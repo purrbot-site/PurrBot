@@ -1,6 +1,8 @@
 package core;
 
+import commands.CmdHelp;
 import listeners.ChannelListener;
+import listeners.CommandListener;
 import listeners.PMListener;
 import listeners.ReadyListener;
 import net.dv8tion.jda.core.AccountType;
@@ -14,9 +16,11 @@ import javax.security.auth.login.LoginException;
 
 public class Main {
 
+    public static JDABuilder builder;
+
     public static void main(String[] args){
 
-        JDABuilder builder = new JDABuilder(AccountType.BOT);
+        builder = new JDABuilder(AccountType.BOT);
 
         //  Adding the Bot-Token from a class
         //  The class isn't in the Repo for safety-reasons
@@ -29,10 +33,9 @@ public class Main {
         builder.setGame(Game.watching("Suggestions. DM for suggestions!"));
         builder.setStatus(OnlineStatus.ONLINE);
 
-        //  Adding listeners
-        builder.addEventListener(new ReadyListener());
-        builder.addEventListener(new PMListener());
-        builder.addEventListener(new ChannelListener());
+        //  Executing the voids, to register listeners and commands
+        addListeners();
+        addCommands();
 
         try {
             JDA jda = builder.buildBlocking();
@@ -41,5 +44,22 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void addListeners(){
+
+        //  Adding listeners
+        builder.addEventListener(new ReadyListener());
+        builder.addEventListener(new PMListener());
+        builder.addEventListener(new ChannelListener());
+        builder.addEventListener(new CommandListener());
+
+    }
+
+    public static void addCommands(){
+
+        //  Adding commands
+        CommandHandler.commands.put("help", new CmdHelp());
+
     }
 }
