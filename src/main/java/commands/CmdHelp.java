@@ -1,8 +1,8 @@
 package commands;
 
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import util.EmbedUtil;
 
 import java.awt.*;
 
@@ -16,17 +16,16 @@ public class CmdHelp implements Command{
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        e.getChannel().sendMessage(new EmbedBuilder().setTitle("Command Help").setColor(Color.BLUE).setDescription(
-                "The Prefix of all commands is `>`\n" +
+        e.getMessage().delete().queue();
+        EmbedUtil.sendEmbedDefault(e.getTextChannel(),"Commands", "All commands start with `>`\n" +
                 "\n" +
-                "`Help` You already see the result\n" +
-                "`Suggestion` Gives you infos about suggestions" +
-                "`Status <id>` Shows the actual status of the suggestion <id>\n" +
+                "`Help` You already see the result.\n" +
+                "`Suggestion` Get info about making suggestions\n" +
+                "`Status <id>` Check the status of Suggestion #<id>\n" +
+                "`Autochan <arg1> <arg2>` Type >Autochan for infos.\n" +
                 "\n" +
-                "**FunFact:**\n" +
-                "This is Andre_601's first try on a Discord-Bot."
-
-        ).build()).queue();
+                "**Fun Fact:**\n" +
+                "42 is not the answer to everything. It's 42.5!");
 
     }
 

@@ -21,6 +21,8 @@ public class ReadyListener extends ListenerAdapter{
         System.out.println(bot);
         System.out.println(guilds);
 
+        commands.CmdAutoChannel.load(e.getJDA());
+
     }
 
 }
