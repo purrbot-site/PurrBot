@@ -1,0 +1,52 @@
+package commands;
+
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import java.awt.Color;
+
+public class CmdInfo implements Command {
+    @Override
+    public boolean called(String[] args, MessageReceivedEvent e) {
+        return false;
+    }
+
+    @Override
+    public void action(String[] args, MessageReceivedEvent e) {
+
+        e.getMessage().delete().queue();
+        EmbedBuilder Builder = new EmbedBuilder();
+
+        Builder.setAuthor(e.getJDA().getSelfUser().getName(), "https://PowerPlugins.net", e.getJDA().getSelfUser().
+                getEffectiveAvatarUrl());
+        Builder.setTitle("Info");
+        Builder.setColor(Color.ORANGE);
+
+        Builder.addField("About PowerSupport:","Hey there.\n" +
+                "I'm PowerSupport and I'm a selfmade bot for the PowerPlugins.net Discord.\n" +
+                "[Andre_601](https://Andre601.net) coded me completely alone! He's not a pro at JDA, so please " +
+                "don't rip his head off, if the code isn't THAT good. Ok? Ok.", false);
+
+        Builder.addField("Functions:", ":white_small_square: `AutoChannels` Joining a certain Voice-" +
+                "Channel generates a new one.\n" +
+                ":white_small_square: `SupportChannels` Generates a new Textchannel, if you type in one.",
+                false);
+
+        Builder.addField("Website:", "[PowerPlugins.net](https://PowerPlugins.net)", true);
+        Builder.addField("GitHub:", "[Link](https://github.com/Andre601/PowerSuggestionBot)", true);
+
+
+        e.getAuthor().openPrivateChannel().complete().sendMessage(Builder.build()).queue();
+
+    }
+
+    @Override
+    public void executed(boolean success, MessageReceivedEvent e) {
+
+    }
+
+    @Override
+    public String help() {
+        return null;
+    }
+}

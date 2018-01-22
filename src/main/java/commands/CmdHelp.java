@@ -2,7 +2,7 @@ package commands;
 
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import util.EmbedUtil;
+import util.STATIC;
 
 import java.awt.*;
 
@@ -17,16 +17,24 @@ public class CmdHelp implements Command{
     public void action(String[] args, MessageReceivedEvent e) {
 
         e.getMessage().delete().queue();
-        EmbedUtil.sendEmbedDefault(e.getTextChannel(),"Commands", "All commands start with `>`\n" +
-                "\n" +
-                "`Help` You already see the result.\n" +
-                "`Suggestion` Get info about making suggestions\n" +
-                "`Status <id>` Check the status of Suggestion #<id>\n" +
-                "`Autochan <arg1> <arg2>` Type >Autochan for infos.\n" +
-                "\n" +
-                "**Fun Fact:**\n" +
-                "42 is not the answer to everything. It's 42.5!");
 
+        EmbedBuilder eb = new EmbedBuilder();
+
+        eb.setAuthor(e.getJDA().getSelfUser().getName(), "https://PowerPlugins.net", e.getJDA().getSelfUser().
+                getEffectiveAvatarUrl());
+        eb.setTitle("Help");
+        eb.setColor(Color.ORANGE);
+
+        eb.addField("Command-Prefix:", "All commands start with `" + STATIC.PREFIX + "`", false);
+
+        eb.addField("Commands:", "`Help` You already see the result ;P\n" +
+                "`Info` Get basic info about the Bot.\n" +
+                "`Autochan <arg1> <arg2>` Command for autochannel.", false);
+
+        eb.addField("Fun Fact:", "Andre_601 finally found out, how Embed-fields are working!",
+                false);
+
+        e.getAuthor().openPrivateChannel().complete().sendMessage(eb.build()).queue();
     }
 
     @Override

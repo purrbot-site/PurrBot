@@ -6,9 +6,9 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import util.EmbedUtil;
 import util.STATIC;
 
+import java.awt.*;
 import java.io.*;
 import java.util.HashMap;
 
@@ -28,25 +28,68 @@ public class CmdAutoChannel implements Command, Serializable {
         return jda.getGuildById(id);
     }
 
-    private  void error(TextChannel tc, String title, String msg){
-        EmbedUtil.sendEmbedError(tc, title, msg);
+    private void error(TextChannel tc, String title, String msg){
+
+        EmbedBuilder eb = new EmbedBuilder();
+
+        eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
+                tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+        eb.setTitle("Error");
+        eb.setColor(Color.RED);
+
+        eb.addField(title, msg, false);
+
+        tc.sendMessage(eb.build()).queue();
     }
 
-    private  void message(TextChannel tc, String title, String msg){
-        EmbedUtil.sendEmbedSuccess(tc, title, msg);
+    private void message(TextChannel tc, String title, String msg){
+
+        EmbedBuilder eb = new EmbedBuilder();
+
+        eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
+                tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+        eb.setTitle("Success");
+        eb.setColor(Color.GREEN);
+
+        eb.addField(title, msg, false);
+
+        tc.sendMessage(eb.build()).queue();
+    }
+
+    private void usage(TextChannel tc){
+
+        EmbedBuilder eb = new EmbedBuilder();
+
+        eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
+                tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+        eb.setTitle("Usage");
+        eb.setColor(Color.RED);
+
+        eb.addField("Command:", "`" + STATIC.PREFIX + "Autochan`", false);
+
+        eb.addField("Arguments:",
+                "`add/set <ChannelID>` Add a Voicechannel to the AutoChannel-List.\n" +
+                        "`remove/unset <ChannelID>` Remove a Voicechannel from the AutoChannel-List.\n" +
+                        "`list` List all AutoChannel.", false);
+
+        eb.addField("Info:", "AutoChannels are special Voicechannels, which will create a seperate " +
+                "new channel, when a User joins.", false);
+
+        tc.sendMessage(eb.build()).queue();
     }
 
     private void setChan(String id, Guild g, TextChannel tc){
         VoiceChannel vc = getVChan(id, g);
 
         if(vc == null)
-            error(tc, "Error", "No valid VoiceChannel!\nPlease enter a valid ID.");
+            error(tc, "No valid Voicechannel", "Please enter a valid ID.");
         else if(autochannels.containsKey(vc))
-            error(tc, "Error", "This channel is already a AutoChannel!");
+            error(tc, "Channel already registered", "This channel is already a AutoChannel!");
         else {
             autochannels.put(vc, g);
             save();
-            message(tc, "Success!", String.format("Channel `%s` set as AutoChannel!", vc.getName()));
+            message(tc, "AutoChannel added", String.format("Channel `%s` (%s) set as AutoChannel!", vc.getName(),
+                    vc.getId()));
         }
     }
 
@@ -54,13 +97,14 @@ public class CmdAutoChannel implements Command, Serializable {
         VoiceChannel vc = getVChan(id, g);
 
         if(vc == null)
-            error(tc, "Error", "No valid VoiceChannel!\nPlease enter a valid ID.");
+            error(tc, "No valid Voicechannel", "Please enter a valid ID.");
         else if(!autochannels.containsKey(vc))
-            error(tc, "Error", "This channel is not a registered AutoChannel!");
+            error(tc, "No registered AutoChannel", "This channel is not a registered AutoChannel!");
         else {
             autochannels.remove(vc);
             save();
-            message(tc, "Success!", String.format("Channel `%s` removed as AutoChannel!", vc.getName()));
+            message(tc, "AutoChannel removed", String.format("Channel `%s` (%s) removed as AutoChannel!",
+                    vc.getName(), vc.getId()));
         }
     }
 
@@ -69,7 +113,18 @@ public class CmdAutoChannel implements Command, Serializable {
         autochannels.keySet().stream()
                 .filter(vc -> autochannels.get(vc).equals(g))
                 .forEach(vc -> sb.append(String.format(":white_small_square: `%s` (%s)\n", vc.getName(), vc.getId())));
-        EmbedUtil.sendEmbedDefault(tc, "Registered AutoChannels", sb.toString());
+
+        EmbedBuilder eb = new EmbedBuilder();
+
+        eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
+                tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+        eb.setTitle("AutoChannel");
+        eb.setColor(Color.ORANGE);
+
+        eb.addField("Registered AutoChannels:", sb.toString(), false);
+
+        tc.sendMessage(eb.build()).queue();
+
     }
 
     public static void unsetChan(VoiceChannel vc){
@@ -127,7 +182,7 @@ public class CmdAutoChannel implements Command, Serializable {
         TextChannel tc = e.getTextChannel();
 
         if(args.length < 1){
-            error(tc, "Usage:", help());
+            usage(tc);
             return;
         }
 
@@ -140,20 +195,20 @@ public class CmdAutoChannel implements Command, Serializable {
             case "set":
             case "add":
                 if(args.length < 2)
-                    error(tc, "Usage", help());
+                    usage(tc);
                 else
                     setChan(args[1], g, tc);
                 break;
             case "unset":
             case "remove":
                 if(args.length < 2)
-                    error(tc, "Usage", help());
+                    usage(tc);
                 else
                     unsetChan(args[1], g, tc);
                 break;
 
             default:
-                error(tc, "Usage", help());
+                usage(tc);
         }
 
     }
@@ -165,15 +220,6 @@ public class CmdAutoChannel implements Command, Serializable {
 
     @Override
     public String help() {
-        return "**Command:**\n" +
-                "`>autochan`\n" +
-                "\n" +
-                "**Arguments:**\n" +
-                "`add/set <ChannelID>` Sets a Voicechannel as Autochannel.\n" +
-                "`remove/unset <ChannelID>` Unsets a Voicechannel as Autochannel.\n" +
-                "`list` Lists all Autochannels.\n" +
-                "\n" +
-                "**Info:**\n" +
-                "The Bot will create a copy of the Autochannel, that the user joins and moves him into that channel.";
+        return null;
     }
 }

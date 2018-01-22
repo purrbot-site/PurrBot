@@ -2,6 +2,7 @@ package core;
 
 import commands.CmdAutoChannel;
 import commands.CmdHelp;
+import commands.CmdInfo;
 import commands.CmdSetup;
 import listeners.*;
 import net.dv8tion.jda.core.*;
@@ -10,9 +11,7 @@ import util.SECRET;
 import util.STATIC;
 
 import javax.security.auth.login.LoginException;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 
 public class Main {
 
@@ -99,6 +98,7 @@ public class Main {
         CommandHandler.commands.put("help", new CmdHelp());
         CommandHandler.commands.put("autochan", new CmdAutoChannel());
         CommandHandler.commands.put("setup", new CmdSetup());
+        CommandHandler.commands.put("info", new CmdInfo());
 
     }
 
@@ -116,7 +116,7 @@ public class Main {
         }
 
     }
-
+    /*
     private void loadFile(){
         File file = new File(STATIC.PATH_TOKEN);
 
@@ -130,4 +130,5 @@ public class Main {
 
         }
     }
+    */
 }
