@@ -1,5 +1,6 @@
 package core;
 
+import audio.TrackManager;
 import commands.*;
 import listeners.*;
 import net.dv8tion.jda.core.*;
@@ -97,6 +98,8 @@ public class Main {
         CommandHandler.commands.put("setup", new CmdSetup());
         CommandHandler.commands.put("info", new CmdInfo());
         CommandHandler.commands.put("shutdown", new CmdShutdown());
+        CommandHandler.commands.put("example", new CmdExample());
+        CommandHandler.commands.put("music", new CmdMusic());
 
     }
 

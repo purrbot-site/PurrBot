@@ -174,7 +174,6 @@ public class CmdAutoChannel implements Command, Serializable {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        e.getMessage().delete().queue();
         Guild g = e.getGuild();
         TextChannel tc = e.getTextChannel();
 

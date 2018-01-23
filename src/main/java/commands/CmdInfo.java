@@ -15,7 +15,6 @@ public class CmdInfo implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        e.getMessage().delete().queue();
         EmbedBuilder Builder = new EmbedBuilder();
 
         Builder.setAuthor(e.getJDA().getSelfUser().getName(), "https://PowerPlugins.net", e.getJDA().getSelfUser().
