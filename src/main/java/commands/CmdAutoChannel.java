@@ -34,7 +34,6 @@ public class CmdAutoChannel implements Command, Serializable {
 
         eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
-        eb.setTitle("Error");
         eb.setColor(Color.RED);
 
         eb.addField(title, msg, false);
@@ -48,7 +47,6 @@ public class CmdAutoChannel implements Command, Serializable {
 
         eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
-        eb.setTitle("Success");
         eb.setColor(Color.GREEN);
 
         eb.addField(title, msg, false);
@@ -62,7 +60,6 @@ public class CmdAutoChannel implements Command, Serializable {
 
         eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
-        eb.setTitle("Usage");
         eb.setColor(Color.RED);
 
         eb.addField("Command:", "`" + STATIC.PREFIX + "Autochan`", false);

@@ -22,7 +22,6 @@ public class CmdHelp implements Command{
 
         eb.setAuthor(e.getJDA().getSelfUser().getName(), "https://PowerPlugins.net", e.getJDA().getSelfUser().
                 getEffectiveAvatarUrl());
-        eb.setTitle("Help");
         eb.setColor(Color.ORANGE);
 
         eb.addField("Command-Prefix:", "All commands start with `" + STATIC.PREFIX + "`", false);

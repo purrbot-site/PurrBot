@@ -1,9 +1,6 @@
 package core;
 
-import commands.CmdAutoChannel;
-import commands.CmdHelp;
-import commands.CmdInfo;
-import commands.CmdSetup;
+import commands.*;
 import listeners.*;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
@@ -99,6 +96,7 @@ public class Main {
         CommandHandler.commands.put("autochan", new CmdAutoChannel());
         CommandHandler.commands.put("setup", new CmdSetup());
         CommandHandler.commands.put("info", new CmdInfo());
+        CommandHandler.commands.put("shutdown", new CmdShutdown());
 
     }
 

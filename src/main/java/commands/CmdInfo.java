@@ -2,6 +2,7 @@ package commands;
 
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import util.STATIC;
 
 import java.awt.Color;
 
@@ -19,7 +20,6 @@ public class CmdInfo implements Command {
 
         Builder.setAuthor(e.getJDA().getSelfUser().getName(), "https://PowerPlugins.net", e.getJDA().getSelfUser().
                 getEffectiveAvatarUrl());
-        Builder.setTitle("Info");
         Builder.setColor(Color.ORANGE);
 
         Builder.addField("About PowerSupport:","Hey there.\n" +
@@ -32,8 +32,13 @@ public class CmdInfo implements Command {
                 ":white_small_square: `SupportChannels` Generates a new Textchannel, if you type in one.",
                 false);
 
+        Builder.addField("Version:", STATIC.VERSION, true);
+        Builder.addField("Library:", "[JDA 3.5.0_329](https://github.com/DV8FromTheWorld/JDA)", true);
+        Builder.addBlankField(true);
+
         Builder.addField("Website:", "[PowerPlugins.net](https://PowerPlugins.net)", true);
-        Builder.addField("GitHub:", "[Link](https://github.com/Andre601/PowerSuggestionBot)", true);
+        Builder.addField("GitHub:", "[PowerSuggestionBot](https://github.com/Andre601/PowerSuggestionBot)", true);
+        Builder.addBlankField(true);
 
 
         e.getAuthor().openPrivateChannel().complete().sendMessage(Builder.build()).queue();
