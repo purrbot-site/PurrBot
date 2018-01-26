@@ -16,11 +16,9 @@ public class CmdHelp implements Command{
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        e.getMessage().delete().queue();
-
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor(e.getJDA().getSelfUser().getName(), "https://PowerPlugins.net", e.getJDA().getSelfUser().
+        eb.setAuthor(e.getJDA().getSelfUser().getName(), STATIC.URL, e.getJDA().getSelfUser().
                 getEffectiveAvatarUrl());
         eb.setColor(Color.ORANGE);
 
@@ -28,7 +26,8 @@ public class CmdHelp implements Command{
 
         eb.addField("Commands:", "`Help` You already see the result ;P\n" +
                 "`Info` Get basic info about the Bot.\n" +
-                "`Autochan <arg1> <arg2>` Command for autochannel.", false);
+                "`Autochan` Command for autochannel.\n" +
+                "`Music` Command for the Musicplayer.", false);
 
         eb.addField("Fun Fact:", "Andre_601 finally found out, how Embed-fields are working!",
                 false);

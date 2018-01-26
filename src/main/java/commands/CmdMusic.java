@@ -15,7 +15,6 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.STATIC;
@@ -67,16 +66,30 @@ public class CmdMusic implements Command {
         return !hasPlayer(g) || getPlayer(g).getPlayingTrack() == null;
     }
 
-    private void loadTrack(String identifier, Member author, Message msg){
+    private void loadTrack(String identifier, Member author, TextChannel tc){
 
         Guild g = author.getGuild();
         getPlayer(g);
 
         MANAGER.setFrameBufferDuration(5000);
         MANAGER.loadItemOrdered(g, identifier, new AudioLoadResultHandler() {
+
             @Override
             public void trackLoaded(AudioTrack track) {
                 getManager(g).queue(track, author);
+
+                AudioTrackInfo info = track.getInfo();
+                String title = info.title;
+                long length = info.length;
+
+                EmbedBuilder eb = new EmbedBuilder();
+
+                eb.setAuthor("Song added", STATIC.URL, tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+                eb.addField("Title:", "[" + title + "](" + identifier + ")", false);
+                eb.addField("Length:", "`[" + getTimestamp(length)  + "]`", false);
+                eb.setColor(Color.GREEN);
+
+                tc.sendMessage(eb.build()).queue();
             }
 
             @Override
@@ -84,16 +97,46 @@ public class CmdMusic implements Command {
                 for(int i = 0; i < (playlist.getTracks().size() > PLAYLIST_LIMIT ? PLAYLIST_LIMIT :
                          playlist.getTracks().size()); i++){
                     getManager(g).queue(playlist.getTracks().get(i), author);
+
+                    EmbedBuilder eb = new EmbedBuilder();
+
+                    eb.setColor(Color.GREEN);
+
+                    eb.setAuthor("Playlist added", STATIC.URL, tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+                    eb.addField("Amount:", "" + (playlist.getTracks().size() > PLAYLIST_LIMIT
+                    ? PLAYLIST_LIMIT : playlist.getTracks().size()) + " tracks!", false);
+
+                    tc.sendMessage(eb.build()).queue();
                 }
             }
 
             @Override
             public void noMatches() {
 
+                EmbedBuilder eb = new EmbedBuilder();
+
+                eb.setAuthor("Music", STATIC.URL, tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+                eb.setColor(Color.RED);
+
+                eb.addField("No song found", "Couldn't find the song! Sorry \\:,(", false);
+
+                tc.sendMessage(eb.build()).queue();
+
             }
 
             @Override
             public void loadFailed(FriendlyException e) {
+
+                EmbedBuilder eb = new EmbedBuilder();
+
+                eb.setAuthor("Music", STATIC.URL, tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+                eb.setColor(Color.RED);
+
+                eb.addField("ERROR", "Something went wrong!\n" +
+                        "Check console for errors", false);
+
+                tc.sendMessage(eb.build()).queue();
+
                 e.printStackTrace();
             }
         });
@@ -123,7 +166,7 @@ public class CmdMusic implements Command {
 
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor("Music", "https://PowerPlugins.net",
+        eb.setAuthor("Music", STATIC.URL,
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
         eb.setColor(Color.RED);
 
@@ -136,22 +179,22 @@ public class CmdMusic implements Command {
 
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor("Music", "https://PowerPlugins.net",
+        eb.setAuthor("Usage", STATIC.URL,
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
         eb.setColor(Color.RED);
 
         eb.addField("Command:", "`" + STATIC.PREFIX + "Music`", false);
 
         eb.addField("Arguments:",
-                "`play <url/title>` Adds a Music/Playlist to the queue.\n" +
+                "`play <URL>` Adds a Music/Playlist to the queue.\n" +
                         "`skip` Skips the current music.\n" +
                         "`shuffle` Shuffles the current playlist." +
                         "`info` Shows info about current music.\n" +
                         "`queue <page>` Shows current playlist.\n" +
                         "`stop` Stops current music.", false);
 
-        eb.addField("Info:", "The Music lets you add Musicvideos from YouTube by either adding a Link, " +
-                "or by typing a title.", false);
+        eb.addField("Info:", "The Music lets you add Musicvideos from YouTube by entering a URL to a You" +
+                "Tube-video.", false);
 
         tc.sendMessage(eb.build()).queue();
     }
@@ -176,16 +219,20 @@ public class CmdMusic implements Command {
 
             case "play":
                 if (args.length < 2) {
-                    error(tc, "No URL/Name", "Please enter a valid source!");
+                    error(tc, "No URL", "Please enter a URL!");
                     return;
                 }
 
-                String input = Arrays.stream(args).skip(1).map(s -> " ").collect(Collectors.joining()).substring(1);
+                String input = Arrays.stream(args).skip(1).map(s -> " " + s).collect(Collectors.joining()).substring(1);
 
-                if (!(input.startsWith("http://") || input.startsWith("https://")))
-                    input = "ytsearch: " + input;
+                if (!(input.startsWith("http://") || input.startsWith("https://"))){
 
-                loadTrack(input, e.getMember(), e.getMessage());
+                    error(tc, "No URL", "Please enter a URL!");
+                    return;
+
+                }
+
+                loadTrack(input, e.getMember(), tc);
                 break;
 
             case "skip":
@@ -235,12 +282,12 @@ public class CmdMusic implements Command {
 
                 EmbedBuilder eb = new EmbedBuilder();
 
-                eb.setAuthor("Music", "https://PowerPlugins.net", tc.getJDA().getSelfUser().
+                eb.setAuthor("Music", STATIC.URL, tc.getJDA().getSelfUser().
                         getEffectiveAvatarUrl());
                 eb.addField("Current Music:", info.title, false);
                 eb.addField("Duration:", "`[" + getTimestamp(track.getPosition()) + "/" +
                         getTimestamp(track.getDuration()) + "]`", true);
-                eb.addField("Requested by:", info.author, true);
+                eb.addField("Uploaded by:", info.author, true);
 
                 tc.sendMessage(eb.build()).queue();
                 break;
@@ -269,10 +316,10 @@ public class CmdMusic implements Command {
 
                 EmbedBuilder eb2 = new EmbedBuilder();
 
-                eb2.setAuthor("Music", "https://PowerPlugins.net", tc.getJDA().getSelfUser().
+                eb2.setAuthor("Current playlist", STATIC.URL, tc.getJDA().getSelfUser().
                         getEffectiveAvatarUrl());
-                eb2.addField("Current Playlist:", "[" + getManager(guild).getQueue().size() + " tracks | " +
-                        "Site `" + sideNum + "/" + sideNumAll + "`]", false);
+                eb2.addField("Size:", getManager(guild).getQueue().size() + " track(s)", true);
+                eb2.addField("Page:", sideNum + "/" + sideNumAll, true);
                 eb2.addField("Content:", out, false);
 
                 tc.sendMessage(eb2.build()).queue();

@@ -32,7 +32,7 @@ public class CmdAutoChannel implements Command, Serializable {
 
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
+        eb.setAuthor("AutoChannel", STATIC.URL,
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
         eb.setColor(Color.RED);
 
@@ -45,7 +45,7 @@ public class CmdAutoChannel implements Command, Serializable {
 
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
+        eb.setAuthor("AutoChannel", STATIC.URL,
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
         eb.setColor(Color.GREEN);
 
@@ -58,7 +58,7 @@ public class CmdAutoChannel implements Command, Serializable {
 
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
+        eb.setAuthor("Usage", STATIC.URL,
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
         eb.setColor(Color.RED);
 
@@ -113,9 +113,8 @@ public class CmdAutoChannel implements Command, Serializable {
 
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor(tc.getJDA().getSelfUser().getName(), "https://PowerPlugins.net",
+        eb.setAuthor("AutoChannel", STATIC.URL,
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
-        eb.setTitle("AutoChannel");
         eb.setColor(Color.ORANGE);
 
         eb.addField("Registered AutoChannels:", sb.toString(), false);

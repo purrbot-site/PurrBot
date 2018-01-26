@@ -1,6 +1,7 @@
 package core;
 
 import audio.TrackManager;
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import commands.*;
 import listeners.*;
 import net.dv8tion.jda.core.*;
@@ -62,7 +63,7 @@ public class Main {
 
         //  "Watching ___" message and Status.
         // getRichPresence(JDAImpl);
-        builder.setGame(Game.of(Game.GameType.WATCHING, "Suggestions. >Help", "https://PowerPlugins.net"));
+        builder.setGame(Game.streaming(">Help | >Info", "https://www.twitch.tv/andre_601"));
 
         builder.setStatus(OnlineStatus.ONLINE);
 
@@ -100,6 +101,7 @@ public class Main {
         CommandHandler.commands.put("shutdown", new CmdShutdown());
         CommandHandler.commands.put("example", new CmdExample());
         CommandHandler.commands.put("music", new CmdMusic());
+        CommandHandler.commands.put("welcome", new CmdWelcome());
 
     }
 
