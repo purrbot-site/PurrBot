@@ -35,12 +35,10 @@ public class CmdInfo implements Command {
 
         Builder.addField("Version:", STATIC.VERSION, true);
         Builder.addField("Library:", "[JDA](https://github.com/DV8FromTheWorld/JDA)", true);
-        Builder.addBlankField(true);
 
         Builder.addField("Website:", "[PowerPlugins.net](https://PowerPlugins.net)", true);
         Builder.addField("GitHub:", "[PowerSuggestionBot](https://github.com/Andre601/PowerSuggestionBot)",
                 true);
-        Builder.addBlankField(true);
 
 
         e.getAuthor().openPrivateChannel().complete().sendMessage(Builder.build()).queue();

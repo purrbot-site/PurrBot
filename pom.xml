@@ -6,7 +6,7 @@
 
     <groupId>net.Andre601</groupId>
     <artifactId>PowerSuggestion</artifactId>
-    <version>1.4.5_SNAPSHOT</version>
+    <version>1.4.6_SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
