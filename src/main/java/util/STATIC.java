@@ -5,22 +5,20 @@ import java.util.Map;
 public class STATIC {
 
     //  Version
-    public static final String VERSION = "1.4.6_SNAPSHOT";
+    public static final String VERSION = "1.5.2_SNAPSHOT";
 
-    //  Prefix for all commands (">[command]")
-    public static String PREFIX = ">";
+    //  Prefix for all commands (">>[command]")
+    public static final String PREFIX = ">>";
 
     //  URL for the Embeds
-    public static String URL = "https://PowerPlugins.net";
+    public static final String URL = "https://PowerPlugins.net";
 
     //  Paths of different Files
-    public static String PATH_AC = "Guilds/autochannels.dat";
-    public static String PATH_TOKEN = "Bot/TOKEN.yml";
-    public static String PATH_SC = "Bot/supportchannel.dat";
-    public static String PATH_SUGGESTIONS = "Bot/suggestions.yml";
+    public static final String PATH_AC = "Guilds/autochannels.dat";
+    public static final String PATH_SC = "Guilds/supportchannels.dat";
 
     //  Logo of the Bot on Startup
-    public static String LOGO =
+    public static final String LOGO =
             "\n" +
             "\n" +
             "     _____                       ____        _\n" +

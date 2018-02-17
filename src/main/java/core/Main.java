@@ -1,7 +1,5 @@
 package core;
 
-import audio.TrackManager;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import commands.*;
 import listeners.*;
 import net.dv8tion.jda.core.*;
@@ -10,45 +8,11 @@ import util.SECRET;
 import util.STATIC;
 
 import javax.security.auth.login.LoginException;
-import java.io.File;
 
 public class Main {
 
     public static JDABuilder builder;
-
-    //  Making "Watching ___" as Rich Presence
-    //  (Not implemented, because complicated af.)
-    /*
-    public getRichPresence(JDAImpl jda){
-
-        JSONObject obj = new JSONObject();
-        JSONObject gameObj = new JSONObject();
-
-        gameObj.put("name", "Suggestions");
-        gameObj.put("type", "0"); // 0 for just playing
-        gameObj.put("details", ">Help for help!");
-
-        JSONObject assetsObj = new JSONObject();
-        assetsObj.put("large_image", jda.getSelfUser().getAvatarId());
-        assetsObj.put("large_text", "Suggestions");
-
-        assetsObj.put("small_image", jda.getSelfUser().getAvatarId());
-
-        obj.put("game", gameObj);
-        obj.put("afk", jda.getPresence().isIdle());
-        obj.put("status", jda.getPresence().getStatus().getKey());
-        obj.put("since", System.currentTimeMillis());
-
-        System.out.println(obj);
-
-        jda.getClient().send(new JSONObject().
-                put("d", obj).
-                put("op", WebSocketCode.PRESENCE).toString());
-
-        return "I am Bot";
-
-    }
-    */
+    public static JDA jda;
 
     public static void main(String[] args){
 
@@ -62,8 +26,9 @@ public class Main {
         builder.setAutoReconnect(true);
 
         //  "Watching ___" message and Status.
-        // getRichPresence(JDAImpl);
-        builder.setGame(Game.streaming(">Help | >Info", "https://www.twitch.tv/andre_601"));
+        builder.setGame(Game.watching(STATIC.PREFIX + "Help | " + STATIC.PREFIX + "Info"));
+        //builder.setGame(Game.streaming(STATIC.PREFIX + "Help | " + STATIC.PREFIX + "Info",
+        //        "https://www.twitch.tv/andre_601"));
 
         builder.setStatus(OnlineStatus.ONLINE);
 
@@ -72,7 +37,7 @@ public class Main {
         addCommands();
 
         try {
-            JDA jda = builder.buildBlocking();
+            jda = builder.buildBlocking();
         } catch (LoginException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -84,10 +49,9 @@ public class Main {
 
         //  Adding listeners
         builder.addEventListener(new ReadyListener());
-        builder.addEventListener(new PMListener());
-        builder.addEventListener(new ChannelListener());
         builder.addEventListener(new CommandListener());
         builder.addEventListener(new AutochannelHandler());
+        builder.addEventListener(new SupportChannelHandler());
 
     }
 
@@ -96,42 +60,13 @@ public class Main {
         //  Adding commands
         CommandHandler.commands.put("help", new CmdHelp());
         CommandHandler.commands.put("autochan", new CmdAutoChannel());
-        CommandHandler.commands.put("setup", new CmdSetup());
+        CommandHandler.commands.put("ac", new CmdAutoChannel());
         CommandHandler.commands.put("info", new CmdInfo());
         CommandHandler.commands.put("shutdown", new CmdShutdown());
-        CommandHandler.commands.put("example", new CmdExample());
         CommandHandler.commands.put("music", new CmdMusic());
         CommandHandler.commands.put("welcome", new CmdWelcome());
+        CommandHandler.commands.put("Support", new CmdSupport());
+        CommandHandler.commands.put("Close", new CmdClose());
 
     }
-
-    private void checkFile(){
-
-        //  Loading the Path of TOKEN.txt from STATIC
-        File path = new File(STATIC.PATH_TOKEN);
-        //  If TOKEN.txt doesn't exist, create one
-        if(!path.exists()) {
-            System.out.println("[INFO] No TOKEN.yml found. Creating one...");
-            path.mkdir();
-            System.out.println("[INFO] Created " + STATIC.PATH_TOKEN);
-            System.out.println("[INFO] Please enter the Bot-Token inside the TOKEN.yml and start it again!");
-
-        }
-
-    }
-    /*
-    private void loadFile(){
-        File file = new File(STATIC.PATH_TOKEN);
-
-        if(file.exists()){
-            BufferedReader br = new BufferedReader(new FileReader(file));
-
-            if(br.readLine() == null){
-                System.out.println("[ERROR] There's no Bottoken set in the TOKEN.txt! Make sure, to add one!");
-
-            }
-
-        }
-    }
-    */
 }

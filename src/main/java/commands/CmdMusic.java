@@ -84,7 +84,8 @@ public class CmdMusic implements Command {
 
                 EmbedBuilder eb = new EmbedBuilder();
 
-                eb.setAuthor("Song added", STATIC.URL, tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+                eb.setAuthor("Song added", STATIC.URL,
+                        tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
                 eb.addField("Title:", "[" + title + "](" + identifier + ")", false);
                 eb.addField("Length:", "`[" + getTimestamp(length)  + "]`", false);
                 eb.setColor(Color.GREEN);
@@ -102,7 +103,8 @@ public class CmdMusic implements Command {
 
                     eb.setColor(Color.GREEN);
 
-                    eb.setAuthor("Playlist added", STATIC.URL, tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+                    eb.setAuthor("Playlist added", STATIC.URL,
+                            tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
                     eb.addField("Amount:", "" + (playlist.getTracks().size() > PLAYLIST_LIMIT
                     ? PLAYLIST_LIMIT : playlist.getTracks().size()) + " tracks!", false);
 
@@ -187,14 +189,14 @@ public class CmdMusic implements Command {
 
         eb.addField("Arguments:",
                 "`play <URL>` Adds a Music/Playlist to the queue.\n" +
-                        "`skip` Skips the current music.\n" +
-                        "`shuffle` Shuffles the current playlist." +
-                        "`info` Shows info about current music.\n" +
-                        "`queue <page>` Shows current playlist.\n" +
-                        "`stop` Stops current music.", false);
+                      "`skip` Skips the current music.\n" +
+                      "`shuffle` Shuffles the current playlist." +
+                      "`info` Shows info about current music.\n" +
+                      "`queue <page>` Shows current playlist.\n" +
+                      "`stop` Stops current music.", false);
 
-        eb.addField("Info:", "The Music lets you add Musicvideos from YouTube by entering a URL to a You" +
-                "Tube-video.", false);
+        eb.addField("Info:", "The Musiccommand lets you add YouTube-Videos, that the bot will then play in" +
+                "the channel you currently are.", false);
 
         tc.sendMessage(eb.build()).queue();
     }
@@ -226,10 +228,8 @@ public class CmdMusic implements Command {
                 String input = Arrays.stream(args).skip(1).map(s -> " " + s).collect(Collectors.joining()).substring(1);
 
                 if (!(input.startsWith("http://") || input.startsWith("https://"))){
-
                     error(tc, "No URL", "Please enter a URL!");
                     return;
-
                 }
 
                 loadTrack(input, e.getMember(), tc);
@@ -238,12 +238,16 @@ public class CmdMusic implements Command {
             case "skip":
                 if (isIdle(guild)) {
                     error(tc, "No Music", "I don't have any music (yet)!\nPlease add music with `" +
-                            STATIC.PREFIX + "music play <url/title>` while being in a Voicechannel.");
+                            STATIC.PREFIX + "music play <url>` while being in a Voicechannel.");
                     return;
                 }
 
                 for (int i = (args.length > 1 ? Integer.parseInt(args[1]) : 1); i == 1; i--){
                     skip(guild);
+                    EmbedBuilder skip = new EmbedBuilder();
+                    skip.setAuthor("Song Skipped", STATIC.URL, tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+                    skip.setDescription(":track_next: Skipped current song(s)!");
+                    tc.sendMessage(skip.build()).queue();
                 }
 
                 break;
@@ -251,7 +255,7 @@ public class CmdMusic implements Command {
             case "stop":
                 if (isIdle(guild)){
                     error(tc, "No Music", "I don't have any music (yet)!\nPlease add music with `" +
-                            STATIC.PREFIX + "music play <url/title>` while being in a Voicechannel.");
+                            STATIC.PREFIX + "music play <url>` while being in a Voicechannel.");
                     return;
                 }
 
@@ -263,7 +267,7 @@ public class CmdMusic implements Command {
             case "shuffle":
                 if (isIdle(guild)){
                     error(tc, "No Music", "I don't have any music (yet)!\nPlease add music with `" +
-                            STATIC.PREFIX + "music play <url/title>` while being in a Voicechannel.");
+                            STATIC.PREFIX + "music play <url>` while being in a Voicechannel.");
                     return;
                 }
 
@@ -273,29 +277,29 @@ public class CmdMusic implements Command {
             case "info":
                 if (isIdle(guild)){
                     error(tc, "No Music", "I don't have any music (yet)!\nPlease add music with `" +
-                            STATIC.PREFIX + "music play <url/title>` while being in a Voicechannel.");
+                            STATIC.PREFIX + "music play <url>` while being in a Voicechannel.");
                     return;
                 }
 
                 AudioTrack track = getPlayer(guild).getPlayingTrack();
                 AudioTrackInfo info = track.getInfo();
 
-                EmbedBuilder eb = new EmbedBuilder();
+                EmbedBuilder music = new EmbedBuilder();
 
-                eb.setAuthor("Music", STATIC.URL, tc.getJDA().getSelfUser().
-                        getEffectiveAvatarUrl());
-                eb.addField("Current Music:", info.title, false);
-                eb.addField("Duration:", "`[" + getTimestamp(track.getPosition()) + "/" +
+                music.setAuthor("Music", STATIC.URL,
+                        tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+                music.addField("Current Music:", info.title, false);
+                music.addField("Duration:", "`[" + getTimestamp(track.getPosition()) + "/" +
                         getTimestamp(track.getDuration()) + "]`", true);
-                eb.addField("Uploaded by:", info.author, true);
+                music.addField("Uploaded by:", info.author, true);
 
-                tc.sendMessage(eb.build()).queue();
+                tc.sendMessage(music.build()).queue();
                 break;
 
             case "queue":
                 if (isIdle(guild)){
                     error(tc, "No Music", "I don't have any music (yet)!\nPlease add music with `" +
-                            STATIC.PREFIX + "music play <url/title>` while being in a Voicechannel.");
+                            STATIC.PREFIX + "music play <url>` while being in a Voicechannel.");
                     return;
                 }
 
@@ -314,15 +318,16 @@ public class CmdMusic implements Command {
                 String out = trackSublist.stream().collect(Collectors.joining("\n"));
                 int sideNumAll = tracks.size() >= 10 ? tracks.size()/10 : 1;
 
-                EmbedBuilder eb2 = new EmbedBuilder();
+                EmbedBuilder playlist = new EmbedBuilder();
 
-                eb2.setAuthor("Current playlist", STATIC.URL, tc.getJDA().getSelfUser().
-                        getEffectiveAvatarUrl());
-                eb2.addField("Size:", getManager(guild).getQueue().size() + " track(s)", true);
-                eb2.addField("Page:", sideNum + "/" + sideNumAll, true);
-                eb2.addField("Content:", out, false);
+                playlist.setAuthor("Current playlist", STATIC.URL,
+                        tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
+                playlist.setThumbnail("https://thumbs.gfycat.com/ComfortableMistyAfricanbushviper-size_restricted.gif");
+                playlist.addField("Size:", getManager(guild).getQueue().size() + " track(s)", true);
+                playlist.addField("Page:", sideNum + "/" + sideNumAll, true);
+                playlist.addField("Content:", out, false);
 
-                tc.sendMessage(eb2.build()).queue();
+                tc.sendMessage(playlist.build()).queue();
                 break;
         }
 

@@ -4,7 +4,6 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.STATIC;
 
@@ -12,27 +11,23 @@ import java.awt.*;
 import java.io.*;
 import java.util.HashMap;
 
-public class CmdAutoChannel implements Command, Serializable {
+public class CmdSupport implements Command {
 
-    private static HashMap<VoiceChannel, Guild> autochannels = new HashMap<>();
+    private static HashMap<TextChannel, Guild> supportchannels = new HashMap<>();
 
-    public static HashMap<VoiceChannel, Guild> getAutoChannels(){
-        return autochannels;
+    public static HashMap<TextChannel, Guild> getTextChannels(){
+        return supportchannels;
     }
 
-    public static VoiceChannel getVChan(String id, Guild g){
-        return g.getVoiceChannelById(id);
-    }
-
-    private static Guild getGuild(String id, JDA jda){
-        return jda.getGuildById(id);
+    public static TextChannel getTChan(String id, Guild g){
+        return g.getTextChannelById(id);
     }
 
     private void error(TextChannel tc, String title, String msg){
 
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor("AutoChannel", STATIC.URL,
+        eb.setAuthor("SupportChannel", STATIC.URL,
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
         eb.setColor(Color.RED);
 
@@ -45,7 +40,7 @@ public class CmdAutoChannel implements Command, Serializable {
 
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor("AutoChannel", STATIC.URL,
+        eb.setAuthor("SupportChannel", STATIC.URL,
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
         eb.setColor(Color.GREEN);
 
@@ -62,71 +57,75 @@ public class CmdAutoChannel implements Command, Serializable {
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
         eb.setColor(Color.RED);
 
-        eb.addField("Command:", "`" + STATIC.PREFIX + "Autochan`", false);
+        eb.addField("Command:", "`" + STATIC.PREFIX + "Support`", false);
 
         eb.addField("Arguments:",
-                "`add/set <ChannelID>` Add a Voicechannel to the AutoChannel-List.\n" +
-                        "`remove/unset <ChannelID>` Remove a Voicechannel from the AutoChannel-List.\n" +
+                "`add/set <id>` Adds the Textchannel to the SupportChannel-List.\n" +
+                        "`remove/unset <id>` Removes the Textchannel from the SupportChannel-List.\n" +
                         "`list` List all AutoChannel.", false);
 
-        eb.addField("Info:", "AutoChannels are special Voicechannels, which will create a seperate " +
-                "new channel, when a User joins.", false);
+        eb.addField("Info:", "SupportChannels are special Textchannels, which will create a seperate " +
+                "new channel, when a User sends a message in it.", false);
 
         tc.sendMessage(eb.build()).queue();
     }
+    private static Guild getGuild(String id, JDA jda){
+        return jda.getGuildById(id);
+    }
 
     private void setChan(String id, Guild g, TextChannel tc){
-        VoiceChannel vc = getVChan(id, g);
+        TextChannel tchan = getTChan(id, g);
 
-        if(vc == null)
-            error(tc, "No valid Voicechannel", "Please enter a valid ID.");
-        else if(autochannels.containsKey(vc))
-            error(tc, "Channel already registered", "This channel is already a AutoChannel!");
-        else {
-            autochannels.put(vc, g);
+        if(tchan == null)
+            error(tc, "No valid channel", "Please add a valid ChannelID!");
+        else if(supportchannels.containsKey(tchan))
+            error(tc, "Already registered", "This Textchannel is already registered!");
+        else{
+            supportchannels.put(tchan, g);
             save();
-            message(tc, "AutoChannel added", String.format("Channel `%s` (%s) set as AutoChannel!", vc.getName(),
-                    vc.getId()));
+            message(tc, "Channel added", String.format("Channel `%s` (%s) successfully added!",
+                    tchan.getName(), tchan.getId()));
         }
     }
 
     private void unsetChan(String id, Guild g, TextChannel tc){
-        VoiceChannel vc = getVChan(id, g);
+        TextChannel tchan = getTChan(id, g);
 
-        if(vc == null)
-            error(tc, "No valid Voicechannel", "Please enter a valid ID.");
-        else if(!autochannels.containsKey(vc))
-            error(tc, "No registered AutoChannel", "This channel is not a registered AutoChannel!");
-        else {
-            autochannels.remove(vc);
+        if(tchan == null)
+            error(tc, "No valid channel", "Please add a valid ChannelID!");
+        else if(!supportchannels.containsKey(tchan))
+            error(tc, "Not registered", "This Textchannel is not registered!");
+        else{
+            supportchannels.remove(tchan);
             save();
-            message(tc, "AutoChannel removed", String.format("Channel `%s` (%s) removed as AutoChannel!",
-                    vc.getName(), vc.getId()));
+            message(tc, "Channel removed", String.format("Channel `%s` (%s) successfully removed!",
+                    tchan.getName(), tchan.getId()));
         }
+    }
+
+    public static void unsetChat(TextChannel tchan){
+        supportchannels.remove(tchan);
+        save();
+        System.out.println("[INFO] A registered SupportChannel was deleted. Auto-removed it from list.");
     }
 
     private void ListChan(Guild g, TextChannel tc){
         StringBuilder sb = new StringBuilder();
-        autochannels.keySet().stream()
-                .filter(vc -> autochannels.get(vc).equals(g))
-                .forEach(vc -> sb.append(String.format(":white_small_square: `%s` (%s)\n", vc.getName(), vc.getId())));
+        supportchannels.keySet().stream()
+                .filter(tchan -> supportchannels.get(tchan).equals(g))
+                .forEach(tchan -> sb.append(String.format(":white_small_square: `%s` (%s)\n",
+                        tchan.getName(), tchan.getId())));
 
         EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor("AutoChannel", STATIC.URL,
+        eb.setAuthor("SupportChannel", STATIC.URL,
                 tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
         eb.setColor(Color.ORANGE);
 
-        eb.addField("Registered AutoChannels:", sb.toString(), false);
+        eb.addField("Registered SupportChannels:", sb.toString(), false);
 
         tc.sendMessage(eb.build()).queue();
 
-    }
-
-    public static void unsetChan(VoiceChannel vc){
-        autochannels.remove(vc);
-        save();
-        System.out.println("[INFO] A registered AutoChannel was deleted. Auto-Removed it.");
     }
 
     private static void save(){
@@ -135,10 +134,10 @@ public class CmdAutoChannel implements Command, Serializable {
             path.mkdir();
 
         HashMap<String, String> out = new HashMap<>();
-        autochannels.forEach((vc, g) -> out.put(vc.getId(), g.getId()));
+        supportchannels.forEach((tchan, g) -> out.put(tchan.getId(), g.getId()));
 
         try{
-            FileOutputStream fos = new FileOutputStream(STATIC.PATH_AC);
+            FileOutputStream fos = new FileOutputStream(STATIC.PATH_SC);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(out);
             oos.close();
@@ -148,7 +147,7 @@ public class CmdAutoChannel implements Command, Serializable {
     }
 
     public static void load(JDA jda){
-        File file = new File(STATIC.PATH_AC);
+        File file = new File(STATIC.PATH_SC);
         if(file.exists()){
             try{
                 FileInputStream fis = new FileInputStream(file);
@@ -158,7 +157,7 @@ public class CmdAutoChannel implements Command, Serializable {
 
                 out.forEach((vid, gid) -> {
                     Guild g = getGuild(gid, jda);
-                    autochannels.put(getVChan(vid, g), g);
+                    supportchannels.put(getTChan(vid, g), g);
                 });
             }catch (IOException | ClassNotFoundException e){
                 e.printStackTrace();
@@ -206,7 +205,6 @@ public class CmdAutoChannel implements Command, Serializable {
             default:
                 usage(tc);
         }
-
     }
 
     @Override

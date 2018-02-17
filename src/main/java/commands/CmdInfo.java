@@ -23,15 +23,12 @@ public class CmdInfo implements Command {
         Builder.setColor(Color.ORANGE);
 
         Builder.addField("About PowerSupport:","Hey there.\n" +
-                "I'm PowerSupport and I'm a selfmade bot for the PowerPlugins.net Discord.\n" +
+                "I'm PowerSupport and I'm a self made bot for the PowerPlugins.net Discord.\n" +
                 "[Andre_601](https://Andre601.net) coded me completely alone! He's not a pro with JDA, so please " +
                 "don't rip his head off, if the code isn't THAT good. Ok? Ok.", false);
 
-        Builder.addField("Functions:", ":white_small_square: `AutoChannels` Joining a certain Voice-" +
-                "Channel generates a new one.\n" +
-                ":white_small_square: `SupportChannels` Generates a new Textchannel, if you type in one.\n" +
-                ":white_small_square: `MusicPlayer` Just a music-player... Nuff' said.",
-                false);
+        Builder.addField("Functions:", "`AutoChannels` Creates a new channel for saved ones.\n" +
+                "`MusicPlayer` Just a music-player... Nuff' said.", false);
 
         Builder.addField("Version:", STATIC.VERSION, true);
         Builder.addField("Library:", "[JDA](https://github.com/DV8FromTheWorld/JDA)", true);

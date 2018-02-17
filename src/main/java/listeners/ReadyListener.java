@@ -1,5 +1,6 @@
 package listeners;
 
+import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -11,13 +12,13 @@ public class ReadyListener extends ListenerAdapter{
 
         String logo = STATIC.LOGO;
 
-        String bot = "  [INFO] Enabled Bot-User " + e.getJDA().getSelfUser().getName() + " (" + e.getJDA().getSelfUser().getId() + ")\n";
+        String bot = "[INFO] Enabled Bot-User " + e.getJDA().getSelfUser().getName() + " (" + e.getJDA().getSelfUser().getId() + ")\n";
 
-        String guilds = "  [INFO] Connected to the following Guild(s):\n";
+        String guilds = "[INFO] Connected to the following Guild(s):\n";
 
         for (Guild g : e.getJDA().getGuilds()) {
 
-            guilds += "    > " + g.getName() + " (" + g.getId() + ")\n";
+            guilds += "  > " + g.getName() + " (" + g.getId() + ")\n";
 
         }
 
@@ -25,7 +26,10 @@ public class ReadyListener extends ListenerAdapter{
         System.out.println(bot);
         System.out.println(guilds);
 
+        System.out.println(JDAInfo.VERSION);
+
         commands.CmdAutoChannel.load(e.getJDA());
+        commands.CmdSupport.load(e.getJDA());
 
     }
 
