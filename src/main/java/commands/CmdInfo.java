@@ -1,10 +1,9 @@
 package commands;
 
+import core.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.STATIC;
-
-import java.awt.Color;
 
 public class CmdInfo implements Command {
     @Override
@@ -19,25 +18,24 @@ public class CmdInfo implements Command {
 
         Builder.setAuthor("Info", STATIC.URL, e.getJDA().getSelfUser().
                 getEffectiveAvatarUrl());
-        Builder.setThumbnail(e.getJDA().getSelfUser().getEffectiveAvatarUrl());
-        Builder.setColor(Color.ORANGE);
+        Builder.setThumbnail(Main.jda.getSelfUser().getEffectiveAvatarUrl());
 
-        Builder.addField("About PowerSupport:","Hey there.\n" +
-                "I'm PowerSupport and I'm a self made bot for the PowerPlugins.net Discord.\n" +
-                "[Andre_601](https://Andre601.net) coded me completely alone! He's not a pro with JDA, so please " +
-                "don't rip his head off, if the code isn't THAT good. Ok? Ok.", false);
+        Builder.addField("About the Bot:","Oh hi there!\n" +
+                "I'm Neko-Master. A selfmade Bot for the ~Nya Discord.\n" +
+                "I was made by <@204232208049766400> with the help of JDA " +
+                "and some free time. ^.^\n" +
+                "To see my commands, just type " + STATIC.PREFIX + "help", false);
 
-        Builder.addField("Functions:", "`AutoChannels` Creates a new channel for saved ones.\n" +
-                "`MusicPlayer` Just a music-player... Nuff' said.", false);
+        Builder.addField("Functions:", "`Nekos` I have some cute nekos, thanks " +
+                "to the [nekos.life](https://nekos.life) API.\n" +
+                "`Lewd Nekos` There are also some lewd nekos. :3", false);
 
         Builder.addField("Version:", STATIC.VERSION, true);
-        Builder.addField("Library:", "[JDA](https://github.com/DV8FromTheWorld/JDA)", true);
-
-        Builder.addField("Website:", "[PowerPlugins.net](https://PowerPlugins.net)", true);
-        Builder.addField("GitHub:", "[PowerSuggestionBot](https://github.com/Andre601/PowerSuggestionBot)",
+        Builder.addField("Library:", "[JDA](https://github.com/DV8FromTheWorld/JDA)",
                 true);
 
-
+        e.getTextChannel().sendMessage(e.getAuthor().getAsMention() +
+                ", I send you a nice message in DM :3").queue();
         e.getAuthor().openPrivateChannel().complete().sendMessage(Builder.build()).queue();
 
     }

@@ -16,19 +16,21 @@ public class CmdShutdown implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        e.getMessage().delete().queue();
+        if(e.getAuthor().getId().equals("204232208049766400")){
+            e.getMessage().delete().queue();
 
-        EmbedBuilder eb = new EmbedBuilder();
+            EmbedBuilder eb = new EmbedBuilder();
 
-        eb.setAuthor(e.getJDA().getSelfUser().getName(), STATIC.URL,
-                e.getJDA().getSelfUser().getEffectiveAvatarUrl());
-        eb.setColor(Color.GRAY);
-        eb.addField("Disabling Bot...", "Good bye!", false);
+            eb.setAuthor(e.getJDA().getSelfUser().getName(), STATIC.URL,
+                    e.getJDA().getSelfUser().getEffectiveAvatarUrl());
+            eb.setDescription("I go and take a nap now...");
 
-        e.getTextChannel().sendMessage(eb.build()).queue();
+            e.getTextChannel().sendMessage(eb.build()).queue();
 
-        System.out.println("[INFO] Disabling bot...");
-        Main.jda.shutdown();
+            System.out.println("[INFO] Disabling bot...");
+            e.getJDA().shutdown();
+
+        }
     }
 
     @Override

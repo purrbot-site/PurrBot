@@ -26,9 +26,7 @@ public class Main {
         builder.setAutoReconnect(true);
 
         //  "Watching ___" message and Status.
-        builder.setGame(Game.watching(STATIC.PREFIX + "Help | " + STATIC.PREFIX + "Info"));
-        //builder.setGame(Game.streaming(STATIC.PREFIX + "Help | " + STATIC.PREFIX + "Info",
-        //        "https://www.twitch.tv/andre_601"));
+        builder.setGame(Game.watching("Some Nekos OwO | " + STATIC.PREFIX + "Help | " + STATIC.PREFIX + "Info"));
 
         builder.setStatus(OnlineStatus.ONLINE);
 
@@ -50,8 +48,6 @@ public class Main {
         //  Adding listeners
         builder.addEventListener(new ReadyListener());
         builder.addEventListener(new CommandListener());
-        builder.addEventListener(new AutochannelHandler());
-        builder.addEventListener(new SupportChannelHandler());
 
     }
 
@@ -59,14 +55,10 @@ public class Main {
 
         //  Adding commands
         CommandHandler.commands.put("help", new CmdHelp());
-        CommandHandler.commands.put("autochan", new CmdAutoChannel());
-        CommandHandler.commands.put("ac", new CmdAutoChannel());
         CommandHandler.commands.put("info", new CmdInfo());
         CommandHandler.commands.put("shutdown", new CmdShutdown());
-        CommandHandler.commands.put("music", new CmdMusic());
-        CommandHandler.commands.put("welcome", new CmdWelcome());
-        CommandHandler.commands.put("Support", new CmdSupport());
-        CommandHandler.commands.put("Close", new CmdClose());
+        CommandHandler.commands.put("neko", new CmdNeko());
+        CommandHandler.commands.put("lewd", new CmdLewd());
 
     }
 }

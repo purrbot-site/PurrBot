@@ -2,7 +2,7 @@
   <artifact type="jar" name="PowerSuggestion:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/PowerSuggestion_jar</output-path>
     <root id="archive" name="PowerSuggestion.jar">
-      <element id="module-output" name="PowerSuggestion" />
+      <element id="module-output" name="Purr-Bot" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20160810/json-20160810.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/sf/trove4j/trove4j/3.0.3/trove4j-3.0.3.jar" path-in-jar="/" />
