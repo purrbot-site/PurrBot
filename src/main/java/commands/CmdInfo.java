@@ -21,10 +21,10 @@ public class CmdInfo implements Command {
         Builder.setThumbnail(Main.jda.getSelfUser().getEffectiveAvatarUrl());
 
         Builder.addField("About the Bot:","Oh hi there!\n" +
-                "I'm Neko-Master. A selfmade Bot for the ~Nya Discord.\n" +
+                "I'm \\*purr*. A selfmade Bot for the ~Nya Discord.\n" +
                 "I was made by <@204232208049766400> with the help of JDA " +
                 "and some free time. ^.^\n" +
-                "To see my commands, just type " + STATIC.PREFIX + "help", false);
+                "To see my commands, just type `" + STATIC.PREFIX + "help`", false);
 
         Builder.addField("Functions:", "`Nekos` I have some cute nekos, thanks " +
                 "to the [nekos.life](https://nekos.life) API.\n" +
@@ -33,10 +33,12 @@ public class CmdInfo implements Command {
         Builder.addField("Version:", STATIC.VERSION, true);
         Builder.addField("Library:", "[JDA](https://github.com/DV8FromTheWorld/JDA)",
                 true);
+        Builder.addField("GitHub:", "[Neko-Bot](https://github.com/Andre601/NekoBot)",
+                true);
 
+        e.getAuthor().openPrivateChannel().complete().sendMessage(Builder.build()).queue();
         e.getTextChannel().sendMessage(e.getAuthor().getAsMention() +
                 ", I send you a nice message in DM :3").queue();
-        e.getAuthor().openPrivateChannel().complete().sendMessage(Builder.build()).queue();
 
     }
 
