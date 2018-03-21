@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="PowerSuggestion" />
+        <module name="Purr-Bot" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="PowerSuggestion" target="1.8" />
+      <module name="Purr-Bot" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

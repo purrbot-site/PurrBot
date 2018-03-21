@@ -1,9 +1,9 @@
-package commands;
+package net.Andre601.commands;
 
-import core.Main;
+import net.Andre601.core.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import util.STATIC;
+import net.Andre601.util.STATIC;
 
 public class CmdInfo implements Command {
     @Override
@@ -23,8 +23,7 @@ public class CmdInfo implements Command {
         Builder.addField("About the Bot:","Oh hi there!\n" +
                 "I'm \\*purr*. A selfmade Bot for the ~Nya Discord.\n" +
                 "I was made by <@204232208049766400> with the help of JDA " +
-                "and some free time. ^.^\n" +
-                "To see my commands, just type `" + STATIC.PREFIX + "help`", false);
+                "and some free time. ^.^", false);
 
         Builder.addField("Functions:", "`Nekos` I have some cute nekos, thanks " +
                 "to the [nekos.life](https://nekos.life) API.\n" +

@@ -1,7 +1,7 @@
-package core;
+package net.Andre601.core;
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import util.STATIC;
+import net.Andre601.util.STATIC;
 
 import java.util.ArrayList;
 

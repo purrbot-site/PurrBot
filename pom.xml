@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.Andre601</groupId>
-    <artifactId>PowerSuggestion</artifactId>
+    <artifactId>Purr-Bot</artifactId>
     <version>1.5.2_SNAPSHOT</version>
     <build>
         <plugins>
@@ -14,7 +14,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>core.Main</mainClass>
+                            <mainClass>net.Andre601.core.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -38,7 +38,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>core.Main</mainClass>
+                            <mainClass>net.Andre601.core.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

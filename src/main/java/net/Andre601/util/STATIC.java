@@ -1,6 +1,4 @@
-package util;
-
-import java.util.Map;
+package net.Andre601.util;
 
 public class STATIC {
 
@@ -11,6 +9,6 @@ public class STATIC {
     public static final String PREFIX = ".";
 
     //  URL for the Embeds
-    public static final String URL = "https://PowerPlugins.net";
+    public static final String URL = "https://Andre601.net";
 
 }

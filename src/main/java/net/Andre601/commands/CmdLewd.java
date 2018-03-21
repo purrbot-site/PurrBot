@@ -1,16 +1,9 @@
-package commands;
+package net.Andre601.commands;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.async.Callback;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import util.NekosLifeUtil;
-
-import java.awt.*;
+import net.Andre601.util.NekosLifeUtil;
 
 public class CmdLewd implements Command {
 

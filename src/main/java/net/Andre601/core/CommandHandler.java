@@ -1,6 +1,6 @@
-package core;
+package net.Andre601.core;
 
-import commands.Command;
+import net.Andre601.commands.Command;
 
 import java.util.HashMap;
 

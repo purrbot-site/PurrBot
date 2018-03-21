@@ -1,11 +1,12 @@
-package core;
+package net.Andre601.core;
 
-import commands.*;
-import listeners.*;
+import net.Andre601.commands.*;
+import net.Andre601.listeners.CommandListener;
+import net.Andre601.listeners.ReadyListener;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
-import util.SECRET;
-import util.STATIC;
+import net.Andre601.util.SECRET;
+import net.Andre601.util.STATIC;
 
 import javax.security.auth.login.LoginException;
 
@@ -59,6 +60,9 @@ public class Main {
         CommandHandler.commands.put("shutdown", new CmdShutdown());
         CommandHandler.commands.put("neko", new CmdNeko());
         CommandHandler.commands.put("lewd", new CmdLewd());
+        CommandHandler.commands.put("hug", new CmdHug());
+        CommandHandler.commands.put("pat", new CmdPat());
+        CommandHandler.commands.put("user", new CmdUser());
 
     }
 }

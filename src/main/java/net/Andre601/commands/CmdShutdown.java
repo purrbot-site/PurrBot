@@ -1,11 +1,8 @@
-package commands;
+package net.Andre601.commands;
 
-import core.Main;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import util.STATIC;
-
-import java.awt.Color;
+import net.Andre601.util.STATIC;
 
 public class CmdShutdown implements Command {
     @Override

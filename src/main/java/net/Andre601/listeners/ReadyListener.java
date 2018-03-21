@@ -1,10 +1,9 @@
-package listeners;
+package net.Andre601.listeners;
 
-import core.Main;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import util.STATIC;
+import net.Andre601.util.STATIC;
 
 public class ReadyListener extends ListenerAdapter{
 
