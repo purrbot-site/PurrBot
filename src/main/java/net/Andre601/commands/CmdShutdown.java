@@ -16,17 +16,14 @@ public class CmdShutdown implements Command {
         if(e.getAuthor().getId().equals("204232208049766400")){
             e.getMessage().delete().queue();
 
-            EmbedBuilder eb = new EmbedBuilder();
-
-            eb.setAuthor(e.getJDA().getSelfUser().getName(), STATIC.URL,
-                    e.getJDA().getSelfUser().getEffectiveAvatarUrl());
-            eb.setDescription("I go and take a nap now...");
-
-            e.getTextChannel().sendMessage(eb.build()).queue();
+            e.getTextChannel().sendMessage("I take a nap now...").queue();
 
             System.out.println("[INFO] Disabling bot...");
             e.getJDA().shutdown();
 
+        }else{
+            e.getTextChannel().sendMessage(e.getAuthor().getAsMention() + " Don't do that.\n" +
+                    "I don't like you, when you're doing that...").queue();
         }
     }
 

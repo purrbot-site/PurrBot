@@ -27,12 +27,12 @@ public class CmdUser implements Command {
             ebuser.setAuthor("Userinfo", STATIC.URL,
                     tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
             ebuser.setThumbnail(user.getEffectiveAvatarUrl());
-            ebuser.addField("Name:",
-                    user.getName() + "#" + user.getDiscriminator(),
-                    true);
-            ebuser.addField("ID:",
-                    user.getId(),
-                    true);
+            ebuser.addField("User:",
+                    String.format("**Name**: `%s#%s`\n" +
+                            "**ID**: `%s`", user.getName(),
+                            user.getDiscriminator(),
+                            user.getId()),
+                    false);
             ebuser.addField("Avatar:",
                     String.format(
                             "[`Current Avatar`](%s)\n" +
@@ -67,17 +67,16 @@ public class CmdUser implements Command {
             user.setAuthor("Userinfo", STATIC.URL,
                     tc.getJDA().getSelfUser().getEffectiveAvatarUrl());
             user.setThumbnail(msg.getAuthor().getEffectiveAvatarUrl());
-            user.addField("Name:",
-                    msg.getAuthor().getName() + "#" +
-                    msg.getAuthor().getDiscriminator(),
-                    true);
-            user.addField("ID:",
-                    msg.getAuthor().getId(),
-                    true);
+            user.addField("User:",
+                    String.format("**Name**: `%s#%s`\n" +
+                            "**ID**: `%s`", msg.getAuthor().getName(),
+                            msg.getAuthor().getDiscriminator(),
+                            msg.getAuthor().getId()),
+                    false);
             user.addField("Avatar:",
                     String.format(
                             "[`Current Avatar`](%s)\n" +
-                                    "[`Default Avatar`](%s)",
+                            "[`Default Avatar`](%s)",
                             msg.getAuthor().getEffectiveAvatarUrl(),
                             msg.getAuthor().getDefaultAvatarUrl()),
                     true);

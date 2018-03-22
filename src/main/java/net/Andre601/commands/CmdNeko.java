@@ -17,7 +17,6 @@ public class CmdNeko implements Command {
 
         TextChannel tc = e.getTextChannel();
 
-        e.getMessage().delete().queue();
         try {
             EmbedBuilder neko = new EmbedBuilder();
             neko.setTitle("Neko " + NekosLifeUtil.getCat());

@@ -25,9 +25,8 @@ public class CmdInfo implements Command {
                 "I was made by <@204232208049766400> with the help of JDA " +
                 "and some free time. ^.^", false);
 
-        Builder.addField("Functions:", "`Nekos` I have some cute nekos, thanks " +
-                "to the [nekos.life](https://nekos.life) API.\n" +
-                "`Lewd Nekos` There are also some lewd nekos. :3", false);
+        Builder.addField("Commands:", "Use `" + STATIC.PREFIX +
+                "help` on the Discord, to see all commands", false);
 
         Builder.addField("Version:", STATIC.VERSION, true);
         Builder.addField("Library:", "[JDA](https://github.com/DV8FromTheWorld/JDA)",

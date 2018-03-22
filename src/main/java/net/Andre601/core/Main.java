@@ -63,6 +63,7 @@ public class Main {
         CommandHandler.commands.put("hug", new CmdHug());
         CommandHandler.commands.put("pat", new CmdPat());
         CommandHandler.commands.put("user", new CmdUser());
+        CommandHandler.commands.put("server", new CmdServer());
 
     }
 }

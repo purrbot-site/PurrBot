@@ -22,11 +22,18 @@ public class CmdHelp implements Command{
         eb.addField("Command-Prefix:", "All commands start with `" +
                 STATIC.PREFIX + "`", false);
 
-        eb.addField("Commands:", "`Help` You already see the result :3\n" +
-                "`Info` Get basic info about the Bot.\n" +
-                "`Neko` Summons a neko from [nekos.life](https://nekos.life). OwO\n" +
-                "`Lewd` Summons a lewd neko from [nekos.life](https://nekos.life). >w<",
+        eb.addField("Info:", "`Info` Gives you infos about me. :3\n" +
+                        "`Help` Well... You see the result. xD\n" +
+                        "`User` Want to know stuff about someone?\n" +
+                        "`Server` What server is that? :O\n",
                 false);
+
+        eb.addField("Fun:", "`Neko` Gives you a cute neko. OwO\n" +
+                        "`Lewd` Gives you a lewd neko. >w<\n" +
+                        "`Hug` Share some love? :?\n" +
+                        "`Pat` Pats are nice. :D\n",
+                false);
+
         eb.setFooter("Requested by " + e.getAuthor().getName() + "#" + e.getAuthor()
                 .getDiscriminator(), e.getAuthor().getEffectiveAvatarUrl());
 

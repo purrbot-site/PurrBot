@@ -17,8 +17,6 @@ public class CmdLewd implements Command {
 
         TextChannel tc = e.getTextChannel();
 
-        e.getMessage().delete().queue();
-
         if(tc.isNSFW()){
             try {
                 EmbedBuilder neko = new EmbedBuilder();
@@ -35,8 +33,7 @@ public class CmdLewd implements Command {
             }
         }else{
             EmbedBuilder shy = new EmbedBuilder();
-            shy.setDescription("Lewd nekos don't like normal channels.\n" +
-                    "They only show themself in NSFW-Channels.");
+            shy.setDescription("Lewd nekos only show them self in NSFW-channels.");
             tc.sendMessage(shy.build()).queue();
         }
 
