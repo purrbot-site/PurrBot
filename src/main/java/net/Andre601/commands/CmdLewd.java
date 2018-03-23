@@ -7,6 +7,15 @@ import net.Andre601.util.NekosLifeUtil;
 
 public class CmdLewd implements Command {
 
+    public String getLink(){
+        try{
+            return NekosLifeUtil.getLewd();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
         return false;
@@ -15,13 +24,14 @@ public class CmdLewd implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
+        String link = getLink();
         TextChannel tc = e.getTextChannel();
 
         if(tc.isNSFW()){
             try {
                 EmbedBuilder neko = new EmbedBuilder();
-                neko.setTitle("Lewd Neko " + NekosLifeUtil.getCat());
-                neko.setImage(NekosLifeUtil.getLewd());
+                neko.setTitle("Lewd Neko " + NekosLifeUtil.getCat(), link);
+                neko.setImage(link);
                 neko.setFooter("Requested by " + e.getAuthor().getName() + "#" + e.getAuthor()
                         .getDiscriminator(), e.getAuthor().getEffectiveAvatarUrl());
 

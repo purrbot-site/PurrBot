@@ -32,13 +32,9 @@ public class CmdServer implements Command {
 
         EmbedBuilder server = new EmbedBuilder();
 
-        server.setAuthor(g.getName(), STATIC.URL,
+        server.setAuthor("Serverinfo: " + g.getName(), STATIC.URL,
                 e.getJDA().getSelfUser().getEffectiveAvatarUrl());
         server.setThumbnail(g.getIconUrl());
-
-        server.addField("Name",
-                g.getName(),
-                true);
 
         server.addField("Users", String.format(
                 "**Total**: %s\n" +
@@ -51,12 +47,15 @@ public class CmdServer implements Command {
         ), true);
 
         server.addField("Server region",
-                g.getRegionRaw(),
+                g.getRegionRaw().toLowerCase(),
                 true);
 
         server.addField("Verification level",
-                g.getVerificationLevel().toString(),
+                g.getVerificationLevel().toString().toLowerCase(),
                 true);
+
+        server.addField("Image", String.format("[`Link`](%s)",
+                g.getIconUrl()), true);
 
         server.addField("Owner",
                 g.getOwner().getAsMention(),

@@ -11,7 +11,7 @@ public class CommandListener extends ListenerAdapter{
 
         if(e.getMessage().getContentRaw().startsWith(STATIC.PREFIX) && e.getMessage().getAuthor().getId() != e.getJDA()
                 .getSelfUser().getId()){
-            CommandHandler.handleCommand(CommandHandler.parser.parse(e.getMessage().getContentRaw(), e));
+            CommandHandler.handleCommand(CommandHandler.parser.parse(e.getMessage().getContentRaw().toLowerCase(), e));
         }
 
     }
