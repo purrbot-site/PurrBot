@@ -11,6 +11,10 @@ public class CommandListener extends ListenerAdapter{
 
         if(e.getMessage().getContentRaw().startsWith(STATIC.PREFIX) && e.getMessage().getAuthor().getId() != e.getJDA()
                 .getSelfUser().getId()){
+            if(MessageListener.isDM(e.getMessage())){
+                e.getTextChannel().sendMessage("Nya! Please use my commands in the Discord. >.<").queue();
+                return;
+            }
             CommandHandler.handleCommand(CommandHandler.parser.parse(e.getMessage().getContentRaw().toLowerCase(), e));
         }
 

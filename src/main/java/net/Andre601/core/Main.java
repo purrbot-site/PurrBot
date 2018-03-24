@@ -1,6 +1,14 @@
 package net.Andre601.core;
 
-import net.Andre601.commands.*;
+import net.Andre601.commands.Info.CmdHelp;
+import net.Andre601.commands.Info.CmdInfo;
+import net.Andre601.commands.Info.CmdServer;
+import net.Andre601.commands.Info.CmdUser;
+import net.Andre601.commands.fun.CmdHug;
+import net.Andre601.commands.fun.CmdNeko;
+import net.Andre601.commands.fun.CmdPat;
+import net.Andre601.commands.nsfw.CmdLewd;
+import net.Andre601.commands.owner.CmdShutdown;
 import net.Andre601.listeners.CommandListener;
 import net.Andre601.listeners.ReadyListener;
 import net.dv8tion.jda.core.*;

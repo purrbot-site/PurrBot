@@ -1,6 +1,6 @@
-package net.Andre601.commands;
+package net.Andre601.commands.Info;
 
-import net.Andre601.util.NekosLifeUtil;
+import net.Andre601.commands.Command;
 import net.Andre601.util.STATIC;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.OnlineStatus;
@@ -16,13 +16,37 @@ public class CmdUser implements Command {
 
     public String getStatus(Member member){
         if(member.getOnlineStatus() == OnlineStatus.ONLINE){
-            return "<:online:426838620033253376> `Online`";
+            return "<:online:426838620033253376> `Online`" +
+                    (member != null && member.getGame() != null ?
+                            " (" + (member.getGame().getUrl() == null ?
+                            "`" + member.getGame().getName() + "`" :
+                            String.format(
+                                    "[`%s`](%s)",
+                                    member.getGame().getName(),
+                                    member.getGame().getUrl()
+                            )) + ")" : "");
         }else
         if(member.getOnlineStatus() == OnlineStatus.IDLE){
-            return "<:idle:426838620012281856> `Idle`";
+            return "<:idle:426838620012281856> `Idle`" +
+                    (member != null && member.getGame() != null ?
+                            " (" + (member.getGame().getUrl() == null ?
+                            "`" + member.getGame().getName() + "`" :
+                            String.format(
+                                    "[`%s`](%s)",
+                                    member.getGame().getName(),
+                                    member.getGame().getUrl()
+                            )) + ")" : "");
         }else
         if(member.getOnlineStatus() == OnlineStatus.DO_NOT_DISTURB){
-            return "<:dnd:426838619714748439> `Do not disturb`";
+            return "<:dnd:426838619714748439> `Do not disturb`" +
+                    (member != null && member.getGame() != null ?
+                            " (" + (member.getGame().getUrl() == null ?
+                            "`" + member.getGame().getName() + "`" :
+                            String.format(
+                                    "[`%s`](%s)",
+                                    member.getGame().getName(),
+                                    member.getGame().getUrl()
+                            )) + ")" : "");
         }
         return "<:offline:426840813729742859> `Offline`";
     }
@@ -53,11 +77,16 @@ public class CmdUser implements Command {
                             getStatus(member)),
                     false);
             ebuser.addField("Avatar:",
+                    (member.getUser().getEffectiveAvatarUrl() != null ?
                     String.format(
                             "[`Current Avatar`](%s)\n" +
                             "[`Default Avatar`](%s)",
                             member.getUser().getEffectiveAvatarUrl(),
-                            member.getUser().getDefaultAvatarUrl()),
+                            member.getUser().getDefaultAvatarUrl()
+                    ) : String.format(
+                            "[`Default Avatar`](%s)",
+                            member.getUser().getDefaultAvatarUrl()
+                    )),
                     true);
             ebuser.addField("Is Bot:",
                     isBot(member.getUser()),

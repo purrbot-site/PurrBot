@@ -1,10 +1,11 @@
-package net.Andre601.commands;
+package net.Andre601.commands.Info;
 
+import net.Andre601.commands.Command;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.Andre601.util.STATIC;
 
-public class CmdHelp implements Command{
+public class CmdHelp implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {

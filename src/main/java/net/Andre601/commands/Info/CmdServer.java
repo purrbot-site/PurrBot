@@ -1,5 +1,6 @@
-package net.Andre601.commands;
+package net.Andre601.commands.Info;
 
+import net.Andre601.commands.Command;
 import net.Andre601.util.STATIC;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
@@ -8,6 +9,21 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CmdServer implements Command {
+
+    public String getLevel(Guild g){
+
+        switch (g.getVerificationLevel().toString().toLowerCase()){
+
+            case "high":
+                return "(╯°□°）╯︵ ┻━┻";
+
+            case "very_high":
+                return "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻";
+
+            default:
+                return g.getVerificationLevel().toString().toLowerCase();
+        }
+    }
 
     public int getBots(Guild g){
         int bot = 0;
@@ -47,11 +63,11 @@ public class CmdServer implements Command {
         ), true);
 
         server.addField("Server region",
-                g.getRegionRaw().toLowerCase(),
+                g.getRegion().getName(),
                 true);
 
         server.addField("Verification level",
-                g.getVerificationLevel().toString().toLowerCase(),
+                getLevel(g),
                 true);
 
         server.addField("Image", String.format("[`Link`](%s)",
