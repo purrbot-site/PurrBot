@@ -4,12 +4,15 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Objects;
 
-public class NekosLifeUtil {
+public class HttpUtil {
     private static final OkHttpClient CLIENT = new OkHttpClient();
 
     public static String getCat() throws Exception{
@@ -86,6 +89,15 @@ public class NekosLifeUtil {
         try(ResponseBody responseBody = response.body()){
             if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
             return new JSONObject(Objects.requireNonNull(responseBody).string()).get("url").toString();
+        }
+    }
+
+    public static String requestHttp(String request){
+        try{
+            return IOUtils.toString(new URL(request), Charset.forName("UTF-8"));
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+            return "";
         }
     }
 }

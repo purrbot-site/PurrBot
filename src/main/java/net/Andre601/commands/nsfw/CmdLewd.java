@@ -1,16 +1,17 @@
 package net.Andre601.commands.nsfw;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.Andre601.util.NekosLifeUtil;
+import net.Andre601.util.HttpUtil;
 
 public class CmdLewd implements Command {
 
     public String getLink(){
         try{
-            return NekosLifeUtil.getLewd();
+            return HttpUtil.getLewd();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -28,10 +29,18 @@ public class CmdLewd implements Command {
         String link = getLink();
         TextChannel tc = e.getTextChannel();
 
+        if(!PermUtil.canSendEmbed(e.getMessage())){
+            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("🚫").queue();
+
+            return;
+        }
+
         if(tc.isNSFW()){
             try {
                 EmbedBuilder neko = new EmbedBuilder();
-                neko.setTitle("Lewd Neko " + NekosLifeUtil.getCat(), link);
+                neko.setTitle("Lewd Neko " + HttpUtil.getCat(), link);
                 neko.setImage(link);
                 neko.setFooter("Requested by " + e.getAuthor().getName() + "#" + e.getAuthor()
                         .getDiscriminator(), e.getAuthor().getEffectiveAvatarUrl());

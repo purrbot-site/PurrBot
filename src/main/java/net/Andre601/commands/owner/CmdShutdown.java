@@ -1,11 +1,32 @@
 package net.Andre601.commands.owner;
 
 import net.Andre601.commands.Command;
-import net.Andre601.listeners.MessageListener;
+import net.Andre601.core.Main;
+import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CmdShutdown implements Command {
+
+    private static String getRandomShutdown(){
+        return Main.getRandomShutdownText().size() > 0 ? Main.getRandomShutdownText().get(
+                Main.getRandom().nextInt(Main.getRandomShutdownText().size())) : "";
+    }
+
+    private static String getRandomNoShutdown(){
+        return Main.getRandomNoShutdownText().size() > 0 ? Main.getRandomNoShutdownText().get(
+                Main.getRandom().nextInt(Main.getRandomNoShutdownText().size())) : "";
+    }
+
+    private static String getRandomImage(){
+        return Main.getRandomShutdownImage().size() > 0 ? Main.getRandomShutdownImage().get(
+                Main.getRandom().nextInt(Main.getRandomShutdownImage().size())) : "";
+    }
+
+    private static String getRandomNoImage(){
+        return Main.getRandomNoShutdownImage().size() > 0 ? Main.getRandomNoShutdownImage().get(
+                Main.getRandom().nextInt(Main.getRandomNoShutdownImage().size())) : "";
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
@@ -14,8 +35,12 @@ public class CmdShutdown implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
-        if(MessageListener.isDM(e.getMessage())){
-            e.getTextChannel().sendMessage("Nya! Please use my commands in the Discord. >.<").queue();
+
+        if(!PermUtil.canSendEmbed(e.getMessage())){
+            e.getChannel().sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("🚫").queue();
+
             return;
         }
 
@@ -24,8 +49,8 @@ public class CmdShutdown implements Command {
 
             EmbedBuilder shutdown = new EmbedBuilder();
 
-            shutdown.setDescription("I go and take a nap now...");
-            shutdown.setImage("https://cdn.nekos.life/neko/neko346.png");
+            shutdown.setDescription(getRandomShutdown());
+            shutdown.setImage(getRandomImage());
 
             e.getTextChannel().sendMessage(shutdown.build()).queue();
 
@@ -33,10 +58,12 @@ public class CmdShutdown implements Command {
             e.getJDA().shutdown();
 
         }else{
+            e.getMessage().delete().queue();
+
             EmbedBuilder noShutdown = new EmbedBuilder();
 
-            noShutdown.setDescription("W-why are you doing that?");
-            noShutdown.setImage("https://cdn.nekos.life/neko/neko015.jpg");
+            noShutdown.setDescription(getRandomNoShutdown());
+            noShutdown.setImage(getRandomNoImage());
 
             e.getTextChannel().sendMessage(noShutdown.build()).queue();
         }

@@ -1,6 +1,7 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.PermUtil;
 import net.Andre601.util.STATIC;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
@@ -45,6 +46,14 @@ public class CmdServer implements Command {
 
         TextChannel tc = e.getTextChannel();
         Guild g = e.getGuild();
+
+        if(!PermUtil.canSendEmbed(e.getMessage())){
+            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("🚫").queue();
+
+            return;
+        }
 
         EmbedBuilder server = new EmbedBuilder();
 

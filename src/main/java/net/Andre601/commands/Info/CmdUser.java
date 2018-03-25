@@ -1,6 +1,7 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.PermUtil;
 import net.Andre601.util.STATIC;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.OnlineStatus;
@@ -14,39 +15,28 @@ import java.util.List;
 
 public class CmdUser implements Command {
 
+    public String getGameStatus(Member member){
+        return (member != null && member.getGame() != null ? " (" +
+                (member.getGame().getUrl() == null ?
+                String.format(
+                        "`%s`",
+                        member.getGame().getName()) :
+                String.format(
+                        "[`%s`](%s)",
+                        member.getGame().getName(),
+                        member.getGame().getUrl()
+                )) + ")" : "");
+    }
+
     public String getStatus(Member member){
         if(member.getOnlineStatus() == OnlineStatus.ONLINE){
-            return "<:online:426838620033253376> `Online`" +
-                    (member != null && member.getGame() != null ?
-                            " (" + (member.getGame().getUrl() == null ?
-                            "`" + member.getGame().getName() + "`" :
-                            String.format(
-                                    "[`%s`](%s)",
-                                    member.getGame().getName(),
-                                    member.getGame().getUrl()
-                            )) + ")" : "");
+            return "<:online:426838620033253376> `Online`" + getGameStatus(member);
         }else
         if(member.getOnlineStatus() == OnlineStatus.IDLE){
-            return "<:idle:426838620012281856> `Idle`" +
-                    (member != null && member.getGame() != null ?
-                            " (" + (member.getGame().getUrl() == null ?
-                            "`" + member.getGame().getName() + "`" :
-                            String.format(
-                                    "[`%s`](%s)",
-                                    member.getGame().getName(),
-                                    member.getGame().getUrl()
-                            )) + ")" : "");
+            return "<:idle:426838620012281856> `Idle`" + getGameStatus(member);
         }else
         if(member.getOnlineStatus() == OnlineStatus.DO_NOT_DISTURB){
-            return "<:dnd:426838619714748439> `Do not disturb`" +
-                    (member != null && member.getGame() != null ?
-                            " (" + (member.getGame().getUrl() == null ?
-                            "`" + member.getGame().getName() + "`" :
-                            String.format(
-                                    "[`%s`](%s)",
-                                    member.getGame().getName(),
-                                    member.getGame().getUrl()
-                            )) + ")" : "");
+            return "<:dnd:426838619714748439> `Do not disturb`" + getGameStatus(member);
         }
         return "<:offline:426840813729742859> `Offline`";
     }
@@ -109,6 +99,14 @@ public class CmdUser implements Command {
 
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
+
+        if(!PermUtil.canSendEmbed(e.getMessage())){
+            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("🚫").queue();
+
+            return;
+        }
 
         if(args.length == 0){
             EmbedBuilder user = new EmbedBuilder();

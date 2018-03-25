@@ -11,12 +11,12 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class CmdHug implements Command {
+public class CmdSlap implements Command{
 
     public void usage(TextChannel tc){
         EmbedBuilder usage = new EmbedBuilder();
         usage.setDescription("Please provide a username after the command, " +
-                "to share the hug!");
+                "to slap him!");
 
         tc.sendMessage(usage.build()).queue();
     }
@@ -49,29 +49,30 @@ public class CmdHug implements Command {
         for (User user : mentionedUsers){
             if(user == msg.getJDA().getSelfUser()){
                 if(PermUtil.canReact(e.getMessage()))
-                    e.getMessage().addReaction("❤").queue();
+                    e.getMessage().addReaction("💔").queue();
 
-                tc.sendMessage(String.format("Awwwwww.... Thank you for the hug %s. :heart:",
+                tc.sendMessage(String.format("%s Please do not hurt me.",
                         msg.getMember().getAsMention())).queue();
                 break;
             }
             if(user == msg.getAuthor()){
-                tc.sendMessage("You wanna hug yourself? Are you lonely?").queue();
+                tc.sendMessage("Why hurting yourself?").queue();
                 break;
             }
             String name = msg.getGuild().getMember(user).getAsMention();
-            tc.sendMessage(String.format("%s you got a hug from %s", name, msg.getMember().
-            getEffectiveName())).queue(message -> {
+            tc.sendMessage(String.format(
+                    "%s slapped you %s",
+                    msg.getMember().getEffectiveName(),
+                    name)).queue(message -> {
                 try{
                     message.editMessage(
-                            new EmbedBuilder().setImage(HttpUtil.getHug()).build()
+                            new EmbedBuilder().setImage(HttpUtil.getSlap()).build()
                     ).queue();
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
             });
         }
-
     }
 
     @Override

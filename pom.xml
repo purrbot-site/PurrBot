@@ -6,7 +6,7 @@
 
     <groupId>net.Andre601</groupId>
     <artifactId>Purr-Bot</artifactId>
-    <version>1.6.9_SNAPSHOT</version>
+    <version>1.7.3_SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
@@ -68,11 +68,6 @@
     </repositories>
 
     <dependencies>
-        <dependency>
-            <groupId>com.sedmelluq</groupId>
-            <artifactId>lavaplayer</artifactId>
-            <version>LATEST</version>
-        </dependency>
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>

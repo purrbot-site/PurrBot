@@ -1,7 +1,8 @@
 package net.Andre601.commands.fun;
 
 import net.Andre601.commands.Command;
-import net.Andre601.util.NekosLifeUtil;
+import net.Andre601.util.HttpUtil;
+import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -31,6 +32,14 @@ public class CmdPat implements Command {
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
+        if(!PermUtil.canSendEmbed(e.getMessage())){
+            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("🚫").queue();
+
+            return;
+        }
+
         if(args.length < 1){
             usage(tc);
             return;
@@ -39,12 +48,15 @@ public class CmdPat implements Command {
         List<User> mentionedUsers = msg.getMentionedUsers();
         for (User user : mentionedUsers){
             if(user == msg.getJDA().getSelfUser()){
+                if(PermUtil.canReact(e.getMessage()))
+                    e.getMessage().addReaction("❤").queue();
+
                 tc.sendMessage(String.format("%s \\*purr*",
                         msg.getMember().getAsMention())).queue();
                 break;
             }
             if(user == msg.getAuthor()){
-                tc.sendMessage("Why are you pat yourself?").queue();
+                tc.sendMessage("Why are you patting yourself?").queue();
                 break;
             }
             String name = msg.getGuild().getMember(user).getAsMention();
@@ -52,7 +64,7 @@ public class CmdPat implements Command {
                     getEffectiveName(), name)).queue(message -> {
                 try{
                     message.editMessage(
-                            new EmbedBuilder().setImage(NekosLifeUtil.getPat()).build()
+                            new EmbedBuilder().setImage(HttpUtil.getPat()).build()
                     ).queue();
                 }catch (Exception ex){
                     ex.printStackTrace();
