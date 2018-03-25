@@ -1,0 +1,10 @@
+﻿The shutdown-command has different images and messages, depending on if Andre_601 is using the command or not.
+The bot has 11 Commands. (4 in Fun, 4 in Info, 1 in NSFW and 2 in a not seen category)
+GitHub literally saved this bot. Without it, the code would be gone!
+It took Andre_601 multiple tries and the help of 4 different devs, to get the Info-command working correctly in DM.
+Multiple people already asked for using this bot in their Discord.
+Some code of the Bot is inspired by other bots (PowerSuggestion, FlareBot, NekoBeta) and a Spigot-plugin (DiscordSRV)
+The bot actually converts the verification levels "high" and "very_high" into their corresponding image (`(╯°□°）╯︵ ┻━┻` and `┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻`)
+The version of the bot would actually be much higher, but Andre_601 is to lazy to update it every time.
+This bot is actually a she.
+This is actually just a random message... because why not :P
