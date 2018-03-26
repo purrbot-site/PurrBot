@@ -34,6 +34,7 @@ public class Main {
     private static List<String> RandomShutdownImage = new ArrayList<>();
     private static List<String> RandomNoShutdownImage = new ArrayList<>();
     private static List<String> RandomFact = new ArrayList<>();
+    private static List<String> RandomNoNSWF = new ArrayList<>();
 
     public static JDABuilder builder;
     public static JDA jda;
@@ -110,6 +111,7 @@ public class Main {
         Collections.addAll(RandomFact, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/Andre601/NekoBot/randomstuff/" +
                         "randomFact").split("\n"));
+        Collections.addAll(RandomNoNSWF, HttpUtil.requestHttp("").split("\n"));
 
     }
 
