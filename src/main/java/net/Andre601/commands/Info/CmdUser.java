@@ -28,17 +28,21 @@ public class CmdUser implements Command {
                 )) + ")" : "");
     }
 
-    public String getStatus(Member member){
+    public String getStatus(Member member, Message msg){
         if(member.getOnlineStatus() == OnlineStatus.ONLINE){
-            return "<:online:426838620033253376> `Online`" + getGameStatus(member);
+            return (PermUtil.canUseCustomEmojis(msg) ? "<:online:426838620033253376> "
+                    : "" ) + "`Online`" + getGameStatus(member);
         }else
         if(member.getOnlineStatus() == OnlineStatus.IDLE){
-            return "<:idle:426838620012281856> `Idle`" + getGameStatus(member);
+            return (PermUtil.canUseCustomEmojis(msg) ? "<:idle:426838620012281856> "
+                    : "" ) + "`Idle`" + getGameStatus(member);
         }else
         if(member.getOnlineStatus() == OnlineStatus.DO_NOT_DISTURB){
-            return "<:dnd:426838619714748439> `Do not disturb`" + getGameStatus(member);
+            return (PermUtil.canUseCustomEmojis(msg) ? "<:dnd:426838619714748439> "
+            : "" ) + "`Do not disturb`" + getGameStatus(member);
         }
-        return "<:offline:426840813729742859> `Offline`";
+        return (PermUtil.canUseCustomEmojis(msg) ? "<:offline:426840813729742859> "
+                : "" ) + "`Offline`";
     }
 
     public String isBot(User user){
@@ -64,7 +68,7 @@ public class CmdUser implements Command {
                             member.getUser().getName(),
                             member.getUser().getDiscriminator(),
                             member.getUser().getId(),
-                            getStatus(member)),
+                            getStatus(member, msg)),
                     false);
             ebuser.addField("Avatar:",
                     (member.getUser().getEffectiveAvatarUrl() != null ?
@@ -120,7 +124,7 @@ public class CmdUser implements Command {
                             msg.getAuthor().getName(),
                             msg.getAuthor().getDiscriminator(),
                             msg.getAuthor().getId(),
-                            getStatus(msg.getMember())),
+                            getStatus(msg.getMember(), e.getMessage())),
                     false);
 
             user.addField("Avatar:",

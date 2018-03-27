@@ -29,6 +29,9 @@ public class CmdNeko implements Command {
         String link = getLink();
         TextChannel tc = e.getTextChannel();
 
+        if(PermUtil.canDeleteMsg(e.getMessage()))
+            e.getMessage().delete().queue();
+
         if(!PermUtil.canSendEmbed(e.getMessage())){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
             if(PermUtil.canReact(e.getMessage()))

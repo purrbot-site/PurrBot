@@ -3,16 +3,17 @@ package net.Andre601.util;
 public class STATIC {
 
     //  Version
-    public static final String VERSION = "1.7.3_SNAPSHOT";
-
-    //  Path for the different files
-    public static final String PATH_XP = "Level/XP.dat";
-    public static final String PATH_LEVEL = "Level-System/Level.dat";
+    public static final String VERSION = "1.7.5_SNAPSHOT";
 
     //  Prefix for all commands (">>[command]")
     public static final String PREFIX = ".";
 
-    //  URL for the Embeds
+    //  Links
     public static final String URL = "https://Andre601.net";
+    public static final String INVITE_FULL = "https://discordapp.com/api/oauth2/authorize?client_id=" +
+            "425382319449309197&permissions=289856&scope=bot";
+    public static final String INVITE_BASIC = "https://discordapp.com/api/oauth2/authorize?client_id=" +
+            "425382319449309197&permissions=19456&scope=bot";
+    public static final String DISCORD_INVITE = "https://discord.gg/NB7AFqn";
 
 }

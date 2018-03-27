@@ -15,4 +15,14 @@ public class PermUtil {
         return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
                 Permission.MESSAGE_EMBED_LINKS);
     }
+
+    public static boolean canDeleteMsg(Message msg){
+        return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
+                Permission.MESSAGE_MANAGE);
+    }
+
+    public static boolean canUseCustomEmojis(Message msg){
+        return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
+                Permission.MESSAGE_EXT_EMOJI);
+    }
 }

@@ -1,9 +1,6 @@
 package net.Andre601.core;
 
-import net.Andre601.commands.Info.CmdHelp;
-import net.Andre601.commands.Info.CmdInfo;
-import net.Andre601.commands.Info.CmdServer;
-import net.Andre601.commands.Info.CmdUser;
+import net.Andre601.commands.Info.*;
 import net.Andre601.commands.fun.CmdHug;
 import net.Andre601.commands.fun.CmdNeko;
 import net.Andre601.commands.fun.CmdPat;
@@ -91,27 +88,30 @@ public class Main {
         CommandHandler.commands.put("server", new CmdServer());
         CommandHandler.commands.put("refresh", new CmdRefresh());
         CommandHandler.commands.put("slap", new CmdSlap());
+        CommandHandler.commands.put("invite", new CmdInvite());
 
     }
 
     public static void loadRandom(){
 
         Collections.addAll(RandomShutdownText, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/Andre601/NekoBot/randomstuff/" +
-                        "randomShutdownText").split("\n"));
+                "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
+                        "main/java/net/Andre601/Files/RandomShutdownText").split("\n"));
         Collections.addAll(RandomNoShutdownText, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/Andre601/NekoBot/randomstuff/" +
-                        "randomNoShutdownText").split("\n"));
+                "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
+                        "main/java/net/Andre601/Files/RandomNoShutdownText").split("\n"));
         Collections.addAll(RandomShutdownImage, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/Andre601/NekoBot/randomstuff/" +
-                        "randomShutdownImage").split("\n"));
+                "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
+                        "main/java/net/Andre601/Files/RandomShutdownImage").split("\n"));
         Collections.addAll(RandomNoShutdownImage, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/Andre601/NekoBot/randomstuff/" +
-                        "randomNoShutdownImage").split("\n"));
+                "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
+                        "main/java/net/Andre601/Files/RandomNoShutdownImage").split("\n"));
         Collections.addAll(RandomFact, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/Andre601/NekoBot/randomstuff/" +
-                        "randomFact").split("\n"));
-        Collections.addAll(RandomNoNSWF, HttpUtil.requestHttp("").split("\n"));
+                "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
+                        "main/java/net/Andre601/Files/RandomFact").split("\n"));
+        Collections.addAll(RandomNoNSWF, HttpUtil.requestHttp(
+                "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
+                        "main/java/net/Andre601/Files/RandomNoNSFWMsg").split("\n"));
 
     }
 
@@ -136,6 +136,10 @@ public class Main {
         return RandomFact;
     }
 
+    public static List<String> getRandomNoNSWF(){
+        return RandomNoNSWF;
+    }
+
     public static Random getRandom(){
         return random;
     }
@@ -145,5 +149,6 @@ public class Main {
         RandomShutdownImage.clear();
         RandomNoShutdownText.clear();
         RandomNoShutdownImage.clear();
+        RandomNoNSWF.clear();
     }
 }

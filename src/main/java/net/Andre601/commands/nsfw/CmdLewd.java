@@ -1,13 +1,21 @@
 package net.Andre601.commands.nsfw;
 
 import net.Andre601.commands.Command;
+import net.Andre601.core.Main;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.Andre601.util.HttpUtil;
 
+import java.util.concurrent.TimeUnit;
+
 public class CmdLewd implements Command {
+
+    private static String getRandomNSFW(){
+        return Main.getRandomNoNSWF().size() > 0 ? Main.getRandomNoNSWF().get(
+                Main.getRandom().nextInt(Main.getRandomFact().size())) : "";
+    }
 
     public String getLink(){
         try{
@@ -28,6 +36,9 @@ public class CmdLewd implements Command {
 
         String link = getLink();
         TextChannel tc = e.getTextChannel();
+
+        if(PermUtil.canDeleteMsg(e.getMessage()))
+            e.getMessage().delete().queue();
 
         if(!PermUtil.canSendEmbed(e.getMessage())){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
@@ -52,9 +63,10 @@ public class CmdLewd implements Command {
                 ex.printStackTrace();
             }
         }else{
-            EmbedBuilder shy = new EmbedBuilder();
-            shy.setDescription("Lewd nekos only show them self in NSFW-channels.");
-            tc.sendMessage(shy.build()).queue();
+            tc.sendMessage(String.format(getRandomNSFW(),
+                    e.getAuthor().getAsMention())).queue(msg -> {
+                        msg.delete().queueAfter(10, TimeUnit.SECONDS);
+            });
         }
 
     }

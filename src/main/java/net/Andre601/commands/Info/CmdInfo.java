@@ -2,6 +2,7 @@ package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
 import net.Andre601.core.Main;
+import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.Andre601.util.STATIC;
@@ -17,6 +18,9 @@ public class CmdInfo implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
+
+        if(PermUtil.canDeleteMsg(e.getMessage()))
+            e.getMessage().delete().queue();
 
         EmbedBuilder info = new EmbedBuilder();
 
