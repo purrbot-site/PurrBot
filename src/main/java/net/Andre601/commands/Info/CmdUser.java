@@ -49,7 +49,6 @@ public class CmdUser implements Command {
         if(user.isBot()){
             return "Yes";
         }
-
         return "No";
     }
 
