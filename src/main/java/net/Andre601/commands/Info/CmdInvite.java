@@ -28,12 +28,13 @@ public class CmdInvite implements Command{
         invite.addField("Invite bot:",
                     "Use one of the links below, to invite me to your Discord. :3\n" +
                     "I recommend using the `Recommended Invite`, to give me access to all needed permissions.\n" +
-                    "`Basic Invite` gives me access to the basic permissions, that I need, to work correctly\n"
+                    "`Basic Invite` gives me access to the basic permissions, that I need, to work correctly\n" +
+                    "\n" +
+                    "**Important Note**:\n" +
+                    "It is **required** for me, to have permissions to: \n" +
+                    "Seeing channels, send messages and embed links!"
                 , false);
-
-        invite.addField("Important note:",
-                "It is **required** for me, to have permissions to: " +
-                "Seeing channels, send messages and embed links!", false);
+        invite.addBlankField(false);
 
         invite.addField("Links:", String.format(
                 "[Recommended Invite](%s)\n" +

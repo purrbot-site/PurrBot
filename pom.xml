@@ -12,6 +12,7 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
+                    <finalName>Purr-Bot</finalName>
                     <archive>
                         <manifest>
                             <mainClass>net.Andre601.core.Main</mainClass>

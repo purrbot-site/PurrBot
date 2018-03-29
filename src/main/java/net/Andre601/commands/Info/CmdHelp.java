@@ -30,38 +30,38 @@ public class CmdHelp implements Command {
             return;
         }
 
-        EmbedBuilder eb = new EmbedBuilder();
+        EmbedBuilder help = new EmbedBuilder();
 
-        eb.setAuthor(e.getJDA().getSelfUser().getName(), STATIC.URL, e.getJDA().getSelfUser().
+        help.setAuthor(e.getJDA().getSelfUser().getName(), STATIC.URL, e.getJDA().getSelfUser().
                 getEffectiveAvatarUrl());
 
-        eb.addField("Command-Prefix:", "All commands start with `" +
+        help.addField("Command-Prefix:", "All commands start with `" +
                 STATIC.PREFIX + "`", false);
 
-        eb.addField("Information:", "`Help` Well... You see the result. xD\n" +
+        help.addField("Commands:", "**Information**\n" +
+                        "`Help` Well... You see the result. xD\n" +
                         "`Info` Sends some infos about me :3\n" +
+                        "`Invite` Sends you a link to invite me. :*\n" +
                         "`Server` What Discord is that? :/\n" +
                         "`User` Get infos about someone :)\n" +
-                        "\n",
-                false);
-
-        eb.addField("Fun:", "`Neko` Gives you a cute neko. OwO\n" +
+                        "\n" +
+                        "**Fun**\n" +
+                        "`Neko` Gives you a cute neko. OwO\n" +
                         "`Hug` Share some love? :?\n" +
                         "`Pat` Pats are nice. :D\n" +
                         "`Slap` Slaps someone >:)\n" +
-                        "\n",
+                        "\n" +
+                        "**NSFW**\n" +
+                        "`Lewd` Gives you a lewd neko. >w<",
                 false);
+        help.addBlankField(false);
 
-        eb.addField("NSFW:", "`Lewd` Gives you a lewd neko. >w<\n" +
-                        "\n",
-                false);
+        help.addField("Random Fact:", getFact(), false);
 
-        eb.addField("Random Fact:", getFact(), false);
-
-        eb.setFooter("Requested by " + e.getAuthor().getName() + "#" + e.getAuthor()
+        help.setFooter("Requested by " + e.getAuthor().getName() + "#" + e.getAuthor()
                 .getDiscriminator(), e.getAuthor().getEffectiveAvatarUrl());
 
-        e.getTextChannel().sendMessage(eb.build()).queue();
+        e.getTextChannel().sendMessage(help.build()).queue();
     }
 
     @Override

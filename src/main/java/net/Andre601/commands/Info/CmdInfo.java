@@ -35,6 +35,7 @@ public class CmdInfo implements Command {
 
         info.addField("Commands:", "Use `" + STATIC.PREFIX +
                 "help` on the Discord, to see all commands", false);
+        info.addBlankField(false);
 
         info.addField("Version:", STATIC.VERSION, true);
         info.addField("Library:", "[JDA](https://github.com/DV8FromTheWorld/JDA)",
