@@ -1,11 +1,11 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.core.Main;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.Andre601.util.STATIC;
 
@@ -47,24 +47,29 @@ public class CmdHelp implements Command {
                 CmdPrefix.getPrefix(msg.getGuild())
         ), false);
 
-        help.addField("Commands:", "**Information**\n" +
-                        "`Help` Well... You see the result. xD\n" +
-                        "`Info` Sends some infos about me :3\n" +
-                        "`Invite` Sends you a link to invite me. :*\n" +
-                        "`Server` What Discord is that? :/\n" +
-                        "`User` Get infos about someone :)\n" +
-                        "\n" +
-                        "**Fun**\n" +
-                        "`Neko` Gives you a cute neko. OwO\n" +
-                        "`Hug` Share some love? :?\n" +
-                        "`Pat` Pats are nice. :D\n" +
-                        "`Slap` Slaps someone >:)\n" +
-                        "\n" +
-                        "**NSFW**\n" +
-                        "`Lewd` Gives you a lewd neko. >w<\n" +
-                        "\n" +
-                        "**Server**\n" +
-                        "`prefix` Set the prefix for the Discord.",
+        help.addField("Commands:", String.format(
+                "type `%shelp [command]` to get infos about a command.\n" +
+                "\n" +
+                "**Information**\n" +
+                "`Help` Well... You see the result. xD\n" +
+                "`Info` Sends some infos about me :3\n" +
+                "`Invite` Sends you a link to invite me. :*\n" +
+                "`Server` What Discord is that? :/\n" +
+                "`User` Get infos about someone :)\n" +
+                "\n" +
+                "**Fun**\n" +
+                "`Neko` Gives you a cute neko. OwO\n" +
+                "`Hug` Share some love? :?\n" +
+                "`Pat` Pats are nice. :D\n" +
+                "`Slap` Slaps someone >:)\n" +
+                "\n" +
+                "**NSFW**\n" +
+                "`Lewd` Gives you a lewd neko. >w<\n" +
+                "\n" +
+                "**Server**\n" +
+                "`prefix` Get or set the prefix for the Discord.",
+                CmdPrefix.getPrefix(msg.getGuild())
+                ),
                 false);
         help.addBlankField(false);
 
@@ -140,19 +145,19 @@ public class CmdHelp implements Command {
                 break;
 
             case "hug":
-                usage(e.getMessage(), "Hug", "hug @user",
+                usage(e.getMessage(), "Hug", "hug <@user>",
                         "Gives the mentioned user a hug."
                 );
                 break;
 
             case "pat":
-                usage(e.getMessage(), "Pat", "pat @user",
+                usage(e.getMessage(), "Pat", "pat <@user>",
                         "Gives the mentioned user a pat."
                 );
                 break;
 
             case "slap":
-                usage(e.getMessage(), "Slap", "slap @user",
+                usage(e.getMessage(), "Slap", "slap <@user>",
                         "Slaps the mentioned user."
                 );
                 break;
@@ -165,9 +170,15 @@ public class CmdHelp implements Command {
                 break;
 
             case "prefix":
-                usage(e.getMessage(), "Prefix", "prefix reset|set [prefix]",
-                        "Sets the command-prefix for the Discord.\n" +
-                                "Use `reset` to reset it to the default one.");
+                usage(e.getMessage(), "Prefix", "prefix [set <prefix>|reset]",
+                        "Shows the currently used prefix in this Discord, if no argument is given.\n" +
+                                "\n" +
+                                "**Arguments:**\n" +
+                                "`set <prefix>` Changes the prefix to the provided text.\n" +
+                                "`reset` Resets the prefix to the default one.\n" +
+                                "\n" +
+                                "**Permissions**\n" +
+                                "You need the `MANAGE_SERVER` permission, to either set or reset the prefix.");
                 break;
 
             default:

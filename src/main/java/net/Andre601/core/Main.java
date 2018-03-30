@@ -8,6 +8,7 @@ import net.Andre601.commands.fun.CmdSlap;
 import net.Andre601.commands.nsfw.CmdLewd;
 import net.Andre601.commands.owner.CmdRefresh;
 import net.Andre601.commands.owner.CmdShutdown;
+import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.listeners.CommandListener;
 import net.Andre601.listeners.ReadyListener;
 import net.Andre601.util.HttpUtil;

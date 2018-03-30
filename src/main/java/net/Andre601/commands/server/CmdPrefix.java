@@ -1,4 +1,4 @@
-package net.Andre601.commands.Info;
+package net.Andre601.commands.server;
 
 import net.Andre601.commands.Command;
 import net.Andre601.util.PermUtil;
@@ -151,10 +151,19 @@ public class CmdPrefix implements Command{
                             "%s You need the `MANAGE_SERVER` permission to use this.",
                             e.getAuthor().getAsMention()
                     )).queue();
+                    break;
                 }
             case "reset":
-                resetPrefix(msg, g);
-                break;
+                if(PermUtil.userIsAdmin(msg)){
+                    resetPrefix(msg, g);
+                    break;
+                }else{
+                    tc.sendMessage(String.format(
+                            "%s You need the `MANAGE_SERVER` permission to use this.",
+                            e.getAuthor().getAsMention()
+                    )).queue();
+                    break;
+                }
             default:
                 currPrefix(msg, g);
         }

@@ -1,11 +1,10 @@
 package net.Andre601.listeners;
 
-import net.Andre601.commands.Info.CmdPrefix;
+import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.core.CommandHandler;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import net.Andre601.util.STATIC;
 
 public class CommandListener extends ListenerAdapter{
 

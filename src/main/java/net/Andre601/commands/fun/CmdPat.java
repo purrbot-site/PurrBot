@@ -1,7 +1,7 @@
 package net.Andre601.commands.fun;
 
 import net.Andre601.commands.Command;
-import net.Andre601.commands.Info.CmdPrefix;
+import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.util.HttpUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;

@@ -1,6 +1,6 @@
 package net.Andre601.listeners;
 
-import net.Andre601.commands.Info.CmdPrefix;
+import net.Andre601.commands.server.CmdPrefix;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
