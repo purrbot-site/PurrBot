@@ -89,6 +89,7 @@ public class Main {
         CommandHandler.commands.put("refresh", new CmdRefresh());
         CommandHandler.commands.put("slap", new CmdSlap());
         CommandHandler.commands.put("invite", new CmdInvite());
+        CommandHandler.commands.put("prefix", new CmdPrefix());
 
     }
 
@@ -151,4 +152,6 @@ public class Main {
         RandomNoShutdownImage.clear();
         RandomNoNSWF.clear();
     }
+
+
 }

@@ -1,6 +1,7 @@
 package net.Andre601.commands.fun;
 
 import net.Andre601.commands.Command;
+import net.Andre601.commands.Info.CmdPrefix;
 import net.Andre601.util.HttpUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -16,8 +17,9 @@ public class CmdHug implements Command {
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
                 "%s Please mention a user at the end of the command, to hug him!\n" +
-                "Example: `.hug @*Purr*#6875`",
-                msg.getAuthor().getAsMention()
+                "Example: `%shug @*Purr*#6875`",
+                msg.getAuthor().getAsMention(),
+                CmdPrefix.getPrefix(msg.getGuild())
         )).queue();
     }
 

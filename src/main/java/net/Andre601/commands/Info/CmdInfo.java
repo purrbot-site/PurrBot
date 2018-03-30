@@ -33,8 +33,10 @@ public class CmdInfo implements Command {
                 "I was made by <@204232208049766400> with the help of JDA " +
                 "and some free time. ^.^", false);
 
-        info.addField("Commands:", "Use `" + STATIC.PREFIX +
-                "help` on the Discord, to see all commands", false);
+        info.addField("Commands:", String.format(
+                "Use `%shelp` on the Discord, to see my commands.",
+                CmdPrefix.getPrefix(e.getGuild())
+        ), false);
         info.addBlankField(false);
 
         info.addField("Version:", STATIC.VERSION, true);

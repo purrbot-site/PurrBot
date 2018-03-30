@@ -3,10 +3,13 @@ package net.Andre601.util;
 public class STATIC {
 
     //  Version
-    public static final String VERSION = "1.7.7";
+    public static final String VERSION = "1.8.0";
 
     //  Prefix for all commands (">>[command]")
     public static final String PREFIX = ".";
+
+    // File
+    public static final String PREFIX_FILE = "guilds/prefixes.dat";
 
     //  Links
     public static final String URL = "https://Andre601.net";

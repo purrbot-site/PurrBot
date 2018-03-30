@@ -1,5 +1,6 @@
 package net.Andre601.listeners;
 
+import net.Andre601.commands.Info.CmdPrefix;
 import net.Andre601.core.CommandHandler;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -17,12 +18,12 @@ public class CommandListener extends ListenerAdapter{
             e.getTextChannel().sendMessage(String.format(
                     "%s My prefix for all commands is `%s`!",
                     e.getAuthor().getAsMention(),
-                    STATIC.PREFIX
+                    CmdPrefix.getPrefix(e.getGuild())
             )).queue();
             return;
         }
-        if(e.getMessage().getContentRaw().startsWith(STATIC.PREFIX) && (e.getMessage().getAuthor().getId() != e.getJDA()
-                .getSelfUser().getId()) && !e.getAuthor().isBot()){
+        if(e.getMessage().getContentRaw().startsWith(CmdPrefix.getPrefix(e.getGuild())) &&
+                (e.getMessage().getAuthor().getId() != e.getJDA().getSelfUser().getId()) && !e.getAuthor().isBot()){
             CommandHandler.handleCommand(CommandHandler.parser.parse(e.getMessage().getContentRaw().toLowerCase(), e));
         }
 

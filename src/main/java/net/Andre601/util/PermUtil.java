@@ -25,4 +25,8 @@ public class PermUtil {
         return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
                 Permission.MESSAGE_EXT_EMOJI);
     }
+
+    public static boolean userIsAdmin(Message msg){
+        return PermissionUtil.checkPermission(msg.getMember(), Permission.MANAGE_SERVER);
+    }
 }

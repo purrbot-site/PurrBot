@@ -1,6 +1,7 @@
 package net.Andre601.commands.fun;
 
 import net.Andre601.commands.Command;
+import net.Andre601.commands.Info.CmdPrefix;
 import net.Andre601.util.HttpUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -16,8 +17,9 @@ public class CmdPat implements Command {
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
                 "%s Please mention a user at the end of the command, to give him a pat!\n" +
-                "Example: `.pat @*Purr*#6875`",
-                msg.getAuthor().getAsMention()
+                "Example: `%spat @*Purr*#6875`",
+                msg.getAuthor().getAsMention(),
+                CmdPrefix.getPrefix(msg.getGuild())
         )).queue();
     }
 

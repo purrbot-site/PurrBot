@@ -1,6 +1,7 @@
 package net.Andre601.commands.fun;
 
 import net.Andre601.commands.Command;
+import net.Andre601.commands.Info.CmdPrefix;
 import net.Andre601.util.HttpUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -16,9 +17,11 @@ public class CmdSlap implements Command{
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
                 "%s Please mention a user at the end of the command, to slap him!\n" +
-                "Example: `.pat %s`",
+                "Example: `%sslap %s#%s`",
                 msg.getAuthor().getAsMention(),
-                msg.getAuthor().getAsMention()
+                CmdPrefix.getPrefix(msg.getGuild()),
+                msg.getAuthor().getName(),
+                msg.getAuthor().getDiscriminator()
         )).queue();
     }
 
@@ -52,7 +55,7 @@ public class CmdSlap implements Command{
                 if(PermUtil.canReact(e.getMessage()))
                     e.getMessage().addReaction("💔").queue();
 
-                tc.sendMessage(String.format("%s Please do not hurt me.",
+                tc.sendMessage(String.format("%s Please do not hurt me. :(",
                         msg.getMember().getAsMention())).queue();
                 break;
             }

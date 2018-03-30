@@ -19,13 +19,18 @@ public class CmdHelp implements Command {
     public static void usage(Message msg, String command, String use, String description){
 
         EmbedBuilder usageEmbed = new EmbedBuilder();
-        usageEmbed.setAuthor("Command: " + command, STATIC.URL,
+        usageEmbed.setAuthor(
+                "Command: " + command, STATIC.URL,
                 msg.getJDA().getSelfUser().getEffectiveAvatarUrl());
         usageEmbed.addField("Usage:", String.format(
-                "`%s`",
+                "`%s%s`",
+                CmdPrefix.getPrefix(msg.getGuild()),
                 use
         ), false);
         usageEmbed.addField("Description:", description, false);
+
+        usageEmbed.setFooter("Requested by " + msg.getAuthor().getName() + "#" + msg.getAuthor()
+                .getDiscriminator(), msg.getAuthor().getEffectiveAvatarUrl());
 
         msg.getTextChannel().sendMessage(usageEmbed.build()).queue();
     }
@@ -39,7 +44,7 @@ public class CmdHelp implements Command {
 
         help.addField("Command-Prefix:", String.format(
                 "All commands start with the prefix `%s`",
-                STATIC.PREFIX
+                CmdPrefix.getPrefix(msg.getGuild())
         ), false);
 
         help.addField("Commands:", "**Information**\n" +
@@ -56,7 +61,10 @@ public class CmdHelp implements Command {
                         "`Slap` Slaps someone >:)\n" +
                         "\n" +
                         "**NSFW**\n" +
-                        "`Lewd` Gives you a lewd neko. >w<",
+                        "`Lewd` Gives you a lewd neko. >w<\n" +
+                        "\n" +
+                        "**Server**\n" +
+                        "`prefix` Set the prefix for the Discord.",
                 false);
         help.addBlankField(false);
 
@@ -76,6 +84,8 @@ public class CmdHelp implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
+        Message msg = e.getMessage();
+
         if(!PermUtil.canSendEmbed(e.getMessage())){
             e.getTextChannel().sendMessage("I need the permission, to embed Links in this Channel!").queue();
             if(PermUtil.canReact(e.getMessage()))
@@ -92,86 +102,72 @@ public class CmdHelp implements Command {
         switch (args[0].toLowerCase()){
 
             case "help":
-                usage(e.getMessage(), "Help", String.format(
-                        "`%shelp`",
-                        STATIC.PREFIX
-                ), "Shows you all available commands."
+                usage(e.getMessage(), "Help", "help",
+                        "Shows you all available commands."
                 );
                 break;
 
             case "info":
-                usage(e.getMessage(), "Info", String.format(
-                        "`%sinfo`",
-                        STATIC.PREFIX
-                        ), "Sends you basic infos about the bot (A small description, version, used " +
+                usage(e.getMessage(), "Info", "info",
+                        "Sends you basic infos about the bot (A small description, version, used " +
                         "Library, ect)"
                 );
                 break;
 
             case "invite":
-                usage(e.getMessage(), "Invite", String.format(
-                        "`%sinvite`",
-                        STATIC.PREFIX
-                        ), "Sends you the invite-links for the bot and for the official Discord"
+                usage(e.getMessage(), "Invite", "invite",
+                        "Sends you the invite-links for the bot and for the official Discord"
                 );
                 break;
 
             case "server":
-                usage(e.getMessage(), "Server", String.format(
-                        "`%sserver`",
-                        STATIC.PREFIX
-                        ), "Gives you basic server-infos like users online, verification level, ect."
+                usage(e.getMessage(), "Server",  "server",
+                        "Gives you basic server-infos like users online, verification level, ect."
                 );
                 break;
 
             case "user":
-                usage(e.getMessage(), "User", String.format(
-                        "`%suser [@user]`",
-                        STATIC.PREFIX
-                        ), "Gives you basic information about yourself.\n" +
+                usage(e.getMessage(), "User", "user [@user]",
+                        "Gives you basic information about yourself.\n" +
                         "@Mention a user at the end of the command, to get infos about him/her."
                 );
                 break;
 
             case "neko":
-                usage(e.getMessage(), "Neko", String.format(
-                        "`%sneko`",
-                        STATIC.PREFIX
-                        ), "Sends a cute neko. 'nuf said."
+                usage(e.getMessage(), "Neko", "neko",
+                        "Sends a cute neko. 'nuf said."
                 );
                 break;
 
             case "hug":
-                usage(e.getMessage(), "Hug", String.format(
-                        "`%shug @user`",
-                        STATIC.PREFIX
-                        ), "Gives the mentioned user a hug."
+                usage(e.getMessage(), "Hug", "hug @user",
+                        "Gives the mentioned user a hug."
                 );
                 break;
 
             case "pat":
-                usage(e.getMessage(), "Pat", String.format(
-                        "`%spat @user`",
-                        STATIC.PREFIX
-                        ), "Gives the mentioned user a pat."
+                usage(e.getMessage(), "Pat", "pat @user",
+                        "Gives the mentioned user a pat."
                 );
                 break;
 
             case "slap":
-                usage(e.getMessage(), "Slap", String.format(
-                        "`%sslap @user`",
-                        STATIC.PREFIX
-                        ), "Slaps the mentioned user."
+                usage(e.getMessage(), "Slap", "slap @user",
+                        "Slaps the mentioned user."
                 );
                 break;
 
             case "lewd":
-                usage(e.getMessage(), "Lewd", String.format(
-                        "`%slewd`",
-                        STATIC.PREFIX
-                        ), "Sends a lewd neko.\n" +
+                usage(e.getMessage(), "Lewd", "lewd",
+                        "Sends a lewd neko.\n" +
                         "Can only be used in NSFW-Channels."
                 );
+                break;
+
+            case "prefix":
+                usage(e.getMessage(), "Prefix", "prefix reset|set [prefix]",
+                        "Sets the command-prefix for the Discord.\n" +
+                                "Use `reset` to reset it to the default one.");
                 break;
 
             default:

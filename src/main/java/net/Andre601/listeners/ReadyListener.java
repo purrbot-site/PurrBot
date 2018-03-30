@@ -1,5 +1,6 @@
 package net.Andre601.listeners;
 
+import net.Andre601.commands.Info.CmdPrefix;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -8,6 +9,8 @@ import net.Andre601.util.STATIC;
 public class ReadyListener extends ListenerAdapter{
 
     public void onReady(ReadyEvent e){
+
+        CmdPrefix.load(e.getJDA());
 
         String guilds = "[INFO] Connected to the following Guild(s):\n";
 
