@@ -96,22 +96,22 @@ public class Main {
 
         Collections.addAll(RandomShutdownText, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
-                        "main/java/net/Andre601/Files/RandomShutdownText").split("\n"));
+                        "main/java/net/Andre601/files/RandomShutdownText").split("\n"));
         Collections.addAll(RandomNoShutdownText, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
-                        "main/java/net/Andre601/Files/RandomNoShutdownText").split("\n"));
+                        "main/java/net/Andre601/files/RandomNoShutdownText").split("\n"));
         Collections.addAll(RandomShutdownImage, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
-                        "main/java/net/Andre601/Files/RandomShutdownImage").split("\n"));
+                        "main/java/net/Andre601/files/RandomShutdownImage").split("\n"));
         Collections.addAll(RandomNoShutdownImage, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
-                        "main/java/net/Andre601/Files/RandomNoShutdownImage").split("\n"));
+                        "main/java/net/Andre601/files/RandomNoShutdownImage").split("\n"));
         Collections.addAll(RandomFact, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
-                        "main/java/net/Andre601/Files/RandomFact").split("\n"));
+                        "main/java/net/Andre601/files/RandomFact").split("\n"));
         Collections.addAll(RandomNoNSWF, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/Andre601/NekoBot/master/src/" +
-                        "main/java/net/Andre601/Files/RandomNoNSFWMsg").split("\n"));
+                        "main/java/net/Andre601/files/RandomNoNSFWMsg").split("\n"));
 
     }
 

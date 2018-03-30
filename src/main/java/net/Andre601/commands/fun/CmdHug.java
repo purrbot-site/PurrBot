@@ -13,12 +13,12 @@ import java.util.List;
 
 public class CmdHug implements Command {
 
-    public void usage(TextChannel tc){
-        EmbedBuilder usage = new EmbedBuilder();
-        usage.setDescription("Please provide a username after the command, " +
-                "to share the hug!");
-
-        tc.sendMessage(usage.build()).queue();
+    public void usage(Message msg){
+        msg.getTextChannel().sendMessage(String.format(
+                "%s Please mention a user at the end of the command, to hug him!\n" +
+                "Example: `.hug @*Purr*#6875`",
+                msg.getAuthor().getAsMention()
+        )).queue();
     }
 
     @Override
@@ -41,7 +41,7 @@ public class CmdHug implements Command {
         }
 
         if(args.length < 1){
-            usage(tc);
+            usage(e.getMessage());
             return;
         }
 
