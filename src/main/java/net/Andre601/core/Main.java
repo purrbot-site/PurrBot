@@ -1,15 +1,13 @@
 package net.Andre601.core;
 
 import net.Andre601.commands.Info.*;
-import net.Andre601.commands.fun.CmdHug;
-import net.Andre601.commands.fun.CmdNeko;
-import net.Andre601.commands.fun.CmdPat;
-import net.Andre601.commands.fun.CmdSlap;
+import net.Andre601.commands.fun.*;
 import net.Andre601.commands.nsfw.CmdLewd;
 import net.Andre601.commands.owner.CmdRefresh;
 import net.Andre601.commands.owner.CmdShutdown;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.listeners.CommandListener;
+import net.Andre601.listeners.GuildListener;
 import net.Andre601.listeners.ReadyListener;
 import net.Andre601.util.HttpUtil;
 import net.dv8tion.jda.core.*;
@@ -49,7 +47,9 @@ public class Main {
         builder.setAutoReconnect(true);
 
         //  "Watching ___" message and Status.
-        builder.setGame(Game.watching("Some Nekos OwO | " + STATIC.PREFIX + "Help | " + STATIC.PREFIX + "Info"));
+        builder.setGame(Game.watching(String.format(
+                "some Nekos OwO | On some guilds"
+        )));
 
         builder.setStatus(OnlineStatus.ONLINE);
 
@@ -72,6 +72,7 @@ public class Main {
         //  Adding listeners
         builder.addEventListener(new ReadyListener());
         builder.addEventListener(new CommandListener());
+        builder.addEventListener(new GuildListener());
 
     }
 
@@ -91,6 +92,7 @@ public class Main {
         CommandHandler.commands.put("slap", new CmdSlap());
         CommandHandler.commands.put("invite", new CmdInvite());
         CommandHandler.commands.put("prefix", new CmdPrefix());
+        CommandHandler.commands.put("cuddle", new CmdCuddle());
 
     }
 

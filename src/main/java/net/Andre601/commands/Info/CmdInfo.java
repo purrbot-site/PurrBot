@@ -5,6 +5,7 @@ import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.core.Main;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.Andre601.util.STATIC;
 
@@ -41,7 +42,11 @@ public class CmdInfo implements Command {
         info.addBlankField(false);
 
         info.addField("Version:", STATIC.VERSION, true);
-        info.addField("Library:", "[JDA](https://github.com/DV8FromTheWorld/JDA)",
+        info.addField("Library:", String.format(
+                "[JDA %s](%s)",
+                JDAInfo.VERSION,
+                "https://github.com/DV8FromTheWorld/JDA"
+                ),
                 true);
         info.addField("GitHub:", "[NekoBot](https://github.com/Andre601/NekoBot)",
                 true);
