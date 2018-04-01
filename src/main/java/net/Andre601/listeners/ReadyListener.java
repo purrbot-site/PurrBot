@@ -44,5 +44,4 @@ public class ReadyListener extends ListenerAdapter{
         System.out.println(guilds);
 
     }
-
 }
