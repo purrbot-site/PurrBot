@@ -6,8 +6,14 @@
 
     <groupId>net.Andre601</groupId>
     <artifactId>Purr-Bot</artifactId>
-    <version>1.8.4</version>
+    <version>1.8.6</version>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

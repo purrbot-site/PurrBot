@@ -41,7 +41,7 @@ public class CmdInfo implements Command {
         ), false);
         info.addBlankField(false);
 
-        info.addField("Version:", STATIC.VERSION, true);
+        info.addField("Version:", Main.getVersion(), true);
         info.addField("Library:", String.format(
                 "[JDA %s](%s)",
                 JDAInfo.VERSION,

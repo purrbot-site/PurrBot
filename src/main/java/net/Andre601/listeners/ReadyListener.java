@@ -1,6 +1,7 @@
 package net.Andre601.listeners;
 
 import net.Andre601.commands.server.CmdPrefix;
+import net.Andre601.core.Main;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
@@ -38,7 +39,7 @@ public class ReadyListener extends ListenerAdapter{
                 e.getJDA().getSelfUser().getName(),
                 e.getJDA().getSelfUser().getDiscriminator(),
                 e.getJDA().getSelfUser().getId(),
-                STATIC.VERSION,
+                Main.getVersion(),
                 JDAInfo.VERSION
         ));
         System.out.println(guilds);

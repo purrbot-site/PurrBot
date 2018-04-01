@@ -10,6 +10,7 @@ public class GuildListener extends ListenerAdapter {
     public void onGuildJoin(GuildJoinEvent e) {
 
         Guild g = e.getGuild();
+
         System.out.println(String.format(
                 "Joined the Guild %s (%s)\n" +
                 "  > Owner: %s#%s (%s)\n" +

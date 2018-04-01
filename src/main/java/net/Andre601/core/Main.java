@@ -16,10 +16,8 @@ import net.Andre601.util.SECRET;
 import net.Andre601.util.STATIC;
 
 import javax.security.auth.login.LoginException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.io.IOException;
+import java.util.*;
 
 public class Main {
 
@@ -31,6 +29,8 @@ public class Main {
     private static List<String> RandomNoShutdownImage = new ArrayList<>();
     private static List<String> RandomFact = new ArrayList<>();
     private static List<String> RandomNoNSWF = new ArrayList<>();
+
+    private static String version = null;
 
     public static JDABuilder builder;
     public static JDA jda;
@@ -156,5 +156,20 @@ public class Main {
         RandomNoNSWF.clear();
     }
 
+    public static String getVersion(){
+        if(version == null){
 
+            Properties p = new Properties();
+
+            try{
+                p.load(Main.class.getClassLoader().getResourceAsStream("version.properties"));
+            }catch (IOException e){
+                e.printStackTrace();
+                return null;
+            }
+
+            version = (String)p.get("version");
+        }
+        return version;
+    }
 }
