@@ -173,7 +173,7 @@ public class Main {
     }
 
     public static String now(){
-        DateFormat df = new SimpleDateFormat("dd. MMMM yyyy HH:mm:ss z");
+        DateFormat df = new SimpleDateFormat("dd. MMM yyyy HH:mm:ss z");
         return df.format(new Date());
     }
 
