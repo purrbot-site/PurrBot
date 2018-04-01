@@ -1,6 +1,7 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.core.Main;
 import net.Andre601.util.PermUtil;
 import net.Andre601.util.STATIC;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -24,16 +25,6 @@ public class CmdServer implements Command {
             default:
                 return g.getVerificationLevel().toString().toLowerCase();
         }
-    }
-
-    public int getBots(Guild g){
-        int bot = 0;
-        for(Member member : g.getMembers()){
-            if(member.getUser().isBot()){
-                bot++;
-            }
-        }
-        return bot;
     }
 
     @Override
@@ -63,12 +54,12 @@ public class CmdServer implements Command {
 
         server.addField("Users", String.format(
                 "**Total**: %s\n" +
-                        "\n" +
-                        "**Humans**: %s\n" +
-                        "**Bots**: %s",
+                "\n" +
+                "**Humans**: %s\n" +
+                "**Bots**: %s",
                 g.getMembers().size(),
-                g.getMembers().size() - getBots(g),
-                getBots(g)
+                g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
+                g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
         ), true);
 
         server.addField("Server region",
@@ -86,8 +77,10 @@ public class CmdServer implements Command {
                 g.getOwner().getAsMention(),
                 true);
         server.setFooter(String.format(
-                "Requested by %s#%s", e.getAuthor().getName(),
-                e.getAuthor().getDiscriminator()
+                "Requested by %s#%s | %s",
+                e.getAuthor().getName(),
+                e.getAuthor().getDiscriminator(),
+                Main.now()
         ), e.getAuthor().getEffectiveAvatarUrl());
 
         tc.sendMessage(server.build()).queue();

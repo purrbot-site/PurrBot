@@ -14,9 +14,13 @@ import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
 import net.Andre601.util.SECRET;
 import net.Andre601.util.STATIC;
+import net.dv8tion.jda.webhook.WebhookClient;
+import net.dv8tion.jda.webhook.WebhookClientBuilder;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Main {
@@ -45,11 +49,6 @@ public class Main {
 
         //  Let JDA try to reconnect, when disconnecting
         builder.setAutoReconnect(true);
-
-        //  "Watching ___" message and Status.
-        builder.setGame(Game.watching(String.format(
-                "some Nekos OwO | On some guilds"
-        )));
 
         builder.setStatus(OnlineStatus.ONLINE);
 
@@ -171,5 +170,14 @@ public class Main {
             version = (String)p.get("version");
         }
         return version;
+    }
+
+    public static String now(){
+        DateFormat df = new SimpleDateFormat("dd. MMMM yyyy HH:mm:ss z");
+        return df.format(new Date());
+    }
+
+    public static WebhookClient webhookClient(String url){
+        return new WebhookClientBuilder(url).build();
     }
 }

@@ -29,8 +29,12 @@ public class CmdHelp implements Command {
         ), false);
         usageEmbed.addField("Description:", description, false);
 
-        usageEmbed.setFooter("Requested by " + msg.getAuthor().getName() + "#" + msg.getAuthor()
-                .getDiscriminator(), msg.getAuthor().getEffectiveAvatarUrl());
+        usageEmbed.setFooter(String.format(
+                "Requested by: %s#%s | %s",
+                msg.getAuthor().getName(),
+                msg.getAuthor().getDiscriminator(),
+                Main.now()
+        ), msg.getAuthor().getEffectiveAvatarUrl());
 
         msg.getTextChannel().sendMessage(usageEmbed.build()).queue();
     }
@@ -75,8 +79,12 @@ public class CmdHelp implements Command {
 
         help.addField("Random Fact:", getFact(), false);
 
-        help.setFooter("Requested by " + msg.getAuthor().getName() + "#" + msg.getAuthor()
-                .getDiscriminator(), msg.getAuthor().getEffectiveAvatarUrl());
+        help.setFooter(String.format(
+                "Requested by: %s#%s | %s",
+                msg.getAuthor().getName(),
+                msg.getAuthor().getDiscriminator(),
+                Main.now()
+        ), msg.getAuthor().getEffectiveAvatarUrl());
 
         msg.getTextChannel().sendMessage(help.build()).queue();
     }

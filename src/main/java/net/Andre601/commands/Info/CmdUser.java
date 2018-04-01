@@ -1,6 +1,7 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.core.Main;
 import net.Andre601.util.PermUtil;
 import net.Andre601.util.STATIC;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -85,8 +86,10 @@ public class CmdUser implements Command {
                     isBot(member.getUser()),
                     true);
             ebuser.setFooter(String.format(
-                    "Requested by %s#%s", msg.getAuthor().getName(),
-                    msg.getAuthor().getDiscriminator()
+                    "Requested by %s#%s | %s",
+                    msg.getAuthor().getName(),
+                    msg.getAuthor().getDiscriminator(),
+                    Main.now()
             ), msg.getAuthor().getEffectiveAvatarUrl());
             tc.sendMessage(ebuser.build()).queue();
         }
