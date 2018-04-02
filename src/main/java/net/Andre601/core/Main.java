@@ -11,9 +11,7 @@ import net.Andre601.listeners.GuildListener;
 import net.Andre601.listeners.ReadyListener;
 import net.Andre601.util.HttpUtil;
 import net.dv8tion.jda.core.*;
-import net.dv8tion.jda.core.entities.Game;
 import net.Andre601.util.SECRET;
-import net.Andre601.util.STATIC;
 import net.dv8tion.jda.webhook.WebhookClient;
 import net.dv8tion.jda.webhook.WebhookClientBuilder;
 
@@ -92,6 +90,7 @@ public class Main {
         CommandHandler.commands.put("invite", new CmdInvite());
         CommandHandler.commands.put("prefix", new CmdPrefix());
         CommandHandler.commands.put("cuddle", new CmdCuddle());
+        CommandHandler.commands.put("tickle", new CmdTickle());
 
     }
 

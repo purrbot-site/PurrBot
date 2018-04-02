@@ -3,8 +3,8 @@ package net.Andre601.commands.fun;
 import net.Andre601.commands.Command;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.util.HttpUtil;
+import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -66,7 +66,7 @@ public class CmdPat implements Command {
                     getEffectiveName(), name)).queue(message -> {
                 try{
                     message.editMessage(
-                            new EmbedBuilder().setImage(HttpUtil.getPat()).build()
+                            MessageUtil.getEmbed().setImage(HttpUtil.getPat()).build()
                     ).queue();
                 }catch (Exception ex){
                     ex.printStackTrace();

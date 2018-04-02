@@ -1,7 +1,7 @@
 package net.Andre601.commands.fun;
 
 import net.Andre601.commands.Command;
-import net.Andre601.core.Main;
+import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -42,15 +42,12 @@ public class CmdNeko implements Command {
         }
 
         try {
-            EmbedBuilder neko = new EmbedBuilder();
-            neko.setTitle("Neko " + HttpUtil.getCat(), link);
-            neko.setImage(link);
-            neko.setFooter(String.format(
-                    "Requested by: %s#%s | %s",
-                    e.getAuthor().getName(),
-                    e.getAuthor().getDiscriminator(),
-                    Main.now()
-            ), e.getAuthor().getEffectiveAvatarUrl());
+            EmbedBuilder neko = MessageUtil.getEmbed(e.getAuthor())
+                    .setTitle(String.format(
+                            "Neko %s",
+                            HttpUtil.getCat()
+                    ), link)
+                    .setImage(link);
 
             tc.sendMessage("Getting a cute neko...").queue(message -> {
                 message.editMessage(neko.build()).queue();

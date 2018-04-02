@@ -2,6 +2,7 @@ package net.Andre601.commands.owner;
 
 import net.Andre601.commands.Command;
 import net.Andre601.core.Main;
+import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -47,10 +48,9 @@ public class CmdShutdown implements Command {
         if(e.getAuthor().getId().equals("204232208049766400")){
             e.getMessage().delete().queue();
 
-            EmbedBuilder shutdown = new EmbedBuilder();
-
-            shutdown.setDescription(getRandomShutdown());
-            shutdown.setImage(getRandomImage());
+            EmbedBuilder shutdown = MessageUtil.getEmbed(e.getAuthor())
+                    .setDescription(getRandomShutdown())
+                    .setImage(getRandomImage());
 
             e.getTextChannel().sendMessage(shutdown.build()).queue();
 
@@ -60,10 +60,9 @@ public class CmdShutdown implements Command {
         }else{
             e.getMessage().delete().queue();
 
-            EmbedBuilder noShutdown = new EmbedBuilder();
-
-            noShutdown.setDescription(getRandomNoShutdown());
-            noShutdown.setImage(getRandomNoImage());
+            EmbedBuilder noShutdown = MessageUtil.getEmbed(e.getAuthor())
+                    .setDescription(getRandomNoShutdown())
+                    .setImage(getRandomNoImage());
 
             e.getTextChannel().sendMessage(noShutdown.build()).queue();
         }

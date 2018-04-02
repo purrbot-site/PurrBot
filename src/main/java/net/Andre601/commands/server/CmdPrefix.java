@@ -1,6 +1,7 @@
 package net.Andre601.commands.server;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.Andre601.util.STATIC;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -40,18 +41,18 @@ public class CmdPrefix implements Command{
         )).queue();
     }
 
-    public void setPrefix(TextChannel tc, Guild g, String prefix){
+    public void setPrefix(Message msg, Guild g, String prefix){
         guildPrefix.put(g, prefix);
         save();
 
-        EmbedBuilder prefixSet = new EmbedBuilder();
-        prefixSet.setDescription(String.format(
-                "Prefix set to `%s`",
-                prefix
-        ));
-        prefixSet.setColor(Color.GREEN);
+        EmbedBuilder prefixSet = MessageUtil.getEmbed(msg.getAuthor())
+                .setDescription(String.format(
+                        "Prefix set to `%s`",
+                        prefix
+                ))
+                .setColor(Color.GREEN);
 
-        tc.sendMessage(prefixSet.build()).queue();
+        msg.getChannel().sendMessage(prefixSet.build()).queue();
     }
 
     public void resetPrefix(Message msg, Guild g){
@@ -60,9 +61,9 @@ public class CmdPrefix implements Command{
             guildPrefix.remove(g);
             save();
 
-            EmbedBuilder prefixReset = new EmbedBuilder();
-            prefixReset.setDescription("Prefix was reset successfully!");
-            prefixReset.setColor(Color.GREEN);
+            EmbedBuilder prefixReset = MessageUtil.getEmbed(msg.getAuthor())
+                    .setDescription("Prefix was reset successfully!")
+                    .setColor(Color.GREEN);
 
             msg.getTextChannel().sendMessage(prefixReset.build()).queue();
 
@@ -134,7 +135,7 @@ public class CmdPrefix implements Command{
         switch (args[0].toLowerCase()){
 
             case "set":
-                if(PermUtil.userIsAdmin(e.getMessage())){
+                if(PermUtil.userIsAdmin(msg)){
                     if(args.length == 1){
                         tc.sendMessage(String.format(
                                 "%s Please provide a prefix!",
@@ -143,7 +144,7 @@ public class CmdPrefix implements Command{
                         break;
                     }
                     if(args.length >= 2){
-                        setPrefix(tc, g, args[1]);
+                        setPrefix(msg, g, args[1]);
                         break;
                     }
                 }else{

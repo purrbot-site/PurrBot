@@ -3,6 +3,7 @@ package net.Andre601.commands.Info;
 import net.Andre601.commands.Command;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.core.Main;
+import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
@@ -24,35 +25,35 @@ public class CmdInfo implements Command {
         if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();
 
-        EmbedBuilder info = new EmbedBuilder();
-
-        info.setAuthor("Info", STATIC.URL, e.getJDA().getSelfUser().
-                getEffectiveAvatarUrl());
-        info.setThumbnail(Main.jda.getSelfUser().getEffectiveAvatarUrl());
-
-        info.addField("About the Bot:","Oh hi there!\n" +
-                "I'm \\*purr*. A selfmade Bot for the ~Nya Discord.\n" +
-                "I was made by <@204232208049766400> with the help of JDA " +
-                "and some free time. ^.^", false);
-
-        info.addField("Commands:", String.format(
-                "Use `%shelp` on the Discord, to see my commands.",
-                CmdPrefix.getPrefix(e.getGuild())
-        ), false);
-        info.addBlankField(false);
-
-        info.addField("Version:", Main.getVersion(), true);
-        info.addField("Library:", String.format(
-                "[JDA %s](%s)",
-                JDAInfo.VERSION,
-                "https://github.com/DV8FromTheWorld/JDA"
-                ),
-                true);
-        info.addField("GitHub:", "[NekoBot](https://github.com/Andre601/NekoBot)",
-                true);
+        EmbedBuilder bInfo = MessageUtil.getEmbed()
+                .setAuthor("*Purr*", null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                .setThumbnail(e.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                .addField("Info:", String.format(
+                        "**About the Bot**\n" +
+                        "Oh hi there!\n" +
+                        "I'm \\*purr*. A Bot for the ~Nya Discord.\n" +
+                        "I was made by <@204232208049766400> with the help of JDA " +
+                        "and a lot of free time. ;)\n" +
+                        "\n" +
+                        "**Commands**\n" +
+                        "You can use %shelp on the Discord, to see all my commands.",
+                        CmdPrefix.getPrefix(e.getGuild())
+                ), false)
+                .addField("Bot-Version:", String.format(
+                        "`%s`",
+                        Main.getVersion()), true)
+                .addField("Library:", String.format(
+                        "[`JDA %s`](%s)",
+                        JDAInfo.VERSION,
+                        JDAInfo.GITHUB
+                ), true)
+                .addField("GitHub:", String.format(
+                        "[`NekoBot`](%s)",
+                        STATIC.GITHUB_LINK
+                ), true);
 
         e.getAuthor().openPrivateChannel().queue(pm -> {
-            pm.sendMessage(info.build()).queue(msg -> {
+            pm.sendMessage(bInfo.build()).queue(msg -> {
                 e.getTextChannel().sendMessage(String.format(
                         "Check your DMs %s",
                         e.getAuthor().getAsMention()

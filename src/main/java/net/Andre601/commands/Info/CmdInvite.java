@@ -1,6 +1,7 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.Andre601.util.STATIC;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -21,29 +22,27 @@ public class CmdInvite implements Command{
         if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();
 
-        EmbedBuilder invite = new EmbedBuilder();
-
-        invite.setAuthor("*Purr*", STATIC.URL, e.getJDA().getSelfUser().getEffectiveAvatarUrl());
-
-        invite.addField("Invite bot:",
-                    "Use one of the links below, to invite me to your Discord. :3\n" +
-                    "I recommend using the `Recommended Invite`, to give me access to all needed permissions.\n" +
-                    "`Basic Invite` gives me access to the basic permissions, that I need, to work correctly\n" +
-                    "\n" +
-                    "**Important Note**:\n" +
-                    "It is **required** for me, to have permissions to: \n" +
-                    "Seeing channels, send messages and embed links!"
-                , false);
-        invite.addBlankField(false);
-
-        invite.addField("Links:", String.format(
-                "[Recommended Invite](%s)\n" +
-                "[Basic Invite](%s)\n" +
-                "[Discord Server](%s)",
-                STATIC.INVITE_FULL,
-                STATIC.INVITE_BASIC,
-                STATIC.DISCORD_INVITE
-        ), false);
+        EmbedBuilder invite = MessageUtil.getEmbed()
+                .setAuthor("*Purr*", null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                .addField("Invite the bot", String.format(
+                        "Heyo! Really nice from you, to invite me to your Discord. :3\n" +
+                        "Inviting me is quite simple:\n" +
+                        "Just click on one of the links below and choose your Discord.\n"
+                ),false)
+                .addField("About the links:",
+                        "Each link has another purpose.\n" +
+                        "`Recommended Invite` is (obviously) the recommended invite, that you should use.\n" +
+                        "`Basic Invite` gives all required permissions for me.\n" +
+                        "`Discord` is my official Discord, where you can get help."
+                        , false)
+                .addField("", String.format(
+                        "[`Recommended Invite`](%s)\n" +
+                        "[`Basic Invite`](%s)\n" +
+                        "[`Discord`](%s)",
+                        STATIC.INVITE_FULL,
+                        STATIC.INVITE_BASIC,
+                        STATIC.DISCORD_INVITE
+                ), false);
 
         e.getAuthor().openPrivateChannel().queue(pm -> {
             pm.sendMessage(invite.build()).queue(msg -> {

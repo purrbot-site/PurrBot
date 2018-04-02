@@ -7,7 +7,6 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import net.Andre601.util.STATIC;
 
 public class ReadyListener extends ListenerAdapter{
 

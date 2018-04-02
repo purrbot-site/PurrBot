@@ -15,4 +15,5 @@ public class STATIC {
     public static final String INVITE_BASIC = "https://discordapp.com/api/oauth2/authorize?client_id=" +
             "425382319449309197&permissions=19456&scope=bot";
     public static final String DISCORD_INVITE = "https://discord.gg/NB7AFqn";
+    public static final String GITHUB_LINK = "https://github.com/Andre601/NekoBot";
 }
