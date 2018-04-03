@@ -1,5 +1,6 @@
 package net.Andre601.listeners;
 
+import net.Andre601.core.GFile;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.SECRET;
 import net.dv8tion.jda.core.entities.Game;
@@ -11,6 +12,8 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import java.awt.Color;
 
 public class GuildListener extends ListenerAdapter {
+
+    private GFile file;
 
     public void onGuildJoin(GuildJoinEvent e) {
 
@@ -30,7 +33,8 @@ public class GuildListener extends ListenerAdapter {
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
         ));
 
-        MessageUtil.sendWebhookEmbed(SECRET.WEBHOOK, g, Color.GREEN, "Guild joined",String.format(
+        MessageUtil.sendWebhookEmbed(file.getItem("config", "webhook"), g, Color.GREEN,
+                "Guild joined",String.format(
                 "**Guild**:\n" +
                         "`%s` (`%s`)\n" +
                         "\n" +
@@ -71,7 +75,8 @@ public class GuildListener extends ListenerAdapter {
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
         ));
 
-        MessageUtil.sendWebhookEmbed(SECRET.WEBHOOK, g, Color.RED, "Guild left",String.format(
+        MessageUtil.sendWebhookEmbed(file.getItem("config", "webhook"), g, Color.RED,
+                "Guild left",String.format(
                 "**Guild**:\n" +
                         "`%s` (`%s`)\n" +
                         "\n" +

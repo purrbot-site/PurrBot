@@ -23,6 +23,8 @@ import java.util.*;
 
 public class Main {
 
+    private static GFile file;
+
     private static Random random = new Random();
 
     private static List<String> RandomShutdownText = new ArrayList<>();
@@ -41,9 +43,11 @@ public class Main {
 
         builder = new JDABuilder(AccountType.BOT);
 
+        file.make("config", "./config.json", "/config.json");
+
         //  Adding the Bot-Token from a class
         //  The class isn't in the Repo for safety-reasons
-        builder.setToken(SECRET.TOKEN);
+        builder.setToken(file.getItem("config", "token"));
 
         //  Let JDA try to reconnect, when disconnecting
         builder.setAutoReconnect(true);
