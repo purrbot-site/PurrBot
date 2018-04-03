@@ -11,7 +11,6 @@ import net.Andre601.listeners.GuildListener;
 import net.Andre601.listeners.ReadyListener;
 import net.Andre601.util.HttpUtil;
 import net.dv8tion.jda.core.*;
-import net.Andre601.util.SECRET;
 import net.dv8tion.jda.webhook.WebhookClient;
 import net.dv8tion.jda.webhook.WebhookClientBuilder;
 
@@ -23,7 +22,7 @@ import java.util.*;
 
 public class Main {
 
-    private static GFile file;
+    public static GFile file = new GFile();
 
     private static Random random = new Random();
 

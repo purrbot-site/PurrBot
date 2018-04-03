@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class GFile {
 
-    private ConfigUtil cutil;
+    private ConfigUtil cutil = new ConfigUtil();
     private Map<String, File> gFiles;
 
     public void make(String name, String externalPath, String internalPath){
@@ -35,12 +35,13 @@ public class GFile {
                 if(file.createNewFile()){
                     if(cutil.exportResource(Main.class.getResourceAsStream(internalPath), externalPath)){
                         System.out.println(name + " successfully created!");
+
                     }else{
                         System.out.println("Failed to create " + name);
                     }
                 }
             }else{
-                System.out.println(name + "successfully loaded!");
+                System.out.println(name + " successfully loaded!");
                 gFiles.put(name, file);
             }
         }catch (Exception e){
