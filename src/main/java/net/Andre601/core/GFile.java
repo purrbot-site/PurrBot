@@ -10,6 +10,15 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * -----------------------------------------------------------------
+ * Code from Gary (GitHub: https://github.com/help-chat/Gary)
+ *
+ * Used with permission of PiggyPiglet
+ * Original Copyright (c) PiggyPiglet 2018 (https://piggypiglet.me)
+ * -----------------------------------------------------------------
+ */
+
 public class GFile {
 
     private ConfigUtil cutil = new ConfigUtil();
@@ -49,10 +58,6 @@ public class GFile {
         }
     }
 
-    public File getFile(String fileName){
-        return gFiles.get(fileName);
-    }
-
     public String getItem(String fileName, String item){
         File file = gFiles.get(fileName);
         try{
@@ -66,9 +71,5 @@ public class GFile {
             e.printStackTrace();
         }
         return item + " not found in " + fileName;
-    }
-
-    public Map<String, File> getgFiles(){
-        return gFiles;
     }
 }

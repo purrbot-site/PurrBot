@@ -8,7 +8,7 @@ import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.Andre601.util.STATIC;
+import net.Andre601.util.StaticInfo;
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,7 +49,7 @@ public class CmdInfo implements Command {
                 ), true)
                 .addField("GitHub:", String.format(
                         "[`NekoBot`](%s)",
-                        STATIC.GITHUB_LINK
+                        StaticInfo.GITHUB_LINK
                 ), true);
 
         e.getAuthor().openPrivateChannel().queue(pm -> {

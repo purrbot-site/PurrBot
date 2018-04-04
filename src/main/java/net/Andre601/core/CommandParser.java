@@ -1,7 +1,7 @@
 package net.Andre601.core;
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.Andre601.util.STATIC;
+import net.Andre601.util.StaticInfo;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ public class CommandParser {
 
     public commandContainer parse(String raw, MessageReceivedEvent event) {
 
-        String beheaded = raw.replaceFirst(STATIC.PREFIX, "");
+        String beheaded = raw.replaceFirst(StaticInfo.PREFIX, "");
         String[] splitBeheaded = beheaded.split(" ");
         String invoke = splitBeheaded[0];
         ArrayList<String> split = new ArrayList<>();

@@ -3,7 +3,7 @@ package net.Andre601.commands.Info;
 import net.Andre601.commands.Command;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
-import net.Andre601.util.STATIC;
+import net.Andre601.util.StaticInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -31,7 +31,7 @@ public class CmdServer implements Command {
         }
 
         EmbedBuilder server = MessageUtil.getEmbed()
-                .setAuthor("Serverinfo: " + g.getName(), STATIC.URL,
+                .setAuthor("Serverinfo: " + g.getName(), StaticInfo.URL,
                         e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setThumbnail(g.getIconUrl())
                 .addField("Users", String.format(

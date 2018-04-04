@@ -3,7 +3,7 @@ package net.Andre601.commands.Info;
 import net.Andre601.commands.Command;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
-import net.Andre601.util.STATIC;
+import net.Andre601.util.StaticInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -39,9 +39,9 @@ public class CmdInvite implements Command{
                         "[`Recommended Invite`](%s)\n" +
                         "[`Basic Invite`](%s)\n" +
                         "[`Discord`](%s)",
-                        STATIC.INVITE_FULL,
-                        STATIC.INVITE_BASIC,
-                        STATIC.DISCORD_INVITE
+                        StaticInfo.INVITE_FULL,
+                        StaticInfo.INVITE_BASIC,
+                        StaticInfo.DISCORD_INVITE
                 ), false);
 
         e.getAuthor().openPrivateChannel().queue(pm -> {

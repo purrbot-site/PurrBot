@@ -1,6 +1,6 @@
 package net.Andre601.util;
 
-public class STATIC {
+public class StaticInfo {
 
     //  Prefix for all commands (">>[command]")
     public static final String PREFIX = ".";
