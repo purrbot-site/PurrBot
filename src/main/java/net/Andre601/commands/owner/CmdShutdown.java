@@ -45,7 +45,7 @@ public class CmdShutdown implements Command {
             return;
         }
 
-        if(e.getAuthor().getId().equals("204232208049766400")){
+        if(PermUtil.isCreator(e.getMessage())){
             e.getMessage().delete().queue();
 
             EmbedBuilder shutdown = MessageUtil.getEmbed(e.getAuthor())

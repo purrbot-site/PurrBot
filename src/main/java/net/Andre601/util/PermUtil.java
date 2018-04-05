@@ -29,4 +29,8 @@ public class PermUtil {
     public static boolean userIsAdmin(Message msg){
         return PermissionUtil.checkPermission(msg.getMember(), Permission.MANAGE_SERVER);
     }
+
+    public static boolean isCreator(Message msg){
+        return msg.getAuthor().getId().equals("204232208049766400");
+    }
 }

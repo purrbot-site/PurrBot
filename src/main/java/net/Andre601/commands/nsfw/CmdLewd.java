@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CmdLewd implements Command {
 
-    private static String getRandomNSFW(){
+    private static String getRandomNotNSFW(){
         return Main.getRandomNoNSWF().size() > 0 ? Main.getRandomNoNSWF().get(
                 Main.getRandom().nextInt(Main.getRandomFact().size())) : "";
     }
@@ -65,10 +65,8 @@ public class CmdLewd implements Command {
                 ex.printStackTrace();
             }
         }else{
-            tc.sendMessage(String.format(getRandomNSFW(),
-                    e.getAuthor().getAsMention())).queue(msg -> {
-                        msg.delete().queueAfter(10, TimeUnit.SECONDS);
-            });
+            tc.sendMessage(String.format(getRandomNotNSFW(),
+                    e.getAuthor().getAsMention())).queue(msg -> msg.delete().queueAfter(10, TimeUnit.SECONDS));
         }
 
     }

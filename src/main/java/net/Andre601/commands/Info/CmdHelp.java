@@ -39,31 +39,35 @@ public class CmdHelp implements Command {
         EmbedBuilder help = MessageUtil.getEmbed(msg.getAuthor())
                 .setTitle("Help")
                 .setDescription(String.format(
-                       "**Command-Prefix**: `%s`\n" +
+                        "**Command-Prefix**: `%s`\n" +
                         "\n" +
                         "**Commands**:\n" +
                         "Type `%shelp [command]`, to get infos about a command!\n" +
                         "\n" +
-                        "__Informative__:\n" +
-                        "`Help`\n" +
-                        "`Info`\n" +
-                        "`Invite`\n" +
-                        "`Server`\n" +
-                        "`User`\n" +
+                        "```\n" +
+                        "Informative:\n" +
+                        "Help\n" +
+                        "Info [-here]\n" +
+                        "Invite [-here]\n" +
+                        "Server\n" +
+                        "User [@user]\n" +
                         "\n" +
-                        "__Fun__:\n" +
-                        "`Cuddle`\n" +
-                        "`Hug`\n" +
-                        "`Neko`\n" +
-                        "`Pat`\n" +
-                        "`Slap`\n" +
-                        "`Tickle`\n" +
+                        "Fun:\n" +
+                        "Cuddle <@user>\n" +
+                        "Hug <@user>\n" +
+                        "Neko`\n" +
+                        "Pat <@user>\n" +
+                        "Slap <@user>\n" +
+                        "Tickle <@user>\n" +
                         "\n" +
-                        "__NSFW__:\n" +
-                        "`Lewd`\n" +
+                        "NSFW:\n" +
+                        "Lewd\n" +
                         "\n" +
-                        "__Server__:\n" +
-                        "`Prefix`\n" +
+                        "Server:\n" +
+                        "Prefix [set <prefix>|reset]\n" +
+                        "\n" +
+                        "[optional] <required>\n" +
+                        "```\n" +
                         "\n" +
                         "**Random Fact**:\n" +
                         "%s",
@@ -107,15 +111,21 @@ public class CmdHelp implements Command {
                 break;
 
             case "info":
-                usage(msg, "Info", "info",
+                usage(msg, "Info", "info [-here]",
                         "Sends you basic infos about the bot (A small description, version, used " +
-                        "Library, ect)"
+                        "Library, ect)\n" +
+                        "\n" +
+                        "**Arguments**:\n" +
+                        "`-here` Sends the message in the channel, in which you've run the command."
                 );
                 break;
 
             case "invite":
-                usage(msg, "Invite", "invite",
-                        "Sends you the invite-links for the bot and for the official Discord"
+                usage(msg, "Invite", "invite [-here]",
+                        "Sends you the invite-links for the bot and for the official Discord\n" +
+                        "\n" +
+                        "**Arguments**:\n" +
+                        "`-here` Sends the message in the channel, in which you've run the command."
                 );
                 break;
 
@@ -167,7 +177,7 @@ public class CmdHelp implements Command {
                 usage(msg, "Prefix", "prefix [set <prefix>|reset]",
                         "Shows the currently used prefix in this Discord, if no argument is given.\n" +
                         "\n" +
-                        "**Arguments:**\n" +
+                        "**Arguments**:\n" +
                         "`set <prefix>` Changes the prefix to the provided text.\n" +
                         "`reset` Resets the prefix to the default one.\n" +
                         "\n" +

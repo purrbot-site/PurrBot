@@ -25,7 +25,7 @@ public class CmdInfo implements Command {
         if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();
 
-        EmbedBuilder bInfo = MessageUtil.getEmbed()
+        EmbedBuilder Info = MessageUtil.getEmbed()
                 .setAuthor("*Purr*", null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setThumbnail(e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .addField("Info:", String.format(
@@ -52,8 +52,13 @@ public class CmdInfo implements Command {
                         StaticInfo.GITHUB_LINK
                 ), true);
 
+        if(e.getMessage().getContentRaw().endsWith("-here")){
+            e.getChannel().sendMessage(Info.build()).queue();
+            return;
+        }
+
         e.getAuthor().openPrivateChannel().queue(pm -> {
-            pm.sendMessage(bInfo.build()).queue(msg -> {
+            pm.sendMessage(Info.build()).queue(msg -> {
                 e.getTextChannel().sendMessage(String.format(
                         "Check your DMs %s",
                         e.getAuthor().getAsMention()

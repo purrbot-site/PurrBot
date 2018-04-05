@@ -1,5 +1,6 @@
 package net.Andre601.core;
 
+import net.Andre601.commands.server.CmdPrefix;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.Andre601.util.StaticInfo;
 
@@ -7,9 +8,9 @@ import java.util.ArrayList;
 
 public class CommandParser {
 
-    public commandContainer parse(String raw, MessageReceivedEvent event) {
+    public commandContainer parse(String raw, MessageReceivedEvent e) {
 
-        String beheaded = raw.replaceFirst(StaticInfo.PREFIX, "");
+        String beheaded = raw.replaceFirst(CmdPrefix.getPrefix(e.getGuild()), "");
         String[] splitBeheaded = beheaded.split(" ");
         String invoke = splitBeheaded[0];
         ArrayList<String> split = new ArrayList<>();
@@ -19,7 +20,7 @@ public class CommandParser {
         String[] args = new String[split.size() - 1];
         split.subList(1, split.size()).toArray(args);
 
-        return new commandContainer(raw, beheaded, splitBeheaded, invoke, args, event);
+        return new commandContainer(raw, beheaded, splitBeheaded, invoke, args, e);
     }
 
 

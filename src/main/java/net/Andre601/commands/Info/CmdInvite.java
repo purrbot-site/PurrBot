@@ -44,6 +44,11 @@ public class CmdInvite implements Command{
                         StaticInfo.DISCORD_INVITE
                 ), false);
 
+        if(e.getMessage().getContentRaw().endsWith("-here")){
+            e.getChannel().sendMessage(invite.build()).queue();
+            return;
+        }
+
         e.getAuthor().openPrivateChannel().queue(pm -> {
             pm.sendMessage(invite.build()).queue(msg -> {
                 e.getTextChannel().sendMessage(String.format(

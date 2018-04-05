@@ -3,6 +3,7 @@ package net.Andre601.core;
 import net.Andre601.commands.Info.*;
 import net.Andre601.commands.fun.*;
 import net.Andre601.commands.nsfw.CmdLewd;
+import net.Andre601.commands.owner.CmdMsg;
 import net.Andre601.commands.owner.CmdRefresh;
 import net.Andre601.commands.owner.CmdShutdown;
 import net.Andre601.commands.server.CmdPrefix;
@@ -94,6 +95,7 @@ public class Main {
         CommandHandler.commands.put("prefix", new CmdPrefix());
         CommandHandler.commands.put("cuddle", new CmdCuddle());
         CommandHandler.commands.put("tickle", new CmdTickle());
+        CommandHandler.commands.put("msg", new CmdMsg());
 
     }
 
