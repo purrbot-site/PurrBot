@@ -1,6 +1,7 @@
 package net.Andre601.listeners;
 
 import net.Andre601.commands.server.CmdPrefix;
+import net.Andre601.commands.server.CmdWelcome;
 import net.Andre601.core.Main;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.Game;
@@ -18,6 +19,7 @@ public class ReadyListener extends ListenerAdapter{
         )));
 
         CmdPrefix.load(e.getJDA());
+        CmdWelcome.load(e.getJDA());
 
         String guilds = "[INFO] Connected to the following Guild(s):\n";
 

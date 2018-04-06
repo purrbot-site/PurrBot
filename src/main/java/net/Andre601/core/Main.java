@@ -7,9 +7,11 @@ import net.Andre601.commands.owner.CmdMsg;
 import net.Andre601.commands.owner.CmdRefresh;
 import net.Andre601.commands.owner.CmdShutdown;
 import net.Andre601.commands.server.CmdPrefix;
+import net.Andre601.commands.server.CmdWelcome;
 import net.Andre601.listeners.CommandListener;
 import net.Andre601.listeners.GuildListener;
 import net.Andre601.listeners.ReadyListener;
+import net.Andre601.listeners.WelcomeListener;
 import net.Andre601.util.HttpUtil;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.webhook.WebhookClient;
@@ -74,6 +76,7 @@ public class Main {
         builder.addEventListener(new ReadyListener());
         builder.addEventListener(new CommandListener());
         builder.addEventListener(new GuildListener());
+        builder.addEventListener(new WelcomeListener());
 
     }
 
@@ -96,6 +99,7 @@ public class Main {
         CommandHandler.commands.put("cuddle", new CmdCuddle());
         CommandHandler.commands.put("tickle", new CmdTickle());
         CommandHandler.commands.put("msg", new CmdMsg());
+        CommandHandler.commands.put("welcome", new CmdWelcome());
 
     }
 

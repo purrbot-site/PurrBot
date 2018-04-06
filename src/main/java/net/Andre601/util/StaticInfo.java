@@ -7,6 +7,7 @@ public class StaticInfo {
 
     //  File
     public static final String PREFIX_FILE = "guilds/prefixes.dat";
+    public static final String WELCOME_FILE = "guilds/welcome_channel.dat";
 
     //  Links
     public static final String URL = "https://Andre601.net";
