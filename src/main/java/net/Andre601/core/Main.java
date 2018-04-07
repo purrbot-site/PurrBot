@@ -16,6 +16,7 @@ import net.Andre601.util.HttpUtil;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.webhook.WebhookClient;
 import net.dv8tion.jda.webhook.WebhookClientBuilder;
+import org.discordbots.api.client.DiscordBotListAPI;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -24,6 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Main {
+
+    private static DiscordBotListAPI api;
 
     public static GFile file = new GFile();
 
@@ -50,6 +53,8 @@ public class Main {
         //  Adding the Bot-Token from a class
         //  The class isn't in the Repo for safety-reasons
         builder.setToken(file.getItem("config", "token"));
+
+        api = new DiscordBotListAPI.Builder().token(file.getItem("config", "api-token")).build();
 
         //  Let JDA try to reconnect, when disconnecting
         builder.setAutoReconnect(true);
@@ -86,6 +91,7 @@ public class Main {
         CommandHandler.commands.put("help", new CmdHelp());
         CommandHandler.commands.put("info", new CmdInfo());
         CommandHandler.commands.put("shutdown", new CmdShutdown());
+        CommandHandler.commands.put("sleep", new CmdShutdown());
         CommandHandler.commands.put("neko", new CmdNeko());
         CommandHandler.commands.put("lewd", new CmdLewd());
         CommandHandler.commands.put("hug", new CmdHug());
@@ -187,5 +193,9 @@ public class Main {
 
     public static WebhookClient webhookClient(String url){
         return new WebhookClientBuilder(url).build();
+    }
+
+    public static DiscordBotListAPI getAPI(){
+        return api;
     }
 }

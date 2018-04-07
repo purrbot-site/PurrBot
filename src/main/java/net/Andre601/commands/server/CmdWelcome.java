@@ -29,7 +29,11 @@ public class CmdWelcome implements Command {
     }
 
     public static TextChannel getTChannel(String id, Guild g){
-        return g.getTextChannelById(id);
+        try{
+            return g.getTextChannelById(id);
+        }catch (Exception ignored){
+            return null;
+        }
     }
 
     public void setChannel(Message msg, Guild g, String id){

@@ -16,7 +16,8 @@ public class CmdHelp implements Command {
                 Main.getRandom().nextInt(Main.getRandomFact().size())) : "";
     }
 
-    public static void usage(Message msg, String command, String use, String description){
+    public static void usage(Message msg, String command, String use, String description, String args,
+                             String permission){
         EmbedBuilder uEmbed = MessageUtil.getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Command: %s",
@@ -26,10 +27,18 @@ public class CmdHelp implements Command {
                         "**Usage**: `%s%s`\n" +
                         "\n" +
                         "**Description**:\n" +
+                        "%s\n" +
+                        "\n" +
+                        "**Arguments**:\n" +
+                        "%s\n" +
+                        "\n" +
+                        "**Permission**:\n" +
                         "%s",
                         CmdPrefix.getPrefix(msg.getGuild()),
                         use,
-                        description
+                        description,
+                        args,
+                        permission
                 ));
 
         msg.getChannel().sendMessage(uEmbed.build()).queue();
@@ -46,25 +55,26 @@ public class CmdHelp implements Command {
                         "\n" +
                         "```\n" +
                         "Informative:\n" +
-                        "Help\n" +
-                        "Info [-here]\n" +
-                        "Invite [-here]\n" +
-                        "Server\n" +
-                        "User [@user]\n" +
+                        " Help [command]\n" +
+                        " Info [-here]\n" +
+                        " Invite [-here]\n" +
+                        " Server\n" +
+                        " User [@user]\n" +
                         "\n" +
                         "Fun:\n" +
-                        "Cuddle <@user>\n" +
-                        "Hug <@user>\n" +
-                        "Neko`\n" +
-                        "Pat <@user>\n" +
-                        "Slap <@user>\n" +
-                        "Tickle <@user>\n" +
+                        " Cuddle <@user>\n" +
+                        " Hug <@user>\n" +
+                        " Neko\n" +
+                        " Pat <@user>\n" +
+                        " Slap <@user>\n" +
+                        " Tickle <@user>\n" +
                         "\n" +
                         "NSFW:\n" +
-                        "Lewd\n" +
+                        " Lewd\n" +
                         "\n" +
                         "Server:\n" +
-                        "Prefix [set <prefix>|reset]\n" +
+                        " Prefix [set <prefix>|reset]\n" +
+                        " Welcome [set <ChannelID>|reset]\n" +
                         "\n" +
                         "[optional] <required>\n" +
                         "```\n" +
@@ -105,95 +115,118 @@ public class CmdHelp implements Command {
         switch (args[0].toLowerCase()){
 
             case "help":
-                usage(msg, "Help", "help",
-                        "Shows you all available commands."
+                usage(msg, "Help", "help [command]",
+                        "Shows you all available commands.",
+                        "`[command]` Gives info about a command.",
+                        "`none`"
                 );
                 break;
 
             case "info":
                 usage(msg, "Info", "info [-here]",
                         "Sends you basic infos about the bot (A small description, version, used " +
-                        "Library, ect)\n" +
-                        "\n" +
-                        "**Arguments**:\n" +
-                        "`-here` Sends the message in the channel, in which you've run the command."
+                        "Library, ect)",
+                        "`-here` Sends the message in the channel, in which you've run the command.",
+                        "`none`"
                 );
                 break;
 
             case "invite":
                 usage(msg, "Invite", "invite [-here]",
                         "Sends you the invite-links for the bot and for the official Discord\n" +
-                        "\n" +
-                        "**Arguments**:\n" +
-                        "`-here` Sends the message in the channel, in which you've run the command."
+                        "\n",
+                        "`-here` Sends the message in the channel, in which you've run the command.",
+                        "none"
                 );
                 break;
 
             case "server":
                 usage(msg, "Server",  "server",
-                        "Gives you basic server-infos like users online, verification level, ect."
+                        "Gives you basic server-infos like users online, verification level, ect.",
+                        "`none`",
+                        "`none`"
                 );
                 break;
 
             case "user":
                 usage(msg, "User", "user [@user]",
-                        "Gives you basic information about yourself.\n" +
-                        "@Mention a user at the end of the command, to get infos about him/her."
+                        "Gives you basic information about yourself.",
+                        "`<@user>` The user to get infos about (as mention).",
+                        "`none`"
                 );
                 break;
 
             case "neko":
                 usage(msg, "Neko", "neko",
-                        "Sends a cute neko. 'nuf said."
+                        "Sends a cute neko. 'nuf said.",
+                        "`none`",
+                        "`none`"
                 );
                 break;
 
             case "hug":
                 usage(msg, "Hug", "hug <@user>",
-                        "Gives the mentioned user a hug."
+                        "Gives the mentioned user a hug.",
+                        "`<@user>` The user to hug (as mention).",
+                        "`none`"
                 );
                 break;
 
             case "pat":
                 usage(msg, "Pat", "pat <@user>",
-                        "Gives the mentioned user a pat."
+                        "Gives the mentioned user a pat.",
+                        "`<@user>` The user to pat (as mention).",
+                        "`none`"
                 );
                 break;
 
             case "slap":
                 usage(msg, "Slap", "slap <@user>",
-                        "Slaps the mentioned user."
+                        "Slaps the mentioned user.",
+                        "`<@slap>` The user to slap (as mention).",
+                        "`none`"
                 );
                 break;
 
             case "lewd":
                 usage(msg, "Lewd", "lewd",
                         "Sends a lewd neko.\n" +
-                        "Can only be used in NSFW-Channels."
+                        "Can only be used in NSFW-Channels.",
+                        "`none`",
+                        "`none`"
                 );
                 break;
 
             case "prefix":
                 usage(msg, "Prefix", "prefix [set <prefix>|reset]",
-                        "Shows the currently used prefix in this Discord, if no argument is given.\n" +
-                        "\n" +
-                        "**Arguments**:\n" +
-                        "`set <prefix>` Changes the prefix to the provided text.\n" +
-                        "`reset` Resets the prefix to the default one.\n" +
-                        "\n" +
-                        "**Permissions**\n" +
-                        "You need the `MANAGE_SERVER` permission, to either set or reset the prefix.");
+                        "Shows the currently used prefix in this Discord, if no argument is given.\n",
+                        "`set <prefix>` Sets the prefix to the provided one.\n" +
+                        "`reset` Resets the prefix to the default one.",
+                        "`MANAGE_SERVER` for setting or resetting the prefix.");
                 break;
 
             case "cuddle":
                 usage(msg, "Cuddle", "cuddle <@user>",
-                        "Cuddles the mentioned user."
+                        "Cuddles the mentioned user.",
+                        "`<@user>` The user to cuddle (as mention).",
+                        "`none`"
                 );
                 break;
 
             case "tickle":
                 usage(e.getMessage(), "Tickle", "tickle <@user>",
-                        "Tickles the mentioned user."
+                        "Tickles the mentioned user.",
+                        "`<@user>` The user to tickle (as mention).",
+                        "`none`"
+                );
+                break;
+
+            case "welcome":
+                usage(e.getMessage(), "Welcome", "welcome [set <ChannelID>|reset]",
+                        "Shows, sets or resets the Welcome-channel.",
+                        "`set <ChannelID>` Sets a Channel as Welcome-Channel.\n" +
+                        "`reset` Resets (removes) the welcome-channel.",
+                        "`MANAGE_SERVER` for setting or resetting the Welcome-Channel."
                 );
                 break;
 

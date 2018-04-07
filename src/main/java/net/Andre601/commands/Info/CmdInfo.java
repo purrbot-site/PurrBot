@@ -28,7 +28,7 @@ public class CmdInfo implements Command {
         EmbedBuilder Info = MessageUtil.getEmbed()
                 .setAuthor("*Purr*", null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setThumbnail(e.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .addField("Info:", String.format(
+                .setDescription(String.format(
                         "**About the Bot**\n" +
                         "Oh hi there!\n" +
                         "I'm \\*purr*. A Bot for the ~Nya Discord.\n" +
@@ -38,7 +38,7 @@ public class CmdInfo implements Command {
                         "**Commands**\n" +
                         "You can use %shelp on the Discord, to see all my commands.",
                         CmdPrefix.getPrefix(e.getGuild())
-                ), false)
+                ))
                 .addField("Bot-Version:", String.format(
                         "`%s`",
                         Main.getVersion()), true)
@@ -50,6 +50,10 @@ public class CmdInfo implements Command {
                 .addField("GitHub:", String.format(
                         "[`NekoBot`](%s)",
                         StaticInfo.GITHUB_LINK
+                ), true)
+                .addField("Bot-Page:", String.format(
+                        "[`Discordbots.org`](%s)",
+                        StaticInfo.DISCORDBOTS
                 ), true);
 
         if(e.getMessage().getContentRaw().endsWith("-here")){

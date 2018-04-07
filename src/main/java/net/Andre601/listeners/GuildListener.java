@@ -38,13 +38,13 @@ public class GuildListener extends ListenerAdapter {
         MessageUtil.sendWebhookEmbed(getLink(), g, Color.GREEN,
                 "Guild joined",String.format(
                 "**Guild**:\n" +
-                        "`%s` (`%s`)\n" +
-                        "\n" +
-                        "**Owner**:\n" +
-                        "%s\n" +
-                        "\n" +
-                        "**Members (Humans|Bots)**:\n" +
-                        "`%s` (`%s`|`%s`)",
+                "`%s` (`%s`)\n" +
+                "\n" +
+                "**Owner**:\n" +
+                "%s\n" +
+                "\n" +
+                "**Members (Humans|Bots)**:\n" +
+                "`%s` (`%s`|`%s`)",
                 g.getName(),
                 g.getId(),
                 g.getOwner().getAsMention(),
@@ -63,6 +63,7 @@ public class GuildListener extends ListenerAdapter {
     public void onGuildLeave(GuildLeaveEvent e) {
 
         Guild g = e.getGuild();
+
         System.out.println(String.format(
                 "Left the Guild %s (%s)\n" +
                 "  > Owner: %s#%s (%s)\n" +
@@ -80,13 +81,13 @@ public class GuildListener extends ListenerAdapter {
         MessageUtil.sendWebhookEmbed(getLink(), g, Color.RED,
                 "Guild left",String.format(
                 "**Guild**:\n" +
-                        "`%s` (`%s`)\n" +
-                        "\n" +
-                        "**Owner**:\n" +
-                        "%s\n" +
-                        "\n" +
-                        "**Members (Humans|Bots)**:\n" +
-                        "`%s` (`%s`|`%s`)",
+                "`%s` (`%s`)\n" +
+                "\n" +
+                "**Owner**:\n" +
+                "%s\n" +
+                "\n" +
+                "**Members (Humans|Bots)**:\n" +
+                "`%s` (`%s`|`%s`)",
                 g.getName(),
                 g.getId(),
                 g.getOwner().getAsMention(),

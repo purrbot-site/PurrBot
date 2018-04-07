@@ -26,16 +26,17 @@ public class CmdRefresh implements Command{
                     Main.clear();
                     Main.loadRandom();
                     msg.editMessage(
-                        "Clearing stored messages and images. Done!").queueAfter(1,
-                        TimeUnit.SECONDS, msg2 -> {
-                            msg2.delete().queueAfter(1, TimeUnit.SECONDS);
-                            e.getTextChannel().sendMessage("Refresh complete!").queueAfter(1,
-                                    TimeUnit.SECONDS);
-
-                            if(PermUtil.canReact(e.getMessage()))
-                                e.getMessage().addReaction("✅").queueAfter(1, TimeUnit.SECONDS);
-                        });
+                            "Clearing stored messages and images. ✅").queueAfter(1, TimeUnit.SECONDS);
             });
+            tc.sendMessage("Updating Guild-count on discordbots.org...").queueAfter(1, TimeUnit.SECONDS,
+                    msg2 -> {
+                Main.getAPI().setStats(e.getJDA().getSelfUser().getId(), e.getJDA().getGuilds().size());
+                msg2.editMessage("Updating Guild-count on discordbots.org ✅").queueAfter(1, TimeUnit.SECONDS);
+            });
+            e.getTextChannel().sendMessage("Refresh complete!").queueAfter(2, TimeUnit.SECONDS);
+
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("✅").queueAfter(2, TimeUnit.SECONDS);
         }else{
             tc.sendMessage(String.format(
                     "Sorry, but you aren't Andre_601 %s!",

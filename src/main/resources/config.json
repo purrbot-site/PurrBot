@@ -1,4 +1,5 @@
 {
   "token": "TOKEN",
-  "webhook": "webhookURL"
+  "webhook": "webhookURL",
+  "api-token": "api-token"
 }

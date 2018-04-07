@@ -36,6 +36,16 @@ public class WelcomeListener extends ListenerAdapter {
                     connection.setRequestProperty(UA[0], UA[1]);
 
                     tc.sendMessage(String.format(
+                            "Welcome %s",
+                            e.getUser().getAsMention()
+                    )).queue();
+                    try {
+                        tc.sendFile(connection.getInputStream(), n).queue();
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+                    /*
+                    tc.sendMessage(String.format(
                             "%s",
                             e.getUser().getAsMention()
                     )).queue(msg -> {
@@ -45,6 +55,7 @@ public class WelcomeListener extends ListenerAdapter {
                             ex.printStackTrace();
                         }
                     });
+                    */
 
                 }catch (Exception ex){
                     ex.printStackTrace();
