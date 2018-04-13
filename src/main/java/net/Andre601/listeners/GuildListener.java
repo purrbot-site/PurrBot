@@ -23,12 +23,11 @@ public class GuildListener extends ListenerAdapter {
 
         System.out.println(String.format(
                 "Joined the Guild %s (%s)\n" +
-                "  > Owner: %s#%s (%s)\n" +
+                "  > Owner: %s (%s)\n" +
                 "  > Members (Humans | Bots): %s (%s | %s)",
                 g.getName(),
                 g.getId(),
-                g.getOwner().getUser().getName(),
-                g.getOwner().getUser().getDiscriminator(),
+                MessageUtil.getTag(g.getOwner().getUser()),
                 g.getOwner().getUser().getId(),
                 g.getMembers().size(),
                 g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
@@ -41,13 +40,14 @@ public class GuildListener extends ListenerAdapter {
                 "`%s` (`%s`)\n" +
                 "\n" +
                 "**Owner**:\n" +
-                "%s\n" +
+                "`%s` (`%s`)\n" +
                 "\n" +
                 "**Members (Humans|Bots)**:\n" +
                 "`%s` (`%s`|`%s`)",
-                g.getName(),
+                g.getName().replace("`", "'"),
                 g.getId(),
-                g.getOwner().getAsMention(),
+                MessageUtil.getTag(g.getOwner().getUser()),
+                g.getOwner().getUser().getId(),
                 g.getMembers().size(),
                 g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
@@ -66,12 +66,11 @@ public class GuildListener extends ListenerAdapter {
 
         System.out.println(String.format(
                 "Left the Guild %s (%s)\n" +
-                "  > Owner: %s#%s (%s)\n" +
+                "  > Owner: %s (%s)\n" +
                 "  > Members (Humans | Bots): %s (%s | %s)",
                 g.getName(),
                 g.getId(),
-                g.getOwner().getUser().getName(),
-                g.getOwner().getUser().getDiscriminator(),
+                MessageUtil.getTag(g.getOwner().getUser()),
                 g.getOwner().getUser().getId(),
                 g.getMembers().size(),
                 g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
@@ -84,20 +83,21 @@ public class GuildListener extends ListenerAdapter {
                 "`%s` (`%s`)\n" +
                 "\n" +
                 "**Owner**:\n" +
-                "%s\n" +
+                "`%s` (`%s`)\n" +
                 "\n" +
                 "**Members (Humans|Bots)**:\n" +
                 "`%s` (`%s`|`%s`)",
-                g.getName(),
+                g.getName().replace("`", "'"),
                 g.getId(),
-                g.getOwner().getAsMention(),
+                MessageUtil.getTag(g.getOwner().getUser()),
+                g.getOwner().getUser().getId(),
                 g.getMembers().size(),
                 g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
         ));
 
         e.getJDA().getPresence().setGame(Game.watching(String.format(
-                "some Nekos OwO | On %s Guilds",
+                "with Nekos OwO | On %s Guilds",
                 e.getJDA().getGuilds().toArray().length
         )));
     }

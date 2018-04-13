@@ -1,10 +1,8 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
-import net.Andre601.util.MessageUtil;
+import net.Andre601.util.ImageUtil;
 import net.Andre601.util.PermUtil;
-import net.Andre601.util.StaticInfo;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -30,6 +28,9 @@ public class CmdServer implements Command {
             return;
         }
 
+        ImageUtil.createImage(e.getMessage(), g);
+
+        /*
         EmbedBuilder server = MessageUtil.getEmbed()
                 .setAuthor("Serverinfo: " + g.getName(), StaticInfo.URL,
                         e.getJDA().getSelfUser().getEffectiveAvatarUrl())
@@ -55,6 +56,7 @@ public class CmdServer implements Command {
                         g.getOwner().getAsMention(), true);
 
         tc.sendMessage(server.build()).queue();
+        */
     }
 
     @Override
