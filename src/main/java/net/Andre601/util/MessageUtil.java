@@ -47,6 +47,18 @@ public class MessageUtil {
                 ) + ")" : "");
     }
 
+    public static String getUsername(Member member){
+        return (member != null && member.getNickname() != null ?
+        String.format(
+                "`%s` (`%s`)",
+                member.getNickname(),
+                getTag(member.getUser())
+        ) : String.format(
+                "`%s`",
+                getTag(member.getUser())
+        ));
+    }
+
     public static String getStatus(Member member, Message msg){
         if(member.getOnlineStatus() == OnlineStatus.ONLINE){
             return (PermUtil.canUseCustomEmojis(msg) ? "<:online:426838620033253376> "
@@ -97,5 +109,24 @@ public class MessageUtil {
 
     public static EmbedBuilder getEmbed(){
         return new EmbedBuilder();
+    }
+
+    public static void sendEvalEmbed(TextChannel tc, String msg, String footer, Color color){
+        String newMsg = msg;
+
+        String overflow = null;
+        if (newMsg.length() > 2000){
+            overflow = newMsg.substring(1999);
+            newMsg = newMsg.substring(0, 1999);
+        }
+
+        EmbedBuilder message = getEmbed()
+                .setColor(color)
+                .setDescription(newMsg)
+                .setFooter(footer, null);
+
+        tc.sendMessage(message.build()).queue();
+        if(overflow != null)
+            sendEvalEmbed(tc, overflow, footer, color);
     }
 }

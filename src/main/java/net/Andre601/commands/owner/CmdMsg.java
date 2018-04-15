@@ -3,12 +3,23 @@ package net.Andre601.commands.owner;
 import net.Andre601.commands.Command;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.util.PermUtil;
+import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.concurrent.TimeUnit;
 
 public class CmdMsg implements Command {
+
+    private static TextChannel getTChannel(String id, JDA jda){
+        try{
+            return jda.getTextChannelById(id);
+        }catch (Exception ignored){
+            return null;
+        }
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
@@ -19,15 +30,35 @@ public class CmdMsg implements Command {
     public void action(String[] args, MessageReceivedEvent e) {
 
         Message msg = e.getMessage();
+        String message = "";
 
         if(PermUtil.canDeleteMsg(msg))
             msg.delete().queue();
 
         if(PermUtil.isCreator(msg)){
-            e.getChannel().sendMessage(msg.getContentRaw().replaceFirst(String.format(
-                    "%smsg ",
-                    CmdPrefix.getPrefix(e.getGuild())
-            ), "")).queue();
+            if(args.length < 2){
+                e.getChannel().sendMessage(String.format(
+                        "Provide a Channel and message! (`%smsg <ChannelID> <Message>`",
+                        CmdPrefix.getPrefix(e.getGuild())
+                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                return;
+            }
+
+            if(getTChannel(args[0], e.getJDA()) == null){
+                e.getChannel().sendMessage(String.format(
+                        "Provide a valid ChannelID! (`%smsg <ChannelID> <Message>`",
+                        CmdPrefix.getPrefix(e.getGuild())
+                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                return;
+            }
+
+            for (int i = 1; i < args.length; i++){
+
+                message += " " + args[i];
+            }
+
+            e.getJDA().getTextChannelById(args[0]).sendMessage(message).queue();
+
         }else{
             e.getChannel().sendMessage(String.format(
                     "No. You can't use that command %s! Only my dad can use it.",

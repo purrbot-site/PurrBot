@@ -124,7 +124,7 @@ public class CmdHelp implements Command {
 
             case "info":
                 usage(msg, "Info", "info [-here]",
-                        "Sends you basic infos about the bot (A small description, version, used " +
+                        "Sends you basic info about the bot (A small description, version, used " +
                         "Library, ect)",
                         "`-here` Sends the message in the channel, in which you've run the command.",
                         "`none`"
@@ -133,8 +133,7 @@ public class CmdHelp implements Command {
 
             case "invite":
                 usage(msg, "Invite", "invite [-here]",
-                        "Sends you the invite-links for the bot and for the official Discord\n" +
-                        "\n",
+                        "Sends you the invite-links for the bot and for the official Discord",
                         "`-here` Sends the message in the channel, in which you've run the command.",
                         "none"
                 );
@@ -199,7 +198,7 @@ public class CmdHelp implements Command {
 
             case "prefix":
                 usage(msg, "Prefix", "prefix [set <prefix>|reset]",
-                        "Shows the currently used prefix in this Discord, if no argument is given.\n",
+                        "Shows the currently used prefix in this Discord, if no argument is given.",
                         "`set <prefix>` Sets the prefix to the provided one.\n" +
                         "`reset` Resets the prefix to the default one.",
                         "`MANAGE_SERVER` for setting or resetting the prefix.");

@@ -51,7 +51,6 @@ public class ReadyListener extends ListenerAdapter{
                     g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
                     g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
             );
-
         }
 
         System.out.println(String.format(

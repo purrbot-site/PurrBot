@@ -25,7 +25,7 @@ public class CommandListener extends ListenerAdapter{
         if(e.getMessage().getContentRaw().startsWith(CmdPrefix.getPrefix(e.getGuild())) &&
                 (e.getMessage().getAuthor().getId() != e.getJDA().getSelfUser().getId()) && !e.getAuthor().isBot()){
 
-            CommandHandler.handleCommand(CommandHandler.parser.parse(e.getMessage().getContentRaw().toLowerCase(), e));
+            CommandHandler.handleCommand(CommandHandler.parser.parse(e.getMessage().getContentRaw(), e));
         }
 
     }

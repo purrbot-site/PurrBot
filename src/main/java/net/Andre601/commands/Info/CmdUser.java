@@ -21,10 +21,10 @@ public class CmdUser implements Command {
                     .setAuthor("Userinfo")
                     .setThumbnail(member.getUser().getEffectiveAvatarUrl())
                     .addField("User:", String.format(
-                            "**Name**: `%s`\n" +
+                            "**Name**: %s\n" +
                             "**ID**: %s\n" +
                             "**Status**: %s",
-                            MessageUtil.getTag(member.getUser()),
+                            MessageUtil.getUsername(member),
                             member.getUser().getId(),
                             MessageUtil.getStatus(member, msg)
                     ), false)

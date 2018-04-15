@@ -2,7 +2,10 @@ package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
 import net.Andre601.util.ImageUtil;
+import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
+import net.Andre601.util.StaticInfo;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -28,35 +31,35 @@ public class CmdServer implements Command {
             return;
         }
 
-        ImageUtil.createImage(e.getMessage(), g);
+        if(PermUtil.canUploadImage(e.getMessage())){
+            ImageUtil.createImage(e.getMessage(), g);
+        }else{
+            EmbedBuilder server = MessageUtil.getEmbed()
+                    .setAuthor("Serverinfo: " + g.getName(), StaticInfo.URL,
+                            e.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                    .setThumbnail(g.getIconUrl())
+                    .addField("Users", String.format(
+                            "**Total**: %s\n" +
+                                    "\n" +
+                                    "**Humans**: %s\n" +
+                                    "**Bots**: %s",
+                            g.getMembers().size(),
+                            g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
+                            g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
+                    ), true)
+                    .addField("Server region",
+                            g.getRegion().getName(), true)
+                    .addField("Verification level",
+                            MessageUtil.getLevel(g), true)
+                    .addField("Image", String.format(
+                            "[`Link`](%s)",
+                            g.getIconUrl()
+                    ), true)
+                    .addField("Owner",
+                            g.getOwner().getAsMention(), true);
 
-        /*
-        EmbedBuilder server = MessageUtil.getEmbed()
-                .setAuthor("Serverinfo: " + g.getName(), StaticInfo.URL,
-                        e.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .setThumbnail(g.getIconUrl())
-                .addField("Users", String.format(
-                        "**Total**: %s\n" +
-                        "\n" +
-                        "**Humans**: %s\n" +
-                        "**Bots**: %s",
-                        g.getMembers().size(),
-                        g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
-                        g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
-                ), true)
-                .addField("Server region",
-                        g.getRegion().getName(), true)
-                .addField("Verification level",
-                        MessageUtil.getLevel(g), true)
-                .addField("Image", String.format(
-                        "[`Link`](%s)",
-                        g.getIconUrl()
-                ), true)
-                .addField("Owner",
-                        g.getOwner().getAsMention(), true);
-
-        tc.sendMessage(server.build()).queue();
-        */
+            tc.sendMessage(server.build()).queue();
+        }
     }
 
     @Override

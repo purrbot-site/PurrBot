@@ -97,7 +97,7 @@ public class GuildListener extends ListenerAdapter {
         ));
 
         e.getJDA().getPresence().setGame(Game.watching(String.format(
-                "with Nekos OwO | On %s Guilds",
+                "some Nekos OwO | On %s Guilds",
                 e.getJDA().getGuilds().toArray().length
         )));
     }

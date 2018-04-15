@@ -45,8 +45,10 @@ public class CmdShutdown implements Command {
             return;
         }
 
-        if(PermUtil.isCreator(e.getMessage())){
+        if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();
+
+        if(PermUtil.isCreator(e.getMessage())){
 
             EmbedBuilder shutdown = MessageUtil.getEmbed(e.getAuthor())
                     .setDescription(getRandomShutdown())
@@ -58,7 +60,6 @@ public class CmdShutdown implements Command {
             e.getJDA().shutdown();
 
         }else{
-            e.getMessage().delete().queue();
 
             EmbedBuilder noShutdown = MessageUtil.getEmbed(e.getAuthor())
                     .setDescription(getRandomNoShutdown())

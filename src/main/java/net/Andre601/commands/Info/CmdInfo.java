@@ -47,13 +47,15 @@ public class CmdInfo implements Command {
                         JDAInfo.VERSION,
                         JDAInfo.GITHUB
                 ), true)
-                .addField("GitHub:", String.format(
-                        "[`NekoBot`](%s)",
-                        StaticInfo.GITHUB_LINK
-                ), true)
-                .addField("Bot-Page:", String.format(
+                .addField("Links:", String.format(
+                        "[`NekoBot`](%s)\n" +
                         "[`Discordbots.org`](%s)",
+                        StaticInfo.GITHUB_LINK,
                         StaticInfo.DISCORDBOTS
+                ), true)
+                .addField("", String.format(
+                        "[`Official Discord`](%s)",
+                        StaticInfo.DISCORD_INVITE
                 ), true);
 
         if(e.getMessage().getContentRaw().endsWith("-here")){
