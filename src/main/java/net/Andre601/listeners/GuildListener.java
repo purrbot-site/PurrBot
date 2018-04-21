@@ -1,6 +1,5 @@
 package net.Andre601.listeners;
 
-import net.Andre601.core.GFile;
 import net.Andre601.core.Main;
 import net.Andre601.util.MessageUtil;
 import net.dv8tion.jda.core.entities.Game;

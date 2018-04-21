@@ -16,7 +16,7 @@ public class CmdSlap implements Command{
 
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
-                "%s Please mention a user at the end of the command, to slap him!\n" +
+                "%s Please mention a user at the end of the command to slap!\n" +
                 "Example: `%sslap %s`",
                 msg.getAuthor().getAsMention(),
                 CmdPrefix.getPrefix(msg.getGuild()),
@@ -34,6 +34,9 @@ public class CmdSlap implements Command{
 
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
+
+        if (!PermUtil.canWrite(msg))
+            return;
 
         if(!PermUtil.canSendEmbed(e.getMessage())){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
@@ -59,7 +62,7 @@ public class CmdSlap implements Command{
                 break;
             }
             if(user == msg.getAuthor()){
-                tc.sendMessage("Why hurting yourself?").queue();
+                tc.sendMessage("Why are you hurting yourself?").queue();
                 break;
             }
             String name = msg.getGuild().getMember(user).getAsMention();

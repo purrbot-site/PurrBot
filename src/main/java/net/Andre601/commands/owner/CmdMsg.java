@@ -3,7 +3,6 @@ package net.Andre601.commands.owner;
 import net.Andre601.commands.Command;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.util.PermUtil;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -31,6 +30,9 @@ public class CmdMsg implements Command {
 
         Message msg = e.getMessage();
         String message = "";
+
+        if (!PermUtil.canWrite(msg))
+            return;
 
         if(PermUtil.canDeleteMsg(msg))
             msg.delete().queue();

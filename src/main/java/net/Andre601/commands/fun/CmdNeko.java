@@ -4,6 +4,7 @@ import net.Andre601.commands.Command;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.Andre601.util.HttpUtil;
@@ -29,6 +30,10 @@ public class CmdNeko implements Command {
 
         String link = getLink();
         TextChannel tc = e.getTextChannel();
+        Message msg = e.getMessage();
+
+        if (!PermUtil.canWrite(msg))
+            return;
 
         if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();

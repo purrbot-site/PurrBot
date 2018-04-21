@@ -3,17 +3,11 @@ package net.Andre601.listeners;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.commands.server.CmdWelcome;
 import net.Andre601.core.Main;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import okhttp3.MediaType;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import org.discordbots.api.client.DiscordBotListAPI;
-import org.json.JSONObject;
 
 public class ReadyListener extends ListenerAdapter{
 

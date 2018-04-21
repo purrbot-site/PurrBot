@@ -1,7 +1,8 @@
 package net.Andre601.util;
 
 import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.User;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,12 +18,12 @@ public class ImageUtil {
     public static final String[] UA = {"User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 " +
             "(KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"};
 
-    private static BufferedImage getIcon(Guild g){
+    private static BufferedImage getUserIcon(User user){
 
         BufferedImage icon = null;
 
         try{
-            URL serverIcon = new URL(g.getIconUrl());
+            URL serverIcon = new URL(user.getEffectiveAvatarUrl());
             URLConnection connection = serverIcon.openConnection();
             connection.setRequestProperty(UA[0], UA[1]);
             connection.connect();
@@ -33,46 +34,50 @@ public class ImageUtil {
         return icon;
     }
 
-    public static void createImage(Message msg, Guild g){
+    public static void createWelcomeImg(User user, Guild g, TextChannel tc){
 
-        msg.getChannel().sendTyping().queue();
-        BufferedImage target =  getIcon(g);
+        //  Saving the userIcon/avatar as a Buffered image
+        BufferedImage u = getUserIcon(user);
+
         try{
-            BufferedImage template = ImageIO.read(new File("img/server.png"));
-            BufferedImage bg = new BufferedImage(template.getWidth(), template.getHeight(), template.getType());
-            Graphics2D image = bg.createGraphics();
-            image.drawImage(template, 0, 0, null);
-            image.drawImage(target, 5, 5, 160, 160, null);
-            Font font1 = new Font("Arial", Font.BOLD, 45);
-            Font font2 = new Font("Arial", Font.PLAIN, 25);
-            image.setColor(Color.WHITE);
-            image.setFont(font1);
-            image.drawString(g.getName(), 175, 150);
-            image.setColor(Color.BLACK);
-            image.setFont(font2);
-            image.drawString(String.valueOf(g.getMembers().size()), 170, 235);
-            image.drawString(String.valueOf(g.getMembers().stream().filter(user -> !user.getUser().isBot())
-                    .toArray().length), 170, 295);
-            image.drawString(String.valueOf(g.getMembers().stream().filter(user -> user.getUser().isBot())
-                    .toArray().length), 170, 365);
-            image.drawString(MessageUtil.getLevel(g), 170, 455);
-            image.drawString(g.getRegion().getName(), 368, 235);
-            image.dispose();
+            BufferedImage bg = ImageIO.read(new File("img/welcome_bg.png"));
+            BufferedImage layer = ImageIO.read(new File("img/welcome_layer.png"));
+            BufferedImage image = new BufferedImage(bg.getWidth(), bg.getHeight(), bg.getType());
+            Graphics2D img = image.createGraphics();
+
+            //  Adding the different images (1. background, 2. User-Avatar, 3rd actual image)
+            img.drawImage(bg, 0, 0, null);
+            img.drawImage(u, 5, 5, 290, 290, null);
+            img.drawImage(layer, 0, 0, null);
+
+            //  Creating the font for the custom text.
+            Font text = new Font("Arial", Font.PLAIN, 60);
+            img.setColor(Color.WHITE);
+            img.setFont(text);
+
+            //  Setting the actual text. \n is (sadly) not supported, so we have to make each new line seperate.
+            img.drawString("Welcome",320, 100);
+            img.drawString(MessageUtil.getTag(user),320, 175);
+            img.drawString(String.format(
+                    "You are user #%s",
+                    g.getMembers().size()
+            ),320, 250);
+
+            img.dispose();
+
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             ImageIO.setUseCache(false);
-            ImageIO.write(bg, "png", stream);
-            msg.getChannel().sendFile(stream.toByteArray(), String.format(
-                    "%s.png",
-                    g.getName()
-            ), null).queue();
-        }catch (IOException e){
-            msg.getChannel().sendMessage(String.format(
-                    "%s Nooooo! There was a issue with the image. >_<",
-                    msg.getAuthor().getAsMention()
-            )).queue();
-            e.printStackTrace();
-        }
+            ImageIO.write(image, "png", stream);
 
+            //  Finally sending the image. I use the user-id as image-name (prevents issues with symbols)
+            tc.sendFile(stream.toByteArray(), String.format(
+                    "%s.png",
+                    user.getId()
+            ), null).queue();
+
+            //  We just ignore the caused exception.
+        }catch (IOException ignored){
+        }
     }
 
 }

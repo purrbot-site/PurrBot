@@ -16,7 +16,7 @@ public class CmdTickle implements Command {
 
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
-                "%s Please mention a user at the end of the command, to tickle him!\n" +
+                "%s Please mention a user at the end of the command to tickle!\n" +
                         "Example: `%stickle @*Purr*#6875`",
                 msg.getAuthor().getAsMention(),
                 CmdPrefix.getPrefix(msg.getGuild())
@@ -33,6 +33,9 @@ public class CmdTickle implements Command {
 
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
+
+        if (!PermUtil.canWrite(msg))
+            return;
 
         if(!PermUtil.canSendEmbed(e.getMessage())){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
@@ -58,7 +61,7 @@ public class CmdTickle implements Command {
                 break;
             }
             if(user == msg.getAuthor()){
-                tc.sendMessage("Why tickling yourself?").queue();
+                tc.sendMessage("Why are you tickling yourself?").queue();
                 break;
             }
             String name = msg.getGuild().getMember(user).getAsMention();

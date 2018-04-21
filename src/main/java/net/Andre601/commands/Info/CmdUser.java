@@ -10,6 +10,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CmdUser implements Command {
@@ -39,7 +40,18 @@ public class CmdUser implements Command {
                                     "[`Default Avatar`](%s)",
                                     member.getUser().getDefaultAvatarUrl()
                             )), true)
-                    .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true);
+                    .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true)
+                    .addField("Dates:", String.format(
+                            "**Account created**: %s\n" +
+                            "**Joined**: %s",
+                            MessageUtil.formatTime(LocalDateTime.from(
+                                    member.getUser().getCreationTime()
+                            )),
+                            (member == null ? "`Not on this Discord!`" :
+                            MessageUtil.formatTime(LocalDateTime.from(
+                                    member.getJoinDate()
+                            )))
+                    ), false);
 
             tc.sendMessage(uInfo.build()).queue();
         }
@@ -55,6 +67,9 @@ public class CmdUser implements Command {
 
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
+
+        if (!PermUtil.canWrite(msg))
+            return;
 
         if(!PermUtil.canSendEmbed(e.getMessage())){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
@@ -86,7 +101,18 @@ public class CmdUser implements Command {
                                     "[`Default Avatar`](%s)",
                                     msg.getAuthor().getDefaultAvatarUrl()
                             )), true)
-                    .addField("Is Bot:", MessageUtil.isBot(msg.getAuthor()), true);
+                    .addField("Is Bot:", MessageUtil.isBot(msg.getAuthor()), true)
+                    .addField("Dates:", String.format(
+                            "**Account created**: %s\n" +
+                            "**Joined**: %s",
+                            MessageUtil.formatTime(LocalDateTime.from(
+                                    msg.getAuthor().getCreationTime()
+                            )),
+                            (msg.getAuthor() == null ? "`Not on this Discord!`" :
+                                    MessageUtil.formatTime(LocalDateTime.from(
+                                            msg.getMember().getJoinDate()
+                                    )))
+                    ), false);
             tc.sendMessage(uInfo.build()).queue();
             return;
         }

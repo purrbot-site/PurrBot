@@ -28,6 +28,9 @@ public class CmdEval implements Command {
 
         Message msg = e.getMessage();
 
+        if (!PermUtil.canWrite(msg))
+            return;
+
         if(PermUtil.canDeleteMsg(msg))
             msg.delete().queue();
 

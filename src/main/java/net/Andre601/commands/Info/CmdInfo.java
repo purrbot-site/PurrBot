@@ -22,6 +22,9 @@ public class CmdInfo implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
+        if (!PermUtil.canWrite(e.getMessage()))
+            return;
+
         if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();
 
@@ -36,7 +39,7 @@ public class CmdInfo implements Command {
                         "and a lot of free time. ;)\n" +
                         "\n" +
                         "**Commands**\n" +
-                        "You can use %shelp on the Discord, to see all my commands.",
+                        "You can use %shelp on your server to see all my commands.",
                         CmdPrefix.getPrefix(e.getGuild())
                 ))
                 .addField("Bot-Version:", String.format(

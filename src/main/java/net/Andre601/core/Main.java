@@ -108,6 +108,8 @@ public class Main {
         CommandHandler.commands.put("msg", new CmdMsg());
         CommandHandler.commands.put("welcome", new CmdWelcome());
         CommandHandler.commands.put("eval", new CmdEval());
+        CommandHandler.commands.put("stats", new CmdStats());
+        CommandHandler.commands.put("stat", new CmdStats());
 
     }
 
@@ -138,23 +140,18 @@ public class Main {
     public static List<String> getRandomShutdownText(){
         return RandomShutdownText;
     }
-
     public static List<String> getRandomNoShutdownText(){
         return RandomNoShutdownText;
     }
-
     public static List<String> getRandomShutdownImage(){
         return RandomShutdownImage;
     }
-
     public static List<String> getRandomNoShutdownImage(){
         return RandomNoShutdownImage;
     }
-
     public static List<String> getRandomFact(){
         return RandomFact;
     }
-
     public static List<String> getRandomNoNSWF(){
         return RandomNoNSWF;
     }
@@ -200,5 +197,10 @@ public class Main {
 
     public static DiscordBotListAPI getAPI(){
         return api;
+    }
+
+    public static boolean isBDay(){
+        final Calendar cal = Calendar.getInstance();
+        return cal.get(Calendar.MONTH) == Calendar.MARCH && cal.get(Calendar.DAY_OF_MONTH) == 19;
     }
 }

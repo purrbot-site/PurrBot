@@ -19,6 +19,9 @@ public class CmdRefresh implements Command{
     public void action(String[] args, MessageReceivedEvent e) {
         TextChannel tc = e.getTextChannel();
 
+        if (!PermUtil.canWrite(e.getMessage()))
+            return;
+
         if(PermUtil.isCreator(e.getMessage())){
 
             tc.sendMessage("Clearing stored messages and images...").queue(

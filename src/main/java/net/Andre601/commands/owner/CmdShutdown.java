@@ -37,6 +37,9 @@ public class CmdShutdown implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
+        if (!PermUtil.canWrite(e.getMessage()))
+            return;
+
         if(!PermUtil.canSendEmbed(e.getMessage())){
             e.getChannel().sendMessage("I need the permission, to embed Links in this Channel!").queue();
             if(PermUtil.canReact(e.getMessage()))

@@ -14,9 +14,10 @@ import java.util.List;
 
 public class CmdCuddle implements Command{
 
+    //  This sends a message, if it is executed.
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
-                        "%s Please mention a user at the end of the command, to cuddle with him!\n" +
+                        "%s Please mention a user at the end of the command to cuddle with!\n" +
                         "Example: `%scuddle @*Purr*#6875`",
                 msg.getAuthor().getAsMention(),
                 CmdPrefix.getPrefix(msg.getGuild())
@@ -34,6 +35,10 @@ public class CmdCuddle implements Command{
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
+        //  Permission-checks for write and embed links-permission.
+        if (!PermUtil.canWrite(msg))
+            return;
+
         if(!PermUtil.canSendEmbed(e.getMessage())){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
             if(PermUtil.canReact(e.getMessage()))
@@ -42,13 +47,17 @@ public class CmdCuddle implements Command{
             return;
         }
 
+        //  Send usage-message defined above, if you only run the command with no args.
         if(args.length < 1){
             usage(e.getMessage());
             return;
         }
 
+        //  Getting all mentioned users in the message and store them in a List
         List<User> mentionedUsers = msg.getMentionedUsers();
         for (User user : mentionedUsers){
+
+            //  mentioned user = own user -> send message, add reaction and return.
             if(user == msg.getJDA().getSelfUser()){
                 if(PermUtil.canReact(e.getMessage()))
                     e.getMessage().addReaction("❤").queue();
@@ -57,6 +66,8 @@ public class CmdCuddle implements Command{
                         msg.getMember().getAsMention())).queue();
                 break;
             }
+
+            //  mentioned user = author of the message -> Send message and return.
             if(user == msg.getAuthor()){
                 tc.sendMessage("Do you have no one to cuddle with?").queue();
                 break;

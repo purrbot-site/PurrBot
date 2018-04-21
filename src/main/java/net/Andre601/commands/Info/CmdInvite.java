@@ -19,13 +19,16 @@ public class CmdInvite implements Command{
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
+        if (!PermUtil.canWrite(e.getMessage()))
+            return;
+
         if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();
 
         EmbedBuilder invite = MessageUtil.getEmbed()
                 .setAuthor("*Purr*", null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .addField("Invite the bot", String.format(
-                        "Heyo! Really nice from you, to invite me to your Discord. :3\n" +
+                        "Heyo! Really nice of you, to invite me to your Discord. :3\n" +
                         "Inviting me is quite simple:\n" +
                         "Just click on one of the links below and choose your Discord.\n"
                 ),false)

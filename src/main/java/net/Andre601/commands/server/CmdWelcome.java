@@ -147,6 +147,9 @@ public class CmdWelcome implements Command {
         Message msg = e.getMessage();
         Guild g = e.getGuild();
 
+        if (!PermUtil.canWrite(msg))
+            return;
+
         if(!PermUtil.userIsAdmin(msg)){
             tc.sendMessage(String.format(
                     "%s You need the permission `MANAGE_SERVER` to use that command!",

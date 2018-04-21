@@ -1,6 +1,5 @@
 package net.Andre601.util;
 
-import net.dv8tion.jda.core.JDA;
 import okhttp3.*;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;

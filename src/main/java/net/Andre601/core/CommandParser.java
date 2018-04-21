@@ -1,9 +1,7 @@
 package net.Andre601.core;
 
 import net.Andre601.commands.server.CmdPrefix;
-import net.Andre601.util.MessageUtil;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.Andre601.util.StaticInfo;
 
 import java.util.ArrayList;
 

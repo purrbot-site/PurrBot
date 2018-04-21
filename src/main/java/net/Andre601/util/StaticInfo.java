@@ -2,7 +2,7 @@ package net.Andre601.util;
 
 public class StaticInfo {
 
-    //  Prefix for all commands (">>[command]")
+    //  Prefix for all commands (".[command]")
     public static final String PREFIX = ".";
 
     //  File

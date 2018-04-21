@@ -8,8 +8,14 @@ import net.dv8tion.jda.webhook.WebhookClient;
 import net.dv8tion.jda.webhook.WebhookMessageBuilder;
 
 import java.awt.Color;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class MessageUtil {
+
+    private static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
 
     public static String isBot(User user){
         if(user.isBot()){
@@ -128,5 +134,10 @@ public class MessageUtil {
         tc.sendMessage(message.build()).queue();
         if(overflow != null)
             sendEvalEmbed(tc, overflow, footer, color);
+    }
+
+    public static String formatTime(LocalDateTime dateTime){
+        LocalDateTime time = LocalDateTime.from(dateTime.atOffset(ZoneOffset.UTC));
+        return time.format(timeFormat) + " UTC";
     }
 }

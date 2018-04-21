@@ -12,6 +12,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 public class CmdHelp implements Command {
 
     private static String getFact(){
+        if(Main.isBDay())
+            return  "🎉 Today is Purr's Birthday! 🎉";
+
         return Main.getRandomFact().size() > 0 ? Main.getRandomFact().get(
                 Main.getRandom().nextInt(Main.getRandomFact().size())) : "";
     }
@@ -59,6 +62,7 @@ public class CmdHelp implements Command {
                         " Info [-here]\n" +
                         " Invite [-here]\n" +
                         " Server\n" +
+                        " Stats\n" +
                         " User [@user]\n" +
                         "\n" +
                         "Fun:\n" +
@@ -99,6 +103,9 @@ public class CmdHelp implements Command {
 
         Message msg = e.getMessage();
 
+        if (!PermUtil.canWrite(msg))
+            return;
+
         if(!PermUtil.canSendEmbed(e.getMessage())){
             e.getTextChannel().sendMessage("I need the permission, to embed Links in this Channel!").queue();
             if(PermUtil.canReact(e.getMessage()))
@@ -126,15 +133,15 @@ public class CmdHelp implements Command {
                 usage(msg, "Info", "info [-here]",
                         "Sends you basic info about the bot (A small description, version, used " +
                         "Library, ect)",
-                        "`-here` Sends the message in the channel, in which you've run the command.",
+                        "`-here` Sends the message in the channel in which you've run the command.",
                         "`none`"
                 );
                 break;
 
             case "invite":
                 usage(msg, "Invite", "invite [-here]",
-                        "Sends you the invite-links for the bot and for the official Discord",
-                        "`-here` Sends the message in the channel, in which you've run the command.",
+                        "Sends you the invite-links for the bot and for the official Discord.",
+                        "`-here` Sends the message in the channel in which you've run the command.",
                         "none"
                 );
                 break;
@@ -149,7 +156,7 @@ public class CmdHelp implements Command {
 
             case "user":
                 usage(msg, "User", "user [@user]",
-                        "Gives you basic information about yourself.",
+                        "Gives basic information about the mentioned user.",
                         "`<@user>` The user to get infos about (as mention).",
                         "`none`"
                 );

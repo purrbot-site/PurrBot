@@ -5,6 +5,7 @@ import net.Andre601.core.Main;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.Andre601.util.HttpUtil;
@@ -15,7 +16,7 @@ public class CmdLewd implements Command {
 
     private static String getRandomNotNSFW(){
         return Main.getRandomNoNSWF().size() > 0 ? Main.getRandomNoNSWF().get(
-                Main.getRandom().nextInt(Main.getRandomFact().size())) : "";
+                Main.getRandom().nextInt(Main.getRandomNoNSWF().size())) : "";
     }
 
     public String getLink(){
@@ -37,6 +38,10 @@ public class CmdLewd implements Command {
 
         String link = getLink();
         TextChannel tc = e.getTextChannel();
+        Message msg = e.getMessage();
+
+        if (!PermUtil.canWrite(msg))
+            return;
 
         if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();
@@ -66,7 +71,7 @@ public class CmdLewd implements Command {
             }
         }else{
             tc.sendMessage(String.format(getRandomNotNSFW(),
-                    e.getAuthor().getAsMention())).queue(msg -> msg.delete().queueAfter(10, TimeUnit.SECONDS));
+                    e.getAuthor().getAsMention())).queue(del -> del.delete().queueAfter(10, TimeUnit.SECONDS));
         }
 
     }

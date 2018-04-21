@@ -16,7 +16,7 @@ public class CmdPat implements Command {
 
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
-                "%s Please mention a user at the end of the command, to give him a pat!\n" +
+                "%s Please mention a user at the end of the command to pat!\n" +
                 "Example: `%spat @*Purr*#6875`",
                 msg.getAuthor().getAsMention(),
                 CmdPrefix.getPrefix(msg.getGuild())
@@ -33,6 +33,9 @@ public class CmdPat implements Command {
 
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
+
+        if (!PermUtil.canWrite(msg))
+            return;
 
         if(!PermUtil.canSendEmbed(e.getMessage())){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();

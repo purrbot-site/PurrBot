@@ -127,6 +127,9 @@ public class CmdPrefix implements Command{
         Message msg = e.getMessage();
         Guild g = e.getGuild();
 
+        if (!PermUtil.canWrite(msg))
+            return;
+
         if(args.length == 0){
             currPrefix(msg, e.getGuild());
             return;
