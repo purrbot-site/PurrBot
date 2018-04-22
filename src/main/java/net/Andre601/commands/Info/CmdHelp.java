@@ -236,6 +236,15 @@ public class CmdHelp implements Command {
                 );
                 break;
 
+            case "stats":
+            case "stat":
+                usage(e.getMessage(), "Stats", "stats",
+                        "Shows some statistics of \\*Purr*",
+                        "`none`",
+                        "`none`"
+                );
+                break;
+
             default:
                 usage(msg);
         }

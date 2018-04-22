@@ -39,7 +39,7 @@ public class CmdInfo implements Command {
                         "and a lot of free time. ;)\n" +
                         "\n" +
                         "**Commands**\n" +
-                        "You can use %shelp on your server to see all my commands.",
+                        "You can use %shelp on your server to see all of my commands.",
                         CmdPrefix.getPrefix(e.getGuild())
                 ))
                 .addField("Bot-Version:", String.format(
@@ -51,14 +51,16 @@ public class CmdInfo implements Command {
                         JDAInfo.GITHUB
                 ), true)
                 .addField("Links:", String.format(
-                        "[`NekoBot`](%s)\n" +
+                        "[`GitHub`](%s)\n" +
                         "[`Discordbots.org`](%s)",
                         StaticInfo.GITHUB_LINK,
                         StaticInfo.DISCORDBOTS
                 ), true)
                 .addField("", String.format(
-                        "[`Official Discord`](%s)",
-                        StaticInfo.DISCORD_INVITE
+                        "[`Official Discord`](%s)\n" +
+                        "[`Website`](%s)",
+                        StaticInfo.DISCORD_INVITE,
+                        StaticInfo.WEBSITE
                 ), true);
 
         if(e.getMessage().getContentRaw().endsWith("-here")){

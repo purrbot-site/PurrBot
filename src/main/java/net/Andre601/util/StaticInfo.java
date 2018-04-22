@@ -18,4 +18,5 @@ public class StaticInfo {
     public static final String DISCORD_INVITE = "https://discord.gg/NB7AFqn";
     public static final String GITHUB_LINK = "https://github.com/Andre601/NekoBot";
     public static final String DISCORDBOTS = "https://discordbots.org/bot/425382319449309197";
+    public static final String WEBSITE = "https://purrbot.site";
 }

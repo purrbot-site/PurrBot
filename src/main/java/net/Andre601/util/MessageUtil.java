@@ -57,11 +57,11 @@ public class MessageUtil {
         return (member != null && member.getNickname() != null ?
         String.format(
                 "`%s` (`%s`)",
-                member.getNickname(),
-                getTag(member.getUser())
+                member.getNickname().replace("`", "'"),
+                getTag(member.getUser()).replace("`", "'")
         ) : String.format(
                 "`%s`",
-                getTag(member.getUser())
+                getTag(member.getUser()).replace("`", "'")
         ));
     }
 

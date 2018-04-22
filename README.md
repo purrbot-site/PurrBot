@@ -15,6 +15,7 @@ Help     | [Commandname] | Will display all commands available. adding a command
 Info     | -here         | DMs you infos about the bot. Use `-here` to post it in the Discord-Channel.
 Invite   | -here         | DMs you the invite-link. Use `-here` to post it in the Discord-Channel.
 Server   |               | Shows infos about the Discord, the bot is currently in.
+Stats    |               | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, ect.)
 User     | [@user]       | Gives infos about a you. tag a user, to get infos about him
 ```
 
