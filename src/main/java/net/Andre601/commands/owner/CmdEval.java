@@ -1,7 +1,7 @@
 package net.Andre601.commands.owner;
 
 import net.Andre601.commands.Command;
-import net.Andre601.util.MessageUtil;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -47,7 +47,7 @@ public class CmdEval implements Command {
             se.put("guild", e.getGuild());
             se.put("channel", e.getChannel());
             se.put("msg", msg);
-
+            
             List<String> splitContent = new LinkedList<>();
             Collections.addAll(splitContent, msg.getContentRaw().split(" "));
             splitContent.remove(0);
@@ -56,7 +56,7 @@ public class CmdEval implements Command {
 
             try{
                 String result = se.eval(statement).toString();
-                MessageUtil.sendEvalEmbed(e.getTextChannel(), String.format(
+                EmbedUtil.sendEvalEmbed(e.getTextChannel(), String.format(
                         "**Input**:\n" +
                         "```java\n" +
                         "%s\n" +
@@ -72,7 +72,7 @@ public class CmdEval implements Command {
                         (System.currentTimeMillis() - startTime)
                 ), Color.GREEN);
             }catch (Exception ex){
-                MessageUtil.sendEvalEmbed(e.getTextChannel(), String.format(
+                EmbedUtil.sendEvalEmbed(e.getTextChannel(), String.format(
                         "**Error while evaluating following input**:\n" +
                         "```java\n" +
                         "%s\n" +

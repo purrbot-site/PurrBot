@@ -1,24 +1,25 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CmdUser implements Command {
 
     public void getUser(TextChannel tc, Message msg){
+        tc.sendTyping().queue();
         List<Member> mentionedMember = msg.getMentionedMembers();
         for(Member member : mentionedMember){
-            EmbedBuilder uInfo = MessageUtil.getEmbed(msg.getAuthor())
+            String roles = member.getRoles().stream().map(Role::getName).collect(Collectors.joining(", "));
+            EmbedBuilder uInfo = EmbedUtil.getEmbed(msg.getAuthor())
                     .setAuthor("Userinfo")
                     .setThumbnail(member.getUser().getEffectiveAvatarUrl())
                     .addField("User:", String.format(
@@ -41,6 +42,10 @@ public class CmdUser implements Command {
                                     member.getUser().getDefaultAvatarUrl()
                             )), true)
                     .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true)
+                    .addField("Roles:", (member == null ?
+                            "This member is not here!" : (roles.length() > 1000 ? "*Way to many!*" :
+                                    roles)),
+                            true)
                     .addField("Dates:", String.format(
                             "**Account created**: %s\n" +
                             "**Joined**: %s",
@@ -80,14 +85,16 @@ public class CmdUser implements Command {
         }
 
         if(args.length == 0){
-            EmbedBuilder uInfo = MessageUtil.getEmbed(msg.getAuthor())
+            tc.sendTyping().queue();
+            String roles = msg.getMember().getRoles().stream().map(Role::getName).collect(Collectors.joining(", "));
+            EmbedBuilder uInfo = EmbedUtil.getEmbed(msg.getAuthor())
                     .setAuthor("Userinfo")
                     .setThumbnail(msg.getAuthor().getEffectiveAvatarUrl())
                     .addField("User:", String.format(
-                            "**Name**: `%s`\n" +
+                            "**Name**: %s\n" +
                             "**ID**: %s\n" +
                             "**Status**: %s",
-                            MessageUtil.getTag(msg.getAuthor()),
+                            MessageUtil.getUsername(e.getMember()),
                             msg.getAuthor().getId(),
                             MessageUtil.getStatus(msg.getMember(), msg)
                     ), false)
@@ -102,6 +109,7 @@ public class CmdUser implements Command {
                                     msg.getAuthor().getDefaultAvatarUrl()
                             )), true)
                     .addField("Is Bot:", MessageUtil.isBot(msg.getAuthor()), true)
+                    .addField("Roles:", (roles.length() > 1000 ? "*Way to many!*" : roles), true)
                     .addField("Dates:", String.format(
                             "**Account created**: %s\n" +
                             "**Joined**: %s",
@@ -117,12 +125,7 @@ public class CmdUser implements Command {
             return;
         }
 
-        List<User> mentionedUsers = msg.getMentionedUsers();
-        for (User user : mentionedUsers){
-            getUser(tc, msg);
-            break;
-        }
-
+        getUser(tc, msg);
     }
 
     @Override

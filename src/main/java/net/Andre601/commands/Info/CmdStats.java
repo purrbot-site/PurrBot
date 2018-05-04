@@ -1,6 +1,7 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -35,11 +36,12 @@ public class CmdStats implements Command {
             return;
         }
 
-        EmbedBuilder stats = MessageUtil.getEmbed(msg.getAuthor())
+        tc.sendTyping().queue();
+        EmbedBuilder stats = EmbedUtil.getEmbed(msg.getAuthor())
                 .setAuthor("Purr-Bot Stats")
-                .addField("Discords", String.valueOf(jda.getGuilds().size()), true)
-                .addField("VoiceChannels", String.valueOf(jda.getVoiceChannels().size()), true)
-                .addField("TextChannels", String.valueOf(jda.getTextChannels().size()), true)
+                .addField("Guilds:", String.valueOf(jda.getGuilds().size()), true)
+                .addField("VoiceChannels:", String.valueOf(jda.getVoiceChannels().size()), true)
+                .addField("TextChannels:", String.valueOf(jda.getTextChannels().size()), true)
                 .addField("Total Members:", String.valueOf(jda.getUsers().stream().toArray().length), true)
                 .addField("Humans:", String.valueOf(jda.getUsers().stream().filter(user ->
                         !user.isBot()).toArray().length), true)

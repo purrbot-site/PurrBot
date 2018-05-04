@@ -4,6 +4,7 @@ public class StaticInfo {
 
     //  Prefix for all commands (".[command]")
     public static final String PREFIX = ".";
+    public static final String BETA_PREFIX = "..";
 
     //  File
     public static final String PREFIX_FILE = "guilds/prefixes.dat";

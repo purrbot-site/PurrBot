@@ -3,10 +3,12 @@ package net.Andre601.commands.Info;
 import net.Andre601.commands.Command;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.core.Main;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.Andre601.util.StaticInfo;
 
@@ -21,6 +23,7 @@ public class CmdInfo implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
+        TextChannel tc = e.getTextChannel();
 
         if (!PermUtil.canWrite(e.getMessage()))
             return;
@@ -28,7 +31,7 @@ public class CmdInfo implements Command {
         if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();
 
-        EmbedBuilder Info = MessageUtil.getEmbed()
+        EmbedBuilder Info = EmbedUtil.getEmbed()
                 .setAuthor("*Purr*", null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setThumbnail(e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setDescription(String.format(
@@ -64,6 +67,7 @@ public class CmdInfo implements Command {
                 ), true);
 
         if(e.getMessage().getContentRaw().endsWith("-here")){
+            tc.sendTyping().queue();
             e.getChannel().sendMessage(Info.build()).queue();
             return;
         }

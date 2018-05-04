@@ -6,7 +6,7 @@
 
     <groupId>net.Andre601</groupId>
     <artifactId>Purr-Bot</artifactId>
-    <version>1.13.2</version>
+    <version>1.16.2</version>
     <build>
         <resources>
             <resource>
@@ -79,6 +79,11 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>com.rethinkdb</groupId>
+            <artifactId>rethinkdb-driver</artifactId>
+            <version>2.3.3</version>
+        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

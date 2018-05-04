@@ -1,33 +1,13 @@
 package net.Andre601.commands.owner;
 
 import net.Andre601.commands.Command;
-import net.Andre601.core.Main;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CmdShutdown implements Command {
-
-    private static String getRandomShutdown(){
-        return Main.getRandomShutdownText().size() > 0 ? Main.getRandomShutdownText().get(
-                Main.getRandom().nextInt(Main.getRandomShutdownText().size())) : "";
-    }
-
-    private static String getRandomNoShutdown(){
-        return Main.getRandomNoShutdownText().size() > 0 ? Main.getRandomNoShutdownText().get(
-                Main.getRandom().nextInt(Main.getRandomNoShutdownText().size())) : "";
-    }
-
-    private static String getRandomImage(){
-        return Main.getRandomShutdownImage().size() > 0 ? Main.getRandomShutdownImage().get(
-                Main.getRandom().nextInt(Main.getRandomShutdownImage().size())) : "";
-    }
-
-    private static String getRandomNoImage(){
-        return Main.getRandomNoShutdownImage().size() > 0 ? Main.getRandomNoShutdownImage().get(
-                Main.getRandom().nextInt(Main.getRandomNoShutdownImage().size())) : "";
-    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
@@ -53,9 +33,9 @@ public class CmdShutdown implements Command {
 
         if(PermUtil.isCreator(e.getMessage())){
 
-            EmbedBuilder shutdown = MessageUtil.getEmbed(e.getAuthor())
-                    .setDescription(getRandomShutdown())
-                    .setImage(getRandomImage());
+            EmbedBuilder shutdown = EmbedUtil.getEmbed(e.getAuthor())
+                    .setDescription(MessageUtil.getRandomShutdown())
+                    .setImage(MessageUtil.getRandomImage());
 
             e.getTextChannel().sendMessage(shutdown.build()).queue();
 
@@ -64,9 +44,9 @@ public class CmdShutdown implements Command {
 
         }else{
 
-            EmbedBuilder noShutdown = MessageUtil.getEmbed(e.getAuthor())
-                    .setDescription(getRandomNoShutdown())
-                    .setImage(getRandomNoImage());
+            EmbedBuilder noShutdown = EmbedUtil.getEmbed(e.getAuthor())
+                    .setDescription(MessageUtil.getRandomNoShutdown())
+                    .setImage(MessageUtil.getRandomNoImage());
 
             e.getTextChannel().sendMessage(noShutdown.build()).queue();
         }

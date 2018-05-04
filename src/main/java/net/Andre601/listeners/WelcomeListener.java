@@ -5,6 +5,7 @@ import net.Andre601.util.ImageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -17,18 +18,30 @@ public class WelcomeListener extends ListenerAdapter {
             TextChannel tc = CmdWelcome.getWelcomeChannel().get(g);
 
             if(tc != null){
-
-                tc.sendMessage(String.format(
-                        "Welcome %s",
-                        e.getUser().getAsMention()
-                )).queue();
+                if(!PermUtil.canWrite(tc))
+                    return;
                 if(PermUtil.canUploadImage(tc)){
                     ImageUtil.createWelcomeImg(e.getUser(), g, tc);
-
+                }else{
+                    tc.sendMessage(String.format(
+                            "Welcome %s",
+                            e.getUser().getAsMention()
+                    )).queue();
                 }
             }
         }
 
+    }
+
+    public void onTextChannelDelete(TextChannelDeleteEvent e) {
+        Guild g = e.getGuild();
+
+        if(CmdWelcome.getWelcomeChannel().containsKey(g)){
+            TextChannel channel = CmdWelcome.getWelcomeChannel().get(g);
+            if(e.getChannel() == channel){
+                CmdWelcome.resetChannel(g);
+            }
+        }
     }
 
 }

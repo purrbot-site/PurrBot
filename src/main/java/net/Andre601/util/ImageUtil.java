@@ -1,6 +1,7 @@
 package net.Andre601.util;
 
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 
@@ -45,7 +46,7 @@ public class ImageUtil {
             BufferedImage image = new BufferedImage(bg.getWidth(), bg.getHeight(), bg.getType());
             Graphics2D img = image.createGraphics();
 
-            //  Adding the different images (1. background, 2. User-Avatar, 3rd actual image)
+            //  Adding the different images (background -> User-Avatar -> actual image)
             img.drawImage(bg, 0, 0, null);
             img.drawImage(u, 5, 5, 290, 290, null);
             img.drawImage(layer, 0, 0, null);
@@ -69,11 +70,15 @@ public class ImageUtil {
             ImageIO.setUseCache(false);
             ImageIO.write(image, "png", stream);
 
-            //  Finally sending the image. I use the user-id as image-name (prevents issues with symbols)
+            //  Finally sending the image. I use the user-id as image-name (prevents issues with non-UTF-8 symbols...)
+
             tc.sendFile(stream.toByteArray(), String.format(
                     "%s.png",
                     user.getId()
-            ), null).queue();
+            ), null).queue(msg -> msg.editMessage(String.format(
+                    "Welcome %s",
+                    user.getAsMention()
+            )).queue());
 
             //  We just ignore the caused exception.
         }catch (IOException ignored){

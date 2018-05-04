@@ -1,9 +1,7 @@
 package net.Andre601.commands.server;
 
 import net.Andre601.commands.Command;
-import net.Andre601.util.MessageUtil;
-import net.Andre601.util.PermUtil;
-import net.Andre601.util.StaticInfo;
+import net.Andre601.util.*;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
@@ -48,7 +46,7 @@ public class CmdWelcome implements Command {
             welcomeChannel.put(g, tc);
             save();
 
-            EmbedBuilder channelSet = MessageUtil.getEmbed(msg.getAuthor())
+            EmbedBuilder channelSet = EmbedUtil.getEmbed(msg.getAuthor())
                     .setDescription(String.format(
                             "Welcome-channel set to `%s` (`%s`)",
                             tc.getName(),
@@ -66,7 +64,7 @@ public class CmdWelcome implements Command {
             welcomeChannel.remove(g);
             save();
 
-            EmbedBuilder prefixReset = MessageUtil.getEmbed(msg.getAuthor())
+            EmbedBuilder prefixReset = EmbedUtil.getEmbed(msg.getAuthor())
                     .setDescription("Welcome-channel was removed!!")
                     .setColor(Color.GREEN);
 
@@ -80,10 +78,15 @@ public class CmdWelcome implements Command {
         }
     }
 
+    public static void resetChannel(Guild g){
+        welcomeChannel.remove(g);
+        save();
+    }
+
     public void getChannel(Message msg, Guild g){
         if(welcomeChannel.containsKey(g)){
             TextChannel tc = welcomeChannel.get(g);
-            EmbedBuilder channel = MessageUtil.getEmbed(msg.getAuthor())
+            EmbedBuilder channel = EmbedUtil.getEmbed(msg.getAuthor())
                     .setTitle("Current Welcome-Channel")
                     .setDescription(String.format(
                             "`%s` (`%s`)",
@@ -99,7 +102,7 @@ public class CmdWelcome implements Command {
         }
     }
 
-    public void save(){
+    public static void save(){
         File path = new File("guilds");
         if(!path.exists())
             path.mkdir();
@@ -111,8 +114,7 @@ public class CmdWelcome implements Command {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(out);
             oos.close();
-        }catch (IOException e){
-            e.printStackTrace();
+        }catch (IOException ignored){
         }
     }
 
@@ -129,8 +131,7 @@ public class CmdWelcome implements Command {
                     Guild g = getGuild(gid, jda);
                     welcomeChannel.put(g, getTChannel(c, g));
                 });
-            }catch (IOException | ClassNotFoundException e){
-                e.printStackTrace();
+            }catch (IOException | ClassNotFoundException ignored){
             }
 
         }
@@ -176,6 +177,11 @@ public class CmdWelcome implements Command {
 
             case "reset":
                 resetChannel(msg, g);
+                break;
+
+            case "test":
+                tc.sendTyping().queue();
+                ImageUtil.createWelcomeImg(e.getAuthor(), g, tc);
                 break;
 
             default:

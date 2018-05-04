@@ -100,6 +100,17 @@ public class HttpUtil {
         }
     }
 
+    public static String getKiss() throws Exception{
+        Request request = new Request.Builder()
+                .url("https://nekos.life/api/v2/img/kiss")
+                .build();
+        Response response = CLIENT.newCall(request).execute();
+        try(ResponseBody responseBody = response.body()){
+            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            return new JSONObject(Objects.requireNonNull(responseBody).string()).get("url").toString();
+        }
+    }
+
     public static String requestHttp(String request){
         try{
             return IOUtils.toString(new URL(request), Charset.forName("UTF-8"));

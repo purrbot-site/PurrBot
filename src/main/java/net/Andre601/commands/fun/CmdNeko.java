@@ -1,6 +1,7 @@
 package net.Andre601.commands.fun;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -47,7 +48,7 @@ public class CmdNeko implements Command {
         }
 
         try {
-            EmbedBuilder neko = MessageUtil.getEmbed(e.getAuthor())
+            EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
                     .setTitle(String.format(
                             "Neko %s",
                             HttpUtil.getCat()
@@ -56,9 +57,13 @@ public class CmdNeko implements Command {
 
             tc.sendMessage("Getting a cute neko...").queue(message -> {
                 message.editMessage(neko.build()).queue();
+                if(link.equals("https://cdn.nekos.life/neko/neko039.jpeg")) {
+                    tc.sendMessage("That's me! :3").queue();
+                    if(PermUtil.canReact(msg))
+                        message.addReaction("❤").queue();
+                }
             });
-        }catch (Exception ex){
-            ex.printStackTrace();
+        }catch (Exception ignored){
         }
     }
 

@@ -3,25 +3,20 @@ package net.Andre601.commands.Info;
 import net.Andre601.commands.Command;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.core.Main;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CmdHelp implements Command {
 
-    private static String getFact(){
-        if(Main.isBDay())
-            return  "🎉 Today is Purr's Birthday! 🎉";
-
-        return Main.getRandomFact().size() > 0 ? Main.getRandomFact().get(
-                Main.getRandom().nextInt(Main.getRandomFact().size())) : "";
-    }
-
     public static void usage(Message msg, String command, String use, String description, String args,
                              String permission){
-        EmbedBuilder uEmbed = MessageUtil.getEmbed(msg.getAuthor())
+        msg.getChannel().sendTyping().queue();
+        EmbedBuilder uEmbed = EmbedUtil.getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Command: %s",
                         command
@@ -48,7 +43,8 @@ public class CmdHelp implements Command {
     }
 
     public static void usage(Message msg){
-        EmbedBuilder help = MessageUtil.getEmbed(msg.getAuthor())
+        msg.getChannel().sendTyping().queue();
+        EmbedBuilder help = EmbedUtil.getEmbed(msg.getAuthor())
                 .setTitle("Help")
                 .setDescription(String.format(
                         "**Command-Prefix**: `%s`\n" +
@@ -68,6 +64,7 @@ public class CmdHelp implements Command {
                         "Fun:\n" +
                         " Cuddle <@user>\n" +
                         " Hug <@user>\n" +
+                        " Kiss <@user>\n" +
                         " Neko\n" +
                         " Pat <@user>\n" +
                         " Slap <@user>\n" +
@@ -78,7 +75,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "Server:\n" +
                         " Prefix [set <prefix>|reset]\n" +
-                        " Welcome [set <ChannelID>|reset]\n" +
+                        " Welcome [set <ChannelID>|reset|test]\n" +
                         "\n" +
                         "[optional] <required>\n" +
                         "```\n" +
@@ -87,7 +84,7 @@ public class CmdHelp implements Command {
                         "%s",
                         CmdPrefix.getPrefix(msg.getGuild()),
                         CmdPrefix.getPrefix(msg.getGuild()),
-                        getFact()
+                        MessageUtil.getFact()
                 ));
 
         msg.getChannel().sendMessage(help.build()).queue();
@@ -228,10 +225,11 @@ public class CmdHelp implements Command {
                 break;
 
             case "welcome":
-                usage(e.getMessage(), "Welcome", "welcome [set <ChannelID>|reset]",
+                usage(e.getMessage(), "Welcome", "welcome [set <ChannelID>|reset|test]",
                         "Shows, sets or resets the Welcome-channel.",
                         "`set <ChannelID>` Sets a Channel as Welcome-Channel.\n" +
-                        "`reset` Resets (removes) the welcome-channel.",
+                        "`reset` Resets (removes) the welcome-channel.\n" +
+                        "`test` Creates a welcome-image in the channel you currently are.",
                         "`MANAGE_SERVER` for setting or resetting the Welcome-Channel."
                 );
                 break;
@@ -241,6 +239,14 @@ public class CmdHelp implements Command {
                 usage(e.getMessage(), "Stats", "stats",
                         "Shows some statistics of \\*Purr*",
                         "`none`",
+                        "`none`"
+                );
+                break;
+
+            case "kiss":
+                usage(e.getMessage(), "Kiss", "kiss <@user>",
+                        "Lets you kiss someone.",
+                        "`<@user>` The user you want to kiss (as mention).",
                         "`none`"
                 );
                 break;

@@ -2,6 +2,7 @@ package net.Andre601.commands.fun;
 
 import net.Andre601.commands.Command;
 import net.Andre601.commands.server.CmdPrefix;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.HttpUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
@@ -72,10 +73,9 @@ public class CmdTickle implements Command {
             )).queue(message -> {
                 try{
                     message.editMessage(
-                            MessageUtil.getEmbed().setImage(HttpUtil.getTickle()).build()
+                            EmbedUtil.getEmbed().setImage(HttpUtil.getTickle()).build()
                     ).queue();
-                }catch (Exception ex){
-                    ex.printStackTrace();
+                }catch (Exception ignored){
                 }
             });
         }

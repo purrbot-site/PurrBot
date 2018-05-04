@@ -2,6 +2,7 @@ package net.Andre601.commands.nsfw;
 
 import net.Andre601.commands.Command;
 import net.Andre601.core.Main;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -13,11 +14,6 @@ import net.Andre601.util.HttpUtil;
 import java.util.concurrent.TimeUnit;
 
 public class CmdLewd implements Command {
-
-    private static String getRandomNotNSFW(){
-        return Main.getRandomNoNSWF().size() > 0 ? Main.getRandomNoNSWF().get(
-                Main.getRandom().nextInt(Main.getRandomNoNSWF().size())) : "";
-    }
 
     public String getLink(){
         try{
@@ -56,7 +52,7 @@ public class CmdLewd implements Command {
 
         if(tc.isNSFW()){
             try {
-                EmbedBuilder neko = MessageUtil.getEmbed(e.getAuthor())
+                EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
                         .setTitle(String.format(
                                 "Lewd Neko %s",
                                 HttpUtil.getCat()
@@ -66,12 +62,12 @@ public class CmdLewd implements Command {
                 tc.sendMessage("Getting a lewd neko...").queue(message -> {
                     message.editMessage(neko.build()).queue();
                 });
-            }catch (Exception ex){
-                ex.printStackTrace();
+            }catch (Exception ignored){
             }
         }else{
-            tc.sendMessage(String.format(getRandomNotNSFW(),
-                    e.getAuthor().getAsMention())).queue(del -> del.delete().queueAfter(10, TimeUnit.SECONDS));
+            tc.sendMessage(String.format(MessageUtil.getRandomNotNSFW(),
+                    e.getAuthor().getAsMention()
+            )).queue(del -> del.delete().queueAfter(10, TimeUnit.SECONDS));
         }
 
     }

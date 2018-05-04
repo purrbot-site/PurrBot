@@ -1,6 +1,7 @@
 package net.Andre601.listeners;
 
 import net.Andre601.core.Main;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
@@ -33,13 +34,13 @@ public class GuildListener extends ListenerAdapter {
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
         ));
 
-        MessageUtil.sendWebhookEmbed(getLink(), g, Color.GREEN,
+        EmbedUtil.sendWebhookEmbed(getLink(), g, Color.GREEN,
                 "Guild joined",String.format(
                 "**Guild**:\n" +
                 "`%s` (`%s`)\n" +
                 "\n" +
                 "**Owner**:\n" +
-                "`%s` (`%s`)\n" +
+                "%s (`%s`)\n" +
                 "\n" +
                 "**Members (Humans|Bots)**:\n" +
                 "`%s` (`%s`|`%s`)",
@@ -53,7 +54,7 @@ public class GuildListener extends ListenerAdapter {
         ));
 
         e.getJDA().getPresence().setGame(Game.watching(String.format(
-                "some Nekos OwO | On %s Guilds",
+                ReadyListener.getBotGame(),
                 e.getJDA().getGuilds().toArray().length
         )));
 
@@ -76,13 +77,13 @@ public class GuildListener extends ListenerAdapter {
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
         ));
 
-        MessageUtil.sendWebhookEmbed(getLink(), g, Color.RED,
+        EmbedUtil.sendWebhookEmbed(getLink(), g, Color.RED,
                 "Guild left",String.format(
                 "**Guild**:\n" +
                 "`%s` (`%s`)\n" +
                 "\n" +
                 "**Owner**:\n" +
-                "`%s` (`%s`)\n" +
+                "%s (`%s`)\n" +
                 "\n" +
                 "**Members (Humans|Bots)**:\n" +
                 "`%s` (`%s`|`%s`)",
@@ -96,7 +97,7 @@ public class GuildListener extends ListenerAdapter {
         ));
 
         e.getJDA().getPresence().setGame(Game.watching(String.format(
-                "some Nekos OwO | On %s Guilds",
+                ReadyListener.getBotGame(),
                 e.getJDA().getGuilds().toArray().length
         )));
     }

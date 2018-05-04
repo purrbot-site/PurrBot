@@ -1,19 +1,48 @@
 package net.Andre601.util;
 
 import net.Andre601.core.Main;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.webhook.WebhookClient;
-import net.dv8tion.jda.webhook.WebhookMessageBuilder;
 
-import java.awt.Color;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class MessageUtil {
+
+    //  For returning random Strings/images.
+    public static String getFact(){
+        if(Main.isBDay())
+            return  "🎉 Today is Purr's Birthday! 🎉";
+
+        return Main.getRandomFact().size() > 0 ? Main.getRandomFact().get(
+                Main.getRandom().nextInt(Main.getRandomFact().size())) : "";
+    }
+
+    public static String getRandomNotNSFW(){
+        return Main.getRandomNoNSWF().size() > 0 ? Main.getRandomNoNSWF().get(
+                Main.getRandom().nextInt(Main.getRandomNoNSWF().size())) : "";
+    }
+
+    public static String getRandomShutdown(){
+        return Main.getRandomShutdownText().size() > 0 ? Main.getRandomShutdownText().get(
+                Main.getRandom().nextInt(Main.getRandomShutdownText().size())) : "";
+    }
+
+    public static String getRandomNoShutdown(){
+        return Main.getRandomNoShutdownText().size() > 0 ? Main.getRandomNoShutdownText().get(
+                Main.getRandom().nextInt(Main.getRandomNoShutdownText().size())) : "";
+    }
+
+    public static String getRandomImage(){
+        return Main.getRandomShutdownImage().size() > 0 ? Main.getRandomShutdownImage().get(
+                Main.getRandom().nextInt(Main.getRandomShutdownImage().size())) : "";
+    }
+
+    public static String getRandomNoImage(){
+        return Main.getRandomNoShutdownImage().size() > 0 ? Main.getRandomNoShutdownImage().get(
+                Main.getRandom().nextInt(Main.getRandomNoShutdownImage().size())) : "";
+    }
 
     private static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
 
@@ -58,7 +87,7 @@ public class MessageUtil {
         String.format(
                 "`%s` (`%s`)",
                 member.getNickname().replace("`", "'"),
-                getTag(member.getUser()).replace("`", "'")
+                getTag(member.getUser())
         ) : String.format(
                 "`%s`",
                 getTag(member.getUser()).replace("`", "'")
@@ -84,56 +113,6 @@ public class MessageUtil {
 
     public static String getTag(User user){
         return user.getName() + "#" + user.getDiscriminator();
-    }
-
-    public static void sendWebhookEmbed(String webhookURL, Guild g, Color color, String title, String desc){
-
-        MessageEmbed webhook = getEmbed()
-                .setColor(color)
-                .setThumbnail(g.getIconUrl())
-                .setDescription(desc)
-                .setFooter(String.format(
-                        "%s",
-                        Main.now()
-                ), null).build();
-
-        WebhookClient webc = Main.webhookClient(webhookURL);
-        webc.send(new WebhookMessageBuilder().addEmbeds(webhook).
-                setUsername(title).
-                setAvatarUrl(g.getJDA().getSelfUser().getEffectiveAvatarUrl()).build());
-        webc.close();
-
-    }
-
-    public static EmbedBuilder getEmbed(User user){
-        return new EmbedBuilder().setFooter(String.format(
-                "Requested by: %s | %s",
-                getTag(user),
-                Main.now()
-        ), user.getEffectiveAvatarUrl());
-    }
-
-    public static EmbedBuilder getEmbed(){
-        return new EmbedBuilder();
-    }
-
-    public static void sendEvalEmbed(TextChannel tc, String msg, String footer, Color color){
-        String newMsg = msg;
-
-        String overflow = null;
-        if (newMsg.length() > 2000){
-            overflow = newMsg.substring(1999);
-            newMsg = newMsg.substring(0, 1999);
-        }
-
-        EmbedBuilder message = getEmbed()
-                .setColor(color)
-                .setDescription(newMsg)
-                .setFooter(footer, null);
-
-        tc.sendMessage(message.build()).queue();
-        if(overflow != null)
-            sendEvalEmbed(tc, overflow, footer, color);
     }
 
     public static String formatTime(LocalDateTime dateTime){

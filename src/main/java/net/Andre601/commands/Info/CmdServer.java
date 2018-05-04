@@ -1,6 +1,7 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.Andre601.util.StaticInfo;
@@ -34,7 +35,8 @@ public class CmdServer implements Command {
 
             return;
         }
-        EmbedBuilder server = MessageUtil.getEmbed()
+        tc.sendTyping().queue();
+        EmbedBuilder server = EmbedUtil.getEmbed()
                 .setAuthor("Serverinfo: " + g.getName(), StaticInfo.URL,
                         e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setThumbnail(g.getIconUrl())

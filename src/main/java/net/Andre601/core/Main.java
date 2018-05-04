@@ -51,11 +51,12 @@ public class Main {
 
         file.make("config", "./config.json", "/config.json");
 
-        //  Adding the Bot-Token from a class
-        //  The class isn't in the Repo for safety-reasons
+        //  Adding the Bot-Token from the config.json
         builder.setToken(file.getItem("config", "token"));
 
-        api = new DiscordBotListAPI.Builder().token(file.getItem("config", "api-token")).build();
+        //  Setting the API-token, if the bot isn't beta.
+        if(file.getItem("config", "beta").equalsIgnoreCase("false"))
+            api = new DiscordBotListAPI.Builder().token(file.getItem("config", "api-token")).build();
 
         //  Let JDA try to reconnect, when disconnecting
         builder.setAutoReconnect(true);
@@ -69,14 +70,12 @@ public class Main {
 
         try {
             jda = builder.buildBlocking();
-        } catch (LoginException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public static void addListeners(){
+    private static void addListeners(){
 
         //  Adding listeners
         builder.addEventListener(new ReadyListener());
@@ -86,7 +85,7 @@ public class Main {
 
     }
 
-    public static void addCommands(){
+    private static void addCommands(){
 
         //  Adding commands
         CommandHandler.commands.put("help", new CmdHelp());
@@ -110,6 +109,7 @@ public class Main {
         CommandHandler.commands.put("eval", new CmdEval());
         CommandHandler.commands.put("stats", new CmdStats());
         CommandHandler.commands.put("stat", new CmdStats());
+        CommandHandler.commands.put("kiss", new CmdKiss());
 
     }
 
@@ -186,10 +186,12 @@ public class Main {
         return version;
     }
 
+    /*
     public static String now(){
         DateFormat df = new SimpleDateFormat("dd. MMM yyyy HH:mm:ss z");
         return df.format(new Date());
     }
+    */
 
     public static WebhookClient webhookClient(String url){
         return new WebhookClientBuilder(url).build();

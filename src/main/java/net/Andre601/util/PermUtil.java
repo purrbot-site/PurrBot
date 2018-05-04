@@ -37,9 +37,15 @@ public class PermUtil {
                 Permission.MESSAGE_ATTACH_FILES);
     }
 
-    //  Check for write message-permission
+    //  Check for write message-permission (Message)
     public static boolean canWrite(Message msg){
         return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
+                Permission.MESSAGE_WRITE);
+    }
+
+    //  Check for write message-permission (TextChannel)
+    public static boolean canWrite(TextChannel tc){
+        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(),
                 Permission.MESSAGE_WRITE);
     }
 

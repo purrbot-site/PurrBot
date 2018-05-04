@@ -24,6 +24,9 @@ public class CmdRefresh implements Command{
 
         if(PermUtil.isCreator(e.getMessage())){
 
+            if(Main.file.getItem("config", "beta").equalsIgnoreCase("true"))
+                return;
+
             tc.sendMessage("Clearing stored messages and images...").queue(
                     msg -> {
                     Main.clear();

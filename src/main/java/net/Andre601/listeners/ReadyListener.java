@@ -3,6 +3,7 @@ package net.Andre601.listeners;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.commands.server.CmdWelcome;
 import net.Andre601.core.Main;
+import net.Andre601.util.DBUtil;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
@@ -10,42 +11,28 @@ import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class ReadyListener extends ListenerAdapter{
+    private static String setBotGame(){
+        return (Main.file.getItem("config", "beta").equalsIgnoreCase("true") ?
+        "some Beta-Stuff on %s Guilds" : "some Nekos OwO | On %s Guilds");
+    }
 
-    private static String getToken(){
-        return Main.file.getItem("config", "api-token");
+    public static String getBotGame(){
+        return setBotGame();
     }
 
     public void onReady(ReadyEvent e){
+
 
         String botID = e.getJDA().getSelfUser().getId();
         int servers = e.getJDA().getGuilds().size();
 
         e.getJDA().getPresence().setGame(Game.watching(String.format(
-                "some Nekos OwO | On %s Guilds",
+                getBotGame(),
                 e.getJDA().getGuilds().toArray().length
         )));
 
         CmdPrefix.load(e.getJDA());
         CmdWelcome.load(e.getJDA());
-
-        String guilds = "[INFO] Connected to the following Guild(s):\n";
-
-        for (Guild g : e.getJDA().getGuilds()) {
-
-            guilds += String.format(
-                    "%s (%s)\n" +
-                    "  > Owner: %s#%s (%s)\n" +
-                    "  > Users (Humans | Bots): %s (%s | %s)\n",
-                    g.getName(),
-                    g.getId(),
-                    g.getOwner().getUser().getName(),
-                    g.getOwner().getUser().getDiscriminator(),
-                    g.getOwner().getUser().getId(),
-                    g.getMembers().size(),
-                    g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
-                    g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
-            );
-        }
 
         System.out.println(String.format(
                 "[INFO] Enabled Bot-User %s#%s (%s)\n" +
@@ -53,13 +40,14 @@ public class ReadyListener extends ListenerAdapter{
                 "  > JDA: %s",
                 e.getJDA().getSelfUser().getName(),
                 e.getJDA().getSelfUser().getDiscriminator(),
-                e.getJDA().getSelfUser().getId(),
+                botID,
                 Main.getVersion(),
                 JDAInfo.VERSION
         ));
-        System.out.println(guilds);
 
-        Main.getAPI().setStats(botID, servers);
+        //  Sending update if Bot isn't beta
+        if(Main.file.getItem("config", "beta").equalsIgnoreCase("false"))
+            Main.getAPI().setStats(botID, servers);
 
     }
 }

@@ -1,10 +1,12 @@
 package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.Andre601.util.StaticInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.concurrent.TimeUnit;
@@ -18,6 +20,7 @@ public class CmdInvite implements Command{
 
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
+        TextChannel tc = e.getTextChannel();
 
         if (!PermUtil.canWrite(e.getMessage()))
             return;
@@ -25,7 +28,7 @@ public class CmdInvite implements Command{
         if(PermUtil.canDeleteMsg(e.getMessage()))
             e.getMessage().delete().queue();
 
-        EmbedBuilder invite = MessageUtil.getEmbed()
+        EmbedBuilder invite = EmbedUtil.getEmbed()
                 .setAuthor("*Purr*", null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .addField("Invite the bot", String.format(
                         "Heyo! Really nice of you, to invite me to your Discord. :3\n" +
@@ -48,6 +51,7 @@ public class CmdInvite implements Command{
                 ), false);
 
         if(e.getMessage().getContentRaw().endsWith("-here")){
+            tc.sendTyping().queue();
             e.getChannel().sendMessage(invite.build()).queue();
             return;
         }

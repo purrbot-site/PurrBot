@@ -1,6 +1,8 @@
 package net.Andre601.commands.server;
 
 import net.Andre601.commands.Command;
+import net.Andre601.core.Main;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.Andre601.util.StaticInfo;
@@ -13,6 +15,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.Color;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +29,9 @@ public class CmdPrefix implements Command{
             return guildPrefix.get(g);
         }
 
-        return StaticInfo.PREFIX;
+        //  If the bot is beta-version -> use Beta-prefix (..)
+        return (Main.file.getItem("config", "beta").equalsIgnoreCase("true") ?
+                StaticInfo.BETA_PREFIX : StaticInfo.PREFIX);
     }
 
     public static Guild getGuild(String id, JDA jda){
@@ -42,10 +47,13 @@ public class CmdPrefix implements Command{
     }
 
     public void setPrefix(Message msg, Guild g, String prefix){
+
+
+
         guildPrefix.put(g, prefix);
         save();
 
-        EmbedBuilder prefixSet = MessageUtil.getEmbed(msg.getAuthor())
+        EmbedBuilder prefixSet = EmbedUtil.getEmbed(msg.getAuthor())
                 .setDescription(String.format(
                         "Prefix set to `%s`",
                         prefix
@@ -61,7 +69,7 @@ public class CmdPrefix implements Command{
             guildPrefix.remove(g);
             save();
 
-            EmbedBuilder prefixReset = MessageUtil.getEmbed(msg.getAuthor())
+            EmbedBuilder prefixReset = EmbedUtil.getEmbed(msg.getAuthor())
                     .setDescription("Prefix was reset successfully!")
                     .setColor(Color.GREEN);
 
@@ -89,8 +97,7 @@ public class CmdPrefix implements Command{
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(out);
             oos.close();
-        }catch (IOException e){
-            e.printStackTrace();
+        }catch (IOException ignored){
         }
     }
 
@@ -108,8 +115,7 @@ public class CmdPrefix implements Command{
                     Guild g = getGuild(gid, jda);
                     guildPrefix.put(g, p);
                 });
-            }catch (IOException | ClassNotFoundException e){
-                e.printStackTrace();
+            }catch (IOException | ClassNotFoundException ignored){
             }
 
         }

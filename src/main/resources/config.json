@@ -1,5 +1,8 @@
 {
   "token": "TOKEN",
   "webhook": "webhookURL",
-  "api-token": "api-token"
+  "api-token": "api-token",
+  "beta": "false",
+
+  "mysql-ip": "localhost"
 }
