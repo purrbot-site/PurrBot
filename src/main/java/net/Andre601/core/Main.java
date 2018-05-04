@@ -3,10 +3,7 @@ package net.Andre601.core;
 import net.Andre601.commands.Info.*;
 import net.Andre601.commands.fun.*;
 import net.Andre601.commands.nsfw.CmdLewd;
-import net.Andre601.commands.owner.CmdEval;
-import net.Andre601.commands.owner.CmdMsg;
-import net.Andre601.commands.owner.CmdRefresh;
-import net.Andre601.commands.owner.CmdShutdown;
+import net.Andre601.commands.owner.*;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.commands.server.CmdWelcome;
 import net.Andre601.listeners.CommandListener;
@@ -21,8 +18,6 @@ import org.discordbots.api.client.DiscordBotListAPI;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Main {

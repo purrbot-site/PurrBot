@@ -4,7 +4,6 @@ import net.Andre601.commands.Command;
 import net.Andre601.commands.server.CmdPrefix;
 import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.HttpUtil;
-import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;

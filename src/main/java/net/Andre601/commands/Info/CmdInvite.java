@@ -2,7 +2,6 @@ package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
 import net.Andre601.util.EmbedUtil;
-import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.Andre601.util.StaticInfo;
 import net.dv8tion.jda.core.EmbedBuilder;

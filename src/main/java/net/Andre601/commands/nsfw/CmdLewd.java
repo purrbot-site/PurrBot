@@ -1,7 +1,6 @@
 package net.Andre601.commands.nsfw;
 
 import net.Andre601.commands.Command;
-import net.Andre601.core.Main;
 import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;

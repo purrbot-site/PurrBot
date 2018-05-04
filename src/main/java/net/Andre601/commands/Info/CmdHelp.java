@@ -2,13 +2,11 @@ package net.Andre601.commands.Info;
 
 import net.Andre601.commands.Command;
 import net.Andre601.commands.server.CmdPrefix;
-import net.Andre601.core.Main;
 import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CmdHelp implements Command {

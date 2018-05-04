@@ -3,7 +3,6 @@ package net.Andre601.commands.server;
 import net.Andre601.commands.Command;
 import net.Andre601.core.Main;
 import net.Andre601.util.EmbedUtil;
-import net.Andre601.util.MessageUtil;
 import net.Andre601.util.PermUtil;
 import net.Andre601.util.StaticInfo;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -15,7 +14,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.Color;
 import java.io.*;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
