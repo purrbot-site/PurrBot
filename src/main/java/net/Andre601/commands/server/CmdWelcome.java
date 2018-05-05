@@ -114,7 +114,9 @@ public class CmdWelcome implements Command {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(out);
             oos.close();
-        }catch (IOException ignored){
+        }catch (IOException ex){
+            EmbedUtil.sendErrorEmbed(null, "CmdWelcome.java (Save)",
+                    ex.getStackTrace().toString());
         }
     }
 
@@ -131,7 +133,9 @@ public class CmdWelcome implements Command {
                     Guild g = getGuild(gid, jda);
                     welcomeChannel.put(g, getTChannel(c, g));
                 });
-            }catch (IOException | ClassNotFoundException ignored){
+            }catch (IOException | ClassNotFoundException ex){
+                EmbedUtil.sendErrorEmbed(null, "CmdWelcome.java (load)",
+                        ex.getStackTrace().toString());
             }
 
         }

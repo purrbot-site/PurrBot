@@ -56,13 +56,10 @@ public class CmdNeko implements Command {
 
             tc.sendMessage("Getting a cute neko...").queue(message -> {
                 message.editMessage(neko.build()).queue();
-                if(link.equals("https://cdn.nekos.life/neko/neko039.jpeg")) {
-                    tc.sendMessage("That's me! :3").queue();
-                    if(PermUtil.canReact(msg))
-                        message.addReaction("❤").queue();
-                }
             });
-        }catch (Exception ignored){
+        }catch (Exception ex){
+            EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdNeko.java",
+                    ex.getStackTrace().toString());
         }
     }
 

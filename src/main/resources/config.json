@@ -1,6 +1,7 @@
 {
   "token": "TOKEN",
   "webhook": "webhookURL",
+  "errorWebhook": "errorWebhookURL",
   "api-token": "api-token",
   "beta": "false",
 

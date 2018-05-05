@@ -10,6 +10,7 @@ import net.Andre601.listeners.CommandListener;
 import net.Andre601.listeners.GuildListener;
 import net.Andre601.listeners.ReadyListener;
 import net.Andre601.listeners.WelcomeListener;
+import net.Andre601.util.EmbedUtil;
 import net.Andre601.util.HttpUtil;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.webhook.WebhookClient;
@@ -65,8 +66,8 @@ public class Main {
 
         try {
             jda = builder.buildBlocking();
-        } catch (LoginException | InterruptedException e) {
-            e.printStackTrace();
+        } catch (LoginException | InterruptedException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -171,8 +172,9 @@ public class Main {
 
             try{
                 p.load(Main.class.getClassLoader().getResourceAsStream("version.properties"));
-            }catch (IOException e){
-                e.printStackTrace();
+            }catch (IOException ex){
+                EmbedUtil.sendErrorEmbed(null, "Main.java",
+                        ex.getStackTrace().toString());
                 return null;
             }
 
@@ -180,13 +182,6 @@ public class Main {
         }
         return version;
     }
-
-    /*
-    public static String now(){
-        DateFormat df = new SimpleDateFormat("dd. MMM yyyy HH:mm:ss z");
-        return df.format(new Date());
-    }
-    */
 
     public static WebhookClient webhookClient(String url){
         return new WebhookClientBuilder(url).build();

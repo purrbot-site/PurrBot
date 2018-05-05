@@ -82,7 +82,9 @@ public class CmdKiss implements Command {
                     message.editMessage(
                             EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()
                     ).queue();
-                }catch (Exception ignored){
+                }catch (Exception ex){
+                    EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdKiss.java",
+                            ex.getStackTrace().toString());
                 }
             });
         }

@@ -26,6 +26,7 @@ Command: | Arguments: | Description:
 
 Cuddle   | <@user>    | Cuddles the mentioned user.
 Hug      | <@user>    | Hugs the mentioned user.
+Kiss     | <@user>    | Kisses the mentioned user.
 Neko     |            | Gets a neko-image from nekos.life.
 Pat      | <@user>    | Gives the mentioned user a pat.
 Slap     | <@user>    | Slaps the mentioned user.
@@ -45,8 +46,8 @@ Lewd     |            | Gets a lewd neko-image from nekos.life (Only in NSFW-lab
 ```
 Command: | Arguments:              | Description:
 
-Prefix   | [set <prefix>|reset]    | Shows the current prefix for the Discord, or sets/resets it.
-Welcome  | [set <ChannelID>|reset] | Shows the current Welcome-channel, or sets/resets it.
+Prefix   | [set <prefix>|reset]         | Shows the current prefix for the Discord, or sets/resets it.
+Welcome  | [set <ChannelID>|reset|test] | Shows the current Welcome-channel, sets/resets or tests it.
 ```
 
 # Usefull Links

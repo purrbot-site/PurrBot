@@ -14,6 +14,8 @@ import java.time.ZonedDateTime;
 
 public class EmbedUtil {
 
+    private static String errorURL = Main.file.getItem("config", "errorWebhook");
+
     public static EmbedBuilder getEmbed(User user){
         return new EmbedBuilder()
                 .setFooter(String.format(
@@ -45,6 +47,53 @@ public class EmbedUtil {
         tc.sendMessage(message.build()).queue();
         if(overflow != null)
             sendEvalEmbed(tc, overflow, footer, color);
+    }
+
+    public static void sendErrorEmbed(Guild g, String source, String msgError){
+        String newMsg = msgError;
+
+        String overflow = null;
+        if(newMsg.length() > 2000){
+            overflow = newMsg.substring(1999);
+            newMsg = newMsg.substring(0, 1999);
+        }
+
+        MessageEmbed error = getEmbed()
+                .setColor(Color.RED)
+                .setDescription((g == null ?
+                        String.format(
+                                "**StackTrace**:\n" +
+                                "```\n" +
+                                "%s\n" +
+                                "```",
+                                newMsg
+                        ) :
+                        String.format(
+                                "**Guild**: `%s` (`%s`)\n" +
+                                "\n" +
+                                "**StackTrace**:\n" +
+                                "```\n" +
+                                "%s\n" +
+                                "```",
+                                g.getName().replace("`", "'"),
+                                g.getId(),
+                                newMsg
+                        )))
+                .setTimestamp(ZonedDateTime.now())
+                .build();
+
+        WebhookClient webc = Main.webhookClient(errorURL);
+        webc.send(new WebhookMessageBuilder().addEmbeds(error)
+        .setUsername(String.format(
+                "Error in %s",
+                source
+        ))
+        .setAvatarUrl(g.getJDA().getSelfUser().getEffectiveAvatarUrl())
+        .build());
+        webc.close();
+
+        if(overflow != null)
+            sendErrorEmbed(g, source, overflow);
     }
 
     public static void sendWebhookEmbed(String webhookURL, Guild g, Color color, String title, String desc){

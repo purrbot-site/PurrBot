@@ -27,25 +27,26 @@ public class CmdRefresh implements Command{
             if(Main.file.getItem("config", "beta").equalsIgnoreCase("true"))
                 return;
 
-            tc.sendMessage("Clearing stored messages and images...").queue(
-                    msg -> {
-                    Main.clear();
-                    Main.loadRandom();
-                    msg.editMessage(
-                            "Clearing stored messages and images. ✅").queueAfter(1, TimeUnit.SECONDS);
-            });
-            tc.sendMessage("Updating Guild-count on discordbots.org...").queueAfter(1, TimeUnit.SECONDS,
-                    msg2 -> {
+            tc.sendMessage(
+                    "Clearing stored messages and images...\n" +
+                    "Updating Guild-count on discordbots.org..."
+            ).queue(msg -> {
+                Main.clear();
+                Main.loadRandom();
                 Main.getAPI().setStats(e.getJDA().getSelfUser().getId(), e.getJDA().getGuilds().size());
-                msg2.editMessage("Updating Guild-count on discordbots.org ✅").queueAfter(1, TimeUnit.SECONDS);
+                msg.editMessage(
+                        "Clearing stored messages and images \\✅\n" +
+                        "Updating Guild-count on discordbots.org \\✅"
+                ).queueAfter(2, TimeUnit.SECONDS, react -> {
+                    if(PermUtil.canReact(e.getMessage()))
+                        e.getMessage().addReaction("✅").queue();
+                });
             });
-            e.getTextChannel().sendMessage("Refresh complete!").queueAfter(2, TimeUnit.SECONDS);
 
-            if(PermUtil.canReact(e.getMessage()))
-                e.getMessage().addReaction("✅").queueAfter(2, TimeUnit.SECONDS);
+            tc.sendMessage("Refresh complete!").queueAfter(3, TimeUnit.SECONDS);
         }else{
             tc.sendMessage(String.format(
-                    "Sorry, but you aren't Andre_601 %s!",
+                    "%s You aren't my dad!",
                     e.getAuthor().getAsMention())).queue();
 
             if(PermUtil.canReact(e.getMessage()))

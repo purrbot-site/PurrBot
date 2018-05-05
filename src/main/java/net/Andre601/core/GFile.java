@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.stream.JsonReader;
 import net.Andre601.util.ConfigUtil;
+import net.Andre601.util.EmbedUtil;
 
 import java.io.File;
 import java.io.FileReader;
@@ -53,8 +54,9 @@ public class GFile {
                 System.out.println(name + " successfully loaded!");
                 gFiles.put(name, file);
             }
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (Exception ex){
+            EmbedUtil.sendErrorEmbed(null, "GFile.java (make)",
+                    ex.getStackTrace().toString());
         }
     }
 
@@ -67,8 +69,9 @@ public class GFile {
             if (data.containsKey(item)){
                 return data.get(item);
             }
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (Exception ex){
+            EmbedUtil.sendErrorEmbed(null, "GFile.java (getItem)",
+                    ex.getStackTrace().toString());
         }
         return item + " not found in " + fileName;
     }

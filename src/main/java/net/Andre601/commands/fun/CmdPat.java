@@ -71,7 +71,9 @@ public class CmdPat implements Command {
                     message.editMessage(
                             EmbedUtil.getEmbed().setImage(HttpUtil.getPat()).build()
                     ).queue();
-                }catch (Exception ignored){
+                }catch (Exception ex){
+                    EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdPat.java",
+                            ex.getStackTrace().toString());
                 }
             });
         }

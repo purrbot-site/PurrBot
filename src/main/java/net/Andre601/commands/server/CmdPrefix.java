@@ -95,7 +95,9 @@ public class CmdPrefix implements Command{
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(out);
             oos.close();
-        }catch (IOException ignored){
+        }catch (IOException ex){
+            EmbedUtil.sendErrorEmbed(null, "CmdPrefix.java (Save)",
+                    ex.getStackTrace().toString());
         }
     }
 
@@ -113,7 +115,9 @@ public class CmdPrefix implements Command{
                     Guild g = getGuild(gid, jda);
                     guildPrefix.put(g, p);
                 });
-            }catch (IOException | ClassNotFoundException ignored){
+            }catch (IOException | ClassNotFoundException ex){
+                EmbedUtil.sendErrorEmbed(null, "CmdPrefix.java (load)",
+                        ex.getStackTrace().toString());
             }
 
         }

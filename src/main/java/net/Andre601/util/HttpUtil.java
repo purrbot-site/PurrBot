@@ -114,8 +114,9 @@ public class HttpUtil {
     public static String requestHttp(String request){
         try{
             return IOUtils.toString(new URL(request), Charset.forName("UTF-8"));
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        }catch (IOException ex){
+            EmbedUtil.sendErrorEmbed(null, "HttpUtil.java (requestHttp)",
+                    ex.getStackTrace().toString());
             return "";
         }
     }

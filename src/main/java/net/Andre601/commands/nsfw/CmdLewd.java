@@ -61,7 +61,9 @@ public class CmdLewd implements Command {
                 tc.sendMessage("Getting a lewd neko...").queue(message -> {
                     message.editMessage(neko.build()).queue();
                 });
-            }catch (Exception ignored){
+            }catch (Exception ex){
+                EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdLewd.java",
+                        ex.getStackTrace().toString());
             }
         }else{
             tc.sendMessage(String.format(MessageUtil.getRandomNotNSFW(),

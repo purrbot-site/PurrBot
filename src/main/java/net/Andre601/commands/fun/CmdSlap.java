@@ -75,7 +75,9 @@ public class CmdSlap implements Command{
                     message.editMessage(
                             EmbedUtil.getEmbed().setImage(HttpUtil.getSlap()).build()
                     ).queue();
-                }catch (Exception ignored){
+                }catch (Exception ex){
+                    EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdSlap.java",
+                            ex.getStackTrace().toString());
                 }
             });
         }

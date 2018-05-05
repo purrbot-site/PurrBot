@@ -74,7 +74,9 @@ public class CmdTickle implements Command {
                     message.editMessage(
                             EmbedUtil.getEmbed().setImage(HttpUtil.getTickle()).build()
                     ).queue();
-                }catch (Exception ignored){
+                }catch (Exception ex){
+                    EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdTickle.java",
+                            ex.getStackTrace().toString());
                 }
             });
         }
