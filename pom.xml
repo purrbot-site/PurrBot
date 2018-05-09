@@ -6,7 +6,7 @@
 
     <groupId>net.Andre601</groupId>
     <artifactId>Purr-Bot</artifactId>
-    <version>1.16.2</version>
+    <version>1.16.3</version>
     <build>
         <resources>
             <resource>
@@ -21,7 +21,7 @@
                     <finalName>Purr-Bot</finalName>
                     <archive>
                         <manifest>
-                            <mainClass>net.Andre601.core.Main</mainClass>
+                            <mainClass>net.andre601.core.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -45,7 +45,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>net.Andre601.core.Main</mainClass>
+                            <mainClass>net.andre601.core.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
