@@ -11,6 +11,8 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.andre601.util.HttpUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static net.andre601.core.Main.waiter;
@@ -20,13 +22,15 @@ public class CmdNeko implements Command {
     private Slideshow.Builder sBuilder =
             new Slideshow.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);
 
+    private static List<String> nekoUserID = new ArrayList<>();
+
     public String getLink(){
         try{
             return HttpUtil.getNeko();
         }catch (Exception ex){
             EmbedUtil.sendErrorEmbed(null, "CmdNeko.java (getLink())", ex.getStackTrace().toString());
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -54,16 +58,18 @@ public class CmdNeko implements Command {
 
             return;
         }
-        tc.sendTyping().queue();
 
         if(e.getMessage().getContentRaw().endsWith("-slide")){
-            if(!PermUtil.canManageMsg(msg)){
+            if(nekoUserID.contains(msg.getAuthor().getId())){
                 tc.sendMessage(String.format(
-                        "%s I need the permission `MANAGE_MESSAGES` for that!",
+                        "%s You can only have one Slideshow at a time!",
                         msg.getAuthor().getAsMention()
                 )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
                 return;
             }
+            tc.sendTyping().queue();
+
+            nekoUserID.add(msg.getAuthor().getId());
             StringBuilder urls = new StringBuilder();
             for(int i = 0; i < 30; ++i){
                 try{
@@ -79,21 +85,18 @@ public class CmdNeko implements Command {
                     .setText("Neko-slideshow!")
                     .setDescription(String.format(
                             "Use the reactions to navigate through the images!\n" +
-                            "Only the author of the command (%s) can use the navigation!",
+                            "Only the author of the command (%s) can use the navigation!\n" +
+                            "\n" +
+                            "__**Slideshows may take a while to update!**__",
                             MessageUtil.getTag(msg.getAuthor())
                     ))
                     .setUrls(urls.toString().split(","))
                     .setFinalAction(
                             message -> {
-                                message.clearReactions().queue();
-                                try {
-                                    message.delete().queue();
-                                    tc.sendMessage("Slideshow is over!").queue(del ->
-                                            del.delete().queueAfter(5, TimeUnit.SECONDS));
-                                }catch (Exception ex){
-                                    EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdNeko.java (-slide -> EditMessage)",
-                                            ex.getStackTrace().toString());
-                                }
+                                message.delete().queue();
+                                tc.sendMessage("Slideshow is over!").queue(del ->
+                                        del.delete().queueAfter(5, TimeUnit.SECONDS));
+                                nekoUserID.remove(msg.getAuthor().getId());
                             }
                     )
                     .build();
@@ -109,9 +112,9 @@ public class CmdNeko implements Command {
                     ), link)
                     .setImage(link);
 
-            tc.sendMessage("Getting a cute neko...").queue(message -> {
-                message.editMessage(neko.build()).queue();
-            });
+            tc.sendMessage("Getting a cute neko...").queue(message ->
+                message.editMessage(neko.build()).queue()
+            );
         }catch (Exception ex){
             EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdNeko.java",
                     ex.getStackTrace().toString());

@@ -13,6 +13,8 @@ import net.andre601.util.HttpUtil;
 
 import static net.andre601.core.Main.waiter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class CmdLewd implements Command {
@@ -20,13 +22,15 @@ public class CmdLewd implements Command {
     private Slideshow.Builder sBuilder =
             new Slideshow.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);
 
+    private static List<String> lewdUserID = new ArrayList<>();
+
     public String getLink(){
         try{
             return HttpUtil.getLewd();
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (Exception ex){
+            EmbedUtil.sendErrorEmbed(null, "CmdLewd.java", ex.getStackTrace().toString());
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -56,15 +60,17 @@ public class CmdLewd implements Command {
         }
 
         if(tc.isNSFW()){
-            tc.sendTyping().queue();
             if(msg.getContentRaw().endsWith("-slide")){
-                if(!PermUtil.canManageMsg(msg)){
+                if(lewdUserID.contains(msg.getAuthor().getId())){
                     tc.sendMessage(String.format(
-                            "%s I need the permission `MANAGE_MESSAGES` for that!",
+                            "%s You can only have one Slideshow at a time!",
                             msg.getAuthor().getAsMention()
                     )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
                     return;
                 }
+                tc.sendTyping().queue();
+
+                lewdUserID.add(msg.getAuthor().getId());
                 StringBuilder urls = new StringBuilder();
                 for(int i = 0; i < 30; ++i){
                     try{
@@ -79,22 +85,18 @@ public class CmdLewd implements Command {
                         .setText("Lewd-slideshow!")
                         .setDescription(String.format(
                                 "Use the reactions to navigate through the images!\n" +
-                                "Only the author of the command (%s) can use the navigation!",
+                                "Only the author of the command (%s) can use the navigation!" +
+                                "\n" +
+                                "__**Slideshows may take a while to update!**__",
                                 MessageUtil.getTag(msg.getAuthor())
                         ))
                         .setUrls(urls.toString().split(","))
                         .setFinalAction(
                                 message -> {
-                                    message.clearReactions().queue();
-                                    try {
-                                        message.delete().queue();
-                                        tc.sendMessage("Slideshow is over!").queue(del ->
-                                                del.delete().queueAfter(5, TimeUnit.SECONDS));
-                                    }catch (Exception ex){
-                                        EmbedUtil.sendErrorEmbed(e.getGuild(),
-                                                "CmdLewd.java (-slide -> EditMessage)",
-                                                ex.getStackTrace().toString());
-                                    }
+                                    message.delete().queue();
+                                    tc.sendMessage("Slideshow is over!").queue(del ->
+                                            del.delete().queueAfter(5, TimeUnit.SECONDS));
+                                    lewdUserID.remove(msg.getAuthor().getId());
                                 }
                         )
                         .build();

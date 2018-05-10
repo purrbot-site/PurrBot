@@ -7,10 +7,7 @@ import net.andre601.commands.nsfw.CmdLewd;
 import net.andre601.commands.owner.*;
 import net.andre601.commands.server.CmdPrefix;
 import net.andre601.commands.server.CmdWelcome;
-import net.andre601.listeners.CommandListener;
-import net.andre601.listeners.GuildListener;
-import net.andre601.listeners.ReadyListener;
-import net.andre601.listeners.WelcomeListener;
+import net.andre601.listeners.*;
 import net.andre601.util.EmbedUtil;
 import net.andre601.util.HttpUtil;
 import net.dv8tion.jda.core.*;
@@ -110,6 +107,7 @@ public class Main {
         CommandHandler.commands.put("stats", new CmdStats());
         CommandHandler.commands.put("stat", new CmdStats());
         CommandHandler.commands.put("kiss", new CmdKiss());
+        CommandHandler.commands.put("quote", new CmdQuote());
 
     }
 

@@ -14,6 +14,7 @@ Command: | Arguments:    | Description:
 Help     | [Commandname] | Will display all commands available. adding a command after it gives infos about it.
 Info     | -here         | DMs you infos about the bot. Use `-here` to post it in the Discord-Channel.
 Invite   | -here         | DMs you the invite-link. Use `-here` to post it in the Discord-Channel.
+Quote    | <messageID>   | Quotes a message from a user.
 Server   |               | Shows infos about the Discord, the bot is currently in.
 Stats    |               | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, ect.)
 User     | [@user]       | Gives infos about a you. tag a user, to get infos about him
@@ -27,7 +28,8 @@ Command: | Arguments: | Description:
 Cuddle   | <@user>    | Cuddles the mentioned user.
 Hug      | <@user>    | Hugs the mentioned user.
 Kiss     | <@user>    | Kisses the mentioned user.
-Neko     |            | Gets a neko-image from nekos.life.
+Neko     | [-slide]   | Gets a neko-image from nekos.life.
+         |            | Use `-slide` at the end for a slideshow with 30 images.
 Pat      | <@user>    | Gives the mentioned user a pat.
 Slap     | <@user>    | Slaps the mentioned user.
 Tickle   | <@user>    | Tickles the mentioned user.
@@ -38,7 +40,8 @@ Tickle   | <@user>    | Tickles the mentioned user.
 ```
 Command: | Arguments: | Description:
 
-Lewd     |            | Gets a lewd neko-image from nekos.life (Only in NSFW-labeled channels).
+Lewd     | [-slide]   | Gets a lewd neko-image from nekos.life (Only in NSFW-labeled channels).
+         |            | Use `-slide` at the end for a slideshow with 30 images.
 ```
 
 ## Server
