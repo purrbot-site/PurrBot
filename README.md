@@ -29,7 +29,7 @@ Cuddle   | <@user>    | Cuddles the mentioned user.
 Hug      | <@user>    | Hugs the mentioned user.
 Kiss     | <@user>    | Kisses the mentioned user.
 Neko     | [-slide]   | Gets a neko-image from nekos.life.
-         |            | Use `-slide` at the end for a slideshow with 30 images.
+                        Use `-slide` at the end of the message for a slideshow with 30 images.
 Pat      | <@user>    | Gives the mentioned user a pat.
 Slap     | <@user>    | Slaps the mentioned user.
 Tickle   | <@user>    | Tickles the mentioned user.
@@ -41,13 +41,13 @@ Tickle   | <@user>    | Tickles the mentioned user.
 Command: | Arguments: | Description:
 
 Lewd     | [-slide]   | Gets a lewd neko-image from nekos.life (Only in NSFW-labeled channels).
-         |            | Use `-slide` at the end for a slideshow with 30 images.
+                        Use `-slide` at the end of the message for a slideshow with 30 images.
 ```
 
 ## Server
 **Permission**: `MANAGE_SERVER` permission is required for the user.
 ```
-Command: | Arguments:              | Description:
+Command: | Arguments:                   | Description:
 
 Prefix   | [set <prefix>|reset]         | Shows the current prefix for the Discord, or sets/resets it.
 Welcome  | [set <ChannelID>|reset|test] | Shows the current Welcome-channel, sets/resets or tests it.
