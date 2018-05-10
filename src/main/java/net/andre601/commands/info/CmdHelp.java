@@ -63,13 +63,13 @@ public class CmdHelp implements Command {
                         " Cuddle <@user>\n" +
                         " Hug <@user>\n" +
                         " Kiss <@user>\n" +
-                        " Neko\n" +
+                        " Neko [-slide]\n" +
                         " Pat <@user>\n" +
                         " Slap <@user>\n" +
                         " Tickle <@user>\n" +
                         "\n" +
                         "NSFW:\n" +
-                        " Lewd\n" +
+                        " Lewd [-slide]\n" +
                         "\n" +
                         "Server:\n" +
                         " Prefix [set <prefix>|reset]\n" +
@@ -158,9 +158,9 @@ public class CmdHelp implements Command {
                 break;
 
             case "neko":
-                usage(msg, "Neko", "neko",
+                usage(msg, "Neko", "neko [-slide]",
                         "Sends a cute neko. 'nuf said.",
-                        "`none`",
+                        "`-slide` Creates a slideshow with 30 images",
                         "`none`"
                 );
                 break;
@@ -190,10 +190,10 @@ public class CmdHelp implements Command {
                 break;
 
             case "lewd":
-                usage(msg, "Lewd", "lewd",
+                usage(msg, "Lewd", "lewd [-slide]",
                         "Sends a lewd neko.\n" +
                         "Can only be used in NSFW-Channels.",
-                        "`none`",
+                        "`-slide` Creates a slideshow with 30 images",
                         "`none`"
                 );
                 break;

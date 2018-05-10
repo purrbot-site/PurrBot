@@ -81,6 +81,7 @@ public class Main {
         builder.addEventListener(new CommandListener());
         builder.addEventListener(new GuildListener());
         builder.addEventListener(new WelcomeListener());
+        builder.addEventListener(waiter);
 
     }
 

@@ -1,5 +1,6 @@
 package net.andre601.commands.nsfw;
 
+import com.jagrosh.jdautilities.menu.Slideshow;
 import net.andre601.commands.Command;
 import net.andre601.util.EmbedUtil;
 import net.andre601.util.MessageUtil;
@@ -10,9 +11,14 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.andre601.util.HttpUtil;
 
+import static net.andre601.core.Main.waiter;
+
 import java.util.concurrent.TimeUnit;
 
 public class CmdLewd implements Command {
+
+    private Slideshow.Builder sBuilder =
+            new Slideshow.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);
 
     public String getLink(){
         try{
@@ -50,6 +56,51 @@ public class CmdLewd implements Command {
         }
 
         if(tc.isNSFW()){
+            tc.sendTyping().queue();
+            if(msg.getContentRaw().endsWith("-slide")){
+                if(!PermUtil.canManageMsg(msg)){
+                    tc.sendMessage(String.format(
+                            "%s I need the permission `MANAGE_MESSAGES` for that!",
+                            msg.getAuthor().getAsMention()
+                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                    return;
+                }
+                StringBuilder urls = new StringBuilder();
+                for(int i = 0; i < 30; ++i){
+                    try{
+                        urls.append(HttpUtil.getLewd()).append(",");
+                    }catch (Exception ex){
+                        EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdLewd.java (-slide -> urls.append",
+                                ex.getStackTrace().toString());
+                    }
+                }
+                Slideshow s = sBuilder
+                        .setUsers(msg.getAuthor())
+                        .setText("Lewd-slideshow!")
+                        .setDescription(String.format(
+                                "Use the reactions to navigate through the images!\n" +
+                                "Only the author of the command (%s) can use the navigation!",
+                                MessageUtil.getTag(msg.getAuthor())
+                        ))
+                        .setUrls(urls.toString().split(","))
+                        .setFinalAction(
+                                message -> {
+                                    message.clearReactions().queue();
+                                    try {
+                                        message.delete().queue();
+                                        tc.sendMessage("Slideshow is over!").queue(del ->
+                                                del.delete().queueAfter(5, TimeUnit.SECONDS));
+                                    }catch (Exception ex){
+                                        EmbedUtil.sendErrorEmbed(e.getGuild(),
+                                                "CmdLewd.java (-slide -> EditMessage)",
+                                                ex.getStackTrace().toString());
+                                    }
+                                }
+                        )
+                        .build();
+                s.display(tc);
+                return;
+            }
             try {
                 EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
                         .setTitle(String.format(
