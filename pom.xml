@@ -80,6 +80,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.jagrosh</groupId>
+            <artifactId>jda-utilities-menu</artifactId>
+            <version>2.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jagrosh</groupId>
+            <artifactId>jda-utilities-commons</artifactId>
+            <version>2.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.rethinkdb</groupId>
             <artifactId>rethinkdb-driver</artifactId>
             <version>2.3.3</version>

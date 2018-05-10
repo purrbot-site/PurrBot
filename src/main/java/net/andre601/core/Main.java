@@ -1,5 +1,6 @@
 package net.andre601.core;
 
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.andre601.commands.info.*;
 import net.andre601.commands.fun.*;
 import net.andre601.commands.nsfw.CmdLewd;
@@ -40,6 +41,8 @@ public class Main {
 
     public static JDABuilder builder;
     public static JDA jda;
+
+    public static EventWaiter waiter = new EventWaiter();
 
     public static void main(String[] args){
 
