@@ -10,6 +10,10 @@ import java.time.format.DateTimeFormatter;
 
 public class MessageUtil {
 
+
+    private static DateTimeFormatter timeFormatFull = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
+    private static DateTimeFormatter timeFormatSimple = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
     //  For returning random Strings/images.
     public static String getFact(){
         if(Main.isBDay())
@@ -43,8 +47,6 @@ public class MessageUtil {
         return Main.getRandomNoShutdownImage().size() > 0 ? Main.getRandomNoShutdownImage().get(
                 Main.getRandom().nextInt(Main.getRandomNoShutdownImage().size())) : "";
     }
-
-    private static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
 
     public static String isBot(User user){
         if(user.isBot()){
@@ -117,6 +119,11 @@ public class MessageUtil {
 
     public static String formatTime(LocalDateTime dateTime){
         LocalDateTime time = LocalDateTime.from(dateTime.atOffset(ZoneOffset.UTC));
-        return time.format(timeFormat) + " UTC";
+        return time.format(timeFormatFull) + " UTC";
+    }
+
+    public static String formatSimpleTime(LocalDateTime dateTime){
+        LocalDateTime time = LocalDateTime.from(dateTime.atOffset(ZoneOffset.UTC));
+        return time.format(timeFormatSimple) + " UTC";
     }
 }

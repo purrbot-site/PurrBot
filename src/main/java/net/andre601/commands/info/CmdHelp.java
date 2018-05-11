@@ -2,13 +2,15 @@ package net.andre601.commands.info;
 
 import com.jagrosh.jdautilities.menu.Paginator;
 import net.andre601.commands.Command;
-import net.andre601.commands.server.CmdPrefix;
 import net.andre601.util.EmbedUtil;
 import net.andre601.util.MessageUtil;
 import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import static net.andre601.commands.server.CmdPrefix.getPrefix;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +40,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "**Permission**:\n" +
                         "%s",
-                        CmdPrefix.getPrefix(msg.getGuild()),
+                        getPrefix(msg.getGuild()),
                         use,
                         description,
                         args,
@@ -49,11 +51,8 @@ public class CmdHelp implements Command {
     }
 
     private static void usage(Message msg){
-        msg.getChannel().sendTyping().queue();
-
-        /*
         Paginator page = pBuilder
-                .addItems(String.format(
+                .setItems(String.format(
                         "**Command-Prefix**: %s\n" +
                         "\n" +
                         "**Commands**:\n" +
@@ -68,126 +67,120 @@ public class CmdHelp implements Command {
                         "  Server\n" +
                         "```\n" +
                         "\n" +
-                        "**Random fact:\n" +
+                        "**Random fact**:\n" +
                         "%s",
-                        CmdPrefix.getPrefix(msg.getGuild()),
-                        CmdPrefix.getPrefix(msg.getGuild()),
+                        getPrefix(msg.getGuild()),
+                        getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
                 ), String.format(
-                        "**Fun**:\n" +
+                        "**Command-Prefix**: %s\n" +
                         "\n" +
+                        "**Commands**:\n" +
+                        "Use the reactions to switch through the pages.\n" +
+                        "Type `%shelp [command]` to get infos about a command!\n" +
+                        "\n" +
+                        "**Fun**:\n" +
                         "```\n" +
-                        "Cuddle <@user>\n" +
-                        "Hug <@user>\n" +
-                        "Kiss <@user>\n" +
-                        "Neko [-slide]\n" +
-                        "Pat <@user>\n" +
-                        "Slap <@user>\n" +
-                        "Tickle <@user>\n" +
+                        "Command:     Argument(s):\n" +
+                        "\n" +
+                        "Cuddle       <@user>\n" +
+                        "Hug          <@user>\n" +
+                        "Kiss         <@user>\n" +
+                        "Neko         [-slide]\n" +
+                        "Pat          <@user>\n" +
+                        "Slap         <@user>\n" +
+                        "Tickle       <@user>\n" +
                         "\n" +
                         "[optional] | <required>\n" +
                         "```\n" +
                         "\n" +
-                        "**Random fact:\n" +
+                        "**Random fact**:\n" +
                         "%s",
+                        getPrefix(msg.getGuild()),
+                        getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
                 ), String.format(
-                        "**Informative**:\n" +
+                        "**Command-Prefix**: %s\n" +
                         "\n" +
+                        "**Commands**:\n" +
+                        "Use the reactions to switch through the pages.\n" +
+                        "Type `%shelp [command]` to get infos about a command!\n" +
+                        "\n" +
+                        "**Informative**:\n" +
                         "```\n" +
+                        "Command:     Argument(s):\n" +
+                        "\n" +
                         "Help\n" +
-                        "Info [-here]\n" +
-                        "Invite [-here]\n" +
-                        "Quote <messageID>\n" +
+                        "Info         [-here]\n" +
+                        "Invite       [-here]\n" +
+                        "Quote        <messageID>\n" +
                         "Server\n" +
                         "Stats\n" +
-                        "User [@user]\n" +
+                        "User         [@user]\n" +
                         "\n" +
                         "[optional] | <required>\n" +
                         "```\n" +
                         "\n" +
-                        "**Random fact:\n" +
+                        "**Random fact**:\n" +
                         "%s",
+                        getPrefix(msg.getGuild()),
+                        getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
                 ), String.format(
+                        "**Command-Prefix**: %s\n" +
+                        "\n" +
+                        "**Commands**:\n" +
+                        "Use the reactions to switch through the pages.\n" +
+                        "Type `%shelp [command]` to get infos about a command!\n" +
+                        "\n" +
                         "**NSFW**:\n" +
-                        "\n" +
                         "```\n" +
-                        "Lewd [-slide]\n" +
+                        "Command:     Argument(s):\n" +
+                        "\n" +
+                        "Lewd         [-slide]\n" +
                         "\n" +
                         "[optional] | <required>\n" +
                         "```\n" +
                         "\n" +
-                        "**Random fact:\n" +
+                        "**Random fact**:\n" +
                         "%s",
+                        getPrefix(msg.getGuild()),
+                        getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
                 ), String.format(
-                        "**Server**:\n" +
+                        "**Command-Prefix**: %s\n" +
                         "\n" +
+                        "**Commands**:\n" +
+                        "Use the reactions to switch through the pages.\n" +
+                        "Type `%shelp [command]` to get infos about a command!\n" +
+                        "\n" +
+                        "**Server**:\n" +
                         "```\n" +
-                        "Prefix [set <prefix>|reset]\n" +
-                        "Welcome [set <channelID>|reset|test]\n" +
+                        "Command:     Argument(s):\n" +
+                        "\n" +
+                        "Prefix       [set <prefix>|reset]\n" +
+                        "Welcome      [set <channelID>|reset|test]\n" +
                         "\n" +
                         "[optional] | <required>\n" +
                         "```\n" +
                         "\n" +
-                        "**Random fact:\n" +
+                        "**Random fact**:\n" +
                         "%s",
+                        getPrefix(msg.getGuild()),
+                        getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
                 ))
+                .setText("\u200B")
+                .setItemsPerPage(1)
+                .waitOnSinglePage(true)
                 .setFinalAction(message -> {
                     message.delete().queue();
                     msg.getTextChannel().sendMessage("Help closed!").queue(del ->
                             del.delete().queueAfter(5, TimeUnit.SECONDS));
                 })
                 .build();
-        page.display(msg.getChannel());
-        */
-        EmbedBuilder help = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle("Help")
-                .setDescription(String.format(
-                        "**Command-Prefix**: `%s`\n" +
-                        "\n" +
-                        "**Commands**:\n" +
-                        "Type `%shelp [command]`, to get infos about a command!\n" +
-                        "\n" +
-                        "```\n" +
-                        "Informative:\n" +
-                        " Help [command]\n" +
-                        " info [-here]\n" +
-                        " Invite [-here]\n" +
-                        " Quote <MessageID>\n" +
-                        " Server\n" +
-                        " Stats\n" +
-                        " User [@user]\n" +
-                        "\n" +
-                        "Fun:\n" +
-                        " Cuddle <@user>\n" +
-                        " Hug <@user>\n" +
-                        " Kiss <@user>\n" +
-                        " Neko [-slide]\n" +
-                        " Pat <@user>\n" +
-                        " Slap <@user>\n" +
-                        " Tickle <@user>\n" +
-                        "\n" +
-                        "NSFW:\n" +
-                        " Lewd [-slide]\n" +
-                        "\n" +
-                        "Server:\n" +
-                        " Prefix [set <prefix>|reset]\n" +
-                        " Welcome [set <ChannelID>|reset|test]\n" +
-                        "\n" +
-                        "[optional] <required>\n" +
-                        "```\n" +
-                        "\n" +
-                        "**Random Fact**:\n" +
-                        "%s",
-                        CmdPrefix.getPrefix(msg.getGuild()),
-                        CmdPrefix.getPrefix(msg.getGuild()),
-                        MessageUtil.getFact()
-                ));
 
-        msg.getChannel().sendMessage(help.build()).queue();
+        page.display(msg.getChannel());
     }
 
     @Override
@@ -199,6 +192,7 @@ public class CmdHelp implements Command {
     public void action(String[] args, MessageReceivedEvent e) {
 
         Message msg = e.getMessage();
+        TextChannel tc = e.getTextChannel();
 
         if (!PermUtil.canWrite(msg))
             return;
@@ -211,7 +205,11 @@ public class CmdHelp implements Command {
             return;
         }
 
+        if(PermUtil.canDeleteMsg(msg))
+            msg.delete().queue();
+
         if(args.length == 0){
+            tc.sendTyping().queue();
             usage(msg);
             return;
         }

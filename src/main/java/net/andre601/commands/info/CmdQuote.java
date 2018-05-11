@@ -60,8 +60,8 @@ public class CmdQuote implements Command {
                     ), null, message.getAuthor().getEffectiveAvatarUrl())
                     .setDescription(String.format(
                             "`%s`\n" +
-                                    "%s",
-                            MessageUtil.formatTime(message.getCreationTime().toLocalDateTime()),
+                            "%s",
+                            MessageUtil.formatSimpleTime(message.getCreationTime().toLocalDateTime()),
                             messageRaw
                     ));
             tc.sendMessage(quote.build()).queue();
