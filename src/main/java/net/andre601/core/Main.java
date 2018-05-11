@@ -11,6 +11,7 @@ import net.andre601.listeners.*;
 import net.andre601.util.EmbedUtil;
 import net.andre601.util.HttpUtil;
 import net.dv8tion.jda.core.*;
+import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.webhook.WebhookClient;
 import net.dv8tion.jda.webhook.WebhookClientBuilder;
 import org.discordbots.api.client.DiscordBotListAPI;
@@ -57,7 +58,8 @@ public class Main {
         //  Let JDA try to reconnect, when disconnecting
         builder.setAutoReconnect(true);
 
-        builder.setStatus(OnlineStatus.ONLINE);
+        builder.setStatus(OnlineStatus.DO_NOT_DISTURB);
+        builder.setGame(Game.playing("Starting Bot..."));
 
         //  Executing the voids, to register listeners, commands and the random-stuff
         addListeners();

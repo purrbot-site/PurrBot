@@ -9,7 +9,7 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.andre601.util.StaticInfo;
+import net.andre601.util.Static;
 
 import java.util.concurrent.TimeUnit;
 
@@ -55,14 +55,14 @@ public class CmdInfo implements Command {
                 .addField("Links:", String.format(
                         "[`GitHub`](%s)\n" +
                         "[`Discordbots.org`](%s)",
-                        StaticInfo.GITHUB_LINK,
-                        StaticInfo.DISCORDBOTS
+                        Static.GITHUB_LINK,
+                        Static.DISCORDBOTS
                 ), true)
                 .addField("", String.format(
                         "[`Official Discord`](%s)\n" +
                         "[`Website`](%s)",
-                        StaticInfo.DISCORD_INVITE,
-                        StaticInfo.WEBSITE
+                        Static.DISCORD_INVITE,
+                        Static.WEBSITE
                 ), true);
 
         if(e.getMessage().getContentRaw().endsWith("-here")){

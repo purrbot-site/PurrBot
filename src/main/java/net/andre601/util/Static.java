@@ -1,6 +1,6 @@
 package net.andre601.util;
 
-public class StaticInfo {
+public class Static {
 
     //  Prefix for all commands (".[command]")
     public static final String PREFIX = ".";
@@ -20,4 +20,10 @@ public class StaticInfo {
     public static final String GITHUB_LINK = "https://github.com/andre601/NekoBot";
     public static final String DISCORDBOTS = "https://discordbots.org/bot/425382319449309197";
     public static final String WEBSITE = "https://purrbot.site";
+
+    //  Custom emojis
+    public static final String EMOJI_ONLINE = "<:online:426838620033253376> ";
+    public static final String EMOJI_IDLE = "<:idle:426838620012281856> ";
+    public static final String EMOJI_DND = "<:dnd:426838619714748439> ";
+    public static final String EMOJI_OFFLINE = "<:offline:426840813729742859> ";
 }

@@ -81,14 +81,16 @@ public class CmdNeko implements Command {
             }
 
             Slideshow s = sBuilder
-                    .setUsers(msg.getAuthor())
+                    .setUsers(msg.getAuthor(), e.getGuild().getOwner().getUser())
                     .setText("Neko-slideshow!")
                     .setDescription(String.format(
                             "Use the reactions to navigate through the images!\n" +
-                            "Only the author of the command (%s) can use the navigation!\n" +
+                            "Only the author of the command (`%s`) and the Guild-Owner (`%s`) " +
+                            "can use the navigation!\n" +
                             "\n" +
                             "__**Slideshows may take a while to update!**__",
-                            MessageUtil.getTag(msg.getAuthor())
+                            MessageUtil.getTag(msg.getAuthor()),
+                            MessageUtil.getTag(e.getGuild().getOwner().getUser())
                     ))
                     .setUrls(urls.toString().split(","))
                     .setFinalAction(

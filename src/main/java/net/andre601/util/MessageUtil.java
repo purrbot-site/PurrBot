@@ -96,18 +96,18 @@ public class MessageUtil {
 
     public static String getStatus(Member member, Message msg){
         if(member.getOnlineStatus() == OnlineStatus.ONLINE){
-            return (PermUtil.canUseCustomEmojis(msg) ? "<:online:426838620033253376> "
+            return (PermUtil.canUseCustomEmojis(msg) ? Static.EMOJI_ONLINE
                     : "" ) + "`Online`" + getGameStatus(member);
         }else
         if(member.getOnlineStatus() == OnlineStatus.IDLE){
-            return (PermUtil.canUseCustomEmojis(msg) ? "<:idle:426838620012281856> "
+            return (PermUtil.canUseCustomEmojis(msg) ? Static.EMOJI_IDLE
                     : "" ) + "`Idle`" + getGameStatus(member);
         }else
         if(member.getOnlineStatus() == OnlineStatus.DO_NOT_DISTURB){
-            return (PermUtil.canUseCustomEmojis(msg) ? "<:dnd:426838619714748439> "
+            return (PermUtil.canUseCustomEmojis(msg) ? Static.EMOJI_DND
                     : "" ) + "`Do not disturb`" + getGameStatus(member);
         }
-        return (PermUtil.canUseCustomEmojis(msg) ? "<:offline:426840813729742859> "
+        return (PermUtil.canUseCustomEmojis(msg) ? Static.EMOJI_OFFLINE
                 : "" ) + "`Offline`";
     }
 

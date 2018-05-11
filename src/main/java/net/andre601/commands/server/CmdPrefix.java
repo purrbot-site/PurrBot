@@ -4,7 +4,7 @@ import net.andre601.commands.Command;
 import net.andre601.core.Main;
 import net.andre601.util.EmbedUtil;
 import net.andre601.util.PermUtil;
-import net.andre601.util.StaticInfo;
+import net.andre601.util.Static;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
@@ -29,7 +29,7 @@ public class CmdPrefix implements Command{
 
         //  If the bot is beta-version -> use Beta-prefix (..)
         return (Main.file.getItem("config", "beta").equalsIgnoreCase("true") ?
-                StaticInfo.BETA_PREFIX : StaticInfo.PREFIX);
+                Static.BETA_PREFIX : Static.PREFIX);
     }
 
     public static Guild getGuild(String id, JDA jda){
@@ -91,7 +91,7 @@ public class CmdPrefix implements Command{
         Map<String, String> out = new HashMap<>();
         guildPrefix.forEach((g, p) -> out.put(g.getId(), p));
         try{
-            FileOutputStream fos = new FileOutputStream(StaticInfo.PREFIX_FILE);
+            FileOutputStream fos = new FileOutputStream(Static.PREFIX_FILE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(out);
             oos.close();
@@ -102,7 +102,7 @@ public class CmdPrefix implements Command{
     }
 
     public static void load(JDA jda){
-        File file = new File(StaticInfo.PREFIX_FILE);
+        File file = new File(Static.PREFIX_FILE);
         if(file.exists()){
 
             try{

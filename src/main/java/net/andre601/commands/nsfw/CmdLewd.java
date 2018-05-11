@@ -81,14 +81,17 @@ public class CmdLewd implements Command {
                     }
                 }
                 Slideshow s = sBuilder
-                        .setUsers(msg.getAuthor())
+                        .setUsers(msg.getAuthor(), e.getGuild().getOwner().getUser())
                         .setText("Lewd-slideshow!")
                         .setDescription(String.format(
                                 "Use the reactions to navigate through the images!\n" +
-                                "Only the author of the command (%s) can use the navigation!" +
+                                "Only the author of the command (`%s`) and the Guild-Owner (`%s`) " +
+                                "can use the navigation!\n" +
                                 "\n" +
                                 "__**Slideshows may take a while to update!**__",
-                                MessageUtil.getTag(msg.getAuthor())
+                                MessageUtil.getTag(msg.getAuthor()).replace("`", "'"),
+                                MessageUtil.getTag(e.getGuild().getOwner().getUser())
+                                        .replace("`", "'")
                         ))
                         .setUrls(urls.toString().split(","))
                         .setFinalAction(

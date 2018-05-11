@@ -110,7 +110,7 @@ public class CmdWelcome implements Command {
         Map<String, String> out = new HashMap<>();
         welcomeChannel.forEach((g, c) -> out.put(g.getId(), c.getId()));
         try{
-            FileOutputStream fos = new FileOutputStream(StaticInfo.WELCOME_FILE);
+            FileOutputStream fos = new FileOutputStream(Static.WELCOME_FILE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(out);
             oos.close();
@@ -121,7 +121,7 @@ public class CmdWelcome implements Command {
     }
 
     public static void load(JDA jda){
-        File file = new File(StaticInfo.WELCOME_FILE);
+        File file = new File(Static.WELCOME_FILE);
         if(file.exists()){
             try{
                 FileInputStream fis = new FileInputStream(file);
