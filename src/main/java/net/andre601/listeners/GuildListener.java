@@ -1,8 +1,9 @@
 package net.andre601.listeners;
 
-import net.andre601.core.Main;
+import net.andre601.core.PurrBotMain;
 import net.andre601.util.EmbedUtil;
 import net.andre601.util.MessageUtil;
+import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
@@ -14,7 +15,7 @@ import java.awt.Color;
 public class GuildListener extends ListenerAdapter {
 
     public String getLink(){
-        return Main.file.getItem("config", "webhook");
+        return PurrBotMain.file.getItem("config", "webhook");
     }
 
     public void onGuildJoin(GuildJoinEvent e) {
@@ -53,7 +54,7 @@ public class GuildListener extends ListenerAdapter {
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
         ));
 
-        e.getJDA().getPresence().setGame(Game.watching(String.format(
+        e.getJDA().getPresence().setPresence(OnlineStatus.ONLINE, Game.watching(String.format(
                 ReadyListener.getBotGame(),
                 e.getJDA().getGuilds().toArray().length
         )));
@@ -96,7 +97,7 @@ public class GuildListener extends ListenerAdapter {
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length
         ));
 
-        e.getJDA().getPresence().setGame(Game.watching(String.format(
+        e.getJDA().getPresence().setPresence(OnlineStatus.ONLINE, Game.watching(String.format(
                 ReadyListener.getBotGame(),
                 e.getJDA().getGuilds().toArray().length
         )));

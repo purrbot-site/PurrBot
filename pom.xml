@@ -6,7 +6,7 @@
 
     <groupId>net.Andre601</groupId>
     <artifactId>Purr-Bot</artifactId>
-    <version>1.17.7</version>
+    <version>1.18.1</version>
     <build>
         <resources>
             <resource>
@@ -21,7 +21,7 @@
                     <finalName>Purr-Bot</finalName>
                     <archive>
                         <manifest>
-                            <mainClass>net.andre601.core.Main</mainClass>
+                            <mainClass>net.andre601.core.PurrBotMain</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -45,7 +45,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>net.andre601.core.Main</mainClass>
+                            <mainClass>net.andre601.core.PurrBotMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -79,6 +79,11 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
         <dependency>
             <groupId>com.jagrosh</groupId>
             <artifactId>jda-utilities-menu</artifactId>

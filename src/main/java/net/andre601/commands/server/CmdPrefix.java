@@ -1,7 +1,7 @@
 package net.andre601.commands.server;
 
 import net.andre601.commands.Command;
-import net.andre601.core.Main;
+import net.andre601.core.PurrBotMain;
 import net.andre601.util.EmbedUtil;
 import net.andre601.util.PermUtil;
 import net.andre601.util.Static;
@@ -28,7 +28,7 @@ public class CmdPrefix implements Command{
         }
 
         //  If the bot is beta-version -> use Beta-prefix (..)
-        return (Main.file.getItem("config", "beta").equalsIgnoreCase("true") ?
+        return (PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true") ?
                 Static.BETA_PREFIX : Static.PREFIX);
     }
 
@@ -95,9 +95,7 @@ public class CmdPrefix implements Command{
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(out);
             oos.close();
-        }catch (IOException ex){
-            EmbedUtil.sendErrorEmbed(null, "CmdPrefix.java (Save)",
-                    ex.getStackTrace().toString());
+        }catch (IOException ignored){
         }
     }
 
@@ -115,9 +113,7 @@ public class CmdPrefix implements Command{
                     Guild g = getGuild(gid, jda);
                     guildPrefix.put(g, p);
                 });
-            }catch (IOException | ClassNotFoundException ex){
-                EmbedUtil.sendErrorEmbed(null, "CmdPrefix.java (load)",
-                        ex.getStackTrace().toString());
+            }catch (IOException | ClassNotFoundException ignored){
             }
 
         }
@@ -137,6 +133,14 @@ public class CmdPrefix implements Command{
 
         if (!PermUtil.canWrite(msg))
             return;
+
+        if(!PermUtil.canSendEmbed(e.getMessage())){
+            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("🚫").queue();
+
+            return;
+        }
 
         if(args.length == 0){
             currPrefix(msg, e.getGuild());

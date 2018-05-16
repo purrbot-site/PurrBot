@@ -2,7 +2,7 @@ package net.andre601.commands.info;
 
 import net.andre601.commands.Command;
 import net.andre601.commands.server.CmdPrefix;
-import net.andre601.core.Main;
+import net.andre601.core.PurrBotMain;
 import net.andre601.util.EmbedUtil;
 import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -46,7 +46,7 @@ public class CmdInfo implements Command {
                 ))
                 .addField("Bot-Version:", String.format(
                         "`%s`",
-                        Main.getVersion()), true)
+                        PurrBotMain.getVersion()), true)
                 .addField("Library:", String.format(
                         "[`JDA %s`](%s)",
                         JDAInfo.VERSION,

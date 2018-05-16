@@ -28,9 +28,7 @@ public class ImageUtil {
             connection.setRequestProperty(UA[0], UA[1]);
             connection.connect();
             icon = ImageIO.read(connection.getInputStream());
-        }catch (Exception ex){
-            EmbedUtil.sendErrorEmbed(null, "ImageUtil.java (getUsetIcon)",
-                    ex.getStackTrace().toString());
+        }catch (Exception ignored){
         }
         return icon;
     }
@@ -81,9 +79,7 @@ public class ImageUtil {
             )).queue());
 
             //  We just ignore the caused exception.
-        }catch (IOException ex){
-            EmbedUtil.sendErrorEmbed(null, "ImageUtil.java (createWelcomeImg)",
-                    ex.getStackTrace().toString());
+        }catch (IOException ignored){
         }
     }
 

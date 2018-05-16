@@ -11,7 +11,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.andre601.util.HttpUtil;
 
-import static net.andre601.core.Main.waiter;
+import static net.andre601.core.PurrBotMain.waiter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,7 @@ public class CmdLewd implements Command {
     public String getLink(){
         try{
             return HttpUtil.getLewd();
-        }catch (Exception ex){
-            EmbedUtil.sendErrorEmbed(null, "CmdLewd.java", ex.getStackTrace().toString());
+        }catch (Exception ignored){
             return null;
         }
     }
@@ -75,9 +74,7 @@ public class CmdLewd implements Command {
                 for(int i = 0; i < 30; ++i){
                     try{
                         urls.append(HttpUtil.getLewd()).append(",");
-                    }catch (Exception ex){
-                        EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdLewd.java (-slide -> urls.append",
-                                ex.getStackTrace().toString());
+                    }catch (Exception ignored){
                     }
                 }
                 Slideshow s = sBuilder
@@ -117,9 +114,7 @@ public class CmdLewd implements Command {
                 tc.sendMessage("Getting a lewd neko...").queue(message -> {
                     message.editMessage(neko.build()).queue();
                 });
-            }catch (Exception ex){
-                EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdLewd.java",
-                        ex.getStackTrace().toString());
+            }catch (Exception ignored){
             }
         }else{
             tc.sendMessage(String.format(MessageUtil.getRandomNotNSFW(),

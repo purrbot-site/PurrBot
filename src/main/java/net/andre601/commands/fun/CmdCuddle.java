@@ -82,9 +82,7 @@ public class CmdCuddle implements Command{
                     message.editMessage(
                             EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
                     ).queue();
-                }catch (Exception ex){
-                    EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdCuddle.java",
-                            ex.getStackTrace().toString());
+                }catch (Exception ignored){
                 }
             });
         }

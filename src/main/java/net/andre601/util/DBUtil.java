@@ -2,7 +2,7 @@ package net.andre601.util;
 
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.net.Connection;
-import net.andre601.core.Main;
+import net.andre601.core.PurrBotMain;
 
 import java.util.Map;
 
@@ -10,8 +10,8 @@ public class DBUtil {
 
     public static final RethinkDB r = RethinkDB.r;
 
-    public static Connection con = r.connection().hostname(Main.file.getItem("config", "db-ip"))
-            .port(28015).db((Main.file.getItem("config", "beta").equalsIgnoreCase("true") ?
+    public static Connection con = r.connection().hostname(PurrBotMain.file.getItem("config", "db-ip"))
+            .port(28015).db((PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true") ?
                     "beta" : "main"
             )).connect();
 

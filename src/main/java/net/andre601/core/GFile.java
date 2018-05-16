@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.stream.JsonReader;
 import net.andre601.util.ConfigUtil;
-import net.andre601.util.EmbedUtil;
 
 import java.io.File;
 import java.io.FileReader;
@@ -43,7 +42,7 @@ public class GFile {
                     }
                 }
                 if(file.createNewFile()){
-                    if(cutil.exportResource(Main.class.getResourceAsStream(internalPath), externalPath)){
+                    if(cutil.exportResource(PurrBotMain.class.getResourceAsStream(internalPath), externalPath)){
                         System.out.println(name + " successfully created!");
 
                     }else{
@@ -54,9 +53,7 @@ public class GFile {
                 System.out.println(name + " successfully loaded!");
                 gFiles.put(name, file);
             }
-        }catch (Exception ex){
-            EmbedUtil.sendErrorEmbed(null, "GFile.java (make)",
-                    ex.getStackTrace().toString());
+        }catch (Exception ignored){
         }
     }
 
@@ -69,9 +66,7 @@ public class GFile {
             if (data.containsKey(item)){
                 return data.get(item);
             }
-        }catch (Exception ex){
-            EmbedUtil.sendErrorEmbed(null, "GFile.java (getItem)",
-                    ex.getStackTrace().toString());
+        }catch (Exception ignored){
         }
         return item + " not found in " + fileName;
     }

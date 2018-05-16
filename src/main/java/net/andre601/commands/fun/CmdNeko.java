@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static net.andre601.core.Main.waiter;
+import static net.andre601.core.PurrBotMain.waiter;
 
 public class CmdNeko implements Command {
 
@@ -27,8 +27,7 @@ public class CmdNeko implements Command {
     public String getLink(){
         try{
             return HttpUtil.getNeko();
-        }catch (Exception ex){
-            EmbedUtil.sendErrorEmbed(null, "CmdNeko.java (getLink())", ex.getStackTrace().toString());
+        }catch (Exception ignored){
             return null;
         }
     }
@@ -60,13 +59,21 @@ public class CmdNeko implements Command {
         }
 
         if(e.getMessage().getContentRaw().endsWith("-slide")){
+            if(!PermUtil.canReact(msg)){
+                tc.sendMessage(String.format(
+                        "%s I need permission, to add reactions in this channel!"
+                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                return;
+            }
             if(nekoUserID.contains(msg.getAuthor().getId())){
                 tc.sendMessage(String.format(
-                        "%s You can only have one Slideshow at a time!",
+                        "%s You can only have one Slideshow at a time!\n" +
+                        "Please use or close your current one.",
                         msg.getAuthor().getAsMention()
                 )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
                 return;
             }
+
             tc.sendTyping().queue();
 
             nekoUserID.add(msg.getAuthor().getId());
@@ -74,9 +81,7 @@ public class CmdNeko implements Command {
             for(int i = 0; i < 30; ++i){
                 try{
                     urls.append(HttpUtil.getNeko()).append(",");
-                }catch (Exception ex){
-                    EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdNeko.java (-slide -> urls.append)",
-                            ex.getStackTrace().toString());
+                }catch (Exception ignored){
                 }
             }
 
@@ -117,9 +122,7 @@ public class CmdNeko implements Command {
             tc.sendMessage("Getting a cute neko...").queue(message ->
                 message.editMessage(neko.build()).queue()
             );
-        }catch (Exception ex){
-            EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdNeko.java",
-                    ex.getStackTrace().toString());
+        }catch (Exception ignored){
         }
     }
 

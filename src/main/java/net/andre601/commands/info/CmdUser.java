@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class CmdUser implements Command {
 
     public void getUser(TextChannel tc, Message msg){
-        tc.sendTyping().queue();
         List<Member> mentionedMember = msg.getMentionedMembers();
         for(Member member : mentionedMember){
             if(member == null){
@@ -32,7 +31,7 @@ public class CmdUser implements Command {
                     .setThumbnail(member.getUser().getEffectiveAvatarUrl())
                     .addField("User:", String.format(
                             "**Name**: %s\n" +
-                            "**ID**: %s\n" +
+                            "**ID**: `%s`\n" +
                             "**Status**: %s",
                             MessageUtil.getUsername(member),
                             member.getUser().getId(),
@@ -49,11 +48,9 @@ public class CmdUser implements Command {
                                     "[`Default Avatar`](%s)",
                                     member.getUser().getDefaultAvatarUrl()
                             )), true)
-                    .addField("Is Bot:", MessageUtil.isBot(member.getUser()), false)
+                    .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true)
                     .addField("Roles:", (member == null ?
-                            "This member is not here!" : (roles.length() > 1000 ? "*Way to many!*" :
-                                    roles)),
-                            true)
+                            "This member is not here!" : (roles.length() > 1000 ? "*Way to many!*" : roles)), false)
                     .addField("Dates:", String.format(
                             "**Account created**: %s\n" +
                             "**Joined**: %s",
@@ -92,15 +89,15 @@ public class CmdUser implements Command {
             return;
         }
 
+        tc.sendTyping().queue();
         if(args.length == 0){
-            tc.sendTyping().queue();
             String roles = msg.getMember().getRoles().stream().map(Role::getName).collect(Collectors.joining(", "));
             EmbedBuilder uInfo = EmbedUtil.getEmbed(msg.getAuthor())
                     .setAuthor("Userinfo")
                     .setThumbnail(msg.getAuthor().getEffectiveAvatarUrl())
                     .addField("User:", String.format(
                             "**Name**: %s\n" +
-                            "**ID**: %s\n" +
+                            "**ID**: `%s`\n" +
                             "**Status**: %s",
                             MessageUtil.getUsername(e.getMember()),
                             msg.getAuthor().getId(),

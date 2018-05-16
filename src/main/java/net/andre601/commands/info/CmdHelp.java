@@ -14,7 +14,7 @@ import static net.andre601.commands.server.CmdPrefix.getPrefix;
 
 import java.util.concurrent.TimeUnit;
 
-import static net.andre601.core.Main.waiter;
+import static net.andre601.core.PurrBotMain.waiter;
 
 public class CmdHelp implements Command {
 
@@ -170,7 +170,7 @@ public class CmdHelp implements Command {
                         getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
                 ))
-                .setText("\u200B")
+                .setText("")
                 .setItemsPerPage(1)
                 .waitOnSinglePage(true)
                 .setFinalAction(message -> {

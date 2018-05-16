@@ -20,9 +20,7 @@ public class ConfigUtil {
         boolean success = true;
         try{
             Files.copy(source, Paths.get(destination), StandardCopyOption.REPLACE_EXISTING);
-        }catch (Exception ex){
-            EmbedUtil.sendErrorEmbed(null, "ConfigUtil.java",
-                    ex.getStackTrace().toString());
+        }catch (Exception ignored){
             success = false;
         }
         return success;

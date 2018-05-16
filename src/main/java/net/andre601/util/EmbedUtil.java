@@ -1,6 +1,6 @@
 package net.andre601.util;
 
-import net.andre601.core.Main;
+import net.andre601.core.PurrBotMain;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 
 public class EmbedUtil {
 
-    private static String errorURL = Main.file.getItem("config", "errorWebhook");
+    private static String errorURL = PurrBotMain.file.getItem("config", "errorWebhook");
 
     public static EmbedBuilder getEmbed(User user){
         return new EmbedBuilder()
@@ -49,8 +49,8 @@ public class EmbedUtil {
             sendEvalEmbed(tc, overflow, footer, color);
     }
 
-    public static void sendErrorEmbed(Guild g, String source, String msgError){
-        String newMsg = msgError;
+    public static void sendErrorEmbed(String errorMsg, String type){
+        String newMsg = errorMsg;
 
         String overflow = null;
         if(newMsg.length() > 2000){
@@ -60,40 +60,26 @@ public class EmbedUtil {
 
         MessageEmbed error = getEmbed()
                 .setColor(Color.RED)
-                .setDescription((g == null ?
-                        String.format(
-                                "**StackTrace**:\n" +
-                                "```\n" +
-                                "%s\n" +
-                                "```",
-                                newMsg
-                        ) :
-                        String.format(
-                                "**Guild**: `%s` (`%s`)\n" +
-                                "\n" +
-                                "**StackTrace**:\n" +
-                                "```\n" +
-                                "%s\n" +
-                                "```",
-                                g.getName().replace("`", "'"),
-                                g.getId(),
-                                newMsg
-                        )))
+                .setDescription(String.format(
+                        "Type: %s\n" +
+                        "```\n" +
+                        "%s\n" +
+                        "```",
+                        type,
+                        newMsg
+                ))
                 .setTimestamp(ZonedDateTime.now())
                 .build();
 
-        WebhookClient webc = Main.webhookClient(errorURL);
+        WebhookClient webc = PurrBotMain.webhookClient(errorURL);
         webc.send(new WebhookMessageBuilder().addEmbeds(error)
-        .setUsername(String.format(
-                "Error in %s",
-                source
-        ))
-        .setAvatarUrl(g.getJDA().getSelfUser().getEffectiveAvatarUrl())
+        .setUsername("Error")
+        .setAvatarUrl(Static.AVATAR_URL)
         .build());
         webc.close();
 
         if(overflow != null)
-            sendErrorEmbed(g, source, overflow);
+            sendErrorEmbed(overflow, type);
     }
 
     public static void sendWebhookEmbed(String webhookURL, Guild g, Color color, String title, String desc){
@@ -108,7 +94,7 @@ public class EmbedUtil {
                 ), null)
                 .setTimestamp(ZonedDateTime.now()).build();
 
-        WebhookClient webc = Main.webhookClient(webhookURL);
+        WebhookClient webc = PurrBotMain.webhookClient(webhookURL);
         webc.send(new WebhookMessageBuilder().addEmbeds(webhook).
                 setUsername(title).
                 setAvatarUrl(g.getJDA().getSelfUser().getEffectiveAvatarUrl()).build());

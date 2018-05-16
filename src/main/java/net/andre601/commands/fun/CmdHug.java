@@ -71,9 +71,7 @@ public class CmdHug implements Command {
                     message.editMessage(
                             EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()
                     ).queue();
-                }catch (Exception ex){
-                    EmbedUtil.sendErrorEmbed(e.getGuild(), "CmdHug.java",
-                            ex.getStackTrace().toString());
+                }catch (Exception ignored){
                 }
             });
         }

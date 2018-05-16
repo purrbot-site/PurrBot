@@ -37,8 +37,10 @@ public class CmdServer implements Command {
         }
         tc.sendTyping().queue();
         EmbedBuilder server = EmbedUtil.getEmbed()
-                .setAuthor("Serverinfo: " + g.getName(), Static.URL,
-                        e.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                .setTitle(String.format(
+                        "Serverinfo: %s",
+                        g.getName()
+                ))
                 .setThumbnail(g.getIconUrl())
                 .addField("Users", String.format(
                         "**Total**: %s\n" +

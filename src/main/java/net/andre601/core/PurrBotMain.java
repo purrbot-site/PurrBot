@@ -8,7 +8,6 @@ import net.andre601.commands.owner.*;
 import net.andre601.commands.server.CmdPrefix;
 import net.andre601.commands.server.CmdWelcome;
 import net.andre601.listeners.*;
-import net.andre601.util.EmbedUtil;
 import net.andre601.util.HttpUtil;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
@@ -20,7 +19,7 @@ import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.util.*;
 
-public class Main {
+public class PurrBotMain {
 
     private static DiscordBotListAPI api;
 
@@ -175,10 +174,8 @@ public class Main {
             Properties p = new Properties();
 
             try{
-                p.load(Main.class.getClassLoader().getResourceAsStream("version.properties"));
-            }catch (IOException ex){
-                EmbedUtil.sendErrorEmbed(null, "Main.java",
-                        ex.getStackTrace().toString());
+                p.load(PurrBotMain.class.getClassLoader().getResourceAsStream("version.properties"));
+            }catch (IOException ignored){
                 return null;
             }
 

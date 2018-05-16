@@ -2,7 +2,7 @@ package net.andre601.listeners;
 
 import net.andre601.commands.server.CmdPrefix;
 import net.andre601.commands.server.CmdWelcome;
-import net.andre601.core.Main;
+import net.andre601.core.PurrBotMain;
 import net.andre601.util.MessageUtil;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.OnlineStatus;
@@ -13,8 +13,8 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class ReadyListener extends ListenerAdapter{
 
     private static String setBotGame(){
-        return (Main.file.getItem("config", "beta").equalsIgnoreCase("true") ?
-        "My sister on %s Guilds!" : "some Nekos OwO | On %s Guilds");
+        return (PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true") ?
+        "My sister on %s Guilds!" : "https://purrbot.site | %s Guilds");
     }
 
     public static String getBotGame(){
@@ -37,14 +37,14 @@ public class ReadyListener extends ListenerAdapter{
                 "  > Discords loaded: %s",
                 MessageUtil.getTag(e.getJDA().getSelfUser()),
                 botID,
-                Main.getVersion(),
+                PurrBotMain.getVersion(),
                 JDAInfo.VERSION,
                 e.getJDA().getGuilds().size()
         ));
 
         //  Sending update if Bot isn't beta
-        if(Main.file.getItem("config", "beta").equalsIgnoreCase("false"))
-            Main.getAPI().setStats(botID, servers);
+        if(PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("false"))
+            PurrBotMain.getAPI().setStats(botID, servers);
 
         e.getJDA().getPresence().setPresence(OnlineStatus.ONLINE, Game.watching(String.format(
                 getBotGame(),

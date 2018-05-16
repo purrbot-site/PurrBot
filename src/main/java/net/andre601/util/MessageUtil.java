@@ -1,6 +1,6 @@
 package net.andre601.util;
 
-import net.andre601.core.Main;
+import net.andre601.core.PurrBotMain;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
 
@@ -12,40 +12,39 @@ public class MessageUtil {
 
 
     private static DateTimeFormatter timeFormatFull = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
-    private static DateTimeFormatter timeFormatSimple = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     //  For returning random Strings/images.
     public static String getFact(){
-        if(Main.isBDay())
+        if(PurrBotMain.isBDay())
             return  "🎉 Today is Purr's Birthday! 🎉";
 
-        return Main.getRandomFact().size() > 0 ? Main.getRandomFact().get(
-                Main.getRandom().nextInt(Main.getRandomFact().size())) : "";
+        return PurrBotMain.getRandomFact().size() > 0 ? PurrBotMain.getRandomFact().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomFact().size())) : "";
     }
 
     public static String getRandomNotNSFW(){
-        return Main.getRandomNoNSWF().size() > 0 ? Main.getRandomNoNSWF().get(
-                Main.getRandom().nextInt(Main.getRandomNoNSWF().size())) : "";
+        return PurrBotMain.getRandomNoNSWF().size() > 0 ? PurrBotMain.getRandomNoNSWF().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomNoNSWF().size())) : "";
     }
 
     public static String getRandomShutdown(){
-        return Main.getRandomShutdownText().size() > 0 ? Main.getRandomShutdownText().get(
-                Main.getRandom().nextInt(Main.getRandomShutdownText().size())) : "";
+        return PurrBotMain.getRandomShutdownText().size() > 0 ? PurrBotMain.getRandomShutdownText().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomShutdownText().size())) : "";
     }
 
     public static String getRandomNoShutdown(){
-        return Main.getRandomNoShutdownText().size() > 0 ? Main.getRandomNoShutdownText().get(
-                Main.getRandom().nextInt(Main.getRandomNoShutdownText().size())) : "";
+        return PurrBotMain.getRandomNoShutdownText().size() > 0 ? PurrBotMain.getRandomNoShutdownText().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomNoShutdownText().size())) : "";
     }
 
     public static String getRandomImage(){
-        return Main.getRandomShutdownImage().size() > 0 ? Main.getRandomShutdownImage().get(
-                Main.getRandom().nextInt(Main.getRandomShutdownImage().size())) : "";
+        return PurrBotMain.getRandomShutdownImage().size() > 0 ? PurrBotMain.getRandomShutdownImage().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomShutdownImage().size())) : "";
     }
 
     public static String getRandomNoImage(){
-        return Main.getRandomNoShutdownImage().size() > 0 ? Main.getRandomNoShutdownImage().get(
-                Main.getRandom().nextInt(Main.getRandomNoShutdownImage().size())) : "";
+        return PurrBotMain.getRandomNoShutdownImage().size() > 0 ? PurrBotMain.getRandomNoShutdownImage().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomNoShutdownImage().size())) : "";
     }
 
     public static String isBot(User user){
@@ -120,10 +119,5 @@ public class MessageUtil {
     public static String formatTime(LocalDateTime dateTime){
         LocalDateTime time = LocalDateTime.from(dateTime.atOffset(ZoneOffset.UTC));
         return time.format(timeFormatFull) + " UTC";
-    }
-
-    public static String formatSimpleTime(LocalDateTime dateTime){
-        LocalDateTime time = LocalDateTime.from(dateTime.atOffset(ZoneOffset.UTC));
-        return time.format(timeFormatSimple) + " UTC";
     }
 }
