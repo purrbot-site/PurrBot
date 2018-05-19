@@ -1,6 +1,8 @@
 package net.andre601.util;
 
+import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 
@@ -12,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.MessageFormat;
+import java.util.concurrent.TimeUnit;
 
 public class ImageUtil {
 
@@ -33,7 +37,7 @@ public class ImageUtil {
         return icon;
     }
 
-    public static void createWelcomeImg(User user, Guild g, TextChannel tc){
+    public static void createWelcomeImg(User user, Guild g, TextChannel tc, Message msg){
 
         //  Saving the userIcon/avatar as a Buffered image
         BufferedImage u = getUserIcon(user);
@@ -73,13 +77,45 @@ public class ImageUtil {
             tc.sendFile(stream.toByteArray(), String.format(
                     "%s.png",
                     user.getId()
-            ), null).queue(msg -> msg.editMessage(String.format(
-                    "Welcome %s",
-                    user.getAsMention()
-            )).queue());
+            ), msg).queue();
 
             //  We just ignore the caused exception.
         }catch (IOException ignored){
+        }
+    }
+
+    public static void createImg(String url, Message msg){
+        String imgName = MessageFormat.format(
+                "FavoriteImage({0}).png",
+                msg.getAuthor().getId());
+        TextChannel tc = msg.getTextChannel();
+
+        try{
+            URL imgURL = new URL(url);
+            URLConnection connection = imgURL.openConnection();
+            connection.setRequestProperty(UA[0], UA[1]);
+            if(connection.getContentType().equals("image/gif"))
+                imgName = MessageFormat.format(
+                        "FavoriteImage({0}).gif",
+                        msg.getAuthor().getId()
+                );
+            Message newMsg = new MessageBuilder()
+                    .append(MessageFormat.format(
+                            "Image requested by {0}!",
+                            msg.getAuthor().getAsMention()
+                    ))
+                    .build();
+            try{
+                final String finalImgName = imgName;
+                tc.sendFile(connection.getInputStream(), finalImgName, newMsg).queue();
+            }catch (Exception ignored){
+                tc.sendMessage(String.format("%s There was an issue with sending the image :(")).queue();
+            }
+        }catch (Exception ignored){
+            tc.sendMessage(String.format(
+                    "%s You need to provide a valid URL!",
+                    msg.getAuthor().getAsMention()
+            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
         }
     }
 

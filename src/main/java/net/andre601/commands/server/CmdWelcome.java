@@ -181,7 +181,7 @@ public class CmdWelcome implements Command {
 
             case "test":
                 tc.sendTyping().queue();
-                ImageUtil.createWelcomeImg(e.getAuthor(), g, tc);
+                ImageUtil.createWelcomeImg(e.getAuthor(), g, tc, null);
                 break;
 
             default:

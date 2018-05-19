@@ -119,8 +119,14 @@ public class CmdNeko implements Command {
                     ), link)
                     .setImage(link);
 
-            tc.sendMessage("Getting a cute neko...").queue(message ->
-                message.editMessage(neko.build()).queue()
+            tc.sendMessage("Getting a cute neko...").queue(message -> {
+                message.editMessage(neko.build()).queue();
+                if(link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko039.jpeg")){
+                    tc.sendMessage("Hey! That's me :3").queue();
+                    if(PermUtil.canReact(message))
+                        message.addReaction("❤").queue();
+                }
+            }
             );
         }catch (Exception ignored){
         }

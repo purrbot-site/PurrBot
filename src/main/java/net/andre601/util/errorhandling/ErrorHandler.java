@@ -22,9 +22,6 @@ public class ErrorHandler extends Filter<ILoggingEvent> {
 
         if(e.getMarker() != Markers.NO_ANNOUNCE && e.getLevel() == Level.ERROR || e.getLevel() == Level.WARN){
             String finalMsg = msg;
-            if(e.getThreadName().startsWith("lava-daemon-pool")){
-                return FilterReply.NEUTRAL;
-            }
             EXECUTOR.submit(() -> {
                 Throwable throwable = null;
                 if(e.getThrowableProxy() != null && e.getThrowableProxy() instanceof ThrowableProxy){
@@ -35,15 +32,9 @@ public class ErrorHandler extends Filter<ILoggingEvent> {
                     return;
                 }
                 if(throwable != null){
-                    if(e.getMarker() == Markers.TAG_DEVELOPER)
-                        EmbedUtil.sendErrorEmbed(finalMsg, "FatalError");
-                    else
-                        EmbedUtil.sendErrorEmbed(finalMsg, "Exception");
+                    EmbedUtil.sendErrorEmbed(finalMsg, "Throwable");
                 }else{
-                    if(e.getMarker() == Markers.TAG_DEVELOPER)
-                        EmbedUtil.sendErrorEmbed(finalMsg, "FatalError");
-                    else
-                        EmbedUtil.sendErrorEmbed(finalMsg, "Error");
+                    EmbedUtil.sendErrorEmbed(finalMsg, "Error");
                 }
             });
         }

@@ -10,6 +10,7 @@
     </appender>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="net.andre601.util.errorhandling.ErrorHandler" />
+        <filter class="net.andre601.util.errorhandling.ErrorFilter" />
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>

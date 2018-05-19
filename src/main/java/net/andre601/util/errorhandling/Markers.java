@@ -6,8 +6,7 @@ import org.slf4j.MarkerFactory;
 import java.util.Iterator;
 
 public enum  Markers implements Marker {
-    NO_ANNOUNCE,
-    TAG_DEVELOPER;
+    NO_ANNOUNCE;
 
     final Marker marker;
 
