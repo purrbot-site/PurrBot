@@ -52,6 +52,14 @@ public class CmdImg implements Command {
             return;
         }
 
+        tc.sendTyping().queue();
+
+        if(args[0].startsWith("neko:")){
+            String link = args[0].replace("neko:", "https://cdn.nekos.life/neko/");
+            createImg(link, msg);
+            return;
+        }
+
         createImg(args[0], msg);
 
     }
