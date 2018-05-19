@@ -52,33 +52,31 @@ public class CmdSlap implements Command{
             return;
         }
 
-        List<User> mentionedUsers = msg.getMentionedUsers();
-        for (User user : mentionedUsers){
-            if(user == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(e.getMessage()))
-                    e.getMessage().addReaction("💔").queue();
+        User user = msg.getMentionedUsers().get(0);
+        if(user == msg.getJDA().getSelfUser()){
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("💔").queue();
 
-                tc.sendMessage(String.format("%s Please do not hurt me. :(",
-                        msg.getMember().getAsMention())).queue();
-                break;
-            }
-            if(user == msg.getAuthor()){
-                tc.sendMessage("Why are you hurting yourself?").queue();
-                break;
-            }
-            String name = msg.getGuild().getMember(user).getAsMention();
-            tc.sendMessage(String.format(
-                    "%s slapped you %s",
-                    msg.getMember().getEffectiveName(),
-                    name)).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getSlap()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
-            });
+            tc.sendMessage(String.format("%s Please do not hurt me. :(",
+                    msg.getMember().getAsMention())).queue();
+            return;
         }
+        if(user == msg.getAuthor()){
+            tc.sendMessage("Why are you hurting yourself?").queue();
+            return;
+        }
+        String name = msg.getGuild().getMember(user).getAsMention();
+        tc.sendMessage(String.format(
+                "%s slapped you %s",
+                msg.getMember().getEffectiveName(),
+                name)).queue(message -> {
+            try{
+                message.editMessage(
+                        EmbedUtil.getEmbed().setImage(HttpUtil.getSlap()).build()
+                ).queue();
+            }catch (Exception ignored){
+            }
+        });
     }
 
     @Override

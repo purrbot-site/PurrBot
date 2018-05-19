@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import static net.andre601.commands.server.CmdPrefix.getPrefix;
 
+import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 
 import static net.andre601.core.PurrBotMain.waiter;
@@ -52,12 +53,12 @@ public class CmdHelp implements Command {
 
     private static void usage(Message msg){
         Paginator page = pBuilder
-                .setItems(String.format(
-                        "**Command-Prefix**: %s\n" +
+                .setItems(MessageFormat.format(
+                        "**Command-Prefix**: {0}\n" +
                         "\n" +
                         "**Commands**:\n" +
                         "Use the reactions to switch through the pages.\n" +
-                        "Type `%shelp [command]` to get infos about a command!\n" +
+                        "Type `{0}help [command]` to get infos about a command!\n" +
                         "\n" +
                         "```\n" +
                         "Pages:\n" +
@@ -68,16 +69,15 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
-                        "%s",
-                        getPrefix(msg.getGuild()),
+                        "{1}",
                         getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
-                ), String.format(
-                        "**Command-Prefix**: %s\n" +
+                ), MessageFormat.format(
+                        "**Command-Prefix**: {0}\n" +
                         "\n" +
                         "**Commands**:\n" +
                         "Use the reactions to switch through the pages.\n" +
-                        "Type `%shelp [command]` to get infos about a command!\n" +
+                        "Type `{0}help [command]` to get infos about a command!\n" +
                         "\n" +
                         "**Fun**:\n" +
                         "```\n" +
@@ -95,16 +95,15 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
-                        "%s",
-                        getPrefix(msg.getGuild()),
+                        "{1}",
                         getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
-                ), String.format(
-                        "**Command-Prefix**: %s\n" +
+                ), MessageFormat.format(
+                        "**Command-Prefix**: {0}\n" +
                         "\n" +
                         "**Commands**:\n" +
                         "Use the reactions to switch through the pages.\n" +
-                        "Type `%shelp [command]` to get infos about a command!\n" +
+                        "Type `{0}help [command]` to get infos about a command!\n" +
                         "\n" +
                         "**Informative**:\n" +
                         "```\n" +
@@ -112,6 +111,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "Help\n" +
                         "Info         [-here]\n" +
+                        "Img          [URL|neko:<image>.<png/jpg/...>]\n" +
                         "Invite       [-here]\n" +
                         "Quote        <messageID>\n" +
                         "Server\n" +
@@ -122,16 +122,15 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
-                        "%s",
-                        getPrefix(msg.getGuild()),
+                        "{1}",
                         getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
-                ), String.format(
-                        "**Command-Prefix**: %s\n" +
+                ), MessageFormat.format(
+                        "**Command-Prefix**: {0}\n" +
                         "\n" +
                         "**Commands**:\n" +
                         "Use the reactions to switch through the pages.\n" +
-                        "Type `%shelp [command]` to get infos about a command!\n" +
+                        "Type `{0}help [command]` to get infos about a command!\n" +
                         "\n" +
                         "**NSFW**:\n" +
                         "```\n" +
@@ -143,16 +142,15 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
-                        "%s",
-                        getPrefix(msg.getGuild()),
+                        "{1}",
                         getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
-                ), String.format(
-                        "**Command-Prefix**: %s\n" +
+                ), MessageFormat.format(
+                        "**Command-Prefix**: {0}\n" +
                         "\n" +
                         "**Commands**:\n" +
                         "Use the reactions to switch through the pages.\n" +
-                        "Type `%shelp [command]` to get infos about a command!\n" +
+                        "Type `{0}help [command]` to get infos about a command!\n" +
                         "\n" +
                         "**Server**:\n" +
                         "```\n" +
@@ -165,8 +163,7 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
-                        "%s",
-                        getPrefix(msg.getGuild()),
+                        "{1}",
                         getPrefix(msg.getGuild()),
                         MessageUtil.getFact()
                 ))
@@ -355,6 +352,15 @@ public class CmdHelp implements Command {
                         "`<messageID>` The ID of the message to quote.",
                         "`none`"
                 );
+                break;
+
+            case "img":
+            case "image":
+                usage(msg, "Img", "img [URL|neko:<name>.<ending>]",
+                        "Will upload a image in the textchannel.",
+                        "`[URL]` The URL of the image to post.\n" +
+                        "`neko:<name>.<ending>` Get an image from the nekos.life-Database. Ending is .png/.jpg/...",
+                        "`none`");
                 break;
 
             default:

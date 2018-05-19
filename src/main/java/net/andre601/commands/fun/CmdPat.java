@@ -50,31 +50,29 @@ public class CmdPat implements Command {
             return;
         }
 
-        List<User> mentionedUsers = msg.getMentionedUsers();
-        for (User user : mentionedUsers){
-            if(user == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(e.getMessage()))
-                    e.getMessage().addReaction("❤").queue();
+        User user = msg.getMentionedUsers().get(0);
+        if(user == msg.getJDA().getSelfUser()){
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("❤").queue();
 
-                tc.sendMessage(String.format("%s \\*purr*",
-                        msg.getMember().getAsMention())).queue();
-                break;
-            }
-            if(user == msg.getAuthor()){
-                tc.sendMessage("Why are you patting yourself?").queue();
-                break;
-            }
-            String name = msg.getGuild().getMember(user).getAsMention();
-            tc.sendMessage(String.format("%s gave you a pat %s", msg.getMember().
-                    getEffectiveName(), name)).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getPat()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
-            });
+            tc.sendMessage(String.format("%s \\*purr*",
+                    msg.getMember().getAsMention())).queue();
+            return;
         }
+        if(user == msg.getAuthor()){
+            tc.sendMessage("Why are you patting yourself?").queue();
+            return;
+        }
+        String name = msg.getGuild().getMember(user).getAsMention();
+        tc.sendMessage(String.format("%s gave you a pat %s", msg.getMember().
+                getEffectiveName(), name)).queue(message -> {
+            try{
+                message.editMessage(
+                        EmbedUtil.getEmbed().setImage(HttpUtil.getPat()).build()
+                ).queue();
+            }catch (Exception ignored){
+            }
+        });
 
     }
 

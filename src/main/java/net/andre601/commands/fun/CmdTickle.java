@@ -50,34 +50,32 @@ public class CmdTickle implements Command {
             return;
         }
 
-        List<User> mentionedUsers = msg.getMentionedUsers();
-        for (User user : mentionedUsers){
-            if(user == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(e.getMessage()))
-                    e.getMessage().addReaction("😂").queue();
+        User user = msg.getMentionedUsers().get(0);
+        if(user == msg.getJDA().getSelfUser()){
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("😂").queue();
 
-                tc.sendMessage(String.format("N-no... I can't lau- \\*uncontrollable laughter*",
-                        msg.getMember().getAsMention())).queue();
-                break;
-            }
-            if(user == msg.getAuthor()){
-                tc.sendMessage("Why are you tickling yourself?").queue();
-                break;
-            }
-            String name = msg.getGuild().getMember(user).getAsMention();
-            tc.sendMessage(String.format(
-                    "%s tickles %s",
-                    msg.getMember().getEffectiveName(),
-                    name
-            )).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getTickle()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
-            });
+            tc.sendMessage(String.format("N-no... I can't lau- \\*laughs*",
+                    msg.getMember().getAsMention())).queue();
+            return;
         }
+        if(user == msg.getAuthor()){
+            tc.sendMessage("Why are you tickling yourself?").queue();
+            return;
+        }
+        String name = msg.getGuild().getMember(user).getAsMention();
+        tc.sendMessage(String.format(
+                "%s tickles %s",
+                msg.getMember().getEffectiveName(),
+                name
+        )).queue(message -> {
+            try{
+                message.editMessage(
+                        EmbedUtil.getEmbed().setImage(HttpUtil.getTickle()).build()
+                ).queue();
+            }catch (Exception ignored){
+            }
+        });
     }
 
     @Override

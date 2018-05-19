@@ -54,38 +54,36 @@ public class CmdCuddle implements Command{
         }
 
         //  Getting all mentioned users in the message and store them in a List
-        List<User> mentionedUsers = msg.getMentionedUsers();
-        for (User user : mentionedUsers){
+        User user = msg.getMentionedUsers().get(0);
 
-            //  mentioned user = own user -> send message, add reaction and return.
-            if(user == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(e.getMessage()))
-                    e.getMessage().addReaction("❤").queue();
+        //  mentioned user = own user -> send message, add reaction and return.
+        if(user == msg.getJDA().getSelfUser()){
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("❤").queue();
 
-                tc.sendMessage(String.format("%s \\*Enjoys the cuddle*",
-                        msg.getMember().getAsMention())).queue();
-                break;
-            }
-
-            //  mentioned user = author of the message -> Send message and return.
-            if(user == msg.getAuthor()){
-                tc.sendMessage("Do you have no one to cuddle with?").queue();
-                break;
-            }
-            String name = msg.getGuild().getMember(user).getAsMention();
-            tc.sendMessage(String.format(
-                    "%s cuddles with you %s",
-                    msg.getMember().getEffectiveName(),
-                    name
-            )).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
-            });
+            tc.sendMessage(String.format("%s \\*Enjoys the cuddle*",
+                    msg.getMember().getAsMention())).queue();
+            return;
         }
+
+        //  mentioned user = author of the message -> Send message and return.
+        if(user == msg.getAuthor()){
+            tc.sendMessage("Do you have no one to cuddle with?").queue();
+            return;
+        }
+        String name = msg.getGuild().getMember(user).getAsMention();
+        tc.sendMessage(String.format(
+                "%s cuddles with you %s",
+                msg.getMember().getEffectiveName(),
+                name
+        )).queue(message -> {
+            try{
+                message.editMessage(
+                        EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
+                ).queue();
+            }catch (Exception ignored){
+            }
+        });
     }
 
     @Override

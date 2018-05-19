@@ -54,38 +54,36 @@ public class CmdKiss implements Command {
         }
 
         //  Getting all mentioned users in the message and store them in a List
-        List<User> mentionedUsers = msg.getMentionedUsers();
-        for (User user : mentionedUsers){
+        User user = msg.getMentionedUsers().get(0);
 
-            //  mentioned user = own user (Bot) -> send message, add reaction and return.
-            if(user == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(e.getMessage()))
-                    e.getMessage().addReaction("\uD83D\uDE33").queue();
+        //  mentioned user = own user (Bot) -> send message, add reaction and return.
+        if(user == msg.getJDA().getSelfUser()){
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("\uD83D\uDE33").queue();
 
-                tc.sendMessage(String.format("%s Not on the first date!",
-                        msg.getMember().getAsMention())).queue();
-                break;
-            }
-
-            //  mentioned user = author of the message -> Send message and return.
-            if(user == msg.getAuthor()){
-                tc.sendMessage("I don't know, how you can actually kiss yourself... But ok.").queue();
-                break;
-            }
-            String name = msg.getGuild().getMember(user).getAsMention();
-            tc.sendMessage(String.format(
-                    "%s gives you a kiss %s",
-                    msg.getMember().getEffectiveName(),
-                    name
-            )).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
-            });
+            tc.sendMessage(String.format("%s Not on the first date!",
+                    msg.getMember().getAsMention())).queue();
+            return;
         }
+
+        //  mentioned user = author of the message -> Send message and return.
+        if(user == msg.getAuthor()){
+            tc.sendMessage("I don't know, how you can actually kiss yourself... But ok.").queue();
+            return;
+        }
+        String name = msg.getGuild().getMember(user).getAsMention();
+        tc.sendMessage(String.format(
+                "%s gives you a kiss %s",
+                msg.getMember().getEffectiveName(),
+                name
+        )).queue(message -> {
+            try{
+                message.editMessage(
+                        EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()
+                ).queue();
+            }catch (Exception ignored){
+            }
+        });
 
     }
 

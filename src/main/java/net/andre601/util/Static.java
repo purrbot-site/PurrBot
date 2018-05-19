@@ -25,6 +25,7 @@ public class Static {
     public static final String EMOJI_IDLE = "<:idle:426838620012281856> ";
     public static final String EMOJI_DND = "<:dnd:426838619714748439> ";
     public static final String EMOJI_OFFLINE = "<:offline:426840813729742859> ";
+    public static final String EMOJI_UNKNOWN = "<:unknown:447511093309603860>";
 
     //  URL for the avatar for certain cases.
     public static final String AVATAR_URL = "https://i.imgur.com/jCWyOtJ.png";

@@ -50,32 +50,29 @@ public class CmdHug implements Command {
             return;
         }
 
-        List<User> mentionedUsers = msg.getMentionedUsers();
-        for (User user : mentionedUsers){
-            if(user == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(e.getMessage()))
-                    e.getMessage().addReaction("❤").queue();
+        User user = msg.getMentionedUsers().get(0);
+        if(user == msg.getJDA().getSelfUser()){
+            if(PermUtil.canReact(e.getMessage()))
+                e.getMessage().addReaction("❤").queue();
 
-                tc.sendMessage(String.format("Awwwwww.... Thank you for the hug %s. :heart:",
-                        msg.getMember().getAsMention())).queue();
-                break;
-            }
-            if(user == msg.getAuthor()){
-                tc.sendMessage("You wanna hug yourself? Are you lonely?").queue();
-                break;
-            }
-            String name = msg.getGuild().getMember(user).getAsMention();
-            tc.sendMessage(String.format("%s you got a hug from %s", name, msg.getMember().
-            getEffectiveName())).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
-            });
+            tc.sendMessage(String.format("Awwwwww.... Thank you for the hug %s. :heart:",
+                    msg.getMember().getAsMention())).queue();
+            return;
         }
-
+        if(user == msg.getAuthor()){
+            tc.sendMessage("You wanna hug yourself? Are you lonely?").queue();
+            return;
+        }
+        String name = msg.getGuild().getMember(user).getAsMention();
+        tc.sendMessage(String.format("%s you got a hug from %s", name, msg.getMember().
+        getEffectiveName())).queue(message -> {
+            try{
+                message.editMessage(
+                        EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()
+                ).queue();
+            }catch (Exception ignored){
+            }
+        });
     }
 
     @Override

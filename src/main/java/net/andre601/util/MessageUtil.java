@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
+import static net.andre601.util.Static.*;
+
 public class MessageUtil {
 
 
@@ -69,18 +71,27 @@ public class MessageUtil {
         }
     }
 
-    private static String getGameStatus(Member member){
-        return (member != null && member.getGame() != null ?
-                " (" + (member.getGame().getUrl() == null ?
-                        String.format(
-                                "`%s`",
-                                member.getGame().getName()) :
-                        String.format(
-                                "[`%s`](%s)",
-                                member.getGame().getName(),
-                                member.getGame().getUrl()
-                        )
-                ) + ")" : "");
+    public static String getGameStatus(Game game){
+        String str;
+        switch (game.getType()){
+            case STREAMING:
+                return "(Streaming [`" + game.getName() + "`](" + game.getUrl() + "))";
+
+            case LISTENING:
+                str = "Listening to ";
+                break;
+
+            case WATCHING:
+                str = "Watching ";
+                break;
+
+            case DEFAULT:
+            default:
+                str = "Playing ";
+                break;
+        }
+        return "(" + str + (game.getUrl() == null ? "`" + game.getName() + "`" : "[`" + game.getName() + "`](" +
+                game.getUrl() + ")") + ")";
     }
 
     public static String getUsername(Member member){
@@ -95,21 +106,34 @@ public class MessageUtil {
         ));
     }
 
-    public static String getStatus(Member member, Message msg){
-        if(member.getOnlineStatus() == OnlineStatus.ONLINE){
-            return (PermUtil.canUseCustomEmojis(msg) ? Static.EMOJI_ONLINE
-                    : "" ) + "`Online`" + getGameStatus(member);
-        }else
-        if(member.getOnlineStatus() == OnlineStatus.IDLE){
-            return (PermUtil.canUseCustomEmojis(msg) ? Static.EMOJI_IDLE
-                    : "" ) + "`Idle`" + getGameStatus(member);
-        }else
-        if(member.getOnlineStatus() == OnlineStatus.DO_NOT_DISTURB){
-            return (PermUtil.canUseCustomEmojis(msg) ? Static.EMOJI_DND
-                    : "" ) + "`Do not disturb`" + getGameStatus(member);
+    public static String getStatus(OnlineStatus status, Message msg){
+        String str;
+        switch (status){
+            case ONLINE:
+                str = EMOJI_ONLINE;
+                break;
+
+            case IDLE:
+                str = EMOJI_IDLE;
+                break;
+
+            case DO_NOT_DISTURB:
+                str = EMOJI_DND;
+                break;
+
+            case INVISIBLE:
+            case OFFLINE:
+                str = EMOJI_OFFLINE;
+                break;
+
+            case UNKNOWN:
+            default:
+                str = EMOJI_UNKNOWN;
         }
-        return (PermUtil.canUseCustomEmojis(msg) ? Static.EMOJI_OFFLINE
-                : "" ) + "`Offline`";
+        if(PermUtil.canUseCustomEmojis(msg))
+            return str + "`" + status.name().replace("_", " ").toLowerCase() + "`";
+
+        return "`" + status.name().replace("_", " ").toLowerCase() + "`";
     }
 
     public static String getTag(User user){
