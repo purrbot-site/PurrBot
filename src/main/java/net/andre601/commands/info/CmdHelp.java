@@ -83,13 +83,13 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "Command:     Argument(s):\n" +
                         "\n" +
-                        "Cuddle       <@user>\n" +
-                        "Hug          <@user>\n" +
-                        "Kiss         <@user>\n" +
+                        "Cuddle       <@user ...>\n" +
+                        "Hug          <@user ...>\n" +
+                        "Kiss         <@user ...>\n" +
                         "Neko         [-slide]\n" +
-                        "Pat          <@user>\n" +
-                        "Slap         <@user>\n" +
-                        "Tickle       <@user>\n" +
+                        "Pat          <@user ...>\n" +
+                        "Slap         <@user ...>\n" +
+                        "Tickle       <@user ...>\n" +
                         "\n" +
                         "[optional] | <required>\n" +
                         "```\n" +
@@ -138,7 +138,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "Lewd         [-slide]\n" +
                         "\n" +
-                        "[optional] | <required>\n" +
+                        "[optional]\n" +
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
@@ -257,7 +257,7 @@ public class CmdHelp implements Command {
             case "neko":
                 usage(msg, "Neko", "neko [-slide]",
                         "Sends a cute neko. 'nuf said.",
-                        "`-slide` Creates a slideshow with 30 images",
+                        "`[-slide]` Creates a slideshow with 30 images",
                         "`none`"
                 );
                 break;
@@ -265,7 +265,7 @@ public class CmdHelp implements Command {
             case "hug":
                 usage(msg, "Hug", "hug <@user>",
                         "Gives the mentioned user a hug.",
-                        "`<@user>` The user to hug (as mention).",
+                        "`<@user ...>` The user to hug (as mention). You can mention multiple users!",
                         "`none`"
                 );
                 break;
@@ -273,7 +273,7 @@ public class CmdHelp implements Command {
             case "pat":
                 usage(msg, "Pat", "pat <@user>",
                         "Gives the mentioned user a pat.",
-                        "`<@user>` The user to pat (as mention).",
+                        "`<@user ...>` The user to pat (as mention). You can mention multiple users!",
                         "`none`"
                 );
                 break;
@@ -281,7 +281,7 @@ public class CmdHelp implements Command {
             case "slap":
                 usage(msg, "Slap", "slap <@user>",
                         "Slaps the mentioned user.",
-                        "`<@slap>` The user to slap (as mention).",
+                        "`<@user ...>` The user to slap (as mention). You can mention multiple users!",
                         "`none`"
                 );
                 break;
@@ -290,7 +290,7 @@ public class CmdHelp implements Command {
                 usage(msg, "Lewd", "lewd [-slide]",
                         "Sends a lewd neko.\n" +
                         "Can only be used in NSFW-Channels.",
-                        "`-slide` Creates a slideshow with 30 images",
+                        "`[-slide]` Creates a slideshow with 30 images",
                         "`none`"
                 );
                 break;
@@ -306,7 +306,7 @@ public class CmdHelp implements Command {
             case "cuddle":
                 usage(msg, "Cuddle", "cuddle <@user>",
                         "Cuddles the mentioned user.",
-                        "`<@user>` The user to cuddle (as mention).",
+                        "`<@user ...>` The user to cuddle (as mention). You can mention multiple users!",
                         "`none`"
                 );
                 break;
@@ -314,7 +314,7 @@ public class CmdHelp implements Command {
             case "tickle":
                 usage(e.getMessage(), "Tickle", "tickle <@user>",
                         "Tickles the mentioned user.",
-                        "`<@user>` The user to tickle (as mention).",
+                        "`<@user ...>` The user to tickle (as mention). You can mention multiple users!",
                         "`none`"
                 );
                 break;
@@ -341,7 +341,7 @@ public class CmdHelp implements Command {
             case "kiss":
                 usage(e.getMessage(), "Kiss", "kiss <@user>",
                         "Lets you kiss someone.",
-                        "`<@user>` The user you want to kiss (as mention).",
+                        "`<@user ...>` The user you want to kiss (as mention). You can mention multiple users!",
                         "`none`"
                 );
                 break;

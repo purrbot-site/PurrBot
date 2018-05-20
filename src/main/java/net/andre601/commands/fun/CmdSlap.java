@@ -19,7 +19,7 @@ public class CmdSlap implements Command{
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
                 "%s Please mention a user at the end of the command to slap!\n" +
-                "Example: `%sslap %s`",
+                "Example: `%sslap @%s`",
                 msg.getAuthor().getAsMention(),
                 CmdPrefix.getPrefix(msg.getGuild()),
                 MessageUtil.getTag(msg.getAuthor())

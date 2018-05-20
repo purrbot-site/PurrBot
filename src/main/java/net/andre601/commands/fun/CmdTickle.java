@@ -18,7 +18,7 @@ public class CmdTickle implements Command {
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
                 "%s Please mention a user at the end of the command to tickle!\n" +
-                        "Example: `%stickle @*Purr*#6875`",
+                "Example: `%stickle @*Purr*#6875`",
                 msg.getAuthor().getAsMention(),
                 CmdPrefix.getPrefix(msg.getGuild())
         )).queue();
