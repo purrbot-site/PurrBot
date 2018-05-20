@@ -11,6 +11,7 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CmdKiss implements Command {
 
@@ -53,37 +54,52 @@ public class CmdKiss implements Command {
             return;
         }
 
-        //  Getting all mentioned users in the message and store them in a List
-        User user = msg.getMentionedUsers().get(0);
+        List<User> user = msg.getMentionedUsers();
+        if(user.size() == 1){
+            //  mentioned user = own user (Bot) -> send message, add reaction and return.
+            if(user == msg.getJDA().getSelfUser()){
+                if(PermUtil.canReact(e.getMessage()))
+                    e.getMessage().addReaction("\uD83D\uDE33").queue();
 
-        //  mentioned user = own user (Bot) -> send message, add reaction and return.
-        if(user == msg.getJDA().getSelfUser()){
-            if(PermUtil.canReact(e.getMessage()))
-                e.getMessage().addReaction("\uD83D\uDE33").queue();
-
-            tc.sendMessage(String.format("%s Not on the first date!",
-                    msg.getMember().getAsMention())).queue();
-            return;
-        }
-
-        //  mentioned user = author of the message -> Send message and return.
-        if(user == msg.getAuthor()){
-            tc.sendMessage("I don't know, how you can actually kiss yourself... But ok.").queue();
-            return;
-        }
-        String name = msg.getGuild().getMember(user).getAsMention();
-        tc.sendMessage(String.format(
-                "%s gives you a kiss %s",
-                msg.getMember().getEffectiveName(),
-                name
-        )).queue(message -> {
-            try{
-                message.editMessage(
-                        EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()
-                ).queue();
-            }catch (Exception ignored){
+                tc.sendMessage(String.format("%s Not on the first date!",
+                        msg.getMember().getAsMention())).queue();
+                return;
             }
-        });
+
+            //  mentioned user = author of the message -> Send message and return.
+            if(user == msg.getAuthor()){
+                tc.sendMessage("I don't know, how you can actually kiss yourself... But ok.").queue();
+                return;
+            }
+            String name = msg.getGuild().getMember(user.get(0)).getAsMention();
+            tc.sendMessage(String.format(
+                    "%s gives you a kiss %s",
+                    msg.getMember().getEffectiveName(),
+                    name
+            )).queue(message -> {
+                try{
+                    message.editMessage(
+                            EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()
+                    ).queue();
+                }catch (Exception ignored){
+                }
+            });
+
+        }else{
+            String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
+            tc.sendMessage(String.format(
+                    "%s gives you a kiss %s",
+                    msg.getMember().getEffectiveName(),
+                    users
+            )).queue(message -> {
+                try{
+                    message.editMessage(
+                            EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()
+                    ).queue();
+                }catch (Exception ignored){
+                }
+            });
+        }
 
     }
 

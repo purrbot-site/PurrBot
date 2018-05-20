@@ -11,6 +11,7 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CmdCuddle implements Command{
 
@@ -53,37 +54,53 @@ public class CmdCuddle implements Command{
             return;
         }
 
-        //  Getting all mentioned users in the message and store them in a List
-        User user = msg.getMentionedUsers().get(0);
+        List<User> user = msg.getMentionedUsers();
 
-        //  mentioned user = own user -> send message, add reaction and return.
-        if(user == msg.getJDA().getSelfUser()){
-            if(PermUtil.canReact(e.getMessage()))
-                e.getMessage().addReaction("❤").queue();
+        if(user.size() == 1){
+            //  mentioned user = own user -> send message, add reaction and return.
+            if(user == msg.getJDA().getSelfUser()){
+                if(PermUtil.canReact(e.getMessage()))
+                    e.getMessage().addReaction("❤").queue();
 
-            tc.sendMessage(String.format("%s \\*Enjoys the cuddle*",
-                    msg.getMember().getAsMention())).queue();
-            return;
-        }
-
-        //  mentioned user = author of the message -> Send message and return.
-        if(user == msg.getAuthor()){
-            tc.sendMessage("Do you have no one to cuddle with?").queue();
-            return;
-        }
-        String name = msg.getGuild().getMember(user).getAsMention();
-        tc.sendMessage(String.format(
-                "%s cuddles with you %s",
-                msg.getMember().getEffectiveName(),
-                name
-        )).queue(message -> {
-            try{
-                message.editMessage(
-                        EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
-                ).queue();
-            }catch (Exception ignored){
+                tc.sendMessage(String.format("%s \\*Enjoys the cuddle*",
+                        msg.getMember().getAsMention())).queue();
+                return;
             }
-        });
+
+            //  mentioned user = author of the message -> Send message and return.
+            if(user == msg.getAuthor()){
+                tc.sendMessage("Do you have no one to cuddle with?").queue();
+                return;
+            }
+            String name = msg.getGuild().getMember(user.get(0)).getAsMention();
+            tc.sendMessage(String.format(
+                    "%s cuddles with you %s",
+                    msg.getMember().getEffectiveName(),
+                    name
+            )).queue(message -> {
+                try{
+                    message.editMessage(
+                            EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
+                    ).queue();
+                }catch (Exception ignored){
+                }
+            });
+
+        }else{
+            String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
+            tc.sendMessage(String.format(
+                    "%s cuddles with you %s",
+                    msg.getMember().getEffectiveName(),
+                    users
+            )).queue(message -> {
+                try{
+                    message.editMessage(
+                            EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
+                    ).queue();
+                }catch (Exception ignored){
+                }
+            });
+        }
     }
 
     @Override

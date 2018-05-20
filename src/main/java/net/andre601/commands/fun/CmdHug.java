@@ -11,6 +11,7 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CmdHug implements Command {
 
@@ -50,29 +51,49 @@ public class CmdHug implements Command {
             return;
         }
 
-        User user = msg.getMentionedUsers().get(0);
-        if(user == msg.getJDA().getSelfUser()){
-            if(PermUtil.canReact(e.getMessage()))
-                e.getMessage().addReaction("❤").queue();
+        List<User> user = msg.getMentionedUsers();
+        if(user.size() == 1){
+            if(user == msg.getJDA().getSelfUser()){
+                if(PermUtil.canReact(e.getMessage()))
+                    e.getMessage().addReaction("❤").queue();
 
-            tc.sendMessage(String.format("Awwwwww.... Thank you for the hug %s. :heart:",
-                    msg.getMember().getAsMention())).queue();
-            return;
-        }
-        if(user == msg.getAuthor()){
-            tc.sendMessage("You wanna hug yourself? Are you lonely?").queue();
-            return;
-        }
-        String name = msg.getGuild().getMember(user).getAsMention();
-        tc.sendMessage(String.format("%s you got a hug from %s", name, msg.getMember().
-        getEffectiveName())).queue(message -> {
-            try{
-                message.editMessage(
-                        EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()
-                ).queue();
-            }catch (Exception ignored){
+                tc.sendMessage(String.format("Awwwwww.... Thank you for the hug %s. :heart:",
+                        msg.getMember().getAsMention())).queue();
+                return;
             }
-        });
+            if(user == msg.getAuthor()){
+                tc.sendMessage("You wanna hug yourself? Are you lonely?").queue();
+                return;
+            }
+            String name = msg.getGuild().getMember(user.get(0)).getAsMention();
+            tc.sendMessage(String.format(
+                    "%s gave you a hug %s",
+                    msg.getMember().getEffectiveName(),
+                    name
+            )).queue(message -> {
+                try{
+                    message.editMessage(
+                            EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()
+                    ).queue();
+                }catch (Exception ignored){
+                }
+            });
+
+        }else{
+            String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
+            tc.sendMessage(String.format(
+                    "%s gave you a hug %s",
+                    msg.getMember().getEffectiveName(),
+                    users
+            )).queue(message -> {
+                try{
+                    message.editMessage(
+                            EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()
+                    ).queue();
+                }catch (Exception ignored){
+                }
+            });
+        }
     }
 
     @Override
