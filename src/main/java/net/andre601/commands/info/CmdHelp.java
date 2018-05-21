@@ -52,6 +52,7 @@ public class CmdHelp implements Command {
     }
 
     private static void usage(Message msg){
+        msg.getChannel().sendTyping().queue();
         Paginator page = pBuilder
                 .setItems(MessageFormat.format(
                         "**Command-Prefix**: {0}\n" +
@@ -111,7 +112,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "Help\n" +
                         "Info         [-here]\n" +
-                        "Img          [URL|neko:<image>.<png/jpg/...>]\n" +
+                        "Img          <URL|neko:<image>.<png/jpg/...>>\n" +
                         "Invite       [-here]\n" +
                         "Quote        <messageID>\n" +
                         "Server\n" +
@@ -206,7 +207,6 @@ public class CmdHelp implements Command {
             msg.delete().queue();
 
         if(args.length == 0){
-            tc.sendTyping().queue();
             usage(msg);
             return;
         }
@@ -263,7 +263,7 @@ public class CmdHelp implements Command {
                 break;
 
             case "hug":
-                usage(msg, "Hug", "hug <@user>",
+                usage(msg, "Hug", "hug <@user ...>",
                         "Gives the mentioned user a hug.",
                         "`<@user ...>` The user to hug (as mention). You can mention multiple users!",
                         "`none`"
@@ -271,7 +271,7 @@ public class CmdHelp implements Command {
                 break;
 
             case "pat":
-                usage(msg, "Pat", "pat <@user>",
+                usage(msg, "Pat", "pat <@user ...>",
                         "Gives the mentioned user a pat.",
                         "`<@user ...>` The user to pat (as mention). You can mention multiple users!",
                         "`none`"
@@ -304,7 +304,7 @@ public class CmdHelp implements Command {
                 break;
 
             case "cuddle":
-                usage(msg, "Cuddle", "cuddle <@user>",
+                usage(msg, "Cuddle", "cuddle <@user ...>",
                         "Cuddles the mentioned user.",
                         "`<@user ...>` The user to cuddle (as mention). You can mention multiple users!",
                         "`none`"
@@ -312,7 +312,7 @@ public class CmdHelp implements Command {
                 break;
 
             case "tickle":
-                usage(e.getMessage(), "Tickle", "tickle <@user>",
+                usage(e.getMessage(), "Tickle", "tickle <@user ...>",
                         "Tickles the mentioned user.",
                         "`<@user ...>` The user to tickle (as mention). You can mention multiple users!",
                         "`none`"
@@ -339,7 +339,7 @@ public class CmdHelp implements Command {
                 break;
 
             case "kiss":
-                usage(e.getMessage(), "Kiss", "kiss <@user>",
+                usage(e.getMessage(), "Kiss", "kiss <@user ...>",
                         "Lets you kiss someone.",
                         "`<@user ...>` The user you want to kiss (as mention). You can mention multiple users!",
                         "`none`"
@@ -356,10 +356,10 @@ public class CmdHelp implements Command {
 
             case "img":
             case "image":
-                usage(msg, "Img", "img [URL|neko:<name>.<ending>]",
+                usage(msg, "Img", "img <URL|neko:<name>.<ending>>",
                         "Will upload a image in the textchannel.",
-                        "`[URL]` The URL of the image to post.\n" +
-                        "`neko:<name>.<ending>` Get an image from the nekos.life-Database. Ending is .png/.jpg/...",
+                        "`<URL>` The URL of the image to post.\n" +
+                        "`<neko:<name>.<ending>>` Get an image from the nekos.life-Database. Ending is .png/.jpg/...",
                         "`none`");
                 break;
 

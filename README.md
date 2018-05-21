@@ -23,16 +23,16 @@ User     | [@user]       | Gives infos about a you. tag a user, to get infos abo
 ## Fun
 **Permission**: No permission required.
 ```
-Command: | Arguments: | Description:
+Command: | Arguments:  | Description:
 
-Cuddle   | <@user>    | Cuddles the mentioned user.
-Hug      | <@user>    | Hugs the mentioned user.
-Kiss     | <@user>    | Kisses the mentioned user.
-Neko     | [-slide]   | Gets a neko-image from nekos.life.
-                        Use `-slide` at the end of the message for a slideshow with 30 images.
-Pat      | <@user>    | Gives the mentioned user a pat.
-Slap     | <@user>    | Slaps the mentioned user.
-Tickle   | <@user>    | Tickles the mentioned user.
+Cuddle   | <@user ...> | Cuddles the mentioned user(s).
+Hug      | <@user ...> | Hugs the mentioned user(s).
+Kiss     | <@user ...> | Kisses the mentioned user(s).
+Neko     | [-slide]    | Gets a neko-image from nekos.life.
+                         Use `-slide` at the end of the message for a slideshow with 30 images.
+Pat      | <@user ...> | Gives the mentioned user(s) a pat.
+Slap     | <@user ...> | Slaps the mentioned user(s).
+Tickle   | <@user ...> | Tickles the mentioned user(s).
 ```
 
 ## NSFW
