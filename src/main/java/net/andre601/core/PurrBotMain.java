@@ -1,10 +1,13 @@
 package net.andre601.core;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.andre601.commands.info.*;
 import net.andre601.commands.fun.*;
 import net.andre601.commands.nsfw.CmdLewd;
 import net.andre601.commands.owner.*;
+import net.andre601.commands.server.CmdDebug;
 import net.andre601.commands.server.CmdPrefix;
 import net.andre601.commands.server.CmdWelcome;
 import net.andre601.listeners.*;
@@ -21,6 +24,8 @@ import java.util.*;
 
 public class PurrBotMain {
 
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     private static DiscordBotListAPI api;
 
     public static GFile file = new GFile();
@@ -33,6 +38,7 @@ public class PurrBotMain {
     private static List<String> RandomNoShutdownImage = new ArrayList<>();
     private static List<String> RandomFact = new ArrayList<>();
     private static List<String> RandomNoNSWF = new ArrayList<>();
+    private static List<String> RandomDebug = new ArrayList<>();
 
     private static String version = null;
 
@@ -111,6 +117,7 @@ public class PurrBotMain {
         CommandHandler.commands.put("quote", new CmdQuote());
         CommandHandler.commands.put("img", new CmdImg());
         CommandHandler.commands.put("image", new CmdImg());
+        CommandHandler.commands.put("debug", new CmdDebug());
 
     }
 
@@ -134,6 +141,9 @@ public class PurrBotMain {
         Collections.addAll(RandomNoNSWF, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
                         "main/java/net/andre601/files/RandomNoNSFWMsg").split("\n"));
+        Collections.addAll(RandomDebug, HttpUtil.requestHttp(
+                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
+                        "main/java/net/andre601/files/RandomDebugMsg").split("\n"));
 
     }
 
@@ -155,6 +165,9 @@ public class PurrBotMain {
     }
     public static List<String> getRandomNoNSWF(){
         return RandomNoNSWF;
+    }
+    public static List<String> getRandomDebug() {
+        return RandomDebug;
     }
 
     public static Random getRandom(){
@@ -197,5 +210,9 @@ public class PurrBotMain {
     public static boolean isBDay(){
         final Calendar cal = Calendar.getInstance();
         return cal.get(Calendar.MONTH) == Calendar.MARCH && cal.get(Calendar.DAY_OF_MONTH) == 19;
+    }
+
+    public static Gson getGson(){
+        return gson;
     }
 }

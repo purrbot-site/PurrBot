@@ -1,6 +1,7 @@
-package net.andre601.util;
+package net.andre601.util.messagehandling;
 
 import net.andre601.core.PurrBotMain;
+import net.andre601.util.Static;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.MessageEmbed;

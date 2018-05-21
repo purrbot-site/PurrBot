@@ -1,6 +1,7 @@
-package net.andre601.util;
+package net.andre601.util.messagehandling;
 
 import net.andre601.core.PurrBotMain;
+import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
 
@@ -11,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 import static net.andre601.util.Static.*;
 
 public class MessageUtil {
-
 
     private static DateTimeFormatter timeFormatFull = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
 
@@ -47,6 +47,11 @@ public class MessageUtil {
     public static String getRandomNoImage(){
         return PurrBotMain.getRandomNoShutdownImage().size() > 0 ? PurrBotMain.getRandomNoShutdownImage().get(
                 PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomNoShutdownImage().size())) : "";
+    }
+
+    public static String getRandomDebug(){
+        return PurrBotMain.getRandomDebug().size() > 0 ? PurrBotMain.getRandomDebug().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomDebug().size())) : "";
     }
 
     public static String isBot(User user){

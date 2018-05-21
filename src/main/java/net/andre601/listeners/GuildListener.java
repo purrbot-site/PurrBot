@@ -1,8 +1,8 @@
 package net.andre601.listeners;
 
 import net.andre601.core.PurrBotMain;
-import net.andre601.util.EmbedUtil;
-import net.andre601.util.MessageUtil;
+import net.andre601.util.messagehandling.EmbedUtil;
+import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;

@@ -2,6 +2,7 @@ package net.andre601.commands.server;
 
 import net.andre601.commands.Command;
 import net.andre601.util.*;
+import net.andre601.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;

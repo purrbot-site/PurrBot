@@ -1,5 +1,6 @@
 package net.andre601.util;
 
+import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;

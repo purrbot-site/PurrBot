@@ -2,7 +2,7 @@ package net.andre601.commands.server;
 
 import net.andre601.commands.Command;
 import net.andre601.core.PurrBotMain;
-import net.andre601.util.EmbedUtil;
+import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.PermUtil;
 import net.andre601.util.Static;
 import net.dv8tion.jda.core.EmbedBuilder;

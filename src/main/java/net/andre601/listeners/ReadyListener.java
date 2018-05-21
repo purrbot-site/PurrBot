@@ -3,7 +3,7 @@ package net.andre601.listeners;
 import net.andre601.commands.server.CmdPrefix;
 import net.andre601.commands.server.CmdWelcome;
 import net.andre601.core.PurrBotMain;
-import net.andre601.util.MessageUtil;
+import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
