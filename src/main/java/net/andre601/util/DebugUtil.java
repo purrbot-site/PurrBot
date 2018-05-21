@@ -145,7 +145,7 @@ public class DebugUtil {
         try{
             connection = (HttpURLConnection) new URL("https://debug.scarsz.me/post").openConnection();
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.addRequestProperty("User-Agent", "DiscordSRV/" + PurrBotMain.getVersion());
+            connection.addRequestProperty("User-Agent", "Purr-Bot/" + PurrBotMain.getVersion());
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
 
