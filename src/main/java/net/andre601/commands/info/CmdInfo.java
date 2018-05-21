@@ -76,12 +76,12 @@ public class CmdInfo implements Command {
                 e.getTextChannel().sendMessage(String.format(
                         "Check your DMs %s",
                         e.getAuthor().getAsMention()
-                )).queue(msg2 -> msg2.delete().completeAfter(10, TimeUnit.SECONDS));
+                )).queue(msg2 -> msg2.delete().completeAfter(5, TimeUnit.SECONDS));
             }, throwable -> {
                 e.getTextChannel().sendMessage(String.format(
                         "I can't DM you %s :,(",
                         e.getAuthor().getAsMention()
-                )).queue(msg -> msg.delete().completeAfter(10, TimeUnit.SECONDS));
+                )).queue(msg -> msg.delete().completeAfter(5, TimeUnit.SECONDS));
             });
             }
         );

@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
+import java.util.concurrent.TimeUnit;
 
 public class CmdDebug implements Command {
 
@@ -34,7 +35,7 @@ public class CmdDebug implements Command {
             tc.sendMessage(MessageFormat.format(
                     "{0} You need the `MANAGE_SERVER` permission to use this!",
                     msg.getAuthor().getAsMention()
-            )).queue();
+            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
             return;
         }
 

@@ -39,7 +39,7 @@ public class CmdHelp implements Command {
                         "**Arguments**:\n" +
                         "%s\n" +
                         "\n" +
-                        "**Permission**:\n" +
+                        "**Required Permission**:\n" +
                         "%s",
                         getPrefix(msg.getGuild()),
                         use,
@@ -157,6 +157,7 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "Command:     Argument(s):\n" +
                         "\n" +
+                        "Debug\n" +
                         "Prefix       [set <prefix>|reset]\n" +
                         "Welcome      [set <channelID>|reset|test]\n" +
                         "\n" +
@@ -361,6 +362,13 @@ public class CmdHelp implements Command {
                         "`<URL>` The URL of the image to post.\n" +
                         "`<neko:<name>.<ending>>` Get an image from the nekos.life-Database. Ending is .png/.jpg/...",
                         "`none`");
+                break;
+
+            case "debug":
+                usage(msg, "Debug", "debug",
+                        "Will create debug-files and post them on [debug.scarsz.me](https://debug.scarsz.me",
+                        "`none`",
+                        "`MANAGE_SERVER`");
                 break;
 
             default:

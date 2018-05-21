@@ -181,6 +181,7 @@ public class PurrBotMain {
         RandomNoShutdownImage.clear();
         RandomFact.clear();
         RandomNoNSWF.clear();
+        RandomDebug.clear();
     }
 
     public static String getVersion(){

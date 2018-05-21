@@ -1,12 +1,13 @@
 package net.andre601.commands.owner;
 
 import net.andre601.commands.Command;
-import net.andre601.core.PurrBotMain;
 import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.concurrent.TimeUnit;
+
+import static net.andre601.core.PurrBotMain.*;
 
 public class CmdRefresh implements Command{
 
@@ -24,16 +25,17 @@ public class CmdRefresh implements Command{
 
         if(PermUtil.isCreator(e.getMessage())){
 
-            if(PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true"))
+            if(file.getItem("config", "beta").equalsIgnoreCase("true"))
                 return;
 
             tc.sendMessage(
                     "Clearing stored messages and images...\n" +
                     "Updating Guild-count on discordbots.org..."
             ).queue(msg -> {
-                PurrBotMain.clear();
-                PurrBotMain.loadRandom();
-                PurrBotMain.getAPI().setStats(e.getJDA().getSelfUser().getId(), e.getJDA().getGuilds().size());
+                clear();
+                loadRandom();
+                getAPI().setStats(e.getJDA().getSelfUser().getId(), e.getJDA().getGuilds().size());
+
                 msg.editMessage(
                         "Clearing stored messages and images \\✅\n" +
                         "Updating Guild-count on discordbots.org \\✅"
