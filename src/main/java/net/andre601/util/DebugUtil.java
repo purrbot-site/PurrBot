@@ -49,7 +49,7 @@ public class DebugUtil {
             files.put("General-Info.yaml", String.join("\n", new String[]{
                     "# Info about who requested the debug and when.",
                     "#",
-                    "#" + MessageUtil.getRandomDebug(),
+                    "# " + MessageUtil.getRandomDebug(),
                     "",
                     "Requester: " + MessageUtil.getTag(requester),
                     "Date: " + MessageUtil.formatTime(LocalDateTime.now())
@@ -145,7 +145,7 @@ public class DebugUtil {
         try{
             connection = (HttpURLConnection) new URL("https://debug.scarsz.me/post").openConnection();
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.addRequestProperty("User-Agent", "DiscordSRV/");
+            connection.addRequestProperty("User-Agent", "DiscordSRV/" + PurrBotMain.getVersion());
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
 
