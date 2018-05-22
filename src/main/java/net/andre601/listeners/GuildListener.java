@@ -1,6 +1,7 @@
 package net.andre601.listeners;
 
 import net.andre601.core.PurrBotMain;
+import net.andre601.util.Static;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.OnlineStatus;
@@ -11,6 +12,7 @@ import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.awt.Color;
+import java.text.MessageFormat;
 
 public class GuildListener extends ListenerAdapter {
 
@@ -21,6 +23,21 @@ public class GuildListener extends ListenerAdapter {
     public void onGuildJoin(GuildJoinEvent e) {
 
         Guild g = e.getGuild();
+
+        //  Check, if the guild is in the Blacklist and if true -> Leave guild.
+        if(PurrBotMain.getBlacklistedGuilds().contains(g.getId())) {
+            g.leave().queue();
+            g.getOwner().getUser().openPrivateChannel().queue(pm -> {
+                pm.sendMessage(MessageFormat.format(
+                        "Your Guild `{0}` (`{1}`) is blacklisted!\n" +
+                        "You can join the official Discord and ask for the reason: {2}",
+                        g.getName(),
+                        g.getId(),
+                        Static.DISCORD_INVITE
+                )).queue();
+            });
+            return;
+        }
 
         System.out.println(String.format(
                 "Joined the Guild %s (%s)\n" +
