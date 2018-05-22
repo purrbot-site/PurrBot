@@ -82,6 +82,10 @@ public class GuildListener extends ListenerAdapter {
 
         Guild g = e.getGuild();
 
+        //  Check, if the guild is in the Blacklist and if true -> return;
+        if(PurrBotMain.getBlacklistedGuilds().contains(g.getId()))
+            return;
+
         System.out.println(String.format(
                 "Left the Guild %s (%s)\n" +
                 "  > Owner: %s (%s)\n" +
