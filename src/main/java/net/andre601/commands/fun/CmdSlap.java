@@ -55,7 +55,8 @@ public class CmdSlap implements Command{
 
         List<User> user = msg.getMentionedUsers();
         if(user.size() == 1){
-            if(user == msg.getJDA().getSelfUser()){
+            User u = user.get(0);
+            if(u == msg.getJDA().getSelfUser()){
                 if(PermUtil.canReact(e.getMessage()))
                     e.getMessage().addReaction("💔").queue();
 
@@ -63,11 +64,11 @@ public class CmdSlap implements Command{
                         msg.getMember().getAsMention())).queue();
                 return;
             }
-            if(user == msg.getAuthor()){
+            if(u == msg.getAuthor()){
                 tc.sendMessage("Why are you hurting yourself?").queue();
                 return;
             }
-            String name = msg.getGuild().getMember(user.get(0)).getAsMention();
+            String name = u.getAsMention();
             tc.sendMessage(String.format(
                     "%s slapped you %s",
                     msg.getMember().getEffectiveName(),

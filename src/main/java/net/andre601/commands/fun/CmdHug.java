@@ -53,7 +53,8 @@ public class CmdHug implements Command {
 
         List<User> user = msg.getMentionedUsers();
         if(user.size() == 1){
-            if(user == msg.getJDA().getSelfUser()){
+            User u = user.get(0);
+            if(u == msg.getJDA().getSelfUser()){
                 if(PermUtil.canReact(e.getMessage()))
                     e.getMessage().addReaction("❤").queue();
 
@@ -61,11 +62,11 @@ public class CmdHug implements Command {
                         msg.getMember().getAsMention())).queue();
                 return;
             }
-            if(user == msg.getAuthor()){
+            if(u == msg.getAuthor()){
                 tc.sendMessage("You wanna hug yourself? Are you lonely?").queue();
                 return;
             }
-            String name = msg.getGuild().getMember(user.get(0)).getAsMention();
+            String name = u.getAsMention();
             tc.sendMessage(String.format(
                     "%s gave you a hug %s",
                     msg.getMember().getEffectiveName(),

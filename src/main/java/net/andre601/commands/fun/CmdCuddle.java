@@ -57,8 +57,9 @@ public class CmdCuddle implements Command{
         List<User> user = msg.getMentionedUsers();
 
         if(user.size() == 1){
+            User u = user.get(0);
             //  mentioned user = own user -> send message, add reaction and return.
-            if(user == msg.getJDA().getSelfUser()){
+            if(u == msg.getJDA().getSelfUser()){
                 if(PermUtil.canReact(e.getMessage()))
                     e.getMessage().addReaction("❤").queue();
 
@@ -68,11 +69,11 @@ public class CmdCuddle implements Command{
             }
 
             //  mentioned user = author of the message -> Send message and return.
-            if(user == msg.getAuthor()){
+            if(u == msg.getAuthor()){
                 tc.sendMessage("Do you have no one to cuddle with?").queue();
                 return;
             }
-            String name = msg.getGuild().getMember(user.get(0)).getAsMention();
+            String name = u.getAsMention();
             tc.sendMessage(String.format(
                     "%s cuddles with you %s",
                     msg.getMember().getEffectiveName(),
