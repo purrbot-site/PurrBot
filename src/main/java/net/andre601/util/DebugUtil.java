@@ -7,6 +7,7 @@ import net.andre601.commands.server.CmdWelcome;
 import net.andre601.core.PurrBotMain;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import org.apache.commons.lang.StringUtils;
@@ -52,13 +53,20 @@ public class DebugUtil {
                     "# " + MessageUtil.getRandomDebug(),
                     "",
                     "Requester: " + MessageUtil.getTag(requester),
-                    "Date: " + MessageUtil.formatTime(LocalDateTime.now())
+                    "",
+                    "# Info about the bot-Settings (Welcome-channel and prefix)",
+                    "",
+                    "Welcome-channel: " + getWelcomeChannel(g),
+                    "Guild-Prefix: " + getGuildPrefix(g),
+                    "Roles: " + g.getSelfMember().getRoles().size(),
+                    "  " + getOwnRoles(g)
             }));
             files.put("Guild-Info.yaml", String.join("\n", new String[]{
                     "# Basic Guild-Info",
                     "",
                     "Guildname: "  + g.getName(),
                     "Guild-ID: " + g.getId(),
+                    "Owner: " + MessageUtil.getTag(g.getOwner().getUser()) + "(" + g.getOwner().getUser().getId() + ")",
                     "",
                     "Users:",
                     "  Total: " + g.getMembers().toArray().length,
@@ -66,18 +74,15 @@ public class DebugUtil {
                     "  Bots: " + g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length,
                     "",
                     "TextChannels: " + g.getTextChannels().size(),
-                    "  " + getChannels(g)
+                    "  " + getChannels(g),
+                    "",
+                    "Roles: " + g.getRoles().size(),
+                    "  " + getRoles(g)
             }));
             files.put("TextChannel-Permissions.yaml", String.join("\n", new String[]{
                     "# All Channels and their permission for the bot",
                     "",
                     getChannelPerms(g)
-            }));
-            files.put("Bot-Settings.yaml", String.join("\n", new String[]{
-                    "# Info about the bot-Settings (Welcome-channel and prefix)",
-                    "",
-                    "Welcome-channel: " + getWelcomeChannel(g),
-                    "Guild-Prefix: " + getGuildPrefix(g)
             }));
         }catch(Exception ignored){
             tc.sendMessage(MessageFormat.format(
@@ -91,6 +96,14 @@ public class DebugUtil {
 
     private static String getChannels(Guild g){
         return g.getTextChannels().stream().map(TextChannel::toString).collect(Collectors.joining("\n  "));
+    }
+
+    private static String getRoles(Guild g){
+        return g.getRoles().stream().map(Role::toString).collect(Collectors.joining("\n  "));
+    }
+
+    private static String getOwnRoles(Guild g){
+        return g.getSelfMember().getRoles().stream().map(Role::toString).collect(Collectors.joining("\n  "));
     }
 
     private static String getChannelPerms(Guild g){
@@ -121,9 +134,8 @@ public class DebugUtil {
     }
 
     private static String makeReport(Map<String, String> toUploadingFiles, User requester){
-        if(toUploadingFiles.size() == 0){
+        if(toUploadingFiles.size() == 0)
             return MessageFormat.format("{0} The files are 0 for some reason...", requester.getAsMention());
-        }
 
         Map<String, String> files = new LinkedHashMap<>();
         toUploadingFiles.forEach((fileName, fileContent) -> files.put((files.size() + 1) + "-" + fileName,
@@ -145,7 +157,7 @@ public class DebugUtil {
         try{
             connection = (HttpURLConnection) new URL("https://debug.scarsz.me/post").openConnection();
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.addRequestProperty("User-Agent", "DiscordSRV/" + PurrBotMain.getVersion());
+            connection.addRequestProperty("User-Agent", "Purr-Bot/" + PurrBotMain.getVersion());
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
 
