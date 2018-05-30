@@ -159,7 +159,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "Debug\n" +
                         "Prefix       [set <prefix>|reset]\n" +
-                        "Welcome      [set <channelID>|reset|test]\n" +
+                        "Welcome      [set <channelID> [image]|reset|test [image]]\n" +
                         "\n" +
                         "[optional] | <required>\n" +
                         "```\n" +
@@ -321,11 +321,13 @@ public class CmdHelp implements Command {
                 break;
 
             case "welcome":
-                usage(e.getMessage(), "Welcome", "welcome [set <ChannelID>|reset|test]",
+                usage(e.getMessage(), "Welcome", "welcome [set <ChannelID> [image]|reset|test [image]]",
                         "Shows, sets or resets the Welcome-channel.",
-                        "`[set <ChannelID>]` Sets a Channel as Welcome-Channel.\n" +
+                        "`[set <ChannelID> [image]]` Sets a Channel as Welcome-Channel. [image] lets you set" +
+                        "a different image.\n" +
                         "`[reset]` Resets (removes) the welcome-channel.\n" +
-                        "`[test [image]]` Creates a welcome-image in the channel you currently are.",
+                        "`[test [image]]` Creates a welcome-image in the channel you currently are. [image] is the " +
+                        "image to use.",
                         "`MANAGE_SERVER`"
                 );
                 break;

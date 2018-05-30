@@ -304,7 +304,7 @@ public class CmdWelcome implements Command {
                         case "gradient":
                         case "landscape":
                         case "random":
-                            ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1]);
+                            ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase());
                             break;
                         default:
                             EmbedBuilder error = EmbedUtil.getEmbed(msg.getAuthor())
