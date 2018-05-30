@@ -5,6 +5,8 @@ import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CmdShutdown implements Command {
@@ -17,21 +19,24 @@ public class CmdShutdown implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        if (!PermUtil.canWrite(e.getMessage()))
+        TextChannel tc = e.getTextChannel();
+        Message msg = e.getMessage();
+
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(!PermUtil.canSendEmbed(e.getMessage())){
+        if(!PermUtil.canSendEmbed(tc)){
             e.getChannel().sendMessage("I need the permission, to embed Links in this Channel!").queue();
-            if(PermUtil.canReact(e.getMessage()))
+            if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
             return;
         }
 
-        if(PermUtil.canDeleteMsg(e.getMessage()))
+        if(PermUtil.canDeleteMsg(tc))
             e.getMessage().delete().queue();
 
-        if(PermUtil.isCreator(e.getMessage())){
+        if(PermUtil.isCreator(msg)){
 
             EmbedBuilder shutdown = EmbedUtil.getEmbed(e.getAuthor())
                     .setDescription(MessageUtil.getRandomShutdown())

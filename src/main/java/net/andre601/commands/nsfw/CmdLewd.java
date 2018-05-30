@@ -44,15 +44,15 @@ public class CmdLewd implements Command {
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
-        if (!PermUtil.canWrite(msg))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(PermUtil.canDeleteMsg(e.getMessage()))
+        if(PermUtil.canDeleteMsg(tc))
             e.getMessage().delete().queue();
 
-        if(!PermUtil.canSendEmbed(e.getMessage())){
+        if(!PermUtil.canSendEmbed(tc)){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
-            if(PermUtil.canReact(e.getMessage()))
+            if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
             return;
@@ -60,6 +60,13 @@ public class CmdLewd implements Command {
 
         if(tc.isNSFW()){
             if(msg.getContentRaw().endsWith("-slide")){
+                if(!PermUtil.canReact(tc)){
+                    tc.sendMessage(String.format(
+                            "%s I need permission, to add reactions in this channel!"
+                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                    return;
+                }
+
                 if(lewdUserID.contains(msg.getAuthor().getId())){
                     tc.sendMessage(String.format(
                             "%s You can only have one Slideshow at a time!",

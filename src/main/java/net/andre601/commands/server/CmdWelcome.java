@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.io.*;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class CmdWelcome implements Command {
         return jda.getGuildById(id);
     }
 
-    public static TextChannel getTChannel(String id, Guild g){
+    public static TextChannel checkChannel(String id, Guild g){
         try{
             return g.getTextChannelById(id);
         }catch (Exception ignored){
@@ -35,31 +36,52 @@ public class CmdWelcome implements Command {
         }
     }
 
-    public void setChannel(Message msg, Guild g, String id){
-        TextChannel tc = getTChannel(id, g);
-
-        if(tc == null){
-            msg.getTextChannel().sendMessage(String.format(
-                    "%s You need to provide a valid Channel-ID!",
-                    msg.getAuthor().getAsMention()
-            )).queue();
-        }else{
-            welcomeChannel.put(g, tc);
-            save();
-
-            EmbedBuilder channelSet = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setDescription(String.format(
-                            "Welcome-channel set to `%s` (`%s`)",
-                            tc.getName(),
-                            tc.getId()
-                    ))
-                    .setColor(Color.GREEN);
-
-            msg.getChannel().sendMessage(channelSet.build()).queue();
+    public static TextChannel getChannel(Guild g){
+        String welcome = DBUtil.getWelcome(g);
+        if(!welcome.equals("none")){
+            try{
+                return g.getTextChannelById(welcome);
+            }catch (Exception ignored){
+                return null;
+            }
         }
+        return null;
+    }
+
+    public void setChannel(Message msg, Guild g, String id){
+        TextChannel tc = g.getTextChannelById(id);
+
+        DBUtil.setWelcome(id, g.getId());
+
+        EmbedBuilder welcomeSet = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription(String.format(
+                        "Welcome-channel set to `%s` (`%s`)!",
+                        tc.getName(),
+                        tc.getId()
+                ))
+                .setColor(Color.GREEN);
+
+        msg.getTextChannel().sendMessage(welcomeSet.build()).queue();
     }
 
     public void resetChannel(Message msg, Guild g){
+        String welcome = DBUtil.getWelcome(g);
+        if(welcome.equals("none")){
+            msg.getTextChannel().sendMessage(String.format(
+                    "%s This Discord doesn't have a Welcome-channel!",
+                    msg.getAuthor().getAsMention()
+            )).queue();
+        }else{
+            DBUtil.resetWelcome(g.getId());
+            DBUtil.changeImage(g.getId(), "purr");
+
+            EmbedBuilder welcomeReset = EmbedUtil.getEmbed(msg.getAuthor())
+                    .setDescription("Welcome-channel was removed!!")
+                    .setColor(Color.GREEN);
+
+            msg.getTextChannel().sendMessage(welcomeReset.build()).queue();
+        }
+        /*
         if(welcomeChannel.containsKey(g)){
 
             welcomeChannel.remove(g);
@@ -77,14 +99,33 @@ public class CmdWelcome implements Command {
                     msg.getAuthor().getAsMention()
             )).queue();
         }
+        */
     }
 
     public static void resetChannel(Guild g){
-        welcomeChannel.remove(g);
-        save();
+        DBUtil.resetWelcome(g.getId());
     }
 
     public void getChannel(Message msg, Guild g){
+        String welcome = DBUtil.getWelcome(g);
+
+        if(welcome.equals("none")){
+            msg.getTextChannel().sendMessage(String.format(
+                    "%s This Discord doesn't have a Welcome-channel!",
+                    msg.getAuthor().getAsMention()
+            )).queue();
+        }else{
+            TextChannel tc = g.getTextChannelById(welcome);
+            EmbedBuilder channel = EmbedUtil.getEmbed(msg.getAuthor())
+                    .setTitle("Current Welcome-Channel")
+                    .setDescription(String.format(
+                            "`%s` (`%s`)",
+                            tc.getName(),
+                            tc.getId()
+                    ));
+            msg.getTextChannel().sendMessage(channel.build()).queue();
+        }
+        /*
         if(welcomeChannel.containsKey(g)){
             TextChannel tc = welcomeChannel.get(g);
             EmbedBuilder channel = EmbedUtil.getEmbed(msg.getAuthor())
@@ -101,8 +142,10 @@ public class CmdWelcome implements Command {
                     msg.getAuthor().getAsMention()
             )).queue();
         }
+        */
     }
 
+    /*
     public static void save(){
         File path = new File("guilds");
         if(!path.exists())
@@ -130,13 +173,14 @@ public class CmdWelcome implements Command {
 
                 out.forEach((gid, c) -> {
                     Guild g = getGuild(gid, jda);
-                    welcomeChannel.put(g, getTChannel(c, g));
+                    welcomeChannel.put(g, getTChannel(g));
                 });
             }catch (IOException | ClassNotFoundException ignored){
             }
 
         }
     }
+    */
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
@@ -149,7 +193,7 @@ public class CmdWelcome implements Command {
         Message msg = e.getMessage();
         Guild g = e.getGuild();
 
-        if (!PermUtil.canWrite(msg))
+        if (!PermUtil.canWrite(tc))
             return;
 
         if(!PermUtil.userIsAdmin(msg)){
@@ -167,13 +211,83 @@ public class CmdWelcome implements Command {
 
         switch (args[0].toLowerCase()){
             case "set":
-                if(args.length < 2)
+                if(args.length < 2) {
                     tc.sendMessage(String.format(
-                            "%s Please provide a channel-ID!",
+                            "%s Please provide a valid channel-ID!",
                             msg.getAuthor().getAsMention()
                     )).queue();
-                else
-                    setChannel(msg, g, args[1]);
+                }else
+                if(args.length == 2){
+                    if(args[1].matches("[0-9]{18,22}")){
+                        if(checkChannel(args[1], g) == null){
+                            tc.sendMessage(String.format(
+                                    "%s Please provide a valid channel-ID!",
+                                    msg.getAuthor().getAsMention()
+                            )).queue();
+                            return;
+                        }
+                        setChannel(msg, g, args[1]);
+                    }else{
+                        tc.sendMessage(String.format(
+                                "%s Please provide a valid channel-ID!",
+                                msg.getAuthor().getAsMention()
+                        )).queue();
+                    }
+                }else{
+                    if(args[1].matches("[0-9]{18,22}")){
+                        if(checkChannel(args[1], g) == null){
+                            tc.sendMessage(String.format(
+                                    "%s Please provide a valid channel-ID!",
+                                    msg.getAuthor().getAsMention()
+                            )).queue();
+                            return;
+                        }
+                        TextChannel textChannel = g.getTextChannelById(args[1]);
+                        switch (args[2].toLowerCase()) {
+                            case "purr":
+                            case "gradient":
+                            case "landscape":
+                            case "random":
+                                DBUtil.changeImage(g.getId(), args[2].toLowerCase());
+                                EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
+                                        .setColor(Color.GREEN)
+                                        .setDescription(MessageFormat.format(
+                                                "Welcome-Channel set to `{0}` (`{1}`) with image `{2}`",
+                                                textChannel.getName(),
+                                                textChannel.getId(),
+                                                args[2].toLowerCase()
+                                        ));
+                                tc.sendMessage(success.build()).queue();
+                                break;
+                            default:
+                                EmbedBuilder error = EmbedUtil.getEmbed(msg.getAuthor())
+                                        .setColor(Color.RED)
+                                        .setTitle("Invalid ImageType!")
+                                        .setDescription(MessageFormat.format(
+                                                "Your provided image was invalid!\n" +
+                                                "The command is `{0}welcome set {1} <image>`\n" +
+                                                "\n" +
+                                                "Please use one of the following options:\n" +
+                                                "`Purr` Default Purr Welcome-image\n" +
+                                                "`Gradient` Simple gradient. (suggested by @aBooDyy#9543)\n" +
+                                                "`Landscape` Landscape with sea (Suggested by @Kawten#6781)\n" +
+                                                "\n" +
+                                                "`random` Lets the bot use a random image on each join.\n" +
+                                                "\n" +
+                                                "You can use `{0}welcome test [image]` to test a image.",
+                                                CmdPrefix.getPrefix(g),
+                                                args[1]
+                                        ));
+                                tc.sendMessage(error.build()).queue();
+                                break;
+                        }
+                    }else{
+                        tc.sendMessage(String.format(
+                                "%s Please provide a valid channel-ID!",
+                                msg.getAuthor().getAsMention()
+                        )).queue();
+                    }
+                }
                 break;
 
             case "reset":
@@ -182,7 +296,38 @@ public class CmdWelcome implements Command {
 
             case "test":
                 tc.sendTyping().queue();
-                ImageUtil.createWelcomeImg(e.getAuthor(), g, tc, null);
+                if(args.length == 1){
+                    ImageUtil.createWelcomeImg(e.getAuthor(), g, tc, null, DBUtil.getImage(g));
+                }else{
+                    switch (args[1].toLowerCase()) {
+                        case "purr":
+                        case "gradient":
+                        case "landscape":
+                        case "random":
+                            ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1]);
+                            break;
+                        default:
+                            EmbedBuilder error = EmbedUtil.getEmbed(msg.getAuthor())
+                                    .setColor(Color.RED)
+                                    .setTitle("Invalid ImageType!")
+                                    .setDescription(MessageFormat.format(
+                                            "Your provided image was invalid!\n" +
+                                                    "The command is `{0}welcome test <image>`\n" +
+                                                    "\n" +
+                                                    "Please use one of the following options:\n" +
+                                                    "`Purr` Default Purr Welcome-image\n" +
+                                                    "`Gradient` Simple gradient. (suggested by @aBooDyy#9543)\n" +
+                                                    "`Landscape` Landscape with sea (Suggested by @Kawten#6781)\n" +
+                                                    "\n" +
+                                                    "`random` Lets the bot use a random image on each join.\n" +
+                                                    "\n" +
+                                                    "You can use `{0}welcome test [image]` to test a image.",
+                                            CmdPrefix.getPrefix(g)
+                                    ));
+                            tc.sendMessage(error.build()).queue();
+                            break;
+                    }
+                }
                 break;
 
             default:

@@ -78,12 +78,12 @@ public class CmdUser implements Command {
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
-        if (!PermUtil.canWrite(msg))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(!PermUtil.canSendEmbed(e.getMessage())){
+        if(!PermUtil.canSendEmbed(tc)){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
-            if(PermUtil.canReact(e.getMessage()))
+            if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
             return;

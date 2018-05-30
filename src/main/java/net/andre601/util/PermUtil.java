@@ -1,5 +1,6 @@
 package net.andre601.util;
 
+import net.andre601.core.PurrBotMain;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -10,36 +11,6 @@ public class PermUtil {
     /*
      *  Permission-checks (Message)
      */
-
-    //  Check for adding reaction-permission
-    public static boolean canReact(Message msg){
-        return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
-                Permission.MESSAGE_ADD_REACTION);
-    }
-
-    //  Check for embed links-permission
-    public static boolean canSendEmbed(Message msg){
-        return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
-                Permission.MESSAGE_EMBED_LINKS);
-    }
-
-    //  Check for deleting message-permission
-    public static boolean canDeleteMsg(Message msg){
-        return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
-                Permission.MESSAGE_MANAGE);
-    }
-
-    //  Check for using external emoji-permission
-    public static boolean canUseCustomEmojis(Message msg){
-        return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
-                Permission.MESSAGE_EXT_EMOJI);
-    }
-
-    //  Check for write message-permission (Message)
-    public static boolean canWrite(Message msg){
-        return PermissionUtil.checkPermission(msg.getTextChannel(), msg.getGuild().getSelfMember(),
-                Permission.MESSAGE_WRITE);
-    }
 
     //  Checking user for manage server-permission
     public static boolean userIsAdmin(Message msg){
@@ -93,5 +64,9 @@ public class PermUtil {
 
     public static boolean canRead(TextChannel tc){
         return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(), Permission.MESSAGE_READ);
+    }
+
+    public static boolean isBeta(){
+        return PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true");
     }
 }

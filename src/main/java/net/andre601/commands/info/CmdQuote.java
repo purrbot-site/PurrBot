@@ -27,12 +27,12 @@ public class CmdQuote implements Command {
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
         Guild g = e.getGuild();
-        Message message = null;
+        Message message;
 
-        if(!PermUtil.canWrite(msg))
+        if(!PermUtil.canWrite(tc))
             return;
 
-        if(PermUtil.canDeleteMsg(msg))
+        if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
         if(args.length == 1 && args[0].matches("[0-9]{18,22}")){

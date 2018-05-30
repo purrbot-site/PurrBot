@@ -2,8 +2,6 @@ package net.andre601.util;
 
 import com.google.common.io.CharStreams;
 import com.google.gson.JsonObject;
-import net.andre601.commands.server.CmdPrefix;
-import net.andre601.commands.server.CmdWelcome;
 import net.andre601.core.PurrBotMain;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.entities.Guild;
@@ -18,7 +16,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
-import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,20 +38,24 @@ public class DebugUtil {
         Map<String, String> files = new LinkedHashMap<>();
         try{
             files.put("Thank-You.yaml", String.join("\n", new String[]{
+                    "#",
                     "# Thanks to Scarsz lol (http://scarsz.me/) for providing this site!",
                     "#",
                     "# GitHub: https://github.com/Scarsz",
                     "# SpigotMC: https://www.spigotmc.org/members/scarsz.149937/",
-                    "# Discord: @Scarsz lol#4227"
+                    "# Discord: https://scarsz.me/discord",
+                    "#"
             }));
             files.put("General-Info.yaml", String.join("\n", new String[]{
-                    "# Info about who requested the debug and when.",
                     "#",
-                    "# " + MessageUtil.getRandomDebug(),
+                    "# Info about who requested the debug.",
+                    "#",
                     "",
                     "Requester: " + MessageUtil.getTag(requester),
                     "",
+                    "#",
                     "# Info about the bot-Settings (Welcome-channel and prefix)",
+                    "#",
                     "",
                     "Welcome-channel: " + getWelcomeChannel(g),
                     "Guild-Prefix: " + getGuildPrefix(g),
@@ -62,7 +63,9 @@ public class DebugUtil {
                     "  " + getOwnRoles(g)
             }));
             files.put("Guild-Info.yaml", String.join("\n", new String[]{
+                    "#",
                     "# Basic Guild-Info",
+                    "#",
                     "",
                     "Guildname: "  + g.getName(),
                     "Guild-ID: " + g.getId(),
@@ -80,7 +83,9 @@ public class DebugUtil {
                     "  " + getRoles(g)
             }));
             files.put("TextChannel-Permissions.yaml", String.join("\n", new String[]{
+                    "#",
                     "# All Channels and their permission for the bot",
+                    "#",
                     "",
                     getChannelPerms(g)
             }));
@@ -125,12 +130,11 @@ public class DebugUtil {
     }
 
     private static String getWelcomeChannel(Guild g){
-        return (CmdWelcome.getWelcomeChannel().containsKey(g) ? CmdWelcome.getWelcomeChannel().get(g).toString() :
-                "none");
+        return DBUtil.getWelcome(g);
     }
 
     private static String getGuildPrefix(Guild g){
-        return CmdPrefix.getPrefix(g);
+        return DBUtil.getPrefix(g);
     }
 
     private static String makeReport(Map<String, String> toUploadingFiles, User requester){

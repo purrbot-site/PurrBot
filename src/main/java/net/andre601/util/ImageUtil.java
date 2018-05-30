@@ -1,5 +1,6 @@
 package net.andre601.util;
 
+import net.andre601.core.PurrBotMain;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
@@ -38,14 +39,31 @@ public class ImageUtil {
         return icon;
     }
 
-    public static void createWelcomeImg(User user, Guild g, TextChannel tc, Message msg){
+    public static void createWelcomeImg(User user, Guild g, TextChannel tc, Message msg, String imageType){
 
         //  Saving the userIcon/avatar as a Buffered image
         BufferedImage u = getUserIcon(user);
 
         try{
+            String number = String.valueOf(1);
+            switch (imageType){
+                case "purr":
+                    number = String.valueOf(1);
+                    break;
+                case "gradient":
+                    number = String.valueOf(2);
+                    break;
+                case "landscape":
+                    number = String.valueOf(3);
+                    break;
+                case "random":
+                    number = String.valueOf(PurrBotMain.getRandom().nextInt(3));
+                    break;
+            }
+
+            BufferedImage layer = ImageIO.read(new File("img/welcome_layer" + number + ".png"));
+
             BufferedImage bg = ImageIO.read(new File("img/welcome_bg.png"));
-            BufferedImage layer = ImageIO.read(new File("img/welcome_layer.png"));
             BufferedImage image = new BufferedImage(bg.getWidth(), bg.getHeight(), bg.getType());
             Graphics2D img = image.createGraphics();
 

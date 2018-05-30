@@ -4,6 +4,7 @@ import net.andre601.commands.Command;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import javax.script.ScriptEngine;
@@ -27,11 +28,12 @@ public class CmdEval implements Command {
     public void action(String[] args, MessageReceivedEvent e) {
 
         Message msg = e.getMessage();
+        TextChannel tc = e.getTextChannel();
 
-        if(!PermUtil.canWrite(msg))
+        if(!PermUtil.canWrite(tc))
             return;
 
-        if(PermUtil.canDeleteMsg(msg))
+        if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
         if(PermUtil.isCreator(msg)){

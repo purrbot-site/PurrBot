@@ -27,7 +27,7 @@ public class CmdImg implements Command {
         Message msg = e.getMessage();
         Guild g = e.getGuild();
 
-        if(!PermUtil.canWrite(msg))
+        if(!PermUtil.canWrite(tc))
             return;
 
         if(!PermUtil.canUploadImage(tc)){
@@ -38,7 +38,7 @@ public class CmdImg implements Command {
             return;
         }
 
-        if(PermUtil.canDeleteMsg(msg))
+        if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
         if(args.length == 0){

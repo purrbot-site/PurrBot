@@ -3,6 +3,7 @@ package net.andre601.commands.server;
 import net.andre601.commands.Command;
 import net.andre601.util.DebugUtil;
 import net.andre601.util.PermUtil;
+import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -39,12 +40,12 @@ public class CmdDebug implements Command {
             return;
         }
 
-        tc.sendMessage("Creating Debug-files...").queue(message ->
-            tc.sendMessage(MessageFormat.format(
+        tc.sendMessage(MessageUtil.getRandomDebug()).queue(message ->
+            message.editMessage(MessageFormat.format(
                     "{0} {1}",
                     msg.getAuthor().getAsMention(),
                     DebugUtil.run(msg.getAuthor(), tc)
-            )).queue(message1 -> message.delete().queue())
+            )).queueAfter(2, TimeUnit.SECONDS)
         );
     }
 

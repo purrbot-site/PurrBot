@@ -22,7 +22,7 @@ public class CmdHelp implements Command {
     private static Paginator.Builder pBuilder =
             new Paginator.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);
 
-    private static void usage(Message msg, String command, String use, String description, String args,
+    public static void usage(Message msg, String command, String use, String description, String args,
                              String permission){
         msg.getChannel().sendTyping().queue();
         EmbedBuilder uEmbed = EmbedUtil.getEmbed(msg.getAuthor())
@@ -110,7 +110,7 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "Command:     Argument(s):\n" +
                         "\n" +
-                        "Help\n" +
+                        "Help         [command]\n" +
                         "Info         [-here]\n" +
                         "Img          <URL|neko:<image>.<png/jpg/...>>\n" +
                         "Invite       [-here]\n" +
@@ -193,18 +193,18 @@ public class CmdHelp implements Command {
         Message msg = e.getMessage();
         TextChannel tc = e.getTextChannel();
 
-        if (!PermUtil.canWrite(msg))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(!PermUtil.canSendEmbed(e.getMessage())){
+        if(!PermUtil.canSendEmbed(tc)){
             e.getTextChannel().sendMessage("I need the permission, to embed Links in this Channel!").queue();
-            if(PermUtil.canReact(e.getMessage()))
+            if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
             return;
         }
 
-        if(PermUtil.canDeleteMsg(msg))
+        if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
         if(args.length == 0){
@@ -226,7 +226,7 @@ public class CmdHelp implements Command {
                 usage(msg, "info", "info [-here]",
                         "Sends you basic info about the bot (A small description, version, used " +
                         "Library, ect)",
-                        "`-here` Sends the message in the channel in which you've run the command.",
+                        "`[-here]` Sends the message in the channel in which you've run the command.",
                         "`none`"
                 );
                 break;
@@ -234,7 +234,7 @@ public class CmdHelp implements Command {
             case "invite":
                 usage(msg, "Invite", "invite [-here]",
                         "Sends you the invite-links for the bot and for the official Discord.",
-                        "`-here` Sends the message in the channel in which you've run the command.",
+                        "`[-here]` Sends the message in the channel in which you've run the command.",
                         "none"
                 );
                 break;
@@ -299,8 +299,8 @@ public class CmdHelp implements Command {
             case "prefix":
                 usage(msg, "Prefix", "prefix [set <prefix>|reset]",
                         "Shows the currently used prefix in this Discord, if no argument is given.",
-                        "`set <prefix>` Sets the prefix to the provided one.\n" +
-                        "`reset` Resets the prefix to the default one.",
+                        "`[set <prefix>]` Sets the prefix to the provided one.\n" +
+                        "`[reset]` Resets the prefix to the default one.",
                         "`MANAGE_SERVER` for setting or resetting the prefix.");
                 break;
 
@@ -323,9 +323,9 @@ public class CmdHelp implements Command {
             case "welcome":
                 usage(e.getMessage(), "Welcome", "welcome [set <ChannelID>|reset|test]",
                         "Shows, sets or resets the Welcome-channel.",
-                        "`set <ChannelID>` Sets a Channel as Welcome-Channel.\n" +
-                        "`reset` Resets (removes) the welcome-channel.\n" +
-                        "`test` Creates a welcome-image in the channel you currently are.",
+                        "`[set <ChannelID>]` Sets a Channel as Welcome-Channel.\n" +
+                        "`[reset]` Resets (removes) the welcome-channel.\n" +
+                        "`[test [image]]` Creates a welcome-image in the channel you currently are.",
                         "`MANAGE_SERVER`"
                 );
                 break;

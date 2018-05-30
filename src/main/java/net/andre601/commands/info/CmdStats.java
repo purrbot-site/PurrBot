@@ -23,12 +23,12 @@ public class CmdStats implements Command {
         Message msg = e.getMessage();
         JDA jda = e.getJDA();
 
-        if(!PermUtil.canWrite(msg))
+        if(!PermUtil.canWrite(tc))
             return;
 
-        if(!PermUtil.canSendEmbed(msg)){
+        if(!PermUtil.canSendEmbed(tc)){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
-            if(PermUtil.canReact(e.getMessage()))
+            if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
             return;

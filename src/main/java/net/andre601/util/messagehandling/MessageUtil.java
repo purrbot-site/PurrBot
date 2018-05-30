@@ -135,7 +135,7 @@ public class MessageUtil {
             default:
                 str = EMOJI_UNKNOWN;
         }
-        if(PermUtil.canUseCustomEmojis(msg))
+        if(PermUtil.canUseCustomEmojis(msg.getTextChannel()))
             return str + "`" + status.name().replace("_", " ").toLowerCase() + "`";
 
         return "`" + status.name().replace("_", " ").toLowerCase() + "`";

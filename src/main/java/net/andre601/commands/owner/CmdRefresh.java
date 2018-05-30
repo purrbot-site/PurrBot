@@ -2,6 +2,7 @@ package net.andre601.commands.owner;
 
 import net.andre601.commands.Command;
 import net.andre601.util.PermUtil;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -19,11 +20,12 @@ public class CmdRefresh implements Command{
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
         TextChannel tc = e.getTextChannel();
+        Message msg = e.getMessage();
 
-        if (!PermUtil.canWrite(e.getMessage()))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(PermUtil.isCreator(e.getMessage())){
+        if(PermUtil.isCreator(msg)){
 
             if(file.getItem("config", "beta").equalsIgnoreCase("true"))
                 return;
@@ -31,17 +33,17 @@ public class CmdRefresh implements Command{
             tc.sendMessage(
                     "Clearing stored messages and images...\n" +
                     "Updating Guild-count on discordbots.org..."
-            ).queue(msg -> {
+            ).queue(message -> {
                 clear();
                 loadRandom();
                 getAPI().setStats(e.getJDA().getSelfUser().getId(), e.getJDA().getGuilds().size());
 
-                msg.editMessage(
+                message.editMessage(
                         "Clearing stored messages and images \\✅\n" +
                         "Updating Guild-count on discordbots.org \\✅"
                 ).queueAfter(2, TimeUnit.SECONDS, react -> {
-                    if(PermUtil.canReact(e.getMessage()))
-                        e.getMessage().addReaction("✅").queue();
+                    if(PermUtil.canReact(tc))
+                        msg.addReaction("✅").queue();
                 });
             });
 
@@ -49,10 +51,10 @@ public class CmdRefresh implements Command{
         }else{
             tc.sendMessage(String.format(
                     "%s You aren't my dad!",
-                    e.getAuthor().getAsMention())).queue();
+                    msg.getAuthor().getAsMention())).queue();
 
-            if(PermUtil.canReact(e.getMessage()))
-                e.getMessage().addReaction("🚫").queue();
+            if(PermUtil.canReact(tc))
+                msg.addReaction("🚫").queue();
         }
     }
 

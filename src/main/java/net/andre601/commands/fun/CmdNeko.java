@@ -44,27 +44,28 @@ public class CmdNeko implements Command {
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
-        if (!PermUtil.canWrite(msg))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(PermUtil.canDeleteMsg(e.getMessage()))
+        if(PermUtil.canDeleteMsg(tc))
             e.getMessage().delete().queue();
 
-        if(!PermUtil.canSendEmbed(e.getMessage())){
+        if(!PermUtil.canSendEmbed(tc)){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
-            if(PermUtil.canReact(e.getMessage()))
+            if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
             return;
         }
 
         if(e.getMessage().getContentRaw().endsWith("-slide")){
-            if(!PermUtil.canReact(msg)){
+            if(!PermUtil.canReact(tc)){
                 tc.sendMessage(String.format(
                         "%s I need permission, to add reactions in this channel!"
                 )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
                 return;
             }
+
             if(nekoUserID.contains(msg.getAuthor().getId())){
                 tc.sendMessage(String.format(
                         "%s You can only have one Slideshow at a time!\n" +
@@ -121,9 +122,11 @@ public class CmdNeko implements Command {
 
             tc.sendMessage("Getting a cute neko...").queue(message -> {
                 message.editMessage(neko.build()).queue();
-                if(link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko039.jpeg")){
+                //  The same image exists twice for some reason...
+                if(link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko039.jpeg") ||
+                        link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko_043.jpeg")){
                     tc.sendMessage("Hey! That's me :3").queue();
-                    if(PermUtil.canReact(message))
+                    if(PermUtil.canReact(tc))
                         message.addReaction("❤").queue();
                 }
             }

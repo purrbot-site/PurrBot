@@ -29,12 +29,13 @@ public class CmdMsg implements Command {
     public void action(String[] args, MessageReceivedEvent e) {
 
         Message msg = e.getMessage();
+        TextChannel tc = e.getTextChannel();
         String message = "";
 
-        if (!PermUtil.canWrite(msg))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(PermUtil.canDeleteMsg(msg))
+        if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
         if(PermUtil.isCreator(msg)){

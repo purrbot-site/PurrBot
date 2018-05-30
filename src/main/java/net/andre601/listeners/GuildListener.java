@@ -1,6 +1,7 @@
 package net.andre601.listeners;
 
 import net.andre601.core.PurrBotMain;
+import net.andre601.util.DBUtil;
 import net.andre601.util.Static;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.messagehandling.MessageUtil;
@@ -38,6 +39,8 @@ public class GuildListener extends ListenerAdapter {
             });
             return;
         }
+
+        DBUtil.newGuild(g);
 
         System.out.println(String.format(
                 "Joined the Guild %s (%s)\n" +
@@ -85,6 +88,8 @@ public class GuildListener extends ListenerAdapter {
         //  Check, if the guild is in the Blacklist and if true -> return;
         if(PurrBotMain.getBlacklistedGuilds().contains(g.getId()))
             return;
+
+        DBUtil.delGuild(g);
 
         System.out.println(String.format(
                 "Left the Guild %s (%s)\n" +

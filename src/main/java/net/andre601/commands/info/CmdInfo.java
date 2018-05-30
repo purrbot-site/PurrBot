@@ -24,10 +24,10 @@ public class CmdInfo implements Command {
     public void action(String[] args, MessageReceivedEvent e) {
         TextChannel tc = e.getTextChannel();
 
-        if (!PermUtil.canWrite(e.getMessage()))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(PermUtil.canDeleteMsg(e.getMessage()))
+        if(PermUtil.canDeleteMsg(tc))
             e.getMessage().delete().queue();
 
         EmbedBuilder Info = EmbedUtil.getEmbed()

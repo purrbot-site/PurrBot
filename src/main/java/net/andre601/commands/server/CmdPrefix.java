@@ -2,6 +2,7 @@ package net.andre601.commands.server;
 
 import net.andre601.commands.Command;
 import net.andre601.core.PurrBotMain;
+import net.andre601.util.DBUtil;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.PermUtil;
 import net.andre601.util.Static;
@@ -23,13 +24,11 @@ public class CmdPrefix implements Command{
 
     public static String getPrefix(Guild g){
 
-        if(guildPrefix.containsKey(g)){
-            return guildPrefix.get(g);
-        }
+        return DBUtil.getPrefix(g);
 
         //  If the bot is beta-version -> use Beta-prefix (..)
-        return (PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true") ?
-                Static.BETA_PREFIX : Static.PREFIX);
+        // return (PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true") ?
+        //        Static.BETA_PREFIX : Static.PREFIX);
     }
 
     public static Guild getGuild(String id, JDA jda){
@@ -45,11 +44,21 @@ public class CmdPrefix implements Command{
     }
 
     public void setPrefix(Message msg, Guild g, String prefix){
+        if(prefix.equals(".")){
+            msg.getTextChannel().sendMessage(String.format(
+                    "%s Why do you want to set the prefix to `.`?\n" +
+                    "Use `%sprefix reset` to reset it to the default one.",
+                    msg.getAuthor().getAsMention(),
+                    getPrefix(g)
+            )).queue();
+            return;
+        }
 
 
+        // guildPrefix.put(g, prefix);
+        DBUtil.setPrefix(prefix, g.getId());
 
-        guildPrefix.put(g, prefix);
-        save();
+        // save();
 
         EmbedBuilder prefixSet = EmbedUtil.getEmbed(msg.getAuthor())
                 .setDescription(String.format(
@@ -62,10 +71,27 @@ public class CmdPrefix implements Command{
     }
 
     public void resetPrefix(Message msg, Guild g){
+        String prefix = DBUtil.getPrefix(g);
+        if(prefix.equals(".")){
+            msg.getTextChannel().sendMessage(String.format(
+                    "%s There is no prefix set for this Guild!\n" +
+                    "The default prefix is `.`!",
+                    msg.getAuthor().getAsMention()
+            )).queue();
+        }else {
+            DBUtil.resetPrefix(g.getId());
+            EmbedBuilder prefixReset = EmbedUtil.getEmbed(msg.getAuthor())
+                    .setDescription("Prefix was reset successfully!")
+                    .setColor(Color.GREEN);
+
+            msg.getTextChannel().sendMessage(prefixReset.build()).queue();
+        }
+        /*
         if(guildPrefix.containsKey(g)){
 
             guildPrefix.remove(g);
-            save();
+
+            // save();
 
             EmbedBuilder prefixReset = EmbedUtil.getEmbed(msg.getAuthor())
                     .setDescription("Prefix was reset successfully!")
@@ -81,8 +107,10 @@ public class CmdPrefix implements Command{
             )).queue();
 
         }
+        */
     }
 
+    /*
     public void save(){
         File path = new File("guilds");
         if(!path.exists())
@@ -100,6 +128,7 @@ public class CmdPrefix implements Command{
     }
 
     public static void load(JDA jda){
+
         File file = new File(Static.PREFIX_FILE);
         if(file.exists()){
 
@@ -118,6 +147,7 @@ public class CmdPrefix implements Command{
 
         }
     }
+    */
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
@@ -131,12 +161,12 @@ public class CmdPrefix implements Command{
         Message msg = e.getMessage();
         Guild g = e.getGuild();
 
-        if (!PermUtil.canWrite(msg))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(!PermUtil.canSendEmbed(e.getMessage())){
+        if(!PermUtil.canSendEmbed(tc)){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
-            if(PermUtil.canReact(e.getMessage()))
+            if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
             return;

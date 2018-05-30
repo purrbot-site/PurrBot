@@ -1,8 +1,10 @@
 package net.andre601.listeners;
 
 import net.andre601.commands.server.CmdWelcome;
+import net.andre601.util.DBUtil;
 import net.andre601.util.ImageUtil;
 import net.andre601.util.PermUtil;
+import net.andre601.util.Static;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
@@ -16,8 +18,8 @@ public class WelcomeListener extends ListenerAdapter {
     public void onGuildMemberJoin(GuildMemberJoinEvent e) {
         Guild g = e.getGuild();
 
-        if(CmdWelcome.getWelcomeChannel().containsKey(g)){
-            TextChannel tc = CmdWelcome.getWelcomeChannel().get(g);
+        if(!DBUtil.getWelcome(g).equals("none")){
+            TextChannel tc = CmdWelcome.getChannel(g);
 
             if(tc != null){
                 if(!PermUtil.canWrite(tc))
@@ -31,20 +33,19 @@ public class WelcomeListener extends ListenerAdapter {
                         )).build();
 
                 if(PermUtil.canUploadImage(tc)){
-                    ImageUtil.createWelcomeImg(e.getUser(), g, tc, msg);
+                    ImageUtil.createWelcomeImg(e.getUser(), g, tc, msg, DBUtil.getImage(g));
                 }else{
                     tc.sendMessage(msg).queue();
                 }
             }
         }
-
     }
 
     public void onTextChannelDelete(TextChannelDeleteEvent e) {
         Guild g = e.getGuild();
 
-        if(CmdWelcome.getWelcomeChannel().containsKey(g)){
-            TextChannel channel = CmdWelcome.getWelcomeChannel().get(g);
+        if(!DBUtil.getWelcome(g).equals("none")){
+            TextChannel channel = g.getTextChannelById(DBUtil.getWelcome(g));
             if(e.getChannel() == channel){
                 CmdWelcome.resetChannel(g);
             }

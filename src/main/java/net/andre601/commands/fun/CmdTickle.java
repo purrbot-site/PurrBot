@@ -35,12 +35,12 @@ public class CmdTickle implements Command {
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
-        if (!PermUtil.canWrite(msg))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(!PermUtil.canSendEmbed(e.getMessage())){
+        if(!PermUtil.canSendEmbed(tc)){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
-            if(PermUtil.canReact(e.getMessage()))
+            if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
             return;
@@ -55,7 +55,7 @@ public class CmdTickle implements Command {
         if(user.size() == 1){
             User u = user.get(0);
             if(u == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(e.getMessage()))
+                if(PermUtil.canReact(tc))
                     e.getMessage().addReaction("😂").queue();
 
                 tc.sendMessage(String.format("N-no... I can't lau- \\*laughs*",

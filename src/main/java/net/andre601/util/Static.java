@@ -2,14 +2,6 @@ package net.andre601.util;
 
 public class Static {
 
-    //  Prefix for all commands (".[command]")
-    public static final String PREFIX = ".";
-    public static final String BETA_PREFIX = "..";
-
-    //  File
-    public static final String PREFIX_FILE = "guilds/prefixes.dat";
-    public static final String WELCOME_FILE = "guilds/welcome_channel.dat";
-
     //  Links
     public static final String INVITE_FULL = "https://discordapp.com/api/oauth2/authorize?client_id=" +
             "425382319449309197&permissions=322624&scope=bot";

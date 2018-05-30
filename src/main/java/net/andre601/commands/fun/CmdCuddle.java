@@ -37,12 +37,12 @@ public class CmdCuddle implements Command{
         Message msg = e.getMessage();
 
         //  Permission-checks for write and embed links-permission.
-        if (!PermUtil.canWrite(msg))
+        if (!PermUtil.canWrite(tc))
             return;
 
-        if(!PermUtil.canSendEmbed(e.getMessage())){
+        if(!PermUtil.canSendEmbed(tc)){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
-            if(PermUtil.canReact(e.getMessage()))
+            if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
             return;
@@ -60,7 +60,7 @@ public class CmdCuddle implements Command{
             User u = user.get(0);
             //  mentioned user = own user -> send message, add reaction and return.
             if(u == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(e.getMessage()))
+                if(PermUtil.canReact(tc))
                     e.getMessage().addReaction("❤").queue();
 
                 tc.sendMessage(String.format("%s \\*Enjoys the cuddle*",
