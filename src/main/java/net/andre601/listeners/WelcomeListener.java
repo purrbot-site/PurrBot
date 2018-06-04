@@ -33,7 +33,7 @@ public class WelcomeListener extends ListenerAdapter {
                         )).build();
 
                 if(PermUtil.canUploadImage(tc)){
-                    ImageUtil.createWelcomeImg(e.getUser(), g, tc, msg, DBUtil.getImage(g));
+                    ImageUtil.createWelcomeImg(e.getUser(), g, tc, msg, DBUtil.getImage(g), DBUtil.getColor(g));
                 }else{
                     tc.sendMessage(msg).queue();
                 }

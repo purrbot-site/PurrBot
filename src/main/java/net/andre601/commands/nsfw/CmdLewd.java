@@ -13,6 +13,7 @@ import net.andre601.util.HttpUtil;
 
 import static net.andre601.core.PurrBotMain.waiter;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,9 +25,25 @@ public class CmdLewd implements Command {
 
     private static List<String> lewdUserID = new ArrayList<>();
 
-    public String getLink(){
+    private String getCatEmoji(){
+        try{
+            return HttpUtil.getCat();
+        }catch (Exception ignored){
+            return null;
+        }
+    }
+
+    private String getLewdLink(){
         try{
             return HttpUtil.getLewd();
+        }catch (Exception ignored){
+            return null;
+        }
+    }
+
+    private String getLewdGifLink(){
+        try{
+            return HttpUtil.getLewdAnimated();
         }catch (Exception ignored){
             return null;
         }
@@ -40,7 +57,7 @@ public class CmdLewd implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        String link = getLink();
+        String link = getLewdLink();
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
@@ -59,7 +76,7 @@ public class CmdLewd implements Command {
         }
 
         if(tc.isNSFW()){
-            if(msg.getContentRaw().endsWith("-slide")){
+            if(msg.getContentRaw().contains("-slide")){
                 if(!PermUtil.canReact(tc)){
                     tc.sendMessage(String.format(
                             "%s I need permission, to add reactions in this channel!"
@@ -78,10 +95,13 @@ public class CmdLewd implements Command {
 
                 lewdUserID.add(msg.getAuthor().getId());
                 StringBuilder urls = new StringBuilder();
-                for(int i = 0; i < 30; ++i){
-                    try{
-                        urls.append(HttpUtil.getLewd()).append(",");
-                    }catch (Exception ignored){
+                if(msg.getContentRaw().contains("-gif")){
+                    for (int i = 0; i < 30; ++i) {
+                        urls.append(getLewdGifLink()).append(",");
+                    }
+                }else{
+                    for (int i = 0; i < 30; ++i) {
+                        urls.append(getLewdLink()).append(",");
                     }
                 }
                 Slideshow s = sBuilder
@@ -110,19 +130,30 @@ public class CmdLewd implements Command {
                 s.display(tc);
                 return;
             }
-            try {
-                EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
-                        .setTitle(String.format(
-                                "Lewd Neko %s",
-                                HttpUtil.getCat()
-                        ), link)
-                        .setImage(link);
+            if(msg.getContentRaw().contains("-gif")){
+                String gifLink = getLewdGifLink();
+                EmbedBuilder lewdgif = EmbedUtil.getEmbed(msg.getAuthor())
+                        .setTitle(MessageFormat.format(
+                                "Lewd Neko-gif {0}",
+                                getCatEmoji()
+                        ), gifLink)
+                        .setImage(gifLink);
 
-                tc.sendMessage("Getting a lewd neko...").queue(message -> {
-                    message.editMessage(neko.build()).queue();
-                });
-            }catch (Exception ignored){
+                tc.sendMessage("Getting a lewd neko...").queue(message ->
+                        message.editMessage(lewdgif.build()).queue()
+                );
+                return;
             }
+            EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
+                    .setTitle(String.format(
+                            "Lewd Neko %s",
+                            getCatEmoji()
+                    ), link)
+                    .setImage(link);
+
+            tc.sendMessage("Getting a lewd neko...").queue(message -> {
+                message.editMessage(neko.build()).queue();
+            });
         }else{
             tc.sendMessage(String.format(MessageUtil.getRandomNotNSFW(),
                     e.getAuthor().getAsMention()

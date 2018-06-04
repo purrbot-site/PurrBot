@@ -6,8 +6,10 @@ import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import static net.andre601.commands.server.CmdPrefix.getPrefix;
@@ -53,6 +55,12 @@ public class CmdHelp implements Command {
 
     private static void usage(Message msg){
         msg.getChannel().sendTyping().queue();
+
+        User user = msg.getAuthor();
+        Guild g = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        String prefix = getPrefix(g);
+
         Paginator page = pBuilder
                 .setItems(MessageFormat.format(
                         "**Command-Prefix**: {0}\n" +
@@ -71,7 +79,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "**Random fact**:\n" +
                         "{1}",
-                        getPrefix(msg.getGuild()),
+                        prefix,
                         MessageUtil.getFact()
                 ), MessageFormat.format(
                         "**Command-Prefix**: {0}\n" +
@@ -87,7 +95,8 @@ public class CmdHelp implements Command {
                         "Cuddle       <@user ...>\n" +
                         "Hug          <@user ...>\n" +
                         "Kiss         <@user ...>\n" +
-                        "Neko         [-slide]\n" +
+                        "Neko         [-gif]\n" +
+                        "             [-slide]\n" +
                         "Pat          <@user ...>\n" +
                         "Slap         <@user ...>\n" +
                         "Tickle       <@user ...>\n" +
@@ -97,7 +106,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "**Random fact**:\n" +
                         "{1}",
-                        getPrefix(msg.getGuild()),
+                        prefix,
                         MessageUtil.getFact()
                 ), MessageFormat.format(
                         "**Command-Prefix**: {0}\n" +
@@ -112,7 +121,8 @@ public class CmdHelp implements Command {
                         "\n" +
                         "Help         [command]\n" +
                         "Info         [-here]\n" +
-                        "Img          <URL|neko:<image>.<png/jpg/...>>\n" +
+                        "Img          <URL>\n" +
+                        "             <neko:<name>.<jpg/png/...>>\n" +
                         "Invite       [-here]\n" +
                         "Quote        <messageID>\n" +
                         "Server\n" +
@@ -124,7 +134,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "**Random fact**:\n" +
                         "{1}",
-                        getPrefix(msg.getGuild()),
+                        prefix,
                         MessageUtil.getFact()
                 ), MessageFormat.format(
                         "**Command-Prefix**: {0}\n" +
@@ -137,14 +147,15 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "Command:     Argument(s):\n" +
                         "\n" +
-                        "Lewd         [-slide]\n" +
+                        "Lewd         [-gif]\n" +
+                        "             [-slide]\n" +
                         "\n" +
                         "[optional]\n" +
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
                         "{1}",
-                        getPrefix(msg.getGuild()),
+                        prefix,
                         MessageUtil.getFact()
                 ), MessageFormat.format(
                         "**Command-Prefix**: {0}\n" +
@@ -158,28 +169,29 @@ public class CmdHelp implements Command {
                         "Command:     Argument(s):\n" +
                         "\n" +
                         "Debug\n" +
-                        "Prefix       [set <prefix>|reset]\n" +
-                        "Welcome      [set <channelID> [image]|reset|test [image]]\n" +
+                        "Prefix       [set <prefix>]\n" +
+                        "             [reset]\n" +
+                        "Welcome      [color <rgb:r,g,b|hex:#code>]\n" +
+                        "             [reset]\n" +
+                        "             [set <ChannelID> [image]]\n" +
+                        "             [test [image]]\n" +
                         "\n" +
                         "[optional] | <required>\n" +
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
                         "{1}",
-                        getPrefix(msg.getGuild()),
+                        prefix,
                         MessageUtil.getFact()
                 ))
                 .setText("")
+                .setUsers(user, g.getOwner().getUser())
                 .setItemsPerPage(1)
                 .waitOnSinglePage(true)
-                .setFinalAction(message -> {
-                    message.delete().queue();
-                    msg.getTextChannel().sendMessage("Help closed!").queue(del ->
-                            del.delete().queueAfter(5, TimeUnit.SECONDS));
-                })
+                .setFinalAction(message -> message.delete().queue())
                 .build();
 
-        page.display(msg.getChannel());
+        page.display(tc);
     }
 
     @Override
@@ -256,9 +268,12 @@ public class CmdHelp implements Command {
                 break;
 
             case "neko":
-                usage(msg, "Neko", "neko [-slide]",
+                usage(msg, "Neko", "neko [-gif] [-slide]",
                         "Sends a cute neko. 'nuf said.",
-                        "`[-slide]` Creates a slideshow with 30 images",
+                        "`[-gif]` Sends a cute neko-gif.\n" +
+                        "`[-slide]` Creates a slideshow with 30 images\n" +
+                        "\n" +
+                        "You can use both arguments at the same time!",
                         "`none`"
                 );
                 break;
@@ -280,7 +295,7 @@ public class CmdHelp implements Command {
                 break;
 
             case "slap":
-                usage(msg, "Slap", "slap <@user>",
+                usage(msg, "Slap", "slap <@user ...>",
                         "Slaps the mentioned user.",
                         "`<@user ...>` The user to slap (as mention). You can mention multiple users!",
                         "`none`"
@@ -288,10 +303,13 @@ public class CmdHelp implements Command {
                 break;
 
             case "lewd":
-                usage(msg, "Lewd", "lewd [-slide]",
+                usage(msg, "Lewd", "lewd [-gif] [-slide]",
                         "Sends a lewd neko.\n" +
                         "Can only be used in NSFW-Channels.",
-                        "`[-slide]` Creates a slideshow with 30 images",
+                        "`[-gif]` Sends a lewd neko-gif.\n" +
+                        "`[-slide]` Creates a slideshow with 30 images\n" +
+                        "\n" +
+                        "You can use both arguments at the same time!",
                         "`none`"
                 );
                 break;
@@ -321,13 +339,15 @@ public class CmdHelp implements Command {
                 break;
 
             case "welcome":
-                usage(e.getMessage(), "Welcome", "welcome [set <ChannelID> [image]|reset|test [image]]",
+                usage(e.getMessage(), "Welcome", "welcome [color <rgb:r,g,b|hex:#code>|reset|set " +
+                                "<ChannelID> [image]|test [image] [color]]",
                         "Shows, sets or resets the Welcome-channel.",
-                        "`[set <ChannelID> [image]]` Sets a Channel as Welcome-Channel. [image] lets you set" +
-                        "a different image.\n" +
+                        "[color <rgb:r,g,b|hex:#code>] Sets the text-color in either RGB or Hexadecimal.\n" +
                         "`[reset]` Resets (removes) the welcome-channel.\n" +
-                        "`[test [image]]` Creates a welcome-image in the channel you currently are. [image] is the " +
-                        "image to use.",
+                        "`[test [image] [color]]` Creates a welcome-image in the channel you currently " +
+                        "are. [image] is the image to use. [color] is the text-color.\n" +
+                        "`[set <ChannelID> [image]]` Sets a Channel as Welcome-Channel. [image] lets you set\n" +
+                        "a different image.",
                         "`MANAGE_SERVER`"
                 );
                 break;
@@ -352,7 +372,8 @@ public class CmdHelp implements Command {
             case "quote":
                 usage(e.getMessage(), "Quote", "quote <messageID>",
                         "Lets you quote a message.",
-                        "`<messageID>` The ID of the message to quote.",
+                        "`<messageID>` The ID of the message to quote.\n" +
+                        "The message needs to be in the same channel!",
                         "`none`"
                 );
                 break;

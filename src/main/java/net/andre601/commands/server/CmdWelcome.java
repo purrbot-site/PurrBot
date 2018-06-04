@@ -3,6 +3,7 @@ package net.andre601.commands.server;
 import net.andre601.commands.Command;
 import net.andre601.util.*;
 import net.andre601.util.messagehandling.EmbedUtil;
+import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
@@ -11,7 +12,6 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
-import java.io.*;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -116,12 +116,26 @@ public class CmdWelcome implements Command {
             )).queue();
         }else{
             TextChannel tc = g.getTextChannelById(welcome);
+
+            String savedColor = DBUtil.getColor(g);
+            String colorType = savedColor.split(":")[0].toLowerCase();
+            String colorValue = savedColor.split(":")[1].toLowerCase();
+
             EmbedBuilder channel = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setTitle("Current Welcome-Channel")
+                    .setTitle("Welcome settings")
                     .setDescription(String.format(
-                            "`%s` (`%s`)",
+                            "**TextChannel**: `%s` (`%s`)\n" +
+                            "\n" +
+                            "**Image**: `%s`\n" +
+                            "\n" +
+                            "Text color:\n" +
+                            "**Type**: `%s`\n" +
+                            "**Value: `%s`",
                             tc.getName(),
-                            tc.getId()
+                            tc.getId(),
+                            DBUtil.getImage(g),
+                            colorType,
+                            colorValue
                     ));
             msg.getTextChannel().sendMessage(channel.build()).queue();
         }
@@ -203,6 +217,9 @@ public class CmdWelcome implements Command {
             )).queue();
             return;
         }
+
+        if(PermUtil.canDeleteMsg(tc))
+            msg.delete().queue();
 
         if(args.length == 0){
             getChannel(msg, g);
@@ -296,15 +313,18 @@ public class CmdWelcome implements Command {
 
             case "test":
                 tc.sendTyping().queue();
-                if(args.length == 1){
-                    ImageUtil.createWelcomeImg(e.getAuthor(), g, tc, null, DBUtil.getImage(g));
-                }else{
+                if(args.length == 1) {
+                    ImageUtil.createWelcomeImg(e.getAuthor(), g, tc, null, DBUtil.getImage(g),
+                            DBUtil.getColor(g));
+                }else
+                if(args.length == 2){
                     switch (args[1].toLowerCase()) {
                         case "purr":
                         case "gradient":
                         case "landscape":
                         case "random":
-                            ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase());
+                            ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase(),
+                                    DBUtil.getColor(g));
                             break;
                         default:
                             EmbedBuilder error = EmbedUtil.getEmbed(msg.getAuthor())
@@ -327,7 +347,112 @@ public class CmdWelcome implements Command {
                             tc.sendMessage(error.build()).queue();
                             break;
                     }
+                }else{
+                    switch (args[1].toLowerCase()) {
+                        case "purr":
+                        case "gradient":
+                        case "landscape":
+                        case "random":
+                            if(MessageUtil.toColor(args[2].toLowerCase()) == null){
+
+                            }
+                            ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase(),
+                                    args[2]);
+                            break;
+                        default:
+                            EmbedBuilder error = EmbedUtil.getEmbed(msg.getAuthor())
+                                    .setColor(Color.RED)
+                                    .setTitle("Invalid ImageType/color!")
+                                    .setDescription(MessageFormat.format(
+                                            "Your provided image and/or color was invalid!\n" +
+                                            "The command is `{0}welcome test [image] [textColor]`\n" +
+                                            "\n" +
+                                            "Please use one of the following options:\n" +
+                                            "`Purr` Default Purr Welcome-image\n" +
+                                            "`Gradient` Simple gradient. (suggested by @aBooDyy#9543)\n" +
+                                            "`Landscape` Landscape with sea (Suggested by @Kawten#6781)\n" +
+                                            "\n" +
+                                            "`random` Lets the bot use a random image on each join.\n" +
+                                            "\n" +
+                                            "You can use `{0}welcome test [image] [color] [textColor]` to test a " +
+                                            "image and textcolor.",
+                                            CmdPrefix.getPrefix(g)
+                                    ));
+                            tc.sendMessage(error.build()).queue();
+                            break;
+                    }
+
                 }
+                break;
+
+            case "image":
+            case "images":
+                EmbedBuilder image = EmbedUtil.getEmbed(msg.getAuthor())
+                        .setDescription(MessageFormat.format(
+                                "You can use the following images:\n" +
+                                        "`Purr` Default Purr Welcome-image\n" +
+                                        "`Gradient` Simple gradient. (suggested by @aBooDyy#9543)\n" +
+                                        "`Landscape` Landscape with sea (Suggested by @Kawten#6781)\n" +
+                                        "\n" +
+                                        "`random` Lets the bot use a random image on each join.\n" +
+                                        "\n" +
+                                        "You can use `{0}welcome test [image]` to test a image.",
+                                CmdPrefix.getPrefix(g)
+                        ));
+                tc.sendMessage(image.build()).queue();
+                break;
+
+            case "color":
+                if(args.length == 1){
+                    EmbedBuilder color = EmbedUtil.getEmbed(msg.getAuthor())
+                            .setDescription(MessageFormat.format(
+                                    "You need to provide a valid color-type and color!\n" +
+                                    "\n" +
+                                    "**Valid types**:\n" +
+                                    "`hex:<#hexcode>` sets the color in hex.\n" +
+                                    "`rgb:<r,g,b>` Sets the color in RGB.\n" +
+                                    "\n" +
+                                    "Test it with `{0}welcome test [image] [textcolor]`\n",
+                                    CmdPrefix.getPrefix(g)
+                            ))
+                            .setColor(Color.RED);
+                    tc.sendMessage(color.build()).queue();
+                    return;
+                }
+                if(args[1].equalsIgnoreCase("reset")){
+                    DBUtil.resetColor(g.getId());
+                    return;
+                }
+                if(MessageUtil.toColor(args[1]) == null) {
+                    EmbedBuilder color = EmbedUtil.getEmbed(msg.getAuthor())
+                            .setDescription(MessageFormat.format(
+                                    "The provided color-type and/or color is invalid!\n" +
+                                    "\n" +
+                                    "**Valid types**:\n" +
+                                    "`hex:<#hexcode>` sets the color in hex.\n" +
+                                    "`rgb:<r,g,b>` Sets the color in RGB.\n" +
+                                    "\n" +
+                                    "Test it with `{0}welcome test [image] [textcolor]`\n",
+                                    CmdPrefix.getPrefix(g)
+                            ))
+                            .setColor(Color.RED);
+                    tc.sendMessage(color.build()).queue();
+                    return;
+                }
+                DBUtil.changeColor(g.getId(), args[1].toLowerCase());
+                String colorType = args[1].split(":")[0].toLowerCase();
+                String colorValue = args[1].split(":")[1].toLowerCase();
+                EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
+                        .setDescription(MessageFormat.format(
+                                "Color successfully changed!\n" +
+                                "\n" +
+                                "**Type**: {0}\n" +
+                                "**Value**: {1}",
+                                colorType,
+                                colorValue
+                        ))
+                        .setColor(Color.GREEN);
+                tc.sendMessage(success.build()).queue();
                 break;
 
             default:

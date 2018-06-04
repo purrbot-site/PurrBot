@@ -39,7 +39,8 @@ public class ImageUtil {
         return icon;
     }
 
-    public static void createWelcomeImg(User user, Guild g, TextChannel tc, Message msg, String imageType){
+    public static void createWelcomeImg(User user, Guild g, TextChannel tc, Message msg, String imageType,
+                                        String imageColor){
 
         //  Saving the userIcon/avatar as a Buffered image
         BufferedImage u = getUserIcon(user);
@@ -74,7 +75,12 @@ public class ImageUtil {
 
             //  Creating the font for the custom text.
             Font text = new Font("Arial", Font.PLAIN, 60);
-            img.setColor(Color.WHITE);
+
+            Color color = MessageUtil.toColor(imageColor);
+            if(color == null)
+                color = Color.WHITE;
+
+            img.setColor(color);
             img.setFont(text);
 
             //  Setting the actual text. \n is (sadly) not supported, so we have to make each new line seperate.

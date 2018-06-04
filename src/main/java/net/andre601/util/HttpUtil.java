@@ -45,9 +45,31 @@ public class HttpUtil {
         }
     }
 
+    public static String getNekoAnimated() throws Exception{
+        Request request = new Request.Builder()
+                .url("https://nekos.life/api/v2/img/ngif")
+                .build();
+        Response response = CLIENT.newCall(request).execute();
+        try(ResponseBody responseBody = response.body()){
+            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            return new JSONObject(Objects.requireNonNull(responseBody).string()).get("url").toString();
+        }
+    }
+
     public static String getLewd() throws Exception{
         Request request = new Request.Builder()
                 .url("https://nekos.life/api/v2/img/lewd")
+                .build();
+        Response response = CLIENT.newCall(request).execute();
+        try(ResponseBody responseBody = response.body()){
+            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            return new JSONObject(Objects.requireNonNull(responseBody).string()).get("url").toString();
+        }
+    }
+
+    public static String getLewdAnimated() throws Exception{
+        Request request = new Request.Builder()
+                .url("https://nekos.life/api/v2/img/nsfw_neko_gif")
                 .build();
         Response response = CLIENT.newCall(request).execute();
         try(ResponseBody responseBody = response.body()){

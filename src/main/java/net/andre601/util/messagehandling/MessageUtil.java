@@ -5,6 +5,7 @@ import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -148,5 +149,35 @@ public class MessageUtil {
     public static String formatTime(LocalDateTime dateTime){
         LocalDateTime time = LocalDateTime.from(dateTime.atOffset(ZoneOffset.UTC));
         return time.format(timeFormatFull) + " UTC";
+    }
+
+    public static Color toColor(String input){
+        String type = input.split(":")[0].toLowerCase();
+        Color result = null;
+
+        switch (type){
+            case "rgb":
+                String[] rgb = (input.split(":")[1].replace(" ", "")).split(",");
+
+                String r = rgb[0];
+                String g = rgb[1];
+                String b = rgb[2];
+                try{
+                    result = new Color(Integer.valueOf(r), Integer.valueOf(g), Integer.valueOf(b));
+                }catch (Exception ignored){
+                    return null;
+                }
+                break;
+
+            case "hex":
+                try {
+                    result = Color.decode((input.split(":")[1].startsWith("#") ? input.split(":")[1] :
+                            "#" + input.split(":")[1]));
+                }catch (Exception ignored){
+                    return null;
+                }
+                break;
+        }
+        return result;
     }
 }

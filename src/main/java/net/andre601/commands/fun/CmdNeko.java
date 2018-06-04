@@ -11,6 +11,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.andre601.util.HttpUtil;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +25,23 @@ public class CmdNeko implements Command {
 
     private static List<String> nekoUserID = new ArrayList<>();
 
-    public String getLink(){
+    private String getCatEmoji(){
+        try{
+            return HttpUtil.getCat();
+        }catch (Exception ignored){
+            return null;
+        }
+    }
+
+    public String getNekoGifLink(){
+        try{
+            return HttpUtil.getNekoAnimated();
+        }catch (Exception ignored){
+            return null;
+        }
+    }
+
+    public String getNekoLink(){
         try{
             return HttpUtil.getNeko();
         }catch (Exception ignored){
@@ -40,7 +57,7 @@ public class CmdNeko implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        String link = getLink();
+        String link = getNekoLink();
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
@@ -58,7 +75,7 @@ public class CmdNeko implements Command {
             return;
         }
 
-        if(e.getMessage().getContentRaw().endsWith("-slide")){
+        if(e.getMessage().getContentRaw().contains("-slide")){
             if(!PermUtil.canReact(tc)){
                 tc.sendMessage(String.format(
                         "%s I need permission, to add reactions in this channel!"
@@ -79,10 +96,13 @@ public class CmdNeko implements Command {
 
             nekoUserID.add(msg.getAuthor().getId());
             StringBuilder urls = new StringBuilder();
-            for(int i = 0; i < 30; ++i){
-                try{
-                    urls.append(HttpUtil.getNeko()).append(",");
-                }catch (Exception ignored){
+            if(msg.getContentRaw().contains("-gif")){
+                for(int i = 0; i < 30; ++i){
+                    urls.append(getNekoGifLink()).append(",");
+                }
+            }else{
+                for (int i = 0; i < 30; ++i) {
+                    urls.append(getNekoLink()).append(",");
                 }
             }
 
@@ -111,28 +131,37 @@ public class CmdNeko implements Command {
             s.display(tc);
             return;
         }
+        if(msg.getContentRaw().contains("-gif")){
+            String gifLink = getNekoGifLink();
+            EmbedBuilder nekogif = EmbedUtil.getEmbed(msg.getAuthor())
+                    .setTitle(MessageFormat.format(
+                            "Neko-gif {0}",
+                            getCatEmoji()
+                    ), gifLink)
+                    .setImage(gifLink);
 
-        try {
-            EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
-                    .setTitle(String.format(
-                            "Neko %s",
-                            HttpUtil.getCat()
-                    ), link)
-                    .setImage(link);
-
-            tc.sendMessage("Getting a cute neko...").queue(message -> {
-                message.editMessage(neko.build()).queue();
-                //  The same image exists twice for some reason...
-                if(link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko039.jpeg") ||
-                        link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko_043.jpeg")){
-                    tc.sendMessage("Hey! That's me :3").queue();
-                    if(PermUtil.canReact(tc))
-                        message.addReaction("❤").queue();
-                }
-            }
+            tc.sendMessage("Getting a cute neko...").queue(message ->
+                    message.editMessage(nekogif.build()).queue()
             );
-        }catch (Exception ignored){
+            return;
         }
+        EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
+                .setTitle(String.format(
+                        "Neko %s",
+                        getCatEmoji()
+                ), link)
+                .setImage(link);
+
+        tc.sendMessage("Getting a cute neko...").queue(message -> {
+            message.editMessage(neko.build()).queue();
+            //  The same image exists twice for some reason...
+            if(link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko039.jpeg") ||
+                    link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko_043.jpeg")){
+                tc.sendMessage("Hey! That's me :3").queue();
+                if(PermUtil.canReact(tc))
+                    message.addReaction("❤").queue();
+            }
+        });
     }
 
     @Override
