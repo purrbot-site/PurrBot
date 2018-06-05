@@ -116,8 +116,6 @@ public class PurrBotMain {
         CommandHandler.commands.put("stat", new CmdStats());
         CommandHandler.commands.put("kiss", new CmdKiss());
         CommandHandler.commands.put("quote", new CmdQuote());
-        CommandHandler.commands.put("img", new CmdImg());
-        CommandHandler.commands.put("image", new CmdImg());
         CommandHandler.commands.put("debug", new CmdDebug());
 
     }

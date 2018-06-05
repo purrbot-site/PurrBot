@@ -64,6 +64,23 @@ public class CmdWelcome implements Command {
         msg.getTextChannel().sendMessage(welcomeSet.build()).queue();
     }
 
+    public void setChannel(Message msg, Guild g, String id, String image){
+        TextChannel tc = g.getTextChannelById(id);
+
+        DBUtil.setWelcome(id, g.getId());
+        DBUtil.changeImage(g.getId(), image);
+
+        EmbedBuilder welcomeSet = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription(String.format(
+                        "Welcome-channel set to `%s` (`%s`)!",
+                        tc.getName(),
+                        tc.getId()
+                ))
+                .setColor(Color.GREEN);
+
+        msg.getTextChannel().sendMessage(welcomeSet.build()).queue();
+    }
+
     public void resetChannel(Message msg, Guild g){
         String welcome = DBUtil.getWelcome(g);
         if(welcome.equals("none")){
@@ -81,25 +98,6 @@ public class CmdWelcome implements Command {
 
             msg.getTextChannel().sendMessage(welcomeReset.build()).queue();
         }
-        /*
-        if(welcomeChannel.containsKey(g)){
-
-            welcomeChannel.remove(g);
-            save();
-
-            EmbedBuilder prefixReset = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setDescription("Welcome-channel was removed!!")
-                    .setColor(Color.GREEN);
-
-            msg.getTextChannel().sendMessage(prefixReset.build()).queue();
-
-        }else{
-            msg.getTextChannel().sendMessage(String.format(
-                    "%s This Discord doesn't have a Welcome-channel!",
-                    msg.getAuthor().getAsMention()
-            )).queue();
-        }
-        */
     }
 
     public static void resetChannel(Guild g){
@@ -139,62 +137,7 @@ public class CmdWelcome implements Command {
                     ));
             msg.getTextChannel().sendMessage(channel.build()).queue();
         }
-        /*
-        if(welcomeChannel.containsKey(g)){
-            TextChannel tc = welcomeChannel.get(g);
-            EmbedBuilder channel = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setTitle("Current Welcome-Channel")
-                    .setDescription(String.format(
-                            "`%s` (`%s`)",
-                            tc.getName(),
-                            tc.getId()
-                    ));
-            msg.getTextChannel().sendMessage(channel.build()).queue();
-        }else{
-            msg.getTextChannel().sendMessage(String.format(
-                    "%s This Discord doesn't have a Welcome-channel!",
-                    msg.getAuthor().getAsMention()
-            )).queue();
-        }
-        */
     }
-
-    /*
-    public static void save(){
-        File path = new File("guilds");
-        if(!path.exists())
-            path.mkdir();
-
-        Map<String, String> out = new HashMap<>();
-        welcomeChannel.forEach((g, c) -> out.put(g.getId(), c.getId()));
-        try{
-            FileOutputStream fos = new FileOutputStream(Static.WELCOME_FILE);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(out);
-            oos.close();
-        }catch (IOException ignored){
-        }
-    }
-
-    public static void load(JDA jda){
-        File file = new File(Static.WELCOME_FILE);
-        if(file.exists()){
-            try{
-                FileInputStream fis = new FileInputStream(file);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                Map<String, String> out = (HashMap<String, String>) ois.readObject();
-                ois.close();
-
-                out.forEach((gid, c) -> {
-                    Guild g = getGuild(gid, jda);
-                    welcomeChannel.put(g, getTChannel(g));
-                });
-            }catch (IOException | ClassNotFoundException ignored){
-            }
-
-        }
-    }
-    */
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
@@ -265,7 +208,7 @@ public class CmdWelcome implements Command {
                             case "gradient":
                             case "landscape":
                             case "random":
-                                DBUtil.changeImage(g.getId(), args[2].toLowerCase());
+                                setChannel(msg, g, args[1], args[2].toLowerCase());
                                 EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
                                         .setColor(Color.GREEN)
                                         .setDescription(MessageFormat.format(
@@ -362,7 +305,7 @@ public class CmdWelcome implements Command {
                         default:
                             EmbedBuilder error = EmbedUtil.getEmbed(msg.getAuthor())
                                     .setColor(Color.RED)
-                                    .setTitle("Invalid ImageType/color!")
+                                    .setTitle("Invalid ImageType")
                                     .setDescription(MessageFormat.format(
                                             "Your provided image and/or color was invalid!\n" +
                                             "The command is `{0}welcome test [image] [textColor]`\n" +
@@ -421,6 +364,13 @@ public class CmdWelcome implements Command {
                 }
                 if(args[1].equalsIgnoreCase("reset")){
                     DBUtil.resetColor(g.getId());
+                    EmbedBuilder reset = EmbedUtil.getEmbed(msg.getAuthor())
+                            .setDescription(MessageFormat.format(
+                                    "Color reset to `hex:ffffff`",
+                                    CmdPrefix.getPrefix(g)
+                            ))
+                            .setColor(Color.GREEN);
+                    tc.sendMessage(reset.build()).queue();
                     return;
                 }
                 if(MessageUtil.toColor(args[1]) == null) {
