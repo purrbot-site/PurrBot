@@ -46,7 +46,7 @@ public class ImageUtil {
         BufferedImage u = getUserIcon(user);
 
         try{
-            int number;
+            int number = 0;
             switch (imageType){
                 case "purr":
                     number = 0;
@@ -58,12 +58,11 @@ public class ImageUtil {
                     number = 2;
                     break;
                 case "random":
-                    number = PurrBotMain.getRandom().nextInt(2);
+                    number = PurrBotMain.getRandom().nextInt(3);
                     break;
-                default:
-                    number = 0;
             }
 
+            System.out.println("Integer " + number);
             BufferedImage layer = ImageIO.read(new File("img/welcome_layer" + number + ".png"));
 
             BufferedImage bg = ImageIO.read(new File("img/welcome_bg.png"));

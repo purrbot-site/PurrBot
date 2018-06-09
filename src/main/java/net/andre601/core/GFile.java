@@ -37,20 +37,20 @@ public class GFile {
                 if((externalSplit.length == 2 && !externalSplit[0].equals(".") || (externalSplit.length >= 3 &&
                 externalSplit[0].equals(".")))){
                     if(!file.getParentFile().mkdirs()){
-                        System.out.println("Failed to create directory: " + externalSplit[1]);
+                        System.out.println("[WARN] Failed to create directory: " + externalSplit[1]);
                         return;
                     }
                 }
                 if(file.createNewFile()){
                     if(cutil.exportResource(PurrBotMain.class.getResourceAsStream(internalPath), externalPath)){
-                        System.out.println(name + " successfully created!");
+                        System.out.println("[INFO]" + name + " successfully created!");
 
                     }else{
-                        System.out.println("Failed to create " + name);
+                        System.out.println("[WARN] Failed to create " + name);
                     }
                 }
             }else{
-                System.out.println(name + " successfully loaded!");
+                System.out.println("[INFO]" + name + " successfully loaded!");
                 gFiles.put(name, file);
             }
         }catch (Exception ignored){

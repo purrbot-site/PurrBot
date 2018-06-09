@@ -5,7 +5,8 @@ import org.slf4j.MarkerFactory;
 
 import java.util.Iterator;
 
-public enum  Markers implements Marker {
+public enum  Markers /*implements Marker*/ {
+    /*
     NO_ANNOUNCE;
 
     final Marker marker;
@@ -53,4 +54,5 @@ public enum  Markers implements Marker {
     public boolean contains(String name) {
         return marker.contains(name);
     }
+    */
 }

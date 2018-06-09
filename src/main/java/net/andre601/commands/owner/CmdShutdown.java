@@ -1,6 +1,7 @@
 package net.andre601.commands.owner;
 
 import net.andre601.commands.Command;
+import net.andre601.core.PurrBotMain;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.andre601.util.PermUtil;
@@ -42,10 +43,11 @@ public class CmdShutdown implements Command {
                     .setDescription(MessageUtil.getRandomShutdown())
                     .setImage(MessageUtil.getRandomImage());
 
-            e.getTextChannel().sendMessage(shutdown.build()).queue();
+            e.getTextChannel().sendMessage(shutdown.build()).queue(message -> {
+                System.out.println("[INFO] Disabling bot...");
+                System.exit(0);
+            });
 
-            System.out.println("[INFO] Disabling bot...");
-            e.getJDA().shutdown();
 
         }else{
 

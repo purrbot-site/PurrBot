@@ -10,8 +10,8 @@ import net.andre601.util.messagehandling.EmbedUtil;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ErrorHandler extends Filter<ILoggingEvent> {
-
+public class ErrorHandler /*extends Filter<ILoggingEvent>*/ {
+/*
     private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
 
     @Override
@@ -40,4 +40,5 @@ public class ErrorHandler extends Filter<ILoggingEvent> {
         }
         return FilterReply.NEUTRAL;
     }
+    */
 }
