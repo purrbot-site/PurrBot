@@ -11,15 +11,19 @@ The default command-prefix is `.` but can be changed with the prefix-command.
 ## Informative
 **Permission**: No permissions required.
 ```
-Command: | Arguments:    | Description:
+Command: | Arguments:  | Description:
 
-Help     | [Commandname] | Will display all commands available. adding a command after it gives infos about it.
-Info     | -here         | DMs you infos about the bot. Use `-here` to post it in the Discord-Channel.
-Invite   | -here         | DMs you the invite-link. Use `-here` to post it in the Discord-Channel.
-Quote    | <messageID>   | Quotes a message from a user.
-Server   |               | Shows infos about the Discord, the bot is currently in.
-Stats    |               | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, ect.)
-User     | [@user]       | Gives infos about a you. tag a user, to get infos about him
+Help     |             | Will display all commands available.
+         | [command]   | Shows info about the provided command.
+Info     |             | DMs you info about the bot.
+         | [-here]     | Shows the info in the channel you run the command.
+Invite   |             | DMs you the invite-link.
+         | [-here]     | Shows the Invite in the channel you currently are.
+Quote    | <messageID> | Quotes a message from a user. The message needs to be in the same channel!
+Server   |             | Shows info about the Discord, the bot is currently in.
+Stats    |             | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, ect.)
+User     |             | Gives info about a you.
+         | [@user]     | Gives info about the mentioned user.
 ```
 
 ## Fun
@@ -30,29 +34,38 @@ Command: | Arguments:  | Description:
 Cuddle   | <@user ...> | Cuddles the mentioned user(s).
 Hug      | <@user ...> | Hugs the mentioned user(s).
 Kiss     | <@user ...> | Kisses the mentioned user(s).
-Neko     | [-slide]    | Gets a neko-image from nekos.life.
-                         Use `-slide` at the end of the message for a slideshow with 30 images.
-Pat      | <@user ...> | Gives the mentioned user(s) a pat.
+Neko     |             | Shows a image of a neko from nekos.life.
+         | [-gif]      | Shows a gif-image of a neko from nekos.life.
+         | [-slide]    | Creates a slideshow with 30 images (Can be combined with the -gif argument).
+Pat      | <@user ...> | Pats the mentioned user(s).
 Slap     | <@user ...> | Slaps the mentioned user(s).
 Tickle   | <@user ...> | Tickles the mentioned user(s).
 ```
 
 ## NSFW
 **Permission**: No permission required.
+**Extra**: This command ONLY works in NSFW-labeled channels.
 ```
 Command: | Arguments: | Description:
 
-Lewd     | [-slide]   | Gets a lewd neko-image from nekos.life (Only in NSFW-labeled channels).
-                        Use `-slide` at the end of the message for a slideshow with 30 images.
+Lewd     |            | Shows a image of a lewd neko from nekos.life.
+         | [-gif]     | Shows a gif-image of a lewd neko from nekos.life.
+         | [-slide]   | Creates a slideshow with 30 images (Can be combined with the -gif argument)
 ```
 
 ## Server
 **Permission**: `MANAGE_SERVER` permission is required for the user.
 ```
-Command: | Arguments:                   | Description:
+Command: | Arguments:           | Description:
 
-Prefix   | [set <prefix>|reset]         | Shows the current prefix for the Discord, or sets/resets it.
-Welcome  | [set <ChannelID>|reset|test] | Shows the current Welcome-channel, sets/resets or tests it.
+Prefix   |                      | Shows the current prefix for the Discord.
+         | set <prefix>         | Sets the provided prefix for the Guild.
+         | reset                | Resets the prefix to the default one.
+Welcome  |                      | Shows the current welcome-settings (welcome-channel, image and textcolor).
+         | set <ChannelID>      | Sets the welcome-channel to the provided one.
+         | reset                | Resets the welcome-settings.
+         | test <image> [color] | Creates a test-image with the provided image and (optionally) textcolor.
+         | color <color>        | Sets the textcolor of the welcome-image. Format is either rgb:r,g,b or hex:<hexcode>
 ```
 
 # Inviting the bot
