@@ -32,6 +32,7 @@ public class PurrBotMain {
 
     private static Random random = new Random();
 
+    //  All the ArrayLists for Random-Stuff and the blacklist
     private static List<String> RandomShutdownText = new ArrayList<>();
     private static List<String> RandomNoShutdownText = new ArrayList<>();
     private static List<String> RandomShutdownImage = new ArrayList<>();
@@ -41,6 +42,7 @@ public class PurrBotMain {
     private static List<String> RandomDebug = new ArrayList<>();
     private static List<String> BlacklistedGuilds = new ArrayList<>();
 
+    //  used for getVersion
     private static String version = null;
 
     public static JDABuilder builder;
@@ -64,6 +66,7 @@ public class PurrBotMain {
         //  Let JDA try to reconnect, when disconnecting
         builder.setAutoReconnect(true);
 
+        //  Set the status to "Do not disturb" with Game "Starting bot..." This changes in the ReadyListener.java
         builder.setStatus(OnlineStatus.DO_NOT_DISTURB);
         builder.setGame(Game.playing("Starting Bot..."));
 
@@ -122,6 +125,7 @@ public class PurrBotMain {
 
     public static void loadRandom(){
 
+        //  Getting all the content for the random-stuff
         Collections.addAll(RandomShutdownText, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
                         "main/java/net/andre601/files/RandomShutdownText").split("\n"));
@@ -143,13 +147,15 @@ public class PurrBotMain {
         Collections.addAll(RandomDebug, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
                         "main/java/net/andre601/files/RandomDebugMsg").split("\n"));
+
+        //  Getting the blacklisted Guild-IDs
         Collections.addAll(BlacklistedGuilds, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
                         "main/java/net/andre601/files/BlacklistedGuilds").split("\n"));
 
     }
 
-    // Lists to
+    //  Just public gets.
     public static List<String> getRandomShutdownText(){
         return RandomShutdownText;
     }
@@ -179,6 +185,7 @@ public class PurrBotMain {
         return random;
     }
 
+    //  Void to clear all the ArrayLists
     public static void clear(){
         RandomShutdownText.clear();
         RandomShutdownImage.clear();
@@ -190,6 +197,7 @@ public class PurrBotMain {
         BlacklistedGuilds.clear();
     }
 
+    //  Returns the version of the bot from the Pom.xml through the version.properties file
     public static String getVersion(){
         if(version == null){
 
@@ -210,10 +218,12 @@ public class PurrBotMain {
         return new WebhookClientBuilder(url).build();
     }
 
+    //  Get-method for the Discordbots-API
     public static DiscordBotListAPI getAPI(){
         return api;
     }
 
+    //  Check for if it is *Purr*'s Birthday (19th of march)
     public static boolean isBDay(){
         final Calendar cal = Calendar.getInstance();
         return cal.get(Calendar.MONTH) == Calendar.MARCH && cal.get(Calendar.DAY_OF_MONTH) == 19;

@@ -54,7 +54,6 @@ public class CmdHelp implements Command {
     }
 
     private static void usage(Message msg){
-        msg.getChannel().sendTyping().queue();
 
         User user = msg.getAuthor();
         Guild g = msg.getGuild();
@@ -346,7 +345,7 @@ public class CmdHelp implements Command {
                         "`[reset]` Resets (removes) the welcome-channel.\n" +
                         "`[test [image] [color]]` Creates a welcome-image in the channel you currently " +
                         "are. [image] is the image to use. [color] is the text-color.\n" +
-                        "`[set <ChannelID> [image]]` Sets a Channel as Welcome-Channel. [image] lets you set\n" +
+                        "`[set <ChannelID> [image]]` Sets a Channel as Welcome-Channel. [image] lets you set " +
                         "a different image.",
                         "`MANAGE_SERVER`"
                 );

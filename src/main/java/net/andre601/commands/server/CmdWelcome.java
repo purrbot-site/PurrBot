@@ -13,21 +13,14 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CmdWelcome implements Command {
-
-    private static Map<Guild, TextChannel> welcomeChannel = new HashMap<>();
-
-    public static Map<Guild, TextChannel> getWelcomeChannel(){
-        return welcomeChannel;
-    }
 
     public static Guild getGuild(String id, JDA jda){
         return jda.getGuildById(id);
     }
 
+    //  Checks, if the id is a valid channel.
     public static TextChannel checkChannel(String id, Guild g){
         try{
             return g.getTextChannelById(id);

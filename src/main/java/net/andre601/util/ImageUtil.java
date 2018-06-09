@@ -46,20 +46,22 @@ public class ImageUtil {
         BufferedImage u = getUserIcon(user);
 
         try{
-            String number = String.valueOf(1);
+            int number;
             switch (imageType){
                 case "purr":
-                    number = String.valueOf(1);
+                    number = 0;
                     break;
                 case "gradient":
-                    number = String.valueOf(2);
+                    number = 1;
                     break;
                 case "landscape":
-                    number = String.valueOf(3);
+                    number = 2;
                     break;
                 case "random":
-                    number = String.valueOf(PurrBotMain.getRandom().nextInt(3));
+                    number = PurrBotMain.getRandom().nextInt(2);
                     break;
+                default:
+                    number = 0;
             }
 
             BufferedImage layer = ImageIO.read(new File("img/welcome_layer" + number + ".png"));

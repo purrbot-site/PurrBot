@@ -54,9 +54,11 @@ public class CmdCuddle implements Command{
             return;
         }
 
+        //  Getting all mentioned users in the message and store them in a list.
         List<User> user = msg.getMentionedUsers();
 
         if(user.size() == 1){
+            //  If amount of mentioned users equals 1: Get the first mentioned user.
             User u = user.get(0);
             //  mentioned user = own user -> send message, add reaction and return.
             if(u == msg.getJDA().getSelfUser()){
@@ -73,6 +75,7 @@ public class CmdCuddle implements Command{
                 tc.sendMessage("Do you have no one to cuddle with?").queue();
                 return;
             }
+            //  Saving the mentioned user as String
             String name = u.getAsMention();
             tc.sendMessage(String.format(
                     "%s cuddles with you %s",
@@ -80,6 +83,7 @@ public class CmdCuddle implements Command{
                     name
             )).queue(message -> {
                 try{
+                    //  Editing the message to add the image ("should" prevent issues with empty embeds)
                     message.editMessage(
                             EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
                     ).queue();
@@ -88,6 +92,7 @@ public class CmdCuddle implements Command{
             });
 
         }else{
+            //  Storing all mentioned users as String, seperated by a comma (@user1, @user2, @user3, ...)
             String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
             tc.sendMessage(String.format(
                     "%s cuddles with you %s",
@@ -95,6 +100,7 @@ public class CmdCuddle implements Command{
                     users
             )).queue(message -> {
                 try{
+                    //  Editing the message to add the image ("should" prevent issues with empty embeds)
                     message.editMessage(
                             EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
                     ).queue();

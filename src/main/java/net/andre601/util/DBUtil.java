@@ -2,11 +2,8 @@ package net.andre601.util;
 
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.net.Connection;
-import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.User;
 
-import java.awt.*;
 import java.util.Map;
 
 import static net.andre601.core.PurrBotMain.file;
