@@ -25,14 +25,6 @@ public class CmdNeko implements Command {
 
     private static List<String> nekoUserID = new ArrayList<>();
 
-    private String getCatEmoji(){
-        try{
-            return HttpUtil.getCat();
-        }catch (Exception ignored){
-            return null;
-        }
-    }
-
     public String getNekoGifLink(){
         try{
             return HttpUtil.getNekoAnimated();
@@ -57,7 +49,6 @@ public class CmdNeko implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        String link = getNekoLink();
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
@@ -135,8 +126,8 @@ public class CmdNeko implements Command {
             String gifLink = getNekoGifLink();
             EmbedBuilder nekogif = EmbedUtil.getEmbed(msg.getAuthor())
                     .setTitle(MessageFormat.format(
-                            "Neko-gif {0}",
-                            getCatEmoji()
+                            "Neko-gif: {0}",
+                            gifLink.replace("https://cdn.nekos.life/ngif/", "")
                     ), gifLink)
                     .setImage(gifLink);
 
@@ -145,10 +136,12 @@ public class CmdNeko implements Command {
             );
             return;
         }
+
+        String link = getNekoLink();
         EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
-                .setTitle(String.format(
-                        "Neko %s",
-                        getCatEmoji()
+                .setTitle(MessageFormat.format(
+                        "Neko: {0}",
+                        link.replace("https://cdn.nekos.life/neko/", "")
                 ), link)
                 .setImage(link);
 

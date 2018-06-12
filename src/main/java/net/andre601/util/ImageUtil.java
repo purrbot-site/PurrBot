@@ -57,12 +57,20 @@ public class ImageUtil {
                 case "landscape":
                     number = 2;
                     break;
+                case "red":
+                    number = 3;
+                    break;
+                case "green":
+                    number = 4;
+                    break;
+                case "blue":
+                    number = 5;
+                    break;
                 case "random":
-                    number = PurrBotMain.getRandom().nextInt(3);
+                    number = PurrBotMain.getRandom().nextInt(6);
                     break;
             }
 
-            System.out.println("Integer " + number);
             BufferedImage layer = ImageIO.read(new File("img/welcome_layer" + number + ".png"));
 
             BufferedImage bg = ImageIO.read(new File("img/welcome_bg.png"));

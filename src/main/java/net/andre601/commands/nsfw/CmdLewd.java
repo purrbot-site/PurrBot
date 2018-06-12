@@ -25,14 +25,6 @@ public class CmdLewd implements Command {
 
     private static List<String> lewdUserID = new ArrayList<>();
 
-    private String getCatEmoji(){
-        try{
-            return HttpUtil.getCat();
-        }catch (Exception ignored){
-            return null;
-        }
-    }
-
     private String getLewdLink(){
         try{
             return HttpUtil.getLewd();
@@ -57,7 +49,6 @@ public class CmdLewd implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent e) {
 
-        String link = getLewdLink();
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
@@ -135,7 +126,7 @@ public class CmdLewd implements Command {
                 EmbedBuilder lewdgif = EmbedUtil.getEmbed(msg.getAuthor())
                         .setTitle(MessageFormat.format(
                                 "Lewd Neko-gif {0}",
-                                getCatEmoji()
+                                gifLink.replace("https://cdn.nekos.life/nsfw_neko_gif/", "")
                         ), gifLink)
                         .setImage(gifLink);
 
@@ -144,10 +135,12 @@ public class CmdLewd implements Command {
                 );
                 return;
             }
+
+            String link = getLewdLink();
             EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
-                    .setTitle(String.format(
-                            "Lewd Neko %s",
-                            getCatEmoji()
+                    .setTitle(MessageFormat.format(
+                            "Lewd Neko {0}",
+                            link.replace("https://cdn.nekos.life/lewd/", "")
                     ), link)
                     .setImage(link);
 

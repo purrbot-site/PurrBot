@@ -1,5 +1,6 @@
 package net.andre601.commands.server;
 
+import com.jagrosh.jdautilities.menu.Paginator;
 import net.andre601.commands.Command;
 import net.andre601.util.*;
 import net.andre601.util.messagehandling.EmbedUtil;
@@ -13,8 +14,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.text.MessageFormat;
+import java.util.concurrent.TimeUnit;
+
+import static net.andre601.core.PurrBotMain.waiter;
+import static net.andre601.commands.server.CmdPrefix.getPrefix;
 
 public class CmdWelcome implements Command {
+
+    private static Paginator.Builder pBuilder =
+            new Paginator.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);
 
     public static Guild getGuild(String id, JDA jda){
         return jda.getGuildById(id);
@@ -120,8 +128,10 @@ public class CmdWelcome implements Command {
                             "**Image**: `%s`\n" +
                             "\n" +
                             "Text color:\n" +
-                            "**Type**: `%s`\n" +
-                            "**Value: `%s`",
+                            "```\n" +
+                            "  Type: %s\n" +
+                            "  Value: %s\n" +
+                            "```",
                             tc.getName(),
                             tc.getId(),
                             DBUtil.getImage(g),
@@ -130,6 +140,96 @@ public class CmdWelcome implements Command {
                     ));
             msg.getTextChannel().sendMessage(channel.build()).queue();
         }
+    }
+
+    private static void sendWelcomeHelp(Message msg, Guild g){
+        String prefix = getPrefix(g);
+        TextChannel tc = msg.getTextChannel();
+
+        Paginator page = pBuilder
+                .setItems(MessageFormat.format(
+                        "**Pages**:\n" +
+                        "```\n" +
+                        "Images:        2-5\n" +
+                        "  Nekos          2\n" +
+                        "  Colors         3\n" +
+                        "  Gradients      4\n" +
+                        "  Nature         5\n" +
+                        "\n" +
+                        "Color-System     6\n" +
+                        "```\n" +
+                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        prefix
+                ),MessageFormat.format(
+                        "**Images**: `Nekos`\n" +
+                        "\n" +
+                        "```\n" +
+                        "Name:          From:\n" +
+                        "\n" +
+                        "Purr           @Andre_601#6811\n" +
+                        "  Default image of *Purr*\n" +
+                        "```\n" +
+                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        prefix
+                ),MessageFormat.format(
+                        "**Images**: `Colors`\n" +
+                        "\n" +
+                        "```\n" +
+                        "Name:          From:\n" +
+                        "\n" +
+                        "Red            @Andre_601#6811\n" +
+                        "  Color #c0392b\n" +
+                        "\n" +
+                        "Green          @Andre_601#6811\n" +
+                        "  Color #27ae60\n" +
+                        "\n" +
+                        "Blue           @Andre_601#6811\n" +
+                        "  Color #2980b9\n" +
+                        "```\n" +
+                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        prefix
+                ),MessageFormat.format(
+                        "**Images**: `Gradients`\n" +
+                        "\n" +
+                        "```\n" +
+                        "Name:          From:\n" +
+                        "\n" +
+                        "gradient       @aBooDyy#9543\n" +
+                        "  Light to dark-blue gradient\n" +
+                        "```\n" +
+                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        prefix
+                ),MessageFormat.format(
+                        "**Images**: `Nature`\n" +
+                        "\n" +
+                        "```\n" +
+                        "Name:          From:\n" +
+                        "\n" +
+                        "Landscape      @Kawten#6781\n" +
+                        "  Image of a landscape at a sea\n" +
+                        "```\n" +
+                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        prefix
+                ),MessageFormat.format(
+                        "**Color-System**\n" +
+                        "\n" +
+                        "You can change the textcolor with `{0}welcome color <color>`\n" +
+                        "```\n" +
+                        "Type:          Desc:\n" +
+                        "\n" +
+                        "RGB:<r,g,b>    Sets the color in RGB\n" +
+                        "HEX:<code>     Sets the color in Hex-code (#rrggbb)\n" +
+                        "```\n" +
+                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        prefix
+                ))
+                .setItemsPerPage(1)
+                .setColor(Color.RED)
+                .setText("")
+                .setFinalAction(message -> message.delete().queue())
+                .build();
+
+        page.display(tc);
     }
 
     @Override
@@ -200,6 +300,9 @@ public class CmdWelcome implements Command {
                             case "purr":
                             case "gradient":
                             case "landscape":
+                            case "red":
+                            case "green":
+                            case "blue":
                             case "random":
                                 setChannel(msg, g, args[1], args[2].toLowerCase());
                                 EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
@@ -213,25 +316,7 @@ public class CmdWelcome implements Command {
                                 tc.sendMessage(success.build()).queue();
                                 break;
                             default:
-                                EmbedBuilder error = EmbedUtil.getEmbed(msg.getAuthor())
-                                        .setColor(Color.RED)
-                                        .setTitle("Invalid ImageType!")
-                                        .setDescription(MessageFormat.format(
-                                                "Your provided image was invalid!\n" +
-                                                "The command is `{0}welcome set {1} <image>`\n" +
-                                                "\n" +
-                                                "Please use one of the following options:\n" +
-                                                "`Purr` Default Purr Welcome-image\n" +
-                                                "`Gradient` Simple gradient. (suggested by @aBooDyy#9543)\n" +
-                                                "`Landscape` Landscape with sea (Suggested by @Kawten#6781)\n" +
-                                                "\n" +
-                                                "`random` Lets the bot use a random image on each join.\n" +
-                                                "\n" +
-                                                "You can use `{0}welcome test [image]` to test a image.",
-                                                CmdPrefix.getPrefix(g),
-                                                args[1]
-                                        ));
-                                tc.sendMessage(error.build()).queue();
+                                sendWelcomeHelp(msg, g);
                                 break;
                         }
                     }else{
@@ -258,29 +343,15 @@ public class CmdWelcome implements Command {
                         case "purr":
                         case "gradient":
                         case "landscape":
+                        case "red":
+                        case "green":
+                        case "blue":
                         case "random":
                             ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase(),
                                     DBUtil.getColor(g));
                             break;
                         default:
-                            EmbedBuilder error = EmbedUtil.getEmbed(msg.getAuthor())
-                                    .setColor(Color.RED)
-                                    .setTitle("Invalid ImageType!")
-                                    .setDescription(MessageFormat.format(
-                                            "Your provided image was invalid!\n" +
-                                                    "The command is `{0}welcome test <image>`\n" +
-                                                    "\n" +
-                                                    "Please use one of the following options:\n" +
-                                                    "`Purr` Default Purr Welcome-image\n" +
-                                                    "`Gradient` Simple gradient. (suggested by @aBooDyy#9543)\n" +
-                                                    "`Landscape` Landscape with sea (Suggested by @Kawten#6781)\n" +
-                                                    "\n" +
-                                                    "`random` Lets the bot use a random image on each join.\n" +
-                                                    "\n" +
-                                                    "You can use `{0}welcome test [image]` to test a image.",
-                                            CmdPrefix.getPrefix(g)
-                                    ));
-                            tc.sendMessage(error.build()).queue();
+                            sendWelcomeHelp(msg, g);
                             break;
                     }
                 }else{
@@ -288,33 +359,22 @@ public class CmdWelcome implements Command {
                         case "purr":
                         case "gradient":
                         case "landscape":
+                        case "red":
+                        case "green":
+                        case "blue":
                         case "random":
                             if(MessageUtil.toColor(args[2].toLowerCase()) == null){
-
+                                tc.sendMessage(MessageFormat.format(
+                                        "{0} Invalid color and/or color-type `{1}`!",
+                                        msg.getAuthor().getAsMention(),
+                                        args[2].toLowerCase()
+                                )).queue();
                             }
                             ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase(),
                                     args[2]);
                             break;
                         default:
-                            EmbedBuilder error = EmbedUtil.getEmbed(msg.getAuthor())
-                                    .setColor(Color.RED)
-                                    .setTitle("Invalid ImageType")
-                                    .setDescription(MessageFormat.format(
-                                            "Your provided image and/or color was invalid!\n" +
-                                            "The command is `{0}welcome test [image] [textColor]`\n" +
-                                            "\n" +
-                                            "Please use one of the following options:\n" +
-                                            "`Purr` Default Purr Welcome-image\n" +
-                                            "`Gradient` Simple gradient. (suggested by @aBooDyy#9543)\n" +
-                                            "`Landscape` Landscape with sea (Suggested by @Kawten#6781)\n" +
-                                            "\n" +
-                                            "`random` Lets the bot use a random image on each join.\n" +
-                                            "\n" +
-                                            "You can use `{0}welcome test [image] [color] [textColor]` to test a " +
-                                            "image and textcolor.",
-                                            CmdPrefix.getPrefix(g)
-                                    ));
-                            tc.sendMessage(error.build()).queue();
+                            sendWelcomeHelp(msg, g);
                             break;
                     }
 
@@ -323,36 +383,12 @@ public class CmdWelcome implements Command {
 
             case "image":
             case "images":
-                EmbedBuilder image = EmbedUtil.getEmbed(msg.getAuthor())
-                        .setDescription(MessageFormat.format(
-                                "You can use the following images:\n" +
-                                        "`Purr` Default Purr Welcome-image\n" +
-                                        "`Gradient` Simple gradient. (suggested by @aBooDyy#9543)\n" +
-                                        "`Landscape` Landscape with sea (Suggested by @Kawten#6781)\n" +
-                                        "\n" +
-                                        "`random` Lets the bot use a random image on each join.\n" +
-                                        "\n" +
-                                        "You can use `{0}welcome test [image]` to test a image.",
-                                CmdPrefix.getPrefix(g)
-                        ));
-                tc.sendMessage(image.build()).queue();
+                sendWelcomeHelp(msg, g);
                 break;
 
             case "color":
                 if(args.length == 1){
-                    EmbedBuilder color = EmbedUtil.getEmbed(msg.getAuthor())
-                            .setDescription(MessageFormat.format(
-                                    "You need to provide a valid color-type and color!\n" +
-                                    "\n" +
-                                    "**Valid types**:\n" +
-                                    "`hex:<#hexcode>` sets the color in hex.\n" +
-                                    "`rgb:<r,g,b>` Sets the color in RGB.\n" +
-                                    "\n" +
-                                    "Test it with `{0}welcome test [image] [textcolor]`\n",
-                                    CmdPrefix.getPrefix(g)
-                            ))
-                            .setColor(Color.RED);
-                    tc.sendMessage(color.build()).queue();
+                    sendWelcomeHelp(msg, g);
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -367,19 +403,7 @@ public class CmdWelcome implements Command {
                     return;
                 }
                 if(MessageUtil.toColor(args[1]) == null) {
-                    EmbedBuilder color = EmbedUtil.getEmbed(msg.getAuthor())
-                            .setDescription(MessageFormat.format(
-                                    "The provided color-type and/or color is invalid!\n" +
-                                    "\n" +
-                                    "**Valid types**:\n" +
-                                    "`hex:<#hexcode>` sets the color in hex.\n" +
-                                    "`rgb:<r,g,b>` Sets the color in RGB.\n" +
-                                    "\n" +
-                                    "Test it with `{0}welcome test [image] [textcolor]`\n",
-                                    CmdPrefix.getPrefix(g)
-                            ))
-                            .setColor(Color.RED);
-                    tc.sendMessage(color.build()).queue();
+                    sendWelcomeHelp(msg, g);
                     return;
                 }
                 DBUtil.changeColor(g.getId(), args[1].toLowerCase());

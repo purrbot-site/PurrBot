@@ -12,17 +12,6 @@ import java.util.Objects;
 public class HttpUtil {
     private static final OkHttpClient CLIENT = new OkHttpClient();
 
-    public static String getCat() throws Exception{
-        Request request = new Request.Builder()
-                .url("https://nekos.life/api/v2/cat")
-                .build();
-        Response response = CLIENT.newCall(request).execute();
-        try(ResponseBody responseBody = response.body()){
-            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-            return new JSONObject(Objects.requireNonNull(responseBody).string()).get("cat").toString();
-        }
-    }
-
     public static String getSlap() throws Exception{
         Request request = new Request.Builder()
                 .url("https://nekos.life/api/v2/img/slap")

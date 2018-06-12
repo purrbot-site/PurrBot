@@ -13,11 +13,10 @@ import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import static net.andre601.commands.server.CmdPrefix.getPrefix;
+import static net.andre601.core.PurrBotMain.waiter;
 
 import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
-
-import static net.andre601.core.PurrBotMain.waiter;
 
 public class CmdHelp implements Command {
 
@@ -120,8 +119,6 @@ public class CmdHelp implements Command {
                         "\n" +
                         "Help         [command]\n" +
                         "Info         [-here]\n" +
-                        "Img          <URL>\n" +
-                        "             <neko:<name>.<jpg/png/...>>\n" +
                         "Invite       [-here]\n" +
                         "Quote        <messageID>\n" +
                         "Server\n" +
