@@ -13,7 +13,7 @@ public class CommandListener extends ListenerAdapter{
         if(e.getMessage().isFromType(ChannelType.PRIVATE))
             return;
 
-        if(e.getMessage().getContentRaw().equals(e.getGuild().getJDA().getSelfUser().getAsMention()) &&
+        if(e.getMessage().getContentRaw().equals(e.getGuild().getSelfMember().getAsMention()) &&
                 (e.getAuthor().getId() != e.getJDA().getSelfUser().getId()) && !e.getAuthor().isBot()){
             e.getTextChannel().sendMessage(String.format(
                     "%s My prefix for all commands is `%s`!",

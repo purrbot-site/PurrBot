@@ -5,6 +5,7 @@ import net.andre601.commands.server.CmdPrefix;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.HttpUtil;
 import net.andre601.util.PermUtil;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -49,7 +50,7 @@ public class CmdCuddle implements Command{
         }
 
         //  Send usage-message defined above, if you only run the command with no args.
-        if(args.length < 1){
+        if(args.length == 0){
             usage(e.getMessage());
             return;
         }

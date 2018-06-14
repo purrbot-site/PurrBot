@@ -126,7 +126,7 @@ public class CmdNeko implements Command {
             String gifLink = getNekoGifLink();
             EmbedBuilder nekogif = EmbedUtil.getEmbed(msg.getAuthor())
                     .setTitle(MessageFormat.format(
-                            "Neko-gif: {0}",
+                            "{0}",
                             gifLink.replace("https://cdn.nekos.life/ngif/", "")
                     ), gifLink)
                     .setImage(gifLink);
@@ -140,7 +140,7 @@ public class CmdNeko implements Command {
         String link = getNekoLink();
         EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
                 .setTitle(MessageFormat.format(
-                        "Neko: {0}",
+                        "{0}",
                         link.replace("https://cdn.nekos.life/neko/", "")
                 ), link)
                 .setImage(link);

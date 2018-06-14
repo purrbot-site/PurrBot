@@ -125,7 +125,7 @@ public class CmdLewd implements Command {
                 String gifLink = getLewdGifLink();
                 EmbedBuilder lewdgif = EmbedUtil.getEmbed(msg.getAuthor())
                         .setTitle(MessageFormat.format(
-                                "Lewd Neko-gif {0}",
+                                "{0}",
                                 gifLink.replace("https://cdn.nekos.life/nsfw_neko_gif/", "")
                         ), gifLink)
                         .setImage(gifLink);
@@ -139,7 +139,7 @@ public class CmdLewd implements Command {
             String link = getLewdLink();
             EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
                     .setTitle(MessageFormat.format(
-                            "Lewd Neko {0}",
+                            "{0}",
                             link.replace("https://cdn.nekos.life/lewd/", "")
                     ), link)
                     .setImage(link);
