@@ -49,7 +49,7 @@ public class CmdInvite implements Command{
                         Static.DISCORD_INVITE
                 ), false);
 
-        if(e.getMessage().getContentRaw().endsWith("-here")){
+        if(e.getMessage().getContentRaw().contains("-here")){
             tc.sendTyping().queue();
             e.getChannel().sendMessage(invite.build()).queue();
             return;

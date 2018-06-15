@@ -57,7 +57,8 @@ public class DebugUtil {
                     "# Info about the bot-Settings (Welcome-channel and prefix)",
                     "#",
                     "",
-                    "Welcome-channel: " + getWelcomeChannel(g),
+                    getWelcomeInfo(g),
+                    "",
                     "Guild-Prefix: " + getGuildPrefix(g),
                     "Roles: " + g.getSelfMember().getRoles().size(),
                     "  " + getOwnRoles(g)
@@ -129,8 +130,13 @@ public class DebugUtil {
         return String.join("\n", output);
     }
 
-    private static String getWelcomeChannel(Guild g){
-        return DBUtil.getWelcome(g);
+    private static String getWelcomeInfo(Guild g){
+        String colorInfo = DBUtil.getColor(g);
+        String colorType = colorInfo.split(":")[0];
+        String colorValue = colorInfo.split(":")[1];
+        return "Welcome-channel: " + DBUtil.getWelcome(g) + "\n" +
+                "  Color-Type: " + colorType + "\n" +
+                "  Color-Value: " + colorValue;
     }
 
     private static String getGuildPrefix(Guild g){

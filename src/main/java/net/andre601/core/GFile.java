@@ -43,14 +43,14 @@ public class GFile {
                 }
                 if(file.createNewFile()){
                     if(cutil.exportResource(PurrBotMain.class.getResourceAsStream(internalPath), externalPath)){
-                        System.out.println("[INFO]" + name + " successfully created!");
+                        System.out.println("[INFO] " + name + " successfully created!");
 
                     }else{
                         System.out.println("[WARN] Failed to create " + name);
                     }
                 }
             }else{
-                System.out.println("[INFO]" + name + " successfully loaded!");
+                System.out.println("[INFO] " + name + " successfully loaded!");
                 gFiles.put(name, file);
             }
         }catch (Exception ignored){

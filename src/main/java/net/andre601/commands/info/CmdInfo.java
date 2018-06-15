@@ -65,7 +65,7 @@ public class CmdInfo implements Command {
                         Static.WEBSITE
                 ), true);
 
-        if(e.getMessage().getContentRaw().endsWith("-here")){
+        if(e.getMessage().getContentRaw().contains("-here")){
             tc.sendTyping().queue();
             e.getChannel().sendMessage(Info.build()).queue();
             return;
