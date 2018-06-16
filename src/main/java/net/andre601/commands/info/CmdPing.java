@@ -25,13 +25,11 @@ public class CmdPing implements Command{
         if(!PermUtil.canWrite(tc))
             return;
 
-        if(PermUtil.canDeleteMsg(tc))
-            msg.delete().queue();
-
         long startTime = System.currentTimeMillis();
 
         tc.sendMessage(MessageFormat.format(
                 MessageUtil.getRandomPingMsg(),
+                msg.getAuthor().getAsMention(),
                 (System.currentTimeMillis() - startTime)
         )).queue();
     }
