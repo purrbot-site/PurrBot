@@ -120,6 +120,7 @@ public class CmdHelp implements Command {
                         "Help         [command]\n" +
                         "Info         [-here]\n" +
                         "Invite       [-here]\n" +
+                        "Ping\n" +
                         "Quote        <messageID>\n" +
                         "Server\n" +
                         "Stats\n" +
@@ -389,6 +390,12 @@ public class CmdHelp implements Command {
                         "`none`",
                         "`MANAGE_SERVER`");
                 break;
+
+            case "ping":
+                usage(msg, "Ping", "ping",
+                        "Will respond with the respond-time in ms.",
+                        "`none`",
+                        "`none`");
 
             default:
                 usage(msg);
