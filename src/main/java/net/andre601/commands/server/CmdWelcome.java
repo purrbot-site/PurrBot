@@ -73,9 +73,10 @@ public class CmdWelcome implements Command {
 
         EmbedBuilder welcomeSet = EmbedUtil.getEmbed(msg.getAuthor())
                 .setDescription(String.format(
-                        "Welcome-channel set to `%s` (`%s`)!",
+                        "Welcome-channel set to `%s` (`%s`) with image `%s`!",
                         tc.getName(),
-                        tc.getId()
+                        tc.getId(),
+                        image.toLowerCase()
                 ))
                 .setColor(Color.GREEN);
 
@@ -146,9 +147,28 @@ public class CmdWelcome implements Command {
         String prefix = getPrefix(g);
         TextChannel tc = msg.getTextChannel();
 
+        TextChannel welChannel = getChannel(g);
+
+        String channel = (welChannel != null ? "`" + welChannel.getName() + "` (`" + welChannel.getId() + "`)" :
+                "`none`");
+
+        String savedColor = DBUtil.getColor(g);
+        String colorType = savedColor.split(":")[0].toLowerCase();
+        String colorValue = savedColor.split(":")[1].toLowerCase();
+
         Paginator page = pBuilder
                 .setItems(MessageFormat.format(
-                        "**Pages**:\n" +
+                        "**Channel**: {0}\n" +
+                        "\n" +
+                        "**Image**: `{1}`\n" +
+                        "\n" +
+                        "**Text Color**:\n" +
+                        "```\n" +
+                        "  Type: {2}\n" +
+                        "  Value: {3}\n" +
+                        "```\n" +
+                        "\n" +
+                        "**Images**:\n" +
                         "```\n" +
                         "Images:        2-5\n" +
                         "  Nekos          2\n" +
@@ -158,7 +178,11 @@ public class CmdWelcome implements Command {
                         "\n" +
                         "Color-System     6\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        "Use `{4}welcome test <image> [color]` to test a image and color.",
+                        channel,
+                        DBUtil.getImage(g),
+                        colorType,
+                        colorValue,
                         prefix
                 ),MessageFormat.format(
                         "**Images**: `Nekos`\n" +
@@ -168,6 +192,12 @@ public class CmdWelcome implements Command {
                         "\n" +
                         "Purr           @Andre_601#6811\n" +
                         "  Default image of *Purr*\n" +
+                        "\n" +
+                        "Neko1          @Andre_601#6811\n" +
+                        "  Image with a neko.\n" +
+                        "\n" +
+                        "Neko2          @Andre_601#6811\n" +
+                        "  Another image with a neko." +
                         "```\n" +
                         "Use `{0}welcome test <image> [color]` to test a image and color.",
                         prefix
@@ -224,7 +254,6 @@ public class CmdWelcome implements Command {
                         prefix
                 ))
                 .setItemsPerPage(1)
-                .setColor(Color.RED)
                 .setText("")
                 .setFinalAction(message -> message.delete().queue())
                 .build();
@@ -258,7 +287,7 @@ public class CmdWelcome implements Command {
             msg.delete().queue();
 
         if(args.length == 0){
-            getChannel(msg, g);
+            sendWelcomeHelp(msg, g);
             return;
         }
 
@@ -285,6 +314,7 @@ public class CmdWelcome implements Command {
                                 "%s Please provide a valid channel-ID!",
                                 msg.getAuthor().getAsMention()
                         )).queue();
+                        return;
                     }
                 }else{
                     if(args[1].matches("[0-9]{18,22}")){
@@ -295,7 +325,6 @@ public class CmdWelcome implements Command {
                             )).queue();
                             return;
                         }
-                        TextChannel textChannel = g.getTextChannelById(args[1]);
                         switch (args[2].toLowerCase()) {
                             case "purr":
                             case "gradient":
@@ -303,17 +332,10 @@ public class CmdWelcome implements Command {
                             case "red":
                             case "green":
                             case "blue":
+                            case "neko1":
+                            case "neko2":
                             case "random":
                                 setChannel(msg, g, args[1], args[2].toLowerCase());
-                                EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
-                                        .setColor(Color.GREEN)
-                                        .setDescription(MessageFormat.format(
-                                                "Welcome-Channel set to `{0}` (`{1}`) with image `{2}`",
-                                                textChannel.getName(),
-                                                textChannel.getId(),
-                                                args[2].toLowerCase()
-                                        ));
-                                tc.sendMessage(success.build()).queue();
                                 break;
                             default:
                                 sendWelcomeHelp(msg, g);
@@ -346,6 +368,8 @@ public class CmdWelcome implements Command {
                         case "red":
                         case "green":
                         case "blue":
+                        case "neko1":
+                        case "neko2":
                         case "random":
                             ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase(),
                                     DBUtil.getColor(g));
@@ -362,13 +386,16 @@ public class CmdWelcome implements Command {
                         case "red":
                         case "green":
                         case "blue":
+                        case "neko1":
+                        case "neko2":
                         case "random":
                             if(MessageUtil.toColor(args[2].toLowerCase()) == null){
                                 tc.sendMessage(MessageFormat.format(
-                                        "{0} Invalid color and/or color-type `{1}`!",
+                                        "{0} Invalid color-value and/or color-type `{1}`!",
                                         msg.getAuthor().getAsMention(),
                                         args[2].toLowerCase()
                                 )).queue();
+                                return;
                             }
                             ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase(),
                                     args[2]);
@@ -423,7 +450,7 @@ public class CmdWelcome implements Command {
                 break;
 
             default:
-                getChannel(msg, g);
+                sendWelcomeHelp(msg, g);
         }
     }
 

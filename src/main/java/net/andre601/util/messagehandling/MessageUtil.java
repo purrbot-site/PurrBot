@@ -84,6 +84,8 @@ public class MessageUtil {
 
     public static String getGameStatus(Game game){
         String str;
+        String currGame = game.getName();
+        currGame = currGame.length() > 20 ? currGame.substring(0, 19) + "..." : currGame;
         switch (game.getType()){
             case STREAMING:
                 return "(Streaming [`" + game.getName() + "`](" + game.getUrl() + "))";
@@ -101,7 +103,7 @@ public class MessageUtil {
                 str = "Playing ";
                 break;
         }
-        return "(" + str + (game.getUrl() == null ? "`" + game.getName() + "`" : "[`" + game.getName() + "`](" +
+        return "(" + str + (game.getUrl() == null ? "`" + currGame + "`" : "[`" + currGame + "`](" +
                 game.getUrl() + ")") + ")";
     }
 

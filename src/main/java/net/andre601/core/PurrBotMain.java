@@ -79,7 +79,8 @@ public class PurrBotMain {
         try {
             jda = builder.buildBlocking();
         } catch (LoginException | InterruptedException ex) {
-            ex.printStackTrace();
+            System.out.println("[ERROR] Couldn't load bot! Is the bot-token valid?");
+            System.exit(0);
         }
     }
 

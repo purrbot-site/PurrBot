@@ -136,7 +136,8 @@ public class DebugUtil {
         String colorValue = colorInfo.split(":")[1];
         return "Welcome-channel: " + DBUtil.getWelcome(g) + "\n" +
                 "  Color-Type: " + colorType + "\n" +
-                "  Color-Value: " + colorValue;
+                "  Color-Value: " + colorValue + "\n" +
+                "  Image: " + DBUtil.getImage(g);
     }
 
     private static String getGuildPrefix(Guild g){

@@ -59,6 +59,17 @@ public class CmdKiss implements Command {
             User u = user.get(0);
             //  mentioned user = own user (Bot) -> send message, add reaction and return.
             if(u == msg.getJDA().getSelfUser()){
+                //  Special response for a certain user.
+                if(msg.getAuthor().getId().equals("433894627553181696")){
+                    if(PermUtil.canReact(tc))
+                        msg.addReaction("\uD83D\uDC8B").queue();
+
+                    tc.sendMessage(String.format(
+                            "%s \\*Enjoys the kiss*",
+                            msg.getAuthor().getAsMention()
+                    )).queue();
+                    return;
+                }
                 if(PermUtil.canReact(tc))
                     e.getMessage().addReaction("\uD83D\uDE33").queue();
 

@@ -54,5 +54,4 @@ public enum  Markers /*implements Marker*/ {
     public boolean contains(String name) {
         return marker.contains(name);
     }
-    */
-}
+    */}

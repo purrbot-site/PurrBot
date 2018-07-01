@@ -66,8 +66,14 @@ public class ImageUtil {
                 case "blue":
                     number = 5;
                     break;
+                case "neko1":
+                    number = 6;
+                    break;
+                case "neko2":
+                    number = 7;
+                    break;
                 case "random":
-                    number = PurrBotMain.getRandom().nextInt(6);
+                    number = PurrBotMain.getRandom().nextInt(8);
                     break;
             }
 
