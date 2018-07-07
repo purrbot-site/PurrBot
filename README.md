@@ -22,7 +22,7 @@ Invite   |             | DMs you the invite-link.
 Quote    | <messageID> | Quotes a message from a user. The message needs to be in the same channel!
 Server   |             | Shows info about the Discord, the bot is currently in.
 Stats    |             | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, ect.)
-User     |             | Gives info about a you.
+User     |             | Gives info about you.
          | [@user]     | Gives info about the mentioned user.
 ```
 
@@ -56,16 +56,16 @@ Lewd     |            | Shows a image of a lewd neko from nekos.life.
 ## Server
 **Permission**: `MANAGE_SERVER` permission is required for the user.
 ```
-Command: | Arguments:           | Description:
+Command: | Arguments:              | Description:
 
-Prefix   |                      | Shows the current prefix for the Discord.
-         | set <prefix>         | Sets the provided prefix for the Guild.
-         | reset                | Resets the prefix to the default one.
-Welcome  |                      | Shows the current welcome-settings (welcome-channel, image and textcolor).
-         | set <ChannelID>      | Sets the welcome-channel to the provided one.
-         | reset                | Resets the welcome-settings.
-         | test <image> [color] | Creates a test-image with the provided image and (optionally) textcolor.
-         | color <color>        | Sets the textcolor of the welcome-image. Format is either rgb:r,g,b or hex:<hexcode>
+Prefix   |                         | Shows the current prefix for the Discord.
+         | set <prefix>            | Sets the provided prefix for the Guild.
+         | reset                   | Resets the prefix to the default one.
+Welcome  |                         | Shows the current welcome-settings (welcome-channel, image and textcolor).
+         | color <color>           | Sets the textcolor of the welcome-image. Format is either rgb:r,g,b or hex:rrggbb
+         | set <ChannelID> [image] | Sets the welcome-channel to the provided one with a optional image.
+         | reset                   | Resets the welcome-settings.
+         | test <image> [color]    | Creates a test-image with the provided image and (optionally) textcolor.
 ```
 
 # Inviting the bot
