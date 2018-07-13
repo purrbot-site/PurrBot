@@ -60,6 +60,11 @@ public class MessageUtil {
                 PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomDebug().size())) : "";
     }
 
+    public static String getRandomKissImg(){
+        return PurrBotMain.getRandomKissImg().size() > 0 ? PurrBotMain.getRandomKissImg().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomKissImg().size())) : "";
+    }
+
     public static String isBot(User user){
         if(user.isBot()){
             return "Yes";

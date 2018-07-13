@@ -34,8 +34,8 @@ public class CmdServer implements Command {
 
             return;
         }
-        tc.sendTyping().queue();
-        EmbedBuilder server = EmbedUtil.getEmbed()
+
+        EmbedBuilder server = EmbedUtil.getEmbed(e.getAuthor())
                 .setTitle(String.format(
                         "Serverinfo: %s",
                         g.getName()

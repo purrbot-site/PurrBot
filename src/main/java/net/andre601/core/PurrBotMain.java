@@ -42,6 +42,7 @@ public class PurrBotMain {
     private static List<String> RandomDebug = new ArrayList<>();
     private static List<String> RandomPingMsg = new ArrayList<>();
     private static List<String> BlacklistedGuilds = new ArrayList<>();
+    private static List<String> RandomKissImg = new ArrayList<>();
 
     //  used for getVersion
     private static String version = null;
@@ -153,6 +154,9 @@ public class PurrBotMain {
         Collections.addAll(RandomPingMsg, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
                         "main/java/net/andre601/files/RandomPingMsg").split("\n"));
+        Collections.addAll(RandomKissImg, HttpUtil.requestHttp(
+                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
+                        "main/java/net/andre601/files/RandomKissImage").split("\n"));
 
         //  Getting the blacklisted Guild-IDs
         Collections.addAll(BlacklistedGuilds, HttpUtil.requestHttp(
@@ -189,6 +193,9 @@ public class PurrBotMain {
     public static List<String> getBlacklistedGuilds(){
         return BlacklistedGuilds;
     }
+    public static List<String> getRandomKissImg(){
+        return RandomKissImg;
+    }
 
     public static Random getRandom(){
         return random;
@@ -204,6 +211,7 @@ public class PurrBotMain {
         RandomNoNSWF.clear();
         RandomDebug.clear();
         RandomPingMsg.clear();
+        RandomKissImg.clear();
         BlacklistedGuilds.clear();
     }
 

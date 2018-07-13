@@ -28,9 +28,6 @@ public class ReadyListener extends ListenerAdapter{
         String botID = e.getJDA().getSelfUser().getId();
         int servers = e.getJDA().getGuilds().size();
 
-        //CmdPrefix.load(e.getJDA());
-        //CmdWelcome.load(e.getJDA());
-
         System.out.println(String.format(
                 "[INFO] Enabled Bot-User %s (%s)\n" +
                 "  > Version: %s\n" +
@@ -44,7 +41,7 @@ public class ReadyListener extends ListenerAdapter{
         ));
 
         //  Sending update if Bot isn't beta
-        if(PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("false"))
+        if(!PermUtil.isBeta())
             PurrBotMain.getAPI().setStats(botID, servers);
 
         e.getJDA().getPresence().setPresence(OnlineStatus.ONLINE, Game.watching(String.format(

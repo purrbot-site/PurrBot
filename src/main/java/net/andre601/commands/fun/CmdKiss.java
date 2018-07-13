@@ -5,6 +5,8 @@ import net.andre601.commands.server.CmdPrefix;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.HttpUtil;
 import net.andre601.util.PermUtil;
+import net.andre601.util.messagehandling.MessageUtil;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -60,22 +62,35 @@ public class CmdKiss implements Command {
             //  mentioned user = own user (Bot) -> send message, add reaction and return.
             if(u == msg.getJDA().getSelfUser()){
                 //  Special response for a certain user.
-                if(msg.getAuthor().getId().equals("433894627553181696")){
-                    if(PermUtil.canReact(tc))
-                        msg.addReaction("\uD83D\uDC8B").queue();
+                if(!PermUtil.isBeta()){
+                    if(msg.getAuthor().getId().equals("433894627553181696")){
+                        if (PermUtil.canReact(tc))
+                            msg.addReaction("\uD83D\uDC8B").queue();
 
-                    tc.sendMessage(String.format(
-                            "%s \\*Enjoys the kiss*",
-                            msg.getAuthor().getAsMention()
-                    )).queue();
+                        EmbedBuilder kiss = EmbedUtil.getEmbed()
+                                .setImage(MessageUtil.getRandomKissImg());
+
+                        tc.sendMessage(String.format(
+                                "%s \\*Enjoys the kiss*",
+                                msg.getAuthor().getAsMention()
+                        )).queue(message -> message.editMessage(kiss.build()).queue());
+                        return;
+                    }
+                    if(PermUtil.canReact(tc))
+                        e.getMessage().addReaction("\uD83D\uDE26").queue();
+
+                    tc.sendMessage(String.format("%s Sorry, but I'm already taken...",
+                            msg.getMember().getAsMention())).queue();
+                    return;
+
+                }else{
+                    if(PermUtil.canReact(tc))
+                        e.getMessage().addReaction("\uD83D\uDE33").queue();
+
+                    tc.sendMessage(String.format("%s Not on the first date!",
+                            msg.getMember().getAsMention())).queue();
                     return;
                 }
-                if(PermUtil.canReact(tc))
-                    e.getMessage().addReaction("\uD83D\uDE33").queue();
-
-                tc.sendMessage(String.format("%s Not on the first date!",
-                        msg.getMember().getAsMention())).queue();
-                return;
             }
 
             //  mentioned user = author of the message -> Send message and return.

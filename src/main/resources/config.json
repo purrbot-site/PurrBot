@@ -5,5 +5,7 @@
   "api-token": "api-token",
   "beta": "false",
 
-  "mysql-ip": "localhost"
+  "db-ip": "127.0.0.1",
+  "db-name": "DatabaseName",
+  "db-table": "DatabaseTable"
 }
