@@ -43,7 +43,7 @@ Tickle   | <@user ...> | Tickles the mentioned user(s).
 ```
 
 ## NSFW
-**Permission**: No permission required.
+**Permission**: No permission required.  
 **Extra**: This command ONLY works in NSFW-labeled channels.
 ```
 Command: | Arguments: | Description:
