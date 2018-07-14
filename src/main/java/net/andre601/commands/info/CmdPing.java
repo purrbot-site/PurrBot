@@ -32,6 +32,7 @@ public class CmdPing implements Command{
                             msg.getJDA().getPing()
                     )
             ).queue());
+            return;
         }
 
         tc.sendMessage("Checking ping...").queue(message -> message.editMessage(
