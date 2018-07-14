@@ -120,7 +120,7 @@ public class CmdHelp implements Command {
                         "Help         [command]\n" +
                         "Info         [-here]\n" +
                         "Invite       [-here]\n" +
-                        "Ping\n" +
+                        "Ping         [-api]\n" +
                         "Quote        <messageID>\n" +
                         "Server\n" +
                         "Stats\n" +
@@ -392,9 +392,9 @@ public class CmdHelp implements Command {
                 break;
 
             case "ping":
-                usage(msg, "Ping", "ping",
+                usage(msg, "Ping", "ping [-api]",
                         "Will respond with the respond-time in ms.",
-                        "`none`",
+                        "`[-api]` Checks the Ping of the JDA-API.",
                         "`none`");
 
             default:
