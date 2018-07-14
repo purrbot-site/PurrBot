@@ -7,13 +7,31 @@ import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.requests.Route;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static net.andre601.util.messagehandling.MessageUtil.*;
 
 public class CmdUser implements Command {
+
+    private String getRoles(Member user){
+        StringBuilder sb = new StringBuilder();
+        List<Role> roles = user.getRoles();
+        for(int i = 0; i < roles.size(); i++){
+            Role role = roles.get(i);
+            int rolesLeft = roles.size() - i;
+            if(sb.length() + role.getName().length() + 15 + String.valueOf(rolesLeft).length() >
+                    MessageEmbed.VALUE_MAX_LENGTH){
+                sb.append("**__+").append(rolesLeft).append(" more__**  ");
+                break;
+            }
+            sb.append(role.getName()).append(", ");
+        }
+        return sb.substring(0, sb.length() - 2);
+    }
 
     public void getUser(TextChannel tc, Message msg){
         Member member = msg.getMentionedMembers().get(0);
@@ -50,18 +68,14 @@ public class CmdUser implements Command {
                                 member.getUser().getDefaultAvatarUrl()
                         )), true)
                 .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true)
-                .addField("Roles:", (member == null ?
-                        "This member is not here!" : (roles.length() > 1000 ? "*Way to many!*" : roles)), false)
+                .addField("Roles:", getRoles(member), false)
                 .addField("Dates:", String.format(
                         "**Account created**: %s\n" +
                         "**Joined**: %s",
                         MessageUtil.formatTime(LocalDateTime.from(
                                 member.getUser().getCreationTime()
                         )),
-                        (member == null ? "`Not on this Discord!`" :
-                        MessageUtil.formatTime(LocalDateTime.from(
-                                member.getJoinDate()
-                        )))
+                        MessageUtil.formatTime(LocalDateTime.from(member.getJoinDate()))
                 ), false);
 
         tc.sendMessage(uInfo.build()).queue();
@@ -115,7 +129,7 @@ public class CmdUser implements Command {
                                     msg.getAuthor().getDefaultAvatarUrl()
                             )), true)
                     .addField("Is Bot:", MessageUtil.isBot(msg.getAuthor()), true)
-                    .addField("Roles:", (roles.length() > 1000 ? "*Way to many!*" : roles), false)
+                    .addField("Roles:", getRoles(msg.getMember()), false)
                     .addField("Dates:", String.format(
                             "**Account created**: %s\n" +
                             "**Joined**: %s",
