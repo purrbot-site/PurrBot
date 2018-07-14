@@ -50,6 +50,11 @@ public class MessageUtil {
                 PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomNoShutdownImage().size())) : "";
     }
 
+    public static String getRandomAPIPingMsg(){
+        return PurrBotMain.getRandomAPIPingMsg().size() > 0 ? PurrBotMain.getRandomAPIPingMsg().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomAPIPingMsg().size())) : "";
+    }
+
     public static String getRandomPingMsg(){
         return PurrBotMain.getRandomPingMsg().size() > 0 ? PurrBotMain.getRandomPingMsg().get(
                 PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomPingMsg().size())) : "";

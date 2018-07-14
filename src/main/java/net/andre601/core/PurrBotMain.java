@@ -40,6 +40,7 @@ public class PurrBotMain {
     private static List<String> RandomFact = new ArrayList<>();
     private static List<String> RandomNoNSWF = new ArrayList<>();
     private static List<String> RandomDebug = new ArrayList<>();
+    private static List<String> RandomAPIPingMsg = new ArrayList<>();
     private static List<String> RandomPingMsg = new ArrayList<>();
     private static List<String> BlacklistedGuilds = new ArrayList<>();
     private static List<String> RandomKissImg = new ArrayList<>();
@@ -151,6 +152,9 @@ public class PurrBotMain {
         Collections.addAll(RandomDebug, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
                         "main/java/net/andre601/files/RandomDebugMsg").split("\n"));
+        Collections.addAll(RandomAPIPingMsg, HttpUtil.requestHttp(
+                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
+                        "main/java/net/andre601/files/RandomAPIPingMsg").split("\n"));
         Collections.addAll(RandomPingMsg, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
                         "main/java/net/andre601/files/RandomPingMsg").split("\n"));
@@ -187,14 +191,18 @@ public class PurrBotMain {
     public static List<String> getRandomDebug() {
         return RandomDebug;
     }
+    public static List<String> getRandomAPIPingMsg(){
+        return RandomAPIPingMsg;
+    }
     public static List<String> getRandomPingMsg() {
         return RandomPingMsg;
     }
-    public static List<String> getBlacklistedGuilds(){
-        return BlacklistedGuilds;
-    }
     public static List<String> getRandomKissImg(){
         return RandomKissImg;
+    }
+
+    public static List<String> getBlacklistedGuilds(){
+        return BlacklistedGuilds;
     }
 
     public static Random getRandom(){
@@ -210,8 +218,10 @@ public class PurrBotMain {
         RandomFact.clear();
         RandomNoNSWF.clear();
         RandomDebug.clear();
+        RandomAPIPingMsg.clear();
         RandomPingMsg.clear();
         RandomKissImg.clear();
+
         BlacklistedGuilds.clear();
     }
 
