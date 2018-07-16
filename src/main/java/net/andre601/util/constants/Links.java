@@ -1,6 +1,6 @@
-package net.andre601.util;
+package net.andre601.util.constants;
 
-public class Static {
+public class Links {
 
     //  Links
     public static final String INVITE_FULL = "https://discordapp.com/api/oauth2/authorize?client_id=" +
@@ -11,13 +11,6 @@ public class Static {
     public static final String GITHUB_LINK = "https://github.com/andre601/NekoBot";
     public static final String DISCORDBOTS = "https://discordbots.org/bot/425382319449309197";
     public static final String WEBSITE = "https://purrbot.site";
-
-    //  Custom emojis
-    public static final String EMOJI_ONLINE = "<:online:426838620033253376> ";
-    public static final String EMOJI_IDLE = "<:idle:426838620012281856> ";
-    public static final String EMOJI_DND = "<:dnd:426838619714748439> ";
-    public static final String EMOJI_OFFLINE = "<:offline:426840813729742859> ";
-    public static final String EMOJI_UNKNOWN = "<:unknown:447511093309603860>";
 
     //  URL for the avatar for certain cases.
     public static final String AVATAR_URL = "https://i.imgur.com/jCWyOtJ.png";

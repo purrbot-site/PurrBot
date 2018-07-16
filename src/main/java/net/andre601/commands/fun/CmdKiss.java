@@ -38,7 +38,7 @@ public class CmdKiss implements Command {
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
 
-        //  Permission-checks for write and embed links-permission.
+        //  Permission-checks for write and embed Links-permission.
         if (!PermUtil.canWrite(tc))
             return;
 

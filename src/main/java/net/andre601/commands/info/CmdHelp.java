@@ -242,7 +242,7 @@ public class CmdHelp implements Command {
 
             case "invite":
                 usage(msg, "Invite", "invite [-here]",
-                        "Sends you the invite-links for the bot and for the official Discord.",
+                        "Sends you the invite-Links for the bot and for the official Discord.",
                         "`[-here]` Sends the message in the channel in which you've run the command.",
                         "none"
                 );

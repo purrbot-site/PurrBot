@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-import static net.andre601.util.Static.*;
+import static net.andre601.util.constants.Emojis.*;
 
 public class MessageUtil {
 

@@ -12,6 +12,7 @@ import net.andre601.commands.server.CmdPrefix;
 import net.andre601.commands.server.CmdWelcome;
 import net.andre601.listeners.*;
 import net.andre601.util.HttpUtil;
+import net.andre601.util.command.CommandHandler;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.webhook.WebhookClient;

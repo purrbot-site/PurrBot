@@ -3,13 +3,13 @@ package net.andre601.commands.info;
 import net.andre601.commands.Command;
 import net.andre601.commands.server.CmdPrefix;
 import net.andre601.core.PurrBotMain;
+import net.andre601.util.constants.Links;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.andre601.util.Static;
 
 import java.util.concurrent.TimeUnit;
 
@@ -55,14 +55,14 @@ public class CmdInfo implements Command {
                 .addField("Links:", String.format(
                         "[`GitHub`](%s)\n" +
                         "[`Discordbots.org`](%s)",
-                        Static.GITHUB_LINK,
-                        Static.DISCORDBOTS
+                        Links.GITHUB_LINK,
+                        Links.DISCORDBOTS
                 ), true)
                 .addField("", String.format(
                         "[`Official Discord`](%s)\n" +
                         "[`Website`](%s)",
-                        Static.DISCORD_INVITE,
-                        Static.WEBSITE
+                        Links.DISCORD_INVITE,
+                        Links.WEBSITE
                 ), true);
 
         if(e.getMessage().getContentRaw().contains("-here")){

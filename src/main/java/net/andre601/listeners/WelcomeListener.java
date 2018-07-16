@@ -4,7 +4,6 @@ import net.andre601.commands.server.CmdWelcome;
 import net.andre601.util.DBUtil;
 import net.andre601.util.ImageUtil;
 import net.andre601.util.PermUtil;
-import net.andre601.util.Static;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;

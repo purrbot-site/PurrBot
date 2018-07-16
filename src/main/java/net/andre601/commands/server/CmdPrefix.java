@@ -1,11 +1,9 @@
 package net.andre601.commands.server;
 
 import net.andre601.commands.Command;
-import net.andre601.core.PurrBotMain;
 import net.andre601.util.DBUtil;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.PermUtil;
-import net.andre601.util.Static;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
@@ -14,7 +12,6 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.Color;
-import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +25,7 @@ public class CmdPrefix implements Command{
 
         //  If the bot is beta-version -> use Beta-prefix (..)
         // return (PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true") ?
-        //        Static.BETA_PREFIX : Static.PREFIX);
+        //        Links.BETA_PREFIX : Links.PREFIX);
     }
 
     public static Guild getGuild(String id, JDA jda){
@@ -37,7 +34,7 @@ public class CmdPrefix implements Command{
 
     public void currPrefix(Message msg, Guild g){
         msg.getTextChannel().sendMessage(String.format(
-                "%s My prefix in this Discord is `%s`",
+                "%s My prefix on this guild is `%s`",
                 msg.getAuthor().getAsMention(),
                 getPrefix(g)
         )).queue();
@@ -119,7 +116,7 @@ public class CmdPrefix implements Command{
         Map<String, String> out = new HashMap<>();
         guildPrefix.forEach((g, p) -> out.put(g.getId(), p));
         try{
-            FileOutputStream fos = new FileOutputStream(Static.PREFIX_FILE);
+            FileOutputStream fos = new FileOutputStream(Links.PREFIX_FILE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(out);
             oos.close();
@@ -129,7 +126,7 @@ public class CmdPrefix implements Command{
 
     public static void load(JDA jda){
 
-        File file = new File(Static.PREFIX_FILE);
+        File file = new File(Links.PREFIX_FILE);
         if(file.exists()){
 
             try{

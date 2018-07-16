@@ -1,4 +1,4 @@
-package net.andre601.core;
+package net.andre601.util.command;
 
 import net.andre601.commands.server.CmdPrefix;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;

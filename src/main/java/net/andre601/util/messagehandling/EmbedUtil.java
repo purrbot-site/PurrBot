@@ -1,7 +1,7 @@
 package net.andre601.util.messagehandling;
 
 import net.andre601.core.PurrBotMain;
-import net.andre601.util.Static;
+import net.andre601.util.constants.Links;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -75,7 +75,7 @@ public class EmbedUtil {
         WebhookClient webc = PurrBotMain.webhookClient(errorURL);
         webc.send(new WebhookMessageBuilder().addEmbeds(error)
         .setUsername("Error")
-        .setAvatarUrl(Static.AVATAR_URL)
+        .setAvatarUrl(Links.AVATAR_URL)
         .build());
         webc.close();
 

@@ -1,9 +1,9 @@
 package net.andre601.commands.info;
 
 import net.andre601.commands.Command;
+import net.andre601.util.constants.Links;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.PermUtil;
-import net.andre601.util.Static;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -32,9 +32,9 @@ public class CmdInvite implements Command{
                 .addField("Invite the bot", String.format(
                         "Heyo! Really nice of you, to invite me to your Discord. :3\n" +
                         "Inviting me is quite simple:\n" +
-                        "Just click on one of the links below and choose your Discord.\n"
+                        "Just click on one of the Links below and choose your Discord.\n"
                 ),false)
-                .addField("About the links:",
+                .addField("About the Links:",
                         "Each link has another purpose.\n" +
                         "`Recommended Invite` is (obviously) the recommended invite, that you should use.\n" +
                         "`Basic Invite` gives all required permissions for me.\n" +
@@ -44,9 +44,9 @@ public class CmdInvite implements Command{
                         "[`Recommended Invite`](%s)\n" +
                         "[`Basic Invite`](%s)\n" +
                         "[`Discord`](%s)",
-                        Static.INVITE_FULL,
-                        Static.INVITE_BASIC,
-                        Static.DISCORD_INVITE
+                        Links.INVITE_FULL,
+                        Links.INVITE_BASIC,
+                        Links.DISCORD_INVITE
                 ), false);
 
         if(e.getMessage().getContentRaw().contains("-here")){

@@ -2,7 +2,7 @@ package net.andre601.listeners;
 
 import net.andre601.core.PurrBotMain;
 import net.andre601.util.DBUtil;
-import net.andre601.util.Static;
+import net.andre601.util.constants.Links;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.OnlineStatus;
@@ -34,7 +34,7 @@ public class GuildListener extends ListenerAdapter {
                         "You can join the official Discord and ask for the reason: {2}",
                         g.getName(),
                         g.getId(),
-                        Static.DISCORD_INVITE
+                        Links.DISCORD_INVITE
                 )).queue();
             });
             return;
