@@ -133,40 +133,40 @@ public class PurrBotMain {
 
         //  Getting all the content for the random-stuff
         Collections.addAll(RandomShutdownText, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomShutdownText").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomShutdownText")
+                .split("\n"));
         Collections.addAll(RandomNoShutdownText, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomNoShutdownText").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomNoShutdownText")
+                .split("\n"));
         Collections.addAll(RandomShutdownImage, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomShutdownImage").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomShutdownImage")
+                .split("\n"));
         Collections.addAll(RandomNoShutdownImage, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomNoShutdownImage").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomNoShutdownImage")
+                .split("\n"));
         Collections.addAll(RandomFact, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomFact").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomFact")
+                .split("\n"));
         Collections.addAll(RandomNoNSWF, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomNoNSFWMsg").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomNoNSFWMsg")
+                .split("\n"));
         Collections.addAll(RandomDebug, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomDebugMsg").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomDebugMsg")
+                .split("\n"));
         Collections.addAll(RandomAPIPingMsg, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomAPIPingMsg").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomAPIPingMsg")
+                .split("\n"));
         Collections.addAll(RandomPingMsg, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomPingMsg").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomPingMsg")
+                .split("\n"));
         Collections.addAll(RandomKissImg, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/RandomKissImage").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomKissImage")
+                .split("\n"));
 
         //  Getting the blacklisted Guild-IDs
         Collections.addAll(BlacklistedGuilds, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/NekoBot/master/src/" +
-                        "main/java/net/andre601/files/BlacklistedGuilds").split("\n"));
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/BlacklistedGuilds")
+                .split("\n"));
 
     }
 

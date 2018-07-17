@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.requests.Route;
 
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,7 +69,13 @@ public class CmdUser implements Command {
                                 member.getUser().getDefaultAvatarUrl()
                         )), true)
                 .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true)
-                .addField("Roles:", getRoles(member), false)
+                .addField("Roles:", MessageFormat.format(
+                        "**Highest**: {0}\n" +
+                        "**Total**:\n" +
+                        "{1}",
+                        member.getRoles().get(0).getAsMention(),
+                        getRoles(member)
+                ), false)
                 .addField("Dates:", String.format(
                         "**Account created**: %s\n" +
                         "**Joined**: %s",
@@ -129,7 +136,13 @@ public class CmdUser implements Command {
                                     msg.getAuthor().getDefaultAvatarUrl()
                             )), true)
                     .addField("Is Bot:", MessageUtil.isBot(msg.getAuthor()), true)
-                    .addField("Roles:", getRoles(msg.getMember()), false)
+                    .addField("Roles:", MessageFormat.format(
+                            "**Highest**: {0}\n" +
+                            "**Total**:\n" +
+                            "{1}",
+                            msg.getMember().getRoles().get(0).getAsMention(),
+                            getRoles(msg.getMember())
+                    ), false)
                     .addField("Dates:", String.format(
                             "**Account created**: %s\n" +
                             "**Joined**: %s",

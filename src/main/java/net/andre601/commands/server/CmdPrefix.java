@@ -22,10 +22,6 @@ public class CmdPrefix implements Command{
     public static String getPrefix(Guild g){
 
         return DBUtil.getPrefix(g);
-
-        //  If the bot is beta-version -> use Beta-prefix (..)
-        // return (PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true") ?
-        //        Links.BETA_PREFIX : Links.PREFIX);
     }
 
     public static Guild getGuild(String id, JDA jda){
@@ -51,11 +47,7 @@ public class CmdPrefix implements Command{
             return;
         }
 
-
-        // guildPrefix.put(g, prefix);
         DBUtil.setPrefix(prefix, g.getId());
-
-        // save();
 
         EmbedBuilder prefixSet = EmbedUtil.getEmbed(msg.getAuthor())
                 .setDescription(String.format(
@@ -83,68 +75,7 @@ public class CmdPrefix implements Command{
 
             msg.getTextChannel().sendMessage(prefixReset.build()).queue();
         }
-        /*
-        if(guildPrefix.containsKey(g)){
-
-            guildPrefix.remove(g);
-
-            // save();
-
-            EmbedBuilder prefixReset = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setDescription("Prefix was reset successfully!")
-                    .setColor(Color.GREEN);
-
-            msg.getTextChannel().sendMessage(prefixReset.build()).queue();
-
-        }else{
-
-            msg.getTextChannel().sendMessage(String.format(
-                    "%s There is no prefix set for this Guild!",
-                    msg.getAuthor().getAsMention()
-            )).queue();
-
-        }
-        */
     }
-
-    /*
-    public void save(){
-        File path = new File("guilds");
-        if(!path.exists())
-            path.mkdir();
-
-        Map<String, String> out = new HashMap<>();
-        guildPrefix.forEach((g, p) -> out.put(g.getId(), p));
-        try{
-            FileOutputStream fos = new FileOutputStream(Links.PREFIX_FILE);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(out);
-            oos.close();
-        }catch (IOException ignored){
-        }
-    }
-
-    public static void load(JDA jda){
-
-        File file = new File(Links.PREFIX_FILE);
-        if(file.exists()){
-
-            try{
-                FileInputStream fis = new FileInputStream(file);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                Map<String, String> out = (HashMap<String, String>) ois.readObject();
-                ois.close();
-
-                out.forEach((gid, p) -> {
-                    Guild g = getGuild(gid, jda);
-                    guildPrefix.put(g, p);
-                });
-            }catch (IOException | ClassNotFoundException ignored){
-            }
-
-        }
-    }
-    */
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
