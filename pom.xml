@@ -6,7 +6,7 @@
 
     <groupId>net.Andre601</groupId>
     <artifactId>Purr-Bot</artifactId>
-    <version>1.26.2</version>
+    <version>1.26.4</version>
     <build>
         <resources>
             <resource>

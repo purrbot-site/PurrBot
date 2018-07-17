@@ -24,7 +24,7 @@ public class CmdUser implements Command {
         for(int i = 0; i < roles.size(); i++){
             Role role = roles.get(i);
             int rolesLeft = roles.size() - i;
-            if(sb.length() + role.getName().length() + 15 + String.valueOf(rolesLeft).length() >
+            if(sb.length() + role.getName().length() + 20 + String.valueOf(rolesLeft).length() >
                     MessageEmbed.VALUE_MAX_LENGTH){
                 sb.append("**__+").append(rolesLeft).append(" more__**  ");
                 break;
@@ -35,16 +35,13 @@ public class CmdUser implements Command {
     }
 
     public void getUser(TextChannel tc, Message msg){
-        Member member = msg.getMentionedMembers().get(0);
-        if(member == null){
-            tc.sendMessage(String.format(
-                    "%s This user isn't on this Discord.",
-                    msg.getAuthor().getAsMention()
-            )).queue();
-            return;
+        Member member;
+        if(msg.getMentionedMembers().size() >= 1){
+            member = msg.getMentionedMembers().get(0);
+        }else{
+            member = msg.getMember();
         }
 
-        String roles = member.getRoles().stream().map(Role::getName).collect(Collectors.joining(", "));
         EmbedBuilder uInfo = EmbedUtil.getEmbed(msg.getAuthor())
                 .setAuthor("Userinfo")
                 .setThumbnail(member.getUser().getEffectiveAvatarUrl())
@@ -71,6 +68,7 @@ public class CmdUser implements Command {
                 .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true)
                 .addField("Roles:", MessageFormat.format(
                         "**Highest**: {0}\n" +
+                        "\n" +
                         "**Total**:\n" +
                         "{1}",
                         member.getRoles().get(0).getAsMention(),
@@ -107,54 +105,6 @@ public class CmdUser implements Command {
             if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
-            return;
-        }
-
-        tc.sendTyping().queue();
-        if(args.length == 0){
-            String roles = msg.getMember().getRoles().stream().map(Role::getName).collect(Collectors.joining(", "));
-            EmbedBuilder uInfo = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setAuthor("Userinfo")
-                    .setThumbnail(msg.getAuthor().getEffectiveAvatarUrl())
-                    .addField("User:", String.format(
-                            "**Name**: %s\n" +
-                            "**ID**: `%s`\n" +
-                            "**Status**: %s %s",
-                            getUsername(e.getMember()),
-                            msg.getAuthor().getId(),
-                            getStatus(e.getMember().getOnlineStatus(), msg),
-                            (e.getMember().getGame() != null ? getGameStatus(e.getMember().getGame()) : "")
-                    ), false)
-                    .addField("Avatar:",
-                            (msg.getAuthor().getEffectiveAvatarUrl() != null ? String.format(
-                                    "[`Current Avatar`](%s)\n" +
-                                    "[`Default Avatar`](%s)",
-                                    msg.getAuthor().getEffectiveAvatarUrl(),
-                                    msg.getAuthor().getDefaultAvatarUrl()
-                            ) : String.format(
-                                    "[`Default Avatar`](%s)",
-                                    msg.getAuthor().getDefaultAvatarUrl()
-                            )), true)
-                    .addField("Is Bot:", MessageUtil.isBot(msg.getAuthor()), true)
-                    .addField("Roles:", MessageFormat.format(
-                            "**Highest**: {0}\n" +
-                            "**Total**:\n" +
-                            "{1}",
-                            msg.getMember().getRoles().get(0).getAsMention(),
-                            getRoles(msg.getMember())
-                    ), false)
-                    .addField("Dates:", String.format(
-                            "**Account created**: %s\n" +
-                            "**Joined**: %s",
-                            MessageUtil.formatTime(LocalDateTime.from(
-                                    msg.getAuthor().getCreationTime()
-                            )),
-                            (msg.getAuthor() == null ? "`Not on this Discord!`" :
-                                    MessageUtil.formatTime(LocalDateTime.from(
-                                            msg.getMember().getJoinDate()
-                                    )))
-                    ), false);
-            tc.sendMessage(uInfo.build()).queue();
             return;
         }
 
