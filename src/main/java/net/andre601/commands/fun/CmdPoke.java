@@ -2,9 +2,9 @@ package net.andre601.commands.fun;
 
 import net.andre601.commands.Command;
 import net.andre601.commands.server.CmdPrefix;
-import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.HttpUtil;
 import net.andre601.util.PermUtil;
+import net.andre601.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -13,12 +13,12 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CmdTickle implements Command {
+public class CmdPoke implements Command {
 
     public void usage(Message msg){
         msg.getTextChannel().sendMessage(String.format(
-                "%s Please mention a user at the end of the command to tickle!\n" +
-                "Example: `%stickle @*Purr*#6875`",
+                "%s Please mention a user at the end of the command to poke!\n" +
+                "Example: `%spoke @*Purr*#6875`",
                 msg.getAuthor().getAsMention(),
                 CmdPrefix.getPrefix(msg.getGuild())
         )).queue();
@@ -56,34 +56,32 @@ public class CmdTickle implements Command {
             User u = user.get(0);
             if(u == msg.getJDA().getSelfUser()){
                 if(PermUtil.canReact(tc))
-                    e.getMessage().addReaction("😂").queue();
+                    e.getMessage().addReaction("\uD83D\uDE16").queue();
 
-                tc.sendMessage(String.format("N-no... I can't lau- \\*laughs*",
+                tc.sendMessage(String.format("%s Nya! Don't poke me >-<",
                         msg.getMember().getAsMention())).queue();
                 return;
             }
             if(u == msg.getAuthor()){
-                tc.sendMessage("Why are you tickling yourself?").queue();
+                tc.sendMessage("Why are you poking yourself?").queue();
                 return;
             }
             String name = u.getAsMention();
-            tc.sendMessage(String.format(
-                    "%s tickles %s",
+            tc.sendMessage(String.format("%s poked you %s",
                     msg.getMember().getEffectiveName(),
                     name
             )).queue(message -> {
                 //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getTickle()).build()).queue();
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getPoke()).build()).queue();
             });
         }else{
             String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
-            tc.sendMessage(String.format(
-                    "%s tickles %s",
+            tc.sendMessage(String.format("%s poked you %s",
                     msg.getMember().getEffectiveName(),
                     users
             )).queue(message -> {
                 //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getTickle()).build()).queue();
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getPoke()).build()).queue();
             });
         }
     }

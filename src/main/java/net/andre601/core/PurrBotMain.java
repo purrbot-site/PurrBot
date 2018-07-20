@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.andre601.commands.info.*;
 import net.andre601.commands.fun.*;
+import net.andre601.commands.nsfw.CmdLesbian;
 import net.andre601.commands.nsfw.CmdLewd;
 import net.andre601.commands.owner.*;
 import net.andre601.commands.server.CmdDebug;
@@ -126,7 +127,10 @@ public class PurrBotMain {
         CommandHandler.commands.put("quote", new CmdQuote());
         CommandHandler.commands.put("debug", new CmdDebug());
         CommandHandler.commands.put("ping", new CmdPing());
-
+        CommandHandler.commands.put("poke", new CmdPoke());
+        CommandHandler.commands.put("gecg", new CmdGecg());
+        CommandHandler.commands.put("lesbian", new CmdLesbian());
+        CommandHandler.commands.put("les", new CmdLesbian());
     }
 
     public static void loadRandom(){

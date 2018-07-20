@@ -73,12 +73,8 @@ public class CmdSlap implements Command{
                     "%s slapped you %s",
                     msg.getMember().getEffectiveName(),
                     name)).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getSlap()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
+                //  Editing the message to add the image ("should" prevent issues with empty embeds)
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getSlap()).build()).queue();
             });
         }else{
             String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
@@ -87,12 +83,8 @@ public class CmdSlap implements Command{
                     msg.getMember().getEffectiveName(),
                     users
             )).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getSlap()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
+                //  Editing the message to add the image ("should" prevent issues with empty embeds)
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getSlap()).build()).queue();
             });
         }
     }

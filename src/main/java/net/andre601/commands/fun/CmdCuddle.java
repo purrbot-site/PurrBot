@@ -83,13 +83,8 @@ public class CmdCuddle implements Command{
                     msg.getMember().getEffectiveName(),
                     name
             )).queue(message -> {
-                try{
-                    //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
+                //  Editing the message to add the image ("should" prevent issues with empty embeds)
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()).queue();
             });
 
         }else{
@@ -100,13 +95,8 @@ public class CmdCuddle implements Command{
                     msg.getMember().getEffectiveName(),
                     users
             )).queue(message -> {
-                try{
-                    //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
+                //  Editing the message to add the image ("should" prevent issues with empty embeds)
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()).queue();
             });
         }
     }

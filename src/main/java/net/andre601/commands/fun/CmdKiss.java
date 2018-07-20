@@ -104,12 +104,8 @@ public class CmdKiss implements Command {
                     msg.getMember().getEffectiveName(),
                     name
             )).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
+                //  Editing the message to add the image ("should" prevent issues with empty embeds)
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()).queue();
             });
 
         }else{
@@ -119,12 +115,8 @@ public class CmdKiss implements Command {
                     msg.getMember().getEffectiveName(),
                     users
             )).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
+                //  Editing the message to add the image ("should" prevent issues with empty embeds)
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()).queue();
             });
         }
 

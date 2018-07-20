@@ -25,22 +25,6 @@ public class CmdNeko implements Command {
 
     private static List<String> nekoUserID = new ArrayList<>();
 
-    public String getNekoGifLink(){
-        try{
-            return HttpUtil.getNekoAnimated();
-        }catch (Exception ignored){
-            return null;
-        }
-    }
-
-    public String getNekoLink(){
-        try{
-            return HttpUtil.getNeko();
-        }catch (Exception ignored){
-            return null;
-        }
-    }
-
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
         return false;
@@ -56,12 +40,12 @@ public class CmdNeko implements Command {
             return;
 
         if(PermUtil.canDeleteMsg(tc))
-            e.getMessage().delete().queue();
+            msg.delete().queue();
 
         if(!PermUtil.canSendEmbed(tc)){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
             if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
+                msg.addReaction("🚫").queue();
 
             return;
         }
@@ -89,11 +73,11 @@ public class CmdNeko implements Command {
             StringBuilder urls = new StringBuilder();
             if(msg.getContentRaw().contains("-gif")){
                 for(int i = 0; i < 30; ++i){
-                    urls.append(getNekoGifLink()).append(",");
+                    urls.append(HttpUtil.getNekoAnimated()).append(",");
                 }
             }else{
                 for (int i = 0; i < 30; ++i) {
-                    urls.append(getNekoLink()).append(",");
+                    urls.append(HttpUtil.getNeko()).append(",");
                 }
             }
 
@@ -123,7 +107,7 @@ public class CmdNeko implements Command {
             return;
         }
         if(msg.getContentRaw().contains("-gif")){
-            String gifLink = getNekoGifLink();
+            String gifLink = HttpUtil.getNekoAnimated();
             EmbedBuilder nekogif = EmbedUtil.getEmbed(msg.getAuthor())
                     .setTitle(MessageFormat.format(
                             "{0}",
@@ -137,7 +121,7 @@ public class CmdNeko implements Command {
             return;
         }
 
-        String link = getNekoLink();
+        String link = HttpUtil.getNeko();
         EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
                 .setTitle(MessageFormat.format(
                         "{0}",
@@ -146,11 +130,14 @@ public class CmdNeko implements Command {
                 .setImage(link);
 
         tc.sendMessage("Getting a cute neko...").queue(message -> {
+            //  Editing the message to add the image ("should" prevent issues with empty embeds)
             message.editMessage(neko.build()).queue();
+
             //  The same image exists twice for some reason...
             if(link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko039.jpeg") ||
                     link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko_043.jpeg")){
                 tc.sendMessage("Hey! That's me :3").queue();
+
                 if(PermUtil.canReact(tc))
                     message.addReaction("❤").queue();
             }

@@ -91,11 +91,13 @@ public class CmdHelp implements Command {
                         "Command:     Argument(s):\n" +
                         "\n" +
                         "Cuddle       <@user ...>\n" +
+                        "Gecg\n" +
                         "Hug          <@user ...>\n" +
                         "Kiss         <@user ...>\n" +
                         "Neko         [-gif]\n" +
                         "             [-slide]\n" +
                         "Pat          <@user ...>\n" +
+                        "Poke         <@user ...>\n" +
                         "Slap         <@user ...>\n" +
                         "Tickle       <@user ...>\n" +
                         "\n" +
@@ -146,6 +148,7 @@ public class CmdHelp implements Command {
                         "\n" +
                         "Lewd         [-gif]\n" +
                         "             [-slide]\n" +
+                        "Lesbian\n" +
                         "\n" +
                         "[optional]\n" +
                         "```\n" +
@@ -278,7 +281,7 @@ public class CmdHelp implements Command {
             case "hug":
                 usage(msg, "Hug", "hug <@user ...>",
                         "Gives the mentioned user a hug.",
-                        "`<@user ...>` The user to hug (as mention). You can mention multiple users!",
+                        "`<@user ...>` The user to hug (as mention).",
                         "`none`"
                 );
                 break;
@@ -286,7 +289,7 @@ public class CmdHelp implements Command {
             case "pat":
                 usage(msg, "Pat", "pat <@user ...>",
                         "Gives the mentioned user a pat.",
-                        "`<@user ...>` The user to pat (as mention). You can mention multiple users!",
+                        "`<@user ...>` The user(s) to pat (as mention).",
                         "`none`"
                 );
                 break;
@@ -294,7 +297,7 @@ public class CmdHelp implements Command {
             case "slap":
                 usage(msg, "Slap", "slap <@user ...>",
                         "Slaps the mentioned user.",
-                        "`<@user ...>` The user to slap (as mention). You can mention multiple users!",
+                        "`<@user ...>` The user(s) to slap (as mention).",
                         "`none`"
                 );
                 break;
@@ -322,7 +325,7 @@ public class CmdHelp implements Command {
             case "cuddle":
                 usage(msg, "Cuddle", "cuddle <@user ...>",
                         "Cuddles the mentioned user.",
-                        "`<@user ...>` The user to cuddle (as mention). You can mention multiple users!",
+                        "`<@user ...>` The user(s) to cuddle (as mention).",
                         "`none`"
                 );
                 break;
@@ -330,7 +333,7 @@ public class CmdHelp implements Command {
             case "tickle":
                 usage(e.getMessage(), "Tickle", "tickle <@user ...>",
                         "Tickles the mentioned user.",
-                        "`<@user ...>` The user to tickle (as mention). You can mention multiple users!",
+                        "`<@user ...>` The user(s) to tickle (as mention).",
                         "`none`"
                 );
                 break;
@@ -361,7 +364,7 @@ public class CmdHelp implements Command {
             case "kiss":
                 usage(e.getMessage(), "Kiss", "kiss <@user ...>",
                         "Lets you kiss someone.",
-                        "`<@user ...>` The user you want to kiss (as mention). You can mention multiple users!",
+                        "`<@user ...>` The user(s) you want to kiss (as mention).",
                         "`none`"
                 );
                 break;
@@ -375,15 +378,6 @@ public class CmdHelp implements Command {
                 );
                 break;
 
-            case "img":
-            case "image":
-                usage(msg, "Img", "img <URL|neko:<name>.<ending>>",
-                        "Will upload a image in the textchannel.",
-                        "`<URL>` The URL of the image to post.\n" +
-                        "`<neko:<name>.<ending>>` Get an image from the nekos.life-Database. Ending is .png/.jpg/...",
-                        "`none`");
-                break;
-
             case "debug":
                 usage(msg, "Debug", "debug",
                         "Will create debug-files and post them on [debug.scarsz.me](https://debug.scarsz.me",
@@ -395,6 +389,28 @@ public class CmdHelp implements Command {
                 usage(msg, "Ping", "ping [-api]",
                         "Will respond with the respond-time in ms.",
                         "`[-api]` Checks the Ping of the JDA-API.",
+                        "`none`");
+                break;
+
+            case "poke":
+                usage(msg, "Poke", "poke <@user ...>",
+                        "Will poke the mentioned user(s).",
+                        "`<@user ...>` The user(s) you want to poke (as mention)",
+                        "`none`");
+                break;
+
+            case "gecg":
+                usage(msg, "Gecg", "gecg",
+                        "Posts a image from [gecfdo.com](https://gecfdo.com).",
+                        "`none`",
+                        "`none`");
+                break;
+            case "lesbian":
+            case "les":
+                usage(msg, "Lesbian", "lesbian",
+                        "Posts a lesbian-gif.\n" +
+                        "Can only be used in NSFW-labeled channels!",
+                        "`none`",
                         "`none`");
 
             default:

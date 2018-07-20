@@ -73,12 +73,8 @@ public class CmdHug implements Command {
                     msg.getMember().getEffectiveName(),
                     name
             )).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
+                //  Editing the message to add the image ("should" prevent issues with empty embeds)
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()).queue();
             });
 
         }else{
@@ -88,12 +84,8 @@ public class CmdHug implements Command {
                     msg.getMember().getEffectiveName(),
                     users
             )).queue(message -> {
-                try{
-                    message.editMessage(
-                            EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()
-                    ).queue();
-                }catch (Exception ignored){
-                }
+                //  Editing the message to add the image ("should" prevent issues with empty embeds)
+                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()).queue();
             });
         }
     }
