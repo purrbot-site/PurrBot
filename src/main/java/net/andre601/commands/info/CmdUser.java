@@ -66,14 +66,8 @@ public class CmdUser implements Command {
                                 member.getUser().getDefaultAvatarUrl()
                         )), true)
                 .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true)
-                .addField("Roles:", MessageFormat.format(
-                        "**Highest**: {0}\n" +
-                        "\n" +
-                        "**Total**:\n" +
-                        "{1}",
-                        member.getRoles().get(0).getAsMention(),
-                        getRoles(member)
-                ), false)
+                .addField("Highest role:", member.getRoles().get(0).getAsMention(), false)
+                .addField("Total roles:", getRoles(member), false)
                 .addField("Dates:", String.format(
                         "**Account created**: %s\n" +
                         "**Joined**: %s",

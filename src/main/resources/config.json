@@ -1,5 +1,6 @@
 {
   "token": "TOKEN",
+  "id": "ID",
   "webhook": "webhookURL",
   "errorWebhook": "errorWebhookURL",
   "api-token": "api-token",

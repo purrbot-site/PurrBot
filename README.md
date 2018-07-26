@@ -51,6 +51,7 @@ Command: | Arguments: | Description:
 Lewd     |            | Shows a image of a lewd neko from nekos.life.
          | [-gif]     | Shows a gif-image of a lewd neko from nekos.life.
          | [-slide]   | Creates a slideshow with 30 images (Can be combined with the -gif argument)
+lesbian  |            | Returns a gif of lesbian.
 ```
 
 ## Server

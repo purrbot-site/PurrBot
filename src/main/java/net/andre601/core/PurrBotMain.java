@@ -13,6 +13,7 @@ import net.andre601.commands.server.CmdPrefix;
 import net.andre601.commands.server.CmdWelcome;
 import net.andre601.listeners.*;
 import net.andre601.util.HttpUtil;
+import net.andre601.util.PermUtil;
 import net.andre601.util.command.CommandHandler;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
@@ -65,8 +66,11 @@ public class PurrBotMain {
         builder.setToken(file.getItem("config", "token"));
 
         //  Setting the API-token, if the bot isn't beta.
-        if(file.getItem("config", "beta").equalsIgnoreCase("false"))
-            api = new DiscordBotListAPI.Builder().token(file.getItem("config", "api-token")).build();
+        if(!PermUtil.isBeta())
+            api = new DiscordBotListAPI.Builder()
+                    .token(file.getItem("config", "api-token"))
+                    .botId(file.getItem("config", "id"))
+                    .build();
 
         //  Let JDA try to reconnect, when disconnecting
         builder.setAutoReconnect(true);

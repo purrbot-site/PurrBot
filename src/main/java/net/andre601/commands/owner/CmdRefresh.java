@@ -21,13 +21,14 @@ public class CmdRefresh implements Command{
     public void action(String[] args, MessageReceivedEvent e) {
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
+        int guilds = e.getJDA().getGuilds().size();
 
         if (!PermUtil.canWrite(tc))
             return;
 
         if(PermUtil.isCreator(msg)){
 
-            if(file.getItem("config", "beta").equalsIgnoreCase("true"))
+            if(PermUtil.isBeta())
                 return;
 
             tc.sendMessage(
@@ -36,7 +37,7 @@ public class CmdRefresh implements Command{
             ).queue(message -> {
                 clear();
                 loadRandom();
-                getAPI().setStats(e.getJDA().getSelfUser().getId(), e.getJDA().getGuilds().size());
+                getAPI().setStats(guilds);
 
                 message.editMessage(
                         "Clearing stored messages and images \\✅\n" +
