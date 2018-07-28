@@ -2,7 +2,6 @@ package net.andre601.util;
 
 import net.andre601.core.PurrBotMain;
 import net.andre601.util.messagehandling.MessageUtil;
-import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -16,8 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.MessageFormat;
-import java.util.concurrent.TimeUnit;
 
 public class ImageUtil {
 

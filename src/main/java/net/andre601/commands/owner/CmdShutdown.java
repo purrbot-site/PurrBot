@@ -1,7 +1,6 @@
 package net.andre601.commands.owner;
 
 import net.andre601.commands.Command;
-import net.andre601.core.PurrBotMain;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.andre601.util.PermUtil;

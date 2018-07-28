@@ -88,20 +88,21 @@ public class CmdHelp implements Command {
                         "\n" +
                         "**Fun**:\n" +
                         "```\n" +
-                        "Command:     Argument(s):\n" +
+                        "Command:   Argument(s):\n" +
                         "\n" +
-                        "Cuddle       <@user ...>\n" +
+                        "Cuddle     <@user ...>\n" +
                         "Gecg\n" +
-                        "Hug          <@user ...>\n" +
-                        "Kiss         <@user ...>\n" +
-                        "Neko         [-gif]\n" +
-                        "             [-slide]\n" +
-                        "Pat          <@user ...>\n" +
-                        "Poke         <@user ...>\n" +
-                        "Slap         <@user ...>\n" +
-                        "Tickle       <@user ...>\n" +
+                        "Hug        <@user ...>\n" +
+                        "Kiss       <@user ...>\n" +
+                        "Neko       [-gif]\n" +
+                        "           [-slide]\n" +
+                        "Pat        <@user ...>\n" +
+                        "Poke       <@user ...>\n" +
+                        "Slap       <@user ...>\n" +
+                        "Tickle     <@user ...>\n" +
                         "\n" +
-                        "[optional] | <required>\n" +
+                        "[optional]\n" +
+                        "<required>\n" +
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
@@ -117,18 +118,19 @@ public class CmdHelp implements Command {
                         "\n" +
                         "**Informative**:\n" +
                         "```\n" +
-                        "Command:     Argument(s):\n" +
+                        "Command:   Argument(s):\n" +
                         "\n" +
-                        "Help         [command]\n" +
-                        "Info         [-here]\n" +
-                        "Invite       [-here]\n" +
-                        "Ping         [-api]\n" +
-                        "Quote        <messageID>\n" +
+                        "Help       [command]\n" +
+                        "Info       [-here]\n" +
+                        "Invite     [-here]\n" +
+                        "Ping       [-api]\n" +
+                        "Quote      <messageID> <channelID>\n" +
                         "Server\n" +
                         "Stats\n" +
-                        "User         [@user]\n" +
+                        "User       [@user]\n" +
                         "\n" +
-                        "[optional] | <required>\n" +
+                        "[optional]\n" +
+                        "<required>\n" +
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
@@ -144,10 +146,10 @@ public class CmdHelp implements Command {
                         "\n" +
                         "**NSFW**:\n" +
                         "```\n" +
-                        "Command:     Argument(s):\n" +
+                        "Command:   Argument(s):\n" +
                         "\n" +
-                        "Lewd         [-gif]\n" +
-                        "             [-slide]\n" +
+                        "Lewd       [-gif]\n" +
+                        "           [-slide]\n" +
                         "Lesbian\n" +
                         "\n" +
                         "[optional]\n" +
@@ -166,17 +168,18 @@ public class CmdHelp implements Command {
                         "\n" +
                         "**Server**:\n" +
                         "```\n" +
-                        "Command:     Argument(s):\n" +
+                        "Command:   Argument(s):\n" +
                         "\n" +
                         "Debug\n" +
-                        "Prefix       [set <prefix>]\n" +
-                        "             [reset]\n" +
-                        "Welcome      [color <rgb:r,g,b|hex:#code>]\n" +
-                        "             [reset]\n" +
-                        "             [set <ChannelID> [image]]\n" +
-                        "             [test [image]]\n" +
+                        "Prefix     [set <prefix>]\n" +
+                        "           [reset]\n" +
+                        "Welcome    [color <rgb:r,g,b|hex:#code>]\n" +
+                        "           [reset]\n" +
+                        "           [set <ChannelID> [image]]\n" +
+                        "           [test [image]]\n" +
                         "\n" +
-                        "[optional] | <required>\n" +
+                        "[optional]\n" +
+                        "<required>\n" +
                         "```\n" +
                         "\n" +
                         "**Random fact**:\n" +
@@ -370,10 +373,10 @@ public class CmdHelp implements Command {
                 break;
 
             case "quote":
-                usage(e.getMessage(), "Quote", "quote <messageID>",
+                usage(e.getMessage(), "Quote", "quote <messageID> <channelID>",
                         "Lets you quote a message.",
                         "`<messageID>` The ID of the message to quote.\n" +
-                        "The message needs to be in the same channel!",
+                        "`<channelID>` The ID of the channel, where the message is.",
                         "`none`"
                 );
                 break;

@@ -3,6 +3,7 @@ package net.andre601.commands.server;
 import net.andre601.commands.Command;
 import net.andre601.util.DebugUtil;
 import net.andre601.util.PermUtil;
+import net.andre601.util.constants.Emojis;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
@@ -40,7 +41,11 @@ public class CmdDebug implements Command {
             return;
         }
 
-        tc.sendMessage(MessageUtil.getRandomDebug()).queue(message ->
+        tc.sendMessage(MessageFormat.format(
+                "{0} {1}",
+                Emojis.LOADING,
+                MessageUtil.getRandomDebug()
+        )).queue(message ->
             message.editMessage(MessageFormat.format(
                     "{0} {1}",
                     msg.getAuthor().getAsMention(),

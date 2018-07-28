@@ -133,25 +133,25 @@ public class MessageUtil {
         String str;
         switch (status){
             case ONLINE:
-                str = EMOJI_ONLINE;
+                str = STATUS_ONLINE;
                 break;
 
             case IDLE:
-                str = EMOJI_IDLE;
+                str = STATUS_IDLE;
                 break;
 
             case DO_NOT_DISTURB:
-                str = EMOJI_DND;
+                str = STATUS_DND;
                 break;
 
             case INVISIBLE:
             case OFFLINE:
-                str = EMOJI_OFFLINE;
+                str = STATUS_OFFLINE;
                 break;
 
             case UNKNOWN:
             default:
-                str = EMOJI_UNKNOWN;
+                str = STATUS_UNKNOWN;
         }
         if(PermUtil.canUseCustomEmojis(msg.getTextChannel()))
             return str + "`" + status.name().replace("_", " ").toLowerCase() + "`";

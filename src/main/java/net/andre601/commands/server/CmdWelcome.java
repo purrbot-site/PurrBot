@@ -106,43 +106,6 @@ public class CmdWelcome implements Command {
         DBUtil.resetWelcome(g.getId());
     }
 
-    public void getChannel(Message msg, Guild g){
-        String welcome = DBUtil.getWelcome(g);
-
-        if(welcome.equals("none")){
-            msg.getTextChannel().sendMessage(String.format(
-                    "%s This Discord doesn't have a Welcome-channel!",
-                    msg.getAuthor().getAsMention()
-            )).queue();
-        }else{
-            TextChannel tc = g.getTextChannelById(welcome);
-
-            String savedColor = DBUtil.getColor(g);
-            String colorType = savedColor.split(":")[0].toLowerCase();
-            String colorValue = savedColor.split(":")[1].toLowerCase();
-
-            EmbedBuilder channel = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setTitle("Welcome settings")
-                    .setDescription(String.format(
-                            "**TextChannel**: `%s` (`%s`)\n" +
-                            "\n" +
-                            "**Image**: `%s`\n" +
-                            "\n" +
-                            "Text color:\n" +
-                            "```\n" +
-                            "  Type: %s\n" +
-                            "  Value: %s\n" +
-                            "```",
-                            tc.getName(),
-                            tc.getId(),
-                            DBUtil.getImage(g),
-                            colorType,
-                            colorValue
-                    ));
-            msg.getTextChannel().sendMessage(channel.build()).queue();
-        }
-    }
-
     private static void sendWelcomeHelp(Message msg, Guild g){
         String prefix = getPrefix(g);
         TextChannel tc = msg.getTextChannel();

@@ -1,22 +1,16 @@
 package net.andre601.commands.nsfw;
 
-import com.jagrosh.jdautilities.menu.Slideshow;
 import net.andre601.commands.Command;
 import net.andre601.util.HttpUtil;
 import net.andre601.util.PermUtil;
 import net.andre601.util.messagehandling.EmbedUtil;
-import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import static net.andre601.core.PurrBotMain.waiter;
 
 public class CmdLesbian implements Command {
 

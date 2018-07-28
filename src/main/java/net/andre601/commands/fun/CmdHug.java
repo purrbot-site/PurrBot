@@ -2,7 +2,6 @@ package net.andre601.commands.fun;
 
 import net.andre601.commands.Command;
 import net.andre601.commands.server.CmdPrefix;
-import net.andre601.util.constants.Emojis;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.HttpUtil;
 import net.andre601.util.PermUtil;

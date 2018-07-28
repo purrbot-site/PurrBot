@@ -7,21 +7,21 @@ import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.requests.Route;
 
-import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static net.andre601.util.messagehandling.MessageUtil.*;
 
 public class CmdUser implements Command {
 
     private String getRoles(Member user){
-        StringBuilder sb = new StringBuilder();
         List<Role> roles = user.getRoles();
-        for(int i = 0; i < roles.size(); i++){
+        if(roles.size() <= 1)
+            return "`No other roles`";
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i < roles.size(); i++){
             Role role = roles.get(i);
             int rolesLeft = roles.size() - i;
             if(sb.length() + role.getName().length() + 20 + String.valueOf(rolesLeft).length() >
@@ -34,7 +34,7 @@ public class CmdUser implements Command {
         return sb.substring(0, sb.length() - 2);
     }
 
-    public void getUser(TextChannel tc, Message msg){
+    private void getUser(TextChannel tc, Message msg){
         Member member;
         if(msg.getMentionedMembers().size() >= 1){
             member = msg.getMentionedMembers().get(0);
@@ -66,8 +66,10 @@ public class CmdUser implements Command {
                                 member.getUser().getDefaultAvatarUrl()
                         )), true)
                 .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true)
-                .addField("Highest role:", member.getRoles().get(0).getAsMention(), false)
-                .addField("Total roles:", getRoles(member), false)
+                .addField("Highest role:", member.getRoles().size() == 0 ?
+                        "`No roles assigned`" :
+                        member.getRoles().get(0).getAsMention(), false)
+                .addField("Other roles:", getRoles(member), false)
                 .addField("Dates:", String.format(
                         "**Account created**: %s\n" +
                         "**Joined**: %s",
