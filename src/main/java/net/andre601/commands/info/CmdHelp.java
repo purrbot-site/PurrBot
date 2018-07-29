@@ -120,6 +120,7 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "Command:   Argument(s):\n" +
                         "\n" +
+                        "Emote      <Emote>\n" +
                         "Help       [command]\n" +
                         "Info       [-here]\n" +
                         "Invite     [-here]\n" +

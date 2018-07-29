@@ -13,6 +13,7 @@ The default command-prefix is `.` but can be changed with the prefix-command.
 ```
 Command: | Arguments:  | Description:
 
+Emote    | <:emote:>   | Displays info about an emote.
 Help     |             | Will display all commands available.
          | [command]   | Shows info about the provided command.
 Info     |             | DMs you info about the bot.

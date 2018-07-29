@@ -135,6 +135,7 @@ public class PurrBotMain {
         CommandHandler.commands.put("gecg", new CmdGecg());
         CommandHandler.commands.put("lesbian", new CmdLesbian());
         CommandHandler.commands.put("les", new CmdLesbian());
+        CommandHandler.commands.put("emote", new CmdEmote());
     }
 
     public static void loadRandom(){
