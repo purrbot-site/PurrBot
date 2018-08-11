@@ -25,7 +25,6 @@ public class CmdDebug implements Command {
 
         TextChannel tc = e.getTextChannel();
         Message msg = e.getMessage();
-        Guild g = e.getGuild();
 
         if(!PermUtil.canWrite(tc))
             return;

@@ -22,14 +22,13 @@ public class VoteUtil {
                     ))
                     .build();
             if(userHasntRole(voterId, role)) {
-                System.out.println("User doesn't have the role. Applying it...");
                 getGuild().getController().addRolesToMember(member, role).queue();
             }
 
             ImageUtil.createVoteImage(member.getUser(), msg, getVoteChannel());
         }else{
             getVoteChannel().sendMessage(
-                    "Someone, that isn't here, has voted for the bot!" +
+                    "Someone, that isn't here, has voted for the bot!\n" +
                     "Vote too on <https://discordbots.org/bot/425382319449309197>!"
             ).queue();
         }

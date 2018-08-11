@@ -35,6 +35,7 @@ Command: | Arguments:  | Description:
 Cuddle   | <@user ...> | Cuddles the mentioned user(s).
 Hug      | <@user ...> | Hugs the mentioned user(s).
 Kiss     | <@user ...> | Kisses the mentioned user(s).
+Kitsune  |             | Shows a image of a kitsune (foxgirl)
 Neko     |             | Shows a image of a neko from nekos.life.
          | [-gif]      | Shows a gif-image of a neko from nekos.life.
          | [-slide]    | Creates a slideshow with 30 images (Can be combined with the -gif argument).
@@ -88,6 +89,11 @@ This permissions are:
 * See messages: Let \*Purr* see all channels, that don't have channel-specific permissions.
 * Send messages: Let her send messages.
 * Embed Links: \*Purr* won't work without this permission!
+
+# Voting
+\*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [support-guild](https://discord.gg/NB7AFqn).
+Just make sure to be on the guild and vote for the bot, to receive the special role.  
+Future rewards may be added.
 
 # Usefull Links
 * [Discord Server](https://discord.gg/NB7AFqn)
