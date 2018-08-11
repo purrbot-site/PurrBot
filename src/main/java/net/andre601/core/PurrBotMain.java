@@ -2,7 +2,9 @@ package net.andre601.core;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
+
 import net.andre601.commands.info.*;
 import net.andre601.commands.fun.*;
 import net.andre601.commands.nsfw.CmdLesbian;
@@ -14,16 +16,23 @@ import net.andre601.commands.server.CmdWelcome;
 import net.andre601.listeners.*;
 import net.andre601.util.HttpUtil;
 import net.andre601.util.PermUtil;
+import net.andre601.util.VoteUtil;
 import net.andre601.util.command.CommandHandler;
+
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.webhook.WebhookClient;
 import net.dv8tion.jda.webhook.WebhookClientBuilder;
+
 import org.discordbots.api.client.DiscordBotListAPI;
+import org.discordbots.api.client.entity.Vote;
+import spark.Spark;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.util.*;
+
+import static spark.Spark.*;
 
 public class PurrBotMain {
 
@@ -84,6 +93,18 @@ public class PurrBotMain {
         addCommands();
         loadRandom();
 
+        if(!PermUtil.isBeta()) {
+            Spark.port(1000);
+
+            Gson gsonVote = new Gson();
+            post("/vote", (req, res) -> {
+
+                Vote vote = gsonVote.fromJson(req.body(), Vote.class);
+                VoteUtil.voteAction(vote.getBotId(), vote.getUserId());
+                return null;
+            });
+        }
+
         try {
             jda = builder.buildBlocking();
         } catch (LoginException | InterruptedException ex) {
@@ -136,6 +157,8 @@ public class PurrBotMain {
         CommandHandler.commands.put("lesbian", new CmdLesbian());
         CommandHandler.commands.put("les", new CmdLesbian());
         CommandHandler.commands.put("emote", new CmdEmote());
+        CommandHandler.commands.put("kitsune", new CmdKitsune());
+        CommandHandler.commands.put("foxgirl", new CmdKitsune());
     }
 
     public static void loadRandom(){

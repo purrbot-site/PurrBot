@@ -2,6 +2,7 @@ package net.andre601.commands.fun;
 
 import net.andre601.commands.Command;
 import net.andre601.commands.server.CmdPrefix;
+import net.andre601.util.constants.IDs;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.HttpUtil;
 import net.andre601.util.PermUtil;
@@ -56,6 +57,8 @@ public class CmdKiss implements Command {
             return;
         }
 
+        String link = HttpUtil.getKiss();
+
         List<User> user = msg.getMentionedUsers();
         if(user.size() == 1){
             User u = user.get(0);
@@ -63,7 +66,7 @@ public class CmdKiss implements Command {
             if(u == msg.getJDA().getSelfUser()){
                 //  Special response for a certain user.
                 if(!PermUtil.isBeta()){
-                    if(msg.getAuthor().getId().equals("433894627553181696")){
+                    if(msg.getAuthor().getId().equals(IDs.SPECIAL_USER)){
                         if (PermUtil.canReact(tc))
                             msg.addReaction("\uD83D\uDC8B").queue();
 
@@ -104,8 +107,8 @@ public class CmdKiss implements Command {
                     msg.getMember().getEffectiveName(),
                     name
             )).queue(message -> {
-                //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()).queue();
+                if(link != null)
+                    message.editMessage(EmbedUtil.getEmbed().setImage(link).build()).queue();
             });
 
         }else{
@@ -115,8 +118,8 @@ public class CmdKiss implements Command {
                     msg.getMember().getEffectiveName(),
                     users
             )).queue(message -> {
-                //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getKiss()).build()).queue();
+                if(link != null)
+                    message.editMessage(EmbedUtil.getEmbed().setImage(link).build()).queue();
             });
         }
 

@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.Buffer;
+import java.text.MessageFormat;
 
 public class ImageUtil {
 
@@ -113,6 +115,51 @@ public class ImageUtil {
 
             tc.sendFile(stream.toByteArray(), String.format(
                     "%s.png",
+                    user.getId()
+            ), msg).queue();
+
+            //  We just ignore the caused exception.
+        }catch (IOException ignored){
+        }
+    }
+
+    public static void createVoteImage(User user, Message msg, TextChannel tc){
+
+        //  Saving the userIcon/avatar as a Buffered image
+        BufferedImage u = getUserIcon(user);
+
+
+        try {
+            BufferedImage layer = ImageIO.read(new File("img/vote_layer.png"));
+
+            BufferedImage bg = ImageIO.read(new File("img/vote_bg.png"));
+            BufferedImage image = new BufferedImage(bg.getWidth(), bg.getHeight(), bg.getType());
+            Graphics2D img = image.createGraphics();
+
+            //  Adding the different images (background -> User-Avatar -> actual image)
+            img.drawImage(bg, 0, 0, null);
+            img.drawImage(u, 5, 5, 290, 290, null);
+            img.drawImage(layer, 0, 0, null);
+
+            //  Creating the font for the custom text.
+            Font text = new Font("Arial", Font.PLAIN, 60);
+
+            img.setColor(Color.BLACK);
+            img.setFont(text);
+
+            //  Setting the actual text. \n is (sadly) not supported, so we have to make each new line seperate.
+            img.drawString(MessageUtil.getTag(user),320, 100);
+            img.drawString("has voted!",320, 175);
+
+            img.dispose();
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            ImageIO.setUseCache(false);
+            ImageIO.write(image, "png", stream);
+
+            //  Finally sending the image. I use the user-id as image-name (prevents issues with non-UTF-8 symbols...)
+            tc.sendFile(stream.toByteArray(), MessageFormat.format(
+                    "{0}.png",
                     user.getId()
             ), msg).queue();
 

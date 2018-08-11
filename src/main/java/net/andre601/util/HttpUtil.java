@@ -36,6 +36,17 @@ public class HttpUtil {
         }
     }
 
+    private static String foxgirl() throws Exception{
+        Request request = new Request.Builder()
+                .url("https://nekos.life/api/v2/img/fox_girl")
+                .build();
+        Response response = CLIENT.newCall(request).execute();
+        try(ResponseBody responseBody = response.body()){
+            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            return new JSONObject(Objects.requireNonNull(responseBody).string()).get("url").toString();
+        }
+    }
+
     private static String slap() throws Exception{
         Request request = new Request.Builder()
                 .url("https://nekos.life/api/v2/img/slap")
@@ -124,7 +135,9 @@ public class HttpUtil {
         }
     }
 
-    //  NSFW-stuff
+    /*
+     *  NSFW-stuff
+     */
     private static String lewd() throws Exception{
         Request request = new Request.Builder()
                 .url("https://nekos.life/api/v2/img/lewd")
@@ -167,12 +180,14 @@ public class HttpUtil {
         }
     }
 
-    //  All the getters
+    /*
+     *  All the getters
+     */
     public static String getNeko(){
         try{
             return neko();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -180,7 +195,15 @@ public class HttpUtil {
         try{
             return nekoAnimated();
         }catch (Exception ex){
-            return "";
+            return null;
+        }
+    }
+
+    public static String getFoxgirl(){
+        try {
+            return foxgirl();
+        }catch (Exception ex){
+            return null;
         }
     }
 
@@ -188,7 +211,7 @@ public class HttpUtil {
         try{
             return hug();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -196,7 +219,7 @@ public class HttpUtil {
         try{
             return slap();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -204,7 +227,7 @@ public class HttpUtil {
         try{
             return pat();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -212,7 +235,7 @@ public class HttpUtil {
         try{
             return cuddle();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -220,7 +243,7 @@ public class HttpUtil {
         try{
             return kiss();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -228,7 +251,7 @@ public class HttpUtil {
         try{
             return tickle();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -236,7 +259,7 @@ public class HttpUtil {
         try{
             return poke();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -244,7 +267,7 @@ public class HttpUtil {
         try{
             return gecg();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -252,7 +275,7 @@ public class HttpUtil {
         try{
             return lewd();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -260,7 +283,7 @@ public class HttpUtil {
         try {
             return lewdAnimated();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 
@@ -268,7 +291,7 @@ public class HttpUtil {
         try {
             return lesbian();
         }catch (Exception ex){
-            return "";
+            return null;
         }
     }
 }

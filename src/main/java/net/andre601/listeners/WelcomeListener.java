@@ -12,9 +12,14 @@ import net.dv8tion.jda.core.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.text.MessageFormat;
+
 public class WelcomeListener extends ListenerAdapter {
 
     public void onGuildMemberJoin(GuildMemberJoinEvent e) {
+        if(e.getUser().isBot())
+            return;
+
         Guild g = e.getGuild();
 
         if(!DBUtil.getWelcome(g).equals("none")){
@@ -26,8 +31,8 @@ public class WelcomeListener extends ListenerAdapter {
 
                 //  Creating a new message with the MessageBuilder
                 Message msg = new MessageBuilder()
-                        .append(String.format(
-                                "Welcome %s!",
+                        .append(MessageFormat.format(
+                                "Welcome {0}!",
                                 e.getUser().getAsMention()
                         )).build();
 

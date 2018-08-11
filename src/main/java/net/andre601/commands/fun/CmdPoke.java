@@ -51,6 +51,8 @@ public class CmdPoke implements Command {
             return;
         }
 
+        String link = HttpUtil.getPoke();
+
         List<User> user = msg.getMentionedUsers();
         if(user.size() == 1){
             User u = user.get(0);
@@ -71,8 +73,8 @@ public class CmdPoke implements Command {
                     msg.getMember().getEffectiveName(),
                     name
             )).queue(message -> {
-                //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getPoke()).build()).queue();
+                if(link != null)
+                    message.editMessage(EmbedUtil.getEmbed().setImage(link).build()).queue();
             });
         }else{
             String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
@@ -80,8 +82,8 @@ public class CmdPoke implements Command {
                     msg.getMember().getEffectiveName(),
                     users
             )).queue(message -> {
-                //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getPoke()).build()).queue();
+                if(link != null)
+                    message.editMessage(EmbedUtil.getEmbed().setImage(link).build()).queue();
             });
         }
     }

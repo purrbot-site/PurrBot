@@ -54,6 +54,8 @@ public class CmdCuddle implements Command{
             return;
         }
 
+        String link = HttpUtil.getCuddle();
+
         //  Getting all mentioned users in the message and store them in a list.
         List<User> user = msg.getMentionedUsers();
 
@@ -82,8 +84,8 @@ public class CmdCuddle implements Command{
                     msg.getMember().getEffectiveName(),
                     name
             )).queue(message -> {
-                //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()).queue();
+                if(link != null)
+                    message.editMessage(EmbedUtil.getEmbed().setImage(link).build()).queue();
             });
 
         }else{
@@ -94,8 +96,8 @@ public class CmdCuddle implements Command{
                     msg.getMember().getEffectiveName(),
                     users
             )).queue(message -> {
-                //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getCuddle()).build()).queue();
+                if(link != null)
+                    message.editMessage(EmbedUtil.getEmbed().setImage(link).build()).queue();
             });
         }
     }

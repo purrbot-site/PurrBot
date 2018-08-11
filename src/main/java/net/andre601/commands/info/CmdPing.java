@@ -2,6 +2,7 @@ package net.andre601.commands.info;
 
 import net.andre601.commands.Command;
 import net.andre601.util.PermUtil;
+import net.andre601.util.constants.Emojis;
 import net.andre601.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -26,7 +27,7 @@ public class CmdPing implements Command{
             return;
 
         if(msg.getContentRaw().contains("-api")){
-            tc.sendMessage("Checking ping to API...").queue(message -> message.editMessage(
+            tc.sendMessage(Emojis.LOADING + " Checking ping to API...").queue(message -> message.editMessage(
                     MessageFormat.format(MessageUtil.getRandomAPIPingMsg(),
                             msg.getAuthor().getAsMention(),
                             msg.getJDA().getPing()
@@ -35,7 +36,7 @@ public class CmdPing implements Command{
             return;
         }
 
-        tc.sendMessage("Checking ping...").queue(message -> message.editMessage(
+        tc.sendMessage(Emojis.LOADING + " Checking ping...").queue(message -> message.editMessage(
                 MessageFormat.format(MessageUtil.getRandomPingMsg(),
                         msg.getAuthor().getAsMention(),
                         msg.getCreationTime().until(message.getCreationTime(), ChronoUnit.MILLIS)

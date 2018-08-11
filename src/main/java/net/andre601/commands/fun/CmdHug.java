@@ -51,6 +51,8 @@ public class CmdHug implements Command {
             return;
         }
 
+        String link = HttpUtil.getHug();
+
         List<User> user = msg.getMentionedUsers();
         if(user.size() == 1){
             User u = user.get(0);
@@ -72,8 +74,8 @@ public class CmdHug implements Command {
                     msg.getMember().getEffectiveName(),
                     name
             )).queue(message -> {
-                //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()).queue();
+                if (link != null)
+                    message.editMessage(EmbedUtil.getEmbed().setImage(link).build()).queue();
             });
 
         }else{
@@ -83,8 +85,8 @@ public class CmdHug implements Command {
                     msg.getMember().getEffectiveName(),
                     users
             )).queue(message -> {
-                //  Editing the message to add the image ("should" prevent issues with empty embeds)
-                message.editMessage(EmbedUtil.getEmbed().setImage(HttpUtil.getHug()).build()).queue();
+                if(link != null)
+                    message.editMessage(EmbedUtil.getEmbed().setImage(link).build()).queue();
             });
         }
     }

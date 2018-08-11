@@ -31,17 +31,18 @@ public class CmdInfo implements Command {
             e.getMessage().delete().queue();
 
         EmbedBuilder Info = EmbedUtil.getEmbed()
-                .setAuthor("*Purr*", null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                .setAuthor(e.getJDA().getSelfUser().getName(), null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setThumbnail(e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setDescription(String.format(
                         "**About the Bot**\n" +
                         "Oh hi there!\n" +
-                        "I'm \\*purr*. A Bot for the ~Nya Discord.\n" +
+                        "I'm %s. A Bot for the ~Nya Discord.\n" +
                         "I was made by <@204232208049766400> with the help of JDA " +
                         "and a lot of free time. ;)\n" +
                         "\n" +
                         "**Commands**\n" +
                         "You can use %shelp on your server to see all of my commands.",
+                        e.getJDA().getSelfUser().getName(),
                         CmdPrefix.getPrefix(e.getGuild())
                 ))
                 .addField("Bot-Version:", String.format(

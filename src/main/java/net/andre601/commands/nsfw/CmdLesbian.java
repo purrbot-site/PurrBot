@@ -42,6 +42,14 @@ public class CmdLesbian implements Command {
         if(tc.isNSFW()){
 
             String link = HttpUtil.getLesbian();
+            if(link == null){
+                tc.sendMessage(MessageFormat.format(
+                        "{0} It looks like, that there's an issue with the API at the moment.",
+                        msg.getAuthor().getAsMention()
+                )).queue();
+                return;
+            }
+
             EmbedBuilder les = EmbedUtil.getEmbed(e.getAuthor())
                     .setTitle(MessageFormat.format(
                             "{0}",

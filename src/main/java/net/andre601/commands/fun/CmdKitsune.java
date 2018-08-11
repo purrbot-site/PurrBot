@@ -11,8 +11,8 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
 
+public class CmdKitsune implements Command {
 
-public class CmdGecg implements Command {
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
         return false;
@@ -33,12 +33,12 @@ public class CmdGecg implements Command {
         if(!PermUtil.canSendEmbed(tc)){
             tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
             if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
+                msg.addReaction("🚫").queue();
 
             return;
         }
 
-        String link = HttpUtil.getGecg();
+        String link = HttpUtil.getFoxgirl();
         if(link == null){
             tc.sendMessage(MessageFormat.format(
                     "{0} It looks like, that there's an issue with the API at the moment.",
@@ -47,16 +47,16 @@ public class CmdGecg implements Command {
             return;
         }
 
-        EmbedBuilder gecg = EmbedUtil.getEmbed(e.getAuthor())
+        EmbedBuilder foxgirl = EmbedUtil.getEmbed(e.getAuthor())
                 .setTitle(MessageFormat.format(
                         "{0}",
-                        link.replace("https://cdn.nekos.life/gecg/", "")
+                        link.replace("https://cdn.nekos.life/fox_girl/", "")
                 ), link)
                 .setImage(link);
 
-        tc.sendMessage("Getting a gecg-image...").queue(message -> {
+        tc.sendMessage("Getting a cute kitsune...").queue(message -> {
             //  Editing the message to add the image ("should" prevent issues with empty embeds)
-            message.editMessage(gecg.build()).queue();
+            message.editMessage(foxgirl.build()).queue();
         });
     }
 

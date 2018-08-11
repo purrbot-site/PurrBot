@@ -1,6 +1,7 @@
 package net.andre601.util;
 
 import net.andre601.core.PurrBotMain;
+import net.andre601.util.constants.IDs;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -20,7 +21,7 @@ public class PermUtil {
 
     //  Check if user is Andre_601#6811 (me)
     public static boolean isCreator(Message msg){
-        return msg.getAuthor().getId().equals("204232208049766400");
+        return msg.getAuthor().getId().equals(IDs.CREATOR);
     }
 
     /*

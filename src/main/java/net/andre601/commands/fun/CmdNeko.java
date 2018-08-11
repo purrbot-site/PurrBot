@@ -50,6 +50,14 @@ public class CmdNeko implements Command {
             return;
         }
 
+        if(HttpUtil.getNeko() == null){
+            tc.sendMessage(MessageFormat.format(
+                    "{0} It looks like, that there's an issue with the API at the moment.",
+                    msg.getAuthor().getAsMention()
+            )).queue();
+            return;
+        }
+
         if(e.getMessage().getContentRaw().contains("-slide")){
             if(!PermUtil.canReact(tc)){
                 tc.sendMessage(String.format(

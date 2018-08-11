@@ -25,22 +25,6 @@ public class CmdLewd implements Command {
 
     private static List<String> lewdUserID = new ArrayList<>();
 
-    private String getLewdLink(){
-        try{
-            return HttpUtil.getLewd();
-        }catch (Exception ignored){
-            return null;
-        }
-    }
-
-    private String getLewdGifLink(){
-        try{
-            return HttpUtil.getLewdAnimated();
-        }catch (Exception ignored){
-            return null;
-        }
-    }
-
     @Override
     public boolean called(String[] args, MessageReceivedEvent e) {
         return false;
@@ -66,6 +50,14 @@ public class CmdLewd implements Command {
             return;
         }
 
+        if(HttpUtil.getLewd() == null){
+            tc.sendMessage(MessageFormat.format(
+                    "{0} It looks like, that there's an issue with the API at the moment.",
+                    msg.getAuthor().getAsMention()
+            )).queue();
+            return;
+        }
+
         if(tc.isNSFW()){
             if(msg.getContentRaw().contains("-slide")){
                 if(!PermUtil.canReact(tc)){
@@ -88,11 +80,11 @@ public class CmdLewd implements Command {
                 StringBuilder urls = new StringBuilder();
                 if(msg.getContentRaw().contains("-gif")){
                     for (int i = 0; i < 30; ++i) {
-                        urls.append(getLewdGifLink()).append(",");
+                        urls.append(HttpUtil.getLewdAnimated()).append(",");
                     }
                 }else{
                     for (int i = 0; i < 30; ++i) {
-                        urls.append(getLewdLink()).append(",");
+                        urls.append(HttpUtil.getLewd()).append(",");
                     }
                 }
                 Slideshow s = sBuilder
@@ -122,7 +114,7 @@ public class CmdLewd implements Command {
                 return;
             }
             if(msg.getContentRaw().contains("-gif")){
-                String gifLink = getLewdGifLink();
+                String gifLink = HttpUtil.getLewdAnimated();
                 EmbedBuilder lewdgif = EmbedUtil.getEmbed(msg.getAuthor())
                         .setTitle(MessageFormat.format(
                                 "{0}",
@@ -136,7 +128,7 @@ public class CmdLewd implements Command {
                 return;
             }
 
-            String link = getLewdLink();
+            String link = HttpUtil.getLewd();
             EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
                     .setTitle(MessageFormat.format(
                             "{0}",

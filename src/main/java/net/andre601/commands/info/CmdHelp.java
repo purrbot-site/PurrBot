@@ -94,6 +94,7 @@ public class CmdHelp implements Command {
                         "Gecg\n" +
                         "Hug        <@user ...>\n" +
                         "Kiss       <@user ...>\n" +
+                        "Kitsune\n" +
                         "Neko       [-gif]\n" +
                         "           [-slide]\n" +
                         "Pat        <@user ...>\n" +
@@ -416,6 +417,14 @@ public class CmdHelp implements Command {
                         "Can only be used in NSFW-labeled channels!",
                         "`none`",
                         "`none`");
+            case "kitsune":
+            case "foxgirl":
+                usage(msg, "Kitsune", "kitsune",
+                        "Posts a image of a kitsune (foxgirl).",
+                        "`none`",
+                        "`none`"
+                );
+                break;
 
             default:
                 usage(msg);
