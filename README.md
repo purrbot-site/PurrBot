@@ -8,31 +8,13 @@ What started as a simple and easy bot became quite a big bot, that is now even o
 The default command-prefix is `.` but can be changed with the prefix-command.  
 `<arguments>` are required and `[arguments]` are optional.
 
-## Informative
-**Permission**: No permissions required.
-```
-Command: | Arguments:  | Description:
-
-Emote    | <:emote:>   | Displays info about an emote.
-Help     |             | Will display all commands available.
-         | [command]   | Shows info about the provided command.
-Info     |             | DMs you info about the bot.
-         | [-here]     | Shows the info in the channel you run the command.
-Invite   |             | DMs you the invite-link.
-         | [-here]     | Shows the Invite in the channel you currently are.
-Quote    | <messageID> | Quotes a message from a user. The message needs to be in the same channel!
-Server   |             | Shows info about the Discord, the bot is currently in.
-Stats    |             | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, ect.)
-User     |             | Gives info about you.
-         | [@user]     | Gives info about the mentioned user.
-```
-
 ## Fun
 **Permission**: No permission required.
 ```
 Command: | Arguments:  | Description:
 
 Cuddle   | <@user ...> | Cuddles the mentioned user(s).
+Fakegit  |             | Creates a fake commit-message with help of https://whatthecommit.com
 Hug      | <@user ...> | Hugs the mentioned user(s).
 Kiss     | <@user ...> | Kisses the mentioned user(s).
 Kitsune  |             | Shows a image of a kitsune (foxgirl)
@@ -42,6 +24,25 @@ Neko     |             | Shows a image of a neko from nekos.life.
 Pat      | <@user ...> | Pats the mentioned user(s).
 Slap     | <@user ...> | Slaps the mentioned user(s).
 Tickle   | <@user ...> | Tickles the mentioned user(s).
+```
+
+## Informative
+**Permission**: No permissions required.
+```
+Command: | Arguments:             | Description:
+
+Emote    | <:emote:>              | Displays info about an emote.
+Help     |                        | Will display all commands available.
+         | [command]              | Shows info about the provided command.
+Info     |                        | DMs you info about the bot.
+         | [-here]                | Shows the info in the channel you run the command.
+Invite   |                        | DMs you the invite-link.
+         | [-here]                | Shows the Invite in the channel you currently are.
+Quote    | <messageID> <#channel> | Quotes a message from a user. The message needs to be in the mentioned channel!
+Server   |                        | Shows info about the Discord, the bot is currently in.
+Stats    |                        | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, ect.)
+User     |                        | Gives info about you.
+         | [@user]                | Gives info about the mentioned user.
 ```
 
 ## NSFW
