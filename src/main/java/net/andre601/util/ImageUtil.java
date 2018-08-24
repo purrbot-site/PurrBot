@@ -6,6 +6,7 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -71,8 +72,47 @@ public class ImageUtil {
                 case "neko2":
                     number = 7;
                     break;
+                case "gradient_blue":
+                    number = 8;
+                    break;
+                case "gradient_orange":
+                    number = 9;
+                    break;
+                case "gradient_green":
+                    number = 10;
+                    break;
+                case "gradient_red1":
+                    number = 11;
+                    break;
+                case "gradient_red2":
+                    number = 12;
+                    break;
+                case "wood1":
+                    number = 13;
+                    break;
+                case "wood2":
+                    number = 14;
+                    break;
+                case "wood3":
+                    number = 15;
+                    break;
+                case "dots_blue":
+                    number = 16;
+                    break;
+                case "dots_green":
+                    number = 17;
+                    break;
+                case "dots_orange":
+                    number = 18;
+                    break;
+                case "dots_pink":
+                    number = 19;
+                    break;
+                case "dots_red":
+                    number = 20;
+                    break;
                 case "random":
-                    number = PurrBotMain.getRandom().nextInt(8);
+                    number = PurrBotMain.getRandom().nextInt(21);
                     break;
             }
 
@@ -99,7 +139,7 @@ public class ImageUtil {
 
             //  Setting the actual text. \n is (sadly) not supported, so we have to make each new line seperate.
             img.drawString("Welcome",320, 100);
-            img.drawString(MessageUtil.getTag(user),320, 175);
+            img.drawString(user.getName(),320, 175);
             img.drawString(String.format(
                     "You are user #%s",
                     g.getMembers().size()
@@ -123,7 +163,7 @@ public class ImageUtil {
         }
     }
 
-    public static void createVoteImage(User user, Message msg, TextChannel tc){
+    public static void createVoteImage(User user, Message msg, TextChannel tc, boolean isWeekend){
 
         //  Saving the userIcon/avatar as a Buffered image
         BufferedImage u = getUserIcon(user);
@@ -144,12 +184,35 @@ public class ImageUtil {
             //  Creating the font for the custom text.
             Font text = new Font("Arial", Font.PLAIN, 60);
 
-            img.setColor(Color.BLACK);
+            img.setColor(Color.WHITE);
             img.setFont(text);
 
             //  Setting the actual text. \n is (sadly) not supported, so we have to make each new line seperate.
-            img.drawString(MessageUtil.getTag(user),320, 100);
+            img.drawString(user.getName(),320, 100);
             img.drawString("has voted!",320, 175);
+
+            img.setColor(new Color(114, 137, 218));
+
+            JSONObject vj = HttpUtil.getVotes();
+            String votes;
+
+            if(vj == null){
+                votes = "?";
+            }else{
+                votes = vj.getString("points");
+            }
+
+            int padding = 345;
+            int total_width = image.getWidth();
+            int actual_width = img.getFontMetrics().stringWidth(votes);
+            int x = total_width - actual_width - padding;
+
+            img.drawString(votes, x, 270);
+
+            if(isWeekend){
+                img.setColor(new Color(46, 204, 113));
+                img.drawString("x2 votes!", 680, 270);
+            }
 
             img.dispose();
 

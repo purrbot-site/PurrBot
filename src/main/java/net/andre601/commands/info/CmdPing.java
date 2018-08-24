@@ -1,6 +1,7 @@
 package net.andre601.commands.info;
 
 import net.andre601.commands.Command;
+import net.andre601.util.HttpUtil;
 import net.andre601.util.PermUtil;
 import net.andre601.util.constants.Emojis;
 import net.andre601.util.messagehandling.MessageUtil;
@@ -27,7 +28,7 @@ public class CmdPing implements Command{
             return;
 
         if(msg.getContentRaw().contains("-api")){
-            tc.sendMessage(Emojis.LOADING + " Checking ping to API...").queue(message -> message.editMessage(
+            tc.sendMessage(Emojis.LOADING + " Checking ping to Discord-API...").queue(message -> message.editMessage(
                     MessageFormat.format(MessageUtil.getRandomAPIPingMsg(),
                             msg.getAuthor().getAsMention(),
                             msg.getJDA().getPing()

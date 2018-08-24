@@ -68,6 +68,10 @@ public class PermUtil {
         return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(), Permission.MESSAGE_READ);
     }
 
+    public static boolean canReadHistory(TextChannel tc){
+        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(), Permission.MESSAGE_HISTORY);
+    }
+
     public static boolean isBeta(){
         return PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true");
     }

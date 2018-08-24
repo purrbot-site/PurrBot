@@ -56,6 +56,12 @@ public class CmdSlap implements Command{
         String link = HttpUtil.getSlap();
 
         List<User> user = msg.getMentionedUsers();
+
+        if(user.isEmpty()){
+            usage(e.getMessage());
+            return;
+        }
+
         if(user.size() == 1){
             User u = user.get(0);
             if(u == msg.getJDA().getSelfUser()){

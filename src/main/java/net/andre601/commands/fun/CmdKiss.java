@@ -60,6 +60,12 @@ public class CmdKiss implements Command {
         String link = HttpUtil.getKiss();
 
         List<User> user = msg.getMentionedUsers();
+
+        if(user.isEmpty()){
+            usage(e.getMessage());
+            return;
+        }
+
         if(user.size() == 1){
             User u = user.get(0);
             //  mentioned user = own user (Bot) -> send message, add reaction and return.

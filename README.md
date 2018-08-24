@@ -92,7 +92,7 @@ This permissions are:
 
 # Voting
 \*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [support-guild](https://discord.gg/NB7AFqn).
-Just make sure to be on the guild and vote for the bot, to receive the special role.  
+Just make sure to be on the guild and vote for the bot, to receive the special role.
 Future rewards may be added.
 
 # Usefull Links

@@ -9,7 +9,7 @@ import java.text.MessageFormat;
 
 public class VoteUtil {
 
-    public static void voteAction(String botId, String voterId){
+    public static void voteAction(String botId, String voterId, boolean isWeekend){
         if(!botId.equals(PurrBotMain.jda.getSelfUser().getId())) return;
         if(voterIsInGuild(voterId)){
             Role role = getGuild().getRoleById(IDs.VOTE_ROLE);
@@ -25,7 +25,7 @@ public class VoteUtil {
                 getGuild().getController().addRolesToMember(member, role).queue();
             }
 
-            ImageUtil.createVoteImage(member.getUser(), msg, getVoteChannel());
+            ImageUtil.createVoteImage(member.getUser(), msg, getVoteChannel(), isWeekend);
         }else{
             getVoteChannel().sendMessage(
                     "Someone, that isn't here, has voted for the bot!\n" +

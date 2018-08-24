@@ -1,6 +1,7 @@
 package net.andre601.commands.info;
 
 import net.andre601.commands.Command;
+import net.andre601.util.HttpUtil;
 import net.andre601.util.messagehandling.EmbedUtil;
 import net.andre601.util.PermUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -8,6 +9,7 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.json.JSONObject;
 
 import java.lang.management.ManagementFactory;
 import java.text.MessageFormat;
@@ -58,6 +60,19 @@ public class CmdStats implements Command {
 
             return;
         }
+
+        JSONObject dbl = HttpUtil.getVotes();
+        String totalVotes;
+        String monthlyVotes;
+
+        if(dbl == null){
+            totalVotes = null;
+            monthlyVotes = null;
+        }else{
+            totalVotes = String.valueOf(dbl.getLong("points"));
+            monthlyVotes = String.valueOf(dbl.getLong("monthlyPoints"));
+        }
+
         EmbedBuilder stats = EmbedUtil.getEmbed(msg.getAuthor())
                 .setAuthor("Purr-Bot Stats")
                 .addField("Guilds", String.valueOf(jda.getGuilds().size()), true)
@@ -76,6 +91,12 @@ public class CmdStats implements Command {
                         String.valueOf(jda.getUsers().stream().filter(user -> !user.isBot()).count()),
                         String.valueOf(jda.getUsers().stream().filter(user -> user.isBot()).count())
                 ), true)
+                .addField("Monthly votes:",
+                        (monthlyVotes == null ? "`Votes not available`" : monthlyVotes)
+                , true)
+                .addField("Total votes:",
+                        (totalVotes == null ? "`Votes not available`" : totalVotes)
+                        , true)
                 .addField("Uptime:", getUptime(), false);
 
         tc.sendMessage(stats.build()).queue();

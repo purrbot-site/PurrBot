@@ -170,6 +170,34 @@ public class HttpUtil {
             return new JSONObject(Objects.requireNonNull(responseBody).string()).get("url").toString();
         }
     }
+    /*
+     *  Getting the votes from the botpage
+     */
+
+    private static JSONObject votes() throws Exception{
+        Request request = new Request.Builder()
+                .url("https://discordbots.org/api/bots/425382319449309197")
+                .build();
+        Response response = CLIENT.newCall(request).execute();
+        try(ResponseBody responseBody = response.body()){
+            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            return new JSONObject(Objects.requireNonNull(responseBody).string());
+        }
+    }
+
+    /*
+     *  Getting a git from the whatthegit-site
+     */
+    private static JSONObject fakeGit() throws Exception{
+        Request request = new Request.Builder()
+                .url("http://whatthecommit.com/index.json")
+                .build();
+        Response response = CLIENT.newCall(request).execute();
+        try(ResponseBody responseBody = response.body()){
+            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            return new JSONObject(Objects.requireNonNull(responseBody).string());
+        }
+    }
 
     //  For the different random things
     public static String requestHttp(String request){
@@ -290,6 +318,22 @@ public class HttpUtil {
     public static String getLesbian(){
         try {
             return lesbian();
+        }catch (Exception ex){
+            return null;
+        }
+    }
+
+    public static JSONObject getVotes(){
+        try{
+            return votes();
+        }catch (Exception ex){
+            return null;
+        }
+    }
+
+    public static JSONObject getFakeGit(){
+        try{
+            return fakeGit();
         }catch (Exception ex){
             return null;
         }

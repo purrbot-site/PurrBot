@@ -138,8 +138,10 @@ public class CmdWelcome implements Command {
                         "  Colors         3\n" +
                         "  Gradients      4\n" +
                         "  Nature         5\n" +
+                        "  Wood           6\n" +
+                        "  Dots           7\n" +
                         "\n" +
-                        "Color-System     6\n" +
+                        "Color-System     8\n" +
                         "```\n" +
                         "Use `{4}welcome test <image> [color]` to test a image and color.",
                         channel,
@@ -168,15 +170,15 @@ public class CmdWelcome implements Command {
                         "**Images**: `Colors`\n" +
                         "\n" +
                         "```\n" +
-                        "Name:          From:\n" +
+                        "Name:           From:\n" +
                         "\n" +
-                        "Red            @Andre_601#6811\n" +
+                        "Red             @Andre_601#6811\n" +
                         "  Color #c0392b\n" +
                         "\n" +
-                        "Green          @Andre_601#6811\n" +
+                        "Green           @Andre_601#6811\n" +
                         "  Color #27ae60\n" +
                         "\n" +
-                        "Blue           @Andre_601#6811\n" +
+                        "Blue            @Andre_601#6811\n" +
                         "  Color #2980b9\n" +
                         "```\n" +
                         "Use `{0}welcome test <image> [color]` to test a image and color.",
@@ -185,10 +187,25 @@ public class CmdWelcome implements Command {
                         "**Images**: `Gradients`\n" +
                         "\n" +
                         "```\n" +
-                        "Name:          From:\n" +
+                        "Name:           From:\n" +
                         "\n" +
-                        "gradient       @aBooDyy#9543\n" +
-                        "  Light to dark-blue gradient\n" +
+                        "gradient        @aBooDyy#9543\n" +
+                        "  Default gradient\n" +
+                        "\n" +
+                        "gradient_blue   @aBooDyy#9543\n" +
+                        "  Dark-blue gradient\n" +
+                        "\n" +
+                        "gradient_orange @aBooDyy#9543\n" +
+                        "  Orange gradient\n" +
+                        "\n" +
+                        "gradient_green  @aBooDyy#9543\n" +
+                        "  Green gradient\n" +
+                        "\n" +
+                        "gradient_red1   @aBooDyy#9543\n" +
+                        "  Dark-red gradient\n" +
+                        "\n" +
+                        "gradient_red2   @aBooDyy#9543\n" +
+                        "  Bright red gradient\n" +
                         "```\n" +
                         "Use `{0}welcome test <image> [color]` to test a image and color.",
                         prefix
@@ -196,10 +213,50 @@ public class CmdWelcome implements Command {
                         "**Images**: `Nature`\n" +
                         "\n" +
                         "```\n" +
-                        "Name:          From:\n" +
+                        "Name:           From:\n" +
                         "\n" +
-                        "Landscape      @Kawten#6781\n" +
+                        "Landscape       @Kawten#6781\n" +
                         "  Image of a landscape at a sea\n" +
+                        "```\n" +
+                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        prefix
+                ),MessageFormat.format(
+                        "**Images**: `Wood`\n" +
+                        "\n" +
+                        "```\n" +
+                        "Name:           From:\n" +
+                        "\n" +
+                        "Wood1           @DasBrin#0001\n" +
+                        "  Light-grey woodplanks\n" +
+                        "\n" +
+                        "Wood2           @DasBrin#0001\n" +
+                        "  Dark-grey woodplanks\n" +
+                        "\n" +
+                        "Wood3           @DasBrin#0001\n" +
+                        "  Woodplanks\n" +
+                        "```\n" +
+                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        prefix
+                ),MessageFormat.format(
+                "**Images**: `Dots`\n" +
+                        "\n" +
+                        "```\n" +
+                        "Name:           From:\n" +
+                        "\n" +
+                        "Dots_blue       @DasBrin#0001\n" +
+                        "  White dots on blue background\n" +
+                        "\n" +
+                        "Dots_green      @DasBrin#0001\n" +
+                        "  White dots on green background\n" +
+                        "\n" +
+                        "Dots_orange     @DasBrin#0001\n" +
+                        "  White dots on orange background\n" +
+                        "\n" +
+                        "Dots_pink       @DasBrin#0001\n" +
+                        "  White dots on pink background\n" +
+                        "\n" +
+                        "Dots_red        @DasBrin#0001\n" +
+                        "  White dots on red background\n" +
                         "```\n" +
                         "Use `{0}welcome test <image> [color]` to test a image and color.",
                         prefix
@@ -208,10 +265,10 @@ public class CmdWelcome implements Command {
                         "\n" +
                         "You can change the textcolor with `{0}welcome color <color>`\n" +
                         "```\n" +
-                        "Type:          Desc:\n" +
+                        "Type:           Desc:\n" +
                         "\n" +
-                        "RGB:<r,g,b>    Sets the color in RGB\n" +
-                        "HEX:<code>     Sets the color in Hex-code (#rrggbb)\n" +
+                        "RGB:<r,g,b>     Sets the color in RGB\n" +
+                        "HEX:<code>      Sets the color in Hex-code (#rrggbb)\n" +
                         "```\n" +
                         "Use `{0}welcome test <image> [color]` to test a image and color.",
                         prefix
@@ -237,6 +294,14 @@ public class CmdWelcome implements Command {
 
         if (!PermUtil.canWrite(tc))
             return;
+
+        if(!PermUtil.canSendEmbed(tc)){
+            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            if(PermUtil.canReact(tc))
+                msg.addReaction("🚫").queue();
+
+            return;
+        }
 
         if(!PermUtil.userIsAdmin(msg)){
             tc.sendMessage(String.format(
@@ -297,6 +362,19 @@ public class CmdWelcome implements Command {
                             case "blue":
                             case "neko1":
                             case "neko2":
+                            case "gradient_blue":
+                            case "gradient_orange":
+                            case "gradient_green":
+                            case "gradient_red1":
+                            case "gradient_red2":
+                            case "wood1":
+                            case "wood2":
+                            case "wood3":
+                            case "dots_blue":
+                            case "dots_green":
+                            case "dots_orange":
+                            case "dots_pink":
+                            case "dots_red":
                             case "random":
                                 setChannel(msg, g, args[1], args[2].toLowerCase());
                                 break;
@@ -333,6 +411,19 @@ public class CmdWelcome implements Command {
                         case "blue":
                         case "neko1":
                         case "neko2":
+                        case "gradient_blue":
+                        case "gradient_orange":
+                        case "gradient_green":
+                        case "gradient_red1":
+                        case "gradient_red2":
+                        case "wood1":
+                        case "wood2":
+                        case "wood3":
+                        case "dots_blue":
+                        case "dots_green":
+                        case "dots_orange":
+                        case "dots_pink":
+                        case "dots_red":
                         case "random":
                             ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase(),
                                     DBUtil.getColor(g));
@@ -351,6 +442,19 @@ public class CmdWelcome implements Command {
                         case "blue":
                         case "neko1":
                         case "neko2":
+                        case "gradient_blue":
+                        case "gradient_orange":
+                        case "gradient_green":
+                        case "gradient_red1":
+                        case "gradient_red2":
+                        case "wood1":
+                        case "wood2":
+                        case "wood3":
+                        case "dots_blue":
+                        case "dots_green":
+                        case "dots_orange":
+                        case "dots_pink":
+                        case "dots_red":
                         case "random":
                             if(MessageUtil.toColor(args[2].toLowerCase()) == null){
                                 tc.sendMessage(MessageFormat.format(

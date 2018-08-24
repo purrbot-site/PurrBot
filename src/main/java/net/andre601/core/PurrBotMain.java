@@ -21,6 +21,7 @@ import net.andre601.util.command.CommandHandler;
 
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.requests.RestAction;
 import net.dv8tion.jda.webhook.WebhookClient;
 import net.dv8tion.jda.webhook.WebhookClientBuilder;
 
@@ -100,9 +101,15 @@ public class PurrBotMain {
             post("/vote", (req, res) -> {
 
                 Vote vote = gsonVote.fromJson(req.body(), Vote.class);
-                VoteUtil.voteAction(vote.getBotId(), vote.getUserId());
+                VoteUtil.voteAction(vote.getBotId(), vote.getUserId(), vote.isWeekend());
+                //  I have to return something for some reason... :shrug:
                 return null;
             });
+        }
+
+        if(file.getItem("config", "debug").equalsIgnoreCase("true")){
+            RestAction.setPassContext(true);
+            RestAction.DEFAULT_FAILURE = Throwable::printStackTrace;
         }
 
         try {
@@ -159,6 +166,8 @@ public class PurrBotMain {
         CommandHandler.commands.put("emote", new CmdEmote());
         CommandHandler.commands.put("kitsune", new CmdKitsune());
         CommandHandler.commands.put("foxgirl", new CmdKitsune());
+        CommandHandler.commands.put("fakegit", new CmdFakegit());
+        CommandHandler.commands.put("git", new CmdFakegit());
     }
 
     public static void loadRandom(){

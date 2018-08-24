@@ -13,6 +13,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class CmdQuote implements Command {
@@ -54,10 +55,28 @@ public class CmdQuote implements Command {
             return;
         }
 
-        if(args[0].matches("[0-9]{18,22}") && args[1].matches("[0-9]{18,22}")){
+        if(args[0].matches("[0-9]{18,22}")){
+            List<TextChannel> channels = msg.getMentionedChannels();
+
+            if(channels.isEmpty()){
+                tc.sendMessage(MessageFormat.format(
+                        "{0} Please mention a valid textchannel!",
+                        msg.getAuthor().getAsMention()
+                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                return;
+            }
+
+            if(!PermUtil.canReadHistory(channels.get(0)) || !PermUtil.canRead(channels.get(0))){
+                tc.sendMessage(MessageFormat.format(
+                        "{0} I can't see the messages of the mentioned channel!",
+                        msg.getAuthor().getAsMention()
+                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                return;
+            }
+
             try{
                 //  Try to get the Message.
-                message = g.getTextChannelById(args[1].trim()).getMessageById(args[0].trim()).complete();
+                message = g.getTextChannelById(channels.get(0).getId()).getMessageById(args[0].trim()).complete();
             }catch (Exception ex){
                 //  Set message to null.
                 message = null;
@@ -66,7 +85,7 @@ public class CmdQuote implements Command {
             //  If message is null -> Send error-message and return.
             if(message == null){
                 tc.sendMessage(MessageFormat.format(
-                        "{0} Unable to find message! Are the IDs correct?",
+                        "{0} Unable to find message! Is the MessageID and the channel correct?",
                         msg.getAuthor().getAsMention()
                 )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
                 return;
@@ -84,14 +103,14 @@ public class CmdQuote implements Command {
                     .setDescription(quoteMsg)
                     .setFooter(MessageFormat.format(
                             "Posted in #{0}",
-                            g.getTextChannelById(args[1].trim()).getName()
+                            g.getTextChannelById(channels.get(0).getId()).getName()
                     ),null)
                     .setTimestamp(message.getCreationTime());
 
             tc.sendMessage(quote.build()).queue();
         }else{
             tc.sendMessage(MessageFormat.format(
-                    "{0} Unable to find message! Are the IDs correct?",
+                    "{0} Unable to find message! Is the MessageID and the channel correct?",
                     msg.getAuthor().getAsMention()
             )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
         }

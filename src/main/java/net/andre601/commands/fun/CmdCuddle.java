@@ -59,6 +59,11 @@ public class CmdCuddle implements Command{
         //  Getting all mentioned users in the message and store them in a list.
         List<User> user = msg.getMentionedUsers();
 
+        if(user.isEmpty()){
+            usage(e.getMessage());
+            return;
+        }
+
         if(user.size() == 1){
             //  If amount of mentioned users equals 1: Get the first mentioned user.
             User u = user.get(0);

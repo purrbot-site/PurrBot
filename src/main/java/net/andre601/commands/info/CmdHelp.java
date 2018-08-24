@@ -91,6 +91,7 @@ public class CmdHelp implements Command {
                         "Command:   Argument(s):\n" +
                         "\n" +
                         "Cuddle     <@user ...>\n" +
+                        "Fakegit\n" +
                         "Gecg\n" +
                         "Hug        <@user ...>\n" +
                         "Kiss       <@user ...>\n" +
@@ -126,7 +127,7 @@ public class CmdHelp implements Command {
                         "Info       [-here]\n" +
                         "Invite     [-here]\n" +
                         "Ping       [-api]\n" +
-                        "Quote      <messageID> <channelID>\n" +
+                        "Quote      <messageID> <#channel>\n" +
                         "Server\n" +
                         "Stats\n" +
                         "User       [@user]\n" +
@@ -375,10 +376,10 @@ public class CmdHelp implements Command {
                 break;
 
             case "quote":
-                usage(e.getMessage(), "Quote", "quote <messageID> <channelID>",
+                usage(e.getMessage(), "Quote", "quote <messageID> <#channel>",
                         "Lets you quote a message.",
                         "`<messageID>` The ID of the message to quote.\n" +
-                        "`<channelID>` The ID of the channel, where the message is.",
+                        "`<#channel>` The mention of the channel, where the message is located.",
                         "`none`"
                 );
                 break;
@@ -410,6 +411,7 @@ public class CmdHelp implements Command {
                         "`none`",
                         "`none`");
                 break;
+
             case "lesbian":
             case "les":
                 usage(msg, "Lesbian", "lesbian",
@@ -417,6 +419,8 @@ public class CmdHelp implements Command {
                         "Can only be used in NSFW-labeled channels!",
                         "`none`",
                         "`none`");
+                break;
+
             case "kitsune":
             case "foxgirl":
                 usage(msg, "Kitsune", "kitsune",
@@ -424,6 +428,14 @@ public class CmdHelp implements Command {
                         "`none`",
                         "`none`"
                 );
+                break;
+
+            case "fakegit":
+            case "git":
+                usage(msg, "Fakegit", "fakegit",
+                        "Creates a fake github-message.",
+                        "`none`",
+                        "`none`");
                 break;
 
             default:
