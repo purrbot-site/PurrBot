@@ -45,18 +45,20 @@ public class PurrBotMain {
     private static Random random = new Random();
 
     //  All the ArrayLists for Random-Stuff and the blacklist
-    private static List<String> RandomShutdownText = new ArrayList<>();
-    private static List<String> RandomNoShutdownText = new ArrayList<>();
-    private static List<String> RandomShutdownImage = new ArrayList<>();
+    private static List<String> RandomShutdownText    = new ArrayList<>();
+    private static List<String> RandomNoShutdownText  = new ArrayList<>();
+    private static List<String> RandomShutdownImage   = new ArrayList<>();
     private static List<String> RandomNoShutdownImage = new ArrayList<>();
-    private static List<String> RandomFact = new ArrayList<>();
-    private static List<String> RandomNoNSWF = new ArrayList<>();
-    private static List<String> RandomDebug = new ArrayList<>();
-    private static List<String> RandomAPIPingMsg = new ArrayList<>();
-    private static List<String> RandomPingMsg = new ArrayList<>();
-    private static List<String> RandomKissImg = new ArrayList<>();
+    private static List<String> RandomFact            = new ArrayList<>();
+    private static List<String> RandomNoNSWF          = new ArrayList<>();
+    private static List<String> RandomDebug           = new ArrayList<>();
+    private static List<String> RandomAPIPingMsg      = new ArrayList<>();
+    private static List<String> RandomPingMsg         = new ArrayList<>();
+    private static List<String> RandomKissImg         = new ArrayList<>();
+    private static List<String> RandomAcceptFuckMsg   = new ArrayList<>();
+    private static List<String> RandomDenyFuckMsg     = new ArrayList<>();
 
-    private static List<String> BlacklistedGuilds = new ArrayList<>();
+    private static List<String> BlacklistedGuilds     = new ArrayList<>();
 
     //  used for getVersion
     private static String version = null;
@@ -139,6 +141,7 @@ public class PurrBotMain {
         CommandHandler.commands.put("shutdown", new CmdShutdown());
         CommandHandler.commands.put("sleep", new CmdShutdown());
         CommandHandler.commands.put("neko", new CmdNeko());
+        CommandHandler.commands.put("catgirl", new CmdNeko());
         CommandHandler.commands.put("lewd", new CmdLewd());
         CommandHandler.commands.put("hug", new CmdHug());
         CommandHandler.commands.put("pat", new CmdPat());
@@ -170,6 +173,8 @@ public class PurrBotMain {
         CommandHandler.commands.put("git", new CmdFakegit());
         CommandHandler.commands.put("leave", new CmdLeave());
         CommandHandler.commands.put("pm", new CmdPM());
+        CommandHandler.commands.put("fuck", new CmdFuck());
+        CommandHandler.commands.put("sex", new CmdFuck());
     }
 
     public static void loadRandom(){
@@ -215,6 +220,14 @@ public class PurrBotMain {
                 "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomKissImage")
                 .split("\n")
         );
+        Collections.addAll(RandomAcceptFuckMsg, HttpUtil.requestHttp(
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomAcceptFuckMsg")
+                .split("\n")
+        );
+        Collections.addAll(RandomDenyFuckMsg, HttpUtil.requestHttp(
+                "https://raw.githubusercontent.com/andre601/PurrBot-files/master/files/RandomDenyFuckMsg")
+                .split("\n")
+        );
 
         //  Getting the blacklisted Guild-IDs
         Collections.addAll(BlacklistedGuilds, HttpUtil.requestHttp(
@@ -255,6 +268,12 @@ public class PurrBotMain {
     public static List<String> getRandomKissImg(){
         return RandomKissImg;
     }
+    public static List<String> getRandomAcceptFuckMsg(){
+        return RandomAcceptFuckMsg;
+    }
+    public static List<String> getRandomDenyFuckMsg(){
+        return RandomDenyFuckMsg;
+    }
 
     public static List<String> getBlacklistedGuilds(){
         return BlacklistedGuilds;
@@ -276,6 +295,8 @@ public class PurrBotMain {
         RandomAPIPingMsg.clear();
         RandomPingMsg.clear();
         RandomKissImg.clear();
+        RandomAcceptFuckMsg.clear();
+        RandomDenyFuckMsg.clear();
 
         BlacklistedGuilds.clear();
     }

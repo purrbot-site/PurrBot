@@ -170,10 +170,21 @@ public class HttpUtil {
             return new JSONObject(Objects.requireNonNull(responseBody).string()).get("url").toString();
         }
     }
+
+    private static String fuck() throws Exception{
+        Request request = new Request.Builder()
+                .url("https://nekos.life/api/v2/img/classic")
+                .build();
+        Response response = CLIENT.newCall(request).execute();
+        try(ResponseBody responseBody = response.body()){
+            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            return new JSONObject(Objects.requireNonNull(responseBody).string()).get("url").toString();
+        }
+    }
+
     /*
      *  Getting the votes from the botpage
      */
-
     private static JSONObject voteInfo() throws Exception{
         Request request = new Request.Builder()
                 .url("https://discordbots.org/api/bots/425382319449309197")
@@ -332,6 +343,14 @@ public class HttpUtil {
     public static String getLesbian(){
         try {
             return lesbian();
+        }catch (Exception ex){
+            return null;
+        }
+    }
+
+    public static String getFuck(){
+        try{
+            return fuck();
         }catch (Exception ex){
             return null;
         }

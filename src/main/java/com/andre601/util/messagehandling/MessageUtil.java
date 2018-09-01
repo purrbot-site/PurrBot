@@ -69,6 +69,16 @@ public class MessageUtil {
                 PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomKissImg().size())) : "";
     }
 
+    public static String getRandomAcceptFuckMsg(){
+        return PurrBotMain.getRandomAcceptFuckMsg().size() > 0 ? PurrBotMain.getRandomAcceptFuckMsg().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomAcceptFuckMsg().size())) : "";
+    }
+
+    public static String getRandomDenyFuckMsg(){
+        return PurrBotMain.getRandomDenyFuckMsg().size() > 0 ? PurrBotMain.getRandomDenyFuckMsg().get(
+                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomDenyFuckMsg().size())) : "";
+    }
+
     public static String isBot(User user){
         if(user.isBot()){
             return "Yes";

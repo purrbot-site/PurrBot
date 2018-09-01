@@ -144,7 +144,8 @@ public class CmdWelcome implements Command {
                         "\n" +
                         "Color-System     8\n" +
                         "```\n" +
-                        "Use `{4}welcome test <image> [color]` to test a image and color.",
+                        "Use `{4}welcome test <image> [color]` to test a image and color.\n" +
+                        "Bots won't trigger the welcome-messages.",
                         channel,
                         DBUtil.getImage(g),
                         colorType,
@@ -165,7 +166,8 @@ public class CmdWelcome implements Command {
                         "Neko2          @Andre_601#6811\n" +
                         "  Another image with a neko." +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
                         "**Images**: `Colors`\n" +
@@ -182,7 +184,8 @@ public class CmdWelcome implements Command {
                         "Blue            @Andre_601#6811\n" +
                         "  Color #2980b9\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
                         "**Images**: `Gradients`\n" +
@@ -208,7 +211,8 @@ public class CmdWelcome implements Command {
                         "gradient_red2   @aBooDyy#9543\n" +
                         "  Bright red gradient\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
                         "**Images**: `Nature`\n" +
@@ -219,7 +223,8 @@ public class CmdWelcome implements Command {
                         "Landscape       @Kawten#6781\n" +
                         "  Image of a landscape at a sea\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
                         "**Images**: `Wood`\n" +
@@ -236,7 +241,8 @@ public class CmdWelcome implements Command {
                         "Wood3           @DasBrin#0001\n" +
                         "  Woodplanks\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
                 "**Images**: `Dots`\n" +
@@ -259,7 +265,8 @@ public class CmdWelcome implements Command {
                         "Dots_red        @DasBrin#0001\n" +
                         "  White dots on red background\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
                         "**Color-System**\n" +
@@ -271,7 +278,8 @@ public class CmdWelcome implements Command {
                         "RGB:<r,g,b>     Sets the color in RGB\n" +
                         "HEX:<code>      Sets the color in Hex-code (#rrggbb)\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.",
+                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Bots won't trigger the welcome-messages.",
                         prefix
                 ))
                 .setItemsPerPage(1)

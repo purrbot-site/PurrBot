@@ -50,7 +50,7 @@ public class CmdEval implements Command {
             se.put("channel", e.getChannel());
             se.put("msg", msg);
             se.put("embed", new net.dv8tion.jda.core.EmbedBuilder());
-            
+
             List<String> splitContent = new LinkedList<>();
             Collections.addAll(splitContent, msg.getContentRaw().split(" "));
             splitContent.remove(0);

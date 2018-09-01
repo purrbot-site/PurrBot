@@ -151,6 +151,7 @@ public class CmdHelp implements Command {
                         "```\n" +
                         "Command:   Argument(s):\n" +
                         "\n" +
+                        "Fuck       <@user>\n" +
                         "Lewd       [-gif]\n" +
                         "           [-slide]\n" +
                         "Lesbian\n" +
@@ -222,6 +223,13 @@ public class CmdHelp implements Command {
             if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
+            return;
+        }
+
+        if(!PermUtil.canReact(tc)){
+            tc.sendMessage(String.format(
+                    "%s I need permission, to add reactions in this channel!"
+            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
             return;
         }
 
@@ -438,6 +446,16 @@ public class CmdHelp implements Command {
                 usage(msg, "Fakegit", "fakegit",
                         "Creates a fake github-message.",
                         "`none`",
+                        "`none`");
+                break;
+
+            case "fuck":
+                usage(msg, "Fuck", "fuck <@user>",
+                        "Sends a request to the mentioned user, who can accept it.\n" +
+                        "To accept, you have to type `>accept`!\n" +
+                        "\n" +
+                        "Can only be used in NSFW-labeled channels.",
+                        "`<@user>` The user you want to fuck.",
                         "`none`");
                 break;
 
