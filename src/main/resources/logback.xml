@@ -74,7 +74,6 @@
 
 -->
 
-
     <!--Root logger-->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
