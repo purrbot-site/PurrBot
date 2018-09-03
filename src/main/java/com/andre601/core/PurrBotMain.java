@@ -109,11 +109,6 @@ public class PurrBotMain {
             });
         }
 
-        if(file.getItem("config", "debug").equalsIgnoreCase("true")){
-            RestAction.setPassContext(true);
-            RestAction.DEFAULT_FAILURE = Throwable::printStackTrace;
-        }
-
         try {
             jda = builder.build().awaitReady();
         } catch (LoginException | InterruptedException ex) {

@@ -23,7 +23,7 @@ public class CmdFuck implements Command {
     private static ArrayList<String> alreadyInQueue = new ArrayList<>();
 
     private static int getRandomPercent(){
-        return PurrBotMain.getRandom().nextInt(9);
+        return PurrBotMain.getRandom().nextInt(10);
     }
 
     private static boolean isMessage(Message msg){
