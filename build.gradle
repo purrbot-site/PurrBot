@@ -1,0 +1,82 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
+    id 'idea'
+}
+mainClassName = 'com.andre601.core.PurrBotMain'
+version = '1.31.5'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'com.jagrosh', name: 'jda-utilities-menu', version:'2.1'
+    compile group: 'com.jagrosh', name: 'jda-utilities-commons', version:'2.1'
+    compile group: 'com.rethinkdb', name: 'rethinkdb-driver', version:'2.3.3'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile group: 'com.google.guava', name: 'guava', version:'25.0-jre'
+    compile(group: 'net.dv8tion', name: 'JDA', version:'3.7.1_397') {
+exclude(module: 'opus-java')
+    }
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'com.mashape.unirest', name: 'unirest-java', version:'1.4.9'
+    compile group: 'org.discordbots', name: 'DBL-Java-Library', version:'2.0.1'
+    compile group: 'com.sparkjava', name: 'spark-core', version:'2.7.2'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version:'1.18.0'
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.9'
+}
+
+
+compileJava {
+    classpath = sourceSets.main.compileClasspath
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+build.dependsOn shadowJar
+
+artifacts {
+    archives shadowJar
+}
+
+task cleanDistTar(type: Delete) { delete files(distTar) }
+distTar { classifier = "trash" }
+distTar.finalizedBy cleanDistTar
+
+task cleanDistZip(type: Delete) { delete files(distZip) }
+distZip { classifier = "trash" }
+distZip.finalizedBy cleanDistZip
+
+task cleanShittyJar(type: Delete) { delete files(jar) }
+jar { classifier = "trash" }
+jar.finalizedBy cleanShittyJar
+
+jar {
+    classifier = "nodeps"
+}
+
+shadowJar {
+    classifier = ""
+    baseName 'Purr'
+}
+

@@ -1,0 +1,13 @@
+{
+  "token": "TOKEN",
+  "id": "ID",
+  "webhook": "webhookURL",
+  "errorWebhook": "errorWebhookURL",
+  "api-token": "api-token",
+  "beta": "false",
+  "debug": "false",
+
+  "db-ip": "127.0.0.1",
+  "db-name": "DatabaseName",
+  "db-table": "DatabaseTable"
+}
