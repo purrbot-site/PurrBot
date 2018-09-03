@@ -1,0 +1,27 @@
+2018-09-03 00:13:28 [Thread-0] [ INFO ] [log] Logging initialized @2994ms to org.eclipse.jetty.util.log.Slf4jLog
+2018-09-03 00:13:28 [Thread-0] [ INFO ] [EmbeddedJettyServer] == Spark has ignited ...
+2018-09-03 00:13:28 [Thread-0] [ INFO ] [EmbeddedJettyServer] >> Listening on 0.0.0.0:1000
+2018-09-03 00:13:28 [Thread-0] [ INFO ] [Server] jetty-9.4.8.v20171121, build timestamp: 2017-11-21T16:27:37-05:00, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
+2018-09-03 00:13:28 [Thread-0] [ INFO ] [session] DefaultSessionIdManager workerName=node0
+2018-09-03 00:13:28 [Thread-0] [ INFO ] [session] No SessionScavenger set, using defaults
+2018-09-03 00:13:28 [Thread-0] [ INFO ] [session] Scavenging every 660000ms
+2018-09-03 00:13:28 [Thread-0] [ INFO ] [AbstractConnector] Started ServerConnector@669a63f7{HTTP/1.1,[http/1.1]}{0.0.0.0:1000}
+2018-09-03 00:13:28 [Thread-0] [ INFO ] [Server] Started @3095ms
+2018-09-03 00:40:41 [Thread-0] [ INFO ] [log] Logging initialized @2206ms to org.eclipse.jetty.util.log.Slf4jLog
+2018-09-03 00:40:41 [Thread-0] [ INFO ] [EmbeddedJettyServer] == Spark has ignited ...
+2018-09-03 00:40:41 [Thread-0] [ INFO ] [EmbeddedJettyServer] >> Listening on 0.0.0.0:1000
+2018-09-03 00:40:41 [Thread-0] [ INFO ] [Server] jetty-9.4.z-SNAPSHOT, build timestamp: 2017-11-21T16:27:37-05:00, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
+2018-09-03 00:40:41 [Thread-0] [ INFO ] [session] DefaultSessionIdManager workerName=node0
+2018-09-03 00:40:41 [Thread-0] [ INFO ] [session] No SessionScavenger set, using defaults
+2018-09-03 00:40:41 [Thread-0] [ INFO ] [session] Scavenging every 660000ms
+2018-09-03 00:40:41 [Thread-0] [ INFO ] [AbstractConnector] Started ServerConnector@4a04765a{HTTP/1.1,[http/1.1]}{0.0.0.0:1000}
+2018-09-03 00:40:41 [Thread-0] [ INFO ] [Server] Started @2293ms
+2018-09-03 00:41:33 [Thread-0] [ INFO ] [log] Logging initialized @1141ms to org.eclipse.jetty.util.log.Slf4jLog
+2018-09-03 00:41:33 [Thread-0] [ INFO ] [EmbeddedJettyServer] == Spark has ignited ...
+2018-09-03 00:41:33 [Thread-0] [ INFO ] [EmbeddedJettyServer] >> Listening on 0.0.0.0:1000
+2018-09-03 00:41:33 [Thread-0] [ INFO ] [Server] jetty-9.4.z-SNAPSHOT, build timestamp: 2017-11-21T16:27:37-05:00, git hash: 82b8fb23f757335bb3329d540ce37a2a2615f0a8
+2018-09-03 00:41:33 [Thread-0] [ INFO ] [session] DefaultSessionIdManager workerName=node0
+2018-09-03 00:41:33 [Thread-0] [ INFO ] [session] No SessionScavenger set, using defaults
+2018-09-03 00:41:33 [Thread-0] [ INFO ] [session] Scavenging every 600000ms
+2018-09-03 00:41:33 [Thread-0] [ INFO ] [AbstractConnector] Started ServerConnector@3440f518{HTTP/1.1,[http/1.1]}{0.0.0.0:1000}
+2018-09-03 00:41:33 [Thread-0] [ INFO ] [Server] Started @1224ms

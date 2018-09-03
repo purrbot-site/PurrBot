@@ -1,0 +1,83 @@
+<configuration debug="false">
+
+    <property name="DEV_HOME" value="./logs"/>
+
+    <!--STDOUT-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+
+        </filter>
+        <encoder>
+            <pattern>%boldMagenta([%d{yyyy-MM-dd HH:mm:ss}]) %boldBlue([%thread]) %highlight([ %-5level]) %boldWhite([%logger{32}]) %boldRed(==>) %cyan(%msg) %n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!--FILE OUT-->
+    <appender name="FILE-AUDIT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${DEV_HOME}/Purr.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [ %-5level] [%logger{0}] %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${DEV_HOME}/archived/neko.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+<!-- web hook
+    <appender name="SLACK" class="jp.co.dwango.logback.SlackWebhookAppender">
+        <webhookUrl>https://discordapp.com/api/webhooks/485896239175696404/9ICoMLc6xTwgWf6IF7GWbeAP9yS7v3d9zs5KxjrqbrTJ-zNedgF2cV8B2l75cEMdTp7O/slack</webhookUrl>
+        <payload>
+            {
+            "username": "logs",
+            "link_names": 1,
+            "attachments": [{
+            "title": level + " (" + hostname + ")",
+            "fallback": level + " (" + hostname + ")",
+            "color": color,
+            "fields": [{
+            "title": "Hostname",
+            "value": hostname,
+            "short": true
+            }, {
+            "title": "Time",
+            "value": timestamp,
+            "short": true
+            }, {
+            "title": "Level",
+            "value": level,
+            "short": true
+            }, {
+            "title": "Trigger",
+            "value": message,
+            "short": false
+            }]
+            }]
+            }
+        </payload>
+    </appender>
+
+    <appender name="ASYNC_SLACK" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="SLACK" />
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+-->
+
+    <!--Root logger-->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-AUDIT"/>
+      <!--  <appender-ref ref="ASYNC_SLACK" /> -->
+    </root>
+</configuration>
