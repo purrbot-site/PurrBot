@@ -1,15 +1,6 @@
 package com.andre601.PurrBot.core;
 
 import ch.qos.logback.classic.Logger;
-import com.andre601.PurrBot.commands.fun.*;
-import com.andre601.PurrBot.commands.info.*;
-import com.andre601.PurrBot.commands.nsfw.CmdFuck;
-import com.andre601.PurrBot.commands.nsfw.CmdLesbian;
-import com.andre601.PurrBot.commands.nsfw.CmdLewd;
-import com.andre601.PurrBot.commands.owner.*;
-import com.andre601.PurrBot.commands.server.CmdDebug;
-import com.andre601.PurrBot.commands.server.CmdPrefix;
-import com.andre601.PurrBot.commands.server.CmdWelcome;
 import com.andre601.PurrBot.listeners.CommandListener;
 import com.andre601.PurrBot.listeners.GuildListener;
 import com.andre601.PurrBot.listeners.ReadyListener;
@@ -18,11 +9,11 @@ import com.andre601.PurrBot.util.HttpUtil;
 import com.andre601.PurrBot.util.PermUtil;
 import com.andre601.PurrBot.util.VoteUtil;
 import com.andre601.PurrBot.util.command.CommandHandler;
-import com.andre601.commands.server.*;
-import com.andre601.commands.fun.*;
-import com.andre601.commands.info.*;
-import com.andre601.commands.nsfw.*;
-import com.andre601.commands.owner.*;
+import com.andre601.PurrBot.commands.server.*;
+import com.andre601.PurrBot.commands.fun.*;
+import com.andre601.PurrBot.commands.info.*;
+import com.andre601.PurrBot.commands.nsfw.*;
+import com.andre601.PurrBot.commands.owner.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
