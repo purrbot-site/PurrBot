@@ -9,7 +9,7 @@
 
         </filter>
         <encoder>
-            <pattern>%boldMagenta([%d{yyyy-MM-dd HH:mm:ss}]) %boldBlue([%thread]) %highlight([ %-5level]) %boldWhite([%logger{32}]) %boldRed(==>) %cyan(%msg) %n
+            <pattern>%boldWhite([%d{dd.MM.yyyy HH:mm:ss}]) %boldBlue([%t]) %cyan([ %-5level]) %boldWhite([%logger{32}]) %boldRed(==>) %white(%msg) %n
             </pattern>
         </encoder>
     </appender>
@@ -26,41 +26,41 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${DEV_HOME}/archived/neko.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${DEV_HOME}/archived/neko.%d{dd-MM-yyyy}.%i.log</fileNamePattern>
             <maxFileSize>100MB</maxFileSize>
             <maxHistory>60</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
     </appender>
-<!-- web hook
+    <!--
     <appender name="SLACK" class="jp.co.dwango.logback.SlackWebhookAppender">
-        <webhookUrl>https://discordapp.com/api/webhooks/485896239175696404/9ICoMLc6xTwgWf6IF7GWbeAP9yS7v3d9zs5KxjrqbrTJ-zNedgF2cV8B2l75cEMdTp7O/slack</webhookUrl>
+        <webhookUrl>https://link.com</webhookUrl>
         <payload>
             {
-            "username": "logs",
-            "link_names": 1,
-            "attachments": [{
-            "title": level + " (" + hostname + ")",
-            "fallback": level + " (" + hostname + ")",
-            "color": color,
-            "fields": [{
-            "title": "Hostname",
-            "value": hostname,
-            "short": true
-            }, {
-            "title": "Time",
-            "value": timestamp,
-            "short": true
-            }, {
-            "title": "Level",
-            "value": level,
-            "short": true
-            }, {
-            "title": "Trigger",
-            "value": message,
-            "short": false
-            }]
-            }]
+                "username": "logs",
+                "link_names": 1,
+                "attachments": [{
+                    "title": level + " (" + hostname + ")",
+                    "fallback": level + " (" + hostname + ")",
+                    "color": color,
+                    "fields": [{
+                        "title": "Hostname",
+                        "value": hostname,
+                        "short": true
+                    }, {
+                        "title": "Time",
+                        "value": timestamp,
+                        "short": true
+                    }, {
+                        "title": "Level",
+                        "value": level,
+                        "short": true
+                    }, {
+                        "title": "Trigger",
+                        "value": message,
+                        "short": false
+                    }]
+                }]
             }
         </payload>
     </appender>
@@ -71,13 +71,12 @@
             <level>INFO</level>
         </filter>
     </appender>
-
--->
+    -->
 
     <!--Root logger-->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE-AUDIT"/>
-      <!--  <appender-ref ref="ASYNC_SLACK" /> -->
+        <!-- <appender-ref ref="ASYNC_SLACK" /> -->
     </root>
 </configuration>

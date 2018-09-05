@@ -5,7 +5,7 @@ plugins {
     id 'idea'
 }
 mainClassName = 'com.andre601.core.PurrBotMain'
-version = '1.31.5'
+version = '1.31.7'
 
 description = """"""
 
@@ -28,7 +28,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile group: 'com.google.guava', name: 'guava', version:'25.0-jre'
     compile(group: 'net.dv8tion', name: 'JDA', version:'3.7.1_397') {
-exclude(module: 'opus-java')
+        exclude(module: 'opus-java')
     }
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'

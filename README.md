@@ -51,10 +51,11 @@ User     |                        | Gives info about you.
 ```
 Command: | Arguments: | Description:
 
+Fuck     | <@user>    | Sends a invite to a user to have sex with you. He/she can accept it with >accept
+Lesbian  |            | Returns a gif of lesbian.
 Lewd     |            | Shows a image of a lewd neko from nekos.life.
          | [-gif]     | Shows a gif-image of a lewd neko from nekos.life.
          | [-slide]   | Creates a slideshow with 30 images (Can be combined with the -gif argument)
-lesbian  |            | Returns a gif of lesbian.
 ```
 
 ## Server
@@ -62,6 +63,7 @@ lesbian  |            | Returns a gif of lesbian.
 ```
 Command: | Arguments:              | Description:
 
+Debug    |                         | Creates a debug-file on debug.scarsz.me
 Prefix   |                         | Shows the current prefix for the Discord.
          | set <prefix>            | Sets the provided prefix for the Guild.
          | reset                   | Resets the prefix to the default one.
