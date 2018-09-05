@@ -8,4 +8,6 @@ public final class IDs {
     public static String VOTE_ROLE    = "475335831649910785";
     public static String VOTE_CHANNEL = "448189613433946122";
 
+    public static String VERSION      = "1.31.8";
+
 }

@@ -12,4 +12,8 @@ public final class LogUtil {
         PurrBot.getLogger().warn(warn);
     }
 
+    public static void ERROR(String error){
+        PurrBot.getLogger().error(error);
+    }
+
 }

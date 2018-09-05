@@ -14,6 +14,7 @@ import com.andre601.PurrBot.commands.fun.*;
 import com.andre601.PurrBot.commands.info.*;
 import com.andre601.PurrBot.commands.nsfw.*;
 import com.andre601.PurrBot.commands.owner.*;
+import com.andre601.PurrBot.util.messagehandling.LogUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -115,7 +116,7 @@ public class PurrBot {
         try {
             jda = builder.build().awaitReady();
         } catch (LoginException | InterruptedException ex) {
-            System.out.println("[ERROR] Couldn't load bot! Is the bot-token valid?");
+            LogUtil.ERROR("Couldn't load bot! Is the bot-token valid?");
             System.exit(0);
         }
     }
@@ -297,23 +298,6 @@ public class PurrBot {
         RandomDenyFuckMsg.clear();
 
         BlacklistedGuilds.clear();
-    }
-
-    //  Returns the version of the bot from the Pom.xml through the version.properties file
-    public static String getVersion(){
-        if(version == null){
-
-            Properties p = new Properties();
-
-            try{
-                p.load(PurrBot.class.getClassLoader().getResourceAsStream("version.properties"));
-            }catch (IOException ignored){
-                return null;
-            }
-
-            version = (String)p.get("version");
-        }
-        return version;
     }
 
     public static WebhookClient webhookClient(String url){

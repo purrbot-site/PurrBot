@@ -3,6 +3,7 @@ package com.andre601.PurrBot.listeners;
 import com.andre601.PurrBot.core.PurrBot;
 import com.andre601.PurrBot.util.DBUtil;
 import com.andre601.PurrBot.util.PermUtil;
+import com.andre601.PurrBot.util.constants.IDs;
 import com.andre601.PurrBot.util.messagehandling.LogUtil;
 import com.andre601.PurrBot.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.JDAInfo;
@@ -43,7 +44,7 @@ public class ReadyListener extends ListenerAdapter{
                 "Enabled Bot-User {0} ({1}) v.{2} on {3} guilds using JDA v.{4}",
                 MessageUtil.getTag(e.getJDA().getSelfUser()),
                 botID,
-                PurrBot.getVersion(),
+                IDs.VERSION,
                 guilds,
                 JDAInfo.VERSION
         ));

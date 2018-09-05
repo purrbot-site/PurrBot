@@ -1,5 +1,6 @@
 package com.andre601.PurrBot.util;
 
+import com.andre601.PurrBot.util.constants.IDs;
 import com.andre601.PurrBot.util.messagehandling.MessageUtil;
 import com.google.common.io.CharStreams;
 import com.google.gson.JsonObject;
@@ -168,7 +169,7 @@ public class DebugUtil {
         try{
             connection = (HttpURLConnection) new URL("https://debug.scarsz.me/post").openConnection();
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.addRequestProperty("User-Agent", "Purr-Bot/" + PurrBot.getVersion());
+            connection.addRequestProperty("User-Agent", "Purr-Bot/" + IDs.VERSION);
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
 

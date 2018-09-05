@@ -4,7 +4,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '2.0.1'
     id 'idea'
 }
-mainClassName = 'com.andre601.PurrBot.core.PurrBotMain'
+mainClassName = 'com.andre601.PurrBot.core.PurrBot'
 version = '1.31.8'
 
 description = """"""
@@ -36,6 +36,14 @@ dependencies {
     compile group: 'org.discordbots', name: 'DBL-Java-Library', version:'2.0.1'
     compile group: 'com.sparkjava', name: 'spark-core', version:'2.7.2'
     compileOnly group: 'org.projectlombok', name: 'lombok', version:'1.18.0'
+}
+
+task replaceTokenFirst{
+    ant.replace(
+            file: "src/main/java/com/andre601/PurrBot/util/constants/IDs.java",
+            token: "@version@",
+            value: version
+    )
 }
 
 
@@ -78,5 +86,6 @@ jar {
 shadowJar {
     classifier = ""
     baseName 'Purr'
+    dependsOn replaceTokenFirst
 }
 
