@@ -2,7 +2,7 @@ package com.andre601.PurrBot.util.messagehandling;
 
 import com.andre601.PurrBot.util.PermUtil;
 import com.andre601.PurrBot.util.constants.Emojis;
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
 
@@ -17,66 +17,66 @@ public class MessageUtil {
 
     //  For returning random Strings/images.
     public static String getFact(){
-        if(PurrBotMain.isBDay())
+        if(PurrBot.isBDay())
             return  "🎉 Today is Purr's Birthday! 🎉";
 
-        return PurrBotMain.getRandomFact().size() > 0 ? PurrBotMain.getRandomFact().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomFact().size())) : "";
+        return PurrBot.getRandomFact().size() > 0 ? PurrBot.getRandomFact().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomFact().size())) : "";
     }
 
     public static String getRandomNotNSFW(){
-        return PurrBotMain.getRandomNoNSWF().size() > 0 ? PurrBotMain.getRandomNoNSWF().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomNoNSWF().size())) : "";
+        return PurrBot.getRandomNoNSWF().size() > 0 ? PurrBot.getRandomNoNSWF().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomNoNSWF().size())) : "";
     }
 
     public static String getRandomShutdown(){
-        return PurrBotMain.getRandomShutdownText().size() > 0 ? PurrBotMain.getRandomShutdownText().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomShutdownText().size())) : "";
+        return PurrBot.getRandomShutdownText().size() > 0 ? PurrBot.getRandomShutdownText().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomShutdownText().size())) : "";
     }
 
     public static String getRandomNoShutdown(){
-        return PurrBotMain.getRandomNoShutdownText().size() > 0 ? PurrBotMain.getRandomNoShutdownText().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomNoShutdownText().size())) : "";
+        return PurrBot.getRandomNoShutdownText().size() > 0 ? PurrBot.getRandomNoShutdownText().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomNoShutdownText().size())) : "";
     }
 
     public static String getRandomImage(){
-        return PurrBotMain.getRandomShutdownImage().size() > 0 ? PurrBotMain.getRandomShutdownImage().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomShutdownImage().size())) : "";
+        return PurrBot.getRandomShutdownImage().size() > 0 ? PurrBot.getRandomShutdownImage().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomShutdownImage().size())) : "";
     }
 
     public static String getRandomNoImage(){
-        return PurrBotMain.getRandomNoShutdownImage().size() > 0 ? PurrBotMain.getRandomNoShutdownImage().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomNoShutdownImage().size())) : "";
+        return PurrBot.getRandomNoShutdownImage().size() > 0 ? PurrBot.getRandomNoShutdownImage().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomNoShutdownImage().size())) : "";
     }
 
     public static String getRandomAPIPingMsg(){
-        return PurrBotMain.getRandomAPIPingMsg().size() > 0 ? PurrBotMain.getRandomAPIPingMsg().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomAPIPingMsg().size())) : "";
+        return PurrBot.getRandomAPIPingMsg().size() > 0 ? PurrBot.getRandomAPIPingMsg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomAPIPingMsg().size())) : "";
     }
 
     public static String getRandomPingMsg(){
-        return PurrBotMain.getRandomPingMsg().size() > 0 ? PurrBotMain.getRandomPingMsg().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomPingMsg().size())) : "";
+        return PurrBot.getRandomPingMsg().size() > 0 ? PurrBot.getRandomPingMsg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomPingMsg().size())) : "";
     }
 
     public static String getRandomDebug(){
-        return PurrBotMain.getRandomDebug().size() > 0 ? PurrBotMain.getRandomDebug().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomDebug().size())) : "";
+        return PurrBot.getRandomDebug().size() > 0 ? PurrBot.getRandomDebug().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomDebug().size())) : "";
     }
 
     public static String getRandomKissImg(){
-        return PurrBotMain.getRandomKissImg().size() > 0 ? PurrBotMain.getRandomKissImg().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomKissImg().size())) : "";
+        return PurrBot.getRandomKissImg().size() > 0 ? PurrBot.getRandomKissImg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomKissImg().size())) : "";
     }
 
     public static String getRandomAcceptFuckMsg(){
-        return PurrBotMain.getRandomAcceptFuckMsg().size() > 0 ? PurrBotMain.getRandomAcceptFuckMsg().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomAcceptFuckMsg().size())) : "";
+        return PurrBot.getRandomAcceptFuckMsg().size() > 0 ? PurrBot.getRandomAcceptFuckMsg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomAcceptFuckMsg().size())) : "";
     }
 
     public static String getRandomDenyFuckMsg(){
-        return PurrBotMain.getRandomDenyFuckMsg().size() > 0 ? PurrBotMain.getRandomDenyFuckMsg().get(
-                PurrBotMain.getRandom().nextInt(PurrBotMain.getRandomDenyFuckMsg().size())) : "";
+        return PurrBot.getRandomDenyFuckMsg().size() > 0 ? PurrBot.getRandomDenyFuckMsg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomDenyFuckMsg().size())) : "";
     }
 
     public static String isBot(User user){

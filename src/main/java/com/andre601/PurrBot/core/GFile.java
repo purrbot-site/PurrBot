@@ -47,7 +47,7 @@ public class GFile {
                     }
                 }
                 if(file.createNewFile()){
-                    if(cutil.exportResource(PurrBotMain.class.getResourceAsStream(internalPath), externalPath)){
+                    if(cutil.exportResource(PurrBot.class.getResourceAsStream(internalPath), externalPath)){
                         LogUtil.INFO(MessageFormat.format(
                                 "{0} successfully created!",
                                 name

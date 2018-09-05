@@ -1,7 +1,7 @@
 package com.andre601.PurrBot.util;
 
 import com.andre601.PurrBot.util.messagehandling.MessageUtil;
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -110,7 +110,7 @@ public class ImageUtil {
                     number = 20;
                     break;
                 case "random":
-                    number = PurrBotMain.getRandom().nextInt(21);
+                    number = PurrBot.getRandom().nextInt(21);
                     break;
             }
 

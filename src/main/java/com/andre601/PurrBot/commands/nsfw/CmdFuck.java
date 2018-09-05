@@ -1,7 +1,7 @@
 package com.andre601.PurrBot.commands.nsfw;
 
 import com.andre601.PurrBot.commands.Command;
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import com.andre601.PurrBot.util.HttpUtil;
 import com.andre601.PurrBot.util.PermUtil;
 import com.andre601.PurrBot.util.constants.IDs;
@@ -23,7 +23,7 @@ public class CmdFuck implements Command {
     private static ArrayList<String> alreadyInQueue = new ArrayList<>();
 
     private static int getRandomPercent(){
-        return PurrBotMain.getRandom().nextInt(10);
+        return PurrBot.getRandom().nextInt(10);
     }
 
     private static boolean isMessage(Message msg){
@@ -140,7 +140,7 @@ public class CmdFuck implements Command {
                     user.getAsMention(),
                     msg.getMember().getEffectiveName()
             )).queue(message -> {
-                EventWaiter waiter = PurrBotMain.waiter;
+                EventWaiter waiter = PurrBot.waiter;
                 waiter.waitForEvent(
                         MessageReceivedEvent.class,
                         ev -> (isMessage(ev.getMessage()) &&

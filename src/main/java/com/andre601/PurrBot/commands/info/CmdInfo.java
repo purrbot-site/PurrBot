@@ -5,7 +5,7 @@ import com.andre601.PurrBot.commands.Command;
 import com.andre601.PurrBot.util.PermUtil;
 import com.andre601.PurrBot.util.constants.Links;
 import com.andre601.PurrBot.util.messagehandling.EmbedUtil;
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -47,7 +47,7 @@ public class CmdInfo implements Command {
                 ))
                 .addField("Bot-Version:", String.format(
                         "`%s`",
-                        PurrBotMain.getVersion()), true)
+                        PurrBot.getVersion()), true)
                 .addField("Library:", String.format(
                         "[`JDA %s`](%s)",
                         JDAInfo.VERSION,

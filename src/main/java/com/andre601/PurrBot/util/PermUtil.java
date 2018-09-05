@@ -1,7 +1,7 @@
 package com.andre601.PurrBot.util;
 
 import com.andre601.PurrBot.util.constants.IDs;
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -73,7 +73,7 @@ public class PermUtil {
     }
 
     public static boolean isBeta(){
-        return PurrBotMain.file.getItem("config", "beta").equalsIgnoreCase("true");
+        return PurrBot.file.getItem("config", "beta").equalsIgnoreCase("true");
     }
 
     public static boolean authorIsBot(User user){

@@ -6,7 +6,7 @@ import net.dv8tion.jda.core.entities.Guild;
 
 import java.util.Map;
 
-import static com.andre601.PurrBot.core.PurrBotMain.file;
+import static com.andre601.PurrBot.core.PurrBot.file;
 
 public class DBUtil {
 

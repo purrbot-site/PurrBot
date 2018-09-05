@@ -1,7 +1,7 @@
 package com.andre601.PurrBot.util.messagehandling;
 
 import com.andre601.PurrBot.util.constants.Links;
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.MessageEmbed;
@@ -15,7 +15,7 @@ import java.time.ZonedDateTime;
 
 public class EmbedUtil {
 
-    private static String errorURL = PurrBotMain.file.getItem("config", "errorWebhook");
+    private static String errorURL = PurrBot.file.getItem("config", "errorWebhook");
 
     public static EmbedBuilder getEmbed(User user){
         return new EmbedBuilder()
@@ -72,7 +72,7 @@ public class EmbedUtil {
                 .setTimestamp(ZonedDateTime.now())
                 .build();
 
-        WebhookClient webc = PurrBotMain.webhookClient(errorURL);
+        WebhookClient webc = PurrBot.webhookClient(errorURL);
         webc.send(new WebhookMessageBuilder().addEmbeds(error)
         .setUsername("Error")
         .setAvatarUrl(Links.AVATAR_URL)
@@ -95,7 +95,7 @@ public class EmbedUtil {
                 ), null)
                 .setTimestamp(ZonedDateTime.now()).build();
 
-        WebhookClient webc = PurrBotMain.webhookClient(webhookURL);
+        WebhookClient webc = PurrBot.webhookClient(webhookURL);
         webc.send(new WebhookMessageBuilder().addEmbeds(webhook).
                 setUsername(title).
                 setAvatarUrl(g.getJDA().getSelfUser().getEffectiveAvatarUrl()).build());

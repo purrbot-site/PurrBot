@@ -1,6 +1,6 @@
 package com.andre601.PurrBot.listeners;
 
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import com.andre601.PurrBot.util.DBUtil;
 import com.andre601.PurrBot.util.PermUtil;
 import com.andre601.PurrBot.util.messagehandling.LogUtil;
@@ -43,14 +43,14 @@ public class ReadyListener extends ListenerAdapter{
                 "Enabled Bot-User {0} ({1}) v.{2} on {3} guilds using JDA v.{4}",
                 MessageUtil.getTag(e.getJDA().getSelfUser()),
                 botID,
-                PurrBotMain.getVersion(),
+                PurrBot.getVersion(),
                 guilds,
                 JDAInfo.VERSION
         ));
 
         //  Sending update if Bot isn't beta
         if(!PermUtil.isBeta())
-            PurrBotMain.getAPI().setStats(guilds);
+            PurrBot.getAPI().setStats(guilds);
 
         e.getJDA().getPresence().setPresence(OnlineStatus.ONLINE, Game.watching(String.format(
                 getBotGame(),

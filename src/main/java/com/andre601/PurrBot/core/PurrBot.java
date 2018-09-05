@@ -35,7 +35,7 @@ import java.util.*;
 
 import static spark.Spark.*;
 
-public class PurrBotMain {
+public class PurrBot {
 
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -67,7 +67,7 @@ public class PurrBotMain {
     public static JDABuilder builder;
     public static JDA jda;
 
-    private static Logger logger = (Logger) LoggerFactory.getLogger(PurrBotMain.class);
+    private static Logger logger = (Logger) LoggerFactory.getLogger(PurrBot.class);
 
     public static EventWaiter waiter = new EventWaiter();
 
@@ -306,7 +306,7 @@ public class PurrBotMain {
             Properties p = new Properties();
 
             try{
-                p.load(PurrBotMain.class.getClassLoader().getResourceAsStream("version.properties"));
+                p.load(PurrBot.class.getClassLoader().getResourceAsStream("version.properties"));
             }catch (IOException ignored){
                 return null;
             }

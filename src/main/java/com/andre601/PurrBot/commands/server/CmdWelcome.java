@@ -18,7 +18,7 @@ import java.awt.*;
 import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 
-import static com.andre601.PurrBot.core.PurrBotMain.waiter;
+import static com.andre601.PurrBot.core.PurrBot.waiter;
 
 public class CmdWelcome implements Command {
 

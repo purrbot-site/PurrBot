@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.andre601.PurrBot.core.PurrBotMain.*;
+import static com.andre601.PurrBot.core.PurrBot.*;
 
 public class CmdRefresh implements Command{
 

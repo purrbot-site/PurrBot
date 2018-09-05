@@ -1,6 +1,6 @@
 package com.andre601.PurrBot.listeners;
 
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import com.andre601.PurrBot.util.DBUtil;
 import com.andre601.PurrBot.util.constants.Links;
 import com.andre601.PurrBot.util.messagehandling.EmbedUtil;
@@ -18,7 +18,7 @@ import java.text.MessageFormat;
 public class GuildListener extends ListenerAdapter {
 
     public String getLink(){
-        return PurrBotMain.file.getItem("config", "webhook");
+        return PurrBot.file.getItem("config", "webhook");
     }
 
     public void onGuildJoin(GuildJoinEvent e) {
@@ -26,7 +26,7 @@ public class GuildListener extends ListenerAdapter {
         Guild g = e.getGuild();
 
         //  Check, if the guild is in the Blacklist and if true -> Leave guild.
-        if(PurrBotMain.getBlacklistedGuilds().contains(g.getId())) {
+        if(PurrBot.getBlacklistedGuilds().contains(g.getId())) {
             g.getOwner().getUser().openPrivateChannel().queue(pm -> {
                 //  Try to send a PM with the reason to the guild-owner.
                 pm.sendMessage(MessageFormat.format(
@@ -88,7 +88,7 @@ public class GuildListener extends ListenerAdapter {
         Guild g = e.getGuild();
 
         //  Check, if the guild is in the Blacklist and if true -> return;
-        if(PurrBotMain.getBlacklistedGuilds().contains(g.getId()))
+        if(PurrBot.getBlacklistedGuilds().contains(g.getId()))
             return;
 
         DBUtil.delGuild(g);

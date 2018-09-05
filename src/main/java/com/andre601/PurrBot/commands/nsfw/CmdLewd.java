@@ -1,7 +1,7 @@
 package com.andre601.PurrBot.commands.nsfw;
 
 import com.andre601.PurrBot.commands.Command;
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import com.andre601.PurrBot.util.HttpUtil;
 import com.andre601.PurrBot.util.PermUtil;
 import com.andre601.PurrBot.util.constants.Emojis;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class CmdLewd implements Command {
 
     private Slideshow.Builder sBuilder =
-            new Slideshow.Builder().setEventWaiter(PurrBotMain.waiter).setTimeout(1, TimeUnit.MINUTES);
+            new Slideshow.Builder().setEventWaiter(PurrBot.waiter).setTimeout(1, TimeUnit.MINUTES);
 
     private static List<String> lewdUserID = new ArrayList<>();
 

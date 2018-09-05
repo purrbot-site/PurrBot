@@ -1,7 +1,7 @@
 package com.andre601.PurrBot.util;
 
 import com.andre601.PurrBot.util.constants.IDs;
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.*;
 
@@ -10,7 +10,7 @@ import java.text.MessageFormat;
 public class VoteUtil {
 
     public static void voteAction(String botId, String voterId, boolean isWeekend){
-        if(!botId.equals(PurrBotMain.jda.getSelfUser().getId())) return;
+        if(!botId.equals(PurrBot.jda.getSelfUser().getId())) return;
         if(voterIsInGuild(voterId)){
             Role role = getGuild().getRoleById(IDs.VOTE_ROLE);
             Member member = getGuild().getMemberById(voterId);
@@ -43,7 +43,7 @@ public class VoteUtil {
     }
 
     private static Guild getGuild(){
-        return PurrBotMain.jda.getGuildById(IDs.GUILD);
+        return PurrBot.jda.getGuildById(IDs.GUILD);
     }
 
     private static TextChannel getVoteChannel(){

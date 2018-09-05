@@ -3,7 +3,7 @@ package com.andre601.PurrBot.util;
 import com.andre601.PurrBot.util.messagehandling.MessageUtil;
 import com.google.common.io.CharStreams;
 import com.google.gson.JsonObject;
-import com.andre601.PurrBot.core.PurrBotMain;
+import com.andre601.PurrBot.core.PurrBot;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -168,7 +168,7 @@ public class DebugUtil {
         try{
             connection = (HttpURLConnection) new URL("https://debug.scarsz.me/post").openConnection();
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.addRequestProperty("User-Agent", "Purr-Bot/" + PurrBotMain.getVersion());
+            connection.addRequestProperty("User-Agent", "Purr-Bot/" + PurrBot.getVersion());
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
 
@@ -184,12 +184,12 @@ public class DebugUtil {
             });
             payload.add("files", filesJson);
 
-            out.write(PurrBotMain.getGson().toJson(payload).getBytes(Charset.forName("UTF-8")));
+            out.write(PurrBot.getGson().toJson(payload).getBytes(Charset.forName("UTF-8")));
             out.close();
 
             String rawOutput = CharStreams.toString(new InputStreamReader(connection.getInputStream()));
             connection.getInputStream().close();
-            JsonObject output = PurrBotMain.getGson().fromJson(rawOutput, JsonObject.class);
+            JsonObject output = PurrBot.getGson().fromJson(rawOutput, JsonObject.class);
 
             if(!output.has("url")) throw new RuntimeException("URL was not recieved. Debug failed!");
             return output.get("url").getAsString();

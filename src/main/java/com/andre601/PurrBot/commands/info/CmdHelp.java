@@ -13,7 +13,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import static com.andre601.PurrBot.core.PurrBotMain.waiter;
+import static com.andre601.PurrBot.core.PurrBot.waiter;
 
 import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
