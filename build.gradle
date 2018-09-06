@@ -4,7 +4,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '2.0.1'
     id 'idea'
 }
-mainClassName = 'com.andre601.PurrBot.core.PurrBot'
+mainClassName = 'com.andre601.purrbot.core.purrbot'
 version = '1.31.8'
 
 description = """"""
@@ -40,7 +40,7 @@ dependencies {
 
 task replaceTokenFirst{
     ant.replace(
-            file: "src/main/java/com/andre601/PurrBot/util/constants/IDs.java",
+            file: "src/main/java/com/andre601/purrbot/util/constants/IDs.java",
             token: "@version@",
             value: version
     )
@@ -86,6 +86,7 @@ jar {
 shadowJar {
     classifier = ""
     baseName 'Purr'
+    archiveName = "Purr.jar"
     dependsOn replaceTokenFirst
 }
 
