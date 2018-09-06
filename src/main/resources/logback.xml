@@ -9,7 +9,7 @@
 
         </filter>
         <encoder>
-            <pattern>%boldWhite([%d{dd.MM.yyyy HH:mm:ss}]) %boldBlue([%t]) %cyan([ %-5level]) %boldWhite([%logger{32}]) %boldRed(==>) %white(%msg) %n
+            <pattern>%boldWhite([%d{dd.MM.yyyy HH:mm:ss}]) %cyan([ %-5level]) %boldBlue([%t]) %boldWhite([%logger{32}]) %boldRed(-->) %white(%msg) %n
             </pattern>
         </encoder>
     </appender>
@@ -26,15 +26,17 @@
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${DEV_HOME}/archived/neko.%d{dd-MM-yyyy}.%i.log</fileNamePattern>
+            <fileNamePattern>${DEV_HOME}/archived/purr-%d{dd.MM.yyyy}.%i.log</fileNamePattern>
             <maxFileSize>100MB</maxFileSize>
             <maxHistory>60</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>
         </rollingPolicy>
     </appender>
+
+    <!-- SLACK -->
     <!--
     <appender name="SLACK" class="jp.co.dwango.logback.SlackWebhookAppender">
-        <webhookUrl>https://link.com</webhookUrl>
+        <webhookUrl>${WEBHOOK_URL}</webhookUrl>
         <payload>
             {
                 "username": "logs",
@@ -77,6 +79,6 @@
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE-AUDIT"/>
-        <!-- <appender-ref ref="ASYNC_SLACK" /> -->
+        <!--<appender-ref ref="ASYNC_SLACK" />-->
     </root>
 </configuration>

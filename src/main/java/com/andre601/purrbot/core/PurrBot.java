@@ -61,11 +61,14 @@ public class PurrBot {
 
     private static List<String> BlacklistedGuilds     = new ArrayList<>();
 
-    //  used for getVersion
-    private static String version = null;
-
     public static JDABuilder builder;
     public static JDA jda;
+
+    private static void setup(){
+        file.make("config", "./config.json", "/config.json");
+
+        System.setProperty("WEBHOOK_URL", file.getItem("config", "errorWebhook"));
+    }
 
     private static Logger logger = (Logger) LoggerFactory.getLogger(PurrBot.class);
 
@@ -73,9 +76,9 @@ public class PurrBot {
 
     public static void main(String[] args){
 
-        builder = new JDABuilder(AccountType.BOT);
+        setup();
 
-        file.make("config", "./config.json", "/config.json");
+        builder = new JDABuilder(AccountType.BOT);
 
         //  Adding the Bot-Token from the config.json
         builder.setToken(file.getItem("config", "token"));

@@ -4,8 +4,8 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '2.0.1'
     id 'idea'
 }
-mainClassName = 'com.andre601.purrbot.core.purrbot'
-version = '1.31.8'
+mainClassName = 'com.andre601.purrbot.core.PurrBot'
+version = '2.0.1'
 
 description = """"""
 
