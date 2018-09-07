@@ -136,8 +136,7 @@ public class DebugUtil {
         String colorInfo = DBUtil.getColor(g);
         String colorType = colorInfo.split(":")[0];
         String colorValue = colorInfo.split(":")[1];
-        return "Welcome-channel: " + (isChannelValid(channelId, g) ? getChannelNameAndId(channelId, g) :
-                "Invalid channelID " + channelId) + "\n" +
+        return "Welcome-channel: " + getChannelNameAndId(channelId, g) + "\n" +
                 "  Color-Type: " + colorType + "\n" +
                 "  Color-Value: " + colorValue + "\n" +
                 "  Image: " + DBUtil.getImage(g);
@@ -149,15 +148,29 @@ public class DebugUtil {
 
     //  Returns true, if the channel is not null (exists) and false, when it is null
     private static boolean isChannelValid(String id, Guild g){
-        return g.getTextChannelById(id) != null;
+        try{
+            g.getTextChannelById(id);
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
     }
 
     private static String getChannelNameAndId(String id, Guild g){
-        return MessageFormat.format(
-                "{0} ({1})",
-                g.getTextChannelById(id).getName(),
-                g.getTextChannelById(id).getId()
-        );
+        if(id.equalsIgnoreCase("none"))
+            return "No Channel set";
+
+        boolean channelValid = isChannelValid(id, g);
+
+        if(channelValid){
+            return MessageFormat.format(
+                    "{0} ({1})",
+                    g.getTextChannelById(id).getName(),
+                    g.getTextChannelById(id).getId()
+            );
+        }else{
+            return "Invalid ChannelID " + id;
+        }
     }
 
     private static String makeReport(Map<String, String> toUploadingFiles, User requester){
