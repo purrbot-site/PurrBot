@@ -3,6 +3,7 @@ package com.andre601.purrbot.commands.info;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Links;
 import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -50,19 +51,22 @@ public class CmdInvite implements Command{
                 ), false);
 
         if(e.getMessage().getContentRaw().contains("-here")){
-            tc.sendTyping().queue();
-            e.getChannel().sendMessage(invite.build()).queue();
+            if(!PermUtil.canSendEmbed(tc)){
+                tc.sendMessage(Errors.NO_EMBED).queue();
+                return;
+            }
+            tc.sendMessage(invite.build()).queue();
             return;
         }
 
         e.getAuthor().openPrivateChannel().queue(pm -> {
             pm.sendMessage(invite.build()).queue(msg -> {
-                e.getTextChannel().sendMessage(String.format(
+                tc.sendMessage(String.format(
                         "I send you something in DM %s",
                         e.getAuthor().getAsMention()
                 )).queue(msg2 -> msg2.delete().queueAfter(10, TimeUnit.SECONDS));
             }, throwable -> {
-                e.getTextChannel().sendMessage(String.format(
+                tc.sendMessage(String.format(
                         "I can't send you a DM %s :,(",
                         e.getAuthor().getAsMention()
                 )).queue(msg2 -> msg2.delete().queueAfter(10, TimeUnit.SECONDS));

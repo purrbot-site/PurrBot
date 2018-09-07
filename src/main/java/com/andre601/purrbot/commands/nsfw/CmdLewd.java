@@ -4,7 +4,8 @@ import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Emojis;
+import com.andre601.purrbot.util.constants.Emotes;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.jagrosh.jdautilities.menu.Slideshow;
@@ -43,7 +44,7 @@ public class CmdLewd implements Command {
             e.getMessage().delete().queue();
 
         if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            tc.sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
@@ -61,8 +62,10 @@ public class CmdLewd implements Command {
         if(tc.isNSFW()){
             if(msg.getContentRaw().contains("-slide")){
                 if(!PermUtil.canReact(tc)){
-                    tc.sendMessage(String.format(
-                            "%s I need permission, to add reactions in this channel!"
+                    tc.sendMessage(MessageFormat.format(
+                            "{0} {1}",
+                            msg.getAuthor().getAsMention(),
+                            Errors.NO_ADD_REACTION
                     )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
                     return;
                 }
@@ -124,7 +127,7 @@ public class CmdLewd implements Command {
                         ), gifLink)
                         .setImage(gifLink);
 
-                tc.sendMessage(Emojis.IMG_LOADING + " Getting a lewd neko...").queue(message ->
+                tc.sendMessage(Emotes.IMG_LOADING + " Getting a lewd neko...").queue(message ->
                         message.editMessage("\u200B").embed(lewdgif.build()).queue()
                 );
                 return;
@@ -138,11 +141,12 @@ public class CmdLewd implements Command {
                     ), link)
                     .setImage(link);
 
-            tc.sendMessage(Emojis.IMG_LOADING + " Getting a lewd neko...").queue(message -> {
+            tc.sendMessage(Emotes.IMG_LOADING + " Getting a lewd neko...").queue(message -> {
                 message.editMessage("\u200B").embed(lewd.build()).queue();
             });
         }else{
-            tc.sendMessage(String.format(MessageUtil.getRandomNotNSFW(),
+            tc.sendMessage(String.format(
+                    MessageUtil.getRandomNotNSFW(),
                     e.getAuthor().getAsMention()
             )).queue(del -> del.delete().queueAfter(10, TimeUnit.SECONDS));
         }

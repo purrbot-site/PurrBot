@@ -66,10 +66,11 @@ public class GFile {
                 ));
                 gFiles.put(name, file);
             }
-        }catch (Exception ignored){
+        }catch (Exception ex){
             LogUtil.WARN(MessageFormat.format(
-                    "Issue while creating/loading file {0}",
-                    name
+                    "Issue while creating/loading file {0}! Reason: {1}",
+                    name,
+                    ex
             ));
         }
     }

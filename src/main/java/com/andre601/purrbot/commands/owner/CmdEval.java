@@ -38,7 +38,7 @@ public class CmdEval implements Command {
 
         if(PermUtil.isCreator(msg)){
             if(args.length == 0){
-                e.getTextChannel().sendMessage("I need at least 1 argument.").queue(del -> del.delete()
+                tc.sendMessage("I need at least 1 argument.").queue(del -> del.delete()
                         .queueAfter(5, TimeUnit.SECONDS));
                 return;
             }
@@ -59,7 +59,7 @@ public class CmdEval implements Command {
 
             try{
                 String result = se.eval(statement).toString();
-                EmbedUtil.sendEvalEmbed(e.getTextChannel(), String.format(
+                EmbedUtil.sendEvalEmbed(tc, String.format(
                         "**Input**:\n" +
                         "```java\n" +
                         "%s\n" +
@@ -75,7 +75,7 @@ public class CmdEval implements Command {
                         (System.currentTimeMillis() - startTime)
                 ), Color.GREEN);
             }catch (Exception ex){
-                EmbedUtil.sendEvalEmbed(e.getTextChannel(), String.format(
+                EmbedUtil.sendEvalEmbed(tc, String.format(
                         "**Error while evaluating following input**:\n" +
                         "```java\n" +
                         "%s\n" +

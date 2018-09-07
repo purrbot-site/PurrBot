@@ -3,7 +3,8 @@ package com.andre601.purrbot.commands.fun;
 import com.andre601.purrbot.commands.server.CmdPrefix;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Emojis;
+import com.andre601.purrbot.util.constants.Emotes;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.constants.IDs;
@@ -46,7 +47,7 @@ public class CmdKiss implements Command {
             return;
 
         if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            tc.sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
@@ -110,7 +111,7 @@ public class CmdKiss implements Command {
                 return;
             }
             String name = u.getAsMention();
-            tc.sendMessage(Emojis.IMG_LOADING + " Getting a kiss-gif...").queue(message -> {
+            tc.sendMessage(Emotes.IMG_LOADING + " Getting a kiss-gif...").queue(message -> {
                 if(link != null)
                     message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                             "{0} gives you a kiss {1}",
@@ -126,7 +127,7 @@ public class CmdKiss implements Command {
             });
         }else{
             String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
-            tc.sendMessage(Emojis.IMG_LOADING + " Getting a kiss-gif...").queue(message -> {
+            tc.sendMessage(Emotes.IMG_LOADING + " Getting a kiss-gif...").queue(message -> {
                 if(link != null)
                     message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                             "{0} gives you a kiss {1}",

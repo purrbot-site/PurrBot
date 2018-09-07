@@ -1,7 +1,8 @@
 package com.andre601.purrbot.commands.server;
 
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Emojis;
+import com.andre601.purrbot.util.constants.Emotes;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.DebugUtil;
@@ -33,15 +34,16 @@ public class CmdDebug implements Command {
 
         if(!PermUtil.userIsAdmin(msg)){
             tc.sendMessage(MessageFormat.format(
-                    "{0} You need the `MANAGE_SERVER` permission to use this!",
-                    msg.getAuthor().getAsMention()
+                    "{0} {1}",
+                    msg.getAuthor().getAsMention(),
+                    Errors.NOT_ADMIN
             )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
             return;
         }
 
         tc.sendMessage(MessageFormat.format(
                 "{0} {1}",
-                Emojis.LOADING,
+                Emotes.LOADING,
                 MessageUtil.getRandomDebug()
         )).queue(message ->
             message.editMessage(MessageFormat.format(

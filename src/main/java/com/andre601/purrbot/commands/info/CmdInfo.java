@@ -5,6 +5,7 @@ import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.constants.Links;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
@@ -71,18 +72,22 @@ public class CmdInfo implements Command {
                 ), true);
 
         if(e.getMessage().getContentRaw().contains("-here")){
+            if(!PermUtil.canSendEmbed(tc)){
+                tc.sendMessage(Errors.NO_EMBED).queue();
+                return;
+            }
             e.getChannel().sendMessage(Info.build()).queue();
             return;
         }
 
         e.getAuthor().openPrivateChannel().queue(pm -> {
             pm.sendMessage(Info.build()).queue(msg -> {
-                e.getTextChannel().sendMessage(MessageFormat.format(
+                tc.sendMessage(MessageFormat.format(
                         "Check your DMs {0}",
                         e.getAuthor().getAsMention()
                 )).queue(msg2 -> msg2.delete().completeAfter(5, TimeUnit.SECONDS));
             }, throwable -> {
-                e.getTextChannel().sendMessage(MessageFormat.format(
+                tc.sendMessage(MessageFormat.format(
                         "I can't DM you {0} :,(",
                         e.getAuthor().getAsMention()
                 )).queue(msg -> msg.delete().completeAfter(5, TimeUnit.SECONDS));

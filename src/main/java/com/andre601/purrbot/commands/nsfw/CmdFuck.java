@@ -5,6 +5,7 @@ import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.IDs;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
@@ -56,7 +57,7 @@ public class CmdFuck implements Command {
             return;
 
         if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            tc.sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
@@ -144,7 +145,7 @@ public class CmdFuck implements Command {
                 waiter.waitForEvent(
                         MessageReceivedEvent.class,
                         ev -> (isMessage(ev.getMessage()) &&
-                                ev.getTextChannel().equals(e.getTextChannel()) &&
+                                ev.getTextChannel().equals(tc) &&
                                 (ev.getAuthor() != ev.getJDA().getSelfUser() ||
                                         ev.getAuthor() != message.getAuthor()) &&
                                 ev.getAuthor() == user),
@@ -186,7 +187,7 @@ public class CmdFuck implements Command {
 
                             alreadyInQueue.remove(author.getId());
 
-                            e.getTextChannel().sendMessage(String.format(
+                            tc.sendMessage(String.format(
                                     "Looks like he/she doesn't want to have sex with you %s",
                                     author.getAsMention()
                             )).queue();
@@ -196,8 +197,9 @@ public class CmdFuck implements Command {
 
         }else{
             tc.sendMessage(MessageFormat.format(
-                    "{0} Please use this command in a NSFW-channel!",
-                    msg.getAuthor().getAsMention()
+                    "{0} {1}",
+                    msg.getAuthor().getAsMention(),
+                    Errors.NSFW
             )).queue();
         }
 

@@ -2,6 +2,7 @@ package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.commands.server.CmdPrefix;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.Errors;
 import com.jagrosh.jdautilities.menu.Paginator;
 import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -219,7 +220,7 @@ public class CmdHelp implements Command {
             return;
 
         if(!PermUtil.canSendEmbed(tc)){
-            e.getTextChannel().sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            tc.sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
@@ -227,9 +228,7 @@ public class CmdHelp implements Command {
         }
 
         if(!PermUtil.canReact(tc)){
-            tc.sendMessage(String.format(
-                    "%s I need permission, to add reactions in this channel!"
-            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+            tc.sendMessage(Errors.NO_ADD_REACTION).queue();
             return;
         }
 

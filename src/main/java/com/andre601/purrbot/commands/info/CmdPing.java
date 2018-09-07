@@ -1,7 +1,7 @@
 package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Emojis;
+import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.commands.Command;
 import net.dv8tion.jda.core.entities.Message;
@@ -27,7 +27,10 @@ public class CmdPing implements Command{
             return;
 
         if(msg.getContentRaw().contains("-api")){
-            tc.sendMessage(Emojis.LOADING + " Checking ping to Discord-API...").queue(message -> message.editMessage(
+            tc.sendMessage(MessageFormat.format(
+                    "{0}",
+                    (PermUtil.canUseCustomEmojis(tc) ? Emotes.LOADING : "") + "Checking ping to Discord-API..."
+            )).queue(message -> message.editMessage(
                     MessageFormat.format(MessageUtil.getRandomAPIPingMsg(),
                             msg.getAuthor().getAsMention(),
                             msg.getJDA().getPing()
@@ -36,7 +39,10 @@ public class CmdPing implements Command{
             return;
         }
 
-        tc.sendMessage(Emojis.LOADING + " Checking ping...").queue(message -> message.editMessage(
+        tc.sendMessage(MessageFormat.format(
+                "{0}",
+                (PermUtil.canUseCustomEmojis(tc) ? Emotes.LOADING : "") + "Checking ping..."
+        )).queue(message -> message.editMessage(
                 MessageFormat.format(MessageUtil.getRandomPingMsg(),
                         msg.getAuthor().getAsMention(),
                         msg.getCreationTime().until(message.getCreationTime(), ChronoUnit.MILLIS)

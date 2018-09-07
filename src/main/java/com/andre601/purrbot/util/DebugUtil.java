@@ -55,7 +55,7 @@ public class DebugUtil {
                     "Requester: " + MessageUtil.getTag(requester),
                     "",
                     "#",
-                    "# Info about the bot-Settings (Welcome-channel and prefix)",
+                    "# Info about the bot-Settings (Welcome-settings, prefix, roles of the bot)",
                     "#",
                     "",
                     getWelcomeInfo(g),
@@ -132,10 +132,12 @@ public class DebugUtil {
     }
 
     private static String getWelcomeInfo(Guild g){
+        String channelId = DBUtil.getWelcome(g);
         String colorInfo = DBUtil.getColor(g);
         String colorType = colorInfo.split(":")[0];
         String colorValue = colorInfo.split(":")[1];
-        return "Welcome-channel: " + DBUtil.getWelcome(g) + "\n" +
+        return "Welcome-channel: " + (isChannelValid(channelId, g) ? getChannelNameAndId(channelId, g) :
+                "Invalid channelID " + channelId) + "\n" +
                 "  Color-Type: " + colorType + "\n" +
                 "  Color-Value: " + colorValue + "\n" +
                 "  Image: " + DBUtil.getImage(g);
@@ -143,6 +145,19 @@ public class DebugUtil {
 
     private static String getGuildPrefix(Guild g){
         return DBUtil.getPrefix(g);
+    }
+
+    //  Returns true, if the channel is not null (exists) and false, when it is null
+    private static boolean isChannelValid(String id, Guild g){
+        return g.getTextChannelById(id) != null;
+    }
+
+    private static String getChannelNameAndId(String id, Guild g){
+        return MessageFormat.format(
+                "{0} ({1})",
+                g.getTextChannelById(id).getName(),
+                g.getTextChannelById(id).getId()
+        );
     }
 
     private static String makeReport(Map<String, String> toUploadingFiles, User requester){

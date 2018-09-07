@@ -1,6 +1,6 @@
 package com.andre601.purrbot.util.constants;
 
-public final class Emojis {
+public final class Emotes {
 
     //  Custom emojis
     public static String STATUS_ONLINE  = "<:online:426838620033253376> ";

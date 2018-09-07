@@ -1,6 +1,7 @@
 package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -28,7 +29,7 @@ public class CmdServer implements Command {
             return;
 
         if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            tc.sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
@@ -43,9 +44,9 @@ public class CmdServer implements Command {
                 .setThumbnail(g.getIconUrl())
                 .addField("Users", String.format(
                         "**Total**: %s\n" +
-                                "\n" +
-                                "**Humans**: %s\n" +
-                                "**Bots**: %s",
+                        "\n" +
+                        "**Humans**: %s\n" +
+                        "**Bots**: %s",
                         g.getMembers().size(),
                         g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
                         g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length

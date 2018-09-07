@@ -2,6 +2,7 @@ package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.commands.server.CmdPrefix;
 import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.util.PermUtil;
@@ -35,7 +36,7 @@ public class CmdQuote implements Command {
             return;
 
         if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            tc.sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
@@ -66,12 +67,15 @@ public class CmdQuote implements Command {
                 return;
             }
 
-            if(!PermUtil.canReadHistory(channels.get(0)) || !PermUtil.canRead(channels.get(0))){
-                tc.sendMessage(MessageFormat.format(
-                        "{0} I can't see the messages of the mentioned channel!",
-                        msg.getAuthor().getAsMention()
-                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-                return;
+            if(PermUtil.canRead(channels.get(0))) {
+                if (!PermUtil.canReadHistory(channels.get(0))) {
+                    tc.sendMessage(MessageFormat.format(
+                            "{0} I can't see the messages of the mentioned channel!\n" +
+                            "Make sure I have permission to see the message history for that channel!",
+                            msg.getAuthor().getAsMention()
+                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                    return;
+                }
             }
 
             try{

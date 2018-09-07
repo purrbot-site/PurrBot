@@ -21,14 +21,14 @@ public class VoteUtil {
                             member.getAsMention()
                     ))
                     .build();
-            if(userHasntRole(voterId, role)) {
+            if(!userHasRole(voterId, role)) {
                 getGuild().getController().addRolesToMember(member, role).queue();
             }
 
             ImageUtil.createVoteImage(member.getUser(), msg, getVoteChannel(), isWeekend);
         }else{
             getVoteChannel().sendMessage(
-                    "Someone, that isn't here, has voted for the bot!\n" +
+                    "A anonymous person has voted for the bot!\n" +
                     "Vote too on <https://discordbots.org/bot/425382319449309197>!"
             ).queue();
         }
@@ -38,8 +38,8 @@ public class VoteUtil {
         return getGuild().getMemberById(userId) != null;
     }
 
-    private static boolean userHasntRole(String userId, Role role){
-        return !getGuild().getMemberById(userId).getRoles().contains(role);
+    private static boolean userHasRole(String userId, Role role){
+        return getGuild().getMemberById(userId).getRoles().contains(role);
     }
 
     private static Guild getGuild(){

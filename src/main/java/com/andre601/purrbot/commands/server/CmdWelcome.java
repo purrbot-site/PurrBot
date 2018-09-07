@@ -3,6 +3,7 @@ package com.andre601.purrbot.commands.server;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.ImageUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.jagrosh.jdautilities.menu.Paginator;
 import com.andre601.purrbot.commands.Command;
@@ -305,7 +306,7 @@ public class CmdWelcome implements Command {
             return;
 
         if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            tc.sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
                 msg.addReaction("🚫").queue();
 
@@ -313,9 +314,10 @@ public class CmdWelcome implements Command {
         }
 
         if(!PermUtil.userIsAdmin(msg)){
-            tc.sendMessage(String.format(
-                    "%s You need the permission `MANAGE_SERVER` to use that command!",
-                    msg.getAuthor().getAsMention()
+            tc.sendMessage(MessageFormat.format(
+                    "{0} {1}",
+                    msg.getAuthor().getAsMention(),
+                    Errors.NOT_ADMIN
             )).queue();
             return;
         }

@@ -2,6 +2,7 @@ package com.andre601.purrbot.commands.owner;
 
 import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.LogUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
@@ -27,9 +28,9 @@ public class CmdShutdown implements Command {
             return;
 
         if(!PermUtil.canSendEmbed(tc)){
-            e.getChannel().sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            e.getChannel().sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
+                msg.addReaction("🚫").queue();
 
             return;
         }
@@ -43,7 +44,7 @@ public class CmdShutdown implements Command {
                     .setDescription(MessageUtil.getRandomShutdown())
                     .setImage(MessageUtil.getRandomImage());
 
-            e.getTextChannel().sendMessage(shutdown.build()).queue(message -> {
+            tc.sendMessage(shutdown.build()).queue(message -> {
                 LogUtil.INFO("Disabling bot...");
                 System.exit(0);
             });
@@ -55,7 +56,7 @@ public class CmdShutdown implements Command {
                     .setDescription(MessageUtil.getRandomNoShutdown())
                     .setImage(MessageUtil.getRandomNoImage());
 
-            e.getTextChannel().sendMessage(noShutdown.build()).queue();
+            tc.sendMessage(noShutdown.build()).queue();
         }
     }
 

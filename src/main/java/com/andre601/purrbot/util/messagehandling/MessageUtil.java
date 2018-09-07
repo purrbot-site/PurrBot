@@ -1,7 +1,7 @@
 package com.andre601.purrbot.util.messagehandling;
 
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Emojis;
+import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.core.PurrBot;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
@@ -142,25 +142,25 @@ public class MessageUtil {
         String str;
         switch (status){
             case ONLINE:
-                str = Emojis.STATUS_ONLINE;
+                str = Emotes.STATUS_ONLINE;
                 break;
 
             case IDLE:
-                str = Emojis.STATUS_IDLE;
+                str = Emotes.STATUS_IDLE;
                 break;
 
             case DO_NOT_DISTURB:
-                str = Emojis.STATUS_DND;
+                str = Emotes.STATUS_DND;
                 break;
 
             case INVISIBLE:
             case OFFLINE:
-                str = Emojis.STATUS_OFFLINE;
+                str = Emotes.STATUS_OFFLINE;
                 break;
 
             case UNKNOWN:
             default:
-                str = Emojis.STATUS_UNKNOWN;
+                str = Emotes.STATUS_UNKNOWN;
         }
         if(PermUtil.canUseCustomEmojis(msg.getTextChannel()))
             return str + "`" + status.name().replace("_", " ").toLowerCase() + "`";

@@ -2,8 +2,9 @@ package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Emojis;
+import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
@@ -32,7 +33,7 @@ public class CmdKitsune implements Command {
             msg.delete().queue();
 
         if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            tc.sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
                 msg.addReaction("🚫").queue();
 
@@ -55,7 +56,7 @@ public class CmdKitsune implements Command {
                 ), link)
                 .setImage(link);
 
-        tc.sendMessage(Emojis.IMG_LOADING + " Getting a cute kitsune...").queue(message -> {
+        tc.sendMessage(Emotes.IMG_LOADING + " Getting a cute kitsune...").queue(message -> {
             //  Editing the message to add the image ("should" prevent issues with empty embeds)
             message.editMessage("\u200B").embed(foxgirl.build()).queue();
         });

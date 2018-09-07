@@ -3,8 +3,9 @@ package com.andre601.purrbot.commands.fun;
 import com.andre601.purrbot.commands.server.CmdPrefix;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Emojis;
+import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -43,7 +44,7 @@ public class CmdCuddle implements Command{
             return;
 
         if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage("I need the permission, to embed Links in this Channel!").queue();
+            tc.sendMessage(Errors.NO_EMBED).queue();
             if(PermUtil.canReact(tc))
                 e.getMessage().addReaction("🚫").queue();
 
@@ -86,7 +87,7 @@ public class CmdCuddle implements Command{
             }
             //  Saving the mentioned user as String
             String name = u.getAsMention();
-            tc.sendMessage(Emojis.IMG_LOADING + " Getting a cuddle-gif...").queue(message -> {
+            tc.sendMessage(Emotes.IMG_LOADING + " Getting a cuddle-gif...").queue(message -> {
                 if(link != null)
                     message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                             "{0} cuddles with you {1}",
@@ -104,7 +105,7 @@ public class CmdCuddle implements Command{
         }else{
             //  Storing all mentioned users as String, seperated by a comma (@user1, @user2, @user3, ...)
             String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
-            tc.sendMessage(Emojis.IMG_LOADING + " Getting a cuddle-gif...").queue(message -> {
+            tc.sendMessage(Emotes.IMG_LOADING + " Getting a cuddle-gif...").queue(message -> {
                 if(link != null)
                     message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                             "{0} cuddles with you {1}",
