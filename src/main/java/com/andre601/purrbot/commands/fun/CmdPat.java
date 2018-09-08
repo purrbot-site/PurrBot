@@ -69,7 +69,7 @@ public class CmdPat implements Command {
                 if(PermUtil.canReact(tc))
                     e.getMessage().addReaction("❤").queue();
 
-                tc.sendMessage(String.format("%s \\*purr*",
+                tc.sendMessage(String.format("%s \\*purr*™",
                         msg.getMember().getAsMention())).queue();
                 return;
             }
