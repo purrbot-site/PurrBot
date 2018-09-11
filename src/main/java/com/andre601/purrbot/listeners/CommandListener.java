@@ -20,11 +20,7 @@ public class CommandListener extends ListenerAdapter{
             return;
 
         if(e.getMessage().getContentRaw().equals(e.getGuild().getSelfMember().getAsMention())){
-            e.getTextChannel().sendMessage(String.format(
-                    "%s My prefix on this guild is `%s`!",
-                    e.getAuthor().getAsMention(),
-                    CmdPrefix.getPrefix(e.getGuild())
-            )).queue();
+            CmdPrefix.currPrefix(e.getMessage(), e.getGuild());
             return;
         }
         if(e.getMessage().getContentRaw().startsWith(CmdPrefix.getPrefix(e.getGuild()))){

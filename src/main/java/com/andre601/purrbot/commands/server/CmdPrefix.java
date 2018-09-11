@@ -22,15 +22,21 @@ public class CmdPrefix implements Command{
     private static Map<Guild, String> guildPrefix = new HashMap<>();
 
     public static String getPrefix(Guild g){
+        String prefix = DBUtil.getPrefix(g);
 
-        return DBUtil.getPrefix(g);
+        if(prefix == null){
+            DBUtil.setPrefix(".", g.getId());
+            return ".";
+        }else{
+            return prefix;
+        }
     }
 
     public static Guild getGuild(String id, JDA jda){
         return jda.getGuildById(id);
     }
 
-    public void currPrefix(Message msg, Guild g){
+    public static void currPrefix(Message msg, Guild g){
         msg.getTextChannel().sendMessage(String.format(
                 "%s My prefix on this guild is `%s`",
                 msg.getAuthor().getAsMention(),
@@ -38,10 +44,10 @@ public class CmdPrefix implements Command{
         )).queue();
     }
 
-    public void setPrefix(Message msg, Guild g, String prefix){
+    private void setPrefix(Message msg, Guild g, String prefix){
         if(prefix.equals(".")){
             msg.getTextChannel().sendMessage(String.format(
-                    "%s Why do you want to set the prefix to `.`?\n" +
+                    "%s The default prefix is already `.`!\n" +
                     "Use `%sprefix reset` to reset it to the default one.",
                     msg.getAuthor().getAsMention(),
                     getPrefix(g)

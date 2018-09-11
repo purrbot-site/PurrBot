@@ -64,19 +64,14 @@ public class PurrBot {
     public static JDABuilder builder;
     public static JDA jda;
 
-    private static void setup(){
-        file.make("config", "./config.json", "/config.json");
-
-        System.setProperty("WEBHOOK_URL", file.getItem("config", "errorWebhook"));
-    }
-
     private static Logger logger = (Logger) LoggerFactory.getLogger(PurrBot.class);
 
     public static EventWaiter waiter = new EventWaiter();
 
     public static void main(String[] args){
 
-        setup();
+        //  Creating the file, if not existing, or just loading it.
+        file.make("config", "./config.json", "/config.json");
 
         builder = new JDABuilder(AccountType.BOT);
 
@@ -111,7 +106,7 @@ public class PurrBot {
                 Vote vote = gsonVote.fromJson(req.body(), Vote.class);
                 VoteUtil.voteAction(vote.getBotId(), vote.getUserId(), vote.isWeekend());
                 //  I have to return something for some reason... :shrug:
-                return null;
+                return "";
             });
         }
 

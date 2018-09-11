@@ -102,3 +102,4 @@ Future rewards may be added.
 * [Discord Server](https://discord.gg/NB7AFqn)
 * [Recommended (Full) Invite](https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=322624&scope=bot)
 * [Basic Invite](https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=19456&scope=bot)
+* [Web dashboard](https://purrbot.site) | [Source code](https://github.com/Andre601/PurrBot-Dashboard)
