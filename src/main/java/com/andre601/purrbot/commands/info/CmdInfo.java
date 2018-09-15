@@ -35,15 +35,15 @@ public class CmdInfo implements Command {
         EmbedBuilder Info = EmbedUtil.getEmbed()
                 .setAuthor(e.getJDA().getSelfUser().getName(), null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setThumbnail(e.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .setDescription(MessageFormat.format(
+                .setDescription(String.format(
                         "**About the Bot**\n" +
                         "Oh hi there!\n" +
-                        "I'm `{0}`. A Bot for the ~Nya Discord.\n" +
+                        "I'm `%s`. A Bot for the ~Nya Discord.\n" +
                         "I was made by <@204232208049766400> with the help of JDA " +
                         "and a lot of free time. ;)\n" +
                         "\n" +
                         "**Commands**\n" +
-                        "You can use {1}help on your server to see all of my commands.",
+                        "You can use %shelp on your server to see all of my commands.",
                         e.getJDA().getSelfUser().getName(),
                         CmdPrefix.getPrefix(e.getGuild())
                 ))
@@ -62,13 +62,15 @@ public class CmdInfo implements Command {
                         "[`Discordbots.org`]({2})",
                         Links.GITHUB,
                         Links.WIKI,
-                        Links.DISCORDBOTS
+                        Links.DISCORDBOTS_ORG
                 ), true)
                 .addField("", MessageFormat.format(
                         "[`Official Discord`]({0})\n" +
-                        "[`Website`]({1})",
+                        "[`Website`]({1})\n" +
+                        "[`Discordbots.co.uk`]({2})",
                         Links.DISCORD_INVITE,
-                        Links.WEBSITE
+                        Links.WEBSITE,
+                        Links.DISCORDBOTS_CO_UK
                 ), true);
 
         if(e.getMessage().getContentRaw().contains("-here")){
