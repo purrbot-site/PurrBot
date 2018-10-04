@@ -1,71 +1,49 @@
 package com.andre601.purrbot.commands.owner;
 
-import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.Emotes;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.util.concurrent.TimeUnit;
+import java.text.MessageFormat;
 
 import static com.andre601.purrbot.core.PurrBot.*;
 
-public class CmdRefresh implements Command{
+@CommandDescription(
+        name = "Refresh",
+        description = "Updates information",
+        triggers = {"refresh", "update"},
+        attributes = {@CommandAttribute(key = "owner")}
+)
+public class CmdRefresh implements Command {
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
+    public void execute(Message msg, String s){
+        TextChannel tc = msg.getTextChannel();
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-        int guilds = e.getJDA().getGuilds().size();
+        if(PermUtil.isBeta()) return;
 
-        if (!PermUtil.canWrite(tc))
-            return;
 
-        if(PermUtil.isCreator(msg)){
-
-            if(PermUtil.isBeta())
-                return;
-
-            tc.sendMessage(
-                    "Clearing stored messages and images...\n" +
-                    "Updating Guild-count on discordbots.org..."
-            ).queue(message -> {
-                clear();
-                loadRandom();
-                getAPI().setStats(guilds);
-
-                message.editMessage(
-                        "Clearing stored messages and images \\✅\n" +
-                        "Updating Guild-count on discordbots.org \\✅"
-                ).queueAfter(2, TimeUnit.SECONDS, react -> {
-                    if(PermUtil.canReact(tc))
-                        msg.addReaction("✅").queue();
-                });
-            });
-
-            tc.sendMessage("Refresh complete!").queueAfter(3, TimeUnit.SECONDS);
-        }else{
-            tc.sendMessage(String.format(
-                    "%s You aren't my dad!",
-                    msg.getAuthor().getAsMention())).queue();
-
-            if(PermUtil.canReact(tc))
-                msg.addReaction("🚫").queue();
-        }
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+        tc.sendMessage(MessageFormat.format(
+                "{0} Updating information...",
+                Emotes.TYPING
+        )).queue(message -> {
+            message.editMessage(MessageFormat.format(
+                    "{0} Updating information... (Updating random messages)",
+                    Emotes.TYPING
+            )).queue();
+            clear();
+            loadRandom();
+            message.editMessage(MessageFormat.format(
+                    "{0} Updating information... (Updating stats on DBL)",
+                    Emotes.TYPING
+            )).queue();
+            getAPI().setStats((int)ReadyListener.getShardManager().getGuildCache().size());
+            message.editMessage("Update done!").queue(message1 -> msg.addReaction("✅").queue());
+        });
     }
 }

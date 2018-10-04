@@ -3,6 +3,7 @@ package com.andre601.purrbot.util;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.core.PurrBot;
 import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -76,11 +77,15 @@ public class PermUtil {
         return PurrBot.file.getItem("config", "beta").equalsIgnoreCase("true");
     }
 
-    public static boolean authorIsBot(User user){
-        return user.isBot();
+    public static boolean isBot(Message msg){
+        return msg.getAuthor().isBot();
     }
 
-    public static boolean authorIsSelf(User user){
-        return user.getId().equals(user.getJDA().getSelfUser().getId());
+    public static boolean isSelf(Message msg){
+        return msg.getAuthor() == msg.getJDA().getSelfUser();
+    }
+
+    public static boolean isDM(Message msg){
+        return msg.isFromType(ChannelType.PRIVATE);
     }
 }

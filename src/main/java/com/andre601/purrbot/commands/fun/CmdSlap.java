@@ -1,125 +1,72 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
+import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
-import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
-import com.andre601.purrbot.util.constants.Errors;
-import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.entities.*;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CmdSlap implements Command{
-
-    public void usage(Message msg){
-        msg.getTextChannel().sendMessage(String.format(
-                "%s Please mention a user at the end of the command to slap!\n" +
-                "Example: `%sslap @%s`",
-                msg.getAuthor().getAsMention(),
-                CmdPrefix.getPrefix(msg.getGuild()),
-                MessageUtil.getTag(msg.getAuthor())
-        )).queue();
-    }
+@CommandDescription(
+        name = "Slap",
+        description = "Slap someone!",
+        triggers = {"slap"},
+        attributes = {@CommandAttribute(key = "fun")}
+)
+public class CmdSlap implements Command {
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
-
+    public void execute(Message msg, String s) {
+        if(msg.getMentionedMembers().isEmpty()){
+            EmbedUtil.error(msg, "Please mention at least one user to slap.");
             return;
         }
 
-        if(args.length < 1){
-            usage(e.getMessage());
-            return;
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        List<Member> members = msg.getMentionedMembers();
+        if(members.size() == 1){
+            Member member = members.get(0);
+            if(member == msg.getMember()){
+                tc.sendMessage(MessageFormat.format(
+                        "Why do you hurt yourself {0}?",
+                        member.getAsMention()
+                )).queue();
+                return;
+            }
+        }
+
+        if(members.contains(guild.getSelfMember())){
+            tc.sendMessage("Please don't hurt me!").queue();
+            msg.addReaction("\uD83D\uDC94").queue();
         }
 
         String link = HttpUtil.getSlap();
+        String pattetMembers = members.stream().map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        List<User> user = msg.getMentionedUsers();
-
-        if(user.isEmpty()){
-            usage(e.getMessage());
-            return;
-        }
-
-        if(user.size() == 1){
-            User u = user.get(0);
-            if(u == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(tc))
-                    e.getMessage().addReaction("💔").queue();
-
-                tc.sendMessage(String.format("%s Please do not hurt me. :(",
-                        msg.getMember().getAsMention())).queue();
-                return;
+        tc.sendMessage(MessageFormat.format(
+                "{0} Getting a slap-gif...",
+                Emotes.LOADING
+        )).queue(message -> {
+            if(link == null){
+                message.editMessage(MessageFormat.format(
+                        "{0} slaps you {1}",
+                        msg.getAuthor().getName(),
+                        pattetMembers
+                )).queue();
+            }else{
+                message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
+                        "{0} slaps you {1}",
+                        msg.getAuthor().getName(),
+                        pattetMembers
+                )).setImage(link).build()).queue();
             }
-            if(u == msg.getAuthor()){
-                tc.sendMessage("Why are you hurting yourself?").queue();
-                return;
-            }
-            String name = u.getAsMention();
-            tc.sendMessage(Emotes.IMG_LOADING + " Getting a slap-gif...").queue(message -> {
-                if(link != null)
-                    message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                            "{0} slapped you {1}",
-                            msg.getMember().getEffectiveName(),
-                            name
-                    )).setImage(link).build()).queue();
-                else
-                    message.editMessage(MessageFormat.format(
-                            "{0} slapped you {1}",
-                            msg.getMember().getEffectiveName(),
-                            name
-                    )).queue();
-            });
-        }else{
-            String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
-            tc.sendMessage(Emotes.IMG_LOADING + " Getting a slap-gif...").queue(message -> {
-                if(link != null)
-                    message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                            "{0} slapped you {1}",
-                            msg.getMember().getEffectiveName(),
-                            users
-                    )).setImage(link).build()).queue();
-                else
-                    message.editMessage(MessageFormat.format(
-                            "{0} slapped you {1}",
-                            msg.getMember().getEffectiveName(),
-                            users
-                    )).queue();
-            });
-        }
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+        });
     }
 }

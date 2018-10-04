@@ -1,88 +1,59 @@
 package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.commands.Command;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
-import java.util.concurrent.TimeUnit;
 
+@CommandDescription(
+        name = "Emote",
+        description = "Get info about a emote (custom emoji)",
+        triggers = {"emote", "e"},
+        attributes = {@CommandAttribute(key = "info")}
+)
 public class CmdEmote implements Command {
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-        Message msg = e.getMessage();
-        TextChannel tc = e.getTextChannel();
-
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
-
-            return;
-        }
+    public void execute(Message msg, String s){
+        TextChannel tc = msg.getTextChannel();
 
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
-        if(args.length > 0){
-            if(!msg.getEmotes().isEmpty()){
-                Emote emote = msg.getEmotes().get(0);
-
-                EmbedBuilder emoteInfo = EmbedUtil.getEmbed(msg.getAuthor())
-                        .setDescription(MessageFormat.format(
-                                "**Name**: `:{0}:`\n" +
-                                "**ID**: `{1}`\n" +
-                                "**Guild**: {2}\n" +
-                                "[**Link**]({3})\n" +
-                                "\n" +
-                                "**Image**:",
-                                emote.getName(),
-                                emote.getId(),
-                                (emote.getGuild() != null ?
-                                        "`" + emote.getGuild().getName() + "` (`" + emote.getGuild().getId() + "`)":
-                                "`Unknown`"),
-                                emote.getImageUrl()
-                        ))
-                        .setImage(emote.getImageUrl());
-
-                tc.sendMessage(emoteInfo.build()).queue();
-            }else{
-                tc.sendMessage(MessageFormat.format(
-                        "{0} You need to mention a emote after the command!",
-                        msg.getAuthor().getAsMention()
-                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-            }
-        }else{
-            tc.sendMessage(MessageFormat.format(
-                    "{0} You need to mention a emote after the command!",
-                    msg.getAuthor().getAsMention()
-            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+        if(msg.getEmotes().isEmpty()){
+            EmbedUtil.error(msg, "You need to provide an Emote!");
+            return;
         }
 
-    }
+        Emote emote = msg.getEmotes().get(0);
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
+        EmbedBuilder emoteInfo = EmbedUtil.getEmbed(msg.getAuthor())
+                .addField("Name:", MessageFormat.format(
+                        "`:{0}:`",
+                        emote.getName()
+                ), true)
+                .addField("ID:", MessageFormat.format(
+                        "`{0}`",
+                        emote.getId()
+                ), true)
+                .addField("Guild", MessageFormat.format(
+                        "{0}",
+                        (emote.getGuild() == null ? "`Unknown`" :
+                        "`" + emote.getGuild().getName() + "` (`" + emote.getGuild().getId() + "`)")
+                ), false)
+                .addField("Image:", MessageFormat.format(
+                        "[`Link`]({0})",
+                        emote.getImageUrl()
+                ), false)
+                .setImage(emote.getImageUrl());
 
-    }
-
-    @Override
-    public String help() {
-        return null;
+        tc.sendMessage(emoteInfo.build()).queue();
     }
 }

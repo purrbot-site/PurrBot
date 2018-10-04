@@ -1,7 +1,6 @@
 package com.andre601.purrbot.core;
 
 import com.andre601.purrbot.util.ConfigUtil;
-import com.andre601.purrbot.util.messagehandling.LogUtil;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.stream.JsonReader;
@@ -39,7 +38,7 @@ public class GFile {
                 if((externalSplit.length == 2 && !externalSplit[0].equals(".") || (externalSplit.length >= 3 &&
                 externalSplit[0].equals(".")))){
                     if(!file.getParentFile().mkdirs()){
-                        LogUtil.WARN(MessageFormat.format(
+                        PurrBot.getLogger().warn(MessageFormat.format(
                                 "Failed to create directory: {0}",
                                 externalSplit[1]
                         ));
@@ -48,26 +47,26 @@ public class GFile {
                 }
                 if(file.createNewFile()){
                     if(cutil.exportResource(PurrBot.class.getResourceAsStream(internalPath), externalPath)){
-                        LogUtil.INFO(MessageFormat.format(
+                        PurrBot.getLogger().info(MessageFormat.format(
                                 "{0} successfully created!",
                                 name
                         ));
                     }else{
-                        LogUtil.WARN(MessageFormat.format(
+                        PurrBot.getLogger().warn(MessageFormat.format(
                                 "Failed to create {0}",
                                 name
                         ));
                     }
                 }
             }else{
-                LogUtil.INFO(MessageFormat.format(
+                PurrBot.getLogger().info(MessageFormat.format(
                         "{0} successfully loaded!",
                         name
                 ));
                 gFiles.put(name, file);
             }
         }catch (Exception ex){
-            LogUtil.WARN(MessageFormat.format(
+            PurrBot.getLogger().warn(MessageFormat.format(
                     "Issue while creating/loading file {0}! Reason: {1}",
                     name,
                     ex

@@ -1,40 +1,46 @@
 package com.andre601.purrbot.commands.info;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
-import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.constants.Links;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 
+@CommandDescription(
+        name = "Info",
+        description =
+                "Get some basic info about the bot.\n" +
+                "Add `-dm` to send it to your DM.",
+        triggers = {"info", "infos", "information"},
+        attributes = {@CommandAttribute(key = "info")}
+)
 public class CmdInfo implements Command {
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-        TextChannel tc = e.getTextChannel();
-
-        if (!PermUtil.canWrite(tc))
-            return;
+    public void execute(Message msg, String s){
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
 
         if(PermUtil.canDeleteMsg(tc))
-            e.getMessage().delete().queue();
+            msg.delete().queue();
 
-        EmbedBuilder Info = EmbedUtil.getEmbed()
-                .setAuthor(e.getJDA().getSelfUser().getName(), null, e.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .setThumbnail(e.getJDA().getSelfUser().getEffectiveAvatarUrl())
+        EmbedBuilder info = EmbedUtil.getEmbed()
+                .setAuthor(msg.getJDA().getSelfUser().getName(),
+                        null,
+                        msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
+                )
+                .setThumbnail(msg.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setDescription(String.format(
                         "**About the Bot**\n" +
                         "Oh hi there!\n" +
@@ -44,15 +50,15 @@ public class CmdInfo implements Command {
                         "\n" +
                         "**Commands**\n" +
                         "You can use %shelp on your server to see all of my commands.",
-                        e.getJDA().getSelfUser().getName(),
-                        CmdPrefix.getPrefix(e.getGuild())
+                        msg.getJDA().getSelfUser().getName(),
+                        DBUtil.getPrefix(guild)
                 ))
                 .addField("Bot-Version:", MessageFormat.format(
-                        "{0}",
+                        "`{0}`",
                         IDs.VERSION
                 ), true)
                 .addField("Library:", MessageFormat.format(
-                        "[JDA {0}]({1})",
+                        "[`JDA {0}`]({1})",
                         JDAInfo.VERSION,
                         JDAInfo.GITHUB
                 ), true)
@@ -73,38 +79,21 @@ public class CmdInfo implements Command {
                         Links.DISCORDBOTS_CO_UK
                 ), true);
 
-        if(e.getMessage().getContentRaw().contains("-here")){
-            if(!PermUtil.canSendEmbed(tc)){
-                tc.sendMessage(Errors.NO_EMBED).queue();
-                return;
-            }
-            e.getChannel().sendMessage(Info.build()).queue();
+        if(s.contains("-dm")){
+            msg.getAuthor().openPrivateChannel().queue(
+                    pm -> pm.sendMessage(info.build()).queue(messageq ->
+                            tc.sendMessage(MessageFormat.format(
+                                    "{0} Check your DMs!",
+                                    msg.getAuthor().getAsMention()
+                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
+                    ), throwable -> tc.sendMessage(MessageFormat.format(
+                            "{0} I can't DM you.",
+                            msg.getAuthor().getAsMention()
+                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
+            );
             return;
         }
 
-        e.getAuthor().openPrivateChannel().queue(pm -> {
-            pm.sendMessage(Info.build()).queue(msg -> {
-                tc.sendMessage(MessageFormat.format(
-                        "Check your DMs {0}",
-                        e.getAuthor().getAsMention()
-                )).queue(msg2 -> msg2.delete().completeAfter(5, TimeUnit.SECONDS));
-            }, throwable -> {
-                tc.sendMessage(MessageFormat.format(
-                        "I can't DM you {0} :,(",
-                        e.getAuthor().getAsMention()
-                )).queue(msg -> msg.delete().completeAfter(5, TimeUnit.SECONDS));
-            });
-            }
-        );
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+        tc.sendMessage(info.build()).queue();
     }
 }

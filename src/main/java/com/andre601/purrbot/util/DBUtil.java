@@ -3,6 +3,7 @@ package com.andre601.purrbot.util;
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.net.Connection;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Message;
 
 import java.util.Map;
 
@@ -33,6 +34,13 @@ public class DBUtil {
         Map g = getGuild(guild.getId());
         return g.get("prefix").toString();
 
+    }
+
+    public static boolean hasPrefix(Message msg, Guild guild){
+        if(msg.getContentRaw().startsWith(getPrefix(guild)))
+            return true;
+
+        return msg.getContentRaw().startsWith(guild.getSelfMember().getAsMention());
     }
 
     public static void setPrefix(String prefix, String id) {

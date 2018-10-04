@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.MessageFormat;
 
 public class ImageUtil {
@@ -35,6 +36,35 @@ public class ImageUtil {
         }catch (Exception ignored){
         }
         return icon;
+    }
+
+    public static void getQuoteImage(TextChannel tc, Message msg, Message quote) throws Exception{
+
+        BufferedImage image;
+
+        String name = URLEncoder.encode(quote.getAuthor().getName(), "UTF-8");
+        String quoteRaw = URLEncoder.encode(quote.getContentRaw(), "UTF-8");
+        String avatar = URLEncoder.encode(quote.getAuthor().getEffectiveAvatarUrl(), "UTF-8");
+        long creationTime = quote.getCreationTime().toInstant().toEpochMilli();
+
+        String url = "https://purrbot.site/api/quote?name=" + name + "&time=" + creationTime + "&avatar=" + avatar +
+                "&text=" + quoteRaw;
+
+        URL link = new URL(url);
+        URLConnection connection = link.openConnection();
+        connection.setRequestProperty(UA[0], UA[1]);
+        connection.connect();
+
+        image = ImageIO.read(connection.getInputStream());
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.setUseCache(false);
+        ImageIO.write(image, "png", baos);
+
+        tc.sendFile(baos.toByteArray(), MessageFormat.format(
+                "{0}.png",
+                System.currentTimeMillis()
+        ), msg).queue();
     }
 
     public static void createWelcomeImg(User user, Guild g, TextChannel tc, Message msg, String imageType,

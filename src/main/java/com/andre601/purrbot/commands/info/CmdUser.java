@@ -1,17 +1,22 @@
 package com.andre601.purrbot.commands.info;
 
-import com.andre601.purrbot.commands.Command;
-import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CommandDescription(
+        name = "User",
+        description = "Get some neat info about a user.",
+        triggers = {"user", "member"},
+        attributes = {@CommandAttribute(key = "info")}
+)
 public class CmdUser implements Command {
 
     private String getRoles(Member user){
@@ -33,8 +38,9 @@ public class CmdUser implements Command {
         return sb.substring(0, sb.length() - 2);
     }
 
-    private void getUser(TextChannel tc, Message msg){
+    private void getUser(Message msg){
         Member member;
+        TextChannel tc = msg.getTextChannel();
         if(msg.getMentionedMembers().size() >= 1){
             member = msg.getMentionedMembers().get(0);
         }else{
@@ -82,37 +88,7 @@ public class CmdUser implements Command {
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
-
-            return;
-        }
-
-        getUser(tc, msg);
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+    public void execute(Message msg, String s){
+        getUser(msg);
     }
 }

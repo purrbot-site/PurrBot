@@ -8,7 +8,7 @@
             <level>INFO</level>
         </filter>
         <encoder>
-            <pattern>%boldWhite([%d{dd.MM.yyyy HH:mm:ss}) %cyan([%-5level) %boldWhite] %boldBlue([%t]) %boldWhite([%logger{32}]) %boldRed(-->) %white(%msg) %n
+            <pattern>%cyan([) %boldWhite([%d{dd.MM.yyyy HH:mm:ss}) %cyan(%-5level]) %boldBlue([%t]) %boldWhite([%logger{32}]) %boldRed(-->) %white(%msg) %n
             </pattern>
         </encoder>
     </appender>
@@ -21,7 +21,7 @@
         </filter>
         <file>${DEV_HOME}/Purr.log</file>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [ %-5level] [%logger{0}] %msg%n</pattern>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss} [%thread] [ %-5level] [%logger{0}] %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->

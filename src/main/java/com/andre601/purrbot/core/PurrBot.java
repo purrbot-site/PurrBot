@@ -1,25 +1,21 @@
 package com.andre601.purrbot.core;
 
 import ch.qos.logback.classic.Logger;
-import com.andre601.purrbot.listeners.CommandListener;
+import com.andre601.purrbot.commands.CommandListener;
 import com.andre601.purrbot.listeners.GuildListener;
 import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.listeners.WelcomeListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.VoteUtil;
-import com.andre601.purrbot.util.command.CommandHandler;
-import com.andre601.purrbot.commands.server.*;
-import com.andre601.purrbot.commands.fun.*;
-import com.andre601.purrbot.commands.info.*;
-import com.andre601.purrbot.commands.nsfw.*;
-import com.andre601.purrbot.commands.owner.*;
-import com.andre601.purrbot.util.messagehandling.LogUtil;
+import com.andre601.purrbot.util.messagehandling.MessageUtil;
+import com.github.rainestormee.jdacommand.CommandHandler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
+import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.webhook.WebhookClient;
@@ -30,8 +26,10 @@ import org.discordbots.api.client.entity.Vote;
 import org.slf4j.LoggerFactory;
 import spark.Spark;
 
-import javax.security.auth.login.LoginException;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static spark.Spark.*;
 
@@ -47,9 +45,7 @@ public class PurrBot {
 
     //  All the ArrayLists for Random-Stuff and the blacklist
     private static List<String> RandomShutdownText    = new ArrayList<>();
-    private static List<String> RandomNoShutdownText  = new ArrayList<>();
     private static List<String> RandomShutdownImage   = new ArrayList<>();
-    private static List<String> RandomNoShutdownImage = new ArrayList<>();
     private static List<String> RandomFact            = new ArrayList<>();
     private static List<String> RandomNoNSWF          = new ArrayList<>();
     private static List<String> RandomDebug           = new ArrayList<>();
@@ -61,22 +57,21 @@ public class PurrBot {
 
     private static List<String> BlacklistedGuilds     = new ArrayList<>();
 
-    public static JDABuilder builder;
+    private static Set<String> images = new HashSet<>();
+
     public static JDA jda;
 
     private static Logger logger = (Logger) LoggerFactory.getLogger(PurrBot.class);
 
     public static EventWaiter waiter = new EventWaiter();
+    private static ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+    public static final CommandHandler COMMAND_HANDLER = new CommandHandler();
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
 
         //  Creating the file, if not existing, or just loading it.
         file.make("config", "./config.json", "/config.json");
-
-        builder = new JDABuilder(AccountType.BOT);
-
-        //  Adding the Bot-Token from the config.json
-        builder.setToken(file.getItem("config", "token"));
+        PurrBot.scheduler.scheduleAtFixedRate(MessageUtil.updateData(), 1, 10, TimeUnit.MINUTES);
 
         //  Setting the API-token, if the bot isn't beta.
         if(!PermUtil.isBeta())
@@ -85,17 +80,32 @@ public class PurrBot {
                     .botId(file.getItem("config", "id"))
                     .build();
 
-        //  Let JDA try to reconnect, when disconnecting
-        builder.setAutoReconnect(true);
-
-        //  Set the status to "Do not disturb" with Game "Starting bot..." This changes in the ReadyListener.java
-        builder.setStatus(OnlineStatus.DO_NOT_DISTURB);
-        builder.setGame(Game.playing("Starting Bot..."));
-
-        //  Executing the voids, to register listeners, commands and the random-stuff
-        addListeners();
-        addCommands();
+        //  Executing the void to register the random-stuff
         loadRandom();
+        loadImages(
+                "purr",
+                "gradient",
+                "landscape",
+                "red",
+                "green",
+                "blue",
+                "neko1",
+                "neko2",
+                "gradient_blue",
+                "gradient_orange",
+                "gradient_green",
+                "gradient_red1",
+                "gradient_red2",
+                "wood1",
+                "wood2",
+                "wood3",
+                "dots_blue",
+                "dots_green",
+                "dots_orange",
+                "dots_pink",
+                "dots_red",
+                "random"
+        );
 
         if(!PermUtil.isBeta()) {
             Spark.port(1000);
@@ -110,67 +120,19 @@ public class PurrBot {
             });
         }
 
-        try {
-            jda = builder.build().awaitReady();
-        } catch (LoginException | InterruptedException ex) {
-            LogUtil.ERROR("Couldn't load bot! Is the bot-token valid?");
-            System.exit(0);
-        }
-    }
-
-    private static void addListeners(){
-
-        //  Adding listeners
-        builder.addEventListener(new ReadyListener());
-        builder.addEventListener(new CommandListener());
-        builder.addEventListener(new GuildListener());
-        builder.addEventListener(new WelcomeListener());
-        builder.addEventListener(waiter);
-
-    }
-
-    private static void addCommands(){
-
-        //  Adding commands
-        CommandHandler.commands.put("help", new CmdHelp());
-        CommandHandler.commands.put("info", new CmdInfo());
-        CommandHandler.commands.put("shutdown", new CmdShutdown());
-        CommandHandler.commands.put("sleep", new CmdShutdown());
-        CommandHandler.commands.put("neko", new CmdNeko());
-        CommandHandler.commands.put("catgirl", new CmdNeko());
-        CommandHandler.commands.put("lewd", new CmdLewd());
-        CommandHandler.commands.put("hug", new CmdHug());
-        CommandHandler.commands.put("pat", new CmdPat());
-        CommandHandler.commands.put("user", new CmdUser());
-        CommandHandler.commands.put("server", new CmdServer());
-        CommandHandler.commands.put("refresh", new CmdRefresh());
-        CommandHandler.commands.put("slap", new CmdSlap());
-        CommandHandler.commands.put("invite", new CmdInvite());
-        CommandHandler.commands.put("prefix", new CmdPrefix());
-        CommandHandler.commands.put("cuddle", new CmdCuddle());
-        CommandHandler.commands.put("tickle", new CmdTickle());
-        CommandHandler.commands.put("msg", new CmdMsg());
-        CommandHandler.commands.put("welcome", new CmdWelcome());
-        CommandHandler.commands.put("eval", new CmdEval());
-        CommandHandler.commands.put("stats", new CmdStats());
-        CommandHandler.commands.put("stat", new CmdStats());
-        CommandHandler.commands.put("kiss", new CmdKiss());
-        CommandHandler.commands.put("quote", new CmdQuote());
-        CommandHandler.commands.put("debug", new CmdDebug());
-        CommandHandler.commands.put("ping", new CmdPing());
-        CommandHandler.commands.put("poke", new CmdPoke());
-        CommandHandler.commands.put("gecg", new CmdGecg());
-        CommandHandler.commands.put("lesbian", new CmdLesbian());
-        CommandHandler.commands.put("les", new CmdLesbian());
-        CommandHandler.commands.put("emote", new CmdEmote());
-        CommandHandler.commands.put("kitsune", new CmdKitsune());
-        CommandHandler.commands.put("foxgirl", new CmdKitsune());
-        CommandHandler.commands.put("fakegit", new CmdFakegit());
-        CommandHandler.commands.put("git", new CmdFakegit());
-        CommandHandler.commands.put("leave", new CmdLeave());
-        CommandHandler.commands.put("pm", new CmdPM());
-        CommandHandler.commands.put("fuck", new CmdFuck());
-        CommandHandler.commands.put("sex", new CmdFuck());
+        COMMAND_HANDLER.registerCommands(new CommandRegisterHandler().getCommands());
+        new DefaultShardManagerBuilder().setToken(file.getItem("config", "token"))
+                .setStatus(OnlineStatus.DO_NOT_DISTURB)
+                .setGame(Game.playing("Starting bot..."))
+                .setShardsTotal(-1)
+                .addEventListeners(
+                        new CommandListener(COMMAND_HANDLER),
+                        new ReadyListener(),
+                        new GuildListener(),
+                        new WelcomeListener(),
+                        waiter
+                )
+                .build();
     }
 
     public static void loadRandom(){
@@ -180,16 +142,8 @@ public class PurrBot {
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomShutdownText")
                 .split("\n")
         );
-        Collections.addAll(RandomNoShutdownText, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomNoShutdownText")
-                .split("\n")
-        );
         Collections.addAll(RandomShutdownImage, HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomShutdownImage")
-                .split("\n")
-        );
-        Collections.addAll(RandomNoShutdownImage, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomNoShutdownImage")
                 .split("\n")
         );
         Collections.addAll(RandomFact, HttpUtil.requestHttp(
@@ -237,14 +191,8 @@ public class PurrBot {
     public static List<String> getRandomShutdownText(){
         return RandomShutdownText;
     }
-    public static List<String> getRandomNoShutdownText(){
-        return RandomNoShutdownText;
-    }
     public static List<String> getRandomShutdownImage(){
         return RandomShutdownImage;
-    }
-    public static List<String> getRandomNoShutdownImage(){
-        return RandomNoShutdownImage;
     }
     public static List<String> getRandomFact(){
         return RandomFact;
@@ -283,8 +231,6 @@ public class PurrBot {
     public static void clear(){
         RandomShutdownText.clear();
         RandomShutdownImage.clear();
-        RandomNoShutdownText.clear();
-        RandomNoShutdownImage.clear();
         RandomFact.clear();
         RandomNoNSWF.clear();
         RandomDebug.clear();
@@ -297,7 +243,15 @@ public class PurrBot {
         BlacklistedGuilds.clear();
     }
 
-    public static WebhookClient webhookClient(String url){
+    private static void loadImages(String... images){
+        PurrBot.images.addAll(Arrays.asList(images));
+    }
+
+    public static Set<String> getImages(){
+        return images;
+    }
+
+    public static WebhookClient getWebhookClient(String url){
         return new WebhookClientBuilder(url).build();
     }
 

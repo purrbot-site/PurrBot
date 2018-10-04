@@ -1,17 +1,19 @@
 package com.andre601.purrbot.commands.fun;
 
+import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.menu.Slideshow;
-import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -20,63 +22,39 @@ import java.util.concurrent.TimeUnit;
 
 import static com.andre601.purrbot.core.PurrBot.waiter;
 
+@CommandDescription(
+        name = "Neko",
+        description = "Gives you a lovely neko (catgirl)",
+        triggers = {"neko", "catgirl"},
+        attributes = {@CommandAttribute(key = "")}
+)
 public class CmdNeko implements Command {
 
     private Slideshow.Builder sBuilder =
             new Slideshow.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);
-
     private static List<String> nekoUserID = new ArrayList<>();
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-
-        if (!PermUtil.canWrite(tc))
-            return;
+    public void execute(Message msg, String s) {
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
 
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                msg.addReaction("🚫").queue();
-
-            return;
-        }
-
         if(HttpUtil.getNeko() == null){
-            tc.sendMessage(MessageFormat.format(
-                    "{0} It looks like, that there's an issue with the API at the moment.",
-                    msg.getAuthor().getAsMention()
-            )).queue();
+            EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
             return;
         }
 
-        if(e.getMessage().getContentRaw().contains("-slide")){
-            if(!PermUtil.canReact(tc)){
-                tc.sendMessage(String.format(
-                        "%s I need permission, to add reactions in this channel!"
-                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-                return;
-            }
-
+        if(s.contains("-slide")){
             if(nekoUserID.contains(msg.getAuthor().getId())){
-                tc.sendMessage(String.format(
-                        "%s You can only have one Slideshow at a time!\n" +
-                        "Please use or close your current one.",
-                        msg.getAuthor().getAsMention()
-                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                EmbedUtil.error(msg,
+                        "Only one slideshow per user!\n" +
+                        "Please use or close your other one."
+                );
                 return;
             }
-
             tc.sendTyping().queue();
 
             nekoUserID.add(msg.getAuthor().getId());
@@ -91,8 +69,8 @@ public class CmdNeko implements Command {
                 }
             }
 
-            Slideshow s = sBuilder
-                    .setUsers(msg.getAuthor(), e.getGuild().getOwner().getUser())
+            Slideshow slideshow = sBuilder
+                    .setUsers(msg.getAuthor(), guild.getOwner().getUser())
                     .setText("Neko-slideshow!")
                     .setDescription(String.format(
                             "Use the reactions to navigate through the images!\n" +
@@ -101,25 +79,24 @@ public class CmdNeko implements Command {
                             "\n" +
                             "__**Slideshows may take a while to update!**__",
                             MessageUtil.getTag(msg.getAuthor()),
-                            MessageUtil.getTag(e.getGuild().getOwner().getUser())
+                            MessageUtil.getTag(guild.getOwner().getUser())
                     ))
                     .setUrls(urls.toString().split(","))
-                    .setFinalAction(
-                            message -> {
-                                if(message != null) {
-                                    message.delete().queue();
-                                    tc.sendMessage("Slideshow is over!").queue(del ->
-                                            del.delete().queueAfter(5, TimeUnit.SECONDS));
-                                }
-                                nekoUserID.remove(msg.getAuthor().getId());
-                            }
-                    )
+                    .setFinalAction(message -> {
+                        if(message != null) message.delete().queue();
+                        nekoUserID.remove(msg.getAuthor().getId());
+                    })
                     .build();
-            s.display(tc);
+            slideshow.display(tc);
             return;
         }
-        if(msg.getContentRaw().contains("-gif")){
+
+        if(s.contains("-gif")){
             String gifLink = HttpUtil.getNekoAnimated();
+            if(gifLink == null){
+                EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
+                return;
+            }
             EmbedBuilder nekogif = EmbedUtil.getEmbed(msg.getAuthor())
                     .setTitle(MessageFormat.format(
                             "{0}",
@@ -127,21 +104,27 @@ public class CmdNeko implements Command {
                     ), gifLink)
                     .setImage(gifLink);
 
-            tc.sendMessage(Emotes.IMG_LOADING + " Getting a cute neko...").queue(message ->
+            tc.sendMessage(MessageFormat.format(
+                    "{0} Getting a cute neko-gif...",
+                    Emotes.LOADING
+            )).queue(message ->
                     message.editMessage("\u200B").embed(nekogif.build()).queue()
             );
             return;
         }
 
         String link = HttpUtil.getNeko();
-        EmbedBuilder neko = EmbedUtil.getEmbed(e.getAuthor())
+        EmbedBuilder neko = EmbedUtil.getEmbed(msg.getAuthor())
                 .setTitle(MessageFormat.format(
                         "{0}",
                         link.replace("https://cdn.nekos.life/neko/", "")
                 ), link)
                 .setImage(link);
 
-        tc.sendMessage(Emotes.IMG_LOADING + " Getting a cute neko...").queue(message -> {
+        tc.sendMessage(MessageFormat.format(
+                "{0} Getting a cute neko...",
+                Emotes.LOADING
+        )).queue(message -> {
             //  Editing the message to add the image ("should" prevent issues with empty embeds)
             message.editMessage("\u200B").embed(neko.build()).queue();
 
@@ -154,15 +137,5 @@ public class CmdNeko implements Command {
                     message.addReaction("❤").queue();
             }
         });
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 }

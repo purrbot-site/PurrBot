@@ -1,133 +1,109 @@
 package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.commands.server.CmdPrefix;
-import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.util.DBUtil;
+import com.andre601.purrbot.util.ImageUtil;
 import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.util.PermUtil;
 
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
+@CommandDescription(
+        name = "Quote",
+        description = "Quote a member.",
+        triggers = {"quote"},
+        attributes = {@CommandAttribute(key = "info")}
+)
 public class CmdQuote implements Command {
 
-    @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
+    private Message getMessage(String id, TextChannel channel){
+        Message message;
+        try{
+            message = channel.getMessageById(id).complete();
+        }catch(Exception ex){
+            message = null;
+        }
+
+        return message;
+    }
+
+    private void sendQuoteEmbed(Message msg, TextChannel channel) {
+        EmbedBuilder quoteEmbed = EmbedUtil.getEmbed()
+                .setAuthor(MessageFormat.format(
+                        "Quote from {0}",
+                        msg.getAuthor().getName()
+                ), null, msg.getAuthor().getEffectiveAvatarUrl())
+                .setDescription(msg.getContentRaw())
+                .setFooter(MessageFormat.format(
+                        "Posted in #{0}",
+                        msg.getTextChannel().getName()
+                ), null)
+                .setTimestamp(msg.getCreationTime());
+
+        channel.sendMessage(quoteEmbed.build()).queue();
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-        Guild g = e.getGuild();
-        Message message;
-
-        if(!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
-
-            return;
-        }
+    public void execute(Message msg, String s){
+        String[] args = s.split(" ");
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
 
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
         if(args.length <= 1){
-            tc.sendMessage(MessageFormat.format(
-                    "{0} To few arguments! You need to provide a message and channel-id!\n" +
-                    "The syntax is `{1}quote <messageID> <channelID>`",
-                    msg.getAuthor().getAsMention(),
-                    CmdPrefix.getPrefix(g)
-            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+            EmbedUtil.error(msg, MessageFormat.format(
+                    "To few arguments!\n" +
+                    "Usage: `{0}quote <messageID> <#channel>`",
+                    DBUtil.getPrefix(guild)
+            ));
             return;
         }
 
-        if(args[0].matches("[0-9]{18,22}")){
-            List<TextChannel> channels = msg.getMentionedChannels();
-
-            if(channels.isEmpty()){
-                tc.sendMessage(MessageFormat.format(
-                        "{0} Please mention a valid textchannel!",
-                        msg.getAuthor().getAsMention()
-                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-                return;
-            }
-
-            if(PermUtil.canRead(channels.get(0))) {
-                if (!PermUtil.canReadHistory(channels.get(0))) {
-                    tc.sendMessage(MessageFormat.format(
-                            "{0} I can't see the messages of the mentioned channel!\n" +
-                            "Make sure I have permission to see the message history for that channel!",
-                            msg.getAuthor().getAsMention()
-                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-                    return;
-                }
-            }
-
-            try{
-                //  Try to get the Message.
-                message = g.getTextChannelById(channels.get(0).getId()).getMessageById(args[0].trim()).complete();
-            }catch (Exception ex){
-                //  Set message to null.
-                message = null;
-            }
-
-            //  If message is null -> Send error-message and return.
-            if(message == null){
-                tc.sendMessage(MessageFormat.format(
-                        "{0} Unable to find message! Is the MessageID and the channel correct?",
-                        msg.getAuthor().getAsMention()
-                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-                return;
-            }
-
-            //  Get the raw content of the message (Above check makes sure, that message exists)
-            String quoteMsg = message.getContentRaw();
-
-            //  Creating embed for quote.
-            EmbedBuilder quote = EmbedUtil.getEmbed()
-                    .setAuthor(MessageFormat.format(
-                            "Quote from {0}",
-                            MessageUtil.getTag(message.getAuthor())
-                    ), null, message.getAuthor().getEffectiveAvatarUrl())
-                    .setDescription(quoteMsg)
-                    .setFooter(MessageFormat.format(
-                            "Posted in #{0}",
-                            g.getTextChannelById(channels.get(0).getId()).getName()
-                    ),null)
-                    .setTimestamp(message.getCreationTime());
-
-            tc.sendMessage(quote.build()).queue();
-        }else{
-            tc.sendMessage(MessageFormat.format(
-                    "{0} Unable to find message! Is the MessageID and the channel correct?",
-                    msg.getAuthor().getAsMention()
-            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+        if(msg.getMentionedChannels().isEmpty()){
+            EmbedUtil.error(msg, "You need to mention a channel!");
+            return;
         }
 
-    }
+        TextChannel channel = msg.getMentionedChannels().get(0);
+        if(PermUtil.canRead(channel) && PermUtil.canReadHistory(channel)){
+            Message quote = getMessage(args[0], channel);
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
+            if(quote == null){
+                EmbedUtil.error(msg, "The provided messageID was invalid!");
+                return;
+            }
 
-    }
+            if(PermUtil.canUploadImage(tc)){
+                Message message = new MessageBuilder()
+                        .append(MessageFormat.format(
+                                "Quote from {0} in {1}",
+                                quote.getAuthor().getName(),
+                                quote.getTextChannel().getAsMention()
+                        )).build();
 
-    @Override
-    public String help() {
-        return null;
+                try{
+                    ImageUtil.getQuoteImage(tc, message, quote);
+                }catch(Exception ex){
+                    sendQuoteEmbed(quote, tc);
+                }
+            }else{
+                sendQuoteEmbed(quote, tc);
+            }
+        }else{
+            EmbedUtil.error(msg, "I need permissions to see the messages in the mentioned channel!");
+        }
     }
 }

@@ -5,7 +5,7 @@ plugins {
     id 'idea'
 }
 mainClassName = 'com.andre601.purrbot.core.PurrBot'
-version = '2.0.5'
+version = '2.5.0'
 
 description = """"""
 
@@ -32,10 +32,11 @@ dependencies {
     }
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
-    compile group: 'com.mashape.unirest', name: 'unirest-java', version:'1.4.9'
-    compile group: 'org.discordbots', name: 'DBL-Java-Library', version:'2.0.1'
-    compile group: 'com.sparkjava', name: 'spark-core', version:'2.7.2'
-    compileOnly group: 'org.projectlombok', name: 'lombok', version:'1.18.0'
+    compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
+    compile group: 'org.discordbots', name: 'DBL-Java-Library', version: '2.0.1'
+    compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
+    compile group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.2'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.0'
 }
 
 task replaceTokenFirst{
@@ -85,7 +86,7 @@ jar {
 
 shadowJar {
     classifier = ""
-    baseName 'Purr'
+    baseName = 'Purr'
     archiveName = "Purr.jar"
     dependsOn replaceTokenFirst
 }

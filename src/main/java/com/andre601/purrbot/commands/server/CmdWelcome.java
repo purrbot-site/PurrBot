@@ -1,19 +1,20 @@
 package com.andre601.purrbot.commands.server;
 
+import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.ImageUtil;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.menu.Paginator;
-import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.text.MessageFormat;
@@ -21,6 +22,12 @@ import java.util.concurrent.TimeUnit;
 
 import static com.andre601.purrbot.core.PurrBot.waiter;
 
+@CommandDescription(
+        name = "Welcome",
+        description = "Sets or resets a welcome-channel",
+        triggers = {"welcome"},
+        attributes = {@CommandAttribute(key = "manage_Server")}
+)
 public class CmdWelcome implements Command {
 
     private static Paginator.Builder pBuilder =
@@ -31,12 +38,15 @@ public class CmdWelcome implements Command {
     }
 
     //  Checks, if the id is a valid channel.
-    public static TextChannel checkChannel(String id, Guild g){
+    public static TextChannel checkChannel(String id, Guild guild){
+        TextChannel channel;
         try{
-            return g.getTextChannelById(id);
+            channel = guild.getTextChannelById(id);
         }catch (Exception ignored){
-            return null;
+            channel = null;
         }
+
+        return channel;
     }
 
     public static TextChannel getChannel(Guild g){
@@ -67,29 +77,11 @@ public class CmdWelcome implements Command {
         msg.getTextChannel().sendMessage(welcomeSet.build()).queue();
     }
 
-    public void setChannel(Message msg, Guild g, String id, String image){
-        TextChannel tc = g.getTextChannelById(id);
-
-        DBUtil.setWelcome(id, g.getId());
-        DBUtil.changeImage(g.getId(), image);
-
-        EmbedBuilder welcomeSet = EmbedUtil.getEmbed(msg.getAuthor())
-                .setDescription(String.format(
-                        "Welcome-channel set to `%s` (`%s`) with image `%s`!",
-                        tc.getName(),
-                        tc.getId(),
-                        image.toLowerCase()
-                ))
-                .setColor(Color.GREEN);
-
-        msg.getTextChannel().sendMessage(welcomeSet.build()).queue();
-    }
-
     public void resetChannel(Message msg, Guild g){
         String welcome = DBUtil.getWelcome(g);
         if(welcome.equals("none")){
             msg.getTextChannel().sendMessage(String.format(
-                    "%s This Discord doesn't have a Welcome-channel!",
+                    "%s This Guild doesn't have a Welcome-channel!",
                     msg.getAuthor().getAsMention()
             )).queue();
         }else{
@@ -106,6 +98,68 @@ public class CmdWelcome implements Command {
 
     public static void resetChannel(Guild g){
         DBUtil.resetWelcome(g.getId());
+    }
+
+    private void resetImage(Message msg, Guild guild){
+        TextChannel tc = msg.getTextChannel();
+        String image = DBUtil.getImage(guild);
+        if(image.equalsIgnoreCase("purr")){
+            EmbedUtil.error(msg, "The image is already the default one!");
+            return;
+        }
+        DBUtil.changeImage(guild.getId(), "purr");
+        EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription("Image reseted to `purr`")
+                .setColor(Color.GREEN);
+
+        tc.sendMessage(success.build()).queue();
+    }
+
+    private void setImage(Message msg, Guild guild, String image){
+        TextChannel tc = msg.getTextChannel();
+        String dbImage = DBUtil.getImage(guild);
+        if(image.equals(dbImage)){
+            EmbedUtil.error(msg, "This image is already set!");
+            return;
+        }
+        DBUtil.changeImage(guild.getId(), image);
+        EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription(MessageFormat.format(
+                        "Updated image to `{0}`",
+                        image
+                ))
+                .setColor(Color.GREEN);
+
+        tc.sendMessage(success.build()).queue();
+    }
+
+    private void resetColor(Message msg, Guild guild){
+        TextChannel tc = msg.getTextChannel();
+        DBUtil.resetColor(guild.getId());
+        EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription("Color resetted to `hex:ffffff`")
+                .setColor(Color.GREEN);
+
+        tc.sendMessage(success.build()).queue();
+    }
+
+    private void setColor(Message msg, Guild guild, String colorInput){
+        TextChannel tc = msg.getTextChannel();
+        Color color = MessageUtil.toColor(colorInput);
+
+        if(color == null){
+            EmbedUtil.error(msg, "Invalid color-type or value!");
+            return;
+        }
+        DBUtil.changeColor(guild.getId(), colorInput);
+        EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription(MessageFormat.format(
+                        "Color changed to `{0}`",
+                        colorInput
+                ))
+                .setColor(Color.GREEN);
+
+        tc.sendMessage(success.build()).queue();
     }
 
     private static void sendWelcomeHelp(Message msg, Guild g){
@@ -133,7 +187,6 @@ public class CmdWelcome implements Command {
                         "  Value: {3}\n" +
                         "```\n" +
                         "\n" +
-                        "**Images**:\n" +
                         "```\n" +
                         "Images:        2-5\n" +
                         "  Nekos          2\n" +
@@ -143,9 +196,10 @@ public class CmdWelcome implements Command {
                         "  Wood           6\n" +
                         "  Dots           7\n" +
                         "\n" +
-                        "Color-System     8\n" +
+                        "Change image     8\n" +
+                        "Change color     9\n" +
                         "```\n" +
-                        "Use `{4}welcome test <image> [color]` to test a image and color.\n" +
+                        "Use `{4}welcome test [image] [color]` to test a image and color.\n" +
                         "Bots won't trigger the welcome-messages.",
                         channel,
                         DBUtil.getImage(g),
@@ -167,7 +221,7 @@ public class CmdWelcome implements Command {
                         "Neko2          @Andre_601#6811\n" +
                         "  Another image with a neko." +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Use `{0}welcome test [image] [color]` to test a image and color.\n" +
                         "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
@@ -185,7 +239,7 @@ public class CmdWelcome implements Command {
                         "Blue            @Andre_601#6811\n" +
                         "  Color #2980b9\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Use `{0}welcome test [image] [color]` to test a image and color.\n" +
                         "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
@@ -212,7 +266,7 @@ public class CmdWelcome implements Command {
                         "gradient_red2   @aBooDyy#9543\n" +
                         "  Bright red gradient\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Use `{0}welcome test [image] [color]` to test a image and color.\n" +
                         "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
@@ -224,7 +278,7 @@ public class CmdWelcome implements Command {
                         "Landscape       @Kawten#6781\n" +
                         "  Image of a landscape at a sea\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Use `{0}welcome test [image] [color]` to test a image and color.\n" +
                         "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
@@ -242,7 +296,7 @@ public class CmdWelcome implements Command {
                         "Wood3           @DasBrin#0001\n" +
                         "  Woodplanks\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Use `{0}welcome test [image] [color]` to test a image and color.\n" +
                         "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
@@ -266,20 +320,29 @@ public class CmdWelcome implements Command {
                         "Dots_red        @DasBrin#0001\n" +
                         "  White dots on red background\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Use `{0}welcome test [image] [color]` to test a image and color.\n" +
                         "Bots won't trigger the welcome-messages.",
                         prefix
                 ),MessageFormat.format(
-                        "**Color-System**\n" +
+                        "**Change image**\n" +
                         "\n" +
-                        "You can change the textcolor with `{0}welcome color <color>`\n" +
+                        "To change the image, run `{0}welcome image set <image>`\n" +
+                        "You can use `{0}welcome image reset` to reset the image.\n" +
+                        "\n" +
+                        "Available image-types can be found on the previous pages.\n",
+                        prefix
+                ),MessageFormat.format(
+                        "**Change color**\n" +
+                        "\n" +
+                        "To change the textcolor, run `{0}welcome color set <rgb:r,g,b|hex:#rrggbb>`\n" +
+                        "Use `{0}welcome color reset` to reset the color to the default `hex:ffffff`\n" +
                         "```\n" +
                         "Type:           Desc:\n" +
                         "\n" +
                         "RGB:<r,g,b>     Sets the color in RGB\n" +
                         "HEX:<code>      Sets the color in Hex-code (#rrggbb)\n" +
                         "```\n" +
-                        "Use `{0}welcome test <image> [color]` to test a image and color.\n" +
+                        "Use `{0}welcome test [image] [color]` to test a image and color.\n" +
                         "Bots won't trigger the welcome-messages.",
                         prefix
                 ))
@@ -292,253 +355,158 @@ public class CmdWelcome implements Command {
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-        Guild g = e.getGuild();
-
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                msg.addReaction("🚫").queue();
-
-            return;
-        }
-
-        if(!PermUtil.userIsAdmin(msg)){
-            tc.sendMessage(MessageFormat.format(
-                    "{0} {1}",
-                    msg.getAuthor().getAsMention(),
-                    Errors.NOT_ADMIN
-            )).queue();
-            return;
-        }
+    public void execute(Message msg, String s){
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        String[] args = s.split(" ");
 
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
         if(args.length == 0){
-            sendWelcomeHelp(msg, g);
+            sendWelcomeHelp(msg, guild);
             return;
         }
 
         switch (args[0].toLowerCase()){
-            case "set":
-                if(args.length < 2) {
-                    tc.sendMessage(String.format(
-                            "%s Please provide a valid channel-ID!",
-                            msg.getAuthor().getAsMention()
-                    )).queue();
+            case "channel":
+                if(args.length < 2){
+                    EmbedUtil.error(msg, MessageFormat.format(
+                            "To few arguments!\n" +
+                            "Usage: `{0}welcome channel <set <#channel>|reset>>`",
+                            DBUtil.getPrefix(guild)
+                    ));
+                    return;
+                }
+                if(args[1].equalsIgnoreCase("reset")){
+                    resetChannel(msg, guild);
                 }else
-                if(args.length == 2){
-                    if(args[1].matches("[0-9]{18,22}")){
-                        if(checkChannel(args[1], g) == null){
-                            tc.sendMessage(String.format(
-                                    "%s Please provide a valid channel-ID!",
-                                    msg.getAuthor().getAsMention()
-                            )).queue();
-                            return;
-                        }
-                        setChannel(msg, g, args[1]);
-                    }else{
-                        tc.sendMessage(String.format(
-                                "%s Please provide a valid channel-ID!",
-                                msg.getAuthor().getAsMention()
-                        )).queue();
+                if(args[1].equalsIgnoreCase("set")){
+                    if(msg.getMentionedChannels().isEmpty()){
+                        EmbedUtil.error(msg, "Please mention a valid textchannel!");
                         return;
                     }
+                    TextChannel channel = checkChannel(msg.getMentionedChannels().get(0).getId(), guild);
+                    if(channel == null){
+                        EmbedUtil.error(msg, "The provided channel was invalid!");
+                        return;
+                    }
+                    setChannel(msg, guild, channel.getId());
                 }else{
-                    if(args[1].matches("[0-9]{18,22}")){
-                        if(checkChannel(args[1], g) == null){
-                            tc.sendMessage(String.format(
-                                    "%s Please provide a valid channel-ID!",
-                                    msg.getAuthor().getAsMention()
-                            )).queue();
-                            return;
-                        }
-                        switch (args[2].toLowerCase()) {
-                            case "purr":
-                            case "gradient":
-                            case "landscape":
-                            case "red":
-                            case "green":
-                            case "blue":
-                            case "neko1":
-                            case "neko2":
-                            case "gradient_blue":
-                            case "gradient_orange":
-                            case "gradient_green":
-                            case "gradient_red1":
-                            case "gradient_red2":
-                            case "wood1":
-                            case "wood2":
-                            case "wood3":
-                            case "dots_blue":
-                            case "dots_green":
-                            case "dots_orange":
-                            case "dots_pink":
-                            case "dots_red":
-                            case "random":
-                                setChannel(msg, g, args[1], args[2].toLowerCase());
-                                break;
-                            default:
-                                sendWelcomeHelp(msg, g);
-                                break;
-                        }
-                    }else{
-                        tc.sendMessage(String.format(
-                                "%s Please provide a valid channel-ID!",
-                                msg.getAuthor().getAsMention()
-                        )).queue();
-                    }
-                }
-                break;
-
-            case "reset":
-                resetChannel(msg, g);
-                break;
-
-            case "test":
-                tc.sendTyping().queue();
-                if(args.length == 1) {
-                    ImageUtil.createWelcomeImg(e.getAuthor(), g, tc, null, DBUtil.getImage(g),
-                            DBUtil.getColor(g));
-                }else
-                if(args.length == 2){
-                    switch (args[1].toLowerCase()) {
-                        case "purr":
-                        case "gradient":
-                        case "landscape":
-                        case "red":
-                        case "green":
-                        case "blue":
-                        case "neko1":
-                        case "neko2":
-                        case "gradient_blue":
-                        case "gradient_orange":
-                        case "gradient_green":
-                        case "gradient_red1":
-                        case "gradient_red2":
-                        case "wood1":
-                        case "wood2":
-                        case "wood3":
-                        case "dots_blue":
-                        case "dots_green":
-                        case "dots_orange":
-                        case "dots_pink":
-                        case "dots_red":
-                        case "random":
-                            ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase(),
-                                    DBUtil.getColor(g));
-                            break;
-                        default:
-                            sendWelcomeHelp(msg, g);
-                            break;
-                    }
-                }else{
-                    switch (args[1].toLowerCase()) {
-                        case "purr":
-                        case "gradient":
-                        case "landscape":
-                        case "red":
-                        case "green":
-                        case "blue":
-                        case "neko1":
-                        case "neko2":
-                        case "gradient_blue":
-                        case "gradient_orange":
-                        case "gradient_green":
-                        case "gradient_red1":
-                        case "gradient_red2":
-                        case "wood1":
-                        case "wood2":
-                        case "wood3":
-                        case "dots_blue":
-                        case "dots_green":
-                        case "dots_orange":
-                        case "dots_pink":
-                        case "dots_red":
-                        case "random":
-                            if(MessageUtil.toColor(args[2].toLowerCase()) == null){
-                                tc.sendMessage(MessageFormat.format(
-                                        "{0} Invalid color-value and/or color-type `{1}`!",
-                                        msg.getAuthor().getAsMention(),
-                                        args[2].toLowerCase()
-                                )).queue();
-                                return;
-                            }
-                            ImageUtil.createWelcomeImg(msg.getAuthor(), g, tc, null, args[1].toLowerCase(),
-                                    args[2]);
-                            break;
-                        default:
-                            sendWelcomeHelp(msg, g);
-                            break;
-                    }
-
+                    EmbedUtil.error(msg, MessageFormat.format(
+                            "Invalid argument!\n" +
+                            "Usage: `{0}welcome channel <set <#channel>|reset>>`",
+                            DBUtil.getPrefix(guild)
+                    ));
                 }
                 break;
 
             case "image":
-            case "images":
-                sendWelcomeHelp(msg, g);
-                break;
-
-            case "color":
-                if(args.length == 1){
-                    sendWelcomeHelp(msg, g);
+                if(args.length < 2){
+                    EmbedUtil.error(msg, MessageFormat.format(
+                            "To few arguments!\n" +
+                            "Usage: `{0}welcome image <set <image>|reset>>`",
+                            DBUtil.getPrefix(guild)
+                    ));
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
-                    DBUtil.resetColor(g.getId());
-                    EmbedBuilder reset = EmbedUtil.getEmbed(msg.getAuthor())
-                            .setDescription(MessageFormat.format(
-                                    "Color reset to `hex:ffffff`",
-                                    CmdPrefix.getPrefix(g)
-                            ))
-                            .setColor(Color.GREEN);
-                    tc.sendMessage(reset.build()).queue();
+                    resetImage(msg, guild);
+                }else
+                if(args[1].equalsIgnoreCase("set")){
+                    if(args.length < 3){
+                        EmbedUtil.error(msg, "Please provide a image!");
+                        return;
+                    }
+                    if(!PurrBot.getImages().contains(args[2].toLowerCase())){
+                        EmbedUtil.error(msg, "Invalid image!");
+                        return;
+                    }
+                    setImage(msg, guild, args[2].toLowerCase());
+                }else{
+                    EmbedUtil.error(msg, MessageFormat.format(
+                            "Invalid argument!\n" +
+                            "Usage: `{0}welcome image <set <image>|reset>>`",
+                            DBUtil.getPrefix(guild)
+                    ));
+                }
+                break;
+
+            case "color":
+                if(args.length < 2){
+                    EmbedUtil.error(msg, MessageFormat.format(
+                            "To few arguments!\n" +
+                            "Usage: `{0}welcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
+                            DBUtil.getPrefix(guild)
+                    ));
                     return;
                 }
-                if(MessageUtil.toColor(args[1]) == null) {
-                    sendWelcomeHelp(msg, g);
-                    return;
+                if(args[1].equalsIgnoreCase("reset")){
+                    resetColor(msg, guild);
+                }else
+                if(args[1].equalsIgnoreCase("set")){
+                    if(args.length < 3){
+                        EmbedUtil.error(msg, "Please provide a color-type and value!");
+                        return;
+                    }
+                    setColor(msg, guild, args[2].toLowerCase());
+                }else{
+                    EmbedUtil.error(msg, MessageFormat.format(
+                            "Invalid argument!\n" +
+                            "Usage: `{0}welcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
+                            DBUtil.getPrefix(guild)
+                    ));
                 }
-                DBUtil.changeColor(g.getId(), args[1].toLowerCase());
-                String colorType = args[1].split(":")[0].toLowerCase();
-                String colorValue = args[1].split(":")[1].toLowerCase();
-                EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
-                        .setDescription(MessageFormat.format(
-                                "Color successfully changed!\n" +
-                                "\n" +
-                                "**Type**: {0}\n" +
-                                "**Value**: {1}",
-                                colorType,
-                                colorValue
-                        ))
-                        .setColor(Color.GREEN);
-                tc.sendMessage(success.build()).queue();
+                break;
+
+            case "test":
+                if(args.length == 1){
+                    ImageUtil.createWelcomeImg(
+                            msg.getAuthor(),
+                            guild,
+                            tc,
+                            null,
+                            DBUtil.getImage(guild),
+                            DBUtil.getColor(guild)
+                    );
+                }else
+                if(args.length == 2){
+                    if(!PurrBot.getImages().contains(args[1].toLowerCase())){
+                        EmbedUtil.error(msg, "Invalid image!");
+                        return;
+                    }
+                    ImageUtil.createWelcomeImg(
+                            msg.getAuthor(),
+                            guild,
+                            tc,
+                            null,
+                            args[1].toLowerCase(),
+                            DBUtil.getColor(guild)
+                    );
+
+                }else{
+                    if(!PurrBot.getImages().contains(args[1].toLowerCase())){
+                        EmbedUtil.error(msg, "Invalid image!");
+                        return;
+                    }
+                    Color color = MessageUtil.toColor(args[2].toLowerCase());
+                    if(color == null){
+                        EmbedUtil.error(msg, "Invalid colortype or value!");
+                        return;
+                    }
+                    ImageUtil.createWelcomeImg(
+                            msg.getAuthor(),
+                            guild,
+                            tc,
+                            null,
+                            args[1].toLowerCase(),
+                            args[2].toLowerCase()
+                    );
+                }
                 break;
 
             default:
-                sendWelcomeHelp(msg, g);
+                sendWelcomeHelp(msg, guild);
         }
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 }

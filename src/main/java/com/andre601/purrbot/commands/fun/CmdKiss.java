@@ -1,157 +1,93 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
+import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
-import com.andre601.purrbot.util.constants.Errors;
-import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
+import com.andre601.purrbot.util.messagehandling.MessageUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.entities.*;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CommandDescription(
+        name = "Kiss",
+        description = "Lets you share some kisses with others!",
+        triggers = {"kiss", "love"},
+        attributes = {@CommandAttribute(key = "fun")}
+)
 public class CmdKiss implements Command {
 
-    //  This sends a message, if it is executed.
-    public void usage(Message msg){
-        msg.getTextChannel().sendMessage(String.format(
-                "%s Please mention a user at the end of the command to kiss him/her!\n" +
-                "Example: `%skiss @*Purr*#6875`",
-                msg.getAuthor().getAsMention(),
-                CmdPrefix.getPrefix(msg.getGuild())
-        )).queue();
-    }
-
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-
-        //  Permission-checks for write and embed Links-permission.
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
-
+    public void execute(Message msg, String s) {
+        if(msg.getMentionedMembers().isEmpty()){
+            EmbedUtil.error(msg, "Please mention at least one user to kiss.");
             return;
         }
 
-        //  Send usage-message defined above, if you only run the command with no args.
-        if(args.length < 1){
-            usage(e.getMessage());
-            return;
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        List<Member> members = msg.getMentionedMembers();
+        if(members.size() == 1){
+            Member member = members.get(0);
+            if(member == msg.getMember()){
+                tc.sendMessage(MessageFormat.format(
+                        "I have no idea, how you can kiss yourself {0}, but ok...",
+                        member.getAsMention()
+                )).queue();
+                return;
+            }
+        }
+
+        if(members.contains(guild.getSelfMember())){
+            if(PermUtil.isBeta()){
+                tc.sendMessage(MessageFormat.format(
+                        "Not on the first date {0}!",
+                        msg.getAuthor().getAsMention()
+                )).queue();
+            }else
+            if(msg.getAuthor().getId().equals(IDs.SPECIAL_USER)){
+                EmbedBuilder kiss = EmbedUtil.getEmbed().setImage(MessageUtil.getRandomKissImg());
+
+                tc.sendMessage("\\*enjoys the kiss*").queue(message -> {
+                    message.editMessage(kiss.build()).queue();
+                    msg.addReaction("\\uD83D\\uDC8B").queue();
+                });
+            }else{
+                tc.sendMessage(MessageFormat.format(
+                        "Sorry {0}, but I'm already taken...",
+                        msg.getAuthor().getAsMention()
+                )).queue();
+            }
         }
 
         String link = HttpUtil.getKiss();
+        String kissedMembers = members.stream().map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        List<User> user = msg.getMentionedUsers();
-
-        if(user.isEmpty()){
-            usage(e.getMessage());
-            return;
-        }
-
-        if(user.size() == 1){
-            User u = user.get(0);
-            //  mentioned user = own user (Bot) -> send message, add reaction and return.
-            if(u == msg.getJDA().getSelfUser()){
-                //  Special response for a certain user.
-                if(!PermUtil.isBeta()){
-                    if(msg.getAuthor().getId().equals(IDs.SPECIAL_USER)){
-                        if (PermUtil.canReact(tc))
-                            msg.addReaction("\uD83D\uDC8B").queue();
-
-                        EmbedBuilder kiss = EmbedUtil.getEmbed()
-                                .setImage(MessageUtil.getRandomKissImg());
-
-                        tc.sendMessage(String.format(
-                                "%s \\*Enjoys the kiss*",
-                                msg.getAuthor().getAsMention()
-                        )).queue(message -> message.editMessage(kiss.build()).queue());
-                        return;
-                    }
-                    if(PermUtil.canReact(tc))
-                        e.getMessage().addReaction("\uD83D\uDE26").queue();
-
-                    tc.sendMessage(String.format("%s Sorry, but I'm already taken...",
-                            msg.getMember().getAsMention())).queue();
-                    return;
-
-                }else{
-                    if(PermUtil.canReact(tc))
-                        e.getMessage().addReaction("\uD83D\uDE33").queue();
-
-                    tc.sendMessage(String.format("%s Not on the first date!",
-                            msg.getMember().getAsMention())).queue();
-                    return;
-                }
+        tc.sendMessage(MessageFormat.format(
+                "{0} Getting a kiss-gif...",
+                Emotes.LOADING
+        )).queue(message -> {
+            if(link == null){
+                message.editMessage(MessageFormat.format(
+                        "{0} kisses you {1}",
+                        msg.getAuthor().getName(),
+                        kissedMembers
+                )).queue();
+            }else{
+                message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
+                        "{0} kisses you {1}",
+                        msg.getAuthor().getName(),
+                        kissedMembers
+                )).setImage(link).build()).queue();
             }
-
-            //  mentioned user = author of the message -> Send message and return.
-            if(u == msg.getAuthor()){
-                tc.sendMessage("I don't know, how you can actually kiss yourself... But ok.").queue();
-                return;
-            }
-            String name = u.getAsMention();
-            tc.sendMessage(Emotes.IMG_LOADING + " Getting a kiss-gif...").queue(message -> {
-                if(link != null)
-                    message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                            "{0} gives you a kiss {1}",
-                            msg.getMember().getEffectiveName(),
-                            name
-                    )).setImage(link).build()).queue();
-                else
-                    message.editMessage(MessageFormat.format(
-                            "{0} gives you a kiss {1}",
-                            msg.getMember().getEffectiveName(),
-                            name
-                    )).queue();
-            });
-        }else{
-            String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
-            tc.sendMessage(Emotes.IMG_LOADING + " Getting a kiss-gif...").queue(message -> {
-                if(link != null)
-                    message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                            "{0} gives you a kiss {1}",
-                            msg.getMember().getEffectiveName(),
-                            users
-                    )).setImage(link).build()).queue();
-                else
-                    message.editMessage(MessageFormat.format(
-                            "{0} gives you a kiss {1}",
-                            msg.getMember().getEffectiveName(),
-                            users
-                    )).queue();
-            });
-        }
-
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+        });
     }
 }

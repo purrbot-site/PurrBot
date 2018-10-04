@@ -1,72 +1,38 @@
 package com.andre601.purrbot.commands.owner;
 
-import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.andre601.purrbot.util.messagehandling.LogUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+@CommandDescription(
+        name = "Shutdown",
+        description = "Disables the bot",
+        triggers = {"shutdown", "sleep", "disable"},
+        attributes = {@CommandAttribute(key = "owner")}
+)
 public class CmdShutdown implements Command {
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            e.getChannel().sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                msg.addReaction("🚫").queue();
-
-            return;
-        }
+    public void execute(Message msg, String s){
+        TextChannel tc = msg.getTextChannel();
 
         if(PermUtil.canDeleteMsg(tc))
-            e.getMessage().delete().queue();
+            msg.delete().queue();
 
-        if(PermUtil.isCreator(msg)){
+        EmbedBuilder shutdown = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription(MessageUtil.getRandomShutdown())
+                .setImage(MessageUtil.getRandomShutdownImage());
 
-            EmbedBuilder shutdown = EmbedUtil.getEmbed(e.getAuthor())
-                    .setDescription(MessageUtil.getRandomShutdown())
-                    .setImage(MessageUtil.getRandomImage());
-
-            tc.sendMessage(shutdown.build()).queue(message -> {
-                LogUtil.INFO("Disabling bot...");
-                System.exit(0);
-            });
-
-
-        }else{
-
-            EmbedBuilder noShutdown = EmbedUtil.getEmbed(e.getAuthor())
-                    .setDescription(MessageUtil.getRandomNoShutdown())
-                    .setImage(MessageUtil.getRandomNoImage());
-
-            tc.sendMessage(noShutdown.build()).queue();
-        }
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+        tc.sendMessage(shutdown.build()).queue(message -> {
+            PurrBot.getLogger().info("Disabling bot...");
+            System.exit(0);
+        });
     }
 }

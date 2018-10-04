@@ -1,12 +1,15 @@
 package com.andre601.purrbot.util.messagehandling;
 
+import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.core.PurrBot;
+import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
 
 import java.awt.*;
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -34,19 +37,9 @@ public class MessageUtil {
                 PurrBot.getRandom().nextInt(PurrBot.getRandomShutdownText().size())) : "";
     }
 
-    public static String getRandomNoShutdown(){
-        return PurrBot.getRandomNoShutdownText().size() > 0 ? PurrBot.getRandomNoShutdownText().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomNoShutdownText().size())) : "";
-    }
-
-    public static String getRandomImage(){
+    public static String getRandomShutdownImage(){
         return PurrBot.getRandomShutdownImage().size() > 0 ? PurrBot.getRandomShutdownImage().get(
                 PurrBot.getRandom().nextInt(PurrBot.getRandomShutdownImage().size())) : "";
-    }
-
-    public static String getRandomNoImage(){
-        return PurrBot.getRandomNoShutdownImage().size() > 0 ? PurrBot.getRandomNoShutdownImage().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomNoShutdownImage().size())) : "";
     }
 
     public static String getRandomAPIPingMsg(){
@@ -179,11 +172,12 @@ public class MessageUtil {
 
     public static Color toColor(String input){
         String type = input.split(":")[0].toLowerCase();
+        String value = input.split(":")[1].toLowerCase();
         Color result = null;
 
         switch (type){
             case "rgb":
-                String[] rgb = (input.split(":")[1].replace(" ", "")).split(",");
+                String[] rgb = (value.replace(" ", "")).split(",");
 
                 String r = rgb[0];
                 String g = rgb[1];
@@ -197,13 +191,25 @@ public class MessageUtil {
 
             case "hex":
                 try {
-                    result = Color.decode((input.split(":")[1].startsWith("#") ? input.split(":")[1] :
-                            "#" + input.split(":")[1]));
+                    result = Color.decode((value.startsWith("#") ? value : "#" + value));
                 }catch (Exception ignored){
                     return null;
                 }
                 break;
         }
         return result;
+    }
+
+    public static Runnable updateData(){
+        return () -> {
+            if(ReadyListener.getReady() == Boolean.TRUE){
+                ShardManager shardManager = ReadyListener.getShardManager();
+                shardManager.setGame(Game.watching(MessageFormat.format(
+                        ReadyListener.getBotGame(),
+                        shardManager.getGuildCache().size()
+                )));
+                if(!PermUtil.isBeta()) PurrBot.getAPI().setStats((int)shardManager.getGuildCache().size());
+            }
+        };
     }
 }

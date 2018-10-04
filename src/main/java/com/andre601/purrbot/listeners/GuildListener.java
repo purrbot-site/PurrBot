@@ -4,7 +4,6 @@ import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.constants.Links;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.andre601.purrbot.util.messagehandling.LogUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
@@ -46,7 +45,7 @@ public class GuildListener extends ListenerAdapter {
         //  Creating a new database-entry
         DBUtil.newGuild(g);
 
-        LogUtil.INFO(MessageFormat.format(
+        PurrBot.getLogger().info(MessageFormat.format(
                 "Joined the guild {0} ({1}) from {2}: {3} total users [{4} humans, {5} bots]",
                 g.getName(),
                 g.getId(),
@@ -56,30 +55,7 @@ public class GuildListener extends ListenerAdapter {
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).count()
         ));
 
-        EmbedUtil.sendWebhookEmbed(getLink(), g, Color.GREEN,
-                "Guild joined", MessageFormat.format(
-                "**Guild**:\n" +
-                "`{0}` (`{1}`)\n" +
-                "\n" +
-                "**Owner**:\n" +
-                "{2} (`{3}`)\n" +
-                "\n" +
-                "**Members (Humans|Bots)**:\n" +
-                "`{4}` (`{5}`|`{6}`)",
-                g.getName().replace("`", "'"),
-                g.getId(),
-                MessageUtil.getUsername(g.getOwner()),
-                g.getOwner().getUser().getId(),
-                g.getMembers().size(),
-                g.getMembers().stream().filter(user -> !user.getUser().isBot()).count(),
-                g.getMembers().stream().filter(user -> user.getUser().isBot()).count()
-        ));
-
-        e.getJDA().getPresence().setPresence(OnlineStatus.ONLINE, Game.watching(String.format(
-                ReadyListener.getBotGame(),
-                e.getJDA().getGuilds().toArray().length
-        )));
-
+        EmbedUtil.sendWebhookEmbed(getLink(), g, Color.GREEN, "Guild joined");
     }
 
     public void onGuildLeave(GuildLeaveEvent e) {
@@ -92,7 +68,7 @@ public class GuildListener extends ListenerAdapter {
 
         DBUtil.delGuild(g);
 
-        LogUtil.INFO(MessageFormat.format(
+        PurrBot.getLogger().info(MessageFormat.format(
                 "Left the guild {0} ({1}) from {2}: {3} total users [{4} humans, {5} bots]",
                 g.getName(),
                 g.getId(),
@@ -102,28 +78,6 @@ public class GuildListener extends ListenerAdapter {
                 g.getMembers().stream().filter(user -> user.getUser().isBot()).count()
         ));
 
-        EmbedUtil.sendWebhookEmbed(getLink(), g, Color.RED,
-                "Guild left", MessageFormat.format(
-                        "**Guild**:\n" +
-                        "`{0}` (`{1}`)\n" +
-                        "\n" +
-                        "**Owner**:\n" +
-                        "{2} (`{3}`)\n" +
-                        "\n" +
-                        "**Members (Humans|Bots)**:\n" +
-                        "`{4}` (`{5}`|`{6}`)",
-                g.getName().replace("`", "'"),
-                g.getId(),
-                MessageUtil.getUsername(g.getOwner()),
-                g.getOwner().getUser().getId(),
-                g.getMembers().size(),
-                g.getMembers().stream().filter(user -> !user.getUser().isBot()).count(),
-                g.getMembers().stream().filter(user -> user.getUser().isBot()).count()
-        ));
-
-        e.getJDA().getPresence().setPresence(OnlineStatus.ONLINE, Game.watching(String.format(
-                ReadyListener.getBotGame(),
-                e.getJDA().getGuilds().toArray().length
-        )));
+        EmbedUtil.sendWebhookEmbed(getLink(), g, Color.RED, "Guild left");
     }
 }

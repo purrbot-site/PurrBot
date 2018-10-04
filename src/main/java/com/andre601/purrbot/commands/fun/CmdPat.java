@@ -1,124 +1,72 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
+import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
-import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
-import com.andre601.purrbot.commands.Command;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.entities.*;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CommandDescription(
+        name = "Pat",
+        description = "Lets you pat someone.",
+        triggers = {"pat", "patting"},
+        attributes = {@CommandAttribute(key = "fun")}
+)
 public class CmdPat implements Command {
 
-    public void usage(Message msg){
-        msg.getTextChannel().sendMessage(String.format(
-                "%s Please mention a user at the end of the command to pat!\n" +
-                "Example: `%spat @*Purr*#6875`",
-                msg.getAuthor().getAsMention(),
-                CmdPrefix.getPrefix(msg.getGuild())
-        )).queue();
-    }
-
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
-
+    public void execute(Message msg, String s) {
+        if(msg.getMentionedMembers().isEmpty()){
+            EmbedUtil.error(msg, "Please mention at least one user to pat.");
             return;
         }
 
-        if(args.length < 1){
-            usage(e.getMessage());
-            return;
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        List<Member> members = msg.getMentionedMembers();
+        if(members.size() == 1){
+            Member member = members.get(0);
+            if(member == msg.getMember()){
+                tc.sendMessage(MessageFormat.format(
+                        "How can you actually pat yourself {0}?",
+                        member.getAsMention()
+                )).queue();
+                return;
+            }
+        }
+
+        if(members.contains(guild.getSelfMember())){
+            tc.sendMessage("\\*purr™*").queue();
+            msg.addReaction("❤").queue();
         }
 
         String link = HttpUtil.getPat();
+        String pattetMembers = members.stream().map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        List<User> user = msg.getMentionedUsers();
-
-        if(user.isEmpty()){
-            usage(e.getMessage());
-            return;
-        }
-
-        if(user.size() == 1){
-            User u = user.get(0);
-            if(u == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(tc))
-                    e.getMessage().addReaction("❤").queue();
-
-                tc.sendMessage(String.format("%s \\*purr*™",
-                        msg.getMember().getAsMention())).queue();
-                return;
+        tc.sendMessage(MessageFormat.format(
+                "{0} Getting a pat-gif...",
+                Emotes.LOADING
+        )).queue(message -> {
+            if(link == null){
+                message.editMessage(MessageFormat.format(
+                        "{0} pats you {1}",
+                        msg.getAuthor().getName(),
+                        pattetMembers
+                )).queue();
+            }else{
+                message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
+                        "{0} pats you {1}",
+                        msg.getAuthor().getName(),
+                        pattetMembers
+                )).setImage(link).build()).queue();
             }
-            if(u == msg.getAuthor()){
-                tc.sendMessage("Why are you patting yourself?").queue();
-                return;
-            }
-            String name = u.getAsMention();
-            tc.sendMessage(Emotes.IMG_LOADING + " Getting a pat-gif...").queue(message -> {
-                if(link != null)
-                    message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                            "{0} gave you a pat {1}",
-                            msg.getMember().getEffectiveName(),
-                            name
-                    )).setImage(link).build()).queue();
-                else
-                    message.editMessage(MessageFormat.format(
-                            "{0} gave you a pat {1}",
-                            msg.getMember().getEffectiveName(),
-                            name
-                    )).queue();
-            });
-        }else{
-            String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
-            tc.sendMessage(Emotes.IMG_LOADING + " Getting a hug-gif...").queue(message -> {
-                if(link != null)
-                    message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                            "{0} gave you a pat {1}",
-                            msg.getMember().getEffectiveName(),
-                            users
-                    )).setImage(link).build()).queue();
-                else
-                    message.editMessage(MessageFormat.format(
-                            "{0} gave you a pat {1}",
-                            msg.getMember().getEffectiveName(),
-                            users
-                    )).queue();
-            });
-        }
-
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+        });
     }
 }

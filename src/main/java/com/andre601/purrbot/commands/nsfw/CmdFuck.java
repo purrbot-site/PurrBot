@@ -1,6 +1,5 @@
 package com.andre601.purrbot.commands.nsfw;
 
-import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
@@ -8,6 +7,9 @@ import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
@@ -19,6 +21,12 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+@CommandDescription(
+        name = "Fuck",
+        description = "Wanna fuck someone?",
+        triggers = {"fuck", "sex"},
+        attributes = {@CommandAttribute(key = "nsfw")}
+)
 public class CmdFuck implements Command {
 
     private static ArrayList<String> alreadyInQueue = new ArrayList<>();
@@ -42,176 +50,131 @@ public class CmdFuck implements Command {
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
+    public void execute(Message msg, String s){
+        TextChannel tc = msg.getTextChannel();
+        User author = msg.getAuthor();
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        Message msg = e.getMessage();
-        TextChannel tc = e.getTextChannel();
-        User author = e.getAuthor();
-
-        if(!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
-
+        if(msg.getMentionedUsers().isEmpty()){
+            tc.sendMessage(MessageFormat.format(
+                    "{0} How can you actually fuck yourself?!",
+                    author.getAsMention()
+            )).queue();
             return;
         }
 
-        if(tc.isNSFW()){
-            if(args.length == 0){
+        User user = msg.getMentionedUsers().get(0);
+
+        if(user == msg.getJDA().getSelfUser()){
+            if(PermUtil.isBeta()){
                 tc.sendMessage(MessageFormat.format(
-                        "{0} How can you actually fuck yourself?!",
+                        "\\*Slaps {0}* Nononononono! Not with me!",
                         author.getAsMention()
                 )).queue();
                 return;
             }
+            if(msg.getAuthor().getId().equals(IDs.SPECIAL_USER)){
+                int random = getRandomPercent();
 
-            if(msg.getMentionedUsers().isEmpty()){
-                tc.sendMessage(MessageFormat.format(
-                        "{0} How can you actually fuck yourself?!",
-                        author.getAsMention()
-                )).queue();
-                return;
-            }
-
-            User user = msg.getMentionedUsers().get(0);
-
-            if(user == e.getJDA().getSelfUser()){
-                if(PermUtil.isBeta()){
-                    tc.sendMessage(MessageFormat.format(
-                            "\\*Slaps {0}* Nononononono! Not with me!",
+                if(random == 9) {
+                    tc.sendMessage(String.format(
+                            MessageUtil.getRandomAcceptFuckMsg(),
+                            author.getAsMention()
+                    )).queue();
+                    return;
+                }else{
+                    tc.sendMessage(String.format(
+                            MessageUtil.getRandomDenyFuckMsg(),
                             author.getAsMention()
                     )).queue();
                     return;
                 }
-                if(msg.getAuthor().getId().equals(IDs.SPECIAL_USER)){
-                    int random = getRandomPercent();
-
-                    if(random == 9) {
-                        tc.sendMessage(String.format(
-                                MessageUtil.getRandomAcceptFuckMsg(),
-                                author.getAsMention()
-                        )).queue();
-                        return;
-                    }else{
-                        tc.sendMessage(String.format(
-                                MessageUtil.getRandomDenyFuckMsg(),
-                                author.getAsMention()
-                        )).queue();
-                        return;
-                    }
-                }else{
-                    tc.sendMessage(MessageFormat.format(
-                            "\\*Slaps {0}* Nononononono! Not with me!",
-                            msg.getAuthor().getAsMention()
-                    )).queue();
-                    return;
-                }
-            }
-
-            if(user == msg.getAuthor()){
+            }else{
                 tc.sendMessage(MessageFormat.format(
-                        "{0} How can you actually fuck yourself?!",
+                        "\\*Slaps {0}* Nononononono! Not with me!",
                         msg.getAuthor().getAsMention()
                 )).queue();
                 return;
             }
-
-            if(alreadyInQueue.contains(author.getId())){
-                tc.sendMessage(MessageFormat.format(
-                        "{0} You already asked someone to fuck with you!\n" +
-                        "Please wait until the person accepts it, or the request times out.",
-                        author.getAsMention()
-                )).queue();
-                return;
-            }
-
-            alreadyInQueue.add(author.getId());
-            tc.sendMessage(MessageFormat.format(
-                    "Hey {0}!\n" +
-                    "{1} wants to have sex with you. Do you want that too?\n" +
-                    "Type `>accept` within the next minute, to accept it!",
-                    user.getAsMention(),
-                    msg.getMember().getEffectiveName()
-            )).queue(message -> {
-                EventWaiter waiter = PurrBot.waiter;
-                waiter.waitForEvent(
-                        MessageReceivedEvent.class,
-                        ev -> (isMessage(ev.getMessage()) &&
-                                ev.getTextChannel().equals(tc) &&
-                                (ev.getAuthor() != ev.getJDA().getSelfUser() ||
-                                        ev.getAuthor() != message.getAuthor()) &&
-                                ev.getAuthor() == user),
-                        ev -> {
-                            if(PermUtil.canDeleteMsg(ev.getTextChannel()))
-                                ev.getMessage().delete().queue();
-
-                            try {
-                                message.delete().queue();
-                            }catch (Exception ex){
-                            }
-
-                            alreadyInQueue.remove(author.getId());
-
-                            String link = HttpUtil.getFuck();
-
-                            ev.getTextChannel().sendMessage(String.format(
-                                    "%s accepted your invite %s! 0w0",
-                                    user.getName(),
-                                    author.getAsMention()
-                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-
-                            if(link == null){
-                                ev.getTextChannel().sendMessage(MessageFormat.format(
-                                        "{0} and {1} are having sex!",
-                                        msg.getMember().getEffectiveName(),
-                                        user.getName()
-                                )).queue();
-                                return;
-                            }
-
-                            ev.getTextChannel().sendMessage(getFuckEmbed(author, user, link).build()).queue();
-                        }, 1, TimeUnit.MINUTES,
-                        () -> {
-                            try {
-                                message.delete().queue();
-                            }catch (Exception ex){
-                            }
-
-                            alreadyInQueue.remove(author.getId());
-
-                            tc.sendMessage(String.format(
-                                    "Looks like he/she doesn't want to have sex with you %s",
-                                    author.getAsMention()
-                            )).queue();
-                        }
-                );
-            });
-
-        }else{
-            tc.sendMessage(MessageFormat.format(
-                    "{0} {1}",
-                    msg.getAuthor().getAsMention(),
-                    Errors.NSFW
-            )).queue();
         }
 
-    }
+        if(user == msg.getAuthor()){
+            tc.sendMessage(MessageFormat.format(
+                    "{0} How can you actually fuck yourself?!",
+                    msg.getAuthor().getAsMention()
+            )).queue();
+            return;
+        }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
+        if(alreadyInQueue.contains(author.getId())){
+            tc.sendMessage(MessageFormat.format(
+                    "{0} You already asked someone to fuck with you!\n" +
+                    "Please wait until the person accepts it, or the request times out.",
+                    author.getAsMention()
+            )).queue();
+            return;
+        }
 
-    }
+        alreadyInQueue.add(author.getId());
+        tc.sendMessage(MessageFormat.format(
+                "Hey {0}!\n" +
+                "{1} wants to have sex with you. Do you want that too?\n" +
+                "Type `>accept` within the next minute, to accept it!",
+                user.getAsMention(),
+                msg.getMember().getEffectiveName()
+        )).queue(message -> {
+            EventWaiter waiter = PurrBot.waiter;
+            waiter.waitForEvent(
+                    MessageReceivedEvent.class,
+                    ev -> (isMessage(ev.getMessage()) &&
+                            ev.getTextChannel().equals(tc) &&
+                            (ev.getAuthor() != ev.getJDA().getSelfUser() ||
+                                    ev.getAuthor() != message.getAuthor()) &&
+                            ev.getAuthor() == user
+                    ),
+                    ev -> {
+                        if(PermUtil.canDeleteMsg(ev.getTextChannel()))
+                            ev.getMessage().delete().queue();
 
-    @Override
-    public String help() {
-        return null;
+                        try {
+                            message.delete().queue();
+                        }catch (Exception ex){
+                        }
+
+                        alreadyInQueue.remove(author.getId());
+
+                        String link = HttpUtil.getFuck();
+
+                        ev.getTextChannel().sendMessage(String.format(
+                                "%s accepted your invite %s! 0w0",
+                                user.getName(),
+                                author.getAsMention()
+                        )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+
+                        if(link == null){
+                            ev.getTextChannel().sendMessage(MessageFormat.format(
+                                    "{0} and {1} are having sex!",
+                                    msg.getMember().getEffectiveName(),
+                                    user.getName()
+                            )).queue();
+                            return;
+                        }
+
+                        ev.getTextChannel().sendMessage(getFuckEmbed(author, user, link).build()).queue();
+                    }, 1, TimeUnit.MINUTES,
+                    () -> {
+                        try {
+                            message.delete().queue();
+                        }catch (Exception ex){
+                        }
+
+                        alreadyInQueue.remove(author.getId());
+
+                        tc.sendMessage(String.format(
+                                "Looks like he/she doesn't want to have sex with you %s",
+                                author.getAsMention()
+                        )).queue();
+                    }
+            );
+        });
     }
 }

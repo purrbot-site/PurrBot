@@ -1,123 +1,72 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
-import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.constants.Emotes;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.HttpUtil;
-import com.andre601.purrbot.util.PermUtil;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.entities.*;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CommandDescription(
+        name = "Tickle",
+        description = "Tickle someone until he/she laughs",
+        triggers = {"tickle"},
+        attributes = {@CommandAttribute(key = "fun")}
+)
 public class CmdTickle implements Command {
 
-    public void usage(Message msg){
-        msg.getTextChannel().sendMessage(String.format(
-                "%s Please mention a user at the end of the command to tickle!\n" +
-                "Example: `%stickle @*Purr*#6875`",
-                msg.getAuthor().getAsMention(),
-                CmdPrefix.getPrefix(msg.getGuild())
-        )).queue();
-    }
-
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        TextChannel tc = e.getTextChannel();
-        Message msg = e.getMessage();
-
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
-
+    public void execute(Message msg, String s) {
+        if(msg.getMentionedMembers().isEmpty()){
+            EmbedUtil.error(msg, "Please mention at least one user to tickle.");
             return;
         }
 
-        if(args.length < 1){
-            usage(e.getMessage());
-            return;
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        List<Member> members = msg.getMentionedMembers();
+        if(members.size() == 1){
+            Member member = members.get(0);
+            if(member == msg.getMember()){
+                tc.sendMessage(MessageFormat.format(
+                        "You know that you should tickle someone else, right {0}?",
+                        member.getAsMention()
+                )).queue();
+                return;
+            }
+        }
+
+        if(members.contains(guild.getSelfMember())){
+            tc.sendMessage("N-no... Please I... I c-can't \\*starts laughing*").queue();
+            msg.addReaction("\uD83D\uDE02").queue();
         }
 
         String link = HttpUtil.getTickle();
+        String pattetMembers = members.stream().map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        List<User> user = msg.getMentionedUsers();
-
-        if(user.isEmpty()){
-            usage(e.getMessage());
-            return;
-        }
-
-        if(user.size() == 1){
-            User u = user.get(0);
-            if(u == msg.getJDA().getSelfUser()){
-                if(PermUtil.canReact(tc))
-                    e.getMessage().addReaction("😂").queue();
-
-                tc.sendMessage(String.format("N-no... I can't lau- \\*laughs*",
-                        msg.getMember().getAsMention())).queue();
-                return;
+        tc.sendMessage(MessageFormat.format(
+                "{0} Getting a tickle-gif...",
+                Emotes.LOADING
+        )).queue(message -> {
+            if(link == null){
+                message.editMessage(MessageFormat.format(
+                        "{0} tickles you {1}",
+                        msg.getAuthor().getName(),
+                        pattetMembers
+                )).queue();
+            }else{
+                message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
+                        "{0} tickles you {1}",
+                        msg.getAuthor().getName(),
+                        pattetMembers
+                )).setImage(link).build()).queue();
             }
-            if(u == msg.getAuthor()){
-                tc.sendMessage("Why are you tickling yourself?").queue();
-                return;
-            }
-            String name = u.getAsMention();
-            tc.sendMessage(Emotes.IMG_LOADING + " Getting a tickle-gif...").queue(message -> {
-                if(link != null)
-                    message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                            "{0} tickles {1}",
-                            msg.getMember().getEffectiveName(),
-                            name
-                    )).setImage(link).build()).queue();
-                else
-                    message.editMessage(MessageFormat.format(
-                            "{0} tickles {1}",
-                            msg.getMember().getEffectiveName(),
-                            name
-                    )).queue();
-            });
-        }else{
-            String users = user.stream().map(User::getAsMention).collect(Collectors.joining(", "));
-            tc.sendMessage(Emotes.IMG_LOADING + " Getting a tickle-gif...").queue(message -> {
-                if(link != null)
-                    message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                            "{0} tickles {1}",
-                            msg.getMember().getEffectiveName(),
-                            users
-                    )).setImage(link).build()).queue();
-                else
-                    message.editMessage(MessageFormat.format(
-                            "{0} tickles {1}",
-                            msg.getMember().getEffectiveName(),
-                            users
-                    )).queue();
-            });
-        }
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+        });
     }
 }

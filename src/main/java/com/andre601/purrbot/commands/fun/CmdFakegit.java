@@ -2,86 +2,58 @@ package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.text.MessageFormat;
 
+@CommandDescription(
+        name = "Fakegit",
+        description = "Creates a commit-message that looks like a real one.",
+        triggers = {"fakegit", "git"},
+        attributes = {@CommandAttribute(key = "fun")}
+)
 public class CmdFakegit implements Command {
 
-
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
+    public void execute(Message msg, String s){
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        JSONObject jsonObject = HttpUtil.getFakeGit();
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        Message msg = e.getMessage();
-        Guild g = e.getGuild();
-        TextChannel tc = e.getTextChannel();
-
-        JSONObject json = HttpUtil.getFakeGit();
-
-        if(!PermUtil.canWrite(tc))
-            return;
-
-        if(PermUtil.canDeleteMsg(tc))
-            msg.delete().queue();
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                msg.addReaction("🚫").queue();
-
+        if(jsonObject == null){
+            EmbedUtil.error(msg, "Couldn't reach the API!");
             return;
         }
 
-        if(json == null){
-            tc.sendMessage(MessageFormat.format(
-                    "{0} There was an issue with the API...",
-                    msg.getAuthor().getAsMention()
-            )).queue();
-            return;
-        }
-
-        String link = json.getString("permalink");
-        String hash = json.getString("hash").substring(0, 6);
-        String commit_message = json.getString("commit_message");
+        String link = jsonObject.getString("permalink");
+        String hash = jsonObject.getString("hash").substring(0, 6);
+        String commit = jsonObject.getString("commit_message");
 
         EmbedBuilder fakeGit = EmbedUtil.getEmbed()
-                .setAuthor(msg.getAuthor().getName(), null, msg.getAuthor().getEffectiveAvatarUrl())
+                .setColor(new Color(114, 137, 218))
+                .setAuthor(msg.getAuthor().getName(), link, msg.getAuthor().getEffectiveAvatarUrl())
                 .setTitle(MessageFormat.format(
                         "[{0}:{1}] 1 new commit",
-                        g.getName().replace(" ", "_"),
+                        guild.getName().replace(" ", "_"),
                         tc.getName()
                 ), link)
                 .setDescription(MessageFormat.format(
                         "[`{0}`]({1}) {2}",
                         hash,
                         link,
-                        commit_message
+                        commit
                 ));
 
         tc.sendMessage(fakeGit.build()).queue();
-
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 }

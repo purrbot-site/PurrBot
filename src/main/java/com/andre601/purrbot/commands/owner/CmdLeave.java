@@ -1,63 +1,53 @@
 package com.andre601.purrbot.commands.owner;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
-import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.commands.Command;
+import com.andre601.purrbot.listeners.ReadyListener;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
 
+@CommandDescription(
+        name = "Leave",
+        description = "Lets the bot leave a guild (with optional PM)",
+        triggers = {"leave", "bye"},
+        attributes = {@CommandAttribute(key = "owner")}
+)
 public class CmdLeave implements Command {
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
+    public void execute(Message msg, String s){
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        ShardManager shardManager = ReadyListener.getShardManager();
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-        Message msg = e.getMessage();
-        TextChannel tc = e.getTextChannel();
-        Guild g = e.getGuild();
+        String[] args = s.split(" ");
+        if(s.contains("-pm")){
+            String pm = s.split("-pm")[1];
 
-        if(!PermUtil.isCreator(msg))
-            return;
-
-        if(args.length == 0){
-            tc.sendMessage(MessageFormat.format(
-                    "{0} Please provide a guildID!\n" +
-                    "Example `{1}leave {2}`",
-                    msg.getAuthor().getAsMention(),
-                    CmdPrefix.getPrefix(g),
-                    g.getId()
-            )).queue();
-            return;
+            try {
+                shardManager.getGuildById(args[0]).getOwner().getUser().openPrivateChannel().queue(
+                        privateChannel -> privateChannel.sendMessage(MessageFormat.format(
+                                "I left your guild `{0}`. Reason:\n" +
+                                "`{1}`",
+                                shardManager.getGuildById(args[0]).getName(),
+                                (pm == null || pm.equals("") ? "No reason" : pm)
+                        )).queue(),
+                        throwable -> tc.sendMessage("Couldn't send PM.").queue()
+                );
+            }catch (Exception ex){
+                tc.sendMessage("Couldn't send PM.").queue();
+            }
         }
 
         try{
-            e.getJDA().getGuildById(args[0].trim()).leave().queue();
-            tc.sendMessage(MessageFormat.format(
-                    "{0} Successfully left the guild!",
-                    msg.getAuthor().getAsMention()
-            )).queue();
+            shardManager.getGuildById(args[0]).leave().queue();
         }catch (Exception ex){
-            tc.sendMessage(MessageFormat.format(
-                    "{0} There was an issue while leaving the guild! Is the ID correct?",
-                    msg.getAuthor().getAsMention()
-            )).queue();
+            tc.sendMessage("Couldn't leave the guild.").queue();
         }
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 }

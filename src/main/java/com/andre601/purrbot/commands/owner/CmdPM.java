@@ -1,72 +1,59 @@
 package com.andre601.purrbot.commands.owner;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
-import com.andre601.purrbot.commands.Command;
-import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.listeners.ReadyListener;
+import com.andre601.purrbot.util.messagehandling.EmbedUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.entities.User;
 
-import java.text.MessageFormat;
-import java.util.concurrent.TimeUnit;
-
+@CommandDescription(
+        name = "PM",
+        description = "Sends a pm to a user.",
+        triggers = {"pm"},
+        attributes = {@CommandAttribute(key = "owner")}
+)
 public class CmdPM implements Command {
-    @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
+
+    private User getUser(String id, ShardManager shardManager){
+        User user;
+        try{
+            user = shardManager.getUserById(id);
+        }catch(Exception ex){
+            user = null;
+        }
+
+        return user;
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        Message msg = e.getMessage();
-        TextChannel tc = e.getTextChannel();
+    public void execute(Message msg, String s) {
+        TextChannel tc = msg.getTextChannel();
         String message = "";
+        String[] args = s.split(" ");
 
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(PermUtil.canDeleteMsg(tc))
-            msg.delete().queue();
-
-        if(!PermUtil.isCreator(msg))
-            return;
-
-        if(args.length < 2){
-            e.getChannel().sendMessage(MessageFormat.format(
-                    "{0} Provide a userID and a message!\n" +
-                    "Example: `{1}pm {2} <message>`",
-                    msg.getAuthor().getAsMention(),
-                    CmdPrefix.getPrefix(e.getGuild()),
-                    msg.getAuthor().getId()
-            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+        if (args.length < 2) {
+            EmbedUtil.error(msg, "I need a channel and actual message!");
             return;
         }
 
-        for (int i = 1; i < args.length; i++){
-
-            message += " " + args[i];
+        User user = getUser(args[0], ReadyListener.getShardManager());
+        if (user == null) {
+            EmbedUtil.error(msg, "The provided user is invalid!");
+            return;
         }
-
-        final String text = message;
-
-        e.getJDA().getUserById(args[0]).openPrivateChannel().queue(pm -> {
-            //  Send the PM to the user.
-            pm.sendMessage(text).queue();
-            tc.sendMessage("Successfully send PM!").queue();
-        }, throwable -> {
-            //  If we can't PM the user
-            tc.sendMessage("Unable to PM user! Either the ID is wrong, or the user doesn't allow PM.").queue();
-        });
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < args.length; i++) {
+            if (sb.length() == 0) {
+                sb.append(args[i]);
+                continue;
+            }
+            sb.append(" ").append(args[i]);
+        }
+        user.openPrivateChannel().queue(pm ->
+                pm.sendMessage(sb.toString()).queue(), throwable -> EmbedUtil.error(msg, "Couldn't send PM!"));
     }
 }

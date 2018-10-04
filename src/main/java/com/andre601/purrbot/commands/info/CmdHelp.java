@@ -1,64 +1,65 @@
 package com.andre601.purrbot.commands.info;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
+import com.andre601.purrbot.core.PurrBot;
+import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Errors;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.menu.Paginator;
-import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.entities.*;
 
 import static com.andre601.purrbot.core.PurrBot.waiter;
 
 import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 
+@CommandDescription(
+        name = "Help",
+        description =
+                "See all available commands.\n" +
+                "Add a command after `help` for additional info about that command.",
+        triggers = {"help", "commands", "command"},
+        attributes = {@CommandAttribute(key = "info")}
+)
 public class CmdHelp implements Command {
 
     private static Paginator.Builder pBuilder =
             new Paginator.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);
 
-    public static void usage(Message msg, String command, String use, String description, String args,
-                             String permission){
-        msg.getChannel().sendTyping().queue();
-        EmbedBuilder uEmbed = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle(String.format(
-                        "Command: %s",
-                        command
+    private static MessageEmbed commandHelp(Message msg, Command cmd, String prefix){
+        CommandDescription description = cmd.getDescription();
+        EmbedBuilder command = EmbedUtil.getEmbed(msg.getAuthor())
+                .setTitle(MessageFormat.format(
+                        "Command: {0}",
+                        description.name()
                 ))
-                .setDescription(String.format(
-                        "**Usage**: `%s%s`\n" +
-                        "\n" +
-                        "**Description**:\n" +
-                        "%s\n" +
-                        "\n" +
-                        "**Arguments**:\n" +
-                        "%s\n" +
-                        "\n" +
-                        "**Required Permission**:\n" +
-                        "%s",
-                        CmdPrefix.getPrefix(msg.getGuild()),
-                        use,
-                        description,
-                        args,
-                        permission
-                ));
+                .setDescription(description.description())
+                .addField("Usage:", MessageFormat.format(
+                        "`{0}{1}`",
+                        prefix,
+                        description.name()
+                ), true)
+                .addField("Aliases:", MessageFormat.format(
+                        "`{0}`",
+                        String.join(", ", description.triggers())
+                ), true);
 
-        msg.getChannel().sendMessage(uEmbed.build()).queue();
+        return command.build();
     }
 
-    private static void usage(Message msg){
+    private static boolean isCommand(Command command){
+        return command.getDescription() != null || command.hasAttribute("description");
+    }
+
+    private static void usage(Message msg, String prefix){
 
         User user = msg.getAuthor();
-        Guild g = msg.getGuild();
+        Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
-        String prefix = CmdPrefix.getPrefix(g);
 
         Paginator page = pBuilder
                 .setItems(MessageFormat.format(
@@ -193,7 +194,7 @@ public class CmdHelp implements Command {
                         MessageUtil.getFact()
                 ))
                 .setText("")
-                .setUsers(user, g.getOwner().getUser())
+                .setUsers(user, guild.getOwner().getUser())
                 .setItemsPerPage(1)
                 .waitOnSinglePage(true)
                 .setFinalAction(message -> {
@@ -206,270 +207,24 @@ public class CmdHelp implements Command {
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        Message msg = e.getMessage();
-        TextChannel tc = e.getTextChannel();
-
-        if (!PermUtil.canWrite(tc))
-            return;
-
-        if(!PermUtil.canSendEmbed(tc)){
-            tc.sendMessage(Errors.NO_EMBED).queue();
-            if(PermUtil.canReact(tc))
-                e.getMessage().addReaction("🚫").queue();
-
-            return;
-        }
-
-        if(!PermUtil.canReact(tc)){
-            tc.sendMessage(Errors.NO_ADD_REACTION).queue();
-            return;
-        }
+    public void execute(Message msg, String s){
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        String prefix = DBUtil.getPrefix(guild);
 
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
-        if(args.length == 0){
-            usage(msg);
-            return;
+        if(s.length() != 0){
+            Command command = PurrBot.COMMAND_HANDLER.findCommand(s.split(" ")[0]);
+
+            if(command == null || !isCommand(command)){
+                EmbedUtil.error(msg, "This command does not exist!");
+                return;
+            }
+            tc.sendMessage(commandHelp(msg, command, prefix)).queue();
+        }else{
+            usage(msg, prefix);
         }
-
-        switch (args[0].toLowerCase()){
-
-            case "help":
-                usage(msg, "Help", "help [command]",
-                        "Shows you all available commands.",
-                        "`[command]` Gives info about a command.",
-                        "`none`"
-                );
-                break;
-
-            case "info":
-                usage(msg, "info", "info [-here]",
-                        "Sends you basic info about the bot (A small description, version, used " +
-                        "Library, ect)",
-                        "`[-here]` Sends the message in the channel in which you've run the command.",
-                        "`none`"
-                );
-                break;
-
-            case "invite":
-                usage(msg, "Invite", "invite [-here]",
-                        "Sends you the invite-Links for the bot and for the official Discord.",
-                        "`[-here]` Sends the message in the channel in which you've run the command.",
-                        "none"
-                );
-                break;
-
-            case "server":
-                usage(msg, "Server",  "server",
-                        "Gives you basic server-infos like users online, verification level, ect.",
-                        "`none`",
-                        "`none`"
-                );
-                break;
-
-            case "user":
-                usage(msg, "User", "user [@user]",
-                        "Gives basic information about the mentioned user.",
-                        "`<@user>` The user to get infos about (as mention).",
-                        "`none`"
-                );
-                break;
-
-            case "neko":
-                usage(msg, "Neko", "neko [-gif] [-slide]",
-                        "Sends a cute neko. 'nuf said.",
-                        "`[-gif]` Sends a cute neko-gif.\n" +
-                        "`[-slide]` Creates a slideshow with 30 images\n" +
-                        "\n" +
-                        "You can use both arguments at the same time!",
-                        "`none`"
-                );
-                break;
-
-            case "hug":
-                usage(msg, "Hug", "hug <@user ...>",
-                        "Gives the mentioned user a hug.",
-                        "`<@user ...>` The user to hug (as mention).",
-                        "`none`"
-                );
-                break;
-
-            case "pat":
-                usage(msg, "Pat", "pat <@user ...>",
-                        "Gives the mentioned user a pat.",
-                        "`<@user ...>` The user(s) to pat (as mention).",
-                        "`none`"
-                );
-                break;
-
-            case "slap":
-                usage(msg, "Slap", "slap <@user ...>",
-                        "Slaps the mentioned user.",
-                        "`<@user ...>` The user(s) to slap (as mention).",
-                        "`none`"
-                );
-                break;
-
-            case "lewd":
-                usage(msg, "Lewd", "lewd [-gif] [-slide]",
-                        "Sends a lewd neko.\n" +
-                        "Can only be used in NSFW-Channels.",
-                        "`[-gif]` Sends a lewd neko-gif.\n" +
-                        "`[-slide]` Creates a slideshow with 30 images\n" +
-                        "\n" +
-                        "You can use both arguments at the same time!",
-                        "`none`"
-                );
-                break;
-
-            case "prefix":
-                usage(msg, "Prefix", "prefix [set <prefix>|reset]",
-                        "Shows the currently used prefix in this Discord, if no argument is given.",
-                        "`[set <prefix>]` Sets the prefix to the provided one.\n" +
-                        "`[reset]` Resets the prefix to the default one.",
-                        "`MANAGE_SERVER` for setting or resetting the prefix.");
-                break;
-
-            case "cuddle":
-                usage(msg, "Cuddle", "cuddle <@user ...>",
-                        "Cuddles the mentioned user.",
-                        "`<@user ...>` The user(s) to cuddle (as mention).",
-                        "`none`"
-                );
-                break;
-
-            case "tickle":
-                usage(e.getMessage(), "Tickle", "tickle <@user ...>",
-                        "Tickles the mentioned user.",
-                        "`<@user ...>` The user(s) to tickle (as mention).",
-                        "`none`"
-                );
-                break;
-
-            case "welcome":
-                usage(e.getMessage(), "Welcome", "welcome [color <rgb:r,g,b|hex:#code>|reset|set " +
-                                "<ChannelID> [image]|test [image] [color]]",
-                        "Shows, sets or resets the Welcome-channel.",
-                        "[color <rgb:r,g,b|hex:#code>] Sets the text-color in either RGB or Hexadecimal.\n" +
-                        "`[reset]` Resets (removes) the welcome-channel.\n" +
-                        "`[test [image] [color]]` Creates a welcome-image in the channel you currently " +
-                        "are. [image] is the image to use. [color] is the text-color.\n" +
-                        "`[set <ChannelID> [image]]` Sets a Channel as Welcome-Channel. [image] lets you set " +
-                        "a different image.",
-                        "`MANAGE_SERVER`"
-                );
-                break;
-
-            case "stats":
-            case "stat":
-                usage(e.getMessage(), "Stats", "stats",
-                        "Shows some statistics of \\*Purr*",
-                        "`none`",
-                        "`none`"
-                );
-                break;
-
-            case "kiss":
-                usage(e.getMessage(), "Kiss", "kiss <@user ...>",
-                        "Lets you kiss someone.",
-                        "`<@user ...>` The user(s) you want to kiss (as mention).",
-                        "`none`"
-                );
-                break;
-
-            case "quote":
-                usage(e.getMessage(), "Quote", "quote <messageID> <#channel>",
-                        "Lets you quote a message.",
-                        "`<messageID>` The ID of the message to quote.\n" +
-                        "`<#channel>` The mention of the channel, where the message is located.",
-                        "`none`"
-                );
-                break;
-
-            case "debug":
-                usage(msg, "Debug", "debug",
-                        "Will create debug-files and post them on [debug.scarsz.me](https://debug.scarsz.me",
-                        "`none`",
-                        "`MANAGE_SERVER`");
-                break;
-
-            case "ping":
-                usage(msg, "Ping", "ping [-api]",
-                        "Will respond with the respond-time in ms.",
-                        "`[-api]` Checks the Ping of the JDA-API.",
-                        "`none`");
-                break;
-
-            case "poke":
-                usage(msg, "Poke", "poke <@user ...>",
-                        "Will poke the mentioned user(s).",
-                        "`<@user ...>` The user(s) you want to poke (as mention)",
-                        "`none`");
-                break;
-
-            case "gecg":
-                usage(msg, "Gecg", "gecg",
-                        "Posts a image from [gecfdo.com](https://gecfdo.com).",
-                        "`none`",
-                        "`none`");
-                break;
-
-            case "lesbian":
-            case "les":
-                usage(msg, "Lesbian", "lesbian",
-                        "Posts a lesbian-gif.\n" +
-                        "Can only be used in NSFW-labeled channels!",
-                        "`none`",
-                        "`none`");
-                break;
-
-            case "kitsune":
-            case "foxgirl":
-                usage(msg, "Kitsune", "kitsune",
-                        "Posts a image of a kitsune (foxgirl).",
-                        "`none`",
-                        "`none`"
-                );
-                break;
-
-            case "fakegit":
-            case "git":
-                usage(msg, "Fakegit", "fakegit",
-                        "Creates a fake github-message.",
-                        "`none`",
-                        "`none`");
-                break;
-
-            case "fuck":
-                usage(msg, "Fuck", "fuck <@user>",
-                        "Sends a request to the mentioned user, who can accept it.\n" +
-                        "To accept, you have to type `>accept`!\n" +
-                        "\n" +
-                        "Can only be used in NSFW-labeled channels.",
-                        "`<@user>` The user you want to fuck.",
-                        "`none`");
-                break;
-
-            default:
-                usage(msg);
-        }
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
     }
 }

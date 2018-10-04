@@ -1,83 +1,57 @@
 package com.andre601.purrbot.commands.owner;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
-import com.andre601.purrbot.commands.Command;
-import com.andre601.purrbot.util.PermUtil;
-import net.dv8tion.jda.core.JDA;
+import com.andre601.purrbot.listeners.ReadyListener;
+import com.andre601.purrbot.util.messagehandling.EmbedUtil;
+import com.github.rainestormee.jdacommand.Command;
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.util.concurrent.TimeUnit;
-
+@CommandDescription(
+        name = "Leave",
+        description = "Lets the bot leave a guild (with optional PM)",
+        triggers = {"leave", "bye"},
+        attributes = {@CommandAttribute(key = "owner")}
+)
 public class CmdMsg implements Command {
 
-    private static TextChannel getTChannel(String id, JDA jda){
+    private static TextChannel getTChannel(String id, ShardManager shardManager){
+        TextChannel channel;
         try{
-            return jda.getTextChannelById(id);
+            channel = shardManager.getTextChannelById(id);
         }catch (Exception ignored){
-            return null;
+            channel = null;
         }
+
+        return channel;
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent e) {
-        return false;
-    }
-
-    @Override
-    public void action(String[] args, MessageReceivedEvent e) {
-
-        Message msg = e.getMessage();
-        TextChannel tc = e.getTextChannel();
+    public void execute(Message msg, String s) {
+        TextChannel tc = msg.getTextChannel();
         String message = "";
+        String[] args = s.split(" ");
 
-        if (!PermUtil.canWrite(tc))
+        if (args.length < 2) {
+            EmbedUtil.error(msg, "I need a channel and actual message!");
             return;
-
-        if(PermUtil.canDeleteMsg(tc))
-            msg.delete().queue();
-
-        if(PermUtil.isCreator(msg)){
-            if(args.length < 2){
-                e.getChannel().sendMessage(String.format(
-                        "Provide a Channel and message! (`%smsg <ChannelID> <Message>`",
-                        CmdPrefix.getPrefix(e.getGuild())
-                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-                return;
-            }
-
-            if(getTChannel(args[0], e.getJDA()) == null){
-                e.getChannel().sendMessage(String.format(
-                        "Provide a valid ChannelID! (`%smsg <ChannelID> <Message>`",
-                        CmdPrefix.getPrefix(e.getGuild())
-                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-                return;
-            }
-
-            for (int i = 1; i < args.length; i++){
-
-                message += " " + args[i];
-            }
-
-            e.getJDA().getTextChannelById(args[0]).sendMessage(message).queue();
-
-        }else{
-            e.getChannel().sendMessage(String.format(
-                    "No. You can't use that command %s! Only my dad can use it.",
-                    msg.getAuthor().getAsMention()
-            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
         }
 
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent e) {
-
-    }
-
-    @Override
-    public String help() {
-        return null;
+        TextChannel textChannel = getTChannel(args[0], ReadyListener.getShardManager());
+        if (textChannel == null) {
+            EmbedUtil.error(msg, "The provided channel is invalid!");
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < args.length; i++) {
+            if (sb.length() == 0) {
+                sb.append(args[i]);
+                continue;
+            }
+            sb.append(" ").append(args[i]);
+        }
+        textChannel.sendMessage(sb.toString()).queue();
     }
 }
