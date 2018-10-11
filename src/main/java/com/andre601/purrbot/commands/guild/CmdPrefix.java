@@ -1,4 +1,4 @@
-package com.andre601.purrbot.commands.server;
+package com.andre601.purrbot.commands.guild;
 
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.PermUtil;
@@ -19,7 +19,7 @@ import java.text.MessageFormat;
         name = "Prefix",
         description = "Set or reset a prefix",
         triggers = {"prefix"},
-        attributes = {@CommandAttribute(key = "manage_Server")}
+        attributes = {@CommandAttribute(key = "manage_Server"), @CommandAttribute(key = "guild")}
 )
 public class CmdPrefix implements Command {
 

@@ -91,10 +91,6 @@ public class ReadyListener extends ListenerAdapter{
                     guilds,
                     jda.asBot().getShardManager().getShardCache().size()
             ));
-
-            //  Sending update if Bot isn't beta
-            if(!PermUtil.isBeta())
-                PurrBot.getAPI().setStats(2);
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.andre601.purrbot.listeners;
 
-import com.andre601.purrbot.commands.server.CmdWelcome;
+import com.andre601.purrbot.commands.guild.CmdWelcome;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.ImageUtil;

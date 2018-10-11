@@ -49,7 +49,7 @@ public class CmdInfo implements Command {
                         "and a lot of free time. ;)\n" +
                         "\n" +
                         "**Commands**\n" +
-                        "You can use %shelp on your server to see all of my commands.",
+                        "You can use %shelp on your guild to see all of my commands.",
                         msg.getJDA().getSelfUser().getName(),
                         DBUtil.getPrefix(guild)
                 ))

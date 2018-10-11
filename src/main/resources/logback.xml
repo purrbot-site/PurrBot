@@ -8,7 +8,7 @@
             <level>INFO</level>
         </filter>
         <encoder>
-            <pattern>%cyan([) %boldWhite([%d{dd.MM.yyyy HH:mm:ss}) %cyan(%-5level]) %boldBlue([%t]) %boldWhite([%logger{32}]) %boldRed(-->) %white(%msg) %n
+            <pattern>%cyan([) %boldWhite(%d{dd.MM.yyyy HH:mm:ss}) %cyan(%-5level]) %boldBlue([%t]) %boldWhite([%logger{32}]) %boldRed(-->) %white(%msg) %n
             </pattern>
         </encoder>
     </appender>

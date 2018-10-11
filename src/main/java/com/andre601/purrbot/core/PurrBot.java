@@ -59,8 +59,6 @@ public class PurrBot {
 
     private static Set<String> images = new HashSet<>();
 
-    public static JDA jda;
-
     private static Logger logger = (Logger) LoggerFactory.getLogger(PurrBot.class);
 
     public static EventWaiter waiter = new EventWaiter();
@@ -71,6 +69,7 @@ public class PurrBot {
 
         //  Creating the file, if not existing, or just loading it.
         file.make("config", "./config.json", "/config.json");
+        //  We start a scheduler here that runs updateData every 10 minutes
         PurrBot.scheduler.scheduleAtFixedRate(MessageUtil.updateData(), 1, 10, TimeUnit.MINUTES);
 
         //  Setting the API-token, if the bot isn't beta.
@@ -107,6 +106,7 @@ public class PurrBot {
                 "random"
         );
 
+        //  Setup the listener for votes on /vote, when the bot isn't beta
         if(!PermUtil.isBeta()) {
             Spark.port(1000);
 
@@ -120,7 +120,10 @@ public class PurrBot {
             });
         }
 
+        //  We register our commands through the CommandRegisterHandler.java
         COMMAND_HANDLER.registerCommands(new CommandRegisterHandler().getCommands());
+
+        //  Creating and enabling the bot through the DefaultShardManagerBuilder
         new DefaultShardManagerBuilder().setToken(file.getItem("config", "token"))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .setGame(Game.playing("Starting bot..."))

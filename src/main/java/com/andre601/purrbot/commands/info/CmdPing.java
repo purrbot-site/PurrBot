@@ -1,6 +1,5 @@
 package com.andre601.purrbot.commands.info;
 
-import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;

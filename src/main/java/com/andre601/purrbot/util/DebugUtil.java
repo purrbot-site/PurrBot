@@ -1,5 +1,13 @@
 package com.andre601.purrbot.util;
 
+/*
+ * ---------------------------------------------------------------------
+ * Code from DiscordSRV (https://github.com/Scarsz/DiscordSRV)
+ *
+ * Original Copyright (c) Scasrsz (Scarsz lol) 2018 (https://scarsz.me)
+ * ---------------------------------------------------------------------
+ */
+
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.google.common.io.CharStreams;
@@ -21,20 +29,11 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
-/*
- * ---------------------------------------------------------------------
- * Code from DiscordSRV (https://github.com/Scarsz/DiscordSRV)
- *
- * Original Copyright (c) Scasrsz (Scarsz lol) 2018 (https://scarsz.me)
- * ---------------------------------------------------------------------
- */
 
 public class DebugUtil {
 
     public static String run(User requester, TextChannel tc){
-        Guild g = tc.getGuild();
+        Guild guild = tc.getGuild();
 
         Map<String, String> files = new LinkedHashMap<>();
         try{
@@ -52,44 +51,45 @@ public class DebugUtil {
                     "# Info about who requested the debug.",
                     "#",
                     "",
-                    "Requester: " + MessageUtil.getTag(requester),
+                    "Requester: " + MessageUtil.getTag(requester) + " (" + requester.getId() + ")",
                     "",
                     "#",
                     "# Info about the bot-Settings (Welcome-settings, prefix, roles of the bot)",
                     "#",
                     "",
-                    getWelcomeInfo(g),
+                    getWelcomeInfo(guild),
                     "",
-                    "Guild-Prefix: " + getGuildPrefix(g),
-                    "Roles: " + g.getSelfMember().getRoles().size(),
-                    "  " + getOwnRoles(g)
+                    "Guild-Prefix: " + getGuildPrefix(guild),
+                    "Roles: " + guild.getSelfMember().getRoles().size(),
+                    getOwnRoles(guild)
             }));
             files.put("Guild-Info.yaml", String.join("\n", new String[]{
                     "#",
                     "# Basic Guild-Info",
                     "#",
                     "",
-                    "Guildname: "  + g.getName(),
-                    "Guild-ID: " + g.getId(),
-                    "Owner: " + MessageUtil.getTag(g.getOwner().getUser()) + "(" + g.getOwner().getUser().getId() + ")",
+                    "Guildname: "  + guild.getName(),
+                    "Guild-ID: " + guild.getId(),
+                    "Owner: " + MessageUtil.getTag(guild.getOwner().getUser()) + " (" +
+                            guild.getOwner().getUser().getId() + ")",
                     "",
                     "Users:",
-                    "  Total: " + g.getMembers().toArray().length,
-                    "  Humans: " + g.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
-                    "  Bots: " + g.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length,
+                    "  Total: " + guild.getMembers().toArray().length,
+                    "  Humans: " + guild.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
+                    "  Bots: " + guild.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length,
                     "",
-                    "TextChannels: " + g.getTextChannels().size(),
-                    "  " + getChannels(g),
+                    "TextChannels: " + guild.getTextChannels().size(),
+                    getChannels(guild),
                     "",
-                    "Roles: " + g.getRoles().size(),
-                    "  " + getRoles(g)
+                    "Roles: " + guild.getRoles().size(),
+                    getRoles(guild)
             }));
             files.put("TextChannel-Permissions.yaml", String.join("\n", new String[]{
                     "#",
                     "# All Channels and their permission for the bot",
                     "#",
                     "",
-                    getChannelPerms(g)
+                    getChannelPerms(guild)
             }));
         }catch(Exception ignored){
             tc.sendMessage(MessageFormat.format(
@@ -101,21 +101,33 @@ public class DebugUtil {
         return makeReport(files, requester);
     }
 
-    private static String getChannels(Guild g){
-        return g.getTextChannels().stream().map(TextChannel::toString).collect(Collectors.joining("\n  "));
+    private static String getChannels(Guild guild){
+        StringBuilder sb = new StringBuilder();
+        for(TextChannel tc : guild.getTextChannels()){
+            sb.append("  ").append(tc.getName()).append(" (").append(tc.getId()).append(")\n");
+        }
+        return sb.toString();
     }
 
-    private static String getRoles(Guild g){
-        return g.getRoles().stream().map(Role::toString).collect(Collectors.joining("\n  "));
+    private static String getRoles(Guild guild){
+        StringBuilder sb = new StringBuilder();
+        for(Role role : guild.getRoles()){
+            sb.append("  ").append(role.getName()).append(" (").append(role.getId()).append(")\n");
+        }
+        return sb.toString();
     }
 
-    private static String getOwnRoles(Guild g){
-        return g.getSelfMember().getRoles().stream().map(Role::toString).collect(Collectors.joining("\n  "));
+    private static String getOwnRoles(Guild guild){
+        StringBuilder sb = new StringBuilder();
+        for(Role role : guild.getSelfMember().getRoles()){
+            sb.append("  ").append(role.getName()).append(" (").append(role.getId()).append(")\n");
+        }
+        return sb.toString();
     }
 
-    private static String getChannelPerms(Guild g){
+    private static String getChannelPerms(Guild guild){
         List<String> output = new LinkedList<>();
-        g.getTextChannels().forEach(textChannel -> {
+        guild.getTextChannels().forEach(textChannel -> {
             if(textChannel != null){
                 List<String> channels = new LinkedList<>();
                 channels.add("Read: " + PermUtil.canRead(textChannel));
@@ -125,51 +137,44 @@ public class DebugUtil {
                 channels.add("Add Reaction: " + PermUtil.canReact(textChannel));
                 channels.add("Attach files: " + PermUtil.canUploadImage(textChannel));
                 channels.add("Use external emojis: " + PermUtil.canUseCustomEmojis(textChannel));
-                output.add(textChannel + ":\n  " + String.join("\n  ", channels));
+                output.add(MessageFormat.format(
+                        "{0} ({1})\n" +
+                        "  {2}",
+                        textChannel.getName(),
+                        textChannel.getId(),
+                        String.join("\n  ", channels)
+                ));
             }
         });
         return String.join("\n", output);
     }
 
-    private static String getWelcomeInfo(Guild g){
-        String channelId = DBUtil.getWelcome(g);
-        String colorInfo = DBUtil.getColor(g);
+    private static String getWelcomeInfo(Guild guild){
+        String channelId = DBUtil.getWelcome(guild);
+        String colorInfo = DBUtil.getColor(guild);
         String colorType = colorInfo.split(":")[0];
         String colorValue = colorInfo.split(":")[1];
-        return "Welcome-channel: " + getChannelNameAndId(channelId, g) + "\n" +
+        return "Welcome-channel: " + getChannelNameAndId(channelId, guild) + "\n" +
                 "  Color-Type: " + colorType + "\n" +
                 "  Color-Value: " + colorValue + "\n" +
-                "  Image: " + DBUtil.getImage(g);
+                "  Image: " + DBUtil.getImage(guild);
     }
 
-    private static String getGuildPrefix(Guild g){
-        return DBUtil.getPrefix(g);
+    private static String getGuildPrefix(Guild guild){
+        return DBUtil.getPrefix(guild);
     }
 
-    //  Returns true, if the channel is not null (exists) and false, when it is null
-    private static boolean isChannelValid(String id, Guild g){
-        try{
-            g.getTextChannelById(id);
-            return true;
-        }catch (Exception ex){
-            return false;
-        }
-    }
+    private static String getChannelNameAndId(String id, Guild guild){
+        TextChannel channel = guild.getTextChannelById(id);
 
-    private static String getChannelNameAndId(String id, Guild g){
-        if(id.equalsIgnoreCase("none"))
-            return "No Channel set";
-
-        boolean channelValid = isChannelValid(id, g);
-
-        if(channelValid){
+        if(channel != null){
             return MessageFormat.format(
                     "{0} ({1})",
-                    g.getTextChannelById(id).getName(),
-                    g.getTextChannelById(id).getId()
+                    channel.getName(),
+                    channel.getId()
             );
         }else{
-            return "Invalid ChannelID " + id;
+            return "No channel set";
         }
     }
 
@@ -185,7 +190,8 @@ public class DebugUtil {
             String url = uploadDebug(files);
             return "New Debug created! " + url;
         }catch (Exception ex){
-            return MessageFormat.format("There was an issue with making the debug!\n" +
+            return MessageFormat.format(
+                    "There was an issue with making the debug!\n" +
                     "Reason: {0}",
                     ex.getMessage());
         }

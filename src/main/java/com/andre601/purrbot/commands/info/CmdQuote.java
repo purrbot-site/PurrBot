@@ -1,11 +1,8 @@
 package com.andre601.purrbot.commands.info;
 
-import com.andre601.purrbot.commands.server.CmdPrefix;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.ImageUtil;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.util.PermUtil;
 
 import com.github.rainestormee.jdacommand.Command;

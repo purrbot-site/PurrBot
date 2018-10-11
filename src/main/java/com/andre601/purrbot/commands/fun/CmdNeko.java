@@ -1,6 +1,5 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
@@ -26,7 +25,7 @@ import static com.andre601.purrbot.core.PurrBot.waiter;
         name = "Neko",
         description = "Gives you a lovely neko (catgirl)",
         triggers = {"neko", "catgirl"},
-        attributes = {@CommandAttribute(key = "")}
+        attributes = {@CommandAttribute(key = "fun")}
 )
 public class CmdNeko implements Command {
 

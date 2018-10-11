@@ -1,7 +1,5 @@
 package com.andre601.purrbot.commands.info;
 
-import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
@@ -11,7 +9,6 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;

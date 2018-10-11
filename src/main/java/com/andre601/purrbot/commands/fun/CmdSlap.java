@@ -1,6 +1,5 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -31,24 +30,27 @@ public class CmdSlap implements Command {
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
         List<Member> members = msg.getMentionedMembers();
-        if(members.size() == 1){
-            Member member = members.get(0);
-            if(member == msg.getMember()){
-                tc.sendMessage(MessageFormat.format(
-                        "Why do you hurt yourself {0}?",
-                        member.getAsMention()
-                )).queue();
-                return;
-            }
-        }
 
         if(members.contains(guild.getSelfMember())){
             tc.sendMessage("Please don't hurt me!").queue();
             msg.addReaction("\uD83D\uDC94").queue();
         }
 
+        if(members.contains(msg.getMember())){
+            tc.sendMessage(MessageFormat.format(
+                    "Stop hurting yourself {0}!",
+                    msg.getMember().getAsMention()
+            )).queue();
+        }
+
         String link = HttpUtil.getSlap();
-        String pattetMembers = members.stream().map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String slapedMembers = members.stream().filter(
+                member -> member != guild.getSelfMember()
+        ).filter(
+                member -> member != msg.getMember()
+        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+
+        if(slapedMembers.equals("") || slapedMembers.length() == 0) return;
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a slap-gif...",
@@ -58,13 +60,13 @@ public class CmdSlap implements Command {
                 message.editMessage(MessageFormat.format(
                         "{0} slaps you {1}",
                         msg.getAuthor().getName(),
-                        pattetMembers
+                        slapedMembers
                 )).queue();
             }else{
                 message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} slaps you {1}",
                         msg.getAuthor().getName(),
-                        pattetMembers
+                        slapedMembers
                 )).setImage(link).build()).queue();
             }
         });

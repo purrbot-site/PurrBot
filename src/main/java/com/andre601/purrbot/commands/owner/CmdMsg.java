@@ -10,9 +10,9 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
 @CommandDescription(
-        name = "Leave",
-        description = "Lets the bot leave a guild (with optional PM)",
-        triggers = {"leave", "bye"},
+        name = "Message",
+        description = "Sends a message to a provided channel.",
+        triggers = {"message", "msg"},
         attributes = {@CommandAttribute(key = "owner")}
 )
 public class CmdMsg implements Command {

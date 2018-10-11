@@ -1,8 +1,6 @@
 package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
-import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;

@@ -1,6 +1,5 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.HttpUtil;
@@ -31,24 +30,27 @@ public class CmdTickle implements Command {
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
         List<Member> members = msg.getMentionedMembers();
-        if(members.size() == 1){
-            Member member = members.get(0);
-            if(member == msg.getMember()){
-                tc.sendMessage(MessageFormat.format(
-                        "You know that you should tickle someone else, right {0}?",
-                        member.getAsMention()
-                )).queue();
-                return;
-            }
-        }
 
         if(members.contains(guild.getSelfMember())){
             tc.sendMessage("N-no... Please I... I c-can't \\*starts laughing*").queue();
             msg.addReaction("\uD83D\uDE02").queue();
         }
 
+        if(members.contains(msg.getMember())){
+            tc.sendMessage(MessageFormat.format(
+                    "Are you that bored, to tickle yourself {0}?",
+                    msg.getMember().getAsMention()
+            )).queue();
+        }
+
         String link = HttpUtil.getTickle();
-        String pattetMembers = members.stream().map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String tickledMembers = members.stream().filter(
+                member -> member != guild.getSelfMember()
+        ).filter(
+                member -> member != msg.getMember()
+        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+
+        if(tickledMembers.equals("") || tickledMembers.length() == 0) return;
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a tickle-gif...",
@@ -58,13 +60,13 @@ public class CmdTickle implements Command {
                 message.editMessage(MessageFormat.format(
                         "{0} tickles you {1}",
                         msg.getAuthor().getName(),
-                        pattetMembers
+                        tickledMembers
                 )).queue();
             }else{
                 message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} tickles you {1}",
                         msg.getAuthor().getName(),
-                        pattetMembers
+                        tickledMembers
                 )).setImage(link).build()).queue();
             }
         });

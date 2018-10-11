@@ -1,7 +1,6 @@
 package com.andre601.purrbot.commands.nsfw;
 
 import com.andre601.purrbot.core.PurrBot;
-import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;

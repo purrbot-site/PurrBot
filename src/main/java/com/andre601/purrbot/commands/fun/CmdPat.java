@@ -1,6 +1,5 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -31,24 +30,27 @@ public class CmdPat implements Command {
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
         List<Member> members = msg.getMentionedMembers();
-        if(members.size() == 1){
-            Member member = members.get(0);
-            if(member == msg.getMember()){
-                tc.sendMessage(MessageFormat.format(
-                        "How can you actually pat yourself {0}?",
-                        member.getAsMention()
-                )).queue();
-                return;
-            }
-        }
 
         if(members.contains(guild.getSelfMember())){
             tc.sendMessage("\\*purr™*").queue();
             msg.addReaction("❤").queue();
         }
 
+        if(members.contains(msg.getMember())){
+            tc.sendMessage(MessageFormat.format(
+                    "Don't you have a neko to pat {0}?",
+                    msg.getMember().getAsMention()
+            )).queue();
+        }
+
         String link = HttpUtil.getPat();
-        String pattetMembers = members.stream().map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String pattetMembers = members.stream().filter(
+                member -> member != guild.getSelfMember()
+        ).filter(
+                member -> member != msg.getMember()
+        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+
+        if(pattetMembers.equals("") || pattetMembers.length() == 0) return;
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a pat-gif...",

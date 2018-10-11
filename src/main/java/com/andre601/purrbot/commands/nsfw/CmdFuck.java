@@ -4,7 +4,6 @@ import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.IDs;
-import com.andre601.purrbot.util.constants.Errors;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;

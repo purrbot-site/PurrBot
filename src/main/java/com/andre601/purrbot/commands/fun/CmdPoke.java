@@ -1,6 +1,5 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -31,24 +30,27 @@ public class CmdPoke implements Command {
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
         List<Member> members = msg.getMentionedMembers();
-        if(members.size() == 1){
-            Member member = members.get(0);
-            if(member == msg.getMember()){
-                tc.sendMessage(MessageFormat.format(
-                        "Why do you poke yourself {0}?",
-                        member.getAsMention()
-                )).queue();
-                return;
-            }
-        }
 
         if(members.contains(guild.getSelfMember())){
             tc.sendMessage("Nya! Do nu poke me! >-<").queue();
             msg.addReaction("\uD83D\uDE16").queue();
         }
 
+        if(members.contains(msg.getMember())){
+            tc.sendMessage(MessageFormat.format(
+                    "How can you actually poke yourself {0}?",
+                    msg.getMember().getAsMention()
+            )).queue();
+        }
+
         String link = HttpUtil.getPoke();
-        String pattetMembers = members.stream().map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String pokedMembers = members.stream().filter(
+                member -> member != guild.getSelfMember()
+        ).filter(
+                member -> member != msg.getMember()
+        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+
+        if(pokedMembers.equals("") || pokedMembers.length() == 0) return;
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a poke-gif...",
@@ -58,13 +60,13 @@ public class CmdPoke implements Command {
                 message.editMessage(MessageFormat.format(
                         "{0} pokes you {1}",
                         msg.getAuthor().getName(),
-                        pattetMembers
+                        pokedMembers
                 )).queue();
             }else{
                 message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} pokes you {1}",
                         msg.getAuthor().getName(),
-                        pattetMembers
+                        pokedMembers
                 )).setImage(link).build()).queue();
             }
         });

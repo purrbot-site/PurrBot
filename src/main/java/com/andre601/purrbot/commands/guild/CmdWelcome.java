@@ -1,4 +1,4 @@
-package com.andre601.purrbot.commands.server;
+package com.andre601.purrbot.commands.guild;
 
 import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.DBUtil;
@@ -26,7 +26,7 @@ import static com.andre601.purrbot.core.PurrBot.waiter;
         name = "Welcome",
         description = "Sets or resets a welcome-channel",
         triggers = {"welcome"},
-        attributes = {@CommandAttribute(key = "manage_Server")}
+        attributes = {@CommandAttribute(key = "manage_Server"), @CommandAttribute(key = "guild")}
 )
 public class CmdWelcome implements Command {
 
@@ -210,15 +210,15 @@ public class CmdWelcome implements Command {
                         "**Images**: `Nekos`\n" +
                         "\n" +
                         "```\n" +
-                        "Name:          From:\n" +
+                        "Name:           From:\n" +
                         "\n" +
-                        "Purr           @Andre_601#6811\n" +
+                        "Purr            @Andre_601#6811\n" +
                         "  Default image of *Purr*\n" +
                         "\n" +
-                        "Neko1          @Andre_601#6811\n" +
+                        "Neko1           @Andre_601#6811\n" +
                         "  Image with a neko.\n" +
                         "\n" +
-                        "Neko2          @Andre_601#6811\n" +
+                        "Neko2           @Andre_601#6811\n" +
                         "  Another image with a neko." +
                         "```\n" +
                         "Use `{0}welcome test [image] [color]` to test a image and color.\n" +

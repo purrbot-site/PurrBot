@@ -3,6 +3,7 @@ package com.andre601.purrbot.commands.info;
 import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.Links;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
@@ -15,6 +16,9 @@ import net.dv8tion.jda.core.entities.*;
 import static com.andre601.purrbot.core.PurrBot.waiter;
 
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
@@ -27,8 +31,17 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdHelp implements Command {
 
-    private static Paginator.Builder pBuilder =
-            new Paginator.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);
+    private Paginator.Builder pBuilder;
+
+    private HashMap<String, String> categories = new LinkedHashMap<String, String>(){
+        {
+            put("fun", "\uD83C\uDFB2");
+            put("guild", "\uD83C\uDFAE");
+            put("info", "ℹ");
+            put("nsfw", "\uD83D\uDC8B");
+            put("owner", "<:andre_601:411527902648074240>");
+        }
+    };
 
     private static MessageEmbed commandHelp(Message msg, Command cmd, String prefix){
         CommandDescription description = cmd.getDescription();
@@ -55,155 +68,8 @@ public class CmdHelp implements Command {
         return command.getDescription() != null || command.hasAttribute("description");
     }
 
-    private static void usage(Message msg, String prefix){
-
-        User user = msg.getAuthor();
-        Guild guild = msg.getGuild();
-        TextChannel tc = msg.getTextChannel();
-
-        Paginator page = pBuilder
-                .setItems(MessageFormat.format(
-                        "**Command-Prefix**: {0}\n" +
-                        "\n" +
-                        "**Commands**:\n" +
-                        "Use the reactions to switch through the pages.\n" +
-                        "Type `{0}help [command]` to get infos about a command!\n" +
-                        "\n" +
-                        "```\n" +
-                        "Pages:\n" +
-                        "  Fun\n" +
-                        "  Informative\n" +
-                        "  NSFW\n" +
-                        "  Server\n" +
-                        "```\n" +
-                        "\n" +
-                        "**Random fact**:\n" +
-                        "{1}",
-                        prefix,
-                        MessageUtil.getFact()
-                ), MessageFormat.format(
-                        "**Command-Prefix**: {0}\n" +
-                        "\n" +
-                        "**Commands**:\n" +
-                        "Use the reactions to switch through the pages.\n" +
-                        "Type `{0}help [command]` to get infos about a command!\n" +
-                        "\n" +
-                        "**Fun**:\n" +
-                        "```\n" +
-                        "Command:   Argument(s):\n" +
-                        "\n" +
-                        "Cuddle     <@user ...>\n" +
-                        "Fakegit\n" +
-                        "Gecg\n" +
-                        "Hug        <@user ...>\n" +
-                        "Kiss       <@user ...>\n" +
-                        "Kitsune\n" +
-                        "Neko       [-gif]\n" +
-                        "           [-slide]\n" +
-                        "Pat        <@user ...>\n" +
-                        "Poke       <@user ...>\n" +
-                        "Slap       <@user ...>\n" +
-                        "Tickle     <@user ...>\n" +
-                        "\n" +
-                        "[optional]\n" +
-                        "<required>\n" +
-                        "```\n" +
-                        "\n" +
-                        "**Random fact**:\n" +
-                        "{1}",
-                        prefix,
-                        MessageUtil.getFact()
-                ), MessageFormat.format(
-                        "**Command-Prefix**: {0}\n" +
-                        "\n" +
-                        "**Commands**:\n" +
-                        "Use the reactions to switch through the pages.\n" +
-                        "Type `{0}help [command]` to get infos about a command!\n" +
-                        "\n" +
-                        "**Informative**:\n" +
-                        "```\n" +
-                        "Command:   Argument(s):\n" +
-                        "\n" +
-                        "Emote      <Emote>\n" +
-                        "Help       [command]\n" +
-                        "Info       [-here]\n" +
-                        "Invite     [-here]\n" +
-                        "Ping       [-api]\n" +
-                        "Quote      <messageID> <#channel>\n" +
-                        "Server\n" +
-                        "Stats\n" +
-                        "User       [@user]\n" +
-                        "\n" +
-                        "[optional]\n" +
-                        "<required>\n" +
-                        "```\n" +
-                        "\n" +
-                        "**Random fact**:\n" +
-                        "{1}",
-                        prefix,
-                        MessageUtil.getFact()
-                ), MessageFormat.format(
-                        "**Command-Prefix**: {0}\n" +
-                        "\n" +
-                        "**Commands**:\n" +
-                        "Use the reactions to switch through the pages.\n" +
-                        "Type `{0}help [command]` to get infos about a command!\n" +
-                        "\n" +
-                        "**NSFW**:\n" +
-                        "```\n" +
-                        "Command:   Argument(s):\n" +
-                        "\n" +
-                        "Fuck       <@user>\n" +
-                        "Lewd       [-gif]\n" +
-                        "           [-slide]\n" +
-                        "Lesbian\n" +
-                        "\n" +
-                        "[optional]\n" +
-                        "```\n" +
-                        "\n" +
-                        "**Random fact**:\n" +
-                        "{1}",
-                        prefix,
-                        MessageUtil.getFact()
-                ), MessageFormat.format(
-                        "**Command-Prefix**: {0}\n" +
-                        "\n" +
-                        "**Commands**:\n" +
-                        "Use the reactions to switch through the pages.\n" +
-                        "Type `{0}help [command]` to get infos about a command!\n" +
-                        "\n" +
-                        "**Server**:\n" +
-                        "```\n" +
-                        "Command:   Argument(s):\n" +
-                        "\n" +
-                        "Debug\n" +
-                        "Prefix     [set <prefix>]\n" +
-                        "           [reset]\n" +
-                        "Welcome    [color <rgb:r,g,b|hex:#code>]\n" +
-                        "           [reset]\n" +
-                        "           [set <ChannelID> [image]]\n" +
-                        "           [test [image]]\n" +
-                        "\n" +
-                        "[optional]\n" +
-                        "<required>\n" +
-                        "```\n" +
-                        "\n" +
-                        "**Random fact**:\n" +
-                        "{1}",
-                        prefix,
-                        MessageUtil.getFact()
-                ))
-                .setText("")
-                .setUsers(user, guild.getOwner().getUser())
-                .setItemsPerPage(1)
-                .waitOnSinglePage(true)
-                .setFinalAction(message -> {
-                    if(message != null)
-                        message.delete().queue();
-                })
-                .build();
-
-        page.display(tc);
+    private String firstUpperCase(String word){
+        return Character.toString(word.charAt(0)).toUpperCase() + word.substring(1).toLowerCase();
     }
 
     @Override
@@ -215,6 +81,72 @@ public class CmdHelp implements Command {
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
+        pBuilder = new Paginator.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);
+
+        HashMap<String, StringBuilder> builders = new LinkedHashMap<>();
+
+        for(Map.Entry<String, String> category : categories.entrySet()){
+            builders.put(category.getKey(), new StringBuilder());
+        }
+
+        for(Command command : PurrBot.COMMAND_HANDLER.getCommands()){
+            String category;
+
+            if(!command.hasAttribute("owner")){
+                category = builders.keySet().stream().filter(command::hasAttribute).findFirst().get();
+            }else{
+                category = "owner";
+            }
+
+            builders.get(category).append(String.format(
+                    "[`%s%s`](%s '%s')\n",
+                    prefix,
+                    command.getDescription().name(),
+                    Links.GITHUB,
+                    command.getDescription().description()
+            ));
+        }
+
+        pBuilder.addItems(String.format(
+                "Use the reactions, to navigate through the pages.\n" +
+                "Run `%shelp [command]` or hover over a command, to get more information!\n" +
+                "\n" +
+                "```\n" +
+                "Pages:\n" +
+                "  Fun\n" +
+                "  Guild\n" +
+                "  Info\n" +
+                "  NSFW\n" +
+                "```\n" +
+                "\n" +
+                "**Random fact:\n" +
+                "%s",
+                prefix,
+                MessageUtil.getFact()
+        ));
+
+        for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
+            if(builderEntry.getKey().equals("owner") && !PermUtil.isCreator(msg)){
+                continue;
+            }
+
+            pBuilder.addItems(String.format(
+                    "Use the reactions, to navigate through the pages.\n" +
+                            "Run `%shelp [command]` or hover over a command, to get more information!\n" +
+                            "\n" +
+                            "%s **%s**\n" +
+                            "%s" +
+                            "\n" +
+                            "**Random fact:\n" +
+                            "%s",
+                    prefix,
+                    categories.get(builderEntry.getKey()),
+                    firstUpperCase(builderEntry.getKey()),
+                    builderEntry.getValue(),
+                    MessageUtil.getFact()
+            ));
+        }
+
         if(s.length() != 0){
             Command command = PurrBot.COMMAND_HANDLER.findCommand(s.split(" ")[0]);
 
@@ -224,7 +156,15 @@ public class CmdHelp implements Command {
             }
             tc.sendMessage(commandHelp(msg, command, prefix)).queue();
         }else{
-            usage(msg, prefix);
+            pBuilder.setText("")
+                    .setFinalAction(message -> {
+                        if(message != null)
+                            message.delete().queue();
+                    })
+                    .waitOnSinglePage(false)
+                    .setItemsPerPage(1)
+                    .build()
+                    .display(tc);
         }
     }
 }

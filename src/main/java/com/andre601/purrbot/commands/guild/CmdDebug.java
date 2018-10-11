@@ -1,6 +1,5 @@
-package com.andre601.purrbot.commands.server;
+package com.andre601.purrbot.commands.guild;
 
-import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
@@ -18,7 +17,7 @@ import java.util.concurrent.TimeUnit;
         name = "Debug",
         description = "Generates a debug",
         triggers = {"debug"},
-        attributes = {@CommandAttribute(key = "manage_Server")}
+        attributes = {@CommandAttribute(key = "manage_Server"), @CommandAttribute(key = "guild")}
 )
 public class CmdDebug implements Command {
 

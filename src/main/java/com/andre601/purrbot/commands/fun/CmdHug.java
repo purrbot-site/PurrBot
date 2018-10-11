@@ -1,6 +1,5 @@
 package com.andre601.purrbot.commands.fun;
 
-import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -31,16 +30,6 @@ public class CmdHug implements Command {
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
         List<Member> members = msg.getMentionedMembers();
-        if(members.size() == 1){
-            Member member = members.get(0);
-            if(member == msg.getMember()){
-                tc.sendMessage(MessageFormat.format(
-                        "Why do you wanna hug yourself {0}? Are you lonely?",
-                        member.getAsMention()
-                )).queue();
-                return;
-            }
-        }
 
         if(members.contains(guild.getSelfMember())){
             tc.sendMessage(MessageFormat.format(
@@ -50,8 +39,21 @@ public class CmdHug implements Command {
             msg.addReaction("❤").queue();
         }
 
+        if(members.contains(msg.getMember())){
+            tc.sendMessage(MessageFormat.format(
+                    "Why are you hugging yourself {0}? Are you lonely?",
+                    msg.getMember().getAsMention()
+            )).queue();
+        }
+
         String link = HttpUtil.getHug();
-        String huggedMembers = members.stream().map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String huggedMembers = members.stream().filter(
+                member -> member != guild.getSelfMember()
+        ).filter(
+                member -> member != msg.getMember()
+        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+
+        if(huggedMembers.equals("") || huggedMembers.length() == 0) return;
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a hug-gif...",

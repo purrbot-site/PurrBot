@@ -4,7 +4,7 @@ import com.andre601.purrbot.commands.fun.*;
 import com.andre601.purrbot.commands.info.*;
 import com.andre601.purrbot.commands.nsfw.*;
 import com.andre601.purrbot.commands.owner.*;
-import com.andre601.purrbot.commands.server.*;
+import com.andre601.purrbot.commands.guild.*;
 import com.github.rainestormee.jdacommand.Command;
 
 import java.util.Arrays;
