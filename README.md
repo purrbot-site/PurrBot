@@ -56,9 +56,9 @@ Guild    |                        | Shows info about the guild.
 Help     |                        | Will display all commands available.
          | [command]              | Shows info about the provided command.
 Info     |                        | Shows some info about the bot.
-         | [-dm  ]                | Sends the info in DM.
+         | [-dm]                  | Sends the info in DM.
 Invite   |                        | Shows you some links.
-         | [-here]                | Sends you the links in DM.
+         | [-dm]                  | Sends you the links in DM.
 Ping     |                        | Checks the ping. (Time the bot takes to edit the message.)
          | [-api]                 | Checks the ping to the Discord-API.
 Quote    | <messageID> <#channel> | Quotes a message from a user. The message needs to be in the mentioned channel!
@@ -109,3 +109,4 @@ Future rewards may be added.
 * [Recommended (Full) Invite](https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=322624&scope=bot)
 * [Basic Invite](https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=19456&scope=bot)
 * [Web dashboard](https://purrbot.site) | [Source code](https://github.com/Andre601/PurrBot-Dashboard)
+* [Wiki](https://github.com/Andre601/PurrBot/wiki)
