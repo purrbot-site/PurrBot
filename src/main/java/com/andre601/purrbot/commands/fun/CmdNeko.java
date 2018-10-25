@@ -23,7 +23,13 @@ import static com.andre601.purrbot.core.PurrBot.waiter;
 
 @CommandDescription(
         name = "Neko",
-        description = "Gives you a lovely neko (catgirl)",
+        description =
+                "Gives you a lovely neko (catgirl)\n" +
+                "\n" +
+                "You can use additional args in the command.\n" +
+                "`-gif` for a gif\n" +
+                "`-slide` for a slideshow with 30 images\n" +
+                "Both arguments can be combined.",
         triggers = {"neko", "catgirl"},
         attributes = {@CommandAttribute(key = "fun")}
 )

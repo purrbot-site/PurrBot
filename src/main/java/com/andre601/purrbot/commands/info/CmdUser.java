@@ -1,13 +1,14 @@
 package com.andre601.purrbot.commands.info;
 
+import com.andre601.purrbot.util.ImageUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -47,19 +48,30 @@ public class CmdUser implements Command {
             member = msg.getMember();
         }
 
-        EmbedBuilder uInfo = EmbedUtil.getEmbed(msg.getAuthor())
+        String imageName = String.valueOf(System.currentTimeMillis());
+
+        tc.sendFile(ImageUtil.getAvatarStatus(
+                member.getUser().getEffectiveAvatarUrl(),
+                member.getOnlineStatus().toString()
+        ), MessageFormat.format(
+                "{0}.png",
+                imageName
+        )).embed(EmbedUtil.getEmbed(msg.getAuthor())
                 .setAuthor("Userinfo")
-                .setThumbnail(member.getUser().getEffectiveAvatarUrl())
+                .setThumbnail(MessageFormat.format(
+                        "attachment://{0}.png",
+                        imageName
+                ))
                 .addField("User:", String.format(
                         "**Name**: %s\n" +
                         "**ID**: `%s`\n" +
-                        "**Status**: %s %s",
+                        "**Status**: `%s` %s",
                         MessageUtil.getUsername(member),
                         member.getUser().getId(),
-                        MessageUtil.getStatus(member.getOnlineStatus(), msg),
+                        MessageUtil.getStatus(member.getOnlineStatus()),
                         (member.getGame() != null ? MessageUtil.getGameStatus(member.getGame()) : "")
                 ), false)
-                .addField("Avatar:",
+                .addField("Avatar",
                         (member.getUser().getEffectiveAvatarUrl() != null ?
                         String.format(
                                 "[`Current Avatar`](%s)\n" +
@@ -70,21 +82,17 @@ public class CmdUser implements Command {
                                 "[`Default Avatar`](%s)",
                                 member.getUser().getDefaultAvatarUrl()
                         )), true)
-                .addField("Is Bot:", MessageUtil.isBot(member.getUser()), true)
-                .addField("Highest role:", member.getRoles().size() == 0 ?
+                .addField("Is Bot", member.getUser().isBot() ? "Yes" : "No", true)
+                .addField("Highest role", member.getRoles().size() == 0 ?
                         "`No roles assigned`" :
                         member.getRoles().get(0).getAsMention(), false)
-                .addField("Other roles:", getRoles(member), false)
-                .addField("Dates:", String.format(
+                .addField("Other roles", getRoles(member), false)
+                .addField("Dates", String.format(
                         "**Account created**: %s\n" +
                         "**Joined**: %s",
-                        MessageUtil.formatTime(LocalDateTime.from(
-                                member.getUser().getCreationTime()
-                        )),
+                        MessageUtil.formatTime(LocalDateTime.from(member.getUser().getCreationTime())),
                         MessageUtil.formatTime(LocalDateTime.from(member.getJoinDate()))
-                ), false);
-
-        tc.sendMessage(uInfo.build()).queue();
+                ), false).build()).queue();
     }
 
     @Override

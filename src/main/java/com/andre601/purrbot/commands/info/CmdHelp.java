@@ -15,6 +15,7 @@ import net.dv8tion.jda.core.entities.*;
 
 import static com.andre601.purrbot.core.PurrBot.waiter;
 
+import java.awt.*;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -119,7 +120,7 @@ public class CmdHelp implements Command {
                 "  NSFW\n" +
                 "```\n" +
                 "\n" +
-                "**Random fact:\n" +
+                "**Random fact**:\n" +
                 "%s",
                 prefix,
                 MessageUtil.getFact()
@@ -129,6 +130,10 @@ public class CmdHelp implements Command {
             if(builderEntry.getKey().equals("owner") && !PermUtil.isCreator(msg)){
                 continue;
             }
+            if(!tc.isNSFW() && builderEntry.getKey().equals("nsfw")){
+                builderEntry.getValue().setLength(0);
+                builderEntry.getValue().append("`Run the command in a NSFW-labeled channel!\n`");
+            }
 
             pBuilder.addItems(String.format(
                     "Use the reactions, to navigate through the pages.\n" +
@@ -137,7 +142,7 @@ public class CmdHelp implements Command {
                             "%s **%s**\n" +
                             "%s" +
                             "\n" +
-                            "**Random fact:\n" +
+                            "**Random fact**:\n" +
                             "%s",
                     prefix,
                     categories.get(builderEntry.getKey()),
@@ -154,6 +159,11 @@ public class CmdHelp implements Command {
                 EmbedUtil.error(msg, "This command does not exist!");
                 return;
             }
+
+            if(!tc.isNSFW() && command.hasAttribute("nsfw")){
+                EmbedUtil.error(msg, "Please run this command in an NSFW-labeled channel!");
+                return;
+            }
             tc.sendMessage(commandHelp(msg, command, prefix)).queue();
         }else{
             pBuilder.setText("")
@@ -163,6 +173,7 @@ public class CmdHelp implements Command {
                     })
                     .waitOnSinglePage(false)
                     .setItemsPerPage(1)
+                    .setColor(new Color(54, 57, 63))
                     .build()
                     .display(tc);
         }

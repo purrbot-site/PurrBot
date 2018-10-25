@@ -22,7 +22,12 @@ import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Lewd",
-        description = "Get images of naughty nekos >w<",
+        description = "Get images of naughty nekos >w<\n" +
+        "\n" +
+        "You can use additional args in the command.\n" +
+        "`-gif` for a gif\n" +
+        "`-slide` for a slideshow with 30 images\n" +
+        "Both arguments can be combined.",
         triggers = {"lewd"},
         attributes = {@CommandAttribute(key = "nsfw")}
 )

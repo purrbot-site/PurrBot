@@ -19,8 +19,8 @@ public class DBUtil {
             .db(file.getItem("config", "db-name"))
             .connect();
 
-    private static String table = file.getItem("config", "db-table");
-    private static String prefix = (PermUtil.isBeta() ? ".." : ".");
+    private static String table      = file.getItem("config", "db-table");
+    private static String prefix     = (PermUtil.isBeta() ? ".." : ".");
 
     public static Map<String, Object> getGuild(String id) {
         return r.table(table).get(id).run(con);

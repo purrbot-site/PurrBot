@@ -46,7 +46,7 @@ public class CmdGuild implements Command {
                         guild.getRegion().getEmoji(),
                         guild.getRegion().getName()
                 ), true)
-                .addField("Level", guild.getVerificationLevel().name(), true)
+                .addField("Level", MessageUtil.getLevel(guild), true)
                 .addField("Owner", guild.getOwner().getAsMention(), true)
                 .addField("Created", MessageFormat.format(
                         "`{0}`",

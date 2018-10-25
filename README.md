@@ -27,21 +27,42 @@ Slap     | <@user ...> | Slaps the mentioned user(s).
 Tickle   | <@user ...> | Tickles the mentioned user(s).
 ```
 
-## Informative
+## Guild
+**Permission**: `MANAGE_SERVER` permission is required for the user.
+```
+Command: | Arguments:              | Description:
+
+Debug    |                         | Creates a debug-file on debug.scarsz.me
+Prefix   |                         | Shows the current prefix for the Discord.
+         | set <prefix>            | Sets the provided prefix for the Guild.
+         | reset                   | Resets the prefix to the default one.
+Welcome  |                         | Shows the current welcome-settings (welcome-channel, image and textcolor).
+         | channel set <#channel>  | Change the channel to the mentioned one.
+         | channel reset           | Resets the channel.
+         | color set <color>       | Change the text color. Supported args are hex:rrggbb or rgb:r,g,b
+         | color reset             | Resets the text color.
+         | image set <image>       | Changes the image.
+         | image reset             | Resets the image.
+         | test [image] [color]    | Creates a test-image with an optional image and text color.
+```
+
+## Info
 **Permission**: No permissions required.
 ```
 Command: | Arguments:             | Description:
 
 Emote    | <:emote:>              | Displays info about an emote.
+Guild    |                        | Shows info about the guild.
 Help     |                        | Will display all commands available.
          | [command]              | Shows info about the provided command.
-Info     |                        | DMs you info about the bot.
-         | [-here]                | Shows the info in the channel you run the command.
-Invite   |                        | DMs you the invite-link.
-         | [-here]                | Shows the Invite in the channel you currently are.
+Info     |                        | Shows some info about the bot.
+         | [-dm  ]                | Sends the info in DM.
+Invite   |                        | Shows you some links.
+         | [-here]                | Sends you the links in DM.
+Ping     |                        | Checks the ping. (Time the bot takes to edit the message.)
+         | [-api]                 | Checks the ping to the Discord-API.
 Quote    | <messageID> <#channel> | Quotes a message from a user. The message needs to be in the mentioned channel!
-Server   |                        | Shows info about the Discord, the bot is currently in.
-Stats    |                        | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, ect.)
+Stats    |                        | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, etc.)
 User     |                        | Gives info about you.
          | [@user]                | Gives info about the mentioned user.
 ```
@@ -57,22 +78,6 @@ Lesbian  |            | Returns a gif of lesbian.
 Lewd     |            | Shows a image of a lewd neko from nekos.life.
          | [-gif]     | Shows a gif-image of a lewd neko from nekos.life.
          | [-slide]   | Creates a slideshow with 30 images (Can be combined with the -gif argument)
-```
-
-## Server
-**Permission**: `MANAGE_SERVER` permission is required for the user.
-```
-Command: | Arguments:              | Description:
-
-Debug    |                         | Creates a debug-file on debug.scarsz.me
-Prefix   |                         | Shows the current prefix for the Discord.
-         | set <prefix>            | Sets the provided prefix for the Guild.
-         | reset                   | Resets the prefix to the default one.
-Welcome  |                         | Shows the current welcome-settings (welcome-channel, image and textcolor).
-         | color <color>           | Sets the textcolor of the welcome-image. Format is either rgb:r,g,b or hex:rrggbb
-         | set <ChannelID> [image] | Sets the welcome-channel to the provided one with a optional image.
-         | reset                   | Resets the welcome-settings.
-         | test <image> [color]    | Creates a test-image with the provided image and (optionally) textcolor.
 ```
 
 # Inviting the bot

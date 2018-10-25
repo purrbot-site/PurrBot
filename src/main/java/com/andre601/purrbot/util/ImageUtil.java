@@ -2,10 +2,12 @@ package com.andre601.purrbot.util;
 
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.core.PurrBot;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
+import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -40,31 +43,48 @@ public class ImageUtil {
 
     public static void getQuoteImage(TextChannel tc, Message msg, Message quote) throws Exception{
 
-        BufferedImage image;
-
         String name = URLEncoder.encode(quote.getAuthor().getName(), "UTF-8");
-        String quoteRaw = URLEncoder.encode(quote.getContentRaw(), "UTF-8");
+        String quoteRaw = URLEncoder.encode(quote.getContentDisplay(), "UTF-8");
         String avatar = URLEncoder.encode(quote.getAuthor().getEffectiveAvatarUrl(), "UTF-8");
+        int color = quote.getMember().getRoles().get(0).getColorRaw();
         long creationTime = quote.getCreationTime().toInstant().toEpochMilli();
 
-        String url = "https://purrbot.site/api/quote?name=" + name + "&time=" + creationTime + "&avatar=" + avatar +
-                "&text=" + quoteRaw;
+        String url = "https://purrbot.site/api/quote?name=" + name + "&color=" + color + "&time=" + creationTime +
+                "&avatar=" + avatar + "&text=" + quoteRaw;
 
         URL link = new URL(url);
         URLConnection connection = link.openConnection();
         connection.setRequestProperty(UA[0], UA[1]);
         connection.connect();
 
-        image = ImageIO.read(connection.getInputStream());
+        String imageName = String.valueOf(System.currentTimeMillis());
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.setUseCache(false);
-        ImageIO.write(image, "png", baos);
-
-        tc.sendFile(baos.toByteArray(), MessageFormat.format(
+        tc.sendFile(connection.getInputStream(), MessageFormat.format(
                 "{0}.png",
-                System.currentTimeMillis()
-        ), msg).queue();
+                imageName
+        )).embed(new EmbedBuilder().setDescription(msg.getContentRaw()).setImage(MessageFormat.format(
+                "attachment://{0}.png",
+                imageName
+        )).build()).queue();
+    }
+
+    public static InputStream getAvatarStatus(String avatar, String status){
+
+        try {
+            String avatarURL = URLEncoder.encode(avatar, "UTF-8");
+            String userStatus = URLEncoder.encode(status, "UTF-8");
+
+            String url = "https://purrbot.site/api/status?avatar=" + avatarURL + "&status=" + userStatus;
+
+            URL link = new URL(url);
+            URLConnection connection = link.openConnection();
+            connection.setRequestProperty(UA[0], UA[1]);
+            connection.connect();
+
+            return connection.getInputStream();
+        }catch(Exception ex){
+            return null;
+        }
     }
 
     public static void createWelcomeImg(User user, Guild g, TextChannel tc, Message msg, String imageType,
@@ -210,32 +230,47 @@ public class ImageUtil {
             img.drawImage(layer, 0, 0, null);
 
             //  Creating the font for the custom text.
-            Font text = new Font("Arial", Font.PLAIN, 60);
+            Font textFont = new Font("Arial", Font.PLAIN, 120);
+            Font voteCount = new Font("Arial", Font.PLAIN, 60);
 
             img.setColor(Color.WHITE);
-            img.setFont(text);
+            img.setFont(textFont);
 
             //  Setting the actual text. \n is (sadly) not supported, so we have to make each new line seperate.
-            img.drawString(user.getName(),320, 100);
-            img.drawString("has voted!",320, 175);
+            img.drawString(user.getName(),320, 130);
 
             img.setColor(new Color(114, 137, 218));
+            img.setFont(voteCount);
 
-            String votes = HttpUtil.getVotes();
+            JSONObject voteInfo = HttpUtil.getVoteInfo();
+            String monthlyVotes;
+            String totalVotes;
 
-            if(votes == null)
-                votes = "?";
+            if(voteInfo == null){
+                monthlyVotes = "?";
+                totalVotes = "?";
+            }else{
+                monthlyVotes = String.valueOf(voteInfo.getLong("monthlyPoints"));
+                totalVotes = String.valueOf(voteInfo.getLong("points"));
+            }
 
-            int padding = 345;
             int total_width = image.getWidth();
-            int actual_width = img.getFontMetrics().stringWidth(votes);
-            int x = total_width - actual_width - padding;
 
-            img.drawString(votes, x, 270);
+            int paddingMonthlyVotes = 1260;
+            int actual_width_mv = img.getFontMetrics().stringWidth(monthlyVotes);
+            int x_mv = total_width - actual_width_mv - paddingMonthlyVotes;
+
+            int paddingTotalVotes = 800;
+            int actual_width_tv = img.getFontMetrics().stringWidth(totalVotes);
+            int x_tv = total_width - actual_width_tv - paddingTotalVotes;
+
+
+            img.drawString(monthlyVotes, x_mv, 270);
+            img.drawString(totalVotes, x_tv, 270);
 
             if(isWeekend){
                 img.setColor(new Color(46, 204, 113));
-                img.drawString("x2 votes!", 680, 270);
+                img.drawString("x2 votes!", 1150, 270);
             }
 
             img.dispose();

@@ -37,8 +37,8 @@ public class CmdPat implements Command {
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(MessageFormat.format(
-                    "Don't you have a neko to pat {0}?",
+            tc.sendMessage(String.format(
+                    "Don't you have a neko to pat %s?",
                     msg.getMember().getAsMention()
             )).queue();
         }

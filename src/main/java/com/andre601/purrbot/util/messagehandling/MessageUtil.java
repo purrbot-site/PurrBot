@@ -72,16 +72,13 @@ public class MessageUtil {
                 PurrBot.getRandom().nextInt(PurrBot.getRandomDenyFuckMsg().size())) : "";
     }
 
-    public static String isBot(User user){
-        if(user.isBot()){
-            return "Yes";
-        }
-        return "No";
+    private static String firstUppercase(String word){
+        return Character.toString(word.charAt(0)).toUpperCase() + word.substring(1).toLowerCase();
     }
 
-    public static String getLevel(Guild g){
+    public static String getLevel(Guild guild){
 
-        switch (g.getVerificationLevel().toString().toLowerCase()){
+        switch (guild.getVerificationLevel().toString().toLowerCase()){
 
             case "high":
                 return "(╯°□°）╯︵ ┻━┻";
@@ -90,7 +87,7 @@ public class MessageUtil {
                 return "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻";
 
             default:
-                return g.getVerificationLevel().toString().toLowerCase();
+                return firstUppercase(guild.getVerificationLevel().name());
         }
     }
 
@@ -131,34 +128,25 @@ public class MessageUtil {
         ));
     }
 
-    public static String getStatus(OnlineStatus status, Message msg){
-        String str;
+    public static String getStatus(OnlineStatus status){
         switch (status){
             case ONLINE:
-                str = Emotes.STATUS_ONLINE;
-                break;
+                return "Online";
 
             case IDLE:
-                str = Emotes.STATUS_IDLE;
-                break;
+                return "Idle";
 
             case DO_NOT_DISTURB:
-                str = Emotes.STATUS_DND;
-                break;
+                return "Do not disturb";
 
-            case INVISIBLE:
             case OFFLINE:
-                str = Emotes.STATUS_OFFLINE;
-                break;
+            case INVISIBLE:
+                return "Offline";
 
             case UNKNOWN:
             default:
-                str = Emotes.STATUS_UNKNOWN;
+                return "Unknown";
         }
-        if(PermUtil.canUseCustomEmojis(msg.getTextChannel()))
-            return str + "`" + status.name().replace("_", " ").toLowerCase() + "`";
-
-        return "`" + status.name().replace("_", " ").toLowerCase() + "`";
     }
 
     public static String getTag(User user){
