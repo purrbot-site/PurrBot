@@ -1,5 +1,7 @@
 package com.andre601.purrbot.commands.owner;
 
+import com.andre601.purrbot.core.ListUtil;
+import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
@@ -21,29 +23,77 @@ import static com.andre601.purrbot.core.PurrBot.*;
 )
 public class CmdRefresh implements Command {
 
+    private void edit(Message message, boolean complete, String text, String progress){
+        message.editMessage(String.format(
+                "%s\n" +
+                "```yaml\n" +
+                "%s\n" +
+                "\n" +
+                "[%-50s]\n" +
+                "```",
+                complete ? "Refresh complete!" : Emotes.TYPING + " Refresh...",
+                text,
+                progress
+        )).queue();
+    }
+
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
 
-        if(PermUtil.isBeta()) return;
-
-
-        tc.sendMessage(MessageFormat.format(
-                "{0} Updating information...",
+        tc.sendMessage(String.format(
+                "%s Prepare refresh...",
                 Emotes.TYPING
         )).queue(message -> {
-            message.editMessage(MessageFormat.format(
-                    "{0} Updating information... (Updating random messages)",
-                    Emotes.TYPING
-            )).queue();
-            clear();
-            loadRandom();
-            message.editMessage(MessageFormat.format(
-                    "{0} Updating information... (Updating stats on DBL)",
-                    Emotes.TYPING
-            )).queue();
-            getAPI().setStats((int)ReadyListener.getShardManager().getGuildCache().size());
-            message.editMessage("Update done!").queue(message1 -> msg.addReaction("✅").queue());
+            edit(
+                    message,
+                    false,
+                    "Clearing data...",
+                    ""
+            );
+            ListUtil.clear();
+
+            edit(
+                    message,
+                    false,
+                    "Clearing data.              [Done]\n" +
+                    "Loading blacklist...",
+                    "##########"
+            );
+            ListUtil.refreshBlackList();
+
+            edit(
+                    message,
+                    false,
+                    "Clearing data.              [Done]\n" +
+                    "Loading blacklist.          [Done]\n" +
+                    "Loading random images...",
+                    "####################"
+            );
+            ListUtil.refreshRandomImages();
+            ListUtil.refreshImages();
+
+            edit(
+                    message,
+                    false,
+                    "Clearing data.              [Done]\n" +
+                    "Loading blacklist.          [Done]\n" +
+                    "Loading random images.      [Done]\n" +
+                    "Loading random messages...",
+                    "##############################"
+            );
+            ListUtil.refreshRandomMessages();
+
+            edit(
+                    message,
+                    true,
+                    "Clearing data.              [Done]\n" +
+                    "Loading blacklist.          [Done]\n" +
+                    "Loading random images.      [Done]\n" +
+                    "Loading random messages.    [Done]",
+                    "##################################################"
+            );
+            msg.addReaction("✅").queue();
         });
     }
 }

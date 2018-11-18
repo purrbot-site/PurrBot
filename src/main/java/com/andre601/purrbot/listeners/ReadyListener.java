@@ -13,6 +13,7 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 
 public class ReadyListener extends ListenerAdapter{

@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.io.InputStream;
 import java.text.MessageFormat;
 
 public class WelcomeListener extends ListenerAdapter {
@@ -38,7 +39,22 @@ public class WelcomeListener extends ListenerAdapter {
                 ).build();
 
                 if(PermUtil.canUploadImage(tc)){
-                    ImageUtil.createWelcomeImg(e.getUser(), g, tc, msg, DBUtil.getImage(g), DBUtil.getColor(g));
+                    InputStream is = ImageUtil.getWelcomeImg(
+                            e.getUser(),
+                            e.getGuild(),
+                            DBUtil.getImage(g),
+                            DBUtil.getColor(g)
+                    );
+
+                    if(is == null) {
+                        tc.sendMessage(msg).queue();
+                        return;
+                    }
+
+                    tc.sendFile(is, String.format(
+                            "%s.png",
+                            System.currentTimeMillis()
+                    ), msg).queue();
                 }else{
                     tc.sendMessage(msg).queue();
                 }

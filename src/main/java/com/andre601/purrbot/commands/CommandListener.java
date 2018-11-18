@@ -16,8 +16,10 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class CommandListener extends ListenerAdapter {
 
@@ -70,7 +72,14 @@ public class CommandListener extends ListenerAdapter {
                             prefix
                     ));
 
-                    if(raw.equalsIgnoreCase(guild.getSelfMember().getAsMention())){
+                    if(raw.startsWith(event.getJDA().getSelfUser().getAsMention()) &&
+                            raw.length() == event.getJDA().getSelfUser().getAsMention().length()){
+                        tc.sendMessage(info.build()).queue();
+                        return;
+                    }
+
+                    if(raw.startsWith(guild.getSelfMember().getAsMention()) &&
+                            raw.length() == guild.getSelfMember().getAsMention().length()){
                         tc.sendMessage(info.build()).queue();
                         return;
                     }

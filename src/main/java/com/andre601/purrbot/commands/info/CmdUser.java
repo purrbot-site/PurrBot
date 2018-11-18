@@ -62,14 +62,17 @@ public class CmdUser implements Command {
                         "attachment://{0}.png",
                         imageName
                 ))
-                .addField("User:", String.format(
-                        "**Name**: %s\n" +
-                        "**ID**: `%s`\n" +
-                        "**Status**: `%s` %s",
-                        MessageUtil.getUsername(member),
+                .addField("User", String.format(
+                        "```yaml\n" +
+                        "Name: %s\n" +
+                        "%s" +
+                        "ID:   %s\n" +
+                        "%s" +
+                        "```",
+                        MessageUtil.getTag(member.getUser()),
+                        (member.getNickname() != null ? "Nick: " + MessageUtil.getNick(member) + "\n" : ""),
                         member.getUser().getId(),
-                        MessageUtil.getStatus(member.getOnlineStatus()),
-                        (member.getGame() != null ? MessageUtil.getGameStatus(member.getGame()) : "")
+                        (member.getGame() != null ? "Game: " + MessageUtil.getGameStatus(member.getGame()) + "\n" : "")
                 ), false)
                 .addField("Avatar",
                         (member.getUser().getEffectiveAvatarUrl() != null ?

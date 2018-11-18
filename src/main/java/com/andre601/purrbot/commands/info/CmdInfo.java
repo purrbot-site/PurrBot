@@ -1,5 +1,6 @@
 package com.andre601.purrbot.commands.info;
 
+import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.IDs;

@@ -54,10 +54,9 @@ public class PurrBot {
     private static List<String> RandomKissImg         = new ArrayList<>();
     private static List<String> RandomAcceptFuckMsg   = new ArrayList<>();
     private static List<String> RandomDenyFuckMsg     = new ArrayList<>();
+    private static List<String> images                = new ArrayList<>();
 
     private static List<String> BlacklistedGuilds     = new ArrayList<>();
-
-    private static Set<String> images = new HashSet<>();
 
     private static Logger logger = (Logger) LoggerFactory.getLogger(PurrBot.class);
 
@@ -79,32 +78,11 @@ public class PurrBot {
                     .botId(file.getItem("config", "id"))
                     .build();
 
-        //  Executing the void to register the random-stuff
-        loadRandom();
-        loadImages(
-                "purr",
-                "gradient",
-                "landscape",
-                "red",
-                "green",
-                "blue",
-                "neko1",
-                "neko2",
-                "gradient_blue",
-                "gradient_orange",
-                "gradient_green",
-                "gradient_red1",
-                "gradient_red2",
-                "wood1",
-                "wood2",
-                "wood3",
-                "dots_blue",
-                "dots_green",
-                "dots_orange",
-                "dots_pink",
-                "dots_red",
-                "random"
-        );
+        //  Loading the different things in the ListUtil.java
+        ListUtil.refreshRandomMessages();
+        ListUtil.refreshRandomImages();
+        ListUtil.refreshBlackList();
+        ListUtil.refreshImages();
 
         //  Setup the listener for votes on /vote, when the bot isn't beta
         if(!PermUtil.isBeta()) {
@@ -138,58 +116,6 @@ public class PurrBot {
                 .build();
     }
 
-    public static void loadRandom(){
-
-        //  Getting all the content for the random-stuff
-        Collections.addAll(RandomShutdownText, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomShutdownText")
-                .split("\n")
-        );
-        Collections.addAll(RandomShutdownImage, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomShutdownImage")
-                .split("\n")
-        );
-        Collections.addAll(RandomFact, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomFact")
-                .split("\n")
-        );
-        Collections.addAll(RandomNoNSWF, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomNoNSFWMsg")
-                .split("\n")
-        );
-        Collections.addAll(RandomDebug, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomDebugMsg")
-                .split("\n")
-        );
-        Collections.addAll(RandomAPIPingMsg, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomAPIPingMsg")
-                .split("\n")
-        );
-        Collections.addAll(RandomPingMsg, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomPingMsg")
-                .split("\n")
-        );
-        Collections.addAll(RandomKissImg, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomKissImage")
-                .split("\n")
-        );
-        Collections.addAll(RandomAcceptFuckMsg, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomAcceptFuckMsg")
-                .split("\n")
-        );
-        Collections.addAll(RandomDenyFuckMsg, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomDenyFuckMsg")
-                .split("\n")
-        );
-
-        //  Getting the blacklisted Guild-IDs
-        Collections.addAll(BlacklistedGuilds, HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/BlacklistedGuilds")
-                .split("\n")
-        );
-
-    }
-
     //  Just public gets.
     public static List<String> getRandomShutdownText(){
         return RandomShutdownText;
@@ -221,6 +147,9 @@ public class PurrBot {
     public static List<String> getRandomDenyFuckMsg(){
         return RandomDenyFuckMsg;
     }
+    public static List<String> getImages(){
+        return images;
+    }
 
     public static List<String> getBlacklistedGuilds(){
         return BlacklistedGuilds;
@@ -228,30 +157,6 @@ public class PurrBot {
 
     public static Random getRandom(){
         return random;
-    }
-
-    //  Void to clear all the ArrayLists
-    public static void clear(){
-        RandomShutdownText.clear();
-        RandomShutdownImage.clear();
-        RandomFact.clear();
-        RandomNoNSWF.clear();
-        RandomDebug.clear();
-        RandomAPIPingMsg.clear();
-        RandomPingMsg.clear();
-        RandomKissImg.clear();
-        RandomAcceptFuckMsg.clear();
-        RandomDenyFuckMsg.clear();
-
-        BlacklistedGuilds.clear();
-    }
-
-    private static void loadImages(String... images){
-        PurrBot.images.addAll(Arrays.asList(images));
-    }
-
-    public static Set<String> getImages(){
-        return images;
     }
 
     public static WebhookClient getWebhookClient(String url){

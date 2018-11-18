@@ -91,7 +91,8 @@ public class DebugUtil {
                     "",
                     getChannelPerms(guild)
             }));
-        }catch(Exception ignored){
+        }catch(Exception ex){
+            ex.printStackTrace();
             tc.sendMessage(MessageFormat.format(
                     "There was an issue with creating the files {0}.",
                     requester.getAsMention()
@@ -99,6 +100,16 @@ public class DebugUtil {
         }
 
         return makeReport(files, requester);
+    }
+
+    private static TextChannel getChannel(String id, Guild guild){
+        TextChannel channel;
+        try{
+            channel = guild.getTextChannelById(id);
+        }catch (Exception ex){
+            channel = null;
+        }
+        return channel;
     }
 
     private static String getChannels(Guild guild){
@@ -165,7 +176,7 @@ public class DebugUtil {
     }
 
     private static String getChannelNameAndId(String id, Guild guild){
-        TextChannel channel = guild.getTextChannelById(id);
+        TextChannel channel = getChannel(id, guild);
 
         if(channel != null){
             return MessageFormat.format(

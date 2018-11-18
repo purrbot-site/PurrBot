@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @CommandDescription(
         name = "Kiss",
         description = "Lets you share some kisses with others!",
-        triggers = {"kiss", "love"},
+        triggers = {"kiss", "love", "kissu"},
         attributes = {@CommandAttribute(key = "fun")}
 )
 public class CmdKiss implements Command {

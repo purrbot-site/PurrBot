@@ -31,8 +31,8 @@ public class ImageUtil {
         BufferedImage icon = null;
 
         try{
-            URL serverIcon = new URL(user.getEffectiveAvatarUrl());
-            URLConnection connection = serverIcon.openConnection();
+            URL userIcon = new URL(user.getEffectiveAvatarUrl());
+            URLConnection connection = userIcon.openConnection();
             connection.setRequestProperty(UA[0], UA[1]);
             connection.connect();
             icon = ImageIO.read(connection.getInputStream());
@@ -87,127 +87,25 @@ public class ImageUtil {
         }
     }
 
-    public static void createWelcomeImg(User user, Guild g, TextChannel tc, Message msg, String imageType,
-                                        String imageColor){
-
-        //  Saving the userIcon/avatar as a Buffered image
-        BufferedImage u = getUserIcon(user);
-
+    public static InputStream getWelcomeImg(User user, Guild g, String imageType, String imageColor){
         try{
-            int number = 0;
-            switch (imageType){
-                case "purr":
-                    number = 0;
-                    break;
-                case "gradient":
-                    number = 1;
-                    break;
-                case "landscape":
-                    number = 2;
-                    break;
-                case "red":
-                    number = 3;
-                    break;
-                case "green":
-                    number = 4;
-                    break;
-                case "blue":
-                    number = 5;
-                    break;
-                case "neko1":
-                    number = 6;
-                    break;
-                case "neko2":
-                    number = 7;
-                    break;
-                case "gradient_blue":
-                    number = 8;
-                    break;
-                case "gradient_orange":
-                    number = 9;
-                    break;
-                case "gradient_green":
-                    number = 10;
-                    break;
-                case "gradient_red1":
-                    number = 11;
-                    break;
-                case "gradient_red2":
-                    number = 12;
-                    break;
-                case "wood1":
-                    number = 13;
-                    break;
-                case "wood2":
-                    number = 14;
-                    break;
-                case "wood3":
-                    number = 15;
-                    break;
-                case "dots_blue":
-                    number = 16;
-                    break;
-                case "dots_green":
-                    number = 17;
-                    break;
-                case "dots_orange":
-                    number = 18;
-                    break;
-                case "dots_pink":
-                    number = 19;
-                    break;
-                case "dots_red":
-                    number = 20;
-                    break;
-                case "random":
-                    number = PurrBot.getRandom().nextInt(21);
-                    break;
-            }
+            String avatar = URLEncoder.encode(user.getEffectiveAvatarUrl(), "UTF-8");
+            String name = URLEncoder.encode(user.getName(), "UTF-8");
+            String image = URLEncoder.encode(imageType, "UTF-8");
+            String color = URLEncoder.encode(imageColor, "UTF-8");
+            long size = g.getMembers().size();
 
-            BufferedImage layer = ImageIO.read(new File("img/welcome_layer" + number + ".png"));
+            String url = "https://purrbot.site/api/welcome?avatar=" + avatar + "&name=" + name + "&image=" + image +
+                    "&color=" + color + "&size=" + size;
 
-            BufferedImage bg = ImageIO.read(new File("img/welcome_bg.png"));
-            BufferedImage image = new BufferedImage(bg.getWidth(), bg.getHeight(), bg.getType());
-            Graphics2D img = image.createGraphics();
+            URL link = new URL(url);
+            URLConnection connection = link.openConnection();
+            connection.setRequestProperty(UA[0], UA[1]);
+            connection.connect();
 
-            //  Adding the different images (background -> User-Avatar -> actual image)
-            img.drawImage(bg, 0, 0, null);
-            img.drawImage(u, 5, 5, 290, 290, null);
-            img.drawImage(layer, 0, 0, null);
-
-            //  Creating the font for the custom text.
-            Font text = new Font("Arial", Font.PLAIN, 60);
-
-            Color color = MessageUtil.toColor(imageColor);
-            if(color == null)
-                color = Color.WHITE;
-
-            img.setColor(color);
-            img.setFont(text);
-
-            //  Setting the actual text. \n is (sadly) not supported, so we have to make each new line seperate.
-            img.drawString("Welcome",320, 100);
-            img.drawString(user.getName(),320, 175);
-            img.drawString(String.format(
-                    "You are user #%s",
-                    g.getMembers().size()
-            ),320, 250);
-
-            img.dispose();
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            ImageIO.setUseCache(false);
-            ImageIO.write(image, "png", stream);
-
-            //  Finally sending the image. I use the user-id as image-name (prevents issues with non-UTF-8 symbols...)
-
-            tc.sendFile(stream.toByteArray(), String.format(
-                    "%s.png",
-                    user.getId()
-            ), msg).queue();
-
-            //  We just ignore the caused exception.
-        }catch (IOException ignored){
+            return connection.getInputStream();
+        }catch (Exception ex){
+            return null;
         }
     }
 

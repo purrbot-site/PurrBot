@@ -69,7 +69,8 @@ public class MessageUtil {
 
     public static String getRandomDenyFuckMsg(){
         return PurrBot.getRandomDenyFuckMsg().size() > 0 ? PurrBot.getRandomDenyFuckMsg().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomDenyFuckMsg().size())) : "";
+                PurrBot.getRandom().nextInt(PurrBot.getRandomDenyFuckMsg().size())
+        ) : "";
     }
 
     private static String firstUppercase(String word){
@@ -94,10 +95,10 @@ public class MessageUtil {
     public static String getGameStatus(Game game){
         String str;
         String currGame = game.getName();
-        currGame = currGame.length() > 20 ? currGame.substring(0, 19) + "..." : currGame;
+        currGame = currGame.length() > 25 ? currGame.substring(0, 24) + "..." : currGame;
         switch (game.getType()){
             case STREAMING:
-                return "(Streaming [`" + game.getName() + "`](" + game.getUrl() + "))";
+                return "Streaming [" + currGame + "](" + game.getUrl() + ")";
 
             case LISTENING:
                 str = "Listening to ";
@@ -112,41 +113,12 @@ public class MessageUtil {
                 str = "Playing ";
                 break;
         }
-        return "(" + str + (game.getUrl() == null ? "`" + currGame + "`" : "[`" + currGame + "`](" +
-                game.getUrl() + ")") + ")";
+        return str + (game.getUrl() == null ? currGame : "[" + currGame + "](" +
+                game.getUrl() + ")");
     }
 
-    public static String getUsername(Member member){
-        return (member != null && member.getNickname() != null ?
-        String.format(
-                "`%s` (`%s`)",
-                member.getNickname().replace("`", "'"),
-                getTag(member.getUser())
-        ) : String.format(
-                "`%s`",
-                getTag(member.getUser()).replace("`", "'")
-        ));
-    }
-
-    public static String getStatus(OnlineStatus status){
-        switch (status){
-            case ONLINE:
-                return "Online";
-
-            case IDLE:
-                return "Idle";
-
-            case DO_NOT_DISTURB:
-                return "Do not disturb";
-
-            case OFFLINE:
-            case INVISIBLE:
-                return "Offline";
-
-            case UNKNOWN:
-            default:
-                return "Unknown";
-        }
+    public static String getNick(Member member){
+        return member.getNickname().length() > 25 ? member.getNickname().substring(0, 24) + "..." : member.getNickname();
     }
 
     public static String getTag(User user){
