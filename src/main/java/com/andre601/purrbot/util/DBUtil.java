@@ -51,7 +51,7 @@ public class DBUtil {
         r.table(table).get(id).update(r.hashMap("prefix", prefix)).run(con);
     }
 
-    public static String getWelcome(Guild guild) {
+    public static String getWelcomeChannel(Guild guild) {
         Map g = getGuild(guild.getId());
         return g.get("welcome_channel").toString();
     }

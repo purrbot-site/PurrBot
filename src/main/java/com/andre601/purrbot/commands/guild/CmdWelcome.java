@@ -9,7 +9,6 @@ import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import com.jagrosh.jdautilities.menu.Paginator;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
@@ -20,9 +19,6 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import java.awt.*;
 import java.io.InputStream;
 import java.text.MessageFormat;
-import java.util.concurrent.TimeUnit;
-
-import static com.andre601.purrbot.core.PurrBot.waiter;
 
 @CommandDescription(
         name = "Welcome",
@@ -55,7 +51,7 @@ public class CmdWelcome implements Command {
     }
 
     public static TextChannel getChannel(Guild g){
-        String welcome = DBUtil.getWelcome(g);
+        String welcome = DBUtil.getWelcomeChannel(g);
         if(!welcome.equals("none")){
             try{
                 return g.getTextChannelById(welcome);
@@ -83,7 +79,7 @@ public class CmdWelcome implements Command {
     }
 
     public void resetChannel(Message msg, Guild g){
-        String welcome = DBUtil.getWelcome(g);
+        String welcome = DBUtil.getWelcomeChannel(g);
         if(welcome.equals("none")){
             msg.getTextChannel().sendMessage(String.format(
                     "%s This Guild doesn't have a Welcome-channel!",
@@ -167,6 +163,47 @@ public class CmdWelcome implements Command {
         tc.sendMessage(success.build()).queue();
     }
 
+    private void sendInfo(Message msg){
+        Guild guild = msg.getGuild();
+        TextChannel tc = msg.getTextChannel();
+        TextChannel welcomeChannel = getChannel(guild);
+        String color = DBUtil.getColor(guild);
+
+        String type = color.split(":")[0];
+        String value = color.split(":")[1];
+
+        EmbedBuilder info = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription(String.format(
+                        "This are the current Settings.\n" +
+                        "Use `%swelcome` with one of the following subcommands:\n" +
+                        "\n" +
+                        "`channel <set #channel|reset>` to set or reset a channel.\n" +
+                        "`image <set image|reset>` to set or reset a image.\n" +
+                        "`color <set color|reset>` to set or reset a color. It can be `rgb:r,g,b` or `hex:rrggbb`\n" +
+                        "\n" +
+                        "Check the [wiki](%s) for more information!",
+                        DBUtil.getPrefix(guild),
+                        Links.WIKI
+                ))
+                .addField("Channel:", welcomeChannel == null ? "`No channel set`" : String.format(
+                        "%s (`%s`)",
+                        welcomeChannel.getAsMention(),
+                        welcomeChannel.getId()
+                ), true)
+                .addField("Text color", String.format(
+                        "**Type**: `%s`\n" +
+                        "**Value**: `%s`",
+                        type,
+                        value
+                ), true)
+                .addField("Image", String.format(
+                        "`%s`",
+                        DBUtil.getImage(guild)
+                ), true);
+
+        tc.sendMessage(info.build()).queue();
+    }
+
     @Override
     public void execute(Message msg, String s){
         Guild guild = msg.getGuild();
@@ -177,11 +214,7 @@ public class CmdWelcome implements Command {
             msg.delete().queue();
 
         if(args.length == 0){
-            EmbedUtil.error(msg, String.format(
-                    "To few or wrong arguments! Run `%shelp welcome` to get more info or visit the [wiki](%s)",
-                    DBUtil.getPrefix(guild),
-                    Links.WIKI
-            ));
+            sendInfo(msg);
             return;
         }
 
@@ -346,11 +379,7 @@ public class CmdWelcome implements Command {
                 break;
 
             default:
-                EmbedUtil.error(msg, String.format(
-                        "To few or wrong arguments! Run `%shelp welcome` to get more info or visit the [wiki](%s)",
-                        DBUtil.getPrefix(guild),
-                        Links.WIKI
-                ));
+                sendInfo(msg);
         }
     }
 }

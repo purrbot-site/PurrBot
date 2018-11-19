@@ -82,7 +82,6 @@ public class PurrBot {
         ListUtil.refreshRandomMessages();
         ListUtil.refreshRandomImages();
         ListUtil.refreshBlackList();
-        ListUtil.refreshImages();
 
         //  Setup the listener for votes on /vote, when the bot isn't beta
         if(!PermUtil.isBeta()) {

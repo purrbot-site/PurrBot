@@ -19,6 +19,9 @@ public class ListUtil {
         Collections.addAll(PurrBot.getRandomShutdownImage(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomShutdownImage"
         ).split("\n"));
+        Collections.addAll(PurrBot.getImages(), HttpUtil.requestHttp(
+                "https://raw.githubusercontent.com/Andre601/PurrBot-files/master/files/welcome-images"
+        ).split("\n"));
     }
 
     public static void refreshRandomMessages(){
@@ -48,12 +51,6 @@ public class ListUtil {
         ).split("\n"));
         Collections.addAll(PurrBot.getRandomAcceptFuckMsg(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomAcceptFuckMsg"
-        ).split("\n"));
-    }
-
-    public static void refreshImages(){
-        Collections.addAll(PurrBot.getImages(), HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/Andre601/PurrBot-files/master/files/welcome-images"
         ).split("\n"));
     }
 

@@ -161,7 +161,7 @@ public class DebugUtil {
     }
 
     private static String getWelcomeInfo(Guild guild){
-        String channelId = DBUtil.getWelcome(guild);
+        String channelId = DBUtil.getWelcomeChannel(guild);
         String colorInfo = DBUtil.getColor(guild);
         String colorType = colorInfo.split(":")[0];
         String colorValue = colorInfo.split(":")[1];

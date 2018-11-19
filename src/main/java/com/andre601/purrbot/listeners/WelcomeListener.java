@@ -23,7 +23,7 @@ public class WelcomeListener extends ListenerAdapter {
 
         Guild g = e.getGuild();
 
-        if(!DBUtil.getWelcome(g).equals("none")){
+        if(!DBUtil.getWelcomeChannel(g).equals("none")){
             TextChannel tc = CmdWelcome.getChannel(g);
 
             if(tc != null){
@@ -65,8 +65,8 @@ public class WelcomeListener extends ListenerAdapter {
     public void onTextChannelDelete(TextChannelDeleteEvent e) {
         Guild g = e.getGuild();
 
-        if(!DBUtil.getWelcome(g).equals("none")){
-            TextChannel channel = g.getTextChannelById(DBUtil.getWelcome(g));
+        if(!DBUtil.getWelcomeChannel(g).equals("none")){
+            TextChannel channel = g.getTextChannelById(DBUtil.getWelcomeChannel(g));
             if(e.getChannel() == channel){
                 CmdWelcome.resetChannel(g);
             }

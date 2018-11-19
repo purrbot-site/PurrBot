@@ -71,7 +71,6 @@ public class CmdRefresh implements Command {
                     "####################"
             );
             ListUtil.refreshRandomImages();
-            ListUtil.refreshImages();
 
             edit(
                     message,
