@@ -19,7 +19,7 @@ import java.text.MessageFormat;
         name = "Prefix",
         description = "Set or reset a prefix",
         triggers = {"prefix"},
-        attributes = {@CommandAttribute(key = "manage_Server"), @CommandAttribute(key = "guild")}
+        attributes = {@CommandAttribute(key = "manage_server"), @CommandAttribute(key = "guild")}
 )
 public class CmdPrefix implements Command {
 

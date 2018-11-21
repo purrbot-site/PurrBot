@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
         name = "Debug",
         description = "Generates a debug",
         triggers = {"debug"},
-        attributes = {@CommandAttribute(key = "manage_Server"), @CommandAttribute(key = "guild")}
+        attributes = {@CommandAttribute(key = "manage_server"), @CommandAttribute(key = "guild")}
 )
 public class CmdDebug implements Command {
 

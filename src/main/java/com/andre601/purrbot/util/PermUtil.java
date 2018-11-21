@@ -73,6 +73,10 @@ public class PermUtil {
         return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(), Permission.MESSAGE_HISTORY);
     }
 
+    public static boolean canManageWebhooks(TextChannel tc){
+        return PermissionUtil.checkPermission(tc.getGuild().getSelfMember(), Permission.MANAGE_WEBHOOKS);
+    }
+
     public static boolean isBeta(){
         return PurrBot.file.getItem("config", "beta").equalsIgnoreCase("true");
     }

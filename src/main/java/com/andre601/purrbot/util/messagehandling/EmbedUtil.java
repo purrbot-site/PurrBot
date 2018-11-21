@@ -50,6 +50,12 @@ public class EmbedUtil {
         msg.getTextChannel().sendMessage(errorEmbed.build()).queue();
     }
 
+    public static void error(TextChannel tc, String error){
+        EmbedBuilder errorEmbed = getEmbed().setColor(Color.RED).setDescription(error);
+
+        tc.sendMessage(errorEmbed.build()).queue();
+    }
+
     public static void sendWebhookEmbed(String url, Guild guild, Color color, String webhookName){
         MessageEmbed webhook = getEmbed()
                 .setColor(color)

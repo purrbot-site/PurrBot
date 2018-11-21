@@ -30,7 +30,7 @@ import java.text.MessageFormat;
                 "`color <set <rgb:r,g,b|hex:rrggbb|reset>` to set or reset the text color.\n" +
                 "`test [image] [color]` to test the image (optionally with other image and text color).",
         triggers = {"welcome"},
-        attributes = {@CommandAttribute(key = "manage_Server"), @CommandAttribute(key = "guild")}
+        attributes = {@CommandAttribute(key = "manage_server"), @CommandAttribute(key = "guild")}
 )
 public class CmdWelcome implements Command {
 

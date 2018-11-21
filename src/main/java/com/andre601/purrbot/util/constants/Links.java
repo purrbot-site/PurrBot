@@ -18,6 +18,7 @@ public final class Links {
      *  - Add reactions
      *  - Use external emojis
      *  - Manage messages
+     *  - Manage webhooks
      */
     public static String INVITE_FULL(JDA jda){
         return jda.asBot().getInviteUrl(
@@ -29,7 +30,8 @@ public final class Links {
                 Permission.MESSAGE_ATTACH_FILES,
                 Permission.MESSAGE_ADD_REACTION,
                 Permission.MESSAGE_EXT_EMOJI,
-                Permission.MESSAGE_MANAGE
+                Permission.MESSAGE_MANAGE,
+                Permission.MANAGE_WEBHOOKS
         );
     }
     /*
@@ -60,4 +62,5 @@ public final class Links {
     public static String DISCORDBOTS_ORG   = "https://discordbots.org/bot/425382319449309197";
     public static String DISCORDBOTS_CO_UK = "https://discordbots.co.uk/bots/425382319449309197";
     public static String WEBSITE           = "https://purrbot.site";
+    public static String GITHUB_AVATAR     = "https://i.imgur.com/Fv6qdfG.png";
 }

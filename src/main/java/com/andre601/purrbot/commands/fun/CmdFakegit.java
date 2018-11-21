@@ -1,13 +1,17 @@
 package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
+import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.Links;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
+import com.andre601.purrbot.util.messagehandling.WebhookUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
 import org.json.JSONObject;
 
@@ -28,6 +32,9 @@ public class CmdFakegit implements Command {
         TextChannel tc = msg.getTextChannel();
         JSONObject jsonObject = HttpUtil.getFakeGit();
 
+        if(PermUtil.canDeleteMsg(tc))
+            msg.delete().queue();
+
         if(jsonObject == null){
             EmbedUtil.error(msg, "Couldn't reach the API!");
             return;
@@ -37,21 +44,31 @@ public class CmdFakegit implements Command {
         String hash = jsonObject.getString("hash").substring(0, 6);
         String commit = jsonObject.getString("commit_message");
 
-        EmbedBuilder fakeGit = EmbedUtil.getEmbed()
+        MessageEmbed messageEmbed = new EmbedBuilder()
                 .setColor(new Color(114, 137, 218))
                 .setAuthor(msg.getAuthor().getName(), link, msg.getAuthor().getEffectiveAvatarUrl())
-                .setTitle(MessageFormat.format(
-                        "[{0}:{1}] 1 new commit",
-                        guild.getName().replace(" ", "_"),
+                .setTitle(String.format(
+                        "[%s:%s] 1 new commit",
+                        guild.getName().replace(" ", "\\_"),
                         tc.getName()
                 ), link)
-                .setDescription(MessageFormat.format(
-                        "[`{0}`]({1}) {2}",
+                .setDescription(String.format(
+                        "[`%s`](%s) %s",
                         hash,
                         link,
                         commit
-                ));
+                )).build();
 
-        tc.sendMessage(fakeGit.build()).queue();
+        if(PermUtil.canManageWebhooks(tc)){
+            try {
+                WebhookUtil.sendMessage(tc, Links.GITHUB_AVATAR, "GitHub", messageEmbed);
+                return;
+            }catch (Exception ex){
+                tc.sendMessage(messageEmbed).queue();
+                return;
+            }
+        }
+
+        tc.sendMessage(messageEmbed).queue();
     }
 }
