@@ -9,9 +9,11 @@ about: Reporting a bug/issue
 > What should happen?
 <!-- Please write below this line -->
 
+
 ### Actual behaviour
 > What happens instead?
 <!-- Please write below this line -->
+
 
 ### Images/Links
 > Please provide any screenshots/links that help describing your issue in more detail.
@@ -19,7 +21,7 @@ about: Reporting a bug/issue
 <!-- Images can be added through ![](Your image link) or by copying the image and pasting it here (Ctrl + V) -->
 <!-- Please write below this line -->
 
-## Information
+
 ### Debug
 > Please use `.debug` in your guild and provide the link.
 <!-- Please write below this line -->
