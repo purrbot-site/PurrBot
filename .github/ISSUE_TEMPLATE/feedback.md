@@ -5,9 +5,21 @@ about: Give feedback and/or a suggestion
 ---
 
 ## Feedback/Suggestion
-<!-- Give your feeback/suggestion here -->
+### Type
+> What kind of feedback is this? (Multiple options possible)
+<!-- Change the [ ] to [x] of the option, that matches your type of feedback -->
 
-## Links, images, other information, ...
-<!-- anything else? -->
-<!-- Link: [text](https://link.com) -->
-<!-- Image: ![text (optional)](https://link.com/image.png) The link NEEDS to end with a .png/.jpg/.gif/... -->
+- [ ] New command
+- [ ] Improvement of a command <!-- PRs are welcome and prefered over just describing it -->
+- [ ] Other
+
+### Description
+> Describe your feedback. What would change/be improved?
+<!-- Please write below this line -->
+
+
+## Images/Links
+> Any images/links that could describe it more?
+<!-- Links can be added through [Your text](Your link) or by simply putting the link here -->
+<!-- Images can be added through ![](Your image link) or by copying the image and pasting it here (Ctrl + V) -->
+<!-- Please write below this line -->
