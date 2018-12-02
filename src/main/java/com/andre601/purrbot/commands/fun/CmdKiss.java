@@ -47,7 +47,7 @@ public class CmdKiss implements Command {
 
                 tc.sendMessage("\\*enjoys the kiss*").queue(message -> {
                     message.editMessage(kiss.build()).queue();
-                    msg.addReaction("\\uD83D\\uDC8B").queue();
+                    msg.addReaction("\uD83D\uDC8B").queue();
                 });
             }else{
                 tc.sendMessage(MessageFormat.format(
@@ -59,7 +59,7 @@ public class CmdKiss implements Command {
 
         if(members.contains(msg.getMember())){
             tc.sendMessage(MessageFormat.format(
-                    "I have no idea, how you can actually kiss yourself {0}...",
+                    "I have no idea, how you can actually kiss yourself {0}... With a mirror?",
                     msg.getMember().getAsMention()
             )).queue();
         }
@@ -84,7 +84,9 @@ public class CmdKiss implements Command {
                         kissedMembers
                 )).queue();
             }else{
-                message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
+                message.editMessage(
+                        EmbedBuilder.ZERO_WIDTH_SPACE
+                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} kisses you {1}",
                         msg.getAuthor().getName(),
                         kissedMembers

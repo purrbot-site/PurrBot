@@ -5,7 +5,7 @@ plugins {
     id 'idea'
 }
 mainClassName = 'com.andre601.purrbot.core.PurrBot'
-version = '2.7.5'
+version = '2.7.8'
 
 description = """"""
 

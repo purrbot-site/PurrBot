@@ -18,6 +18,16 @@ import net.dv8tion.jda.core.entities.User;
 )
 public class CmdPM implements Command {
 
+    /**
+     * Checks, if a userID is valid.
+     *
+     * @param  id
+     *         The id of the user as a {@link java.lang.String String}.
+     * @param  shardManager
+     *         A {@link net.dv8tion.jda.bot.sharding.ShardManager ShardManager}.
+     *
+     * @return A {@link net.dv8tion.jda.core.entities.User User object} if existing, or {@code null}.
+     */
     private User getUser(String id, ShardManager shardManager){
         User user;
         try{
@@ -31,8 +41,6 @@ public class CmdPM implements Command {
 
     @Override
     public void execute(Message msg, String s) {
-        TextChannel tc = msg.getTextChannel();
-        String message = "";
         String[] args = s.split(" ");
 
         if (args.length < 2) {
@@ -54,6 +62,8 @@ public class CmdPM implements Command {
             sb.append(" ").append(args[i]);
         }
         user.openPrivateChannel().queue(pm ->
-                pm.sendMessage(sb.toString()).queue(), throwable -> EmbedUtil.error(msg, "Couldn't send PM!"));
+                        pm.sendMessage(sb.toString()).queue(),
+                throwable ->
+                        EmbedUtil.error(msg, "Couldn't send PM!"));
     }
 }

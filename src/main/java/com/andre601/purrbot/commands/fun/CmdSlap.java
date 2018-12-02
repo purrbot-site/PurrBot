@@ -6,6 +6,7 @@ import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
 import java.text.MessageFormat;
@@ -32,13 +33,13 @@ public class CmdSlap implements Command {
         List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
-            tc.sendMessage("Please don't hurt me!").queue();
+            tc.sendMessage("Noooo... Why hurting me? T^T").queue();
             msg.addReaction("\uD83D\uDC94").queue();
         }
 
         if(members.contains(msg.getMember())){
             tc.sendMessage(MessageFormat.format(
-                    "Stop hurting yourself {0}!",
+                    "\\*Slaps {0}* NO! You won't hurt yourself.",
                     msg.getMember().getAsMention()
             )).queue();
         }
@@ -63,7 +64,9 @@ public class CmdSlap implements Command {
                         slapedMembers
                 )).queue();
             }else{
-                message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
+                message.editMessage(
+                        EmbedBuilder.ZERO_WIDTH_SPACE
+                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} slaps you {1}",
                         msg.getAuthor().getName(),
                         slapedMembers

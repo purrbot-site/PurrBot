@@ -114,7 +114,9 @@ public class CmdLewd implements Command {
                     "{0} Getting a lewd neko-gif...",
                     Emotes.LOADING
             )).queue(message ->
-                    message.editMessage("\u200B").embed(lewdgif.build()).queue()
+                    message.editMessage(
+                            EmbedBuilder.ZERO_WIDTH_SPACE
+                    ).embed(lewdgif.build()).queue()
             );
             return;
         }
@@ -131,7 +133,9 @@ public class CmdLewd implements Command {
                 "{0} Getting a lewd neko...",
                 Emotes.LOADING
         )).queue(message -> {
-            message.editMessage("\u200B").embed(lewd.build()).queue();
+            message.editMessage(
+                    EmbedBuilder.ZERO_WIDTH_SPACE
+            ).embed(lewd.build()).queue();
         });
     }
 }

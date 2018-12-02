@@ -23,6 +23,18 @@ import static com.andre601.purrbot.core.PurrBot.*;
 )
 public class CmdRefresh implements Command {
 
+    /**
+     * Edits the provided message with the given content.
+     *
+     * @param message
+     *        A {@link net.dv8tion.jda.core.entities.Message Message object}.
+     * @param complete
+     *        A boolean to set a certain text, if true.
+     * @param text
+     *        The text in the message.
+     * @param progress
+     *        The progress of the update.
+     */
     private void edit(Message message, boolean complete, String text, String progress){
         message.editMessage(String.format(
                 "%s\n" +

@@ -15,6 +15,9 @@ public class CommandRegisterHandler {
 
     private static final Set<Command> COMMANDS = new HashSet<>();
 
+    /**
+     * Registers the different command-classes in a {@link java.util.Set Set<Command>}.
+     */
     CommandRegisterHandler(){
         register(
                 // Fun

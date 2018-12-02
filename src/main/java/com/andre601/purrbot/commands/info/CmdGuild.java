@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @CommandDescription(
         name = "Guild",
         description = "Basic Guild-info",
-        triggers = {"guild", "server"},
+        triggers = {"guild", "server", "guildinfo", "serverinfo"},
         attributes = {@CommandAttribute(key = "info")}
 )
 public class CmdGuild implements Command {

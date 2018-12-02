@@ -29,7 +29,7 @@ public class CmdInvite implements Command {
             msg.delete().queue();
 
         EmbedBuilder invite = EmbedUtil.getEmbed()
-                .setAuthor(msg.getAuthor().getName(),
+                .setAuthor(msg.getJDA().getSelfUser().getName(),
                         null,
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
                 )

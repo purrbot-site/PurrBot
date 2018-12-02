@@ -10,6 +10,16 @@ import java.text.MessageFormat;
 
 public class VoteUtil {
 
+    /**
+     * Performs an action when the vote listener received a webhook message from the bot-page.
+     *
+     * @param botId
+     *        The ID of the bot, provided through the webhook message.
+     * @param voterId
+     *        The ID of the voter, provided through the webhook message.
+     * @param isWeekend
+     *        A boolean for if it's actually weekend, provided through the webhook message.
+     */
     public static void voteAction(String botId, String voterId, boolean isWeekend){
         if(!botId.equals(IDs.PURR)) return;
         if(voterIsInGuild(voterId)){
@@ -35,18 +45,47 @@ public class VoteUtil {
         }
     }
 
+    /**
+     * Checks if the member is on the support-guild.
+     *
+     * @param  userId
+     *         The ID of the user.
+     *
+     * @return True if the user is not null (on the guild).
+     */
     private static boolean voterIsInGuild(String userId){
         return getGuild().getMemberById(userId) != null;
     }
 
+    /**
+     * Checks, if the user already has the voter-role.
+     *
+     * @param  userId
+     *         The ID of the user.
+     * @param  role
+     *         The {@link net.dv8tion.jda.core.entities.Role Role} to be checked.
+     *
+     * @return True if the user already has the role.
+     */
     private static boolean userHasRole(String userId, Role role){
         return getGuild().getMemberById(userId).getRoles().contains(role);
     }
 
+    /**
+     * Gets the guild.
+     *
+     * @return The guild through the ID from {@link com.andre601.purrbot.util.constants.IDs#GUILD IDs.GUILD}.
+     */
     private static Guild getGuild(){
         return ReadyListener.getShardManager().getGuildById(IDs.GUILD);
     }
 
+    /**
+     * Gets the channel for the vote-message to be send.
+     *
+     * @return The TextChannel through the ID from
+     *         {@link com.andre601.purrbot.util.constants.IDs#VOTE_CHANNEL IDs.VOTE_CHANNEL}.
+     */
     private static TextChannel getVoteChannel(){
         return getGuild().getTextChannelById(IDs.VOTE_CHANNEL);
     }

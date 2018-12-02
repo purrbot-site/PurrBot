@@ -7,7 +7,6 @@ import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -23,29 +22,35 @@ import java.text.MessageFormat;
 )
 public class CmdPrefix implements Command {
 
-    public static String getPrefix(Guild g){
-        String prefix = DBUtil.getPrefix(g);
+    /**
+     * Gets the prefix from the database.
+     *
+     * @param  guild
+     *         A {@link net.dv8tion.jda.core.entities.Guild Guild object} used for identification.
+     * @return The saved prefix of the guild.
+     */
+    private static String getPrefix(Guild guild){
+        String prefix = DBUtil.getPrefix(guild);
 
         if(prefix == null){
-            DBUtil.setPrefix(".", g.getId());
+            DBUtil.setPrefix(".", guild.getId());
             return ".";
         }else{
             return prefix;
         }
     }
 
-    public static Guild getGuild(String id, JDA jda){
-        return jda.getGuildById(id);
-    }
-
-    public static void currPrefix(Message msg, Guild g){
-        msg.getTextChannel().sendMessage(String.format(
-                "%s My prefix on this guild is `%s`",
-                msg.getAuthor().getAsMention(),
-                getPrefix(g)
-        )).queue();
-    }
-
+    /**
+     * Sets the prefix to the provided one.
+     * The prefix won't be changed, if {@param prefix} is the default one ({@code .}).
+     *
+     * @param msg
+     *        Messages that is used for the response.
+     * @param guild
+     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
+     * @param prefix
+     *        The String that should be saved.
+     */
     private void setPrefix(Message msg, Guild guild, String prefix){
         if(prefix.equals(".")){
             EmbedUtil.error(msg, MessageFormat.format(
@@ -67,12 +72,21 @@ public class CmdPrefix implements Command {
         msg.getChannel().sendMessage(prefixSet.build()).queue();
     }
 
-    private void resetPrefix(Message msg, Guild g){
-        String prefix = getPrefix(g);
+    /**
+     * Resets the prefix to the default one ({@code .}).
+     * It won't reset it, when it's already the default one.
+     *
+     * @param msg
+     *        Messages that is used for the response.
+     * @param guild
+     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
+     */
+    private void resetPrefix(Message msg, Guild guild){
+        String prefix = getPrefix(guild);
         if(prefix.equals(".")){
             EmbedUtil.error(msg, "This guild doesn't have a own prefix set!");
         }else {
-            DBUtil.resetPrefix(g.getId());
+            DBUtil.resetPrefix(guild.getId());
             EmbedBuilder prefixReset = EmbedUtil.getEmbed(msg.getAuthor())
                     .setDescription("Prefix was reset successfully!")
                     .setColor(Color.GREEN);

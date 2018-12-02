@@ -24,6 +24,16 @@ import java.text.MessageFormat;
 )
 public class CmdQuote implements Command {
 
+    /**
+     * Checks if a {@link net.dv8tion.jda.core.entities.Message Message} exists (is valid).
+     *
+     * @param  id
+     *         ID of the message.
+     * @param  channel
+     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} where the message should be found.
+     *
+     * @return {@code null} if no message could be found. Else the Message itself.
+     */
     private Message getMessage(String id, TextChannel channel){
         Message message;
         try{
@@ -35,6 +45,14 @@ public class CmdQuote implements Command {
         return message;
     }
 
+    /**
+     * Method to send a {@link net.dv8tion.jda.core.entities.MessageEmbed MessageEmbed} to the provided channel.
+     *
+     * @param msg
+     *        A {@link net.dv8tion.jda.core.entities.Message Message object} that is used for the quote information.
+     * @param channel
+     *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} the message should be send in.
+     */
     private void sendQuoteEmbed(Message msg, TextChannel channel) {
         EmbedBuilder quoteEmbed = EmbedUtil.getEmbed()
                 .setAuthor(MessageFormat.format(
@@ -86,15 +104,8 @@ public class CmdQuote implements Command {
                 return;
             }
             if(PermUtil.canUploadImage(tc)){
-                Message message = new MessageBuilder()
-                        .append(MessageFormat.format(
-                                "Quote from {0} in {1}",
-                                quote.getAuthor().getName(),
-                                quote.getTextChannel().getAsMention()
-                        )).build();
-
                 try{
-                    ImageUtil.getQuoteImage(tc, message, quote);
+                    ImageUtil.getQuoteImage(tc, msg, quote);
                 }catch(Exception ex){
                     sendQuoteEmbed(quote, tc);
                 }
@@ -114,15 +125,8 @@ public class CmdQuote implements Command {
             }
 
             if(PermUtil.canUploadImage(tc)){
-                Message message = new MessageBuilder()
-                        .append(MessageFormat.format(
-                                "Quote from {0} in {1}",
-                                quote.getAuthor().getName(),
-                                quote.getTextChannel().getAsMention()
-                        )).build();
-
                 try{
-                    ImageUtil.getQuoteImage(tc, message, quote);
+                    ImageUtil.getQuoteImage(tc, msg, quote);
                 }catch(Exception ex){
                     sendQuoteEmbed(quote, tc);
                 }

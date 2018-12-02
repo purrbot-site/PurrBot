@@ -44,6 +44,8 @@ public class CmdLesbian implements Command {
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting lewd lesbians...",
                 Emotes.LOADING
-        )).queue(message -> message.editMessage("\u200B").embed(les.build()).queue());
+        )).queue(message -> message.editMessage(
+                EmbedBuilder.ZERO_WIDTH_SPACE
+        ).embed(les.build()).queue());
     }
 }

@@ -1,12 +1,11 @@
 package com.andre601.purrbot.util;
 
+import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.core.PurrBot;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.MessageBuilder;
+import net.dv8tion.jda.core.entities.*;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
@@ -20,12 +19,20 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
+import java.time.ZonedDateTime;
 
 public class ImageUtil {
 
     public static final String[] UA = {"User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 " +
             "(KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"};
 
+    /**
+     * Gets the avatar of a provided user.
+     *
+     * @param  user
+     *         A {@link net.dv8tion.jda.core.entities.User User object}.
+     * @return The user-avatar as a {@link java.awt.image.BufferedImage BufferedImage}.
+     */
     private static BufferedImage getUserIcon(User user){
 
         BufferedImage icon = null;
@@ -41,6 +48,19 @@ public class ImageUtil {
         return icon;
     }
 
+    /**
+     * Gets and sends a image from the <a href="https://purrbot.site/api/quote" target="_blank">quote-API</a>.
+     *
+     * @param  tc
+     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}
+     * @param  msg
+     *         The {@link net.dv8tion.jda.core.entities.Message Message} of the command executor.
+     * @param  quote
+     *         The {@link net.dv8tion.jda.core.entities.Message Message} for the quote.
+     *
+     * @throws Exception
+     *         Will be thrown, when the text can't be encoded or the connection can't be made.
+     */
     public static void getQuoteImage(TextChannel tc, Message msg, Message quote) throws Exception{
 
         String name = URLEncoder.encode(quote.getAuthor().getName(), "UTF-8");
@@ -49,25 +69,41 @@ public class ImageUtil {
         int color = quote.getMember().getRoles().get(0).getColorRaw();
         long creationTime = quote.getCreationTime().toInstant().toEpochMilli();
 
-        String url = "https://purrbot.site/api/quote?name=" + name + "&color=" + color + "&time=" + creationTime +
-                "&avatar=" + avatar + "&text=" + quoteRaw;
+        String url = "https://purrbot.site/api/quote?name=" + name + "&color=" + color + "&time="
+                + creationTime + "&avatar=" + avatar + "&text=" + quoteRaw;
 
         URL link = new URL(url);
         URLConnection connection = link.openConnection();
         connection.setRequestProperty(UA[0], UA[1]);
         connection.connect();
+        String imageName = String.format("quote_%s.png", quote.getId());
 
-        String imageName = String.valueOf(System.currentTimeMillis());
+        MessageBuilder message = new MessageBuilder();
+        EmbedBuilder quoteEmbed = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription(String.format(
+                        "Quote from %s in %s",
+                        quote.getAuthor().getName(),
+                        quote.getTextChannel().getAsMention()
+                ))
+                .setImage(String.format(
+                        "attachment://%s",
+                        imageName
+                ));
+        message.setEmbed(quoteEmbed.build());
 
-        tc.sendFile(connection.getInputStream(), MessageFormat.format(
-                "{0}.png",
-                imageName
-        )).embed(new EmbedBuilder().setDescription(msg.getContentRaw()).setImage(MessageFormat.format(
-                "attachment://{0}.png",
-                imageName
-        )).build()).queue();
+        tc.sendFile(connection.getInputStream(), imageName, message.build()).queue();
     }
 
+    /**
+     * Gets the InputStream of the <a href="https://purrbot.site/api/status" target="_blank">status-API</a>.
+     *
+     * @param  avatar
+     *         Link to an image, that can be used as avatar.
+     * @param  status
+     *         A {@link java.lang.String String} that is the current status.
+     *
+     * @return A {@link java.io.InputStream InputStream} of the site, or {@code null}.
+     */
     public static InputStream getAvatarStatus(String avatar, String status){
 
         try {
@@ -87,13 +123,27 @@ public class ImageUtil {
         }
     }
 
-    public static InputStream getWelcomeImg(User user, Guild g, String imageType, String imageColor){
+    /**
+     * Gets the InputStream of the <a href="https://purrbot.site/api/welcome" target="_blank">welcome-API</a>.
+     *
+     * @param  user
+     *         A {@link net.dv8tion.jda.core.entities.User User object}.
+     * @param  guild
+     *         A {@link net.dv8tion.jda.core.entities.Guild Guild object}.
+     * @param  imageType
+     *         A {@link java.lang.String String} containing the imageType.
+     * @param  imageColor
+     *         A {@link java.lang.String String} containing colortype (hex/rgb) and value (rrggbb/r,g,b)
+     *
+     * @return A {@link java.io.InputStream InputStream} of the site, or {@code null}.
+     */
+    public static InputStream getWelcomeImg(User user, Guild guild, String imageType, String imageColor){
         try{
             String avatar = URLEncoder.encode(user.getEffectiveAvatarUrl(), "UTF-8");
             String name = URLEncoder.encode(user.getName(), "UTF-8");
             String image = URLEncoder.encode(imageType, "UTF-8");
             String color = URLEncoder.encode(imageColor, "UTF-8");
-            long size = g.getMembers().size();
+            long size = guild.getMembers().size();
 
             String url = "https://purrbot.site/api/welcome?avatar=" + avatar + "&name=" + name + "&image=" + image +
                     "&color=" + color + "&size=" + size;
@@ -109,6 +159,18 @@ public class ImageUtil {
         }
     }
 
+    /**
+     * Creates and sends a vote-image
+     *
+     * @param user
+     *        A {@link net.dv8tion.jda.core.entities.User User object}.
+     * @param msg
+     *        The {@link net.dv8tion.jda.core.entities.Message Message} for the attachment.
+     * @param tc
+     *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to send the message.
+     * @param isWeekend
+     *        A boolean to check, if it's weekend or not (for displaying "x2 votes").
+     */
     public static void createVoteImage(User user, Message msg, TextChannel tc, boolean isWeekend){
 
         //  Saving the userIcon/avatar as a Buffered image

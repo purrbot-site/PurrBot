@@ -123,6 +123,8 @@ public class DebugUtil {
     private static String getRoles(Guild guild){
         StringBuilder sb = new StringBuilder();
         for(Role role : guild.getRoles()){
+            if(role.isPublicRole()) continue;
+
             sb.append("  ").append(role.getName()).append(" (").append(role.getId()).append(")\n");
         }
         return sb.toString();

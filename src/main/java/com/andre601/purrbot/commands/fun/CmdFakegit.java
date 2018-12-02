@@ -16,7 +16,6 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import org.json.JSONObject;
 
 import java.awt.*;
-import java.text.MessageFormat;
 
 @CommandDescription(
         name = "Fakegit",

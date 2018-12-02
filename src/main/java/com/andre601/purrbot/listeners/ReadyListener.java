@@ -23,38 +23,88 @@ public class ReadyListener extends ListenerAdapter{
     private static ShardManager shardManager;
     private static boolean ready = Boolean.FALSE;
 
+    /**
+     * Option to check, if the bot is ready.
+     *
+     * @return boolean that returns either {@code true} or {@code false}.
+     */
     public static boolean getReady(){
         return ready;
     }
 
+    /**
+     * Sets the boolean {@code ready} to the provided one.
+     *
+     * @param ready
+     *        A boolean that is either true or false.
+     */
     private static void setReady(Boolean ready){
         ReadyListener.ready = ready;
     }
 
+    /**
+     * Gets a JDA object.
+     *
+     * @return A {@link net.dv8tion.jda.core.JDA JDA object}.
+     */
     public static JDA getJda(){
         return jda;
     }
 
+    /**
+     * Sets the JDA object to the provided one.
+     *
+     * @param jda
+     *        A {@link net.dv8tion.jda.core.JDA JDA object} of the current shard.
+     */
     private static void setJda(JDA jda){
         ReadyListener.jda = jda;
     }
 
+    /**
+     * Gives the ShardManager.
+     *
+     * @return A {@link net.dv8tion.jda.bot.sharding.ShardManager ShardManager object}.
+     */
     public static ShardManager getShardManager(){
         return shardManager;
     }
 
+    /**
+     * Sets the ShardManager to the provided one.
+     *
+     * @param shardManager
+     *        A {@link net.dv8tion.jda.bot.sharding.ShardManager ShardManager object}.
+     */
     private static void setShardManager(ShardManager shardManager){
         ReadyListener.shardManager = shardManager;
     }
 
-    private static String setBotGame(){
-        return (PermUtil.isBeta() ? "My sister on {0} Guilds!" : "https://purrbot.site | {0} Guilds");
-    }
-
+    /**
+     * Gets the current bot-status (updates it).
+     *
+     * @return String from {@link #setBotGame()}.
+     */
     public static String getBotGame(){
         return setBotGame();
     }
 
+    /**
+     * Sets the status of the bot.
+     *
+     * @return A string that depends on if the bot is the beta-version or not.
+     */
+    private static String setBotGame(){
+        return (PermUtil.isBeta() ? "My sister on {0} Guilds!" : "https://purrbot.site | {0} Guilds");
+    }
+
+    /**
+     * Listens for when the bot is ready.
+     * This gets fired every time a shard is ready.
+     *
+     * @param event
+     *        A {@link net.dv8tion.jda.core.events.ReadyEvent ReadyEvent}.
+     */
     public void onReady(ReadyEvent event){
 
         shardCount += 1;

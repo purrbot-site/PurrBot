@@ -1,6 +1,5 @@
 package com.andre601.purrbot.commands.info;
 
-import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.IDs;
@@ -15,7 +14,6 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
-import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
@@ -42,53 +40,52 @@ public class CmdInfo implements Command {
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
                 )
                 .setThumbnail(msg.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .setDescription(String.format(
-                        "**About the Bot**\n" +
+                .addField("About the bot", String.format(
                         "Oh hi there!\n" +
                         "I'm `%s`. A Bot for the ~Nya Discord.\n" +
-                        "I was made by <@204232208049766400> with the help of JDA " +
+                        "I was made by Andre_601 (<@204232208049766400>) with the help of JDA " +
                         "and a lot of free time. ;)\n" +
                         "\n" +
                         "**Commands**\n" +
                         "You can use %shelp on your guild to see all of my commands.",
                         msg.getJDA().getSelfUser().getName(),
                         DBUtil.getPrefix(guild)
-                ))
-                .addField("Bot-Version:", MessageFormat.format(
-                        "`{0}`",
+                ), false)
+                .addField("Bot-Version", String.format(
+                        "`%s`",
                         IDs.VERSION
                 ), true)
-                .addField("Library:", MessageFormat.format(
-                        "[`JDA {0}`]({1})",
+                .addField("Library", String.format(
+                        "[`JDA %s`](%s)",
                         JDAInfo.VERSION,
                         JDAInfo.GITHUB
                 ), true)
-                .addField("Links:", MessageFormat.format(
-                        "[`GitHub`]({0})\n" +
-                        "[`Wiki`]({1})\n" +
-                        "[`Discordbots.org`]({2})",
+                .addField("Links", String.format(
+                        "[`GitHub`](%s)\n" +
+                        "[`Wiki`](%s)\n" +
+                        "[`Discordbots.org`](%s)",
                         Links.GITHUB,
                         Links.WIKI,
                         Links.DISCORDBOTS_ORG
                 ), true)
-                .addField("", MessageFormat.format(
-                        "[`Official Discord`]({0})\n" +
-                        "[`Website`]({1})\n" +
-                        "[`Discordbots.co.uk`]({2})",
+                .addField("", String.format(
+                        "[`Official Discord`](%s)\n" +
+                        "[`Website`](%s)\n" +
+                        "[`ls.terminal.ink`](%s)",
                         Links.DISCORD_INVITE,
                         Links.WEBSITE,
-                        Links.DISCORDBOTS_CO_UK
+                        Links.LS_TERMINAL_INK
                 ), true);
 
         if(s.contains("-dm")){
             msg.getAuthor().openPrivateChannel().queue(
                     pm -> pm.sendMessage(info.build()).queue(messageq ->
-                            tc.sendMessage(MessageFormat.format(
-                                    "{0} Check your DMs!",
+                            tc.sendMessage(String.format(
+                                    "%s Check your DMs!",
                                     msg.getAuthor().getAsMention()
                             )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
-                    ), throwable -> tc.sendMessage(MessageFormat.format(
-                            "{0} I can't DM you.",
+                    ), throwable -> tc.sendMessage(String.format(
+                            "%s I can't DM you.",
                             msg.getAuthor().getAsMention()
                     )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
             );

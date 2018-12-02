@@ -25,6 +25,16 @@ public class GFile {
     private ConfigUtil cutil = new ConfigUtil();
     private Map<String, File> gFiles;
 
+    /**
+     * Generates or loads a json-file.
+     *
+     * @param name
+     *        The name of the file.
+     * @param externalPath
+     *        The location (external path) where it should be saved.
+     * @param internalPath
+     *        The internal location, where the template is saved.
+     */
     public void make(String name, String externalPath, String internalPath){
         if(gFiles == null){
             gFiles = new HashMap<>();
@@ -74,6 +84,16 @@ public class GFile {
         }
     }
 
+    /**
+     * Gets the content of an item.
+     *
+     * @param  fileName
+     *         The saved name of the item.
+     * @param  item
+     *         The actual item (key) in the file.
+     *
+     * @return A {@link java.lang.String String} with either the value of the item, or a warning, when not found.
+     */
     public String getItem(String fileName, String item){
         File file = gFiles.get(fileName);
         try{

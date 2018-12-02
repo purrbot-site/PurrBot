@@ -6,6 +6,7 @@ import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
 import java.text.MessageFormat;
@@ -63,7 +64,9 @@ public class CmdPoke implements Command {
                         pokedMembers
                 )).queue();
             }else{
-                message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
+                message.editMessage(
+                        EmbedBuilder.ZERO_WIDTH_SPACE
+                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} pokes you {1}",
                         msg.getAuthor().getName(),
                         pokedMembers

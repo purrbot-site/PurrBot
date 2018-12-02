@@ -6,6 +6,7 @@ import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
 import java.text.MessageFormat;
@@ -41,7 +42,8 @@ public class CmdCuddle implements Command {
 
         if(members.contains(msg.getMember())){
             tc.sendMessage(MessageFormat.format(
-                    "Do you have no one to cuddle {0}?",
+                    "Do you have no one to cuddle {0}?\n" +
+                    "Here... Let me fix that! \\*cuddles with {0}*",
                     msg.getMember().getAsMention()
             )).queue();
         }
@@ -66,7 +68,9 @@ public class CmdCuddle implements Command {
                         cuddledMembers
                 )).queue();
             }else{
-                message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
+                message.editMessage(
+                        EmbedBuilder.ZERO_WIDTH_SPACE
+                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} cuddles with you {1}",
                         msg.getAuthor().getName(),
                         cuddledMembers

@@ -1,7 +1,6 @@
 package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.listeners.ReadyListener;
-import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
@@ -12,7 +11,6 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
-import org.json.JSONObject;
 
 import java.lang.management.ManagementFactory;
 import java.text.MessageFormat;
@@ -26,6 +24,11 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdStats implements Command {
 
+    /**
+     * Method for getting the current uptime.
+     *
+     * @return A String with the current uptime of the bot.
+     */
     private static String getUptime(){
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
         long d = TimeUnit.MILLISECONDS.toDays(uptime);
@@ -53,18 +56,6 @@ public class CmdStats implements Command {
         TextChannel tc = msg.getTextChannel();
         ShardManager shardManager = ReadyListener.getShardManager();
 
-        JSONObject dbl = HttpUtil.getVoteInfo();
-        String totalVotes;
-        String monthlyVotes;
-
-        if(dbl == null){
-            totalVotes = null;
-            monthlyVotes = null;
-        }else{
-            totalVotes = String.valueOf(dbl.getLong("points"));
-            monthlyVotes = String.valueOf(dbl.getLong("monthlyPoints"));
-        }
-
         EmbedBuilder stats = EmbedUtil.getEmbed(msg.getAuthor())
                 .setAuthor("Purr-Bot Stats")
                 .addField("Guilds", MessageFormat.format(
@@ -87,12 +78,6 @@ public class CmdStats implements Command {
                         "**Total**: `{1}`",
                         guild.getJDA().getShardInfo().getShardId(),
                         shardManager.getShardCache().size()
-                ), true)
-                .addField("Votes", MessageFormat.format(
-                        "**Total**: `{0}`\n" +
-                        "**This month**: `{1}`",
-                        (totalVotes == null ? "No data" : totalVotes),
-                        (monthlyVotes == null ? "No data" : monthlyVotes)
                 ), true)
                 .addField("Uptime", getUptime(), false);
 

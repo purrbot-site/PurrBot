@@ -113,7 +113,9 @@ public class CmdNeko implements Command {
                     "{0} Getting a cute neko-gif...",
                     Emotes.LOADING
             )).queue(message ->
-                    message.editMessage("\u200B").embed(nekogif.build()).queue()
+                    message.editMessage(
+                            EmbedBuilder.ZERO_WIDTH_SPACE
+                    ).embed(nekogif.build()).queue()
             );
             return;
         }
@@ -131,7 +133,9 @@ public class CmdNeko implements Command {
                 Emotes.LOADING
         )).queue(message -> {
             //  Editing the message to add the image ("should" prevent issues with empty embeds)
-            message.editMessage("\u200B").embed(neko.build()).queue();
+            message.editMessage(
+                    EmbedBuilder.ZERO_WIDTH_SPACE
+            ).embed(neko.build()).queue();
 
             //  The same image exists twice for some reason...
             if(link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko039.jpeg") ||

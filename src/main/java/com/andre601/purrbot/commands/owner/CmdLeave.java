@@ -21,7 +21,6 @@ public class CmdLeave implements Command {
 
     @Override
     public void execute(Message msg, String s){
-        Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
         ShardManager shardManager = ReadyListener.getShardManager();
 

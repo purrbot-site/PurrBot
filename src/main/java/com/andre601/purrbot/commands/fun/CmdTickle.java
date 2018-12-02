@@ -6,6 +6,7 @@ import com.andre601.purrbot.util.HttpUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
 import java.text.MessageFormat;
@@ -38,7 +39,7 @@ public class CmdTickle implements Command {
 
         if(members.contains(msg.getMember())){
             tc.sendMessage(MessageFormat.format(
-                    "Are you that bored, to tickle yourself {0}?",
+                    "Alright... If you really want to tickle yourself... \\*tickles {0}*",
                     msg.getMember().getAsMention()
             )).queue();
         }
@@ -63,7 +64,9 @@ public class CmdTickle implements Command {
                         tickledMembers
                 )).queue();
             }else{
-                message.editMessage("\u200B").embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
+                message.editMessage(
+                        EmbedBuilder.ZERO_WIDTH_SPACE
+                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} tickles you {1}",
                         msg.getAuthor().getName(),
                         tickledMembers
