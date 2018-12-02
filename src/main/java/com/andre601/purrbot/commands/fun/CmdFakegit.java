@@ -40,7 +40,7 @@ public class CmdFakegit implements Command {
         }
 
         String link = jsonObject.getString("permalink");
-        String hash = jsonObject.getString("hash").substring(0, 6);
+        String hash = jsonObject.getString("hash").substring(0, 7);
         String commit = jsonObject.getString("commit_message");
 
         MessageEmbed messageEmbed = new EmbedBuilder()

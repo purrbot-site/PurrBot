@@ -1,8 +1,11 @@
 package com.andre601.purrbot.util;
 
+import com.andre601.purrbot.util.constants.Links;
 import okhttp3.*;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.net.URL;
@@ -319,6 +322,24 @@ public class HttpUtil {
     }
 
     /**
+     * Gets a JSON object from the api.github site.
+     *
+     * @return A JSONObject with info.
+     * @throws Exception
+     *         Thrown when for example the site is unavailable.
+     */
+    private static JSONObject latestCommit() throws Exception{
+        Request request = new Request.Builder()
+                .url(Links.GITHUB_COMMITS)
+                .build();
+        Response response = CLIENT.newCall(request).execute();
+        try(ResponseBody responseBody = response.body()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            return new JSONArray(new JSONTokener(responseBody.byteStream())).getJSONObject(0);
+        }
+    }
+
+    /**
      * Gets content of a provided link as String.
      *
      * @param  request
@@ -550,6 +571,19 @@ public class HttpUtil {
     public static JSONObject getFakeGit(){
         try{
             return fakeGit();
+        }catch (Exception ex){
+            return null;
+        }
+    }
+
+    /**
+     * Getter for {@link #latestCommit()}.
+     *
+     * @return possible-null JSONObject
+     */
+    public static JSONObject getLatestCommit(){
+        try{
+            return latestCommit();
         }catch (Exception ex){
             return null;
         }

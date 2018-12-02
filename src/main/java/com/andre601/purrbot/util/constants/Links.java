@@ -63,4 +63,5 @@ public final class Links {
     public static String LS_TERMINAL_INK   = "https://ls.terminal.ink/bots/425382319449309197";
     public static String WEBSITE           = "https://purrbot.site";
     public static String GITHUB_AVATAR     = "https://i.imgur.com/Fv6qdfG.png";
+    public static String GITHUB_COMMITS    = "https://api.github.com/repos/Andre601/PurrBot/commits";
 }

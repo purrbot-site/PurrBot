@@ -1,6 +1,7 @@
 package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.util.DBUtil;
+import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.constants.Links;
@@ -13,6 +14,7 @@ import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
+import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +22,11 @@ import java.util.concurrent.TimeUnit;
         name = "Info",
         description =
                 "Get some basic info about the bot.\n" +
-                "Add `-dm` to send it to your DM.",
+                "\n" +
+                "You can use additional args in the command.\n" +
+                "`-dm` to send it in DM.\n" +
+                "`-github` to get info about the latest commit-hash\n" +
+                "Both arguments can be combined.",
         triggers = {"info", "infos", "information"},
         attributes = {@CommandAttribute(key = "info")}
 )
@@ -34,48 +40,90 @@ public class CmdInfo implements Command {
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
-        EmbedBuilder info = EmbedUtil.getEmbed()
-                .setAuthor(msg.getJDA().getSelfUser().getName(),
-                        null,
-                        msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
-                )
-                .setThumbnail(msg.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .addField("About the bot", String.format(
-                        "Oh hi there!\n" +
-                        "I'm `%s`. A Bot for the ~Nya Discord.\n" +
-                        "I was made by Andre_601 (<@204232208049766400>) with the help of JDA " +
-                        "and a lot of free time. ;)\n" +
-                        "\n" +
-                        "**Commands**\n" +
-                        "You can use %shelp on your guild to see all of my commands.",
-                        msg.getJDA().getSelfUser().getName(),
-                        DBUtil.getPrefix(guild)
-                ), false)
-                .addField("Bot-Version", String.format(
-                        "`%s`",
-                        IDs.VERSION
-                ), true)
-                .addField("Library", String.format(
-                        "[`JDA %s`](%s)",
-                        JDAInfo.VERSION,
-                        JDAInfo.GITHUB
-                ), true)
-                .addField("Links", String.format(
-                        "[`GitHub`](%s)\n" +
-                        "[`Wiki`](%s)\n" +
-                        "[`Discordbots.org`](%s)",
-                        Links.GITHUB,
-                        Links.WIKI,
-                        Links.DISCORDBOTS_ORG
-                ), true)
-                .addField("", String.format(
-                        "[`Official Discord`](%s)\n" +
-                        "[`Website`](%s)\n" +
-                        "[`ls.terminal.ink`](%s)",
-                        Links.DISCORD_INVITE,
-                        Links.WEBSITE,
-                        Links.LS_TERMINAL_INK
-                ), true);
+        EmbedBuilder info;
+
+        if(s.contains("-github")){
+            JSONObject json = HttpUtil.getLatestCommit();
+
+            if(json == null){
+                EmbedUtil.error(
+                        msg,
+                        "There was an issue getting the GitHub-information. Please try again later!"
+                );
+                return;
+            }
+
+            JSONObject commitJson = json.getJSONObject("commit");
+
+            String commitLink = json.getString("html_url");
+            String commitHashFull = json.getString("sha");
+            String commitHashSmall = json.getString("sha").substring(0, 7);
+
+            String commitMsg = commitJson.getString("message");
+
+            info = EmbedUtil.getEmbed(msg.getAuthor())
+                    .setAuthor(String.format(
+                            "Info about commit %s",
+                            commitHashSmall
+                    ), commitLink, Links.GITHUB_AVATAR)
+                    .addField("Full commit hash", String.format(
+                            "[`%s`](%s)",
+                            commitHashFull,
+                            commitLink
+                    ), false)
+                    .addField("Message", String.format(
+                            "```\n" +
+                            "%s\n" +
+                            "```",
+                            commitMsg.length() > 2000 ?
+                                    commitMsg.substring(0, 1996) + "..." :
+                                    commitMsg
+                    ), false);
+
+        }else {
+            info = EmbedUtil.getEmbed()
+                    .setAuthor(msg.getJDA().getSelfUser().getName(),
+                            null,
+                            msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
+                    )
+                    .setThumbnail(msg.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                    .addField("About the bot", String.format(
+                            "Oh hi there!\n" +
+                            "I'm `%s`. A Bot for the ~Nya Discord.\n" +
+                            "I was made by Andre_601 (<@204232208049766400>) with the help of JDA " +
+                            "and a lot of free time. ;)\n" +
+                            "\n" +
+                            "**Commands**\n" +
+                            "You can use %shelp on your guild to see all of my commands.",
+                            msg.getJDA().getSelfUser().getName(),
+                            DBUtil.getPrefix(guild)
+                    ), false)
+                    .addField("Bot-Version", String.format(
+                            "`%s`",
+                            IDs.VERSION
+                    ), true)
+                    .addField("Library", String.format(
+                            "[`JDA %s`](%s)",
+                            JDAInfo.VERSION,
+                            JDAInfo.GITHUB
+                    ), true)
+                    .addField("Links", String.format(
+                            "[`GitHub`](%s)\n" +
+                            "[`Wiki`](%s)\n" +
+                            "[`Discordbots.org`](%s)",
+                            Links.GITHUB,
+                            Links.WIKI,
+                            Links.DISCORDBOTS_ORG
+                    ), true)
+                    .addField("", String.format(
+                            "[`Official Discord`](%s)\n" +
+                            "[`Website`](%s)\n" +
+                            "[`ls.terminal.ink`](%s)",
+                            Links.DISCORD_INVITE,
+                            Links.WEBSITE,
+                            Links.LS_TERMINAL_INK
+                    ), true);
+        }
 
         if(s.contains("-dm")){
             msg.getAuthor().openPrivateChannel().queue(
