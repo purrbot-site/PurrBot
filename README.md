@@ -1,5 +1,4 @@
 [![](https://discordbots.org/api/widget/425382319449309197.svg)](https://discordbots.org/bot/425382319449309197)
-[![](https://discordbots.co.uk/api/bots/425382319449309197.svg)](https://discordbots.co.uk/bots/425382319449309197)
 
 # \*Purr*
 This bot was made to use the [nekos.life](https://nekos.life)-API.  
