@@ -13,7 +13,9 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
@@ -31,6 +33,37 @@ import java.util.concurrent.TimeUnit;
         attributes = {@CommandAttribute(key = "info")}
 )
 public class CmdInfo implements Command {
+
+    private String getChangedFiles(JSONArray jsonArray){
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < jsonArray.length(); ++i){
+            int filesLeft = jsonArray.length() - i;
+
+            JSONObject json = jsonArray.getJSONObject(i);
+            String filename = json.getString("filename").replace("src/main/java/com/andre601/purrbot", "");
+            int addition = json.getInt("additions");
+            int deletion = json.getInt("deletions");
+
+            String fileInfo = String.format(
+                    "%s\n" +
+                    "+%6d\n" +
+                    "-%6d\n",
+                    filename,
+                    addition,
+                    deletion
+            );
+
+            if(sb.length() + fileInfo.length() + 25 + String.valueOf(filesLeft).length() >
+                    MessageEmbed.VALUE_MAX_LENGTH){
+                sb.append("+").append(filesLeft).append(" more  ");
+                break;
+            }
+            sb.append(fileInfo).append("\n");
+        }
+
+        return sb.substring(0, sb.length() - 2);
+    }
 
     @Override
     public void execute(Message msg, String s){
@@ -53,7 +86,16 @@ public class CmdInfo implements Command {
                 return;
             }
 
+            JSONObject commit = HttpUtil.getSpecificCommit(json.getString("url"));
+
+            if(commit == null){
+                EmbedUtil.error(msg, "Couldn't get information from GitHub. Please try again later.");
+                return;
+            }
+
+
             JSONObject commitJson = json.getJSONObject("commit");
+            JSONArray files = commit.getJSONArray("files");
 
             String commitLink = json.getString("html_url");
             String commitHashFull = json.getString("sha");
@@ -78,6 +120,12 @@ public class CmdInfo implements Command {
                             commitMsg.length() > 2000 ?
                                     commitMsg.substring(0, 1996) + "..." :
                                     commitMsg
+                    ), false)
+                    .addField("Changed files:", String.format(
+                            "```diff\n" +
+                            "%s\n" +
+                            "```",
+                            getChangedFiles(files)
                     ), false);
 
         }else {

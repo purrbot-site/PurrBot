@@ -340,6 +340,25 @@ public class HttpUtil {
     }
 
     /**
+     * Gets a JSON object from the api.github site.
+     *
+     * @return A JSONObject with info.
+     * @throws Exception
+     *         Thrown when for example the site is unavailable.
+     */
+    private static JSONObject specificCommit(String link) throws IOException{
+        Request request = new Request.Builder()
+                .url(link)
+                .header("User-Agent", "PurrBot")
+                .build();
+        Response response = CLIENT.newCall(request).execute();
+        try(ResponseBody responseBody = response.body()){
+            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            return new JSONObject(Objects.requireNonNull(responseBody).string());
+        }
+    }
+
+    /**
      * Gets content of a provided link as String.
      *
      * @param  request
@@ -585,6 +604,19 @@ public class HttpUtil {
         try{
             return latestCommit();
         }catch (Exception ex){
+            return null;
+        }
+    }
+
+    /**
+     * Getter for {@link #specificCommit(String)}.
+     *
+     * @return possible-null JSONObject
+     */
+    public static JSONObject getSpecificCommit(String link){
+        try {
+            return specificCommit(link);
+        }catch(IOException ex){
             return null;
         }
     }
