@@ -57,6 +57,7 @@ Help     |                        | Will display all commands available.
          | [command]              | Shows info about the provided command.
 Info     |                        | Shows some info about the bot.
          | [-dm]                  | Sends the info in DM.
+         | [-github]              | Shows information about the latest commit.
 Invite   |                        | Shows you some links.
          | [-dm]                  | Sends you the links in DM.
 Ping     |                        | Checks the ping. (Time the bot takes to edit the message.)
