@@ -63,7 +63,7 @@ Invite   |                        | Shows you some links.
          | [-dm]                  | Sends you the links in DM.
 Ping     |                        | Checks the ping. (Time the bot takes to edit the message.)
          | [-api]                 | Checks the ping to the Discord-API.
-Quote    | <messageID> <#channel> | Quotes a message from a user. The message needs to be in the mentioned channel!
+Quote    | <messageID> [#channel] | Quotes a message. The message needs to be in the same channel or in the mentioned one.
 Stats    |                        | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, etc.)
 User     |                        | Gives info about you.
          | [@user]                | Gives info about the mentioned user.
