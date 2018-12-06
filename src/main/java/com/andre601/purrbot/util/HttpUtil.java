@@ -1,5 +1,6 @@
 package com.andre601.purrbot.util;
 
+import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.constants.Links;
 import okhttp3.*;
 import org.apache.commons.io.IOUtils;
@@ -295,6 +296,7 @@ public class HttpUtil {
     private static JSONObject voteInfo() throws Exception{
         Request request = new Request.Builder()
                 .url("https://discordbots.org/api/bots/425382319449309197")
+                .header("Authorization", PurrBot.file.getItem("config", "api-token"))
                 .build();
         Response response = CLIENT.newCall(request).execute();
         try(ResponseBody responseBody = response.body()){

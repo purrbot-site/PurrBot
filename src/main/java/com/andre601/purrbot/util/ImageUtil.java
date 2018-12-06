@@ -14,10 +14,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
 
 public class ImageUtil {
+
+    public static final String[] UA = {"User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"};
 
     /**
      * Gets the avatar of a provided user.
@@ -31,7 +35,11 @@ public class ImageUtil {
         BufferedImage icon = null;
 
         try{
-            icon = ImageIO.read(new URL(user.getEffectiveAvatarUrl()).openStream());
+            URL userIcon = new URL(user.getEffectiveAvatarUrl());
+            URLConnection connection = userIcon.openConnection();
+            connection.setRequestProperty(UA[0], UA[1]);
+            connection.connect();
+            icon = ImageIO.read(connection.getInputStream());
         }catch (Exception ignored){
         }
         return icon;

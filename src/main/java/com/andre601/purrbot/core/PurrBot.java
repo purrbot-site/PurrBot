@@ -91,7 +91,8 @@ public class PurrBot {
             post("/vote", (req, res) -> {
 
                 Vote vote = gsonVote.fromJson(req.body(), Vote.class);
-                VoteUtil.voteAction(vote.getBotId(), vote.getUserId(), vote.isWeekend());
+                if(ReadyListener.getReady())
+                    VoteUtil.voteAction(vote.getBotId(), vote.getUserId(), vote.isWeekend());
                 //  I have to return something for some reason... :shrug:
                 return "";
             });
