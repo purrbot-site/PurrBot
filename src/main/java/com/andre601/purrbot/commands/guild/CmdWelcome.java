@@ -203,6 +203,13 @@ public class CmdWelcome implements Command {
      */
     private void resetColor(Message msg, Guild guild){
         TextChannel tc = msg.getTextChannel();
+        String color = DBUtil.getColor(guild);
+
+        if(color.equalsIgnoreCase("hex:ffffff")){
+            EmbedUtil.error(msg, "The color is already set to `hex:ffffff`!");
+            return;
+        }
+
         DBUtil.resetColor(guild.getId());
         EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
                 .setDescription("Color resetted to `hex:ffffff`")
@@ -237,6 +244,69 @@ public class CmdWelcome implements Command {
                 .setDescription(MessageFormat.format(
                         "Color changed to `{0}`",
                         colorInput
+                ))
+                .setColor(Color.GREEN);
+
+        tc.sendMessage(success.build()).queue();
+    }
+
+    /**
+     * Resets the message to default one ({@code Welcome {mention}!}).
+     *
+     * @param msg
+     *        Messages that is used for the response.
+     * @param guild
+     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
+     */
+    private void resetMessage(Message msg, Guild guild){
+        TextChannel tc = msg.getTextChannel();
+
+        if(!DBUtil.hasMessage(guild)){
+            EmbedUtil.error(msg, "The message is already the default one (`Welcome {mention}!`)");
+            return;
+        }
+
+        String text = DBUtil.getMessage(guild);
+
+        if(text.equals("Welcome {mention}!")){
+            EmbedUtil.error(msg, "The message is already the default one (`Welcome {mention}!`)");
+            return;
+        }
+
+        DBUtil.resetMessage(guild.getId());
+        EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription("Successfully reset the message!")
+                .setColor(Color.GREEN);
+
+        tc.sendMessage(success.build()).queue();
+    }
+
+    /**
+     * Sets the message.
+     *
+     * @param msg
+     *        Messages that is used for the response.
+     * @param guild
+     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
+     * @param text
+     *        A {@link java.lang.String String} containing the message.
+     */
+    private void setMessage(Message msg, Guild guild, String text){
+        TextChannel tc = msg.getTextChannel();
+        if(text.equalsIgnoreCase("Welcome {mention}!")){
+            if(!DBUtil.hasMessage(guild) || DBUtil.getMessage(guild).equalsIgnoreCase("Welcome {mention}!")){
+                EmbedUtil.error(msg, "Your message is already the default one");
+                return;
+            }
+        }
+        DBUtil.changeMessage(guild.getId(), text);
+        EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
+                .setDescription(String.format(
+                        "Successfully updated the message to:\n" +
+                        "```\n" +
+                        "%s\n" +
+                        "```",
+                        text
                 ))
                 .setColor(Color.GREEN);
 
@@ -285,7 +355,13 @@ public class CmdWelcome implements Command {
                 .addField("Image", String.format(
                         "`%s`",
                         DBUtil.getImage(guild)
-                ), true);
+                ), true)
+                .addField("Message",String.format(
+                        "```\n" +
+                        "%s\n" +
+                        "```",
+                        DBUtil.hasMessage(guild) ? DBUtil.getMessage(guild) : "Welcome {mention}!"
+                ), false);
 
         tc.sendMessage(info.build()).queue();
     }
@@ -370,9 +446,9 @@ public class CmdWelcome implements Command {
 
             case "color":
                 if(args.length < 2){
-                    EmbedUtil.error(msg, MessageFormat.format(
+                    EmbedUtil.error(msg, String.format(
                             "To few arguments!\n" +
-                            "Usage: `{0}welcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
+                            "Usage: `%swelcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
                             DBUtil.getPrefix(guild)
                     ));
                     return;
@@ -395,6 +471,40 @@ public class CmdWelcome implements Command {
                 }
                 break;
 
+            case "msg":
+                if(args.length < 2){
+                    EmbedUtil.error(msg, String.format(
+                            "The current message is:\n" +
+                            "```\n" +
+                            "%s\n" +
+                            "```\n" +
+                            "Use `%swelcome msg set <message>` to set a message.\n" +
+                            "\n" +
+                            "**Placeholders**:\n" +
+                            "`{mention}` - Mention of the joined user\n" +
+                            "`{name}` - Name of the joined user\n" +
+                            "`{guild}` - Name of the guild\n" +
+                            "`{count}` - Member count of the guild",
+                            DBUtil.hasMessage(guild) ? DBUtil.getMessage(guild) : "Welcome {mention}!",
+                            DBUtil.getPrefix(guild)
+                    ));
+                    return;
+                }
+                if(args[1].equalsIgnoreCase("reset")){
+                    resetMessage(msg, guild);
+                }else
+                if(args[1].equalsIgnoreCase("set")){
+                    if(args.length < 3){
+                        EmbedUtil.error(msg, "Please provide a message!");
+                        return;
+                    }
+                    StringBuilder sb = new StringBuilder();
+                    for(int i = 2; i < args.length; i++){
+                        sb.append(args[i]).append(" ");
+                    }
+                    setMessage(msg, guild, sb.toString());
+                }
+                break;
             case "test":
                 if(args.length == 1){
                     InputStream is = ImageUtil.getWelcomeImg(msg.getAuthor(),

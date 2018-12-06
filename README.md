@@ -42,6 +42,8 @@ Welcome  |                         | Shows the current welcome-settings (welcome
          | color reset             | Resets the text color.
          | image set <image>       | Changes the image.
          | image reset             | Resets the image.
+         | msg set <message>       | Changes the greeting message.
+         | msg reset               | Resets the greeting message to "Welcome {mention}!"
          | test [image] [color]    | Creates a test-image with an optional image and text color.
 ```
 

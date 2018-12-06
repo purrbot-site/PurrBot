@@ -8,12 +8,12 @@ import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.io.InputStream;
-import java.text.MessageFormat;
 
 public class WelcomeListener extends ListenerAdapter {
 
@@ -28,6 +28,7 @@ public class WelcomeListener extends ListenerAdapter {
             return;
 
         Guild guild = event.getGuild();
+        User user = event.getUser();
 
         if(!DBUtil.getWelcomeChannel(guild).equals("none")){
             TextChannel tc = CmdWelcome.getChannel(guild);
@@ -36,13 +37,19 @@ public class WelcomeListener extends ListenerAdapter {
                 if(!PermUtil.canWrite(tc))
                     return;
 
+                String msg = "Welcome {mention}!";
+
+                if(DBUtil.hasMessage(guild))
+                    msg = DBUtil.getMessage(guild);
+
                 //  Creating a new message with the MessageBuilder
                 Message welcome = new MessageBuilder()
-                        .append(MessageFormat.format(
-                                "Welcome {0}!",
-                                event.getUser().getAsMention()
-                        )
-                ).build();
+                        .append(
+                                msg.replaceAll("(?i)\\{mention}", user.getAsMention())
+                                .replaceAll("(?i)\\{name}", user.getName())
+                                .replaceAll("(?i)\\{guild}", guild.getName())
+                                .replaceAll("(?i)\\{count}", String.valueOf(guild.getMembers().size()))
+                        ).build();
 
                 if(PermUtil.canUploadImage(tc)){
                     InputStream is = ImageUtil.getWelcomeImg(
