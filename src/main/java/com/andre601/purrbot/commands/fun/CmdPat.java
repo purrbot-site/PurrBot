@@ -60,7 +60,7 @@ public class CmdPat implements Command {
             if(link == null){
                 message.editMessage(MessageFormat.format(
                         "{0} pats you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         pattetMembers
                 )).queue();
             }else{
@@ -68,7 +68,7 @@ public class CmdPat implements Command {
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} pats you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         pattetMembers
                 )).setImage(link).build()).queue();
             }

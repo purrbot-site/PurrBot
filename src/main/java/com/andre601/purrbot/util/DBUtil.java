@@ -72,6 +72,7 @@ public class DBUtil {
                                 .with("welcome_channel", "none")
                                 .with("welcome_image", "purr")
                                 .with("welcome_color", "hex:ffffff")
+                                .with("welcome_message", "Welcome {mention}!")
                 )
         ).optArg("conflict", "update").run(con);
     }
@@ -104,6 +105,24 @@ public class DBUtil {
     public static String getColor(Guild guild){
         Map g = getGuild(guild.getId());
         return g.get("welcome_color").toString();
+    }
+
+    public static void changeMessage(String id, String text){
+        r.table(table).get(id).update(r.hashMap("welcome_message", text)).run(con);
+    }
+
+    public static String getMessage(Guild guild){
+        Map g = getGuild(guild.getId());
+        return g.get("welcome_message").toString();
+    }
+
+    public static void resetMessage(String id){
+        r.table(table).get(id).update(r.hashMap("welcome_message", "Welcome {mention}!")).run(con);
+    }
+
+    public static boolean hasMessage(Guild guild){
+        Map g = getGuild(guild.getId());
+        return g.get("welcome_message") != null;
     }
 
 }

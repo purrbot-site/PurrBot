@@ -60,7 +60,7 @@ public class CmdPoke implements Command {
             if(link == null){
                 message.editMessage(MessageFormat.format(
                         "{0} pokes you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         pokedMembers
                 )).queue();
             }else{
@@ -68,7 +68,7 @@ public class CmdPoke implements Command {
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} pokes you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         pokedMembers
                 )).setImage(link).build()).queue();
             }

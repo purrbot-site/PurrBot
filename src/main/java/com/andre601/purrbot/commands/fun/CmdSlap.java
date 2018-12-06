@@ -60,7 +60,7 @@ public class CmdSlap implements Command {
             if(link == null){
                 message.editMessage(MessageFormat.format(
                         "{0} slaps you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         slapedMembers
                 )).queue();
             }else{
@@ -68,7 +68,7 @@ public class CmdSlap implements Command {
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} slaps you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         slapedMembers
                 )).setImage(link).build()).queue();
             }

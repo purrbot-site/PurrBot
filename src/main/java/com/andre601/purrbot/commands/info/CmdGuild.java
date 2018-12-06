@@ -47,7 +47,11 @@ public class CmdGuild implements Command {
                         guild.getRegion().getName()
                 ), true)
                 .addField("Level", MessageUtil.getLevel(guild), true)
-                .addField("Owner", guild.getOwner().getAsMention(), true)
+                .addField("Owner", String.format(
+                        "%s | %s",
+                        guild.getOwner().getAsMention(),
+                        guild.getOwner().getEffectiveName()
+                ), true)
                 .addField("Created", MessageFormat.format(
                         "`{0}`",
                         MessageUtil.formatTime(LocalDateTime.from(guild.getCreationTime()))

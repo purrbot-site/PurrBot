@@ -64,7 +64,7 @@ public class CmdCuddle implements Command {
             if(link == null){
                 message.editMessage(MessageFormat.format(
                         "{0} cuddles with you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         cuddledMembers
                 )).queue();
             }else{
@@ -72,7 +72,7 @@ public class CmdCuddle implements Command {
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} cuddles with you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         cuddledMembers
                 )).setImage(link).build()).queue();
             }

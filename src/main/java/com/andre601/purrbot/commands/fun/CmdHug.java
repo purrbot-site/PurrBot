@@ -42,7 +42,8 @@ public class CmdHug implements Command {
 
         if(members.contains(msg.getMember())){
             tc.sendMessage(MessageFormat.format(
-                    "Why are you hugging yourself {0}? Are you lonely? Let me hug you \\*hugs {0}*",
+                    "Why are you hugging yourself {0}? Are you lonely?\n" +
+                    "Let me hug you \\*hugs {0}*",
                     msg.getMember().getAsMention()
             )).queue();
         }
@@ -63,7 +64,7 @@ public class CmdHug implements Command {
             if(link == null){
                 message.editMessage(MessageFormat.format(
                         "{0} hugs you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         huggedMembers
                 )).queue();
             }else{
@@ -71,7 +72,7 @@ public class CmdHug implements Command {
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} hugs you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         huggedMembers
                 )).setImage(link).build()).queue();
             }

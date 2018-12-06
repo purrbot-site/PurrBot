@@ -60,7 +60,7 @@ public class CmdTickle implements Command {
             if(link == null){
                 message.editMessage(MessageFormat.format(
                         "{0} tickles you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         tickledMembers
                 )).queue();
             }else{
@@ -68,7 +68,7 @@ public class CmdTickle implements Command {
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} tickles you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         tickledMembers
                 )).setImage(link).build()).queue();
             }

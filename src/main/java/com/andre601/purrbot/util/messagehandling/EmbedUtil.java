@@ -8,7 +8,6 @@ import net.dv8tion.jda.webhook.WebhookClient;
 import net.dv8tion.jda.webhook.WebhookMessageBuilder;
 
 import java.awt.*;
-import java.text.MessageFormat;
 import java.time.ZonedDateTime;
 
 public class EmbedUtil {
@@ -115,26 +114,26 @@ public class EmbedUtil {
         MessageEmbed webhook = getEmbed()
                 .setColor(color)
                 .setThumbnail(guild.getIconUrl())
-                .addField("Guild", MessageFormat.format(
-                        "{0} (`{1}`)",
+                .addField("Guild", String.format(
+                        "%s (`%s`)",
                         guild.getName(),
                         guild.getId()
                 ), false)
-                .addField("Owner", MessageFormat.format(
-                        "{0} | {1}",
+                .addField("Owner", String.format(
+                        "%s | %s",
                         guild.getOwner().getAsMention(),
                         guild.getOwner().getEffectiveName()
                 ), false)
-                .addField("Members", MessageFormat.format(
-                        "**Total**: {0}\n" +
-                        "**Humans**: {1}\n" +
-                        "**Bots**: {2}",
+                .addField("Members", String.format(
+                        "**Total**: %s\n" +
+                        "**Humans**: %s\n" +
+                        "**Bots**: %s",
                         guild.getMembers().size(),
                         guild.getMembers().stream().filter(user -> !user.getUser().isBot()).count(),
                         guild.getMembers().stream().filter(user -> user.getUser().isBot()).count()
                 ), false)
-                .setFooter(MessageFormat.format(
-                        "Guild-count: {0}",
+                .setFooter(String.format(
+                        "Guild-count: %s",
                         ReadyListener.getShardManager().getGuildCache().size()
                 ), null)
                 .setTimestamp(ZonedDateTime.now())

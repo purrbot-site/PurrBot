@@ -1,8 +1,6 @@
 package com.andre601.purrbot.util;
 
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.andre601.purrbot.core.PurrBot;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.*;
@@ -16,15 +14,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
-import java.time.ZonedDateTime;
 
 public class ImageUtil {
-
-    public static final String[] UA = {"User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 " +
-            "(KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"};
 
     /**
      * Gets the avatar of a provided user.
@@ -38,11 +31,7 @@ public class ImageUtil {
         BufferedImage icon = null;
 
         try{
-            URL userIcon = new URL(user.getEffectiveAvatarUrl());
-            URLConnection connection = userIcon.openConnection();
-            connection.setRequestProperty(UA[0], UA[1]);
-            connection.connect();
-            icon = ImageIO.read(connection.getInputStream());
+            icon = ImageIO.read(new URL(user.getEffectiveAvatarUrl()).openStream());
         }catch (Exception ignored){
         }
         return icon;
@@ -69,21 +58,23 @@ public class ImageUtil {
         int color = quote.getMember().getRoles().get(0).getColorRaw();
         long creationTime = quote.getCreationTime().toInstant().toEpochMilli();
 
-        String url = "https://purrbot.site/api/quote?name=" + name + "&color=" + color + "&time="
-                + creationTime + "&avatar=" + avatar + "&text=" + quoteRaw;
-
-        URL link = new URL(url);
-        URLConnection connection = link.openConnection();
-        connection.setRequestProperty(UA[0], UA[1]);
-        connection.connect();
+        String url = "https://purrbot.site/api/quote" +
+                "?name=" + name +
+                "&color=" + color +
+                "&time=" + creationTime +
+                "&avatar=" + avatar +
+                "&text=" + quoteRaw;
         String imageName = String.format("quote_%s.png", quote.getId());
+
+        InputStream inputStream = new URL(url).openStream();
 
         MessageBuilder message = new MessageBuilder();
         EmbedBuilder quoteEmbed = EmbedUtil.getEmbed(msg.getAuthor())
                 .setDescription(String.format(
-                        "Quote from %s in %s",
-                        quote.getAuthor().getName(),
-                        quote.getTextChannel().getAsMention()
+                        "Quote from %s in %s **[**[`Link`](%s)**]**",
+                        quote.getMember().getEffectiveName(),
+                        quote.getTextChannel().getAsMention(),
+                        quote.getJumpUrl()
                 ))
                 .setImage(String.format(
                         "attachment://%s",
@@ -91,7 +82,7 @@ public class ImageUtil {
                 ));
         message.setEmbed(quoteEmbed.build());
 
-        tc.sendFile(connection.getInputStream(), imageName, message.build()).queue();
+        tc.sendFile(inputStream, imageName, message.build()).queue();
     }
 
     /**
@@ -110,14 +101,11 @@ public class ImageUtil {
             String avatarURL = URLEncoder.encode(avatar, "UTF-8");
             String userStatus = URLEncoder.encode(status, "UTF-8");
 
-            String url = "https://purrbot.site/api/status?avatar=" + avatarURL + "&status=" + userStatus;
+            String url = "https://purrbot.site/api/status" +
+                    "?avatar=" + avatarURL +
+                    "&status=" + userStatus;
 
-            URL link = new URL(url);
-            URLConnection connection = link.openConnection();
-            connection.setRequestProperty(UA[0], UA[1]);
-            connection.connect();
-
-            return connection.getInputStream();
+            return new URL(url).openStream();
         }catch(Exception ex){
             return null;
         }
@@ -145,15 +133,14 @@ public class ImageUtil {
             String color = URLEncoder.encode(imageColor, "UTF-8");
             long size = guild.getMembers().size();
 
-            String url = "https://purrbot.site/api/welcome?avatar=" + avatar + "&name=" + name + "&image=" + image +
-                    "&color=" + color + "&size=" + size;
+            String url = "https://purrbot.site/api/welcome" +
+                    "?avatar=" + avatar +
+                    "&name=" + name +
+                    "&image=" + image +
+                    "&color=" + color +
+                    "&size=" + size;
 
-            URL link = new URL(url);
-            URLConnection connection = link.openConnection();
-            connection.setRequestProperty(UA[0], UA[1]);
-            connection.connect();
-
-            return connection.getInputStream();
+            return new URL(url).openStream();
         }catch (Exception ex){
             return null;
         }

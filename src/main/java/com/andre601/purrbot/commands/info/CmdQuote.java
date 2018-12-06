@@ -55,10 +55,10 @@ public class CmdQuote implements Command {
      */
     private void sendQuoteEmbed(Message msg, TextChannel channel) {
         EmbedBuilder quoteEmbed = EmbedUtil.getEmbed()
-                .setAuthor(MessageFormat.format(
-                        "Quote from {0}",
-                        msg.getAuthor().getName()
-                ), null, msg.getAuthor().getEffectiveAvatarUrl())
+                .setAuthor(String.format(
+                        "Quote from %s",
+                        msg.getMember().getEffectiveName()
+                ), msg.getJumpUrl(), msg.getAuthor().getEffectiveAvatarUrl())
                 .setDescription(msg.getContentRaw())
                 .setFooter(MessageFormat.format(
                         "Posted in #{0}",

@@ -80,7 +80,7 @@ public class CmdKiss implements Command {
             if(link == null){
                 message.editMessage(MessageFormat.format(
                         "{0} kisses you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         kissedMembers
                 )).queue();
             }else{
@@ -88,7 +88,7 @@ public class CmdKiss implements Command {
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
                         "{0} kisses you {1}",
-                        msg.getAuthor().getName(),
+                        msg.getMember().getEffectiveName(),
                         kissedMembers
                 )).setImage(link).build()).queue();
             }

@@ -37,7 +37,7 @@ public class WelcomeListener extends ListenerAdapter {
                     return;
 
                 //  Creating a new message with the MessageBuilder
-                Message msg = new MessageBuilder()
+                Message welcome = new MessageBuilder()
                         .append(MessageFormat.format(
                                 "Welcome {0}!",
                                 event.getUser().getAsMention()
@@ -53,16 +53,16 @@ public class WelcomeListener extends ListenerAdapter {
                     );
 
                     if(is == null) {
-                        tc.sendMessage(msg).queue();
+                        tc.sendMessage(welcome).queue();
                         return;
                     }
 
                     tc.sendFile(is, String.format(
                             "%s.png",
                             System.currentTimeMillis()
-                    ), msg).queue();
+                    ), welcome).queue();
                 }else{
-                    tc.sendMessage(msg).queue();
+                    tc.sendMessage(welcome).queue();
                 }
             }
         }
