@@ -15,6 +15,7 @@ import java.util.Objects;
 
 public class HttpUtil {
     private static final OkHttpClient CLIENT = new OkHttpClient();
+    private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
     /**
      * Gets a URL from the neko-endpoint of nekos.life
@@ -296,7 +297,7 @@ public class HttpUtil {
     private static JSONObject voteInfo() throws Exception{
         Request request = new Request.Builder()
                 .url("https://discordbots.org/api/bots/425382319449309197")
-                .header("Authorization", PurrBot.file.getItem("config", "api-token"))
+                .header("authorization", PurrBot.file.getItem("config", "dbl-token"))
                 .build();
         Response response = CLIENT.newCall(request).execute();
         try(ResponseBody responseBody = response.body()){
@@ -357,6 +358,48 @@ public class HttpUtil {
         try(ResponseBody responseBody = response.body()){
             if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
             return new JSONObject(Objects.requireNonNull(responseBody).string());
+        }
+    }
+
+    public static void updateStatsBotsGG(int count) throws IOException{
+        String content = String.format(
+                "{\"guildCount\": %d}",
+                count
+        );
+
+        RequestBody requestBody = RequestBody.create(JSON, content);
+        Request request = new Request.Builder()
+                .url(String.format(
+                        "https://discord.bots.gg/api/v1/bots/%s/stats",
+                        PurrBot.file.getItem("config", "id")
+                ))
+                .header("authorization", PurrBot.file.getItem("config", "dbgg-token"))
+                .post(requestBody)
+                .build();
+        try(Response response = CLIENT.newCall(request).execute()){
+            PurrBot.getLogger().info("Performed Update-task for discord.bots.gg!");
+            PurrBot.getLogger().info("Response: " + response);
+        }
+    }
+
+    public static void updateStatsLSTerminal(int count) throws IOException{
+        String content = String.format(
+                "{\"bot\":{\"count\": %d}}",
+                count
+        );
+
+        RequestBody requestBody = RequestBody.create(JSON, content);
+        Request request = new Request.Builder()
+                .url(String.format(
+                        "https://ls.terminal.ink/api/v2/bots/%s",
+                        PurrBot.file.getItem("config", "id")
+                ))
+                .header("Authorization", PurrBot.file.getItem("config", "lst-token"))
+                .post(requestBody)
+                .build();
+        try(Response response = CLIENT.newCall(request).execute()){
+            PurrBot.getLogger().info("Performed Update-task for ls.terminal.ink!");
+            PurrBot.getLogger().info("Response: " + response);
         }
     }
 

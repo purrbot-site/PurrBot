@@ -1,14 +1,14 @@
 package com.andre601.purrbot.util.messagehandling;
 
 import com.andre601.purrbot.listeners.ReadyListener;
+import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.core.PurrBot;
 import net.dv8tion.jda.bot.sharding.ShardManager;
-import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.*;
 
 import java.awt.*;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -281,7 +281,14 @@ public class MessageUtil {
                         ReadyListener.getBotGame(),
                         shardManager.getGuildCache().size()
                 )));
-                if(!PermUtil.isBeta()) PurrBot.getAPI().setStats((int)shardManager.getGuildCache().size());
+                if(!PermUtil.isBeta()){
+                    PurrBot.getAPI().setStats((int)shardManager.getGuildCache().size());
+                    try {
+                        HttpUtil.updateStatsLSTerminal((int) shardManager.getGuildCache().size());
+                    }catch (IOException ex){
+                        // Meh...
+                    }
+                }
             }
         };
     }

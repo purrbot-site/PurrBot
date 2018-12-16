@@ -42,7 +42,7 @@ public class CmdKiss implements Command {
                         msg.getAuthor().getAsMention()
                 )).queue();
             }else
-            if(msg.getAuthor().getId().equals(IDs.SPECIAL_USER)){
+            if(msg.getAuthor().getId().equals(IDs.EVELIEN)){
                 EmbedBuilder kiss = EmbedUtil.getEmbed().setImage(MessageUtil.getRandomKissImg());
 
                 tc.sendMessage("\\*enjoys the kiss*").queue(message -> {
@@ -50,8 +50,8 @@ public class CmdKiss implements Command {
                     msg.addReaction("\uD83D\uDC8B").queue();
                 });
             }else{
-                tc.sendMessage(MessageFormat.format(
-                        "Sorry {0}, but I'm already taken...",
+                tc.sendMessage(String.format(
+                        "\\*gets a kiss on her cheek from %s*",
                         msg.getAuthor().getAsMention()
                 )).queue();
             }

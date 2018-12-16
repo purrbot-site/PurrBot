@@ -1,6 +1,7 @@
 package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.util.ImageUtil;
+import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;
@@ -81,14 +82,16 @@ public class CmdUser implements Command {
                         "attachment://{0}.png",
                         imageName
                 ))
-                .addField("User", String.format(
+                .addField(String.format(
+                        "%s %s",
+                        MessageUtil.getTag(member.getUser()),
+                        (member.getUser().isBot() ? Emotes.BOT : "")
+                ), String.format(
                         "```yaml\n" +
-                        "Name: %s\n" +
                         "%s" +
                         "ID:   %s\n" +
                         "%s" +
                         "```",
-                        MessageUtil.getTag(member.getUser()),
                         (member.getNickname() != null ? "Nick: " + MessageUtil.getNick(member) + "\n" : ""),
                         member.getUser().getId(),
                         (member.getGame() != null ? "Game: " + MessageUtil.getGameStatus(member.getGame()) + "\n" : "")
@@ -104,10 +107,9 @@ public class CmdUser implements Command {
                                 "[`Default Avatar`](%s)",
                                 member.getUser().getDefaultAvatarUrl()
                         )), true)
-                .addField("Is Bot", member.getUser().isBot() ? "Yes" : "No", true)
                 .addField("Highest role", member.getRoles().size() == 0 ?
                         "`No roles assigned`" :
-                        member.getRoles().get(0).getAsMention(), false)
+                        member.getRoles().get(0).getAsMention(), true)
                 .addField("Other roles", getRoles(member), false)
                 .addField("Dates", String.format(
                         "```yaml\n" +

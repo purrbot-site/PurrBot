@@ -5,7 +5,13 @@ import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.core.PurrBot;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.webhook.WebhookClient;
+import net.dv8tion.jda.webhook.WebhookMessageBuilder;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.MessageFormat;
 
 public class VoteUtil {
@@ -22,12 +28,17 @@ public class VoteUtil {
      */
     public static void voteAction(String botId, String voterId, boolean isWeekend){
         if(!botId.equals(IDs.PURR)) return;
+
+        Message msg;
+        WebhookClient webhookClient = PurrBot.getWebhookClient(
+                PurrBot.file.getItem("config", "vote-webhook")
+        );
         if(voterIsInGuild(voterId)){
             Role role = getGuild().getRoleById(IDs.VOTE_ROLE);
             Member member = getGuild().getMemberById(voterId);
-            Message msg = new MessageBuilder()
-                    .append(MessageFormat.format(
-                            "{0} has voted for the bot! Thank you! \uD83C\uDF89\n" +
+            msg = new MessageBuilder()
+                    .append(String.format(
+                            "%s has voted for the bot! Thank you! \uD83C\uDF89\n" +
                             "Vote too on <https://discordbots.org/bot/425382319449309197>!",
                             member.getAsMention()
                     ))
@@ -36,12 +47,42 @@ public class VoteUtil {
                 getGuild().getController().addRolesToMember(member, role).queue();
             }
 
-            ImageUtil.createVoteImage(member.getUser(), msg, getVoteChannel(), isWeekend);
+            BufferedImage image = ImageUtil.createVoteImage(member.getUser(), isWeekend);
+
+            if(image == null){
+                webhookClient.send(msg);
+                webhookClient.close();
+                return;
+            }
+
+            try {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.setUseCache(false);
+                ImageIO.write(image, "png", baos);
+
+                webhookClient.send(new WebhookMessageBuilder(msg)
+                        .addFile(String.format(
+                        "vote_%s.png",
+                        voterId
+                ), baos.toByteArray())
+                        .build()
+                );
+                webhookClient.close();
+            }catch (IOException ex){
+                webhookClient.send(msg);
+                webhookClient.close();
+            }
+
+
         }else{
-            getVoteChannel().sendMessage(
-                    "A anonymous person has voted for the bot!\n" +
-                    "Vote too on <https://discordbots.org/bot/425382319449309197>!"
-            ).queue();
+            msg = new MessageBuilder()
+                    .append(
+                            "A anonymous person has voted for the bot!\n" +
+                            "Vote too on <https://discordbots.org/bot/425382319449309197>!"
+                    )
+                    .build();
+            webhookClient.send(msg);
+            webhookClient.close();
         }
     }
 

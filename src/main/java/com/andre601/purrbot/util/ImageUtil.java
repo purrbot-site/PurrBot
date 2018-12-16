@@ -9,14 +9,12 @@ import org.json.JSONObject;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.text.MessageFormat;
 
 public class ImageUtil {
 
@@ -32,7 +30,7 @@ public class ImageUtil {
      */
     private static BufferedImage getUserIcon(User user){
 
-        BufferedImage icon = null;
+        BufferedImage icon;
 
         try{
             URL userIcon = new URL(user.getEffectiveAvatarUrl());
@@ -41,6 +39,7 @@ public class ImageUtil {
             connection.connect();
             icon = ImageIO.read(connection.getInputStream());
         }catch (Exception ignored){
+            icon = null;
         }
         return icon;
     }
@@ -60,18 +59,20 @@ public class ImageUtil {
      */
     public static void getQuoteImage(TextChannel tc, Message msg, Message quote) throws Exception{
 
-        String name = URLEncoder.encode(quote.getAuthor().getName(), "UTF-8");
+        String name = URLEncoder.encode(quote.getMember().getEffectiveName(), "UTF-8");
         String quoteRaw = URLEncoder.encode(quote.getContentDisplay(), "UTF-8");
         String avatar = URLEncoder.encode(quote.getAuthor().getEffectiveAvatarUrl(), "UTF-8");
         int color = quote.getMember().getRoles().get(0).getColorRaw();
         long creationTime = quote.getCreationTime().toInstant().toEpochMilli();
 
-        String url = "https://purrbot.site/api/quote" +
-                "?name=" + name +
-                "&color=" + color +
-                "&time=" + creationTime +
-                "&avatar=" + avatar +
-                "&text=" + quoteRaw;
+        String url = String.format(
+                "https://purrbot.site/api/quote?avatar=%s&color=%d&name=%s&text=%s&time=%d",
+                avatar,
+                color,
+                name,
+                quoteRaw,
+                creationTime
+        );
         String imageName = String.format("quote_%s.png", quote.getId());
 
         InputStream inputStream = new URL(url).openStream();
@@ -159,18 +160,14 @@ public class ImageUtil {
      *
      * @param user
      *        A {@link net.dv8tion.jda.core.entities.User User object}.
-     * @param msg
-     *        The {@link net.dv8tion.jda.core.entities.Message Message} for the attachment.
-     * @param tc
-     *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to send the message.
      * @param isWeekend
      *        A boolean to check, if it's weekend or not (for displaying "x2 votes").
      */
-    public static void createVoteImage(User user, Message msg, TextChannel tc, boolean isWeekend){
+    public static BufferedImage createVoteImage(User user, boolean isWeekend){
 
         //  Saving the userIcon/avatar as a Buffered image
         BufferedImage u = getUserIcon(user);
-
+        BufferedImage finalImage;
 
         try {
             BufferedImage layer = ImageIO.read(new File("img/vote_layer.png"));
@@ -230,18 +227,11 @@ public class ImageUtil {
 
             img.dispose();
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            ImageIO.setUseCache(false);
-            ImageIO.write(image, "png", stream);
+            return image;
 
-            //  Finally sending the image. I use the user-id as image-name (prevents issues with non-UTF-8 symbols...)
-            tc.sendFile(stream.toByteArray(), MessageFormat.format(
-                    "{0}.png",
-                    user.getId()
-            ), msg).queue();
-
-            //  We just ignore the caused exception.
-        }catch (IOException ignored){
+        }catch (IOException ex){
+            return null;
         }
+
     }
 }

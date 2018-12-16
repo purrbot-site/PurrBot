@@ -99,7 +99,7 @@ public class CmdFuck implements Command {
                 )).queue();
                 return;
             }
-            if(msg.getAuthor().getId().equals(IDs.SPECIAL_USER)){
+            if(msg.getAuthor().getId().equals(IDs.EVELIEN)){
                 int random = getRandomPercent();
 
                 if(random == 9) {

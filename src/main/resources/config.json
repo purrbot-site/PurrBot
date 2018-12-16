@@ -2,7 +2,10 @@
   "token": "TOKEN",
   "id": "ID",
   "webhook": "webhookURL",
-  "api-token": "api-token",
+  "vote-webhook": "vote-Webhook URL",
+  "dbl-token": "dbl-token",
+  "dbgg-token": "dbgg-token",
+  "lst-token": "lst-token",
   "beta": "false",
 
   "db-ip": "127.0.0.1",
