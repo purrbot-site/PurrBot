@@ -17,6 +17,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -32,6 +33,27 @@ public class CommandListener extends ListenerAdapter {
 
     public CommandListener(CommandHandler handler){
         this.HANDLER = handler;
+    }
+
+    private String getIssueLink(Exception exception){
+        try{
+            return Links.GITHUB + "/issues/new?title=" + URLEncoder.encode(
+                    "[Automated issue] Command exception",
+                    "UTF-8"
+            ) + "&body=" + URLEncoder.encode(String.format(
+                    "<!-- Just post this issue -->\n" +
+                    "A command had an exception.\n" +
+                    "\n" +
+                    "Exception-message: `%s`\n" +
+                    "\n" +
+                    "## Steps to reproduce\n" +
+                    "<!-- Please write, what you did to cause the issues -->\n" +
+                    "* ",
+                    exception.getMessage()
+            ), "UTF-8");
+        }catch (Exception ex){
+            return null;
+        }
     }
 
     @Override
@@ -121,15 +143,18 @@ public class CommandListener extends ListenerAdapter {
                     try{
                         HANDLER.execute(command, msg, split.length > 1 ? split[1] : "");
                     }catch(Exception ex){
+                        String link = getIssueLink(ex);
                         PurrBot.getLogger().error("Couldn't perform command!", ex);
                         EmbedUtil.error(msg, String.format(
                                 "Uhm... This is a bit embarrassing now, but I had an error with a command. %s\n" +
-                                "Please join [my guild](%s) and contact my dev (Andre_601#0601) about this error.\n" +
+                                "Please %s\n" +
                                 "\n" +
-                                "**Please provide the following error-message**:\n" +
+                                "**Cause of error**:\n" +
                                 "`%s`",
                                 Emotes.TOO_LEWD,
-                                Links.DISCORD_INVITE,
+                                link != null ?
+                                        "[click this link](" + link + ") to open an automated issue on GitHub!" :
+                                        "[join my guild](" + Links.DISCORD_INVITE + ") and contact my Dev Andre_601.",
                                 ex.getMessage()
                         ));
                     }

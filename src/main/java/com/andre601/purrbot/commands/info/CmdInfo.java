@@ -158,10 +158,12 @@ public class CmdInfo implements Command {
                     .addField("Links", String.format(
                             "[`GitHub`](%s)\n" +
                             "[`Wiki`](%s)\n" +
-                            "[`Discordbots.org`](%s)",
+                            "[`Discordbots.org`](%s)\n" +
+                            "[`discord.bots.gg`](%s)",
                             Links.GITHUB,
                             Links.WIKI,
-                            Links.DISCORDBOTS_ORG
+                            Links.DISCORDBOTS_ORG,
+                            Links.DISCORD_BOTS_GG
                     ), true)
                     .addField("", String.format(
                             "[`Official Discord`](%s)\n" +

@@ -285,6 +285,7 @@ public class MessageUtil {
                     PurrBot.getAPI().setStats((int)shardManager.getGuildCache().size());
                     try {
                         HttpUtil.updateStatsLSTerminal((int) shardManager.getGuildCache().size());
+                        HttpUtil.updateStatsBotsGG((int) shardManager.getGuildCache().size());
                     }catch (IOException ex){
                         // Meh...
                     }
