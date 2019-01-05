@@ -41,7 +41,7 @@ public class CmdInfo implements Command {
             int filesLeft = jsonArray.length() - i;
 
             JSONObject json = jsonArray.getJSONObject(i);
-            String filename = json.getString("filename").replace("src/main/java/com/andre601/purrbot", "");
+            String filename = json.getString("filename").replace("src/main/java/com/andre601/purrbot", "...");
             int addition = json.getInt("additions");
             int deletion = json.getInt("deletions");
 

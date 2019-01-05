@@ -277,17 +277,25 @@ public class MessageUtil {
         return () -> {
             if(ReadyListener.getReady() == Boolean.TRUE){
                 ShardManager shardManager = ReadyListener.getShardManager();
-                shardManager.setGame(Game.watching(MessageFormat.format(
+                shardManager.setGame(Game.watching(String.format(
                         ReadyListener.getBotGame(),
                         shardManager.getGuildCache().size()
                 )));
                 if(!PermUtil.isBeta()){
                     PurrBot.getAPI().setStats((int)shardManager.getGuildCache().size());
+
                     try {
                         HttpUtil.updateStatsLSTerminal((int) shardManager.getGuildCache().size());
+                    }catch (IOException ex){
+                        PurrBot.getLogger().warn("Couldn't perform update task for ls.terminal.ink!");
+                        PurrBot.getLogger().warn("Reason: " + ex.getMessage());
+                    }
+
+                    try{
                         HttpUtil.updateStatsBotsGG((int) shardManager.getGuildCache().size());
                     }catch (IOException ex){
-                        // Meh...
+                        PurrBot.getLogger().warn("Couldn't perform update task for discord.bots.gg!");
+                        PurrBot.getLogger().warn("Reason: " + ex.getMessage());
                     }
                 }
             }

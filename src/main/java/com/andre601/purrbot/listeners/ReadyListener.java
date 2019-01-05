@@ -13,9 +13,6 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-import java.io.IOException;
-import java.text.MessageFormat;
-
 public class ReadyListener extends ListenerAdapter{
 
     private int shardCount = 0;
@@ -83,10 +80,10 @@ public class ReadyListener extends ListenerAdapter{
     /**
      * Gets the current bot-status (updates it).
      *
-     * @return String from {@link #setBotGame()}.
+     * @return String from {@link #botGame()}.
      */
     public static String getBotGame(){
-        return setBotGame();
+        return botGame();
     }
 
     /**
@@ -94,8 +91,8 @@ public class ReadyListener extends ListenerAdapter{
      *
      * @return A string that depends on if the bot is the beta-version or not.
      */
-    private static String setBotGame(){
-        return (PermUtil.isBeta() ? "My sister on {0} Guilds!" : "https://purrbot.site | {0} Guilds");
+    private static String botGame(){
+        return (PermUtil.isBeta() ? "My sister on %d Guilds!" : "https://purrbot.site | %d Guilds");
     }
 
     /**
@@ -129,13 +126,13 @@ public class ReadyListener extends ListenerAdapter{
         if(shardCount == jda.getShardInfo().getShardTotal()){
             setReady(Boolean.TRUE);
             jda.asBot().getShardManager().setStatus(OnlineStatus.ONLINE);
-            jda.asBot().getShardManager().setGame(Game.watching(MessageFormat.format(
+            jda.asBot().getShardManager().setGame(Game.watching(String.format(
                     getBotGame(),
                     jda.getGuilds().size()
             )));
 
-            PurrBot.getLogger().info(MessageFormat.format(
-                    "Enabled Bot-User {0} ({1}) v.{2} on {3} guild(s) with {4} shard(s)",
+            PurrBot.getLogger().info(String.format(
+                    "Enabled Bot-User %s (%s) v.%s on %s guild(s) with %s shard(s)",
                     MessageUtil.getTag(jda.getSelfUser()),
                     botID,
                     IDs.VERSION,

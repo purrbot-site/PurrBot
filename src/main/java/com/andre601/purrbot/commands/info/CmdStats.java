@@ -29,7 +29,7 @@ public class CmdStats implements Command {
      *
      * @return A String with the current uptime of the bot.
      */
-    private static String getUptime(){
+    private String getUptime(){
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
         long d = TimeUnit.MILLISECONDS.toDays(uptime);
         long h = TimeUnit.MILLISECONDS.toHours(uptime) - d * 24;
@@ -41,12 +41,23 @@ public class CmdStats implements Command {
         String minutes = m + (m == 1 ? " minute" : " minutes");
         String seconds = s + (s == 1 ? " second" : " seconds");
 
-        return MessageFormat.format(
-                "{0}, {1}, {2} and {3}",
+        return String.format(
+                "`%s, %s, %s and %s`",
                 days,
                 hours,
                 minutes,
                 seconds
+        );
+    }
+
+    private String getRAM(){
+        long usedMem = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed() >> 20;
+        long totalMem = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax() >> 20;
+
+        return String.format(
+                "`%d/%dMB`",
+                usedMem,
+                totalMem
         );
     }
 
@@ -58,27 +69,28 @@ public class CmdStats implements Command {
 
         EmbedBuilder stats = EmbedUtil.getEmbed(msg.getAuthor())
                 .setAuthor("Purr-Bot Stats")
-                .addField("Guilds", MessageFormat.format(
-                        "**Total**: `{0}`\n" +
-                        "**This shard**: `{1}`",
+                .addField("Guilds", String.format(
+                        "**Total**: `%d`\n" +
+                        "**This shard**: `%d`",
                         shardManager.getGuildCache().size(),
                         guild.getJDA().getGuilds().size()
                 ), true)
-                .addField("Users", MessageFormat.format(
-                        "**Total**: `{0}`\n" +
+                .addField("Users", String.format(
+                        "**Total**: `%d`\n" +
                         "\n" +
-                        "**Humans**: `{1}`\n" +
-                        "**Bots**: `{2}`",
+                        "**Humans**: `%d`\n" +
+                        "**Bots**: `%d`",
                         shardManager.getUserCache().size(),
                         shardManager.getUserCache().stream().filter(user -> !user.isBot()).count(),
                         shardManager.getUserCache().stream().filter(User::isBot).count()
                 ), true)
-                .addField("Shards", MessageFormat.format(
-                        "**Current**: `{0}`\n" +
-                        "**Total**: `{1}`",
+                .addField("Shards", String.format(
+                        "**Current**: `%d`\n" +
+                        "**Total**: `%d`",
                         guild.getJDA().getShardInfo().getShardId(),
                         shardManager.getShardCache().size()
                 ), true)
+                .addField("Memory used", getRAM(), true)
                 .addField("Uptime", getUptime(), false);
 
         tc.sendMessage(stats.build()).queue();

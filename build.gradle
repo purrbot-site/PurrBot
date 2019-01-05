@@ -5,7 +5,7 @@ plugins {
     id 'idea'
 }
 mainClassName = 'com.andre601.purrbot.core.PurrBot'
-version = '2.9.4'
+version = '2.9.7'
 
 description = """"""
 
@@ -27,7 +27,7 @@ dependencies {
     compile group: 'com.rethinkdb', name: 'rethinkdb-driver', version:'2.3.3'
     compile 'com.google.code.gson:gson:2.2.4'
     compile group: 'com.google.guava', name: 'guava', version:'25.0-jre'
-    compile(group: 'net.dv8tion', name: 'JDA', version:'3.8.1_448') {
+    compile(group: 'net.dv8tion', name: 'JDA', version:'3.8.1_450') {
         exclude(module: 'opus-java')
     }
     compile group: 'commons-io', name: 'commons-io', version: '2.6'

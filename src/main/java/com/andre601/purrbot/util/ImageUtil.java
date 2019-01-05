@@ -62,7 +62,7 @@ public class ImageUtil {
         String name = URLEncoder.encode(quote.getMember().getEffectiveName(), "UTF-8");
         String quoteRaw = URLEncoder.encode(quote.getContentDisplay(), "UTF-8");
         String avatar = URLEncoder.encode(quote.getAuthor().getEffectiveAvatarUrl(), "UTF-8");
-        int color = quote.getMember().getRoles().get(0).getColorRaw();
+        int color = quote.getMember().getColor() != null ? quote.getMember().getColor().getRGB() : 0xFFFFFF;
         long creationTime = quote.getCreationTime().toInstant().toEpochMilli();
 
         String url = String.format(

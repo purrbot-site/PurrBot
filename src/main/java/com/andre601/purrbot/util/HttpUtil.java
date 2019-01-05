@@ -346,7 +346,7 @@ public class HttpUtil {
      * Gets a JSON object from the api.github site.
      *
      * @return A JSONObject with info.
-     * @throws Exception
+     * @throws IOException
      *         Thrown when for example the site is unavailable.
      */
     private static JSONObject specificCommit(String link) throws IOException{
