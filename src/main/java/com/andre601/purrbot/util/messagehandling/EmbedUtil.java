@@ -79,7 +79,7 @@ public class EmbedUtil {
      *        A {@link java.lang.String String} that will be used in the description.
      */
     public static void error(Message msg, String error){
-        EmbedBuilder errorEmbed = getEmbed().setColor(Color.RED).setDescription(error);
+        EmbedBuilder errorEmbed = getEmbed(msg.getAuthor()).setColor(Color.RED).setDescription(error);
 
         msg.getTextChannel().sendMessage(errorEmbed.build()).queue();
     }

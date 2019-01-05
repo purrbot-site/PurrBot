@@ -53,13 +53,14 @@ public class CmdQuote implements Command {
      * @param channel
      *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} the message should be send in.
      */
-    private void sendQuoteEmbed(Message msg, TextChannel channel) {
+    private void sendQuoteEmbed(Message msg, String link, TextChannel channel) {
         EmbedBuilder quoteEmbed = EmbedUtil.getEmbed()
                 .setAuthor(String.format(
                         "Quote from %s",
                         msg.getMember().getEffectiveName()
                 ), msg.getJumpUrl(), msg.getAuthor().getEffectiveAvatarUrl())
                 .setDescription(msg.getContentRaw())
+                .setImage(link)
                 .setFooter(MessageFormat.format(
                         "Posted in #{0}",
                         msg.getTextChannel().getName()
@@ -103,19 +104,39 @@ public class CmdQuote implements Command {
                 ));
                 return;
             }
+            if(!quote.getAttachments().isEmpty()){
+                String link = quote.getAttachments().stream().filter(Message.Attachment::isImage).findFirst()
+                        .map(Message.Attachment::getUrl).orElse(null);
+
+                if(link == null && quote.getContentRaw().isEmpty()){
+                    EmbedUtil.error(msg, "The quoted message had no valid image attached, nor any message!");
+                    return;
+                }
+
+                sendQuoteEmbed(quote, link, tc);
+            }else
             if(PermUtil.canUploadImage(tc)){
                 try{
                     ImageUtil.getQuoteImage(tc, msg, quote);
                 }catch(Exception ex){
-                    sendQuoteEmbed(quote, tc);
+                    sendQuoteEmbed(quote, null, tc);
                 }
             }else{
-                sendQuoteEmbed(quote, tc);
+                sendQuoteEmbed(quote, null, tc);
             }
             return;
         }
 
         TextChannel channel = msg.getMentionedChannels().get(0);
+        if(channel.isNSFW() && !tc.isNSFW()){
+            EmbedUtil.error(msg, String.format(
+                    "The mentioned channel (%s) is labeled as NSFW, while this channel here isn't!\n" +
+                    "The message wasn't quoted for safety.",
+                    channel.getAsMention()
+            ));
+            return;
+        }
+
         if(PermUtil.canRead(channel) && PermUtil.canReadHistory(channel)){
             Message quote = getMessage(args[0], channel);
 
@@ -124,14 +145,25 @@ public class CmdQuote implements Command {
                 return;
             }
 
+            if(!quote.getAttachments().isEmpty()){
+                String link = quote.getAttachments().stream().filter(Message.Attachment::isImage).findFirst()
+                        .map(Message.Attachment::getUrl).orElse(null);
+
+                if(link == null && quote.getContentRaw().isEmpty()){
+                    EmbedUtil.error(msg, "The quoted message had no valid image attached, nor any message!");
+                    return;
+                }
+
+                sendQuoteEmbed(quote, link, tc);
+            }else
             if(PermUtil.canUploadImage(tc)){
                 try{
                     ImageUtil.getQuoteImage(tc, msg, quote);
                 }catch(Exception ex){
-                    sendQuoteEmbed(quote, tc);
+                    sendQuoteEmbed(quote, null, tc);
                 }
             }else{
-                sendQuoteEmbed(quote, tc);
+                sendQuoteEmbed(quote, null, tc);
             }
         }else{
             EmbedUtil.error(msg, "I need permissions to see the messages in the mentioned channel!");
