@@ -23,87 +23,24 @@ import static com.andre601.purrbot.core.PurrBot.*;
 )
 public class CmdRefresh implements Command {
 
-    /**
-     * Edits the provided message with the given content.
-     *
-     * @param message
-     *        A {@link net.dv8tion.jda.core.entities.Message Message object}.
-     * @param complete
-     *        A boolean to set a certain text, if true.
-     * @param text
-     *        The text in the message.
-     * @param progress
-     *        The progress of the update.
-     */
-    private void edit(Message message, boolean complete, String text, String progress){
-        message.editMessage(String.format(
-                "%s\n" +
-                "```yaml\n" +
-                "%s\n" +
-                "\n" +
-                "[%-50s]\n" +
-                "```",
-                complete ? "Refresh complete!" : Emotes.TYPING + " Refresh...",
-                text,
-                progress
-        )).queue();
-    }
-
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
 
-        tc.sendMessage(String.format(
-                "%s Prepare refresh...",
-                Emotes.TYPING
-        )).queue(message -> {
-            edit(
-                    message,
-                    false,
-                    "Clearing data...",
-                    ""
-            );
+        tc.sendMessage(Emotes.TYPING + " ░░░░░░░░░░ | 0% Prepare refresh...").queue(message -> {
+            message.editMessage(Emotes.TYPING + " ██░░░░░░░░ | 20% Clearing data...").queue();
             ListUtil.clear();
 
-            edit(
-                    message,
-                    false,
-                    "Clearing data.              [Done]\n" +
-                    "Loading blacklist...",
-                    "##########"
-            );
+            message.editMessage(Emotes.TYPING + " ████░░░░░░ | 40% Loading blacklist...").queue();
             ListUtil.refreshBlackList();
 
-            edit(
-                    message,
-                    false,
-                    "Clearing data.              [Done]\n" +
-                    "Loading blacklist.          [Done]\n" +
-                    "Loading random images...",
-                    "####################"
-            );
+            message.editMessage(Emotes.TYPING + " ██████░░░░ | 60% Loading images...").queue();
             ListUtil.refreshRandomImages();
 
-            edit(
-                    message,
-                    false,
-                    "Clearing data.              [Done]\n" +
-                    "Loading blacklist.          [Done]\n" +
-                    "Loading random images.      [Done]\n" +
-                    "Loading random messages...",
-                    "##############################"
-            );
+            message.editMessage(Emotes.TYPING + " ████████░░ | 80% Loading messages...").queue();
             ListUtil.refreshRandomMessages();
 
-            edit(
-                    message,
-                    true,
-                    "Clearing data.              [Done]\n" +
-                    "Loading blacklist.          [Done]\n" +
-                    "Loading random images.      [Done]\n" +
-                    "Loading random messages.    [Done]",
-                    "##################################################"
-            );
+            message.editMessage("✅ ██████████ | 100% Refresh complete!").queue();
             msg.addReaction("✅").queue();
         });
     }

@@ -144,12 +144,11 @@ public class MessageUtil {
      */
     public static String getLevel(Guild guild){
 
-        switch (guild.getVerificationLevel().toString().toLowerCase()){
-
-            case "high":
+        switch(guild.getVerificationLevel()){
+            case HIGH:
                 return "(╯°□°）╯︵ ┻━┻";
 
-            case "very_high":
+            case VERY_HIGH:
                 return "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻";
 
             default:

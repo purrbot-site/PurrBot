@@ -22,7 +22,8 @@ import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Lewd",
-        description = "Get images of naughty nekos >w<\n" +
+        description =
+        "Get images of naughty nekos. >w<\n" +
         "\n" +
         "You can use additional args in the command.\n" +
         "`-gif` for a gif\n" +

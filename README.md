@@ -1,4 +1,8 @@
-[![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
+[Discord]: https://img.shields.io/discord/423771795523371019.svg?colorB=%237289DA
+[Issues]: https://img.shields.io/github/issues/Andre601/PurrBot.svg
+[License]: https://img.shields.io/github/license/Andre601/PurrBot.svg
+
+![Discord] ![Issues] ![License]
 
 [![](https://discordbots.org/api/widget/425382319449309197.svg)](https://discordbots.org/bot/425382319449309197)
 

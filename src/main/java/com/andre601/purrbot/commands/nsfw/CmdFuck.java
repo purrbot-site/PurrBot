@@ -11,9 +11,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.text.MessageFormat;
@@ -22,7 +20,10 @@ import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Fuck",
-        description = "Wanna fuck someone?",
+        description =
+                "Wanna fuck someone?\n" +
+                "Mention a user, to send a request.\n" +
+                "The mentioned user can accept it with `>accept` or let it run out.",
         triggers = {"fuck", "sex"},
         attributes = {@CommandAttribute(key = "nsfw")}
 )
@@ -66,12 +67,12 @@ public class CmdFuck implements Command {
      *
      * @return The MessageEmbed after the description and image where set.
      */
-    private static EmbedBuilder getFuckEmbed(User user1, User user2, String url){
+    private static EmbedBuilder getFuckEmbed(Member user1, Member user2, String url){
         return EmbedUtil.getEmbed()
                 .setDescription(MessageFormat.format(
                         "{0} and {1} are having sex!",
-                        user1.getName(),
-                        user2.getName()
+                        user1.getEffectiveName(),
+                        user2.getEffectiveName()
                 ))
                 .setImage(url);
     }
@@ -79,13 +80,11 @@ public class CmdFuck implements Command {
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
-        User author = msg.getAuthor();
+        Member author = msg.getMember();
+        Guild guild = msg.getGuild();
 
         if(msg.getMentionedUsers().isEmpty()){
-            tc.sendMessage(MessageFormat.format(
-                    "{0} How can you actually fuck yourself?!",
-                    author.getAsMention()
-            )).queue();
+            EmbedUtil.error(msg, "Please mention a user you want to fuck");
             return;
         }
 
@@ -99,10 +98,10 @@ public class CmdFuck implements Command {
                 )).queue();
                 return;
             }
-            if(msg.getAuthor().getId().equals(IDs.EVELIEN)){
+            if(msg.getAuthor().getId().equals(IDs.EVELIEN) || msg.getAuthor().getId().equals(IDs.LILYSCARLET)){
                 int random = getRandomPercent();
 
-                if(random == 9) {
+                if(random == 1) {
                     tc.sendMessage(String.format(
                             MessageUtil.getRandomAcceptFuckMsg(),
                             author.getAsMention()
@@ -126,7 +125,7 @@ public class CmdFuck implements Command {
 
         if(user == msg.getAuthor()){
             tc.sendMessage(MessageFormat.format(
-                    "{0} How can you actually fuck yourself?!",
+                    "{0} How can you actually fuck yourself?! (And no. Masturbation is not a valid answer)",
                     msg.getAuthor().getAsMention()
             )).queue();
             return;
@@ -140,7 +139,7 @@ public class CmdFuck implements Command {
             return;
         }
 
-        if(alreadyInQueue.contains(author.getId())){
+        if(alreadyInQueue.contains(author.getUser().getId())){
             tc.sendMessage(MessageFormat.format(
                     "{0} You already asked someone to fuck with you!\n" +
                     "Please wait until the person accepts it, or the request times out.",
@@ -149,7 +148,7 @@ public class CmdFuck implements Command {
             return;
         }
 
-        alreadyInQueue.add(author.getId());
+        alreadyInQueue.add(author.getUser().getId());
         tc.sendMessage(MessageFormat.format(
                 "Hey {0}!\n" +
                 "{1} wants to have sex with you. Do you want that too?\n" +
@@ -175,13 +174,13 @@ public class CmdFuck implements Command {
                         }catch (Exception ex){
                         }
 
-                        alreadyInQueue.remove(author.getId());
+                        alreadyInQueue.remove(author.getUser().getId());
 
                         String link = HttpUtil.getFuck();
 
                         ev.getTextChannel().sendMessage(String.format(
                                 "%s accepted your invite %s! 0w0",
-                                user.getName(),
+                                guild.getMember(user).getEffectiveName(),
                                 author.getAsMention()
                         )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
 
@@ -189,12 +188,14 @@ public class CmdFuck implements Command {
                             ev.getTextChannel().sendMessage(MessageFormat.format(
                                     "{0} and {1} are having sex!",
                                     msg.getMember().getEffectiveName(),
-                                    user.getName()
+                                    guild.getMember(user).getEffectiveName()
                             )).queue();
                             return;
                         }
 
-                        ev.getTextChannel().sendMessage(getFuckEmbed(author, user, link).build()).queue();
+                        ev.getTextChannel().sendMessage(
+                                getFuckEmbed(author, guild.getMember(user), link).build()
+                        ).queue();
                     }, 1, TimeUnit.MINUTES,
                     () -> {
                         try {
@@ -202,7 +203,7 @@ public class CmdFuck implements Command {
                         }catch (Exception ex){
                         }
 
-                        alreadyInQueue.remove(author.getId());
+                        alreadyInQueue.remove(author.getUser().getId());
 
                         tc.sendMessage(String.format(
                                 "Looks like he/she doesn't want to have sex with you %s",

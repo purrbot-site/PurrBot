@@ -42,7 +42,7 @@ public class CmdKiss implements Command {
                         msg.getAuthor().getAsMention()
                 )).queue();
             }else
-            if(msg.getAuthor().getId().equals(IDs.EVELIEN)){
+            if(msg.getAuthor().getId().equals(IDs.EVELIEN) || msg.getAuthor().getId().equals(IDs.LILYSCARLET)){
                 EmbedBuilder kiss = EmbedUtil.getEmbed().setImage(MessageUtil.getRandomKissImg());
 
                 tc.sendMessage("\\*enjoys the kiss*").queue(message -> {

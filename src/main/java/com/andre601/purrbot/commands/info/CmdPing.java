@@ -13,7 +13,7 @@ import java.time.temporal.ChronoUnit;
 
 @CommandDescription(
         name = "Ping",
-        description = "Pong",
+        description = "Pong?",
         triggers = {"ping"},
         attributes = {@CommandAttribute(key = "info")}
 )
