@@ -1,8 +1,11 @@
 [Discord]: https://img.shields.io/discord/423771795523371019.svg?colorB=%237289DA
+[DiscordLink]: https://discord.gg/NB7AFqn
 [Issues]: https://img.shields.io/github/issues/Andre601/PurrBot.svg
+[IssuesLink]: https://github.com/Andre601/PurrBot/issues
 [License]: https://img.shields.io/github/license/Andre601/PurrBot.svg
+[LicenseLink]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
 
-![Discord] ![Issues] ![License]
+[![Discord]][DiscordLink] [![Issues]][IssuesLink] [![License]][LicenseLink]
 
 [![](https://discordbots.org/api/widget/425382319449309197.svg)](https://discordbots.org/bot/425382319449309197)
 
