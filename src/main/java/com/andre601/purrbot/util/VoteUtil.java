@@ -33,9 +33,10 @@ public class VoteUtil {
         WebhookClient webhookClient = PurrBot.getWebhookClient(
                 PurrBot.file.getItem("config", "vote-webhook")
         );
-        if(voterIsInGuild(voterId)){
-            Role role = getGuild().getRoleById(IDs.VOTE_ROLE);
-            Member member = getGuild().getMemberById(voterId);
+        Guild guild = ReadyListener.getShardManager().getGuildById(IDs.GUILD);
+        if(voterIsInGuild(guild, voterId)){
+            Role role = guild.getRoleById(IDs.VOTE_ROLE);
+            Member member = guild.getMemberById(voterId);
             msg = new MessageBuilder()
                     .append(String.format(
                             "%s has voted for the bot! Thank you! \uD83C\uDF89\n" +
@@ -43,8 +44,8 @@ public class VoteUtil {
                             member.getAsMention()
                     ))
                     .build();
-            if(!userHasRole(voterId, role)) {
-                getGuild().getController().addRolesToMember(member, role).queue();
+            if(!guild.getMemberById(voterId).getRoles().contains(role)) {
+                guild.getController().addRolesToMember(member, role).queue();
             }
 
             BufferedImage image = ImageUtil.createVoteImage(member.getUser(), isWeekend);
@@ -94,41 +95,8 @@ public class VoteUtil {
      *
      * @return True if the user is not null (on the guild).
      */
-    private static boolean voterIsInGuild(String userId){
-        return getGuild().getMemberById(userId) != null;
-    }
-
-    /**
-     * Checks, if the user already has the voter-role.
-     *
-     * @param  userId
-     *         The ID of the user.
-     * @param  role
-     *         The {@link net.dv8tion.jda.core.entities.Role Role} to be checked.
-     *
-     * @return True if the user already has the role.
-     */
-    private static boolean userHasRole(String userId, Role role){
-        return getGuild().getMemberById(userId).getRoles().contains(role);
-    }
-
-    /**
-     * Gets the guild.
-     *
-     * @return The guild through the ID from {@link com.andre601.purrbot.util.constants.IDs#GUILD IDs.GUILD}.
-     */
-    private static Guild getGuild(){
-        return ReadyListener.getShardManager().getGuildById(IDs.GUILD);
-    }
-
-    /**
-     * Gets the channel for the vote-message to be send.
-     *
-     * @return The TextChannel through the ID from
-     *         {@link com.andre601.purrbot.util.constants.IDs#VOTE_CHANNEL IDs.VOTE_CHANNEL}.
-     */
-    private static TextChannel getVoteChannel(){
-        return getGuild().getTextChannelById(IDs.VOTE_CHANNEL);
+    private static boolean voterIsInGuild(Guild guild, String userId){
+        return guild.getMemberById(userId) != null;
     }
 
 }

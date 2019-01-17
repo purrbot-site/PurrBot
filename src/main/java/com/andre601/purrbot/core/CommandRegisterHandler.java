@@ -46,6 +46,7 @@ public class CommandRegisterHandler {
                 new CmdFuck(),
                 new CmdLesbian(),
                 new CmdLewd(),
+                new CmdYurifuck(),
                 // Owner
                 new CmdEval(),
                 new CmdLeave(),

@@ -27,22 +27,19 @@ public class CmdGuild implements Command {
         TextChannel tc = msg.getTextChannel();
 
         EmbedBuilder guildInfo = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle(MessageFormat.format(
-                        "Guild: {0}",
-                        guild.getName()
-                ))
+                .setTitle(guild.getName())
                 .setThumbnail(guild.getIconUrl())
-                .addField("Users", MessageFormat.format(
-                        "**Total**: `{0}`\n" +
+                .addField("Users", String.format(
+                        "**Total**: `%d`\n" +
                         "\n" +
-                        "**Humans**: `{1}`\n" +
-                        "**Bots**: `{2}`",
-                        guild.getMembers().size(),
-                        guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count(),
-                        guild.getMembers().stream().filter(member -> member.getUser().isBot()).count()
+                        "**Humans**: `%d`\n" +
+                        "**Bots**: `%d`",
+                        guild.getMemberCache().size(),
+                        guild.getMemberCache().stream().filter(member -> !member.getUser().isBot()).count(),
+                        guild.getMemberCache().stream().filter(member -> member.getUser().isBot()).count()
                 ), true)
-                .addField("Region", MessageFormat.format(
-                        "{0} {1}",
+                .addField("Region", String.format(
+                        "%s %s",
                         guild.getRegion().getEmoji(),
                         guild.getRegion().getName()
                 ), true)
@@ -52,8 +49,8 @@ public class CmdGuild implements Command {
                         guild.getOwner().getAsMention(),
                         guild.getOwner().getEffectiveName()
                 ), true)
-                .addField("Created", MessageFormat.format(
-                        "`{0}`",
+                .addField("Created", String.format(
+                        "`%s`",
                         MessageUtil.formatTime(LocalDateTime.from(guild.getCreationTime()))
                 ), false);
 

@@ -54,6 +54,7 @@ public class PurrBot {
     private static List<String> RandomKissImg         = new ArrayList<>();
     private static List<String> RandomAcceptFuckMsg   = new ArrayList<>();
     private static List<String> RandomDenyFuckMsg     = new ArrayList<>();
+    private static List<String> RandomYuriFuckImage   = new ArrayList<>();
     private static List<String> images                = new ArrayList<>();
 
     private static List<String> BlacklistedGuilds     = new ArrayList<>();
@@ -74,7 +75,7 @@ public class PurrBot {
         //  Setting the API-token, if the bot isn't beta.
         if(!PermUtil.isBeta())
             api = new DiscordBotListAPI.Builder()
-                    .token(file.getItem("config", "api-token"))
+                    .token(file.getItem("config", "dbl-token"))
                     .botId(file.getItem("config", "id"))
                     .build();
 
@@ -147,6 +148,9 @@ public class PurrBot {
     }
     public static List<String> getRandomDenyFuckMsg(){
         return RandomDenyFuckMsg;
+    }
+    public static List<String> getRandomYuriFuckImage(){
+        return RandomYuriFuckImage;
     }
     public static List<String> getImages(){
         return images;

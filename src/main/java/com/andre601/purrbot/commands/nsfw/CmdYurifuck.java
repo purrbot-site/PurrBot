@@ -1,8 +1,8 @@
 package com.andre601.purrbot.commands.nsfw;
 
 import com.andre601.purrbot.core.PurrBot;
-import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
@@ -19,20 +19,20 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
-        name = "Fuck",
+        name = "Yurifuck",
         description =
-                "Wanna fuck someone?\n" +
+                "Two women havng fun with each other...\n" +
                 "Mention a user, to send a request.\n" +
                 "The mentioned user can accept it with `>accept` or let it run out.",
-        triggers = {"fuck", "sex"},
+        triggers = {"yurifuck", "yurisex", "yfuck", "ysex"},
         attributes = {@CommandAttribute(key = "nsfw")}
 )
-public class CmdFuck implements Command {
+public class CmdYurifuck implements Command {
 
     /**
      * {@link java.util.ArrayList ArrayList<String>} that contains the userIDs of the members, that execute the command.
      */
-    private static ArrayList<String> alreadyInQueue = new ArrayList<>();
+    private static ArrayList<String> yuriQueue = new ArrayList<>();
 
     /**
      * Gives a random value between 0 and 9
@@ -52,7 +52,7 @@ public class CmdFuck implements Command {
      * @return {@code true} if the text equals {@code >accept}. Else returns {@code false}.
      */
     private static boolean isMessage(Message msg){
-        return msg.getContentRaw().equalsIgnoreCase(">accept");
+        return msg.getContentRaw().equalsIgnoreCase(">yus");
     }
 
     /**
@@ -84,7 +84,7 @@ public class CmdFuck implements Command {
         Guild guild = msg.getGuild();
 
         if(msg.getMentionedUsers().isEmpty()){
-            EmbedUtil.error(msg, "Please mention a user you want to fuck");
+            EmbedUtil.error(msg, "Please mention a user you want to yurifuck");
             return;
         }
 
@@ -116,8 +116,9 @@ public class CmdFuck implements Command {
                 }
             }else{
                 tc.sendMessage(String.format(
-                        "\\*Slaps %s* Nononononono! Not with me!",
-                        msg.getAuthor().getAsMention()
+                        "Uhm... I-i'm honored, b-but I can't with you %s %s",
+                        msg.getAuthor().getAsMention(),
+                        Emotes.UHM
                 )).queue();
                 return;
             }
@@ -125,7 +126,7 @@ public class CmdFuck implements Command {
 
         if(user == msg.getAuthor()){
             tc.sendMessage(String.format(
-                    "%s How can you actually fuck yourself?! (And no. Masturbation is not a valid answer)",
+                    "%s Why do you want to only play with yourself?",
                     msg.getAuthor().getAsMention()
             )).queue();
             return;
@@ -139,20 +140,20 @@ public class CmdFuck implements Command {
             return;
         }
 
-        if(alreadyInQueue.contains(author.getUser().getId())){
+        if(yuriQueue.contains(author.getUser().getId())){
             tc.sendMessage(String.format(
-                    "%s You already asked someone to fuck with you, you horny person!\n" +
+                    "%s You already asked someone to fuck with you!\n" +
                     "Please wait until the person accepts it, or the request times out.",
                     author.getAsMention()
             )).queue();
             return;
         }
 
-        alreadyInQueue.add(author.getUser().getId());
+        yuriQueue.add(author.getUser().getId());
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to have sex with you. Do you want that too?\n" +
-                "Type `>accept` within the next minute, to accept it!",
+                "Type `>yus` within the next minute, to accept it!",
                 user.getAsMention(),
                 msg.getMember().getEffectiveName()
         )).queue(message -> {
@@ -174,9 +175,10 @@ public class CmdFuck implements Command {
                         }catch (Exception ex){
                         }
 
-                        alreadyInQueue.remove(author.getUser().getId());
+                        yuriQueue.remove(author.getUser().getId());
 
-                        String link = HttpUtil.getFuck();
+                        String link = MessageUtil.getRandomYurifuckImage();
+                        System.out.println(link);
 
                         ev.getTextChannel().sendMessage(String.format(
                                 "%s accepted your invite %s! 0w0",
@@ -184,9 +186,9 @@ public class CmdFuck implements Command {
                                 author.getAsMention()
                         )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
 
-                        if(link == null){
+                        if(link == null || link.isEmpty()){
                             ev.getTextChannel().sendMessage(String.format(
-                                    "%s and %s are having sex!",
+                                    "%s and %s are having yurisex!",
                                     msg.getMember().getEffectiveName(),
                                     guild.getMember(user).getEffectiveName()
                             )).queue();
@@ -203,10 +205,10 @@ public class CmdFuck implements Command {
                         }catch (Exception ex){
                         }
 
-                        alreadyInQueue.remove(author.getUser().getId());
+                        yuriQueue.remove(author.getUser().getId());
 
                         tc.sendMessage(String.format(
-                                "Looks like he/she doesn't want to have sex with you %s ;-;",
+                                "Looks like he/she (hopefully a she) doesn't want to have sex with you %s ;-;",
                                 author.getAsMention()
                         )).queue();
                     }

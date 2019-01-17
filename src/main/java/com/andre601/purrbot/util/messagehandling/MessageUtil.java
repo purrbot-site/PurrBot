@@ -122,6 +122,12 @@ public class MessageUtil {
         ) : "";
     }
 
+    public static String getRandomYurifuckImage(){
+        return PurrBot.getRandomYuriFuckImage().size() > 0 ? PurrBot.getRandomYuriFuckImage().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomYuriFuckImage().size())
+        ) : "";
+    }
+
     /**
      * Makes the first letter of a text uppercase (some text -> Some text).
      *
