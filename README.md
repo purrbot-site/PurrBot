@@ -7,8 +7,6 @@
 
 [![Discord]][DiscordLink] [![Issues]][IssuesLink] [![License]][LicenseLink]
 
-[![](https://discordbots.org/api/widget/425382319449309197.svg)](https://discordbots.org/bot/425382319449309197)
-
 # \*Purr*
 This bot was made to use the [nekos.life](https://nekos.life)-API.  
 What started as a simple and easy bot became quite a big bot, that is now even on the official Discord of Nekos.life!
