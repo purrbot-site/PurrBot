@@ -60,6 +60,7 @@ Welcome  |                         | Shows the current welcome-settings (welcome
 Command: | Arguments:             | Description:
 
 Emote    | <:emote:>              | Displays info about an emote.
+         | [-search]              | The bot will try to find an emote in the last 100 messages.
 Guild    |                        | Shows info about the guild.
 Help     |                        | Will display all commands available.
          | [command]              | Shows info about the provided command.
