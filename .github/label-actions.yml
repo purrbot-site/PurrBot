@@ -6,11 +6,11 @@ actions:
   "Type: Support request":
     # Post a comment
     comment: >
-      Hello @{issue-author},
-      It seems like you ask for support with the bot, the API or similar.
-      
-      Sadly the issue section isn't the best place to seek for support.
-      We recommend to you, to make sure you've read the [wiki](/Andre601/PurrBot/wiki) to make sure your question isn't answred there.
+      Hello @{issue-author},  
+      It seems like you ask for support with the bot, the API or similar.  
+        
+      Sadly the issue section isn't the best place to seek for support.  
+      We recommend to you, to make sure you've read the [wiki](/Andre601/PurrBot/wiki) to make sure your question isn't answered there.  
       If you still need support, join our [Discord](https://discord.gg/NB7AFqn).
     close: true
     # Lock the thread
@@ -20,10 +20,20 @@ actions:
   # Actions taken when the `heated` label is removed
   "Type: Dublicate":
     comment: >
-      This issue (or a similar one) does already exist.
+      This issue (or a similar one) does already exist.  
       Please make sure you checked the Issue-page for already existing ones, before creating an issue.
     close: true
-
+  "Problem: Need more info":
+    comment: >
+      Hello @{issue-author},  
+      Your reported bug/problem seems to lack proper information.  
+      We can't provide a right solution, if we don't have enough information.  
+        
+      Please follow those steps to provide more information:  
+      - Give an up to date debug report (`.debug`)  
+      - Make sure the bot has the required permissions  
+      - Make sure you've checked the [wiki](/Andre601/PurrBot/wiki) for known answers and solutions
+    
 # Optionally, specify configuration settings just for issues
 issues:
   actions:
@@ -45,7 +55,7 @@ pulls:
         ![](https://i.imgur.com/WuduJNk.jpg)
 
 # Limit to only `issues` or `pulls`
-# only: issues
+only: issues
 
 # Repository to extend settings from
 # _extends: repo
