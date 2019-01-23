@@ -151,7 +151,7 @@ public class CommandListener extends ListenerAdapter {
                                 "\n" +
                                 "**Cause of error**:\n" +
                                 "`%s`",
-                                Emotes.TOO_LEWD,
+                                Emotes.UHM,
                                 link != null ?
                                         "[click this link](" + link + ") to open an automated issue on GitHub!" :
                                         "[join my guild](" + Links.DISCORD_INVITE + ") and contact my Dev Andre_601.",

@@ -28,9 +28,9 @@ public class CmdInvite implements Command {
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
-        EmbedBuilder invite = EmbedUtil.getEmbed()
+        EmbedBuilder invite = EmbedUtil.getEmbed(msg.getAuthor())
                 .setAuthor(msg.getJDA().getSelfUser().getName(),
-                        null,
+                        Links.WEBSITE,
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
                 )
                 .addField("Invite the bot",

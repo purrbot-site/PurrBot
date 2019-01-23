@@ -63,18 +63,18 @@ public class CmdHelp implements Command {
     private static MessageEmbed commandHelp(Message msg, Command cmd, String prefix){
         CommandDescription description = cmd.getDescription();
         EmbedBuilder command = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle(MessageFormat.format(
-                        "Command: {0}",
+                .setTitle(String.format(
+                        "Command: %s",
                         description.name()
                 ))
                 .setDescription(description.description())
-                .addField("Usage:", MessageFormat.format(
-                        "`{0}{1}`",
+                .addField("Usage:", String.format(
+                        "`%s%s`",
                         prefix,
                         description.name()
                 ), true)
-                .addField("Aliases:", MessageFormat.format(
-                        "`{0}`",
+                .addField("Aliases:", String.format(
+                        "`%s`",
                         String.join(", ", description.triggers())
                 ), true);
 

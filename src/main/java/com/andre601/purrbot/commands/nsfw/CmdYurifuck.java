@@ -116,7 +116,7 @@ public class CmdYurifuck implements Command {
                 }
             }else{
                 tc.sendMessage(String.format(
-                        "Uhm... I-i'm honored, b-but I can't with you %s %s",
+                        "Uhm... I-i'm honored, b-but I can't do it with you %s %s",
                         msg.getAuthor().getAsMention(),
                         Emotes.UHM
                 )).queue();
