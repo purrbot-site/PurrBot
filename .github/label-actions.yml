@@ -19,7 +19,7 @@ actions:
     lockReason: "too heated"
   # Actions taken when the `heated` label is removed
   "Type: Dublicate":
-    comment: >
+    comment: |-
       This issue (or a similar one) does already exist.  
       Please make sure you checked the Issue-page for already existing ones, before creating an issue.
     close: true
