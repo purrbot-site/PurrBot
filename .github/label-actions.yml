@@ -5,7 +5,7 @@ actions:
   # Actions taken when the `heated` label is added
   "Type: Support request":
     # Post a comment
-    comment: >
+    comment: |-
       Hello @{issue-author},  
       It seems like you ask for support with the bot, the API or similar.  
         
@@ -24,8 +24,8 @@ actions:
       Please make sure you checked the Issue-page for already existing ones, before creating an issue.
     close: true
   "Problem: Need more info":
-    comment: >
-      Hello @{issue-author},  
+    comment: |-
+      Hello @{issue-author},
       Your reported bug/problem seems to lack proper information.  
       We can't provide the right solution if we don't have enough information.  
         
