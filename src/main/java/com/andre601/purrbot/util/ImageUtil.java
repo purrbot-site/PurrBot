@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -167,7 +168,6 @@ public class ImageUtil {
 
         //  Saving the userIcon/avatar as a Buffered image
         BufferedImage u = getUserIcon(user);
-        BufferedImage finalImage;
 
         try {
             BufferedImage layer = ImageIO.read(new File("img/vote_layer.png"));
@@ -233,5 +233,66 @@ public class ImageUtil {
             return null;
         }
 
+    }
+
+    public static byte[] getShipImage(Member member1, Member member2, int chance){
+        try {
+            BufferedImage template = ImageIO.read(new File("img/LoveTemplate.png"));
+            BufferedImage background = new BufferedImage(template.getWidth(), template.getHeight(), template.getType());
+            BufferedImage avatar1 = getUserIcon(member1.getUser());
+            BufferedImage avatar2 = getUserIcon(member2.getUser());
+
+            Graphics2D image = background.createGraphics();
+
+            Font textFont = new Font("Arial", Font.PLAIN, 80);
+            image.setFont(textFont);
+
+            Color textColor;
+
+            if(chance == 100){
+                textColor = new Color(0xe2ecc71);
+            }else
+            if((chance <= 99) && (chance > 75)){
+                textColor = new Color(0xf1c40f);
+            }else
+            if((chance <= 75) && (chance > 50)){
+                textColor = new Color(0xf39c12);
+            }else
+            if((chance <= 50) && (chance > 25)){
+                textColor = new Color(0xe67e22);
+            }else
+            if((chance <= 25) && (chance > 0)){
+                textColor = new Color(0xe74c3c);
+            }else{
+                textColor = new Color(0xe000000);
+            }
+
+            image.setColor(textColor);
+
+            String text = chance + "%";
+
+            image.drawImage(avatar1, 0, 0, 320, 320, null);
+            image.drawImage(avatar2, 640, 0, 320, 320, null);
+            image.drawImage(template, 0, 0, null);
+
+            int imageWidth = template.getWidth();
+
+            int patting = 480;
+            int textWidth = image.getFontMetrics().stringWidth(text);
+            int text_x = imageWidth - patting - (textWidth/2);
+
+            image.drawString(text, text_x, 190);
+
+            image.dispose();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.setUseCache(false);
+            ImageIO.write(background, "png", baos);
+
+            return baos.toByteArray();
+
+        }catch(Exception ex){
+            return null;
+        }
     }
 }

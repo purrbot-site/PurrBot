@@ -30,6 +30,7 @@ public class CommandRegisterHandler {
                 new CmdNeko(),
                 new CmdPat(),
                 new CmdPoke(),
+                new CmdShip(),
                 new CmdSlap(),
                 new CmdTickle(),
                 // Info

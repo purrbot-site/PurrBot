@@ -9,6 +9,6 @@ public final class IDs {
     public static String GUILD        = "423771795523371019";
     public static String VOTE_ROLE    = "475335831649910785";
 
-    public static String VERSION      = "2.9.10";
+    public static String VERSION      = "3.0.0";
 
 }

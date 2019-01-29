@@ -5,7 +5,6 @@ import com.andre601.purrbot.commands.CommandListener;
 import com.andre601.purrbot.listeners.GuildListener;
 import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.listeners.WelcomeListener;
-import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.VoteUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;

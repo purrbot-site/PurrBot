@@ -178,7 +178,6 @@ public class CmdYurifuck implements Command {
                         yuriQueue.remove(author.getUser().getId());
 
                         String link = MessageUtil.getRandomYurifuckImage();
-                        System.out.println(link);
 
                         ev.getTextChannel().sendMessage(String.format(
                                 "%s accepted your invite %s! 0w0",
