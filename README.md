@@ -4,6 +4,10 @@
 [IssuesLink]: https://github.com/Andre601/PurrBot/issues
 [License]: https://img.shields.io/github/license/Andre601/PurrBot.svg
 [LicenseLink]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
+[Full invite (recommended)]: https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=322624&scope=bot
+[Basic invite]: https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=19456&scope=bot
+[Website]: https://purrbot.site
+[Wiki]: https://github.com/Andre601/PurrBot/wiki
 
 [![Discord]][DiscordLink] [![Issues]][IssuesLink] [![License]][LicenseLink]
 
@@ -112,13 +116,13 @@ This permissions are:
 * Embed Links: \*Purr* won't work without this permission!
 
 # Voting
-\*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [support-guild](https://discord.gg/NB7AFqn).
+\*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [Discord].
 Just make sure to be on the guild and vote for the bot, to receive the special role.
 Future rewards may be added.
 
 # Usefull Links
-* [Discord Server](https://discord.gg/NB7AFqn)
-* [Recommended (Full) Invite](https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=322624&scope=bot)
-* [Basic Invite](https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=19456&scope=bot)
-* [Web dashboard](https://purrbot.site) | [Source code](https://github.com/Andre601/PurrBot-Dashboard)
-* [Wiki](https://github.com/Andre601/PurrBot/wiki)
+* [Discord Server][Discord]
+* [Full invite (recommended)]
+* [Basic Invite]
+* [Website]
+* [Wiki]
