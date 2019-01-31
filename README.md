@@ -1,15 +1,15 @@
-[Discord]: https://img.shields.io/discord/423771795523371019.svg?colorB=%237289DA
-[DiscordLink]: https://discord.gg/NB7AFqn
-[Issues]: https://img.shields.io/github/issues/Andre601/PurrBot.svg
-[IssuesLink]: https://github.com/Andre601/PurrBot/issues
-[License]: https://img.shields.io/github/license/Andre601/PurrBot.svg
-[LicenseLink]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
+[DiscordImg]: https://img.shields.io/discord/423771795523371019.svg?colorB=%237289DA
+[Discord]: https://discord.gg/NB7AFqn
+[IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot.svg
+[Issues]: https://github.com/Andre601/PurrBot/issues
+[LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg
+[License]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
 [Full invite (recommended)]: https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=322624&scope=bot
 [Basic invite]: https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=19456&scope=bot
 [Website]: https://purrbot.site
 [Wiki]: https://github.com/Andre601/PurrBot/wiki
 
-[![Discord]][DiscordLink] [![Issues]][IssuesLink] [![License]][LicenseLink]
+[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License]
 
 # \*Purr*
 This bot was made to use the [nekos.life](https://nekos.life)-API.  
@@ -116,7 +116,7 @@ This permissions are:
 * Embed Links: \*Purr* won't work without this permission!
 
 # Voting
-\*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [Discord].
+\*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [Discord].    
 Just make sure to be on the guild and vote for the bot, to receive the special role.
 Future rewards may be added.
 
