@@ -116,8 +116,8 @@ This permissions are:
 * Embed Links: \*Purr* won't work without this permission!
 
 # Voting
-\*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [Discord].    
-Just make sure to be on the guild and vote for the bot, to receive the special role.
+\*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [Discord].  
+Just make sure to be on the guild and vote for the bot, to receive the special role.  
 Future rewards may be added.
 
 # Usefull Links
