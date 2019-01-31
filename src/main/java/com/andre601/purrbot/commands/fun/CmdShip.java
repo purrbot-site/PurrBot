@@ -28,7 +28,7 @@ public class CmdShip implements Command {
             message = new MessageBuilder("Perfect love! ❤").build();
         }else
         if((chance <= 99) && (chance > 90)){
-            message = new MessageBuilder("When is your marriage?").build();
+            message = new MessageBuilder("Don't forget to invite me to your wedding.").build();
         }else
         if((chance <= 90) && (chance > 80)){
             message = new MessageBuilder("I can imagine them marrying each other.").build();

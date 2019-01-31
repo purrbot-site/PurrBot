@@ -18,19 +18,20 @@ The default command-prefix is `.` but can be changed with the prefix-command.
 ## Fun
 **Permission**: No permission required.
 ```
-Command: | Arguments:  | Description:
+Command: | Arguments:      | Description:
 
-Cuddle   | <@user ...> | Cuddles the mentioned user(s).
-Fakegit  |             | Creates a fake commit-message with help of https://whatthecommit.com
-Hug      | <@user ...> | Hugs the mentioned user(s).
-Kiss     | <@user ...> | Kisses the mentioned user(s).
-Kitsune  |             | Shows a image of a kitsune (foxgirl)
-Neko     |             | Shows a image of a neko from nekos.life.
-         | [-gif]      | Shows a gif-image of a neko from nekos.life.
-         | [-slide]    | Creates a slideshow with 30 images (Can be combined with the -gif argument).
-Pat      | <@user ...> | Pats the mentioned user(s).
-Slap     | <@user ...> | Slaps the mentioned user(s).
-Tickle   | <@user ...> | Tickles the mentioned user(s).
+Cuddle   | <@user ...>     | Cuddles the mentioned user(s).
+Fakegit  |                 | Creates a fake commit-message with help of https://whatthecommit.com
+Hug      | <@user ...>     | Hugs the mentioned user(s).
+Kiss     | <@user ...>     | Kisses the mentioned user(s).
+Kitsune  |                 | Shows a image of a kitsune (foxgirl)
+Neko     |                 | Shows a image of a neko from nekos.life.
+         | [-gif]          | Shows a gif-image of a neko from nekos.life.
+         | [-slide]        | Creates a slideshow with 30 images (Can be combined with the -gif argument).
+Pat      | <@user ...>     | Pats the mentioned user(s).
+Ship     | <@user> [@user] | Ships you (or another user) with someone.
+Slap     | <@user ...>     | Slaps the mentioned user(s).
+Tickle   | <@user ...>     | Tickles the mentioned user(s).
 ```
 
 ## Guild
