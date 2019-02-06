@@ -1,6 +1,8 @@
 package com.andre601.purrbot.core;
 
 import ch.qos.logback.classic.Logger;
+import club.minnced.discord.webhook.WebhookClient;
+import club.minnced.discord.webhook.WebhookClientBuilder;
 import com.andre601.purrbot.commands.CommandListener;
 import com.andre601.purrbot.listeners.GuildListener;
 import com.andre601.purrbot.listeners.ReadyListener;
@@ -17,8 +19,6 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.webhook.WebhookClient;
-import net.dv8tion.jda.webhook.WebhookClientBuilder;
 
 import org.discordbots.api.client.DiscordBotListAPI;
 import org.discordbots.api.client.entity.Vote;

@@ -113,7 +113,11 @@ public class CmdShip implements Command {
             return;
         }
 
-        tc.sendFile(image, "love.png", getMessage(result)).queue();
+        tc.sendMessage(getMessage(result)).addFile(image, String.format(
+                "love_%s_%s.png",
+                member1.getUser().getId(),
+                member2.getUser().getId()
+        )).queue();
 
     }
 }

@@ -1,5 +1,7 @@
 package com.andre601.purrbot.commands.fun;
 
+import club.minnced.discord.webhook.send.WebhookEmbed;
+import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Links;
@@ -9,17 +11,16 @@ import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.*;
 import org.json.JSONObject;
 
-import java.awt.*;
+import java.util.List;
 
 @CommandDescription(
         name = "Fakegit",
-        description = "Creates a commit-message that looks like a real one.",
+        description =
+                "Creates a commit-message that looks like a real one.\n" +
+                "Use `-clear` to remove",
         triggers = {"fakegit", "git"},
         attributes = {@CommandAttribute(key = "fun")}
 )
@@ -34,6 +35,17 @@ public class CmdFakegit implements Command {
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
+        if(msg.getContentRaw().contains("-clear")){
+            List<Webhook> webhooks = tc.getWebhooks().complete();
+
+            tc.sendMessage("Deleting webhooks with name `PurrBot-Fakegit`. Please wait...").queue();
+            webhooks.stream().filter(webhook -> webhook.getName().equals("PurrBot-Fakegit")).forEach(webhook ->
+                    webhook.delete().reason("[Fakegit] Webhook cleaning").queue()
+            );
+            tc.sendMessage("Removed all webhooks from this channel!").queue();
+            return;
+        }
+
         if(jsonObject == null){
             EmbedUtil.error(msg, "Couldn't reach the API!");
             return;
@@ -43,8 +55,10 @@ public class CmdFakegit implements Command {
         String hash = jsonObject.getString("hash").substring(0, 7);
         String commit = jsonObject.getString("commit_message");
 
+        int color = 0x7289DA;
+
         MessageEmbed messageEmbed = new EmbedBuilder()
-                .setColor(new Color(114, 137, 218))
+                .setColor(color)
                 .setAuthor(msg.getAuthor().getName(), link, msg.getAuthor().getEffectiveAvatarUrl())
                 .setTitle(String.format(
                         "[%s:%s] 1 new commit",
@@ -58,9 +72,28 @@ public class CmdFakegit implements Command {
                         commit
                 )).build();
 
+        WebhookEmbed webhookEmbed = new WebhookEmbedBuilder()
+                .setColor(color)
+                .setAuthor(new WebhookEmbed.EmbedAuthor(
+                        msg.getMember().getEffectiveName(),
+                        msg.getAuthor().getEffectiveAvatarUrl(),
+                        link
+                ))
+                .setTitle(new WebhookEmbed.EmbedTitle(String.format(
+                        "[%s:%s] 1 new commit",
+                        guild.getName().replace(" ", "\\_"),
+                        tc.getName()
+                ), link))
+                .setDescription(String.format(
+                        "[`%s`](%s) %s",
+                        hash,
+                        link,
+                        commit
+                )).build();
+
         if(PermUtil.canManageWebhooks(tc)){
             try {
-                WebhookUtil.sendMessage(tc, Links.GITHUB_AVATAR, "GitHub", messageEmbed);
+                WebhookUtil.sendMessage(tc, Links.GITHUB_AVATAR, "GitHub", webhookEmbed);
                 return;
             }catch (Exception ex){
                 tc.sendMessage(messageEmbed).queue();

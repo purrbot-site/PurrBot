@@ -361,6 +361,16 @@ public class HttpUtil {
         }
     }
 
+    /**
+     * Performs a POST action towards <a href="https://discord.bots.gg" target="_blank">discord.bots.gg</a> to update
+     * statistics.
+     *
+     * @param  count
+     *         The guild-count of the bot.
+     *
+     * @throws IOException
+     *         When the post-action wasn't successful.
+     */
     public static void updateStatsBotsGG(int count) throws IOException{
         String content = String.format(
                 "{\"guildCount\": %d}",
@@ -382,23 +392,33 @@ public class HttpUtil {
         }
     }
 
-    public static void updateStatsLSTerminal(int count) throws IOException{
+    /**
+     * Performs a POST action towards <a href="https://lbots.org" target="_blank">lbots.org</a> to update
+     * statistics.
+     *
+     * @param  count
+     *         The guild-count of the bot.
+     *
+     * @throws IOException
+     *         When the post-action wasn't successful.
+     */
+    public static void updateStatsLBots(int count) throws IOException{
         String content = String.format(
-                "{\"bot\":{\"count\": %d}}",
+                "{\"guild_count\": %d}",
                 count
         );
 
         RequestBody requestBody = RequestBody.create(JSON, content);
         Request request = new Request.Builder()
                 .url(String.format(
-                        "https://ls.terminal.ink/api/v2/bots/%s",
+                        "https://lbots.org/api/v1/bots/%s/stats",
                         PurrBot.file.getItem("config", "id")
                 ))
-                .header("Authorization", PurrBot.file.getItem("config", "lst-token"))
+                .header("Authorization", PurrBot.file.getItem("config", "lbots-token"))
                 .post(requestBody)
                 .build();
         try(Response response = CLIENT.newCall(request).execute()){
-            PurrBot.getLogger().info("Performed Update-task for ls.terminal.ink!");
+            PurrBot.getLogger().info("Performed Update-task for lbots.org");
             PurrBot.getLogger().info("Response: " + response);
         }
     }
@@ -409,7 +429,7 @@ public class HttpUtil {
      * @param  request
      *         The link to get the content from.
      *
-     * @return The content of the site as a String.
+     * @return The content of the site as a String or an empty String if not successful.
      */
     public static String requestHttp(String request){
         try{

@@ -7,8 +7,7 @@ public final class IDs {
     public static String LILYSCARLET  = "218772716814204930";
     public static String PURR         = "425382319449309197";
     public static String GUILD        = "423771795523371019";
-    public static String VOTE_ROLE    = "475335831649910785";
 
-    public static String VERSION      = "3.0.0";
+    public static String VERSION      = "3.1.5";
 
 }

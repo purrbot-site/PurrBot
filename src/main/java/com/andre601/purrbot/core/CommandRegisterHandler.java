@@ -39,6 +39,7 @@ public class CommandRegisterHandler {
                 new CmdHelp(),
                 new CmdInfo(),
                 new CmdInvite(),
+                new CmdLevel(),
                 new CmdPing(),
                 new CmdQuote(),
                 new CmdStats(),

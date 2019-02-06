@@ -5,7 +5,7 @@ plugins {
     id 'idea'
 }
 mainClassName = 'com.andre601.purrbot.core.PurrBot'
-version = '3.0.0'
+version = '3.1.5'
 
 description = """"""
 
@@ -18,6 +18,7 @@ repositories {
     jcenter()
     mavenCentral()
     maven { url 'https://jitpack.io' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 dependencies {
@@ -27,15 +28,17 @@ dependencies {
     compile group: 'com.rethinkdb', name: 'rethinkdb-driver', version:'2.3.3'
     compile 'com.google.code.gson:gson:2.2.4'
     compile group: 'com.google.guava', name: 'guava', version:'25.0-jre'
-    compile(group: 'net.dv8tion', name: 'JDA', version:'3.8.1_450') {
+    compile(group: 'net.dv8tion', name: 'JDA', version:'3.8.2_459') {
         exclude(module: 'opus-java')
     }
+    compile group: 'club.minnced', name: 'discord-webhooks', version: '0.1.5'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
     compile group: 'org.discordbots', name: 'DBL-Java-Library', version: '2.0.1'
     compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
     compile group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.2'
+    compile group: 'me.duncte123', name: 'loadingbar', version: '1.2.1_11'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.0'
 }
 

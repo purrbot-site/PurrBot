@@ -64,10 +64,10 @@ public class WelcomeListener extends ListenerAdapter {
                         return;
                     }
 
-                    tc.sendFile(is, String.format(
+                    tc.sendMessage(welcome).addFile(is, String.format(
                             "%s.png",
                             System.currentTimeMillis()
-                    ), welcome).queue();
+                    )).queue();
                 }else{
                     tc.sendMessage(welcome).queue();
                 }

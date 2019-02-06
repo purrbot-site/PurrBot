@@ -1,11 +1,17 @@
 package com.andre601.purrbot.util.messagehandling;
 
-import net.dv8tion.jda.core.entities.MessageEmbed;
+import club.minnced.discord.webhook.WebhookClient;
+import club.minnced.discord.webhook.WebhookClientBuilder;
+import club.minnced.discord.webhook.send.WebhookEmbed;
+import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
+import club.minnced.discord.webhook.send.WebhookMessageBuilder;
+import com.andre601.purrbot.core.PurrBot;
+import com.andre601.purrbot.listeners.ReadyListener;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.Webhook;
-import net.dv8tion.jda.webhook.WebhookClient;
-import net.dv8tion.jda.webhook.WebhookClientBuilder;
-import net.dv8tion.jda.webhook.WebhookMessageBuilder;
+
+import java.time.ZonedDateTime;
 
 public class WebhookUtil {
 
@@ -19,41 +25,91 @@ public class WebhookUtil {
      *        The url for the avatar.
      * @param name
      *        The name displayed in the webhook-message.
-     * @param messageEmbed
-     *        A {@link net.dv8tion.jda.core.entities.MessageEmbed MessageEmbed object}.
+     * @param webhookEmbed
+     *        A {@link club.minnced.discord.webhook.send.WebhookEmbed WebhookEmbed object}.
      */
-    public static void sendMessage(TextChannel tc, String avatarURL, String name, MessageEmbed messageEmbed){
-        Webhook webhook;
+    public static void sendMessage(TextChannel tc, String avatarURL, String name, WebhookEmbed webhookEmbed){
 
-        if(!tc.getWebhooks().complete().isEmpty())
+        Webhook webhook = null;
+
+        if(!tc.getWebhooks().complete().isEmpty()){
             webhook = tc.getWebhooks().complete().get(0);
-        else
-            webhook = createWebhook(tc);
-
-        if(webhook == null){
-            EmbedUtil.error(tc, "There was an issue with creating/loading a webhook.");
-            return;
         }
 
-        WebhookClientBuilder clientBuilder = webhook.newClient();
-        WebhookClient client = clientBuilder.build();
+        if(webhook == null){
+            webhook = tc.createWebhook("PurrBot-Fakegit").reason(
+                    "[PurrBot] Create webhook for command fakegit"
+            ).complete();
+        }
 
-        client.send(
-                new WebhookMessageBuilder().setUsername(name).setAvatarUrl(avatarURL).addEmbeds(messageEmbed).build()
+        WebhookClient client = new WebhookClientBuilder(webhook.getUrl()).build();
+
+        client.send(new WebhookMessageBuilder()
+                .addEmbeds(webhookEmbed)
+                .setAvatarUrl(avatarURL)
+                .setUsername(name)
+                .build()
         );
         client.close();
+
     }
 
     /**
-     * Creates a webhook in the provided channel.
+     * Sends a webhook to the provided URL with the parameters of the guild.
      *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     *
-     * @return A {@link net.dv8tion.jda.core.entities.Webhook Webhook object}.
+     * @param url
+     *        The URL of the {@link club.minnced.discord.webhook.WebhookClient WebhookClient}
+     * @param guild
+     *        The {@link net.dv8tion.jda.core.entities.Guild Guild} the bot joined/left
+     * @param color
+     *        The color for the embed, as an Integer
+     * @param name
+     *        The shown name of the Webhook
      */
-    private static Webhook createWebhook(TextChannel tc){
-        return tc.createWebhook("PurrBot-FakeGit").complete();
+    public static void sendGuildWebhook(String url, Guild guild, int color, String name){
+        WebhookEmbed embed = new WebhookEmbedBuilder()
+                .setColor(color)
+                .setThumbnailUrl(guild.getIconUrl())
+                .addField(new WebhookEmbed.EmbedField(
+                        false, "Guild", guild.getName()
+                ))
+                .addField(new WebhookEmbed.EmbedField(
+                        false, "Owner", String.format(
+                                "%s | %s (`%s`)",
+                                guild.getOwner().getAsMention(),
+                                guild.getOwner().getUser().getName(),
+                                guild.getOwner().getUser().getId()
+                )
+                ))
+                .addField(new WebhookEmbed.EmbedField(
+                        false, "Members", String.format(
+                                "**Total**: `%d`\n" +
+                                "**Humans**: `%d`\n" +
+                                "**Bots**: `%d`",
+                                guild.getMembers().size(),
+                                guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count(),
+                                guild.getMembers().stream().filter(member -> member.getUser().isBot()).count()
+                )
+                ))
+                .setFooter(new WebhookEmbed.EmbedFooter(String.format(
+                        "Guild #%d",
+                        ReadyListener.getShardManager().getGuildCache().size()
+                ), null))
+                .setTimestamp(ZonedDateTime.now())
+                .build();
+
+        WebhookClient client = PurrBot.getWebhookClient(url);
+        client.send(new WebhookMessageBuilder()
+                .setUsername(name)
+                .setAvatarUrl(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                .setContent(String.format(
+                        "ID: %s",
+                        guild.getId()
+                ))
+                .addEmbeds(embed)
+                .build()
+        );
+        client.close();
     }
 
 }

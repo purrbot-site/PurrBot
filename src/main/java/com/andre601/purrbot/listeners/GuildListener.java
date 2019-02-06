@@ -5,6 +5,7 @@ import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.constants.Links;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
+import com.andre601.purrbot.util.messagehandling.WebhookUtil;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
@@ -42,9 +43,9 @@ public class GuildListener extends ListenerAdapter {
         if(PurrBot.getBlacklistedGuilds().contains(guild.getId())) {
             guild.getOwner().getUser().openPrivateChannel().queue(pm -> {
                 //  Try to send a PM with the reason to the guild-owner.
-                pm.sendMessage(MessageFormat.format(
-                        "Your Guild `{0}` (`{1}`) is blacklisted!\n" +
-                        "You can join the official Discord and ask for the reason: {2}",
+                pm.sendMessage(String.format(
+                        "Your Server `%s` (`%s`) is blacklisted!\n" +
+                        "You can join the official Discord and ask for the reason: %s",
                         guild.getName(),
                         guild.getId(),
                         Links.DISCORD_INVITE
@@ -68,7 +69,7 @@ public class GuildListener extends ListenerAdapter {
                 guild.getMembers().stream().filter(user -> user.getUser().isBot()).count()
         ));
 
-        EmbedUtil.sendWebhookEmbed(getLink(), guild, Color.GREEN, "Guild joined");
+        WebhookUtil.sendGuildWebhook(getLink(), guild, 0x00FF00, "Joined server");
     }
 
     /**
@@ -99,6 +100,6 @@ public class GuildListener extends ListenerAdapter {
                 guild.getMembers().stream().filter(user -> user.getUser().isBot()).count()
         ));
 
-        EmbedUtil.sendWebhookEmbed(getLink(), guild, Color.RED, "Guild left");
+        WebhookUtil.sendGuildWebhook(getLink(), guild, 0xFF0000, "Joined server");
     }
 }

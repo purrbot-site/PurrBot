@@ -92,7 +92,7 @@ public class ImageUtil {
                 ));
         message.setEmbed(quoteEmbed.build());
 
-        tc.sendFile(inputStream, imageName, message.build()).queue();
+        tc.sendMessage(message.build()).addFile(inputStream, imageName).queue();
     }
 
     /**
@@ -111,9 +111,11 @@ public class ImageUtil {
             String avatarURL = URLEncoder.encode(avatar, "UTF-8");
             String userStatus = URLEncoder.encode(status, "UTF-8");
 
-            String url = "https://purrbot.site/api/status" +
-                    "?avatar=" + avatarURL +
-                    "&status=" + userStatus;
+            String url = String.format(
+                    "https://purrbot.site/api/status?avatar=%s&status=%s",
+                    avatarURL,
+                    userStatus
+            );
 
             return new URL(url).openStream();
         }catch(Exception ex){
@@ -143,12 +145,14 @@ public class ImageUtil {
             String color = URLEncoder.encode(imageColor, "UTF-8");
             long size = guild.getMembers().size();
 
-            String url = "https://purrbot.site/api/welcome" +
-                    "?avatar=" + avatar +
-                    "&name=" + name +
-                    "&image=" + image +
-                    "&color=" + color +
-                    "&size=" + size;
+            String url = String.format(
+                    "https://purrbot.site/api/welcome?avatar=%s&name=%s&image=%s&color=%s&size=%d",
+                    avatar,
+                    name,
+                    image,
+                    color,
+                    size
+            );
 
             return new URL(url).openStream();
         }catch (Exception ex){
@@ -235,6 +239,19 @@ public class ImageUtil {
 
     }
 
+    /**
+     * Generates a image that shows how likely both shipped Members will stay together (percentage).
+     * <br>The numbers color changes depending on how high the number is.
+     *
+     * @param  member1
+     *         A {@link net.dv8tion.jda.core.entities.Member Member} object.
+     * @param  member2
+     *         A {@link net.dv8tion.jda.core.entities.Member Member} object.
+     * @param  chance
+     *         The percentage of them (from 0 to 100) of how likely they match.
+     *
+     * @return A {@link java.io.ByteArrayOutputStream ByteArray} of the generated image.
+     */
     public static byte[] getShipImage(Member member1, Member member2, int chance){
         try {
             BufferedImage template = ImageIO.read(new File("img/LoveTemplate.png"));

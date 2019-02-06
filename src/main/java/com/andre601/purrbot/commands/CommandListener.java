@@ -3,13 +3,16 @@ package com.andre601.purrbot.commands;
 import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.DBUtil;
+import com.andre601.purrbot.util.LevelUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
+import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.constants.Links;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandHandler;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
@@ -17,6 +20,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.io.File;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.concurrent.Executor;
@@ -33,27 +37,6 @@ public class CommandListener extends ListenerAdapter {
 
     public CommandListener(CommandHandler handler){
         this.HANDLER = handler;
-    }
-
-    private String getIssueLink(Exception exception){
-        try{
-            return Links.GITHUB + "/issues/new?title=" + URLEncoder.encode(
-                    "[Automated issue] Command exception",
-                    "UTF-8"
-            ) + "&body=" + URLEncoder.encode(String.format(
-                    "<!-- Just post this issue -->\n" +
-                    "A command had an exception.\n" +
-                    "\n" +
-                    "Exception-message: `%s`\n" +
-                    "\n" +
-                    "## Steps to reproduce\n" +
-                    "<!-- Please write, what you did to cause the issues -->\n" +
-                    "* ",
-                    exception.getMessage()
-            ), "UTF-8");
-        }catch (Exception ex){
-            return null;
-        }
     }
 
     @Override
@@ -139,22 +122,49 @@ public class CommandListener extends ListenerAdapter {
                         EmbedUtil.error(msg, "You need the `manage server` permission!");
                         return;
                     }
+                    if(command.hasAttribute("guild_only") && !guild.getId().equals(IDs.GUILD)){
+                        EmbedUtil.error(msg, String.format(
+                                "This command can only be used [in my Discord](%s)!",
+                                Links.DISCORD_INVITE
+                        ));
+                        return;
+                    }
 
                     try{
+                        if(guild.getId().equals(IDs.GUILD)){
+                            if(!DBUtil.hasMember(msg.getAuthor())) DBUtil.setUser(msg.getAuthor());
+
+                            long xp = DBUtil.getXP(msg.getAuthor()) + 2;
+
+                            DBUtil.setXP(msg.getAuthor(), xp);
+
+                            if(!DBUtil.hasLevel(msg.getAuthor())) DBUtil.setLevel(msg.getAuthor(), 0);
+                            if(LevelUtil.isLevelUp(msg.getAuthor(), xp)){
+                                long level = DBUtil.getLevel(msg.getAuthor());
+                                String imageName = String.format("levelup_%s.png", msg.getAuthor().getId());
+                                File image = new File("img/levelup.png");
+
+                                tc.sendMessage(String.format(
+                                        "%s leveled up to **Level %d**! \uD83C\uDF89",
+                                        msg.getMember().getAsMention(),
+                                        level + 1
+                                )).addFile(image, imageName).queue();
+                                LevelUtil.updateLevel(msg.getMember(), xp, level);
+                            }
+                        }
+
                         HANDLER.execute(command, msg, split.length > 1 ? split[1] : "");
                     }catch(Exception ex){
-                        String link = getIssueLink(ex);
                         PurrBot.getLogger().error("Couldn't perform command!", ex);
                         EmbedUtil.error(msg, String.format(
                                 "Uhm... This is a bit embarrassing now, but I had an error with a command. %s\n" +
-                                "Please %s\n" +
+                                "Please [join my server](%s) or report the issue [on GitHub](%s)\n" +
                                 "\n" +
                                 "**Cause of error**:\n" +
                                 "`%s`",
                                 Emotes.UHM,
-                                link != null ?
-                                        "[click this link](" + link + ") to open an automated issue on GitHub!" :
-                                        "[join my guild](" + Links.DISCORD_INVITE + ") and contact my Dev Andre_601.",
+                                Links.DISCORD_INVITE,
+                                Links.GITHUB,
                                 ex.getMessage()
                         ));
                     }

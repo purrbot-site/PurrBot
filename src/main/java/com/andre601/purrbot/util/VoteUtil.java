@@ -1,18 +1,18 @@
 package com.andre601.purrbot.util;
 
+import club.minnced.discord.webhook.WebhookClient;
+import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.core.PurrBot;
-import net.dv8tion.jda.core.MessageBuilder;
+import com.andre601.purrbot.util.constants.Links;
+import com.andre601.purrbot.util.constants.Roles;
 import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.webhook.WebhookClient;
-import net.dv8tion.jda.webhook.WebhookMessageBuilder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.MessageFormat;
 
 public class VoteUtil {
 
@@ -29,23 +29,23 @@ public class VoteUtil {
     public static void voteAction(String botId, String voterId, boolean isWeekend){
         if(!botId.equals(IDs.PURR)) return;
 
-        Message msg;
+        String msg;
         WebhookClient webhookClient = PurrBot.getWebhookClient(
                 PurrBot.file.getItem("config", "vote-webhook")
         );
         Guild guild = ReadyListener.getShardManager().getGuildById(IDs.GUILD);
         if(voterIsInGuild(guild, voterId)){
-            Role role = guild.getRoleById(IDs.VOTE_ROLE);
+            Role role = guild.getRoleById(Roles.VOTER);
             Member member = guild.getMemberById(voterId);
-            msg = new MessageBuilder()
-                    .append(String.format(
-                            "%s has voted for the bot! Thank you! \uD83C\uDF89\n" +
-                            "Vote too on <https://discordbots.org/bot/425382319449309197>!",
-                            member.getAsMention()
-                    ))
-                    .build();
+            msg = String.format(
+                    "%s has voted for the bot! Thank you! \uD83C\uDF89\n" +
+                    "Vote too on <%s>!",
+                    member.getAsMention(),
+                    Links.DISCORDBOTS_ORG
+            );
+
             if(!guild.getMemberById(voterId).getRoles().contains(role)) {
-                guild.getController().addRolesToMember(member, role).queue();
+                guild.getController().addRolesToMember(member, role).reason("[Vote reward] Voted for the bot").queue();
             }
 
             BufferedImage image = ImageUtil.createVoteImage(member.getUser(), isWeekend);
@@ -61,27 +61,27 @@ public class VoteUtil {
                 ImageIO.setUseCache(false);
                 ImageIO.write(image, "png", baos);
 
-                webhookClient.send(new WebhookMessageBuilder(msg)
+                webhookClient.send(new WebhookMessageBuilder()
+                        .setContent(msg)
                         .addFile(String.format(
-                        "vote_%s.png",
-                        voterId
-                ), baos.toByteArray())
+                                "vote_%s.png",
+                                voterId
+                        ), baos.toByteArray())
                         .build()
                 );
-                webhookClient.close();
             }catch (IOException ex){
                 webhookClient.send(msg);
-                webhookClient.close();
             }
+            webhookClient.close();
 
 
         }else{
-            msg = new MessageBuilder()
-                    .append(
-                            "A anonymous person has voted for the bot!\n" +
-                            "Vote too on <https://discordbots.org/bot/425382319449309197>!"
-                    )
-                    .build();
+            msg = String.format(
+                    "An anonymous person has voted for the bot!\n" +
+                    "Vote too on <%s>",
+                    Links.DISCORDBOTS_ORG
+            );
+
             webhookClient.send(msg);
             webhookClient.close();
         }

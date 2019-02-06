@@ -3,12 +3,15 @@
   "id": "ID",
   "webhook": "webhookURL",
   "vote-webhook": "vote-Webhook URL",
+
   "dbl-token": "dbl-token",
   "dbgg-token": "dbgg-token",
-  "lst-token": "lst-token",
+  "lbots-token": "lbots-token",
+
   "beta": "false",
 
   "db-ip": "127.0.0.1",
   "db-name": "DatabaseName",
-  "db-table": "DatabaseTable"
+  "db-guildTable": "GuildTable",
+  "db-memberTable": "MemberTable"
 }

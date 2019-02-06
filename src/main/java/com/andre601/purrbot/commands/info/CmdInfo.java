@@ -168,10 +168,10 @@ public class CmdInfo implements Command {
                     .addField("", String.format(
                             "[`Official Discord`](%s)\n" +
                             "[`Website`](%s)\n" +
-                            "[`ls.terminal.ink`](%s)",
+                            "[`lbots.org`](%s)",
                             Links.DISCORD_INVITE,
                             Links.WEBSITE,
-                            Links.LS_TERMINAL_INK
+                            Links.LBOTS_ORG
                     ), true);
         }
 

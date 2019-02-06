@@ -31,7 +31,7 @@ public class CmdLeave implements Command {
             try {
                 shardManager.getGuildById(args[0]).getOwner().getUser().openPrivateChannel().queue(
                         privateChannel -> privateChannel.sendMessage(MessageFormat.format(
-                                "I left your guild `{0}`. Reason:\n" +
+                                "I left your server `{0}`. Reason:\n" +
                                 "`{1}`",
                                 shardManager.getGuildById(args[0]).getName(),
                                 (pm == null || pm.equals("") ? "No reason" : pm)

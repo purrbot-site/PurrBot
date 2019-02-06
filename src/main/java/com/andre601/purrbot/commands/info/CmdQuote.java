@@ -57,7 +57,7 @@ public class CmdQuote implements Command {
         EmbedBuilder quoteEmbed = EmbedUtil.getEmbed()
                 .setAuthor(String.format(
                         "Quote from %s",
-                        msg.getMember().getEffectiveName()
+                        msg.getMember() == null ? "Unknown Member" : msg.getMember().getEffectiveName()
                 ), msg.getJumpUrl(), msg.getAuthor().getEffectiveAvatarUrl())
                 .setDescription(msg.getContentRaw())
                 .setImage(link)

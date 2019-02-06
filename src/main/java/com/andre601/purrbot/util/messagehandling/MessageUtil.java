@@ -287,19 +287,21 @@ public class MessageUtil {
                         shardManager.getGuildCache().size()
                 )));
                 if(!PermUtil.isBeta()){
-                    PurrBot.getAPI().setStats((int)shardManager.getGuildCache().size());
+                    int guildCount = (int)shardManager.getGuildCache().size();
 
-                    try {
-                        HttpUtil.updateStatsLSTerminal((int) shardManager.getGuildCache().size());
+                    PurrBot.getAPI().setStats(guildCount);
+
+                    try{
+                        HttpUtil.updateStatsBotsGG(guildCount);
                     }catch (IOException ex){
-                        PurrBot.getLogger().warn("Couldn't perform update task for ls.terminal.ink!");
+                        PurrBot.getLogger().warn("Couldn't perform update task for discord.bots.gg!");
                         PurrBot.getLogger().warn("Reason: " + ex.getMessage());
                     }
 
                     try{
-                        HttpUtil.updateStatsBotsGG((int) shardManager.getGuildCache().size());
-                    }catch (IOException ex){
-                        PurrBot.getLogger().warn("Couldn't perform update task for discord.bots.gg!");
+                        HttpUtil.updateStatsLBots(guildCount);
+                    }catch(IOException ex){
+                        PurrBot.getLogger().warn("Couldn't perform update task for lbots.org!");
                         PurrBot.getLogger().warn("Reason: " + ex.getMessage());
                     }
                 }

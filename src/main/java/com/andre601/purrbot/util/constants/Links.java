@@ -78,7 +78,7 @@ public final class Links {
     public static String GITHUB          = "https://github.com/andre601/PurrBot";
     public static String WIKI            = "https://github.com/andre601/PurrBot/wiki";
     public static String DISCORDBOTS_ORG = "https://discordbots.org/bot/425382319449309197";
-    public static String LS_TERMINAL_INK = "https://ls.terminal.ink/bots/425382319449309197";
+    public static String LBOTS_ORG       = "https://lbots.org/bots/425382319449309197";
     public static String DISCORD_BOTS_GG = "https://discord.bots.gg/bots/425382319449309197";
     public static String WEBSITE         = "https://purrbot.site";
     public static String GITHUB_AVATAR   = "https://i.imgur.com/Fv6qdfG.png";
