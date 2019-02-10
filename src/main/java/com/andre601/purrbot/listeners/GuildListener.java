@@ -29,8 +29,8 @@ public class GuildListener extends ListenerAdapter {
 
     /**
      * Listens for when the bot joins a Guild.
-     * The guild will be checked, if it is in the blacklist. If it is, then the bot leaves and we return here.
-     * If not, then it will create the required inforamtion in the database.
+     * <br>The guild will be checked, if it is in the blacklist. If it is, then the bot leaves and we return here.
+     * <br>If not, then it will create the required information in the database.
      *
      * @param event
      *        The {@link net.dv8tion.jda.core.events.guild.GuildJoinEvent GuildJoinEvent}.
@@ -74,7 +74,7 @@ public class GuildListener extends ListenerAdapter {
 
     /**
      * Listens for when the bot leaves a guild.
-     * Instead of creating a database-entry, we delete one to save storage.
+     * <br>Instead of creating a database-entry, we delete one to save storage.
      *
      * @param event
      *        The {@link net.dv8tion.jda.core.events.guild.GuildLeaveEvent GuildLeaveEvent}.

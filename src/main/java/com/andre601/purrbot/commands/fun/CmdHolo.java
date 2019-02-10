@@ -11,20 +11,18 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
-import java.text.MessageFormat;
-
 @CommandDescription(
-        name = "Kitsune",
-        description = "Gives you a image of a kitsune (foxgirl)",
-        triggers = {"kitsune", "foxgirl"},
+        name = "Holo",
+        description = "Gives a image of Holo from \"Spice and wolf\"",
+        triggers = {"holo", "spiceandwolf"},
         attributes = {@CommandAttribute(key = "fun")}
 )
-public class CmdKitsune implements Command {
+public class CmdHolo implements Command {
 
     @Override
-    public void execute(Message msg, String s){
+    public void execute(Message msg, String s) {
         TextChannel tc = msg.getTextChannel();
-        String link = HttpUtil.getImage("fox_girl", "url");
+        String link = HttpUtil.getImage("holo", "url");
 
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
@@ -34,18 +32,16 @@ public class CmdKitsune implements Command {
             return;
         }
 
-        EmbedBuilder gecg = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle(MessageFormat.format(
-                        "{0}",
-                        link.replace("https://cdn.nekos.life/fox_girl/", "")
+        EmbedBuilder holo = EmbedUtil.getEmbed(msg.getAuthor())
+                .setTitle(String.format(
+                        "%s",
+                        link.replace("https://cdn.nekos.life/holo/", "")
                 ), link)
                 .setImage(link);
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting a cute kitsune...",
+        tc.sendMessage(String.format(
+                "%s Getting a cute image of holo...",
                 Emotes.LOADING
-        )).queue(message -> message.editMessage(
-                EmbedBuilder.ZERO_WIDTH_SPACE
-        ).embed(gecg.build()).queue());
+        )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(holo.build()).queue());
     }
 }

@@ -77,10 +77,10 @@ public class WelcomeListener extends ListenerAdapter {
 
     /**
      * Listens for when a channel in a guild gets deleted.
-     * This is used for when a saved welcome-channel gets deleted, that the bot won't return errors because of it no
-     * longer exists.
-     *
-     * If a saved welcome channel gets deleted, we run
+     * <br>This is used for when a saved welcome-channel gets deleted, that the bot won't return errors because of it
+     * no longer exists.
+     * <br>
+     * <br>If a saved welcome channel gets deleted, we run
      * {@link com.andre601.purrbot.commands.guild.CmdWelcome#resetChannel(Guild) CmdWelcome.resetChannel(Guild)} to
      * reset it.
      *

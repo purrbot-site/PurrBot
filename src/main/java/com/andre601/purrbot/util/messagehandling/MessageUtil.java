@@ -9,7 +9,6 @@ import net.dv8tion.jda.core.entities.*;
 
 import java.awt.*;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -122,6 +121,11 @@ public class MessageUtil {
         ) : "";
     }
 
+    /**
+     * Returns a random yuri fuck (female <-> female sex) image.
+     *
+     * @return A random {@link java.lang.String String} from an List.
+     */
     public static String getRandomYurifuckImage(){
         return PurrBot.getRandomYuriFuckImage().size() > 0 ? PurrBot.getRandomYuriFuckImage().get(
                 PurrBot.getRandom().nextInt(PurrBot.getRandomYuriFuckImage().size())
@@ -280,7 +284,7 @@ public class MessageUtil {
      */
     public static Runnable updateData(){
         return () -> {
-            if(ReadyListener.getReady() == Boolean.TRUE){
+            if(ReadyListener.isReady() == Boolean.TRUE){
                 ShardManager shardManager = ReadyListener.getShardManager();
                 shardManager.setGame(Game.watching(String.format(
                         ReadyListener.getBotGame(),

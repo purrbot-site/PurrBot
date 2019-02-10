@@ -26,6 +26,7 @@ Command: | Arguments:      | Description:
 
 Cuddle   | <@user ...>     | Cuddles the mentioned user(s).
 Fakegit  |                 | Creates a fake commit-message with help of https://whatthecommit.com
+Holo     |                 | Gives an image of Holo from Spice and wolf.
 Hug      | <@user ...>     | Hugs the mentioned user(s).
 Kiss     | <@user ...>     | Kisses the mentioned user(s).
 Kitsune  |                 | Shows a image of a kitsune (foxgirl)

@@ -1,5 +1,8 @@
 package com.andre601.purrbot.util.constants;
 
+/**
+ * Class for commonly used Emotes.
+ */
 public final class Emotes {
 
     //  Custom emojis

@@ -16,7 +16,6 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class ReadyListener extends ListenerAdapter{
 
     private int shardCount = 0;
-    private static JDA jda;
     private static ShardManager shardManager;
     private static boolean ready = Boolean.FALSE;
 
@@ -25,37 +24,12 @@ public class ReadyListener extends ListenerAdapter{
      *
      * @return boolean that returns either {@code true} or {@code false}.
      */
-    public static boolean getReady(){
+    public static boolean isReady(){
         return ready;
     }
 
-    /**
-     * Sets the boolean {@code ready} to the provided one.
-     *
-     * @param ready
-     *        A boolean that is either true or false.
-     */
     private static void setReady(Boolean ready){
         ReadyListener.ready = ready;
-    }
-
-    /**
-     * Gets a JDA object.
-     *
-     * @return A {@link net.dv8tion.jda.core.JDA JDA object}.
-     */
-    public static JDA getJda(){
-        return jda;
-    }
-
-    /**
-     * Sets the JDA object to the provided one.
-     *
-     * @param jda
-     *        A {@link net.dv8tion.jda.core.JDA JDA object} of the current shard.
-     */
-    private static void setJda(JDA jda){
-        ReadyListener.jda = jda;
     }
 
     /**
@@ -67,12 +41,6 @@ public class ReadyListener extends ListenerAdapter{
         return shardManager;
     }
 
-    /**
-     * Sets the ShardManager to the provided one.
-     *
-     * @param shardManager
-     *        A {@link net.dv8tion.jda.bot.sharding.ShardManager ShardManager object}.
-     */
     private static void setShardManager(ShardManager shardManager){
         ReadyListener.shardManager = shardManager;
     }
@@ -80,24 +48,22 @@ public class ReadyListener extends ListenerAdapter{
     /**
      * Gets the current bot-status (updates it).
      *
-     * @return String from {@link #botGame()}.
+     * @return String with the bots status (game).
      */
     public static String getBotGame(){
         return botGame();
     }
 
-    /**
-     * Sets the status of the bot.
-     *
-     * @return A string that depends on if the bot is the beta-version or not.
-     */
     private static String botGame(){
         return (PermUtil.isBeta() ? "My sister on %d Guilds!" : "https://purrbot.site | %d Guilds");
     }
 
     /**
      * Listens for when the bot is ready.
-     * This gets fired every time a shard is ready.
+     * <br>This gets fired every time a shard is ready.
+     * <br>
+     * <br>To make sure all shards are really ready, we count 1 up each time another shard is ready and when the
+     * amount of ready shards equals total amounts of shard, we mark the bot as ready.
      *
      * @param event
      *        A {@link net.dv8tion.jda.core.events.ReadyEvent ReadyEvent}.
@@ -108,7 +74,6 @@ public class ReadyListener extends ListenerAdapter{
         JDA jda = event.getJDA();
 
         setShardManager(jda.asBot().getShardManager());
-        setJda(jda);
 
         String botID = jda.getSelfUser().getId();
         long guilds = jda.asBot().getShardManager().getGuildCache().size();
@@ -123,6 +88,11 @@ public class ReadyListener extends ListenerAdapter{
             }
         }
 
+        /*
+         * If all shards have been loaded, we mark the bot as ready.
+         * For that we set the boolean "ready" to true with #setReady, set the OnlineStatus to ONLINE and finally
+         * update the Game of the bot from "starting bot..." to that set in #getBotGame()
+         */
         if(shardCount == jda.getShardInfo().getShardTotal()){
             setReady(Boolean.TRUE);
             jda.asBot().getShardManager().setStatus(OnlineStatus.ONLINE);

@@ -34,6 +34,12 @@ public class VoteUtil {
                 PurrBot.file.getItem("config", "vote-webhook")
         );
         Guild guild = ReadyListener.getShardManager().getGuildById(IDs.GUILD);
+
+        PurrBot.getLogger().info(String.format(
+                "Received vote. ID: %s",
+                voterId
+        ));
+
         if(voterIsInGuild(guild, voterId)){
             Role role = guild.getRoleById(Roles.VOTER);
             Member member = guild.getMemberById(voterId);

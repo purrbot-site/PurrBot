@@ -44,7 +44,7 @@ public class CmdPoke implements Command {
             )).queue();
         }
 
-        String link = HttpUtil.getPoke();
+        String link = HttpUtil.getImage("poke", "url");
         String pokedMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(

@@ -48,7 +48,7 @@ public class CmdCuddle implements Command {
             )).queue();
         }
 
-        String link = HttpUtil.getCuddle();
+        String link = HttpUtil.getImage("cuddle", "url");
         String cuddledMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(

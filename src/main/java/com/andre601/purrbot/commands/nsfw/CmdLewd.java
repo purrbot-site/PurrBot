@@ -47,10 +47,6 @@ public class CmdLewd implements Command {
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
-        if(HttpUtil.getLewd() == null){
-            EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
-            return;
-        }
         if(s.contains("-slide")){
             if(lewdUserID.contains(msg.getAuthor().getId())){
                 tc.sendMessage(String.format(
@@ -65,11 +61,11 @@ public class CmdLewd implements Command {
             StringBuilder urls = new StringBuilder();
             if(msg.getContentRaw().contains("-gif")){
                 for (int i = 0; i < 30; ++i) {
-                    urls.append(HttpUtil.getLewdAnimated()).append(",");
+                    urls.append(HttpUtil.getImage("nsfw_neko_gif", "url")).append(",");
                 }
             }else{
                 for (int i = 0; i < 30; ++i) {
-                    urls.append(HttpUtil.getLewd()).append(",");
+                    urls.append(HttpUtil.getImage("lewd", "url")).append(",");
                 }
             }
             Slideshow slideshow = sBuilder
@@ -98,7 +94,7 @@ public class CmdLewd implements Command {
             return;
         }
         if(msg.getContentRaw().contains("-gif")){
-            String gifLink = HttpUtil.getLewdAnimated();
+            String gifLink = HttpUtil.getImage("cuddle", "url");
             if(gifLink == null){
                 EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
                 return;
@@ -122,7 +118,12 @@ public class CmdLewd implements Command {
             return;
         }
 
-        String link = HttpUtil.getLewd();
+        String link = HttpUtil.getImage("lewd", "url");
+        if(link == null){
+            EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
+            return;
+        }
+
         EmbedBuilder lewd = EmbedUtil.getEmbed(msg.getAuthor())
                 .setTitle(MessageFormat.format(
                         "{0}",

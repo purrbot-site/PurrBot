@@ -44,7 +44,7 @@ public class CmdSlap implements Command {
             )).queue();
         }
 
-        String link = HttpUtil.getSlap();
+        String link = HttpUtil.getImage("slap", "url");
         String slapedMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(

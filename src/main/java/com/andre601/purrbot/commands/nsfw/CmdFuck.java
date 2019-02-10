@@ -172,11 +172,12 @@ public class CmdFuck implements Command {
                         try {
                             message.delete().queue();
                         }catch (Exception ex){
+                            PurrBot.getLogger().warn("Couldn't delete a own message. ._.");
                         }
 
                         alreadyInQueue.remove(author.getUser().getId());
 
-                        String link = HttpUtil.getFuck();
+                        String link = HttpUtil.getImage("classic", "url");
 
                         ev.getTextChannel().sendMessage(String.format(
                                 "%s accepted your invite %s! 0w0",
@@ -201,6 +202,7 @@ public class CmdFuck implements Command {
                         try {
                             message.delete().queue();
                         }catch (Exception ex){
+                            PurrBot.getLogger().warn("Couldn't delete a own message. ._.");
                         }
 
                         alreadyInQueue.remove(author.getUser().getId());

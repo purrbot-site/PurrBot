@@ -64,7 +64,7 @@ public class CmdKiss implements Command {
             )).queue();
         }
 
-        String link = HttpUtil.getKiss();
+        String link = HttpUtil.getImage("kiss", "url");
         String kissedMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(

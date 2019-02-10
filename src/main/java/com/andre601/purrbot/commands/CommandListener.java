@@ -12,8 +12,6 @@ import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandHandler;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -21,7 +19,6 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.io.File;
-import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -41,7 +38,7 @@ public class CommandListener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
-        if(!ReadyListener.getReady()) return;
+        if(!ReadyListener.isReady()) return;
 
         CMD_EXECUTOR.execute(
                 () -> {
@@ -51,7 +48,12 @@ public class CommandListener extends ListenerAdapter {
                     if(PermUtil.isBot(msg)) return;
                     if(PermUtil.isSelf(msg)) return;
                     if(PermUtil.isDM(msg)) return;
-                    if(!DBUtil.hasPrefix(msg, guild)) return;
+                    if(!DBUtil.hasPrefix(msg, guild)){
+                        if(guild.getId().equals(IDs.GUILD) && !PermUtil.isBeta()) {
+                            LevelUtil.giveXP(msg.getMember(), false, event.getTextChannel());
+                        }
+                        return;
+                    }
 
                     TextChannel tc = event.getTextChannel();
                     String prefix = DBUtil.getPrefix(guild);
@@ -131,26 +133,8 @@ public class CommandListener extends ListenerAdapter {
                     }
 
                     try{
-                        if(guild.getId().equals(IDs.GUILD)){
-                            if(!DBUtil.hasMember(msg.getAuthor())) DBUtil.setUser(msg.getAuthor());
-
-                            long xp = DBUtil.getXP(msg.getAuthor()) + 2;
-
-                            DBUtil.setXP(msg.getAuthor(), xp);
-
-                            if(!DBUtil.hasLevel(msg.getAuthor())) DBUtil.setLevel(msg.getAuthor(), 0);
-                            if(LevelUtil.isLevelUp(msg.getAuthor(), xp)){
-                                long level = DBUtil.getLevel(msg.getAuthor());
-                                String imageName = String.format("levelup_%s.png", msg.getAuthor().getId());
-                                File image = new File("img/levelup.png");
-
-                                tc.sendMessage(String.format(
-                                        "%s leveled up to **Level %d**! \uD83C\uDF89",
-                                        msg.getMember().getAsMention(),
-                                        level + 1
-                                )).addFile(image, imageName).queue();
-                                LevelUtil.updateLevel(msg.getMember(), xp, level);
-                            }
+                        if(guild.getId().equals(IDs.GUILD) && !PermUtil.isBeta()){
+                            LevelUtil.giveXP(msg.getMember(), true, msg.getTextChannel());
                         }
 
                         HANDLER.execute(command, msg, split.length > 1 ? split[1] : "");

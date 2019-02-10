@@ -24,7 +24,7 @@ public class CmdLesbian implements Command {
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
-        String link = HttpUtil.getLesbian();
+        String link = HttpUtil.getImage("les", "url");
 
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();

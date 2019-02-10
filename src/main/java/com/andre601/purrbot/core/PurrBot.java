@@ -92,7 +92,7 @@ public class PurrBot {
 
                 Vote vote = gsonVote.fromJson(req.body(), Vote.class);
 
-                if(ReadyListener.getReady())
+                if(ReadyListener.isReady())
                     VoteUtil.voteAction(vote.getBotId(), vote.getUserId(), vote.isWeekend());
                 //  I have to return something for some reason... :shrug:
                 return "";

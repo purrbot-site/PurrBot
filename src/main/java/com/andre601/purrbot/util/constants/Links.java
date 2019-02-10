@@ -3,6 +3,9 @@ package com.andre601.purrbot.util.constants;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.Permission;
 
+/**
+ * Class for commonly used Links.
+ */
 public final class Links {
 
     /**

@@ -24,7 +24,7 @@ public class CmdGecg implements Command {
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
-        String link = HttpUtil.getGecg();
+        String link = HttpUtil.getImage("gecg", "url");
 
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();

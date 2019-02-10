@@ -1,11 +1,7 @@
 package com.andre601.purrbot.util.messagehandling;
 
-import com.andre601.purrbot.core.PurrBot;
-import com.andre601.purrbot.listeners.ReadyListener;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.webhook.WebhookClient;
-import net.dv8tion.jda.webhook.WebhookMessageBuilder;
 
 import java.awt.*;
 import java.time.ZonedDateTime;
@@ -14,7 +10,7 @@ public class EmbedUtil {
 
     /**
      * Gives a Embed with a set footer.
-     * It uses {@link #getEmbed()} to get a default EmbedBuilder with a set color.
+     * <br>It uses {@link #getEmbed()} to get a default EmbedBuilder with a set color.
      *
      * @param  user
      *         The {@link net.dv8tion.jda.core.entities.User User object} used for the footer.
@@ -39,7 +35,8 @@ public class EmbedUtil {
 
     /**
      * Sends a {@link net.dv8tion.jda.core.entities.MessageEmbed MessageEmbed} to the provided channel.
-     * If the text in {@param msg} is to big for one Embed, then the action will be repeated.
+     * <br>If the text in {@param msg} is to big for one Embed, then the text will be cut, the embed send and the
+     * action repeated with the remaining text.
      *
      * @param tc
      *        A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel}.

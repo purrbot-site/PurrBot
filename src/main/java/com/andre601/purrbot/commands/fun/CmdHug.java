@@ -48,7 +48,7 @@ public class CmdHug implements Command {
             )).queue();
         }
 
-        String link = HttpUtil.getHug();
+        String link = HttpUtil.getImage("hug", "url");
         String huggedMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(

@@ -44,7 +44,7 @@ public class CmdTickle implements Command {
             )).queue();
         }
 
-        String link = HttpUtil.getTickle();
+        String link = HttpUtil.getImage("tickle", "url");
         String tickledMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(

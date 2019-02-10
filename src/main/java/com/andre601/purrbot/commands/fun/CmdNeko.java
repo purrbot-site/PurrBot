@@ -47,11 +47,6 @@ public class CmdNeko implements Command {
         if(PermUtil.canDeleteMsg(tc))
             msg.delete().queue();
 
-        if(HttpUtil.getNeko() == null){
-            EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
-            return;
-        }
-
         if(s.contains("-slide")){
             if(nekoUserID.contains(msg.getAuthor().getId())){
                 EmbedUtil.error(msg,
@@ -66,11 +61,11 @@ public class CmdNeko implements Command {
             StringBuilder urls = new StringBuilder();
             if(msg.getContentRaw().contains("-gif")){
                 for(int i = 0; i < 30; ++i){
-                    urls.append(HttpUtil.getNekoAnimated()).append(",");
+                    urls.append(HttpUtil.getImage("cuddle", "url")).append(",");
                 }
             }else{
                 for (int i = 0; i < 30; ++i) {
-                    urls.append(HttpUtil.getNeko()).append(",");
+                    urls.append(HttpUtil.getImage("cuddle", "url")).append(",");
                 }
             }
 
@@ -97,7 +92,7 @@ public class CmdNeko implements Command {
         }
 
         if(s.contains("-gif")){
-            String gifLink = HttpUtil.getNekoAnimated();
+            String gifLink = HttpUtil.getImage("cuddle", "url");
             if(gifLink == null){
                 EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
                 return;
@@ -120,7 +115,13 @@ public class CmdNeko implements Command {
             return;
         }
 
-        String link = HttpUtil.getNeko();
+        String link = HttpUtil.getImage("neko", "url");
+
+        if(link == null){
+            EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
+            return;
+        }
+
         EmbedBuilder neko = EmbedUtil.getEmbed(msg.getAuthor())
                 .setTitle(MessageFormat.format(
                         "{0}",

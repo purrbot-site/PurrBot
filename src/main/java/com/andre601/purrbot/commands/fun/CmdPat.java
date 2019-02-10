@@ -44,7 +44,7 @@ public class CmdPat implements Command {
             )).queue();
         }
 
-        String link = HttpUtil.getPat();
+        String link = HttpUtil.getImage("pat", "url");
         String pattetMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(

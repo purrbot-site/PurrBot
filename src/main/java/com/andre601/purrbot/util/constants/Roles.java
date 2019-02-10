@@ -1,5 +1,8 @@
 package com.andre601.purrbot.util.constants;
 
+/**
+ * Class for commonly used Roles on the bots support-guild.
+ */
 public final class Roles {
 
     public static String VOTER          = "475335831649910785";
