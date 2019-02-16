@@ -11,14 +11,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CommandRegisterHandler {
+public class CommandFactory {
 
     private static final Set<Command> COMMANDS = new HashSet<>();
 
     /**
      * Registers the different command-classes in a {@link java.util.Set Set<Command>}.
      */
-    CommandRegisterHandler(){
+    CommandFactory(){
         register(
                 // Fun
                 new CmdCuddle(),

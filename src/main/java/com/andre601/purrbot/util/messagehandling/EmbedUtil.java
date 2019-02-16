@@ -9,28 +9,29 @@ import java.time.ZonedDateTime;
 public class EmbedUtil {
 
     /**
-     * Gives a Embed with a set footer.
-     * <br>It uses {@link #getEmbed()} to get a default EmbedBuilder with a set color.
+     * Provides an EmbedBuilder with set color (RGB: 54, 57, 63), timestamp and footer.
+     * <br>We just use {@link #getEmbed() getEmbed()} to get an EmbedBuilder with set color and timestamp and then
+     * add the user ({@code Requested by <username>#<discrim>}) to the footer.
      *
      * @param  user
      *         The {@link net.dv8tion.jda.core.entities.User User object} used for the footer.
      *
-     * @return A {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder} with a set footer and timestamp.
+     * @return A {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder} with a set color, footer and timestamp.
      */
     public static EmbedBuilder getEmbed(User user){
         return getEmbed().setFooter(String.format(
                 "Requested by: %s",
                 MessageUtil.getTag(user)
-        ), user.getEffectiveAvatarUrl()).setTimestamp(ZonedDateTime.now());
+        ), user.getEffectiveAvatarUrl());
     }
 
     /**
-     * Gives a Embed with a set footer.
+     * Provides an EmbedBuilder with a set color (RGB: 54, 57, 63) and timestamp.
      *
-     * @return A {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder} with a set color.
+     * @return A {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder} with a set color and footer.
      */
     public static EmbedBuilder getEmbed(){
-        return new EmbedBuilder().setColor(new Color(54, 57, 63));
+        return new EmbedBuilder().setColor(new Color(54, 57, 63)).setTimestamp(ZonedDateTime.now());
     }
 
     /**
@@ -59,8 +60,7 @@ public class EmbedUtil {
         EmbedBuilder message = getEmbed()
                 .setColor(color)
                 .setDescription(newMsg)
-                .setFooter(footer, null)
-                .setTimestamp(ZonedDateTime.now());
+                .setFooter(footer, null);
 
         tc.sendMessage(message.build()).queue();
         if(overflow != null)
@@ -71,9 +71,10 @@ public class EmbedUtil {
      * Sends a embed with a message to the provided channel.
      *
      * @param msg
-     *        A {@link net.dv8tion.jda.core.entities.Message Message object} to get the channel.
+     *        The {@link net.dv8tion.jda.core.entities.Message Message} for getting the channel, to then send the
+     *        message in it.
      * @param error
-     *        A {@link java.lang.String String} that will be used in the description.
+     *        The message that should be send.
      */
     public static void error(Message msg, String error){
         EmbedBuilder errorEmbed = getEmbed(msg.getAuthor()).setColor(Color.RED).setDescription(error);
@@ -85,9 +86,9 @@ public class EmbedUtil {
      * Sends a embed with a message to the provided channel.
      *
      * @param tc
-     *        A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object} to get the channel.
+     *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to send the message to.
      * @param error
-     *        A {@link java.lang.String String} that will be used in the description.
+     *        The message that should be send.
      */
     public static void error(TextChannel tc, String error){
         EmbedBuilder errorEmbed = getEmbed().setColor(Color.RED).setDescription(error);

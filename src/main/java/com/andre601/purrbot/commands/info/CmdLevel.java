@@ -77,6 +77,11 @@ public class CmdLevel implements Command {
         User author = msg.getAuthor();
 
         if(!msg.getMentionedMembers().isEmpty()){
+            if(msg.getMentionedMembers().get(0).getUser().isBot()){
+                EmbedUtil.error(msg, "Bots can't have levels. ;P");
+                return;
+            }
+
             sendLevelEmbed(tc, author, msg.getMentionedMembers().get(0));
             return;
         }

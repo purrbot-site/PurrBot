@@ -152,7 +152,7 @@ public class MessageUtil {
      *
      * @return A {@link java.lang.String String} depending on the verification-level.
      */
-    public static String getLevel(Guild guild){
+    public static String getVerificationLevel(Guild guild){
 
         switch(guild.getVerificationLevel()){
             case HIGH:

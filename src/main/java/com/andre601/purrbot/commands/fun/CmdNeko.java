@@ -61,11 +61,11 @@ public class CmdNeko implements Command {
             StringBuilder urls = new StringBuilder();
             if(msg.getContentRaw().contains("-gif")){
                 for(int i = 0; i < 30; ++i){
-                    urls.append(HttpUtil.getImage("cuddle", "url")).append(",");
+                    urls.append(HttpUtil.getImage("ngif", "url")).append(",");
                 }
             }else{
                 for (int i = 0; i < 30; ++i) {
-                    urls.append(HttpUtil.getImage("cuddle", "url")).append(",");
+                    urls.append(HttpUtil.getImage("neko", "url")).append(",");
                 }
             }
 
@@ -92,7 +92,7 @@ public class CmdNeko implements Command {
         }
 
         if(s.contains("-gif")){
-            String gifLink = HttpUtil.getImage("cuddle", "url");
+            String gifLink = HttpUtil.getImage("ngif", "url");
             if(gifLink == null){
                 EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
                 return;

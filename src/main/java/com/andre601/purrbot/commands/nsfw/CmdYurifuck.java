@@ -29,44 +29,16 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdYurifuck implements Command {
 
-    /**
-     * {@link java.util.ArrayList ArrayList<String>} that contains the userIDs of the members, that execute the command.
-     */
     private static ArrayList<String> yuriQueue = new ArrayList<>();
 
-    /**
-     * Gives a random value between 0 and 9
-     *
-     * @return Random {@link java.lang.Integer Integer} between 0 and 9.
-     */
     private static int getRandomPercent(){
         return PurrBot.getRandom().nextInt(10);
     }
 
-    /**
-     * Checks, if the raw content of the message equals {@code >accept}.
-     *
-     * @param  msg
-     *         A {@link net.dv8tion.jda.core.entities.Message Message object} to get the raw content from.
-     *
-     * @return {@code true} if the text equals {@code >accept}. Else returns {@code false}.
-     */
     private static boolean isMessage(Message msg){
         return msg.getContentRaw().equalsIgnoreCase(">yus");
     }
 
-    /**
-     * Gives back a {@link net.dv8tion.jda.core.entities.MessageEmbed MessageEmbed} with an image.
-     *
-     * @param  user1
-     *         A {@link net.dv8tion.jda.core.entities.Member Member object} to get the name from.
-     * @param  user2
-     *         A {@link net.dv8tion.jda.core.entities.Member Member object} to get the name from.
-     * @param  url
-     *         The image-link for the embed.
-     *
-     * @return The MessageEmbed after the description and image where set.
-     */
     private static EmbedBuilder getFuckEmbed(Member user1, Member user2, String url){
         return EmbedUtil.getEmbed()
                 .setDescription(MessageFormat.format(
@@ -98,7 +70,11 @@ public class CmdYurifuck implements Command {
                 )).queue();
                 return;
             }
-            if(msg.getAuthor().getId().equals(IDs.EVELIEN) || msg.getAuthor().getId().equals(IDs.LILYSCARLET)){
+            if(
+                    msg.getAuthor().getId().equals(IDs.EVELIEN) ||
+                    msg.getAuthor().getId().equals(IDs.LILYSCARLET) ||
+                    msg.getAuthor().getId().equals(IDs.KORBO)
+            ){
                 int random = getRandomPercent();
 
                 if(random == 1) {

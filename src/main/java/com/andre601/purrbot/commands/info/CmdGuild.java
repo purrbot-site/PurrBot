@@ -10,7 +10,6 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
-import java.text.MessageFormat;
 import java.time.LocalDateTime;
 
 @CommandDescription(
@@ -43,7 +42,7 @@ public class CmdGuild implements Command {
                         guild.getRegion().getEmoji(),
                         guild.getRegion().getName()
                 ), true)
-                .addField("Level", MessageUtil.getLevel(guild), true)
+                .addField("Level", MessageUtil.getVerificationLevel(guild), true)
                 .addField("Owner", String.format(
                         "%s | %s",
                         guild.getOwner().getAsMention(),

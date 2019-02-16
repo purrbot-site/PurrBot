@@ -43,7 +43,7 @@ public class LevelUtil {
 
             textChannel.sendMessage(String.format(
                     "%s has reached **Level %d**! \uD83C\uDF89",
-                    user.getAsMention(),
+                    member.getEffectiveName(),
                     level + 1
             )).addFile(image, imageName).queue();
             updateLevel(member, xp, level);

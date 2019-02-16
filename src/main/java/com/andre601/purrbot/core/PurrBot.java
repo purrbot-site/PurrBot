@@ -87,20 +87,32 @@ public class PurrBot {
         if(!PermUtil.isBeta()) {
             Spark.port(1000);
 
-            Gson gsonVote = new Gson();
-            post("/vote", (req, res) -> {
+            path("/votes", () -> {
 
-                Vote vote = gsonVote.fromJson(req.body(), Vote.class);
+                Gson gsonVote = new Gson();
+                post("/dbl", (request, response) -> {
 
-                if(ReadyListener.isReady())
-                    VoteUtil.voteAction(vote.getBotId(), vote.getUserId(), vote.isWeekend());
-                //  I have to return something for some reason... :shrug:
-                return "";
+                    Vote vote = gsonVote.fromJson(request.body(), Vote.class);
+                    if(ReadyListener.isReady()) {
+                        VoteUtil.voteAction(vote.getBotId(), vote.getUserId(), vote.isWeekend());
+                    }
+
+                    return "";
+                });
+
+                /*
+                post("/lbots", (request, response) -> {
+
+
+
+                    return response;
+                });
+                */
             });
         }
 
-        //  We register our commands through the CommandRegisterHandler.java
-        COMMAND_HANDLER.registerCommands(new CommandRegisterHandler().getCommands());
+        //  We register our commands through the CommandFactory.java
+        COMMAND_HANDLER.registerCommands(new CommandFactory().getCommands());
 
         //  Creating and enabling the bot through the DefaultShardManagerBuilder
         new DefaultShardManagerBuilder().setToken(file.getItem("config", "token"))
