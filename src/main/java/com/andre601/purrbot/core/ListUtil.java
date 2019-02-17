@@ -7,7 +7,7 @@ import java.util.Collections;
 public class ListUtil {
 
     public static void refreshBlackList(){
-        Collections.addAll(PurrBot.getBlacklistedGuilds(), HttpUtil.requestHttp(
+        Collections.addAll(PurrBot.getGuildBlacklist(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/BlacklistedGuilds"
         ).split("\n"));
     }
@@ -16,10 +16,10 @@ public class ListUtil {
         Collections.addAll(PurrBot.getRandomKissImg(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomKissImage"
         ).split("\n"));
-        Collections.addAll(PurrBot.getRandomShutdownImage(), HttpUtil.requestHttp(
+        Collections.addAll(PurrBot.getRandomShutdownImg(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomShutdownImage"
         ).split("\n"));
-        Collections.addAll(PurrBot.getRandomYuriFuckImage(), HttpUtil.requestHttp(
+        Collections.addAll(PurrBot.getRandomYuriFuckImg(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/Andre601/PurrBot-files/master/files/RandomYuriFuckImage"
         ).split("\n"));
         Collections.addAll(PurrBot.getImages(), HttpUtil.requestHttp(
@@ -28,16 +28,19 @@ public class ListUtil {
     }
 
     public static void refreshRandomMessages(){
-        Collections.addAll(PurrBot.getRandomShutdownText(), HttpUtil.requestHttp(
+        Collections.addAll(PurrBot.getRandomStartupMsg(), HttpUtil.requestHttp(
+                "https://raw.githubusercontent.com/Andre601/PurrBot-files/master/files/RandomStartupMsg"
+        ).split("\n"));
+        Collections.addAll(PurrBot.getRandomShutdownMsg(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomShutdownText"
         ).split("\n"));
-        Collections.addAll(PurrBot.getRandomFact(), HttpUtil.requestHttp(
+        Collections.addAll(PurrBot.getRandomFacts(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomFact"
         ).split("\n"));
-        Collections.addAll(PurrBot.getRandomNoNSWF(), HttpUtil.requestHttp(
+        Collections.addAll(PurrBot.getRandomNoNSFWMsg(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomNoNSFWMsg"
         ).split("\n"));
-        Collections.addAll(PurrBot.getRandomDebug(), HttpUtil.requestHttp(
+        Collections.addAll(PurrBot.getRandomDebugMsg(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomDebugMsg"
         ).split("\n"));
         Collections.addAll(PurrBot.getRandomAPIPingMsg(), HttpUtil.requestHttp(
@@ -58,17 +61,18 @@ public class ListUtil {
     }
 
     public static void clear(){
-        PurrBot.getRandomShutdownImage().clear();
-        PurrBot.getRandomShutdownText().clear();
-        PurrBot.getRandomFact().clear();
-        PurrBot.getRandomNoNSWF().clear();
-        PurrBot.getRandomDebug().clear();
+        PurrBot.getRandomStartupMsg().clear();
+        PurrBot.getRandomShutdownImg().clear();
+        PurrBot.getRandomShutdownMsg().clear();
+        PurrBot.getRandomFacts().clear();
+        PurrBot.getRandomNoNSFWMsg().clear();
+        PurrBot.getRandomDebugMsg().clear();
         PurrBot.getRandomAPIPingMsg().clear();
         PurrBot.getRandomPingMsg().clear();
         PurrBot.getRandomKissImg().clear();
         PurrBot.getRandomAcceptFuckMsg().clear();
         PurrBot.getRandomDenyFuckMsg().clear();
-        PurrBot.getRandomYuriFuckImage().clear();
+        PurrBot.getRandomYuriFuckImg().clear();
         PurrBot.getImages().clear();
     }
 }

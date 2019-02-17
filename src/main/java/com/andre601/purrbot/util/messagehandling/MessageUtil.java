@@ -20,50 +20,50 @@ public class MessageUtil {
     /**
      * Returns a random fact.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getFact(){
         if(PurrBot.isBDay())
             return  "🎉 Today is Purr's Birthday! 🎉";
 
-        return PurrBot.getRandomFact().size() > 0 ? PurrBot.getRandomFact().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomFact().size())) : "";
+        return PurrBot.getRandomFacts().size() > 0 ? PurrBot.getRandomFacts().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomFacts().size())) : "";
     }
 
     /**
      * Returns a random NoNSFW message.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getRandomNotNSFW(){
-        return PurrBot.getRandomNoNSWF().size() > 0 ? PurrBot.getRandomNoNSWF().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomNoNSWF().size())) : "";
+        return PurrBot.getRandomNoNSFWMsg().size() > 0 ? PurrBot.getRandomNoNSFWMsg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomNoNSFWMsg().size())) : "";
     }
 
     /**
      * Returns a random shutdown message.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getRandomShutdown(){
-        return PurrBot.getRandomShutdownText().size() > 0 ? PurrBot.getRandomShutdownText().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomShutdownText().size())) : "";
+        return PurrBot.getRandomShutdownMsg().size() > 0 ? PurrBot.getRandomShutdownMsg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomShutdownMsg().size())) : "";
     }
 
     /**
      * Returns a random shutdown image.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getRandomShutdownImage(){
-        return PurrBot.getRandomShutdownImage().size() > 0 ? PurrBot.getRandomShutdownImage().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomShutdownImage().size())) : "";
+        return PurrBot.getRandomShutdownImg().size() > 0 ? PurrBot.getRandomShutdownImg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomShutdownImg().size())) : "";
     }
 
     /**
      * Returns a random API ping message.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getRandomAPIPingMsg(){
         return PurrBot.getRandomAPIPingMsg().size() > 0 ? PurrBot.getRandomAPIPingMsg().get(
@@ -73,7 +73,7 @@ public class MessageUtil {
     /**
      * Returns a random ping message.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getRandomPingMsg(){
         return PurrBot.getRandomPingMsg().size() > 0 ? PurrBot.getRandomPingMsg().get(
@@ -83,17 +83,17 @@ public class MessageUtil {
     /**
      * Returns a random debug message.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getRandomDebug(){
-        return PurrBot.getRandomDebug().size() > 0 ? PurrBot.getRandomDebug().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomDebug().size())) : "";
+        return PurrBot.getRandomDebugMsg().size() > 0 ? PurrBot.getRandomDebugMsg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomDebugMsg().size())) : "";
     }
 
     /**
      * Returns a random kiss image.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getRandomKissImg(){
         return PurrBot.getRandomKissImg().size() > 0 ? PurrBot.getRandomKissImg().get(
@@ -103,7 +103,7 @@ public class MessageUtil {
     /**
      * Returns a random accept fuck message.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getRandomAcceptFuckMsg(){
         return PurrBot.getRandomAcceptFuckMsg().size() > 0 ? PurrBot.getRandomAcceptFuckMsg().get(
@@ -113,7 +113,7 @@ public class MessageUtil {
     /**
      * Returns a random deny fuck message.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a list.
      */
     public static String getRandomDenyFuckMsg(){
         return PurrBot.getRandomDenyFuckMsg().size() > 0 ? PurrBot.getRandomDenyFuckMsg().get(
@@ -124,12 +124,23 @@ public class MessageUtil {
     /**
      * Returns a random yuri fuck (female <-> female sex) image.
      *
-     * @return A random {@link java.lang.String String} from an List.
+     * @return A random {@link java.lang.String String} from a List.
      */
     public static String getRandomYurifuckImage(){
-        return PurrBot.getRandomYuriFuckImage().size() > 0 ? PurrBot.getRandomYuriFuckImage().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomYuriFuckImage().size())
+        return PurrBot.getRandomYuriFuckImg().size() > 0 ? PurrBot.getRandomYuriFuckImg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomYuriFuckImg().size())
         ) : "";
+    }
+
+    /**
+     * Returns a random startup message.
+     *
+     * @return A random {@link java.lang.String String} from a list.
+     */
+    public static String getRandomStartupMsg(){
+        return PurrBot.getRandomStartupMsg().size() > 0 ? PurrBot.getRandomStartupMsg().get(
+                PurrBot.getRandom().nextInt(PurrBot.getRandomStartupMsg().size())
+        ) : "Starting bot...";
     }
 
     /**

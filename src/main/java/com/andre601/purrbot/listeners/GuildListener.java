@@ -3,17 +3,13 @@ package com.andre601.purrbot.listeners;
 import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.constants.Links;
-import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.util.messagehandling.WebhookUtil;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-import java.awt.Color;
 import java.text.MessageFormat;
 
 public class GuildListener extends ListenerAdapter {
@@ -40,7 +36,7 @@ public class GuildListener extends ListenerAdapter {
         Guild guild = event.getGuild();
 
         //  Check, if the guild is in the Blacklist and if true -> Leave guild.
-        if(PurrBot.getBlacklistedGuilds().contains(guild.getId())) {
+        if(PurrBot.getGuildBlacklist().contains(guild.getId())) {
             guild.getOwner().getUser().openPrivateChannel().queue(pm -> {
                 //  Try to send a PM with the reason to the guild-owner.
                 pm.sendMessage(String.format(
@@ -85,7 +81,7 @@ public class GuildListener extends ListenerAdapter {
         Guild guild = event.getGuild();
 
         //  Check, if the guild is in the Blacklist and if true -> return;
-        if(PurrBot.getBlacklistedGuilds().contains(guild.getId()))
+        if(PurrBot.getGuildBlacklist().contains(guild.getId()))
             return;
 
         DBUtil.delGuild(guild);

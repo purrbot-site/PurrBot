@@ -43,20 +43,21 @@ public class PurrBot {
     private static Random random = new Random();
 
     //  All the ArrayLists for Random-Stuff and the blacklist
-    private static List<String> RandomShutdownText    = new ArrayList<>();
-    private static List<String> RandomShutdownImage   = new ArrayList<>();
-    private static List<String> RandomFact            = new ArrayList<>();
-    private static List<String> RandomNoNSWF          = new ArrayList<>();
-    private static List<String> RandomDebug           = new ArrayList<>();
-    private static List<String> RandomAPIPingMsg      = new ArrayList<>();
-    private static List<String> RandomPingMsg         = new ArrayList<>();
-    private static List<String> RandomKissImg         = new ArrayList<>();
-    private static List<String> RandomAcceptFuckMsg   = new ArrayList<>();
-    private static List<String> RandomDenyFuckMsg     = new ArrayList<>();
-    private static List<String> RandomYuriFuckImage   = new ArrayList<>();
+    private static List<String> randomShutdownMsg = new ArrayList<>();
+    private static List<String> randomShutdownImg = new ArrayList<>();
+    private static List<String> randomFacts = new ArrayList<>();
+    private static List<String> randomNoNSFWMsg = new ArrayList<>();
+    private static List<String> randomDebugMsg = new ArrayList<>();
+    private static List<String> randomAPIPingMsg = new ArrayList<>();
+    private static List<String> randomPingMsg = new ArrayList<>();
+    private static List<String> randomKissImg = new ArrayList<>();
+    private static List<String> randomAcceptFuckMsg = new ArrayList<>();
+    private static List<String> randomDenyFuckMsg = new ArrayList<>();
+    private static List<String> randomYuriFuckImg = new ArrayList<>();
     private static List<String> images                = new ArrayList<>();
+    private static List<String> randomStartupMsg      = new ArrayList<>();
 
-    private static List<String> BlacklistedGuilds     = new ArrayList<>();
+    private static List<String> guildBlacklist = new ArrayList<>();
 
     private static Logger logger = (Logger) LoggerFactory.getLogger(PurrBot.class);
 
@@ -117,7 +118,7 @@ public class PurrBot {
         //  Creating and enabling the bot through the DefaultShardManagerBuilder
         new DefaultShardManagerBuilder().setToken(file.getItem("config", "token"))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
-                .setGame(Game.playing("Starting bot..."))
+                .setGame(Game.playing(MessageUtil.getRandomStartupMsg()))
                 .setShardsTotal(-1)
                 .addEventListeners(
                         new CommandListener(COMMAND_HANDLER),
@@ -130,45 +131,48 @@ public class PurrBot {
     }
 
     //  Just public gets.
-    public static List<String> getRandomShutdownText(){
-        return RandomShutdownText;
+    public static List<String> getRandomShutdownMsg(){
+        return randomShutdownMsg;
     }
-    public static List<String> getRandomShutdownImage(){
-        return RandomShutdownImage;
+    public static List<String> getRandomShutdownImg(){
+        return randomShutdownImg;
     }
-    public static List<String> getRandomFact(){
-        return RandomFact;
+    public static List<String> getRandomFacts(){
+        return randomFacts;
     }
-    public static List<String> getRandomNoNSWF(){
-        return RandomNoNSWF;
+    public static List<String> getRandomNoNSFWMsg(){
+        return randomNoNSFWMsg;
     }
-    public static List<String> getRandomDebug() {
-        return RandomDebug;
+    public static List<String> getRandomDebugMsg() {
+        return randomDebugMsg;
     }
     public static List<String> getRandomAPIPingMsg(){
-        return RandomAPIPingMsg;
+        return randomAPIPingMsg;
     }
     public static List<String> getRandomPingMsg() {
-        return RandomPingMsg;
+        return randomPingMsg;
     }
     public static List<String> getRandomKissImg(){
-        return RandomKissImg;
+        return randomKissImg;
     }
     public static List<String> getRandomAcceptFuckMsg(){
-        return RandomAcceptFuckMsg;
+        return randomAcceptFuckMsg;
     }
     public static List<String> getRandomDenyFuckMsg(){
-        return RandomDenyFuckMsg;
+        return randomDenyFuckMsg;
     }
-    public static List<String> getRandomYuriFuckImage(){
-        return RandomYuriFuckImage;
+    public static List<String> getRandomYuriFuckImg(){
+        return randomYuriFuckImg;
+    }
+    public static List<String> getRandomStartupMsg(){
+        return randomStartupMsg;
     }
     public static List<String> getImages(){
         return images;
     }
 
-    public static List<String> getBlacklistedGuilds(){
-        return BlacklistedGuilds;
+    public static List<String> getGuildBlacklist(){
+        return guildBlacklist;
     }
 
     public static Random getRandom(){
