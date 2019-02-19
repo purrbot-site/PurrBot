@@ -7,6 +7,7 @@ import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.MessageBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -83,7 +84,7 @@ public class CmdShip implements Command {
         member1 = msg.getMentionedMembers().get(0);
 
         if(member1 == msg.getGuild().getSelfMember() || member2 == msg.getGuild().getSelfMember()){
-            EmbedUtil.error(msg, "N-no! Y-you can't ship with me! >.<");
+            EmbedUtil.error(msg, "N-no! Don't ship with me. >.<");
             return;
         }
 
@@ -103,7 +104,7 @@ public class CmdShip implements Command {
 
         byte[] image = ImageUtil.getShipImage(member1, member2, result);
 
-        if(image == null || !PermUtil.canUploadImage(tc)){
+        if(image == null || !PermUtil.check(tc, Permission.MESSAGE_ATTACH_FILES)){
             Message message = new MessageBuilder().append(String.format(
                     "`%d",
                     result

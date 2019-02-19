@@ -76,7 +76,6 @@ public class ReadyListener extends ListenerAdapter{
         setShardManager(jda.asBot().getShardManager());
 
         String botID = jda.getSelfUser().getId();
-        long guilds = jda.asBot().getShardManager().getGuildCache().size();
 
         /*
          *  Create a new DB-entry for every guild that isn't in the DB.
@@ -88,17 +87,26 @@ public class ReadyListener extends ListenerAdapter{
             }
         }
 
+        PurrBot.getLogger().info(String.format(
+                "Shard %d with %d Guilds is ready!",
+                jda.getShardInfo().getShardId(),
+                jda.getGuilds().size()
+        ));
+
         /*
          * If all shards have been loaded, we mark the bot as ready.
          * For that we set the boolean "ready" to true with #setReady, set the OnlineStatus to ONLINE and finally
          * update the Game of the bot from "starting bot..." to that set in #getBotGame()
          */
         if(shardCount == jda.getShardInfo().getShardTotal()){
+            long guilds = jda.asBot().getShardManager().getGuildCache().size();
+
             setReady(Boolean.TRUE);
+
             jda.asBot().getShardManager().setStatus(OnlineStatus.ONLINE);
             jda.asBot().getShardManager().setGame(Game.watching(String.format(
                     getBotGame(),
-                    jda.getGuilds().size()
+                    guilds
             )));
 
             PurrBot.getLogger().info(String.format(

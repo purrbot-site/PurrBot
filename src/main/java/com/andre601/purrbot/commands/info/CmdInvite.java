@@ -7,6 +7,7 @@ import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
@@ -25,7 +26,7 @@ public class CmdInvite implements Command {
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
 
-        if(PermUtil.canDeleteMsg(tc))
+        if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         EmbedBuilder invite = EmbedUtil.getEmbed(msg.getAuthor())

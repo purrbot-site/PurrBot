@@ -22,6 +22,7 @@ public class CmdPing implements Command {
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
+
         if(s.contains("-api")){
             tc.sendMessage(MessageFormat.format(
                     "{0} Checking ping to Discord-API...",

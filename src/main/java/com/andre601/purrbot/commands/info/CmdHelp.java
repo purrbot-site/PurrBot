@@ -11,6 +11,7 @@ import com.jagrosh.jdautilities.menu.Paginator;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 
 import static com.andre601.purrbot.core.PurrBot.waiter;
@@ -34,10 +35,6 @@ public class CmdHelp implements Command {
 
     private Paginator.Builder pBuilder;
 
-    /**
-     * A {@link java.util.LinkedHashMap LinkedHashMap<String, String>} for the categories and their corresponding
-     * emojis.
-     */
     private HashMap<String, String> categories = new LinkedHashMap<String, String>(){
         {
             put("fun", "\uD83C\uDFB2");
@@ -48,18 +45,6 @@ public class CmdHelp implements Command {
         }
     };
 
-    /**
-     * Gives a {@link net.dv8tion.jda.core.entities.MessageEmbed MessageEmbed} with information.
-     *
-     * @param  msg
-     *         Message that is used for the response.
-     * @param  cmd
-     *         A {@link com.github.rainestormee.jdacommand.Command Command object} that contains command info.
-     * @param  prefix
-     *         The used prefix of the guild.
-     *
-     * @return A MessageEmbed with the provided information and values.
-     */
     private static MessageEmbed commandHelp(Message msg, Command cmd, String prefix){
         CommandDescription description = cmd.getDescription();
         EmbedBuilder command = EmbedUtil.getEmbed(msg.getAuthor())
@@ -81,26 +66,10 @@ public class CmdHelp implements Command {
         return command.build();
     }
 
-    /**
-     * Check for if a command exists.
-     *
-     * @param  command
-     *         A {@link com.github.rainestormee.jdacommand.Command Command object} to check.
-     *
-     * @return {@code true} when the command is not null or has the attribute {@code description}.
-     */
     private static boolean isCommand(Command command){
         return command.getDescription() != null || command.hasAttribute("description");
     }
 
-    /**
-     * Makes the first character of the provided String uppercase.
-     *
-     * @param  word
-     *         The String that gets uppercase on first character.
-     *
-     * @return String with the first letter being uppercase. (word -> Word)
-     */
     private String firstUpperCase(String word){
         return Character.toString(word.charAt(0)).toUpperCase() + word.substring(1).toLowerCase();
     }
@@ -111,7 +80,7 @@ public class CmdHelp implements Command {
         TextChannel tc = msg.getTextChannel();
         String prefix = DBUtil.getPrefix(guild);
 
-        if(PermUtil.canDeleteMsg(tc))
+        if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         pBuilder = new Paginator.Builder().setEventWaiter(waiter).setTimeout(1, TimeUnit.MINUTES);

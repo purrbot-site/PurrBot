@@ -24,11 +24,6 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdStats implements Command {
 
-    /**
-     * Method for getting the current uptime.
-     *
-     * @return A String with the current uptime of the bot.
-     */
     private String getUptime(){
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
         long d = TimeUnit.MILLISECONDS.toDays(uptime);

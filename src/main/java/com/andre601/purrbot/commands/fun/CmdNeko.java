@@ -10,6 +10,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.menu.Slideshow;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -44,7 +45,7 @@ public class CmdNeko implements Command {
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
-        if(PermUtil.canDeleteMsg(tc))
+        if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(s.contains("-slide")){
@@ -143,8 +144,7 @@ public class CmdNeko implements Command {
                     link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko_043.jpeg")){
                 tc.sendMessage("Hey! That's me :3").queue();
 
-                if(PermUtil.canReact(tc))
-                    message.addReaction("❤").queue();
+                message.addReaction("❤").queue();
             }
         });
     }

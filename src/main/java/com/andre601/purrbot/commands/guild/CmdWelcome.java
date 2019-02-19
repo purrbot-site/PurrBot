@@ -11,6 +11,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -33,17 +34,6 @@ import java.text.MessageFormat;
 )
 public class CmdWelcome implements Command {
 
-    /**
-     * Checks if the provided id is a valid one.
-     *
-     * @param  id
-     *         The id of the textchannel.
-     * @param  guild
-     *         A {@link net.dv8tion.jda.core.entities.Guild Guild object}.
-     *
-     * @return {@code null} if the id was invalid, or a valid
-     *         {@link net.dv8tion.jda.core.entities.TextChannel TextChannel}.
-     */
     private static TextChannel checkChannel(String id, Guild guild){
         TextChannel channel;
         try{
@@ -76,17 +66,6 @@ public class CmdWelcome implements Command {
         return null;
     }
 
-    /**
-     * Saves the provided id in the database through the
-     * {@link com.andre601.purrbot.util.DBUtil#setWelcome(String, String) DBUtil.setWelcome(String, String)} method.
-     *
-     * @param msg
-     *        Messages that is used for the response.
-     * @param guild
-     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
-     * @param id
-     *        The id of the {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} that should be saved.
-     */
     private void setChannel(Message msg, Guild guild, String id){
         TextChannel tc = guild.getTextChannelById(id);
 
@@ -103,14 +82,6 @@ public class CmdWelcome implements Command {
         msg.getTextChannel().sendMessage(welcomeSet.build()).queue();
     }
 
-    /**
-     * Resets the saved channel to {@code none}.
-     *
-     * @param msg
-     *        Messages that is used for the response.
-     * @param guild
-     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
-     */
     private void resetChannel(Message msg, Guild guild){
         String welcome = DBUtil.getWelcomeChannel(guild);
         if(welcome.equals("none")){
@@ -140,14 +111,6 @@ public class CmdWelcome implements Command {
         DBUtil.resetWelcome(guild.getId());
     }
 
-    /**
-     * Resets the image to the default {@code purr}.
-     *
-     * @param msg
-     *        Messages that is used for the response.
-     * @param guild
-     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
-     */
     private void resetImage(Message msg, Guild guild){
         TextChannel tc = msg.getTextChannel();
         String image = DBUtil.getImage(guild);
@@ -163,18 +126,6 @@ public class CmdWelcome implements Command {
         tc.sendMessage(success.build()).queue();
     }
 
-    /**
-     * Sets the image to the provided one.
-     *
-     * @param msg
-     *        Messages that is used for the response.
-     * @param guild
-     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
-     * @param image
-     *        Type of image, that should be saved.
-     *
-     * @see <a href="https://github.com/Andre601/PurrBot/wiki" target="_blank">PurrBot-wiki</a> for image types.
-     */
     private void setImage(Message msg, Guild guild, String image){
         TextChannel tc = msg.getTextChannel();
         String dbImage = DBUtil.getImage(guild);
@@ -193,14 +144,6 @@ public class CmdWelcome implements Command {
         tc.sendMessage(success.build()).queue();
     }
 
-    /**
-     * Resets color to default {@code hex:ffffff}.
-     *
-     * @param msg
-     *        Messages that is used for the response.
-     * @param guild
-     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
-     */
     private void resetColor(Message msg, Guild guild){
         TextChannel tc = msg.getTextChannel();
         String color = DBUtil.getColor(guild);
@@ -218,19 +161,6 @@ public class CmdWelcome implements Command {
         tc.sendMessage(success.build()).queue();
     }
 
-    /**
-     * Sets color to the provided one.
-     * We use {@link com.andre601.purrbot.util.messagehandling.MessageUtil#toColor(String) MessageUtil#toColor(String)}
-     * to check for valid color.
-     *
-     * @param msg
-     *        Messages that is used for the response.
-     * @param guild
-     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
-     * @param colorInput
-     *        Color type and value that gets saved in the database.
-     *        Available types are {@code hex:rrggbb} and {@code rgb:r,g,b}
-     */
     private void setColor(Message msg, Guild guild, String colorInput){
         TextChannel tc = msg.getTextChannel();
         Color color = MessageUtil.toColor(colorInput);
@@ -250,14 +180,6 @@ public class CmdWelcome implements Command {
         tc.sendMessage(success.build()).queue();
     }
 
-    /**
-     * Resets the message to default one ({@code Welcome {mention}!}).
-     *
-     * @param msg
-     *        Messages that is used for the response.
-     * @param guild
-     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
-     */
     private void resetMessage(Message msg, Guild guild){
         TextChannel tc = msg.getTextChannel();
 
@@ -281,16 +203,6 @@ public class CmdWelcome implements Command {
         tc.sendMessage(success.build()).queue();
     }
 
-    /**
-     * Sets the message.
-     *
-     * @param msg
-     *        Messages that is used for the response.
-     * @param guild
-     *        A {@link net.dv8tion.jda.core.entities.Guild Guild object} for identification.
-     * @param text
-     *        A {@link java.lang.String String} containing the message.
-     */
     private void setMessage(Message msg, Guild guild, String text){
         TextChannel tc = msg.getTextChannel();
         if(text.equalsIgnoreCase("Welcome {mention}!")){
@@ -313,12 +225,6 @@ public class CmdWelcome implements Command {
         tc.sendMessage(success.build()).queue();
     }
 
-    /**
-     * Sends a {@link net.dv8tion.jda.core.EmbedBuilder Embed} to the channel of the received message.
-     *
-     * @param msg
-     *        Messages that is used for the response.
-     */
     private void sendInfo(Message msg){
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
@@ -372,7 +278,7 @@ public class CmdWelcome implements Command {
         TextChannel tc = msg.getTextChannel();
         String[] args = s.split(" ");
 
-        if(PermUtil.canDeleteMsg(tc))
+        if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.length == 0){

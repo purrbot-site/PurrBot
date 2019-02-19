@@ -13,6 +13,7 @@ import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.google.common.io.CharStreams;
 import com.google.gson.JsonObject;
 import com.andre601.purrbot.core.PurrBot;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -143,13 +144,14 @@ public class DebugUtil {
         guild.getTextChannels().forEach(textChannel -> {
             if(textChannel != null){
                 List<String> channels = new LinkedList<>();
-                channels.add("Read: " + PermUtil.canRead(textChannel));
-                channels.add("Write: " + PermUtil.canWrite(textChannel));
-                channels.add("Embed Links: " + PermUtil.canSendEmbed(textChannel));
-                channels.add("Manage messages: " + PermUtil.canDeleteMsg(textChannel));
-                channels.add("Add Reaction: " + PermUtil.canReact(textChannel));
-                channels.add("Attach files: " + PermUtil.canUploadImage(textChannel));
-                channels.add("Use external emojis: " + PermUtil.canUseCustomEmojis(textChannel));
+                channels.add("Read:                " + PermUtil.check(textChannel, Permission.MESSAGE_READ));
+                channels.add("Read History:        " + PermUtil.check(textChannel, Permission.MESSAGE_READ));
+                channels.add("Write:               " + PermUtil.check(textChannel, Permission.MESSAGE_WRITE));
+                channels.add("Embed Links:         " + PermUtil.check(textChannel, Permission.MESSAGE_EMBED_LINKS));
+                channels.add("Manage messages:     " + PermUtil.check(textChannel, Permission.MESSAGE_MANAGE));
+                channels.add("Add Reaction:        " + PermUtil.check(textChannel, Permission.MESSAGE_ADD_REACTION));
+                channels.add("Attach files:        " + PermUtil.check(textChannel, Permission.MESSAGE_ATTACH_FILES));
+                channels.add("Use external emojis: " + PermUtil.check(textChannel, Permission.MESSAGE_EXT_EMOJI));
                 output.add(MessageFormat.format(
                         "{0} ({1})\n" +
                         "  {2}",
@@ -168,9 +170,9 @@ public class DebugUtil {
         String colorType = colorInfo.split(":")[0];
         String colorValue = colorInfo.split(":")[1];
         return "Welcome-channel: " + getChannelNameAndId(channelId, guild) + "\n" +
-                "  Color-Type: " + colorType + "\n" +
+                "  Color-Type:  " + colorType + "\n" +
                 "  Color-Value: " + colorValue + "\n" +
-                "  Image: " + DBUtil.getImage(guild);
+                "  Image:       " + DBUtil.getImage(guild);
     }
 
     private static String getGuildPrefix(Guild guild){

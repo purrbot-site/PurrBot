@@ -11,6 +11,7 @@ import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 import org.json.JSONObject;
 
@@ -32,10 +33,15 @@ public class CmdFakegit implements Command {
         TextChannel tc = msg.getTextChannel();
         JSONObject jsonObject = HttpUtil.getFakeGit();
 
-        if(PermUtil.canDeleteMsg(tc))
+        if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(msg.getContentRaw().contains("-clear")){
+            if(!PermUtil.check(tc, Permission.MANAGE_WEBHOOKS)){
+                EmbedUtil.error(msg, "I need `Manage webhooks` permission for this action!");
+                return;
+            }
+
             List<Webhook> webhooks = tc.getWebhooks().complete();
 
             tc.sendMessage("Deleting webhooks with name `PurrBot-Fakegit`. Please wait...").queue();
@@ -47,7 +53,7 @@ public class CmdFakegit implements Command {
         }
 
         if(jsonObject == null){
-            EmbedUtil.error(msg, "Couldn't reach the API!");
+            EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
             return;
         }
 
@@ -91,7 +97,7 @@ public class CmdFakegit implements Command {
                         commit
                 )).build();
 
-        if(PermUtil.canManageWebhooks(tc)){
+        if(PermUtil.check(tc, Permission.MANAGE_WEBHOOKS)){
             try {
                 WebhookUtil.sendMessage(tc, Links.GITHUB_AVATAR, "GitHub", webhookEmbed);
                 return;

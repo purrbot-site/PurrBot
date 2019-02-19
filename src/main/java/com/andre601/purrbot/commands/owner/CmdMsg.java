@@ -17,17 +17,6 @@ import net.dv8tion.jda.core.entities.TextChannel;
 )
 public class CmdMsg implements Command {
 
-    /**
-     * Checks if the provided id is a valid one.
-     *
-     * @param  id
-     *         The id of the textchannel.
-     * @param  shardManager
-     *         A {@link net.dv8tion.jda.bot.sharding.ShardManager ShardManager}.
-     *
-     * @return {@code null} if the id was invalid, or a valid
-     *         {@link net.dv8tion.jda.core.entities.TextChannel TextChannel}.
-     */
     private static TextChannel getTChannel(String id, ShardManager shardManager){
         TextChannel channel;
         try{

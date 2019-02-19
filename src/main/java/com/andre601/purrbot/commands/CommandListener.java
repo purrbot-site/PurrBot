@@ -12,13 +12,13 @@ import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandHandler;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-import java.io.File;
 import java.text.MessageFormat;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -59,9 +59,9 @@ public class CommandListener extends ListenerAdapter {
                     String prefix = DBUtil.getPrefix(guild);
                     String raw = msg.getContentRaw();
 
-                    if(!PermUtil.canRead(tc)) return;
-                    if(!PermUtil.canReadHistory(tc)) return;
-                    if(!PermUtil.canWrite(tc)) return;
+                    if(!PermUtil.check(tc, Permission.MESSAGE_READ)) return;
+                    if(!PermUtil.check(tc, Permission.MESSAGE_HISTORY)) return;
+                    if(!PermUtil.check(tc, Permission.MESSAGE_WRITE)) return;
 
                     if(raw.startsWith(event.getJDA().getSelfUser().getAsMention()) &&
                             raw.length() == event.getJDA().getSelfUser().getAsMention().length()){
@@ -101,15 +101,15 @@ public class CommandListener extends ListenerAdapter {
 
                     Command command = HANDLER.findCommand(commandString.toLowerCase());
                     if(command == null) return;
-                    if(command.hasAttribute("owner") && !PermUtil.isCreator(msg)) return;
-                    if(!PermUtil.canSendEmbed(tc)){
+                    if(command.hasAttribute("owner") && !msg.getAuthor().getId().equals(IDs.CREATOR)) return;
+                    if(!PermUtil.check(tc, Permission.MESSAGE_EMBED_LINKS)){
                         tc.sendMessage(MessageFormat.format(
                         "{0} I need permission to embed links in this channel!",
                                 msg.getAuthor().getAsMention()
                         )).queue();
                         return;
                     }
-                    if(!PermUtil.canReact(tc)){
+                    if(!PermUtil.check(tc, Permission.MESSAGE_ADD_REACTION)){
                         EmbedUtil.error(msg, "I need permission to add reactions!");
                         return;
                     }
@@ -120,9 +120,11 @@ public class CommandListener extends ListenerAdapter {
                         ));
                         return;
                     }
-                    if(command.hasAttribute("manage_server") && !PermUtil.userIsAdmin(msg)){
-                        EmbedUtil.error(msg, "You need the `manage server` permission!");
-                        return;
+                    if(command.hasAttribute("manage_server")){
+                        if(!PermUtil.check(msg.getMember(), Permission.MANAGE_SERVER)){
+                            EmbedUtil.error(msg, "You need the `manage server` permission!");
+                            return;
+                        }
                     }
                     if(command.hasAttribute("guild_only") && !guild.getId().equals(IDs.GUILD)){
                         EmbedUtil.error(msg, String.format(

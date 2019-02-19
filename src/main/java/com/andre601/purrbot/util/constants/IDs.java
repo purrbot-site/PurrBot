@@ -12,6 +12,6 @@ public final class IDs {
     public static String PURR         = "425382319449309197";
     public static String GUILD        = "423771795523371019";
 
-    public static String VERSION      = "3.2.5";
+    public static String VERSION      = "3.3.1";
 
 }

@@ -1,10 +1,12 @@
 package com.andre601.purrbot.commands.owner;
 
+import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
@@ -32,11 +34,12 @@ public class CmdEval implements Command {
             return;
         }
 
-        if(PermUtil.canDeleteMsg(tc))
+        if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         ScriptEngine se = new ScriptEngineManager().getEngineByName("Nashorn");
         se.put("jda", msg.getJDA());
+        se.put("shardManager", ReadyListener.getShardManager());
         se.put("guild", msg.getGuild());
         se.put("channel", msg.getChannel());
         se.put("msg", msg);

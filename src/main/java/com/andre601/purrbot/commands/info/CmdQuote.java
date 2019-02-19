@@ -10,6 +10,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -24,16 +25,6 @@ import java.text.MessageFormat;
 )
 public class CmdQuote implements Command {
 
-    /**
-     * Checks if a {@link net.dv8tion.jda.core.entities.Message Message} exists (is valid).
-     *
-     * @param  id
-     *         ID of the message.
-     * @param  channel
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} where the message should be found.
-     *
-     * @return {@code null} if no message could be found. Else the Message itself.
-     */
     private Message getMessage(String id, TextChannel channel){
         Message message;
         try{
@@ -45,14 +36,6 @@ public class CmdQuote implements Command {
         return message;
     }
 
-    /**
-     * Method to send a {@link net.dv8tion.jda.core.entities.MessageEmbed MessageEmbed} to the provided channel.
-     *
-     * @param msg
-     *        A {@link net.dv8tion.jda.core.entities.Message Message object} that is used for the quote information.
-     * @param channel
-     *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} the message should be send in.
-     */
     private void sendQuoteEmbed(Message msg, String link, TextChannel channel) {
         EmbedBuilder quoteEmbed = EmbedUtil.getEmbed()
                 .setAuthor(String.format(
@@ -76,7 +59,7 @@ public class CmdQuote implements Command {
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
-        if(PermUtil.canDeleteMsg(tc))
+        if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.length == 0){
@@ -89,7 +72,7 @@ public class CmdQuote implements Command {
         }
 
         if(msg.getMentionedChannels().isEmpty()){
-            if(!PermUtil.canReadHistory(tc)){
+            if(!PermUtil.check(tc, Permission.MESSAGE_HISTORY)){
                 EmbedUtil.error(msg, "I need permissions to see the messages in this channel!");
                 return;
             }
@@ -115,7 +98,7 @@ public class CmdQuote implements Command {
 
                 sendQuoteEmbed(quote, link, tc);
             }else
-            if(PermUtil.canUploadImage(tc)){
+            if(PermUtil.check(tc, Permission.MESSAGE_ATTACH_FILES)){
                 try{
                     ImageUtil.getQuoteImage(tc, msg, quote);
                 }catch(Exception ex){
@@ -137,7 +120,7 @@ public class CmdQuote implements Command {
             return;
         }
 
-        if(PermUtil.canRead(channel) && PermUtil.canReadHistory(channel)){
+        if(PermUtil.check(channel, Permission.MESSAGE_READ) && PermUtil.check(channel, Permission.MESSAGE_HISTORY)){
             Message quote = getMessage(args[0], channel);
 
             if(quote == null){
@@ -156,7 +139,7 @@ public class CmdQuote implements Command {
 
                 sendQuoteEmbed(quote, link, tc);
             }else
-            if(PermUtil.canUploadImage(tc)){
+            if(PermUtil.check(tc, Permission.MESSAGE_ATTACH_FILES)){
                 try{
                     ImageUtil.getQuoteImage(tc, msg, quote);
                 }catch(Exception ex){

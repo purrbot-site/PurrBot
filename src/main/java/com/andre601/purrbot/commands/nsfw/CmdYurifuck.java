@@ -11,6 +11,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -143,7 +144,7 @@ public class CmdYurifuck implements Command {
                             ev.getAuthor() == user
                     ),
                     ev -> {
-                        if(PermUtil.canDeleteMsg(ev.getTextChannel()))
+                        if(PermUtil.check(ev.getTextChannel(), Permission.MESSAGE_MANAGE))
                             ev.getMessage().delete().queue();
 
                         try {

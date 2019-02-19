@@ -5,6 +5,7 @@ import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 
 @CommandDescription(
@@ -51,11 +52,11 @@ public class CmdEmote implements Command {
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
 
-        if(PermUtil.canDeleteMsg(tc))
+        if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(msg.getContentRaw().contains("-search")){
-            if(!PermUtil.canReadHistory(tc)){
+            if(!PermUtil.check(tc, Permission.MESSAGE_HISTORY)){
                 EmbedUtil.error(msg, "I need permissions to see the message history of this channel!");
                 return;
             }

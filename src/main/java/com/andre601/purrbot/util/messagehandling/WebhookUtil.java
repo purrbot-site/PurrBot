@@ -103,7 +103,7 @@ public class WebhookUtil {
                 .setUsername(name)
                 .setAvatarUrl(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .setContent(String.format(
-                        "ID: %s",
+                        ".leave %s",
                         guild.getId()
                 ))
                 .addEmbeds(embed)

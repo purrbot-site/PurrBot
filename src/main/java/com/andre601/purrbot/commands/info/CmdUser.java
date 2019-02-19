@@ -1,12 +1,16 @@
 package com.andre601.purrbot.commands.info;
 
+import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.ImageUtil;
+import com.andre601.purrbot.util.LevelUtil;
 import com.andre601.purrbot.util.constants.Emotes;
+import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
 import java.text.MessageFormat;
@@ -21,17 +25,6 @@ import java.util.List;
 )
 public class CmdUser implements Command {
 
-    /**
-     * Collects and returns {@link net.dv8tion.jda.core.entities.Role roles} of a member.
-     * If amount of roles (Characters) goes over a certain limit, then all remaining roles will be summarized as
-     * {@code +<number> more}
-     *
-     * @param  user
-     *         A {@link net.dv8tion.jda.core.entities.Member Member} to get the roles from.
-     *
-     * @return String with either {@code No other roles} if the user has less or exactly one role or a comma-seperated
-     *         list of roles.
-     */
     private String getRoles(Member user){
         List<Role> roles = user.getRoles();
         if(roles.size() <= 1)
@@ -41,24 +34,19 @@ public class CmdUser implements Command {
         for(int i = 1; i < roles.size(); i++){
             Role role = roles.get(i);
             int rolesLeft = roles.size() - i;
-            if(sb.length() + role.getName().length() + 20 + String.valueOf(rolesLeft).length() >
+            String roleName = String.format("`%s`", role.getName().replace("`", "'"));
+
+            if(sb.length() + roleName.length() + 20 + String.valueOf(rolesLeft).length() >
                     MessageEmbed.VALUE_MAX_LENGTH){
                 sb.append("**__+").append(rolesLeft).append(" more__**  ");
                 break;
             }
-            sb.append(role.getName()).append(", ");
+
+            sb.append(roleName).append(", ");
         }
         return sb.substring(0, sb.length() - 2);
     }
 
-    /**
-     * Creates and sends a {@link net.dv8tion.jda.core.entities.MessageEmbed MessageEmbed} with the user-information.
-     * If no user is mentioned in the message, then the {@link net.dv8tion.jda.core.entities.Member Member} is set to
-     * the executor of the command (author of the message).
-     *
-     * @param msg
-     *        The {@link net.dv8tion.jda.core.entities.Message Message object} to get information from.
-     */
     private void getUser(Message msg){
         Member member;
         TextChannel tc = msg.getTextChannel();
@@ -68,18 +56,12 @@ public class CmdUser implements Command {
             member = msg.getMember();
         }
 
-        String imageName = String.valueOf(System.currentTimeMillis());
+        String imageName = member.getUser().getId();
 
-        tc.sendFile(ImageUtil.getAvatarStatus(
-                member.getUser().getEffectiveAvatarUrl(),
-                member.getOnlineStatus().toString()
-        ), MessageFormat.format(
-                "{0}.png",
-                imageName
-        )).embed(EmbedUtil.getEmbed(msg.getAuthor())
+        EmbedBuilder userEmbed = EmbedUtil.getEmbed(msg.getAuthor())
                 .setAuthor("Userinfo")
-                .setThumbnail(MessageFormat.format(
-                        "attachment://{0}.png",
+                .setThumbnail(String.format(
+                        "attachment://%s.png",
                         imageName
                 ))
                 .addField(String.format(
@@ -88,28 +70,24 @@ public class CmdUser implements Command {
                         (member.getUser().isBot() ? Emotes.BOT : "")
                 ), String.format(
                         "```yaml\n" +
-                        "%s" +
+                        "%s\n" +
                         "ID:   %s\n" +
-                        "%s" +
+                        "%s\n" +
                         "```",
                         (member.getNickname() != null ? "Nick: " + MessageUtil.getNick(member) + "\n" : ""),
                         member.getUser().getId(),
                         (member.getGame() != null ? "Game: " + MessageUtil.getGameStatus(member.getGame()) + "\n" : "")
                 ), false)
-                .addField("Avatar",
-                        (member.getUser().getEffectiveAvatarUrl() != null ?
-                        String.format(
-                                "[`Current Avatar`](%s)\n" +
-                                "[`Default Avatar`](%s)",
-                                member.getUser().getEffectiveAvatarUrl(),
-                                member.getUser().getDefaultAvatarUrl()
-                        ) : String.format(
-                                "[`Default Avatar`](%s)",
-                                member.getUser().getDefaultAvatarUrl()
-                        )), true)
-                .addField("Highest role", member.getRoles().size() == 0 ?
-                        "`No roles assigned`" :
-                        member.getRoles().get(0).getAsMention(), true)
+                .addField("Avatar", String.format(
+                        "[`Avatar URL`](%s)",
+                        member.getUser().getEffectiveAvatarUrl()
+                ), true)
+                .addField("Highest role", String.format(
+                        "%s",
+                        (member.getRoles().size() == 0 ? "`No roles assigned`" :
+                                member.getRoles().get(0).getAsMention()
+                        )
+                ), true)
                 .addField("Other roles", getRoles(member), false)
                 .addField("Dates", String.format(
                         "```yaml\n" +
@@ -118,7 +96,27 @@ public class CmdUser implements Command {
                         "```",
                         MessageUtil.formatTime(LocalDateTime.from(member.getUser().getCreationTime())),
                         MessageUtil.formatTime(LocalDateTime.from(member.getJoinDate()))
-                ), false).build()).queue();
+                ), false);
+
+        if(msg.getGuild().getId().equals(IDs.GUILD) && !member.getUser().isBot()){
+            userEmbed.addField("XP", String.format(
+                    "`%d`/`%d`",
+                    DBUtil.getXP(member.getUser()),
+                    (long)LevelUtil.getRequiredXP(DBUtil.getLevel(member.getUser()))
+            ), true);
+            userEmbed.addField("Level", String.format(
+                    "`%d`",
+                    DBUtil.getLevel(member.getUser())
+            ), true);
+        }
+
+        tc.sendFile(ImageUtil.getAvatarStatus(
+                member.getUser().getEffectiveAvatarUrl(),
+                member.getOnlineStatus().toString()
+        ), String.format(
+                "%s.png",
+                imageName
+        )).embed(userEmbed.build()).queue();
     }
 
     @Override

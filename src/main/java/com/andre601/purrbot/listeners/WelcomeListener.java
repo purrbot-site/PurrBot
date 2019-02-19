@@ -5,6 +5,7 @@ import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.ImageUtil;
 import net.dv8tion.jda.core.MessageBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -34,7 +35,7 @@ public class WelcomeListener extends ListenerAdapter {
             TextChannel tc = CmdWelcome.getChannel(guild);
 
             if(tc != null){
-                if(!PermUtil.canWrite(tc))
+                if(!PermUtil.check(tc, Permission.MESSAGE_WRITE))
                     return;
 
                 String msg = "Welcome {mention}!";
@@ -51,7 +52,7 @@ public class WelcomeListener extends ListenerAdapter {
                                 .replaceAll("(?i)\\{count}", String.valueOf(guild.getMembers().size()))
                         ).build();
 
-                if(PermUtil.canUploadImage(tc)){
+                if(PermUtil.check(tc, Permission.MESSAGE_ATTACH_FILES)){
                     InputStream is = ImageUtil.getWelcomeImg(
                             event.getUser(),
                             event.getGuild(),

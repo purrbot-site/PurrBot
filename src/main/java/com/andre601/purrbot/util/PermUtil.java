@@ -3,10 +3,7 @@ package com.andre601.purrbot.util;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.core.PurrBot;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.utils.PermissionUtil;
 
 /**
@@ -15,21 +12,11 @@ import net.dv8tion.jda.core.utils.PermissionUtil;
 public class PermUtil {
 
     /**
-     * Checks for {@code manage server} permission.
-     *
-     * @param  msg
-     *         A {@link net.dv8tion.jda.core.entities.Message Message object}.
-     * @return True if the member has permission, otherwise false.
-     */
-    public static boolean userIsAdmin(Message msg){
-        return PermissionUtil.checkPermission(msg.getMember(), Permission.MANAGE_SERVER);
-    }
-
-    /**
      * Checks for if the member is actually me (Andre_601#0601)
      *
      * @param  msg
      *         A {@link net.dv8tion.jda.core.entities.Message Message object}.
+     *
      * @return True if the member's id is the same as
      *         {@link com.andre601.purrbot.util.constants.IDs#CREATOR IDs.CREATOR}
      */
@@ -38,108 +25,31 @@ public class PermUtil {
     }
 
     /**
-     * Checks for {@code add reaction} permission.
+     * Checks if a user has a certain permission.
      *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     * @return True if the bot has permission, otherwise false.
+     * @param  member
+     *         The {@link net.dv8tion.jda.core.entities.Member Memeber} to check permissions from.
+     * @param  permission
+     *         The current {@link net.dv8tion.jda.core.Permission Permission} to check.
+     *
+     * @return True or false, depending on if the Member has the permission.
      */
-    public static boolean canReact(TextChannel tc){
-        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(),
-                Permission.MESSAGE_ADD_REACTION);
+    public static boolean check(Member member, Permission permission){
+        return PermissionUtil.checkPermission(member, permission);
     }
 
     /**
-     * Checks for {@code embed links} permission.
+     * Checks if the bot has the permission.
      *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     * @return True if the bot has permission, otherwise false.
-     */
-    public static boolean canSendEmbed(TextChannel tc){
-        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(),
-                Permission.MESSAGE_EMBED_LINKS);
-    }
-
-    /**
-     * Checks for {@code manage messages} permission.
+     * @param  textChannel
+     *         The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to check the permissions of the bot.
+     * @param  permission
+     *         The current {@link net.dv8tion.jda.core.Permission Permission} to check.
      *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     * @return True if the bot has permission, otherwise false.
+     * @return True or false, depending on if the Member has the permission.
      */
-    public static boolean canDeleteMsg(TextChannel tc){
-        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(),
-                Permission.MESSAGE_MANAGE);
-    }
-
-    /**
-     * Checks for {@code use external emojis} permission.
-     *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     * @return True if the bot has permission, otherwise false.
-     */
-    public static boolean canUseCustomEmojis(TextChannel tc){
-        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(),
-                Permission.MESSAGE_EXT_EMOJI);
-    }
-
-    /**
-     * Checks for {@code attach files} permission.
-     *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     * @return True if the bot has permission, otherwise false.
-     */
-    public static boolean canUploadImage(TextChannel tc){
-        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(),
-                Permission.MESSAGE_ATTACH_FILES);
-    }
-
-    /**
-     * Checks for {@code send messages} permission.
-     *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     * @return True if the bot has permission, otherwise false.
-     */
-    public static boolean canWrite(TextChannel tc){
-        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(),
-                Permission.MESSAGE_WRITE);
-    }
-
-    /**
-     * Checks for {@code see text channel} permission.
-     *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     * @return True if the bot has permission, otherwise false.
-     */
-    public static boolean canRead(TextChannel tc){
-        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(), Permission.MESSAGE_READ);
-    }
-
-    /**
-     * Checks for {@code see channel history} permission.
-     *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     * @return True if the bot has permission, otherwise false.
-     */
-    public static boolean canReadHistory(TextChannel tc){
-        return PermissionUtil.checkPermission(tc, tc.getGuild().getSelfMember(), Permission.MESSAGE_HISTORY);
-    }
-
-    /**
-     * Checks for {@code manage webhooks} permission.
-     *
-     * @param  tc
-     *         A {@link net.dv8tion.jda.core.entities.TextChannel TextChannel object}.
-     * @return True if the bot has permission, otherwise false.
-     */
-    public static boolean canManageWebhooks(TextChannel tc){
-        return PermissionUtil.checkPermission(tc.getGuild().getSelfMember(), Permission.MANAGE_WEBHOOKS);
+    public static boolean check(TextChannel textChannel, Permission permission){
+        return PermissionUtil.checkPermission(textChannel, textChannel.getGuild().getSelfMember(), permission);
     }
 
     /**

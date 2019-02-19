@@ -18,16 +18,6 @@ import net.dv8tion.jda.core.entities.User;
 )
 public class CmdPM implements Command {
 
-    /**
-     * Checks, if a userID is valid.
-     *
-     * @param  id
-     *         The id of the user as a {@link java.lang.String String}.
-     * @param  shardManager
-     *         A {@link net.dv8tion.jda.bot.sharding.ShardManager ShardManager}.
-     *
-     * @return A {@link net.dv8tion.jda.core.entities.User User object} if existing, or {@code null}.
-     */
     private User getUser(String id, ShardManager shardManager){
         User user;
         try{
