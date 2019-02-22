@@ -26,7 +26,7 @@ public class CmdPing implements Command {
         if(s.contains("-api")){
             tc.sendMessage(MessageFormat.format(
                     "{0} Checking ping to Discord-API...",
-                    Emotes.TYPING
+                    Emotes.TYPING.getEmote()
             )).queue(message -> message.editMessage(MessageFormat.format(
                     MessageUtil.getRandomAPIPingMsg(),
                     msg.getAuthor().getAsMention(),
@@ -37,7 +37,7 @@ public class CmdPing implements Command {
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Checking ping...",
-                Emotes.TYPING
+                Emotes.TYPING.getEmote()
         )).queue(message -> message.editMessage(MessageFormat.format(
                 MessageUtil.getRandomPingMsg(),
                 msg.getAuthor().getAsMention(),

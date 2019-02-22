@@ -99,7 +99,7 @@ public class CmdFakegit implements Command {
 
         if(PermUtil.check(tc, Permission.MANAGE_WEBHOOKS)){
             try {
-                WebhookUtil.sendMessage(tc, Links.GITHUB_AVATAR, "GitHub", webhookEmbed);
+                WebhookUtil.sendMessage(tc, Links.GITHUB_AVATAR.getLink(), "GitHub", webhookEmbed);
                 return;
             }catch (Exception ex){
                 tc.sendMessage(messageEmbed).queue();

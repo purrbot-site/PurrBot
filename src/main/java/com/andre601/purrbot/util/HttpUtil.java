@@ -60,7 +60,7 @@ public class HttpUtil {
 
     private static JSONObject latestCommit() throws Exception{
         Request request = new Request.Builder()
-                .url(Links.GITHUB_COMMITS)
+                .url(Links.GITHUB_COMMITS.getLink())
                 .build();
         Response response = CLIENT.newCall(request).execute();
         try(ResponseBody responseBody = response.body()) {
@@ -154,7 +154,7 @@ public class HttpUtil {
     public static String requestHttp(String request){
         try{
             return IOUtils.toString(new URL(request), Charset.forName("UTF-8"));
-        }catch (IOException ignored){
+        }catch (IOException ex){
             return "";
         }
     }
@@ -173,6 +173,7 @@ public class HttpUtil {
         try{
             return image(endpoint, key);
         }catch(IOException ex){
+            if(PermUtil.isBeta()) ex.printStackTrace();
             return null;
         }
     }
@@ -186,6 +187,7 @@ public class HttpUtil {
         try{
             return voteInfo();
         }catch (Exception ex){
+            if(PermUtil.isBeta()) ex.printStackTrace();
             return null;
         }
     }
@@ -199,6 +201,7 @@ public class HttpUtil {
         try{
             return fakeGit();
         }catch (Exception ex){
+            if(PermUtil.isBeta()) ex.printStackTrace();
             return null;
         }
     }
@@ -212,6 +215,7 @@ public class HttpUtil {
         try{
             return latestCommit();
         }catch (Exception ex){
+            if(PermUtil.isBeta()) ex.printStackTrace();
             return null;
         }
     }
@@ -225,6 +229,7 @@ public class HttpUtil {
         try {
             return specificCommit(link);
         }catch(IOException ex){
+            if(PermUtil.isBeta()) ex.printStackTrace();
             return null;
         }
     }

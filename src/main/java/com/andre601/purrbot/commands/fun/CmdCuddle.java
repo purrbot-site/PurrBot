@@ -59,7 +59,7 @@ public class CmdCuddle implements Command {
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a cuddle-gif...",
-                Emotes.LOADING
+                Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
                 message.editMessage(MessageFormat.format(

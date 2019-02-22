@@ -38,16 +38,16 @@ public class DebugUtil {
 
         Map<String, String> files = new LinkedHashMap<>();
         try{
-            files.put("Thank-You.yaml", String.join("\n", new String[]{
+            files.put("Thank-You.yml", String.join("\n", new String[]{
                     "#",
                     "# Thanks to Scarsz lol (http://scarsz.me/) for providing this site!",
                     "#",
-                    "# GitHub: https://github.com/Scarsz",
+                    "# GitHub:   https://github.com/Scarsz",
                     "# SpigotMC: https://www.spigotmc.org/members/scarsz.149937/",
-                    "# Discord: https://scarsz.me/discord",
+                    "# Discord:  https://scarsz.me/discord",
                     "#"
             }));
-            files.put("General-Info.yaml", String.join("\n", new String[]{
+            files.put("General-Info.yml", String.join("\n", new String[]{
                     "#",
                     "# Info about who requested the debug.",
                     "#",
@@ -64,20 +64,19 @@ public class DebugUtil {
                     "Roles: " + guild.getSelfMember().getRoles().size(),
                     getOwnRoles(guild)
             }));
-            files.put("Guild-Info.yaml", String.join("\n", new String[]{
+            files.put("Guild-Info.yml", String.join("\n", new String[]{
                     "#",
                     "# Basic Guild-Info",
                     "#",
                     "",
-                    "Guildname: "  + guild.getName(),
-                    "Guild-ID: " + guild.getId(),
+                    "Guild: "  + guild.getName() + " (" + guild.getId() + ")",
                     "Owner: " + MessageUtil.getTag(guild.getOwner().getUser()) + " (" +
                             guild.getOwner().getUser().getId() + ")",
                     "",
                     "Users:",
-                    "  Total: " + guild.getMembers().toArray().length,
+                    "  Total:  " + guild.getMembers().toArray().length,
                     "  Humans: " + guild.getMembers().stream().filter(user -> !user.getUser().isBot()).toArray().length,
-                    "  Bots: " + guild.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length,
+                    "  Bots:   " + guild.getMembers().stream().filter(user -> user.getUser().isBot()).toArray().length,
                     "",
                     "TextChannels: " + guild.getTextChannels().size(),
                     getChannels(guild),
@@ -85,7 +84,7 @@ public class DebugUtil {
                     "Roles: " + guild.getRoles().size(),
                     getRoles(guild)
             }));
-            files.put("TextChannel-Permissions.yaml", String.join("\n", new String[]{
+            files.put("TextChannel-Permissions.yml", String.join("\n", new String[]{
                     "#",
                     "# All Channels and their permission for the bot",
                     "#",
@@ -145,16 +144,17 @@ public class DebugUtil {
             if(textChannel != null){
                 List<String> channels = new LinkedList<>();
                 channels.add("Read:                " + PermUtil.check(textChannel, Permission.MESSAGE_READ));
-                channels.add("Read History:        " + PermUtil.check(textChannel, Permission.MESSAGE_READ));
+                channels.add("Read History:        " + PermUtil.check(textChannel, Permission.MESSAGE_HISTORY));
                 channels.add("Write:               " + PermUtil.check(textChannel, Permission.MESSAGE_WRITE));
                 channels.add("Embed Links:         " + PermUtil.check(textChannel, Permission.MESSAGE_EMBED_LINKS));
                 channels.add("Manage messages:     " + PermUtil.check(textChannel, Permission.MESSAGE_MANAGE));
                 channels.add("Add Reaction:        " + PermUtil.check(textChannel, Permission.MESSAGE_ADD_REACTION));
                 channels.add("Attach files:        " + PermUtil.check(textChannel, Permission.MESSAGE_ATTACH_FILES));
                 channels.add("Use external emojis: " + PermUtil.check(textChannel, Permission.MESSAGE_EXT_EMOJI));
+                channels.add("Manage webhooks:     " + PermUtil.check(textChannel, Permission.MANAGE_WEBHOOKS));
                 output.add(MessageFormat.format(
                         "{0} ({1})\n" +
-                        "  {2}",
+                        "  {2}\n",
                         textChannel.getName(),
                         textChannel.getId(),
                         String.join("\n  ", channels)
@@ -166,20 +166,24 @@ public class DebugUtil {
 
     private static String getWelcomeInfo(Guild guild){
         String channelId = DBUtil.getWelcomeChannel(guild);
-        String colorInfo = DBUtil.getColor(guild);
-        String colorType = colorInfo.split(":")[0];
-        String colorValue = colorInfo.split(":")[1];
-        return "Welcome-channel: " + getChannelNameAndId(channelId, guild) + "\n" +
-                "  Color-Type:  " + colorType + "\n" +
-                "  Color-Value: " + colorValue + "\n" +
-                "  Image:       " + DBUtil.getImage(guild);
+
+        return String.format(
+                "Welcome channel: %s\n" +
+                "  Image:                   %s\n" +
+                "  Text color [type:value]: %s\n" +
+                "  Message:                 %s",
+                getChannelInfo(channelId, guild),
+                DBUtil.getImage(guild),
+                DBUtil.getColor(guild),
+                DBUtil.getMessage(guild).replace("\n", "\n                           ")
+        );
     }
 
     private static String getGuildPrefix(Guild guild){
         return DBUtil.getPrefix(guild);
     }
 
-    private static String getChannelNameAndId(String id, Guild guild){
+    private static String getChannelInfo(String id, Guild guild){
         TextChannel channel = getChannel(id, guild);
 
         if(channel != null){
@@ -218,7 +222,7 @@ public class DebugUtil {
         try{
             connection = (HttpURLConnection) new URL("https://debug.scarsz.me/post").openConnection();
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.addRequestProperty("User-Agent", "Purr-Bot/" + IDs.VERSION);
+            connection.addRequestProperty("User-Agent", "Purr-Bot/" + IDs.VERSION.getId());
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
 

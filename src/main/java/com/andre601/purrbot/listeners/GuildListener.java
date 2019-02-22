@@ -44,7 +44,7 @@ public class GuildListener extends ListenerAdapter {
                         "You can join the official Discord and ask for the reason: %s",
                         guild.getName(),
                         guild.getId(),
-                        Links.DISCORD_INVITE
+                        Links.DISCORD_INVITE.getLink()
                 )).queue();
             });
             guild.leave().queue();

@@ -49,7 +49,7 @@ public class CommandListener extends ListenerAdapter {
                     if(PermUtil.isSelf(msg)) return;
                     if(PermUtil.isDM(msg)) return;
                     if(!DBUtil.hasPrefix(msg, guild)){
-                        if(guild.getId().equals(IDs.GUILD) && !PermUtil.isBeta()) {
+                        if(guild.getId().equals(IDs.GUILD.getId()) && !PermUtil.isBeta()) {
                             LevelUtil.giveXP(msg.getMember(), false, event.getTextChannel());
                         }
                         return;
@@ -101,7 +101,7 @@ public class CommandListener extends ListenerAdapter {
 
                     Command command = HANDLER.findCommand(commandString.toLowerCase());
                     if(command == null) return;
-                    if(command.hasAttribute("owner") && !msg.getAuthor().getId().equals(IDs.CREATOR)) return;
+                    if(command.hasAttribute("owner") && !msg.getAuthor().getId().equals(IDs.ANDRE_601.getId())) return;
                     if(!PermUtil.check(tc, Permission.MESSAGE_EMBED_LINKS)){
                         tc.sendMessage(MessageFormat.format(
                         "{0} I need permission to embed links in this channel!",
@@ -126,16 +126,16 @@ public class CommandListener extends ListenerAdapter {
                             return;
                         }
                     }
-                    if(command.hasAttribute("guild_only") && !guild.getId().equals(IDs.GUILD)){
+                    if(command.hasAttribute("guild_only") && !guild.getId().equals(IDs.GUILD.getId())){
                         EmbedUtil.error(msg, String.format(
                                 "This command can only be used [in my Discord](%s)!",
-                                Links.DISCORD_INVITE
+                                Links.DISCORD_INVITE.getLink()
                         ));
                         return;
                     }
 
                     try{
-                        if(guild.getId().equals(IDs.GUILD) && !PermUtil.isBeta()){
+                        if(guild.getId().equals(IDs.GUILD.getId()) && !PermUtil.isBeta()){
                             LevelUtil.giveXP(msg.getMember(), true, msg.getTextChannel());
                         }
 
@@ -148,9 +148,9 @@ public class CommandListener extends ListenerAdapter {
                                 "\n" +
                                 "**Cause of error**:\n" +
                                 "`%s`",
-                                Emotes.UHM,
-                                Links.DISCORD_INVITE,
-                                Links.GITHUB,
+                                Emotes.UHM.getEmote(),
+                                Links.DISCORD_INVITE.getLink(),
+                                Links.GITHUB.getLink(),
                                 ex.getMessage()
                         ));
                     }

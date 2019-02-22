@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 
 public class MessageUtil {
 
-    private static DateTimeFormatter timeFormatFull = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
+    private static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
 
     /**
      * Returns a random fact.
@@ -247,7 +247,7 @@ public class MessageUtil {
      */
     public static String formatTime(LocalDateTime dateTime){
         LocalDateTime time = LocalDateTime.from(dateTime.atOffset(ZoneOffset.UTC));
-        return time.format(timeFormatFull) + " UTC";
+        return time.format(timeFormat) + " UTC";
     }
 
     /**

@@ -107,7 +107,7 @@ public class CmdNeko implements Command {
 
             tc.sendMessage(MessageFormat.format(
                     "{0} Getting a cute neko-gif...",
-                    Emotes.LOADING
+                    Emotes.LOADING.getEmote()
             )).queue(message ->
                     message.editMessage(
                             EmbedBuilder.ZERO_WIDTH_SPACE
@@ -132,7 +132,7 @@ public class CmdNeko implements Command {
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a cute neko...",
-                Emotes.LOADING
+                Emotes.LOADING.getEmote()
         )).queue(message -> {
             //  Editing the message to add the image ("should" prevent issues with empty embeds)
             message.editMessage(

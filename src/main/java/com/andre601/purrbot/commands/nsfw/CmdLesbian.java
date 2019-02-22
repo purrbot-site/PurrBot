@@ -43,8 +43,8 @@ public class CmdLesbian implements Command {
                 .setImage(link);
 
         tc.sendMessage(MessageFormat.format(
-                "{0} Getting lewd lesbians...",
-                Emotes.LOADING
+                "{0} Getting hot lesbians...",
+                Emotes.LOADING.getEmote()
         )).queue(message -> message.editMessage(
                 EmbedBuilder.ZERO_WIDTH_SPACE
         ).embed(les.build()).queue());

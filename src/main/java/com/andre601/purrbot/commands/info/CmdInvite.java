@@ -31,7 +31,7 @@ public class CmdInvite implements Command {
 
         EmbedBuilder invite = EmbedUtil.getEmbed(msg.getAuthor())
                 .setAuthor(msg.getJDA().getSelfUser().getName(),
-                        Links.WEBSITE,
+                        Links.WEBSITE.getLink(),
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
                 )
                 .addField("Invite the bot",
@@ -49,9 +49,9 @@ public class CmdInvite implements Command {
                         "[`Recommended Invite`](%s)\n" +
                         "[`Basic Invite`](%s)\n" +
                         "[`Discord`](%s)",
-                        Links.INVITE_FULL(msg.getJDA()),
-                        Links.INVITE_BASIC(msg.getJDA()),
-                        Links.DISCORD_INVITE
+                        Links.INVITE_FULL.getLink(),
+                        Links.INVITE_BASIC.getLink(),
+                        Links.DISCORD_INVITE.getLink()
                 ), false);
 
 

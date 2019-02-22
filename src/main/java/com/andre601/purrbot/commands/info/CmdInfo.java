@@ -108,7 +108,7 @@ public class CmdInfo implements Command {
                     .setAuthor(String.format(
                             "Info about commit %s",
                             commitHashSmall
-                    ), commitLink, Links.GITHUB_AVATAR)
+                    ), commitLink, Links.GITHUB_AVATAR.getLink())
                     .addField("Full commit hash", String.format(
                             "[`%s`](%s)",
                             commitHashFull,
@@ -161,18 +161,18 @@ public class CmdInfo implements Command {
                             "[`Wiki`](%s)\n" +
                             "[`Discordbots.org`](%s)\n" +
                             "[`discord.bots.gg`](%s)",
-                            Links.GITHUB,
-                            Links.WIKI,
-                            Links.DISCORDBOTS_ORG,
-                            Links.DISCORD_BOTS_GG
+                            Links.GITHUB.getLink(),
+                            Links.WIKI.getLink(),
+                            Links.DISCORDBOTS_ORG.getLink(),
+                            Links.DISCORD_BOTS_GG.getLink()
                     ), true)
                     .addField("", String.format(
                             "[`Official Discord`](%s)\n" +
                             "[`Website`](%s)\n" +
                             "[`lbots.org`](%s)",
-                            Links.DISCORD_INVITE,
-                            Links.WEBSITE,
-                            Links.LBOTS_ORG
+                            Links.DISCORD_INVITE.getLink(),
+                            Links.WEBSITE.getLink(),
+                            Links.LBOTS_ORG.getLink()
                     ), true);
         }
 

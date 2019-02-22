@@ -27,13 +27,13 @@ public class VoteUtil {
      *        A boolean for if it's actually weekend, provided through the webhook message.
      */
     public static void voteAction(String botId, String voterId, boolean isWeekend){
-        if(!botId.equals(IDs.PURR)) return;
+        if(!botId.equals(IDs.PURR.getId())) return;
 
         String msg;
         WebhookClient webhookClient = PurrBot.getWebhookClient(
                 PurrBot.file.getItem("config", "vote-webhook")
         );
-        Guild guild = ReadyListener.getShardManager().getGuildById(IDs.GUILD);
+        Guild guild = ReadyListener.getShardManager().getGuildById(IDs.GUILD.getId());
 
         PurrBot.getLogger().info(String.format(
                 "Received vote. ID: %s",
@@ -41,13 +41,13 @@ public class VoteUtil {
         ));
 
         if(voterIsInGuild(guild, voterId)){
-            Role role = guild.getRoleById(Roles.VOTER);
+            Role role = guild.getRoleById(Roles.VOTER.getRole());
             Member member = guild.getMemberById(voterId);
             msg = String.format(
                     "%s has voted for the bot! Thank you! \uD83C\uDF89\n" +
                     "Vote too on <%s>!",
                     member.getAsMention(),
-                    Links.DISCORDBOTS_ORG
+                    Links.DISCORDBOTS_ORG.getLink()
             );
 
             if(!guild.getMemberById(voterId).getRoles().contains(role)) {
@@ -85,7 +85,7 @@ public class VoteUtil {
             msg = String.format(
                     "An anonymous person has voted for the bot!\n" +
                     "Vote too on <%s>",
-                    Links.DISCORDBOTS_ORG
+                    Links.DISCORDBOTS_ORG.getLink()
             );
 
             webhookClient.send(msg);

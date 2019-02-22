@@ -27,17 +27,27 @@ public class CmdRefresh implements Command {
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
 
-        tc.sendMessage(Emotes.TYPING + " ░░░░░░░░░░ | 0% Prepare refresh...").queue(message -> {
-            message.editMessage(Emotes.TYPING + " ██░░░░░░░░ | 20% Clearing data...").queue();
+        tc.sendMessage(
+                Emotes.TYPING.getEmote() + " ░░░░░░░░░░ | 0% Prepare refresh..."
+        ).queue(message -> {
+            message.editMessage(
+                    Emotes.TYPING.getEmote() + " ██░░░░░░░░ | 20% Clearing data..."
+            ).queue();
             ListUtil.clear();
 
-            message.editMessage(Emotes.TYPING + " ████░░░░░░ | 40% Loading blacklist...").queue();
+            message.editMessage(
+                    Emotes.TYPING.getEmote() + " ████░░░░░░ | 40% Loading blacklist..."
+            ).queue();
             ListUtil.refreshBlackList();
 
-            message.editMessage(Emotes.TYPING + " ██████░░░░ | 60% Loading images...").queue();
+            message.editMessage(
+                    Emotes.TYPING.getEmote() + " ██████░░░░ | 60% Loading images..."
+            ).queue();
             ListUtil.refreshRandomImages();
 
-            message.editMessage(Emotes.TYPING + " ████████░░ | 80% Loading messages...").queue();
+            message.editMessage(
+                    Emotes.TYPING.getEmote() + " ████████░░ | 80% Loading messages..."
+            ).queue();
             ListUtil.refreshRandomMessages();
 
             message.editMessage("✅ ██████████ | 100% Refresh complete!").queue();

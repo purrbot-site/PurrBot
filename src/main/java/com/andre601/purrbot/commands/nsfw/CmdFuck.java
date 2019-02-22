@@ -72,9 +72,9 @@ public class CmdFuck implements Command {
                 return;
             }
             if(
-                    msg.getAuthor().getId().equals(IDs.EVELIEN) ||
-                    msg.getAuthor().getId().equals(IDs.LILYSCARLET) ||
-                    msg.getAuthor().getId().equals(IDs.KORBO)
+                    msg.getAuthor().getId().equals(IDs.EVELIEN.getId()) ||
+                    msg.getAuthor().getId().equals(IDs.LILYSCARLET.getId()) ||
+                    msg.getAuthor().getId().equals(IDs.KORBO.getId())
             ){
                 int random = getRandomPercent();
 
@@ -139,9 +139,8 @@ public class CmdFuck implements Command {
                     ev -> (isMessage(ev.getMessage()) &&
                             ev.getTextChannel().equals(tc) &&
                             (ev.getAuthor() != ev.getJDA().getSelfUser() ||
-                                    ev.getAuthor() != message.getAuthor()) &&
-                            ev.getAuthor() == user
-                    ),
+                            ev.getAuthor() != message.getAuthor()) &&
+                            ev.getAuthor() == user),
                     ev -> {
                         if(PermUtil.check(ev.getTextChannel(), Permission.MESSAGE_MANAGE))
                             ev.getMessage().delete().queue();

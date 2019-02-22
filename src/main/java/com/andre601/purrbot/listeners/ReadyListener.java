@@ -113,7 +113,7 @@ public class ReadyListener extends ListenerAdapter{
                     "Enabled Bot-User %s (%s) v.%s on %s guild(s) with %s shard(s)",
                     MessageUtil.getTag(jda.getSelfUser()),
                     botID,
-                    IDs.VERSION,
+                    IDs.VERSION.getId(),
                     guilds,
                     jda.asBot().getShardManager().getShardCache().size()
             ));

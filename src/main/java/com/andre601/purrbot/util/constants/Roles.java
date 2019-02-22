@@ -3,12 +3,21 @@ package com.andre601.purrbot.util.constants;
 /**
  * Class for commonly used Roles on the bots support-guild.
  */
-public final class Roles {
+public enum Roles {
 
-    public static String VOTER          = "475335831649910785";
-    public static String VERY_ADDICTED  = "449280939839979530";
-    public static String SUPER_ADDICTED = "424194307881435177";
-    public static String ULTRA_ADDICTED = "541671949831766037";
+    VOTER         ("475335831649910785"),
+    VERY_ADDICTED ("449280939839979530"),
+    SUPER_ADDICTED("424194307881435177"),
+    ULTRA_ADDICTED("541671949831766037");
 
+    private String role;
+
+    Roles(String role){
+        this.role = role;
+    }
+
+    public String getRole(){
+        return this.role;
+    }
 
 }

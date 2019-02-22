@@ -44,7 +44,7 @@ public class CmdGecg implements Command {
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a gecg-image...",
-                Emotes.LOADING
+                Emotes.LOADING.getEmote()
         )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(gecg.build()).queue());
     }
 }

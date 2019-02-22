@@ -42,7 +42,7 @@ public class CmdHolo implements Command {
 
         tc.sendMessage(String.format(
                 "%s Getting a cute image of holo...",
-                Emotes.LOADING
+                Emotes.LOADING.getEmote()
         )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(holo.build()).queue());
     }
 }

@@ -67,7 +67,7 @@ public class CmdUser implements Command {
                 .addField(String.format(
                         "%s %s",
                         MessageUtil.getTag(member.getUser()),
-                        (member.getUser().isBot() ? Emotes.BOT : "")
+                        (member.getUser().isBot() ? Emotes.BOT.getEmote() : "")
                 ), String.format(
                         "```yaml\n" +
                         "%s\n" +
@@ -98,7 +98,7 @@ public class CmdUser implements Command {
                         MessageUtil.formatTime(LocalDateTime.from(member.getJoinDate()))
                 ), false);
 
-        if(msg.getGuild().getId().equals(IDs.GUILD) && !member.getUser().isBot()){
+        if(msg.getGuild().getId().equals(IDs.GUILD.getId()) && !member.getUser().isBot()){
             userEmbed.addField("XP", String.format(
                     "`%d`/`%d`",
                     DBUtil.getXP(member.getUser()),

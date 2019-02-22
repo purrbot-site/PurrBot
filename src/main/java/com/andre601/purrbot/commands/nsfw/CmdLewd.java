@@ -95,7 +95,7 @@ public class CmdLewd implements Command {
             return;
         }
         if(msg.getContentRaw().contains("-gif")){
-            String gifLink = HttpUtil.getImage("cuddle", "url");
+            String gifLink = HttpUtil.getImage("nsfw_neko_gif", "url");
             if(gifLink == null){
                 EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
                 return;
@@ -110,7 +110,7 @@ public class CmdLewd implements Command {
 
             tc.sendMessage(MessageFormat.format(
                     "{0} Getting a lewd neko-gif...",
-                    Emotes.LOADING
+                    Emotes.LOADING.getEmote()
             )).queue(message ->
                     message.editMessage(
                             EmbedBuilder.ZERO_WIDTH_SPACE
@@ -134,7 +134,7 @@ public class CmdLewd implements Command {
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a lewd neko...",
-                Emotes.LOADING
+                Emotes.LOADING.getEmote()
         )).queue(message -> {
             message.editMessage(
                     EmbedBuilder.ZERO_WIDTH_SPACE

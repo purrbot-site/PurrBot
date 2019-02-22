@@ -55,7 +55,7 @@ public class CmdSlap implements Command {
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a slap-gif...",
-                Emotes.LOADING
+                Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
                 message.editMessage(MessageFormat.format(

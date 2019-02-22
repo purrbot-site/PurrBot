@@ -140,9 +140,8 @@ public class CmdYurifuck implements Command {
                     ev -> (isMessage(ev.getMessage()) &&
                             ev.getTextChannel().equals(tc) &&
                             (ev.getAuthor() != ev.getJDA().getSelfUser() ||
-                                    ev.getAuthor() != message.getAuthor()) &&
-                            ev.getAuthor() == user
-                    ),
+                            ev.getAuthor() != message.getAuthor()) &&
+                            ev.getAuthor() == user),
                     ev -> {
                         if(PermUtil.check(ev.getTextChannel(), Permission.MESSAGE_MANAGE))
                             ev.getMessage().delete().queue();
@@ -150,6 +149,7 @@ public class CmdYurifuck implements Command {
                         try {
                             message.delete().queue();
                         }catch (Exception ex){
+                            PurrBot.getLogger().warn("Couldn't delete a own message. ._.");
                         }
 
                         yuriQueue.remove(author.getUser().getId());
@@ -179,6 +179,7 @@ public class CmdYurifuck implements Command {
                         try {
                             message.delete().queue();
                         }catch (Exception ex){
+                            PurrBot.getLogger().warn("Couldn't delete a own message. ._.");
                         }
 
                         yuriQueue.remove(author.getUser().getId());

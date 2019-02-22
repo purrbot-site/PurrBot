@@ -44,7 +44,7 @@ public class CmdKitsune implements Command {
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a cute kitsune...",
-                Emotes.LOADING
+                Emotes.LOADING.getEmote()
         )).queue(message -> message.editMessage(
                 EmbedBuilder.ZERO_WIDTH_SPACE
         ).embed(gecg.build()).queue());

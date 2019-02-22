@@ -77,9 +77,9 @@ public class LevelUtil {
 
     private static void roleCheck(Member member, long level){
         Guild guild = member.getGuild();
-        Role veryAddicted = guild.getRoleById(Roles.VERY_ADDICTED);
-        Role superAddicted = guild.getRoleById(Roles.SUPER_ADDICTED);
-        Role ultraAddicted = guild.getRoleById(Roles.ULTRA_ADDICTED);
+        Role veryAddicted = guild.getRoleById(Roles.VERY_ADDICTED.getRole());
+        Role superAddicted = guild.getRoleById(Roles.SUPER_ADDICTED.getRole());
+        Role ultraAddicted = guild.getRoleById(Roles.ULTRA_ADDICTED.getRole());
 
         if((level >= 5) && (level <= 9)){
             if(!member.getRoles().contains(veryAddicted)){

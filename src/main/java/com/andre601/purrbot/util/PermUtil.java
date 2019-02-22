@@ -18,10 +18,10 @@ public class PermUtil {
      *         A {@link net.dv8tion.jda.core.entities.Message Message object}.
      *
      * @return True if the member's id is the same as
-     *         {@link com.andre601.purrbot.util.constants.IDs#CREATOR IDs.CREATOR}
+     *         {@link com.andre601.purrbot.util.constants.IDs#ANDRE_601 IDs.ANDRE_601}
      */
     public static boolean isCreator(Message msg){
-        return msg.getAuthor().getId().equals(IDs.CREATOR);
+        return msg.getAuthor().getId().equals(IDs.ANDRE_601.getId());
     }
 
     /**

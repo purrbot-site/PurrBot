@@ -3,15 +3,31 @@ package com.andre601.purrbot.util.constants;
 /**
  * Class for commonly used IDs.
  */
-public final class IDs {
+public enum IDs {
 
-    public static String CREATOR      = "204232208049766400";
-    public static String EVELIEN      = "433894627553181696";
-    public static String LILYSCARLET  = "218772716814204930";
-    public static String KORBO        = "116595448357060610";
-    public static String PURR         = "425382319449309197";
-    public static String GUILD        = "423771795523371019";
+    //Accounts
+    ANDRE_601  ("204232208049766400"),
+    EVELIEN    ("433894627553181696"),
+    LILYSCARLET("218772716814204930"),
+    KORBO      ("116595448357060610"),
 
-    public static String VERSION      = "3.3.1";
+    // Bots
+    PURR   ("425382319449309197"),
+
+    // Support guild
+    GUILD("423771795523371019"),
+
+    // Current version
+    VERSION("3.3.5");
+
+    private String id;
+
+    IDs(String id){
+        this.id = id;
+    }
+
+    public String getId(){
+        return id;
+    }
 
 }

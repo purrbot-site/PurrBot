@@ -43,9 +43,9 @@ public class CmdKiss implements Command {
                 )).queue();
             }else
             if(
-                    msg.getAuthor().getId().equals(IDs.EVELIEN) ||
-                    msg.getAuthor().getId().equals(IDs.LILYSCARLET) ||
-                    msg.getAuthor().getId().equals(IDs.KORBO)
+                    msg.getAuthor().getId().equals(IDs.EVELIEN.getId()) ||
+                    msg.getAuthor().getId().equals(IDs.LILYSCARLET.getId()) ||
+                    msg.getAuthor().getId().equals(IDs.KORBO.getId())
             ){
                 EmbedBuilder kiss = EmbedUtil.getEmbed().setImage(MessageUtil.getRandomKissImg());
 
@@ -79,7 +79,7 @@ public class CmdKiss implements Command {
 
         tc.sendMessage(MessageFormat.format(
                 "{0} Getting a kiss-gif...",
-                Emotes.LOADING
+                Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
                 message.editMessage(MessageFormat.format(
