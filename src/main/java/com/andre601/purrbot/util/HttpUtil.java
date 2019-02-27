@@ -49,30 +49,7 @@ public class HttpUtil {
 
     private static JSONObject fakeGit() throws Exception{
         Request request = new Request.Builder()
-                .url("http://whatthecommit.com/index.json")
-                .build();
-        Response response = CLIENT.newCall(request).execute();
-        try(ResponseBody responseBody = response.body()){
-            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-            return new JSONObject(Objects.requireNonNull(responseBody).string());
-        }
-    }
-
-    private static JSONObject latestCommit() throws Exception{
-        Request request = new Request.Builder()
-                .url(Links.GITHUB_COMMITS.getLink())
-                .build();
-        Response response = CLIENT.newCall(request).execute();
-        try(ResponseBody responseBody = response.body()) {
-            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-            return new JSONArray(new JSONTokener(responseBody.byteStream())).getJSONObject(0);
-        }
-    }
-
-    private static JSONObject specificCommit(String link) throws IOException{
-        Request request = new Request.Builder()
-                .url(link)
-                .header("User-Agent", "PurrBot")
+                .url("https://whatthecommit.com/index.json")
                 .build();
         Response response = CLIENT.newCall(request).execute();
         try(ResponseBody responseBody = response.body()){
@@ -201,34 +178,6 @@ public class HttpUtil {
         try{
             return fakeGit();
         }catch (Exception ex){
-            if(PermUtil.isBeta()) ex.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * Getter-method to get a JSONObject.
-     *
-     * @return possible-null JSONObject
-     */
-    public static JSONObject getLatestCommit(){
-        try{
-            return latestCommit();
-        }catch (Exception ex){
-            if(PermUtil.isBeta()) ex.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * Getter-method to get a JSONObject.
-     *
-     * @return possible-null JSONObject
-     */
-    public static JSONObject getSpecificCommit(String link){
-        try {
-            return specificCommit(link);
-        }catch(IOException ex){
             if(PermUtil.isBeta()) ex.printStackTrace();
             return null;
         }

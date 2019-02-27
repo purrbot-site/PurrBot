@@ -74,107 +74,50 @@ public class CmdInfo implements Command {
         if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        EmbedBuilder info;
-
-        if(s.contains("-github")){
-            JSONObject json = HttpUtil.getLatestCommit();
-
-            if(json == null){
-                EmbedUtil.error(
-                        msg,
-                        "There was an issue getting the GitHub-information. Please try again later!"
-                );
-                return;
-            }
-
-            JSONObject commit = HttpUtil.getSpecificCommit(json.getString("url"));
-
-            if(commit == null){
-                EmbedUtil.error(msg, "Couldn't get information from GitHub. Please try again later.");
-                return;
-            }
-
-
-            JSONObject commitJson = json.getJSONObject("commit");
-            JSONArray files = commit.getJSONArray("files");
-
-            String commitLink = json.getString("html_url");
-            String commitHashFull = json.getString("sha");
-            String commitHashSmall = json.getString("sha").substring(0, 7);
-
-            String commitMsg = commitJson.getString("message");
-
-            info = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setAuthor(String.format(
-                            "Info about commit %s",
-                            commitHashSmall
-                    ), commitLink, Links.GITHUB_AVATAR.getLink())
-                    .addField("Full commit hash", String.format(
-                            "[`%s`](%s)",
-                            commitHashFull,
-                            commitLink
-                    ), false)
-                    .addField("Message", String.format(
-                            "```\n" +
-                            "%s\n" +
-                            "```",
-                            commitMsg.length() > 2000 ?
-                                    commitMsg.substring(0, 1996) + "..." :
-                                    commitMsg
-                    ), false)
-                    .addField("Changed files:", String.format(
-                            "```diff\n" +
-                            "%s\n" +
-                            "```",
-                            getChangedFiles(files)
-                    ), false);
-
-        }else {
-            info = EmbedUtil.getEmbed()
-                    .setAuthor(msg.getJDA().getSelfUser().getName(),
-                            null,
-                            msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
-                    )
-                    .setThumbnail(msg.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                    .addField("About the bot", String.format(
-                            "Oh hi there!\n" +
-                            "I'm `%s`. A Bot for the ~Nya Discord.\n" +
-                            "I was made by Andre_601 (<@204232208049766400>) with the help of JDA " +
-                            "and a lot of free time. ;)\n" +
-                            "\n" +
-                            "**Commands**\n" +
-                            "You can use %shelp on your guild to see all of my commands.",
-                            msg.getJDA().getSelfUser().getName(),
-                            DBUtil.getPrefix(guild)
-                    ), false)
-                    .addField("Bot-Version", String.format(
-                            "`%s`",
-                            IDs.VERSION
-                    ), true)
-                    .addField("Library", String.format(
-                            "[`JDA %s`](%s)",
-                            JDAInfo.VERSION,
-                            JDAInfo.GITHUB
-                    ), true)
-                    .addField("Links", String.format(
-                            "[`GitHub`](%s)\n" +
-                            "[`Wiki`](%s)\n" +
-                            "[`Discordbots.org`](%s)\n" +
-                            "[`discord.bots.gg`](%s)",
-                            Links.GITHUB.getLink(),
-                            Links.WIKI.getLink(),
-                            Links.DISCORDBOTS_ORG.getLink(),
-                            Links.DISCORD_BOTS_GG.getLink()
-                    ), true)
-                    .addField("", String.format(
-                            "[`Official Discord`](%s)\n" +
-                            "[`Website`](%s)\n" +
-                            "[`lbots.org`](%s)",
-                            Links.DISCORD_INVITE.getLink(),
-                            Links.WEBSITE.getLink(),
-                            Links.LBOTS_ORG.getLink()
-                    ), true);
-        }
+        EmbedBuilder info = EmbedUtil.getEmbed()
+                .setAuthor(msg.getJDA().getSelfUser().getName(),
+                        null,
+                        msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
+                )
+                .setThumbnail(msg.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                .addField("About the bot", String.format(
+                        "Oh hi there!\n" +
+                        "I'm `%s`. A Bot for the ~Nya Discord.\n" +
+                        "I was made by Andre_601 (<@204232208049766400>) with the help of JDA " +
+                        "and a lot of free time. ;)\n" +
+                        "\n" +
+                        "**Commands**\n" +
+                        "You can use %shelp on your guild to see all of my commands.",
+                        msg.getJDA().getSelfUser().getName(),
+                        DBUtil.getPrefix(guild)
+                ), false)
+                .addField("Bot-Version", String.format(
+                        "`%s`",
+                        IDs.VERSION
+                ), true)
+                .addField("Library", String.format(
+                        "[`JDA %s`](%s)",
+                        JDAInfo.VERSION,
+                        JDAInfo.GITHUB
+                ), true)
+                .addField("Links", String.format(
+                        "[`GitHub`](%s)\n" +
+                        "[`Wiki`](%s)\n" +
+                        "[`Discordbots.org`](%s)\n" +
+                        "[`discord.bots.gg`](%s)",
+                        Links.GITHUB.getLink(),
+                        Links.WIKI.getLink(),
+                        Links.DISCORDBOTS_ORG.getLink(),
+                        Links.DISCORD_BOTS_GG.getLink()
+                ), true)
+                .addField("", String.format(
+                        "[`Official Discord`](%s)\n" +
+                        "[`Website`](%s)\n" +
+                        "[`lbots.org`](%s)",
+                        Links.DISCORD_INVITE.getLink(),
+                        Links.WEBSITE.getLink(),
+                        Links.LBOTS_ORG.getLink()
+                ), true);
 
         if(s.contains("-dm")){
             msg.getAuthor().openPrivateChannel().queue(

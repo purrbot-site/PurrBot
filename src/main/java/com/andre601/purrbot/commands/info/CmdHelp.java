@@ -104,7 +104,7 @@ public class CmdHelp implements Command {
                     "[`%s%s`](%s '%s')\n",
                     prefix,
                     command.getDescription().name(),
-                    Links.GITHUB,
+                    Links.GITHUB.getLink(),
                     command.getDescription().description()
             ));
         }

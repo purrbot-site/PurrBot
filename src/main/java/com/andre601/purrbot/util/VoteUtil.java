@@ -1,6 +1,7 @@
 package com.andre601.purrbot.util;
 
 import club.minnced.discord.webhook.WebhookClient;
+import club.minnced.discord.webhook.WebhookClientBuilder;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.constants.IDs;
@@ -30,15 +31,10 @@ public class VoteUtil {
         if(!botId.equals(IDs.PURR.getId())) return;
 
         String msg;
-        WebhookClient webhookClient = PurrBot.getWebhookClient(
+        WebhookClient webhookClient = new WebhookClientBuilder(
                 PurrBot.file.getItem("config", "vote-webhook")
-        );
+        ).build();
         Guild guild = ReadyListener.getShardManager().getGuildById(IDs.GUILD.getId());
-
-        PurrBot.getLogger().info(String.format(
-                "Received vote. ID: %s",
-                voterId
-        ));
 
         if(voterIsInGuild(guild, voterId)){
             Role role = guild.getRoleById(Roles.VOTER.getRole());

@@ -1,8 +1,6 @@
 package com.andre601.purrbot.core;
 
 import ch.qos.logback.classic.Logger;
-import club.minnced.discord.webhook.WebhookClient;
-import club.minnced.discord.webhook.WebhookClientBuilder;
 import com.andre601.purrbot.commands.CommandListener;
 import com.andre601.purrbot.listeners.GuildListener;
 import com.andre601.purrbot.listeners.ReadyListener;
@@ -69,6 +67,7 @@ public class PurrBot {
 
         //  Creating the file, if not existing, or just loading it.
         file.make("config", "./config.json", "/config.json");
+
         //  We start a scheduler here that runs updateData every 10 minutes
         PurrBot.scheduler.scheduleAtFixedRate(MessageUtil.updateData(), 1, 10, TimeUnit.MINUTES);
 
@@ -177,10 +176,6 @@ public class PurrBot {
 
     public static Random getRandom(){
         return random;
-    }
-
-    public static WebhookClient getWebhookClient(String url){
-        return new WebhookClientBuilder(url).build();
     }
 
     //  Get-method for the Discordbots-API

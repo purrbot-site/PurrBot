@@ -23,7 +23,6 @@ public class CommandFactory {
                 // Fun
                 new CmdCuddle(),
                 new CmdFakegit(),
-                new CmdGecg(),
                 new CmdHolo(),
                 new CmdHug(),
                 new CmdKiss(),

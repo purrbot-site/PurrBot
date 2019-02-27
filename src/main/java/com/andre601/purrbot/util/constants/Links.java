@@ -22,8 +22,8 @@ public enum Links {
     LBOTS_ORG      ("https://lbots.org/bots/425382319449309197"),
 
     // Other links
-    WEBSITE      ("https://purrbot.site"),
-    GITHUB_AVATAR("https://i.imgur.com/Fv6qdfG.png"),
+    WEBSITE       ("https://purrbot.site"),
+    GITHUB_AVATAR ("https://i.imgur.com/Fv6qdfG.png"),
     GITHUB_COMMITS("https://api.github.com/repos/Andre601/PurrBot/commits");
 
 

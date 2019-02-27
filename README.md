@@ -4,8 +4,8 @@
 [Issues]: https://github.com/Andre601/PurrBot/issues
 [LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg
 [License]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
-[Full invite (recommended)]: https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=322624&scope=bot
-[Basic invite]: https://discordapp.com/oauth2/authorize?client_id=425382319449309197&permissions=19456&scope=bot
+[Full invite]: https://discordapp.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=537259072
+[Basic invite]: https://discordapp.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=85056
 [Website]: https://purrbot.site
 [Wiki]: https://github.com/Andre601/PurrBot/wiki
 
@@ -34,6 +34,7 @@ Neko     |                 | Shows a image of a neko from nekos.life.
          | [-gif]          | Shows a gif-image of a neko from nekos.life.
          | [-slide]        | Creates a slideshow with 30 images (Can be combined with the -gif argument).
 Pat      | <@user ...>     | Pats the mentioned user(s).
+Poke     | <@user ...>     | Pokes the mentioned user(s).
 Ship     | <@user> [@user] | Ships you (or another user) with someone.
 Slap     | <@user ...>     | Slaps the mentioned user(s).
 Tickle   | <@user ...>     | Tickles the mentioned user(s).
@@ -72,7 +73,6 @@ Help     |                        | Will display all commands available.
          | [command]              | Shows info about the provided command.
 Info     |                        | Shows some info about the bot.
          | [-dm]                  | Sends the info in DM.
-         | [-github]              | Shows information about the latest commit.
 Invite   |                        | Shows you some links.
          | [-dm]                  | Sends you the links in DM.
 Ping     |                        | Checks the ping. (Time the bot takes to edit the message.)
@@ -123,7 +123,7 @@ Future rewards may be added.
 
 # Usefull Links
 * [Discord Server][Discord]
-* [Full invite (recommended)]
+* [Full invite] (Recommended)
 * [Basic Invite]
 * [Website]
 * [Wiki]

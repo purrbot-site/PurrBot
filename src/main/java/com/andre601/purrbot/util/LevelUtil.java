@@ -7,8 +7,6 @@ import java.io.File;
 
 public class LevelUtil {
 
-    private static long BASE = 50;
-
     /**
      * Gives either 1 or 2 XP to the member, depending on if it was a command or not.
      *
@@ -61,7 +59,7 @@ public class LevelUtil {
      * @return A double containing the required XP for the next level.
      */
     public static double getRequiredXP(long level){
-        return (BASE * level) + (BASE * (level + 1) * 1.1);
+        return (50 * level) + (50 * (level + 1) * 1.1);
     }
 
     private static boolean isLevelUp(User user, long xp){
@@ -77,9 +75,12 @@ public class LevelUtil {
 
     private static void roleCheck(Member member, long level){
         Guild guild = member.getGuild();
-        Role veryAddicted = guild.getRoleById(Roles.VERY_ADDICTED.getRole());
-        Role superAddicted = guild.getRoleById(Roles.SUPER_ADDICTED.getRole());
-        Role ultraAddicted = guild.getRoleById(Roles.ULTRA_ADDICTED.getRole());
+
+        Role veryAddicted   = guild.getRoleById(Roles.VERY_ADDICTED.getRole());
+        Role superAddicted  = guild.getRoleById(Roles.SUPER_ADDICTED.getRole());
+        Role ultraAddicted  = guild.getRoleById(Roles.ULTRA_ADDICTED.getRole());
+        Role hyperAddicted  = guild.getRoleById(Roles.HYPER_ADDICTED.getRole());
+        Role masterAddicted = guild.getRoleById(Roles.MASTER_ADDICTED.getRole());
 
         if((level >= 5) && (level <= 9)){
             if(!member.getRoles().contains(veryAddicted)){
@@ -95,10 +96,24 @@ public class LevelUtil {
                 ).queue();
             }
         }else
-        if(level >= 15){
+        if((level >= 15) && (level <= 19)){
             if(!member.getRoles().contains(ultraAddicted)){
                 guild.getController().addRolesToMember(member, ultraAddicted).reason(
                         "[Level up] User reached level 15!"
+                ).queue();
+            }
+        }else
+        if((level >= 20) && (level <= 29)){
+            if(!member.getRoles().contains(hyperAddicted)){
+                guild.getController().addRolesToMember(member, hyperAddicted).reason(
+                        "[Level up] User reached level 20!"
+                ).queue();
+            }
+        }else
+        if(level >= 30){
+            if(!member.getRoles().contains(masterAddicted)){
+                guild.getController().addRolesToMember(member, masterAddicted).reason(
+                        "[Level up] User reached level 30!"
                 ).queue();
             }
         }

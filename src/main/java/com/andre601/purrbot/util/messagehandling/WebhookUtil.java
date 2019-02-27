@@ -98,7 +98,7 @@ public class WebhookUtil {
                 .setTimestamp(ZonedDateTime.now())
                 .build();
 
-        WebhookClient client = PurrBot.getWebhookClient(url);
+        WebhookClient client = new WebhookClientBuilder(url).build();
         client.send(new WebhookMessageBuilder()
                 .setUsername(name)
                 .setAvatarUrl(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
