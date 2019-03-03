@@ -2,6 +2,7 @@ package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
@@ -23,7 +24,7 @@ public class CmdHolo implements Command {
     @Override
     public void execute(Message msg, String s) {
         TextChannel tc = msg.getTextChannel();
-        String link = HttpUtil.getImage("holo", "url");
+        String link = HttpUtil.getImage(API.IMG_HOLO, 0);
 
         if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();

@@ -52,7 +52,7 @@ public class DebugUtil {
                     "# Info about who requested the debug.",
                     "#",
                     "",
-                    "Requester: " + MessageUtil.getTag(requester) + " (" + requester.getId() + ")",
+                    "Requester: " + requester.getAsTag() + " (" + requester.getId() + ")",
                     "",
                     "#",
                     "# Info about the bot-Settings (Welcome-settings, prefix, roles of the bot)",
@@ -70,8 +70,7 @@ public class DebugUtil {
                     "#",
                     "",
                     "Guild: "  + guild.getName() + " (" + guild.getId() + ")",
-                    "Owner: " + MessageUtil.getTag(guild.getOwner().getUser()) + " (" +
-                            guild.getOwner().getUser().getId() + ")",
+                    "Owner: " + guild.getOwner().getUser().getAsTag() + " (" + guild.getOwner().getUser().getId() + ")",
                     "",
                     "Users:",
                     "  Total:  " + guild.getMembers().toArray().length,

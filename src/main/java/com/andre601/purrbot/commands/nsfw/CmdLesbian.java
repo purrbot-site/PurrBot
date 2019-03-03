@@ -2,6 +2,7 @@ package com.andre601.purrbot.commands.nsfw;
 
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
@@ -11,8 +12,6 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
-
-import java.text.MessageFormat;
 
 @CommandDescription(
         name = "Lesbian",
@@ -25,7 +24,7 @@ public class CmdLesbian implements Command {
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
-        String link = HttpUtil.getImage("les", "url");
+        String link = HttpUtil.getImage(API.GIF_LES_LEWD, 0);
 
         if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
@@ -36,14 +35,11 @@ public class CmdLesbian implements Command {
         }
 
         EmbedBuilder les = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle(MessageFormat.format(
-                        "{0}",
-                        link.replace("https://cdn.nekos.life/les/", "")
-                ), link)
+                .setTitle("Lesbian O//w//O", link)
                 .setImage(link);
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting hot lesbians...",
+        tc.sendMessage(String.format(
+                "%s Getting hot lesbians...",
                 Emotes.LOADING.getEmote()
         )).queue(message -> message.editMessage(
                 EmbedBuilder.ZERO_WIDTH_SPACE

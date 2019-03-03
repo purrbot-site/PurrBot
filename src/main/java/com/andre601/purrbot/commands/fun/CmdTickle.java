@@ -1,5 +1,6 @@
 package com.andre601.purrbot.commands.fun;
 
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.HttpUtil;
@@ -38,13 +39,13 @@ public class CmdTickle implements Command {
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(MessageFormat.format(
-                    "Alright... If you really want to tickle yourself... \\*tickles {0}*",
+            tc.sendMessage(String.format(
+                    "Alright... If you really want to tickle yourself... \\*tickles %s*",
                     msg.getMember().getAsMention()
             )).queue();
         }
 
-        String link = HttpUtil.getImage("tickle", "url");
+        String link = HttpUtil.getImage(API.GIF_TICKLE, 0);
         String tickledMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(
@@ -53,21 +54,21 @@ public class CmdTickle implements Command {
 
         if(tickledMembers.equals("") || tickledMembers.length() == 0) return;
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting a tickle-gif...",
+        tc.sendMessage(String.format(
+                "%s Getting a tickle-gif...",
                 Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
-                message.editMessage(MessageFormat.format(
-                        "{0} tickles you {1}",
+                message.editMessage(String.format(
+                        "%s tickles you %s",
                         msg.getMember().getEffectiveName(),
                         tickledMembers
                 )).queue();
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                        "{0} tickles you {1}",
+                ).embed(EmbedUtil.getEmbed().setDescription(String.format(
+                        "%s tickles you %s",
                         msg.getMember().getEffectiveName(),
                         tickledMembers
                 )).setImage(link).build()).queue();

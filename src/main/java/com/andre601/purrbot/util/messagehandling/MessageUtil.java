@@ -122,17 +122,6 @@ public class MessageUtil {
     }
 
     /**
-     * Returns a random yuri fuck (female <-> female sex) image.
-     *
-     * @return A random {@link java.lang.String String} from a List.
-     */
-    public static String getRandomYurifuckImage(){
-        return PurrBot.getRandomYuriFuckImg().size() > 0 ? PurrBot.getRandomYuriFuckImg().get(
-                PurrBot.getRandom().nextInt(PurrBot.getRandomYuriFuckImg().size())
-        ) : "";
-    }
-
-    /**
      * Returns a random startup message.
      *
      * @return A random {@link java.lang.String String} from a list.
@@ -223,18 +212,6 @@ public class MessageUtil {
      */
     public static String getNick(Member member){
         return member.getNickname().length() > 25 ? member.getNickname().substring(0, 24) + "..." : member.getNickname();
-    }
-
-    /**
-     * Gets the username and discrim and returns it as {@code <username>#<discrim>}.
-     *
-     * @param  user
-     *         A {@link net.dv8tion.jda.core.entities.User User object}.
-     *
-     * @return The username and discrim as {@code <username>#<discrim>}.
-     */
-    public static String getTag(User user){
-        return user.getName() + "#" + user.getDiscriminator();
     }
 
     /**

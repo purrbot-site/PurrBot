@@ -24,7 +24,8 @@ public enum Links {
     // Other links
     WEBSITE       ("https://purrbot.site"),
     GITHUB_AVATAR ("https://i.imgur.com/Fv6qdfG.png"),
-    GITHUB_COMMITS("https://api.github.com/repos/Andre601/PurrBot/commits");
+    UPVOTE        ("https://i.imgur.com/HGQXIYp.png"),
+    FAVOURITE     ("https://i.imgur.com/5hccwa9.png");
 
 
     private String link;

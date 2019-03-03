@@ -2,6 +2,7 @@ package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -12,7 +13,6 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,8 +37,8 @@ public class CmdKiss implements Command {
 
         if(members.contains(guild.getSelfMember())){
             if(PermUtil.isBeta()){
-                tc.sendMessage(MessageFormat.format(
-                        "Not on the first date {0}!",
+                tc.sendMessage(String.format(
+                        "Not on the first date %s!",
                         msg.getAuthor().getAsMention()
                 )).queue();
             }else
@@ -62,13 +62,13 @@ public class CmdKiss implements Command {
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(MessageFormat.format(
-                    "I have no idea, how you can actually kiss yourself {0}... With a mirror?",
+            tc.sendMessage(String.format(
+                    "I have no idea, how you can actually kiss yourself %s... With a mirror?",
                     msg.getMember().getAsMention()
             )).queue();
         }
 
-        String link = HttpUtil.getImage("kiss", "url");
+        String link = HttpUtil.getImage(API.GIF_KISS, 0);
         String kissedMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(
@@ -77,21 +77,21 @@ public class CmdKiss implements Command {
 
         if(kissedMembers.equals("") || kissedMembers.length() == 0) return;
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting a kiss-gif...",
+        tc.sendMessage(String.format(
+                "%s Getting a kiss-gif...",
                 Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
-                message.editMessage(MessageFormat.format(
-                        "{0} kisses you {1}",
+                message.editMessage(String.format(
+                        "%s kisses you %s",
                         msg.getMember().getEffectiveName(),
                         kissedMembers
                 )).queue();
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                        "{0} kisses you {1}",
+                ).embed(EmbedUtil.getEmbed().setDescription(String.format(
+                        "%s kisses you %s",
                         msg.getMember().getEffectiveName(),
                         kissedMembers
                 )).setImage(link).build()).queue();

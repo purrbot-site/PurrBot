@@ -59,7 +59,7 @@ public class GuildListener extends ListenerAdapter {
                 "Joined the guild {0} ({1}) from {2}: {3} total users [{4} humans, {5} bots]",
                 guild.getName(),
                 guild.getId(),
-                MessageUtil.getTag(guild.getOwner().getUser()),
+                guild.getOwner().getUser().getAsTag(),
                 guild.getMembers().size(),
                 guild.getMembers().stream().filter(user -> !user.getUser().isBot()).count(),
                 guild.getMembers().stream().filter(user -> user.getUser().isBot()).count()
@@ -90,7 +90,7 @@ public class GuildListener extends ListenerAdapter {
                 "Left the guild {0} ({1}) from {2}: {3} total users [{4} humans, {5} bots]",
                 guild.getName(),
                 guild.getId(),
-                MessageUtil.getTag(guild.getOwner().getUser()),
+                guild.getOwner().getUser().getAsTag(),
                 guild.getMembers().size(),
                 guild.getMembers().stream().filter(user -> !user.getUser().isBot()).count(),
                 guild.getMembers().stream().filter(user -> user.getUser().isBot()).count()

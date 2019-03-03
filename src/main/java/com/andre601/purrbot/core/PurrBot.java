@@ -12,6 +12,7 @@ import com.github.rainestormee.jdacommand.CommandHandler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import com.google.gson.JsonObject;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
 import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
@@ -51,7 +52,6 @@ public class PurrBot {
     private static List<String> randomKissImg = new ArrayList<>();
     private static List<String> randomAcceptFuckMsg = new ArrayList<>();
     private static List<String> randomDenyFuckMsg = new ArrayList<>();
-    private static List<String> randomYuriFuckImg = new ArrayList<>();
     private static List<String> images                = new ArrayList<>();
     private static List<String> randomStartupMsg      = new ArrayList<>();
 
@@ -94,20 +94,25 @@ public class PurrBot {
 
                     Vote vote = gsonVote.fromJson(request.body(), Vote.class);
                     if(ReadyListener.isReady()) {
-                        VoteUtil.voteAction(vote.getBotId(), vote.getUserId(), vote.isWeekend());
+                        VoteUtil.rewardUpvote(vote.getBotId(), vote.getUserId(), vote.isWeekend());
                     }
 
                     return "";
                 });
 
-                /*
                 post("/lbots", (request, response) -> {
 
+                    String body = request.body();
+                    JsonObject jsonObject = gsonVote.fromJson(body, JsonObject.class);
 
+                    String userId = jsonObject.get("userid").toString();
+                    boolean isFavour = jsonObject.get("favourited").getAsBoolean();
+                    if(ReadyListener.isReady() && isFavour){
+                        VoteUtil.rewardFavourte(userId);
+                    }
 
-                    return response;
+                    return "";
                 });
-                */
             });
         }
 
@@ -159,9 +164,6 @@ public class PurrBot {
     }
     public static List<String> getRandomDenyFuckMsg(){
         return randomDenyFuckMsg;
-    }
-    public static List<String> getRandomYuriFuckImg(){
-        return randomYuriFuckImg;
     }
     public static List<String> getRandomStartupMsg(){
         return randomStartupMsg;

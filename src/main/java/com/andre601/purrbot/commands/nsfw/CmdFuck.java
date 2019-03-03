@@ -3,6 +3,7 @@ package com.andre601.purrbot.commands.nsfw;
 import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
@@ -40,12 +41,12 @@ public class CmdFuck implements Command {
         return msg.getContentRaw().equalsIgnoreCase(">accept");
     }
 
-    private static EmbedBuilder getFuckEmbed(Member user1, Member user2, String url){
+    private static EmbedBuilder getFuckEmbed(Member member1, Member member2, String url){
         return EmbedUtil.getEmbed()
-                .setDescription(MessageFormat.format(
-                        "{0} and {1} are having sex!",
-                        user1.getEffectiveName(),
-                        user2.getEffectiveName()
+                .setDescription(String.format(
+                        "%s and %s are having sex!",
+                        member1.getEffectiveName(),
+                        member2.getEffectiveName()
                 ))
                 .setImage(url);
     }
@@ -153,7 +154,7 @@ public class CmdFuck implements Command {
 
                         alreadyInQueue.remove(author.getUser().getId());
 
-                        String link = HttpUtil.getImage("classic", "url");
+                        String link = HttpUtil.getImage(API.GIF_FUCK_LEWD, 0);
 
                         ev.getTextChannel().sendMessage(String.format(
                                 "%s accepted your invite %s! 0w0",

@@ -19,9 +19,6 @@ public class ListUtil {
         Collections.addAll(PurrBot.getRandomShutdownImg(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/andre601/purrbot-files/master/files/RandomShutdownImage"
         ).split("\n"));
-        Collections.addAll(PurrBot.getRandomYuriFuckImg(), HttpUtil.requestHttp(
-                "https://raw.githubusercontent.com/Andre601/PurrBot-files/master/files/RandomYuriFuckImage"
-        ).split("\n"));
         Collections.addAll(PurrBot.getImages(), HttpUtil.requestHttp(
                 "https://raw.githubusercontent.com/Andre601/PurrBot-files/master/files/welcome-images"
         ).split("\n"));
@@ -72,7 +69,6 @@ public class ListUtil {
         PurrBot.getRandomKissImg().clear();
         PurrBot.getRandomAcceptFuckMsg().clear();
         PurrBot.getRandomDenyFuckMsg().clear();
-        PurrBot.getRandomYuriFuckImg().clear();
         PurrBot.getImages().clear();
     }
 }

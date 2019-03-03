@@ -3,9 +3,9 @@ package com.andre601.purrbot.commands.nsfw;
 import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
@@ -16,7 +16,6 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -59,16 +58,18 @@ public class CmdLewd implements Command {
             tc.sendTyping().queue();
 
             lewdUserID.add(msg.getAuthor().getId());
-            StringBuilder urls = new StringBuilder();
+            String urls;
             if(msg.getContentRaw().contains("-gif")){
-                for (int i = 0; i < 30; ++i) {
-                    urls.append(HttpUtil.getImage("nsfw_neko_gif", "url")).append(",");
-                }
+                urls = HttpUtil.getImage(API.GIF_NEKO_LEWD, 20);
             }else{
-                for (int i = 0; i < 30; ++i) {
-                    urls.append(HttpUtil.getImage("lewd", "url")).append(",");
-                }
+                urls = HttpUtil.getImage(API.IMG_NEKO_LEWD, 20);
             }
+
+            if(urls == null){
+                EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
+                return;
+            }
+
             Slideshow slideshow = sBuilder
                     .setUsers(msg.getAuthor(), guild.getOwner().getUser())
                     .setText("Lewd-slideshow!")
@@ -78,11 +79,10 @@ public class CmdLewd implements Command {
                             "can use the navigation!\n" +
                             "\n" +
                             "__**Slideshows may take a while to update!**__",
-                            MessageUtil.getTag(msg.getAuthor()).replace("`", "'"),
-                            MessageUtil.getTag(guild.getOwner().getUser())
-                                    .replace("`", "'")
+                            msg.getAuthor().getAsTag().replace("`", "'"),
+                            guild.getOwner().getUser().getAsTag().replace("`", "'")
                     ))
-                    .setUrls(urls.toString().split(","))
+                    .setUrls(urls.replace("\"", "").split(","))
                     .setFinalAction(
                             message -> {
                                 if(message != null) {
@@ -95,21 +95,18 @@ public class CmdLewd implements Command {
             return;
         }
         if(msg.getContentRaw().contains("-gif")){
-            String gifLink = HttpUtil.getImage("nsfw_neko_gif", "url");
+            String gifLink = HttpUtil.getImage(API.GIF_NEKO_LEWD, 0);
             if(gifLink == null){
                 EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
                 return;
             }
 
             EmbedBuilder lewdgif = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setTitle(MessageFormat.format(
-                            "{0}",
-                            gifLink.replace("https://cdn.nekos.life/nsfw_neko_gif/", "")
-                    ), gifLink)
+                    .setTitle("Lewd Neko >w<", gifLink)
                     .setImage(gifLink);
 
-            tc.sendMessage(MessageFormat.format(
-                    "{0} Getting a lewd neko-gif...",
+            tc.sendMessage(String.format(
+                    "%s Getting a lewd neko-gif...",
                     Emotes.LOADING.getEmote()
             )).queue(message ->
                     message.editMessage(
@@ -119,26 +116,19 @@ public class CmdLewd implements Command {
             return;
         }
 
-        String link = HttpUtil.getImage("lewd", "url");
+        String link = HttpUtil.getImage(API.IMG_NEKO_LEWD, 0);
         if(link == null){
             EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
             return;
         }
 
         EmbedBuilder lewd = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle(MessageFormat.format(
-                        "{0}",
-                        link.replace("https://cdn.nekos.life/lewd/", "")
-                ), link)
+                .setTitle("Lewd Neko >w<", link)
                 .setImage(link);
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting a lewd neko...",
+        tc.sendMessage(String.format(
+                "%s Getting a lewd neko...",
                 Emotes.LOADING.getEmote()
-        )).queue(message -> {
-            message.editMessage(
-                    EmbedBuilder.ZERO_WIDTH_SPACE
-            ).embed(lewd.build()).queue();
-        });
+        )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(lewd.build()).queue());
     }
 }

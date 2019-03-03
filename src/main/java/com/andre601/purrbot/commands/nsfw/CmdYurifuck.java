@@ -1,7 +1,9 @@
 package com.andre601.purrbot.commands.nsfw;
 
 import com.andre601.purrbot.core.PurrBot;
+import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -15,7 +17,6 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -40,12 +41,12 @@ public class CmdYurifuck implements Command {
         return msg.getContentRaw().equalsIgnoreCase(">yus");
     }
 
-    private static EmbedBuilder getFuckEmbed(Member user1, Member user2, String url){
+    private static EmbedBuilder getFuckEmbed(Member member1, Member member2, String url){
         return EmbedUtil.getEmbed()
-                .setDescription(MessageFormat.format(
-                        "{0} and {1} are having sex!",
-                        user1.getEffectiveName(),
-                        user2.getEffectiveName()
+                .setDescription(String.format(
+                        "%s and %s are having sex!",
+                        member1.getEffectiveName(),
+                        member2.getEffectiveName()
                 ))
                 .setImage(url);
     }
@@ -72,9 +73,9 @@ public class CmdYurifuck implements Command {
                 return;
             }
             if(
-                    msg.getAuthor().getId().equals(IDs.EVELIEN) ||
-                    msg.getAuthor().getId().equals(IDs.LILYSCARLET) ||
-                    msg.getAuthor().getId().equals(IDs.KORBO)
+                    msg.getAuthor().getId().equals(IDs.EVELIEN.getId()) ||
+                    msg.getAuthor().getId().equals(IDs.LILYSCARLET.getId()) ||
+                    msg.getAuthor().getId().equals(IDs.KORBO.getId())
             ){
                 int random = getRandomPercent();
 
@@ -103,7 +104,7 @@ public class CmdYurifuck implements Command {
 
         if(user == msg.getAuthor()){
             tc.sendMessage(String.format(
-                    "%s Why do you want to only play with yourself?",
+                    "%s Why do you want to only play with yourself? It's more fun with others. \uD83D\uDE0F",
                     msg.getAuthor().getAsMention()
             )).queue();
             return;
@@ -154,7 +155,7 @@ public class CmdYurifuck implements Command {
 
                         yuriQueue.remove(author.getUser().getId());
 
-                        String link = MessageUtil.getRandomYurifuckImage();
+                        String link = HttpUtil.getImage(API.GIF_YURI_LEWD, 0);
 
                         ev.getTextChannel().sendMessage(String.format(
                                 "%s accepted your invite %s! 0w0",
@@ -164,7 +165,7 @@ public class CmdYurifuck implements Command {
 
                         if(link == null || link.isEmpty()){
                             ev.getTextChannel().sendMessage(String.format(
-                                    "%s and %s are having yurisex!",
+                                    "%s and %s are having sex!",
                                     msg.getMember().getEffectiveName(),
                                     guild.getMember(user).getEffectiveName()
                             )).queue();

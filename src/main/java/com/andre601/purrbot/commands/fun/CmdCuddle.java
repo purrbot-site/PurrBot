@@ -1,6 +1,7 @@
 package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
@@ -9,7 +10,6 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,22 +33,23 @@ public class CmdCuddle implements Command {
         List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
-            tc.sendMessage(MessageFormat.format(
-                    "\\*enjoys the cuddle from {0}*",
+            tc.sendMessage(String.format(
+                    "\\*enjoys the cuddle from %s*",
                     msg.getAuthor().getAsMention()
             )).queue();
             msg.addReaction("❤").queue();
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(MessageFormat.format(
-                    "Do you have no one to cuddle {0}?\n" +
-                    "Here... Let me fix that! \\*cuddles with {0}*",
+            tc.sendMessage(String.format(
+                    "Do you have no one to cuddle %s?\n" +
+                    "Here... Let me fix that! \\*cuddles with %s*",
+                    msg.getMember().getAsMention(),
                     msg.getMember().getAsMention()
             )).queue();
         }
 
-        String link = HttpUtil.getImage("cuddle", "url");
+        String link = HttpUtil.getImage(API.GIF_CUDDLE, 0);
         String cuddledMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(
@@ -57,21 +58,21 @@ public class CmdCuddle implements Command {
 
         if(cuddledMembers.equals("") || cuddledMembers.length() == 0) return;
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting a cuddle-gif...",
+        tc.sendMessage(String.format(
+                "%s Getting a cuddle-gif...",
                 Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
-                message.editMessage(MessageFormat.format(
-                        "{0} cuddles with you {1}",
+                message.editMessage(String.format(
+                        "%s cuddles with you %s",
                         msg.getMember().getEffectiveName(),
                         cuddledMembers
                 )).queue();
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                        "{0} cuddles with you {1}",
+                ).embed(EmbedUtil.getEmbed().setDescription(String.format(
+                        "%s cuddles with you %s",
                         msg.getMember().getEffectiveName(),
                         cuddledMembers
                 )).setImage(link).build()).queue();

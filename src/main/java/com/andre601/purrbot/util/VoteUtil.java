@@ -27,7 +27,7 @@ public class VoteUtil {
      * @param isWeekend
      *        A boolean for if it's actually weekend, provided through the webhook message.
      */
-    public static void voteAction(String botId, String voterId, boolean isWeekend){
+    public static void rewardUpvote(String botId, String voterId, boolean isWeekend){
         if(!botId.equals(IDs.PURR.getId())) return;
 
         String msg;
@@ -37,23 +37,27 @@ public class VoteUtil {
         Guild guild = ReadyListener.getShardManager().getGuildById(IDs.GUILD.getId());
 
         if(voterIsInGuild(guild, voterId)){
-            Role role = guild.getRoleById(Roles.VOTER.getRole());
+            Role role = guild.getRoleById(Roles.VOTED.getRole());
             Member member = guild.getMemberById(voterId);
             msg = String.format(
-                    "%s has voted for the bot! Thank you! \uD83C\uDF89\n" +
+                    "%s has voted for %s! Thank you. \uD83C\uDF89\n" +
                     "Vote too on <%s>!",
                     member.getAsMention(),
+                    guild.getSelfMember().getAsMention(),
                     Links.DISCORDBOTS_ORG.getLink()
             );
 
-            if(!guild.getMemberById(voterId).getRoles().contains(role)) {
+            if(!guild.getMemberById(voterId).getRoles().contains(role))
                 guild.getController().addRolesToMember(member, role).reason("[Vote reward] Voted for the bot").queue();
-            }
 
-            BufferedImage image = ImageUtil.createVoteImage(member.getUser(), isWeekend);
+            BufferedImage image = ImageUtil.createVoteImage(member, isWeekend);
 
             if(image == null){
-                webhookClient.send(msg);
+                webhookClient.send(new WebhookMessageBuilder()
+                        .setUsername("New Upvote!")
+                        .setAvatarUrl(Links.UPVOTE.getLink())
+                        .setContent(msg)
+                        .build());
                 webhookClient.close();
                 return;
             }
@@ -64,6 +68,8 @@ public class VoteUtil {
                 ImageIO.write(image, "png", baos);
 
                 webhookClient.send(new WebhookMessageBuilder()
+                        .setUsername("New Upvote!")
+                        .setAvatarUrl(Links.UPVOTE.getLink())
                         .setContent(msg)
                         .addFile(String.format(
                                 "vote_%s.png",
@@ -79,12 +85,87 @@ public class VoteUtil {
 
         }else{
             msg = String.format(
-                    "An anonymous person has voted for the bot!\n" +
+                    "An anonymous person has voted for %s!\n" +
                     "Vote too on <%s>",
+                    guild.getSelfMember().getAsMention(),
                     Links.DISCORDBOTS_ORG.getLink()
             );
 
-            webhookClient.send(msg);
+            webhookClient.send(new WebhookMessageBuilder()
+                    .setUsername("New Upvote!")
+                    .setAvatarUrl(Links.UPVOTE.getLink())
+                    .setContent(msg)
+                    .build());
+            webhookClient.close();
+        }
+    }
+
+    public static void rewardFavourte(String userID){
+        String msg;
+        WebhookClient webhookClient = new WebhookClientBuilder(
+                PurrBot.file.getItem("config", "vote-webhook")
+        ).build();
+        Guild guild = ReadyListener.getShardManager().getGuildById(IDs.GUILD.getId());
+
+        if(voterIsInGuild(guild, userID)){
+            Role role = guild.getRoleById(Roles.FAVORITED.getRole());
+            Member member = guild.getMemberById(userID);
+            msg = String.format(
+                    "%s has added %s to their favorites! Thank you. \uD83C\uDF89\n" +
+                    "Favourite her too on <%s>",
+                    member.getAsMention(),
+                    guild.getSelfMember().getAsMention(),
+                    Links.LBOTS_ORG.getLink()
+            );
+
+            if(!member.getRoles().contains(role))
+                guild.getController().addRolesToMember(member, role).reason("[Vote reward] Favoured the bot").queue();
+
+            BufferedImage image = ImageUtil.createVoteImage(member);
+
+            if(image == null){
+                webhookClient.send(new WebhookMessageBuilder()
+                        .setUsername("New Favourite!")
+                        .setAvatarUrl(Links.FAVOURITE.getLink())
+                        .setContent(msg)
+                        .build()
+                );
+                webhookClient.close();
+                return;
+            }
+
+            try {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.setUseCache(false);
+                ImageIO.write(image, "png", baos);
+
+                webhookClient.send(new WebhookMessageBuilder()
+                        .setUsername("New Favourite!")
+                        .setAvatarUrl(Links.FAVOURITE.getLink())
+                        .setContent(msg)
+                        .addFile(String.format(
+                                "favourite_%s.png",
+                                userID
+                        ), baos.toByteArray())
+                        .build()
+                );
+            }catch (IOException ex){
+                webhookClient.send(msg);
+            }
+            webhookClient.close();
+        }else{
+            msg = String.format(
+                    "An anonymous personhas added %s to their favorites!\n" +
+                    "Favourite her too on <%s>",
+                    guild.getSelfMember().getAsMention(),
+                    Links.LBOTS_ORG.getLink()
+            );
+
+            webhookClient.send(new WebhookMessageBuilder()
+                    .setUsername("New Favourite!")
+                    .setAvatarUrl(Links.FAVOURITE.getLink())
+                    .setContent(msg)
+                    .build());
             webhookClient.close();
         }
     }

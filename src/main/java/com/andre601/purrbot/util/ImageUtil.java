@@ -163,20 +163,22 @@ public class ImageUtil {
     /**
      * Creates and sends a vote-image
      *
-     * @param user
-     *        A {@link net.dv8tion.jda.core.entities.User User object}.
+     * @param member
+     *        The {@link net.dv8tion.jda.core.entities.Member Member} that voted
      * @param isWeekend
      *        A boolean to check, if it's weekend or not (for displaying "x2 votes").
+     *
+     * @return A {@link java.awt.image.BufferedImage BufferedImage}.
      */
-    public static BufferedImage createVoteImage(User user, boolean isWeekend){
+    public static BufferedImage createVoteImage(Member member, boolean isWeekend){
 
         //  Saving the userIcon/avatar as a Buffered image
-        BufferedImage u = getUserIcon(user);
+        BufferedImage u = getUserIcon(member.getUser());
 
         try {
             BufferedImage layer = ImageIO.read(new File("img/vote_layer.png"));
 
-            BufferedImage bg = ImageIO.read(new File("img/vote_bg.png"));
+            BufferedImage bg = ImageIO.read(new File("img/background.png"));
             BufferedImage image = new BufferedImage(bg.getWidth(), bg.getHeight(), bg.getType());
             Graphics2D img = image.createGraphics();
 
@@ -193,7 +195,7 @@ public class ImageUtil {
             img.setFont(textFont);
 
             //  Setting the actual text. \n is (sadly) not supported, so we have to make each new line seperate.
-            img.drawString(user.getName(),320, 130);
+            img.drawString(member.getEffectiveName(),320, 130);
 
             img.setColor(new Color(114, 137, 218));
             img.setFont(voteCount);
@@ -237,6 +239,46 @@ public class ImageUtil {
             return null;
         }
 
+    }
+
+    /**
+     * Creates and sends a vote-image
+     *
+     * @param member
+     *        The {@link net.dv8tion.jda.core.entities.Member Member} that voted
+     *
+     * @return A {@link java.awt.image.BufferedImage BufferedImage}.
+     */
+    public static BufferedImage createVoteImage(Member member){
+        BufferedImage icon = getUserIcon(member.getUser());
+
+        try{
+            BufferedImage layer = ImageIO.read(new File("img/favourite_layer.png"));
+
+            BufferedImage bg = ImageIO.read(new File("img/background.png"));
+            BufferedImage image = new BufferedImage(bg.getWidth(), bg.getHeight(), bg.getType());
+            Graphics2D img = image.createGraphics();
+
+            //  Adding the different images (background -> User-Avatar -> actual image)
+            img.drawImage(bg, 0, 0, null);
+            img.drawImage(icon, 5, 5, 290, 290, null);
+            img.drawImage(layer, 0, 0, null);
+
+            //  Creating the font for the custom text.
+            Font textFont = new Font("Arial", Font.PLAIN, 120);
+
+            img.setColor(Color.WHITE);
+            img.setFont(textFont);
+
+            //  Setting the actual text. \n is (sadly) not supported, so we have to make each new line seperate.
+            img.drawString(member.getEffectiveName(),320, 130);
+
+            img.dispose();
+
+            return image;
+        }catch(IOException ex){
+            return null;
+        }
     }
 
     /**

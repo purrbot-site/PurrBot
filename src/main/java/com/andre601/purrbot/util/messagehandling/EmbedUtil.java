@@ -21,7 +21,7 @@ public class EmbedUtil {
     public static EmbedBuilder getEmbed(User user){
         return getEmbed().setFooter(String.format(
                 "Requested by: %s",
-                MessageUtil.getTag(user)
+                user.getAsTag()
         ), user.getEffectiveAvatarUrl());
     }
 

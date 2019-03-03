@@ -1,6 +1,7 @@
 package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
@@ -9,7 +10,6 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,13 +38,13 @@ public class CmdPoke implements Command {
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(MessageFormat.format(
-                    "How can you actually poke yourself {0}?",
+            tc.sendMessage(String.format(
+                    "Why do you poke yourself %s?",
                     msg.getMember().getAsMention()
             )).queue();
         }
 
-        String link = HttpUtil.getImage("poke", "url");
+        String link = HttpUtil.getImage(API.GIF_POKE, 0);
         String pokedMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(
@@ -53,21 +53,21 @@ public class CmdPoke implements Command {
 
         if(pokedMembers.equals("") || pokedMembers.length() == 0) return;
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting a poke-gif...",
+        tc.sendMessage(String.format(
+                "%s Getting a poke-gif...",
                 Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
-                message.editMessage(MessageFormat.format(
-                        "{0} pokes you {1}",
+                message.editMessage(String.format(
+                        "%s pokes you %s",
                         msg.getMember().getEffectiveName(),
                         pokedMembers
                 )).queue();
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                        "{0} pokes you {1}",
+                ).embed(EmbedUtil.getEmbed().setDescription(String.format(
+                        "%s pokes you %s",
                         msg.getMember().getEffectiveName(),
                         pokedMembers
                 )).setImage(link).build()).queue();

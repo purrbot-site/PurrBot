@@ -1,6 +1,7 @@
 package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
@@ -9,7 +10,6 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +44,7 @@ public class CmdPat implements Command {
             )).queue();
         }
 
-        String link = HttpUtil.getImage("pat", "url");
+        String link = HttpUtil.getImage(API.GIF_PAT, 0);
         String pattetMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(
@@ -53,21 +53,21 @@ public class CmdPat implements Command {
 
         if(pattetMembers.equals("") || pattetMembers.length() == 0) return;
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting a pat-gif...",
+        tc.sendMessage(String.format(
+                "%s Getting a pat-gif...",
                 Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
-                message.editMessage(MessageFormat.format(
-                        "{0} pats you {1}",
+                message.editMessage(String.format(
+                        "%s pats you %s",
                         msg.getMember().getEffectiveName(),
                         pattetMembers
                 )).queue();
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                        "{0} pats you {1}",
+                ).embed(EmbedUtil.getEmbed().setDescription(String.format(
+                        "%s pats you %s",
                         msg.getMember().getEffectiveName(),
                         pattetMembers
                 )).setImage(link).build()).queue();

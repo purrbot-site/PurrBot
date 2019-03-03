@@ -2,8 +2,8 @@ package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
-import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
@@ -15,7 +15,6 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -59,15 +58,16 @@ public class CmdNeko implements Command {
             tc.sendTyping().queue();
 
             nekoUserID.add(msg.getAuthor().getId());
-            StringBuilder urls = new StringBuilder();
+            String urls;
             if(msg.getContentRaw().contains("-gif")){
-                for(int i = 0; i < 30; ++i){
-                    urls.append(HttpUtil.getImage("ngif", "url")).append(",");
-                }
+                urls = HttpUtil.getImage(API.GIF_NEKO, 20);
             }else{
-                for (int i = 0; i < 30; ++i) {
-                    urls.append(HttpUtil.getImage("neko", "url")).append(",");
-                }
+                urls = HttpUtil.getImage(API.IMG_NEKO, 20);
+            }
+
+            if(urls == null){
+                EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
+                return;
             }
 
             Slideshow slideshow = sBuilder
@@ -79,10 +79,10 @@ public class CmdNeko implements Command {
                             "can use the navigation!\n" +
                             "\n" +
                             "__**Slideshows may take a while to update!**__",
-                            MessageUtil.getTag(msg.getAuthor()),
-                            MessageUtil.getTag(guild.getOwner().getUser())
+                            msg.getAuthor().getAsTag().replace("`", "'"),
+                            guild.getOwner().getUser().getAsTag().replace("`", "'")
                     ))
-                    .setUrls(urls.toString().split(","))
+                    .setUrls(urls.replace("\"", "").split(","))
                     .setFinalAction(message -> {
                         if(message != null) message.delete().queue();
                         nekoUserID.remove(msg.getAuthor().getId());
@@ -93,20 +93,17 @@ public class CmdNeko implements Command {
         }
 
         if(s.contains("-gif")){
-            String gifLink = HttpUtil.getImage("ngif", "url");
-            if(gifLink == null){
+            String link = HttpUtil.getImage(API.GIF_NEKO, 0);
+            if(link == null){
                 EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
                 return;
             }
             EmbedBuilder nekogif = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setTitle(MessageFormat.format(
-                            "{0}",
-                            gifLink.replace("https://cdn.nekos.life/ngif/", "")
-                    ), gifLink)
-                    .setImage(gifLink);
+                    .setTitle("Cute Neko UwU", link)
+                    .setImage(link);
 
-            tc.sendMessage(MessageFormat.format(
-                    "{0} Getting a cute neko-gif...",
+            tc.sendMessage(String.format(
+                    "%s Getting a cute neko-gif...",
                     Emotes.LOADING.getEmote()
             )).queue(message ->
                     message.editMessage(
@@ -116,7 +113,7 @@ public class CmdNeko implements Command {
             return;
         }
 
-        String link = HttpUtil.getImage("neko", "url");
+        String link = HttpUtil.getImage(API.IMG_NEKO, 0);
 
         if(link == null){
             EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");
@@ -124,14 +121,11 @@ public class CmdNeko implements Command {
         }
 
         EmbedBuilder neko = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle(MessageFormat.format(
-                        "{0}",
-                        link.replace("https://cdn.nekos.life/neko/", "")
-                ), link)
+                .setTitle("Cute Neko UwU", link)
                 .setImage(link);
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting a cute neko...",
+        tc.sendMessage(String.format(
+                "%s Getting a cute neko...",
                 Emotes.LOADING.getEmote()
         )).queue(message -> {
             //  Editing the message to add the image ("should" prevent issues with empty embeds)

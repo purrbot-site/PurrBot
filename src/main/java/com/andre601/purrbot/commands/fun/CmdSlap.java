@@ -1,6 +1,7 @@
 package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.HttpUtil;
+import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
@@ -9,7 +10,6 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,13 +38,13 @@ public class CmdSlap implements Command {
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(MessageFormat.format(
-                    "\\*Slaps {0}* NO! You won't hurt yourself.",
+            tc.sendMessage(String.format(
+                    "\\*Holds arm of %s* NO! You won't hurt yourself.",
                     msg.getMember().getAsMention()
             )).queue();
         }
 
-        String link = HttpUtil.getImage("slap", "url");
+        String link = HttpUtil.getImage(API.GIF_SLAP, 0);
         String slapedMembers = members.stream().filter(
                 member -> member != guild.getSelfMember()
         ).filter(
@@ -53,21 +53,21 @@ public class CmdSlap implements Command {
 
         if(slapedMembers.equals("") || slapedMembers.length() == 0) return;
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Getting a slap-gif...",
+        tc.sendMessage(String.format(
+                "%s Getting a slap-gif...",
                 Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
-                message.editMessage(MessageFormat.format(
-                        "{0} slaps you {1}",
+                message.editMessage(String.format(
+                        "%s slaps you %s",
                         msg.getMember().getEffectiveName(),
                         slapedMembers
                 )).queue();
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(EmbedUtil.getEmbed().setDescription(MessageFormat.format(
-                        "{0} slaps you {1}",
+                ).embed(EmbedUtil.getEmbed().setDescription(String.format(
+                        "%s slaps you %s",
                         msg.getMember().getEffectiveName(),
                         slapedMembers
                 )).setImage(link).build()).queue();

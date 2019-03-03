@@ -1,12 +1,10 @@
 package com.andre601.purrbot.util;
 
 import com.andre601.purrbot.core.PurrBot;
-import com.andre601.purrbot.util.constants.Links;
+import com.andre601.purrbot.util.constants.API;
 import okhttp3.*;
 import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,21 +15,27 @@ public class HttpUtil {
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    private static String image(String endpoint, String key) throws IOException{
+    private static String image(API link, int count) throws IOException{
         Request request = new Request.Builder()
                 .url(String.format(
-                        "https://nekos.life/api/v2/img/%s",
-                        endpoint
+                        "%s/%s",
+                        link.getLink(),
+                        count == 0 ? "" : "?count=" + (count > 20 ? 20 : count)
                 ))
                 .build();
         Response response = CLIENT.newCall(request).execute();
         try(ResponseBody responseBody = response.body()){
             if(!response.isSuccessful()) throw new IOException(String.format(
                     "Unexpected code for endpoint %s: %s",
-                    endpoint,
+                    link.getEndpoint(),
                     response
             ));
-            return new JSONObject(Objects.requireNonNull(responseBody).string()).get(key).toString();
+            JSONObject json = new JSONObject(Objects.requireNonNull(responseBody).string())
+                    .getJSONObject("data")
+                    .getJSONObject("response");
+
+
+            return count == 0 ? json.getString("url") : json.getJSONArray("urls").join(",");
         }
     }
 
@@ -139,16 +143,16 @@ public class HttpUtil {
     /**
      * Getter-method to get the link to an image from the nekos.life-API.
      *
-     * @param  endpoint
-     *         The name of the endpoint to get the link from.
-     * @param  key
-     *         The name of the key used to get the value from JSON.
+     * @param  link
+     *         The {@link com.andre601.purrbot.util.constants.API API} that is targeted on the nekos.life API.
+     * @param  count
+     *         The amount of images that should get requested (limited to 20 from the API itself)
      *
      * @return Possible-null String from the API.
      */
-    public static String getImage(String endpoint, String key){
+    public static String getImage(API link, int count){
         try{
-            return image(endpoint, key);
+            return image(link, count);
         }catch(IOException ex){
             if(PermUtil.isBeta()) ex.printStackTrace();
             return null;

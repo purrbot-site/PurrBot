@@ -111,7 +111,7 @@ public class ReadyListener extends ListenerAdapter{
 
             PurrBot.getLogger().info(String.format(
                     "Enabled Bot-User %s (%s) v.%s on %s guild(s) with %s shard(s)",
-                    MessageUtil.getTag(jda.getSelfUser()),
+                    jda.getSelfUser().getAsTag(),
                     botID,
                     IDs.VERSION.getId(),
                     guilds,

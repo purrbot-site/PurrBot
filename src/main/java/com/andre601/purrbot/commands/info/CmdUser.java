@@ -3,6 +3,7 @@ package com.andre601.purrbot.commands.info;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.ImageUtil;
 import com.andre601.purrbot.util.LevelUtil;
+import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -34,7 +35,7 @@ public class CmdUser implements Command {
         for(int i = 1; i < roles.size(); i++){
             Role role = roles.get(i);
             int rolesLeft = roles.size() - i;
-            String roleName = String.format("`%s`", role.getName().replace("`", "'"));
+            String roleName = String.format("%s", role.getName().replace("`", "'"));
 
             if(sb.length() + roleName.length() + 20 + String.valueOf(rolesLeft).length() >
                     MessageEmbed.VALUE_MAX_LENGTH){
@@ -42,7 +43,7 @@ public class CmdUser implements Command {
                 break;
             }
 
-            sb.append(roleName).append(", ");
+            sb.append(roleName).append("\n");
         }
         return sb.substring(0, sb.length() - 2);
     }
@@ -66,11 +67,11 @@ public class CmdUser implements Command {
                 ))
                 .addField(String.format(
                         "%s %s",
-                        MessageUtil.getTag(member.getUser()),
+                        member.getUser().getAsTag(),
                         (member.getUser().isBot() ? Emotes.BOT.getEmote() : "")
                 ), String.format(
                         "```yaml\n" +
-                        "%s\n" +
+                        "%s" +
                         "ID:   %s\n" +
                         "%s\n" +
                         "```",
@@ -98,7 +99,7 @@ public class CmdUser implements Command {
                         MessageUtil.formatTime(LocalDateTime.from(member.getJoinDate()))
                 ), false);
 
-        if(msg.getGuild().getId().equals(IDs.GUILD.getId()) && !member.getUser().isBot()){
+        if(msg.getGuild().getId().equals(IDs.GUILD.getId()) && !member.getUser().isBot() && !PermUtil.isBeta()){
             userEmbed.addField("XP", String.format(
                     "`%d`/`%d`",
                     DBUtil.getXP(member.getUser()),
