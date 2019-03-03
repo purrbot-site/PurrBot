@@ -309,21 +309,21 @@ public class ImageUtil {
             Color textColor;
 
             if(chance == 100){
-                textColor = new Color(0xe2ecc71);
+                textColor = new Color(0x58f10f);
             }else
             if((chance <= 99) && (chance > 75)){
-                textColor = new Color(0xf1c40f);
+                textColor = new Color(0xbbf10f);
             }else
             if((chance <= 75) && (chance > 50)){
-                textColor = new Color(0xf39c12);
+                textColor = new Color(0xf1c40f);
             }else
             if((chance <= 50) && (chance > 25)){
-                textColor = new Color(0xe67e22);
+                textColor = new Color(0xf39c12);
             }else
             if((chance <= 25) && (chance > 0)){
-                textColor = new Color(0xe74c3c);
+                textColor = new Color(0xe67e22);
             }else{
-                textColor = new Color(0xe000000);
+                textColor = new Color(0xe74c3c);
             }
 
             image.setColor(textColor);
