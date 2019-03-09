@@ -26,26 +26,25 @@ import java.util.List;
 )
 public class CmdUser implements Command {
 
-    private String getRoles(Member user){
-        List<Role> roles = user.getRoles();
+    private String getRoles(Member member){
+        List<Role> roles = member.getRoles();
         if(roles.size() <= 1)
             return "`No other roles`";
 
         StringBuilder sb = new StringBuilder();
         for(int i = 1; i < roles.size(); i++){
             Role role = roles.get(i);
-            int rolesLeft = roles.size() - i;
             String roleName = String.format("%s", role.getName().replace("`", "'"));
 
-            if(sb.length() + roleName.length() + 20 + String.valueOf(rolesLeft).length() >
-                    MessageEmbed.VALUE_MAX_LENGTH){
-                sb.append("**__+").append(rolesLeft).append(" more__**  ");
+            if(sb.length() + roleName.length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
+                int rolesLeft = roles.size() - i;
+                sb.append("**__+").append(rolesLeft).append(" more__**");
                 break;
             }
 
             sb.append(roleName).append("\n");
         }
-        return sb.substring(0, sb.length() - 2);
+        return sb.toString();
     }
 
     private void getUser(Message msg){

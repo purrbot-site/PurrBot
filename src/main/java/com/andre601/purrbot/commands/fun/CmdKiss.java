@@ -38,7 +38,7 @@ public class CmdKiss implements Command {
         if(members.contains(guild.getSelfMember())){
             if(PermUtil.isBeta()){
                 tc.sendMessage(String.format(
-                        "Not on the first date %s!",
+                        "\\*gets a kiss on her cheek from %s*",
                         msg.getAuthor().getAsMention()
                 )).queue();
             }else

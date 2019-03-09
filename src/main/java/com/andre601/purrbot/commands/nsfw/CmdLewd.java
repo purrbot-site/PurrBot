@@ -102,7 +102,7 @@ public class CmdLewd implements Command {
             }
 
             EmbedBuilder lewdgif = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setTitle("Lewd Neko >w<", gifLink)
+                    .setTitle("Lewd Neko [Gif] >w<", gifLink)
                     .setImage(gifLink);
 
             tc.sendMessage(String.format(
@@ -123,7 +123,7 @@ public class CmdLewd implements Command {
         }
 
         EmbedBuilder lewd = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle("Lewd Neko >w<", link)
+                .setTitle("Lewd Neko [Img] >w<", link)
                 .setImage(link);
 
         tc.sendMessage(String.format(

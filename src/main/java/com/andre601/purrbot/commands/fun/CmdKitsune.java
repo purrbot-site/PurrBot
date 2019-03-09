@@ -35,10 +35,7 @@ public class CmdKitsune implements Command {
         }
 
         EmbedBuilder gecg = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle(String.format(
-                        "%s",
-                        link.replace("https://cdn.nekos.life/fox_girl/", "")
-                ), link)
+                .setTitle("Kitsune UwU", link)
                 .setImage(link);
 
         tc.sendMessage(String.format(

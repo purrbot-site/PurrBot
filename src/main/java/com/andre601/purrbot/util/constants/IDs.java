@@ -18,7 +18,7 @@ public enum IDs {
     GUILD("423771795523371019"),
 
     // Current version
-    VERSION("3.5.0");
+    VERSION("3.5.1");
 
     private String id;
 

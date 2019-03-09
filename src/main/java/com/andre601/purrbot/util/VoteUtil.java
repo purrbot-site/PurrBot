@@ -48,7 +48,9 @@ public class VoteUtil {
             );
 
             if(!guild.getMemberById(voterId).getRoles().contains(role))
-                guild.getController().addRolesToMember(member, role).reason("[Vote reward] Voted for the bot").queue();
+                guild.getController().addRolesToMember(member, role)
+                        .reason("[Vote reward] Has voted for the bot (discordbots.org)")
+                        .queue();
 
             BufferedImage image = ImageUtil.createVoteImage(member, isWeekend);
 
@@ -111,7 +113,7 @@ public class VoteUtil {
             Role role = guild.getRoleById(Roles.FAVORITED.getRole());
             Member member = guild.getMemberById(userID);
             msg = String.format(
-                    "%s has added %s to their favorites! Thank you. \uD83C\uDF89\n" +
+                    "%s has added %s to their favourites! Thank you. \uD83C\uDF89\n" +
                     "Favourite her too on <%s>",
                     member.getAsMention(),
                     guild.getSelfMember().getAsMention(),
@@ -119,7 +121,9 @@ public class VoteUtil {
             );
 
             if(!member.getRoles().contains(role))
-                guild.getController().addRolesToMember(member, role).reason("[Vote reward] Favoured the bot").queue();
+                guild.getController().addRolesToMember(member, role)
+                        .reason("[Vote reward] Added bot to favourites (LBots.org)")
+                        .queue();
 
             BufferedImage image = ImageUtil.createVoteImage(member);
 
@@ -155,7 +159,7 @@ public class VoteUtil {
             webhookClient.close();
         }else{
             msg = String.format(
-                    "An anonymous personhas added %s to their favorites!\n" +
+                    "An anonymous person has added %s to their favourites!\n" +
                     "Favourite her too on <%s>",
                     guild.getSelfMember().getAsMention(),
                     Links.LBOTS_ORG.getLink()

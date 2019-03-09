@@ -99,7 +99,7 @@ public class CmdNeko implements Command {
                 return;
             }
             EmbedBuilder nekogif = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setTitle("Cute Neko UwU", link)
+                    .setTitle("Neko [Gif] OwO", link)
                     .setImage(link);
 
             tc.sendMessage(String.format(
@@ -121,7 +121,7 @@ public class CmdNeko implements Command {
         }
 
         EmbedBuilder neko = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle("Cute Neko UwU", link)
+                .setTitle("Neko [Img] OwO", link)
                 .setImage(link);
 
         tc.sendMessage(String.format(
