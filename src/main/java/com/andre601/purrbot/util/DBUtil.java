@@ -131,7 +131,7 @@ public class DBUtil {
         return r.table(memberTable).get(user.getId()).run(con);
     }
 
-    public static boolean hasMember(User user){
+    static boolean hasMember(User user){
         return getUser(user) != null;
     }
 
@@ -145,7 +145,7 @@ public class DBUtil {
         ).optArg("conflict", "update").run(con);
     }
 
-    public static void setXP(User user, long xp){
+    static void setXP(User user, long xp){
         r.table(memberTable).get(user.getId()).update(r.hashMap("xp", xp)).run(con);
     }
 
@@ -155,13 +155,13 @@ public class DBUtil {
         return (long)u.get("xp");
     }
 
-    public static boolean hasLevel(User user){
+    static boolean hasLevel(User user){
         Map u = getUser(user);
 
         return u.get("level") != null;
     }
 
-    public static void setLevel(User user, long level){
+    static void setLevel(User user, long level){
         r.table(memberTable).get(user.getId()).update(r.hashMap("level", level)).run(con);
     }
 

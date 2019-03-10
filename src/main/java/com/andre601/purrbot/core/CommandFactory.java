@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CommandFactory {
+class CommandFactory {
 
     private static final Set<Command> COMMANDS = new HashSet<>();
 

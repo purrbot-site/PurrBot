@@ -19,7 +19,7 @@ import java.net.URLEncoder;
 
 public class ImageUtil {
 
-    public static final String[] UA = {"User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 " +
+    private static final String[] UA = {"User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 " +
             "(KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36"};
 
     /**
@@ -170,7 +170,7 @@ public class ImageUtil {
      *
      * @return A {@link java.awt.image.BufferedImage BufferedImage}.
      */
-    public static BufferedImage createVoteImage(Member member, boolean isWeekend){
+    static BufferedImage createVoteImage(Member member, boolean isWeekend){
 
         //  Saving the userIcon/avatar as a Buffered image
         BufferedImage u = getUserIcon(member.getUser());
@@ -249,7 +249,7 @@ public class ImageUtil {
      *
      * @return A {@link java.awt.image.BufferedImage BufferedImage}.
      */
-    public static BufferedImage createVoteImage(Member member){
+    static BufferedImage createVoteImage(Member member){
         BufferedImage icon = getUserIcon(member.getUser());
 
         try{

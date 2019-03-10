@@ -35,7 +35,7 @@ public class GFile {
      * @param internalPath
      *        The internal location, where the template is saved.
      */
-    public void make(String name, String externalPath, String internalPath){
+    void make(String name, String externalPath, String internalPath){
         if(gFiles == null){
             gFiles = new HashMap<>();
         }
