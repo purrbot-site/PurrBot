@@ -93,7 +93,7 @@ public class CmdInfo implements Command {
                 ), false)
                 .addField("Bot-Version", String.format(
                         "`%s`",
-                        IDs.VERSION
+                        IDs.VERSION.getId()
                 ), true)
                 .addField("Library", String.format(
                         "[`JDA %s`](%s)",

@@ -97,7 +97,7 @@ public class PurrBot {
                         VoteUtil.rewardUpvote(vote.getBotId(), vote.getUserId(), vote.isWeekend());
                     }
 
-                    return "";
+                    return "Success";
                 });
 
                 post("/lbots", (request, response) -> {
@@ -111,7 +111,7 @@ public class PurrBot {
                         VoteUtil.rewardFavourte(userId);
                     }
 
-                    return "";
+                    return "Success";
                 });
             });
         }
@@ -186,9 +186,14 @@ public class PurrBot {
     }
 
     //  Check for if it is *Purr*'s Birthday (19th of march)
-    public static boolean isBDay(){
+    public static boolean isPurrsBirthday(){
         final Calendar cal = Calendar.getInstance();
         return cal.get(Calendar.MONTH) == Calendar.MARCH && cal.get(Calendar.DAY_OF_MONTH) == 19;
+    }
+
+    public static boolean isSnugglesBirthday(){
+        final Calendar cal = Calendar.getInstance();
+        return cal.get(Calendar.MONTH) == Calendar.APRIL && cal.get(Calendar.DAY_OF_MONTH) == 28;
     }
 
     public static Gson getGson(){

@@ -1,5 +1,6 @@
 package com.andre601.purrbot.commands.fun;
 
+import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.API;
@@ -11,6 +12,7 @@ import com.jagrosh.jdautilities.menu.Slideshow;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -92,6 +94,8 @@ public class CmdNeko implements Command {
             return;
         }
 
+        Emote blobCatHeart = ReadyListener.getShardManager().getEmoteById(Emotes.BLOBCATHEART.getId());
+
         if(s.contains("-gif")){
             String link = HttpUtil.getImage(API.GIF_NEKO, 0);
             if(link == null){
@@ -105,11 +109,12 @@ public class CmdNeko implements Command {
             tc.sendMessage(String.format(
                     "%s Getting a cute neko-gif...",
                     Emotes.LOADING.getEmote()
-            )).queue(message ->
-                    message.editMessage(
-                            EmbedBuilder.ZERO_WIDTH_SPACE
-                    ).embed(nekogif.build()).queue()
-            );
+            )).queue(message -> {
+                message.editMessage(
+                        EmbedBuilder.ZERO_WIDTH_SPACE
+                ).embed(nekogif.build()).queue();
+                message.addReaction(blobCatHeart).queue();
+            });
             return;
         }
 
@@ -132,14 +137,7 @@ public class CmdNeko implements Command {
             message.editMessage(
                     EmbedBuilder.ZERO_WIDTH_SPACE
             ).embed(neko.build()).queue();
-
-            //  The same image exists twice for some reason...
-            if(link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko039.jpeg") ||
-                    link.equalsIgnoreCase("https://cdn.nekos.life/neko/neko_043.jpeg")){
-                tc.sendMessage("Hey! That's me :3").queue();
-
-                message.addReaction("❤").queue();
-            }
+            message.addReaction(blobCatHeart).queue();
         });
     }
 }

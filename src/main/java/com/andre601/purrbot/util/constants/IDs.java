@@ -13,12 +13,13 @@ public enum IDs {
 
     // Bots
     PURR   ("425382319449309197"),
+    SNUGGLE("439829950686822410"),
 
     // Support guild
     GUILD("423771795523371019"),
 
     // Current version
-    VERSION("3.5.2");
+    VERSION("3.5.3");
 
     private String id;
 

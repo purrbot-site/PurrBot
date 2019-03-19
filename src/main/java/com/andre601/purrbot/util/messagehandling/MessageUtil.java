@@ -4,6 +4,7 @@ import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.core.PurrBot;
+import com.andre601.purrbot.util.constants.IDs;
 import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.entities.*;
 
@@ -23,8 +24,11 @@ public class MessageUtil {
      * @return A random {@link java.lang.String String} from a list.
      */
     public static String getFact(){
-        if(PurrBot.isBDay())
-            return  "🎉 Today is Purr's Birthday! 🎉";
+        if(PurrBot.isPurrsBirthday() || PurrBot.isSnugglesBirthday())
+            return  String.format(
+                    "Today is <@%s>'s birthday!",
+                    PurrBot.isPurrsBirthday() ? IDs.PURR.getId() : IDs.SNUGGLE.getId()
+            );
 
         return PurrBot.getRandomFacts().size() > 0 ? PurrBot.getRandomFacts().get(
                 PurrBot.getRandom().nextInt(PurrBot.getRandomFacts().size())) : "";

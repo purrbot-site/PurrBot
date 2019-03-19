@@ -5,10 +5,12 @@ package com.andre601.purrbot.util.constants;
  */
 public enum Emotes {
 
-    TYPING ("typing",  "472685909389737985", true),
-    LOADING("loading", "479011152148299777", true),
-    BOT    ("isBot",   "523673098784997414", false),
-    UHM    ("uhm",     "532675295719850001", false);
+    BLOBCATHEART("blobCatHeart", "483996289583808533", true),
+    LOADING     ("loading",      "479011152148299777", true),
+    TYPING      ("typing",       "472685909389737985", true),
+    BLOBHOLO    ("blobHolo",     "536346012546236436", false),
+    BOT         ("isBot",        "523673098784997414", false),
+    UHM         ("uhm",          "532675295719850001", false);
 
     private String name;
     private String id;
@@ -27,6 +29,10 @@ public enum Emotes {
                 this.name,
                 this.id
         );
+    }
+
+    public String getId(){
+        return this.id;
     }
 
 }
