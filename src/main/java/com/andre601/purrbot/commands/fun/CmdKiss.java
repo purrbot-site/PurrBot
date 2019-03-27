@@ -79,7 +79,7 @@ public class CmdKiss implements Command {
 
         tc.sendMessage(String.format(
                 "%s Getting a kiss-gif...",
-                Emotes.LOADING.getEmote()
+                Emotes.ANIM_LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
                 message.editMessage(String.format(

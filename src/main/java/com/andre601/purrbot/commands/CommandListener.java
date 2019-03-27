@@ -63,20 +63,7 @@ public class CommandListener extends ListenerAdapter {
                     if(!PermUtil.check(tc, Permission.MESSAGE_HISTORY)) return;
                     if(!PermUtil.check(tc, Permission.MESSAGE_WRITE)) return;
 
-                    if(raw.startsWith(event.getJDA().getSelfUser().getAsMention()) &&
-                            raw.length() == event.getJDA().getSelfUser().getAsMention().length()){
-                        tc.sendMessage(String.format(
-                                "%s Hi there! My prefix on this guild is `%s`\n" +
-                                "You can run `%shelp` for a list of my commands.",
-                                msg.getAuthor().getAsMention(),
-                                prefix,
-                                prefix
-                        )).queue();
-                        return;
-                    }
-
-                    if(raw.startsWith(guild.getSelfMember().getAsMention()) &&
-                            raw.length() == guild.getSelfMember().getAsMention().length()){
+                    if(raw.equalsIgnoreCase(guild.getSelfMember().getAsMention())){
                         tc.sendMessage(String.format(
                                 "%s Hi there! My prefix on this guild is `%s`\n" +
                                 "You can run `%shelp` for a list of my commands.",

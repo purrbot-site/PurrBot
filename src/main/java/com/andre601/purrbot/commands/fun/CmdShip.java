@@ -2,6 +2,7 @@ package com.andre601.purrbot.commands.fun;
 
 import com.andre601.purrbot.util.ImageUtil;
 import com.andre601.purrbot.util.PermUtil;
+import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
@@ -83,8 +84,45 @@ public class CmdShip implements Command {
 
         member1 = msg.getMentionedMembers().get(0);
 
-        if(member1 == msg.getGuild().getSelfMember() || member2 == msg.getGuild().getSelfMember()){
-            EmbedUtil.error(msg, "N-no! Don't ship with me. >.<");
+        if(member1 == msg.getGuild().getSelfMember()){
+            if(!PermUtil.isBeta()) {
+                if(
+                        member2.getUser().getId().equals(IDs.EVELIEN.getId()) ||
+                        member2.getUser().getId().equals(IDs.LILYSCARLET.getId()) ||
+                        member2.getUser().getId().equals(IDs.KORBO.getId())
+                ){
+                    tc.sendMessage(String.format(
+                            "%s Aww sweetie. You know we will always be a 100.\n" +
+                            "You don't need this command for that. ^-^",
+                            member2.getAsMention()
+                    )).queue();
+                    return;
+                }
+                EmbedUtil.error(msg, "N-no! You can't ship with me. >.<");
+                return;
+            }
+            EmbedUtil.error(msg, "N-no! You can't ship with me. >.<");
+            return;
+        }
+
+        if(member2 == msg.getGuild().getSelfMember()) {
+            if(!PermUtil.isBeta()){
+                if(
+                        member1.getUser().getId().equals(IDs.EVELIEN.getId()) ||
+                        member1.getUser().getId().equals(IDs.LILYSCARLET.getId()) ||
+                        member1.getUser().getId().equals(IDs.KORBO.getId())
+                ){
+                    tc.sendMessage(String.format(
+                            "%s Naw sweetie. You know we will always be a 100.\n" +
+                            "You don't need a test for that ^-^",
+                            member1.getAsMention()
+                    )).queue();
+                    return;
+                }
+                EmbedUtil.error(msg, "N-no! You can't ship with me. >.<");
+                return;
+            }
+            EmbedUtil.error(msg, "N-no! You can't ship with me. >.<");
             return;
         }
 

@@ -31,7 +31,7 @@ public class CmdDebug implements Command {
 
         tc.sendMessage(MessageFormat.format(
                 "{0} {1}",
-                Emotes.TYPING.getEmote(),
+                Emotes.ANIM_TYPING.getEmote(),
                 MessageUtil.getRandomDebug()
         )).queue(message -> message.editMessage(MessageFormat.format(
                 "{0} {1}",

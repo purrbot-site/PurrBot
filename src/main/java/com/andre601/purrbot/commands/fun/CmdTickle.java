@@ -10,7 +10,6 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.*;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,7 +55,7 @@ public class CmdTickle implements Command {
 
         tc.sendMessage(String.format(
                 "%s Getting a tickle-gif...",
-                Emotes.LOADING.getEmote()
+                Emotes.ANIM_LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
                 message.editMessage(String.format(

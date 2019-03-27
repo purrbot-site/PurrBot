@@ -6,8 +6,8 @@ package com.andre601.purrbot.util.constants;
 public enum Links {
 
     // Invites
-    INVITE_FULL ("https://discordapp.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=537259072"),
-    INVITE_BASIC("https://discordapp.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=85056"),
+    INVITE_FULL (true, 537259072),
+    INVITE_BASIC(true, 85056),
 
     // Guild invite
     DISCORD_INVITE("https://discord.gg/NB7AFqn"),
@@ -29,12 +29,26 @@ public enum Links {
 
 
     private String link;
+    private boolean isOauth;
+    private int perms;
 
     Links(String link){
         this.link = link;
     }
 
+    Links(boolean isOauth, int perms){
+        this.isOauth = isOauth;
+        this.perms = perms;
+    }
+
     public String getLink(){
+        if(isOauth)
+            return String.format(
+                    "https://discordapp.com/oauth2/authorize?scope=bot&client_id=%s&permissions=%d",
+                    IDs.PURR.getId(),
+                    this.perms
+            );
+
         return link;
     }
 }

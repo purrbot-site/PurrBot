@@ -46,7 +46,7 @@ public class CmdHolo implements Command {
         Emote blobHolo = ReadyListener.getShardManager().getEmoteById(Emotes.BLOBHOLO.getId());
         tc.sendMessage(String.format(
                 "%s Getting a cute image of holo...",
-                Emotes.LOADING.getEmote()
+                Emotes.ANIM_LOADING.getEmote()
         )).queue(message -> {
             message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(holo.build()).queue();
             message.addReaction(blobHolo).queue();

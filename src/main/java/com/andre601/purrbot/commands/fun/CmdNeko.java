@@ -95,6 +95,7 @@ public class CmdNeko implements Command {
         }
 
         Emote blobCatHeart = ReadyListener.getShardManager().getEmoteById(Emotes.BLOBCATHEART.getId());
+        Emote aBlobCatHeart = ReadyListener.getShardManager().getEmoteById(Emotes.ANIM_BLOBCATHEART.getId());
 
         if(s.contains("-gif")){
             String link = HttpUtil.getImage(API.GIF_NEKO, 0);
@@ -103,17 +104,15 @@ public class CmdNeko implements Command {
                 return;
             }
             EmbedBuilder nekogif = EmbedUtil.getEmbed(msg.getAuthor())
-                    .setTitle("Neko [Gif] OwO", link)
+                    .setTitle("Neko [Gif]", link)
                     .setImage(link);
 
             tc.sendMessage(String.format(
                     "%s Getting a cute neko-gif...",
-                    Emotes.LOADING.getEmote()
+                    Emotes.ANIM_LOADING.getEmote()
             )).queue(message -> {
-                message.editMessage(
-                        EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(nekogif.build()).queue();
-                message.addReaction(blobCatHeart).queue();
+                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(nekogif.build()).queue();
+                message.addReaction(aBlobCatHeart).queue();
             });
             return;
         }
@@ -126,17 +125,15 @@ public class CmdNeko implements Command {
         }
 
         EmbedBuilder neko = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle("Neko [Img] OwO", link)
+                .setTitle("Neko [Img]", link)
                 .setImage(link);
 
         tc.sendMessage(String.format(
                 "%s Getting a cute neko...",
-                Emotes.LOADING.getEmote()
+                Emotes.ANIM_LOADING.getEmote()
         )).queue(message -> {
             //  Editing the message to add the image ("should" prevent issues with empty embeds)
-            message.editMessage(
-                    EmbedBuilder.ZERO_WIDTH_SPACE
-            ).embed(neko.build()).queue();
+            message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(neko.build()).queue();
             message.addReaction(blobCatHeart).queue();
         });
     }
