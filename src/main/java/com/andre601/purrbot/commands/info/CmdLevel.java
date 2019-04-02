@@ -7,12 +7,10 @@ import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import me.duncte123.loadingbar.LoadingBar;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.*;
 
-import java.io.IOException;
+import java.io.File;
 import java.text.DecimalFormat;
 
 @CommandDescription(
@@ -35,15 +33,8 @@ public class CmdLevel implements Command {
 
         Double progress = (xp / reqXpDouble) * 100;
 
-        String imageName = String.format("progress_%s.png", member.getUser().getId());
-
-        byte[] image;
-
-        try{
-            image = LoadingBar.generateImage(progress);
-        }catch(IOException ex){
-            image = null;
-        }
+        String imageName = String.format("progress_%s.gif", member.getUser().getId());
+        File image = LevelUtil.getLevelImg(level);
 
         EmbedBuilder levelEmbed = EmbedUtil.getEmbed(requester)
                 .setDescription(String.format(
@@ -60,14 +51,8 @@ public class CmdLevel implements Command {
                         reqXpLong
                 ), true)
                 .addField("Progress", new DecimalFormat("###.##").format(progress) + "%", false)
-                .setImage(image == null ? null : String.format(
-                        "attachment://%s",
-                        imageName
-                ));
-        if(image == null){
-            textChannel.sendMessage(levelEmbed.build()).queue();
-            return;
-        }
+                .setImage(String.format("attachment://%s", imageName));
+
         textChannel.sendMessage(levelEmbed.build()).addFile(image, imageName).queue();
     }
 

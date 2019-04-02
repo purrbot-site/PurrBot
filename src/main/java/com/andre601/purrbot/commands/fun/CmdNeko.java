@@ -112,7 +112,8 @@ public class CmdNeko implements Command {
                     Emotes.ANIM_LOADING.getEmote()
             )).queue(message -> {
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(nekogif.build()).queue();
-                message.addReaction(aBlobCatHeart).queue();
+                if(PermUtil.check(tc, Permission.MESSAGE_EXT_EMOJI))
+                    message.addReaction(aBlobCatHeart).queue();
             });
             return;
         }
@@ -134,7 +135,8 @@ public class CmdNeko implements Command {
         )).queue(message -> {
             //  Editing the message to add the image ("should" prevent issues with empty embeds)
             message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(neko.build()).queue();
-            message.addReaction(blobCatHeart).queue();
+            if(PermUtil.check(tc, Permission.MESSAGE_EXT_EMOJI))
+                message.addReaction(blobCatHeart).queue();
         });
     }
 }

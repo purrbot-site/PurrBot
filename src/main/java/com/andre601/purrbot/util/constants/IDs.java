@@ -16,10 +16,7 @@ public enum IDs {
     SNUGGLE("439829950686822410"),
 
     // Support guild
-    GUILD("423771795523371019"),
-
-    // Current version
-    VERSION("3.5.5");
+    GUILD("423771795523371019");
 
     private String id;
 

@@ -37,7 +37,7 @@ public class LevelUtil {
             long level = DBUtil.getLevel(user);
 
             String imageName = String.format("levelup_%s.png", user.getId());
-            File image = new File("img/levelup.png");
+            File image = new File("img/level/levelup.png");
 
             textChannel.sendMessage(String.format(
                     "%s has reached **Level %d**! \uD83C\uDF89",
@@ -118,5 +118,25 @@ public class LevelUtil {
             }
         }
 
+    }
+
+    public static File getLevelImg(long level){
+        if(level >= 5 && level <= 9) {
+            return new File("img/level/very_addicted.gif");
+        }else
+        if(level >= 10 && level <= 14){
+            return new File("img/level/super_addicted.gif");
+        }else
+        if(level >= 15 && level <= 19){
+            return new File("img/level/ultra_addicted.gif");
+        }else
+        if(level >= 20 && level <= 29){
+            return new File("img/level/hyper_addicted.gif");
+        }else
+        if(level >= 30){
+            return new File("img/level/master_addicted.gif");
+        }
+
+        return new File("img/level/addicted.gif");
     }
 }

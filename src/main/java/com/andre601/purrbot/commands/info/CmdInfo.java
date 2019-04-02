@@ -91,10 +91,7 @@ public class CmdInfo implements Command {
                         msg.getJDA().getSelfUser().getName(),
                         DBUtil.getPrefix(guild)
                 ), false)
-                .addField("Bot-Version", String.format(
-                        "`%s`",
-                        IDs.VERSION.getId()
-                ), true)
+                .addField("Bot-Version", "`BOT_VERSION`", true)
                 .addField("Library", String.format(
                         "[`JDA %s`](%s)",
                         JDAInfo.VERSION,

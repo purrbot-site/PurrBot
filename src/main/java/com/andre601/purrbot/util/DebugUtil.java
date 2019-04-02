@@ -221,7 +221,7 @@ public class DebugUtil {
         try{
             connection = (HttpURLConnection) new URL("https://debug.scarsz.me/post").openConnection();
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.addRequestProperty("User-Agent", "Purr-Bot/" + IDs.VERSION.getId());
+            connection.addRequestProperty("User-Agent", "Purr-Bot/BOT_VERSION");
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
 

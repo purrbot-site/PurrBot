@@ -3,16 +3,15 @@ plugins {
     id 'application'
     id 'com.github.johnrengelman.shadow' version '2.0.4'
     id 'idea'
+    id 'net.kyori.blossom' version '1.1.0'
 }
 mainClassName = 'com.andre601.purrbot.core.PurrBot'
-version = '3.5.5'
+version = '3.7.0'
 
 description = """"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-
 
 repositories {
     jcenter()
@@ -37,7 +36,6 @@ dependencies {
     compile group: 'org.discordbots', name: 'DBL-Java-Library', version: '2.0.1'
     compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
     compile group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.2'
-    compile group: 'me.duncte123', name: 'loadingbar', version: '1.2.1_11'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.0'
 }
 
@@ -76,6 +74,10 @@ jar.finalizedBy cleanShittyJar
 
 jar {
     classifier = "nodeps"
+}
+
+blossom {
+    replaceToken 'BOT_VERSION', version
 }
 
 shadowJar {
