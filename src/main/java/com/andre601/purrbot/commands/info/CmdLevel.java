@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.entities.*;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
 
 @CommandDescription(
         name = "Level",
@@ -45,12 +46,13 @@ public class CmdLevel implements Command {
                         "`%d`",
                         level
                 ), true)
-                .addField("XP", String.format(
-                        "`%d/%d`",
+                .addField("XP", MessageFormat.format(
+                        "`{0}/{1} ({2}%)`",
                         xp,
-                        reqXpLong
+                        reqXpLong,
+                        new DecimalFormat("###.##").format(progress)
                 ), true)
-                .addField("Progress", new DecimalFormat("###.##").format(progress) + "%", false)
+                .setThumbnail(member.getUser().getEffectiveAvatarUrl())
                 .setImage(String.format("attachment://%s", imageName));
 
         textChannel.sendMessage(levelEmbed.build()).addFile(image, imageName).queue();
