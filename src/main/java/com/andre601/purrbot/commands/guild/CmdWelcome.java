@@ -166,7 +166,12 @@ public class CmdWelcome implements Command {
         Color color = MessageUtil.toColor(colorInput);
 
         if(color == null){
-            EmbedUtil.error(msg, "Invalid color-type or value!");
+            EmbedUtil.error(msg, String.format(
+                    "Invalid color type or value!\n" +
+                    "Make sure to prefix the color value with either `hex:` or `rgb:`\n" +
+                    "Example: `%swelcome color set hex:ffffff`",
+                    DBUtil.getPrefix(guild)
+            ));
             return;
         }
         DBUtil.changeColor(guild.getId(), colorInput);

@@ -240,6 +240,8 @@ public class MessageUtil {
      * @return Possibly-null {@link java.awt.Color Color}.
      */
     public static Color toColor(String input){
+        if(!input.toLowerCase().startsWith("rgb:") && !input.toLowerCase().startsWith("hex:")) return null;
+
         String type = input.split(":")[0].toLowerCase();
         String value = input.split(":")[1].toLowerCase();
         Color result = null;
