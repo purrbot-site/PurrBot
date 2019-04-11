@@ -73,7 +73,7 @@ public class DBUtil {
                                 .with("prefix", prefix)
                                 .with("welcome_channel", "none")
                                 .with("welcome_image", "purr")
-                                .with("welcome_color", "hex:ffffff")
+                                .with("welcome_color", "hex:000000")
                                 .with("welcome_message", "Welcome {mention}!")
                 )
         ).optArg("conflict", "update").run(con);

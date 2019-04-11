@@ -100,20 +100,22 @@ public class CmdInfo implements Command {
                 .addField("Links", String.format(
                         "[`GitHub`](%s)\n" +
                         "[`Wiki`](%s)\n" +
-                        "[`Discordbots.org`](%s)\n" +
-                        "[`discord.bots.gg`](%s)",
+                        "[`Twitter`](%s)\n" +
+                        "[`Discord.bots.gg`](%s)",
                         Links.GITHUB.getLink(),
                         Links.WIKI.getLink(),
-                        Links.DISCORDBOTS_ORG.getLink(),
+                        Links.TWITTER.getLink(),
                         Links.DISCORD_BOTS_GG.getLink()
                 ), true)
                 .addField("", String.format(
                         "[`Official Discord`](%s)\n" +
                         "[`Website`](%s)\n" +
-                        "[`lbots.org`](%s)",
+                        "[`Lbots.org`](%s)" +
+                        "[`Discordbots.org`](%s)",
                         Links.DISCORD_INVITE.getLink(),
                         Links.WEBSITE.getLink(),
-                        Links.LBOTS_ORG.getLink()
+                        Links.LBOTS_ORG.getLink(),
+                        Links.DISCORDBOTS_ORG.getLink()
                 ), true);
 
         if(s.contains("-dm")){

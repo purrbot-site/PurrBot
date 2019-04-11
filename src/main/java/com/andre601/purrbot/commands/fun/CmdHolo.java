@@ -37,10 +37,7 @@ public class CmdHolo implements Command {
         }
 
         EmbedBuilder holo = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle(String.format(
-                        "%s",
-                        link.replace("https://cdn.nekos.life/holo/", "")
-                ), link)
+                .setTitle("Holo", link)
                 .setImage(link);
 
         Emote blobHolo = ReadyListener.getShardManager().getEmoteById(Emotes.BLOBHOLO.getId());

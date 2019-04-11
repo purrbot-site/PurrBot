@@ -3,8 +3,6 @@ package com.andre601.purrbot.listeners;
 import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.PermUtil;
-import com.andre601.purrbot.util.constants.IDs;
-import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;

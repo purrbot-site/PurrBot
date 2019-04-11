@@ -148,14 +148,14 @@ public class CmdWelcome implements Command {
         TextChannel tc = msg.getTextChannel();
         String color = DBUtil.getColor(guild);
 
-        if(color.equalsIgnoreCase("hex:ffffff")){
-            EmbedUtil.error(msg, "The color is already set to `hex:ffffff`!");
+        if(color.equalsIgnoreCase("hex:000000")){
+            EmbedUtil.error(msg, "The color is already set to `hex:000000`!");
             return;
         }
 
         DBUtil.resetColor(guild.getId());
         EmbedBuilder success = EmbedUtil.getEmbed(msg.getAuthor())
-                .setDescription("Color resetted to `hex:ffffff`")
+                .setDescription("Color resetted to `hex:000000`")
                 .setColor(Color.GREEN);
 
         tc.sendMessage(success.build()).queue();
@@ -169,7 +169,7 @@ public class CmdWelcome implements Command {
             EmbedUtil.error(msg, String.format(
                     "Invalid color type or value!\n" +
                     "Make sure to prefix the color value with either `hex:` or `rgb:`\n" +
-                    "Example: `%swelcome color set hex:ffffff`",
+                    "Example: `%swelcome color set hex:000000`",
                     DBUtil.getPrefix(guild)
             ));
             return;

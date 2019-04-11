@@ -22,10 +22,11 @@ public enum Links {
     LBOTS_ORG      ("https://lbots.org/bots/425382319449309197"),
 
     // Other links
-    WEBSITE       ("https://purrbot.site"),
-    GITHUB_AVATAR ("https://i.imgur.com/Fv6qdfG.png"),
-    UPVOTE        ("https://i.imgur.com/HGQXIYp.png"),
-    FAVOURITE     ("https://i.imgur.com/5hccwa9.png");
+    WEBSITE      ("https://purrbot.site"),
+    GITHUB_AVATAR("https://i.imgur.com/Fv6qdfG.png"),
+    UPVOTE       ("https://i.imgur.com/HGQXIYp.png"),
+    FAVOURITE    ("https://i.imgur.com/5hccwa9.png"),
+    TWITTER      ("https://twitter.com/TruePurrBot");
 
 
     private String link;

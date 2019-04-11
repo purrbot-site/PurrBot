@@ -15,6 +15,7 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
         description =
                 "Wanna fuck someone?\n" +
                 "Mention a user, to send a request.\n" +
-                "The mentioned user can accept it with `>accept` or let it run out.",
+                "The mentioned user can accept it by clicking on the ✅ reaction or let it time out.",
         triggers = {"fuck", "sex"},
         attributes = {@CommandAttribute(key = "nsfw")}
 )
@@ -35,10 +36,6 @@ public class CmdFuck implements Command {
 
     private static int getRandomPercent(){
         return PurrBot.getRandom().nextInt(10);
-    }
-
-    private static boolean isMessage(Message msg){
-        return msg.getContentRaw().equalsIgnoreCase(">accept");
     }
 
     private static EmbedBuilder getFuckEmbed(Member member1, Member member2, String url){
@@ -130,22 +127,20 @@ public class CmdFuck implements Command {
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to have sex with you. Do you want that too?\n" +
-                "Type `>accept` within the next minute, to accept it!",
+                "Click on the ✅ reaction to accept the request.\n" +
+                "\n" +
+                "**This request will time out in 1 minute!**",
                 user.getAsMention(),
                 msg.getMember().getEffectiveName()
-        )).queue(message -> {
+        )).queue(message -> message.addReaction("✅").queue(emote -> {
             EventWaiter waiter = PurrBot.waiter;
             waiter.waitForEvent(
-                    MessageReceivedEvent.class,
-                    ev -> (isMessage(ev.getMessage()) &&
-                            ev.getTextChannel().equals(tc) &&
-                            (ev.getAuthor() != ev.getJDA().getSelfUser() ||
-                            ev.getAuthor() != message.getAuthor()) &&
-                            ev.getAuthor() == user),
+                    GuildMessageReactionAddEvent.class,
+                    ev -> ev.getReactionEmote().getName().equals("✅") &&
+                            !ev.getUser().isBot() &&
+                            ev.getUser().equals(user)&&
+                            ev.getMessageId().equals(message.getId()),
                     ev -> {
-                        if(PermUtil.check(ev.getTextChannel(), Permission.MESSAGE_MANAGE))
-                            ev.getMessage().delete().queue();
-
                         try {
                             message.delete().queue();
                         }catch (Exception ex){
@@ -156,14 +151,14 @@ public class CmdFuck implements Command {
 
                         String link = HttpUtil.getImage(API.GIF_FUCK_LEWD, 0);
 
-                        ev.getTextChannel().sendMessage(String.format(
+                        ev.getChannel().sendMessage(String.format(
                                 "%s accepted your invite %s! 0w0",
                                 guild.getMember(user).getEffectiveName(),
                                 author.getAsMention()
                         )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
 
                         if(link == null){
-                            ev.getTextChannel().sendMessage(String.format(
+                            ev.getChannel().sendMessage(String.format(
                                     "%s and %s are having sex!",
                                     msg.getMember().getEffectiveName(),
                                     guild.getMember(user).getEffectiveName()
@@ -171,7 +166,7 @@ public class CmdFuck implements Command {
                             return;
                         }
 
-                        ev.getTextChannel().sendMessage(
+                        ev.getChannel().sendMessage(
                                 getFuckEmbed(author, guild.getMember(user), link).build()
                         ).queue();
                     }, 1, TimeUnit.MINUTES,
@@ -188,8 +183,7 @@ public class CmdFuck implements Command {
                                 "Looks like he/she doesn't want to have sex with you %s ;-;",
                                 author.getAsMention()
                         )).queue();
-                    }
-            );
-        });
+                    });
+        }));
     }
 }
