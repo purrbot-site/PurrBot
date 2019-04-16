@@ -89,7 +89,7 @@ User     |                        | Gives info about you.
 ```
 Command: | Arguments: | Description:
 
-Fuck     | <@user>    | Sends a invite to a user to have sex with you. He/she can accept it with >accept
+Fuck     | <@user>    | Sends a invite to a user to have sex with you. He/she can accept or deny the request.
 Lesbian  |            | Returns a gif of lesbian.
 Lewd     |            | Shows a image of a lewd neko from nekos.life.
          | [-gif]     | Shows a gif-image of a lewd neko from nekos.life.
