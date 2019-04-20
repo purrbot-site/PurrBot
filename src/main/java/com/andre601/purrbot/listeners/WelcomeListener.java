@@ -4,6 +4,7 @@ import com.andre601.purrbot.commands.guild.CmdWelcome;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.ImageUtil;
+import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
@@ -29,7 +30,6 @@ public class WelcomeListener extends ListenerAdapter {
             return;
 
         Guild guild = event.getGuild();
-        User user = event.getUser();
 
         if(!DBUtil.getWelcomeChannel(guild).equals("none")){
             TextChannel tc = CmdWelcome.getChannel(guild);
@@ -45,12 +45,7 @@ public class WelcomeListener extends ListenerAdapter {
 
                 //  Creating a new message with the MessageBuilder
                 Message welcome = new MessageBuilder()
-                        .append(
-                                msg.replaceAll("(?i)\\{mention}", user.getAsMention())
-                                .replaceAll("(?i)\\{name}", user.getName())
-                                .replaceAll("(?i)\\{guild}", guild.getName())
-                                .replaceAll("(?i)\\{count}", String.valueOf(guild.getMembers().size()))
-                        ).build();
+                        .append(MessageUtil.formatPlaceholders(msg, guild, event.getMember())).build();
 
                 if(PermUtil.check(tc, Permission.MESSAGE_ATTACH_FILES)){
                     InputStream is = ImageUtil.getWelcomeImg(

@@ -306,4 +306,23 @@ public class MessageUtil {
             }
         };
     }
+
+    /**
+     * Formats certain placeholders from a String into their corresponding values.
+     *
+     * @param  msg
+     *         The String to format the placeholders in.
+     * @param  guild
+     *         The Guild to get values from.
+     * @param  member
+     *         The Member to get values from.
+     *
+     * @return The formatted String.
+     */
+    public static String formatPlaceholders(String msg, Guild guild, Member member){
+        return msg.replaceAll("(?i)\\{mention}", member.getAsMention())
+                .replaceAll("(?i)\\{name}", member.getEffectiveName())
+                .replaceAll("(?i)\\{guild}", guild.getName())
+                .replaceAll("(?i)\\{count}", String.valueOf(guild.getMembers().size()));
+    }
 }

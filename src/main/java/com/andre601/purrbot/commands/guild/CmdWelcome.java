@@ -436,7 +436,11 @@ public class CmdWelcome implements Command {
                 }else
                 if(args.length == 2){
                     if(!PurrBot.getImages().contains(args[1].toLowerCase())){
-                        EmbedUtil.error(msg, "Invalid image!");
+                        EmbedUtil.error(msg, String.format(
+                                "Invalid image name!\n" +
+                                "A list of available images can be found on the [wiki](%s)!",
+                                Links.WIKI.getLink()
+                        ));
                         return;
                     }
                     InputStream is = ImageUtil.getWelcomeImg(
@@ -456,14 +460,23 @@ public class CmdWelcome implements Command {
                             System.currentTimeMillis()
                     )).queue();
 
-                }else{
+                }else
+                if(args.length == 3){
                     if(!PurrBot.getImages().contains(args[1].toLowerCase())){
-                        EmbedUtil.error(msg, "Invalid image!");
+                        EmbedUtil.error(msg, String.format(
+                                "Invalid image name!\n" +
+                                "A list of available images can be found on the [wiki](%s)!",
+                                Links.WIKI.getLink()
+                        ));
                         return;
                     }
                     Color color = MessageUtil.toColor(args[2].toLowerCase());
                     if(color == null){
-                        EmbedUtil.error(msg, "Invalid color type or value!");
+                        EmbedUtil.error(msg,
+                                "Invalid color type or value!\n" +
+                                "Make sure it starts with `hex:` or `rgb:` and has the right values!\n" +
+                                "For example: `hex:ffffff` or `rgb:255,255,255`"
+                        );
                         return;
                     }
                     InputStream is = ImageUtil.getWelcomeImg(
@@ -482,6 +495,46 @@ public class CmdWelcome implements Command {
                             "%s.png",
                             System.currentTimeMillis()
                     )).queue();
+                }else{
+                    if(!PurrBot.getImages().contains(args[1].toLowerCase())){
+                        EmbedUtil.error(msg, String.format(
+                                "Invalid image name!\n" +
+                                "A list of available images can be found on the [wiki](%s)!",
+                                Links.WIKI.getLink()
+                        ));
+                        return;
+                    }
+                    Color color = MessageUtil.toColor(args[2].toLowerCase());
+                    if(color == null){
+                        EmbedUtil.error(msg,
+                                "Invalid color type or value!\n" +
+                                "Make sure it starts with `hex:` or `rgb:` and has the right values!\n" +
+                                "For example: `hex:ffffff` or `rgb:255,255,255`"
+                        );
+                        return;
+                    }
+                    StringBuilder sb = new StringBuilder();
+                    for(int i =3; i < args.length; i++){
+                        sb.append(args[i]).append(" ");
+                    }
+
+                    InputStream is = ImageUtil.getWelcomeImg(
+                            msg.getAuthor(),
+                            guild,
+                            args[1].toLowerCase(),
+                            args[2].toLowerCase()
+                    );
+
+                    if(is == null){
+                        EmbedUtil.error(msg, "Couldn't generate image. Try again later.");
+                        return;
+                    }
+
+                    tc.sendMessage(MessageUtil.formatPlaceholders(sb.toString(), guild, msg.getMember()))
+                            .addFile(is, String.format(
+                                    "%s.png",
+                                    System.currentTimeMillis()
+                            )).queue();
                 }
                 break;
 
