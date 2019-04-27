@@ -11,7 +11,7 @@ actions:
         
       Sadly the issue section isn't the best place to seek for support.  
       We recommend to you, to make sure you've read the [wiki](/Andre601/PurrBot/wiki) to make sure your question isn't answered there.  
-      If you still need support, join our [Discord](https://discord.gg/NB7AFqn).
+      If you still need support, join our [Discord](https://purrbot.site/discord).
     close: true
     # Lock the thread
     lock: false
@@ -30,7 +30,7 @@ actions:
       We can't provide the right solution if we don't have enough information.  
         
       Please follow these steps to provide more information:  
-      - Give an up to date debug report (.debug)  
+      - Give an up to date debug report (Run `.debug` and provide the generated link)
       - Make sure the bot has the required permissions  
       - Make sure you've checked the wiki for known answers and solutions
     
