@@ -41,7 +41,7 @@ public class CmdEval implements Command {
         se.put("jda", msg.getJDA());
         se.put("shardManager", ReadyListener.getShardManager());
         se.put("guild", msg.getGuild());
-        se.put("channel", msg.getChannel());
+        se.put("channel", msg.getTextChannel());
         se.put("msg", msg);
 
         List<String> splitContent = new LinkedList<>();

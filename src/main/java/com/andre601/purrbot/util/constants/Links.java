@@ -10,23 +10,23 @@ public enum Links {
     INVITE_BASIC(true, 85056),
 
     // Guild invite
-    DISCORD_INVITE("https://discord.gg/NB7AFqn"),
+    DISCORD_INVITE("https://purrbot.site/discord"),
 
     // GitHub links
-    GITHUB("https://github.com/andre601/PurrBot"),
+    GITHUB("https://purrbot.site/github"),
     WIKI  ("https://github.com/andre601/PurrBot/wiki"),
 
     // Bot lists
     DISCORDBOTS_ORG("https://discordbots.org/bot/425382319449309197"),
     DISCORD_BOTS_GG("https://discord.bots.gg/bots/425382319449309197"),
-    LBOTS_ORG      ("https://lbots.org/bots/425382319449309197"),
+    LBOTS_ORG      ("https://lbots.org/bots/Purr"),
 
     // Other links
     WEBSITE      ("https://purrbot.site"),
     GITHUB_AVATAR("https://i.imgur.com/Fv6qdfG.png"),
     UPVOTE       ("https://i.imgur.com/HGQXIYp.png"),
     FAVOURITE    ("https://i.imgur.com/5hccwa9.png"),
-    TWITTER      ("https://twitter.com/TruePurrBot");
+    TWITTER      ("https://purrbot.site/twitter");
 
 
     private String link;

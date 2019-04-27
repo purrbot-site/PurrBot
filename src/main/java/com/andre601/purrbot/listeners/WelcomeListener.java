@@ -26,6 +26,23 @@ public class WelcomeListener extends ListenerAdapter {
      *        A {@link net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent GuildMemberJoinEvent}.
      */
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+
+        long bots = event.getGuild().getMembers().stream().filter(user -> user.getUser().isBot()).count();
+        long members = event.getGuild().getMembers().stream().filter(user -> !user.getUser().isBot()).count();
+
+        if(bots > (members + 2)){
+            event.getGuild().getOwner().getUser().openPrivateChannel().queue(pm -> {
+                //  Try to send a PM with the reason to the guild-owner.
+                pm.sendMessage(String.format(
+                        "Your Server `%s` (`%s`) has too many bots!",
+                        event.getGuild().getName(),
+                        event.getGuild().getId()
+                )).queue();
+            });
+            event.getGuild().leave().queue();
+            return;
+        }
+
         if(event.getUser().isBot())
             return;
 

@@ -294,9 +294,9 @@ public class CmdWelcome implements Command {
         switch (args[0].toLowerCase()){
             case "channel":
                 if(args.length < 2){
-                    EmbedUtil.error(msg, MessageFormat.format(
+                    EmbedUtil.error(msg, String.format(
                             "To few arguments!\n" +
-                            "Usage: `{0}welcome channel <set <#channel>|reset>>`",
+                            "Usage: `%swelcome channel <set <#channel>|reset>`",
                             DBUtil.getPrefix(guild)
                     ));
                     return;
@@ -316,9 +316,9 @@ public class CmdWelcome implements Command {
                     }
                     setChannel(msg, guild, channel.getId());
                 }else{
-                    EmbedUtil.error(msg, MessageFormat.format(
+                    EmbedUtil.error(msg, String.format(
                             "Invalid argument!\n" +
-                            "Usage: `{0}welcome channel <set <#channel>|reset>>`",
+                            "Usage: `%swelcome channel <set <#channel>|reset>`",
                             DBUtil.getPrefix(guild)
                     ));
                 }
@@ -326,10 +326,13 @@ public class CmdWelcome implements Command {
 
             case "image":
                 if(args.length < 2){
-                    EmbedUtil.error(msg, MessageFormat.format(
+                    EmbedUtil.error(msg, String.format(
                             "To few arguments!\n" +
-                            "Usage: `{0}welcome image <set <image>|reset>>`",
-                            DBUtil.getPrefix(guild)
+                            "Usage: `%swelcome image <set <image>|reset>`\n" +
+                            "\n" +
+                            "A list of available images can be found on the [wiki](%s)",
+                            DBUtil.getPrefix(guild),
+                            Links.WIKI.getLink()
                     ));
                     return;
                 }
@@ -347,10 +350,13 @@ public class CmdWelcome implements Command {
                     }
                     setImage(msg, guild, args[2].toLowerCase());
                 }else{
-                    EmbedUtil.error(msg, MessageFormat.format(
+                    EmbedUtil.error(msg, String.format(
                             "Invalid argument!\n" +
-                            "Usage: `{0}welcome image <set <image>|reset>>`",
-                            DBUtil.getPrefix(guild)
+                            "Usage: `%swelcome image <set <image>|reset>`\n" +
+                            "\n" +
+                            "A list of available images can be found on the [wiki](%s)",
+                            DBUtil.getPrefix(guild),
+                            Links.WIKI.getLink()
                     ));
                 }
                 break;
