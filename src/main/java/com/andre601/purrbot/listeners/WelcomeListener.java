@@ -34,7 +34,8 @@ public class WelcomeListener extends ListenerAdapter {
             event.getGuild().getOwner().getUser().openPrivateChannel().queue(pm -> {
                 //  Try to send a PM with the reason to the guild-owner.
                 pm.sendMessage(String.format(
-                        "Your Server `%s` (`%s`) has more bots than members!",
+                        "Your Server `%s` (`%s`) has more bots than members!\n" +
+                        "I left the Discord because of this reason.",
                         event.getGuild().getName(),
                         event.getGuild().getId()
                 )).queue();
