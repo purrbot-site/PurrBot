@@ -94,9 +94,6 @@ public class CmdNeko implements Command {
             return;
         }
 
-        Emote blobCatHeart = ReadyListener.getShardManager().getEmoteById(Emotes.BLOBCATHEART.getId());
-        Emote aBlobCatHeart = ReadyListener.getShardManager().getEmoteById(Emotes.ANIM_BLOBCATHEART.getId());
-
         if(s.contains("-gif")){
             String link = HttpUtil.getImage(API.GIF_NEKO, 0);
             if(link == null){
@@ -112,8 +109,6 @@ public class CmdNeko implements Command {
                     Emotes.ANIM_LOADING.getEmote()
             )).queue(message -> {
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(nekogif.build()).queue();
-                if(PermUtil.check(tc, Permission.MESSAGE_EXT_EMOJI))
-                    message.addReaction(aBlobCatHeart).queue();
             });
             return;
         }
@@ -125,18 +120,41 @@ public class CmdNeko implements Command {
             return;
         }
 
-        EmbedBuilder neko = EmbedUtil.getEmbed(msg.getAuthor())
-                .setTitle("Neko [Img]", link)
-                .setImage(link);
-
         tc.sendMessage(String.format(
                 "%s Getting a cute neko...",
                 Emotes.ANIM_LOADING.getEmote()
         )).queue(message -> {
+            EmbedBuilder neko = EmbedUtil.getEmbed(msg.getAuthor())
+                    .setTitle("Neko [Img]", link)
+                    .setImage(link);
+
+            if(link.equals("https://cdn.nekos.life/v3/sfw/img/neko/neko_079.jpg")){
+                if(PermUtil.isBeta()){
+                    neko.setDescription("That is me! >w<");
+                    message.addReaction("❤").queue();
+                }else{
+                    Emote snuggle = ReadyListener.getShardManager().getEmoteById(Emotes.SNUGGLE.getId());
+                    neko.setDescription("That is my little sister!");
+
+                    if(PermUtil.check(message.getTextChannel(), Permission.MESSAGE_EXT_EMOJI))
+                        message.addReaction(snuggle).queue();
+                }
+            }else
+            if(link.equals("https://cdn.nekos.life/v3/sfw/img/neko/neko_139.png")){
+                if(PermUtil.isBeta()){
+                    Emote purr = ReadyListener.getShardManager().getEmoteById(Emotes.PURR.getId());
+                    neko.setDescription("That is my big sister!");
+
+                    if(PermUtil.check(message.getTextChannel(), Permission.MESSAGE_EXT_EMOJI))
+                        message.addReaction(purr).queue();
+                }else{
+                    neko.setDescription("T-that is me! OwO");
+                    message.addReaction("❤").queue();
+                }
+            }
+
             //  Editing the message to add the image ("should" prevent issues with empty embeds)
             message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(neko.build()).queue();
-            if(PermUtil.check(tc, Permission.MESSAGE_EXT_EMOJI))
-                message.addReaction(blobCatHeart).queue();
         });
     }
 }

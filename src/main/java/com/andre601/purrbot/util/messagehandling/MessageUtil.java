@@ -184,23 +184,27 @@ public class MessageUtil {
         currGame = currGame.length() > 25 ? currGame.substring(0, 24) + "..." : currGame;
         switch (game.getType()){
             case STREAMING:
-                return "Streaming [" + currGame + "](" + game.getUrl() + ")";
+                str = "Streaming";
+                break;
 
             case LISTENING:
-                str = "Listening to ";
+                str = "Listening to";
                 break;
 
             case WATCHING:
-                str = "Watching ";
+                str = "Watching";
                 break;
 
             case DEFAULT:
             default:
-                str = "Playing ";
+                str = "Playing";
                 break;
         }
-        return str + (game.getUrl() == null ? currGame : "[" + currGame + "](" +
-                game.getUrl() + ")");
+        return String.format(
+                "%s %s",
+                str,
+                currGame
+        );
     }
 
     /**

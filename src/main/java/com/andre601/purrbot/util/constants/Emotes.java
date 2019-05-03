@@ -6,14 +6,14 @@ package com.andre601.purrbot.util.constants;
 public enum Emotes {
 
     // Animated emotes
-    ANIM_BLOBCATHEART("aBlobCatHeart", "558750534241091584", true),
     ANIM_LOADING     ("loading",       "479011152148299777", true),
     ANIM_TYPING      ("typing",        "472685909389737985", true),
 
     // Static/normal emotes
-    BLOBCATHEART     ("blobCatHeart", "483996289583808533", false),
     BLOBHOLO         ("blobHolo",     "536346012546236436", false),
     BOT              ("isBot",        "523673098784997414", false),
+    PURR             ("purr",         "564766029608124416", false),
+    SNUGGLE          ("snuggle",      "570238657265401856", false),
     UHM              ("uhm",          "532675295719850001", false);
 
     private String name;

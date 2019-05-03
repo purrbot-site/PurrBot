@@ -62,6 +62,7 @@ public class GuildListener extends ListenerAdapter {
                 )).queue();
             });
             guild.leave().queue();
+            WebhookUtil.sendGuildWebhook(getLink(), guild, false, false);
             return;
         }
 
@@ -78,7 +79,7 @@ public class GuildListener extends ListenerAdapter {
                 bots
         ));
 
-        WebhookUtil.sendGuildWebhook(getLink(), guild, 0x00FF00, "Joined server");
+        WebhookUtil.sendGuildWebhook(getLink(), guild, true, false);
     }
 
     /**
@@ -114,6 +115,6 @@ public class GuildListener extends ListenerAdapter {
                 bots
         ));
 
-        WebhookUtil.sendGuildWebhook(getLink(), guild, 0xFF0000, "Joined server");
+        WebhookUtil.sendGuildWebhook(getLink(), guild, false, false);
     }
 }

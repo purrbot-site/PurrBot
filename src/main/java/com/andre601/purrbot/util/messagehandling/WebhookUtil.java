@@ -61,14 +61,14 @@ public class WebhookUtil {
      *        The URL of the {@link club.minnced.discord.webhook.WebhookClient WebhookClient}
      * @param guild
      *        The {@link net.dv8tion.jda.core.entities.Guild Guild} the bot joined/left
-     * @param color
-     *        The color for the embed, as an Integer
-     * @param name
-     *        The shown name of the Webhook
+     * @param join
+     *        Boolean for if the bot joined or left a Guild
+     * @param botGuild
+     *        Boolean for if the Guild is a Bot-Guild (has more bots than members)
      */
-    public static void sendGuildWebhook(String url, Guild guild, int color, String name){
+    public static void sendGuildWebhook(String url, Guild guild, boolean join, boolean botGuild){
         WebhookEmbed embed = new WebhookEmbedBuilder()
-                .setColor(color)
+                .setColor(join ? 0x00FF00 : 0xFF0000)
                 .setThumbnailUrl(guild.getIconUrl())
                 .addField(new WebhookEmbed.EmbedField(
                         false, "Guild", guild.getName()
@@ -100,12 +100,12 @@ public class WebhookUtil {
 
         WebhookClient client = new WebhookClientBuilder(url).build();
         client.send(new WebhookMessageBuilder()
-                .setUsername(name)
+                .setUsername(botGuild ? "Auto-left Server" : join ? "Joined Server" : "Left Server")
                 .setAvatarUrl(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .setContent(String.format(
+                .setContent(join ? String.format(
                         ".leave %s",
                         guild.getId()
-                ))
+                ) : null)
                 .addEmbeds(embed)
                 .build()
         );
