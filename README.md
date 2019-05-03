@@ -96,7 +96,7 @@ What started as a simple and easy bot became quite a big bot, that is now even o
 |          | `[@user]`                  | Gives info about the mentioned user.                                                   |
 
 ## NSFW
-**Permission**: `None`
+**Permission**: `None`  
 **Extra**: This command ONLY works in NSFW-labeled channels.
 
 | Command: | Arguments:  | Description:                                                                          |
