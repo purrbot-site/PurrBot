@@ -93,4 +93,8 @@ public class PermUtil {
     public static boolean isDM(Message msg){
         return msg.isFromType(ChannelType.PRIVATE);
     }
+
+    public static boolean isSpecialUser(String id){
+        return id.equals(IDs.EVELIEN.getId()) || id.equals(IDs.KORBO.getId()) || id.equals(IDs.LILYSCARLET.getId());
+    }
 }
