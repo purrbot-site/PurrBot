@@ -17,10 +17,15 @@
 [Wiki]: https://github.com/Andre601/PurrBot/wiki
 [image]: https://github.com/Andre601/PurrBot/wiki/Welcome-images
 
+<!-- Other links -->
+[debug.scrarsz.me]: https://debug.scarsz.me
+[nekos.life]: https://nekos.life
+[whatthecommit]: https://whatthecommit.com
+
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License]
 
 # \*Purr*
-This bot was made to use the [nekos.life](https://nekos.life)-API.
+This bot was made to use the [nekos.life]-API.
 What started as a simple and easy bot became quite a big bot, that is now even on the official Discord of Nekos.life!
 
 # Commands
@@ -32,42 +37,42 @@ What started as a simple and easy bot became quite a big bot, that is now even o
 ## Fun
 **Permission**: `None`
 
-| Command: | Arguments:          | Description:                                                                 |
-| -------- | ------------------- | ---------------------------------------------------------------------------- |
-| Cuddle   | `<@user ...>`       | Cuddles the mentioned user(s).                                               |
-| Fakegit  |                     | Creates a fake commit-message with help of https://whatthecommit.com         |
-| Holo     |                     | Gives an image of Holo from Spice and wolf.                                  |
-| Hug      | `<@user ...>`       | Hugs the mentioned user(s).                                                  |
-| Kiss     | `<@user ...>`       | Kisses the mentioned user(s).                                                |
-| Kitsune  |                     | Shows a image of a kitsune (foxgirl)                                         |
-| Neko     |                     | Shows a image of a neko from nekos.life.                                     |
-|          | `[--gif]`           | Shows a gif-image of a neko from nekos.life.                                 |
-|          | `[--slide]`         | Creates a slideshow with 30 images (Can be combined with the -gif argument). |
-| Pat      | `<@user ...>`       | Pats the mentioned user(s).                                                  |
-| Poke     | `<@user ...>`       | Pokes the mentioned user(s).                                                 |
-| Ship     | `<@user>` `[@user]` | Ships you (or another user) with someone.                                    |
-| Slap     | `<@user ...>`       | Slaps the mentioned user(s).                                                 |
-| Tickle   | `<@user ...>`       | Tickles the mentioned user(s).                                               |
+| Command: | Arguments:          | Description:                                                          |
+| -------- | ------------------- | --------------------------------------------------------------------- |
+| Cuddle   | `<@user ...>`       | Cuddles the mentioned user(s).                                        |
+| Fakegit  |                     | Creates a fake commit-message with help of [whatthecommit]            |
+| Holo     |                     | Gives an image of Holo from Spice and wolf.                           |
+| Hug      | `<@user ...>`       | Hugs the mentioned user(s).                                           |
+| Kiss     | `<@user ...>`       | Kisses the mentioned user(s).                                         |
+| Kitsune  |                     | Shows a image of a kitsune (foxgirl)                                  |
+| Neko     |                     | Shows a image of a neko from nekos.life.                              |
+|          | `[--gif]`           | Shows a gif-image of a neko from nekos.life.                          |
+|          | `[--slide]`         | Creates a slideshow with 30 images (Combination with --gif possible). |
+| Pat      | `<@user ...>`       | Pats the mentioned user(s).                                           |
+| Poke     | `<@user ...>`       | Pokes the mentioned user(s).                                          |
+| Ship     | `<@user>` `[@user]` | Ships you (or another user) with someone.                             |
+| Slap     | `<@user ...>`       | Slaps the mentioned user(s).                                          |
+| Tickle   | `<@user ...>`       | Tickles the mentioned user(s).                                        |
 
 ## Guild
 **Permission**: `Manage Server`
 
-| Command: | Arguments:                   | Description:                                                               |
-| -------- | ---------------------------- | -------------------------------------------------------------------------- |
-| Debug    |                              | Creates a debug-file on https://debug.scarsz.me                            |
-| Prefix   |                              | Shows the current prefix for the Discord.                                  |
-|          | `set <prefix>`               | Sets the provided prefix for the Guild.                                    |
-|          | `reset`                      | Resets the prefix to the default one.                                      |
-| Welcome  |                              | Shows the current welcome-settings (welcome-channel, image and textcolor). |
-|          | `channel set <#channel>`     | Change the channel to the mentioned one.                                   |
-|          | `channel reset`              | Resets the channel.                                                        |
-|          | `color set <color>`          | Change the text color. Supported args are hex:rrggbb or rgb:r,g,b          |
-|          | `color reset`                | Resets the text color.                                                     |
-|          | `image set <image>`          | Changes the image. `<image>` can be a [image] from the wiki.               |
-|          | `image reset`                | Resets the image.                                                          |
-|          | `msg set <msg>`              | Changes the greeting message.                                              |
-|          | `msg reset`                  | Resets the greeting message to "Welcome {mention}!"                        |
-|          | `test [image] [color] [msg]` | Creates a test-image with an optional image and text color.                |
+| Command: | Arguments:                   | Description:                                                      |
+| -------- | ---------------------------- | ----------------------------------------------------------------- |
+| Debug    |                              | Creates a debug-file on [debug.scarsz.me]                         |
+| Prefix   |                              | Shows the current prefix for the Discord.                         |
+|          | `set <prefix>`               | Sets the provided prefix for the Guild.                           |
+|          | `reset`                      | Resets the prefix to the default one.                             |
+| Welcome  |                              | Shows the current welcome-settings.                               |
+|          | `channel set <#channel>`     | Change the channel to the mentioned one.                          |
+|          | `channel reset`              | Resets the channel.                                               |
+|          | `color set <color>`          | Change the text color. Supported args are hex:rrggbb or rgb:r,g,b |
+|          | `color reset`                | Resets the text color.                                            |
+|          | `image set <image>`          | Changes the image. `<image>` can be a [image] from the wiki.      |
+|          | `image reset`                | Resets the image.                                                 |
+|          | `msg set <msg>`              | Changes the greeting message.                                     |
+|          | `msg reset`                  | Resets the greeting message to "Welcome {mention}!"               |
+|          | `test [image] [color] [msg]` | Creates a test-image with an optional image and text color.       |
 
 ## Info
 **Permission**: `None`
@@ -85,7 +90,7 @@ What started as a simple and easy bot became quite a big bot, that is now even o
 |          | `[--dm]`                   | Sends you the links in DM.                                                             |
 | Ping     |                            | Checks the ping. (Time the bot takes to edit the message.)                             |
 |          | `[--api]`                  | Checks the ping to the Discord-API.                                                    |
-| Quote    | `<messageID>` `[#channel]` | Quotes a message. The message needs to be in the same channel or in the mentioned one. |
+| Quote    | `<messageID>` `[#channel]` | Quotes a message. It has to be in the same channel or the channel has to be mentioned. |
 | Stats    |                            | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, etc.)       |
 | User     |                            | Gives info about you.                                                                  |
 |          | `[@user]`                  | Gives info about the mentioned user.                                                   |
@@ -100,7 +105,7 @@ What started as a simple and easy bot became quite a big bot, that is now even o
 | Lesbian  |             | Returns a gif of lesbian.                                                             |
 | Lewd     |             | Shows a image of a lewd neko from nekos.life.                                         |
 |          | `[--gif]`   | Shows a gif-image of a lewd neko from nekos.life.                                     |
-|          | `[--slide]` | Creates a slideshow with 30 images (Can be combined with the -gif argument)           |
+|          | `[--slide]` | Creates a slideshow with 30 images (Combination with --gif possible)                  |
 | Yurifuck | `<@user>`   | Similar like .fuck, but with females only >wO                                         |
 
 # Inviting the bot
