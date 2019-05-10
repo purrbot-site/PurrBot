@@ -16,14 +16,16 @@ import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Invite",
-        description = "Receive links for inviting the bot or joining the support-guild.",
+        description =
+                "Receive links for inviting the bot or joining the support-guild.\n" +
+                "Use `--dm` to send the info to your DMs.",
         triggers = {"invite", "links"},
         attributes = {@CommandAttribute(key = "info")}
 )
 public class CmdInvite implements Command {
 
     @Override
-    public void execute(Message msg, String s){
+    public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
 
         if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
@@ -55,7 +57,7 @@ public class CmdInvite implements Command {
                 ), false);
 
 
-        if(s.contains("-dm")){
+        if(args.toLowerCase().toLowerCase().contains("--dm")){
             msg.getAuthor().openPrivateChannel().queue(
                     pm -> pm.sendMessage(invite.build()).queue(messageq ->
                             tc.sendMessage(MessageFormat.format(

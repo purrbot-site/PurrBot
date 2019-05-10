@@ -62,7 +62,6 @@ public class GuildListener extends ListenerAdapter {
                 )).queue();
             });
             guild.leave().queue();
-            WebhookUtil.sendGuildWebhook(getLink(), guild, false, false);
             return;
         }
 
@@ -101,7 +100,10 @@ public class GuildListener extends ListenerAdapter {
         long member = guild.getMembers().stream().filter(user -> !user.getUser().isBot()).count();
         long bots = guild.getMembers().stream().filter(user -> user.getUser().isBot()).count();
 
-        if(bots > (member + 2)) return;
+        if(bots > (member + 2)){
+            WebhookUtil.sendGuildWebhook(getLink(), guild, false, true);
+            return;
+        }
 
         DBUtil.delGuild(guild);
 

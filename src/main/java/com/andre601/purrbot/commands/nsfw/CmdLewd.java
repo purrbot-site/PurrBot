@@ -40,14 +40,14 @@ public class CmdLewd implements Command {
     private static List<String> lewdUserID = new ArrayList<>();
 
     @Override
-    public void execute(Message msg, String s){
+    public void execute(Message msg, String args){
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
         if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(s.contains("-slide")){
+        if(args.toLowerCase().contains("--slide")){
             if(lewdUserID.contains(msg.getAuthor().getId())){
                 tc.sendMessage(String.format(
                         "%s You can only have one Slideshow at a time!",
@@ -59,7 +59,7 @@ public class CmdLewd implements Command {
 
             lewdUserID.add(msg.getAuthor().getId());
             String urls;
-            if(msg.getContentRaw().contains("-gif")){
+            if(args.toLowerCase().contains("--gif")){
                 urls = HttpUtil.getImage(API.GIF_NEKO_LEWD, 20);
             }else{
                 urls = HttpUtil.getImage(API.IMG_NEKO_LEWD, 20);
@@ -94,7 +94,7 @@ public class CmdLewd implements Command {
             slideshow.display(tc);
             return;
         }
-        if(msg.getContentRaw().contains("-gif")){
+        if(args.toLowerCase().contains("--gif")){
             String gifLink = HttpUtil.getImage(API.GIF_NEKO_LEWD, 0);
             if(gifLink == null){
                 EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");

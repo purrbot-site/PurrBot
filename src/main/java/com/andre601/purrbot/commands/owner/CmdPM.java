@@ -34,7 +34,7 @@ public class CmdPM implements Command {
         String[] args = s.split(" ");
 
         if (args.length < 2) {
-            EmbedUtil.error(msg, "I need a channel and actual message!");
+            EmbedUtil.error(msg, "I need a user and actual message!");
             return;
         }
 

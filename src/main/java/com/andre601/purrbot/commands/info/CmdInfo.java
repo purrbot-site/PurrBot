@@ -27,47 +27,15 @@ import java.util.concurrent.TimeUnit;
                 "Get some basic info about the bot.\n" +
                 "\n" +
                 "You can use additional args in the command.\n" +
-                "`-dm` to send it in DM.\n" +
-                "`-github` to get info about the latest commit-hash\n" +
+                "`--dm` to send it in DM.\n" +
                 "Both arguments can be combined.",
         triggers = {"info", "infos", "information"},
         attributes = {@CommandAttribute(key = "info")}
 )
 public class CmdInfo implements Command {
 
-    private String getChangedFiles(JSONArray jsonArray){
-
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < jsonArray.length(); ++i){
-            int filesLeft = jsonArray.length() - i;
-
-            JSONObject json = jsonArray.getJSONObject(i);
-            String filename = json.getString("filename").replace("src/main/java/com/andre601/purrbot", "...");
-            int addition = json.getInt("additions");
-            int deletion = json.getInt("deletions");
-
-            String fileInfo = String.format(
-                    "%s\n" +
-                    "+%6d\n" +
-                    "-%6d\n",
-                    filename,
-                    addition,
-                    deletion
-            );
-
-            if(sb.length() + fileInfo.length() + 25 + String.valueOf(filesLeft).length() >
-                    MessageEmbed.VALUE_MAX_LENGTH){
-                sb.append("+").append(filesLeft).append(" more  ");
-                break;
-            }
-            sb.append(fileInfo).append("\n");
-        }
-
-        return sb.substring(0, sb.length() - 2);
-    }
-
     @Override
-    public void execute(Message msg, String s){
+    public void execute(Message msg, String args){
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
@@ -118,7 +86,7 @@ public class CmdInfo implements Command {
                         Links.DISCORDBOTS_ORG.getLink()
                 ), true);
 
-        if(s.contains("-dm")){
+        if(args.toLowerCase().toLowerCase().contains("--dm")){
             msg.getAuthor().openPrivateChannel().queue(
                     pm -> pm.sendMessage(info.build()).queue(messageq ->
                             tc.sendMessage(String.format(

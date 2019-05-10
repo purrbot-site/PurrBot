@@ -105,7 +105,10 @@ public class WebhookUtil {
                 .setContent(join ? String.format(
                         ".leave %s",
                         guild.getId()
-                ) : null)
+                ) : String.format(
+                        "ID: %s",
+                        guild.getId()
+                ))
                 .addEmbeds(embed)
                 .build()
         );

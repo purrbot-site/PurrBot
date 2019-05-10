@@ -34,6 +34,8 @@ public class DBUtil {
 
     public static String getPrefix(Guild guild) {
         Map g = getGuild(guild.getId());
+        if(g.get("prefix").toString() == null) setPrefix(".", guild.getId());
+
         return g.get("prefix").toString();
 
     }

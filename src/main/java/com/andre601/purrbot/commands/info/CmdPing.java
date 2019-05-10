@@ -13,17 +13,19 @@ import java.time.temporal.ChronoUnit;
 
 @CommandDescription(
         name = "Ping",
-        description = "Pong?",
+        description =
+                "Pong?\n" +
+                "Use `--api` to get the Websocket-Ping",
         triggers = {"ping"},
         attributes = {@CommandAttribute(key = "info")}
 )
 public class CmdPing implements Command {
 
     @Override
-    public void execute(Message msg, String s){
+    public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
 
-        if(s.contains("-api")){
+        if(args.toLowerCase().contains("--api")){
             tc.sendMessage(MessageFormat.format(
                     "{0} Checking ping to Discord-API...",
                     Emotes.ANIM_TYPING.getEmote()

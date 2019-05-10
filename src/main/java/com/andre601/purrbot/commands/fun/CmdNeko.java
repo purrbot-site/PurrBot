@@ -29,8 +29,8 @@ import static com.andre601.purrbot.core.PurrBot.waiter;
                 "Gives you a lovely neko (catgirl)\n" +
                 "\n" +
                 "You can use additional args in the command.\n" +
-                "`-gif` for a gif\n" +
-                "`-slide` for a slideshow with 30 images\n" +
+                "`--gif` for a gif\n" +
+                "`--slide` for a slideshow with 30 images\n" +
                 "Both arguments can be combined.",
         triggers = {"neko", "catgirl"},
         attributes = {@CommandAttribute(key = "fun")}
@@ -42,14 +42,14 @@ public class CmdNeko implements Command {
     private static List<String> nekoUserID = new ArrayList<>();
 
     @Override
-    public void execute(Message msg, String s) {
+    public void execute(Message msg, String args) {
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
         if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(s.contains("-slide")){
+        if(args.toLowerCase().contains("--slide")){
             if(nekoUserID.contains(msg.getAuthor().getId())){
                 EmbedUtil.error(msg,
                         "Only one slideshow per user!\n" +
@@ -61,7 +61,7 @@ public class CmdNeko implements Command {
 
             nekoUserID.add(msg.getAuthor().getId());
             String urls;
-            if(msg.getContentRaw().contains("-gif")){
+            if(args.toLowerCase().contains("--gif")){
                 urls = HttpUtil.getImage(API.GIF_NEKO, 20);
             }else{
                 urls = HttpUtil.getImage(API.IMG_NEKO, 20);
@@ -94,7 +94,7 @@ public class CmdNeko implements Command {
             return;
         }
 
-        if(s.contains("-gif")){
+        if(args.toLowerCase().contains("--gif")){
             String link = HttpUtil.getImage(API.GIF_NEKO, 0);
             if(link == null){
                 EmbedUtil.error(msg, "Couldn't reach the API! Try again later.");

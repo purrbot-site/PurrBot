@@ -21,14 +21,14 @@ import java.util.List;
         name = "Fakegit",
         description =
                 "Creates a commit-message that looks like a real one.\n" +
-                "Use `-clear` to remove",
+                "Use `--clear` to remove Webhooks named `PurrBot-Fakegit`",
         triggers = {"fakegit", "git"},
         attributes = {@CommandAttribute(key = "fun")}
 )
 public class CmdFakegit implements Command {
 
     @Override
-    public void execute(Message msg, String s){
+    public void execute(Message msg, String args){
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
         JSONObject jsonObject = HttpUtil.getFakeGit();
@@ -36,7 +36,7 @@ public class CmdFakegit implements Command {
         if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(msg.getContentRaw().contains("-clear")){
+        if(args.toLowerCase().contains("--clear")){
             if(!PermUtil.check(tc, Permission.MANAGE_WEBHOOKS)){
                 EmbedUtil.error(msg, "I need `Manage webhooks` permission for this action!");
                 return;

@@ -12,7 +12,7 @@ import net.dv8tion.jda.core.entities.*;
         name = "Emote",
         description =
                 "Get info about a emote (custom emoji)\n" +
-                "Use `-search` to search for an emote in the past 100 messages.",
+                "Use `--search` to search for an emote in the past 100 messages.",
         triggers = {"emote", "e"},
         attributes = {@CommandAttribute(key = "info")}
 )
@@ -49,13 +49,13 @@ public class CmdEmote implements Command {
     }
 
     @Override
-    public void execute(Message msg, String s){
+    public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
 
         if(PermUtil.check(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(msg.getContentRaw().contains("-search")){
+        if(args.toLowerCase().contains("--search")){
             if(!PermUtil.check(tc, Permission.MESSAGE_HISTORY)){
                 EmbedUtil.error(msg, "I need permissions to see the message history of this channel!");
                 return;
