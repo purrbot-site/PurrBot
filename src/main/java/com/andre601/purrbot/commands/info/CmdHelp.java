@@ -96,7 +96,7 @@ public class CmdHelp implements Command {
             builders.put(category.getKey(), new StringBuilder());
         }
 
-        for(Command command : PurrBot.COMMAND_HANDLER.getCommands()){
+        for (Command command : COMMAND_HANDLER.getCommands().stream().map(ca -> (Command) ca).collect(Collectors.toList())) {
             String category;
 
             if(!command.hasAttribute("owner")){

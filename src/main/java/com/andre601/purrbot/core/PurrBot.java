@@ -8,6 +8,7 @@ import com.andre601.purrbot.listeners.WelcomeListener;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.VoteUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
+import com.github.rainestormee.jdacommand.AbstractCommand;
 import com.github.rainestormee.jdacommand.CommandHandler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +20,7 @@ import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.core.*;
 import net.dv8tion.jda.core.entities.Game;
 
+import net.dv8tion.jda.core.entities.Message;
 import org.discordbots.api.client.DiscordBotListAPI;
 import org.discordbots.api.client.entity.Vote;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,7 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static spark.Spark.*;
 
@@ -61,7 +64,7 @@ public class PurrBot {
 
     public static EventWaiter waiter = new EventWaiter();
     private static ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-    public static final CommandHandler COMMAND_HANDLER = new CommandHandler();
+    public static final CommandHandler<Message> COMMAND_HANDLER = new CommandHandler<>();
 
     public static void main(String[] args) throws Exception{
 
@@ -117,7 +120,7 @@ public class PurrBot {
         }
 
         //  We register our commands through the CommandFactory.java
-        COMMAND_HANDLER.registerCommands(new CommandFactory().getCommands());
+        COMMAND_HANDLER.registerCommands(new HashSet<>(new CommandFactory().getCommands()));
 
         //  Creating and enabling the bot through the DefaultShardManagerBuilder
         new DefaultShardManagerBuilder().setToken(file.getItem("config", "token"))

@@ -1,15 +1,16 @@
 package com.andre601.purrbot.core;
 
+import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.commands.fun.*;
 import com.andre601.purrbot.commands.info.*;
 import com.andre601.purrbot.commands.nsfw.*;
 import com.andre601.purrbot.commands.owner.*;
 import com.andre601.purrbot.commands.guild.*;
-import com.github.rainestormee.jdacommand.Command;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
 
 class CommandFactory {
 
