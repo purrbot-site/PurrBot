@@ -5,7 +5,7 @@ import com.andre601.purrbot.util.ImageUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.PermUtil;
 
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -19,9 +19,14 @@ import java.text.MessageFormat;
 
 @CommandDescription(
         name = "Quote",
-        description = "Quote a member.",
+        description =
+                "Quote a message of a member from a channel.\n" +
+                "You have to mention a channel when the message isn't in the same one.",
         triggers = {"quote"},
-        attributes = {@CommandAttribute(key = "info")}
+        attributes = {
+                @CommandAttribute(key = "info"),
+                @CommandAttribute(key = "usage", value = "quote <messageID> [#channel]")
+        }
 )
 public class CmdQuote implements Command {
 

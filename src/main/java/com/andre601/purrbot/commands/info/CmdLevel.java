@@ -4,7 +4,7 @@ package com.andre601.purrbot.commands.info;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.LevelUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -20,7 +20,11 @@ import java.text.MessageFormat;
                 "Shows your level on the ~Nya guild.\n" +
                 "Mention a user to see his/her progress.",
         triggers = {"level", "lvl"},
-        attributes = {@CommandAttribute(key = "info"), @CommandAttribute(key = "guild_only")}
+        attributes = {
+                @CommandAttribute(key = "info"),
+                @CommandAttribute(key = "guild_only"),
+                @CommandAttribute(key = "usage", value = "level [@user]")
+        }
 )
 public class CmdLevel implements Command {
 

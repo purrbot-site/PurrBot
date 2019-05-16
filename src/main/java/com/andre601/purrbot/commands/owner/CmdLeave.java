@@ -1,7 +1,7 @@
 package com.andre601.purrbot.commands.owner;
 
 import com.andre601.purrbot.listeners.ReadyListener;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.bot.sharding.ShardManager;
@@ -15,7 +15,10 @@ import java.text.MessageFormat;
         name = "Leave",
         description = "Lets the bot leave a guild (with optional PM)",
         triggers = {"leave", "bye"},
-        attributes = {@CommandAttribute(key = "owner")}
+        attributes = {
+                @CommandAttribute(key = "owner"),
+                @CommandAttribute(key = "usage", value = "leave <discordID> [--pm <message>]")
+        }
 )
 public class CmdLeave implements Command {
 
@@ -25,8 +28,8 @@ public class CmdLeave implements Command {
         ShardManager shardManager = ReadyListener.getShardManager();
 
         String[] args = s.split(" ");
-        if(s.contains("-pm")){
-            String pm = s.split("-pm")[1];
+        if(s.contains("--pm")){
+            String pm = s.split("--pm")[1];
 
             try {
                 shardManager.getGuildById(args[0]).getOwner().getUser().openPrivateChannel().queue(

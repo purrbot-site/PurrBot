@@ -5,7 +5,7 @@ import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -17,7 +17,10 @@ import net.dv8tion.jda.core.entities.TextChannel;
         name = "Lesbian",
         description = "Gives you a gif of lesbians",
         triggers = {"lesbian", "les"},
-        attributes = {@CommandAttribute(key = "nsfw")}
+        attributes = {
+                @CommandAttribute(key = "nsfw"),
+                @CommandAttribute(key = "usage", value = "lesbian")
+        }
 )
 public class CmdLesbian implements Command {
 

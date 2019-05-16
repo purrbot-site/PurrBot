@@ -10,7 +10,6 @@ import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.constants.Links;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandHandler;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
@@ -86,7 +85,7 @@ public class CommandListener extends ListenerAdapter {
                         return;
                     }
 
-                    Command command = HANDLER.findCommand(commandString.toLowerCase());
+                    Command command = (Command)HANDLER.findCommand(commandString.toLowerCase());
                     if(command == null) return;
                     if(command.hasAttribute("owner") && !msg.getAuthor().getId().equals(IDs.ANDRE_601.getId())) return;
                     if(!PermUtil.check(tc, Permission.MESSAGE_EMBED_LINKS)){
@@ -126,6 +125,7 @@ public class CommandListener extends ListenerAdapter {
                             LevelUtil.giveXP(msg.getMember(), true, msg.getTextChannel());
                         }
 
+                        //noinspection unchecked
                         HANDLER.execute(command, msg, split.length > 1 ? split[1] : "");
                     }catch(Exception ex){
                         PurrBot.getLogger().error("Couldn't perform command!", ex);

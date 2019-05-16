@@ -5,7 +5,7 @@ import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.menu.Slideshow;
@@ -33,7 +33,10 @@ import static com.andre601.purrbot.core.PurrBot.waiter;
                 "`--slide` for a slideshow with 30 images\n" +
                 "Both arguments can be combined.",
         triggers = {"neko", "catgirl"},
-        attributes = {@CommandAttribute(key = "fun")}
+        attributes = {
+                @CommandAttribute(key = "fun"),
+                @CommandAttribute(key = "usage", value = "neko [--gif] [--slide]")
+        }
 )
 public class CmdNeko implements Command {
 

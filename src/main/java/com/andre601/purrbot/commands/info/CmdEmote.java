@@ -2,7 +2,7 @@ package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.Permission;
@@ -12,9 +12,12 @@ import net.dv8tion.jda.core.entities.*;
         name = "Emote",
         description =
                 "Get info about a emote (custom emoji)\n" +
-                "Use `--search` to search for an emote in the past 100 messages.",
+                "`--search` to search for an emote in the past 100 messages.",
         triggers = {"emote", "e"},
-        attributes = {@CommandAttribute(key = "info")}
+        attributes = {
+                @CommandAttribute(key = "info"),
+                @CommandAttribute(key = "usage", value = "emote <:emote:|--search>")
+        }
 )
 public class CmdEmote implements Command {
 

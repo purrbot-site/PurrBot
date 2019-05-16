@@ -2,7 +2,7 @@ package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.bot.sharding.ShardManager;
@@ -20,7 +20,10 @@ import java.util.concurrent.TimeUnit;
         name = "Stats",
         description = "Everybody loves statistics... right?",
         triggers = {"stats", "stat", "statistic", "statistics"},
-        attributes = {@CommandAttribute(key = "info")}
+        attributes = {
+                @CommandAttribute(key = "info"),
+                @CommandAttribute(key = "usage", value = "stats")
+        }
 )
 public class CmdStats implements Command {
 

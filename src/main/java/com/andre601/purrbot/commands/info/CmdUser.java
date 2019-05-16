@@ -8,7 +8,7 @@ import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -22,7 +22,10 @@ import java.util.List;
         name = "User",
         description = "Get some neat info about a user.",
         triggers = {"user", "member", "userinfo", "userstats"},
-        attributes = {@CommandAttribute(key = "info")}
+        attributes = {
+                @CommandAttribute(key = "info"),
+                @CommandAttribute(key = "usage", value = "user [@user]")
+        }
 )
 public class CmdUser implements Command {
 

@@ -3,7 +3,7 @@ package com.andre601.purrbot.commands.guild;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -19,7 +19,11 @@ import java.text.MessageFormat;
         name = "Prefix",
         description = "Set or reset a prefix",
         triggers = {"prefix"},
-        attributes = {@CommandAttribute(key = "manage_server"), @CommandAttribute(key = "guild")}
+        attributes = {
+                @CommandAttribute(key = "manage_server"),
+                @CommandAttribute(key = "guild"),
+                @CommandAttribute(key = "usage", value = "prefix <set <prefix>|reset>")
+        }
 )
 public class CmdPrefix implements Command {
 

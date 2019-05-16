@@ -4,7 +4,8 @@ import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.DBUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Links;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
+import com.github.rainestormee.jdacommand.AbstractCommand;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.menu.Paginator;
@@ -14,14 +15,15 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
 
+import static com.andre601.purrbot.core.PurrBot.COMMAND_HANDLER;
 import static com.andre601.purrbot.core.PurrBot.waiter;
 
 import java.awt.*;
-import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @CommandDescription(
         name = "Help",
@@ -29,7 +31,10 @@ import java.util.concurrent.TimeUnit;
                 "See all available commands.\n" +
                 "Add a command after `help` for additional info about that command.",
         triggers = {"help", "commands", "command"},
-        attributes = {@CommandAttribute(key = "info")}
+        attributes = {
+                @CommandAttribute(key = "info"),
+                @CommandAttribute(key = "usage", value = "help [command]")
+        }
 )
 public class CmdHelp implements Command {
 
@@ -56,7 +61,7 @@ public class CmdHelp implements Command {
                 .addField("Usage:", String.format(
                         "`%s%s`",
                         prefix,
-                        description.name()
+                        cmd.getAttribute("usage")
                 ), true)
                 .addField("Aliases:", String.format(
                         "`%s`",
@@ -154,7 +159,7 @@ public class CmdHelp implements Command {
         }
 
         if(s.length() != 0){
-            Command command = PurrBot.COMMAND_HANDLER.findCommand(s.split(" ")[0]);
+            Command command = (Command)PurrBot.COMMAND_HANDLER.findCommand(s.split(" ")[0]);
 
             if(command == null || !isCommand(command)){
                 EmbedUtil.error(msg, "This command does not exist!");

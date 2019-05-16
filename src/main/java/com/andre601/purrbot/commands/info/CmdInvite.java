@@ -3,7 +3,7 @@ package com.andre601.purrbot.commands.info;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Links;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -18,9 +18,12 @@ import java.util.concurrent.TimeUnit;
         name = "Invite",
         description =
                 "Receive links for inviting the bot or joining the support-guild.\n" +
-                "Use `--dm` to send the info to your DMs.",
+                "`--dm` to send it in DM.",
         triggers = {"invite", "links"},
-        attributes = {@CommandAttribute(key = "info")}
+        attributes = {
+                @CommandAttribute(key = "info"),
+                @CommandAttribute(key = "usage", value = "invite [--dm]")
+        }
 )
 public class CmdInvite implements Command {
 

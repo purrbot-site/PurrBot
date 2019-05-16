@@ -2,7 +2,7 @@ package com.andre601.purrbot.commands.owner;
 
 import com.andre601.purrbot.listeners.ReadyListener;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.bot.sharding.ShardManager;
@@ -14,7 +14,10 @@ import net.dv8tion.jda.core.entities.User;
         name = "PM",
         description = "Sends a pm to a user.",
         triggers = {"pm"},
-        attributes = {@CommandAttribute(key = "owner")}
+        attributes = {
+                @CommandAttribute(key = "owner"),
+                @CommandAttribute(key = "usage", value = "pm <userID> <message>")
+        }
 )
 public class CmdPM implements Command {
 

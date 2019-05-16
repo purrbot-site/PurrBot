@@ -4,7 +4,7 @@ import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -17,7 +17,10 @@ import java.util.stream.Collectors;
         name = "Slap",
         description = "Slap someone!",
         triggers = {"slap"},
-        attributes = {@CommandAttribute(key = "fun")}
+        attributes = {
+                @CommandAttribute(key = "fun"),
+                @CommandAttribute(key = "usage", value = "slap <@user ...>")
+        }
 )
 public class CmdSlap implements Command {
 
@@ -51,7 +54,7 @@ public class CmdSlap implements Command {
                 member -> member != msg.getMember()
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        if(slapedMembers.equals("") || slapedMembers.length() == 0) return;
+        if(slapedMembers.isEmpty()) return;
 
         tc.sendMessage(String.format(
                 "%s Getting a slap-gif...",

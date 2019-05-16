@@ -6,7 +6,7 @@ import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.menu.Slideshow;
@@ -26,11 +26,14 @@ import java.util.concurrent.TimeUnit;
         "Get images of naughty nekos. >w<\n" +
         "\n" +
         "You can use additional args in the command.\n" +
-        "`-gif` for a gif\n" +
-        "`-slide` for a slideshow with 30 images\n" +
+        "`--gif` for a gif\n" +
+        "`--slide` for a slideshow with 30 images\n" +
         "Both arguments can be combined.",
         triggers = {"lewd"},
-        attributes = {@CommandAttribute(key = "nsfw")}
+        attributes = {
+                @CommandAttribute(key = "nsfw"),
+                @CommandAttribute(key = "usage", value = "lewd [--gif] [--slide]")
+        }
 )
 public class CmdLewd implements Command {
 

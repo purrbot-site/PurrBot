@@ -2,7 +2,7 @@ package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.entities.Message;
@@ -15,9 +15,12 @@ import java.time.temporal.ChronoUnit;
         name = "Ping",
         description =
                 "Pong?\n" +
-                "Use `--api` to get the Websocket-Ping",
+                "`--api` to get the Websocket-Ping",
         triggers = {"ping"},
-        attributes = {@CommandAttribute(key = "info")}
+        attributes = {
+                @CommandAttribute(key = "info"),
+                @CommandAttribute(key = "usage", value = "ping [--api]")
+        }
 )
 public class CmdPing implements Command {
 
@@ -26,8 +29,8 @@ public class CmdPing implements Command {
         TextChannel tc = msg.getTextChannel();
 
         if(args.toLowerCase().contains("--api")){
-            tc.sendMessage(MessageFormat.format(
-                    "{0} Checking ping to Discord-API...",
+            tc.sendMessage(String.format(
+                    "%s Checking ping to Discord-API...",
                     Emotes.ANIM_TYPING.getEmote()
             )).queue(message -> message.editMessage(MessageFormat.format(
                     MessageUtil.getRandomAPIPingMsg(),
@@ -37,8 +40,8 @@ public class CmdPing implements Command {
             return;
         }
 
-        tc.sendMessage(MessageFormat.format(
-                "{0} Checking ping...",
+        tc.sendMessage(String.format(
+                "%s Checking ping...",
                 Emotes.ANIM_TYPING.getEmote()
         )).queue(message -> message.editMessage(MessageFormat.format(
                 MessageUtil.getRandomPingMsg(),

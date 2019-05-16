@@ -2,7 +2,7 @@ package com.andre601.purrbot.commands.owner;
 
 import com.andre601.purrbot.core.ListUtil;
 import com.andre601.purrbot.util.constants.Emotes;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.entities.Message;
@@ -12,7 +12,10 @@ import net.dv8tion.jda.core.entities.TextChannel;
         name = "Refresh",
         description = "Updates information",
         triggers = {"refresh", "update"},
-        attributes = {@CommandAttribute(key = "owner")}
+        attributes = {
+                @CommandAttribute(key = "owner"),
+                @CommandAttribute(key = "usage", value = "refresh")
+        }
 )
 public class CmdRefresh implements Command {
 

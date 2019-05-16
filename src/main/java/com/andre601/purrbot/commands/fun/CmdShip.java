@@ -4,7 +4,7 @@ import com.andre601.purrbot.util.ImageUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.MessageBuilder;
@@ -19,7 +19,10 @@ import java.util.Random;
         name = "Ship",
         description = "Checks how well you and someone else match. Mention two people to ship them instead.",
         triggers = {"ship", "shipping"},
-        attributes = {@CommandAttribute(key = "fun")}
+        attributes = {
+                @CommandAttribute(key = "fun"),
+                @CommandAttribute(key = "usage", value = "ship <@user> [@user]")
+        }
 )
 public class CmdShip implements Command {
 

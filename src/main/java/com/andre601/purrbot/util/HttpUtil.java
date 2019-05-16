@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 public class HttpUtil {
     private static final OkHttpClient CLIENT = new OkHttpClient();

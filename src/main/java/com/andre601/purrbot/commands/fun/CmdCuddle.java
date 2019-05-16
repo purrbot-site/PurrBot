@@ -1,10 +1,10 @@
 package com.andre601.purrbot.commands.fun;
 
+import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -16,8 +16,11 @@ import java.util.stream.Collectors;
 @CommandDescription(
         name = "Cuddle",
         description = "Lets you cuddle someone.",
-        triggers = {"cuddle", "cuddles"},
-        attributes = {@CommandAttribute(key = "fun")}
+        triggers = {"cuddle", "cuddles", "snuggle"},
+        attributes = {
+                @CommandAttribute(key = "fun"),
+                @CommandAttribute(key = "usage", value = "cuddle <@user ...>")
+        }
 )
 public class CmdCuddle implements Command {
 
@@ -56,7 +59,7 @@ public class CmdCuddle implements Command {
                 member -> member != msg.getMember()
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        if(cuddledMembers.equals("") || cuddledMembers.length() == 0) return;
+        if(cuddledMembers.isEmpty()) return;
 
         tc.sendMessage(String.format(
                 "%s Getting a cuddle-gif...",

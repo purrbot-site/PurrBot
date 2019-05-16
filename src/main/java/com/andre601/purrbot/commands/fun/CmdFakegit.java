@@ -2,12 +2,12 @@ package com.andre601.purrbot.commands.fun;
 
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
+import com.andre601.purrbot.commands.Command;
 import com.andre601.purrbot.util.HttpUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Links;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.WebhookUtil;
-import com.github.rainestormee.jdacommand.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -21,9 +21,12 @@ import java.util.List;
         name = "Fakegit",
         description =
                 "Creates a commit-message that looks like a real one.\n" +
-                "Use `--clear` to remove Webhooks named `PurrBot-Fakegit`",
+                "`--clear` removes all Webhooks named `PurrBot-Fakegit`",
         triggers = {"fakegit", "git"},
-        attributes = {@CommandAttribute(key = "fun")}
+        attributes = {
+                @CommandAttribute(key = "fun"),
+                @CommandAttribute(key = "usage", value = "fakegit [--clear]")
+        }
 )
 public class CmdFakegit implements Command {
 

@@ -5,7 +5,7 @@ import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -17,7 +17,10 @@ import net.dv8tion.jda.core.entities.TextChannel;
         name = "Kitsune",
         description = "Gives you a image of a kitsune (foxgirl)",
         triggers = {"kitsune", "foxgirl"},
-        attributes = {@CommandAttribute(key = "fun")}
+        attributes = {
+                @CommandAttribute(key = "fun"),
+                @CommandAttribute(key = "usage", value = "kitsune")
+        }
 )
 public class CmdKitsune implements Command {
 

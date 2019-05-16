@@ -2,7 +2,7 @@ package com.andre601.purrbot.commands.info;
 
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -16,7 +16,10 @@ import java.time.LocalDateTime;
         name = "Guild",
         description = "Basic Guild-info",
         triggers = {"guild", "server", "guildinfo", "serverinfo"},
-        attributes = {@CommandAttribute(key = "info")}
+        attributes = {
+                @CommandAttribute(key = "info"),
+                @CommandAttribute(key = "usage", value = "guild")
+        }
 )
 public class CmdGuild implements Command {
 

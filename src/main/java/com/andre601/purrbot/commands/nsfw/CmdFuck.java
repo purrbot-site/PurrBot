@@ -7,7 +7,7 @@ import com.andre601.purrbot.util.constants.API;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
@@ -26,9 +26,12 @@ import java.util.concurrent.TimeUnit;
         description =
                 "Wanna fuck someone?\n" +
                 "Mention a user, to send a request.\n" +
-                "The mentioned user can accept it by clicking on the ✅ reaction or let it time out.",
+                "The mentioned user can accept it by clicking on the ✅, deny it by clicking on ❌ or let it time out.",
         triggers = {"fuck", "sex"},
-        attributes = {@CommandAttribute(key = "nsfw")}
+        attributes = {
+                @CommandAttribute(key = "nsfw"),
+                @CommandAttribute(key = "usage", value = "fuck <@user>")
+        }
 )
 public class CmdFuck implements Command {
 

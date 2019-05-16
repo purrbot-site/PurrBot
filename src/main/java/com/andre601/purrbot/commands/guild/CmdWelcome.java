@@ -6,7 +6,7 @@ import com.andre601.purrbot.util.ImageUtil;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Links;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
@@ -26,11 +26,19 @@ import java.text.MessageFormat;
                 "Sets or resets a welcome-channel\n" +
                 "\n" +
                 "`channel <set <#channel>|reset>` to set or reset a channel.\n" +
-                "`image <set <image>|reset>` to set or reset a image.\n" +
                 "`color <set <rgb:r,g,b|hex:rrggbb|reset>` to set or reset the text color.\n" +
-                "`test [image] [color]` to test the image (optionally with other image and text color).",
+                "`image <set <image>|reset>` to set or reset a image.\n" +
+                "`msg <set <msg>|reset>` to set a welcome-message.\n" +
+                "`test [image] [color] [msg]` to test the image (optionally with other image, text color and message).",
         triggers = {"welcome"},
-        attributes = {@CommandAttribute(key = "manage_server"), @CommandAttribute(key = "guild")}
+        attributes = {
+                @CommandAttribute(key = "manage_server"),
+                @CommandAttribute(key = "guild"),
+                @CommandAttribute(key = "usage", value =
+                        "welcome [channel <set <#channel>|reset>|color <set <color>|reset>|image <set <img>|reset>|" +
+                        "msg <set <msg>|reset>|test [image] [color] [msg]]"
+                )
+        }
 )
 public class CmdWelcome implements Command {
 

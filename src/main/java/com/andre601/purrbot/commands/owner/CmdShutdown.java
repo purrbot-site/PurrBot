@@ -4,7 +4,7 @@ import com.andre601.purrbot.core.PurrBot;
 import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -16,7 +16,10 @@ import net.dv8tion.jda.core.entities.TextChannel;
         name = "Shutdown",
         description = "Disables the bot",
         triggers = {"shutdown", "sleep", "disable"},
-        attributes = {@CommandAttribute(key = "owner")}
+        attributes = {
+                @CommandAttribute(key = "owner"),
+                @CommandAttribute(key = "usage", value = "shutdown")
+        }
 )
 public class CmdShutdown implements Command {
 

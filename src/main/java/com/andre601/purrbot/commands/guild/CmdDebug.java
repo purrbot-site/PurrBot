@@ -4,7 +4,7 @@ import com.andre601.purrbot.util.PermUtil;
 import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
 import com.andre601.purrbot.util.DebugUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.Permission;
@@ -18,7 +18,11 @@ import java.util.concurrent.TimeUnit;
         name = "Debug",
         description = "Generates a debug",
         triggers = {"debug"},
-        attributes = {@CommandAttribute(key = "manage_server"), @CommandAttribute(key = "guild")}
+        attributes = {
+                @CommandAttribute(key = "manage_server"),
+                @CommandAttribute(key = "guild"),
+                @CommandAttribute(key = "usage", value = "debug")
+        }
 )
 public class CmdDebug implements Command {
 

@@ -7,7 +7,7 @@ import com.andre601.purrbot.util.constants.Emotes;
 import com.andre601.purrbot.util.constants.IDs;
 import com.andre601.purrbot.util.messagehandling.EmbedUtil;
 import com.andre601.purrbot.util.messagehandling.MessageUtil;
-import com.github.rainestormee.jdacommand.Command;
+import com.andre601.purrbot.commands.Command;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -20,7 +20,10 @@ import java.util.stream.Collectors;
         name = "Kiss",
         description = "Lets you share some kisses with others!",
         triggers = {"kiss", "love", "kissu"},
-        attributes = {@CommandAttribute(key = "fun")}
+        attributes = {
+                @CommandAttribute(key = "fun"),
+                @CommandAttribute(key = "usage", value = "kiss <@user ...>")
+        }
 )
 public class CmdKiss implements Command {
 
@@ -35,24 +38,51 @@ public class CmdKiss implements Command {
         TextChannel tc = msg.getTextChannel();
         List<Member> members = msg.getMentionedMembers();
 
-        if(members.contains(guild.getSelfMember())){
-            if(PermUtil.isBeta()){
+        Member purr = members.stream().filter(member -> member.getUser().getId().equals(IDs.PURR.getId()))
+                .findFirst().orElse(null);
+        Member snuggle = members.stream().filter(member -> member.getUser().getId().equals(IDs.SNUGGLE.getId()))
+                .findFirst().orElse(null);
+
+        if(PermUtil.isBeta()){
+            if(members.contains(guild.getSelfMember())){
                 tc.sendMessage(String.format(
-                        "\\*gets a kiss on her cheek from %s*",
-                        msg.getAuthor().getAsMention()
+                        "Wha-?! O-okay. But only on my cheek %s. \\*lets you kiss her cheek*",
+                        msg.getMember().getAsMention()
                 )).queue();
             }else
-            if(PermUtil.isSpecialUser(msg.getAuthor().getId())){
-                EmbedBuilder kiss = EmbedUtil.getEmbed().setImage(MessageUtil.getRandomKissImg());
+            if(purr != null && members.contains(purr)){
+                if(PermUtil.isSpecialUser(msg.getAuthor().getId())){
+                    tc.sendMessage(String.format(
+                            "W-why do you kiss my sister through my help %s? G-go and kiss her yourself...",
+                            msg.getMember().getAsMention()
+                    )).queue();
+                }else{
+                    tc.sendMessage(String.format(
+                            "N-no! No kissing of my Sister %s!",
+                            msg.getMember().getAsMention()
+                    )).queue();
+                }
+            }
+        }else{
+            if(members.contains(guild.getSelfMember())){
+                if(PermUtil.isSpecialUser(msg.getAuthor().getId())){
+                    tc.sendMessage("\\*enjoys the kiss").queue(message -> {
+                        EmbedBuilder kiss = EmbedUtil.getEmbed().setImage(MessageUtil.getRandomKissImg());
 
-                tc.sendMessage("\\*enjoys the kiss*").queue(message -> {
-                    message.editMessage(kiss.build()).queue();
-                    msg.addReaction("\uD83D\uDC8B").queue();
-                });
-            }else{
+                        message.editMessage(kiss.build()).queue();
+                        msg.addReaction("\uD83D\uDC8B").queue();
+                    });
+                }else{
+                    tc.sendMessage(String.format(
+                            "\"I only allow you to kiss me on the cheek %s. \\\\*lets you kiss her cheek*\"",
+                            msg.getMember().getAsMention()
+                    )).queue();
+                }
+            }else
+            if(snuggle != null && members.contains(snuggle)){
                 tc.sendMessage(String.format(
-                        "\\*gets a kiss on her cheek from %s*",
-                        msg.getAuthor().getAsMention()
+                        "No kissing of my Sister with my help %s!",
+                        msg.getMember().getAsMention()
                 )).queue();
             }
         }
@@ -64,14 +94,15 @@ public class CmdKiss implements Command {
             )).queue();
         }
 
+        String kissedMembers = members.stream()
+                .filter(member -> !member.equals(guild.getSelfMember()))
+                .filter(member -> !member.equals(msg.getMember()))
+                .filter(member -> !member.equals(purr))
+                .filter(member -> !member.equals(snuggle))
+                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
         String link = HttpUtil.getImage(API.GIF_KISS, 0);
-        String kissedMembers = members.stream().filter(
-                member -> member != guild.getSelfMember()
-        ).filter(
-                member -> member != msg.getMember()
-        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        if(kissedMembers.equals("") || kissedMembers.length() == 0) return;
+        if(kissedMembers.isEmpty()) return;
 
         tc.sendMessage(String.format(
                 "%s Getting a kiss-gif...",
