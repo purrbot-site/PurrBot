@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
         triggers = {"poke", "poking"},
         attributes = {
                 @CommandAttribute(key = "fun"),
-                @CommandAttribute(key = "usage", value = "poke <@user...>")
+                @CommandAttribute(key = "usage", value = "{p}poke @user [@user ...]")
         }
 )
 public class CmdPoke implements Command {

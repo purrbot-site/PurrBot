@@ -35,7 +35,11 @@ import static com.andre601.purrbot.core.PurrBot.waiter;
         triggers = {"neko", "catgirl"},
         attributes = {
                 @CommandAttribute(key = "fun"),
-                @CommandAttribute(key = "usage", value = "neko [--gif] [--slide]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}neko\n" +
+                        "{p}neko --gif\n" +
+                        "{p}neko --slide\n" +
+                        "{p}neko --gif --slide")
         }
 )
 public class CmdNeko implements Command {

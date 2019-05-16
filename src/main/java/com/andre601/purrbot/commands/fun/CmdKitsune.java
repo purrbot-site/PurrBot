@@ -19,7 +19,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
         triggers = {"kitsune", "foxgirl"},
         attributes = {
                 @CommandAttribute(key = "fun"),
-                @CommandAttribute(key = "usage", value = "kitsune")
+                @CommandAttribute(key = "usage", value = "{p}kitsune")
         }
 )
 public class CmdKitsune implements Command {

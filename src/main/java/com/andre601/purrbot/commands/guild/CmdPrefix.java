@@ -22,7 +22,9 @@ import java.text.MessageFormat;
         attributes = {
                 @CommandAttribute(key = "manage_server"),
                 @CommandAttribute(key = "guild"),
-                @CommandAttribute(key = "usage", value = "prefix <set <prefix>|reset>")
+                @CommandAttribute(key = "usage", value =
+                        "{p}prefix set <prefix>\n" +
+                        "{p}prefix reset")
         }
 )
 public class CmdPrefix implements Command {

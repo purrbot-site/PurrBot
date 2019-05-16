@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
         triggers = {"tickle"},
         attributes = {
                 @CommandAttribute(key = "fun"),
-                @CommandAttribute(key = "usage", value = "tickle <@user ...>")
+                @CommandAttribute(key = "usage", value = "{p}tickle @user [@user ...]")
         }
 )
 public class CmdTickle implements Command {

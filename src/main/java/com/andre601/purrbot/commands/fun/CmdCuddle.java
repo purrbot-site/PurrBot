@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
         triggers = {"cuddle", "cuddles", "snuggle"},
         attributes = {
                 @CommandAttribute(key = "fun"),
-                @CommandAttribute(key = "usage", value = "cuddle <@user ...>")
+                @CommandAttribute(key = "usage", value = "{p}cuddle @user [@user ...]")
         }
 )
 public class CmdCuddle implements Command {

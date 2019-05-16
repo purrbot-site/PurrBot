@@ -25,7 +25,10 @@ import java.util.List;
         triggers = {"fakegit", "git"},
         attributes = {
                 @CommandAttribute(key = "fun"),
-                @CommandAttribute(key = "usage", value = "fakegit [--clear]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}fakegit\n" +
+                        "{p}fakegit --clear"
+                )
         }
 )
 public class CmdFakegit implements Command {

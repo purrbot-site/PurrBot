@@ -16,7 +16,10 @@ import net.dv8tion.jda.core.entities.*;
         triggers = {"emote", "e"},
         attributes = {
                 @CommandAttribute(key = "info"),
-                @CommandAttribute(key = "usage", value = "emote <:emote:|--search>")
+                @CommandAttribute(key = "usage", value =
+                        "{p}emote :emote:\n" +
+                        "{p}emote --search"
+                )
         }
 )
 public class CmdEmote implements Command {

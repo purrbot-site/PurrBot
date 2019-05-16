@@ -25,7 +25,9 @@ import java.text.MessageFormat;
         triggers = {"quote"},
         attributes = {
                 @CommandAttribute(key = "info"),
-                @CommandAttribute(key = "usage", value = "quote <messageID> [#channel]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}quote <messageID>\n" +
+                        "{p}quote <messageID> [#channel]")
         }
 )
 public class CmdQuote implements Command {

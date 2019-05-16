@@ -17,7 +17,9 @@ import java.text.MessageFormat;
         triggers = {"leave", "bye"},
         attributes = {
                 @CommandAttribute(key = "owner"),
-                @CommandAttribute(key = "usage", value = "leave <discordID> [--pm <message>]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}leave <discordID>\n" +
+                        "{p}leave <discordID> --pm <message>")
         }
 )
 public class CmdLeave implements Command {

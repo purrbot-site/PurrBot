@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
         triggers = {"hug", "hugging"},
         attributes = {
                 @CommandAttribute(key = "fun"),
-                @CommandAttribute(key = "usage", value = "hug <@user ...>")
+                @CommandAttribute(key = "usage", value = "{p}hug @user [@user ...]")
         }
 )
 public class CmdHug implements Command {

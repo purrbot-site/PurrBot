@@ -19,7 +19,10 @@ import java.time.temporal.ChronoUnit;
         triggers = {"ping"},
         attributes = {
                 @CommandAttribute(key = "info"),
-                @CommandAttribute(key = "usage", value = "ping [--api]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}ping\n" +
+                        "{p}ping --api"
+                )
         }
 )
 public class CmdPing implements Command {

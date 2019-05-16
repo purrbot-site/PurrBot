@@ -32,7 +32,11 @@ import java.util.concurrent.TimeUnit;
         triggers = {"lewd"},
         attributes = {
                 @CommandAttribute(key = "nsfw"),
-                @CommandAttribute(key = "usage", value = "lewd [--gif] [--slide]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}lewd\n" +
+                        "{p}lewd --gif\n" +
+                        "{p}lewd --slide\n" +
+                        "{p}lewd --gif --slide")
         }
 )
 public class CmdLewd implements Command {

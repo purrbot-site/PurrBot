@@ -23,7 +23,7 @@ import java.util.List;
         triggers = {"eval"},
         attributes = {
                 @CommandAttribute(key = "owner"),
-                @CommandAttribute(key = "usage", value = "eval <code>")
+                @CommandAttribute(key = "usage", value = "{p}eval <code>")
         }
 )
 public class CmdEval implements Command {

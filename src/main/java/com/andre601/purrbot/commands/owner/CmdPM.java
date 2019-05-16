@@ -16,7 +16,7 @@ import net.dv8tion.jda.core.entities.User;
         triggers = {"pm"},
         attributes = {
                 @CommandAttribute(key = "owner"),
-                @CommandAttribute(key = "usage", value = "pm <userID> <message>")
+                @CommandAttribute(key = "usage", value = "{p}pm <userID> <message>")
         }
 )
 public class CmdPM implements Command {

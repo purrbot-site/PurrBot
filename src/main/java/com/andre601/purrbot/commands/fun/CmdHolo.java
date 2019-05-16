@@ -21,7 +21,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
         triggers = {"holo", "spiceandwolf"},
         attributes = {
                 @CommandAttribute(key = "fun"),
-                @CommandAttribute(key = "usage", value = "holo")
+                @CommandAttribute(key = "usage", value = "{p}holo")
         }
 )
 public class CmdHolo implements Command {

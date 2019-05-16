@@ -14,7 +14,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
         triggers = {"refresh", "update"},
         attributes = {
                 @CommandAttribute(key = "owner"),
-                @CommandAttribute(key = "usage", value = "refresh")
+                @CommandAttribute(key = "usage", value = "{p}refresh")
         }
 )
 public class CmdRefresh implements Command {

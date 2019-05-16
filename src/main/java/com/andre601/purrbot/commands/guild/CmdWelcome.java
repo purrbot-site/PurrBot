@@ -35,8 +35,12 @@ import java.text.MessageFormat;
                 @CommandAttribute(key = "manage_server"),
                 @CommandAttribute(key = "guild"),
                 @CommandAttribute(key = "usage", value =
-                        "welcome [channel <set <#channel>|reset>|color <set <color>|reset>|image <set <img>|reset>|" +
-                        "msg <set <msg>|reset>|test [image] [color] [msg]]"
+                        "{p}welcome\n" +
+                        "{p}welcome channel <set <#channel>|reset>\n" +
+                        "{p}welcome color <set <color>|reset>\n" +
+                        "{p}welcome image <set <image>|reset>\n" +
+                        "{p}welcome msg <set <message>|reset>\n" +
+                        "{p}welcome test [image] [color] [msg]"
                 )
         }
 )

@@ -23,7 +23,10 @@ import java.text.MessageFormat;
         attributes = {
                 @CommandAttribute(key = "info"),
                 @CommandAttribute(key = "guild_only"),
-                @CommandAttribute(key = "usage", value = "level [@user]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}level\n" +
+                        "{p}level @user"
+                )
         }
 )
 public class CmdLevel implements Command {

@@ -18,7 +18,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
         triggers = {"shutdown", "sleep", "disable"},
         attributes = {
                 @CommandAttribute(key = "owner"),
-                @CommandAttribute(key = "usage", value = "shutdown")
+                @CommandAttribute(key = "usage", value = "{p}shutdown")
         }
 )
 public class CmdShutdown implements Command {

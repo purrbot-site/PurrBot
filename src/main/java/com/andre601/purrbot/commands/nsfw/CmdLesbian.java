@@ -19,7 +19,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
         triggers = {"lesbian", "les"},
         attributes = {
                 @CommandAttribute(key = "nsfw"),
-                @CommandAttribute(key = "usage", value = "lesbian")
+                @CommandAttribute(key = "usage", value = "{p}lesbian")
         }
 )
 public class CmdLesbian implements Command {

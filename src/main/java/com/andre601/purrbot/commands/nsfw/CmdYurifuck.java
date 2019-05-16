@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
         triggers = {"yurifuck", "yurisex", "yfuck", "ysex"},
         attributes = {
                 @CommandAttribute(key = "nsfw"),
-                @CommandAttribute(key = "usage", value = "yurifuck <@user>")
+                @CommandAttribute(key = "usage", value = "{p}yurifuck @user")
         }
 )
 public class CmdYurifuck implements Command {

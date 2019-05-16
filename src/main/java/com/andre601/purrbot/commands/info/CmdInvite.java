@@ -22,7 +22,10 @@ import java.util.concurrent.TimeUnit;
         triggers = {"invite", "links"},
         attributes = {
                 @CommandAttribute(key = "info"),
-                @CommandAttribute(key = "usage", value = "invite [--dm]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}invite\n" +
+                        "{p}invite --dm"
+                )
         }
 )
 public class CmdInvite implements Command {

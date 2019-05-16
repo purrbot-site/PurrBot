@@ -33,7 +33,10 @@ import java.util.stream.Collectors;
         triggers = {"help", "commands", "command"},
         attributes = {
                 @CommandAttribute(key = "info"),
-                @CommandAttribute(key = "usage", value = "help [command]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}help\n" +
+                        "{p}help [command]"
+                )
         }
 )
 public class CmdHelp implements Command {
@@ -52,6 +55,7 @@ public class CmdHelp implements Command {
 
     private static MessageEmbed commandHelp(Message msg, Command cmd, String prefix){
         CommandDescription description = cmd.getDescription();
+        String[] triggers = description.triggers();
         EmbedBuilder command = EmbedUtil.getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Command: %s",
@@ -59,14 +63,15 @@ public class CmdHelp implements Command {
                 ))
                 .setDescription(description.description())
                 .addField("Usage:", String.format(
-                        "`%s%s`",
-                        prefix,
-                        cmd.getAttribute("usage")
-                ), true)
+                        "```\n" +
+                        "%s" +
+                        "\n```",
+                        cmd.getAttribute("usage").replace("{p}", prefix)
+                ), false)
                 .addField("Aliases:", String.format(
                         "`%s`",
-                        String.join(", ", description.triggers())
-                ), true);
+                        String.join(", ", triggers)
+                ), false);
 
         return command.build();
     }

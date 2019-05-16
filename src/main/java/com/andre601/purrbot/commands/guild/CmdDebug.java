@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
         attributes = {
                 @CommandAttribute(key = "manage_server"),
                 @CommandAttribute(key = "guild"),
-                @CommandAttribute(key = "usage", value = "debug")
+                @CommandAttribute(key = "usage", value = "{p}debug")
         }
 )
 public class CmdDebug implements Command {

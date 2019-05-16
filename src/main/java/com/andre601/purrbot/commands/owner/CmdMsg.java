@@ -15,7 +15,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
         triggers = {"message", "msg"},
         attributes = {
                 @CommandAttribute(key = "owner"),
-                @CommandAttribute(key = "usage", value = "message <channelID> <message>")
+                @CommandAttribute(key = "usage", value = "{p}message <channelID> <message>")
         }
 )
 public class CmdMsg implements Command {

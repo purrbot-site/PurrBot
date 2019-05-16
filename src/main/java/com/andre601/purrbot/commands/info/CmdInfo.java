@@ -32,7 +32,10 @@ import java.util.concurrent.TimeUnit;
         triggers = {"info", "infos", "information"},
         attributes = {
                 @CommandAttribute(key = "info"),
-                @CommandAttribute(key = "usage", value = "info [--dm]")
+                @CommandAttribute(key = "usage", value =
+                        "{p}info\n" +
+                        "{p}info --dm"
+                )
         }
 )
 public class CmdInfo implements Command {
