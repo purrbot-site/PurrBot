@@ -91,7 +91,7 @@ public class CmdShip implements Command {
             if(!PermUtil.isBeta()) {
                 if(
                         member2.getUser().getId().equals(IDs.EVELIEN.getId()) ||
-                        member2.getUser().getId().equals(IDs.LILYSCARLET.getId()) ||
+                        member2.getUser().getId().equals(IDs.KAPPACHINO.getId()) ||
                         member2.getUser().getId().equals(IDs.KORBO.getId())
                 ){
                     tc.sendMessage(String.format(
@@ -112,7 +112,7 @@ public class CmdShip implements Command {
             if(!PermUtil.isBeta()){
                 if(
                         member1.getUser().getId().equals(IDs.EVELIEN.getId()) ||
-                        member1.getUser().getId().equals(IDs.LILYSCARLET.getId()) ||
+                        member1.getUser().getId().equals(IDs.KAPPACHINO.getId()) ||
                         member1.getUser().getId().equals(IDs.KORBO.getId())
                 ){
                     tc.sendMessage(String.format(

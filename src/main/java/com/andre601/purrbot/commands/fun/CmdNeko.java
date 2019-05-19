@@ -93,7 +93,9 @@ public class CmdNeko implements Command {
                     ))
                     .setUrls(urls.replace("\"", "").split(","))
                     .setFinalAction(message -> {
-                        if(message != null) message.delete().queue();
+                        if(PermUtil.check(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                            message.clearReactions().queue();
+
                         nekoUserID.remove(msg.getAuthor().getId());
                     })
                     .build();

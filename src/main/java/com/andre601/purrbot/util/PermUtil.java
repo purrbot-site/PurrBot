@@ -95,6 +95,6 @@ public class PermUtil {
     }
 
     public static boolean isSpecialUser(String id){
-        return id.equals(IDs.EVELIEN.getId()) || id.equals(IDs.KORBO.getId()) || id.equals(IDs.LILYSCARLET.getId());
+        return id.equals(IDs.EVELIEN.getId()) || id.equals(IDs.KORBO.getId()) || id.equals(IDs.KAPPACHINO.getId());
     }
 }

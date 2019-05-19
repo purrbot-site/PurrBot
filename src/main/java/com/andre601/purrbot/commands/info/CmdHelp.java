@@ -179,8 +179,8 @@ public class CmdHelp implements Command {
         }else{
             pBuilder.setText("")
                     .setFinalAction(message -> {
-                        if(message != null)
-                            message.delete().queue();
+                        if(PermUtil.check(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                            message.clearReactions().queue();
                     })
                     .waitOnSinglePage(false)
                     .setItemsPerPage(1)

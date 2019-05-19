@@ -74,7 +74,7 @@ public class CmdKiss implements Command {
                     });
                 }else{
                     tc.sendMessage(String.format(
-                            "\"I only allow you to kiss me on the cheek %s. \\\\*lets you kiss her cheek*\"",
+                            "I only allow you to kiss me on the cheek %s. \\*lets you kiss her cheek*",
                             msg.getMember().getAsMention()
                     )).queue();
                 }
