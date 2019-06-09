@@ -59,7 +59,6 @@ What started as a simple and easy bot became quite a big bot, that is now even o
 
 | Command: | Arguments:                   | Description:                                                      |
 | -------- | ---------------------------- | ----------------------------------------------------------------- |
-| Debug    |                              | Creates a debug-file on [debug.scarsz.me]                         |
 | Prefix   |                              | Shows the current prefix for the Discord.                         |
 |          | `set <prefix>`               | Sets the provided prefix for the Guild.                           |
 |          | `reset`                      | Resets the prefix to the default one.                             |
