@@ -1,6 +1,5 @@
 {
-  "token": "TOKEN",
-  "id": "ID",
+  "bot-token": "TOKEN",
   "webhook": "webhookURL",
   "vote-webhook": "vote-Webhook URL",
 

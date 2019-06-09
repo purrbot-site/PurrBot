@@ -1,0 +1,107 @@
+{
+  "accept_fuck_msg": [
+    "Which bedroom %s?",
+    "\\*moves with her hand over %s's body* Lets get some privacy sweetie. 😘"
+  ],
+  "api_ping_msg": [
+    "API responded in %sms!",
+    "Speedtest complete! Result: %sms",
+    "The API said hello in %sms.",
+    "Got a response from Discord in %sms."
+  ],
+  "blacklist": [
+    "578951136288178216"
+  ],
+  "deny_fuck_msg": [
+    "I'm sorry %s, but I can't right now...",
+    "Can you wait a lil more %s? I don't have time right now.",
+    "\\*gives a kiss* I can't %s. Sorry."
+  ],
+  "kiss_img": [
+    "https://purrbot.site/images/kiss/kiss_001.jpeg",
+    "https://purrbot.site/images/kiss/kiss_002.jpg",
+    "https://purrbot.site/images/kiss/kiss_003.gif",
+    "https://purrbot.site/images/kiss/kiss_004.gif",
+    "https://purrbot.site/images/kiss/kiss_005.gif",
+    "https://purrbot.site/images/kiss/kiss_006.gif",
+    "https://purrbot.site/images/kiss/kiss_007.gif",
+    "https://purrbot.site/images/kiss/kiss_008.gif",
+    "https://purrbot.site/images/kiss/kiss_009.gif",
+    "https://purrbot.site/images/kiss/kiss_010.gif",
+    "https://purrbot.site/images/kiss/kiss_011.gif",
+    "https://purrbot.site/images/kiss/kiss_012.gif",
+    "https://purrbot.site/images/kiss/kiss_013.gif"
+  ],
+  "no_nsfw_msg": [
+    "Please be a naughty person in a NSFW channel %s.",
+    "Nonono! You be a nice guy and go to a NSFW channel with that %s!",
+    "Is it me or does this channel not have a NSFW-label %s?",
+    "Nice try. But you can only use those commands in NSFW channels %s.",
+    "Please be dirty in a NSFW channel %s.",
+    "Trust me %s, it's much more fun to use those in a NSFW channel. :3",
+    "What are you trying to do? Keep your naughtyness in a NSFW channel %s!",
+    "Those naughty things can only be seen and used in NSFW channels %s.",
+    "Error: NoNSFWChannelFoundException (Not actually an error, but I guess you get the hint %s)."
+  ],
+  "ping_msg": [
+    "I catched a fish in %sms!",
+    "Took a nap for %sms.",
+    "Hewwo! (Took %sms.)",
+    "Meow! (Translation: %sms)",
+    "What now? Should I say \"pong\"? Nah. That is so boring. I won't say it. But I will say how much time it took: %sms."
+  ],
+  "shutdown_img": [
+    "https://purrbot.site/images/shutdown/shutdown_001.png",
+    "https://purrbot.site/images/shutdown/shutdown_002.jpg",
+    "https://purrbot.site/images/shutdown/shutdown_003.jpeg",
+    "https://purrbot.site/images/shutdown/shutdown_004.png",
+    "https://purrbot.site/images/shutdown/shutdown_005.jpg",
+    "https://purrbot.site/images/shutdown/shutdown_006.jpg",
+    "https://purrbot.site/images/shutdown/shutdown_007.png",
+    "https://purrbot.site/images/shutdown/shutdown_008.jpg",
+    "https://purrbot.site/images/shutdown/shutdown_009.jpeg",
+    "https://purrbot.site/images/shutdown/shutdown_010.jpeg",
+    "https://purrbot.site/images/shutdown/shutdown_011.jpeg",
+    "https://purrbot.site/images/shutdown/shutdown_012.gif",
+    "https://purrbot.site/images/shutdown/shutdown_013.gif",
+    "https://purrbot.site/images/shutdown/shutdown_014.gif",
+    "https://purrbot.site/images/shutdown/shutdown_015.gif"
+  ],
+  "shutdown_msg": [
+    "Time for a nap UwU",
+    "Bye bye!",
+    "I feel so tired...",
+    "\\*yawns* I go and take a nap now.",
+    "See you later. :3"
+  ],
+  "startup_msg": [
+    "Loading cute nekos...",
+    "Slowly waking up.",
+    "Give Andre_601 headaches",
+    "[Placeholder_text]",
+    "Breaking stuff... again",
+    "Hey look! I'm a startup message!",
+    "Connecting to da interwebz"
+  ],
+  "welcome_img": [
+    "color_black",
+    "color_blue",
+    "color_green",
+    "color_red",
+    "color_white",
+    "gradient",
+    "gradient_blue",
+    "gradient_dark_red",
+    "gradient_green",
+    "gradient_orange",
+    "gradient_red",
+    "neko_cat",
+    "neko_hug",
+    "neko_smiling",
+    "purr",
+    "wood",
+    "wood_bright",
+    "wood_dark",
+    "wood_grey"
+  ]
+}
