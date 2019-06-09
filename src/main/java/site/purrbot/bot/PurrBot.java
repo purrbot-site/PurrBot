@@ -99,7 +99,7 @@ public class PurrBot {
         CMD_HANDLER.registerCommands(new HashSet<>(new CommandLoader(this).getCommands()));
 
         //noinspection ResultOfMethodCallIgnored
-        scheduler.scheduleAtFixedRate(this::update, 1, 10, TimeUnit.MINUTES);
+        this.scheduler.scheduleAtFixedRate(update(), 1, 5, TimeUnit.MINUTES);
 
         shardManager = new DefaultShardManagerBuilder()
                 .setToken(getgFile().getString("config", "bot-token"))
@@ -131,7 +131,7 @@ public class PurrBot {
                                 vote.isWeekend()
                         );
 
-                    return response.body();
+                    return "";
                 });
 
                 post("/lbots", (request, response) -> {
@@ -144,7 +144,7 @@ public class PurrBot {
                         if(isFavourite)
                             rewardHandler.giveReward(IDs.PURR.getId(), userId);
 
-                    return response.body();
+                    return "";
                 });
             });
 
@@ -248,15 +248,28 @@ public class PurrBot {
                         getMessageUtil().getBotGame(),
                         getShardManager().getGuildCache().size()
                 )));
-                try {
-                    getHttpUtil().updateStats(Links.DISCORDBOTS_ORG, (int)getShardManager().getGuildCache().size());
-                }catch(IOException ignored){}
 
-                try{
-                    getHttpUtil().updateStats(Links.LBOTS_ORG, (int)getShardManager().getGuildCache().size());
-                }catch(IOException ignored){}
+                if(!isBeta()) {
+                    try {
+                        getHttpUtil().updateStats(
+                                Links.DISCORD_BOTS_GG_STATS,
+                                (int)getShardManager().getGuildCache().size()
+                        );
+                    } catch (IOException ex) {
+                        logger.warn("Couldn't update stats on Discord.bots.gg: ", ex);
+                    }
 
-                getDblApi().setStats((int)getShardManager().getGuildCache().size());
+                    try {
+                        getHttpUtil().updateStats(
+                                Links.LBOTS_ORG_STATS,
+                                (int) getShardManager().getGuildCache().size()
+                        );
+                    } catch (IOException ex) {
+                        logger.warn("Couldn't update stats on LBots.org: ", ex);
+                    }
+
+                    getDblApi().setStats((int) getShardManager().getGuildCache().size());
+                }
             }
         };
     }

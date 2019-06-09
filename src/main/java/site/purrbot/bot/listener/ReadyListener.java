@@ -5,6 +5,7 @@ import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,10 @@ public class ReadyListener extends ListenerAdapter{
         JDA jda = event.getJDA();
 
         shards += 1;
+
+        for(Guild guild : jda.getGuilds()){
+
+        }
 
         logger.info(String.format(
                 "Shard %d (%d Guilds) ready!",

@@ -56,9 +56,9 @@ public class CmdPat implements Command{
         String link = manager.getHttpUtil().getImage(API.GIF_PAT);
 
         String pattetMembers = members.stream().filter(
-                member -> member != guild.getSelfMember()
+                member -> !member.equals(guild.getSelfMember())
         ).filter(
-                member -> member != msg.getMember()
+                member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(pattetMembers.isEmpty()) return;

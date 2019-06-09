@@ -183,7 +183,8 @@ public class GuildListener extends ListenerAdapter{
             return;
 
         if(isBotGuild(guild))
-            return;
+            if(!guild.getId().equals(IDs.GUILD.getId()))
+                return;
 
         manager.getDbUtil().delGuild(guild.getId());
 
@@ -204,7 +205,7 @@ public class GuildListener extends ListenerAdapter{
         Guild guild = event.getGuild();
 
         if(isBotGuild(guild)){
-            if(guild.getOwner().getUser().getId().equals(IDs.ANDRE_601.getId())) {
+            if(!guild.getOwner().getUser().getId().equals(IDs.ANDRE_601.getId())) {
                 guild.getOwner().getUser().openPrivateChannel().queue(channel ->
                         channel.sendMessage(String.format(
                                 "I left your Discord `%s` for the following reason:\n" +

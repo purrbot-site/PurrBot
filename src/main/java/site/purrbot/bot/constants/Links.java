@@ -15,6 +15,10 @@ public enum  Links {
     DISCORD_BOTS_GG("https://discord.bots.gg/bots/425382319449309197"),
     LBOTS_ORG      ("https://lbots.org/bots/Purr"),
 
+    DISCORDBOTS_ORG_STATS("https://discordbots.org/api/bots/425382319449309197"),
+    DISCORD_BOTS_GG_STATS("https://discord.bots.gg/api/v1/bots/425382319449309197/stats"),
+    LBOTS_ORG_STATS      ("https://lbots.org/api/v1/bots/425382319449309197/stats"),
+
     // Other links
     WEBSITE      ("https://purrbot.site"),
     GITHUB_AVATAR("https://i.imgur.com/Fv6qdfG.png"),

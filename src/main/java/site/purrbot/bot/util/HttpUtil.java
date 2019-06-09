@@ -47,8 +47,8 @@ public class HttpUtil {
     }
 
     private JSONObject voteInfo() throws IOException{
-        Request request = new Request.Builder().url(Links.DISCORDBOTS_ORG.getUrl())
-                .header("authorization", manager.getgFile().getString("config", "dbl-token"))
+        Request request = new Request.Builder().url(Links.DISCORDBOTS_ORG_STATS.getUrl())
+                .header("Authorization", manager.getgFile().getString("config", "dbl-token"))
                 .build();
 
         Response response = CLIENT.newCall(request).execute();
@@ -77,18 +77,19 @@ public class HttpUtil {
     }
 
     public void updateStats(Links link, int count) throws IOException{
+
         String content;
         String url;
         String token;
 
         switch(link){
-            case LBOTS_ORG:
+            case LBOTS_ORG_STATS:
                 content = String.format("{\"guild_count\": %d}", count);
                 url = link.getUrl();
                 token = manager.getgFile().getString("config", "lbots-token");
                 break;
 
-            case DISCORD_BOTS_GG:
+            case DISCORD_BOTS_GG_STATS:
                 content = String.format("{\"guildCount\": %d}", count);
                 url = link.getUrl();
                 token = manager.getgFile().getString("config", "dbgg-token");
@@ -103,8 +104,8 @@ public class HttpUtil {
         if(url == null || content == null || token == null) return;
 
         RequestBody rbody = RequestBody.create(JSON, content);
-        Request request = new Request.Builder().url(String.format("%s/stats", url))
-                .header("authorization", token)
+        Request request = new Request.Builder().url(url)
+                .header("Authorization", token)
                 .post(rbody)
                 .build();
 

@@ -61,9 +61,9 @@ public class CmdHug implements Command {
         String link = manager.getHttpUtil().getImage(API.GIF_HUG);
 
         String huggedMembers = members.stream().filter(
-                member -> member != guild.getSelfMember()
+                member -> !member.equals(guild.getSelfMember())
         ).filter(
-                member -> member != msg.getMember()
+                member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(huggedMembers.isEmpty()) return;

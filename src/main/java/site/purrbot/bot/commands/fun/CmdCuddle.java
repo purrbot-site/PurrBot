@@ -66,7 +66,7 @@ public class CmdCuddle implements Command{
         String cuddledMembers = members.stream().filter(
                 member -> !member.equals(guild.getSelfMember())
         ).filter(
-                member -> member.equals(msg.getMember())
+                member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(cuddledMembers.isEmpty()) return;

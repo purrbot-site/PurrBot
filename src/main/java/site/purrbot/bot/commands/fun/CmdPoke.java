@@ -56,9 +56,9 @@ public class CmdPoke implements Command{
         String link = manager.getHttpUtil().getImage(API.GIF_POKE);
 
         String pokedMembers = members.stream().filter(
-                member -> member != guild.getSelfMember()
+                member -> !member.equals(guild.getSelfMember())
         ).filter(
-                member -> member != msg.getMember()
+                member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(pokedMembers.isEmpty()) return;
