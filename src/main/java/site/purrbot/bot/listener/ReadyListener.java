@@ -43,10 +43,6 @@ public class ReadyListener extends ListenerAdapter{
 
         shards += 1;
 
-        for(Guild guild : jda.getGuilds()){
-
-        }
-
         logger.info(String.format(
                 "Shard %d (%d Guilds) ready!",
                 shards,
