@@ -28,9 +28,7 @@ import spark.Spark;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -64,6 +62,8 @@ public class PurrBot {
     private EventWaiter waiter;
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
+    private Map<String, String> prefixes = new HashMap<>();
+
     public static void main(String[] args){
         try{
             new PurrBot().setup();
@@ -82,7 +82,7 @@ public class PurrBot {
 
         readyListener = new ReadyListener(this);
         dbUtil        = new DBUtil(this);
-        permUtil      = new PermUtil(this);
+        permUtil      = new PermUtil();
         messageUtil   = new MessageUtil(this);
         rewardHandler = new RewardHandler(this);
         embedUtil     = new EmbedUtil();
@@ -205,6 +205,13 @@ public class PurrBot {
     }
     public EventWaiter getWaiter(){
         return waiter;
+    }
+
+    public Map<String, String> getPrefixes(){
+        return prefixes;
+    }
+    public void setPrefix(String guildId, String prefix){
+        prefixes.put(guildId, prefix);
     }
 
     public List<String> getAcceptFuckMsg(){

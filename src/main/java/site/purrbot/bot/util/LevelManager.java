@@ -48,7 +48,7 @@ public class LevelManager {
         if(isLevelup(id, xp)){
             long level = manager.getDbUtil().getLevel(id);
 
-            String imgName = String.format("levelup_%s_%d", id, level + 1);
+            String imgName = String.format("levelup_%s_%d.png", id, level + 1);
             File image = new File("img/level/levelup.png");
 
             Guild guild = manager.getShardManager().getGuildById(IDs.GUILD.getId());

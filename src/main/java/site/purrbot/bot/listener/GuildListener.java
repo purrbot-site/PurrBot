@@ -89,8 +89,8 @@ public class GuildListener extends ListenerAdapter{
                                 "Users: %5d\n" +
                                 "```",
                                 guild.getMembers().size(),
-                                guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count(),
-                                guild.getMembers().stream().filter(member -> member.getUser().isBot()).count()
+                                guild.getMembers().stream().filter(member -> member.getUser().isBot()).count(),
+                                guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count()
                         )
                 ))
                 .setFooter(new WebhookEmbed.EmbedFooter(
@@ -183,10 +183,12 @@ public class GuildListener extends ListenerAdapter{
             return;
 
         if(isBotGuild(guild))
-            if(!guild.getId().equals(IDs.GUILD.getId()))
+            if(!guild.getOwner().getUser().getId().equals(IDs.ANDRE_601.getId()))
                 return;
 
         manager.getDbUtil().delGuild(guild.getId());
+
+        manager.getPrefixes().remove(guild.getId());
 
         logger.info(String.format(
                 "[Guild leave] Name: %s (%s), Members: %d (Bots: %d, Users: %d)",
@@ -209,9 +211,9 @@ public class GuildListener extends ListenerAdapter{
                 guild.getOwner().getUser().openPrivateChannel().queue(channel ->
                         channel.sendMessage(String.format(
                                 "I left your Discord `%s` for the following reason:\n" +
-                                    "```\n" +
-                                    "[Auto Leave] Your Discord has more bots than users.\n" +
-                                    "```",
+                                "```\n" +
+                                "[Auto Leave] Your Discord has more bots than users.\n" +
+                                "```",
                                 guild.getName()
                         )).queue(message -> {
                             guild.leave().queue();

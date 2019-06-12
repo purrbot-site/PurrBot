@@ -4,7 +4,6 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -13,7 +12,6 @@ import site.purrbot.bot.commands.Command;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.MessageFormat;
 
 @CommandDescription(
         name = "Quote",
@@ -67,7 +65,6 @@ public class CmdQuote implements Command{
     @Override
     public void execute(Message msg, String s){
         String[] args = s.split(" ");
-        Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
         if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
@@ -77,7 +74,7 @@ public class CmdQuote implements Command{
             manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                     "To few arguments!\n" +
                     "Usage: `%squote <messageID> [#channel]`",
-                    manager.getDbUtil().getPrefix(guild.getId())
+                    manager.getPrefixes().get(msg.getGuild().getId())
             ));
             return;
         }

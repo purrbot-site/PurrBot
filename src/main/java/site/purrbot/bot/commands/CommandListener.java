@@ -15,6 +15,8 @@ import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -46,7 +48,18 @@ public class CommandListener extends ListenerAdapter{
                     User user = event.getAuthor();
 
                     if(user.isBot()) return;
-                    if(!manager.getDbUtil().hasPrefix(guild.getId(), msg.getContentRaw())){
+
+                    String prefix;
+
+                    if(!manager.getPrefixes().containsKey(guild.getId())){
+                        prefix = manager.getDbUtil().getPrefix(guild.getId());
+
+                        manager.setPrefix(guild.getId(), prefix);
+                    }else{
+                        prefix = manager.getPrefixes().get(guild.getId());
+                    }
+
+                    if(!msg.getContentRaw().toLowerCase().startsWith(prefix)){
                         if(guild.getId().equals(IDs.GUILD.getId()))
                             manager.getLevelManager().giveXP(user.getId(), false, msg.getTextChannel());
 
@@ -54,10 +67,14 @@ public class CommandListener extends ListenerAdapter{
                     }
 
                     TextChannel tc = event.getChannel();
-                    String prefix = manager.getDbUtil().getPrefix(guild.getId());
+
+                    if(!manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_WRITE))
+                        return;
+
                     String raw = msg.getContentRaw();
 
-                    if(raw.equalsIgnoreCase(guild.getSelfMember().getAsMention())){
+                    String mention = guild.getSelfMember().getAsMention();
+                    if(raw.startsWith(mention) && raw.length() == mention.length()){
                         tc.sendMessage(String.format(
                                 "Hey there %s!\n" +
                                 "My prefix on this Discord is `%s`\n" +

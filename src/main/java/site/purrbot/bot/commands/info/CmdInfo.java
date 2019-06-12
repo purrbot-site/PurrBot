@@ -62,7 +62,7 @@ public class CmdInfo implements Command{
                 ), false)
                 .addField("Commands", String.format(
                         "Use `%shelp` in the Discord for a list of commands.",
-                        manager.getDbUtil().getPrefix(guild.getId())
+                        manager.getPrefixes().get(guild.getId())
                 ), false)
                 .addField("Bot-Version", "`BOT_VERSION`", true)
                 .addField("Library", String.format(
@@ -83,7 +83,7 @@ public class CmdInfo implements Command{
                 .addField("", String.format(
                         "[`Official Discord`](%s)\n" +
                         "[`Website`](%s)\n" +
-                        "[`Lbots.org`](%s)" +
+                        "[`Lbots.org`](%s)\n" +
                         "[`Discordbots.org`](%s)",
                         Links.DISCORD.getUrl(),
                         Links.WEBSITE.getUrl(),

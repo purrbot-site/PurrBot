@@ -79,20 +79,6 @@ public class DBUtil {
      */
 
     /**
-     * Checks if a message starts with the provided prefix.
-     *
-     * @param  id
-     *         The ID of the Guild.
-     * @param  msg
-     *         The message to check for the prefix.
-     *
-     * @return True or false depending on if the String starts with the prefix.
-     */
-    public boolean hasPrefix(String id, String msg){
-        return msg.toLowerCase().startsWith(getPrefix(id));
-    }
-
-    /**
      * Gets the prefix of a Guild.
      *
      * @param  id

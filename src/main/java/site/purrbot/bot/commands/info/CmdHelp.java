@@ -5,7 +5,6 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.menu.Paginator;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -81,9 +80,8 @@ public class CmdHelp implements Command{
 
     @Override
     public void execute(Message msg, String args) {
-        Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
-        String prefix = manager.getDbUtil().getPrefix(guild.getId());
+        String prefix = manager.getPrefixes().get(msg.getGuild().getId());
 
         if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();

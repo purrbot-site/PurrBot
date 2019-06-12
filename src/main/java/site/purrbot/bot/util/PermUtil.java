@@ -4,13 +4,11 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.utils.PermissionUtil;
-import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
 
 public class PermUtil {
 
-    public PermUtil(PurrBot manager){}
+    public PermUtil(){}
 
     /**
      * Checks if the provided user is the author of the bot.
@@ -32,12 +30,12 @@ public class PermUtil {
      * @param  member
      *         The {@link net.dv8tion.jda.core.entities.Member Member} to check.
      * @param  permissions
-     *         The {@link net.dv8tion.jda.core.Permission Permission} to check for.
+     *         The {@link net.dv8tion.jda.core.Permission Permission(s)} to check for.
      *
      * @return True or false if the member has the permission.
      */
     public boolean hasPermission(TextChannel tc, Member member, Permission... permissions){
-        return PermissionUtil.checkPermission(tc, member, permissions);
+        return member.hasPermission(tc, permissions);
     }
 
     /**
@@ -46,17 +44,13 @@ public class PermUtil {
      *
      * @param  tc
      *         The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to check permission in.
-     * @param  permission
-     *         The {@link net.dv8tion.jda.core.Permission Permission} to check for.
+     * @param  permissions
+     *         The {@link net.dv8tion.jda.core.Permission Permission(s)} to check for.
      *
      * @return True or false if the Bot has the checked permission.
      *
      * @see #hasPermission(TextChannel, Member, Permission...)
      */
-    public boolean hasPermission(TextChannel tc, Permission permission){
-        return hasPermission(tc, tc.getGuild().getSelfMember(), permission);
-    }
-
     public boolean hasPermission(TextChannel tc, Permission... permissions){
         return hasPermission(tc, tc.getGuild().getSelfMember(), permissions);
     }

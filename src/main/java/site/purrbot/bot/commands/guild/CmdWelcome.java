@@ -60,7 +60,7 @@ public class CmdWelcome implements Command{
                 .setDescription(String.format(
                         "Here is a list of all current settings for this Discord!\n" +
                         "To change some settings use `%swelcome [subcommand]`",
-                        manager.getDbUtil().getPrefix(id)
+                        manager.getPrefixes().get(id)
                 ))
                 .addField(
                         "Subcommands",
@@ -180,7 +180,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "To few arguments!\n" +
                             "Usage: `%swelcome channel <set <#channel>|reset>`",
-                            manager.getDbUtil().getPrefix(guild.getId())
+                            manager.getPrefixes().get(guild.getId())
                     ));
                     return;
                 }
@@ -201,7 +201,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "Invalid argument!\n" +
                             "Usage: `%swelcome channel <set <#channel>|reset>`",
-                            manager.getDbUtil().getPrefix(guild.getId())
+                            manager.getPrefixes().get(guild.getId())
                     ));
                 }
                 break;
@@ -213,7 +213,7 @@ public class CmdWelcome implements Command{
                             "Usage: `%swelcome image <set <image>|reset>`\n" +
                             "\n" +
                             "A list of available images can be found on the [wiki](%s)",
-                            manager.getDbUtil().getPrefix(guild.getId()),
+                            manager.getPrefixes().get(guild.getId()),
                             Links.WIKI.getUrl()
                     ));
                     return;
@@ -237,7 +237,7 @@ public class CmdWelcome implements Command{
                             "Usage: `%swelcome image <set <image>|reset>`\n" +
                             "\n" +
                             "A list of available images can be found on the [wiki](%s)",
-                            manager.getDbUtil().getPrefix(guild.getId()),
+                            manager.getPrefixes().get(guild.getId()),
                             Links.WIKI.getUrl()
                     ));
                 }
@@ -248,7 +248,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "To few arguments!\n" +
                             "Usage: `%swelcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
-                            manager.getDbUtil().getPrefix(guild.getId())
+                            manager.getPrefixes().get(guild.getId())
                     ));
                     return;
                 }
@@ -276,7 +276,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "Invalid argument!\n" +
                             "Usage: `%swelcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
-                            manager.getDbUtil().getPrefix(guild.getId())
+                            manager.getPrefixes().get(guild.getId())
                     ));
                 }
                 break;
@@ -296,7 +296,7 @@ public class CmdWelcome implements Command{
                             "`{guild}` - Name of the guild\n" +
                             "`{count}` - Member count of the guild",
                             manager.getDbUtil().getWelcomeMsg(guild.getId()),
-                            manager.getDbUtil().getPrefix(guild.getId())
+                            manager.getPrefixes().get(guild.getId())
                     ));
                     return;
                 }

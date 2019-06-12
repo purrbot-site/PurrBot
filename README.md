@@ -18,7 +18,6 @@
 [image]: https://github.com/Andre601/PurrBot/wiki/Welcome-images
 
 <!-- Other links -->
-[debug.scrarsz.me]: https://debug.scarsz.me
 [nekos.life]: https://nekos.life
 [whatthecommit]: https://whatthecommit.com
 
