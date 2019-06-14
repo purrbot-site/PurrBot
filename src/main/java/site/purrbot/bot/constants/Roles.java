@@ -2,9 +2,10 @@ package site.purrbot.bot.constants;
 
 public enum Roles {
 
-    // Roles for voting or favouriting the bot
-    UPVOTED   ("475335831649910785"),
-    FAVOURITED("550817930489626633"),
+    // Roles for upvoting (discordbots.org and botlist.space) or for adding it to their favourites (lbots.org)
+    FAVOURITE     ("550817930489626633"),
+    UPVOTE_BOTLIST("588717938849349645"),
+    UPVOTE_DBL    ("475335831649910785"),
 
     // Level roles.
     ADDICTED       ("423772991520768011"),

@@ -60,7 +60,7 @@ public class CmdWelcome implements Command{
                 .setDescription(String.format(
                         "Here is a list of all current settings for this Discord!\n" +
                         "To change some settings use `%swelcome [subcommand]`",
-                        manager.getPrefixes().get(id)
+                        manager.getPrefixes().get(id, k -> manager.getDbUtil().getPrefix(id))
                 ))
                 .addField(
                         "Subcommands",
@@ -180,7 +180,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "To few arguments!\n" +
                             "Usage: `%swelcome channel <set <#channel>|reset>`",
-                            manager.getPrefixes().get(guild.getId())
+                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
                     ));
                     return;
                 }
@@ -201,7 +201,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "Invalid argument!\n" +
                             "Usage: `%swelcome channel <set <#channel>|reset>`",
-                            manager.getPrefixes().get(guild.getId())
+                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
                     ));
                 }
                 break;
@@ -213,7 +213,7 @@ public class CmdWelcome implements Command{
                             "Usage: `%swelcome image <set <image>|reset>`\n" +
                             "\n" +
                             "A list of available images can be found on the [wiki](%s)",
-                            manager.getPrefixes().get(guild.getId()),
+                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId())),
                             Links.WIKI.getUrl()
                     ));
                     return;
@@ -237,7 +237,7 @@ public class CmdWelcome implements Command{
                             "Usage: `%swelcome image <set <image>|reset>`\n" +
                             "\n" +
                             "A list of available images can be found on the [wiki](%s)",
-                            manager.getPrefixes().get(guild.getId()),
+                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId())),
                             Links.WIKI.getUrl()
                     ));
                 }
@@ -248,7 +248,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "To few arguments!\n" +
                             "Usage: `%swelcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
-                            manager.getPrefixes().get(guild.getId())
+                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
                     ));
                     return;
                 }
@@ -276,7 +276,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "Invalid argument!\n" +
                             "Usage: `%swelcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
-                            manager.getPrefixes().get(guild.getId())
+                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
                     ));
                 }
                 break;
@@ -296,7 +296,7 @@ public class CmdWelcome implements Command{
                             "`{guild}` - Name of the guild\n" +
                             "`{count}` - Member count of the guild",
                             manager.getDbUtil().getWelcomeMsg(guild.getId()),
-                            manager.getPrefixes().get(guild.getId())
+                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
                     ));
                     return;
                 }

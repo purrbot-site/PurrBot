@@ -188,7 +188,7 @@ public class GuildListener extends ListenerAdapter{
 
         manager.getDbUtil().delGuild(guild.getId());
 
-        manager.getPrefixes().remove(guild.getId());
+        manager.getPrefixes().invalidate(guild.getId());
 
         logger.info(String.format(
                 "[Guild leave] Name: %s (%s), Members: %d (Bots: %d, Users: %d)",

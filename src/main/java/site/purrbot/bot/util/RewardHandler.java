@@ -1,8 +1,6 @@
 package site.purrbot.bot.util;
 
 import ch.qos.logback.classic.Logger;
-import club.minnced.discord.webhook.WebhookClient;
-import club.minnced.discord.webhook.WebhookClientBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Role;
@@ -23,19 +21,7 @@ public class RewardHandler {
         this.manager = manager;
     }
 
-    /**
-     * Performs certain checks to then reward Users for upvoting the bot on discordbots.org.
-     *
-     * @param botId
-     *        The ID of the bot to make sure it's actually our bot.
-     * @param userId
-     *        The ID of the User that upvoted.
-     * @param site
-     *        The {@link site.purrbot.bot.util.RewardHandler.Site Site} the vote/favourite is comming from.
-     * @param weekend
-     *        The boolean to check if it is weekend (double votes).
-     */
-    public void giveReward(String botId, String userId, Site site, boolean weekend){
+    private void giveReward(String botId, String userId, Site site, boolean weekend){
         if(!botId.equals(IDs.PURR.getId())) return;
 
         Guild guild = manager.getShardManager().getGuildById(IDs.GUILD.getId());
@@ -56,15 +42,15 @@ public class RewardHandler {
             }
 
             member = guild.getMemberById(userId);
-            reward = guild.getRoleById(Roles.FAVOURITED.getId());
+            reward = guild.getRoleById(Roles.FAVOURITE.getId());
 
             // TODO: Remove getController() when updating to JDA 4
             guild.getController().addRolesToMember(member, reward)
                     .reason("[Reward] User added Bot to favourites on LBots.org!")
                     .queue();
 
-            manager.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New favourite", String.format(
-                    "%s added %s to their favourites!\n" +
+            manager.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New Favourite", String.format(
+                    "%s added %s to their favourites! Thank you. \uD83C\uDF89\n" +
                     "You can do that too on <%s>",
                     member.getAsMention(),
                     guild.getSelfMember().getAsMention(),
@@ -73,8 +59,8 @@ public class RewardHandler {
         }else
         if(site.equals(Site.DBL)){
             if(guild.getMemberById(userId) == null){
-                manager.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New favourite", String.format(
-                        "An anonymous person upvoted %s!\n" +
+                manager.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New Upvote", String.format(
+                        "An anonymous person upvoted %s on discordbots.org!\n" +
                         "You can do that too on <%s>",
                         guild.getSelfMember().getAsMention(),
                         Links.DISCORDBOTS_ORG.getUrl()
@@ -83,11 +69,11 @@ public class RewardHandler {
             }
 
             member = guild.getMemberById(userId);
-            reward = guild.getRoleById(Roles.FAVOURITED.getId());
+            reward = guild.getRoleById(Roles.UPVOTE_DBL.getId());
 
             // TODO: Remove getController() when updating to JDA 4
             guild.getController().addRolesToMember(member, reward)
-                    .reason("[Reward] User voted for bot on discordbots.org!")
+                    .reason("[Reward] User upvoted bot on discordbots.org!")
                     .queue();
 
             byte[] image;
@@ -99,8 +85,8 @@ public class RewardHandler {
             }
 
             if(image == null){
-                manager.getWebhookUtil().sendMsg(url, Links.UPVOTE.getUrl(), "New Upvote", String.format(
-                        "%s upvotes %s! Thank you. \uD83C\uDF89\n" +
+                manager.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
+                        "%s upvotes %s on discordbots.org! Thank you. \uD83C\uDF89\n" +
                         "You can do that too on <%s>",
                         member.getAsMention(),
                         guild.getSelfMember().getAsMention(),
@@ -109,8 +95,8 @@ public class RewardHandler {
                 return;
             }
 
-            manager.getWebhookUtil().sendFile(url, Links.UPVOTE.getUrl(), "New Upvote", String.format(
-                    "%s upvotes %s! Thank you. \uD83C\uDF89\n" +
+            manager.getWebhookUtil().sendFile(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
+                    "%s upvotes %s on discordbots.org! Thank you. \uD83C\uDF89\n" +
                     "You can do that too on <%s>",
                     member.getAsMention(),
                     guild.getSelfMember().getAsMention(),
@@ -119,27 +105,80 @@ public class RewardHandler {
                     "upvote_%s.png",
                     userId
             ), image);
+        }else
+        if(site.equals(Site.BOTLIST_SPACE)){
+            if(guild.getMemberById(userId) == null){
+                manager.getWebhookUtil().sendMsg(url, Links.UPVOTE_BOTLIST.getUrl(), "New Upvote", String.format(
+                        "An anonymous person upvoted %s on botlist.space!\n" +
+                        "You can do that too on <%s>",
+                        guild.getSelfMember().getAsMention(),
+                        Links.BOTLIST_SPACE.getUrl()
+                ), null);
+                return;
+            }
+
+            member = guild.getMemberById(userId);
+            reward = guild.getRoleById(Roles.UPVOTE_BOTLIST.getId());
+
+            // TODO: Remove getController() when updating to JDA 4
+            guild.getController().addRolesToMember(member, reward)
+                    .reason("[Reward] User upvoted bot on botlist.space!")
+                    .queue();
+
+            manager.getWebhookUtil().sendMsg(url, Links.UPVOTE_BOTLIST.getUrl(), "New upvote", String.format(
+                    "%s upvoted %s on botlist.space! Thank you. \uD83C\uDF89\n" +
+                    "You can do that too on <%s>",
+                    member.getAsMention(),
+                    guild.getSelfMember().getAsMention(),
+                    Links.BOTLIST_SPACE.getUrl()
+            ), null);
         }else{
             logger.info("Received unknown reward-action/Vote");
         }
     }
 
     /**
-     * Shortcut method for favourites from LBots.org
+     * Runs {@link #giveReward(String, String, Site, boolean)} to reward users for adding *Purr* to their favourites
+     * on <a href="https://lbots.org/bots/Purr">LBots.org</a>
      *
-     * @param botId
-     *        The ID of the bot that got a favourite.
      * @param userId
      *        The ID of the user that gave the favourite.
      *
      * @see #giveReward(String, String, Site, boolean) for the full handling of favourites.
      */
-    public void giveReward(String botId, String userId){
-        giveReward(botId, userId, Site.LBOTS, false);
+    public void lbotsReward(String userId){
+        giveReward(IDs.PURR.getId(), userId, Site.LBOTS, false);
     }
 
-    public enum Site{
+    /**
+     * Runs {@link #giveReward(String, String, Site, boolean)} to reward users for upvoting *Purr* on
+     * <a href="https://botlist.space/bot/425382319449309197">botlist.space</a>
+     *
+     * @param botId
+     *        The ID of the bot that got a favourite.
+     * @param userId
+     *        The ID of the user that gave the favourite.
+     */
+    public void botlistSpaceReward(String botId, String userId){
+        giveReward(botId, userId, Site.BOTLIST_SPACE, false);
+    }
+
+    /**
+     * Runs {@link #giveReward(String, String, Site, boolean)} to reward users for upvoting *Purr* on
+     * <a href="https://discordbots.org/bot/425382319449309197">discordbots.org</a>
+     *
+     * @param botId
+     *        The ID of the bot that got a favourite.
+     * @param userId
+     *        The ID of the user that gave the favourite.
+     */
+    public void discordbots_org(String botId, String userId, boolean isWeekend){
+        giveReward(botId, userId, Site.DBL, isWeekend);
+    }
+
+    private enum Site{
         LBOTS,
+        BOTLIST_SPACE,
         DBL
     }
 }

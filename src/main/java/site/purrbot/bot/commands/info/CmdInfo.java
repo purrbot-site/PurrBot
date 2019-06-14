@@ -62,7 +62,7 @@ public class CmdInfo implements Command{
                 ), false)
                 .addField("Commands", String.format(
                         "Use `%shelp` in the Discord for a list of commands.",
-                        manager.getPrefixes().get(guild.getId())
+                        manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
                 ), false)
                 .addField("Bot-Version", "`BOT_VERSION`", true)
                 .addField("Library", String.format(

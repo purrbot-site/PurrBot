@@ -49,15 +49,8 @@ public class CommandListener extends ListenerAdapter{
 
                     if(user.isBot()) return;
 
-                    String prefix;
-
-                    if(!manager.getPrefixes().containsKey(guild.getId())){
-                        prefix = manager.getDbUtil().getPrefix(guild.getId());
-
-                        manager.setPrefix(guild.getId(), prefix);
-                    }else{
-                        prefix = manager.getPrefixes().get(guild.getId());
-                    }
+                    String prefix = manager.getPrefixes()
+                            .get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()));
 
                     if(!msg.getContentRaw().toLowerCase().startsWith(prefix)){
                         if(guild.getId().equals(IDs.GUILD.getId()))

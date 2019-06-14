@@ -4,6 +4,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageEmbed;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -66,6 +67,7 @@ public class CmdQuote implements Command{
     public void execute(Message msg, String s){
         String[] args = s.split(" ");
         TextChannel tc = msg.getTextChannel();
+        Guild guild = msg.getGuild();
 
         if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
@@ -74,7 +76,7 @@ public class CmdQuote implements Command{
             manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                     "To few arguments!\n" +
                     "Usage: `%squote <messageID> [#channel]`",
-                    manager.getPrefixes().get(msg.getGuild().getId())
+                    manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
             ));
             return;
         }

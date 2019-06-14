@@ -95,6 +95,12 @@ public class HttpUtil {
                 token = manager.getgFile().getString("config", "dbgg-token");
                 break;
 
+            case BOTLIST_SPACE_STATS:
+                content = String.format("{\"guild_count\": %d}", count);
+                url = link.getUrl();
+                token = manager.getgFile().getString("config", "botlist-token");
+                break;
+
             default:
                 content = null;
                 url = null;
@@ -105,13 +111,14 @@ public class HttpUtil {
 
         RequestBody rbody = RequestBody.create(JSON, content);
         Request request = new Request.Builder().url(url)
-                .header("Authorization", token)
+                .addHeader("Authorization", token)
+                .addHeader("Content-Type", "application/json")
                 .post(rbody)
                 .build();
 
         try(Response response = CLIENT.newCall(request).execute()){
             if(!response.isSuccessful()) throw new IOException(String.format(
-                    "Couldn't perform update-task! URL: %s",
+                    "Couldn't update stats! %s",
                     url
             ));
 

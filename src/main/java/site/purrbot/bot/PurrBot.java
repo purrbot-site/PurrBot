@@ -1,6 +1,8 @@
 package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -62,7 +64,9 @@ public class PurrBot {
     private EventWaiter waiter;
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
-    private Map<String, String> prefixes = new HashMap<>();
+    private Cache<String, String> prefixes = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
 
     public static void main(String[] args){
         try{
@@ -120,29 +124,40 @@ public class PurrBot {
             path("/votes", () -> {
                 Gson voteGson = new Gson();
 
-                post("/dbl", (request, response) -> {
-                    Vote vote = voteGson.fromJson(request.body(), Vote.class);
-
-                    if(getReadyListener().isReady())
-                        rewardHandler.giveReward(
-                                vote.getBotId(),
-                                vote.getUserId(),
-                                RewardHandler.Site.DBL,
-                                vote.isWeekend()
-                        );
-
-                    return "";
-                });
-
                 post("/lbots", (request, response) -> {
                     JsonObject jsonObject = voteGson.fromJson(request.body(), JsonObject.class);
 
-                    String userId = jsonObject.get("userid").toString();
+                    String userId = jsonObject.get("userid").getAsString();
                     boolean isFavourite = jsonObject.get("favourited").getAsBoolean();
 
                     if(getReadyListener().isReady())
                         if(isFavourite)
-                            rewardHandler.giveReward(IDs.PURR.getId(), userId);
+                            rewardHandler.lbotsReward(userId);
+
+                    return "";
+                });
+
+                post("/botlist_space", (request, response) -> {
+                    JsonObject jsonObject = voteGson.fromJson(request.body(), JsonObject.class);
+
+                    String botId = jsonObject.get("bot").getAsString();
+                    String userId = jsonObject.getAsJsonObject("user").get("id").getAsString();
+
+                    if(getReadyListener().isReady())
+                        rewardHandler.botlistSpaceReward(botId, userId);
+
+                    return "";
+                });
+
+                post("/dbl", (request, response) -> {
+                    Vote vote = voteGson.fromJson(request.body(), Vote.class);
+
+                    if(getReadyListener().isReady())
+                        rewardHandler.discordbots_org(
+                                vote.getBotId(),
+                                vote.getUserId(),
+                                vote.isWeekend()
+                        );
 
                     return "";
                 });
@@ -207,11 +222,11 @@ public class PurrBot {
         return waiter;
     }
 
-    public Map<String, String> getPrefixes(){
+    public Cache<String, String> getPrefixes(){
         return prefixes;
     }
-    public void setPrefix(String guildId, String prefix){
-        prefixes.put(guildId, prefix);
+    public void setPrefixes(String key, String value){
+        prefixes.put(key, value);
     }
 
     public List<String> getAcceptFuckMsg(){
@@ -269,7 +284,7 @@ public class PurrBot {
                     try {
                         getHttpUtil().updateStats(
                                 Links.LBOTS_ORG_STATS,
-                                (int) getShardManager().getGuildCache().size()
+                                (int)getShardManager().getGuildCache().size()
                         );
                     } catch (IOException ex) {
                         logger.warn("Couldn't update stats on LBots.org: ", ex);
