@@ -21,6 +21,16 @@
 [nekos.life]: https://nekos.life
 [whatthecommit]: https://whatthecommit.com
 
+<!-- Widgets -->
+[widgetBotlist]: https://botlist.space/bot/425382319449309197/widget/6  
+[widgetDbl]: https://discordbots.org/api/widget/425382319449309197.svg  
+
+<!-- Botlists -->
+[botlist]: https://botlist.space/bot/425382319449309197  
+[dbl]: https://discordbots.org/bot/425382319449309197  
+[discordBots]: https://discord.bots.gg/bots/425382319449309197  
+[lbots]: https://lbots.org/bots/Purr
+
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License]
 
 # \*Purr*
@@ -129,6 +139,26 @@ This permissions are:
 \*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [Discord].  
 Just make sure to be on the guild and vote for the bot, to receive the special role.  
 Future rewards may be added.
+
+# Botlists
+\*Purr* can be found on different Botlist sites.  
+Feel free to upvote or add her to your favourites to show your support.
+
+### [Botlist.space][botlist]
+> Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
+
+![widgetBotlist]
+
+### [Discordbots.org][dbl]
+> Spice up your Discord experience with our diverse range of Discord bots
+
+![widgetDbl]
+
+### [Discord.bots.gg][discordBots]
+> The original Discord bot list, find the right bot for your server today.
+
+### [LBots.org][lbots]
+> LBots - A bot listing website that loves lewds~
 
 # Usefull Links
 * [Discord Server][Discord]
