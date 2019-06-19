@@ -158,7 +158,7 @@ Feel free to upvote or add her to your favourites to show your support.
 > The original Discord bot list, find the right bot for your server today.
 
 ### [LBots.org][lbots]
-> LBots - A bot listing website that loves lewds~
+> A bot listing website that loves lewds~
 
 # Usefull Links
 * [Discord Server][Discord]
