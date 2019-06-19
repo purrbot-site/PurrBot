@@ -96,7 +96,7 @@ public class HttpUtil {
                 break;
 
             case BOTLIST_SPACE_STATS:
-                content = String.format("{\"guild_count\": %d}", count);
+                content = String.format("{\"server_count\": %d}", count);
                 url = link.getUrl();
                 token = manager.getgFile().getString("config", "botlist-token");
                 break;
@@ -118,8 +118,9 @@ public class HttpUtil {
 
         try(Response response = CLIENT.newCall(request).execute()){
             if(!response.isSuccessful()) throw new IOException(String.format(
-                    "Couldn't update stats! %s",
-                    url
+                    "Couldn't update stats! %s responded with Code %d",
+                    url,
+                    response.code()
             ));
 
             logger.info(String.format(

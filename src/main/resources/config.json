@@ -1,7 +1,9 @@
 {
   "bot-token": "TOKEN",
-  "webhook": "webhookURL",
-  "vote-webhook": "vote-Webhook URL",
+
+  "guild-webhook": "guild-webhook_url",
+  "log-webhook": "log-webhook_url",
+  "vote-webhook": "vote-webhook_url",
 
   "dbl-token": "dbl-token",
   "dbgg-token": "dbgg-token",

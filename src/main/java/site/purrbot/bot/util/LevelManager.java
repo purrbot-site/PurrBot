@@ -77,8 +77,6 @@ public class LevelManager {
     private void updateRoles(String id, long level) {
         Guild guild = manager.getShardManager().getGuildById(IDs.GUILD.getId());
         Member member = guild.getMemberById(id);
-
-        Role addicted = guild.getRoleById(Roles.ADDICTED.getId());
         Role veryAddicted = guild.getRoleById(Roles.VERY_ADDICTED.getId());
         Role superAddicted = guild.getRoleById(Roles.SUPER_ADDICTED.getId());
         Role ultraAddicted = guild.getRoleById(Roles.ULTRA_ADDICTED.getId());
@@ -92,35 +90,35 @@ public class LevelManager {
             guild.getController().modifyMemberRoles(
                     member,
                     Collections.singletonList(veryAddicted),
-                    Arrays.asList(addicted, superAddicted, ultraAddicted, hyperAddicted, masterAddicted)
+                    Arrays.asList(superAddicted, ultraAddicted, hyperAddicted, masterAddicted)
             ).reason(reason).queue();
         else
         if (level >= 10 && level < 15)
             guild.getController().modifyMemberRoles(
                     member,
                     Collections.singletonList(superAddicted),
-                    Arrays.asList(addicted, veryAddicted, ultraAddicted, hyperAddicted, masterAddicted)
+                    Arrays.asList(veryAddicted, ultraAddicted, hyperAddicted, masterAddicted)
             ).reason(reason).queue();
         else
         if (level >= 15 && level < 20)
             guild.getController().modifyMemberRoles(
                     member,
                     Collections.singletonList(ultraAddicted),
-                    Arrays.asList(addicted, veryAddicted, superAddicted, hyperAddicted, masterAddicted)
+                    Arrays.asList(veryAddicted, superAddicted, hyperAddicted, masterAddicted)
             ).reason(reason).queue();
         else
         if (level >= 20 && level < 30)
             guild.getController().modifyMemberRoles(
                     member,
                     Collections.singletonList(hyperAddicted),
-                    Arrays.asList(addicted, veryAddicted, superAddicted, ultraAddicted, masterAddicted)
+                    Arrays.asList(veryAddicted, superAddicted, ultraAddicted, masterAddicted)
             ).reason(reason).queue();
         else
         if (level >= 30)
             guild.getController().modifyMemberRoles(
                     member,
                     Collections.singletonList(masterAddicted),
-                    Arrays.asList(addicted, veryAddicted, superAddicted, ultraAddicted, hyperAddicted)
+                    Arrays.asList(veryAddicted, superAddicted, ultraAddicted, hyperAddicted)
             ).reason(reason).queue();
     }
 

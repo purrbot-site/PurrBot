@@ -19,6 +19,7 @@ import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
+import site.purrbot.bot.listener.ConnectionListener;
 import site.purrbot.bot.listener.GuildListener;
 import site.purrbot.bot.listener.ReadyListener;
 import site.purrbot.bot.util.*;
@@ -110,6 +111,7 @@ public class PurrBot {
                 .addEventListeners(
                         readyListener,
                         new GuildListener(this),
+                        new ConnectionListener(this),
                         new CommandListener(this, CMD_HANDLER),
                         waiter
                 )
@@ -177,7 +179,7 @@ public class PurrBot {
     public ShardManager getShardManager(){
         return shardManager;
     }
-    public ReadyListener getReadyListener(){
+    private ReadyListener getReadyListener(){
         return readyListener;
     }
     public DBUtil getDbUtil(){
@@ -272,10 +274,12 @@ public class PurrBot {
                 )));
 
                 if(!isBeta()) {
+                    int guilds = (int)getShardManager().getGuildCache().size();
+
                     try {
                         getHttpUtil().updateStats(
                                 Links.DISCORD_BOTS_GG_STATS,
-                                (int)getShardManager().getGuildCache().size()
+                                guilds
                         );
                     } catch (IOException ex) {
                         logger.warn("Couldn't update stats on Discord.bots.gg: ", ex);
@@ -284,10 +288,19 @@ public class PurrBot {
                     try {
                         getHttpUtil().updateStats(
                                 Links.LBOTS_ORG_STATS,
-                                (int)getShardManager().getGuildCache().size()
+                                guilds
                         );
                     } catch (IOException ex) {
                         logger.warn("Couldn't update stats on LBots.org: ", ex);
+                    }
+
+                    try{
+                        getHttpUtil().updateStats(
+                                Links.BOTLIST_SPACE_STATS,
+                                guilds
+                        );
+                    }catch(IOException ex){
+                        logger.warn("Couldn't update stats on Botlist.space: ", ex);
                     }
 
                     getDblApi().setStats((int) getShardManager().getGuildCache().size());

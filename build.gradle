@@ -6,7 +6,7 @@ plugins {
     id 'net.kyori.blossom' version '1.1.0'
 }
 mainClassName = 'site.purrbot.bot.PurrBot'
-version = '5.2.5'
+version = '5.3.0'
 
 description = """"""
 

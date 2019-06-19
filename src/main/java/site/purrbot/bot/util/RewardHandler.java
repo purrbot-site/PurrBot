@@ -59,7 +59,7 @@ public class RewardHandler {
         }else
         if(site.equals(Site.DBL)){
             if(guild.getMemberById(userId) == null){
-                manager.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New Upvote", String.format(
+                manager.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
                         "An anonymous person upvoted %s on discordbots.org!\n" +
                         "You can do that too on <%s>",
                         guild.getSelfMember().getAsMention(),

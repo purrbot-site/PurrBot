@@ -33,10 +33,29 @@ public class WebhookUtil {
                 .setUsername(name)
                 .setContent(message);
 
-        if(embed != null) builder.addEmbeds(embed);
+        if(embed != null)
+            builder.addEmbeds(embed);
 
         client.send(builder.build());
         client.close();
+    }
+
+    /**
+     * Sebds a message through a webhook.
+     * <br>This method calls {@link #sendMsg(String, String, String, String, WebhookEmbed)} but only sends a
+     * {@link club.minnced.discord.webhook.send.WebhookEmbed WebhookEmbed} without any message.
+     *
+     * @param url
+     *        The url of the webhook.
+     * @param avatar
+     *        The URL for the avatar to display.
+     * @param name
+     *        The name to display.
+     * @param embed
+     *        The {@link club.minnced.discord.webhook.send.WebhookEmbed WebhookEmbed} to send.
+     */
+    public void sendMsg(String url, String avatar, String name, WebhookEmbed embed){
+        sendMsg(url, avatar, name, null, embed);
     }
 
     /**

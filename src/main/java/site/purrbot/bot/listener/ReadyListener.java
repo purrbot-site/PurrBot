@@ -1,15 +1,18 @@
 package site.purrbot.bot.listener;
 
 import ch.qos.logback.classic.Logger;
+import club.minnced.discord.webhook.send.WebhookEmbed;
+import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
+
+import java.time.ZonedDateTime;
 
 public class ReadyListener extends ListenerAdapter{
 
@@ -48,6 +51,29 @@ public class ReadyListener extends ListenerAdapter{
                 shards,
                 jda.getGuilds().size()
         ));
+
+        WebhookEmbed embed = new WebhookEmbedBuilder()
+                .setColor(0x00FF00)
+                .addField(new WebhookEmbed.EmbedField(
+                        true,
+                        "Guilds:",
+                        String.valueOf(jda.getGuilds().size())
+                ))
+                .addField(new WebhookEmbed.EmbedField(
+                        true,
+                        "Shard:",
+                        String.valueOf(jda.getShardInfo().getShardId())
+                ))
+                .setFooter(new WebhookEmbed.EmbedFooter("Ready at", null))
+                .setTimestamp(ZonedDateTime.now())
+                .build();
+
+        manager.getWebhookUtil().sendMsg(
+                manager.getgFile().getString("config", "log-webhook"),
+                jda.getSelfUser().getEffectiveAvatarUrl(),
+                "Shard ready!",
+                embed
+        );
 
         if(shards == jda.getShardInfo().getShardTotal()){
             setReady(true);

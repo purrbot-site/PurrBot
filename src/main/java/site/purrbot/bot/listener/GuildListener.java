@@ -104,7 +104,7 @@ public class GuildListener extends ListenerAdapter{
                 .build();
 
         manager.getWebhookUtil().sendMsg(
-                manager.getgFile().getString("config", "webhook"),
+                manager.getgFile().getString("config", "guild-webhook"),
                 guild.getSelfMember().getUser().getEffectiveAvatarUrl(),
                 autoLeave ? "Auto-left" : event,
                 content,

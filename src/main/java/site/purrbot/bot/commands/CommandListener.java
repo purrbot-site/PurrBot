@@ -15,8 +15,6 @@ import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -39,7 +37,6 @@ public class CommandListener extends ListenerAdapter{
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event){
-        if(!manager.getReadyListener().isReady()) return;
 
         CMD_EXECUTOR.execute(
                 () -> {
