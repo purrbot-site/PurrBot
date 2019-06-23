@@ -11,6 +11,7 @@ import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
+import site.purrbot.bot.constants.Emotes;
 
 import java.time.ZonedDateTime;
 
@@ -35,8 +36,8 @@ public class ReadyListener extends ListenerAdapter{
         return ready;
     }
 
-    private void setReady(boolean ready){
-        this.ready = ready;
+    private void setReady(){
+        this.ready = true;
     }
 
     @Override
@@ -54,6 +55,7 @@ public class ReadyListener extends ListenerAdapter{
 
         WebhookEmbed embed = new WebhookEmbedBuilder()
                 .setColor(0x00FF00)
+                .setTitle(new WebhookEmbed.EmbedTitle(Emotes.STATUS_READY.getEmote(), null))
                 .addField(new WebhookEmbed.EmbedField(
                         true,
                         "Guilds:",
@@ -76,7 +78,9 @@ public class ReadyListener extends ListenerAdapter{
         );
 
         if(shards == jda.getShardInfo().getShardTotal()){
-            setReady(true);
+            setReady();
+
+            manager.startUpdates();
 
             shardManager.setPresence(OnlineStatus.ONLINE, Game.of(Game.GameType.WATCHING, String.format(
                     manager.getMessageUtil().getBotGame(),

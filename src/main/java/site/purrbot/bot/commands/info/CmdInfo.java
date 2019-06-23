@@ -54,7 +54,7 @@ public class CmdInfo implements Command{
                 .setThumbnail(msg.getJDA().getSelfUser().getEffectiveAvatarUrl())
                 .addField("About me", String.format(
                         "Oh hi there!\n" +
-                        "I'm `%s`. A Bot for the ~Nya Discord.\n" +
+                        "I'm %s. A Bot for the ~Nya Discord.\n" +
                         "I was made by Andre_601 (<@%s>) with the help of JDA " +
                         "and a lot of free time. ;)\n",
                         guild.getSelfMember().getAsMention(),

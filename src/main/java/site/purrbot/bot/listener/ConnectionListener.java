@@ -7,6 +7,7 @@ import net.dv8tion.jda.core.events.DisconnectEvent;
 import net.dv8tion.jda.core.events.ResumedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import site.purrbot.bot.PurrBot;
+import site.purrbot.bot.constants.Emotes;
 
 import java.time.ZonedDateTime;
 
@@ -27,6 +28,7 @@ public class ConnectionListener extends ListenerAdapter{
 
         WebhookEmbedBuilder embed = new WebhookEmbedBuilder()
                 .setColor(0xFF0000)
+                .setTitle(new WebhookEmbed.EmbedTitle(Emotes.STATUS_DISCONNECT.getEmote(), null))
                 .addField(new WebhookEmbed.EmbedField(
                         true,
                         "Affected Guilds:",
@@ -67,6 +69,7 @@ public class ConnectionListener extends ListenerAdapter{
 
         WebhookEmbed embed = new WebhookEmbedBuilder()
                 .setColor(0x00FF00)
+                .setTitle(new WebhookEmbed.EmbedTitle(Emotes.STATUS_READY.getEmote(), null))
                 .addField(new WebhookEmbed.EmbedField(
                         true,
                         "Affected Guilds:",

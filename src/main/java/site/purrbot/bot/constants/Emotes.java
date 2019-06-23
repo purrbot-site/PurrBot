@@ -11,11 +11,17 @@ public enum Emotes{
     // Static/normal emotes
     BLOBHOLO    ("blobHolo",     "536346012546236436", false),
     BOT         ("isBot",        "590951368093859870", false),
-    NEKOWO      ("nekOwO",       "565506566690832392", false),
-    OWNER       ("isOwner",      "590951368399912970", false),
     PURR        ("purr",         "564766029608124416", false),
     SNUGGLE     ("snuggle",      "570238657265401856", false),
-    VANILLABLUSH("vanillaBlush", "575487690921869323", false);
+    VANILLABLUSH("vanillaBlush", "575487690921869323", false),
+
+    JOINED_GUILD     ("joinedGuild",      "592043203629416459", false),
+    LEFT_GUILD       ("leftGuild",        "592043203042213925", false),
+    NEKOWO           ("nekOwO",           "565506566690832392", false),
+    OWNER            ("isOwner",          "590951368399912970", false),
+    STATUS_DISCONNECT("statusDisconnect", "592043203440410624", false),
+    STATUS_READY     ("statusReady",      "592043203646193692", false);
+
 
     private String name;
     private String id;

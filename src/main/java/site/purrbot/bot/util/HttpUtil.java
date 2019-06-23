@@ -76,6 +76,7 @@ public class HttpUtil {
         }
     }
 
+    /*
     public void updateStats(Links link, int count) throws IOException{
 
         String content;
@@ -129,6 +130,7 @@ public class HttpUtil {
             ));
         }
     }
+    */
 
     public String getImage(API api, int count){
         try{

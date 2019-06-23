@@ -15,6 +15,7 @@ import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
+import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
@@ -43,18 +44,21 @@ public class GuildListener extends ListenerAdapter{
         int color;
         String event;
         String content;
+        String emote;
 
         switch(type){
             case JOIN:
                 color   = 0x00FF00;
                 event   = "Joined Guild";
                 content = String.format(".leave %s", guild.getId());
+                emote   = Emotes.JOINED_GUILD.getEmote();
                 break;
 
             case LEAVE:
                 color = 0xFF0000;
                 event   = "Left Guild";
                 content = String.format("ID: %s", guild.getId());
+                emote   = Emotes.LEFT_GUILD.getEmote();
                 break;
 
             case UNKNOWN:
@@ -62,11 +66,13 @@ public class GuildListener extends ListenerAdapter{
                 color   = 0x7F8C8D;
                 event   = "Unknown Action";
                 content = "???";
+                emote   = "";
         }
 
         WebhookEmbed embed = new WebhookEmbedBuilder()
                 .setColor(color)
                 .setThumbnailUrl(guild.getIconUrl())
+                .setTitle(new WebhookEmbed.EmbedTitle(emote, null))
                 .addField(new WebhookEmbed.EmbedField(
                         true, "Name", guild.getName()
                 ))

@@ -1,6 +1,9 @@
 package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
+import com.andre601.javabotblockapi.BotBlockAPI;
+import com.andre601.javabotblockapi.RequestHandler;
+import com.andre601.javabotblockapi.exceptions.RatelimitedException;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
@@ -12,13 +15,13 @@ import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Message;
+import org.apache.commons.lang3.ObjectUtils;
 import org.discordbots.api.client.DiscordBotListAPI;
 import org.discordbots.api.client.entity.Vote;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
 import site.purrbot.bot.constants.IDs;
-import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.listener.ConnectionListener;
 import site.purrbot.bot.listener.GuildListener;
 import site.purrbot.bot.listener.ReadyListener;
@@ -61,6 +64,9 @@ public class PurrBot {
     private boolean beta = false;
 
     private DiscordBotListAPI dblApi = null;
+    private BotBlockAPI botBlockAPI = null;
+    private RequestHandler handler = new RequestHandler();
+
     private final CommandHandler<Message> CMD_HANDLER = new CommandHandler<>();
     private EventWaiter waiter;
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
@@ -102,9 +108,6 @@ public class PurrBot {
         beta = getgFile().getString("config", "beta").equalsIgnoreCase("true");
 
         CMD_HANDLER.registerCommands(new HashSet<>(new CommandLoader(this).getCommands()));
-
-        //noinspection ResultOfMethodCallIgnored
-        this.scheduler.scheduleAtFixedRate(update(), 1, 5, TimeUnit.MINUTES);
 
         shardManager = new DefaultShardManagerBuilder()
                 .setToken(getgFile().getString("config", "bot-token"))
@@ -164,12 +167,24 @@ public class PurrBot {
                     return "";
                 });
             });
+        }
+    }
+
+    public void startUpdates(){
+        if(!isBeta()) {
+            botBlockAPI = new BotBlockAPI.Builder()
+                    .addAuthToken("botlist.space", getgFile().getString("config", "botlist-token"))
+                    .addAuthToken("discord.bots.gg", getgFile().getString("config", "dbgg-token"))
+                    .addAuthToken("lbots.org", getgFile().getString("config", "lbots-token"))
+                    .build();
 
             dblApi = new DiscordBotListAPI.Builder()
                     .token(getgFile().getString("config", "dbl-token"))
                     .botId(IDs.PURR.getId())
                     .build();
         }
+
+        startUpdate();
     }
 
     public Random getRandom(){
@@ -265,47 +280,29 @@ public class PurrBot {
         return getgFile().getStringlist("random", "welcome_img");
     }
 
-    private Runnable update(){
-        return () -> {
-            if(getReadyListener().isReady()){
-                getShardManager().setGame(Game.of(Game.GameType.WATCHING, String.format(
-                        getMessageUtil().getBotGame(),
-                        getShardManager().getGuildCache().size()
-                )));
+    private void startUpdate(){
+        scheduler.scheduleAtFixedRate(() -> {
 
-                if(!isBeta()) {
-                    int guilds = (int)getShardManager().getGuildCache().size();
+            getShardManager().setGame(Game.of(Game.GameType.WATCHING, String.format(
+                    getMessageUtil().getBotGame(),
+                    getShardManager().getGuilds().size()
+            )));
+            if(isBeta())
+                return;
 
-                    try {
-                        getHttpUtil().updateStats(
-                                Links.DISCORD_BOTS_GG_STATS,
-                                guilds
-                        );
-                    } catch (IOException ex) {
-                        logger.warn("Couldn't update stats on Discord.bots.gg: ", ex);
-                    }
+            getDblApi().setStats(getShardManager().getGuilds().size());
 
-                    try {
-                        getHttpUtil().updateStats(
-                                Links.LBOTS_ORG_STATS,
-                                guilds
-                        );
-                    } catch (IOException ex) {
-                        logger.warn("Couldn't update stats on LBots.org: ", ex);
-                    }
+            if(!ObjectUtils.allNotNull(botBlockAPI)) {
+                logger.warn("RequestHandler and/or BotBlockAPI are null!");
 
-                    try{
-                        getHttpUtil().updateStats(
-                                Links.BOTLIST_SPACE_STATS,
-                                guilds
-                        );
-                    }catch(IOException ex){
-                        logger.warn("Couldn't update stats on Botlist.space: ", ex);
-                    }
-
-                    getDblApi().setStats((int) getShardManager().getGuildCache().size());
-                }
+                return;
             }
-        };
+
+            try {
+                handler.postGuilds(getShardManager(), botBlockAPI);
+            } catch (Exception | RatelimitedException ex) {
+                logger.warn("Not able to post guild counts!", ex);
+            }
+        }, 1, 5, TimeUnit.MINUTES);
     }
 }
