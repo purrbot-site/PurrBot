@@ -76,62 +76,6 @@ public class HttpUtil {
         }
     }
 
-    /*
-    public void updateStats(Links link, int count) throws IOException{
-
-        String content;
-        String url;
-        String token;
-
-        switch(link){
-            case LBOTS_ORG_STATS:
-                content = String.format("{\"guild_count\": %d}", count);
-                url = link.getUrl();
-                token = manager.getgFile().getString("config", "lbots-token");
-                break;
-
-            case DISCORD_BOTS_GG_STATS:
-                content = String.format("{\"guildCount\": %d}", count);
-                url = link.getUrl();
-                token = manager.getgFile().getString("config", "dbgg-token");
-                break;
-
-            case BOTLIST_SPACE_STATS:
-                content = String.format("{\"server_count\": %d}", count);
-                url = link.getUrl();
-                token = manager.getgFile().getString("config", "botlist-token");
-                break;
-
-            default:
-                content = null;
-                url = null;
-                token = null;
-        }
-
-        if(url == null || content == null || token == null) return;
-
-        RequestBody rbody = RequestBody.create(JSON, content);
-        Request request = new Request.Builder().url(url)
-                .addHeader("Authorization", token)
-                .addHeader("Content-Type", "application/json")
-                .post(rbody)
-                .build();
-
-        try(Response response = CLIENT.newCall(request).execute()){
-            if(!response.isSuccessful()) throw new IOException(String.format(
-                    "Couldn't update stats! %s responded with Code %d",
-                    url,
-                    response.code()
-            ));
-
-            logger.info(String.format(
-                    "Performed Update-task successfully! URL: %s",
-                    url
-            ));
-        }
-    }
-    */
-
     public String getImage(API api, int count){
         try{
             return image(api, count);

@@ -15,6 +15,7 @@ import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
+import java.util.Arrays;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -49,7 +50,12 @@ public class CommandListener extends ListenerAdapter{
                     String prefix = manager.getPrefixes()
                             .get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()));
 
-                    if(!msg.getContentRaw().toLowerCase().startsWith(prefix)){
+                    String raw = msg.getContentRaw().toLowerCase();
+
+                    String userMention = "<@" + event.getJDA().getSelfUser().getId() + ">";
+                    String memberMention = "<@!" + event.getJDA().getSelfUser().getId() + ">";
+
+                    if(!raw.startsWith(prefix) && !raw.startsWith(userMention) && !raw.startsWith(memberMention)){
                         if(guild.getId().equals(IDs.GUILD.getId()))
                             manager.getLevelManager().giveXP(user.getId(), false, msg.getTextChannel());
 
@@ -61,10 +67,7 @@ public class CommandListener extends ListenerAdapter{
                     if(!manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_WRITE))
                         return;
 
-                    String raw = msg.getContentRaw();
-
-                    String mention = guild.getSelfMember().getAsMention();
-                    if(raw.startsWith(mention) && raw.length() == mention.length()){
+                    if(raw.equalsIgnoreCase(userMention) || raw.equalsIgnoreCase(memberMention)){
                         tc.sendMessage(String.format(
                                 "Hey there %s!\n" +
                                 "My prefix on this Discord is `%s`\n" +
@@ -76,17 +79,17 @@ public class CommandListener extends ListenerAdapter{
                         return;
                     }
 
-                    String[] split = raw.split("\\s+", 2);
+                    String[] args = null;
                     String cmdString = null;
 
-                    try{
-                        if(raw.toLowerCase().startsWith(prefix))
-                            cmdString = split[0].substring(prefix.length());
-                        else
-                        if(raw.toLowerCase().startsWith(guild.getSelfMember().getAsMention() + " "))
-                            cmdString = split[0].substring(guild.getSelfMember().getAsMention().length() + 1);
-                    }catch(Exception ex){
-                        return;
+                    if(raw.startsWith(userMention) || raw.startsWith(memberMention)) {
+                        args = split(raw, raw.indexOf(">") + 1);
+                        cmdString = args[0];
+                    }
+
+                    if((args == null || cmdString == null) && raw.toLowerCase().startsWith(prefix)) {
+                        args = split(raw, prefix.length());
+                        cmdString = args[0];
                     }
 
                     if(cmdString == null) return;
@@ -131,7 +134,7 @@ public class CommandListener extends ListenerAdapter{
 
                     try{
                         //noinspection unchecked
-                        HANDLER.execute(command, msg, split.length > 1 ? split[1] : "");
+                        HANDLER.execute(command, msg, args[1] == null ? "" : args[1]);
 
                         if(guild.getId().equals(IDs.GUILD.getId()))
                             manager.getLevelManager().giveXP(user.getId(), true, tc);
@@ -143,9 +146,13 @@ public class CommandListener extends ListenerAdapter{
                                 Emotes.VANILLABLUSH.getEmote(),
                                 Links.DISCORD.getUrl(),
                                 Links.GITHUB.getUrl()
-                        ), ex);
+                        ), ex.getMessage());
                     }
                 }
         );
+    }
+
+    private String[] split(String raw, int length){
+        return Arrays.copyOf(raw.substring(length).trim().split("\\s+", 2), 2);
     }
 }

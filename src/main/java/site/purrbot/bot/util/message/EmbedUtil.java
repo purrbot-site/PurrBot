@@ -45,19 +45,19 @@ public class EmbedUtil {
      *        The user that should be set in the footer. Can be null.
      * @param error
      *        The error message.
-     * @param throwable
-     *        An optional (nullable) {@link java.lang.Throwable Throwable}.
+     * @param reason
+     *        A optional (nullable) String with the reason of error.
      */
-    public void sendError(TextChannel tc, @Nullable User user, String error, @Nullable Throwable throwable){
+    public void sendError(TextChannel tc, @Nullable User user, String error, @Nullable String reason){
         EmbedBuilder errorEmbed = user == null ? getEmbed() : getEmbed(user);
 
         errorEmbed.setColor(0xFF0000)
                 .setDescription(error);
 
-        if(throwable != null)
+        if(reason != null)
             errorEmbed.addField(
                     "Error:",
-                    throwable.getMessage() == null ? "*No error Message*" : throwable.getMessage(),
+                    reason,
                     false
             );
 
@@ -66,7 +66,7 @@ public class EmbedUtil {
 
     /**
      * Sends an Embed with error message to a provided TextChannel.
-     * <br>This method calls {@link #sendError(TextChannel, User, String, Throwable)} but without a throwable.
+     * <br>This method calls {@link #sendError(TextChannel, User, String, String)} but without an Exception.
      *
      * @param tc
      *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to send the embed.
@@ -75,7 +75,7 @@ public class EmbedUtil {
      * @param error
      *        The error message.
      *
-     * @see #sendError(TextChannel, User, String, Throwable) for full method.
+     * @see #sendError(TextChannel, User, String, String) for full method.
      */
     public void sendError(TextChannel tc, User user, String error){
         sendError(tc, user, error, null);
