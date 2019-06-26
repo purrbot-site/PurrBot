@@ -40,7 +40,7 @@ What started as a simple and easy bot became quite a big bot, that is now even o
 # Commands
 **Default Prefix**: `.` (You can also mention the bot or change the prefix with the prefix command.)
 
-`Permission` is the permission you require to use the commands of that category.
+`Permission` is the permission you require to use the commands of that category.  
 `<arguments>` are required, `[arguments]` are optional and `...` means you can use multiple arguments of the same type.
 
 ## Fun
