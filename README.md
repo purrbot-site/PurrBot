@@ -34,7 +34,7 @@
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License]
 
 # \*Purr*
-This bot was made to use the [nekos.life]-API.
+This bot was made to use the [nekos.life]-API.  
 What started as a simple and easy bot became quite a big bot, that is now even on the official Discord of Nekos.life!
 
 # Commands
@@ -136,7 +136,7 @@ This permissions are:
 * Embed Links: \*Purr* won't work without this permission!
 
 # Voting
-\*Purr* now has a integrated Votelistener that gives you a reward (currently just a role) on the [Discord].  
+\*Purr* has a integrated Votelistener that gives you a reward (currently just a role) on the [Discord].  
 Just make sure to be on the guild and vote for the bot, to receive the special role.  
 Future rewards may be added.
 
