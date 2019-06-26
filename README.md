@@ -38,10 +38,10 @@ This bot was made to use the [nekos.life]-API.
 What started as a simple and easy bot became quite a big bot, that is now even on the official Discord of Nekos.life!
 
 # Commands
-**Default Prefix**: `.` (You can change it with the prefix command)
+**Default Prefix**: `.` (You can also mention the bot or change the prefix with the prefix command.)
 
 `Permission` is the permission you require to use the commands of that category.
-`<arguments>` are required, `[arguments]` are optional and `...` means you can use multiple arguments.
+`<arguments>` are required, `[arguments]` are optional and `...` means you can use multiple arguments of the same type.
 
 ## Fun
 **Permission**: `None`
