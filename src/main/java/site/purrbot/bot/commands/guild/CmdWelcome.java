@@ -226,8 +226,11 @@ public class CmdWelcome implements Command{
                         manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please provide an image!");
                         return;
                     }
-                    if(!manager.getgFile().getStringlist("random", "images").contains(args[0].toLowerCase())){
-                        manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Invalid image!");
+                    if(!manager.getWelcomeImg().contains(args[2].toLowerCase())){
+                        manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
+                                "Invalid image name `%s`!",
+                                args[2].toLowerCase()
+                        ));
                         return;
                     }
                     update(msg, Type.IMAGE, args[2].toLowerCase());
@@ -343,7 +346,7 @@ public class CmdWelcome implements Command{
                 if(args.length == 2){
                     if(!manager.getWelcomeImg().contains(args[1].toLowerCase())){
                         manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                                "%s is not a valid image name!\n" +
+                                "`%s` is not a valid image name!\n" +
                                 "A list of available images can be found on the [wiki](%s)!",
                                 args[1].toLowerCase(),
                                 Links.WIKI.getUrl()

@@ -9,7 +9,9 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.constants.IDs;
 
+import java.util.List;
 import java.util.Random;
 
 @CommandDescription(
@@ -29,66 +31,66 @@ public class CmdShip implements Command{
         this.manager = manager;
     }
 
-    private Message getMessage(int chance){
-        Message message;
+    private String getMessage(int chance){
 
         if(chance == 100){
-            message = new MessageBuilder("Perfect love! ❤").build();
+            return "Perfect love! ❤";
         }else
         if((chance <= 99) && (chance > 90)){
-            message = new MessageBuilder("Don't forget to invite me to your wedding.").build();
+            return "Don't forget to invite me to your wedding.";
         }else
         if((chance <= 90) && (chance > 80)){
-            message = new MessageBuilder("I can imagine them marrying each other.").build();
+            return "I can imagine them marrying each other.";
         }else
         if((chance <= 80) && (chance > 70)){
-            message = new MessageBuilder("\\*pushes both to each other*").build();
+            return "\\*pushes both to each other*";
         }else
         if((chance <= 70) && (chance > 60)){
-            message = new MessageBuilder("This will hold for some time.").build();
+            return "This will hold for some time.";
         }else
         if((chance <= 60) && (chance > 50)){
-            message = new MessageBuilder("Kiss already!").build();
+            return "Kiss already!";
         }else
         if((chance <= 50) && (chance > 40)) {
-            message = new MessageBuilder("Already a couple I guess?").build();
+            return "Already a couple I guess?";
         }else
         if((chance <= 40) && (chance > 30)) {
-            message = new MessageBuilder("I can actually imagine you as a couple.").build();
+            return "I can actually imagine you as a couple.";
         }else
         if((chance <= 30) && (chance > 20)) {
-            message = new MessageBuilder("Friendzone+ (With some \"extras\")").build();
+            return "Friendzone+ (With some \"extras\")";
         }else
         if((chance <= 20) && (chance > 10)) {
-            message = new MessageBuilder("Welcome to the friendzone!").build();
+            return "Welcome to the friendzone!";
         }else
         if((chance <= 10) && (chance > 0)) {
-            message = new MessageBuilder("Not even friends.").build();
+            return "Not even friends.";
         }else{
-            message = new MessageBuilder("If love is heat, then you're an ice block.").build();
+            return "If love is heat, then you're an ice block.";
         }
-
-        return message;
     }
 
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
+
         Member member1;
         Member member2;
 
-        if (msg.getMentionedMembers().isEmpty()){
+        List<Member> members = msg.getMentionedMembers();
+
+        if (members.isEmpty()){
             manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Mention at least one user to ship!");
             return;
         }
 
-        if(msg.getMentionedMembers().size() > 1){
-            member2 = msg.getMentionedMembers().get(1);
-        }else{
-            member2 = msg.getMember();
-        }
 
-        member1 = msg.getMentionedMembers().get(0);
+        if(members.size() > 1)
+            member2 = members.get(1);
+        else
+            member2 = msg.getMember();
+
+        member1 = members.get(0);
 
         if(member1 == msg.getGuild().getSelfMember()){
             if(!manager.isBeta()) {
@@ -103,7 +105,7 @@ public class CmdShip implements Command{
                 manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
                 return;
             }
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
+            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "D-don't ship with me. >~<");
             return;
         }
 
@@ -120,7 +122,7 @@ public class CmdShip implements Command{
                 manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
                 return;
             }
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
+            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "D-don't ship with me. >~<");
             return;
         }
 
@@ -128,6 +130,11 @@ public class CmdShip implements Command{
             manager.getEmbedUtil().sendError(tc, msg.getAuthor(),
                     "Nu! You can't ship yourself! Get someone else to ship with."
             );
+            return;
+        }
+
+        if(member1.getUser().getId().equals(IDs.SNUGGLE.getId()) || member2.getUser().getId().equals(IDs.SNUGGLE.getId())){
+            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "No shipping with my sister!.");
             return;
         }
 
@@ -143,10 +150,11 @@ public class CmdShip implements Command{
         byte[] image = manager.getImageUtil().getShipImg(member1, member2, result);
 
         if(image == null || !manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
-            Message message = new MessageBuilder().append(String.format(
-                    "`%d",
-                    result
-            )).append("%` | ").append(getMessage(result).getContentRaw()).build();
+            Message message = new MessageBuilder(String.format(
+                    "`%d%%` | %s",
+                    result,
+                    getMessage(result)
+            )).build();
 
             tc.sendMessage(message).queue();
             return;

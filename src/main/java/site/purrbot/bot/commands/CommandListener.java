@@ -52,8 +52,8 @@ public class CommandListener extends ListenerAdapter{
 
                     String raw = msg.getContentRaw().toLowerCase();
 
-                    String userMention = "<@" + event.getJDA().getSelfUser().getId() + ">";
-                    String memberMention = "<@!" + event.getJDA().getSelfUser().getId() + ">";
+                    String memberMention = "<@!" + guild.getJDA().getSelfUser().getId() + ">";
+                    String userMention = "<@" + guild.getJDA().getSelfUser().getId() + ">";
 
                     if(!raw.startsWith(prefix) && !raw.startsWith(userMention) && !raw.startsWith(memberMention)){
                         if(guild.getId().equals(IDs.GUILD.getId()))
@@ -79,18 +79,11 @@ public class CommandListener extends ListenerAdapter{
                         return;
                     }
 
-                    String[] args = null;
-                    String cmdString = null;
+                    if(!raw.toLowerCase().startsWith(prefix))
+                        return;
 
-                    if(raw.startsWith(userMention) || raw.startsWith(memberMention)) {
-                        args = split(raw, raw.indexOf(">") + 1);
-                        cmdString = args[0];
-                    }
-
-                    if((args == null || cmdString == null) && raw.toLowerCase().startsWith(prefix)) {
-                        args = split(raw, prefix.length());
-                        cmdString = args[0];
-                    }
+                    String[] args = split(raw, prefix.length());
+                    String cmdString = args[0];
 
                     if(cmdString == null) return;
 
