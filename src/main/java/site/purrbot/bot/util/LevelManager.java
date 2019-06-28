@@ -14,10 +14,10 @@ import java.util.Collections;
 
 public class LevelManager {
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public LevelManager(PurrBot manager) {
-        this.manager = manager;
+    public LevelManager(PurrBot bot) {
+        this.bot = bot;
     }
 
     /**
@@ -31,27 +31,27 @@ public class LevelManager {
      *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to send possible messages.
      */
     public void giveXP(String id, boolean command, TextChannel textChannel) {
-        if(manager.isBeta())
+        if(bot.isBeta())
             return;
 
-        if (!manager.getDbUtil().hasMember(id))
-            manager.getDbUtil().addMember(id);
+        if (!bot.getDbUtil().hasMember(id))
+            bot.getDbUtil().addMember(id);
 
         long xp;
         if (command)
-            xp = manager.getDbUtil().getXp(id) + 2;
+            xp = bot.getDbUtil().getXp(id) + 2;
         else
-            xp = manager.getDbUtil().getXp(id) + 1;
+            xp = bot.getDbUtil().getXp(id) + 1;
 
-        manager.getDbUtil().setXp(id, xp);
+        bot.getDbUtil().setXp(id, xp);
 
         if(isLevelup(id, xp)){
-            long level = manager.getDbUtil().getLevel(id);
+            long level = bot.getDbUtil().getLevel(id);
 
             String imgName = String.format("levelup_%s_%d.png", id, level + 1);
             File image = new File("img/level/levelup.png");
 
-            Guild guild = manager.getShardManager().getGuildById(IDs.GUILD.getId());
+            Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
 
             textChannel.sendMessage(String.format(
                     "%s has reached **Level %d**! \uD83C\uDF89",
@@ -59,8 +59,8 @@ public class LevelManager {
                     level + 1
             )).addFile(image, imgName).queue();
 
-            manager.getDbUtil().setLevel(id, level + 1);
-            manager.getDbUtil().setXp(id, xp - (long) reqXp(level));
+            bot.getDbUtil().setLevel(id, level + 1);
+            bot.getDbUtil().setXp(id, xp - (long) reqXp(level));
 
             updateRoles(id, level + 1);
         }
@@ -71,11 +71,11 @@ public class LevelManager {
     }
 
     private boolean isLevelup(String id, long xp) {
-        return xp >= reqXp(manager.getDbUtil().getLevel(id));
+        return xp >= reqXp(bot.getDbUtil().getLevel(id));
     }
 
     private void updateRoles(String id, long level) {
-        Guild guild = manager.getShardManager().getGuildById(IDs.GUILD.getId());
+        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
         Member member = guild.getMemberById(id);
         Role veryAddicted = guild.getRoleById(Roles.VERY_ADDICTED.getId());
         Role superAddicted = guild.getRoleById(Roles.SUPER_ADDICTED.getId());

@@ -26,10 +26,10 @@ import java.util.stream.Collectors;
 )
 public class CmdCuddle implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdCuddle(PurrBot manager){
-        this.manager = manager;
+    public CmdCuddle(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class CmdCuddle implements Command{
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to cuddle.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to cuddle.");
             return;
         }
 
@@ -61,7 +61,7 @@ public class CmdCuddle implements Command{
             )).queue();
         }
 
-        String link = manager.getHttpUtil().getImage(API.GIF_CUDDLE);
+        String link = bot.getHttpUtil().getImage(API.GIF_CUDDLE);
 
         String cuddledMembers = members.stream().filter(
                 member -> !member.equals(guild.getSelfMember())
@@ -83,7 +83,7 @@ public class CmdCuddle implements Command{
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(
-                        manager.getEmbedUtil().getEmbed().setDescription(String.format(
+                        bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s cuddles with you %s",
                                 msg.getMember().getEffectiveName(),
                                 cuddledMembers

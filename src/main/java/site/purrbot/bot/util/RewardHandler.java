@@ -15,24 +15,24 @@ import java.io.IOException;
 public class RewardHandler {
 
     private Logger logger = (Logger)LoggerFactory.getLogger(RewardHandler.class);
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public RewardHandler(PurrBot manager){
-        this.manager = manager;
+    public RewardHandler(PurrBot bot){
+        this.bot = bot;
     }
 
     private void giveReward(String botId, String userId, Site site, boolean weekend){
         if(!botId.equals(IDs.PURR.getId())) return;
 
-        Guild guild = manager.getShardManager().getGuildById(IDs.GUILD.getId());
+        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
         Role reward;
         Member member;
 
-        String url = manager.getgFile().getString("config", "vote-webhook");
+        String url = bot.getgFile().getString("config", "vote-webhook");
 
         if(site.equals(Site.LBOTS)){
             if(guild.getMemberById(userId) == null){
-                manager.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New favourite", String.format(
+                bot.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New favourite", String.format(
                         "An anonymous person added %s to their favourites!\n" +
                         "You can do that too on <%s>",
                         guild.getSelfMember().getAsMention(),
@@ -49,7 +49,7 @@ public class RewardHandler {
                     .reason("[Reward] User added Bot to favourites on LBots.org!")
                     .queue();
 
-            manager.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New Favourite", String.format(
+            bot.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New Favourite", String.format(
                     "%s added %s to their favourites! Thank you. \uD83C\uDF89\n" +
                     "You can do that too on <%s>",
                     member.getAsMention(),
@@ -59,7 +59,7 @@ public class RewardHandler {
         }else
         if(site.equals(Site.DBL)){
             if(guild.getMemberById(userId) == null){
-                manager.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
+                bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
                         "An anonymous person upvoted %s on discordbots.org!\n" +
                         "You can do that too on <%s>",
                         guild.getSelfMember().getAsMention(),
@@ -79,13 +79,13 @@ public class RewardHandler {
             byte[] image;
 
             try{
-                image = manager.getImageUtil().getVoteImage(member, weekend);
+                image = bot.getImageUtil().getVoteImage(member, weekend);
             }catch(IOException ex){
                 image = null;
             }
 
             if(image == null){
-                manager.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
+                bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
                         "%s upvotes %s on discordbots.org! Thank you. \uD83C\uDF89\n" +
                         "You can do that too on <%s>",
                         member.getAsMention(),
@@ -95,7 +95,7 @@ public class RewardHandler {
                 return;
             }
 
-            manager.getWebhookUtil().sendFile(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
+            bot.getWebhookUtil().sendFile(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
                     "%s upvotes %s on discordbots.org! Thank you. \uD83C\uDF89\n" +
                     "You can do that too on <%s>",
                     member.getAsMention(),
@@ -108,7 +108,7 @@ public class RewardHandler {
         }else
         if(site.equals(Site.BOTLIST_SPACE)){
             if(guild.getMemberById(userId) == null){
-                manager.getWebhookUtil().sendMsg(url, Links.UPVOTE_BOTLIST.getUrl(), "New Upvote", String.format(
+                bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_BOTLIST.getUrl(), "New Upvote", String.format(
                         "An anonymous person upvoted %s on botlist.space!\n" +
                         "You can do that too on <%s>",
                         guild.getSelfMember().getAsMention(),
@@ -125,7 +125,7 @@ public class RewardHandler {
                     .reason("[Reward] User upvoted bot on botlist.space!")
                     .queue();
 
-            manager.getWebhookUtil().sendMsg(url, Links.UPVOTE_BOTLIST.getUrl(), "New upvote", String.format(
+            bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_BOTLIST.getUrl(), "New upvote", String.format(
                     "%s upvoted %s on botlist.space! Thank you. \uD83C\uDF89\n" +
                     "You can do that too on <%s>",
                     member.getAsMention(),

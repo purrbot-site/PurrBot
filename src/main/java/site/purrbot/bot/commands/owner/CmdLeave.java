@@ -24,16 +24,16 @@ import site.purrbot.bot.commands.Command;
 )
 public class CmdLeave implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdLeave(PurrBot manager){
-        this.manager = manager;
+    public CmdLeave(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
-        ShardManager shardManager = manager.getShardManager();
+        ShardManager shardManager = bot.getShardManager();
 
         String pm = null;
 

@@ -21,14 +21,14 @@ import java.util.List;
 )
 public class CmdMsg implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdMsg(PurrBot manager){
-        this.manager = manager;
+    public CmdMsg(PurrBot bot){
+        this.bot = bot;
     }
 
     private boolean isValidChannel(String id){
-        return manager.getShardManager().getTextChannelById(id) != null;
+        return bot.getShardManager().getTextChannelById(id) != null;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CmdMsg implements Command{
         Collections.addAll(split, args.split(" "));
 
         if(!isValidChannel(channelID)){
-            manager.getEmbedUtil().sendError(
+            bot.getEmbedUtil().sendError(
                     msg.getTextChannel(),
                     msg.getAuthor(),
                     "The provided ID was invalid. Make sure it's an actual channel-ID!"
@@ -48,11 +48,11 @@ public class CmdMsg implements Command{
         split.remove(0);
 
         if(split.isEmpty()){
-            manager.getEmbedUtil().sendError(msg.getTextChannel(), msg.getAuthor(), "Please provide a message!");
+            bot.getEmbedUtil().sendError(msg.getTextChannel(), msg.getAuthor(), "Please provide a message!");
             return;
         }
 
-        manager.getShardManager().getTextChannelById(channelID).sendMessage(String.join(" ", split)).queue(
+        bot.getShardManager().getTextChannelById(channelID).sendMessage(String.join(" ", split)).queue(
                 message -> msg.addReaction("✅").queue()
         );
     }

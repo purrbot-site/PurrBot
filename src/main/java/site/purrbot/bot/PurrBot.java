@@ -33,7 +33,6 @@ import site.purrbot.bot.util.message.WebhookUtil;
 import spark.Spark;
 
 import javax.security.auth.login.LoginException;
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -72,6 +71,18 @@ public class PurrBot {
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     private Cache<String, String> prefixes = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
+    private Cache<String, String> welcomeChannel = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
+    private Cache<String, String> welcomeImg = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
+    private Cache<String, String> welcomeColor = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
+    private Cache<String, String> welcomeMsg = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
 
@@ -239,11 +250,49 @@ public class PurrBot {
         return waiter;
     }
 
-    public Cache<String, String> getPrefixes(){
-        return prefixes;
+    public String getPrefix(String id){
+        return prefixes.get(id, k -> getDbUtil().getPrefix(id));
     }
-    public void setPrefixes(String key, String value){
+    public String getWelcomeChannel(String id){
+        return welcomeChannel.get(id, k -> getDbUtil().getWelcomeChannel(id));
+    }
+    public String getWelcomeImg(String id){
+        return welcomeImg.get(id, k -> getDbUtil().getWelcomeImg(id));
+    }
+    public String getWelcomeColor(String id){
+        return welcomeColor.get(id, k -> getDbUtil().getWelcomeColor(id));
+    }
+    public String getWelcomeMsg(String id){
+        return welcomeMsg.get(id, k -> getDbUtil().getWelcomeMsg(id));
+    }
+
+    public void setPrefix(String key, String value){
+        getDbUtil().setPrefix(key, value);
         prefixes.put(key, value);
+    }
+    public void setWelcomeChannel(String key, String value){
+        getDbUtil().setWelcomeChannel(key, value);
+        welcomeChannel.put(key, value);
+    }
+    public void setWelcomeImg(String key, String value){
+        getDbUtil().setWelcomeImg(key, value);
+        welcomeImg.put(key, value);
+    }
+    public void setWelcomeColor(String key, String value){
+        getDbUtil().setWelcomeColor(key, value);
+        welcomeColor.put(key, value);
+    }
+    public void setWelcomeMsg(String key, String value){
+        getDbUtil().setWelcomeMsg(key, value);
+        welcomeMsg.put(key, value);
+    }
+
+    public void invalidateCache(String id){
+        prefixes.invalidate(id);
+        welcomeChannel.invalidate(id);
+        welcomeImg.invalidate(id);
+        welcomeColor.invalidate(id);
+        welcomeMsg.invalidate(id);
     }
 
     public List<String> getAcceptFuckMsg(){

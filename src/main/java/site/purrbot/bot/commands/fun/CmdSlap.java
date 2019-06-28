@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 )
 public class CmdSlap implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdSlap(PurrBot manager){
-        this.manager = manager;
+    public CmdSlap(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CmdSlap implements Command{
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to slap.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to slap.");
             return;
         }
 
@@ -53,7 +53,7 @@ public class CmdSlap implements Command{
             )).queue();
         }
 
-        String link = manager.getHttpUtil().getImage(API.GIF_SLAP);
+        String link = bot.getHttpUtil().getImage(API.GIF_SLAP);
 
         String slapedMembers = members.stream().filter(
                 member -> !member.equals(guild.getSelfMember())
@@ -76,7 +76,7 @@ public class CmdSlap implements Command{
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(manager.getEmbedUtil().getEmbed().setDescription(String.format(
+                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s slaps you %s",
                         msg.getMember().getEffectiveName(),
                         slapedMembers

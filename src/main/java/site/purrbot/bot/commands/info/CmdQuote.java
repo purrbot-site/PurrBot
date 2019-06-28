@@ -29,10 +29,10 @@ import java.io.InputStream;
 )
 public class CmdQuote implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdQuote(PurrBot manager){
-        this.manager = manager;
+    public CmdQuote(PurrBot bot){
+        this.bot = bot;
     }
 
     private Message getMessage(String id, TextChannel channel){
@@ -47,7 +47,7 @@ public class CmdQuote implements Command{
     }
 
     private void sendQuoteEmbed(Message msg, String link, TextChannel channel) {
-        EmbedBuilder quoteEmbed = manager.getEmbedUtil().getEmbed()
+        EmbedBuilder quoteEmbed = bot.getEmbedUtil().getEmbed()
                 .setAuthor(String.format(
                         "Quote from %s",
                         msg.getMember() == null ? "Unknown Member" : msg.getMember().getEffectiveName()
@@ -67,30 +67,29 @@ public class CmdQuote implements Command{
     public void execute(Message msg, String s){
         String[] args = s.split(" ");
         TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.length == 0){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                     "To few arguments!\n" +
                     "Usage: `%squote <messageID> [#channel]`",
-                    manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
+                    bot.getPrefix(msg.getGuild().getId())
             ));
             return;
         }
 
         if(msg.getMentionedChannels().isEmpty()){
-            if(!manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need permission to see the message history!");
+            if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need permission to see the message history!");
                 return;
             }
 
             Message quote = getMessage(args[0], tc);
 
             if(quote == null){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                         "Couldn't find the message in %s\n" +
                         "Make sure, that the messageID is correct and that the message is in the right channel!",
                         tc.getAsMention()
@@ -102,7 +101,7 @@ public class CmdQuote implements Command{
                         .map(Message.Attachment::getUrl).orElse(null);
 
                 if(link == null && quote.getContentRaw().isEmpty()){
-                    manager.getEmbedUtil().sendError(
+                    bot.getEmbedUtil().sendError(
                             tc,
                             msg.getAuthor(),
                             "The quoted message doesn't have any images, nor a message itself!"
@@ -115,7 +114,7 @@ public class CmdQuote implements Command{
                 InputStream is;
 
                 try{
-                    is = manager.getImageUtil().getQuoteImg(quote);
+                    is = bot.getImageUtil().getQuoteImg(quote);
                 }catch(IOException ex){
                     is = null;
                 }
@@ -126,7 +125,7 @@ public class CmdQuote implements Command{
                 }
                 String name = String.format("quote_%s.png", quote.getId());
 
-                MessageEmbed embed = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                         .setDescription(String.format(
                                 "Quote from %s in %s [`[Link]`](%s)",
                                 quote.getMember() == null ? "`Unknown Member`" : quote.getMember().getEffectiveName(),
@@ -146,7 +145,7 @@ public class CmdQuote implements Command{
 
         TextChannel channel = msg.getMentionedChannels().get(0);
         if(channel.isNSFW() && !tc.isNSFW()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                     "The mentioned channel (%s) is a NSFW channel, while this channel here isn't!\n" +
                     "I won't post quotes from NSFW channels in non-NSFW channels.",
                     channel.getAsMention()
@@ -154,11 +153,11 @@ public class CmdQuote implements Command{
             return;
         }
 
-        if(manager.getPermUtil().hasPermission(channel, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY)){
+        if(bot.getPermUtil().hasPermission(channel, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY)){
             Message quote = getMessage(args[0], channel);
 
             if(quote == null){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "The provided ID was invalid!");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "The provided ID was invalid!");
                 return;
             }
 
@@ -167,7 +166,7 @@ public class CmdQuote implements Command{
                         .map(Message.Attachment::getUrl).orElse(null);
 
                 if(link == null && quote.getContentRaw().isEmpty()){
-                    manager.getEmbedUtil().sendError(
+                    bot.getEmbedUtil().sendError(
                             tc,
                             msg.getAuthor(),
                             "The quoted message doesn't have any images, nor a message itself!"
@@ -180,7 +179,7 @@ public class CmdQuote implements Command{
                 InputStream is;
 
                 try{
-                    is = manager.getImageUtil().getQuoteImg(quote);
+                    is = bot.getImageUtil().getQuoteImg(quote);
                 }catch(IOException ex){
                     is = null;
                 }
@@ -191,7 +190,7 @@ public class CmdQuote implements Command{
                 }
                 String name = String.format("quote_%s.png", quote.getId());
 
-                MessageEmbed embed = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                         .setDescription(String.format(
                                 "Quote from %s in %s [`[Link]`](%s)",
                                 quote.getMember() == null ? "`Unknown Member`" : quote.getMember().getEffectiveName(),
@@ -207,7 +206,7 @@ public class CmdQuote implements Command{
                 tc.sendFile(is, name).embed(embed).queue();
             }
         }else{
-            manager.getEmbedUtil().sendError(
+            bot.getEmbedUtil().sendError(
                     tc,
                     msg.getAuthor(),
                     "I need permissions to see messages in the mentioned channel!"

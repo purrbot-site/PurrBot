@@ -34,10 +34,10 @@ import java.util.stream.Collectors;
 )
 public class CmdHelp implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdHelp(PurrBot manager){
-        this.manager = manager;
+    public CmdHelp(PurrBot bot){
+        this.bot = bot;
     }
 
     private HashMap<String, String> categories = new LinkedHashMap<String, String>(){
@@ -53,7 +53,7 @@ public class CmdHelp implements Command{
     private MessageEmbed commandHelp(Message msg, Command cmd, String prefix){
         CommandDescription desc = cmd.getDescription();
         String[] triggers = desc.triggers();
-        EmbedBuilder commandInfo = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder commandInfo = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Command-help: %s",
                         desc.name()
@@ -82,13 +82,12 @@ public class CmdHelp implements Command{
     @Override
     public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-        String prefix = manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()));
+        String prefix = bot.getPrefix(msg.getGuild().getId());
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        Paginator.Builder builder = new Paginator.Builder().setEventWaiter(manager.getWaiter())
+        Paginator.Builder builder = new Paginator.Builder().setEventWaiter(bot.getWaiter())
                 .setTimeout(1, TimeUnit.MINUTES);
 
         HashMap<String, StringBuilder> builders = new LinkedHashMap<>();
@@ -97,7 +96,7 @@ public class CmdHelp implements Command{
             builders.put(category.getKey(), new StringBuilder());
         }
 
-        for(Command cmd : manager.getCmdHandler().getCommands().stream().map(ca -> (Command)ca).collect(Collectors.toList())){
+        for(Command cmd : bot.getCmdHandler().getCommands().stream().map(ca -> (Command)ca).collect(Collectors.toList())){
             String category = cmd.getAttribute("category");
 
             builders.get(category).append(String.format(
@@ -125,7 +124,7 @@ public class CmdHelp implements Command{
         ));
 
         for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
-            if(builderEntry.getKey().equals("owner") && !manager.getPermUtil().isDeveloper(msg.getAuthor()))
+            if(builderEntry.getKey().equals("owner") && !bot.getPermUtil().isDeveloper(msg.getAuthor()))
                 continue;
 
             if(!tc.isNSFW() && builderEntry.getKey().equals("nsfw")){
@@ -148,15 +147,15 @@ public class CmdHelp implements Command{
         }
 
         if(args.length() != 0){
-            Command command = (Command)manager.getCmdHandler().findCommand(args.split(" ")[0]);
+            Command command = (Command)bot.getCmdHandler().findCommand(args.split(" ")[0]);
 
             if(command == null || !isCommand(command)){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "This command doesn't exist!");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "This command doesn't exist!");
                 return;
             }
 
             if(!tc.isNSFW() && command.getAttribute("category").equals("nsfw")){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please run this command in a NSFW-channel!");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please run this command in a NSFW-channel!");
                 return;
             }
 
@@ -164,7 +163,7 @@ public class CmdHelp implements Command{
         }else{
             builder.setText(EmbedBuilder.ZERO_WIDTH_SPACE)
                     .setFinalAction(message -> {
-                        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+                        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
                             message.clearReactions().queue();
                     })
                     .waitOnSinglePage(false)

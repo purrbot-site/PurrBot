@@ -29,20 +29,20 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdInvite implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdInvite(PurrBot manager){
-        this.manager = manager;
+    public CmdInvite(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        EmbedBuilder invite = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder invite = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setAuthor(msg.getJDA().getSelfUser().getName(),
                         Links.WEBSITE.getUrl(),
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()

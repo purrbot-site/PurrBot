@@ -27,10 +27,10 @@ import java.util.List;
 )
 public class CmdEval implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdEval(PurrBot manager){
-        this.manager = manager;
+    public CmdEval(PurrBot bot){
+        this.bot = bot;
     }
 
     private void sendEvalEmbed(TextChannel tc, String input, String output, String footer, boolean success){
@@ -43,7 +43,7 @@ public class CmdEval implements Command{
             newMsg = newMsg.substring(0, 1999);
         }
 
-        EmbedBuilder embed = manager.getEmbedUtil().getEmbed()
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed()
                 .setColor(success ? 0x00FF00 : 0xFF0000)
                 .addField("Input", String.format(
                         "```java\n" +
@@ -68,18 +68,18 @@ public class CmdEval implements Command{
     public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need at least one argument!");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need at least one argument!");
             return;
         }
 
         ScriptEngine se = new ScriptEngineManager().getEngineByName("Nashorn");
 
         se.put("jda", msg.getJDA());
-        se.put("shardManager", manager.getShardManager());
+        se.put("shardManager", bot.getShardManager());
         se.put("guild", msg.getGuild());
         se.put("channel", msg.getTextChannel());
         se.put("msg", msg);

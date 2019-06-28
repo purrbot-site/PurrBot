@@ -22,49 +22,49 @@ public class CommandLoader {
 
     private final Set<Command> COMMANDS = new HashSet<>();
 
-    public CommandLoader(PurrBot manager){
+    public CommandLoader(PurrBot bot){
         loadCommands(
                 // Fun
-                new CmdCuddle(manager),
-                new CmdFakegit(manager),
-                new CmdHolo(manager),
-                new CmdHug(manager),
-                new CmdKiss(manager),
-                new CmdKitsune(manager),
-                new CmdNeko(manager),
-                new CmdPat(manager),
-                new CmdPoke(manager),
-                new CmdShip(manager),
-                new CmdSlap(manager),
-                new CmdTickle(manager),
+                new CmdCuddle(bot),
+                new CmdFakegit(bot),
+                new CmdHolo(bot),
+                new CmdHug(bot),
+                new CmdKiss(bot),
+                new CmdKitsune(bot),
+                new CmdNeko(bot),
+                new CmdPat(bot),
+                new CmdPoke(bot),
+                new CmdShip(bot),
+                new CmdSlap(bot),
+                new CmdTickle(bot),
 
                 // Guild
-                new CmdPrefix(manager),
-                new CmdWelcome(manager),
+                new CmdPrefix(bot),
+                new CmdWelcome(bot),
 
                 // Info
-                new CmdEmote(manager),
-                new CmdGuild(manager),
-                new CmdHelp(manager),
-                new CmdInfo(manager),
-                new CmdInvite(manager),
-                new CmdLevel(manager),
-                new CmdPing(manager),
-                new CmdQuote(manager),
-                new CmdStats(manager),
-                new CmdUser(manager),
+                new CmdEmote(bot),
+                new CmdGuild(bot),
+                new CmdHelp(bot),
+                new CmdInfo(bot),
+                new CmdInvite(bot),
+                new CmdLevel(bot),
+                new CmdPing(bot),
+                new CmdQuote(bot),
+                new CmdStats(bot),
+                new CmdUser(bot),
 
                 // NSFW
-                new CmdFuck(manager),
-                new CmdLesbian(manager),
-                new CmdLewd(manager),
-                new CmdYurifuck(manager),
+                new CmdFuck(bot),
+                new CmdLesbian(bot),
+                new CmdLewd(bot),
+                new CmdYurifuck(bot),
 
                 // Owner
-                new CmdEval(manager),
-                new CmdLeave(manager),
-                new CmdMsg(manager),
-                new CmdShutdown(manager)
+                new CmdEval(bot),
+                new CmdLeave(bot),
+                new CmdMsg(bot),
+                new CmdShutdown(bot)
         );
     }
 

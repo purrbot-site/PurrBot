@@ -22,26 +22,26 @@ import site.purrbot.bot.constants.Emotes;
 )
 public class CmdKitsune implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdKitsune(PurrBot manager){
-        this.manager = manager;
+    public CmdKitsune(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
-        String link = manager.getHttpUtil().getImage(API.IMG_KITSUNE);
+        String link = bot.getHttpUtil().getImage(API.IMG_KITSUNE);
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(link == null){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
             return;
         }
 
-        EmbedBuilder gecg = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder gecg = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Kitsune %s",
                         Emotes.ANIM_SHIROTAILWAG.getEmote()

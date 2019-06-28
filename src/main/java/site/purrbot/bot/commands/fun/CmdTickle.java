@@ -23,17 +23,17 @@ import java.util.stream.Collectors;
 )
 public class CmdTickle implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdTickle(PurrBot manager){
-        this.manager = manager;
+    public CmdTickle(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String s) {
         TextChannel tc = msg.getTextChannel();
         if(msg.getMentionedMembers().isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to tickle.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to tickle.");
             return;
         }
 
@@ -52,7 +52,7 @@ public class CmdTickle implements Command{
             )).queue();
         }
 
-        String link = manager.getHttpUtil().getImage(API.GIF_TICKLE);
+        String link = bot.getHttpUtil().getImage(API.GIF_TICKLE);
         String tickledMembers = members.stream().filter(
                 member -> !member.equals(guild.getSelfMember())
         ).filter(
@@ -74,7 +74,7 @@ public class CmdTickle implements Command{
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(manager.getEmbedUtil().getEmbed().setDescription(String.format(
+                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s tickles you %s",
                         msg.getMember().getEffectiveName(),
                         tickledMembers

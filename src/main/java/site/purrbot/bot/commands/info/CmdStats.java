@@ -27,10 +27,10 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdStats implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdStats(PurrBot manager){
-        this.manager = manager;
+    public CmdStats(PurrBot bot){
+        this.bot = bot;
     }
 
     private String getUptime(){
@@ -74,9 +74,9 @@ public class CmdStats implements Command{
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
         JDA jda = msg.getJDA();
-        ShardManager shardManager = manager.getShardManager();
+        ShardManager shardManager = bot.getShardManager();
 
-        EmbedBuilder stats = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder stats = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setAuthor("Statistics")
                 .addField("Total", String.format(
                         "```yaml\n" +

@@ -28,27 +28,27 @@ import java.text.MessageFormat;
 )
 public class CmdLevel implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdLevel(PurrBot manager){
-        this.manager = manager;
+    public CmdLevel(PurrBot bot){
+        this.bot = bot;
     }
 
     private void sendLevelEmbed(TextChannel textChannel, User requester, Member member){
         String id = member.getUser().getId();
 
-        long xp = manager.getDbUtil().getXp(id);
-        long level = manager.getDbUtil().getLevel(id);
+        long xp = bot.getDbUtil().getXp(id);
+        long level = bot.getDbUtil().getLevel(id);
 
-        double reqXpDouble = manager.getLevelManager().reqXp(level);
+        double reqXpDouble = bot.getLevelManager().reqXp(level);
         long reqXpLong = (long)reqXpDouble;
 
         Double progress = (xp / reqXpDouble) * 100;
 
         String imageName = level >= 30 ? String.format("progress_%s.png", id) : String.format("progress_%s.gif", id);
-        File image = manager.getLevelManager().getImage(level);
+        File image = bot.getLevelManager().getImage(level);
 
-        EmbedBuilder levelEmbed = manager.getEmbedUtil().getEmbed(requester)
+        EmbedBuilder levelEmbed = bot.getEmbedUtil().getEmbed(requester)
                 .setDescription(String.format(
                         "Level-Info about %s",
                         member.getEffectiveName()
@@ -74,14 +74,14 @@ public class CmdLevel implements Command{
         TextChannel tc = msg.getTextChannel();
         User author = msg.getAuthor();
 
-        if(manager.isBeta()){
-            manager.getEmbedUtil().sendError(tc, author, "Nya! The command is only available for my Sister. >w<");
+        if(bot.isBeta()){
+            bot.getEmbedUtil().sendError(tc, author, "Nya! The command is only available for my Sister. >w<");
             return;
         }
 
         if(!msg.getMentionedMembers().isEmpty()){
             if(msg.getMentionedMembers().get(0).getUser().isBot()){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Bots can't level up. xP");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Bots can't level up. xP");
                 return;
             }
 

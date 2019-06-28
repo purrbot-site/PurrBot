@@ -38,12 +38,12 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdLewd implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
     private Slideshow.Builder sBuilder;
 
-    public CmdLewd(PurrBot manager){
-        this.manager = manager;
-        sBuilder = new Slideshow.Builder().setEventWaiter(manager.getWaiter()).setTimeout(1, TimeUnit.MINUTES);
+    public CmdLewd(PurrBot bot){
+        this.bot = bot;
+        sBuilder = new Slideshow.Builder().setEventWaiter(bot.getWaiter()).setTimeout(1, TimeUnit.MINUTES);
     }
 
     private static List<String> lewdUserID = new ArrayList<>();
@@ -53,7 +53,7 @@ public class CmdLewd implements Command{
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.toLowerCase().contains("--slide")){
@@ -69,13 +69,13 @@ public class CmdLewd implements Command{
             lewdUserID.add(msg.getAuthor().getId());
             String urls;
             if(args.toLowerCase().contains("--gif")){
-                urls = manager.getHttpUtil().getImage(API.GIF_NEKO_LEWD, 20);
+                urls = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD, 20);
             }else{
-                urls = manager.getHttpUtil().getImage(API.IMG_NEKO_LEWD, 20);
+                urls = bot.getHttpUtil().getImage(API.IMG_NEKO_LEWD, 20);
             }
 
             if(urls == null){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
                 return;
             }
 
@@ -94,7 +94,7 @@ public class CmdLewd implements Command{
                     .setUrls(urls.replace("\"", "").split(","))
                     .setFinalAction(
                             message -> {
-                                if(manager.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                                if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
                                     message.delete().queue();
 
                                 lewdUserID.remove(msg.getAuthor().getId());
@@ -104,13 +104,13 @@ public class CmdLewd implements Command{
             return;
         }
         if(args.toLowerCase().contains("--gif")){
-            String gifLink = manager.getHttpUtil().getImage(API.GIF_NEKO_LEWD);
+            String gifLink = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD);
             if(gifLink == null){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
                 return;
             }
 
-            EmbedBuilder lewdgif = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+            EmbedBuilder lewdgif = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                     .setTitle(String.format(
                             "Lewd Neko %s",
                             Emotes.ANIM_WAGTAIL.getEmote()
@@ -124,13 +124,13 @@ public class CmdLewd implements Command{
             return;
         }
 
-        String link = manager.getHttpUtil().getImage(API.IMG_NEKO_LEWD);
+        String link = bot.getHttpUtil().getImage(API.IMG_NEKO_LEWD);
         if(link == null){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
             return;
         }
 
-        EmbedBuilder lewd = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder lewd = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Lewd Neko %s",
                         Emotes.NEKOWO.getEmote()

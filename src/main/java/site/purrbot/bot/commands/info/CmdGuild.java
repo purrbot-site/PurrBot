@@ -22,10 +22,10 @@ import java.time.LocalDateTime;
 )
 public class CmdGuild implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdGuild(PurrBot manager){
-        this.manager = manager;
+    public CmdGuild(PurrBot bot){
+        this.bot = bot;
     }
 
     private String getVerifyLevel(Guild.VerificationLevel level){
@@ -37,7 +37,7 @@ public class CmdGuild implements Command{
                 return "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻";
 
             default:
-                return manager.getMessageUtil().firstUpperCase(level.name());
+                return bot.getMessageUtil().firstUpperCase(level.name());
         }
     }
 
@@ -46,7 +46,7 @@ public class CmdGuild implements Command{
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
-        EmbedBuilder guildInfo = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder guildInfo = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle(guild.getName())
                 .setThumbnail(guild.getIconUrl())
                 .addField("Users", String.format(
@@ -71,7 +71,7 @@ public class CmdGuild implements Command{
                 ), true)
                 .addField("Created", String.format(
                         "`%s`",
-                        manager.getMessageUtil().formatTime(LocalDateTime.from(guild.getCreationTime()))
+                        bot.getMessageUtil().formatTime(LocalDateTime.from(guild.getCreationTime()))
                 ), false);
 
         tc.sendMessage(guildInfo.build()).queue();

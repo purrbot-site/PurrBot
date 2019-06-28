@@ -10,64 +10,64 @@ import java.time.format.DateTimeFormatter;
 
 public class MessageUtil {
 
-    private PurrBot manager;
+    private PurrBot bot;
     private DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
 
-    public MessageUtil(PurrBot manager){
-        this.manager = manager;
+    public MessageUtil(PurrBot bot){
+        this.bot = bot;
     }
 
     public String getRandomAcceptFuckMsg(){
-        return manager.getAcceptFuckMsg().isEmpty() ? "" : manager.getAcceptFuckMsg().get(
-                manager.getRandom().nextInt(manager.getAcceptFuckMsg().size())
+        return bot.getAcceptFuckMsg().isEmpty() ? "" : bot.getAcceptFuckMsg().get(
+                bot.getRandom().nextInt(bot.getAcceptFuckMsg().size())
         );
     }
 
     public String getRandomApiPingMsg(){
-        return manager.getApiPingMsg().isEmpty() ? "" : manager.getApiPingMsg().get(
-                manager.getRandom().nextInt(manager.getApiPingMsg().size())
+        return bot.getApiPingMsg().isEmpty() ? "" : bot.getApiPingMsg().get(
+                bot.getRandom().nextInt(bot.getApiPingMsg().size())
         );
     }
 
     public String getRandomDenyFuckMsg(){
-        return manager.getDenyFuckMsg().isEmpty() ? "" : manager.getDenyFuckMsg().get(
-                manager.getRandom().nextInt(manager.getDenyFuckMsg().size())
+        return bot.getDenyFuckMsg().isEmpty() ? "" : bot.getDenyFuckMsg().get(
+                bot.getRandom().nextInt(bot.getDenyFuckMsg().size())
         );
     }
 
     public String getRandomKissImg(){
-        return manager.getKissImg().isEmpty() ? "" : manager.getKissImg().get(
-                manager.getRandom().nextInt(manager.getKissImg().size())
+        return bot.getKissImg().isEmpty() ? "" : bot.getKissImg().get(
+                bot.getRandom().nextInt(bot.getKissImg().size())
         );
     }
 
     public String getRandomNoNsfwMsg(){
-        return manager.getNoNsfwMsg().isEmpty() ? "" : manager.getNoNsfwMsg().get(
-                manager.getRandom().nextInt(manager.getNoNsfwMsg().size())
+        return bot.getNoNsfwMsg().isEmpty() ? "" : bot.getNoNsfwMsg().get(
+                bot.getRandom().nextInt(bot.getNoNsfwMsg().size())
         );
     }
 
     public String getRandomPingMsg(){
-        return manager.getPingMsg().isEmpty() ? "" : manager.getPingMsg().get(
-                manager.getRandom().nextInt(manager.getPingMsg().size())
+        return bot.getPingMsg().isEmpty() ? "" : bot.getPingMsg().get(
+                bot.getRandom().nextInt(bot.getPingMsg().size())
         );
     }
 
     public String getRandomShutdownImg(){
-        return manager.getShutdownImg().isEmpty() ? "" : manager.getShutdownImg().get(
-                manager.getRandom().nextInt(manager.getShutdownImg().size())
+        return bot.getShutdownImg().isEmpty() ? "" : bot.getShutdownImg().get(
+                bot.getRandom().nextInt(bot.getShutdownImg().size())
         );
     }
 
     public String getRandomShutdownMsg(){
-        return manager.getShutdownMsg().isEmpty() ? "" : manager.getShutdownMsg().get(
-                manager.getRandom().nextInt(manager.getShutdownMsg().size())
+        return bot.getShutdownMsg().isEmpty() ? "" : bot.getShutdownMsg().get(
+                bot.getRandom().nextInt(bot.getShutdownMsg().size())
         );
     }
 
     public String getRandomStartupMsg(){
-        return manager.getStartupMsg().isEmpty() ? "" : manager.getStartupMsg().get(
-                manager.getRandom().nextInt(manager.getStartupMsg().size())
+        return bot.getStartupMsg().isEmpty() ? "" : bot.getStartupMsg().get(
+                bot.getRandom().nextInt(bot.getStartupMsg().size())
         );
     }
 
@@ -155,6 +155,6 @@ public class MessageUtil {
     }
 
     public String getBotGame(){
-        return manager.isBeta() ? "My sister on %d Guilds." : "https://purrbot.site | %d Guilds";
+        return bot.isBeta() ? "My sister on %d Guilds." : "https://purrbot.site | %d Guilds";
     }
 }

@@ -44,10 +44,10 @@ public class CmdWelcome implements Command{
     private MessageEmbed welcomeSettings(User author, String id){
         TextChannel tc = getWelcomeChannel(id);
 
-        String[] color = manager.getDbUtil().getWelcomeColor(id).split(":");
+        String[] color = manager.getWelcomeColor(id).split(":");
 
         if(color.length < 2) {
-            manager.getDbUtil().setWelcomeColor(id, "hex:ffffff");
+            manager.setWelcomeColor(id, "hex:ffffff");
 
             color = new String[2];
 
@@ -60,7 +60,7 @@ public class CmdWelcome implements Command{
                 .setDescription(String.format(
                         "Here is a list of all current settings for this Discord!\n" +
                         "To change some settings use `%swelcome [subcommand]`",
-                        manager.getPrefixes().get(id, k -> manager.getDbUtil().getPrefix(id))
+                        manager.getPrefix(id)
                 ))
                 .addField(
                         "Subcommands",
@@ -81,14 +81,15 @@ public class CmdWelcome implements Command{
                 ), true)
                 .addField("Image", String.format(
                         "`%s`",
-                        manager.getDbUtil().getWelcomeImg(id)
+                        manager.getWelcomeImg(id)
                 ),true)
                 .addField("Message", String.format(
                         "```\n" +
                         "%s\n" +
                         "```",
-                        manager.getDbUtil().getWelcomeMsg(id)
-                ), false).build();
+                        manager.getWelcomeMsg(id)
+                ), false)
+                .build();
     }
 
     private void update(Message msg, Type type, String value){
@@ -96,19 +97,19 @@ public class CmdWelcome implements Command{
 
         switch(type){
             case CHANNEL:
-                manager.getDbUtil().setWelcomeChannel(id, value);
+                manager.setWelcomeChannel(id, value);
                 break;
 
             case IMAGE:
-                manager.getDbUtil().setWelcomeImg(id, value);
+                manager.setWelcomeImg(id, value);
                 break;
 
             case COLOR:
-                manager.getDbUtil().setWelcomeColor(id, value);
+                manager.setWelcomeColor(id, value);
                 break;
 
             case MESSAGE:
-                manager.getDbUtil().setWelcomeMsg(id, value);
+                manager.setWelcomeMsg(id, value);
         }
 
         msg.getTextChannel().sendMessage(
@@ -155,9 +156,9 @@ public class CmdWelcome implements Command{
     }
 
     private TextChannel getWelcomeChannel(String id){
-        if(manager.getDbUtil().getWelcomeChannel(id).equals("none")) return null;
+        if(manager.getWelcomeChannel(id).equals("none")) return null;
 
-        return manager.getShardManager().getGuildById(id).getTextChannelById(manager.getDbUtil().getWelcomeChannel(id));
+        return manager.getShardManager().getGuildById(id).getTextChannelById(manager.getWelcomeChannel(id));
     }
 
     @Override
@@ -180,7 +181,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "To few arguments!\n" +
                             "Usage: `%swelcome channel <set <#channel>|reset>`",
-                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
+                            manager.getPrefix(guild.getId())
                     ));
                     return;
                 }
@@ -201,7 +202,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "Invalid argument!\n" +
                             "Usage: `%swelcome channel <set <#channel>|reset>`",
-                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
+                            manager.getPrefix(guild.getId())
                     ));
                 }
                 break;
@@ -213,7 +214,7 @@ public class CmdWelcome implements Command{
                             "Usage: `%swelcome image <set <image>|reset>`\n" +
                             "\n" +
                             "A list of available images can be found on the [wiki](%s)",
-                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId())),
+                            manager.getPrefix(guild.getId()),
                             Links.WIKI.getUrl()
                     ));
                     return;
@@ -240,7 +241,7 @@ public class CmdWelcome implements Command{
                             "Usage: `%swelcome image <set <image>|reset>`\n" +
                             "\n" +
                             "A list of available images can be found on the [wiki](%s)",
-                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId())),
+                            manager.getPrefix(guild.getId()),
                             Links.WIKI.getUrl()
                     ));
                 }
@@ -251,7 +252,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "To few arguments!\n" +
                             "Usage: `%swelcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
-                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
+                            manager.getPrefix(guild.getId())
                     ));
                     return;
                 }
@@ -279,7 +280,7 @@ public class CmdWelcome implements Command{
                     manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "Invalid argument!\n" +
                             "Usage: `%swelcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
-                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
+                            manager.getPrefix(guild.getId())
                     ));
                 }
                 break;
@@ -298,8 +299,8 @@ public class CmdWelcome implements Command{
                             "`{name}` - Name of the joined user\n" +
                             "`{guild}` - Name of the guild\n" +
                             "`{count}` - Member count of the guild",
-                            manager.getDbUtil().getWelcomeMsg(guild.getId()),
-                            manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
+                            manager.getWelcomeMsg(guild.getId()),
+                            manager.getPrefix(guild.getId())
                     ));
                     return;
                 }
@@ -326,8 +327,8 @@ public class CmdWelcome implements Command{
                         is = manager.getImageUtil().getWelcomeImg(
                                 msg.getAuthor(),
                                 guild.getMembers().size(),
-                                manager.getDbUtil().getWelcomeImg(guild.getId()),
-                                manager.getDbUtil().getWelcomeColor(guild.getId())
+                                manager.getWelcomeImg(guild.getId()),
+                                manager.getWelcomeColor(guild.getId())
                         );
                     }catch(IOException ex){
                         is = null;
@@ -360,7 +361,7 @@ public class CmdWelcome implements Command{
                                 msg.getAuthor(),
                                 guild.getMembers().size(),
                                 args[1].toLowerCase(),
-                                manager.getDbUtil().getWelcomeColor(guild.getId())
+                                manager.getWelcomeColor(guild.getId())
                         );
                     }catch(IOException ex){
                         is = null;
@@ -410,7 +411,10 @@ public class CmdWelcome implements Command{
                     }
 
                     if(is == null){
-                        manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't generate image. Try again later.");
+                        manager.getEmbedUtil().sendError(
+                                tc,
+                                msg.getAuthor(),
+                                "Couldn't generate image. Try again later.");
                         return;
                     }
 

@@ -27,10 +27,10 @@ import java.time.temporal.ChronoUnit;
 )
 public class CmdPing implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdPing(PurrBot manager){
-        this.manager = manager;
+    public CmdPing(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class CmdPing implements Command{
                     "%s Checking ping to Discord-API...",
                     Emotes.ANIM_TYPING.getEmote()
             )).queue(message -> message.editMessage(String.format(
-                    manager.getMessageUtil().getRandomApiPingMsg(),
+                    bot.getMessageUtil().getRandomApiPingMsg(),
                     msg.getJDA().getPing()
             )).queue());
             return;
@@ -52,7 +52,7 @@ public class CmdPing implements Command{
                 "%s Checking message ping...",
                 Emotes.ANIM_TYPING.getEmote()
         )).queue(message -> message.editMessage(String.format(
-                manager.getMessageUtil().getRandomPingMsg(),
+                bot.getMessageUtil().getRandomPingMsg(),
                 msg.getCreationTime().until(message.getCreationTime(), ChronoUnit.MILLIS)
         )).queue());
     }

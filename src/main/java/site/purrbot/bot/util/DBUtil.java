@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class DBUtil {
 
-    private PurrBot manager;
+    private PurrBot bot;
 
     private final RethinkDB r;
     private Connection connection;
@@ -16,17 +16,17 @@ public class DBUtil {
     private String guildTable;
     private String memberTable;
 
-    public DBUtil(PurrBot manager){
+    public DBUtil(PurrBot bot){
         r = RethinkDB.r;
         connection = r.connection()
-                .hostname(manager.getgFile().getString("config", "db-ip"))
+                .hostname(bot.getgFile().getString("config", "db-ip"))
                 .port(28015)
-                .db(manager.getgFile().getString("config", "db-name"))
+                .db(bot.getgFile().getString("config", "db-name"))
                 .connect();
 
-        guildTable  = manager.getgFile().getString("config", "db-guildTable");
-        memberTable = manager.getgFile().getString("config", "db-memberTable");
-        this.manager = manager;
+        guildTable  = bot.getgFile().getString("config", "db-guildTable");
+        memberTable = bot.getgFile().getString("config", "db-memberTable");
+        this.bot = bot;
     }
 
     /*
@@ -47,7 +47,7 @@ public class DBUtil {
         r.table(guildTable).insert(
                 r.array(
                         r.hashMap("id", id)
-                                .with("prefix", manager.isBeta() ? ".." : ".")
+                                .with("prefix", bot.isBeta() ? ".." : ".")
                                 .with("welcome_channel", "none")
                                 .with("welcome_image", "purr")
                                 .with("welcome_color", "hex:000000")

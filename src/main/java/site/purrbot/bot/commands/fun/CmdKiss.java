@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 )
 public class CmdKiss implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdKiss(PurrBot manager){
-        this.manager = manager;
+    public CmdKiss(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class CmdKiss implements Command{
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to kiss.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to kiss.");
             return;
         }
 
@@ -47,7 +47,7 @@ public class CmdKiss implements Command{
         Member snuggle = members.stream().filter(member -> member.getUser().getId().equals(IDs.SNUGGLE.getId()))
                 .findFirst().orElse(null);
 
-        if(manager.isBeta()){
+        if(bot.isBeta()){
             if(members.contains(guild.getSelfMember())){
                 tc.sendMessage(String.format(
                         "Wha-? Okay. B-but only on my cheeck %s. \\*Lets you kiss her cheek*",
@@ -55,7 +55,7 @@ public class CmdKiss implements Command{
                 )).queue();
             }else
             if(purr != null && members.contains(purr)){
-                if(manager.getPermUtil().isSpecial(msg.getAuthor().getId())){
+                if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
                     tc.sendMessage(String.format(
                             "W-why do you kiss my sister through my help %s? G-go and kiss her yourself... %s",
                             msg.getMember().getAsMention(),
@@ -70,13 +70,13 @@ public class CmdKiss implements Command{
             }
         }else{
             if(members.contains(guild.getSelfMember())){
-                if(manager.getPermUtil().isSpecial(msg.getAuthor().getId())){
+                if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
                     tc.sendMessage(String.format(
                             "\\*Enjoys the kiss from %s*",
                             msg.getMember().getAsMention()
                     )).queue(message -> {
-                        MessageEmbed kiss = manager.getEmbedUtil().getEmbed().setImage(
-                                manager.getMessageUtil().getRandomKissImg()
+                        MessageEmbed kiss = bot.getEmbedUtil().getEmbed().setImage(
+                                bot.getMessageUtil().getRandomKissImg()
                         ).build();
 
                         message.editMessage(kiss).queue();
@@ -111,7 +111,7 @@ public class CmdKiss implements Command{
                 .filter(member -> !member.equals(snuggle))
                 .map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        String link = manager.getHttpUtil().getImage(API.GIF_KISS);
+        String link = bot.getHttpUtil().getImage(API.GIF_KISS);
 
         if(kissedMembers.isEmpty()) return;
 
@@ -128,7 +128,7 @@ public class CmdKiss implements Command{
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(manager.getEmbedUtil().getEmbed().setDescription(String.format(
+                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s kisses you %s",
                         msg.getMember().getEffectiveName(),
                         kissedMembers

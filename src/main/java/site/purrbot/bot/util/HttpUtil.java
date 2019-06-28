@@ -1,9 +1,7 @@
 package site.purrbot.bot.util;
 
-import ch.qos.logback.classic.Logger;
 import okhttp3.*;
 import org.json.JSONObject;
-import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Links;
@@ -14,13 +12,11 @@ import java.util.Objects;
 public class HttpUtil {
 
     private final OkHttpClient CLIENT = new OkHttpClient();
-    private final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    private PurrBot manager;
-    private Logger logger = (Logger)LoggerFactory.getLogger(HttpUtil.class);
+    private PurrBot bot;
 
-    public HttpUtil(PurrBot manager){
-        this.manager = manager;
+    public HttpUtil(PurrBot bot){
+        this.bot = bot;
     }
 
     private String image(API api, int count) throws IOException{
@@ -48,7 +44,7 @@ public class HttpUtil {
 
     private JSONObject voteInfo() throws IOException{
         Request request = new Request.Builder().url(Links.DISCORDBOTS_ORG_STATS.getUrl())
-                .header("Authorization", manager.getgFile().getString("config", "dbl-token"))
+                .header("Authorization", bot.getgFile().getString("config", "dbl-token"))
                 .build();
 
         Response response = CLIENT.newCall(request).execute();

@@ -19,12 +19,12 @@ public class ReadyListener extends ListenerAdapter{
 
     private Logger logger = (Logger)LoggerFactory.getLogger(ReadyListener.class);
 
-    private PurrBot manager;
+    private PurrBot bot;
     private boolean ready = false;
     private int shards = 0;
 
-    public ReadyListener(PurrBot manager){
-        this.manager = manager;
+    public ReadyListener(PurrBot bot){
+        this.bot = bot;
     }
 
     /**
@@ -42,7 +42,7 @@ public class ReadyListener extends ListenerAdapter{
 
     @Override
     public void onReady(ReadyEvent event){
-        ShardManager shardManager = manager.getShardManager();
+        ShardManager shardManager = bot.getShardManager();
         JDA jda = event.getJDA();
 
         shards += 1;
@@ -70,8 +70,8 @@ public class ReadyListener extends ListenerAdapter{
                 .setTimestamp(ZonedDateTime.now())
                 .build();
 
-        manager.getWebhookUtil().sendMsg(
-                manager.getgFile().getString("config", "log-webhook"),
+        bot.getWebhookUtil().sendMsg(
+                bot.getgFile().getString("config", "log-webhook"),
                 jda.getSelfUser().getEffectiveAvatarUrl(),
                 "Shard ready!",
                 embed
@@ -80,10 +80,10 @@ public class ReadyListener extends ListenerAdapter{
         if(shards == jda.getShardInfo().getShardTotal()){
             setReady();
 
-            manager.startUpdates();
+            bot.startUpdates();
 
             shardManager.setPresence(OnlineStatus.ONLINE, Game.of(Game.GameType.WATCHING, String.format(
-                    manager.getMessageUtil().getBotGame(),
+                    bot.getMessageUtil().getBotGame(),
                     shardManager.getGuildCache().size()
             )));
 

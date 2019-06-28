@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 )
 public class CmdHug implements Command {
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdHug(PurrBot manager){
-        this.manager = manager;
+    public CmdHug(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CmdHug implements Command {
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to hug.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to hug.");
             return;
         }
 
@@ -58,7 +58,7 @@ public class CmdHug implements Command {
             )).queue();
         }
 
-        String link = manager.getHttpUtil().getImage(API.GIF_HUG);
+        String link = bot.getHttpUtil().getImage(API.GIF_HUG);
 
         String huggedMembers = members.stream().filter(
                 member -> !member.equals(guild.getSelfMember())
@@ -81,7 +81,7 @@ public class CmdHug implements Command {
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(manager.getEmbedUtil().getEmbed().setDescription(String.format(
+                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s hugs you %s",
                         msg.getMember().getEffectiveName(),
                         huggedMembers

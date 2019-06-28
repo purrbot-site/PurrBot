@@ -26,15 +26,15 @@ import javax.annotation.Nullable;
 )
 public class CmdEmote implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdEmote(PurrBot manager){
-        this.manager = manager;
+    public CmdEmote(PurrBot bot){
+        this.bot = bot;
     }
 
     private MessageEmbed emoteInfo(User user, Emote emote, @Nullable String link){
 
-        EmbedBuilder embed = manager.getEmbedUtil().getEmbed(user)
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(user)
                 .setTitle(String.format(
                         "Emote-Info: %s",
                         emote
@@ -70,12 +70,12 @@ public class CmdEmote implements Command{
     public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.toLowerCase().contains("--search")){
-            if(!manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need permission to see the channel history!");
+            if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need permission to see the channel history!");
                 return;
             }
 
@@ -84,7 +84,7 @@ public class CmdEmote implements Command{
             ).findFirst().orElse(null);
 
             if(emoteMessage == null){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't find an emote in past 100 messages.");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't find an emote in past 100 messages.");
                 return;
             }
 
@@ -93,7 +93,7 @@ public class CmdEmote implements Command{
         }
 
         if(msg.getEmotes().isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please provide an `:emote:` or use `--search`");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please provide an `:emote:` or use `--search`");
             return;
         }
 

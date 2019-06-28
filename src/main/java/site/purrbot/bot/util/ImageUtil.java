@@ -17,10 +17,10 @@ import java.net.URLEncoder;
 
 public class ImageUtil {
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public ImageUtil(PurrBot manager){
-        this.manager = manager;
+    public ImageUtil(PurrBot bot){
+        this.bot = bot;
     }
 
     private final String[] USER_AGENT = {"User-Agent", "PurrBot-UserAgent"};
@@ -64,7 +64,7 @@ public class ImageUtil {
         img.setColor(new Color(0x7289DA));
         img.setFont(vote);
 
-        JSONObject object = manager.getHttpUtil().getVoteInfo();
+        JSONObject object = bot.getHttpUtil().getVoteInfo();
 
         String monthly;
         String total;

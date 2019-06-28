@@ -29,10 +29,10 @@ import java.util.List;
 )
 public class CmdUser implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdUser(PurrBot manager){
-        this.manager = manager;
+    public CmdUser(PurrBot bot){
+        this.bot = bot;
     }
 
     private String getRoles(Member member){
@@ -107,7 +107,7 @@ public class CmdUser implements Command{
 
         String imgName = String.format("userinfo_%s.png", member.getUser().getId());
 
-        EmbedBuilder embed = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .addField(
                         String.format(
                             "%s %s %s",
@@ -152,19 +152,19 @@ public class CmdUser implements Command{
                                 "Account created: %s\n" +
                                 "Guild joined:    %s\n" +
                                 "```",
-                                manager.getMessageUtil().formatTime(LocalDateTime.from(member.getUser().getCreationTime())),
-                                manager.getMessageUtil().formatTime(LocalDateTime.from(member.getJoinDate()))
+                                bot.getMessageUtil().formatTime(LocalDateTime.from(member.getUser().getCreationTime())),
+                                bot.getMessageUtil().formatTime(LocalDateTime.from(member.getJoinDate()))
                         ),
                         false
                 );
 
-        if(msg.getGuild().getId().equals(IDs.GUILD.getId()) && !member.getUser().isBot() && !manager.isBeta())
+        if(msg.getGuild().getId().equals(IDs.GUILD.getId()) && !member.getUser().isBot() && !bot.isBeta())
             embed.addField(
                     "XP",
                     String.format(
                             "`%d/%d`",
-                            manager.getDbUtil().getXp(member.getUser().getId()),
-                            (long)manager.getLevelManager().reqXp(manager.getDbUtil().getLevel(member.getUser().getId()))
+                            bot.getDbUtil().getXp(member.getUser().getId()),
+                            (long)bot.getLevelManager().reqXp(bot.getDbUtil().getLevel(member.getUser().getId()))
                     ),
                     true
             )
@@ -172,14 +172,14 @@ public class CmdUser implements Command{
                     "Level",
                     String.format(
                             "`%d`",
-                            manager.getDbUtil().getLevel(member.getUser().getId())
+                            bot.getDbUtil().getLevel(member.getUser().getId())
                     ),
                     true
             );
 
         InputStream is;
         try {
-            is = manager.getImageUtil().getStatusAvatar(
+            is = bot.getImageUtil().getStatusAvatar(
                     member.getUser().getEffectiveAvatarUrl(),
                     member.getOnlineStatus().toString()
             );

@@ -31,20 +31,20 @@ public class CmdFuck implements Command{
 
     private Logger logger = (Logger)LoggerFactory.getLogger(CmdFuck.class);
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdFuck(PurrBot manager){
-        this.manager = manager;
+    public CmdFuck(PurrBot bot){
+        this.bot = bot;
     }
 
     private static ArrayList<String> alreadyInQueue = new ArrayList<>();
 
     private int getRandomPercent(){
-        return manager.getRandom().nextInt(10);
+        return bot.getRandom().nextInt(10);
     }
 
     private EmbedBuilder getFuckEmbed(Member member1, Member member2, String url){
-        return manager.getEmbedUtil().getEmbed()
+        return bot.getEmbedUtil().getEmbed()
                 .setDescription(String.format(
                         "%s and %s are having sex!",
                         member1.getEffectiveName(),
@@ -60,32 +60,32 @@ public class CmdFuck implements Command{
         Guild guild = msg.getGuild();
 
         if(msg.getMentionedUsers().isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention a user to fuck.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention a user to fuck.");
             return;
         }
 
         User user = msg.getMentionedUsers().get(0);
 
         if(user == msg.getJDA().getSelfUser()){
-            if(manager.isBeta()){
+            if(bot.isBeta()){
                 tc.sendMessage(String.format(
                         "\\*Slaps %s* Nononononono! Not with me!",
                         author.getAsMention()
                 )).queue();
                 return;
             }
-            if(manager.getPermUtil().isSpecial(msg.getAuthor().getId())){
+            if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
                 int random = getRandomPercent();
 
                 if(random >= 1 && random <= 3) {
                     tc.sendMessage(String.format(
-                            manager.getMessageUtil().getRandomAcceptFuckMsg(),
+                            bot.getMessageUtil().getRandomAcceptFuckMsg(),
                             author.getAsMention()
                     )).queue();
                     return;
                 }else{
                     tc.sendMessage(String.format(
-                            manager.getMessageUtil().getRandomDenyFuckMsg(),
+                            bot.getMessageUtil().getRandomDenyFuckMsg(),
                             author.getAsMention()
                     )).queue();
                     return;
@@ -108,7 +108,7 @@ public class CmdFuck implements Command{
         }
 
         if(user.isBot()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "You can't fuck with bots! >-<");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "You can't fuck with bots! >-<");
             return;
         }
 
@@ -133,7 +133,7 @@ public class CmdFuck implements Command{
         )).queue(message -> {
             message.addReaction("✅").queue();
             message.addReaction("❌").queue(emote -> {
-                EventWaiter waiter = manager.getWaiter();
+                EventWaiter waiter = bot.getWaiter();
                 waiter.waitForEvent(
                         GuildMessageReactionAddEvent.class,
                         ev -> {
@@ -177,7 +177,7 @@ public class CmdFuck implements Command{
 
                                 alreadyInQueue.remove(author.getUser().getId());
 
-                                String link = manager.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
+                                String link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
 
                                 ev.getChannel().sendMessage(String.format(
                                         "%s accepted your invite %s! 0w0",

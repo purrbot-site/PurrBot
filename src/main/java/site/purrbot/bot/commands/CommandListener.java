@@ -28,11 +28,11 @@ public class CommandListener extends ListenerAdapter{
             r -> new Thread(CMD_THREAD, r, "CommandPool")
     );
 
-    private PurrBot manager;
+    private PurrBot bot;
     private final CommandHandler HANDLER;
 
-    public CommandListener(PurrBot manager, CommandHandler handler){
-        this.manager = manager;
+    public CommandListener(PurrBot bot, CommandHandler handler){
+        this.bot = bot;
         this.HANDLER = handler;
     }
 
@@ -47,8 +47,7 @@ public class CommandListener extends ListenerAdapter{
 
                     if(user.isBot()) return;
 
-                    String prefix = manager.getPrefixes()
-                            .get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()));
+                    String prefix = bot.getPrefix(guild.getId());
 
                     String raw = msg.getContentRaw().toLowerCase();
 
@@ -57,14 +56,14 @@ public class CommandListener extends ListenerAdapter{
 
                     if(!raw.startsWith(prefix) && !raw.startsWith(userMention) && !raw.startsWith(memberMention)){
                         if(guild.getId().equals(IDs.GUILD.getId()))
-                            manager.getLevelManager().giveXP(user.getId(), false, msg.getTextChannel());
+                            bot.getLevelManager().giveXP(user.getId(), false, msg.getTextChannel());
 
                         return;
                     }
 
                     TextChannel tc = event.getChannel();
 
-                    if(!manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_WRITE))
+                    if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_WRITE))
                         return;
 
                     if(raw.equalsIgnoreCase(userMention) || raw.equalsIgnoreCase(memberMention)){
@@ -93,32 +92,32 @@ public class CommandListener extends ListenerAdapter{
                     if(command.getAttribute("category").equals("owner") &&
                             !user.getId().equals(IDs.ANDRE_601.getId())) return;
 
-                    if(!manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_EMBED_LINKS)){
+                    if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EMBED_LINKS)){
                         tc.sendMessage(String.format(
                                 "I need permission to embed links in this channel %s!",
                                 msg.getMember().getAsMention()
                         )).queue();
                         return;
                     }
-                    if(!manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_ADD_REACTION)){
-                        manager.getEmbedUtil().sendError(tc, user, "I need permission to add reactions!");
+                    if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_ADD_REACTION)){
+                        bot.getEmbedUtil().sendError(tc, user, "I need permission to add reactions!");
                         return;
                     }
                     if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
-                        manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                                manager.getMessageUtil().getRandomNoNsfwMsg(),
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
+                                bot.getMessageUtil().getRandomNoNsfwMsg(),
                                 msg.getMember().getEffectiveName()
                         ));
                         return;
                     }
                     if(command.hasAttribute("manage_server")){
-                        if(!manager.getPermUtil().hasPermission(tc, msg.getMember(), Permission.MANAGE_SERVER)){
-                            manager.getEmbedUtil().sendError(tc, user, "You need the `manage server` permission!");
+                        if(!bot.getPermUtil().hasPermission(tc, msg.getMember(), Permission.MANAGE_SERVER)){
+                            bot.getEmbedUtil().sendError(tc, user, "You need the `manage server` permission!");
                             return;
                         }
                     }
                     if(command.hasAttribute("guild_only") && !guild.getId().equals(IDs.GUILD.getId())){
-                        manager.getEmbedUtil().sendError(tc, user, String.format(
+                        bot.getEmbedUtil().sendError(tc, user, String.format(
                                 "This command can only be used in [my Discord](%s)!",
                                 Links.DISCORD.getUrl()
                         ));
@@ -130,10 +129,10 @@ public class CommandListener extends ListenerAdapter{
                         HANDLER.execute(command, msg, args[1] == null ? "" : args[1]);
 
                         if(guild.getId().equals(IDs.GUILD.getId()))
-                            manager.getLevelManager().giveXP(user.getId(), true, tc);
+                            bot.getLevelManager().giveXP(user.getId(), true, tc);
                     }catch(Exception ex){
                         logger.error("Couldn't perform command!", ex);
-                        manager.getEmbedUtil().sendError(tc, user, String.format(
+                        bot.getEmbedUtil().sendError(tc, user, String.format(
                                 "Uhm... This is actually a bit embarrassing, but I had an error with a command. %s\n" +
                                 "Please [join my Discord](%s) or report the issue on [GitHub](%s)!",
                                 Emotes.VANILLABLUSH.getEmote(),

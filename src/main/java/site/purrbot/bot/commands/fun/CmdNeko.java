@@ -39,12 +39,12 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdNeko implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
     private Slideshow.Builder sBuilder;
 
-    public CmdNeko(PurrBot manager){
-        this.manager = manager;
-        sBuilder = new Slideshow.Builder().setEventWaiter(manager.getWaiter()).setTimeout(1, TimeUnit.MINUTES);
+    public CmdNeko(PurrBot bot){
+        this.bot = bot;
+        sBuilder = new Slideshow.Builder().setEventWaiter(bot.getWaiter()).setTimeout(1, TimeUnit.MINUTES);
     }
 
     private static List<String> nekoUserID = new ArrayList<>();
@@ -54,12 +54,12 @@ public class CmdNeko implements Command{
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.toLowerCase().contains("--slide")){
             if(nekoUserID.contains(msg.getAuthor().getId())){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(),
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(),
                         "Only one slideshow per user!\n" +
                         "Please use or close your other one."
                 );
@@ -70,13 +70,13 @@ public class CmdNeko implements Command{
             nekoUserID.add(msg.getAuthor().getId());
             String urls;
             if(args.toLowerCase().contains("--gif")){
-                urls = manager.getHttpUtil().getImage(API.GIF_NEKO, 20);
+                urls = bot.getHttpUtil().getImage(API.GIF_NEKO, 20);
             }else{
-                urls = manager.getHttpUtil().getImage(API.IMG_NEKO, 20);
+                urls = bot.getHttpUtil().getImage(API.IMG_NEKO, 20);
             }
 
             if(urls == null){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
                 return;
             }
 
@@ -94,7 +94,7 @@ public class CmdNeko implements Command{
                     ))
                     .setUrls(urls.replace("\"", "").split(","))
                     .setFinalAction(message -> {
-                        if(manager.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                        if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
                             message.clearReactions().queue();
 
                         nekoUserID.remove(msg.getAuthor().getId());
@@ -105,12 +105,12 @@ public class CmdNeko implements Command{
         }
 
         if(args.toLowerCase().contains("--gif")){
-            String link = manager.getHttpUtil().getImage(API.GIF_NEKO);
+            String link = bot.getHttpUtil().getImage(API.GIF_NEKO);
             if(link == null){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
                 return;
             }
-            EmbedBuilder nekogif = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+            EmbedBuilder nekogif = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                     .setTitle(String.format(
                             "Neko %s",
                             Emotes.ANIM_WAGTAIL.getEmote()
@@ -124,10 +124,10 @@ public class CmdNeko implements Command{
             return;
         }
 
-        String link = manager.getHttpUtil().getImage(API.IMG_NEKO);
+        String link = bot.getHttpUtil().getImage(API.IMG_NEKO);
 
         if(link == null){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
             return;
         }
 
@@ -135,7 +135,7 @@ public class CmdNeko implements Command{
                 "%s Getting a cute neko...",
                 Emotes.ANIM_LOADING.getEmote()
         )).queue(message -> {
-            EmbedBuilder neko = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+            EmbedBuilder neko = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                     .setTitle(String.format(
                             "Neko %s",
                             Emotes.NEKOWO.getEmote()
@@ -143,23 +143,23 @@ public class CmdNeko implements Command{
                     .setImage(link);
 
             if(link.equals("https://cdn.nekos.life/v3/sfw/img/neko/neko_079.jpg")){
-                if(manager.isBeta()){
+                if(bot.isBeta()){
                     neko.setDescription("That is me! >w<");
                     message.addReaction("❤").queue();
                 }else{
-                    Emote snuggle = manager.getShardManager().getEmoteById(Emotes.SNUGGLE.getId());
+                    Emote snuggle = bot.getShardManager().getEmoteById(Emotes.SNUGGLE.getId());
                     neko.setDescription("That is my little sister!");
 
-                    if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
+                    if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
                         message.addReaction(snuggle).queue();
                 }
             }else
             if(link.equals("https://cdn.nekos.life/v3/sfw/img/neko/neko_139.png")){
-                if(manager.isBeta()){
-                    Emote purr = manager.getShardManager().getEmoteById(Emotes.PURR.getId());
+                if(bot.isBeta()){
+                    Emote purr = bot.getShardManager().getEmoteById(Emotes.PURR.getId());
                     neko.setDescription("That is my big sister!");
 
-                    if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
+                    if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
                         message.addReaction(purr).queue();
                 }else{
                     neko.setDescription("T-that is me! OwO");

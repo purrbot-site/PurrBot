@@ -13,13 +13,13 @@ import java.time.ZonedDateTime;
 
 public class ConnectionListener extends ListenerAdapter{
 
-    private PurrBot manager;
+    private PurrBot bot;
     private final String URL;
 
-    public ConnectionListener(PurrBot manager){
-        this.manager = manager;
+    public ConnectionListener(PurrBot bot){
+        this.bot = bot;
 
-        this.URL = manager.getgFile().getString("config", "log-webhook");
+        this.URL = bot.getgFile().getString("config", "log-webhook");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ConnectionListener extends ListenerAdapter{
                     )
             ));
 
-        manager.getWebhookUtil().sendMsg(
+        bot.getWebhookUtil().sendMsg(
                 URL,
                 jda.getSelfUser().getEffectiveAvatarUrl(),
                 "Disconnected",
@@ -84,7 +84,7 @@ public class ConnectionListener extends ListenerAdapter{
                 .setTimestamp(ZonedDateTime.now())
                 .build();
 
-        manager.getWebhookUtil().sendMsg(
+        bot.getWebhookUtil().sendMsg(
                 URL,
                 jda.getSelfUser().getEffectiveAvatarUrl(),
                 "Resumed session",

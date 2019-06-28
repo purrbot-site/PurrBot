@@ -42,8 +42,7 @@ public class CmdPrefix implements Command{
                 ))
                 .build();
 
-        manager.setPrefixes(msg.getGuild().getId(), prefix);
-        manager.getDbUtil().setPrefix(msg.getGuild().getId(), prefix);
+        manager.setPrefix(msg.getGuild().getId(), prefix);
 
         msg.getTextChannel().sendMessage(embed).queue();
     }
@@ -54,8 +53,7 @@ public class CmdPrefix implements Command{
                 .setDescription("Prefix was changed back to `.`")
                 .build();
 
-        manager.setPrefixes(msg.getGuild().getId(), ".");
-        manager.getDbUtil().setPrefix(msg.getGuild().getId(), ".");
+        manager.setPrefix(msg.getGuild().getId(), ".");
 
         msg.getTextChannel().sendMessage(embed).queue();
     }
@@ -73,7 +71,7 @@ public class CmdPrefix implements Command{
             manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                     "You need to provide arguments!\n" +
                     "Usage: `%sprefix <set <prefix>|reset>`",
-                    manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
+                    manager.getPrefix(guild.getId())
             ));
             return;
         }
@@ -91,7 +89,7 @@ public class CmdPrefix implements Command{
             manager.getEmbedUtil().sendError(tc, msg.getAuthor(), MessageFormat.format(
                     "You need to provide valid arguments!\n" +
                     "Usage: `{0}prefix <set <prefix>|reset>`",
-                    manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
+                    manager.getPrefix(guild.getId())
             ));
         }
     }

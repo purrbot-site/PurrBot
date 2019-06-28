@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 )
 public class CmdPoke implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdPoke(PurrBot manager){
-        this.manager = manager;
+    public CmdPoke(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CmdPoke implements Command{
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to poke.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to poke.");
             return;
         }
 
@@ -53,7 +53,7 @@ public class CmdPoke implements Command{
             )).queue();
         }
 
-        String link = manager.getHttpUtil().getImage(API.GIF_POKE);
+        String link = bot.getHttpUtil().getImage(API.GIF_POKE);
 
         String pokedMembers = members.stream().filter(
                 member -> !member.equals(guild.getSelfMember())
@@ -76,7 +76,7 @@ public class CmdPoke implements Command{
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(manager.getEmbedUtil().getEmbed().setDescription(String.format(
+                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s pokes you %s",
                         msg.getMember().getEffectiveName(),
                         pokedMembers

@@ -23,27 +23,27 @@ import site.purrbot.bot.constants.Emotes;
 )
 public class CmdHolo implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdHolo(PurrBot manager){
-        this.manager = manager;
+    public CmdHolo(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
 
-        String link = manager.getHttpUtil().getImage(API.IMG_HOLO);
+        String link = bot.getHttpUtil().getImage(API.IMG_HOLO);
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(link == null){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
             return;
         }
 
-        MessageEmbed holo = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        MessageEmbed holo = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Holo %s",
                         Emotes.BLOBHOLO.getEmote()

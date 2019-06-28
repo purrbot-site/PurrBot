@@ -25,10 +25,10 @@ import java.util.Random;
 )
 public class CmdShip implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdShip(PurrBot manager){
-        this.manager = manager;
+    public CmdShip(PurrBot bot){
+        this.bot = bot;
     }
 
     private String getMessage(int chance){
@@ -80,7 +80,7 @@ public class CmdShip implements Command{
         List<Member> members = msg.getMentionedMembers();
 
         if (members.isEmpty()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Mention at least one user to ship!");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Mention at least one user to ship!");
             return;
         }
 
@@ -93,8 +93,8 @@ public class CmdShip implements Command{
         member1 = members.get(0);
 
         if(member1 == msg.getGuild().getSelfMember()){
-            if(!manager.isBeta()) {
-                if(manager.getPermUtil().isSpecial(member2.getUser().getId())){
+            if(!bot.isBeta()) {
+                if(bot.getPermUtil().isSpecial(member2.getUser().getId())){
                     tc.sendMessage(String.format(
                             "%s Aww sweetie. You know we will always be a 100.\n" +
                             "You don't need this command for that. ^-^",
@@ -102,16 +102,16 @@ public class CmdShip implements Command{
                     )).queue();
                     return;
                 }
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
                 return;
             }
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "D-don't ship with me. >~<");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "D-don't ship with me. >~<");
             return;
         }
 
         if(member2 == msg.getGuild().getSelfMember()) {
-            if(!manager.isBeta()){
-                if(manager.getPermUtil().isSpecial(member1.getUser().getId())){
+            if(!bot.isBeta()){
+                if(bot.getPermUtil().isSpecial(member1.getUser().getId())){
                     tc.sendMessage(String.format(
                             "%s Naw sweetie. You know we will always be a 100.\n" +
                             "You don't need a test for that ^-^",
@@ -119,27 +119,27 @@ public class CmdShip implements Command{
                     )).queue();
                     return;
                 }
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
                 return;
             }
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "D-don't ship with me. >~<");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "D-don't ship with me. >~<");
             return;
         }
 
         if((member1 == msg.getMember()) && (member2 == msg.getMember())){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(),
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(),
                     "Nu! You can't ship yourself! Get someone else to ship with."
             );
             return;
         }
 
         if(member1.getUser().getId().equals(IDs.SNUGGLE.getId()) || member2.getUser().getId().equals(IDs.SNUGGLE.getId())){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "No shipping with my sister!.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "No shipping with my sister!.");
             return;
         }
 
         if(member1.getUser().isBot() || member2.getUser().isBot()){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Why do you ship with bots? O_O");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Why do you ship with bots? O_O");
             return;
         }
 
@@ -147,9 +147,9 @@ public class CmdShip implements Command{
 
         int result = random.nextInt(101);
 
-        byte[] image = manager.getImageUtil().getShipImg(member1, member2, result);
+        byte[] image = bot.getImageUtil().getShipImg(member1, member2, result);
 
-        if(image == null || !manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+        if(image == null || !bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
             Message message = new MessageBuilder(String.format(
                     "`%d%%` | %s",
                     result,

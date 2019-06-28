@@ -24,22 +24,22 @@ public class CmdShutdown implements Command{
 
     private Logger logger = (Logger)LoggerFactory.getLogger(CmdShutdown.class);
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdShutdown(PurrBot manager){
-        this.manager = manager;
+    public CmdShutdown(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        MessageEmbed embed = manager.getEmbedUtil().getEmbed()
-                .setDescription(manager.getMessageUtil().getRandomShutdownMsg())
-                .setImage(manager.getMessageUtil().getRandomShutdownImg())
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed()
+                .setDescription(bot.getMessageUtil().getRandomShutdownMsg())
+                .setImage(bot.getMessageUtil().getRandomShutdownImg())
                 .build();
 
         tc.sendMessage(embed).queue(message -> {

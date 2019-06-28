@@ -32,10 +32,10 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdInfo implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdInfo(PurrBot manager){
-        this.manager = manager;
+    public CmdInfo(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
@@ -43,10 +43,10 @@ public class CmdInfo implements Command{
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        EmbedBuilder info = manager.getEmbedUtil().getEmbed()
+        EmbedBuilder info = bot.getEmbedUtil().getEmbed()
                 .setAuthor(msg.getJDA().getSelfUser().getName(),
                         Links.WEBSITE.getUrl(),
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
@@ -62,7 +62,7 @@ public class CmdInfo implements Command{
                 ), false)
                 .addField("Commands", String.format(
                         "Use `%shelp` in the Discord for a list of commands.",
-                        manager.getPrefixes().get(guild.getId(), k -> manager.getDbUtil().getPrefix(guild.getId()))
+                        bot.getPrefix(guild.getId())
                 ), false)
                 .addField("Bot-Version", "`BOT_VERSION`", true)
                 .addField("Library", String.format(

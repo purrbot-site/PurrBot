@@ -30,24 +30,24 @@ import java.util.List;
 )
 public class CmdFakegit implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdFakegit(PurrBot manager){
-        this.manager = manager;
+    public CmdFakegit(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String args) {
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
-        JSONObject json = manager.getHttpUtil().getFakeGit();
+        JSONObject json = bot.getHttpUtil().getFakeGit();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.toLowerCase().contains("--clear")){
-            if(!manager.getPermUtil().hasPermission(tc, Permission.MANAGE_WEBHOOKS)){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need `manage webhook` permission to do this!");
+            if(!bot.getPermUtil().hasPermission(tc, Permission.MANAGE_WEBHOOKS)){
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need `manage webhook` permission to do this!");
                 return;
             }
 
@@ -63,7 +63,7 @@ public class CmdFakegit implements Command{
         }
 
         if(json == null){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API. Try again later.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API. Try again later.");
             return;
         }
 
@@ -109,9 +109,9 @@ public class CmdFakegit implements Command{
                 ))
                 .build();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MANAGE_WEBHOOKS)){
+        if(bot.getPermUtil().hasPermission(tc, Permission.MANAGE_WEBHOOKS)){
             try{
-                manager.getWebhookUtil().sendMsg(tc, Links.GITHUB_AVATAR.getUrl(), "GitHub", null, wEmbed);
+                bot.getWebhookUtil().sendMsg(tc, Links.GITHUB_AVATAR.getUrl(), "GitHub", null, wEmbed);
             }catch(Exception ignored){
                 tc.sendMessage(mEmbed).queue();
             }

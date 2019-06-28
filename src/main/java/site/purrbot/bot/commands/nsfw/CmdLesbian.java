@@ -22,26 +22,26 @@ import site.purrbot.bot.constants.Emotes;
 )
 public class CmdLesbian implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdLesbian(PurrBot manager){
-        this.manager = manager;
+    public CmdLesbian(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
-        String link = manager.getHttpUtil().getImage(API.GIF_LES_LEWD);
+        String link = bot.getHttpUtil().getImage(API.GIF_LES_LEWD);
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(link == null){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
             return;
         }
 
-        EmbedBuilder les = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder les = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle("Lesbian", link)
                 .setImage(link);
 

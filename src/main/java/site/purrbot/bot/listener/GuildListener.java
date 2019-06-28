@@ -27,10 +27,10 @@ public class GuildListener extends ListenerAdapter{
 
     private Logger logger = (Logger)LoggerFactory.getLogger(GuildListener.class);
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public GuildListener(PurrBot manager){
-        this.manager = manager;
+    public GuildListener(PurrBot bot){
+        this.bot = bot;
     }
 
     private boolean isBotGuild(Guild guild){
@@ -102,15 +102,15 @@ public class GuildListener extends ListenerAdapter{
                 .setFooter(new WebhookEmbed.EmbedFooter(
                         String.format(
                                 "Guild #%d",
-                                manager.getShardManager().getGuildCache().size()
+                                bot.getShardManager().getGuildCache().size()
                         ),
                         null
                 ))
                 .setTimestamp(ZonedDateTime.now())
                 .build();
 
-        manager.getWebhookUtil().sendMsg(
-                manager.getgFile().getString("config", "guild-webhook"),
+        bot.getWebhookUtil().sendMsg(
+                bot.getgFile().getString("config", "guild-webhook"),
                 guild.getSelfMember().getUser().getEffectiveAvatarUrl(),
                 autoLeave ? "Auto-left" : event,
                 content,
@@ -124,7 +124,7 @@ public class GuildListener extends ListenerAdapter{
     public void onGuildJoin(GuildJoinEvent event){
         Guild guild = event.getGuild();
 
-        if(manager.getBlacklist().contains(guild.getId())){
+        if(bot.getBlacklist().contains(guild.getId())){
             guild.getOwner().getUser().openPrivateChannel().queue(channel ->
                     channel.sendMessage(String.format(
                             "I left your Discord `%s` for the following reason:\n" +
@@ -167,7 +167,7 @@ public class GuildListener extends ListenerAdapter{
             }
         }
 
-        manager.getDbUtil().addGuild(guild.getId());
+        bot.getDbUtil().addGuild(guild.getId());
 
         logger.info(String.format(
                 "[Guild join] Name: %s (%s), Members: %d (Bots: %d, Users: %d)",
@@ -185,16 +185,16 @@ public class GuildListener extends ListenerAdapter{
     public void onGuildLeave(GuildLeaveEvent event){
         Guild guild = event.getGuild();
 
-        if(manager.getBlacklist().contains(guild.getId()))
+        if(bot.getBlacklist().contains(guild.getId()))
             return;
 
         if(isBotGuild(guild))
             if(!guild.getOwner().getUser().getId().equals(IDs.ANDRE_601.getId()))
                 return;
 
-        manager.getDbUtil().delGuild(guild.getId());
+        bot.getDbUtil().delGuild(guild.getId());
 
-        manager.getPrefixes().invalidate(guild.getId());
+        bot.invalidateCache(guild.getId());
 
         logger.info(String.format(
                 "[Guild leave] Name: %s (%s), Members: %d (Bots: %d, Users: %d)",
@@ -238,33 +238,33 @@ public class GuildListener extends ListenerAdapter{
         if(event.getUser().isBot())
             return;
 
-        if(manager.getDbUtil().getWelcomeChannel(guild.getId()).equals("none"))
+        if(bot.getWelcomeChannel(guild.getId()).equals("none"))
             return;
 
-        TextChannel tc = guild.getTextChannelById(manager.getDbUtil().getWelcomeChannel(guild.getId()));
+        TextChannel tc = guild.getTextChannelById(bot.getWelcomeChannel(guild.getId()));
 
         if(tc == null)
             return;
 
-        if(!manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_WRITE))
+        if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_WRITE))
             return;
 
-        String msg = manager.getDbUtil().getWelcomeMsg(guild.getId());
+        String msg = bot.getWelcomeMsg(guild.getId());
 
         if(msg == null)
             msg = "Hello {mention}!";
 
-        Message message = new MessageBuilder(manager.getMessageUtil().formatPlaceholders(msg, event.getMember())).build();
+        Message message = new MessageBuilder(bot.getMessageUtil().formatPlaceholders(msg, event.getMember())).build();
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)) {
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)) {
             InputStream is;
 
             try {
-                is = manager.getImageUtil().getWelcomeImg(
+                is = bot.getImageUtil().getWelcomeImg(
                         event.getUser(),
                         guild.getMembers().size(),
-                        manager.getDbUtil().getWelcomeImg(guild.getId()),
-                        manager.getDbUtil().getWelcomeColor(guild.getId())
+                        bot.getWelcomeImg(guild.getId()),
+                        bot.getWelcomeColor(guild.getId())
                 );
             }catch(IOException ex){
                 is = null;
@@ -287,15 +287,19 @@ public class GuildListener extends ListenerAdapter{
     @Override
     public void onTextChannelDelete(TextChannelDeleteEvent event){
         Guild guild = event.getGuild();
+        String id = bot.getWelcomeChannel(guild.getId());
 
-        if(manager.getDbUtil().getWelcomeChannel(guild.getId()).equals("none"))
+        if(id.equals("none"))
             return;
 
-        TextChannel tc = guild.getTextChannelById(manager.getDbUtil().getWelcomeChannel(guild.getId()));
-        if(tc == null)
+        TextChannel tc = guild.getTextChannelById(id);
+        if(tc == null) {
+            bot.setWelcomeChannel(guild.getId(), id);
             return;
+        }
 
-        manager.getDbUtil().setWelcomeChannel(guild.getId(), "none");
+        if(event.getChannel().getId().equals(id))
+            bot.setWelcomeChannel(guild.getId(), "none");
     }
 
     private enum Type{
