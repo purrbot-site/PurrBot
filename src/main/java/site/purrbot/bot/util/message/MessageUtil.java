@@ -41,6 +41,12 @@ public class MessageUtil {
         );
     }
 
+    public String getRandomLickImg(){
+        return bot.getLickImg().isEmpty() ? "" : bot.getLickImg().get(
+                bot.getRandom().nextInt(bot.getLickImg().size())
+        );
+    }
+
     public String getRandomNoNsfwMsg(){
         return bot.getNoNsfwMsg().isEmpty() ? "" : bot.getNoNsfwMsg().get(
                 bot.getRandom().nextInt(bot.getNoNsfwMsg().size())

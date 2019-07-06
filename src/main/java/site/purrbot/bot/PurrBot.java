@@ -310,6 +310,9 @@ public class PurrBot {
     public List<String> getKissImg(){
         return getgFile().getStringlist("random", "kiss_img");
     }
+    public List<String> getLickImg(){
+        return getgFile().getStringlist("random", "lick_img");
+    }
     public List<String> getNoNsfwMsg(){
         return getgFile().getStringlist("random", "no_nsfw_msg");
     }

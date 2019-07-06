@@ -42,8 +42,16 @@ public class CmdSlap implements Command{
         List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
-            tc.sendMessage("Nuuuu... Why hurting me? T^T").queue();
-            msg.addReaction("\uD83D\uDC94").queue();
+            if(bot.isBeta()){
+                tc.sendMessage(String.format(
+                        "\\*runs away from %s and hides*",
+                        msg.getMember().getAsMention()
+                )).queue();
+                msg.addReaction("\uD83D\uDE2D").queue();
+            }else {
+                tc.sendMessage("Nuuuu... Why hurting me? T^T").queue();
+                msg.addReaction("\uD83D\uDE2D").queue();
+            }
         }
 
         if(members.contains(msg.getMember())){
@@ -61,7 +69,8 @@ public class CmdSlap implements Command{
                 member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        if(slapedMembers.isEmpty()) return;
+        if(slapedMembers.isEmpty())
+            return;
 
         tc.sendMessage(String.format(
                 "%s Getting a slap-gif...",

@@ -54,6 +54,7 @@ What started as a simple and easy bot became quite a big bot, that is now even o
 | Hug      | `<@user ...>`       | Hugs the mentioned user(s).                                           |
 | Kiss     | `<@user ...>`       | Kisses the mentioned user(s).                                         |
 | Kitsune  |                     | Shows a image of a kitsune (foxgirl)                                  |
+| Lick     | `<@user ...>`       | Licks the mentioned user(s).                                          |
 | Neko     |                     | Shows a image of a neko from nekos.life.                              |
 |          | `[--gif]`           | Shows a gif-image of a neko from nekos.life.                          |
 |          | `[--slide]`         | Creates a slideshow with 30 images (Combination with --gif possible). |

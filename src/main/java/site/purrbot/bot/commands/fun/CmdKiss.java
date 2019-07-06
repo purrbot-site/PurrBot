@@ -113,7 +113,8 @@ public class CmdKiss implements Command{
 
         String link = bot.getHttpUtil().getImage(API.GIF_KISS);
 
-        if(kissedMembers.isEmpty()) return;
+        if(kissedMembers.isEmpty())
+            return;
 
         tc.sendMessage(String.format(
                 "%s Getting a kiss-gif...",

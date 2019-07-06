@@ -41,8 +41,13 @@ public class CmdTickle implements Command{
         List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
-            tc.sendMessage("N-no... Please I... I c-can't \\*starts laughing*").queue();
-            msg.addReaction("\uD83D\uDE02").queue();
+            if(bot.isBeta()){
+                tc.sendMessage("\\*can't hold back and starts laughing*").queue();
+                msg.addReaction("\uD83D\uDE02").queue();
+            }else {
+                tc.sendMessage("N-no... Please I... I c-can't \\*starts laughing*").queue();
+                msg.addReaction("\uD83D\uDE02").queue();
+            }
         }
 
         if(members.contains(msg.getMember())){
@@ -59,7 +64,8 @@ public class CmdTickle implements Command{
                 member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        if(tickledMembers.isEmpty()) return;
+        if(tickledMembers.isEmpty())
+            return;
 
         tc.sendMessage(String.format(
                 "%s Getting a tickle-gif...",

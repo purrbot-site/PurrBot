@@ -32,6 +32,22 @@
     "https://purrbot.site/images/kiss/kiss_012.gif",
     "https://purrbot.site/images/kiss/kiss_013.gif"
   ],
+  "lick_img": [
+    "https://purrbot.site/images/lick/lick_001.gif",
+    "https://purrbot.site/images/lick/lick_002.gif",
+    "https://purrbot.site/images/lick/lick_003.gif",
+    "https://purrbot.site/images/lick/lick_004.gif",
+    "https://purrbot.site/images/lick/lick_005.gif",
+    "https://purrbot.site/images/lick/lick_006.gif",
+    "https://purrbot.site/images/lick/lick_007.gif",
+    "https://purrbot.site/images/lick/lick_008.gif",
+    "https://purrbot.site/images/lick/lick_009.gif",
+    "https://purrbot.site/images/lick/lick_010.gif",
+    "https://purrbot.site/images/lick/lick_011.gif",
+    "https://purrbot.site/images/lick/lick_012.gif",
+    "https://purrbot.site/images/lick/lick_013.gif",
+    "https://purrbot.site/images/lick/lick_014.gif"
+  ],
   "no_nsfw_msg": [
     "Please be a naughty person in a NSFW channel %s.",
     "Nonono! You be a nice guy and go to a NSFW channel with that %s!",

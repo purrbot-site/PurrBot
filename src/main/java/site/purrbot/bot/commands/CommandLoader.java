@@ -31,6 +31,7 @@ public class CommandLoader {
                 new CmdHug(bot),
                 new CmdKiss(bot),
                 new CmdKitsune(bot),
+                new CmdLick(bot),
                 new CmdNeko(bot),
                 new CmdPat(bot),
                 new CmdPoke(bot),

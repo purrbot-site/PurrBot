@@ -42,8 +42,16 @@ public class CmdPoke implements Command{
         List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
-            tc.sendMessage("Nya! Do nu poke me! >-<").queue();
-            msg.addReaction("\uD83D\uDE16").queue();
+            if(bot.isBeta()){
+                tc.sendMessage(String.format(
+                        "\\*covers face* W-why poking me %s? >~<",
+                        msg.getMember().getAsMention()
+                )).queue();
+                msg.addReaction("\uD83D\uDE16").queue();
+            }else {
+                tc.sendMessage("Nya! Do nu poke me! >-<").queue();
+                msg.addReaction("\uD83D\uDE16").queue();
+            }
         }
 
         if(members.contains(msg.getMember())){
@@ -61,7 +69,8 @@ public class CmdPoke implements Command{
                 member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        if(pokedMembers.isEmpty()) return;
+        if(pokedMembers.isEmpty())
+            return;
 
         tc.sendMessage(String.format(
                 "%s Getting a poke-gif...",

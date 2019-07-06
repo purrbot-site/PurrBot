@@ -42,11 +42,19 @@ public class CmdHug implements Command {
         List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
-            tc.sendMessage(String.format(
-                    "\\*enjoys the hug from %s*",
-                    msg.getAuthor().getAsMention()
-            )).queue();
-            msg.addReaction("❤").queue();
+            if(bot.isBeta()){
+                tc.sendMessage(String.format(
+                        "\\*loves the hug from %s*",
+                        msg.getMember().getAsMention()
+                )).queue();
+                msg.addReaction("❤").queue();
+            }else {
+                tc.sendMessage(String.format(
+                        "\\*enjoys the hug from %s*",
+                        msg.getAuthor().getAsMention()
+                )).queue();
+                msg.addReaction("❤").queue();
+            }
         }
 
         if(members.contains(msg.getMember())){
@@ -66,7 +74,8 @@ public class CmdHug implements Command {
                 member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        if(huggedMembers.isEmpty()) return;
+        if(huggedMembers.isEmpty())
+            return;
 
         tc.sendMessage(String.format(
                 "%s Getting a hug-gif...",

@@ -49,12 +49,12 @@ public class CommandListener extends ListenerAdapter{
 
                     String prefix = bot.getPrefix(guild.getId());
 
-                    String raw = msg.getContentRaw().toLowerCase();
+                    String raw = msg.getContentRaw();
 
                     String memberMention = "<@!" + guild.getJDA().getSelfUser().getId() + ">";
                     String userMention = "<@" + guild.getJDA().getSelfUser().getId() + ">";
 
-                    if(!raw.startsWith(prefix) && !raw.startsWith(userMention) && !raw.startsWith(memberMention)){
+                    if(!raw.toLowerCase().startsWith(prefix) && !raw.startsWith(userMention) && !raw.startsWith(memberMention)){
                         if(guild.getId().equals(IDs.GUILD.getId()))
                             bot.getLevelManager().giveXP(user.getId(), false, msg.getTextChannel());
 
@@ -84,13 +84,16 @@ public class CommandListener extends ListenerAdapter{
                     String[] args = split(raw, prefix.length());
                     String cmdString = args[0];
 
-                    if(cmdString == null) return;
+                    if(cmdString == null)
+                        return;
 
                     Command command = (Command)HANDLER.findCommand(cmdString.toLowerCase());
 
-                    if(command == null) return;
-                    if(command.getAttribute("category").equals("owner") &&
-                            !user.getId().equals(IDs.ANDRE_601.getId())) return;
+                    if(command == null)
+                        return;
+
+                    if(command.getAttribute("category").equals("owner") && !user.getId().equals(IDs.ANDRE_601.getId()))
+                        return;
 
                     if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EMBED_LINKS)){
                         tc.sendMessage(String.format(

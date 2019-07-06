@@ -45,11 +45,19 @@ public class CmdCuddle implements Command{
         List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
-            tc.sendMessage(String.format(
-                    "\\*enjoys the cuddle from %s*",
-                    msg.getMember().getAsMention()
-            )).queue();
-            msg.addReaction("❤").queue();
+            if(bot.isBeta()){
+                tc.sendMessage(String.format(
+                        "\\*snuggles up at %s*",
+                        msg.getMember().getAsMention()
+                )).queue();
+                msg.addReaction("❤").queue();
+            }else{
+                tc.sendMessage(String.format(
+                        "\\*enjoys the cuddle from %s*",
+                        msg.getMember().getAsMention()
+                )).queue();
+                msg.addReaction("❤").queue();
+            }
         }
 
         if(members.contains(msg.getMember())){
@@ -69,7 +77,8 @@ public class CmdCuddle implements Command{
                 member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        if(cuddledMembers.isEmpty()) return;
+        if(cuddledMembers.isEmpty())
+            return;
 
         tc.sendMessage(String.format(
                 "%s Getting a cuddle-gif...",

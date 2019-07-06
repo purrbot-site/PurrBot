@@ -3,38 +3,40 @@ package site.purrbot.bot.commands.fun;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @CommandDescription(
-        name = "Pat",
-        description = "Lets you pat someone.",
-        triggers = {"pat", "patting", "pet"},
+        name = "Lick",
+        description = "Lets you lick one or multiple users.",
+        triggers = {"lick"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}pat @user [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}lick @user [@user ...]")
         }
 )
-public class CmdPat implements Command{
+public class CmdLick implements Command{
 
     private PurrBot bot;
 
-    public CmdPat(PurrBot bot){
+    public CmdLick(PurrBot bot){
         this.bot = bot;
     }
 
     @Override
-    public void execute(Message msg, String s) {
+    public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to pat.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to lick.");
             return;
         }
 
@@ -44,51 +46,54 @@ public class CmdPat implements Command{
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(String.format(
-                        "\\*enjoys the pat from %s",
+                        "\\*blushes* W-why do you lick me %s?",
                         msg.getMember().getAsMention()
                 )).queue();
-                msg.addReaction("❤").queue();
-            }else {
-                tc.sendMessage("\\*purr™*").queue();
-                msg.addReaction("❤").queue();
+                msg.addReaction("\uD83D\uDE33").queue();
+            }else{
+                tc.sendMessage(String.format(
+                        "H-hey! I never allowed you to lick me %s!",
+                        msg.getMember().getAsMention()
+                )).queue();
+                msg.addReaction("\uD83D\uDE33").queue();
             }
         }
 
         if(members.contains(msg.getMember())){
             tc.sendMessage(String.format(
-                    "Don't you have a neko to pat %s? \\*points to herself*",
+                    "I won't even ask how and *where* you lick yourself %s...",
                     msg.getMember().getAsMention()
             )).queue();
         }
 
-        String link = bot.getHttpUtil().getImage(API.GIF_PAT);
+        String link = bot.getMessageUtil().getRandomLickImg();
 
-        String pattetMembers = members.stream().filter(
+        String lickedMembers = members.stream().filter(
                 member -> !member.equals(guild.getSelfMember())
         ).filter(
                 member -> !member.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
-        if(pattetMembers.isEmpty())
+        if(lickedMembers.isEmpty())
             return;
 
         tc.sendMessage(String.format(
-                "%s Getting a pat-gif...",
+                "%s Getting a lick-gif...",
                 Emotes.ANIM_LOADING.getEmote()
         )).queue(message -> {
-            if(link == null){
+            if(link.isEmpty()){
                 message.editMessage(String.format(
-                        "%s pats you %s",
+                        "%s licks you %s",
                         msg.getMember().getEffectiveName(),
-                        pattetMembers
+                        lickedMembers
                 )).queue();
             }else{
                 message.editMessage(
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                        "%s pats you %s",
+                        "%s licks you %s",
                         msg.getMember().getEffectiveName(),
-                        pattetMembers
+                        lickedMembers
                 )).setImage(link).build()).queue();
             }
         });
