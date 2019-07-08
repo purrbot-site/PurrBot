@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @CommandDescription(
         name = "Cuddle",
         description = "Cuddle someone UwU",
-        triggers = {"cuddle", "cuddles", "snuggle", "snuggles"},
+        triggers = {"cuddle", "cuddles", "snuggle", "snuggles", "squeeze"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
                 @CommandAttribute(key = "usage", value = "{p}cuddle @user [@user ...]")

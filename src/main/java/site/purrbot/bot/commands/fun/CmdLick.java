@@ -51,11 +51,15 @@ public class CmdLick implements Command{
                 )).queue();
                 msg.addReaction("\uD83D\uDE33").queue();
             }else{
-                tc.sendMessage(String.format(
-                        "H-hey! I never allowed you to lick me %s!",
-                        msg.getMember().getAsMention()
-                )).queue();
-                msg.addReaction("\uD83D\uDE33").queue();
+                if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
+                    tc.sendMessage("B-but Sweetie... Not in public \\*blushes*").queue();
+                }else {
+                    tc.sendMessage(String.format(
+                            "H-hey! I never allowed you to lick me %s!",
+                            msg.getMember().getAsMention()
+                    )).queue();
+                    msg.addReaction("\uD83D\uDE33").queue();
+                }
             }
         }
 
