@@ -31,13 +31,13 @@ public class ConnectionListener extends ListenerAdapter{
                 .setTitle(new WebhookEmbed.EmbedTitle(Emotes.STATUS_DISCONNECT.getEmote(), null))
                 .addField(new WebhookEmbed.EmbedField(
                         true,
-                        "Affected Guilds:",
-                        String.valueOf(jda.getGuilds().size())
+                        "Shard:",
+                        String.valueOf(jda.getShardInfo().getShardId())
                 ))
                 .addField(new WebhookEmbed.EmbedField(
                         true,
-                        "Shard:",
-                        String.valueOf(jda.getShardInfo().getShardId())
+                        "Affected Guilds:",
+                        String.valueOf(jda.getGuilds().size())
                 ))
                 .setFooter(new WebhookEmbed.EmbedFooter("Disconnected at", null))
                 .setTimestamp(event.getDisconnectTime());
@@ -72,13 +72,13 @@ public class ConnectionListener extends ListenerAdapter{
                 .setTitle(new WebhookEmbed.EmbedTitle(Emotes.STATUS_READY.getEmote(), null))
                 .addField(new WebhookEmbed.EmbedField(
                         true,
-                        "Affected Guilds:",
-                        String.valueOf(jda.getGuilds().size())
+                        "Shard:",
+                        String.valueOf(jda.getShardInfo().getShardId())
                 ))
                 .addField(new WebhookEmbed.EmbedField(
                         true,
-                        "Shard:",
-                        String.valueOf(jda.getShardInfo().getShardId())
+                        "Affected Guilds:",
+                        String.valueOf(jda.getGuilds().size())
                 ))
                 .setFooter(new WebhookEmbed.EmbedFooter("Resumed at", null))
                 .setTimestamp(ZonedDateTime.now())

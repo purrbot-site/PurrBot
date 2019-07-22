@@ -211,7 +211,8 @@ public class CmdYurifuck implements Command{
                             yuriQueue.remove(author.getUser().getId());
 
                             tc.sendMessage(String.format(
-                                    "Looks like he/she (hopefully a she) doesn't want to have sex with you %s ;-;",
+                                    "Looks like %s doesn't want to have sex with you %s. ._.",
+                                    guild.getMember(user).getEffectiveName(),
                                     author.getAsMention()
                             )).queue();
                         });

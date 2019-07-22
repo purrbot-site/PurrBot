@@ -35,10 +35,7 @@ public class CmdEmote implements Command{
     private MessageEmbed emoteInfo(User user, Emote emote, @Nullable String link){
 
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(user)
-                .setTitle(String.format(
-                        "Emote-Info: %s",
-                        emote
-                ))
+                .setTitle("Emote")
                 .addField("Name", String.format(
                         "`:%s:`",
                         emote.getName()
