@@ -129,12 +129,10 @@ public class CmdYurifuck implements Command{
                 "%s wants to have sex with you. Do you want that too?\n" +
                 "Click ✅ or ❌ to accept or deny the request.\n" +
                 "\n" +
-                "**This request will time out in 1 minute!**",
+                "> **This request will time out in 1 minute!**",
                 user.getAsMention(),
                 msg.getMember().getEffectiveName()
-        )).queue(message -> {
-            message.addReaction("✅").queue();
-            message.addReaction("❌").queue(emote -> {
+        )).queue(message -> message.addReaction("✅").queue(m -> message.addReaction("❌").queue(emote -> {
                 EventWaiter waiter = bot.getWaiter();
                 waiter.waitForEvent(
                         GuildMessageReactionAddEvent.class,
@@ -152,7 +150,7 @@ public class CmdYurifuck implements Command{
                                     message.delete().queue();
                                 }catch(Exception ex){
                                     logger.warn(String.format(
-                                            "Couldn't delete a own message... Reason: %s",
+                                            "Couldn't delete own message for CmdYurifuck. Reason: %s",
                                             ex.getMessage()
                                     ));
                                 }
@@ -172,7 +170,7 @@ public class CmdYurifuck implements Command{
                                     message.delete().queue();
                                 } catch (Exception ex) {
                                     logger.warn(String.format(
-                                            "Couldn't delete a own message... Reason: %s",
+                                            "Couldn't delete own message for CmdYurifuck. Reason: %s",
                                             ex.getMessage()
                                     ));
                                 }
@@ -205,7 +203,10 @@ public class CmdYurifuck implements Command{
                             try {
                                 message.delete().queue();
                             }catch (Exception ex){
-                                logger.warn("Couldn't delete a own message. ._.");
+                                logger.warn(String.format(
+                                        "Couldn't delete own message for CmdYurifuck. Reason: %s",
+                                        ex.getMessage()
+                                ));
                             }
 
                             yuriQueue.remove(author.getUser().getId());
@@ -215,8 +216,8 @@ public class CmdYurifuck implements Command{
                                     guild.getMember(user).getEffectiveName(),
                                     author.getAsMention()
                             )).queue();
-                        });
-            });
-        });
+                        }
+            );
+        })));
     }
 }

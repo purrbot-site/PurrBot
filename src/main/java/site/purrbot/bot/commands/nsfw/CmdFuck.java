@@ -37,7 +37,7 @@ public class CmdFuck implements Command{
         this.bot = bot;
     }
 
-    private static ArrayList<String> alreadyInQueue = new ArrayList<>();
+    private ArrayList<String> alreadyInQueue = new ArrayList<>();
 
     private int getRandomPercent(){
         return bot.getRandom().nextInt(10);
@@ -60,7 +60,7 @@ public class CmdFuck implements Command{
         Guild guild = msg.getGuild();
 
         if(msg.getMentionedUsers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention a user to fuck.");
+            bot.getEmbedUtil().sendError(tc, author.getUser(), "Please mention a user to fuck.");
             return;
         }
 
@@ -69,7 +69,7 @@ public class CmdFuck implements Command{
         if(user == msg.getJDA().getSelfUser()){
             if(bot.isBeta()){
                 tc.sendMessage(String.format(
-                        "\\*Slaps %s* Nononononono! Not with me!",
+                        "\\*Slaps %s* N-NO! Not with me!",
                         author.getAsMention()
                 )).queue();
                 return;
@@ -101,7 +101,7 @@ public class CmdFuck implements Command{
 
         if(user == msg.getAuthor()){
             tc.sendMessage(String.format(
-                    "%s How can you actually fuck yourself?! (And no. Masturbation is not a valid answer)",
+                    "How can you actually fuck yourself %s?! (And no. Masturbation is not a valid answer)",
                     msg.getAuthor().getAsMention()
             )).queue();
             return;
@@ -127,12 +127,10 @@ public class CmdFuck implements Command{
                 "%s wants to have sex with you. Do you want that too?\n" +
                 "Click ✅ or ❌ to accept or deny the request.\n" +
                 "\n" +
-                "**This request will time out in 1 minute!**",
+                "> **This request will time out in 1 minute!**",
                 user.getAsMention(),
                 msg.getMember().getEffectiveName()
-        )).queue(message -> {
-            message.addReaction("✅").queue();
-            message.addReaction("❌").queue(emote -> {
+        )).queue(message -> message.addReaction("✅").queue(m -> message.addReaction("❌").queue(emote -> {
                 EventWaiter waiter = bot.getWaiter();
                 waiter.waitForEvent(
                         GuildMessageReactionAddEvent.class,
@@ -150,7 +148,7 @@ public class CmdFuck implements Command{
                                     message.delete().queue();
                                 }catch(Exception ex){
                                     logger.warn(String.format(
-                                            "Couldn't delete a own message... Reason: %s",
+                                            "Couldn't delete own message for CmdFuck. Reason: %s",
                                             ex.getMessage()
                                     ));
                                 }
@@ -170,7 +168,7 @@ public class CmdFuck implements Command{
                                     message.delete().queue();
                                 }catch(Exception ex){
                                     logger.warn(String.format(
-                                            "Couldn't delete a own message... Reason: %s",
+                                            "Couldn't delete own message for CmdFuck. Reason: %s",
                                             ex.getMessage()
                                     ));
                                 }
@@ -204,7 +202,10 @@ public class CmdFuck implements Command{
                             try {
                                 message.delete().queue();
                             }catch (Exception ex){
-                                logger.warn("Couldn't delete a own message. ._.");
+                                logger.warn(String.format(
+                                        "Couldn't delete own message for CmdFuck. Reason: %s",
+                                        ex.getMessage()
+                                ));
                             }
 
                             alreadyInQueue.remove(author.getUser().getId());
@@ -214,8 +215,8 @@ public class CmdFuck implements Command{
                                     guild.getMember(user).getEffectiveName(),
                                     author.getAsMention()
                             )).queue();
-                        });
-            });
-        });
+                        }
+            );
+        })));
     }
 }

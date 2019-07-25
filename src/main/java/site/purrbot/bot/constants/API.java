@@ -17,10 +17,11 @@ public enum API {
     GIF_SLAP  (false, true, "slap"),
     GIF_TICKLE(false, true, "tickle"),
 
-    GIF_FUCK_LEWD(true, true, "classic"),
-    GIF_LES_LEWD (true, true, "girls_solo"),
-    GIF_NEKO_LEWD(true, true, "neko"),
-    GIF_YURI_LEWD(true, true, "yuri");
+    GIF_BLOW_JOB_LEWD(true, true, "blow_job"),
+    GIF_FUCK_LEWD    (true, true, "classic"),
+    GIF_LES_LEWD     (true, true, "girls_solo"),
+    GIF_NEKO_LEWD    (true, true, "neko"),
+    GIF_YURI_LEWD    (true, true, "yuri");
 
     private boolean nsfw;
     private boolean gif;

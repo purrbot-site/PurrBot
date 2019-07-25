@@ -5,10 +5,7 @@ import site.purrbot.bot.commands.fun.*;
 import site.purrbot.bot.commands.guild.CmdPrefix;
 import site.purrbot.bot.commands.guild.CmdWelcome;
 import site.purrbot.bot.commands.info.*;
-import site.purrbot.bot.commands.nsfw.CmdFuck;
-import site.purrbot.bot.commands.nsfw.CmdLesbian;
-import site.purrbot.bot.commands.nsfw.CmdLewd;
-import site.purrbot.bot.commands.nsfw.CmdYurifuck;
+import site.purrbot.bot.commands.nsfw.*;
 import site.purrbot.bot.commands.owner.CmdEval;
 import site.purrbot.bot.commands.owner.CmdLeave;
 import site.purrbot.bot.commands.owner.CmdMsg;
@@ -56,6 +53,7 @@ public class CommandLoader {
                 new CmdUser(bot),
 
                 // NSFW
+                new CmdBlowjob(bot),
                 new CmdFuck(bot),
                 new CmdLesbian(bot),
                 new CmdLewd(bot),
