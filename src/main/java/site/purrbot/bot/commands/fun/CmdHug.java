@@ -2,8 +2,8 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -38,6 +38,10 @@ public class CmdHug implements Command {
             return;
         }
 
+        Member member = msg.getMember();
+        if(member == null)
+            return;
+
         Guild guild = msg.getGuild();
         List<Member> members = msg.getMentionedMembers();
 
@@ -45,13 +49,13 @@ public class CmdHug implements Command {
             if(bot.isBeta()){
                 tc.sendMessage(String.format(
                         "\\*loves the hug from %s*",
-                        msg.getMember().getAsMention()
+                        member.getAsMention()
                 )).queue();
                 msg.addReaction("❤").queue();
             }else {
                 tc.sendMessage(String.format(
                         "\\*enjoys the hug from %s*",
-                        msg.getAuthor().getAsMention()
+                        member.getAsMention()
                 )).queue();
                 msg.addReaction("❤").queue();
             }
@@ -61,7 +65,7 @@ public class CmdHug implements Command {
             tc.sendMessage(String.format(
                     "Why are you hugging yourself %s?\n" +
                     "You can hug me if you want... %s",
-                    msg.getMember().getAsMention(),
+                    member.getAsMention(),
                     Emotes.VANILLABLUSH.getEmote()
             )).queue();
         }
@@ -69,9 +73,9 @@ public class CmdHug implements Command {
         String link = bot.getHttpUtil().getImage(API.GIF_HUG);
 
         String huggedMembers = members.stream().filter(
-                member -> !member.equals(guild.getSelfMember())
+                mem -> !mem.equals(guild.getSelfMember())
         ).filter(
-                member -> !member.equals(msg.getMember())
+                mem -> !mem.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(huggedMembers.isEmpty())
@@ -84,7 +88,7 @@ public class CmdHug implements Command {
             if(link == null){
                 message.editMessage(String.format(
                         "%s hugs you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         huggedMembers
                 )).queue();
             }else{
@@ -92,7 +96,7 @@ public class CmdHug implements Command {
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s hugs you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         huggedMembers
                 )).setImage(link).build()).queue();
             }

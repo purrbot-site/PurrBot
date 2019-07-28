@@ -2,7 +2,8 @@ package site.purrbot.bot.commands.owner;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -52,7 +53,11 @@ public class CmdMsg implements Command{
             return;
         }
 
-        bot.getShardManager().getTextChannelById(channelID).sendMessage(String.join(" ", split)).queue(
+        TextChannel tc = bot.getShardManager().getTextChannelById(channelID);
+        if(tc == null)
+            return;
+
+        tc.sendMessage(String.join(" ", split)).queue(
                 message -> msg.addReaction("✅").queue()
         );
     }

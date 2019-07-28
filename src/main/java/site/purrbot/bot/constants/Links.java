@@ -17,10 +17,7 @@ public enum  Links {
     LBOTS_ORG      ("https://lbots.org/bots/Purr"),
 
     // Stats link
-    BOTLIST_SPACE_STATS  ("https://api.botlist.space/v1/bots/425382319449309197"),
-    DISCORD_BOTS_GG_STATS("https://discord.bots.gg/api/v1/bots/425382319449309197/stats"),
     DISCORDBOTS_ORG_STATS("https://discordbots.org/api/bots/425382319449309197"),
-    LBOTS_ORG_STATS      ("https://lbots.org/api/v1/bots/425382319449309197/stats"),
 
     // Images
     GITHUB_AVATAR ("https://i.imgur.com/Fv6qdfG.png"),

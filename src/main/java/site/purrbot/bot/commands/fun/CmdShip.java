@@ -2,11 +2,11 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.MessageBuilder;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.MessageBuilder;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
@@ -92,6 +92,9 @@ public class CmdShip implements Command{
 
         member1 = members.get(0);
 
+        if(member2 == null)
+            return;
+
         if(member1 == msg.getGuild().getSelfMember()){
             if(!bot.isBeta()) {
                 if(bot.getPermUtil().isSpecial(member2.getUser().getId())){
@@ -139,7 +142,7 @@ public class CmdShip implements Command{
         }
 
         if(member1.getUser().isBot() || member2.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Why do you ship with bots? O_O");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "You can't ship with bots you weirdo!");
             return;
         }
 
@@ -162,8 +165,8 @@ public class CmdShip implements Command{
 
         tc.sendMessage(getMessage(result)).addFile(image, String.format(
                 "love_%s_%s.png",
-                member1.getUser().getId(),
-                member2.getUser().getId()
+                member1.getId(),
+                member2.getId()
         )).queue();
 
     }

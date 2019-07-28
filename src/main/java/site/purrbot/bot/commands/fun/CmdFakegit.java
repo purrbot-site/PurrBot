@@ -4,9 +4,9 @@ import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.*;
 import org.json.JSONObject;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -51,7 +51,7 @@ public class CmdFakegit implements Command{
                 return;
             }
 
-            List<Webhook> webhooks = tc.getWebhooks().complete();
+            List<Webhook> webhooks = tc.retrieveWebhooks().complete();
 
             tc.sendMessage("Deleting all webhooks with name `PurrBot-Fakegit`. Please wait...").queue(message -> {
                 webhooks.stream().filter(webhook -> webhook.getName().equals("PurrBot-Fakegit")).forEach(webhook ->
@@ -71,11 +71,13 @@ public class CmdFakegit implements Command{
         String hash   = json.getString("hash").substring(0, 7);
         String commit = json.getString("commit_message");
 
+        String name = msg.getMember() == null ? "Unknown Member" : msg.getMember().getEffectiveName();
+
         int color = 0x7289DA;
 
         MessageEmbed mEmbed = new EmbedBuilder()
                 .setColor(color)
-                .setAuthor(msg.getMember().getEffectiveName(), link, msg.getAuthor().getEffectiveAvatarUrl())
+                .setAuthor(name, link, msg.getAuthor().getEffectiveAvatarUrl())
                 .setTitle(String.format(
                         "[`%s:%s`] 1 new commit",
                         guild.getName().replace(" ", "\\_"),
@@ -92,7 +94,7 @@ public class CmdFakegit implements Command{
         WebhookEmbed wEmbed = new WebhookEmbedBuilder()
                 .setColor(color)
                 .setAuthor(new WebhookEmbed.EmbedAuthor(
-                        msg.getMember().getEffectiveName(),
+                        name,
                         link,
                         msg.getAuthor().getEffectiveAvatarUrl()
                 ))

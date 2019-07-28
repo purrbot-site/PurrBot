@@ -4,9 +4,9 @@ import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -60,14 +60,17 @@ public class CmdYurifuck implements Command{
         Member author = msg.getMember();
         Guild guild = msg.getGuild();
 
+        if(author == null)
+            return;
+
         if(msg.getMentionedUsers().isEmpty()){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention one user to fuck!");
             return;
         }
 
-        User user = msg.getMentionedUsers().get(0);
+        Member target = msg.getMentionedMembers().get(0);
 
-        if(user == msg.getJDA().getSelfUser()){
+        if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(String.format(
                         "\\*Slaps %s* Nononononono! Not with me!",
@@ -101,7 +104,7 @@ public class CmdYurifuck implements Command{
             }
         }
 
-        if(user == msg.getAuthor()){
+        if(target.equals(author)){
             tc.sendMessage(String.format(
                     "Why do you want to only play with yourself %s? It's more fun with others. \uD83D\uDE0F",
                     msg.getAuthor().getAsMention()
@@ -109,7 +112,7 @@ public class CmdYurifuck implements Command{
             return;
         }
 
-        if(user.isBot()){
+        if(target.getUser().isBot()){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "You can't fuck with bots! >-<");
             return;
         }
@@ -123,15 +126,15 @@ public class CmdYurifuck implements Command{
             return;
         }
 
-        yuriQueue.add(author.getUser().getId());
+        yuriQueue.add(author.getId());
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to have sex with you. Do you want that too?\n" +
                 "Click ✅ or ❌ to accept or deny the request.\n" +
                 "\n" +
                 "> **This request will time out in 1 minute!**",
-                user.getAsMention(),
-                msg.getMember().getEffectiveName()
+                target.getAsMention(),
+                author.getEffectiveName()
         )).queue(message -> message.addReaction("✅").queue(m -> message.addReaction("❌").queue(emote -> {
                 EventWaiter waiter = bot.getWaiter();
                 waiter.waitForEvent(
@@ -140,7 +143,7 @@ public class CmdYurifuck implements Command{
                             MessageReaction.ReactionEmote emoji = ev.getReactionEmote();
                             if(!emoji.getName().equals("✅") && !emoji.getName().equals("❌")) return false;
                             if(ev.getUser().isBot()) return false;
-                            if(!ev.getUser().equals(user)) return false;
+                            if(!ev.getMember().equals(target)) return false;
 
                             return ev.getMessageId().equals(message.getId());
                         },
@@ -155,11 +158,11 @@ public class CmdYurifuck implements Command{
                                     ));
                                 }
 
-                                yuriQueue.remove(author.getUser().getId());
+                                yuriQueue.remove(author.getId());
 
                                 ev.getChannel().sendMessage(String.format(
                                         "%s doesn't want to lewd with you %s. >.<",
-                                        guild.getMember(user).getEffectiveName(),
+                                        target.getEffectiveName(),
                                         author.getAsMention()
                                 )).queue();
                                 return;
@@ -175,27 +178,27 @@ public class CmdYurifuck implements Command{
                                     ));
                                 }
 
-                                yuriQueue.remove(author.getUser().getId());
+                                yuriQueue.remove(author.getId());
 
                                 String link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
 
                                 ev.getChannel().sendMessage(String.format(
                                         "%s accepted your invite %s! 0w0",
-                                        guild.getMember(user).getEffectiveName(),
+                                        target.getEffectiveName(),
                                         author.getAsMention()
                                 )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
 
                                 if (link == null || link.isEmpty()) {
                                     ev.getChannel().sendMessage(String.format(
                                             "%s and %s are having sex!",
-                                            msg.getMember().getEffectiveName(),
-                                            guild.getMember(user).getEffectiveName()
+                                            author.getEffectiveName(),
+                                            target.getEffectiveName()
                                     )).queue();
                                     return;
                                 }
 
                                 ev.getChannel().sendMessage(
-                                        getFuckEmbed(author, guild.getMember(user), link).build()
+                                        getFuckEmbed(author, target, link).build()
                                 ).queue();
                             }
                         }, 1, TimeUnit.MINUTES,
@@ -209,11 +212,11 @@ public class CmdYurifuck implements Command{
                                 ));
                             }
 
-                            yuriQueue.remove(author.getUser().getId());
+                            yuriQueue.remove(author.getId());
 
                             tc.sendMessage(String.format(
                                     "Looks like %s doesn't want to have sex with you %s. ._.",
-                                    guild.getMember(user).getEffectiveName(),
+                                    target.getEffectiveName(),
                                     author.getAsMention()
                             )).queue();
                         }

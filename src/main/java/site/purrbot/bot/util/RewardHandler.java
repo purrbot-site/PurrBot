@@ -1,9 +1,10 @@
 package site.purrbot.bot.util;
 
 import ch.qos.logback.classic.Logger;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+import org.apache.commons.collections4.ListUtils;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
@@ -11,6 +12,7 @@ import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.constants.Roles;
 
 import java.io.IOException;
+import java.util.Collections;
 
 public class RewardHandler {
 
@@ -25,13 +27,16 @@ public class RewardHandler {
         if(!botId.equals(IDs.PURR.getId())) return;
 
         Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
+        if(guild == null)
+            return;
+
         Role reward;
-        Member member;
+        Member member = guild.getMemberById(userId);
 
         String url = bot.getgFile().getString("config", "vote-webhook");
 
         if(site.equals(Site.LBOTS)){
-            if(guild.getMemberById(userId) == null){
+            if(member == null){
                 bot.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New favourite", String.format(
                         "An anonymous person added %s to their favourites!\n" +
                         "You can do that too on <%s>",
@@ -40,12 +45,9 @@ public class RewardHandler {
                 ), null);
                 return;
             }
-
-            member = guild.getMemberById(userId);
             reward = guild.getRoleById(Roles.FAVOURITE.getId());
 
-            // TODO: Remove getController() when updating to JDA 4
-            guild.getController().addRolesToMember(member, reward)
+            guild.modifyMemberRoles(member, Collections.singletonList(reward), null)
                     .reason("[Reward] User added Bot to favourites on LBots.org!")
                     .queue();
 
@@ -58,7 +60,7 @@ public class RewardHandler {
             ), null);
         }else
         if(site.equals(Site.DBL)){
-            if(guild.getMemberById(userId) == null){
+            if(member == null){
                 bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
                         "An anonymous person upvoted %s on discordbots.org!\n" +
                         "You can do that too on <%s>",
@@ -67,12 +69,9 @@ public class RewardHandler {
                 ), null);
                 return;
             }
-
-            member = guild.getMemberById(userId);
             reward = guild.getRoleById(Roles.UPVOTE_DBL.getId());
 
-            // TODO: Remove getController() when updating to JDA 4
-            guild.getController().addRolesToMember(member, reward)
+            guild.modifyMemberRoles(member, Collections.singletonList(reward), null)
                     .reason("[Reward] User upvoted bot on discordbots.org!")
                     .queue();
 
@@ -107,7 +106,7 @@ public class RewardHandler {
             ), image);
         }else
         if(site.equals(Site.BOTLIST_SPACE)){
-            if(guild.getMemberById(userId) == null){
+            if(member == null){
                 bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_BOTLIST.getUrl(), "New Upvote", String.format(
                         "An anonymous person upvoted %s on botlist.space!\n" +
                         "You can do that too on <%s>",
@@ -116,12 +115,10 @@ public class RewardHandler {
                 ), null);
                 return;
             }
-
-            member = guild.getMemberById(userId);
             reward = guild.getRoleById(Roles.UPVOTE_BOTLIST.getId());
 
             // TODO: Remove getController() when updating to JDA 4
-            guild.getController().addRolesToMember(member, reward)
+            guild.modifyMemberRoles(member, Collections.singletonList(reward), null)
                     .reason("[Reward] User upvoted bot on botlist.space!")
                     .queue();
 
@@ -143,8 +140,6 @@ public class RewardHandler {
      *
      * @param userId
      *        The ID of the user that gave the favourite.
-     *
-     * @see #giveReward(String, String, Site, boolean) for the full handling of favourites.
      */
     public void lbotsReward(String userId){
         giveReward(IDs.PURR.getId(), userId, Site.LBOTS, false);

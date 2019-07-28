@@ -2,8 +2,8 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -38,6 +38,10 @@ public class CmdPat implements Command{
             return;
         }
 
+        Member member = msg.getMember();
+        if(member == null)
+            return;
+
         Guild guild = msg.getGuild();
         List<Member> members = msg.getMentionedMembers();
 
@@ -45,7 +49,7 @@ public class CmdPat implements Command{
             if(bot.isBeta()){
                 tc.sendMessage(String.format(
                         "\\*enjoys the pat from %s",
-                        msg.getMember().getAsMention()
+                        member.getAsMention()
                 )).queue();
                 msg.addReaction("❤").queue();
             }else {
@@ -57,16 +61,16 @@ public class CmdPat implements Command{
         if(members.contains(msg.getMember())){
             tc.sendMessage(String.format(
                     "Don't you have a neko to pat %s? \\*points to herself*",
-                    msg.getMember().getAsMention()
+                    member.getAsMention()
             )).queue();
         }
 
         String link = bot.getHttpUtil().getImage(API.GIF_PAT);
 
         String pattetMembers = members.stream().filter(
-                member -> !member.equals(guild.getSelfMember())
+                mem -> !mem.equals(guild.getSelfMember())
         ).filter(
-                member -> !member.equals(msg.getMember())
+                mem -> !mem.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(pattetMembers.isEmpty())
@@ -79,7 +83,7 @@ public class CmdPat implements Command{
             if(link == null){
                 message.editMessage(String.format(
                         "%s pats you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         pattetMembers
                 )).queue();
             }else{
@@ -87,7 +91,7 @@ public class CmdPat implements Command{
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s pats you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         pattetMembers
                 )).setImage(link).build()).queue();
             }

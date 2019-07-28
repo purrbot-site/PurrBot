@@ -2,10 +2,11 @@ package site.purrbot.bot.listener;
 
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.events.DisconnectEvent;
-import net.dv8tion.jda.core.events.ResumedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.events.DisconnectEvent;
+import net.dv8tion.jda.api.events.ResumedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 
@@ -23,7 +24,7 @@ public class ConnectionListener extends ListenerAdapter{
     }
 
     @Override
-    public void onDisconnect(DisconnectEvent event){
+    public void onDisconnect(@NotNull DisconnectEvent event){
         JDA jda = event.getJDA();
 
         WebhookEmbedBuilder embed = new WebhookEmbedBuilder()
@@ -40,7 +41,7 @@ public class ConnectionListener extends ListenerAdapter{
                         String.valueOf(jda.getGuilds().size())
                 ))
                 .setFooter(new WebhookEmbed.EmbedFooter("Disconnected at", null))
-                .setTimestamp(event.getDisconnectTime());
+                .setTimestamp(event.getTimeDisconnected());
 
         if(event.getCloseCode() != null)
             embed.addField(new WebhookEmbed.EmbedField(
@@ -64,7 +65,7 @@ public class ConnectionListener extends ListenerAdapter{
     }
 
     @Override
-    public void onResume(ResumedEvent event){
+    public void onResume(@NotNull ResumedEvent event){
         JDA jda = event.getJDA();
 
         WebhookEmbed embed = new WebhookEmbedBuilder()

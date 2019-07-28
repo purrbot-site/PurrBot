@@ -3,12 +3,13 @@ package site.purrbot.bot.listener;
 import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
-import net.dv8tion.jda.bot.sharding.ShardManager;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.events.ReadyEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.sharding.ShardManager;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
@@ -41,7 +42,7 @@ public class ReadyListener extends ListenerAdapter{
     }
 
     @Override
-    public void onReady(ReadyEvent event){
+    public void onReady(@NotNull ReadyEvent event){
         ShardManager shardManager = bot.getShardManager();
         JDA jda = event.getJDA();
 
@@ -82,7 +83,7 @@ public class ReadyListener extends ListenerAdapter{
 
             bot.startUpdates();
 
-            shardManager.setPresence(OnlineStatus.ONLINE, Game.of(Game.GameType.WATCHING, String.format(
+            shardManager.setPresence(OnlineStatus.ONLINE, Activity.of(Activity.ActivityType.WATCHING, String.format(
                     bot.getMessageUtil().getBotGame(),
                     shardManager.getGuildCache().size()
             )));

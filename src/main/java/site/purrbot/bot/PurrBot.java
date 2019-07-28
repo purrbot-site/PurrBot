@@ -10,12 +10,11 @@ import com.github.rainestormee.jdacommand.CommandHandler;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
-import net.dv8tion.jda.bot.sharding.ShardManager;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Message;
-import org.apache.commons.lang3.ObjectUtils;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
+import net.dv8tion.jda.api.sharding.ShardManager;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Message;
 import org.discordbots.api.client.DiscordBotListAPI;
 import org.discordbots.api.client.entity.Vote;
 import org.slf4j.LoggerFactory;
@@ -130,7 +129,7 @@ public class PurrBot {
                         waiter
                 )
                 .setShardsTotal(-1)
-                .setGame(Game.of(Game.GameType.DEFAULT, getMessageUtil().getRandomStartupMsg()))
+                .setActivity(Activity.of(Activity.ActivityType.DEFAULT, getMessageUtil().getRandomStartupMsg()))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .build();
 
@@ -335,7 +334,7 @@ public class PurrBot {
     private void startUpdate(){
         scheduler.scheduleAtFixedRate(() -> {
 
-            getShardManager().setGame(Game.of(Game.GameType.WATCHING, String.format(
+            getShardManager().setActivity(Activity.of(Activity.ActivityType.WATCHING, String.format(
                     getMessageUtil().getBotGame(),
                     getShardManager().getGuilds().size()
             )));
@@ -344,7 +343,7 @@ public class PurrBot {
 
             getDblApi().setStats(getShardManager().getGuilds().size());
 
-            if(!ObjectUtils.allNotNull(botBlockAPI)) {
+            if(botBlockAPI == null || handler == null) {
                 logger.warn("RequestHandler and/or BotBlockAPI are null!");
 
                 return;

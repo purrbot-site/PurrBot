@@ -2,8 +2,8 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -38,6 +38,10 @@ public class CmdSlap implements Command{
             return;
         }
 
+        Member member = msg.getMember();
+        if(member == null)
+            return;
+
         Guild guild = msg.getGuild();
         List<Member> members = msg.getMentionedMembers();
 
@@ -45,7 +49,7 @@ public class CmdSlap implements Command{
             if(bot.isBeta()){
                 tc.sendMessage(String.format(
                         "\\*runs away from %s and hides*",
-                        msg.getMember().getAsMention()
+                        member.getAsMention()
                 )).queue();
                 msg.addReaction("\uD83D\uDE2D").queue();
             }else {
@@ -57,16 +61,16 @@ public class CmdSlap implements Command{
         if(members.contains(msg.getMember())){
             tc.sendMessage(String.format(
                     "\\*Holds arm of %s* NO! You won't hurt yourself.",
-                    msg.getMember().getAsMention()
+                    member.getAsMention()
             )).queue();
         }
 
         String link = bot.getHttpUtil().getImage(API.GIF_SLAP);
 
         String slapedMembers = members.stream().filter(
-                member -> !member.equals(guild.getSelfMember())
+                mem -> !mem.equals(guild.getSelfMember())
         ).filter(
-                member -> !member.equals(msg.getMember())
+                mem -> !mem.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(slapedMembers.isEmpty())
@@ -79,7 +83,7 @@ public class CmdSlap implements Command{
             if(link == null){
                 message.editMessage(String.format(
                         "%s slaps you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         slapedMembers
                 )).queue();
             }else{
@@ -87,7 +91,7 @@ public class CmdSlap implements Command{
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s slaps you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         slapedMembers
                 )).setImage(link).build()).queue();
             }

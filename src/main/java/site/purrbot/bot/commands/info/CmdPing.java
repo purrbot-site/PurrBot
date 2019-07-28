@@ -2,8 +2,8 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
@@ -27,33 +27,33 @@ import java.time.temporal.ChronoUnit;
 )
 public class CmdPing implements Command{
 
-    private PurrBot bot;
-
-    public CmdPing(PurrBot bot){
-        this.bot = bot;
+    public CmdPing(){
     }
 
     @Override
     public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
 
-        if(args.toLowerCase().contains("--api")){
-            tc.sendMessage(String.format(
-                    "%s Checking ping to Discord-API...",
-                    Emotes.ANIM_TYPING.getEmote()
-            )).queue(message -> message.editMessage(String.format(
-                    bot.getMessageUtil().getRandomApiPingMsg(),
-                    msg.getJDA().getPing()
-            )).queue());
-            return;
-        }
-
         tc.sendMessage(String.format(
-                "%s Checking message ping...",
+                "%s Checking ping. Please wait...",
                 Emotes.ANIM_TYPING.getEmote()
-        )).queue(message -> message.editMessage(String.format(
-                bot.getMessageUtil().getRandomPingMsg(),
-                msg.getCreationTime().until(message.getCreationTime(), ChronoUnit.MILLIS)
-        )).queue());
+        )).queue(message -> msg.getJDA().getRestPing().queue((time) -> message.editMessage(String.format(
+                "%s Edit message: `%dms`\n" +
+                "%s Discord: `%sms`\n" +
+                "%s RestAction: `%sms`",
+                Emotes.ANIM_CURSOR.getEmote(),
+                msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS),
+                Emotes.DISCORD.getEmote(),
+                msg.getJDA().getGatewayPing(),
+                Emotes.UPDATE.getEmote(),
+                time
+        )).queue(), throwable -> message.editMessage(String.format(
+                "%s Edit message: `%dms`\n" +
+                "%s Discord: `%sms`",
+                Emotes.ANIM_CURSOR.getEmote(),
+                msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS),
+                Emotes.DISCORD.getEmote(),
+                msg.getJDA().getGatewayPing()
+        )).queue()));
     }
 }

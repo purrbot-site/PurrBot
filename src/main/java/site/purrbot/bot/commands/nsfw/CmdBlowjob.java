@@ -4,15 +4,12 @@ import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -55,6 +52,9 @@ public class CmdBlowjob implements Command{
         TextChannel tc = msg.getTextChannel();
         Member author = msg.getMember();
         Guild guild = msg.getGuild();
+
+        if(author == null)
+            return;
 
         if(msg.getMentionedMembers().isEmpty()){
             bot.getEmbedUtil().sendError(tc, author.getUser(), "Please mention the user you want to give a blowjob.");
@@ -120,7 +120,7 @@ public class CmdBlowjob implements Command{
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to give you a blowjob. Do you want that too?\n" +
-                "Click  or  to either accept or deny the request.\n" +
+                "Click ✅ to accept or ❌ to deny the request.\n" +
                 "\n" +
                 "> **This request will time out in 1 minute!**",
                 target.getAsMention(),
@@ -152,7 +152,7 @@ public class CmdBlowjob implements Command{
                                 ));
                             }
 
-                            queue.remove(author.getUser().getId());
+                            queue.remove(author.getId());
                             event.getChannel().sendMessage(String.format(
                                     "%s doesn't want to get sucked by you %s. :/",
                                     target.getEffectiveName(),
@@ -171,7 +171,7 @@ public class CmdBlowjob implements Command{
                                 ));
                             }
 
-                            queue.remove(author.getUser().getId());
+                            queue.remove(author.getId());
                             String link = bot.getHttpUtil().getImage(API.GIF_BLOW_JOB_LEWD);
 
                             event.getChannel().sendMessage(String.format(
@@ -202,7 +202,7 @@ public class CmdBlowjob implements Command{
                             ));
                         }
 
-                        queue.remove(author.getUser().getId());
+                        queue.remove(author.getId());
 
                         tc.sendMessage(String.format(
                                 "Looks like %s doesn't want a blowjob from you %s.",

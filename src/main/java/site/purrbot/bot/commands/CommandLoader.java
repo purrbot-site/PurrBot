@@ -47,7 +47,7 @@ public class CommandLoader {
                 new CmdInfo(bot),
                 new CmdInvite(bot),
                 new CmdLevel(bot),
-                new CmdPing(bot),
+                new CmdPing(),
                 new CmdQuote(bot),
                 new CmdStats(bot),
                 new CmdUser(bot),

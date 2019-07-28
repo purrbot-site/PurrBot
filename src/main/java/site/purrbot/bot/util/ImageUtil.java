@@ -1,8 +1,8 @@
 package site.purrbot.bot.util;
 
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
 import org.apache.commons.codec.EncoderException;
 import org.json.JSONObject;
 import site.purrbot.bot.PurrBot;
@@ -108,9 +108,9 @@ public class ImageUtil {
      * Generates a image with the provided members and chance and returns it as byte-array.
      *
      * @param  member1
-     *         The first {@link net.dv8tion.jda.core.entities.Member Member} to get information from.
+     *         The first {@link net.dv8tion.jda.api.entities.Member Member} to get information from.
      * @param  member2
-     *         The second {@link net.dv8tion.jda.core.entities.Member Member} to get information from.
+     *         The second {@link net.dv8tion.jda.api.entities.Member Member} to get information from.
      * @param  chance
      *         The chance (from 0 to 100)
      *
@@ -181,7 +181,7 @@ public class ImageUtil {
      * an InputStream.
      *
      * @param  quote
-     *         The {@link net.dv8tion.jda.core.entities.Message Message} to generate a image from.
+     *         The {@link net.dv8tion.jda.api.entities.Message Message} to generate a image from.
      *
      * @return The InputStream of the image.
      *
@@ -191,11 +191,11 @@ public class ImageUtil {
     public InputStream getQuoteImg(Message quote) throws IOException{
         Member member = quote.getMember();
 
-        String name   = URLEncoder.encode(member == null ? "Anonymous" : member.getEffectiveName(), "UTF-8");
+        String name   = URLEncoder.encode(member == null ? "Unknown" : member.getEffectiveName(), "UTF-8");
         String msg    = URLEncoder.encode(quote.getContentDisplay(), "UTF-8");
         String avatar = URLEncoder.encode(quote.getAuthor().getEffectiveAvatarUrl(), "UTF-8");
         int color = member == null ? 0x1FFFFFFF : member.getColorRaw();
-        long time = quote.getCreationTime().toInstant().toEpochMilli();
+        long time = quote.getTimeCreated().toInstant().toEpochMilli();
 
         String url = String.format(
                 "https://purrbot.site/api/quote?avatar=%s&color=%d&name=%s&text=%s&time=%d",

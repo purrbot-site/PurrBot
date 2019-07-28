@@ -1,9 +1,9 @@
 package site.purrbot.bot.util;
 
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Roles;
@@ -28,7 +28,7 @@ public class LevelManager {
      * @param command
      *        If it is a command (Give 2 XP) or a normal message (Give 1 XP).
      * @param textChannel
-     *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to send possible messages.
+     *        The {@link net.dv8tion.jda.api.entities.TextChannel TextChannel} to send possible messages.
      */
     public void giveXP(String id, boolean command, TextChannel textChannel) {
         if(bot.isBeta())
@@ -38,7 +38,7 @@ public class LevelManager {
             bot.getDbUtil().addMember(id);
 
         long xp;
-        if (command)
+        if(command)
             xp = bot.getDbUtil().getXp(id) + 2;
         else
             xp = bot.getDbUtil().getXp(id) + 1;
@@ -53,16 +53,23 @@ public class LevelManager {
 
             Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
 
+            if(guild == null)
+                return;
+
+            Member member = guild.getMemberById(id);
+            if(member == null)
+                return;
+
             textChannel.sendMessage(String.format(
                     "%s has reached **Level %d**! \uD83C\uDF89",
-                    guild.getMemberById(id).getEffectiveName(),
+                    member.getEffectiveName(),
                     level + 1
             )).addFile(image, imgName).queue();
 
             bot.getDbUtil().setLevel(id, level + 1);
             bot.getDbUtil().setXp(id, xp - (long) reqXp(level));
 
-            updateRoles(id, level + 1);
+            updateRoles(member, level + 1);
         }
     }
 
@@ -74,9 +81,11 @@ public class LevelManager {
         return xp >= reqXp(bot.getDbUtil().getLevel(id));
     }
 
-    private void updateRoles(String id, long level) {
+    private void updateRoles(Member member, long level) {
         Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
-        Member member = guild.getMemberById(id);
+        if(guild == null)
+            return;
+
         Role veryAddicted = guild.getRoleById(Roles.VERY_ADDICTED.getId());
         Role superAddicted = guild.getRoleById(Roles.SUPER_ADDICTED.getId());
         Role ultraAddicted = guild.getRoleById(Roles.ULTRA_ADDICTED.getId());
@@ -85,37 +94,36 @@ public class LevelManager {
 
         String reason = String.format("[Level up] Member %s reached level %d!", member.getEffectiveName(), level);
 
-        // TODO: Remove all the getController() when updating to JDA 4
         if (level >= 5 && level < 10)
-            guild.getController().modifyMemberRoles(
+            guild.modifyMemberRoles(
                     member,
                     Collections.singletonList(veryAddicted),
                     Arrays.asList(superAddicted, ultraAddicted, hyperAddicted, masterAddicted)
             ).reason(reason).queue();
         else
         if (level >= 10 && level < 15)
-            guild.getController().modifyMemberRoles(
+            guild.modifyMemberRoles(
                     member,
                     Collections.singletonList(superAddicted),
                     Arrays.asList(veryAddicted, ultraAddicted, hyperAddicted, masterAddicted)
             ).reason(reason).queue();
         else
         if (level >= 15 && level < 20)
-            guild.getController().modifyMemberRoles(
+            guild.modifyMemberRoles(
                     member,
                     Collections.singletonList(ultraAddicted),
                     Arrays.asList(veryAddicted, superAddicted, hyperAddicted, masterAddicted)
             ).reason(reason).queue();
         else
         if (level >= 20 && level < 30)
-            guild.getController().modifyMemberRoles(
+            guild.modifyMemberRoles(
                     member,
                     Collections.singletonList(hyperAddicted),
                     Arrays.asList(veryAddicted, superAddicted, ultraAddicted, masterAddicted)
             ).reason(reason).queue();
         else
         if (level >= 30)
-            guild.getController().modifyMemberRoles(
+            guild.modifyMemberRoles(
                     member,
                     Collections.singletonList(masterAddicted),
                     Arrays.asList(veryAddicted, superAddicted, ultraAddicted, hyperAddicted)

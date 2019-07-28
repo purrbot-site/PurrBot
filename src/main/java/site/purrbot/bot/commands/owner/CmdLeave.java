@@ -2,9 +2,11 @@ package site.purrbot.bot.commands.owner;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.bot.sharding.ShardManager;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.sharding.ShardManager;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -43,19 +45,30 @@ public class CmdLeave implements Command{
             pm = args.split("--pm")[1];
 
         String finalPm = pm;
-        shardManager.getGuildById(id).getOwner().getUser().openPrivateChannel().queue(
+        Guild guild = shardManager.getGuildById(id);
+
+        if(guild == null)
+            return;
+
+        Member owner = guild.getOwner();
+        if(owner == null){
+            guild.leave().queue();
+            return;
+        }
+
+        guild.getOwner().getUser().openPrivateChannel().queue(
                 privateChannel -> privateChannel.sendMessage(String.format(
                         "I left your Discord `%s` for the following reason:\n" +
                         "```\n" +
                         "%s\n" +
                         "```",
-                        shardManager.getGuildById(id).getName(),
+                        guild.getName(),
                         finalPm == null ? "No reason given" : finalPm
-                )).queue(message -> shardManager.getGuildById(id).leave().queue(),
-                        throwable -> shardManager.getGuildById(id).leave().queue()),
+                )).queue(message -> guild.leave().queue(),
+                        throwable -> guild.leave().queue()),
                 throwable -> {
                     tc.sendMessage("Couldn't send PM to user!").queue();
-                    shardManager.getGuildById(id).leave().queue();
+                    guild.leave().queue();
                 }
         );
     }

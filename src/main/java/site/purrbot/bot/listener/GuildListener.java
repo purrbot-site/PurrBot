@@ -3,25 +3,28 @@ package site.purrbot.bot.listener;
 import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
-import net.dv8tion.jda.core.MessageBuilder;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.channel.text.TextChannelDeleteEvent;
-import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.MessageBuilder;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 public class GuildListener extends ListenerAdapter{
 
@@ -68,6 +71,7 @@ public class GuildListener extends ListenerAdapter{
                 content = "???";
                 emote   = "";
         }
+        Member owner = guild.getOwner();
 
         WebhookEmbed embed = new WebhookEmbedBuilder()
                 .setColor(color)
@@ -82,9 +86,9 @@ public class GuildListener extends ListenerAdapter{
                 .addField(new WebhookEmbed.EmbedField(
                         false, "Owner", String.format(
                                 "%s | %s (`%s`)",
-                                guild.getOwner().getAsMention(),
-                                guild.getOwner().getUser().getName(),
-                                guild.getOwner().getUser().getId()
+                                owner == null ? "Unknown" : owner.getAsMention(),
+                                owner == null ? "Unknown" : owner.getUser().getName(),
+                                owner == null ? "?" : owner.getId()
                         )
                 ))
                 .addField(new WebhookEmbed.EmbedField(
@@ -121,10 +125,14 @@ public class GuildListener extends ListenerAdapter{
     }
 
     @Override
-    public void onGuildJoin(GuildJoinEvent event){
+    public void onGuildJoin(@Nonnull GuildJoinEvent event){
         Guild guild = event.getGuild();
 
         if(bot.getBlacklist().contains(guild.getId())){
+            if(guild.getOwner() == null){
+                guild.leave().queue();
+                return;
+            }
             guild.getOwner().getUser().openPrivateChannel().queue(channel ->
                     channel.sendMessage(String.format(
                             "I left your Discord `%s` for the following reason:\n" +
@@ -145,6 +153,10 @@ public class GuildListener extends ListenerAdapter{
         }
 
         if(isBotGuild(guild)) {
+            if(guild.getOwner() == null){
+                guild.leave().queue();
+                return;
+            }
             if(!guild.getOwner().getUser().getId().equals(IDs.ANDRE_601.getId())){
                 guild.getOwner().getUser().openPrivateChannel().queue(channel ->
                         channel.sendMessage(String.format(
@@ -182,14 +194,16 @@ public class GuildListener extends ListenerAdapter{
     }
 
     @Override
-    public void onGuildLeave(GuildLeaveEvent event){
+    public void onGuildLeave(@Nonnull GuildLeaveEvent event){
         Guild guild = event.getGuild();
 
         if(bot.getBlacklist().contains(guild.getId()))
             return;
 
         if(isBotGuild(guild))
-            if(!guild.getOwner().getUser().getId().equals(IDs.ANDRE_601.getId()))
+            if(guild.getOwner() == null)
+                return;
+            if(!Objects.requireNonNull(guild.getOwner()).getId().equals(IDs.ANDRE_601.getId()))
                 return;
 
         bot.getDbUtil().delGuild(guild.getId());
@@ -209,10 +223,14 @@ public class GuildListener extends ListenerAdapter{
     }
 
     @Override
-    public void onGuildMemberJoin(GuildMemberJoinEvent event){
+    public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event){
         Guild guild = event.getGuild();
 
         if(isBotGuild(guild)){
+            if(guild.getOwner() == null){
+                guild.leave().queue();
+                return;
+            }
             if(!guild.getOwner().getUser().getId().equals(IDs.ANDRE_601.getId())) {
                 guild.getOwner().getUser().openPrivateChannel().queue(channel ->
                         channel.sendMessage(String.format(
@@ -285,7 +303,7 @@ public class GuildListener extends ListenerAdapter{
     }
 
     @Override
-    public void onTextChannelDelete(TextChannelDeleteEvent event){
+    public void onTextChannelDelete(@Nonnull TextChannelDeleteEvent event){
         Guild guild = event.getGuild();
         String id = bot.getWelcomeChannel(guild.getId());
 

@@ -2,11 +2,11 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
@@ -40,6 +40,10 @@ public class CmdLick implements Command{
             return;
         }
 
+        Member member = msg.getMember();
+        if(member == null)
+            return;
+
         Guild guild = msg.getGuild();
         List<Member> members = msg.getMentionedMembers();
 
@@ -47,7 +51,7 @@ public class CmdLick implements Command{
             if(bot.isBeta()){
                 tc.sendMessage(String.format(
                         "\\*blushes* W-why do you lick me %s?",
-                        msg.getMember().getAsMention()
+                        member.getAsMention()
                 )).queue();
                 msg.addReaction("\uD83D\uDE33").queue();
             }else{
@@ -56,7 +60,7 @@ public class CmdLick implements Command{
                 }else {
                     tc.sendMessage(String.format(
                             "H-hey! I never allowed you to lick me %s!",
-                            msg.getMember().getAsMention()
+                            member.getAsMention()
                     )).queue();
                     msg.addReaction("\uD83D\uDE33").queue();
                 }
@@ -66,16 +70,16 @@ public class CmdLick implements Command{
         if(members.contains(msg.getMember())){
             tc.sendMessage(String.format(
                     "I won't even ask how and *where* you lick yourself %s...",
-                    msg.getMember().getAsMention()
+                    member.getAsMention()
             )).queue();
         }
 
         String link = bot.getMessageUtil().getRandomLickImg();
 
         String lickedMembers = members.stream().filter(
-                member -> !member.equals(guild.getSelfMember())
+                mem -> !mem.equals(guild.getSelfMember())
         ).filter(
-                member -> !member.equals(msg.getMember())
+                mem -> !mem.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(lickedMembers.isEmpty())
@@ -88,7 +92,7 @@ public class CmdLick implements Command{
             if(link.isEmpty()){
                 message.editMessage(String.format(
                         "%s licks you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         lickedMembers
                 )).queue();
             }else{
@@ -96,7 +100,7 @@ public class CmdLick implements Command{
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s licks you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         lickedMembers
                 )).setImage(link).build()).queue();
             }

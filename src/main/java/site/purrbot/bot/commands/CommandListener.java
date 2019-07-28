@@ -2,19 +2,19 @@ package site.purrbot.bot.commands;
 
 import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandHandler;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -37,7 +37,7 @@ public class CommandListener extends ListenerAdapter{
     }
 
     @Override
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event){
+    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event){
 
         CMD_EXECUTOR.execute(
                 () -> {
@@ -45,7 +45,8 @@ public class CommandListener extends ListenerAdapter{
                     Guild guild = event.getGuild();
                     User user = event.getAuthor();
 
-                    if(user.isBot()) return;
+                    if(user.isBot())
+                        return;
 
                     String prefix = bot.getPrefix(guild.getId());
 
@@ -66,12 +67,16 @@ public class CommandListener extends ListenerAdapter{
                     if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_WRITE))
                         return;
 
+                    Member member = msg.getMember();
+                    if(member == null)
+                        return;
+
                     if(raw.equalsIgnoreCase(userMention) || raw.equalsIgnoreCase(memberMention)){
                         tc.sendMessage(String.format(
                                 "Hey there %s!\n" +
                                 "My prefix on this Discord is `%s`\n" +
                                 "Run `%shelp` for a list of commands.",
-                                msg.getMember().getAsMention(),
+                                member.getAsMention(),
                                 prefix,
                                 prefix
                         )).queue();
@@ -98,7 +103,7 @@ public class CommandListener extends ListenerAdapter{
                     if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EMBED_LINKS)){
                         tc.sendMessage(String.format(
                                 "I need permission to embed links in this channel %s!",
-                                msg.getMember().getAsMention()
+                                member.getAsMention()
                         )).queue();
                         return;
                     }
@@ -109,7 +114,7 @@ public class CommandListener extends ListenerAdapter{
                     if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
                         bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                                 bot.getMessageUtil().getRandomNoNsfwMsg(),
-                                msg.getMember().getEffectiveName()
+                                member.getEffectiveName()
                         ));
                         return;
                     }
@@ -132,7 +137,7 @@ public class CommandListener extends ListenerAdapter{
                         HANDLER.execute(command, msg, args[1] == null ? "" : args[1]);
 
                         if(guild.getId().equals(IDs.GUILD.getId()))
-                            bot.getLevelManager().giveXP(user.getId(), true, tc);
+                            bot.getLevelManager().giveXP(member.getId(), true, tc);
                     }catch(Exception ex){
                         logger.error("Couldn't perform command!", ex);
                         bot.getEmbedUtil().sendError(tc, user, String.format(

@@ -2,14 +2,13 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 
-import javax.swing.plaf.metal.MetalMenuBarUI;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
@@ -60,12 +59,29 @@ public class CmdUser implements Command{
     }
 
     private String getNickname(Member member){
+        if(member.getNickname() == null)
+            return "";
+
         String nick = member.getNickname();
 
-        return nick.length() > 25 ? nick.substring(0, 24) + "..." : nick;
+        return nick.length() > 25 ? nick.substring(0, 24) + "...\n" : nick + "\n";
     }
 
-    private String getGame(Game game){
+    private String getName(Member member){
+        StringBuilder sb = new StringBuilder();
+
+        if(member.isOwner())
+            sb.append(Emotes.OWNER.getEmote()).append(" ");
+
+        if(member.getUser().isBot())
+            sb.append(Emotes.BOT.getEmote()).append(" ");
+
+        sb.append(member.getUser().getName());
+
+        return sb.toString();
+    }
+
+    private String getGame(Activity game){
         String type;
 
         switch(game.getType()){
@@ -94,6 +110,24 @@ public class CmdUser implements Command{
         );
     }
 
+    private String getTimes(Member member){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Account created: ")
+                .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeCreated())))
+                .append("\n")
+                .append("Guild joined:    ")
+                .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeJoined())))
+                .append("\n");
+
+        if(member.getTimeBoosted() != null)
+            sb.append("Boost since:     ")
+                    .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeBoosted())))
+                    .append("\n");
+
+        return sb.toString();
+    }
+
     @Override
     public void execute(Message msg, String args) {
         Member member;
@@ -105,25 +139,23 @@ public class CmdUser implements Command{
             member = msg.getMentionedMembers().get(0);
         }
 
-        String imgName = String.format("userinfo_%s.png", member.getUser().getId());
+        if(member == null){
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "The requested Member doesn't seem to be in this Discord!");
+            return;
+        }
+
+        String imgName = String.format("userinfo_%s.png", member.getId());
 
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .addField(
-                        String.format(
-                            "%s %s %s",
-                            member.getUser().getName(),
-                            msg.getGuild().getOwner().equals(member) ? Emotes.OWNER.getEmote() : "",
-                            member.getUser().isBot() ? Emotes.BOT.getEmote() : ""
-                        ),
-                        String.format(
-                            "```yaml\n" +
-                            "%s" +
-                            "ID:   %s\n" +
-                            "%s\n" +
-                            "```",
-                            member.getNickname() == null ? "" : "Nick: " + getNickname(member) + "\n",
-                            member.getUser().getId(),
-                            member.getGame() == null ? "" : "Game: " + getGame(member.getGame())
+                .addField(getName(member), String.format(
+                        "```yaml\n" +
+                        "%s" +
+                        "ID:   %s\n" +
+                        "%s\n" +
+                        "```",
+                        getNickname(member),
+                        member.getId(),
+                        member.getActivities().isEmpty() ? "" : "Game: " + getGame(member.getActivities().get(0))
                         ),
                         false
                 )
@@ -149,11 +181,9 @@ public class CmdUser implements Command{
                         "Dates",
                         String.format(
                                 "```yaml\n" +
-                                "Account created: %s\n" +
-                                "Guild joined:    %s\n" +
+                                "%s\n" +
                                 "```",
-                                bot.getMessageUtil().formatTime(LocalDateTime.from(member.getUser().getCreationTime())),
-                                bot.getMessageUtil().formatTime(LocalDateTime.from(member.getJoinDate()))
+                                getTimes(member)
                         ),
                         false
                 );

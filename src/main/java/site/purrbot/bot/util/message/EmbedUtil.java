@@ -1,8 +1,8 @@
 package site.purrbot.bot.util.message;
 
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -10,22 +10,22 @@ import java.time.ZonedDateTime;
 public class EmbedUtil {
 
     /**
-     * Gets an {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder} with a set color and timestamp.
+     * Gets an {@link net.dv8tion.jda.api.EmbedBuilder EmbedBuilder} with a set color and timestamp.
      *
-     * @return A {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder} with set color and timestamp.
+     * @return A {@link net.dv8tion.jda.api.EmbedBuilder EmbedBuilder} with set color and timestamp.
      */
     public EmbedBuilder getEmbed(){
         return new EmbedBuilder().setColor(0x36393F).setTimestamp(ZonedDateTime.now());
     }
 
     /**
-     * Gets an {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder} with a set color, timestamp and footer.
+     * Gets an {@link net.dv8tion.jda.api.EmbedBuilder EmbedBuilder} with a set color, timestamp and footer.
      * <br>This method calls {@link #getEmbed() getEmbed()} and adds the users tag in the footer.
      *
      * @param  user
-     *         The {@link net.dv8tion.jda.core.entities.User User} to set in the footer.
+     *         The {@link net.dv8tion.jda.api.entities.User User} to set in the footer.
      *
-     * @return A {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder} with set color, timestamp and footer.
+     * @return A {@link net.dv8tion.jda.api.EmbedBuilder EmbedBuilder} with set color, timestamp and footer.
      *
      * @see #getEmbed() for getting an embed without a set user.
      */
@@ -40,7 +40,7 @@ public class EmbedUtil {
      * Sends an Embed with error message to a provided TextChannel.
      *
      * @param tc
-     *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to send the embed.
+     *        The {@link net.dv8tion.jda.api.entities.TextChannel TextChannel} to send the embed.
      * @param user
      *        The user that should be set in the footer. Can be null.
      * @param error
@@ -69,7 +69,7 @@ public class EmbedUtil {
      * <br>This method calls {@link #sendError(TextChannel, User, String, String)} but without an Exception.
      *
      * @param tc
-     *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to send the embed.
+     *        The {@link net.dv8tion.jda.api.entities.TextChannel TextChannel} to send the embed.
      * @param user
      *        The user that should be set in the footer. Can be null.
      * @param error

@@ -1,9 +1,9 @@
 package site.purrbot.bot.util;
 
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import site.purrbot.bot.constants.IDs;
 
 public class PermUtil {
@@ -14,7 +14,7 @@ public class PermUtil {
      * Checks if the provided user is the author of the bot.
      *
      * @param  user
-     *         The {@link net.dv8tion.jda.core.entities.User User} to check.
+     *         The {@link net.dv8tion.jda.api.entities.User User} to check.
      *
      * @return True if the user is the Bot-Author.
      */
@@ -26,11 +26,11 @@ public class PermUtil {
      * Checks permissions of a Member in a TextChannel.
      *
      * @param  tc
-     *         The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to check permission in.
+     *         The {@link net.dv8tion.jda.api.entities.TextChannel TextChannel} to check permission in.
      * @param  member
-     *         The {@link net.dv8tion.jda.core.entities.Member Member} to check.
+     *         The {@link net.dv8tion.jda.api.entities.Member Member} to check.
      * @param  permissions
-     *         The {@link net.dv8tion.jda.core.Permission Permission(s)} to check for.
+     *         The {@link net.dv8tion.jda.api.Permission Permission(s)} to check for.
      *
      * @return True or false if the member has the permission.
      */
@@ -43,9 +43,9 @@ public class PermUtil {
      * <br>This is a shortcut to {@link #hasPermission(TextChannel, Member, Permission...)} that provides the bot as Member.
      *
      * @param  tc
-     *         The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to check permission in.
+     *         The {@link net.dv8tion.jda.api.entities.TextChannel TextChannel} to check permission in.
      * @param  permissions
-     *         The {@link net.dv8tion.jda.core.Permission Permission(s)} to check for.
+     *         The {@link net.dv8tion.jda.api.Permission Permission(s)} to check for.
      *
      * @return True or false if the Bot has the checked permission.
      *

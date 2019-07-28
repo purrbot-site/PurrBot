@@ -4,8 +4,8 @@ import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.WebhookClientBuilder;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.Webhook;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.Webhook;
 
 import javax.annotation.Nullable;
 
@@ -64,7 +64,7 @@ public class WebhookUtil {
      * instead of a URL.
      *
      * @param tc
-     *        The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to get the webhook from.
+     *        The {@link net.dv8tion.jda.api.entities.TextChannel TextChannel} to get the webhook from.
      * @param avatar
      *        The link to an avatar to use.
      * @param name
@@ -110,14 +110,15 @@ public class WebhookUtil {
      * Gets the URL of an existing webhook or creates one and gets the URL from it.
      *
      * @param  textChannel
-     *         The {@link net.dv8tion.jda.core.entities.TextChannel TextChannel} to check for webhooks.
+     *         The {@link net.dv8tion.jda.api.entities.TextChannel TextChannel} to check for webhooks.
      *
      * @return The URL of a (newly created) webhook.
      */
     private String getURL(TextChannel textChannel){
-        Webhook webhook = textChannel.getWebhooks().complete().stream().findFirst().orElse(null);
+        Webhook webhook = textChannel.retrieveWebhooks().complete().stream().findFirst().orElse(null);
 
-        if(webhook == null) webhook = textChannel.createWebhook("PurrBot-Fakegit").complete();
+        if(webhook == null)
+            webhook = textChannel.createWebhook("PurrBot-Fakegit").complete();
 
         return webhook.getUrl();
     }

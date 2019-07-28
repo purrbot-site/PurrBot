@@ -1,6 +1,6 @@
 package site.purrbot.bot.util.message;
 
-import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.api.entities.Member;
 import site.purrbot.bot.PurrBot;
 
 import java.awt.Color;
@@ -149,7 +149,7 @@ public class MessageUtil {
      * @param  message
      *         The String to format.
      * @param  member
-     *         The {@link net.dv8tion.jda.core.entities.Member Member} to get values from.
+     *         The {@link net.dv8tion.jda.api.entities.Member Member} to get values from.
      *
      * @return The formatted text.
      */

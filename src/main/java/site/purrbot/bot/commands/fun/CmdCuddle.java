@@ -2,11 +2,11 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -41,6 +41,10 @@ public class CmdCuddle implements Command{
             return;
         }
 
+        Member member = msg.getMember();
+        if(member == null)
+            return;
+
         Guild guild = msg.getGuild();
         List<Member> members = msg.getMentionedMembers();
 
@@ -48,13 +52,13 @@ public class CmdCuddle implements Command{
             if(bot.isBeta()){
                 tc.sendMessage(String.format(
                         "\\*snuggles up at %s*",
-                        msg.getMember().getAsMention()
+                        member.getAsMention()
                 )).queue();
                 msg.addReaction("❤").queue();
             }else{
                 tc.sendMessage(String.format(
                         "\\*enjoys the cuddle from %s*",
-                        msg.getMember().getAsMention()
+                        member.getAsMention()
                 )).queue();
                 msg.addReaction("❤").queue();
             }
@@ -64,7 +68,7 @@ public class CmdCuddle implements Command{
             tc.sendMessage(String.format(
                     "Why do you cuddle yourself %s?\n" +
                     "You can cuddle me if you want... %s",
-                    msg.getMember().getAsMention(),
+                    member.getAsMention(),
                     Emotes.VANILLABLUSH.getEmote()
             )).queue();
         }
@@ -72,9 +76,9 @@ public class CmdCuddle implements Command{
         String link = bot.getHttpUtil().getImage(API.GIF_CUDDLE);
 
         String cuddledMembers = members.stream().filter(
-                member -> !member.equals(guild.getSelfMember())
+                mem -> !mem.equals(guild.getSelfMember())
         ).filter(
-                member -> !member.equals(msg.getMember())
+                mem -> !mem.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(cuddledMembers.isEmpty())
@@ -87,14 +91,14 @@ public class CmdCuddle implements Command{
             if(link == null){
                 message.editMessage(String.format(
                         "%s cuddles with you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         cuddledMembers
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(
                         bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s cuddles with you %s",
-                                msg.getMember().getEffectiveName(),
+                                member.getEffectiveName(),
                                 cuddledMembers
                         )).setImage(link).build()
                 ).queue();

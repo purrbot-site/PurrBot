@@ -3,12 +3,9 @@ package site.purrbot.bot.commands.fun;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.menu.Slideshow;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Emote;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -51,7 +48,6 @@ public class CmdNeko implements Command{
 
     @Override
     public void execute(Message msg, String args) {
-        Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
@@ -81,16 +77,14 @@ public class CmdNeko implements Command{
             }
 
             Slideshow slideshow = sBuilder
-                    .setUsers(msg.getAuthor(), guild.getOwner().getUser())
+                    .setUsers(msg.getAuthor())
                     .setText("Neko-slideshow!")
                     .setDescription(String.format(
                             "Use the reactions to navigate through the images!\n" +
-                            "Only the author of the command (`%s`) and the Guild-Owner (`%s`) " +
-                            "can use the navigation!\n" +
+                            "Only the author of the command (`%s`) can use the navigation!\n" +
                             "\n" +
                             "__**Slideshows may take a while to update!**__",
-                            msg.getAuthor().getAsTag().replace("`", "'"),
-                            guild.getOwner().getUser().getAsTag().replace("`", "'")
+                            msg.getAuthor().getAsTag().replace("`", "'")
                     ))
                     .setUrls(urls.replace("\"", "").split(","))
                     .setFinalAction(message -> {
@@ -151,7 +145,8 @@ public class CmdNeko implements Command{
                     neko.setDescription("That is my little sister!");
 
                     if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
-                        message.addReaction(snuggle).queue();
+                        if(snuggle != null)
+                            message.addReaction(snuggle).queue();
                 }
             }else
             if(link.equals("https://cdn.nekos.life/v3/sfw/img/neko/neko_139.png")){
@@ -160,7 +155,8 @@ public class CmdNeko implements Command{
                     neko.setDescription("That is my big sister!");
 
                     if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
-                        message.addReaction(purr).queue();
+                        if(purr != null)
+                            message.addReaction(purr).queue();
                 }else{
                     neko.setDescription("T-that is me! OwO");
                     message.addReaction("❤").queue();

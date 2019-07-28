@@ -2,8 +2,8 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -37,6 +37,10 @@ public class CmdTickle implements Command{
             return;
         }
 
+        Member member = msg.getMember();
+        if(member == null)
+            return;
+
         Guild guild = msg.getGuild();
         List<Member> members = msg.getMentionedMembers();
 
@@ -53,15 +57,15 @@ public class CmdTickle implements Command{
         if(members.contains(msg.getMember())){
             tc.sendMessage(String.format(
                     "Alright... If you really want to tickle yourself... \\*tickles %s*",
-                    msg.getMember().getAsMention()
+                    member.getAsMention()
             )).queue();
         }
 
         String link = bot.getHttpUtil().getImage(API.GIF_TICKLE);
         String tickledMembers = members.stream().filter(
-                member -> !member.equals(guild.getSelfMember())
+                mem -> !mem.equals(guild.getSelfMember())
         ).filter(
-                member -> !member.equals(msg.getMember())
+                mem -> !mem.equals(msg.getMember())
         ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(tickledMembers.isEmpty())
@@ -74,7 +78,7 @@ public class CmdTickle implements Command{
             if(link == null){
                 message.editMessage(String.format(
                         "%s tickles you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         tickledMembers
                 )).queue();
             }else{
@@ -82,7 +86,7 @@ public class CmdTickle implements Command{
                         EmbedBuilder.ZERO_WIDTH_SPACE
                 ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                         "%s tickles you %s",
-                        msg.getMember().getEffectiveName(),
+                        member.getEffectiveName(),
                         tickledMembers
                 )).setImage(link).build()).queue();
             }

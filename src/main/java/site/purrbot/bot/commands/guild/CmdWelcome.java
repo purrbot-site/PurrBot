@@ -2,9 +2,8 @@ package site.purrbot.bot.commands.guild;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Links;
@@ -12,7 +11,7 @@ import site.purrbot.bot.constants.Links;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.MessageFormat;
+import java.util.Objects;
 
 @CommandDescription(
         name = "Welcome",
@@ -118,7 +117,8 @@ public class CmdWelcome implements Command{
                         .setDescription(String.format(
                                 "%s updated to %s",
                                 type.toString().toLowerCase(),
-                                type == Type.CHANNEL ? msg.getGuild().getTextChannelById(value).getAsMention() : value
+                                type == Type.CHANNEL ? Objects.requireNonNull(msg.getGuild().getTextChannelById(value))
+                                        .getAsMention() : value
                         ))
                         .build()
         ).queue();
@@ -158,7 +158,8 @@ public class CmdWelcome implements Command{
     private TextChannel getWelcomeChannel(String id){
         if(manager.getWelcomeChannel(id).equals("none")) return null;
 
-        return manager.getShardManager().getGuildById(id).getTextChannelById(manager.getWelcomeChannel(id));
+        return Objects.requireNonNull(manager.getShardManager().getGuildById(id))
+                .getTextChannelById(manager.getWelcomeChannel(id));
     }
 
     @Override
