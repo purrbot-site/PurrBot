@@ -22,7 +22,7 @@
 [whatthecommit]: https://whatthecommit.com
 
 <!-- Widgets -->
-[widgetBotlist]: https://botlist.space/bot/425382319449309197/widget/6  
+[widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
 [widgetDbl]: https://discordbots.org/api/widget/425382319449309197.svg  
 
 <!-- Botlists -->
