@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @CommandDescription(
         name = "Poke",
         description = "Poke one or multiple people!",
-        triggers = {"poke", "poking"},
+        triggers = {"poke", "poking", "boop", "boops"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
                 @CommandAttribute(key = "usage", value = "{p}poke @user [@user ...]")

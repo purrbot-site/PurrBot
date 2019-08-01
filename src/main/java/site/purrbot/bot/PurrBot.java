@@ -3,6 +3,7 @@ package site.purrbot.bot;
 import ch.qos.logback.classic.Logger;
 import com.andre601.javabotblockapi.BotBlockAPI;
 import com.andre601.javabotblockapi.RequestHandler;
+import com.andre601.javabotblockapi.Site;
 import com.andre601.javabotblockapi.exceptions.RatelimitedException;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -183,9 +184,9 @@ public class PurrBot {
     public void startUpdates(){
         if(!isBeta()) {
             botBlockAPI = new BotBlockAPI.Builder()
-                    .addAuthToken("botlist.space", getgFile().getString("config", "botlist-token"))
-                    .addAuthToken("discord.bots.gg", getgFile().getString("config", "dbgg-token"))
-                    .addAuthToken("lbots.org", getgFile().getString("config", "lbots-token"))
+                    .addAuthToken(Site.BOTLIST_SPACE, getgFile().getString("config", "botlist-token"))
+                    .addAuthToken(Site.DISCORD_BOTS_GG, getgFile().getString("config", "dbgg-token"))
+                    .addAuthToken(Site.LBOTS_ORG, getgFile().getString("config", "lbots-token"))
                     .build();
 
             dblApi = new DiscordBotListAPI.Builder()

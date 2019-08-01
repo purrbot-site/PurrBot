@@ -132,7 +132,7 @@ public class CmdFuck implements Command{
                 "\n" +
                 "> **This request will time out in 1 minute!**",
                 member.getAsMention(),
-                author
+                author.getEffectiveName()
         )).queue(message -> message.addReaction("✅").queue(m -> message.addReaction("❌").queue(emote -> {
                 EventWaiter waiter = bot.getWaiter();
                 waiter.waitForEvent(
