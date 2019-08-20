@@ -107,6 +107,10 @@ public class CommandListener extends ListenerAdapter{
                         )).queue();
                         return;
                     }
+                    if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
+                        bot.getEmbedUtil().sendError(tc, user, "I require `Read Message History` permissions to do this.");
+                        return;
+                    }
                     if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_ADD_REACTION)){
                         bot.getEmbedUtil().sendError(tc, user, "I need permission to add reactions!");
                         return;

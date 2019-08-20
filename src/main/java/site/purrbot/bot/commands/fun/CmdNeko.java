@@ -141,22 +141,18 @@ public class CmdNeko implements Command{
                     neko.setDescription("That is me! >w<");
                     message.addReaction("❤").queue();
                 }else{
-                    Emote snuggle = bot.getShardManager().getEmoteById(Emotes.SNUGGLE.getId());
                     neko.setDescription("That is my little sister!");
 
                     if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
-                        if(snuggle != null)
-                            message.addReaction(snuggle).queue();
+                        message.addReaction(Emotes.SNUGGLE.getNameAndId()).queue();
                 }
             }else
             if(link.equals("https://cdn.nekos.life/v3/sfw/img/neko/neko_139.png")){
                 if(bot.isBeta()){
-                    Emote purr = bot.getShardManager().getEmoteById(Emotes.PURR.getId());
                     neko.setDescription("That is my big sister!");
 
                     if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
-                        if(purr != null)
-                            message.addReaction(purr).queue();
+                        message.addReaction(Emotes.PURR.getNameAndId()).queue();
                 }else{
                     neko.setDescription("T-that is me! OwO");
                     message.addReaction("❤").queue();

@@ -10,7 +10,10 @@
     "Got a response from Discord in %sms."
   ],
   "blacklist": [
-    "578951136288178216"
+    "578951136288178216",
+    "591723340130156545",
+    "525029165192183808",
+    "610874380112625735"
   ],
   "deny_fuck_msg": [
     "I'm sorry %s, but I can't right now...",

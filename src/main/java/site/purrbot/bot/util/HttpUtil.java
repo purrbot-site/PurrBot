@@ -2,9 +2,7 @@ package site.purrbot.bot.util;
 
 import okhttp3.*;
 import org.json.JSONObject;
-import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Links;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -13,10 +11,7 @@ public class HttpUtil {
 
     private final OkHttpClient CLIENT = new OkHttpClient();
 
-    private PurrBot bot;
-
-    public HttpUtil(PurrBot bot){
-        this.bot = bot;
+    public HttpUtil(){
     }
 
     private String image(API api, int count) throws IOException{
@@ -39,22 +34,6 @@ public class HttpUtil {
                     .getJSONObject("response");
 
             return count <= 1 ? json.getString("url") : json.getJSONArray("urls").join(",");
-        }
-    }
-
-    private JSONObject voteInfo() throws IOException{
-        Request request = new Request.Builder().url(Links.DISCORDBOTS_ORG_STATS.getUrl())
-                .header("Authorization", bot.getgFile().getString("config", "dbl-token"))
-                .build();
-
-        Response response = CLIENT.newCall(request).execute();
-        try(ResponseBody body = response.body()){
-            if(!response.isSuccessful()) throw new IOException(String.format(
-                    "Unexpected code: %s",
-                    response
-            ));
-
-            return new JSONObject(Objects.requireNonNull(body).string());
         }
     }
 
@@ -83,14 +62,6 @@ public class HttpUtil {
     public String getImage(API api){
         try{
             return image(api, 1);
-        }catch(IOException ex){
-            return null;
-        }
-    }
-
-    JSONObject getVoteInfo(){
-        try{
-            return voteInfo();
         }catch(IOException ex){
             return null;
         }

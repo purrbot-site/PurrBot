@@ -20,8 +20,3 @@ about: Reporting a bug/issue
 <!-- Links can be added through [Your text](Your link) or by simply putting the link here -->
 <!-- Images can be added through ![](Your image link) or by copying the image and pasting it here (Ctrl + V) -->
 <!-- Please write below this line -->
-
-
-### Debug
-> Please use `.debug` in your guild and provide the link.
-<!-- Please write below this line -->

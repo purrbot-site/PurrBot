@@ -4,14 +4,12 @@ import ch.qos.logback.classic.Logger;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
-import org.apache.commons.collections4.ListUtils;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.constants.Roles;
 
-import java.io.IOException;
 import java.util.Collections;
 
 public class RewardHandler {
@@ -75,35 +73,13 @@ public class RewardHandler {
                     .reason("[Reward] User upvoted bot on discordbots.org!")
                     .queue();
 
-            byte[] image;
-
-            try{
-                image = bot.getImageUtil().getVoteImage(member, weekend);
-            }catch(IOException ex){
-                image = null;
-            }
-
-            if(image == null){
-                bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
-                        "%s upvotes %s on discordbots.org! Thank you. \uD83C\uDF89\n" +
-                        "You can do that too on <%s>",
-                        member.getAsMention(),
-                        guild.getSelfMember().getAsMention(),
-                        Links.DISCORDBOTS_ORG.getUrl()
-                ), null);
-                return;
-            }
-
-            bot.getWebhookUtil().sendFile(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
+            bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
                     "%s upvotes %s on discordbots.org! Thank you. \uD83C\uDF89\n" +
                     "You can do that too on <%s>",
                     member.getAsMention(),
                     guild.getSelfMember().getAsMention(),
                     Links.DISCORDBOTS_ORG.getUrl()
-            ), String.format(
-                    "upvote_%s.png",
-                    userId
-            ), image);
+            ), null);
         }else
         if(site.equals(Site.BOTLIST_SPACE)){
             if(member == null){

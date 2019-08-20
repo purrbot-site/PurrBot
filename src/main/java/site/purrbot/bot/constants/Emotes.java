@@ -45,6 +45,14 @@ public enum Emotes{
         );
     }
 
+    public String getNameAndId(){
+        return String.format(
+                "%s:%s",
+                this.name,
+                this.id
+        );
+    }
+
     public String getId(){
         return this.id;
     }

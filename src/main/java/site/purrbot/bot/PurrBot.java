@@ -108,9 +108,9 @@ public class PurrBot {
         messageUtil   = new MessageUtil(this);
         rewardHandler = new RewardHandler(this);
         embedUtil     = new EmbedUtil();
-        httpUtil      = new HttpUtil(this);
+        httpUtil      = new HttpUtil();
         webhookUtil   = new WebhookUtil();
-        imageUtil     = new ImageUtil(this);
+        imageUtil     = new ImageUtil();
         levelManager  = new LevelManager(this);
 
         waiter = new EventWaiter();

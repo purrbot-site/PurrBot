@@ -1,11 +1,12 @@
 package site.purrbot.bot.util;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
-import org.apache.commons.codec.EncoderException;
 import org.json.JSONObject;
-import site.purrbot.bot.PurrBot;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,11 +18,7 @@ import java.net.URLEncoder;
 
 public class ImageUtil {
 
-    private PurrBot bot;
-
-    public ImageUtil(PurrBot bot){
-        this.bot = bot;
-    }
+    public ImageUtil(){}
 
     private final String[] USER_AGENT = {"User-Agent", "PurrBot-UserAgent"};
 
@@ -32,76 +29,6 @@ public class ImageUtil {
         connection.connect();
 
         return ImageIO.read(connection.getInputStream());
-    }
-
-    byte[] getVoteImage(Member member, boolean weekend) throws IOException{
-        BufferedImage avatar;
-
-        try{
-            avatar = getAvatar(member.getUser());
-        }catch(IOException ex){
-            avatar = null;
-        }
-
-        BufferedImage background = ImageIO.read(new File("img/background.png"));
-        BufferedImage layer = ImageIO.read(new File("img/vote_layer.png"));
-
-        BufferedImage image = new BufferedImage(background.getWidth(), background.getHeight(), background.getType());
-        Graphics2D img = image.createGraphics();
-
-        img.drawImage(background, 0, 0, null);
-        if(avatar != null) img.drawImage(avatar, 5, 5, 290, 290, null);
-        img.drawImage(layer, 0, 0, null);
-
-        Font text = new Font(Font.SANS_SERIF, Font.PLAIN, 120);
-        Font vote = new Font(Font.SANS_SERIF, Font.PLAIN, 60);
-
-        img.setColor(Color.WHITE);
-        img.setFont(text);
-
-        img.drawString(member.getEffectiveName(), 320, 130);
-
-        img.setColor(new Color(0x7289DA));
-        img.setFont(vote);
-
-        JSONObject object = bot.getHttpUtil().getVoteInfo();
-
-        String monthly;
-        String total;
-
-        if(object == null){
-            monthly = "?";
-            total  = "?";
-        }else{
-            monthly = String.valueOf(object.getLong("monthlyPoints"));
-            total   = String.valueOf(object.getLong("points"));
-        }
-
-        int width = image.getWidth();
-
-        int paddingMontly = 1260;
-        int monthlyWidth = img.getFontMetrics().stringWidth(monthly);
-        int monthlyX = width - monthlyWidth - paddingMontly;
-
-        int paddingTotal = 800;
-        int totalWidth = img.getFontMetrics().stringWidth(total);
-        int totalX = width - totalWidth - paddingTotal;
-
-        img.drawString(monthly, monthlyX, 270);
-        img.drawString(total, totalX, 270);
-
-        if(weekend){
-            img.setColor(new Color(0x2ECC71));
-            img.drawString("x2 Votes!", 1150, 270);
-        }
-
-        img.dispose();
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.setUseCache(false);
-        ImageIO.write(image, "png", baos);
-
-        return baos.toByteArray();
     }
 
     /**
