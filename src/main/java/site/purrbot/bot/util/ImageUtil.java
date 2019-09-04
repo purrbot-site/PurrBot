@@ -1,12 +1,18 @@
 package site.purrbot.bot.util;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
+
+import net.dv8tion.jda.internal.utils.IOUtil;
+import okhttp3.OkHttpClient;
+
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.json.JSONObject;
+import site.purrbot.bot.PurrBot;
+
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,13 +20,19 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.util.Random;
 
 public class ImageUtil {
 
-    public ImageUtil(){}
+    private PurrBot bot;
+
+    public ImageUtil(PurrBot bot){
+        this.bot = bot;
+    }
 
     private final String[] USER_AGENT = {"User-Agent", "PurrBot-UserAgent"};
+    private final OkHttpClient CLIENT = new OkHttpClient();
+    private Random random = new Random();
 
     private BufferedImage getAvatar(User user) throws IOException{
         URL url = new URL(user.getEffectiveAvatarUrl());
@@ -104,7 +116,7 @@ public class ImageUtil {
     }
 
     /**
-     * Connects to <a href="https://purrbot.site/api/quote">purrbot.site/api/quote</a> and receives a quote-image as
+     * Connects to the <a href="https://purrbot.site/api">PurrBot API</a> and receives a quote-image as
      * an InputStream.
      *
      * @param  quote
@@ -113,31 +125,43 @@ public class ImageUtil {
      * @return The InputStream of the image.
      *
      * @throws IOException
-     *         When either the URL-encoding failed, the URL is malformed, or the connection can't be established.
+     *         Thrown when the request fails (response is not 2xx)
+     * @throws NullPointerException
+     *         Thrown when the returned body is empty/null
      */
-    public InputStream getQuoteImg(Message quote) throws IOException{
+    public byte[] getQuoteImg(Message quote) throws IOException, NullPointerException{
         Member member = quote.getMember();
 
-        String name   = URLEncoder.encode(member == null ? "Unknown" : member.getEffectiveName(), "UTF-8");
-        String msg    = URLEncoder.encode(quote.getContentDisplay(), "UTF-8");
-        String avatar = URLEncoder.encode(quote.getAuthor().getEffectiveAvatarUrl(), "UTF-8");
-        int color = member == null ? 0x1FFFFFFF : member.getColorRaw();
-        long time = quote.getTimeCreated().toInstant().toEpochMilli();
+        JSONObject json = new JSONObject()
+                .put("avatar", quote.getAuthor().getEffectiveAvatarUrl())
+                .put("color", member == null ? String.valueOf(0x1FFFFFFF) : String.valueOf(member.getColorRaw()))
+                .put("format", "dd. MMM yyyy")
+                .put("name", member == null ? "Anonymous" : member.getEffectiveName())
+                .put("text", quote.getContentDisplay())
+                .put("time", String.valueOf(quote.getTimeCreated().toInstant().toEpochMilli()));
 
-        String url = String.format(
-                "https://purrbot.site/api/quote?avatar=%s&color=%d&name=%s&text=%s&time=%d",
-                avatar,
-                color,
-                name,
-                msg,
-                time
-        );
+        RequestBody body = RequestBody.create(null, json.toString());
 
-        return new URL(url).openStream();
+        Request request = new Request.Builder()
+                .addHeader("User-Agent", "PurrBot BOT_VERSION")
+                .addHeader("content-type", "application/json")
+                .post(body)
+                .url("https://purrbot.site/api/quote")
+                .build();
+
+        try(Response response = CLIENT.newCall(request).execute()){
+            if(!response.isSuccessful())
+                throw new IOException("Couldn't get quote image.");
+
+            if(response.body() == null)
+                throw new NullPointerException("Received empty response (null).");
+
+            return IOUtil.readFully(response.body().byteStream());
+        }
     }
 
     /**
-     * Connects to <a href="https://purrbot.site/api/status">purrbot.site/api/status</a> and receives a status-image
+     * Connects to the <a href="https://purrbot.site/api">PurrBot API</a> and receives a status-image
      * (avatar with the status icon of Discord (Green, yellow, red or gray dot).
      *
      * @param  avatarUrl
@@ -148,36 +172,117 @@ public class ImageUtil {
      * @return The InputStream of the image.
      *
      * @throws IOException
-     *         When either the URL-encoding failed, the URL is malformed, or the connection can't be established.
+     *         Thrown when the request fails (response is not 2xx)
+     * @throws NullPointerException
+     *         Thrown when the returned body is empty/null
      */
-    public InputStream getStatusAvatar(String avatarUrl, String status) throws IOException{
-        avatarUrl = URLEncoder.encode(avatarUrl, "UTF-8");
-        status    = URLEncoder.encode(status, "UTF-8");
+    public byte[] getStatusAvatar(String avatarUrl, String status) throws IOException, NullPointerException{
 
-        String url = String.format(
-                "https://purrbot.site/api/status?avatar=%s&status=%s",
-                avatarUrl,
-                status
-        );
+        JSONObject json = new JSONObject()
+                .put("avatar", avatarUrl)
+                .put("status", status);
 
-        return new URL(url).openStream();
+        RequestBody body = RequestBody.create(null, json.toString());
+
+        Request request = new Request.Builder()
+                .addHeader("User-Agent", "PurrBot BOT_VERSION")
+                .addHeader("content-type", "application/json")
+                .post(body)
+                .url("https://purrbot.site/api/status")
+                .build();
+
+        try(Response response = CLIENT.newCall(request).execute()){
+            if(!response.isSuccessful())
+                throw new IOException("Couldn't get status image.");
+
+            if(response.body() == null)
+                throw new NullPointerException("Received empty response (null).");
+
+            return IOUtil.readFully(response.body().byteStream());
+        }
     }
 
-    public InputStream getWelcomeImg(User user, int size, String imgType, String color) throws IOException{
-        String avatar = URLEncoder.encode(user.getEffectiveAvatarUrl(), "UTF-8");
-        String name = URLEncoder.encode(user.getName(), "UTF-8");
-        imgType = URLEncoder.encode(imgType, "UTF-8");
-        color = URLEncoder.encode(color, "UTF-8");
+    /**
+     * Gets the image from the <a href="https://api.blazedev.me" target="_blank">BlazeDev API</a>.
+     *
+     * @param  user
+     *         The User to get information from like avatar and username
+     * @param  size
+     *         The current Discord size
+     * @param  icon
+     *         The icon to use
+     * @param  bg
+     *         The background to use
+     * @param  color
+     *         The font colour to use
+     *
+     * @return The InputStream of the generated image
+     *
+     * @throws IOException
+     *         Thrown when the request fails (response is not 2xx)
+     * @throws NullPointerException
+     *         Thrown when the returned body is empty/null
+     */
+    public InputStream getWelcomeImg(User user, int size, String icon, String bg, String color) throws IOException, NullPointerException{
+        if(color.toLowerCase().startsWith("hex:") || color.toLowerCase().startsWith("hex:#")){
+            color = color.toLowerCase().replace("hex:#", "#").replace("hex:", "#");
+        }else
+        if(color.toLowerCase().startsWith("rgb:")){
+            color = color.toLowerCase().replace("rgb:", "");
+        }else{
+            color = "#000000";
+        }
 
-        String url = String.format(
-                "https://purrbot.site/api/welcome?avatar=%s&name=%s&image=%s&color=%s&size=%d",
-                avatar,
-                name,
-                imgType,
-                color,
-                size
+        if(icon.equalsIgnoreCase("random"))
+            icon = getRandomIcon();
+
+        if(bg.equalsIgnoreCase("random"))
+            bg = getRandomBg();
+
+        JSONObject json = new JSONObject()
+                .put("username", user.getAsTag())
+                .put("members", String.format("You're member #%d", size))
+                .put("icon", String.format("https://purrbot.site/images/icon/%s.png", icon))
+                .put("banner", String.format("https://purrbot.site/images/background/%s.png", bg))
+                .put("avatar", user.getEffectiveAvatarUrl())
+                .put("color_welcome", color)
+                .put("color_username", color)
+                .put("color_members", color);
+
+        RequestBody body = RequestBody.create(null, json.toString());
+
+        Request request = new Request.Builder()
+                .addHeader("User-Agent", "PurrBot BOT_VERSION")
+                .addHeader("content-type", "application/json")
+                .addHeader("Authorization", bot.getgFile().getString("config", "blaze-token"))
+                .post(body)
+                .url("https://api.blazedev.me/gen/welcome")
+                .build();
+
+        try(Response response = CLIENT.newCall(request).execute()){
+            if(!response.isSuccessful())
+                throw new IOException(String.format(
+                        "Couldn't get welcome image. Server responded with %d (%s)",
+                        response.code(),
+                        response.message()
+                ));
+
+            if(response.body() == null)
+                throw new NullPointerException("Received empty response (null).");
+
+            return new ByteArrayInputStream(response.body().bytes());
+        }
+    }
+
+    private String getRandomIcon(){
+        return bot.getWelcomeIcon().isEmpty() ? "" : bot.getWelcomeIcon().get(
+                random.nextInt(bot.getWelcomeIcon().size())
         );
+    }
 
-        return new URL(url).openStream();
+    private String getRandomBg(){
+        return bot.getWelcomeBg().isEmpty() ? "" : bot.getWelcomeBg().get(
+                random.nextInt(bot.getWelcomeBg().size())
+        );
     }
 }

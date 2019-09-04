@@ -10,7 +10,6 @@ import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -207,22 +206,22 @@ public class CmdUser implements Command{
                     true
             );
 
-        InputStream is;
+        byte[] bytes;
         try {
-            is = bot.getImageUtil().getStatusAvatar(
+            bytes = bot.getImageUtil().getStatusAvatar(
                     member.getUser().getEffectiveAvatarUrl(),
                     member.getOnlineStatus().toString()
             );
         }catch(IOException ex){
-            is = null;
+            bytes = null;
         }
 
-        if(is == null){
+        if(bytes == null){
             tc.sendMessage(embed.setThumbnail(member.getUser().getEffectiveAvatarUrl()).build()).queue();
             return;
         }
 
-        tc.sendFile(is, String.format("%s", imgName)).embed(embed.setThumbnail(String.format(
+        tc.sendFile(bytes, String.format("%s", imgName)).embed(embed.setThumbnail(String.format(
                 "attachment://%s",
                 imgName
                 )

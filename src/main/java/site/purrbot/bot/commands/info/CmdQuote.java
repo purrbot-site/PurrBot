@@ -11,7 +11,6 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 @CommandDescription(
         name = "Quote",
@@ -110,15 +109,15 @@ public class CmdQuote implements Command{
 
                 sendQuoteEmbed(quote, link, tc);
             }else{
-                InputStream is;
+                byte[] bytes;
 
                 try{
-                    is = bot.getImageUtil().getQuoteImg(quote);
+                    bytes = bot.getImageUtil().getQuoteImg(quote);
                 }catch(IOException ex){
-                    is = null;
+                    bytes = null;
                 }
 
-                if(is == null){
+                if(bytes == null){
                     sendQuoteEmbed(quote, null, tc);
                     return;
                 }
@@ -137,7 +136,7 @@ public class CmdQuote implements Command{
                         ))
                         .build();
 
-                tc.sendFile(is, name).embed(embed).queue();
+                tc.sendMessage(embed).addFile(bytes, name).queue();
             }
             return;
         }
@@ -175,15 +174,15 @@ public class CmdQuote implements Command{
 
                 sendQuoteEmbed(quote, link, tc);
             }else{
-                InputStream is;
+                byte[] bytes;
 
                 try{
-                    is = bot.getImageUtil().getQuoteImg(quote);
+                    bytes = bot.getImageUtil().getQuoteImg(quote);
                 }catch(IOException ex){
-                    is = null;
+                    bytes = null;
                 }
 
-                if(is == null){
+                if(bytes == null){
                     sendQuoteEmbed(quote, null, tc);
                     return;
                 }
@@ -202,7 +201,7 @@ public class CmdQuote implements Command{
                         ))
                         .build();
 
-                tc.sendFile(is, name).embed(embed).queue();
+                tc.sendFile(bytes, name).embed(embed).queue();
             }
         }else{
             bot.getEmbedUtil().sendError(

@@ -73,13 +73,16 @@ public class PurrBot {
     private Cache<String, String> prefixes = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
+    private Cache<String, String> welcomeBg = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
     private Cache<String, String> welcomeChannel = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    private Cache<String, String> welcomeImg = Caffeine.newBuilder()
+    private Cache<String, String> welcomeColor = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    private Cache<String, String> welcomeColor = Caffeine.newBuilder()
+    private Cache<String, String> welcomeIcon = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
     private Cache<String, String> welcomeMsg = Caffeine.newBuilder()
@@ -110,7 +113,7 @@ public class PurrBot {
         embedUtil     = new EmbedUtil();
         httpUtil      = new HttpUtil();
         webhookUtil   = new WebhookUtil();
-        imageUtil     = new ImageUtil();
+        imageUtil     = new ImageUtil(this);
         levelManager  = new LevelManager(this);
 
         waiter = new EventWaiter();
@@ -150,7 +153,11 @@ public class PurrBot {
                         if(isFavourite)
                             rewardHandler.lbotsReward(userId);
 
-                    return "";
+                    response.status(200);
+                    response.type("application/json");
+                    response.body("{\"code\": 200,\"message\": \"POST request successful.\"}");
+
+                    return response.body();
                 });
 
                 post("/botlist_space", (request, response) -> {
@@ -162,7 +169,11 @@ public class PurrBot {
                     if(getReadyListener().isReady())
                         rewardHandler.botlistSpaceReward(botId, userId);
 
-                    return "";
+                    response.status(200);
+                    response.type("application/json");
+                    response.body("{\"code\": 200,\"message\": \"POST request successful.\"}");
+
+                    return response.body();
                 });
 
                 post("/dbl", (request, response) -> {
@@ -175,7 +186,11 @@ public class PurrBot {
                                 vote.isWeekend()
                         );
 
-                    return "";
+                    response.status(200);
+                    response.type("application/json");
+                    response.body("{\"code\": 200,\"message\": \"POST request successful.\"}");
+
+                    return response.body();
                 });
             });
         }
@@ -253,14 +268,17 @@ public class PurrBot {
     public String getPrefix(String id){
         return prefixes.get(id, k -> getDbUtil().getPrefix(id));
     }
+    public String getWelcomeBg(String id){
+        return welcomeBg.get(id, k -> getDbUtil().getWelcomeBg(id));
+    }
     public String getWelcomeChannel(String id){
         return welcomeChannel.get(id, k -> getDbUtil().getWelcomeChannel(id));
     }
-    public String getWelcomeImg(String id){
-        return welcomeImg.get(id, k -> getDbUtil().getWelcomeImg(id));
-    }
     public String getWelcomeColor(String id){
         return welcomeColor.get(id, k -> getDbUtil().getWelcomeColor(id));
+    }
+    public String getWelcomeIcon(String id){
+        return welcomeIcon.get(id, k -> getDbUtil().getWelcomeIcon(id));
     }
     public String getWelcomeMsg(String id){
         return welcomeMsg.get(id, k -> getDbUtil().getWelcomeMsg(id));
@@ -270,17 +288,21 @@ public class PurrBot {
         getDbUtil().setPrefix(key, value);
         prefixes.put(key, value);
     }
+    public void setWelcomeBg(String key, String value){
+        getDbUtil().setWelcomeBg(key, value);
+        welcomeBg.put(key, value);
+    }
     public void setWelcomeChannel(String key, String value){
         getDbUtil().setWelcomeChannel(key, value);
         welcomeChannel.put(key, value);
     }
-    public void setWelcomeImg(String key, String value){
-        getDbUtil().setWelcomeImg(key, value);
-        welcomeImg.put(key, value);
-    }
     public void setWelcomeColor(String key, String value){
         getDbUtil().setWelcomeColor(key, value);
         welcomeColor.put(key, value);
+    }
+    public void setWelcomeIcon(String key, String value){
+        getDbUtil().setWelcomeIcon(key, value);
+        welcomeIcon.put(key, value);
     }
     public void setWelcomeMsg(String key, String value){
         getDbUtil().setWelcomeMsg(key, value);
@@ -289,9 +311,10 @@ public class PurrBot {
 
     public void invalidateCache(String id){
         prefixes.invalidate(id);
+        welcomeBg.invalidate(id);
         welcomeChannel.invalidate(id);
-        welcomeImg.invalidate(id);
         welcomeColor.invalidate(id);
+        welcomeIcon.invalidate(id);
         welcomeMsg.invalidate(id);
     }
 
@@ -328,8 +351,11 @@ public class PurrBot {
     public List<String> getStartupMsg(){
         return getgFile().getStringlist("random", "startup_msg");
     }
-    public List<String> getWelcomeImg(){
-        return getgFile().getStringlist("random", "welcome_img");
+    public List<String> getWelcomeBg(){
+        return getgFile().getStringlist("random", "welcome_bg");
+    }
+    public List<String> getWelcomeIcon(){
+        return getgFile().getStringlist("random", "welcome_icon");
     }
 
     private void startUpdate(){

@@ -33,8 +33,16 @@ public class DBUtil {
      *  Guild Stuff
      */
 
-    private void checkGuild(String id){
-        if(getGuild(id) == null) addGuild(id);
+    private void checkValue(String id, String key, String defaultVal){
+        Map guild = r.table(guildTable).get(id).run(connection);
+
+        if(guild == null){
+            addGuild(id);
+            return;
+        }
+
+        if(guild.get(key) == null)
+            r.table(guildTable).get(id).update(r.hashMap(key, defaultVal)).run(connection);
     }
 
     /**
@@ -48,9 +56,10 @@ public class DBUtil {
                 r.array(
                         r.hashMap("id", id)
                                 .with("prefix", bot.isBeta() ? ".." : ".")
+                                .with("welcome_background", "color_white")
                                 .with("welcome_channel", "none")
-                                .with("welcome_image", "purr")
                                 .with("welcome_color", "hex:000000")
+                                .with("welcome_icon", "purr")
                                 .with("welcome_message", "Welcome {mention}!")
                 )
         ).optArg("conflict", "update").run(connection);
@@ -87,7 +96,7 @@ public class DBUtil {
      * @return The prefix of the Guild.
      */
     public String getPrefix(String id){
-        checkGuild(id);
+        checkValue(id, "prefix", ".");
         Map guild = getGuild(id);
 
         return guild.get("prefix").toString();
@@ -102,7 +111,7 @@ public class DBUtil {
      *        The new prefix.
      */
     public void setPrefix(String id, String prefix){
-        checkGuild(id);
+        checkValue(id, "prefix", prefix);
 
         r.table(guildTable).get(id).update(r.hashMap("prefix", prefix)).run(connection);
     }
@@ -110,6 +119,36 @@ public class DBUtil {
     /*
      *  Welcome Stuff
      */
+
+    /**
+     * Gets the welcome image of the Guild.
+     *
+     * @param  id
+     *         The ID of the Guild to get the image from.
+     *
+     * @return The image name.
+     */
+    public String getWelcomeBg(String id){
+        checkValue(id, "welcome_background", "color_white");
+        Map guild = getGuild(id);
+
+        return guild.get("welcome_background").toString();
+    }
+
+    /**
+     * Sets the background for the Guild.
+     *
+     * @param id
+     *        The ID of the Guild.
+     * @param background
+     *        The background that should be used. A list of images can be found here:
+     *        <br>https://github.com/Andre601/PurrBot/wiki/Welcome-Images
+     */
+    public void setWelcomeBg(String id, String background){
+        checkValue(id, "welcome_background", background);
+
+        r.table(guildTable).get(id).update(r.hashMap("welcome_background", background)).run(connection);
+    }
 
     /**
      * Gets the welcome channel of the Guild.
@@ -120,7 +159,7 @@ public class DBUtil {
      * @return The channels ID as String, or "none" if there is no channel set.
      */
     public String getWelcomeChannel(String id){
-        checkGuild(id);
+        checkValue(id, "welcome_channel", "none");
         Map guild = getGuild(id);
 
         return guild.get("welcome_channel").toString();
@@ -135,39 +174,9 @@ public class DBUtil {
      *        The ID of the channel to be saved.
      */
     public void setWelcomeChannel(String id, String channelID){
-        checkGuild(id);
+        checkValue(id, "welcome_channel", channelID);
 
         r.table(guildTable).get(id).update(r.hashMap("welcome_channel", channelID)).run(connection);
-    }
-
-    /**
-     * Gets the welcome image of the Guild.
-     *
-     * @param  id
-     *         The ID of the Guild to get the image from.
-     *
-     * @return The image name.
-     */
-    public String getWelcomeImg(String id){
-        checkGuild(id);
-        Map guild = getGuild(id);
-
-        return guild.get("welcome_image").toString();
-    }
-
-    /**
-     * Sets the image for the Guild.
-     *
-     * @param id
-     *        The ID of the Guild.
-     * @param image
-     *        The image that should be used. A list of images can be found here:
-     *        <br>https://github.com/Andre601/PurrBot/wiki/Welcome-Images
-     */
-    public void setWelcomeImg(String id, String image){
-        checkGuild(id);
-
-        r.table(guildTable).get(id).update(r.hashMap("welcome_image", image)).run(connection);
     }
 
     /**
@@ -179,7 +188,7 @@ public class DBUtil {
      * @return The color's type and value in the format {@code type:value}.
      */
     public String getWelcomeColor(String id){
-        checkGuild(id);
+        checkValue(id, "welcome_color", "hex:000000");
         Map guild = getGuild(id);
 
         return guild.get("welcome_color").toString();
@@ -194,9 +203,38 @@ public class DBUtil {
      *        The color to be saved.
      */
     public void setWelcomeColor(String id, String color){
-        checkGuild(id);
+        checkValue(id, "welcome_color", color);
 
         r.table(guildTable).get(id).update(r.hashMap("welcome_color", color)).run(connection);
+    }
+
+    /**
+     * Gets the icon for the welcome image.
+     *
+     * @param  id
+     *         The ID of the guild to get the icon from.
+     *
+     * @return The saved icon of the Guild.
+     */
+    public String getWelcomeIcon(String id){
+        checkValue(id, "welcome_icon", "purr");
+        Map guild = getGuild(id);
+
+        return guild.get("welcome_icon").toString();
+    }
+
+    /**
+     * Sets the icon for the provided Guild to the provided icon.
+     *
+     * @param id
+     *        the ID of the Guild to set the icon for.
+     * @param icon
+     *        The icon to set.
+     */
+    public void setWelcomeIcon(String id, String icon){
+        checkValue(id, "welcome_icon", icon);
+
+        r.table(guildTable).get(id).update(r.hashMap("welcome_icon", icon)).run(connection);
     }
 
     /**
@@ -208,7 +246,7 @@ public class DBUtil {
      * @return The message that a user will be greeted with.
      */
     public String getWelcomeMsg(String id){
-        checkGuild(id);
+        checkValue(id, "welcome_message", "Welcome {mention}!");
         Map guild = getGuild(id);
 
         return guild.get("welcome_message").toString();
@@ -223,7 +261,7 @@ public class DBUtil {
      *        The message to be saved.
      */
     public void setWelcomeMsg(String id, String message){
-        checkGuild(id);
+        checkValue(id, "welcome_message", message);
 
         r.table(guildTable).get(id).update(r.hashMap("welcome_message", message)).run(connection);
     }

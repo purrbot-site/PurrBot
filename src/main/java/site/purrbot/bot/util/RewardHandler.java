@@ -1,6 +1,8 @@
 package site.purrbot.bot.util;
 
 import ch.qos.logback.classic.Logger;
+import club.minnced.discord.webhook.send.WebhookEmbed;
+import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
@@ -93,7 +95,6 @@ public class RewardHandler {
             }
             reward = guild.getRoleById(Roles.UPVOTE_BOTLIST.getId());
 
-            // TODO: Remove getController() when updating to JDA 4
             guild.modifyMemberRoles(member, Collections.singletonList(reward), null)
                     .reason("[Reward] User upvoted bot on botlist.space!")
                     .queue();

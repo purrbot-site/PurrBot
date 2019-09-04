@@ -281,7 +281,8 @@ public class GuildListener extends ListenerAdapter{
                 is = bot.getImageUtil().getWelcomeImg(
                         event.getUser(),
                         guild.getMembers().size(),
-                        bot.getWelcomeImg(guild.getId()),
+                        bot.getWelcomeIcon(guild.getId()),
+                        bot.getWelcomeBg(guild.getId()),
                         bot.getWelcomeColor(guild.getId())
                 );
             }catch(IOException ex){
@@ -294,7 +295,7 @@ public class GuildListener extends ListenerAdapter{
             }
 
             tc.sendMessage(message).addFile(is, String.format(
-                    "welcome_%s.png",
+                    "welcome_%s.jpg",
                     event.getUser().getId()
             )).queue();
         }else{

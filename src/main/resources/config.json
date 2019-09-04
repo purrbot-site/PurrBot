@@ -5,6 +5,8 @@
   "log-webhook": "log-webhook_url",
   "vote-webhook": "vote-webhook_url",
 
+  "blaze-token": "blaze-token",
+
   "dbl-token": "dbl-token",
   "dbgg-token": "dbgg-token",
   "lbots-token": "lbots-token",

@@ -3,12 +3,6 @@
     "Which bedroom %s?",
     "\\*moves with her hand over %s's body* Lets get some privacy sweetie. 😘"
   ],
-  "api_ping_msg": [
-    "API responded in %sms!",
-    "Speedtest complete! Result: %sms",
-    "The API said hello in %sms.",
-    "Got a response from Discord in %sms."
-  ],
   "blacklist": [
     "578951136288178216",
     "591723340130156545",
@@ -62,13 +56,6 @@
     "Those naughty things can only be seen and used in NSFW channels %s.",
     "Error: NoNSFWChannelFoundException (Not actually an error, but I guess you get the hint %s)."
   ],
-  "ping_msg": [
-    "I catched a fish in %sms!",
-    "Took a nap for %sms.",
-    "Hewwo! (Took %sms.)",
-    "Meow! (Translation: %sms)",
-    "What now? Should I say \"pong\"? Nah. That is so boring. I won't say it. But I will say how much time it took: %sms."
-  ],
   "shutdown_img": [
     "https://purrbot.site/images/shutdown/shutdown_001.png",
     "https://purrbot.site/images/shutdown/shutdown_002.jpg",
@@ -102,10 +89,11 @@
     "Hey look! I'm a startup message!",
     "Connecting to da interwebz"
   ],
-  "welcome_img": [
+  "welcome_bg": [
     "color_black",
     "color_blue",
     "color_green",
+    "color_grey",
     "color_red",
     "color_white",
     "gradient",
@@ -113,15 +101,12 @@
     "gradient_dark_red",
     "gradient_green",
     "gradient_orange",
-    "gradient_red",
-    "neko_cat",
+    "gradient_red"
+  ],
+  "welcome_icon": [
     "neko_hug",
-    "neko_smiling",
+    "neko_smile",
     "purr",
-    "random",
-    "wood",
-    "wood_bright",
-    "wood_dark",
-    "wood_grey"
+    "snuggle"
   ]
 }
