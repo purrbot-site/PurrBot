@@ -3,7 +3,7 @@ package site.purrbot.bot.constants;
 public enum Emotes{
 
     // Animated emotes,
-    ANIM_CURSOR      ("cursor",       "404001393360502805", true),
+    ANIM_CURSOR      ("edit",         "619476058802094100", true),
     ANIM_LOADING     ("loading",      "590951368328740865", true),
     ANIM_TYPING      ("typing",       "590954127727525889", true),
     ANIM_SHIROTAILWAG("shiroTailWag", "583782265029394473", true),
@@ -12,10 +12,10 @@ public enum Emotes{
     // Static/normal emotes
     BLOBHOLO    ("blobHolo",     "536346012546236436", false),
     BOT         ("isBot",        "590951368093859870", false),
-    DISCORD     ("discord",      "314003252830011395", false),
+    DISCORD     ("discord",      "619476059334901770", false),
     PURR        ("purr",         "564766029608124416", false),
     SNUGGLE     ("snuggle",      "570238657265401856", false),
-    UPDATE      ("update",       "264184209617321984", false),
+    DOWNLOAD    ("download",     "619476058827390976", false),
     VANILLABLUSH("vanillaBlush", "575487690921869323", false),
 
     JOINED_GUILD     ("joinedGuild",      "592043203629416459", false),

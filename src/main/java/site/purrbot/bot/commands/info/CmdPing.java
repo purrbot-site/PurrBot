@@ -4,11 +4,9 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 
-import java.text.MessageFormat;
 import java.time.temporal.ChronoUnit;
 
 @CommandDescription(
@@ -45,7 +43,7 @@ public class CmdPing implements Command{
                 msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS),
                 Emotes.DISCORD.getEmote(),
                 msg.getJDA().getGatewayPing(),
-                Emotes.UPDATE.getEmote(),
+                Emotes.DOWNLOAD.getEmote(),
                 time
         )).queue(), throwable -> message.editMessage(String.format(
                 "%s Edit message: `%dms`\n" +

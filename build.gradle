@@ -6,7 +6,7 @@ plugins {
     id 'net.kyori.blossom' version '1.1.0'
 }
 mainClassName = 'site.purrbot.bot.PurrBot'
-version = '2.0.0'
+version = '2.0.1'
 
 description = """"""
 
@@ -26,7 +26,7 @@ dependencies {
     compile group: 'com.rethinkdb', name: 'rethinkdb-driver', version:'2.3.3'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.2.4'
     compile group: 'com.google.guava', name: 'guava', version:'25.0-jre'
-    compile(group: 'net.dv8tion', name: 'JDA', version:'4.0.0_39'){
+    compile(group: 'net.dv8tion', name: 'JDA', version:'4.0.0_46'){
         exclude(module: 'opus-java')
     }
     compile group: 'club.minnced', name: 'discord-webhooks', version: '0.1.5'
