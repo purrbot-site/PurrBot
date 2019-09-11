@@ -39,7 +39,7 @@ public class CmdPing implements Command{
                 "%s Edit message: `%dms`\n" +
                 "%s Discord: `%sms`\n" +
                 "%s RestAction: `%sms`",
-                Emotes.ANIM_CURSOR.getEmote(),
+                Emotes.EDIT.getEmote(),
                 msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS),
                 Emotes.DISCORD.getEmote(),
                 msg.getJDA().getGatewayPing(),
@@ -48,7 +48,7 @@ public class CmdPing implements Command{
         )).queue(), throwable -> message.editMessage(String.format(
                 "%s Edit message: `%dms`\n" +
                 "%s Discord: `%sms`",
-                Emotes.ANIM_CURSOR.getEmote(),
+                Emotes.EDIT.getEmote(),
                 msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS),
                 Emotes.DISCORD.getEmote(),
                 msg.getJDA().getGatewayPing()

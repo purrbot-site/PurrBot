@@ -16,9 +16,6 @@ public enum  Links {
     DISCORD_BOTS_GG("https://discord.bots.gg/bots/425382319449309197"),
     LBOTS_ORG      ("https://lbots.org/bots/Purr"),
 
-    // Stats link
-    DISCORDBOTS_ORG_STATS("https://discordbots.org/api/bots/425382319449309197"),
-
     // Images
     GITHUB_AVATAR ("https://i.imgur.com/Fv6qdfG.png"),
     FAVOURITE     ("https://i.imgur.com/LTd5nEJ.png"),
@@ -26,8 +23,9 @@ public enum  Links {
     UPVOTE_DBL    ("https://i.imgur.com/SwAz3je.png"),
 
     // Other links
-    WEBSITE("https://purrbot.site"),
-    TWITTER("https://purrbot.site/twitter");
+    PATREON("https://patreon.com/purrbot"),
+    TWITTER("https://purrbot.site/twitter"),
+    WEBSITE("https://purrbot.site");
 
     private String url;
     private int perms;

@@ -85,10 +85,12 @@ public class CmdInfo implements Command{
                 .addField("", String.format(
                         "[`Official Discord`](%s)\n" +
                         "[`Website`](%s)\n" +
+                        "[`Patreon`](%s)\n" +
                         "[`Lbots.org`](%s)\n" +
                         "[`Discordbots.org`](%s)",
                         Links.DISCORD.getUrl(),
                         Links.WEBSITE.getUrl(),
+                        Links.PATREON.getUrl(),
                         Links.LBOTS_ORG.getUrl(),
                         Links.DISCORDBOTS_ORG.getUrl()
                 ), true);
