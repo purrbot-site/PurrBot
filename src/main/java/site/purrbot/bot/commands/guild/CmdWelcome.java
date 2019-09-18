@@ -65,11 +65,11 @@ public class CmdWelcome implements Command{
                 .addField(
                         "Subcommands",
                         "```\n" +
-                        "bg <set <background>|reset>\n" +
+                        "bg      <set <background>|reset>\n" +
                         "channel <set <#channel>|reset>\n" +
-                        "color <set <hex:rrggbb|rgb:r,g,b>|reset>\n" +
-                        "icon <set <icon>|reset>\n" +
-                        "msg <set <message>|reset>\n" +
+                        "color   <set <hex:rrggbb|rgb:r,g,b>|reset>\n" +
+                        "icon    <set <icon>|reset>\n" +
+                        "msg     <set <message>|reset>\n" +
                         "```",
                         false)
                 .addField("Channel", String.format(

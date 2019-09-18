@@ -157,7 +157,9 @@ public class MessageUtil {
         return message.replaceAll("(?i)\\{mention}", member.getAsMention())
                 .replaceAll("(?i)\\{name}", member.getEffectiveName())
                 .replaceAll("(?i)\\{guild}", member.getGuild().getName())
-                .replaceAll("(?i)\\{count}", String.valueOf(member.getGuild().getMembers().size()));
+                .replaceAll("(?i)\\{count}", String.valueOf(member.getGuild().getMembers().size()))
+                .replaceAll("(?i)@everyone", "everyone")
+                .replaceAll("(?i)@here", "here");
     }
 
     public String getBotGame(){

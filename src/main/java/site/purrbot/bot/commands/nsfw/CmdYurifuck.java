@@ -150,7 +150,8 @@ public class CmdYurifuck implements Command{
                         ev -> {
                             if(ev.getReactionEmote().getName().equals("❌")){
                                 try{
-                                    message.delete().queue();
+                                    if(message != null)
+                                        message.delete().queue();
                                 }catch(Exception ex){
                                     logger.warn(String.format(
                                             "Couldn't delete own message for CmdYurifuck. Reason: %s",
@@ -170,7 +171,8 @@ public class CmdYurifuck implements Command{
 
                             if(ev.getReactionEmote().getName().equals("✅")) {
                                 try {
-                                    message.delete().queue();
+                                    if(message != null)
+                                        message.delete().queue();
                                 } catch (Exception ex) {
                                     logger.warn(String.format(
                                             "Couldn't delete own message for CmdYurifuck. Reason: %s",
@@ -204,7 +206,8 @@ public class CmdYurifuck implements Command{
                         }, 1, TimeUnit.MINUTES,
                         () -> {
                             try {
-                                message.delete().queue();
+                                if(message != null)
+                                    message.delete().queue();
                             }catch (Exception ex){
                                 logger.warn(String.format(
                                         "Couldn't delete own message for CmdYurifuck. Reason: %s",
