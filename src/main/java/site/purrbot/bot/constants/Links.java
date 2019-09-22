@@ -11,10 +11,11 @@ public enum  Links {
     WIKI  ("https://github.com/Andre601/PurrBot/wiki"),
 
     // Bot lists
-    BOTLIST_SPACE  ("https://botlist.space/bot/425382319449309197"),
-    DISCORDBOTS_ORG("https://discordbots.org/bot/425382319449309197"),
-    DISCORD_BOTS_GG("https://discord.bots.gg/bots/425382319449309197"),
-    LBOTS_ORG      ("https://lbots.org/bots/Purr"),
+    BOTLIST_SPACE         ("https://botlist.space/bot/425382319449309197"),
+    DISCORDBOTS_ORG       ("https://discordbots.org/bot/425382319449309197"),
+    DISCORD_BOTS_GG       ("https://discord.bots.gg/bots/425382319449309197"),
+    DISCORDEXTREMELIST_XYZ("https://discordextremelist.xyz/bots/425382319449309197"),
+    LBOTS_ORG             ("https://lbots.org/bots/Purr"),
 
     // Images
     GITHUB_AVATAR ("https://i.imgur.com/Fv6qdfG.png"),

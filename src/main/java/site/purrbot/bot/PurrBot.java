@@ -202,6 +202,7 @@ public class PurrBot {
                     .addAuthToken(Site.BOTLIST_SPACE, getgFile().getString("config", "botlist-token"))
                     .addAuthToken(Site.DISCORD_BOTS_GG, getgFile().getString("config", "dbgg-token"))
                     .addAuthToken(Site.LBOTS_ORG, getgFile().getString("config", "lbots-token"))
+                    .addAuthToken(Site.DISCORDEXTREMELIST_XYZ, getgFile().getString("config", "debl-token"))
                     .build();
 
             dblApi = new DiscordBotListAPI.Builder()

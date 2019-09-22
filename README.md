@@ -24,11 +24,13 @@
 <!-- Widgets -->
 [widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
 [widgetDbl]: https://discordbots.org/api/widget/425382319449309197.svg  
+[widgetdebl]: https://discordextremelist.xyz/api/bot/425382319449309197/widget  
 
 <!-- Botlists -->
 [botlist]: https://botlist.space/bot/425382319449309197  
 [dbl]: https://discordbots.org/bot/425382319449309197  
 [discordBots]: https://discord.bots.gg/bots/425382319449309197  
+[debl]: https://discordextremelist.xyz/bots/425382319449309197  
 [lbots]: https://lbots.org/bots/Purr
 
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License]
@@ -157,6 +159,11 @@ Feel free to upvote or add her to your favourites to show your support.
 
 ### [Discord.bots.gg][discordBots]
 > The original Discord bot list, find the right bot for your server today.
+
+### [Discordextremelist][debl]
+> Discord's unbiased list, giving small bots and small servers a big chance!
+
+![widgetDebl]
 
 ### [LBots.org][lbots]
 > A bot listing website that loves lewds~
