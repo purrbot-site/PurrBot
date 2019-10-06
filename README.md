@@ -1,9 +1,7 @@
 <!-- Badges -->
-[DiscordImg]: https://img.shields.io/discord/423771795523371019.svg?colorB=%237289DA
-[IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot.svg
-[LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg
-[License]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
-[DependaBotImg]: https://api.dependabot.com/badges/status?host=github&repo=Andre601/PurrBot
+[DiscordImg]: https://img.shields.io/discord/423771795523371019?color=%237289DA&label=Chat&logo=Discord&logoColor=white&style=plastic
+[IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot?label=Issues&logo=GitHub&style=plastic
+[LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg?label=License&logo=GitHub&style=plastic
 
 <!-- Discord OAuth -->
 [Full invite]: https://discordapp.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=537259072
@@ -17,11 +15,11 @@
 [Issues]: https://github.com/Andre601/PurrBot/issues
 [Wiki]: https://github.com/Andre601/PurrBot/wiki
 [image]: https://github.com/Andre601/PurrBot/wiki/Welcome-images
+[License]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
 [whatthecommit]: https://whatthecommit.com
-[DependaBot]: https://dependabot.com
 
 <!-- Widgets -->
 [widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
@@ -35,7 +33,7 @@
 [debl]: https://discordextremelist.xyz/bots/425382319449309197  
 [lbots]: https://lbots.org/bots/Purr
 
-[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![DependaBotImg]][DependaBot]
+[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License]
 
 # \*Purr*
 This bot was made to use the [nekos.life]-API.  
