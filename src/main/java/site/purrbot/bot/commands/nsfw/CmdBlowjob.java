@@ -1,6 +1,26 @@
+/*
+ * Copyright 2019 Andre601
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package site.purrbot.bot.commands.nsfw;
 
 import ch.qos.logback.classic.Logger;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
@@ -34,7 +54,9 @@ public class CmdBlowjob implements Command{
         this.bot = bot;
     }
 
-    private ArrayList<String> queue = new ArrayList<>();
+    Cache<String, String> queue = Caffeine.newBuilder()
+            .expireAfterWrite(2, TimeUnit.MINUTES)
+            .build();
 
     private MessageEmbed getBJEmbed(Member requester, Member target, String link){
         return bot.getEmbedUtil().getEmbed()
@@ -108,7 +130,7 @@ public class CmdBlowjob implements Command{
             return;
         }
 
-        if(queue.contains(author.getUser().getId())){
+        if(queue.getIfPresent(author.getId()) != null){
             tc.sendMessage(String.format(
                     "Don't be that greedy %s and wait for the other request to be accepted or denied!",
                     author.getAsMention()
@@ -116,7 +138,7 @@ public class CmdBlowjob implements Command{
             return;
         }
 
-        queue.add(author.getUser().getId());
+        queue.put(author.getId(), target.getId());
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to give you a blowjob. Do you want that too?\n" +
@@ -144,7 +166,8 @@ public class CmdBlowjob implements Command{
                         MessageReaction.ReactionEmote emoji = event.getReactionEmote();
                         if(emoji.getName().equals("❌")){
                             try{
-                                message.delete().queue();
+                                if(message != null)
+                                    message.delete().queue();
                             }catch(Exception ex){
                                 logger.warn(String.format(
                                         "Couldn't delete own message for CmdBlowjob. Reason: %s",
@@ -152,7 +175,7 @@ public class CmdBlowjob implements Command{
                                 ));
                             }
 
-                            queue.remove(author.getId());
+                            queue.invalidate(author.getId());
                             event.getChannel().sendMessage(String.format(
                                     "%s doesn't want to get sucked by you %s. :/",
                                     target.getEffectiveName(),
@@ -163,15 +186,16 @@ public class CmdBlowjob implements Command{
 
                         if(emoji.getName().equals("✅")){
                             try{
-                                message.delete().queue();
+                                if(message != null)
+                                    message.delete().queue();
                             }catch(Exception ex){
                                 logger.warn(String.format(
                                         "Couldn't delete own message for CmdBlowjob. Reason: %s",
                                         ex.getMessage()
                                 ));
                             }
-
-                            queue.remove(author.getId());
+    
+                            queue.invalidate(author.getId());
                             String link = bot.getHttpUtil().getImage(API.GIF_BLOW_JOB_LEWD);
 
                             event.getChannel().sendMessage(String.format(
@@ -194,16 +218,16 @@ public class CmdBlowjob implements Command{
                     }, 1, TimeUnit.MINUTES,
                     () -> {
                         try {
-                            message.delete().queue();
+                            if(message != null)
+                                message.delete().queue();
                         }catch (Exception ex){
                             logger.warn(String.format(
                                     "Couldn't delete own message for CmdBlowjob. Reason: %s",
                                     ex.getMessage()
                             ));
                         }
-
-                        queue.remove(author.getId());
-
+    
+                        queue.invalidate(author.getId());
                         tc.sendMessage(String.format(
                                 "Looks like %s doesn't want a blowjob from you %s.",
                                 target.getEffectiveName(),

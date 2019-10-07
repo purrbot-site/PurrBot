@@ -1,6 +1,26 @@
+/*
+ * Copyright 2019 Andre601
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package site.purrbot.bot.commands.nsfw;
 
 import ch.qos.logback.classic.Logger;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
@@ -37,8 +57,10 @@ public class CmdYurifuck implements Command{
     public CmdYurifuck(PurrBot bot){
         this.bot = bot;
     }
-
-    private static ArrayList<String> yuriQueue = new ArrayList<>();
+    
+    private Cache<String, String> queue = Caffeine.newBuilder()
+            .expireAfterWrite(2, TimeUnit.MINUTES)
+            .build();
 
     private int getRandomPercent(){
         return bot.getRandom().nextInt(10);
@@ -117,7 +139,7 @@ public class CmdYurifuck implements Command{
             return;
         }
 
-        if(yuriQueue.contains(author.getUser().getId())){
+        if(queue.getIfPresent(author.getId()) != null){
             tc.sendMessage(String.format(
                     "%s You already asked someone to fuck with you!\n" +
                     "Please wait until the person accepts it, or the request times out.",
@@ -126,7 +148,7 @@ public class CmdYurifuck implements Command{
             return;
         }
 
-        yuriQueue.add(author.getId());
+        queue.put(author.getId(), target.getId());
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to have sex with you. Do you want that too?\n" +
@@ -159,7 +181,7 @@ public class CmdYurifuck implements Command{
                                     ));
                                 }
 
-                                yuriQueue.remove(author.getId());
+                                queue.invalidate(author.getId());
 
                                 ev.getChannel().sendMessage(String.format(
                                         "%s doesn't want to lewd with you %s. >.<",
@@ -179,8 +201,8 @@ public class CmdYurifuck implements Command{
                                             ex.getMessage()
                                     ));
                                 }
-
-                                yuriQueue.remove(author.getId());
+    
+                                queue.invalidate(author.getId());
 
                                 String link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
 
@@ -214,8 +236,8 @@ public class CmdYurifuck implements Command{
                                         ex.getMessage()
                                 ));
                             }
-
-                            yuriQueue.remove(author.getId());
+    
+                            queue.invalidate(author.getId());
 
                             tc.sendMessage(String.format(
                                     "Looks like %s doesn't want to have sex with you %s. ._.",
