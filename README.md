@@ -1,4 +1,5 @@
 <!-- Badges -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 [DiscordImg]: https://img.shields.io/discord/423771795523371019?color=%237289DA&label=Chat&logo=Discord&logoColor=white&style=plastic
 [IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot?label=Issues&logo=GitHub&style=plastic
 [LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg?label=License&logo=GitHub&style=plastic
@@ -174,3 +175,19 @@ Feel free to upvote or add her to your favourites to show your support.
 * [Basic Invite]
 * [Website]
 * [Wiki]
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="https://rainestormee.github.io"><img src="https://avatars1.githubusercontent.com/u/26597492?v=4" width="100px;" alt="Ryan Arrowsmith"/><br /><sub><b>Ryan Arrowsmith</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=rainestormee" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
