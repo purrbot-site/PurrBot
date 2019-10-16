@@ -1,0 +1,23 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "IamTails",
+      "name": "Tails",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/21271709?v=4",
+      "profile": "https://nekos.life",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "PurrBot",
+  "projectOwner": "Andre601",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
