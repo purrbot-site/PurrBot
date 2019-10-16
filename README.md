@@ -1,5 +1,5 @@
 <!-- Badges -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 [DiscordImg]: https://img.shields.io/discord/423771795523371019?color=%237289DA&label=Chat&logo=Discord&logoColor=white&style=plastic
 [IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot?label=Issues&logo=GitHub&style=plastic
 [LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg?label=License&logo=GitHub&style=plastic
@@ -185,6 +185,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://nekos.life"><img src="https://avatars2.githubusercontent.com/u/21271709?v=4" width="100px;" alt="Tails"/><br /><sub><b>Tails</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=IamTails" title="Code">💻</a></td>
+    <td align="center"><a href="https://rainestormee.github.io"><img src="https://avatars1.githubusercontent.com/u/26597492?v=4" width="100px;" alt="Ryan Arrowsmith"/><br /><sub><b>Ryan Arrowsmith</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=rainestormee" title="Code">💻</a></td>
   </tr>
 </table>
 
