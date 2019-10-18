@@ -33,7 +33,7 @@
 [debl]: https://discordextremelist.xyz/bots/425382319449309197  
 [lbots]: https://lbots.org/bots/Purr
 
-[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![Contributors](https://img.shields.io/badge/Contributors_✨-2-green.svg?style=plastic)](#contributors-)
+[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![Contributors](https://img.shields.io/badge/Contributors_✨-3-green.svg?style=plastic)](#contributors-)
 
 # \*Purr*
 This bot was made to use the [nekos.life]-API.  
@@ -185,6 +185,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://nekos.life"><img src="https://avatars2.githubusercontent.com/u/21271709?v=4" width="100px;" alt="Tails"/><br /><sub><b>Tails</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=IamTails" title="Code">💻</a></td>
     <td align="center"><a href="https://rainestormee.github.io"><img src="https://avatars1.githubusercontent.com/u/26597492?v=4" width="100px;" alt="Ryan Arrowsmith"/><br /><sub><b>Ryan Arrowsmith</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=rainestormee" title="Code">💻</a></td>
+    <td align="center"><a href="http://linkedin.dv8tion.net"><img src="https://avatars1.githubusercontent.com/u/1479909?v=4" width="100px;" alt="Austin Keener"/><br /><sub><b>Austin Keener</b></sub></a><br /><a href="#plugin-DV8FromTheWorld" title="Plugin/utility libraries">🔌</a></td>
   </tr>
 </table>
 
