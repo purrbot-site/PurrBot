@@ -33,7 +33,7 @@
 [debl]: https://discordextremelist.xyz/bots/425382319449309197  
 [lbots]: https://lbots.org/bots/Purr
 
-[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![Contributors](https://img.shields.io/badge/Contributors_✨-2-green.svg?style=plastic)](#contributors-)
+[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![Contributors](https://img.shields.io/badge/Contributors_✨-3-green.svg?style=plastic)](#contributors-)
 
 # \*Purr*
 This bot was made to use the [nekos.life]-API.  
