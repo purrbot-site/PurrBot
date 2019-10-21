@@ -130,17 +130,19 @@ public class CmdUser implements Command{
     private String getTimes(Member member){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Account created: ")
+        sb.append("Account created:")
+                .append("\n   ")
                 .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeCreated())))
-                .append("\n")
-                .append("Guild joined:    ")
-                .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeJoined())))
-                .append("\n");
+                .append("\n\n")
+                .append("Guild joined:")
+                .append("\n   ")
+                .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeJoined())));
 
         if(member.getTimeBoosted() != null)
-            sb.append("Boost since:     ")
-                    .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeBoosted())))
-                    .append("\n");
+            sb.append("\n\n")
+                    .append("Booster since:")
+                    .append("\n   ")
+                    .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeBoosted())));
 
         return sb.toString();
     }

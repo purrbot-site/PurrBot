@@ -23,11 +23,8 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 
 import net.dv8tion.jda.internal.utils.IOUtil;
-import okhttp3.OkHttpClient;
+import okhttp3.*;
 
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import org.json.JSONObject;
 import site.purrbot.bot.PurrBot;
 
@@ -158,7 +155,7 @@ public class ImageUtil {
                 .put("text", quote.getContentDisplay())
                 .put("time", String.valueOf(quote.getTimeCreated().toInstant().toEpochMilli()));
 
-        RequestBody body = RequestBody.create(null, json.toString());
+        RequestBody body = RequestBody.create(json.toString(), null);
 
         Request request = new Request.Builder()
                 .addHeader("User-Agent", "PurrBot BOT_VERSION")
@@ -171,10 +168,11 @@ public class ImageUtil {
             if(!response.isSuccessful())
                 throw new IOException("Couldn't get quote image.");
 
-            if(response.body() == null)
+            ResponseBody responseBody = response.body();
+            if(responseBody == null)
                 throw new NullPointerException("Received empty response (null).");
 
-            return IOUtil.readFully(response.body().byteStream());
+            return IOUtil.readFully(responseBody.byteStream());
         }
     }
 
@@ -200,7 +198,7 @@ public class ImageUtil {
                 .put("avatar", avatarUrl)
                 .put("status", status);
 
-        RequestBody body = RequestBody.create(null, json.toString());
+        RequestBody body = RequestBody.create(json.toString(), null);
 
         Request request = new Request.Builder()
                 .addHeader("User-Agent", "PurrBot BOT_VERSION")
@@ -213,10 +211,11 @@ public class ImageUtil {
             if(!response.isSuccessful())
                 throw new IOException("Couldn't get status image.");
 
-            if(response.body() == null)
+            ResponseBody responseBody = response.body();
+            if(responseBody == null)
                 throw new NullPointerException("Received empty response (null).");
 
-            return IOUtil.readFully(response.body().byteStream());
+            return IOUtil.readFully(responseBody.byteStream());
         }
     }
 
@@ -258,7 +257,7 @@ public class ImageUtil {
             bg = getRandomBg();
 
         JSONObject json = new JSONObject()
-                .put("username", user.getAsTag())
+                .put("username", user.getName())
                 .put("members", String.format("You're member #%d", size))
                 .put("icon", String.format("https://purrbot.site/images/icon/%s.png", icon))
                 .put("banner", String.format("https://purrbot.site/images/background/%s.png", bg))
@@ -267,7 +266,7 @@ public class ImageUtil {
                 .put("color_username", color)
                 .put("color_members", color);
 
-        RequestBody body = RequestBody.create(null, json.toString());
+        RequestBody body = RequestBody.create(json.toString(), null);
 
         Request request = new Request.Builder()
                 .addHeader("User-Agent", "PurrBot BOT_VERSION")
@@ -285,21 +284,22 @@ public class ImageUtil {
                         response.message()
                 ));
 
-            if(response.body() == null)
+            ResponseBody responseBody = response.body();
+            if(responseBody == null)
                 throw new NullPointerException("Received empty response (null).");
 
-            return new ByteArrayInputStream(response.body().bytes());
+            return new ByteArrayInputStream(responseBody.bytes());
         }
     }
 
     private String getRandomIcon(){
-        return bot.getWelcomeIcon().isEmpty() ? "" : bot.getWelcomeIcon().get(
+        return bot.getWelcomeIcon().isEmpty() ? "purr" : bot.getWelcomeIcon().get(
                 random.nextInt(bot.getWelcomeIcon().size())
         );
     }
 
     private String getRandomBg(){
-        return bot.getWelcomeBg().isEmpty() ? "" : bot.getWelcomeBg().get(
+        return bot.getWelcomeBg().isEmpty() ? "color_white" : bot.getWelcomeBg().get(
                 random.nextInt(bot.getWelcomeBg().size())
         );
     }

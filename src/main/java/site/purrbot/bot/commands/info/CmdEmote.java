@@ -51,6 +51,10 @@ public class CmdEmote implements Command{
     }
 
     private MessageEmbed emoteInfo(User user, Emote emote, @Nullable String link){
+        Emote e = bot.getShardManager().getEmoteById(emote.getId());
+        Guild guild = null;
+        if(e != null)
+            guild = e.getGuild();
 
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(user)
                 .setTitle("Emote")
@@ -64,7 +68,7 @@ public class CmdEmote implements Command{
                 ), true)
                 .addField("Guild", String.format(
                         "`%s`",
-                        emote.getGuild() != null ? emote.getGuild().getName() : "Unknown Guild"
+                        guild != null ? guild.getName() : "Unknown Guild"
                 ), true)
                 .addField("Image", String.format(
                         "[`Link`](%s)",
