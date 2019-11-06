@@ -20,32 +20,32 @@ package site.purrbot.bot.constants;
 
 public enum API {
 
-    IMG_KITSUNE(false, false, "kitsune"),
-    IMG_HOLO   (false, false, "holo"),
-    IMG_NEKO   (false, false, "neko"),
+    IMG_KITSUNE(false, "kitsune", false),
+    IMG_HOLO   (false, "holo",    false),
+    IMG_NEKO   (false, "neko",    false),
 
-    IMG_NEKO_LEWD(true, false, "neko_lewd"),
+    IMG_NEKO_LEWD(true, "neko", false),
 
-    GIF_CUDDLE(false, true, "cuddle"),
-    GIF_HUG   (false, true, "hug"),
-    GIF_KISS  (false, true, "kiss"),
-    GIF_NEKO  (false, true, "neko"),
-    GIF_PAT   (false, true, "pat"),
-    GIF_POKE  (false, true, "poke"),
-    GIF_SLAP  (false, true, "slap"),
-    GIF_TICKLE(false, true, "tickle"),
+    GIF_CUDDLE(false, "cuddle", true),
+    GIF_HUG   (false, "hug",    true),
+    GIF_KISS  (false, "kiss",   true),
+    GIF_NEKO  (false, "neko",   true),
+    GIF_PAT   (false, "pat",    true),
+    GIF_POKE  (false, "poke",   true),
+    GIF_SLAP  (false, "slap",   true),
+    GIF_TICKLE(false, "tickle", true),
 
-    GIF_BLOW_JOB_LEWD(true, true, "blow_job"),
-    GIF_FUCK_LEWD    (true, true, "classic"),
-    GIF_LES_LEWD     (true, true, "girls_solo"),
-    GIF_NEKO_LEWD    (true, true, "neko"),
-    GIF_YURI_LEWD    (true, true, "yuri");
+    GIF_BLOW_JOB_LEWD(true, "blowjob",   true),
+    GIF_FUCK_LEWD    (true, "fuck",    true),
+    GIF_LESBIAN_LEWD (true, "lesbian", true),
+    GIF_NEKO_LEWD    (true, "neko",       true),
+    GIF_YURI_LEWD    (true, "yuri",       true);
 
     private boolean nsfw;
     private boolean gif;
     private String endpoint;
 
-    API(boolean nsfw, boolean gif, String endpoint){
+    API(boolean nsfw, String endpoint, boolean gif){
         this.nsfw = nsfw;
         this.gif = gif;
         this.endpoint = endpoint;
@@ -53,10 +53,10 @@ public enum API {
 
     public String getLink(){
         return String.format(
-                "https://api.nekos.dev/api/v3/images/%s/%s/%s",
+                "https://purrbot.site/api/img/%s/%s/%s",
                 this.nsfw ? "nsfw" : "sfw",
-                this.gif ? "gif" : "img",
-                this.endpoint
+                this.endpoint,
+                this.gif ? "gif" : "img"
         );
     }
 

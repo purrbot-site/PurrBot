@@ -20,9 +20,6 @@ package site.purrbot.bot.constants;
 
 public enum  Links {
 
-    INVITE_FULL (537259072),
-    INVITE_BASIC(85056),
-
     DISCORD("https://purrbot.site/discord"),
 
     GITHUB("https://purrbot.site/github"),
@@ -47,25 +44,12 @@ public enum  Links {
     WEBSITE("https://purrbot.site");
 
     private String url;
-    private int perms;
 
     Links(String url){
         this.url = url;
     }
 
-    Links(int perms){
-        this.perms = perms;
-    }
-
     public String getUrl() {
         return url;
-    }
-
-    public String getInvite(){
-        return String.format(
-                "https://discordapp.com/oauth2/authorize?scope=bot&client_id=%s&permission=%d",
-                IDs.PURR.getId(),
-                perms
-        );
     }
 }

@@ -21,6 +21,7 @@ package site.purrbot.bot.commands.info;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -52,6 +53,10 @@ public class CmdInvite implements Command{
     public CmdInvite(PurrBot bot){
         this.bot = bot;
     }
+    
+    private String getInvite(JDA jda, Permission... permissions){
+        return jda.getInviteUrl(permissions);
+    }
 
     @Override
     public void execute(Message msg, String args){
@@ -80,8 +85,25 @@ public class CmdInvite implements Command{
                         "[`Recommended Invite`](%s)\n" +
                         "[`Basic Invite`](%s)\n" +
                         "[`Discord`](%s)",
-                        Links.INVITE_FULL.getInvite(),
-                        Links.INVITE_BASIC.getInvite(),
+                        getInvite(
+                                msg.getJDA(),
+                                Permission.MESSAGE_WRITE,
+                                Permission.MESSAGE_EMBED_LINKS,
+                                Permission.MESSAGE_HISTORY,
+                                Permission.MESSAGE_ADD_REACTION,
+                                Permission.MESSAGE_EXT_EMOJI,
+                                Permission.MESSAGE_MANAGE,
+                                Permission.MANAGE_WEBHOOKS,
+                                Permission.MESSAGE_ATTACH_FILES
+                        ),
+                        getInvite(
+                                msg.getJDA(),
+                                Permission.MESSAGE_WRITE,
+                                Permission.MESSAGE_EMBED_LINKS,
+                                Permission.MESSAGE_HISTORY,
+                                Permission.MESSAGE_ADD_REACTION,
+                                Permission.MESSAGE_EXT_EMOJI
+                        ),
                         Links.DISCORD.getUrl()
                 ), false);
 

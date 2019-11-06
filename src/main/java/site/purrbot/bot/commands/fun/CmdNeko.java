@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import com.jagrosh.jdautilities.menu.Slideshow;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
@@ -28,10 +27,6 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Emotes;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Neko",
@@ -45,24 +40,19 @@ import java.util.concurrent.TimeUnit;
         triggers = {"neko", "catgirl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value =
+                @CommandAttribute(key = "usage", value = 
                         "{p}neko\n" +
-                        "{p}neko --gif\n" +
-                        "{p}neko --slide\n" +
-                        "{p}neko --gif --slide")
+                        "{p}neko --gif\n"
+                )
         }
 )
 public class CmdNeko implements Command{
 
     private PurrBot bot;
-    private Slideshow.Builder sBuilder;
 
     public CmdNeko(PurrBot bot){
         this.bot = bot;
-        sBuilder = new Slideshow.Builder().setEventWaiter(bot.getWaiter()).setTimeout(1, TimeUnit.MINUTES);
     }
-
-    private static List<String> nekoUserID = new ArrayList<>();
 
     @Override
     public void execute(Message msg, String args) {
@@ -70,51 +60,6 @@ public class CmdNeko implements Command{
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
-
-        if(args.toLowerCase().contains("--slide")){
-            if(nekoUserID.contains(msg.getAuthor().getId())){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(),
-                        "Only one slideshow per user!\n" +
-                        "Please use or close your other one."
-                );
-                return;
-            }
-            tc.sendTyping().queue();
-
-            nekoUserID.add(msg.getAuthor().getId());
-            String urls;
-            if(args.toLowerCase().contains("--gif")){
-                urls = bot.getHttpUtil().getImage(API.GIF_NEKO, 20);
-            }else{
-                urls = bot.getHttpUtil().getImage(API.IMG_NEKO, 20);
-            }
-
-            if(urls == null){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
-                return;
-            }
-
-            Slideshow slideshow = sBuilder
-                    .setUsers(msg.getAuthor())
-                    .setText("Neko-slideshow!")
-                    .setDescription(String.format(
-                            "Use the reactions to navigate through the images!\n" +
-                            "Only the author of the command (`%s`) can use the navigation!\n" +
-                            "\n" +
-                            "__**Slideshows may take a while to update!**__",
-                            msg.getAuthor().getAsTag().replace("`", "'")
-                    ))
-                    .setUrls(urls.replace("\"", "").split(","))
-                    .setFinalAction(message -> {
-                        if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
-                            message.clearReactions().queue();
-
-                        nekoUserID.remove(msg.getAuthor().getId());
-                    })
-                    .build();
-            slideshow.display(tc);
-            return;
-        }
 
         if(args.toLowerCase().contains("--gif")){
             String link = bot.getHttpUtil().getImage(API.GIF_NEKO);

@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.nsfw;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import com.jagrosh.jdautilities.menu.Slideshow;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
@@ -29,10 +28,6 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Emotes;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Lewd",
@@ -48,22 +43,17 @@ import java.util.concurrent.TimeUnit;
                 @CommandAttribute(key = "category", value = "nsfw"),
                 @CommandAttribute(key = "usage", value =
                         "{p}lewd\n" +
-                        "{p}lewd --gif\n" +
-                        "{p}lewd --slide\n" +
-                        "{p}lewd --gif --slide")
+                        "{p}lewd --gif\n"
+                )
         }
 )
 public class CmdLewd implements Command{
 
     private PurrBot bot;
-    private Slideshow.Builder sBuilder;
 
     public CmdLewd(PurrBot bot){
         this.bot = bot;
-        sBuilder = new Slideshow.Builder().setEventWaiter(bot.getWaiter()).setTimeout(1, TimeUnit.MINUTES);
     }
-
-    private static List<String> lewdUserID = new ArrayList<>();
 
     @Override
     public void execute(Message msg, String args){
@@ -71,52 +61,7 @@ public class CmdLewd implements Command{
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
-
-        if(args.toLowerCase().contains("--slide")){
-            if(lewdUserID.contains(msg.getAuthor().getId())){
-                tc.sendMessage(String.format(
-                        "%s You can only have one Slideshow at a time!",
-                        msg.getAuthor().getAsMention()
-                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-                return;
-            }
-            tc.sendTyping().queue();
-
-            lewdUserID.add(msg.getAuthor().getId());
-            String urls;
-            if(args.toLowerCase().contains("--gif")){
-                urls = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD, 20);
-            }else{
-                urls = bot.getHttpUtil().getImage(API.IMG_NEKO_LEWD, 20);
-            }
-
-            if(urls == null){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
-                return;
-            }
-
-            Slideshow slideshow = sBuilder
-                    .setUsers(msg.getAuthor())
-                    .setText("Lewd-slideshow!")
-                    .setDescription(String.format(
-                            "Use the reactions to navigate through the images!\n" +
-                            "Only the author of the command (`%s`) can use the navigation!\n" +
-                            "\n" +
-                            "__**Slideshows may take a while to update!**__",
-                            msg.getAuthor().getAsTag().replace("`", "'")
-                    ))
-                    .setUrls(urls.replace("\"", "").split(","))
-                    .setFinalAction(
-                            message -> {
-                                if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
-                                    message.delete().queue();
-
-                                lewdUserID.remove(msg.getAuthor().getId());
-                            }
-                    ).build();
-            slideshow.display(tc);
-            return;
-        }
+        
         if(args.toLowerCase().contains("--gif")){
             String gifLink = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD);
             if(gifLink == null){

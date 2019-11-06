@@ -32,11 +32,10 @@ public class HttpUtil {
     public HttpUtil(){
     }
 
-    private String image(API api, int count) throws IOException{
+    private String image(API api) throws IOException{
         Request request = new Request.Builder().url(String.format(
-                "%s/%s",
-                api.getLink(),
-                count <= 1 ? "" : "?count=" + (count > 20 ? 20 : count)
+                "%s",
+                api.getLink()
         )).build();
 
         Response response = CLIENT.newCall(request).execute();
@@ -46,12 +45,11 @@ public class HttpUtil {
                     api.getEndpoint(),
                     response
             ));
-
-            JSONObject json = new JSONObject(Objects.requireNonNull(body).string())
-                    .getJSONObject("data")
-                    .getJSONObject("response");
-
-            return count <= 1 ? json.getString("url") : json.getJSONArray("urls").join(",");
+            
+            if(body == null)
+                throw new NullPointerException("Received empty body!");
+            
+            return new JSONObject(body.string()).getString("link");
         }
     }
 
@@ -69,17 +67,9 @@ public class HttpUtil {
         }
     }
 
-    public String getImage(API api, int count){
-        try{
-            return image(api, count);
-        }catch(IOException ex){
-            return null;
-        }
-    }
-
     public String getImage(API api){
         try{
-            return image(api, 1);
+            return image(api);
         }catch(IOException ex){
             return null;
         }

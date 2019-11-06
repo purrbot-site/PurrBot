@@ -49,7 +49,7 @@ public class CmdLesbian implements Command{
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
-        String link = bot.getHttpUtil().getImage(API.GIF_LES_LEWD);
+        String link = bot.getHttpUtil().getImage(API.GIF_LESBIAN_LEWD);
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
