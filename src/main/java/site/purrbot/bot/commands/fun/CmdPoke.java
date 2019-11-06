@@ -83,16 +83,15 @@ public class CmdPoke implements Command{
             )).queue();
         }
 
-        String link = bot.getHttpUtil().getImage(API.GIF_POKE);
-
-        String pokedMembers = members.stream().filter(
-                mem -> !mem.equals(guild.getSelfMember())
-        ).filter(
-                mem -> !mem.equals(msg.getMember())
-        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String pokedMembers = members.stream()
+                .filter(mem -> !mem.equals(guild.getSelfMember()))
+                .filter(mem -> !mem.equals(msg.getMember()))
+                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(pokedMembers.isEmpty())
             return;
+    
+        String link = bot.getHttpUtil().getImage(API.GIF_POKE);
 
         tc.sendMessage(String.format(
                 "%s Getting a poke-gif...",
@@ -105,13 +104,12 @@ public class CmdPoke implements Command{
                         pokedMembers
                 )).queue();
             }else{
-                message.editMessage(
-                        EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                        "%s pokes you %s",
-                        member.getEffectiveName(),
-                        pokedMembers
-                )).setImage(link).build()).queue();
+                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
+                                "%s pokes you %s",
+                                member.getEffectiveName(),
+                                pokedMembers
+                        )).setImage(link).build()).queue();
             }
         });
     }

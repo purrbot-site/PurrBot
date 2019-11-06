@@ -83,16 +83,15 @@ public class CmdSlap implements Command{
             )).queue();
         }
 
-        String link = bot.getHttpUtil().getImage(API.GIF_SLAP);
-
-        String slapedMembers = members.stream().filter(
-                mem -> !mem.equals(guild.getSelfMember())
-        ).filter(
-                mem -> !mem.equals(msg.getMember())
-        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String slapedMembers = members.stream()
+                .filter(mem -> !mem.equals(guild.getSelfMember()))
+                .filter(mem -> !mem.equals(msg.getMember()))
+                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(slapedMembers.isEmpty())
             return;
+    
+        String link = bot.getHttpUtil().getImage(API.GIF_SLAP);
 
         tc.sendMessage(String.format(
                 "%s Getting a slap-gif...",
@@ -105,13 +104,12 @@ public class CmdSlap implements Command{
                         slapedMembers
                 )).queue();
             }else{
-                message.editMessage(
-                        EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                        "%s slaps you %s",
-                        member.getEffectiveName(),
-                        slapedMembers
-                )).setImage(link).build()).queue();
+                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
+                                "%s slaps you %s",
+                                member.getEffectiveName(),
+                                slapedMembers
+                        )).setImage(link).build()).queue();
             }
         });
     }

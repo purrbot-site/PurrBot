@@ -78,16 +78,16 @@ public class CmdTickle implements Command{
                     member.getAsMention()
             )).queue();
         }
-
-        String link = bot.getHttpUtil().getImage(API.GIF_TICKLE);
-        String tickledMembers = members.stream().filter(
-                mem -> !mem.equals(guild.getSelfMember())
-        ).filter(
-                mem -> !mem.equals(msg.getMember())
-        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        
+        String tickledMembers = members.stream()
+                .filter(mem -> !mem.equals(guild.getSelfMember()))
+                .filter(mem -> !mem.equals(msg.getMember()))
+                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(tickledMembers.isEmpty())
             return;
+    
+        String link = bot.getHttpUtil().getImage(API.GIF_TICKLE);
 
         tc.sendMessage(String.format(
                 "%s Getting a tickle-gif...",
@@ -100,13 +100,12 @@ public class CmdTickle implements Command{
                         tickledMembers
                 )).queue();
             }else{
-                message.editMessage(
-                        EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                        "%s tickles you %s",
-                        member.getEffectiveName(),
-                        tickledMembers
-                )).setImage(link).build()).queue();
+                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
+                                "%s tickles you %s",
+                                member.getEffectiveName(),
+                                tickledMembers
+                        )).setImage(link).build()).queue();
             }
         });
     }

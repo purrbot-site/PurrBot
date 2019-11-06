@@ -59,7 +59,7 @@ public class CmdKitsune implements Command{
             return;
         }
 
-        EmbedBuilder gecg = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder kitsune = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Kitsune %s",
                         Emotes.ANIM_SHIROTAILWAG.getEmote()
@@ -71,6 +71,6 @@ public class CmdKitsune implements Command{
                 Emotes.ANIM_LOADING.getEmote()
         )).queue(message -> message.editMessage(
                 EmbedBuilder.ZERO_WIDTH_SPACE
-        ).embed(gecg.build()).queue());
+        ).embed(kitsune.build()).queue());
     }
 }

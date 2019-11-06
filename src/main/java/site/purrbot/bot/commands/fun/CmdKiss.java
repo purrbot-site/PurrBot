@@ -153,13 +153,12 @@ public class CmdKiss implements Command{
                         kissedMembers
                 )).queue();
             }else{
-                message.editMessage(
-                        EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                        "%s kisses you %s",
-                        member.getEffectiveName(),
-                        kissedMembers
-                )).setImage(link).build()).queue();
+                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
+                                "%s kisses you %s",
+                                member.getEffectiveName(),
+                                kissedMembers
+                        )).setImage(link).build()).queue();
             }
         });
     }

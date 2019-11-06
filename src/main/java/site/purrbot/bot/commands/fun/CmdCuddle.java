@@ -91,16 +91,16 @@ public class CmdCuddle implements Command{
             )).queue();
         }
 
-        String link = bot.getHttpUtil().getImage(API.GIF_CUDDLE);
 
-        String cuddledMembers = members.stream().filter(
-                mem -> !mem.equals(guild.getSelfMember())
-        ).filter(
-                mem -> !mem.equals(msg.getMember())
-        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String cuddledMembers = members.stream()
+                .filter(mem -> !mem.equals(guild.getSelfMember()))
+                .filter(mem -> !mem.equals(msg.getMember()))
+                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(cuddledMembers.isEmpty())
             return;
+        
+        String link = bot.getHttpUtil().getImage(API.GIF_CUDDLE);
 
         tc.sendMessage(String.format(
                 "%s Getting a cuddle-gif...",
@@ -113,13 +113,13 @@ public class CmdCuddle implements Command{
                         cuddledMembers
                 )).queue();
             }else{
-                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(
-                        bot.getEmbedUtil().getEmbed().setDescription(String.format(
+                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
+                        .embed(
+                                bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s cuddles with you %s",
                                 member.getEffectiveName(),
                                 cuddledMembers
-                        )).setImage(link).build()
-                ).queue();
+                        )).setImage(link).build()).queue();
             }
         });
     }

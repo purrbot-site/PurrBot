@@ -88,16 +88,15 @@ public class CmdHug implements Command {
             )).queue();
         }
 
-        String link = bot.getHttpUtil().getImage(API.GIF_HUG);
-
-        String huggedMembers = members.stream().filter(
-                mem -> !mem.equals(guild.getSelfMember())
-        ).filter(
-                mem -> !mem.equals(msg.getMember())
-        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String huggedMembers = members.stream()
+                .filter(mem -> !mem.equals(guild.getSelfMember()))
+                .filter(mem -> !mem.equals(msg.getMember()))
+                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(huggedMembers.isEmpty())
             return;
+    
+        String link = bot.getHttpUtil().getImage(API.GIF_HUG);
 
         tc.sendMessage(String.format(
                 "%s Getting a hug-gif...",
@@ -110,13 +109,12 @@ public class CmdHug implements Command {
                         huggedMembers
                 )).queue();
             }else{
-                message.editMessage(
-                        EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                        "%s hugs you %s",
-                        member.getEffectiveName(),
-                        huggedMembers
-                )).setImage(link).build()).queue();
+                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
+                                "%s hugs you %s",
+                                member.getEffectiveName(),
+                                huggedMembers
+                        )).setImage(link).build()).queue();
             }
         });
     }

@@ -29,8 +29,7 @@ public class HttpUtil {
 
     private final OkHttpClient CLIENT = new OkHttpClient();
 
-    public HttpUtil(){
-    }
+    public HttpUtil(){}
 
     private String image(API api) throws IOException{
         Request request = new Request.Builder().url(String.format(

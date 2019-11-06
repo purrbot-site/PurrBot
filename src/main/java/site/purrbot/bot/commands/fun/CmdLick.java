@@ -27,6 +27,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
@@ -92,35 +93,33 @@ public class CmdLick implements Command{
             )).queue();
         }
 
-        String link = bot.getMessageUtil().getRandomLickImg();
-
-        String lickedMembers = members.stream().filter(
-                mem -> !mem.equals(guild.getSelfMember())
-        ).filter(
-                mem -> !mem.equals(msg.getMember())
-        ).map(Member::getEffectiveName).collect(Collectors.joining(", "));
+        String lickedMembers = members.stream()
+                .filter(mem -> !mem.equals(guild.getSelfMember()))
+                .filter(mem -> !mem.equals(msg.getMember()))
+                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
 
         if(lickedMembers.isEmpty())
             return;
+    
+        String link = bot.getHttpUtil().getImage(API.GIF_LICK);
 
         tc.sendMessage(String.format(
                 "%s Getting a lick-gif...",
                 Emotes.ANIM_LOADING.getEmote()
         )).queue(message -> {
-            if(link.isEmpty()){
+            if(link == null){
                 message.editMessage(String.format(
                         "%s licks you %s",
                         member.getEffectiveName(),
                         lickedMembers
                 )).queue();
             }else{
-                message.editMessage(
-                        EmbedBuilder.ZERO_WIDTH_SPACE
-                ).embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                        "%s licks you %s",
-                        member.getEffectiveName(),
-                        lickedMembers
-                )).setImage(link).build()).queue();
+                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
+                                "%s licks you %s",
+                                member.getEffectiveName(),
+                                lickedMembers
+                        )).setImage(link).build()).queue();
             }
         });
     }
