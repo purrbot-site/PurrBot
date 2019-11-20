@@ -41,7 +41,6 @@ public class CommandLoader {
         loadCommands(
                 // Fun
                 new CmdCuddle(bot),
-                new CmdFakegit(bot),
                 new CmdHolo(bot),
                 new CmdHug(bot),
                 new CmdKiss(bot),

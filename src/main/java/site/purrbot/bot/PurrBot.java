@@ -20,9 +20,9 @@ package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
 import com.andre601.javabotblockapi.BotBlockAPI;
-import com.andre601.javabotblockapi.RequestHandler;
 import com.andre601.javabotblockapi.Site;
 import com.andre601.javabotblockapi.exceptions.RatelimitedException;
+import com.andre601.javabotblockapi.requests.PostAction;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
@@ -82,7 +82,7 @@ public class PurrBot {
 
     private DiscordBotListAPI dblApi = null;
     private BotBlockAPI botBlockAPI = null;
-    private RequestHandler handler = new RequestHandler();
+    private PostAction post = new PostAction();
 
     private final CommandHandler<Message> CMD_HANDLER = new CommandHandler<>();
     private EventWaiter waiter;
@@ -441,14 +441,14 @@ public class PurrBot {
 
             getDblApi().setStats(getShardManager().getGuilds().size());
 
-            if(botBlockAPI == null || handler == null) {
-                logger.warn("RequestHandler and/or BotBlockAPI are null!");
+            if(botBlockAPI == null || post == null) {
+                logger.warn("PostAction and/or BotBlockAPI are null!");
 
                 return;
             }
 
             try {
-                handler.postGuilds(getShardManager(), botBlockAPI);
+                post.postGuilds(getShardManager(), botBlockAPI);
             } catch (Exception | RatelimitedException ex) {
                 logger.warn("Not able to post guild counts!", ex);
             }

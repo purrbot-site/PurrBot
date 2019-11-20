@@ -127,7 +127,7 @@ public class CmdHelp implements Command{
         }
 
         builder.addItems(String.format(
-                "Use the reactions to navigate through the pages.\n" +
+                "Use the \u25C0 or \u25B6 reactions to navigate through the pages and \u23F9 to cancel it.\n" +
                 "Hover over a command name (PC only) or use `%shelp [command]` for more info about a specific " +
                 "command.\n" +
                 "\n" +
@@ -151,7 +151,7 @@ public class CmdHelp implements Command{
             }
 
             builder.addItems(String.format(
-                    "Use the reactions to navigate through the pages.\n" +
+                    "Use the \u25C0 or \u25B6 reactions to navigate through the pages and \u23F9 to cancel it.\n" +
                     "Hover over a command name (PC only) or use `%shelp [command]` for more info about a specific " +
                     "command.\n" +
                     "\n" +

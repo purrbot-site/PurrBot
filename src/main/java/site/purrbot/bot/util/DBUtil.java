@@ -52,14 +52,14 @@ public class DBUtil {
      */
 
     private void checkValue(String id, String key, String defaultVal){
-        Map guild = r.table(guildTable).get(id).run(connection);
+        Map map = r.table(guildTable).get(id).run(connection);
 
-        if(guild == null){
+        if(map == null){
             addGuild(id);
             return;
         }
 
-        if(guild.get(key) == null)
+        if(map.get(key) == null)
             r.table(guildTable).get(id).update(r.hashMap(key, defaultVal)).run(connection);
     }
 
@@ -293,11 +293,12 @@ public class DBUtil {
      *
      * @param  id
      *         The ID of the member to check.
-     *
-     * @return True if the member (ID) is in the database.
      */
-    boolean hasMember(String id){
-        return getMember(id) != null;
+    void checkMember(String id){
+        Map member = getMember(id);
+        
+        if(member == null)
+            addMember(id);
     }
 
     private Map getMember(String id){
@@ -329,6 +330,7 @@ public class DBUtil {
      * @return The XP of the member.
      */
     public long getXp(String id){
+        checkMember(id);
         Map member = getMember(id);
 
         return (long)member.get("xp");
@@ -343,6 +345,7 @@ public class DBUtil {
      *        The new XP of the member.
      */
     void setXp(String id, long xp){
+        checkMember(id);
         r.table(memberTable).get(id).update(r.hashMap("xp", xp)).run(connection);
     }
 
@@ -355,6 +358,7 @@ public class DBUtil {
      * @return The Level of the member.
      */
     public long getLevel(String id){
+        checkMember(id);
         Map member = getMember(id);
 
         return (long)member.get("level");
@@ -369,6 +373,7 @@ public class DBUtil {
      *        The new Level of the member.
      */
     void setLevel(String id, long level){
+        checkMember(id);
         r.table(memberTable).get(id).update(r.hashMap("level", level)).run(connection);
     }
 }

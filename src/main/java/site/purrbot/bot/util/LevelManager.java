@@ -52,8 +52,7 @@ public class LevelManager {
         if(bot.isBeta())
             return;
 
-        if (!bot.getDbUtil().hasMember(id))
-            bot.getDbUtil().addMember(id);
+        bot.getDbUtil().checkMember(id);
 
         long xp;
         if(command)

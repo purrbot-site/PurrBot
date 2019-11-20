@@ -52,31 +52,9 @@ public class HttpUtil {
         }
     }
 
-    private JSONObject fakeGit() throws IOException{
-        Request request = new Request.Builder().url("https://whatthecommit.com/index.json").build();
-
-        Response response = CLIENT.newCall(request).execute();
-        try(ResponseBody body = response.body()){
-            if(!response.isSuccessful()) throw new IOException(String.format(
-                    "Unexpected code: %s",
-                    response
-            ));
-
-            return new JSONObject(Objects.requireNonNull(body).string());
-        }
-    }
-
     public String getImage(API api){
         try{
             return image(api);
-        }catch(IOException ex){
-            return null;
-        }
-    }
-
-    public JSONObject getFakeGit(){
-        try{
-            return fakeGit();
         }catch(IOException ex){
             return null;
         }
