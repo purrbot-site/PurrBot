@@ -21,7 +21,6 @@
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
-[whatthecommit]: https://whatthecommit.com
 
 <!-- Widgets -->
 [widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
@@ -52,7 +51,6 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 | Command: | Arguments:          | Description:                                               |
 | -------- | ------------------- | ---------------------------------------------------------- |
 | Cuddle   | `<@user ...>`       | Cuddles the mentioned user(s).                             |
-| Fakegit  |                     | Creates a fake commit-message with help of [whatthecommit] |
 | Holo     |                     | Gives an image of Holo from Spice and wolf.                |
 | Hug      | `<@user ...>`       | Hugs the mentioned user(s).                                |
 | Kiss     | `<@user ...>`       | Kisses the mentioned user(s).                              |
