@@ -44,6 +44,7 @@ import java.util.Random;
 public class CmdShip implements Command{
 
     private PurrBot bot;
+    Random random = new Random();
 
     public CmdShip(PurrBot bot){
         this.bot = bot;
@@ -117,8 +118,8 @@ public class CmdShip implements Command{
             if(!bot.isBeta()) {
                 if(bot.getPermUtil().isSpecial(member2.getUser().getId())){
                     tc.sendMessage(String.format(
-                            "%s Aww sweetie. You know we will always be a 100.\n" +
-                            "You don't need this command for that. ^-^",
+                            "%s Aww sweetie. You know we will always be a 100%%.\n" +
+                            "You don't need this test for that. ^-^",
                             member2.getAsMention()
                     )).queue();
                     return;
@@ -134,8 +135,8 @@ public class CmdShip implements Command{
             if(!bot.isBeta()){
                 if(bot.getPermUtil().isSpecial(member1.getUser().getId())){
                     tc.sendMessage(String.format(
-                            "%s Naw sweetie. You know we will always be a 100.\n" +
-                            "You don't need a test for that ^-^",
+                            "%s Naw sweetie. You know we will always be a 100%%.\n" +
+                            "You don't need this test for that ^-^",
                             member1.getAsMention()
                     )).queue();
                     return;
@@ -163,8 +164,6 @@ public class CmdShip implements Command{
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "You can't ship with bots you weirdo!");
             return;
         }
-
-        Random random = new Random();
 
         int result = random.nextInt(101);
 

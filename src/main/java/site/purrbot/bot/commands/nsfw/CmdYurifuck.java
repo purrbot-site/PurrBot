@@ -27,6 +27,7 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -66,12 +67,12 @@ public class CmdYurifuck implements Command{
         return bot.getRandom().nextInt(10);
     }
 
-    private EmbedBuilder getFuckEmbed(Member member1, Member member2, String url){
+    private EmbedBuilder getFuckEmbed(Member requester, Member target, String url){
         return bot.getEmbedUtil().getEmbed()
                 .setDescription(String.format(
                         "%s and %s are having sex!",
-                        member1.getEffectiveName(),
-                        member2.getEffectiveName()
+                        MarkdownSanitizer.escape(requester.getEffectiveName()),
+                        MarkdownSanitizer.escape(target.getEffectiveName())
                 ))
                 .setImage(url);
     }
@@ -156,7 +157,7 @@ public class CmdYurifuck implements Command{
                 "\n" +
                 "> **This request will time out in 1 minute!**",
                 target.getAsMention(),
-                author.getEffectiveName()
+                MarkdownSanitizer.escape(author.getEffectiveName())
         )).queue(message -> message.addReaction("✅").queue(m -> message.addReaction("❌").queue(emote -> {
                 EventWaiter waiter = bot.getWaiter();
                 waiter.waitForEvent(
@@ -185,7 +186,7 @@ public class CmdYurifuck implements Command{
 
                                 ev.getChannel().sendMessage(String.format(
                                         "%s doesn't want to lewd with you %s. >.<",
-                                        target.getEffectiveName(),
+                                        MarkdownSanitizer.escape(target.getEffectiveName()),
                                         author.getAsMention()
                                 )).queue();
                                 return;
@@ -208,15 +209,15 @@ public class CmdYurifuck implements Command{
 
                                 ev.getChannel().sendMessage(String.format(
                                         "%s accepted your invite %s! 0w0",
-                                        target.getEffectiveName(),
+                                        MarkdownSanitizer.escape(target.getEffectiveName()),
                                         author.getAsMention()
                                 )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
 
                                 if (link == null || link.isEmpty()) {
                                     ev.getChannel().sendMessage(String.format(
                                             "%s and %s are having sex!",
-                                            author.getEffectiveName(),
-                                            target.getEffectiveName()
+                                            MarkdownSanitizer.escape(author.getEffectiveName()),
+                                            MarkdownSanitizer.escape(target.getEffectiveName())
                                     )).queue();
                                     return;
                                 }
@@ -241,7 +242,7 @@ public class CmdYurifuck implements Command{
 
                             tc.sendMessage(String.format(
                                     "Looks like %s doesn't want to have sex with you %s. ._.",
-                                    target.getEffectiveName(),
+                                    MarkdownSanitizer.escape(target.getEffectiveName()),
                                     author.getAsMention()
                             )).queue();
                         }

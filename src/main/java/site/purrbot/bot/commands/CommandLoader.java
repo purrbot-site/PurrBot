@@ -72,8 +72,9 @@ public class CommandLoader {
                 // NSFW
                 new CmdBlowjob(bot),
                 new CmdFuck(bot),
-                new CmdLesbian(bot),
                 new CmdLewd(bot),
+                new CmdSolo(bot),
+                new CmdThreesome(bot),
                 new CmdYurifuck(bot),
 
                 // Owner

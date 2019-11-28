@@ -30,26 +30,26 @@ import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Emotes;
 
 @CommandDescription(
-        name = "Lesbian",
-        description = "Gives you a gif of lesbians",
-        triggers = {"lesbian", "les"},
+        name = "Girl",
+        description = "Gives you a gif of a girl playing with herself.",
+        triggers = {"solo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}lesbian")
+                @CommandAttribute(key = "usage", value = "{p}solo")
         }
 )
-public class CmdLesbian implements Command{
+public class CmdSolo implements Command{
 
     private PurrBot bot;
 
-    public CmdLesbian(PurrBot bot){
+    public CmdSolo(PurrBot bot){
         this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
-        String link = bot.getHttpUtil().getImage(API.GIF_LESBIAN_LEWD);
+        String link = bot.getHttpUtil().getImage(API.GIF_SOLO_LEWD);
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
@@ -59,13 +59,13 @@ public class CmdLesbian implements Command{
             return;
         }
 
-        EmbedBuilder les = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .setTitle("Lesbian", link)
+        EmbedBuilder girl = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+                .setTitle("Solo girl", link)
                 .setImage(link);
 
         tc.sendMessage(String.format(
-                "%s Getting hot lesbians...",
+                "%s Getting hot girl...",
                 Emotes.ANIM_LOADING.getEmote()
-        )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(les.build()).queue());
+        )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(girl.build()).queue());
     }
 }

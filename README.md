@@ -107,13 +107,15 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 **Permission**: `None`  
 **Extra**: This command ONLY works in NSFW-labeled channels.
 
-| Command: | Arguments:  | Description:                                                                        |
-| -------- | ----------- | ----------------------------------------------------------------------------------- |
-| Fuck     | `<@user>`   | Sends a invite to a user to have sex with you. They can accept or deny the request. |
-| Lesbian  |             | Returns a gif of lesbians.                                                          |
-| Lewd     |             | Shows a image of a lewd neko (catgirl).                                             |
-|          | `[--gif]`   | Shows a gif of a lewd neko (catgirl).                                               |
-| Yurifuck | `<@user>`   | Similar like .fuck, but with females only \>wO                                       |
+| Command:  | Arguments:            | Description:                                                                        |
+| --------- | --------------------- | ----------------------------------------------------------------------------------- |
+| Fuck      | `<@user>`             | Sends a invite to a user to have sex with you. They can accept or deny the request. |
+| Lewd      |                       | Shows a image of a lewd neko (catgirl).                                             |
+|           | `[--gif]`             | Shows a gif of a lewd neko (catgirl).                                               |
+| Solo      |                       | Gives a gif of a girl *playing* with herself.                                       |
+| Threesome | `<@user1>` `<@user2>` | Similar to `.fuck`, but lets you have sex with 2 people.                            |
+|           | `[--mmf]`             | Gives you a gif with 2 males and 1 female instead of the default 1 male, 2 females. |
+| Yurifuck  | `<@user>`             | Similar to `.fuck`, but with females only \>wO                                      |
 
 # Inviting the bot
 The bot has two invite-links: A full invite and a basic invite.

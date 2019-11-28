@@ -26,6 +26,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -38,7 +39,7 @@ import java.util.concurrent.TimeUnit;
         name = "Blowjob",
         description =
                 "Get a gif of someone trying to get some *milk*",
-        triggers = {"blowjob", "bj", "bjob"},
+        triggers = {"blowjob", "bj", "bjob", "succ"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
                 @CommandAttribute(key = "usage", value = "{p}blowjob @user")
@@ -54,7 +55,7 @@ public class CmdBlowjob implements Command{
         this.bot = bot;
     }
 
-    Cache<String, String> queue = Caffeine.newBuilder()
+    private Cache<String, String> queue = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)
             .build();
 
@@ -62,8 +63,8 @@ public class CmdBlowjob implements Command{
         return bot.getEmbedUtil().getEmbed()
                 .setDescription(String.format(
                         "%s is giving %s a blowjob!",
-                        requester.getEffectiveName(),
-                        target.getEffectiveName()
+                        MarkdownSanitizer.escape(requester.getEffectiveName()),
+                        MarkdownSanitizer.escape(target.getEffectiveName())
                 ))
                 .setImage(link)
                 .build();
@@ -146,7 +147,7 @@ public class CmdBlowjob implements Command{
                 "\n" +
                 "> **This request will time out in 1 minute!**",
                 target.getAsMention(),
-                author.getEffectiveName()
+                MarkdownSanitizer.escape(author.getEffectiveName())
         )).queue(message -> message.addReaction("✅").queue(m -> message.addReaction("❌").queue(emote -> {
             EventWaiter waiter = bot.getWaiter();
             waiter.waitForEvent(
@@ -178,7 +179,7 @@ public class CmdBlowjob implements Command{
                             queue.invalidate(author.getId());
                             event.getChannel().sendMessage(String.format(
                                     "%s doesn't want to get sucked by you %s. :/",
-                                    target.getEffectiveName(),
+                                    MarkdownSanitizer.escape(target.getEffectiveName()),
                                     author.getAsMention()
                             )).queue();
                             return;
@@ -200,15 +201,15 @@ public class CmdBlowjob implements Command{
 
                             event.getChannel().sendMessage(String.format(
                                     "%s accepted your request %s!",
-                                    target.getEffectiveName(),
+                                    MarkdownSanitizer.escape(target.getEffectiveName()),
                                     author.getAsMention()
                             )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
 
                             if(link == null){
                                 event.getChannel().sendMessage(String.format(
                                         "%s is giving %s a blowjob!",
-                                        author.getEffectiveName(),
-                                        target.getEffectiveName()
+                                        MarkdownSanitizer.escape(author.getEffectiveName()),
+                                        MarkdownSanitizer.escape(target.getEffectiveName())
                                 )).queue();
                                 return;
                             }
@@ -230,7 +231,7 @@ public class CmdBlowjob implements Command{
                         queue.invalidate(author.getId());
                         tc.sendMessage(String.format(
                                 "Looks like %s doesn't want a blowjob from you %s.",
-                                target.getEffectiveName(),
+                                MarkdownSanitizer.escape(target.getEffectiveName()),
                                 author.getAsMention()
                         )).queue();
                     }

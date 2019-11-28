@@ -22,6 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -86,7 +87,8 @@ public class CmdSlap implements Command{
         String slapedMembers = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
-                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
+                .map(Member::getEffectiveName)
+                .collect(Collectors.joining(", "));
 
         if(slapedMembers.isEmpty())
             return;
@@ -100,15 +102,15 @@ public class CmdSlap implements Command{
             if(link == null){
                 message.editMessage(String.format(
                         "%s slaps you %s",
-                        member.getEffectiveName(),
-                        slapedMembers
+                        MarkdownSanitizer.escape(member.getEffectiveName()),
+                        MarkdownSanitizer.escape(slapedMembers)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s slaps you %s",
-                                member.getEffectiveName(),
-                                slapedMembers
+                                MarkdownSanitizer.escape(member.getEffectiveName()),
+                                MarkdownSanitizer.escape(slapedMembers)
                         )).setImage(link).build()).queue();
             }
         });

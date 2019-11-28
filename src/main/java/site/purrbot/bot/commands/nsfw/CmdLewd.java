@@ -38,7 +38,7 @@ import site.purrbot.bot.constants.Emotes;
         "`--gif` for a gif\n" +
         "`--slide` for a slideshow with 30 images\n" +
         "Both arguments can be combined.",
-        triggers = {"lewd"},
+        triggers = {"lewd", "lneko"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
                 @CommandAttribute(key = "usage", value =

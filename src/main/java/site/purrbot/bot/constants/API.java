@@ -36,11 +36,13 @@ public enum API {
     GIF_SLAP  (false, "slap",   true),
     GIF_TICKLE(false, "tickle", true),
 
-    GIF_BLOW_JOB_LEWD(true, "blowjob",   true),
-    GIF_FUCK_LEWD    (true, "fuck",    true),
-    GIF_LESBIAN_LEWD (true, "lesbian", true),
-    GIF_NEKO_LEWD    (true, "neko",       true),
-    GIF_YURI_LEWD    (true, "yuri",       true);
+    GIF_BLOW_JOB_LEWD     (true, "blowjob",   true),
+    GIF_FUCK_LEWD         (true, "fuck",      true),
+    GIF_NEKO_LEWD         (true, "neko",      true),
+    GIF_SOLO_LEWD         (true, "solo",      true),
+    GIF_THREESOME_FFM_LEWD(true, "threesome_ffm", true),
+    GIF_THREESOME_MMF_LEWD(true, "threesome_mmf", true),
+    GIF_YURI_LEWD         (true, "yuri",      true);
 
     private boolean nsfw;
     private boolean gif;

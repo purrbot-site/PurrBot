@@ -25,6 +25,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -96,7 +97,8 @@ public class CmdLick implements Command{
         String lickedMembers = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
-                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
+                .map(Member::getEffectiveName)
+                .collect(Collectors.joining(", "));
 
         if(lickedMembers.isEmpty())
             return;
@@ -110,15 +112,15 @@ public class CmdLick implements Command{
             if(link == null){
                 message.editMessage(String.format(
                         "%s licks you %s",
-                        member.getEffectiveName(),
-                        lickedMembers
+                        MarkdownSanitizer.escape(member.getEffectiveName()),
+                        MarkdownSanitizer.escape(lickedMembers)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s licks you %s",
-                                member.getEffectiveName(),
-                                lickedMembers
+                                MarkdownSanitizer.escape(member.getEffectiveName()),
+                                MarkdownSanitizer.escape(lickedMembers)
                         )).setImage(link).build()).queue();
             }
         });

@@ -25,6 +25,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -95,7 +96,8 @@ public class CmdCuddle implements Command{
         String cuddledMembers = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
-                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
+                .map(Member::getEffectiveName)
+                .collect(Collectors.joining(", "));
 
         if(cuddledMembers.isEmpty())
             return;
@@ -109,16 +111,16 @@ public class CmdCuddle implements Command{
             if(link == null){
                 message.editMessage(String.format(
                         "%s cuddles with you %s",
-                        member.getEffectiveName(),
-                        cuddledMembers
+                        MarkdownSanitizer.escape(member.getEffectiveName()),
+                        MarkdownSanitizer.escape(cuddledMembers)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(
                                 bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s cuddles with you %s",
-                                member.getEffectiveName(),
-                                cuddledMembers
+                                        MarkdownSanitizer.escape(member.getEffectiveName()),
+                                        MarkdownSanitizer.escape(cuddledMembers)
                         )).setImage(link).build()).queue();
             }
         });

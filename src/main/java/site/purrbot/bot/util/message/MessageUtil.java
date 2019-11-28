@@ -19,6 +19,7 @@
 package site.purrbot.bot.util.message;
 
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 
 import java.awt.Color;
@@ -137,7 +138,7 @@ public class MessageUtil {
                 String[] rgb = value.replace(" ", "").split(",");
 
                 try{
-                    result = new Color(Integer.valueOf(rgb[0]), Integer.valueOf(rgb[1]), Integer.valueOf(rgb[2]));
+                    result = new Color(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
                 }catch(Exception ex){
                     return null;
                 }

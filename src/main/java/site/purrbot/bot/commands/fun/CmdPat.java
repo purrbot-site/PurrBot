@@ -22,6 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -86,7 +87,8 @@ public class CmdPat implements Command{
         String pattetMembers = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
-                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
+                .map(Member::getEffectiveName)
+                .collect(Collectors.joining(", "));
 
         if(pattetMembers.isEmpty())
             return;
@@ -100,15 +102,15 @@ public class CmdPat implements Command{
             if(link == null){
                 message.editMessage(String.format(
                         "%s pats you %s",
-                        member.getEffectiveName(),
-                        pattetMembers
+                        MarkdownSanitizer.escape(member.getEffectiveName()),
+                        MarkdownSanitizer.escape(pattetMembers)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s pats you %s",
-                                member.getEffectiveName(),
-                                pattetMembers
+                                MarkdownSanitizer.escape(member.getEffectiveName()),
+                                MarkdownSanitizer.escape(pattetMembers)
                         )).setImage(link).build()).queue();
             }
         });

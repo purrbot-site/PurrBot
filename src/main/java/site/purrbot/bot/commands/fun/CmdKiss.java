@@ -22,6 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -135,7 +136,8 @@ public class CmdKiss implements Command{
                 .filter(mem -> !mem.equals(msg.getMember()))
                 .filter(mem -> !mem.equals(purr))
                 .filter(mem -> !mem.equals(snuggle))
-                .map(Member::getEffectiveName).collect(Collectors.joining(", "));
+                .map(Member::getEffectiveName)
+                .collect(Collectors.joining(", "));
 
         String link = bot.getHttpUtil().getImage(API.GIF_KISS);
 
@@ -149,15 +151,15 @@ public class CmdKiss implements Command{
             if(link == null){
                 message.editMessage(String.format(
                         "%s kisses you %s",
-                        member.getEffectiveName(),
-                        kissedMembers
+                        MarkdownSanitizer.escape(member.getEffectiveName()),
+                        MarkdownSanitizer.escape(kissedMembers)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s kisses you %s",
-                                member.getEffectiveName(),
-                                kissedMembers
+                                MarkdownSanitizer.escape(member.getEffectiveName()),
+                                MarkdownSanitizer.escape(kissedMembers)
                         )).setImage(link).build()).queue();
             }
         });
