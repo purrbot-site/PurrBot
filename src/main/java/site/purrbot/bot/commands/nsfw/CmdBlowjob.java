@@ -139,7 +139,7 @@ public class CmdBlowjob implements Command{
             return;
         }
 
-        queue.put(author.getId(), target.getId());
+        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to give you a blowjob. Do you want that too?\n" +
@@ -176,7 +176,7 @@ public class CmdBlowjob implements Command{
                                 ));
                             }
 
-                            queue.invalidate(author.getId());
+                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             event.getChannel().sendMessage(String.format(
                                     "%s doesn't want to get sucked by you %s. :/",
                                     MarkdownSanitizer.escape(target.getEffectiveName()),
@@ -196,7 +196,7 @@ public class CmdBlowjob implements Command{
                                 ));
                             }
     
-                            queue.invalidate(author.getId());
+                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             String link = bot.getHttpUtil().getImage(API.GIF_BLOW_JOB_LEWD);
 
                             event.getChannel().sendMessage(String.format(
@@ -228,7 +228,7 @@ public class CmdBlowjob implements Command{
                             ));
                         }
     
-                        queue.invalidate(author.getId());
+                        queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                         tc.sendMessage(String.format(
                                 "Looks like %s doesn't want a blowjob from you %s.",
                                 MarkdownSanitizer.escape(target.getEffectiveName()),

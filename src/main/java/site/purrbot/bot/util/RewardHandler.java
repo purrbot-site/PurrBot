@@ -19,8 +19,6 @@
 package site.purrbot.bot.util;
 
 import ch.qos.logback.classic.Logger;
-import club.minnced.discord.webhook.send.WebhookEmbed;
-import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
@@ -79,11 +77,11 @@ public class RewardHandler {
         }else
         if(site.equals(Site.DBL)){
             if(member == null){
-                bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
+                bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_TOP_GG.getUrl(), "New Upvote", String.format(
                         "An anonymous person upvoted %s on discordbots.org!\n" +
                         "You can do that too on <%s>",
                         guild.getSelfMember().getAsMention(),
-                        Links.DISCORDBOTS_ORG.getUrl()
+                        Links.TOP_GG.getUrl()
                 ), null);
                 return;
             }
@@ -93,12 +91,12 @@ public class RewardHandler {
                     .reason("[Reward] User upvoted bot on discordbots.org!")
                     .queue();
 
-            bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_DBL.getUrl(), "New Upvote", String.format(
+            bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_TOP_GG.getUrl(), "New Upvote", String.format(
                     "%s upvotes %s on discordbots.org! Thank you. \uD83C\uDF89\n" +
                     "You can do that too on <%s>",
                     member.getAsMention(),
                     guild.getSelfMember().getAsMention(),
-                    Links.DISCORDBOTS_ORG.getUrl()
+                    Links.TOP_GG.getUrl()
             ), null);
         }else
         if(site.equals(Site.BOTLIST_SPACE)){

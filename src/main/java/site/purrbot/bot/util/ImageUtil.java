@@ -27,6 +27,7 @@ import okhttp3.*;
 
 import org.json.JSONObject;
 import site.purrbot.bot.PurrBot;
+import site.purrbot.bot.constants.API;
 
 
 import javax.imageio.ImageIO;
@@ -35,7 +36,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Random;
 
 public class ImageUtil {
 
@@ -47,7 +47,6 @@ public class ImageUtil {
 
     private final String[] USER_AGENT = {"User-Agent", "PurrBot-UserAgent"};
     private final OkHttpClient CLIENT = new OkHttpClient();
-    private Random random = new Random();
 
     private BufferedImage getAvatar(User user) throws IOException{
         URL url = new URL(user.getEffectiveAvatarUrl());
@@ -57,19 +56,7 @@ public class ImageUtil {
 
         return ImageIO.read(connection.getInputStream());
     }
-
-    /**
-     * Generates a image with the provided members and chance and returns it as byte-array.
-     *
-     * @param  member1
-     *         The first {@link net.dv8tion.jda.api.entities.Member Member} to get information from.
-     * @param  member2
-     *         The second {@link net.dv8tion.jda.api.entities.Member Member} to get information from.
-     * @param  chance
-     *         The chance (from 0 to 100)
-     *
-     * @return The generated image as byte-array.
-     */
+    
     public byte[] getShipImg(Member member1, Member member2, int chance){
         try{
             BufferedImage template = ImageIO.read(new File("img/LoveTemplate.png"));
@@ -129,21 +116,7 @@ public class ImageUtil {
             return null;
         }
     }
-
-    /**
-     * Connects to the <a href="https://purrbot.site/api">PurrBot API</a> and receives a quote-image as
-     * an InputStream.
-     *
-     * @param  quote
-     *         The {@link net.dv8tion.jda.api.entities.Message Message} to generate a image from.
-     *
-     * @return The InputStream of the image.
-     *
-     * @throws IOException
-     *         Thrown when the request fails (response is not 2xx)
-     * @throws NullPointerException
-     *         Thrown when the returned body is empty/null
-     */
+    
     public byte[] getQuoteImg(Message quote) throws IOException, NullPointerException{
         Member member = quote.getMember();
 
@@ -176,22 +149,6 @@ public class ImageUtil {
         }
     }
 
-    /**
-     * Connects to the <a href="https://purrbot.site/api">PurrBot API</a> and receives a status-image
-     * (avatar with the status icon of Discord (Green, yellow, red or gray dot).
-     *
-     * @param  avatarUrl
-     *         The URL of the avatar.
-     * @param  status
-     *         The actual status of the user. Needs to be "online", "idle", "do_not_disturb", "dnd" or "offline"
-     *
-     * @return The InputStream of the image.
-     *
-     * @throws IOException
-     *         Thrown when the request fails (response is not 2xx)
-     * @throws NullPointerException
-     *         Thrown when the returned body is empty/null
-     */
     public byte[] getStatusAvatar(String avatarUrl, String status) throws IOException, NullPointerException{
 
         JSONObject json = new JSONObject()
@@ -219,27 +176,6 @@ public class ImageUtil {
         }
     }
 
-    /**
-     * Gets the image from the <a href="https://api.blazedev.me" target="_blank">BlazeDev API</a>.
-     *
-     * @param  user
-     *         The User to get information from like avatar and username
-     * @param  size
-     *         The current Discord size
-     * @param  icon
-     *         The icon to use
-     * @param  bg
-     *         The background to use
-     * @param  color
-     *         The font colour to use
-     *
-     * @return The InputStream of the generated image
-     *
-     * @throws IOException
-     *         Thrown when the request fails (response is not 2xx)
-     * @throws NullPointerException
-     *         Thrown when the returned body is empty/null
-     */
     public InputStream getWelcomeImg(User user, int size, String icon, String bg, String color) throws IOException, NullPointerException{
         if(color.toLowerCase().startsWith("hex:") || color.toLowerCase().startsWith("hex:#")){
             color = color.toLowerCase().replace("hex:#", "#").replace("hex:", "#");
@@ -250,17 +186,17 @@ public class ImageUtil {
             color = "#000000";
         }
 
-        if(icon.equalsIgnoreCase("random"))
-            icon = getRandomIcon();
-
-        if(bg.equalsIgnoreCase("random"))
-            bg = getRandomBg();
-
         JSONObject json = new JSONObject()
                 .put("username", user.getName())
                 .put("members", String.format("You're member #%d", size))
-                .put("icon", String.format("https://purrbot.site/images/icon/%s.png", icon))
-                .put("banner", String.format("https://purrbot.site/images/background/%s.png", bg))
+                .put("icon", icon.equalsIgnoreCase("random") ? 
+                        bot.getHttpUtil().getImage(API.IMG_ICON) :
+                        String.format("https://purrbot.site/img/sfw/icon/img/%s.png", icon)
+                )
+                .put("banner", bg.equalsIgnoreCase("random") ?
+                        bot.getHttpUtil().getImage(API.IMG_BACKGROUND) :
+                        String.format("https://purrbot.site/img/sfw/background/img/%s.png", bg)
+                )
                 .put("avatar", user.getEffectiveAvatarUrl())
                 .put("color_welcome", color)
                 .put("color_username", color)
@@ -290,17 +226,5 @@ public class ImageUtil {
 
             return new ByteArrayInputStream(responseBody.bytes());
         }
-    }
-
-    private String getRandomIcon(){
-        return bot.getWelcomeIcon().isEmpty() ? "purr" : bot.getWelcomeIcon().get(
-                random.nextInt(bot.getWelcomeIcon().size())
-        );
-    }
-
-    private String getRandomBg(){
-        return bot.getWelcomeBg().isEmpty() ? "color_white" : bot.getWelcomeBg().get(
-                random.nextInt(bot.getWelcomeBg().size())
-        );
     }
 }

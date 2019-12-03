@@ -147,7 +147,7 @@ public class CmdFuck implements Command{
             return;
         }
 
-        queue.put(author.getId(), target.getId());
+        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to have sex with you. Do you want that too?\n" +
@@ -180,7 +180,7 @@ public class CmdFuck implements Command{
                                     ));
                                 }
 
-                                queue.invalidate(author.getId());
+                                queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
                                 ev.getChannel().sendMessage(String.format(
                                         "%s doesn't want to lewd with you %s. >.<",
@@ -201,7 +201,7 @@ public class CmdFuck implements Command{
                                     ));
                                 }
     
-                                queue.invalidate(author.getId());
+                                queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
                                 String link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
 
@@ -237,7 +237,7 @@ public class CmdFuck implements Command{
                                 ));
                             }
     
-                            queue.invalidate(author.getId());
+                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
                             tc.sendMessage(String.format(
                                     "Looks like %s doesn't want to have sex with you %s. ._.",

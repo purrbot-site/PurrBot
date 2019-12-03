@@ -64,7 +64,7 @@ public class CmdInfo implements Command{
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        EmbedBuilder info = bot.getEmbedUtil().getEmbed()
+        EmbedBuilder info = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setAuthor(msg.getJDA().getSelfUser().getName(),
                         Links.WEBSITE.getUrl(),
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
@@ -79,38 +79,40 @@ public class CmdInfo implements Command{
                         IDs.ANDRE_601.getId()
                 ), false)
                 .addField("Commands", String.format(
-                        "Use `%shelp` in the Discord for a list of commands.",
+                        "Use `%shelp` in this Discord for a list of commands.",
                         bot.getPrefix(guild.getId())
                 ), false)
-                .addField("Bot-Version", "`BOT_VERSION`", true)
-                .addField("Library", String.format(
-                        "[`JDA %s`](%s)",
+                .addField("Bot Info", String.format(
+                        "Bot version: `BOT_VERSION`\n" +
+                        "Library: [`JDA %s`](%s)",
                         JDAInfo.VERSION,
                         JDAInfo.GITHUB
                 ), true)
-                .addField("Links", String.format(
-                        "[`GitHub`](%s)\n" +
-                        "[`Wiki`](%s)\n" +
-                        "[`Twitter`](%s)\n" +
+                .addField("Bot Lists", String.format(
+                        "[`Botlist.space`](%s)\n" +
+                        "[`Discordextremelist.xyz`](%s)\n" +
                         "[`Discord.bots.gg`](%s)\n" +
-                        "[`Botlist.space`](%s)",
-                        Links.GITHUB.getUrl(),
-                        Links.WIKI.getUrl(),
-                        Links.TWITTER.getUrl(),
+                        "[`LBots.org`](%s)\n" +
+                        "[`Top.gg`](%s)",
+                        Links.BOTLIST_SPACE.getUrl(),
+                        Links.DISCORDEXTREMELIST_XYZ.getUrl(),
                         Links.DISCORD_BOTS_GG.getUrl(),
-                        Links.BOTLIST_SPACE.getUrl()
-                ), true)
-                .addField("", String.format(
-                        "[`Official Discord`](%s)\n" +
-                        "[`Website`](%s)\n" +
-                        "[`Patreon`](%s)\n" +
-                        "[`Lbots.org`](%s)\n" +
-                        "[`Discordbots.org`](%s)",
-                        Links.DISCORD.getUrl(),
-                        Links.WEBSITE.getUrl(),
-                        Links.PATREON.getUrl(),
                         Links.LBOTS_ORG.getUrl(),
-                        Links.DISCORDBOTS_ORG.getUrl()
+                        Links.TOP_GG.getUrl()
+                ), true)
+                .addField("Other links", String.format(
+                        "[`GitHub`](%s)" +
+                        "[`Patreon`](%s)\n" +
+                        "[`Support Discord`](%s)\n" +
+                        "[`Twitter`](%s)\n" +
+                        "[`Website`](%s)\n" +
+                        "[`Wiki`](%s)\n",
+                        Links.GITHUB.getUrl(),
+                        Links.PATREON.getUrl(),
+                        Links.DISCORD.getUrl(),
+                        Links.TWITTER.getUrl(),
+                        Links.WEBSITE.getUrl(),
+                        Links.WIKI.getUrl()
                 ), true);
 
         if(args.toLowerCase().contains("--dm")){

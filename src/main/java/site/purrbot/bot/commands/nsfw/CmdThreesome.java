@@ -43,11 +43,11 @@ import java.util.concurrent.TimeUnit;
                 "Both can accept the request by clicking on ✅ or deny it by clicking on ❌.\n" +
                 "The request is denied if even just one of the users denies it, or when it times out.\n" +
                 "\n" +
-                "Use `--mmf` to get gifs with 2 man and 1 female.",
+                "Use `--mmf` to get gifs with 2 man and 1 female or `--fff` with only females.",
         triggers = {"threesome", "3some"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}threesome @user1 @user2 [--mmf]")
+                @CommandAttribute(key = "usage", value = "{p}threesome @user1 @user2 [--mmf|--fff]")
         }
 )
 public class CmdThreesome implements Command{
@@ -147,13 +147,13 @@ public class CmdThreesome implements Command{
         if(queue.getIfPresent(author.getId()) != null){
             tc.sendMessage(String.format(
                     "Whoa there %s! Show some patience you horny person.\n" +
-                    "You already asked some people to fuck with you. Wait for them to accept or deny your request.",
+                    "You already asked some people to fuck with you. Wait for them to either accept or deny your request.",
                     author.getAsMention()
             )).queue();
             return;
         }
         
-        queue.put(author.getId(), String.format("%s:%s", target1.getId(), target2.getId()));
+        queue.put(String.format("%s:%s", author.getId(), guild.getId()), String.format("%s:%s", target1.getId(), target2.getId()));
         List<String> list = new ArrayList<>();
         list.add(target1.getId());
         list.add(target2.getId());
@@ -197,7 +197,7 @@ public class CmdThreesome implements Command{
                                 ));
                             }
                             
-                            queue.invalidate(author.getId());
+                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             list.remove(target1.getId());
                             list.remove(target2.getId());
                             
@@ -219,11 +219,14 @@ public class CmdThreesome implements Command{
                                 ));
                             }
                             
-                            queue.invalidate(author.getId());
+                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             
                             String link;
                             if(msg.getContentRaw().toLowerCase().contains("--mmf"))
                                 link = bot.getHttpUtil().getImage(API.GIF_THREESOME_MMF_LEWD);
+                            else
+                            if(msg.getContentRaw().toLowerCase().contains("--fff"))
+                                link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFF_LEWD);
                             else
                                 link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFM_LEWD);
                             
@@ -258,7 +261,7 @@ public class CmdThreesome implements Command{
                             ));
                         }
                         
-                        queue.invalidate(author.getId());
+                        queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                         list.remove(target1.getId());
                         list.remove(target2.getId());
                         

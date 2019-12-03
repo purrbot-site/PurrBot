@@ -20,23 +20,24 @@ package site.purrbot.bot.constants;
 
 public enum  Links {
 
+    // Discord invite
     DISCORD("https://purrbot.site/discord"),
 
+    // GitHub links
     GITHUB("https://purrbot.site/github"),
     WIKI  ("https://github.com/Andre601/PurrBot/wiki"),
 
     // Bot lists
     BOTLIST_SPACE         ("https://botlist.space/bot/425382319449309197"),
-    DISCORDBOTS_ORG       ("https://discordbots.org/bot/425382319449309197"),
+    DISCORDEXTREMELIST_XYZ("https://discordextremelist.xyz/bots/purr"),
     DISCORD_BOTS_GG       ("https://discord.bots.gg/bots/425382319449309197"),
-    DISCORDEXTREMELIST_XYZ("https://discordextremelist.xyz/bots/425382319449309197"),
     LBOTS_ORG             ("https://lbots.org/bots/Purr"),
+    TOP_GG                ("https://top.gg/bot/425382319449309197"),
 
     // Images
-    GITHUB_AVATAR ("https://i.imgur.com/Fv6qdfG.png"),
     FAVOURITE     ("https://i.imgur.com/LTd5nEJ.png"),
     UPVOTE_BOTLIST("https://i.imgur.com/Velat7C.png"),
-    UPVOTE_DBL    ("https://i.imgur.com/SwAz3je.png"),
+    UPVOTE_TOP_GG ("https://i.imgur.com/SwAz3je.png"),
 
     // Other links
     PATREON("https://patreon.com/purrbot"),

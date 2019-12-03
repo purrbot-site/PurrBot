@@ -20,9 +20,11 @@ package site.purrbot.bot.constants;
 
 public enum API {
 
-    IMG_KITSUNE(false, "kitsune", false),
-    IMG_HOLO   (false, "holo",    false),
-    IMG_NEKO   (false, "neko",    false),
+    IMG_BACKGROUND(false, "background", false),
+    IMG_HOLO      (false, "holo",       false),
+    IMG_ICON      (false, "icon",       false),
+    IMG_KITSUNE   (false, "kitsune",    false),
+    IMG_NEKO      (false, "neko",       false),
 
     IMG_NEKO_LEWD(true, "neko", false),
 
@@ -36,13 +38,14 @@ public enum API {
     GIF_SLAP  (false, "slap",   true),
     GIF_TICKLE(false, "tickle", true),
 
-    GIF_BLOW_JOB_LEWD     (true, "blowjob",   true),
-    GIF_FUCK_LEWD         (true, "fuck",      true),
-    GIF_NEKO_LEWD         (true, "neko",      true),
-    GIF_SOLO_LEWD         (true, "solo",      true),
+    GIF_BLOW_JOB_LEWD     (true, "blowjob",       true),
+    GIF_FUCK_LEWD         (true, "fuck",          true),
+    GIF_NEKO_LEWD         (true, "neko",          true),
+    GIF_SOLO_LEWD         (true, "solo",          true),
+    GIF_THREESOME_FFF_LEWD(true, "threesome_fff", true),
     GIF_THREESOME_FFM_LEWD(true, "threesome_ffm", true),
     GIF_THREESOME_MMF_LEWD(true, "threesome_mmf", true),
-    GIF_YURI_LEWD         (true, "yuri",      true);
+    GIF_YURI_LEWD         (true, "yuri",          true);
 
     private boolean nsfw;
     private boolean gif;

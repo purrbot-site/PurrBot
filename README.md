@@ -114,6 +114,7 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 |           | `[--gif]`             | Shows a gif of a lewd neko (catgirl).                                               |
 | Solo      |                       | Gives a gif of a girl *playing* with herself.                                       |
 | Threesome | `<@user1>` `<@user2>` | Similar to `.fuck`, but lets you have sex with 2 people.                            |
+|           | `[--fff]`             | Gives you a gif with females only instead of the default 1 male, 2 females.         |
 |           | `[--mmf]`             | Gives you a gif with 2 males and 1 female instead of the default 1 male, 2 females. |
 | Yurifuck  | `<@user>`             | Similar to `.fuck`, but with females only \>wO                                      |
 

@@ -34,10 +34,7 @@ import site.purrbot.bot.constants.Emotes;
         description =
         "Get images of naughty nekos. >w<\n" +
         "\n" +
-        "You can use additional args in the command.\n" +
-        "`--gif` for a gif\n" +
-        "`--slide` for a slideshow with 30 images\n" +
-        "Both arguments can be combined.",
+        "Use `--gif` to get a gif of a lewd neko.",
         triggers = {"lewd", "lneko"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),

@@ -99,7 +99,7 @@ public class CmdNeko implements Command{
                     ), link)
                     .setImage(link);
 
-            if(link.equals("https://cdn.nekos.life/v3/sfw/img/neko/neko_079.jpg")){
+            if(link.equals("https://purrbot.site/img/sfw/neko/img/neko_076.jpg")){
                 if(bot.isBeta()){
                     neko.setDescription("That is me! >w<");
                     message.addReaction("❤").queue();
@@ -110,7 +110,7 @@ public class CmdNeko implements Command{
                         message.addReaction(Emotes.SNUGGLE.getNameAndId()).queue();
                 }
             }else
-            if(link.equals("https://cdn.nekos.life/v3/sfw/img/neko/neko_139.png")){
+            if(link.equals("https://purrbot.site/img/sfw/neko/img/neko_136.jpg")){
                 if(bot.isBeta()){
                     neko.setDescription("That is my big sister!");
 
