@@ -87,7 +87,7 @@ public class CmdInfo implements Command{
                         "Library: [`JDA %s`](%s)",
                         JDAInfo.VERSION,
                         JDAInfo.GITHUB
-                ), true)
+                ), false)
                 .addField("Bot Lists", String.format(
                         "[`Botlist.space`](%s)\n" +
                         "[`Discordextremelist.xyz`](%s)\n" +
@@ -99,9 +99,9 @@ public class CmdInfo implements Command{
                         Links.DISCORD_BOTS_GG.getUrl(),
                         Links.LBOTS_ORG.getUrl(),
                         Links.TOP_GG.getUrl()
-                ), true)
+                ), false)
                 .addField("Other links", String.format(
-                        "[`GitHub`](%s)" +
+                        "[`GitHub`](%s)\n" +
                         "[`Patreon`](%s)\n" +
                         "[`Support Discord`](%s)\n" +
                         "[`Twitter`](%s)\n" +
@@ -113,7 +113,7 @@ public class CmdInfo implements Command{
                         Links.TWITTER.getUrl(),
                         Links.WEBSITE.getUrl(),
                         Links.WIKI.getUrl()
-                ), true);
+                ), false);
 
         if(args.toLowerCase().contains("--dm")){
             msg.getAuthor().openPrivateChannel().queue(
