@@ -66,8 +66,9 @@ public class ConnectionListener extends ListenerAdapter{
                     false,
                     "Reason:",
                     String.format(
-                            "```\n" +
-                            "%d: %s\n" +
+                            "```yaml\n" +
+                            "Code:    %d\n" +
+                            "Message: %s\n" +
                             "```",
                             event.getCloseCode().getCode(),
                             event.getCloseCode().getMeaning()

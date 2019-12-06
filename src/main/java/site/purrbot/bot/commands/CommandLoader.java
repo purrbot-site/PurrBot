@@ -49,6 +49,7 @@ public class CommandLoader {
                 new CmdNeko(bot),
                 new CmdPat(bot),
                 new CmdPoke(bot),
+                new CmdSenko(bot),
                 new CmdShip(bot),
                 new CmdSlap(bot),
                 new CmdTickle(bot),

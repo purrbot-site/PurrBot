@@ -25,6 +25,7 @@ public enum API {
     IMG_ICON      (false, "icon",       false),
     IMG_KITSUNE   (false, "kitsune",    false),
     IMG_NEKO      (false, "neko",       false),
+    IMG_SENKO     (false, "senko",      false),
 
     IMG_NEKO_LEWD(true, "neko", false),
 

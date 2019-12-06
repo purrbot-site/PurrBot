@@ -23,6 +23,7 @@ public enum Emotes{
     // Animated emotes,
     ANIM_LOADING     ("loading",      "590951368328740865", true),
     ANIM_TYPING      ("typing",       "590954127727525889", true),
+    ANIM_SENKOTAILWAG("senkoTailWag", "574631381804777482", true),
     ANIM_SHIROTAILWAG("shiroTailWag", "583782265029394473", true),
     ANIM_WAGTAIL     ("wagTail",      "570462900234223639", true),
 
