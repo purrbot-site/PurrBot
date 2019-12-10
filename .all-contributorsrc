@@ -3,7 +3,7 @@
     "README.md"
   ],
   "imageSize": 100,
-  "badgeTemplate": "[ContributorBadge]: https://img.shields.io/badge/Contributors_✨-<%= contributors.length %>-green.svg?style=plastic",
+  "badgeTemplate": "[contributorBadge]: https://img.shields.io/badge/Contributors_✨-<%= contributors.length %>-green.svg?style=plastic",
   "commit": false,
   "contributors": [
     {
