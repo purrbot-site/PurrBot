@@ -34,7 +34,11 @@
 [debl]: https://discordextremelist.xyz/bots/purr  
 [lbots]: https://lbots.org/bots/Purr
 
-[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![Contributors](https://img.shields.io/badge/Contributors_✨-3-green.svg?style=plastic)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[contributorsBadge]: https://img.shields.io/badge/Contributors_✨-3-green.svg?style=plastic
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![contributorsBadge]](#contributors-)
 
 # \*Purr*
 This bot was made to use the [nekos.life]-API but now moved to its very own API.
