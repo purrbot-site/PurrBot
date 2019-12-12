@@ -39,8 +39,7 @@ import site.purrbot.bot.constants.Emotes;
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
                 @CommandAttribute(key = "usage", value =
-                        "{p}lewd\n" +
-                        "{p}lewd --gif\n"
+                        "{p}lewd [--gif]"
                 )
         }
 )

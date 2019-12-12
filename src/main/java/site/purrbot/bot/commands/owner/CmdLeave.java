@@ -37,7 +37,6 @@ import site.purrbot.bot.commands.Command;
         attributes = {
                 @CommandAttribute(key = "category", value = "owner"),
                 @CommandAttribute(key = "usage", value =
-                        "{p}leave <guildID>\n" +
                         "{p}leave <guildID> [--pm <message>]"
                 )
         }

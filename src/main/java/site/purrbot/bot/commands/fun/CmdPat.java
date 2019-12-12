@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
         triggers = {"pat", "patting", "pet"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}pat @user [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}pat <@user> [@user ...]")
         }
 )
 public class CmdPat implements Command{

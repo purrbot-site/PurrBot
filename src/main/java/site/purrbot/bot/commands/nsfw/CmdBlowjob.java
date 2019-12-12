@@ -42,7 +42,9 @@ import java.util.concurrent.TimeUnit;
         triggers = {"blowjob", "bj", "bjob", "succ"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}blowjob @user")
+                @CommandAttribute(key = "usage", value = 
+                        "{p}blowjob <@user>"
+                )
         }
 )
 public class CmdBlowjob implements Command{
@@ -143,12 +145,14 @@ public class CmdBlowjob implements Command{
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to give you a blowjob. Do you want that too?\n" +
-                "Click ✅ to accept or ❌ to deny the request.\n" +
+                "React with ✅ to accept or with ❌ to deny the request.\n" +
                 "\n" +
                 "> **This request will time out in 1 minute!**",
                 target.getAsMention(),
                 MarkdownSanitizer.escape(author.getEffectiveName())
-        )).queue(message -> message.addReaction("✅").queue(m -> message.addReaction("❌").queue(emote -> {
+        )).queue(message -> {
+            message.addReaction("✅").queue();
+            message.addReaction("❌").queue();
             EventWaiter waiter = bot.getWaiter();
             waiter.waitForEvent(
                     GuildMessageReactionAddEvent.class,
@@ -236,6 +240,6 @@ public class CmdBlowjob implements Command{
                         )).queue();
                     }
             );
-        })));
+        });
     }
 }

@@ -33,11 +33,11 @@ import java.util.stream.Collectors;
 
 @CommandDescription(
         name = "Tickle",
-        description = "Tickle someone until he/she laughs",
+        description = "Tickle someone until they laughs",
         triggers = {"tickle"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}tickle @user [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}tickle <@user> [@user ...]")
         }
 )
 public class CmdTickle implements Command{

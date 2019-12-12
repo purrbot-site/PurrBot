@@ -37,8 +37,8 @@ import javax.annotation.Nullable;
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
                 @CommandAttribute(key = "usage", value =
-                        "{p}emote :emote:\n" +
-                        "{p}emote --search"
+                        "{p}emote <:emote:>\n" +
+                        "{p}emote <--search>"
                 )
         }
 )

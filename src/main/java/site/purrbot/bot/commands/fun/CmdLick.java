@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
         triggers = {"lick"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}lick @user [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}lick <@user> [@user ...]")
         }
 )
 public class CmdLick implements Command{

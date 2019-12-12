@@ -33,16 +33,12 @@ import site.purrbot.bot.constants.Emotes;
         description =
                 "Gives you a lovely neko (catgirl)\n" +
                 "\n" +
-                "You can use additional args in the command.\n" +
-                "`--gif` for a gif\n" +
-                "`--slide` for a slideshow with 30 images\n" +
-                "Both arguments can be combined.",
+                "Use `--gif` to show a gif of a neko.",
         triggers = {"neko", "catgirl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
                 @CommandAttribute(key = "usage", value = 
-                        "{p}neko\n" +
-                        "{p}neko --gif\n"
+                        "{p}neko [--gif]"
                 )
         }
 )

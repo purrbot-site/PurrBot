@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
         triggers = {"poke", "poking", "boop", "boops"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}poke @user [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}poke <@user> [@user ...]")
         }
 )
 public class CmdPoke implements Command{

@@ -211,61 +211,6 @@ public class PurrBot {
                     return response.body();
                 });
             });
-            post("/dashboard", (request, response) -> {
-                String key = request.raw().getHeader("authorization");
-    
-                if(key == null || key.isEmpty()){
-                    response.status(403);
-                    response.type("application/json");
-                    response.body("{\"code\": 403,\"message\": \"Access denied! No Auth-header was given.\"}");
-                    return response.body();
-                }
-                
-                if(!key.equalsIgnoreCase(getgFile().getString("config", "lbots-token"))){
-                    response.status(403);
-                    response.type("application/json");
-                    response.body("{\"code\": 403,\"message\": \"Access denied! Auth token is invalid.\"}");
-                    return response.body();
-                }
-                
-                Gson gson = new Gson();
-                JsonObject json = gson.fromJson(request.body(), JsonObject.class);
-                String guildId = json.get("guild_id").getAsString();
-                
-                if(shardManager.getGuildById(guildId) == null){
-                    response.status(403);
-                    response.type("application/json");
-                    response.body("{\"code\": 403,\"message\": \"Bot is not in provided Guild!\"}");
-                    return response.body();
-                }
-                
-                String prefix = json.get("prefix").getAsString().isEmpty() ? "." : json.get("prefix").getAsString();
-                String welcome_channel = json.get("welcome_channel").getAsString().isEmpty() ? "none" : 
-                        json.get("welcome_channel").getAsString();
-                
-                String welcome_background = json.get("welcome_background").getAsString().isEmpty() ? "color_white" : 
-                        json.get("welcome_background").getAsString();
-                String welcome_color = json.get("welcome_color").getAsString().isEmpty() ? "hex:ffffff" : 
-                        json.get("welcome_color").getAsString();
-                String welcome_icon = json.get("welcome_icon").getAsString().isEmpty() ? "purr" : 
-                        json.get("welcome_icon").getAsString();
-                
-                if(getMessageUtil().getColor(welcome_color) == null)
-                    welcome_color = "hex:ffffff";
-                
-                invalidateCache(guildId);
-                
-                getDbUtil().setPrefix(guildId, prefix);
-                getDbUtil().setWelcomeChannel(guildId, welcome_channel);
-                getDbUtil().setWelcomeBg(guildId, welcome_background);
-                getDbUtil().setWelcomeColor(guildId, welcome_color);
-                getDbUtil().setWelcomeIcon(guildId, welcome_icon);
-                
-                response.status(200);
-                response.type("application/json");
-                response.body("{\"code\": 200,\"message\": \"POST request successful.\"}");
-                return response.body();
-            });
         }
     }
 

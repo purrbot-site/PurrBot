@@ -40,7 +40,9 @@ import java.util.concurrent.TimeUnit;
         triggers = {"stats", "stat", "statistic", "statistics"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}stats")
+                @CommandAttribute(key = "usage", value = 
+                        "{p}stats"
+                )
         }
 )
 public class CmdStats implements Command{

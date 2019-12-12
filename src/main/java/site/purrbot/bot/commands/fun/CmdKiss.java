@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
         triggers = {"kiss", "love", "kissu"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}kiss @user [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}kiss <@user> [@user ...]")
         }
 )
 public class CmdKiss implements Command{

@@ -45,8 +45,7 @@ import java.util.stream.Collectors;
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
                 @CommandAttribute(key = "usage", value =
-                        "{p}help\n" +
-                        "{p}help command"
+                        "{p}help [command]"
                 )
         }
 )
@@ -76,10 +75,12 @@ public class CmdHelp implements Command{
                         "Command-help: %s",
                         desc.name()
                 )).setDescription(desc.description())
-                .addField("Usage", String.format(
+                .addField("Usage options", String.format(
                         "```\n" +
                         "%s\n" +
-                        "```",
+                        "```\n" +
+                        "`[]` = optional\n" +
+                        "`<>` = required",
                         cmd.getAttribute("usage").replace("{p}", prefix)
                 ), false).addField("Aliases:", String.format(
                         "`%s`",

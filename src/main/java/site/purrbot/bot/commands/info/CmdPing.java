@@ -30,14 +30,12 @@ import java.time.temporal.ChronoUnit;
 @CommandDescription(
         name = "Ping",
         description =
-                "Pong?\n" +
-                "Use `--api` to get the Websocket-Ping",
+                "Pong I guess?",
         triggers = {"ping"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
                 @CommandAttribute(key = "usage", value =
-                        "{p}ping\n" +
-                        "{p}ping --api"
+                        "{p}ping"
                 )
         }
 )

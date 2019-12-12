@@ -47,7 +47,9 @@ import java.util.concurrent.TimeUnit;
         triggers = {"threesome", "3some"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}threesome @user1 @user2 [--mmf|--fff]")
+                @CommandAttribute(key = "usage", value = 
+                        "{p}threesome <@user1> <@user2> [--mmf|--fff]"
+                )
         }
 )
 public class CmdThreesome implements Command{
@@ -161,14 +163,16 @@ public class CmdThreesome implements Command{
         tc.sendMessage(String.format(
                 "Hey %s and %s!\n" +
                 "%s asks you if you want to fuck with them.\n" +
-                "React to this message with ✅ to accept it or with ❌ to deny it.\n" +
+                "React with ✅ to accept or with ❌ to deny the request.\n" +
                 "Only if both of you accept this, will that happen.\n" +
                 "\n" +
                 "> **This request will time out in 1 minute!**",
                 target1.getAsMention(),
                 target2.getAsMention(),
                 MarkdownSanitizer.escape(author.getEffectiveName())
-        )).queue(message -> message.addReaction("✅").queue(m -> message.addReaction("❌").queue(emote -> {
+        )).queue(message -> { 
+            message.addReaction("✅").queue();
+            message.addReaction("❌").queue();
             EventWaiter waiter = bot.getWaiter();
             waiter.waitForEvent(
                     GuildMessageReactionAddEvent.class,
@@ -273,6 +277,6 @@ public class CmdThreesome implements Command{
                         )).queue();
                     }
             );
-        })));
+        });
     }
 }

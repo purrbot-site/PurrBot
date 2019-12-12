@@ -31,11 +31,13 @@ import site.purrbot.bot.constants.Emotes;
 
 @CommandDescription(
         name = "Girl",
-        description = "Gives you a gif of a girl playing with herself.",
+        description = "Gives you a gif of a girl *playing* with herself.",
         triggers = {"solo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}solo")
+                @CommandAttribute(key = "usage", value = 
+                        "{p}solo"
+                )
         }
 )
 public class CmdSolo implements Command{

@@ -35,7 +35,9 @@ import site.purrbot.bot.constants.Emotes;
         triggers = {"kitsune", "foxgirl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}kitsune")
+                @CommandAttribute(key = "usage", value = 
+                        "{p}kitsune"
+                )
         }
 )
 public class CmdKitsune implements Command{

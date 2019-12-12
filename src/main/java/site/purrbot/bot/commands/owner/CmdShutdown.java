@@ -35,7 +35,9 @@ import site.purrbot.bot.commands.Command;
         triggers = {"shutdown", "sleep"},
         attributes = {
                 @CommandAttribute(key = "category", value = "owner"),
-                @CommandAttribute(key = "usage", value = "{p}shutdown")
+                @CommandAttribute(key = "usage", value = 
+                        "{p}shutdown"
+                )
         }
 )
 public class CmdShutdown implements Command{

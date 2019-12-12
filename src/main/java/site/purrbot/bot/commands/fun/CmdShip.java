@@ -38,7 +38,7 @@ import java.util.Random;
         triggers = {"ship", "shipping"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}ship @user [@user]")
+                @CommandAttribute(key = "usage", value = "{p}ship <@user> [@user]")
         }
 )
 public class CmdShip implements Command{

@@ -40,13 +40,15 @@ import java.util.concurrent.TimeUnit;
 @CommandDescription(
         name = "Yurifuck",
         description =
-                "Two women having fun with each other...\n" +
+                "Two women having *fun* with each other.\n" +
                 "Mention a user, to send a request.\n" +
                 "The mentioned user can accept it by clicking on the ✅, deny it by clicking on ❌ or let it time out.",
         triggers = {"yurifuck", "yurisex", "yfuck", "ysex"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}yurifuck @user")
+                @CommandAttribute(key = "usage", value = 
+                        "{p}yurifuck <@user>"
+                )
         }
 )
 public class CmdYurifuck implements Command{
@@ -153,85 +155,52 @@ public class CmdYurifuck implements Command{
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to have sex with you. Do you want that too?\n" +
-                "Click ✅ or ❌ to accept or deny the request.\n" +
+                "React with ✅ to accept or with ❌ to deny the request.\n" +
                 "\n" +
                 "> **This request will time out in 1 minute!**",
                 target.getAsMention(),
                 MarkdownSanitizer.escape(author.getEffectiveName())
-        )).queue(message -> message.addReaction("✅").queue(m -> message.addReaction("❌").queue(emote -> {
-                EventWaiter waiter = bot.getWaiter();
-                waiter.waitForEvent(
-                        GuildMessageReactionAddEvent.class,
-                        ev -> {
-                            MessageReaction.ReactionEmote emoji = ev.getReactionEmote();
-                            if(!emoji.getName().equals("✅") && !emoji.getName().equals("❌")) return false;
-                            if(ev.getUser().isBot()) return false;
-                            if(!ev.getMember().equals(target)) return false;
-
-                            return ev.getMessageId().equals(message.getId());
-                        },
-                        ev -> {
-                            if(ev.getReactionEmote().getName().equals("❌")){
-                                try{
-                                    if(message != null)
-                                        message.delete().queue();
-                                }catch(Exception ex){
-                                    logger.warn(String.format(
-                                            "Couldn't delete own message for CmdYurifuck. Reason: %s",
-                                            ex.getMessage()
-                                    ));
-                                }
-
-                                queue.invalidate(author.getId());
-
-                                ev.getChannel().sendMessage(String.format(
-                                        "%s doesn't want to lewd with you %s. >.<",
-                                        MarkdownSanitizer.escape(target.getEffectiveName()),
-                                        author.getAsMention()
-                                )).queue();
-                                return;
+        )).queue(message -> {
+            message.addReaction("✅").queue();
+            message.addReaction("❌").queue();
+            EventWaiter waiter = bot.getWaiter();
+            waiter.waitForEvent(
+                    GuildMessageReactionAddEvent.class, 
+                    ev -> {
+                        MessageReaction.ReactionEmote emoji = ev.getReactionEmote();
+                        if(!emoji.getName().equals("✅") && !emoji.getName().equals("❌")) return false;
+                        if(ev.getUser().isBot()) return false;
+                        if(!ev.getMember().equals(target)) return false;
+                        
+                        return ev.getMessageId().equals(message.getId()); 
+                    },
+                    ev -> {
+                        if(ev.getReactionEmote().getName().equals("❌")){
+                            try{
+                                if(message != null)
+                                    message.delete().queue();
+                            }catch(Exception ex){
+                                logger.warn(String.format(
+                                        "Couldn't delete own message for CmdYurifuck. Reason: %s",
+                                        ex.getMessage()
+                                ));
                             }
 
-                            if(ev.getReactionEmote().getName().equals("✅")) {
-                                try {
-                                    if(message != null)
-                                        message.delete().queue();
-                                } catch (Exception ex) {
-                                    logger.warn(String.format(
-                                            "Couldn't delete own message for CmdYurifuck. Reason: %s",
-                                            ex.getMessage()
-                                    ));
-                                }
-    
-                                queue.invalidate(author.getId());
+                            queue.invalidate(author.getId());
 
-                                String link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
+                            ev.getChannel().sendMessage(String.format(
+                                    "%s doesn't want to lewd with you %s. >.<",
+                                    MarkdownSanitizer.escape(target.getEffectiveName()),
+                                    author.getAsMention()
+                            )).queue();
+                            return;
+                        }
 
-                                ev.getChannel().sendMessage(String.format(
-                                        "%s accepted your invite %s! 0w0",
-                                        MarkdownSanitizer.escape(target.getEffectiveName()),
-                                        author.getAsMention()
-                                )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
-
-                                if (link == null || link.isEmpty()) {
-                                    ev.getChannel().sendMessage(String.format(
-                                            "%s and %s are having sex!",
-                                            MarkdownSanitizer.escape(author.getEffectiveName()),
-                                            MarkdownSanitizer.escape(target.getEffectiveName())
-                                    )).queue();
-                                    return;
-                                }
-
-                                ev.getChannel().sendMessage(
-                                        getFuckEmbed(author, target, link).build()
-                                ).queue();
-                            }
-                        }, 1, TimeUnit.MINUTES,
-                        () -> {
+                        if(ev.getReactionEmote().getName().equals("✅")) {
                             try {
                                 if(message != null)
                                     message.delete().queue();
-                            }catch (Exception ex){
+                            }catch(Exception ex){
                                 logger.warn(String.format(
                                         "Couldn't delete own message for CmdYurifuck. Reason: %s",
                                         ex.getMessage()
@@ -239,14 +208,49 @@ public class CmdYurifuck implements Command{
                             }
     
                             queue.invalidate(author.getId());
-
-                            tc.sendMessage(String.format(
-                                    "Looks like %s doesn't want to have sex with you %s. ._.",
+                            
+                            String link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
+                            
+                            ev.getChannel().sendMessage(String.format(
+                                    "%s accepted your invite %s! 0w0",
                                     MarkdownSanitizer.escape(target.getEffectiveName()),
                                     author.getAsMention()
-                            )).queue();
+                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                            
+                            if (link == null || link.isEmpty()) {
+                                ev.getChannel().sendMessage(String.format(
+                                        "%s and %s are having sex!",
+                                        MarkdownSanitizer.escape(author.getEffectiveName()),
+                                        MarkdownSanitizer.escape(target.getEffectiveName())
+                                )).queue();
+                                return;
+                            }
+
+                            ev.getChannel().sendMessage(
+                                    getFuckEmbed(author, target, link).build()
+                            ).queue();
+                        } 
+                    }, 1, TimeUnit.MINUTES,
+                    () -> {
+                        try {
+                            if(message != null)
+                                message.delete().queue();
+                        }catch(Exception ex){ 
+                            logger.warn(String.format(
+                                    "Couldn't delete own message for CmdYurifuck. Reason: %s",
+                                    ex.getMessage()
+                            ));
                         }
+    
+                        queue.invalidate(author.getId());
+
+                        tc.sendMessage(String.format(
+                                "Looks like %s doesn't want to have sex with you %s. ._.",
+                                MarkdownSanitizer.escape(target.getEffectiveName()),
+                                author.getAsMention()
+                        )).queue();
+                    }
             );
-        })));
+        });
     }
 }

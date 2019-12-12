@@ -41,8 +41,7 @@ import java.util.concurrent.TimeUnit;
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
                 @CommandAttribute(key = "usage", value =
-                        "{p}invite\n" +
-                        "{p}invite --dm"
+                        "{p}invite [--dm]"
                 )
         }
 )

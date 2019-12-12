@@ -39,8 +39,8 @@ import java.io.IOException;
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
                 @CommandAttribute(key = "usage", value =
-                        "{p}quote <messageID>\n" +
-                        "{p}quote <messageID> [#channel]")
+                        "{p}quote <messageID> [#channel]"
+                )
         }
 )
 public class CmdQuote implements Command{

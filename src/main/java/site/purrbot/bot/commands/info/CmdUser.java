@@ -38,8 +38,7 @@ import java.util.List;
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
                 @CommandAttribute(key = "usage", value =
-                        "{p}user\n" +
-                        "{p}user @user"
+                        "{p}user [@user]"
                 )
         }
 )
@@ -81,7 +80,7 @@ public class CmdUser implements Command{
 
         String nick = member.getNickname();
 
-        return nick.length() > 25 ? nick.substring(0, 24) + "...\n" : nick + "\n";
+        return "Nick: " + (nick.length() > 20 ? nick.substring(0, 19) + "...\n" : nick + "\n");
     }
 
     private String getName(Member member){

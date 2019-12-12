@@ -40,8 +40,7 @@ import java.text.MessageFormat;
                 @CommandAttribute(key = "category", value = "info"),
                 @CommandAttribute(key = "guild_only"),
                 @CommandAttribute(key = "usage", value =
-                        "{p}level\n" +
-                        "{p}level @user"
+                        "{p}level [@user]"
                 )
         }
 )

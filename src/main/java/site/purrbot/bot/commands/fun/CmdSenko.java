@@ -35,7 +35,9 @@ import site.purrbot.bot.constants.Emotes;
         triggers = {"senko", "senko-san"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}senko")
+                @CommandAttribute(key = "usage", value = 
+                        "{p}senko"
+                )
         }
 )
 public class CmdSenko implements Command{

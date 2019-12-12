@@ -43,11 +43,16 @@ import java.util.Objects;
                 @CommandAttribute(key = "category", value = "guild"),
                 @CommandAttribute(key = "usage", value =
                         "{p}welcome\n" +
-                        "{p}welcome bg <set <image>|reset>\n" +
-                        "{p}welcome channel <set <#channel>|reset>\n" +
-                        "{p}welcome color <set <color>|reset>\n" +
-                        "{p}welcome icon <set <icon>|reset>\n" +
-                        "{p}welcome msg <set <message>|reset>"
+                        "{p}welcome bg set <image>\n" +
+                        "{p}welcome bg reset\n" +
+                        "{p}welcome channel set <#channel>\n" +
+                        "{p}welcome channel reset\n" +
+                        "{p}welcome color set <color>\n" +
+                        "{p}welcome color reset\n" +
+                        "{p}welcome icon set <icon>\n" +
+                        "{p}welcome icon reset\n" +
+                        "{p}welcome msg <message>\n" +
+                        "{p}welcome msg reset"
                 )
         }
 )
@@ -80,14 +85,18 @@ public class CmdWelcome implements Command{
                         "To change some settings use `%swelcome [subcommand]`",
                         bot.getPrefix(id)
                 ))
-                .addField(
-                        "Subcommands",
+                .addField("Subcommands", 
                         "```\n" +
-                        "bg      <set <background>|reset>\n" +
-                        "channel <set <#channel>|reset>\n" +
-                        "color   <set <hex:rrggbb|rgb:r,g,b>|reset>\n" +
-                        "icon    <set <icon>|reset>\n" +
-                        "msg     <set <message>|reset>\n" +
+                        "bg      set <background>\n" +
+                        "        reset\n" +
+                        "channel set <#channel>\n" +
+                        "        reset\n" +
+                        "color   set <hex:rrggbb|rgb:r,g,b>\n" +
+                        "        reset\n" +
+                        "icon    set <icon>\n" +
+                        "        reset\n" +
+                        "msg     set <message>\n" +
+                        "        reset\n" +
                         "```",
                         false)
                 .addField("Channel", String.format(
