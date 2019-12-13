@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.commands.nsfw;
 
-import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
@@ -28,14 +27,15 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
-import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Emotes;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
+import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 @CommandDescription(
         name = "Yurifuck",
@@ -52,8 +52,6 @@ import java.util.concurrent.TimeUnit;
         }
 )
 public class CmdYurifuck implements Command{
-
-    private Logger logger = (Logger)LoggerFactory.getLogger(CmdYurifuck.class);
 
     private PurrBot bot;
 
@@ -111,13 +109,11 @@ public class CmdYurifuck implements Command{
                             bot.getMessageUtil().getRandomAcceptFuckMsg(),
                             author.getAsMention()
                     )).queue();
-                    return;
                 }else{
                     tc.sendMessage(String.format(
                             bot.getMessageUtil().getRandomDenyFuckMsg(),
                             author.getAsMention()
                     )).queue();
-                    return;
                 }
             }else{
                 tc.sendMessage(String.format(
@@ -125,8 +121,8 @@ public class CmdYurifuck implements Command{
                         msg.getAuthor().getAsMention(),
                         Emotes.VANILLABLUSH.getEmote()
                 )).queue();
-                return;
             }
+            return;
         }
 
         if(target.equals(author)){
@@ -142,7 +138,7 @@ public class CmdYurifuck implements Command{
             return;
         }
 
-        if(queue.getIfPresent(author.getId()) != null){
+        if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
             tc.sendMessage(String.format(
                     "%s You already asked someone to fuck with you!\n" +
                     "Please wait until the person accepts it, or the request times out.",
@@ -151,7 +147,7 @@ public class CmdYurifuck implements Command{
             return;
         }
 
-        queue.put(author.getId(), target.getId());
+        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
         tc.sendMessage(String.format(
                 "Hey %s!\n" +
                 "%s wants to have sex with you. Do you want that too?\n" +
@@ -168,25 +164,20 @@ public class CmdYurifuck implements Command{
                     GuildMessageReactionAddEvent.class, 
                     ev -> {
                         MessageReaction.ReactionEmote emoji = ev.getReactionEmote();
-                        if(!emoji.getName().equals("✅") && !emoji.getName().equals("❌")) return false;
-                        if(ev.getUser().isBot()) return false;
-                        if(!ev.getMember().equals(target)) return false;
+                        if(!emoji.getName().equals("✅") && !emoji.getName().equals("❌")) 
+                            return false;
+                        if(ev.getUser().isBot()) 
+                            return false;
+                        if(!ev.getMember().equals(target)) 
+                            return false;
                         
                         return ev.getMessageId().equals(message.getId()); 
                     },
                     ev -> {
                         if(ev.getReactionEmote().getName().equals("❌")){
-                            try{
-                                if(message != null)
-                                    message.delete().queue();
-                            }catch(Exception ex){
-                                logger.warn(String.format(
-                                        "Couldn't delete own message for CmdYurifuck. Reason: %s",
-                                        ex.getMessage()
-                                ));
-                            }
+                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
 
-                            queue.invalidate(author.getId());
+                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
                             ev.getChannel().sendMessage(String.format(
                                     "%s doesn't want to lewd with you %s. >.<",
@@ -197,17 +188,9 @@ public class CmdYurifuck implements Command{
                         }
 
                         if(ev.getReactionEmote().getName().equals("✅")) {
-                            try {
-                                if(message != null)
-                                    message.delete().queue();
-                            }catch(Exception ex){
-                                logger.warn(String.format(
-                                        "Couldn't delete own message for CmdYurifuck. Reason: %s",
-                                        ex.getMessage()
-                                ));
-                            }
+                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
     
-                            queue.invalidate(author.getId());
+                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             
                             String link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
                             
@@ -232,20 +215,12 @@ public class CmdYurifuck implements Command{
                         } 
                     }, 1, TimeUnit.MINUTES,
                     () -> {
-                        try {
-                            if(message != null)
-                                message.delete().queue();
-                        }catch(Exception ex){ 
-                            logger.warn(String.format(
-                                    "Couldn't delete own message for CmdYurifuck. Reason: %s",
-                                    ex.getMessage()
-                            ));
-                        }
+                        message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
     
-                        queue.invalidate(author.getId());
+                        queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
                         tc.sendMessage(String.format(
-                                "Looks like %s doesn't want to have sex with you %s. ._.",
+                                "Looks like %s doesn't want to have sex with you %s. .\\_.",
                                 MarkdownSanitizer.escape(target.getEffectiveName()),
                                 author.getAsMention()
                         )).queue();

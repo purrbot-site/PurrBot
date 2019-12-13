@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.commands.nsfw;
 
-import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
@@ -27,13 +26,14 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
-import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
+import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 @CommandDescription(
         name = "Blowjob",
@@ -48,8 +48,6 @@ import java.util.concurrent.TimeUnit;
         }
 )
 public class CmdBlowjob implements Command{
-
-    private Logger logger = (Logger)LoggerFactory.getLogger(CmdBlowjob.class);
 
     private PurrBot bot;
 
@@ -133,7 +131,7 @@ public class CmdBlowjob implements Command{
             return;
         }
 
-        if(queue.getIfPresent(author.getId()) != null){
+        if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
             tc.sendMessage(String.format(
                     "Don't be that greedy %s and wait for the other request to be accepted or denied!",
                     author.getAsMention()
@@ -170,15 +168,7 @@ public class CmdBlowjob implements Command{
                     event -> {
                         MessageReaction.ReactionEmote emoji = event.getReactionEmote();
                         if(emoji.getName().equals("❌")){
-                            try{
-                                if(message != null)
-                                    message.delete().queue();
-                            }catch(Exception ex){
-                                logger.warn(String.format(
-                                        "Couldn't delete own message for CmdBlowjob. Reason: %s",
-                                        ex.getMessage()
-                                ));
-                            }
+                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
 
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             event.getChannel().sendMessage(String.format(
@@ -190,15 +180,7 @@ public class CmdBlowjob implements Command{
                         }
 
                         if(emoji.getName().equals("✅")){
-                            try{
-                                if(message != null)
-                                    message.delete().queue();
-                            }catch(Exception ex){
-                                logger.warn(String.format(
-                                        "Couldn't delete own message for CmdBlowjob. Reason: %s",
-                                        ex.getMessage()
-                                ));
-                            }
+                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
     
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             String link = bot.getHttpUtil().getImage(API.GIF_BLOW_JOB_LEWD);
@@ -222,15 +204,7 @@ public class CmdBlowjob implements Command{
                         }
                     }, 1, TimeUnit.MINUTES,
                     () -> {
-                        try {
-                            if(message != null)
-                                message.delete().queue();
-                        }catch (Exception ex){
-                            logger.warn(String.format(
-                                    "Couldn't delete own message for CmdBlowjob. Reason: %s",
-                                    ex.getMessage()
-                            ));
-                        }
+                        message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
     
                         queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                         tc.sendMessage(String.format(

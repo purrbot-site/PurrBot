@@ -113,14 +113,18 @@ public class CmdLick implements Command{
                 message.editMessage(String.format(
                         "%s licks you %s",
                         MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(lickedMembers)
+                        MarkdownSanitizer.escape(
+                                bot.getMessageUtil().replaceLast(lickedMembers, ",", " and")
+                        )
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s licks you %s",
                                 MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(lickedMembers)
+                                MarkdownSanitizer.escape(
+                                        bot.getMessageUtil().replaceLast(lickedMembers, ",", " and")
+                                )
                         )).setImage(link).build()).queue();
             }
         });

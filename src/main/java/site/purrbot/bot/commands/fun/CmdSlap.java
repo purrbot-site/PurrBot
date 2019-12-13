@@ -103,14 +103,18 @@ public class CmdSlap implements Command{
                 message.editMessage(String.format(
                         "%s slaps you %s",
                         MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(slapedMembers)
+                        MarkdownSanitizer.escape(
+                                bot.getMessageUtil().replaceLast(slapedMembers, ",", " and")
+                        )
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s slaps you %s",
                                 MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(slapedMembers)
+                                MarkdownSanitizer.escape(
+                                        bot.getMessageUtil().replaceLast(slapedMembers, ",", " and")
+                                )
                         )).setImage(link).build()).queue();
             }
         });

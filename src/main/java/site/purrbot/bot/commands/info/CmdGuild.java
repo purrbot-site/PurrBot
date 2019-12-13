@@ -26,6 +26,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.constants.Emotes;
 
 import java.time.LocalDateTime;
 
@@ -65,6 +66,7 @@ public class CmdGuild implements Command{
     public void execute(Message msg, String s){
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
+        int boosts = guild.getBoostCount();
 
         EmbedBuilder guildInfo = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle(guild.getName())
@@ -93,6 +95,56 @@ public class CmdGuild implements Command{
                         "`%s`",
                         bot.getMessageUtil().formatTime(LocalDateTime.from(guild.getTimeCreated()))
                 ), false);
+        
+        switch(guild.getBoostTier()){
+            case NONE:
+                guildInfo.addField(String.format(
+                        "Boost Tier: %s (Level 0)",
+                        Emotes.BOOST_LEVEL_0.getEmote()
+                ), boosts == 1 ? "1 boost" : boosts + " boosts", false);
+                break;
+            
+            case TIER_1:
+                guildInfo.addField(String.format(
+                        "Boost Tier: %s (Level 1)",
+                        Emotes.BOOST_LEVEL_1.getEmote()
+                ), String.format(
+                        "%d boosts",
+                        boosts
+                ), false);
+                break;
+            
+            case TIER_2:
+                guildInfo.addField(String.format(
+                        "Boost Tier: %s (Level 2)",
+                        Emotes.BOOST_LEVEL_2.getEmote()
+                ), String.format(
+                        "%d boosts",
+                        boosts
+                ), false);
+                break;
+            
+            case TIER_3:
+                guildInfo.addField(String.format(
+                        "Boost Tier: %s (Level 3)",
+                        Emotes.BOOST_LEVEL_3.getEmote()
+                ), String.format(
+                        "%d boosts",
+                        boosts
+                ), false);
+                break;
+            
+            case UNKNOWN:
+            default:
+                guildInfo.addField(String.format(
+                        "Boost Tier: %s (Unknown)",
+                        Emotes.BOOST_LEVEL_0.getEmote()
+                ), String.format(
+                        "%d boosts",
+                        boosts
+                ), false);
+                break;
+        }
 
         tc.sendMessage(guildInfo.build()).queue();
     }

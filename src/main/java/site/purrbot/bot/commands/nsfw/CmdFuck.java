@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.commands.nsfw;
 
-import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
@@ -28,13 +27,14 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
-import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
+import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 @CommandDescription(
         name = "Fuck",
@@ -51,8 +51,6 @@ import java.util.concurrent.TimeUnit;
         }
 )
 public class CmdFuck implements Command{
-
-    private Logger logger = (Logger)LoggerFactory.getLogger(CmdFuck.class);
 
     private PurrBot bot;
 
@@ -140,7 +138,7 @@ public class CmdFuck implements Command{
             return;
         }
 
-        if(queue.getIfPresent(author.getId()) != null){
+        if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
             tc.sendMessage(String.format(
                     "You already have an open request for someone to fuck with you %s!\n" +
                     "Please wait until the person accepts or denies it, or the request times out.",
@@ -177,15 +175,7 @@ public class CmdFuck implements Command{
                     },
                     ev -> {
                         if(ev.getReactionEmote().getName().equals("❌")){
-                            try{
-                                if(message != null) 
-                                    message.delete().queue();
-                            }catch(Exception ex){
-                                logger.warn(String.format(
-                                        "Couldn't delete own message for CmdFuck. Reason: %s",
-                                        ex.getMessage()
-                                ));
-                            }
+                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
 
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
@@ -198,15 +188,7 @@ public class CmdFuck implements Command{
                         }
 
                         if(ev.getReactionEmote().getName().equals("✅")){
-                            try{
-                                if(message != null)
-                                    message.delete().queue();
-                            }catch(Exception ex){
-                                logger.warn(String.format(
-                                        "Couldn't delete own message for CmdFuck. Reason: %s",
-                                        ex.getMessage()
-                                ));
-                            }
+                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
     
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
@@ -234,20 +216,12 @@ public class CmdFuck implements Command{
                         } 
                     }, 1, TimeUnit.MINUTES,
                     () -> {
-                        try {
-                            if(message != null)
-                                message.delete().queue();
-                        }catch(Exception ex){
-                            logger.warn(String.format(
-                                    "Couldn't delete own message for CmdFuck. Reason: %s",
-                                    ex.getMessage()
-                            ));
-                        }
+                        message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
     
                         queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
                         tc.sendMessage(String.format(
-                                "Looks like %s doesn't want to have sex with you %s. ._.",
+                                "Looks like %s doesn't want to have sex with you %s. .\\_.",
                                 MarkdownSanitizer.escape(target.getEffectiveName()),
                                 author.getAsMention()
                         )).queue();

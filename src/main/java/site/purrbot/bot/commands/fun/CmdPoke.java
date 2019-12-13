@@ -103,14 +103,18 @@ public class CmdPoke implements Command{
                 message.editMessage(String.format(
                         "%s pokes you %s",
                         MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(pokedMembers)
+                        MarkdownSanitizer.escape(
+                                bot.getMessageUtil().replaceLast(pokedMembers, ",", " and")
+                        )
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s pokes you %s",
                                 MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(pokedMembers)
+                                MarkdownSanitizer.escape(
+                                        bot.getMessageUtil().replaceLast(pokedMembers, ",", " and")
+                                )
                         )).setImage(link).build()).queue();
             }
         });

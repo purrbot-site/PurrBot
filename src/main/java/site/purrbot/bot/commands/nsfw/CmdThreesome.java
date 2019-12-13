@@ -36,6 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
+import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
+
 @CommandDescription(
         name = "Threesome",
         description = 
@@ -146,7 +149,7 @@ public class CmdThreesome implements Command{
             return;
         }
         
-        if(queue.getIfPresent(author.getId()) != null){
+        if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
             tc.sendMessage(String.format(
                     "Whoa there %s! Show some patience you horny person.\n" +
                     "You already asked some people to fuck with you. Wait for them to either accept or deny your request.",
@@ -191,37 +194,21 @@ public class CmdThreesome implements Command{
                     },
                     ev -> {
                         if(ev.getReactionEmote().getName().equals("❌")){
-                            try{
-                                if(message != null)
-                                    message.delete().queue();
-                            }catch(Exception ex){
-                                logger.warn(String.format(
-                                        "Couldn't delete own message for CmdThreesome. Reason: %s",
-                                        ex.getMessage()
-                                ));
-                            }
+                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                             
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             list.remove(target1.getId());
                             list.remove(target2.getId());
                             
                             ev.getChannel().sendMessage(String.format(
-                                    "Looks like one of them doesn't want to have fun with you %s. >_<",
+                                    "Looks like one of them doesn't want to have fun with you %s. >\\_<",
                                     author.getAsMention()
                             )).queue();
                             return;
                         }
                         
                         if(ev.getReactionEmote().getName().equals("✅")){
-                            try{
-                                if(message != null)
-                                    message.delete().queue();
-                            }catch(Exception ex){
-                                logger.warn(String.format(
-                                        "Couldn't delete own message for CmdThreesome. Reason: %s",
-                                        ex.getMessage()
-                                ));
-                            }
+                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                             
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             
@@ -255,22 +242,14 @@ public class CmdThreesome implements Command{
                         }
                     }, 1, TimeUnit.MINUTES,
                     () -> {
-                        try{
-                            if(message != null)
-                                message.delete().queue();
-                        }catch(Exception ex){
-                            logger.warn(String.format(
-                                    "Couldn't delete own message for CmdThreesome. Reason: %s",
-                                    ex.getMessage()
-                            ));
-                        }
+                        message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                         
                         queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                         list.remove(target1.getId());
                         list.remove(target2.getId());
                         
                         tc.sendMessage(String.format(
-                                "Looks like %s and %s don't want to have fun with you %s. >_<",
+                                "Looks like %s and %s don't want to have fun with you %s. >\\_<",
                                 MarkdownSanitizer.escape(target1.getEffectiveName()),
                                 MarkdownSanitizer.escape(target2.getEffectiveName()),
                                 author.getAsMention()

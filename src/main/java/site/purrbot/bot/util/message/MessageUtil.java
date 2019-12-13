@@ -178,4 +178,14 @@ public class MessageUtil {
     public String getBotGame(){
         return bot.isBeta() ? "My sister on %d Guilds." : "https://purrbot.site | %d Guilds";
     }
+    
+    public String replaceLast(String input, String target, String replacement){
+        if(!input.contains(target))
+            return input;
+        
+        StringBuilder builder = new StringBuilder(input);
+        builder.replace(input.lastIndexOf(target), input.lastIndexOf(target) + 1, replacement);
+        
+        return builder.toString();
+    }
 }

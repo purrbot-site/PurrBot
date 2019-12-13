@@ -103,14 +103,18 @@ public class CmdPat implements Command{
                 message.editMessage(String.format(
                         "%s pats you %s",
                         MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(pattetMembers)
+                        MarkdownSanitizer.escape(
+                                bot.getMessageUtil().replaceLast(pattetMembers, ",", " and")
+                        )
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s pats you %s",
                                 MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(pattetMembers)
+                                MarkdownSanitizer.escape(
+                                        bot.getMessageUtil().replaceLast(pattetMembers, ",", " and")
+                                )
                         )).setImage(link).build()).queue();
             }
         });

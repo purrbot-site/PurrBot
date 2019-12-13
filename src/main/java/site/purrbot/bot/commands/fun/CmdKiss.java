@@ -152,14 +152,18 @@ public class CmdKiss implements Command{
                 message.editMessage(String.format(
                         "%s kisses you %s",
                         MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(kissedMembers)
+                        MarkdownSanitizer.escape(
+                                bot.getMessageUtil().replaceLast(kissedMembers, ",", " and")
+                        )
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s kisses you %s",
                                 MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(kissedMembers)
+                                MarkdownSanitizer.escape(
+                                        bot.getMessageUtil().replaceLast(kissedMembers, ",", " and")
+                                )
                         )).setImage(link).build()).queue();
             }
         });

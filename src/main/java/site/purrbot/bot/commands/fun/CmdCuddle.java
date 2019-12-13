@@ -103,7 +103,7 @@ public class CmdCuddle implements Command{
             return;
         
         String link = bot.getHttpUtil().getImage(API.GIF_CUDDLE);
-
+    
         tc.sendMessage(String.format(
                 "%s Getting a cuddle-gif...",
                 Emotes.ANIM_LOADING.getEmote()
@@ -112,7 +112,9 @@ public class CmdCuddle implements Command{
                 message.editMessage(String.format(
                         "%s cuddles with you %s",
                         MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(cuddledMembers)
+                        MarkdownSanitizer.escape(
+                                bot.getMessageUtil().replaceLast(cuddledMembers, ",", " and")
+                        )
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
@@ -120,7 +122,9 @@ public class CmdCuddle implements Command{
                                 bot.getEmbedUtil().getEmbed().setDescription(String.format(
                                 "%s cuddles with you %s",
                                         MarkdownSanitizer.escape(member.getEffectiveName()),
-                                        MarkdownSanitizer.escape(cuddledMembers)
+                                        MarkdownSanitizer.escape(
+                                                bot.getMessageUtil().replaceLast(cuddledMembers, ",", " and")
+                                        )
                         )).setImage(link).build()).queue();
             }
         });
