@@ -44,15 +44,15 @@ import java.text.MessageFormat;
 )
 public class CmdPrefix implements Command{
 
-    private PurrBot manager;
+    private PurrBot bot;
 
-    public CmdPrefix(PurrBot manager){
-        this.manager = manager;
+    public CmdPrefix(PurrBot bot){
+        this.bot = bot;
     }
 
     private void setPrefix(Message msg, String prefix){
 
-        MessageEmbed embed = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setColor(0x00FF00)
                 .setDescription(String.format(
                         "Prefix set to `%s`",
@@ -60,18 +60,18 @@ public class CmdPrefix implements Command{
                 ))
                 .build();
 
-        manager.setPrefix(msg.getGuild().getId(), prefix);
+        bot.setPrefix(msg.getGuild().getId(), prefix);
 
         msg.getTextChannel().sendMessage(embed).queue();
     }
 
     private void resetPrefix(Message msg){
-        MessageEmbed embed = manager.getEmbedUtil().getEmbed(msg.getAuthor())
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setColor(0x00FF00)
                 .setDescription("Prefix was changed back to `.`")
                 .build();
 
-        manager.setPrefix(msg.getGuild().getId(), ".");
+        bot.setPrefix(msg.getGuild().getId(), ".");
 
         msg.getTextChannel().sendMessage(embed).queue();
     }
@@ -82,14 +82,14 @@ public class CmdPrefix implements Command{
         TextChannel tc = msg.getTextChannel();
         String[] args = s.split(" ");
 
-        if(manager.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.length < 1){
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                     "You need to provide arguments!\n" +
                     "Usage: `%sprefix <set <prefix>|reset>`",
-                    manager.getPrefix(guild.getId())
+                    bot.getPrefix(guild.getId())
             ));
             return;
         }
@@ -99,15 +99,15 @@ public class CmdPrefix implements Command{
         }else
         if(args[0].equalsIgnoreCase("set")){
             if(args.length == 1){
-                manager.getEmbedUtil().sendError(tc, msg.getAuthor(), "You need to provide a prefix!");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "You need to provide a prefix!");
             }else{
                 setPrefix(msg, args[1].toLowerCase());
             }
         }else{
-            manager.getEmbedUtil().sendError(tc, msg.getAuthor(), MessageFormat.format(
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), MessageFormat.format(
                     "You need to provide valid arguments!\n" +
                     "Usage: `{0}prefix <set <prefix>|reset>`",
-                    manager.getPrefix(guild.getId())
+                    bot.getPrefix(guild.getId())
             ));
         }
     }

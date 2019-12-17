@@ -278,9 +278,9 @@ public class CmdWelcome implements Command{
                 }else{
                     bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "Invalid argument!\n" +
-                                    "Usage: `%swelcome bg <set <bg>|reset>`\n" +
-                                    "\n" +
-                                    "A list of available backgrounds can be found on the [wiki](%s)",
+                            "Usage: `%swelcome bg <set <bg>|reset>`\n" +
+                            "\n" +
+                            "A list of available backgrounds can be found on the [wiki](%s)",
                             bot.getPrefix(guild.getId()),
                             Links.WIKI.getUrl()
                     ));

@@ -24,7 +24,6 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
@@ -32,7 +31,6 @@ import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -47,9 +45,9 @@ public class CommandListener extends ListenerAdapter{
     );
 
     private PurrBot bot;
-    private final CommandHandler HANDLER;
+    private final CommandHandler<Message> HANDLER;
 
-    public CommandListener(PurrBot bot, CommandHandler handler){
+    public CommandListener(PurrBot bot, CommandHandler<Message> handler){
         this.bot = bot;
         this.HANDLER = handler;
     }
@@ -155,7 +153,6 @@ public class CommandListener extends ListenerAdapter{
                     }
 
                     try{
-                        //noinspection unchecked
                         HANDLER.execute(command, msg, args[1] == null ? "" : args[1]);
 
                         if(guild.getId().equals(IDs.GUILD.getId()))

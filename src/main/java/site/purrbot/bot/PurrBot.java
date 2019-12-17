@@ -136,7 +136,6 @@ public class PurrBot {
 
         waiter = new EventWaiter();
 
-
         beta = getgFile().getString("config", "beta").equalsIgnoreCase("true");
 
         CMD_HANDLER.registerCommands(new HashSet<>(new CommandLoader(this).getCommands()));
