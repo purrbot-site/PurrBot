@@ -70,11 +70,10 @@ public class CmdSlap implements Command{
                         "\\*runs away from %s and hides*",
                         member.getAsMention()
                 )).queue();
-                msg.addReaction("\uD83D\uDE2D").queue();
             }else {
                 tc.sendMessage("Nuuuu... Why hurting me? T^T").queue();
-                msg.addReaction("\uD83D\uDE2D").queue();
             }
+            msg.addReaction("\uD83D\uDE2D").queue();
         }
 
         if(members.contains(msg.getMember())){
