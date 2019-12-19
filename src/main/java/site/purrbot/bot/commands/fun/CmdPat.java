@@ -97,7 +97,7 @@ public class CmdPat implements Command{
 
         tc.sendMessage(String.format(
                 "%s Getting a pat-gif...",
-                Emotes.ANIM_LOADING.getEmote()
+                Emotes.LOADING.getEmote()
         )).queue(message -> {
             if(link == null){
                 message.editMessage(String.format(

@@ -75,8 +75,8 @@ public class CmdLevel implements Command{
                         "`%d`",
                         level
                 ), true)
-                .addField("XP", MessageFormat.format(
-                        "`{0}/{1} ({2}%)`",
+                .addField("XP", String.format(
+                        "`%d/%d (%s%%)`",
                         xp,
                         reqXpLong,
                         new DecimalFormat("###.##").format(progress)

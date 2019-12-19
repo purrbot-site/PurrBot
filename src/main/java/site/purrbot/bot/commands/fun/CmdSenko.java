@@ -64,13 +64,13 @@ public class CmdSenko implements Command{
         EmbedBuilder senko = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Senko-San %s",
-                        Emotes.ANIM_SENKOTAILWAG.getEmote()
+                        Emotes.SENKOTAILWAG.getEmote()
                 ), link)
                 .setImage(link);
     
         tc.sendMessage(String.format(
                 "%s Getting an image of Senko...",
-                Emotes.ANIM_LOADING.getEmote()
+                Emotes.LOADING.getEmote()
         )).queue(message -> message.editMessage(
                 EmbedBuilder.ZERO_WIDTH_SPACE
         ).embed(senko.build()).queue());

@@ -68,13 +68,13 @@ public class CmdLewd implements Command{
             EmbedBuilder lewdgif = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                     .setTitle(String.format(
                             "Lewd Neko %s",
-                            Emotes.ANIM_WAGTAIL.getEmote()
+                            Emotes.WAGTAIL.getEmote()
                     ), gifLink)
                     .setImage(gifLink);
 
             tc.sendMessage(String.format(
                     "%s Getting a lewd neko-gif...",
-                    Emotes.ANIM_LOADING.getEmote()
+                    Emotes.LOADING.getEmote()
             )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(lewdgif.build()).queue());
             return;
         }
@@ -94,7 +94,7 @@ public class CmdLewd implements Command{
 
         tc.sendMessage(String.format(
                 "%s Getting a lewd neko...",
-                Emotes.ANIM_LOADING.getEmote()
+                Emotes.LOADING.getEmote()
         )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(lewd.build()).queue());
     }
 }
