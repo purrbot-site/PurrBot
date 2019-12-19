@@ -11,8 +11,8 @@ To do this, follow those steps:
 4. Save the changes and PR them to the main repository.
 
 ## Important
-Do NOT remove, add or edit any placeholders within the json file.  
-A placeholder looks like this: `{placeholder}`
+- Do NOT remove, add or edit any placeholders (`{placeholder}`).
+- Do NOT remove or edit any unicode. Unicode starts with `\u` (e.g. `\u2705` for ✅)
 
 ## Supported languages
 Here is a list of currently supported languages and who translated it.
