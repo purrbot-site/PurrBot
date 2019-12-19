@@ -67,7 +67,7 @@ public class CmdSolo implements Command{
 
         tc.sendMessage(String.format(
                 "%s Getting hot girl...",
-                Emotes.ANIM_LOADING.getEmote()
+                Emotes.LOADING.getEmote()
         )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(girl.build()).queue());
     }
 }

@@ -64,13 +64,13 @@ public class CmdKitsune implements Command{
         EmbedBuilder kitsune = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setTitle(String.format(
                         "Kitsune %s",
-                        Emotes.ANIM_SHIROTAILWAG.getEmote()
+                        Emotes.SHIROTAILWAG.getEmote()
                 ), link)
                 .setImage(link);
 
         tc.sendMessage(String.format(
                 "%s Getting a cute kitsune...",
-                Emotes.ANIM_LOADING.getEmote()
+                Emotes.LOADING.getEmote()
         )).queue(message -> message.editMessage(
                 EmbedBuilder.ZERO_WIDTH_SPACE
         ).embed(kitsune.build()).queue());

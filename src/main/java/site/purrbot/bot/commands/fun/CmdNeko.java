@@ -66,13 +66,13 @@ public class CmdNeko implements Command{
             EmbedBuilder nekogif = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                     .setTitle(String.format(
                             "Neko %s",
-                            Emotes.ANIM_WAGTAIL.getEmote()
+                            Emotes.WAGTAIL.getEmote()
                     ), link)
                     .setImage(link);
 
             tc.sendMessage(String.format(
                     "%s Getting a cute neko-gif...",
-                    Emotes.ANIM_LOADING.getEmote()
+                    Emotes.LOADING.getEmote()
             )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(nekogif.build()).queue());
             return;
         }
@@ -86,7 +86,7 @@ public class CmdNeko implements Command{
 
         tc.sendMessage(String.format(
                 "%s Getting a cute neko...",
-                Emotes.ANIM_LOADING.getEmote()
+                Emotes.LOADING.getEmote()
         )).queue(message -> {
             EmbedBuilder neko = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                     .setTitle(String.format(

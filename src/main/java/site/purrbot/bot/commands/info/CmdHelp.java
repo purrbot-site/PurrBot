@@ -82,7 +82,7 @@ public class CmdHelp implements Command{
                         "`[]` = optional\n" +
                         "`<>` = required",
                         cmd.getAttribute("usage").replace("{p}", prefix)
-                ), false).addField("Aliases:", String.format(
+                ), false).addField("Aliases", String.format(
                         "`%s`",
                         String.join(", ", triggers)
                 ), false);
@@ -119,11 +119,9 @@ public class CmdHelp implements Command{
             String category = cmd.getAttribute("category");
 
             builders.get(category).append(String.format(
-                    "[`%s%s`](%s '%s')\n",
+                    "`%s%s`\n",
                     prefix,
-                    cmd.getDescription().name(),
-                    Links.WEBSITE.getUrl(),
-                    cmd.getDescription().description()
+                    cmd.getDescription().name()
             ));
         }
 

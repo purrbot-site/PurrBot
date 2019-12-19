@@ -339,9 +339,6 @@ public class PurrBot {
     public List<String> getAcceptFuckMsg(){
         return getgFile().getStringlist("random", "accept_fuck_msg");
     }
-    public List<String> getApiPingMsg(){
-        return getgFile().getStringlist("random", "api_ping_msg");
-    }
     public List<String> getBlacklist(){
         return getgFile().getStringlist("random", "blacklist");
     }

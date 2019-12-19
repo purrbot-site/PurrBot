@@ -50,7 +50,7 @@ public class CmdPing implements Command{
 
         tc.sendMessage(String.format(
                 "%s Checking ping. Please wait...",
-                Emotes.ANIM_TYPING.getEmote()
+                Emotes.TYPING.getEmote()
         )).queue(message -> msg.getJDA().getRestPing().queue((time) -> message.editMessage(String.format(
                 "%s Edit message: `%dms`\n" +
                 "%s Discord: `%sms`\n" +

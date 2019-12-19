@@ -45,7 +45,7 @@ public class ImageUtil {
         this.bot = bot;
     }
 
-    private final String[] USER_AGENT = {"User-Agent", "PurrBot-UserAgent"};
+    private final String[] USER_AGENT = {"User-Agent", "PurrBot BOT_VERSION"};
     private final OkHttpClient CLIENT = new OkHttpClient();
 
     private BufferedImage getAvatar(User user) throws IOException{
