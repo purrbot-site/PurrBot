@@ -50,7 +50,7 @@
         "mention_purr": "O-okay. But only my cheek! \\*Holds cheek out*",
         "message": "{user} kisses you {targets}",
         "no_mention": "Please mention at least one user to kiss!",
-        "special_user": "Enjoys the kiss from {user}",
+        "special_user": "\\*Enjoys the kiss from {user}*",
         "target_snuggle": "NO! I won't let you kiss my sister with my help!"
       },
       "kitsune": {
