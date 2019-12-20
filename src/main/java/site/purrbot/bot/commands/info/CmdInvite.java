@@ -64,6 +64,11 @@ public class CmdInvite implements Command{
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
+        if(bot.isBeta()){
+            
+            return;
+        }
+        
         EmbedBuilder invite = bot.getEmbedUtil().getEmbed(msg.getAuthor())
                 .setAuthor(msg.getJDA().getSelfUser().getName(),
                         Links.WEBSITE.getUrl(),

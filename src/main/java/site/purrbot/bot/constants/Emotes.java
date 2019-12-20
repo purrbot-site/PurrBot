@@ -81,7 +81,7 @@ public enum Emotes{
     
     public String getEmoteByName(String name){
         for(Emotes emote : values()){
-            if(emote.name().equals(name))
+            if(emote.name().toLowerCase().equals(name))
                 return emote.getEmote();
         }
         
