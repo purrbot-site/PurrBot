@@ -1,14 +1,32 @@
 package site.purrbot.bot.util.file.lang;
 
 import com.google.auto.value.AutoAnnotation;
+import com.google.inject.Inject;
+import me.piggypiglet.framework.file.framework.FileConfiguration;
 
 // ------------------------------
 // Copyright (c) PiggyPiglet 2019
 // https://www.piggypiglet.me
 // ------------------------------
 public final class LangUtils {
+    @Inject @Lang("de") private static FileConfiguration de;
+    @Inject @Lang("en") private static FileConfiguration en;
+
     @AutoAnnotation
-    public static Lang lang(String lang) {
-        return new AutoAnnotation_LangUtils_lang(lang);
+    public static Lang lang(String value) {
+        return new AutoAnnotation_LangUtils_lang(value);
+    }
+
+    public static String get(String language, String path) {
+        switch (language.toLowerCase()) {
+            case "de":
+                return de.getString(path);
+
+            case "en":
+                return en.getString(path);
+
+            default:
+                throw new UnsupportedOperationException("That language doesn't exist.");
+        }
     }
 }

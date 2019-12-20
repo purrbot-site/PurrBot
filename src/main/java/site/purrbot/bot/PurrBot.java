@@ -31,6 +31,7 @@ import com.google.gson.JsonObject;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import me.piggypiglet.framework.Framework;
 import me.piggypiglet.framework.utils.annotations.files.Config;
+import me.piggypiglet.framework.utils.annotations.registerable.RegisterableData;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
@@ -48,6 +49,7 @@ import site.purrbot.bot.listener.ReadyListener;
 import site.purrbot.bot.util.*;
 import site.purrbot.bot.util.file.GFile;
 import site.purrbot.bot.util.file.lang.LangUtils;
+import site.purrbot.bot.util.file.lang.StaticLangHack;
 import site.purrbot.bot.util.message.EmbedUtil;
 import site.purrbot.bot.util.message.MessageUtil;
 import site.purrbot.bot.util.message.WebhookUtil;
@@ -125,6 +127,7 @@ public class PurrBot {
         gFile         = new GFile();
     
         Framework.builder()
+                .startup(new RegisterableData(StaticLangHack.class))
                 .file(true, "de", "/lang/de.json", "./lang/de.json", LangUtils.lang("de"))
                 .file(true, "en", "/lang/en.json", "./lang/en.json", LangUtils.lang("en"))
                 .build();
