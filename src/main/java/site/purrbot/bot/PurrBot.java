@@ -47,6 +47,7 @@ import site.purrbot.bot.listener.GuildListener;
 import site.purrbot.bot.listener.ReadyListener;
 import site.purrbot.bot.util.*;
 import site.purrbot.bot.util.file.GFile;
+import site.purrbot.bot.util.file.lang.LangUtils;
 import site.purrbot.bot.util.message.EmbedUtil;
 import site.purrbot.bot.util.message.MessageUtil;
 import site.purrbot.bot.util.message.WebhookUtil;
@@ -124,8 +125,8 @@ public class PurrBot {
         gFile         = new GFile();
     
         Framework.builder()
-                .file(true, "de", "/lang/de.json", "./lang/de.json", Config.class)
-                .file(true, "en", "/lang/en.json", "./lang/en.json", Config.class)
+                .file(true, "de", "/lang/de.json", "./lang/de.json", LangUtils.lang("de"))
+                .file(true, "en", "/lang/en.json", "./lang/en.json", LangUtils.lang("en"))
                 .build();
         
         getgFile().createOrLoad("config", "/config.json", "./config.json");
