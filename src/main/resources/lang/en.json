@@ -17,7 +17,7 @@
       "You can only see those naughty things in NSFW channels {user}.",
       "Everything has its place. And this command belongs in a NSFW-channel {user}."
     ],
-    "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {e:VANILLA_BLUSH}\nPlease report this on the Discord, or on GitHub!"
+    "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {e:VANILLABLUSH}\nPlease report this on the Discord, or on GitHub!"
   },
   "misc": {
     "and": "and",
@@ -28,7 +28,7 @@
     "fun": {
       "cuddle": {
         "loading": "{e:LOADING} Receiving a cuddle-gif...",
-        "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {e:VANILLA_BLUSH}",
+        "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {e:VANILLABLUSH}",
         "mention_purr": "\\*enjoys the cuddle from {user}*",
         "message": "{user} cuddles with you {targets}",
         "no_mention": "Please mention at least one user to cuddle!"
@@ -39,7 +39,7 @@
       },
       "hug": {
         "loading": "{e:LOADING} Receiving a hug-gif...",
-        "mention_self": "Why are you hugging yourself {user}?\nYou can hug me if you want. {e:VANILLA_BLUSH}",
+        "mention_self": "Why are you hugging yourself {user}?\nYou can hug me if you want. {e:VANILLABLUSH}",
         "mention_purr": "\\*enjoys the hug from {user}*",
         "message": "{user} hugs you {targets}",
         "no_mention": "Please mention at least one user to hug!"
@@ -140,7 +140,7 @@
         "invalid_bg": "Invalid background `{background}`\nCheck the [Wiki]({wiki:bg}) for available backgrounds.",
         "invalid_channel": "Please mention a valid text channel!",
         "invalid_color": "The provided color was invalid!\nSupported are `hex:rrggbb` or `rgb:r,g,b`",
-        "invalid_icon": "The provided icon was invalid!\nCheck the [Wiki]({wiki:bg}) for available icons.",
+        "invalid_icon": "The provided icon was invalid!\nCheck the [Wiki]({wiki:icon}) for available icons.",
         "no_bg": "Please provide a background name!",
         "no_channel": "No text channel provided! Make sure you mention one.",
         "no_color": "No color provided!\nPlease either use `hex:rrggbb` or `rgb:r,g,b`",
@@ -212,7 +212,7 @@
           "about_title": "About me",
           "about_value": "Oh hi there!\nI'm {name}. A bot for the ~Nya Discord.\nI was made by Andre_601 (<@{id}>) with the help of JDA and a lot of free time. ;)",
           "bot_title": "Bot info",
-          "bot_value": "Bot Version: `{version}`\nLibrary: [`JDA {version}`]({link})",
+          "bot_value": "Bot Version: `{bot_version}`\nLibrary: [`JDA {jda_version}`]({link})",
           "bot_list_title": "Bot lists",
           "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})\n[`Top.gg`]({top})",
           "commands_title": "Commands",
@@ -226,7 +226,7 @@
         "about_value": "Each of the links has a different purpose.\n`Recommended Invite` contains all permissions I need and a few more to make your experience more smooth.\n`Basic Invite` only has the required permissions.\n`Discord` is the invite to my support Discord.",
         "info_title": "Invite me",
         "info_value": "Heyo! Nice from you to invite me to your Discord. :3\nJust select one of the links below to get me on your Discord, so that I can bring fun and nekos to you.",
-        "links": "[`Recommended Invite`]({invite_full})\n[`Basic Invite`]({invite_basic})\n[`Discord`]({discord})"
+        "links": "[`Recommended Invite`]({invite_full})\n[`Basic Invite`]({invite_basic})\n[`Discord`]({support})"
       },
       "level": {
         "bot": "Bots can't level up. xP",
@@ -272,7 +272,7 @@
         },
         "embed": {
           "other_title": "Other stats",
-          "other_value": "```yaml\nRAM: {ram}\nUptime: {uptime}\n```",
+          "other_value": "```yaml\nRAM: {ram}\nUptime: {days}, {hours}, {minutes} and {seconds}\n```",
           "shard_this_title": "This shard",
           "shard_this_value": "```yaml\nID: {id} # IDs start at 0\n\nGuilds: {guilds}\nMembers: {total} [{users} Users, {bots} Bots]\n```",
           "shard_total_title": "Total",
@@ -377,23 +377,23 @@
   "snuggle": {
     "fun": {
       "cuddle": {
-        "mention_purr": "\\*snuggles up to {user}*"
+        "mention_snuggle": "\\*snuggles up to {user}*"
       },
       "hug": {
-        "mention_purr": "\\*loves the hug from {user}*"
+        "mention_snuggle": "\\*loves the hug from {user}*"
       },
       "kiss": {
-        "mention_purr": "Wha-? O-okay. B-but you can only kiss my cheek {user}! \\*Lets you kiss her cheek*",
+        "mention_snuggle": "Wha-? O-okay. B-but you can only kiss my cheek {user}! \\*Lets you kiss her cheek*",
         "special_user": "W-why do you kiss my sister through me? Y-you can kiss her yourself {user}."
       },
       "lick": {
-        "mention_purr": "H-HEY! T-that is lewd {user}."
+        "mention_snuggle": "H-HEY! T-that is lewd {user}."
       },
       "pat": {
-        "mention_purr": "\\*enjoys the pat*"
+        "mention_snuggle": "\\*enjoys the pat*"
       },
       "poke": {
-        "mention_purr": "Nuuu. Do nu poke me!"
+        "mention_snuggle": "Nuuu. Do nu poke me!"
       },
       "ship": {
         "mention_snuggle": "N-no. I don't want to ship with you.",
@@ -401,10 +401,10 @@
         "target_purr": "No! No shipping with my big sister!"
       },
       "slap": {
-        "mention_purr": "\\*runs away from {user}*"
+        "mention_snuggle": "\\*runs away from {user}*"
       },
       "tickle": {
-        "mention_purr": "H-help! I c-can't lau- \\*starts laughing*"
+        "mention_snuggle": "H-help! I c-can't lau- \\*starts laughing*"
       }
     },
     "info": {
