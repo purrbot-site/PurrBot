@@ -13,7 +13,7 @@
       "This channel doesn't seem to have a NSFW-label, does it {user}?",
       "Please be naughty in a NSFW channel {user}.",
       "Nonono! You're a nice person and use this command in a NSFW-channel {user}!",
-      "Error: ChannelNotNSFWException",
+      "ChannelNotNSFWException: Command may not be used outside a NSFW channel.",
       "You can only see those naughty things in NSFW channels {user}.",
       "Everything has its place. And this command belongs in a NSFW-channel {user}."
     ],

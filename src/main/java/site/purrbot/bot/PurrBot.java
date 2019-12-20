@@ -29,6 +29,8 @@ import com.github.rainestormee.jdacommand.CommandHandler;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
+import me.piggypiglet.framework.Framework;
+import me.piggypiglet.framework.utils.annotations.files.Config;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
@@ -88,7 +90,10 @@ public class PurrBot {
     private EventWaiter waiter;
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
-    private Cache<String, String> prefixes = Caffeine.newBuilder()
+    private Cache<String, String> language = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
+    private Cache<String, String> prefix = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
     private Cache<String, String> welcomeBg = Caffeine.newBuilder()
@@ -117,7 +122,12 @@ public class PurrBot {
 
     private void setup() throws LoginException{
         gFile         = new GFile();
-
+    
+        Framework.builder()
+                .file(true, "de", "/lang/de.json", "./lang/de.json", Config.class)
+                .file(true, "en", "/lang/en.json", "./lang/en.json", Config.class)
+                .build();
+        
         getgFile().createOrLoad("config", "/config.json", "./config.json");
         getgFile().createOrLoad("random", "/random.json", "./random.json");
 
@@ -283,8 +293,11 @@ public class PurrBot {
         return waiter;
     }
 
+    public String getLanguage(String id){
+        return language.get(id, k -> getDbUtil().getLanguage(id));
+    }
     public String getPrefix(String id){
-        return prefixes.get(id, k -> getDbUtil().getPrefix(id));
+        return prefix.get(id, k -> getDbUtil().getPrefix(id));
     }
     public String getWelcomeBg(String id){
         return welcomeBg.get(id, k -> getDbUtil().getWelcomeBg(id));
@@ -302,9 +315,13 @@ public class PurrBot {
         return welcomeMsg.get(id, k -> getDbUtil().getWelcomeMsg(id));
     }
 
+    public void setLanguage(String key, String value){
+        getDbUtil().setLanguage(key, value);
+        language.put(key, value);
+    }
     public void setPrefix(String key, String value){
         getDbUtil().setPrefix(key, value);
-        prefixes.put(key, value);
+        prefix.put(key, value);
     }
     public void setWelcomeBg(String key, String value){
         getDbUtil().setWelcomeBg(key, value);
@@ -328,7 +345,8 @@ public class PurrBot {
     }
 
     public void invalidateCache(String id){
-        prefixes.invalidate(id);
+        language.invalidate(id);
+        prefix.invalidate(id);
         welcomeBg.invalidate(id);
         welcomeChannel.invalidate(id);
         welcomeColor.invalidate(id);

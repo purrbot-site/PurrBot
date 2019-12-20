@@ -9,6 +9,14 @@
       "self_channel": "Ich benötige die Berechtigung {permission} im Textkanal {channel} dafür!",
       "other": "Du benötigst die Berechtigung {permission} für diesen Befehl."
     },
+    "nsfw_random": [
+      "Dieser Kanal scheint keinen NSFW-Label zu haben, oder {user}?",
+      "Bitte sei ungezogen in einem NSFW-Kanal {user}.",
+      "Neinneinnein! Du bist eine gute Person und verwendest diesen Befehl in einem NSFW-Kabal {user}!",
+      "ChannelNotNSFWException: Der Befehl darf nicht ausserhalb eines NSFW-Kanals verwendet werden.",
+      "Du kannst diese schmutzigen dinge nur in NSFW-Kanälen sehen {user}.",
+      "Alles hat seinen Platz. Und dieser Befehl gehört in einen NSFW-Kanal {user}."
+    ],
     "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {e:VANILLA_BLUSH}\nBitte melde dies im Discord, oder auf GitHub!"
   },
   "misc": {
