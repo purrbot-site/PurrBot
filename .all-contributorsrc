@@ -32,11 +32,21 @@
       "contributions": [
         "plugin"
       ]
+    },
+    {
+      "login": "PiggyPiglet",
+      "name": "PiggyPiglet",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11957313?v=4",
+      "profile": "https://www.piggypiglet.me",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "PurrBot",
   "projectOwner": "Andre601",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
