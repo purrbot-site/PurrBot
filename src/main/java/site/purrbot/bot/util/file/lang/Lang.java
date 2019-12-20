@@ -14,5 +14,5 @@ import java.lang.annotation.Target;
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME) @Target({ElementType.FIELD, ElementType.PARAMETER})
 public @interface Lang {
-    String lang() default "en";
+    String value() default "en";
 }
