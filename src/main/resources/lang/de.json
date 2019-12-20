@@ -17,7 +17,7 @@
       "Du kannst diese schmutzigen dinge nur in NSFW-Kanälen sehen {user}.",
       "Alles hat seinen Platz. Und dieser Befehl gehört in einen NSFW-Kanal {user}."
     ],
-    "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {e:VANILLA_BLUSH}\nBitte melde dies im Discord, oder auf GitHub!"
+    "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {e:VANILLABLUSH}\nBitte melde dies im Discord, oder auf GitHub!"
   },
   "misc": {
     "and": "und",
@@ -28,7 +28,7 @@
     "fun": {
       "cuddle": {
         "loading": "{e:LOADING} Erhalte ein Knuddel-gif...",
-        "mention_self": "Warum knuddelst du dich selbst {user}?\nDu kannst mich knuddeln wenn du willst. {e:VANILLA_BLUSH}",
+        "mention_self": "Warum knuddelst du dich selbst {user}?\nDu kannst mich knuddeln wenn du willst. {e:VANILLABLUSH}",
         "mention_purr": "\\*geniest das knuddeln von {user}*",
         "message": "{user} knuddelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum knuddeln!"
@@ -39,7 +39,7 @@
       },
       "hug": {
         "loading": "{e:LOADING} Erhalte ein Umarmungs-gif...",
-        "mention_self": "Warum umarmst du dich selbst {user}?\nDu kannst mich umarmen wenn du willst. {e:VANILLA_BLUSH}",
+        "mention_self": "Warum umarmst du dich selbst {user}?\nDu kannst mich umarmen wenn du willst. {e:VANILLABLUSH}",
         "mention_purr": "\\*geniest die umarmung von {user}*",
         "message": "{user} umarmt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum umarmen!"
@@ -79,7 +79,7 @@
       },
       "poke": {
         "loading": "{e:LOADING} Erhalte ein stups-gif...",
-        "mention_self": "Bist du gelangweilt oder warum stupst du dich selbst {user}?",
+        "mention_self": "Is dir langweilig oder warum stupst du dich selbst {user}?",
         "mention_purr": "\\*N-nya! Stups mich nicht! >~<*",
         "message": "{user} stupst dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum stupsen!"
@@ -137,10 +137,10 @@
         "current_msg": "Aktuelle Nachricht:\n```\n{message}\n```\n\nDu kannst Platzhalter in deiner Nachricht verwenden.\n**Platzhalter**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
         "few_args": "Nicht genug Argumente gegeben!\nVewende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
         "invalid_args": "Ungültige Argumente!\nVerwende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
-        "invalid_bg": "Ungültiger Hintergrund `{background}`\nÜberpfüfe das [Wiki]({link}) für verfügbare Hintergründe.",
+        "invalid_bg": "Ungültiger Hintergrund `{background}`\nÜberpfüfe das [Wiki]({wiki:bg}) für verfügbare Hintergründe.",
         "invalid_channel": "Bitte erwähne einen gültigen TextKanal!",
         "invalid_color": "Die angegebene Farbe war ungültig!\nUnterstützt werden `hex:rrggbb` oder `rgb:r,g,b`",
-        "invalid_icon": "Ungültiges Icon `{icon}`!\nÜberprüfe das [Wiki]({link}) für verfügbare Icons.",
+        "invalid_icon": "Ungültiges Icon `{icon}`!\nÜberprüfe das [Wiki]({wiki:icon}) für verfügbare Icons.",
         "no_bg": "Bitte gib einen Hintergrund an!",
         "no_channel": "Kein Textkanal angegeben! Stell sicher, dass du einen erwähnst.",
         "no_color": "Keine Farbe angegeben!\nBitte verwende entweder `hex:rrggbb` oder `rgb:r,g,b`",
@@ -212,7 +212,7 @@
           "about_title": "Über mich",
           "about_value": "Oh hallo da!\nIch bin {name}. Ein Bot für den ~Nya Discord.\nIch wurde von Andre_601 (<@{id}>) mit der Hilfe von JDA und viel Freizeit erstellt. ;)",
           "bot_title": "Bot Info",
-          "bot_value": "Bot Version: `{version}`\nAPI: [`JDA {version}`]({link})",
+          "bot_value": "Bot Version: `{bot_version}`\nAPI: [`JDA {jda_version}`]({link})",
           "bot_list_title": "Bot Listen",
           "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})\n[`Top.gg`]({top})",
           "commands_title": "Befehle",
@@ -226,7 +226,7 @@
         "about_value": "Jeder Link hat eine andere Verwendung.\n`Empfohlene Einladung` enthält alle Berechtigungen die ich benötige und ein paar andere, um deine Erfahrungen mit mir angenehmer zu machen.\n`Standard Einladung` hat nur die benötigten Berechtigungen.\n`Discord` ist die Einladung zu meinem Support Discord.",
         "info_title": "Lade mich ein",
         "info_value": "Heyo! Nett von dir, mich auf deinen Discord einzuladen. :3\nVerwende einfach einen der Links unten um mich auf deinen Discord zu kriegen, so dass ich nekos und Spass zu dir bringen kann.",
-        "links": "[`Empfohlene Einladung`]({invite_full})\n[`Standard Einladung`]({invite_basic})\n[`Discord`]({discord})"
+        "links": "[`Empfohlene Einladung`]({invite_full})\n[`Standard Einladung`]({invite_basic})\n[`Discord`]({support})"
       },
       "level": {
         "bot": "Bots können nicht aufleveln. xP",
