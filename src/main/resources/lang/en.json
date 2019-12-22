@@ -48,10 +48,10 @@
         "loading": "{e:LOADING} Receiving a kiss...",
         "mention_self": "How can you kiss yourself {user}? With a mirror?",
         "mention_purr": "O-okay. But only my cheek! \\*Holds cheek out*",
+        "mention_snuggle": "NO! I won't let you kiss my sister with my help!",
         "message": "{user} kisses you {targets}",
         "no_mention": "Please mention at least one user to kiss!",
-        "special_user": "\\*Enjoys the kiss from {user}*",
-        "target_snuggle": "NO! I won't let you kiss my sister with my help!"
+        "special_user": "\\*Enjoys the kiss from {user}*"
       },
       "kitsune": {
         "loading": "{e:LOADING} Receiving a kitsune-gif...",
@@ -68,7 +68,9 @@
       "neko": {
         "loading": "{e:LOADING} Receiving a cute neko image (or gif)...",
         "title_gif": "Neko {e:WAGTAIL}",
-        "title_img": "Neko {e:NEKOWO}"
+        "title_img": "Neko {e:NEKOWO}",
+        "purr": "Hey! That is me! OwO",
+        "snuggle": "That is my little sister! UwU"
       },
       "pat": {
         "loading": "{e:LOADING} Receiving pats...",
@@ -90,10 +92,11 @@
       },
       "ship": {
         "mention_self": "Shipping yourself {user}? Actually get someone else!",
-        "mention_purr": "N-nu! You can't ship with me!",
+        "mention_purr": "N-nu! You can't ship with me {user}!",
+        "mention_snuggle": "I won't let you ship with my little sister {user}!",
         "no_mention": "Please mention at least one user to ship!",
         "results": {
-          "100": "Perfect love! ❤",
+          "100": "Perfect love! \u2764",
           "91_99": "Please invite me to your wedding. ^-^",
           "81_90": "I can really imagine you both marrying each other.",
           "71_80": "\\*pushes both of you closer to each other*",
@@ -107,8 +110,7 @@
           "0": "If love was heat, then this would be an ice block."
         },
         "special_user": "{user} Awww sweetie. You know we both are always a perfect 100.\nYou don't need the test for that.",
-        "target_bot": "You can't really ship with bots you weirdo!",
-        "target_snuggle": "No shipping with my little sister!"
+        "target_bot": "You can't really ship with bots you weirdo!"
       },
       "slap": {
         "loading": "{e:LOADING} Slapping the users...",
@@ -126,8 +128,22 @@
       }
     },
     "guild": {
+      "language": {
+        "few_args": "Not enough arguments provided!\nUsage: `{prefix}language set <language>`",
+        "invalid_args": "Invalid arguments!\nUsage: `{prefix}language <set <language>|reset>`",
+        "invalid_lang": "The provided language was invalid!\nUse `{prefix}language` to see all available languages.",
+        "embed": {
+          "description": "You can change the language to one of the supported ones listed below using `{prefix}language set <language>`.",
+          "curr_lang_title": "Currently set language",
+          "curr_lang_value": "English (en)",
+          "available_lang_title": "Available languages"
+        },
+        "language_reset": "Language reset!",
+        "language_set": "Language set to `English (en)`!",
+        "no_language": "Please provide a language you want to set!"
+      },
       "prefix": {
-        "few_args": "Not enough arguments provided!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
+        "few_args": "Not enough arguments provided!\nUsage: `{prefix}prefix set <new prefix>`",
         "invalid_args": "Invalid arguments!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
         "no_prefix": "You need to provide a prefix!",
         "reset": "Prefix reset back to `.`",
@@ -383,11 +399,16 @@
         "mention_snuggle": "\\*loves the hug from {user}*"
       },
       "kiss": {
+        "mention_purr": "I won't help you kissing my sister through me {user}!",
         "mention_snuggle": "Wha-? O-okay. B-but you can only kiss my cheek {user}! \\*Lets you kiss her cheek*",
         "special_user": "W-why do you kiss my sister through me? Y-you can kiss her yourself {user}."
       },
       "lick": {
         "mention_snuggle": "H-HEY! T-that is lewd {user}."
+      },
+      "neko": {
+        "purr": "Nya. That is my big sister. >w<",
+        "snuggle": "I-is that me? OwO"
       },
       "pat": {
         "mention_snuggle": "\\*enjoys the pat*"
@@ -396,9 +417,9 @@
         "mention_snuggle": "Nuuu. Do nu poke me!"
       },
       "ship": {
-        "mention_snuggle": "N-no. I don't want to ship with you.",
-        "special_user": "W-why are you doing this with me {user}?\nG-go and do that with my sister. >////<",
-        "target_purr": "No! No shipping with my big sister!"
+        "mention_purr": "No! No shipping with my big sister {user}!",
+        "mention_snuggle": "N-no. I don't want to ship with you {user}.",
+        "special_user": "W-why should I ship you two {user}?\nG-go and do that yourself. >////<"
       },
       "slap": {
         "mention_snuggle": "\\*runs away from {user}*"
