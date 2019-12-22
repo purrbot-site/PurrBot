@@ -68,7 +68,9 @@
       "neko": {
         "loading": "{e:LOADING} Erhalte ein süsses neko Bild (oder gif)...",
         "title_gif": "Neko {e:WAGTAIL}",
-        "title_img": "Neko {e:NEKOWO}"
+        "title_img": "Neko {e:NEKOWO}",
+        "purr": "Hey! Das bin ich! OwO",
+        "snuggle": "Das ist meine kleine Schwester! UwU"
       },
       "pat": {
         "loading": "{e:LOADING} Erhalte Streicheleinheiten...",
@@ -90,10 +92,11 @@
       },
       "ship": {
         "mention_self": "Sich selbst verkuppeln {user}? Finde jemand anderes!",
-        "mention_purr": "N-nein! Du kannst dich nicht mit mir verkuppeln!",
+        "mention_purr": "N-nein! Du kannst dich nicht mit mir verkuppeln {user}!",
+        "mention_snuggle": "Keine verkupplung mir meiner kleinen Schwester {user}!",
         "no_mention": "Bitte erwähne mindestens eine Person zum verkuppeln!",
         "results": {
-          "100": "Perfekte Liebe! ❤",
+          "100": "Perfekte Liebe! \u2764",
           "91_99": "Bitte ladet mich zu eurer Hochzeit ein. ^-^",
           "81_90": "Ich kann mir wirklich euch beide vorstellen, wie ihr einander heiratet.",
           "71_80": "\\*Drückt euch näher aneinander*",
@@ -107,8 +110,7 @@
           "0": "Wenn Liebe wärme wäre, dann wär dies ein Eisblock."
         },
         "special_user": "{user} Awww Süsse. Du weisst doch dass wir zwei immer eine perfekte 100 sind.\nDu brauchst diesen Test nicht dafür.",
-        "target_bot": "Du kannst dich nicht wirklich mit Bots verkuppeln du Verrückter!",
-        "target_snuggle": "Keine verkupplung mir meiner kleinen Schwester!"
+        "target_bot": "Du kannst dich nicht wirklich mit Bots verkuppeln du Verrückter!"
       },
       "slap": {
         "loading": "{e:LOADING} Schlage den/die User...",
@@ -126,8 +128,22 @@
       }
     },
     "guild": {
+      "language": {
+        "few_args": "Nicht genug Argumente gegeben!\nVerwendung: `{prefix}language set <Sprache>`",
+        "invalid_args": "Ungültige Argumente!\nVewendung: `{prefix}language <set <Sprache>|reset>`",
+        "invalid_lang": "Die angegebene Sprache ist ungültig!\nVewende `{prefix}language` um alle verfügbaren Sprachen zu sehen.",
+        "embed": {
+          "description": "Du kannst die Sprache zu einer der unten stehenden ändern indem du `{prefix}language set <Sprache>` verwendest.",
+          "curr_lang_title": "Momentan gesetzte Sprache",
+          "curr_lang_value": "Deutsch (de)",
+          "available_lang_title": "Verfügbare Sprachen"
+        },
+        "language_reset": "Sprache resettet!",
+        "language_set": "Sprache geändert zu `Deutsch (de)`!",
+        "no_language": "Bitte gib eine Sprache an, welche du verwenden willst!"
+      },
       "prefix": {
-        "few_args": "Nicht genug Argumente gegeben!\nVerwendung: `{prefix}prefix <set <neuer Prefix>|reset>`",
+        "few_args": "Nicht genug Argumente gegeben!\nVerwendung: `{prefix}prefix set <neuer Prefix>`",
         "invalid_args": "Ungültige Argumente!\nVerwendung: `{prefix}prefix <set <neuer Prefix>|reset>`",
         "no_prefix": "Du musst einen Prefix angeben!",
         "reset": "Prefix zurückgesetzt auf `.`",
@@ -377,34 +393,39 @@
   "snuggle": {
     "fun": {
       "cuddle": {
-        "mention_purr": "\\*kuschelt sich an {user}*"
+        "mention_snuggle": "\\*kuschelt sich an {user}*"
       },
       "hug": {
-        "mention_purr": "\\*liebt die Umarmung von {user}*"
+        "mention_snuggle": "\\*liebt die Umarmung von {user}*"
       },
       "kiss": {
-        "mention_purr": "Wa-? O-okay. A-aber du kannst mich nur auf die Wange küssen {user}! \\*lässt dich ihre Wange küssen*",
+        "mention_purr": "Ich werde dir nicht helfen meine Schwester zu küssen {user}!",
+        "mention_snuggle": "Wa-? O-okay. A-aber du kannst mich nur auf die Wange küssen {user}! \\*lässt dich ihre Wange küssen*",
         "special_user": "W-warum küsst du meine Schwester durch mich? D-du kannst sie selber küssen {user}."
       },
       "lick": {
-        "mention_purr": "H-HEY! D-das ist ungezogen {user}."
+        "mention_snuggle": "H-HEY! D-das ist ungezogen {user}."
+      },
+      "neko": {
+        "purr": "Nya. Das ist meine grosse Schwester. >w<",
+        "snuggle": "B-bin das ich? OwO"
       },
       "pat": {
-        "mention_purr": "\\*geniesst die Streicheleinheit*"
+        "mention_snuggle": "\\*geniesst die Streicheleinheit*"
       },
       "poke": {
-        "mention_purr": "Nuuu. Stups mich nicht!"
+        "mention_snuggle": "Nuuu. Stups mich nicht!"
       },
       "ship": {
-        "mention_snuggle": "N-nein. Ich möchte nicht verkuppelt werden.",
-        "special_user": "W-warum machst du dass mit mir {user}?\nG-geh und mach dass mit meiner Schwester. >////<",
-        "target_purr": "Nein! Kein verkuppeln mit meiner grossen Schwester!"
+        "mention_purr": "Nein! Kein verkuppeln mit meiner grossen Schwester {user}!",
+        "mention_snuggle": "N-nein. Ich möchte nicht verkuppelt werden {user}.",
+        "special_user": "W-warum soll ich euch beide verkuppeln {user}?\nG-geh und mach dass selbst. >////<"
       },
       "slap": {
-        "mention_purr": "\\*rennt weg von {user}*"
+        "mention_snuggle": "\\*rennt weg von {user}*"
       },
       "tickle": {
-        "mention_purr": "H-hilfe! I d-darf nicht lac- \\*fängt an zu lachen*"
+        "mention_snuggle": "H-hilfe! I d-darf nicht lac- \\*fängt an zu lachen*"
       }
     },
     "info": {
