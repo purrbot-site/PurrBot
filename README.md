@@ -35,7 +35,7 @@
 [lbots]: https://lbots.org/bots/Purr
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[contributorBadge]: https://img.shields.io/badge/Contributors_✨-4-green.svg?style=plastic
+[contributorBadge]: https://img.shields.io/badge/Contributors_✨-5-green.svg?style=plastic
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![contributorsBadge]](#contributors-)
@@ -191,6 +191,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://rainestormee.github.io"><img src="https://avatars1.githubusercontent.com/u/26597492?v=4" width="100px;" alt=""/><br /><sub><b>Ryan Arrowsmith</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=rainestormee" title="Code">💻</a></td>
     <td align="center"><a href="http://linkedin.dv8tion.net"><img src="https://avatars1.githubusercontent.com/u/1479909?v=4" width="100px;" alt=""/><br /><sub><b>Austin Keener</b></sub></a><br /><a href="#plugin-DV8FromTheWorld" title="Plugin/utility libraries">🔌</a></td>
     <td align="center"><a href="https://www.piggypiglet.me"><img src="https://avatars3.githubusercontent.com/u/11957313?v=4" width="100px;" alt=""/><br /><sub><b>PiggyPiglet</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=PiggyPiglet" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Katinor"><img src="https://avatars3.githubusercontent.com/u/16473891?v=4" width="100px;" alt=""/><br /><sub><b>Oh Hyejun</b></sub></a><br /><a href="#translation-Katinor" title="Translation">🌍</a></td>
   </tr>
 </table>
 
