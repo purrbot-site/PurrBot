@@ -38,7 +38,7 @@
 [contributorBadge]: https://img.shields.io/badge/Contributors_✨-5-green.svg?style=plastic
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![contributorsBadge]](#contributors-)
+[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![contributorBadge]](#contributors-)
 
 # \*Purr*
 This bot was made to use the [nekos.life]-API but now moved to its very own API.
