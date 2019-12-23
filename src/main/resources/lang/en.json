@@ -17,7 +17,7 @@
       "You can only see those naughty things in NSFW channels {user}.",
       "Everything has its place. And this command belongs in a NSFW-channel {user}."
     ],
-    "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {e:VANILLABLUSH}\nPlease report this on the Discord, or on GitHub!"
+    "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {VANILLABLUSH}\nPlease report this on the Discord, or on GitHub!"
   },
   "misc": {
     "and": "and",
@@ -27,25 +27,25 @@
   "purr": {
     "fun": {
       "cuddle": {
-        "loading": "{e:LOADING} Receiving a cuddle-gif...",
-        "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {e:VANILLABLUSH}",
+        "loading": "{LOADING} Receiving a cuddle-gif...",
+        "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {VANILLABLUSH}",
         "mention_purr": "\\*enjoys the cuddle from {user}*",
         "message": "{user} cuddles with you {targets}",
         "no_mention": "Please mention at least one user to cuddle!"
       },
       "holo": {
-        "loading": "{e:LOADING} Receiving a image from Holo...",
-        "title": "Holo {e:BLOBHOLO}"
+        "loading": "{LOADING} Receiving a image from Holo...",
+        "title": "Holo {BLOBHOLO}"
       },
       "hug": {
-        "loading": "{e:LOADING} Receiving a hug-gif...",
-        "mention_self": "Why are you hugging yourself {user}?\nYou can hug me if you want. {e:VANILLABLUSH}",
+        "loading": "{LOADING} Receiving a hug-gif...",
+        "mention_self": "Why are you hugging yourself {user}?\nYou can hug me if you want. {VANILLABLUSH}",
         "mention_purr": "\\*enjoys the hug from {user}*",
         "message": "{user} hugs you {targets}",
         "no_mention": "Please mention at least one user to hug!"
       },
       "kiss": {
-        "loading": "{e:LOADING} Receiving a kiss...",
+        "loading": "{LOADING} Receiving a kiss...",
         "mention_self": "How can you kiss yourself {user}? With a mirror?",
         "mention_purr": "O-okay. But only my cheek! \\*Holds cheek out*",
         "mention_snuggle": "NO! I won't let you kiss my sister with my help!",
@@ -54,11 +54,11 @@
         "special_user": "\\*Enjoys the kiss from {user}*"
       },
       "kitsune": {
-        "loading": "{e:LOADING} Receiving a kitsune-gif...",
-        "title": "Kitsune {e:SHIROTAILWAG}"
+        "loading": "{LOADING} Receiving a kitsune-gif...",
+        "title": "Kitsune {SHIROTAILWAG}"
       },
       "lick": {
-        "loading": "{e:LOADING} Receiving a lick-gif...",
+        "loading": "{LOADING} Receiving a lick-gif...",
         "mention_self": "I won't ask how and *where* you lick yourself {user}...",
         "mention_purr": "\\*backs away* I-I never allowed you to lick me!",
         "message": "{user} licks you {targets}",
@@ -66,29 +66,29 @@
         "special_user": "B-but sweetie... Not in public. \\*blushes*"
       },
       "neko": {
-        "loading": "{e:LOADING} Receiving a cute neko image (or gif)...",
-        "title_gif": "Neko {e:WAGTAIL}",
-        "title_img": "Neko {e:NEKOWO}",
+        "loading": "{LOADING} Receiving a cute neko image (or gif)...",
+        "title_gif": "Neko {WAGTAIL}",
+        "title_img": "Neko {NEKOWO}",
         "purr": "Hey! That is me! OwO",
         "snuggle": "That is my little sister! UwU"
       },
       "pat": {
-        "loading": "{e:LOADING} Receiving pats...",
+        "loading": "{LOADING} Receiving pats...",
         "mention_self": "Uhm... Isn't there a neko that you can pat {user}? \\*points to herself*",
         "mention_purr": "\\*purr™*",
         "message": "{user} pats you {targets}",
         "no_mention": "Please mention at least one user to pat!"
       },
       "poke": {
-        "loading": "{e:LOADING} Receiving a poke-gif...",
+        "loading": "{LOADING} Receiving a poke-gif...",
         "mention_self": "Are you bored or why do you poke yourself {user}?",
         "mention_purr": "N-nya! Nu poking me! >~<",
         "message": "{user} pokes you {targets}",
         "no_mention": "Please mention at least one user to poke!"
       },
       "senko": {
-        "loading": "{e:LOADING} Receiving an image of Senko-san...",
-        "title": "Senko-San {e:SENKOTAILWAG}"
+        "loading": "{LOADING} Receiving an image of Senko-san...",
+        "title": "Senko-San {SENKOTAILWAG}"
       },
       "ship": {
         "mention_self": "Shipping yourself {user}? Actually get someone else!",
@@ -113,14 +113,14 @@
         "target_bot": "You can't really ship with bots you weirdo!"
       },
       "slap": {
-        "loading": "{e:LOADING} Slapping the users...",
+        "loading": "{LOADING} Slapping the users...",
         "mention_self": "Nononono! I won't help you hurting yourself {user}.",
         "mention_purr": "Nuuuu... W-why hurting me {user}? T^T",
         "message": "{user} slaps you {targets}",
         "no_mention": "Please mention at least one user to slap!"
       },
       "tickle": {
-        "loading": "{e:LOADING} Receiving a tickle-gif...",
+        "loading": "{LOADING} Receiving a tickle-gif...",
         "mention_self": "Okay... If you really want to get tickled... \\*tickles {user}*",
         "mention_purr": "N-not fair! I c-can't \\*laughs from the tickles*",
         "message": "{user} tickles you {targets}",
@@ -143,7 +143,7 @@
         "no_language": "Please provide a language you want to set!"
       },
       "prefix": {
-        "few_args": "Not enough arguments provided!\nUsage: `{prefix}prefix set <new prefix>`",
+        "few_args": "Not enough arguments provided!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
         "invalid_args": "Invalid arguments!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
         "no_prefix": "You need to provide a prefix!",
         "reset": "Prefix reset back to `.`",
@@ -151,6 +151,20 @@
       },
       "welcome": {
         "current_msg": "Current message:\n```\n{message}\n```\n\nYou may use placeholders in your message.\n**Placeholders**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
+        "embed": {
+          "channel": "Channel",
+          "color_title": "Color",
+          "color_value": "```\nType:  {type}\nValue: {value}\n```",
+          "current_settings": "This are the current Welcome-settings of this Discord.\nUse `{prefix}welcome [subcommand]` to change them.",
+          "image_title": "Image",
+          "image_value": "```\nBackground: {background}\nIcon:       {icon}\n```",
+          "message_title": "Message",
+          "message_value": "```\n{message}\n```",
+          "no_channel": "`No channel set`",
+          "preview": "Preview",
+          "subcommands_title": "Subcommands",
+          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset```"
+        },
         "few_args": "Not enough arguments provided!\nRun `{prefix}welcome` to see all available sub-commands.",
         "invalid_args": "Invalid arguments!\nRun `{prefix}welcome` to see all available sub-commands.",
         "invalid_bg": "Invalid background `{background}`\nCheck the [Wiki]({wiki:bg}) for available backgrounds.",
@@ -183,7 +197,7 @@
         "embeds": {
           "boost_multiple": "{boost} boosts",
           "boost_single": "{boost} boost",
-          "boost_tier": "BoostTier: {e:BOOST_LEVEL_{level}} (Level {level})",
+          "boost_tier": "BoostTier: {BOOST_LEVEL_{level}} (Level {level})",
           "created": "Created",
           "level": "Level",
           "levels": {
@@ -252,14 +266,14 @@
       },
       "ping": {
         "loading": [
-          "{e:TYPING} Talking with Discord...",
-          "{e:TYPING} Catching a fish...",
-          "{e:TYPING} Giving a pong for the ping.",
-          "{e:TYPING} [placeholder_loading_text]",
-          "{e:TYPING} Hey Discord, are you there?"
+          "{TYPING} Talking with Discord...",
+          "{TYPING} Catching a fish...",
+          "{TYPING} Giving a pong for the ping.",
+          "{TYPING} [placeholder_loading_text]",
+          "{TYPING} Hey Discord, are you there?"
         ],
-        "info": "{e:EDIT} Edit message: `{edit_message}`\n{e:DISCORD} Discord: `{discord}`",
-        "info_full": "{e:EDIT} Edit message: `{edit_message}`\n{e:DISCORD} Discord: `{discord}`\n{e:DOWNLOAD} RestAction: `{rest_action}`"
+        "info": "{EDIT} Edit message: `{edit_message}`\n{e:DISCORD} Discord: `{discord}`",
+        "info_full": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
         "embed_basic": {
@@ -352,7 +366,7 @@
         }
       },
       "lewd": {
-        "loading": "{e:LOADING} Getting a lewd neko image (or gif)...",
+        "loading": "{LOADING} Getting a lewd neko image (or gif)...",
         "title_gif": "Lewd neko {e:WAGTAIL}",
         "title_img": "Lewd neko {e:NEKOWO}"
       },
