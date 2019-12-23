@@ -131,7 +131,7 @@
       "language": {
         "few_args": "무언가 적게 받았어!\n사용법: `{prefix}language set <언어>`",
         "invalid_args": "유효하지 않은 값이야!\n사용법: `{prefix}language <set <언어>|reset>`",
-        "invalid_lang": "그 언어는 아직 모르는 언어야!\nUse `{prefix}language` 를 사용하면 내가 아는 언어들을 알려줄게!",
+        "invalid_lang": "그 언어는 아직 모르는 언어야!\n`{prefix}language` 를 사용하면 내가 아는 언어들을 알려줄게!",
         "embed": {
           "description": "`{prefix}language set <언어>` 를 이용하면 아래에 있는 언어들 중 원하는 언어로 바꿀 수 있어!",
           "curr_lang_title": "현재 사용중인 언어",
