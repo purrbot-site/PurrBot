@@ -11,6 +11,7 @@ import me.piggypiglet.framework.file.framework.FileConfiguration;
 public final class LangUtils {
     @Inject @Lang("de") private static FileConfiguration de;
     @Inject @Lang("en") private static FileConfiguration en;
+    @Inject @Lang("ko") private static FileConfiguration ko;
 
     @AutoAnnotation
     public static Lang lang(String value) {
@@ -24,6 +25,9 @@ public final class LangUtils {
 
             case "en":
                 return en.getString(path);
+
+            case "ko":
+                return ko.getString(path);
 
             default:
                 throw new UnsupportedOperationException("That language doesn't exist.");

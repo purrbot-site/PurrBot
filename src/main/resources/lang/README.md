@@ -21,5 +21,6 @@ Here is a list of currently supported languages and who translated it.
 | --------- | ------ | -------------- |
 | English   | en     | Andre_601      |
 | German    | de     | Andre_601      |
+| Korean    | ko     | Katinor        |
 
 *The code may be used in the `.language` command.

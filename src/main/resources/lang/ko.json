@@ -1,0 +1,470 @@
+{
+  "embed": {
+    "footer": "{user}가 요청함"
+  },
+  "errors": {
+    "api_error": "API 요청에 실패했어! 나중에 다시 시도해줘.",
+    "missing_perms": {
+      "self": "{permission} 권한이 나에게 없어!",
+      "self_channel": "{channel} 채널에 {permission} 권한이 나에게 없어!",
+      "other": "이 명령어를 사용하려면 너에게 {permission} 권한이 있어야 해."
+    },
+    "nsfw_random": [
+      "이 채널은 연령 제한 채널이 아닌 것 같은데.. 그렇지, {user}?",
+      "응큼한건 연령 제한 채널에서 하지 않을래, {user}?",
+      "그만! 거기까지. 넌 좋은 사람이니까 제발 그 명령어는 연령 제한 채널해서 써, {user}!",
+      "ChannelNotNSFWException: 명령어는 연령 제한 채널이 아닌 경우 사용할 수 없습니다.",
+      "그런 부끄러운 것들은 연령 제한 채널에서만 볼 수 있어, {user}.",
+      "모든 것은 속한 자리가 있지. 그리고 그 명령어의 자리는 연령 제한 채널이야, {user}."
+    ],
+    "unknown": "미.. 미안! 무언가 잘못된 모양이야.. {e:VANILLABLUSH}\n디스코드 혹은 깃허브에 문의해줘!"
+  },
+  "misc": {
+    "and": "그리고",
+    "unknown_user": "(알 수 없음)",
+    "welcome_member": "넌 {count}번 째로 들어온 사람이야!"
+  },
+  "purr": {
+    "fun": {
+      "cuddle": {
+        "loading": "{e:LOADING} 부비부비 이미지 불러오는 중...",
+        "mention_self": "왜 혼자 부비부비 하고 있어, {user}?\n여기 날 부비부비하면 되잖아..{e:VANILLABLUSH}",
+        "mention_purr": "\\*{user}와 부비부비를 즐기는 중*",
+        "message": "{user} 가 {targets} 랑 부비부비하고 있어!",
+        "no_mention": "최소한 부비부비할 상대 한명을 언급해줘!"
+      },
+      "holo": {
+        "loading": "{e:LOADING} 호로 이미지 불러오는 중...",
+        "title": "호로 {e:BLOBHOLO}"
+      },
+      "hug": {
+        "loading": "{e:LOADING} 포옹 이미지 불러오는 중...",
+        "mention_self": "왜 혼자 껴안으려고 해, {user}?\n여기 날 껴안으면 되잖아.. {e:VANILLABLUSH}",
+        "mention_purr": "\\*{user}에게 껴안기는 중*",
+        "message": "{user} 가 {targets} 를 껴안고 있어!",
+        "no_mention": "최소한 껴안을 상대 한명을 언급해줘!"
+      },
+      "kiss": {
+        "loading": "{e:LOADING} 키스 이미지 불러오는 중...",
+        "mention_self": "어쩧게 혼자 키스하게, {user}? 거울이랑 하려고?",
+        "mention_purr": "그, 그래..! 하지만 볼에다가만 해! \\*볼을 내미는 중*",
+        "mention_snuggle": "안-돼-! 내 동생이랑은 안된다구.",
+        "message": "{user} 가 {targets} 에게 키스하고 있어!",
+        "no_mention": "최소한 키스할 상대 한명을 언급해줘!",
+        "special_user": "\\*{user}와 키스하는 중*"
+      },
+      "kitsune": {
+        "loading": "{e:LOADING} 여우 이미지 불러오는중...",
+        "title": "여우 {e:SHIROTAILWAG}"
+      },
+      "lick": {
+        "loading": "{e:LOADING} 핥짝 이미지 불러오는중...",
+        "mention_self": "어.. 스스로 *어딜* 어떻게 핥으려는지는 묻지 않을께, {user}...",
+        "mention_purr": "\\*뒷걸음질 치며* 그-그만! 핥으라고 한 적 없어!",
+        "message": "{user} 가 {targets} 를 핥고 있어!",
+        "no_mention": "최소한 핥을 상대 한명을 언급해줘!",
+        "special_user": "하, 하지만 자기... 여긴 모두가 보고 있다구. \\*부끄부끄*"
+      },
+      "neko": {
+        "loading": "{e:LOADING} 귀여운 고양이 소녀 이미지 불러오는 중...",
+        "title_gif": "고양이 {e:WAGTAIL}",
+        "title_img": "고양이 {e:NEKOWO}",
+        "purr": "Hey! That is me! OwO",
+        "snuggle": "That is my little sister! UwU"
+      },
+      "pat": {
+        "loading": "{e:LOADING} 쓰담쓰담 이미지 불러오는 중...",
+        "mention_self": "어.. 혹시 쓰다듬을 고양이가 없는거야, {user}? \\*자신을 가리키며*",
+        "mention_purr": "\\*야옹™*",
+        "message": "{user} 가 {targets} 를 쓰담쓰담 해주고 있어!",
+        "no_mention": "최소한 쓰다듬을 상대 한명을 언급해줘!"
+      },
+      "poke": {
+        "loading": "{e:LOADING} 푹푹 이미지 불러오는 중...",
+        "mention_self": "심심한거야? 왜 스스로를 찌르려고 해, {user}?",
+        "mention_purr": "야-야옹-! 푹푹 찌르지 마아-! >~<",
+        "message": "{user} 가 {targets} 를 손가락으로 찌르고 있어!",
+        "no_mention": "최소한 손가락으로 찌를 상대 한명을 언급해줘!"
+      },
+      "senko": {
+        "loading": "{e:LOADING} 센코 이미지 불러오는 중...",
+        "title": "센코씨 {e:SENKOTAILWAG}"
+      },
+      "ship": {
+        "mention_self": "자기 자신이랑 연애하려고, {user}? 세상에 좋은 사람은 널려있어!",
+        "mention_purr": "아-안돼! 나는 임자있는 몸이라구.",
+        "mention_snuggle": "내 동생은 누구에게도 줄 수 없어!",
+        "no_mention": "최소한 테스트할 상대 한명을 언급해줘!",
+        "results": {
+          "100": "완벽한 사랑인데-! \u2764",
+          "91_99": "결혼식에 나 초대하는거, 잊지마! ^-^",
+          "81_90": "나나 너희 둘 결혼하는거 자꾸만 떠올라! 헤헤.",
+          "71_80": "\\*서로를 서로에게 떠밀어서 붙여준다*",
+          "61_70": "이거 정말 서로 결혼하는거 아냐-?",
+          "51_60": "에이.. 이미 키스 해봤지-?",
+          "41_50": "이미 커플인거 아냐?",
+          "31_40": "이정도면 커플해도 될 것 같은데-?.",
+          "21_30": "친구 이상.. 아마 *응큼*한 대화도 가능하려나?",
+          "11_20": "이정도면 친구라구!",
+          "1_10": "아마 친구조차도 아닌 모양인데...",
+          "0": "사랑에 온도가 있다면, 너희 둘은 얼음덩어리구나."
+        },
+        "special_user": "{user}, 내 사랑. 이미 우리 둘 사이는 완벽하게 100점인걸.\n이런 거 할 필요도 없어.",
+        "target_bot": "봇이랑 사랑에 빠지지 말라구, 이 바보야!"
+      },
+      "slap": {
+        "loading": "{e:LOADING} 찰싹 이미지 불러오는 중...",
+        "mention_self": "안돼! 거기까지. 너 자신을 상처입히지 마, {user}.",
+        "mention_purr": "으아아앙.. 왜 날 상처주는거야, {user}? T^T",
+        "message": "{user} 가 {targets} 를 때려버렸어!",
+        "no_mention": "적어도 한대 칠 상대 한명을 언급해줘!"
+      },
+      "tickle": {
+        "loading": "{e:LOADING} 간질간질 이미지 불러오는 중...",
+        "mention_self": "그래.. 정말 간지럽혀지고 싶다면 말야.. \\*{user}를 간지럽힌다*",
+        "mention_purr": "부-불공평해! 아하하하! \\*간지러움에 폭소하며*",
+        "message": "{user} 가 {targets} 를 간지럽히고 있어!",
+        "no_mention": "적어도 간지럽힐 상대 한명을 언급해줘!"
+      }
+    },
+    "guild": {
+      "language": {
+        "few_args": "무언가 적게 받았어!\n사용법: `{prefix}language set <언어>`",
+        "invalid_args": "유효하지 않은 값이야!\n사용법: `{prefix}language <set <언어>|reset>`",
+        "invalid_lang": "그 언어는 아직 모르는 언어야!\n`{prefix}language` 를 사용하면 내가 아는 언어들을 알려줄게!",
+        "embed": {
+          "description": "`{prefix}language set <언어>` 를 이용하면 아래에 있는 언어들 중 원하는 언어로 바꿀 수 있어!",
+          "curr_lang_title": "현재 사용중인 언어",
+          "curr_lang_value": "한국어 (ko)",
+          "available_lang_title": "사용가능한 언어들"
+        },
+        "language_reset": "언어 초기화 성공!",
+        "language_set": "언어가 `한국어 (ko)`로 변경되었어!",
+        "no_language": "언어를 알려줘야 언어 설정이 가능해!"
+      },
+      "prefix": {
+        "few_args": "무언가 적게 받았어!\n사용법: `{prefix}prefix <set <새 접두어>|reset>`",
+        "invalid_args": "유효하지 않은 값이야!\n사용법: `{prefix}prefix <set <새 접두어>|reset>`",
+        "no_prefix": "!",
+        "reset": "접두어가 `.` 로 초기화되었어.",
+        "set": "접두어가 `{prefix}` 로 설정되었어."
+      },
+      "welcome": {
+        "current_msg": "현재 메시지:\n```\n{message}\n```\n\n아래의 것들을 같이 쓸 수도 있어.\n**사용가능한 표현**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
+        "few_args": "무언가 적게 받았어!\n`{prefix}welcome` 을 사용하면 사용 가능한 모든 세부 명령어들을 확인할 수 있어!",
+        "invalid_args": "유효하지 않은 값이야!\nRun `{prefix}welcome` 을 사용하면 가능한 모든 세부 명령어들을 확인할 수 있어!",
+        "invalid_bg": "유효하지 않은 배경이야. `{background}`\n[위키]({wiki:bg}) 에 가능한 배경들이 소개되어 있어.",
+        "invalid_channel": "유효한 텍스트 채널을 알려줘!",
+        "invalid_color": "색상코드가 잘못되었어. \n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘.",
+        "invalid_icon": "그 아이콘은 유효하지 않아!\n[위키]({wiki:icon}) 에 가능한 아이콘들이 소개되어 있어.",
+        "no_bg": "배경의 이름을 알려줘!",
+        "no_channel": "아무런 텍스트 채널도 받지 못했어. 제대로 나에게 언급해줘.",
+        "no_color": "아무 색도 받지 못했어!\n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘.",
+        "no_icon": "아이콘의 이름을 같이 줘!",
+        "no_msg": "아무런 메시지도 받지 못했어!",
+        "set": "{type} 가 {value} 으로 설정되었어."
+      }
+    },
+    "info": {
+      "emote": {
+        "embed": {
+          "emote": "이모티콘",
+          "guild": "서버",
+          "id": "ID",
+          "image": "이미지",
+          "link": "[`링크`]({link})",
+          "message": "메시지"
+        },
+        "no_args": "최소한 `:이모티콘:`이나 `--search`를 명령어 뒤에 붙여줘.",
+        "not_found": "최근 100개의 메시지 중에서 이모티콘이 있는 메시지를 찾을 수 없어.",
+        "unknown_guild": "알 수 없는 서버"
+      },
+      "guild": {
+        "embeds": {
+          "boost_multiple": "{boost} 명이 부스트 중",
+          "boost_single": "{boost} 명이 부스트 중",
+          "boost_tier": "부스트 레밸: {e:BOOST_LEVEL_{level}} (Level {level})",
+          "created": "생성 일자",
+          "level": "보안 수준",
+          "levels": {
+            "none": "없음",
+            "low": "낮음",
+            "medium": "중간",
+            "high": "(╯°□°）╯︵ ┻━┻",
+            "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
+          },
+          "owner": "소유자",
+          "region": "지역",
+          "users_title": "소속 인원",
+          "users_value": "**합계**: `{total}`\n\n**사용자**: `{humans}`\n**봇**: `{bots}`"
+        }
+      },
+      "help": {
+        "command_info": {
+          "aliases": "같은 명령어",
+          "command_nsfw": "이 명령어는 연령 제한 채널에서만 사용할 수 있어.",
+          "no_command": "그런 명령어는 없어!\n제대로 친 게 맞는지 확인해 봐.",
+          "title": "명령어 도움말: {command}",
+          "usage_title": "사용법",
+          "usage_value": "```\n{commands}\n```\n`[]` = 선택가능\n`<>` = 필수"
+        },
+        "command_menu": {
+          "categories": {
+            "fun": "재미",
+            "guild": "서버",
+            "info": "정보",
+            "list": "```\n종류:\n  재미\n  서버\n  정보\n  성인\n```",
+            "nsfw": "성인",
+            "owner": "소유자"
+          },
+          "description": "아래의 \u25C0 와 \u25B6 를 누르면 페이지를 바꿀 수 있어. \u23F9 를 누르면 그만둘 수 있어.\n`{prefix}help [명령어]`를 사용해서 더 자세한 정보를 확인해 봐.",
+          "nsfw_info": "`연령 제한 채널에서 확인해봐!`"
+        }
+      },
+      "info": {
+        "dm_failure": "개인 메시지를 보낼 수 없어, {user}!",
+        "dm_success": "개인 메시지를 확인해, {user}!",
+        "embed": {
+          "about_title": "자기소개",
+          "about_value": "반가워!\n나는 ~Nya 서버에서 활동하는 {name}이야. \n난 Andre_601 (<@{id}>) 가 JDA와 압도적인 노동력을 바탕으로 만들어졌어. ^ㅡ'",
+          "bot_title": "봇 정보",
+          "bot_value": "봇 버전: `{bot_version}`\n라이브러리: [`JDA {jda_version}`]({link})",
+          "bot_list_title": "내가 등록된 사이트들",
+          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})\n[`Top.gg`]({top})",
+          "commands_title": "명령어",
+          "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
+          "links_title": "유용한 링크들",
+          "links_value": "[`깃허브`]({github})\n[`후원하기`]({patreon})\n[`봇 지원 서버`]({support})\n[`공식 트위터`]({twitter})\n[`공식 웹사이트`]({website})\n[`공식 위키`]({wiki})"
+        }
+      },
+      "invite": {
+        "about_title": "각각 링크에 대한 설명",
+        "about_value": "각각의 링크는 다른 방식으로 나를 초대해.\n`권장 초대`는 내가 필요로 하는 모든 권한들을 갖고 들어올거야. 내가 가장 자유롭게 움직일 수 있어.\n`Basic Invite`는 필수적인 권한들만 갖고 들어와.\n`봇 지원 서버`는 너를 내 지원 서버로 초대하는 링크야.",
+        "info_title": "초대하는 방법",
+        "info_value": "오 예! 날 네 서버에 초대하려 하다니 너무 기뻐. ^ㅡ^\n아래에 있는 링크들 중에서 하나를 고르면 내가 따라가서 따분함을 풀고 고양이 소녀들을 데려와 줄게!",
+        "links": "[`권장 초대`]({invite_full})\n[`기본 초대`]({invite_basic})\n[`봇 지원 서버`]({support})"
+      },
+      "level": {
+        "bot": "봇은 래벨이 없어 xP",
+        "info": "{user}의 정보",
+        "level": "레벨",
+        "xp": "경험치"
+      },
+      "ping": {
+        "loading": [
+          "{e:TYPING} 디스코드와 떠드는 중...",
+          "{e:TYPING} 물고기를 잡는 중...",
+          "{e:TYPING} 핑퐁을 준비중...",
+          "{e:TYPING} [대충 로딩한다는 내용]",
+          "{e:TYPING} 야 디스코드! 전할게."
+        ],
+        "info": "{e:EDIT} 메시지 수정: `{edit_message}`\n{e:DISCORD} 디스코드 도착: `{discord}`",
+        "info_full": "{e:EDIT} 메시지 수정: `{edit_message}`\n{e:DISCORD} 디스코드 도착: `{discord}`\n{e:DOWNLOAD} RestAction: `{rest_action}`"
+      },
+      "quote": {
+        "embed_basic": {
+          "channel": "#{channel} 에 올라옴",
+          "info": "{user} 가 작성한 메시지"
+        },
+        "embed_image": {
+          "info": "{user} 가 {channel} 에 작성한 메시지 [`[Link]`]({link})"
+        },
+        "few_args": "무언가 적게 받았어!\n사용법: `{prefix}quote <메시지 ID> [#채널핑]`",
+        "invalid_id": "유효하지 않은 ID야. 개발자 모드를 킨 상태에서 **메시지**를 우클릭하고 \"ID복사하기\"를 제대로 눌렀는 지 확인해봐.",
+        "not_msg": "{channel}에서 그 메시지를 찾을 수 없어!\n그 메시지가 그 채널에 제대로 있는지 확인해봐.",
+        "no_value": "그 메시지는 텍스트도, 이미지도 없는 빈 메시지야.",
+        "nsfw_channel": "{channel}는 연령 제한 채널이지만 여기는 아니야!\n안전을 위해서 연령 제한 채널의 메시지는 여기로 불러올 수 없어."
+      },
+      "stats": {
+        "uptime": {
+          "day": "일",
+          "days": "일",
+          "hour": "시간",
+          "hours": "시간",
+          "minute": "분",
+          "minutes": "분",
+          "second": "초",
+          "seconds": "초"
+        },
+        "embed": {
+          "other_title": "기타 정보",
+          "other_value": "```yaml\n메모리 점유: {ram}\n가동 시간: {days} {hours} {minutes} {seconds}\n```",
+          "shard_this_title": "현재 샤드",
+          "shard_this_value": "```yaml\nID: {id} # ID는 0부터 시작\n\n소속 서버수: {guilds}\nM총 사용자수: {total} [사용자 {users}, 봇 {bots}]\n```",
+          "shard_total_title": "총계",
+          "shard_total_value": "```yaml\n샤드갯수: {shards}\n\n소속 서버수: {guilds}\n총 사용자수: {total} [사용자 {users}, 봇 {bots}]\n```",
+          "title": "통계"
+        }
+      },
+      "user": {
+        "embed": {
+          "avatar": "아바타",
+          "avatar_url": "[`서버저장본`]({link})",
+          "booster": "부스트 시작:",
+          "created": "계정생성:",
+          "dates": "날짜",
+          "game": "상태: {status}",
+          "joined": "서버입장:",
+          "level": "레벨",
+          "role_highest": "최고 역할",
+          "role_total": "그 외 역할",
+          "xp": "경험치"
+        },
+        "no_member": "그 사람은 이 서버에 없어.",
+        "no_roles": "`가진 역할 없음`",
+        "no_roles_others": "`그 외 가진 역할 없음`",
+        "status": {
+          "listening": "{game} 듣는 중",
+          "playing": "{game} 플레이 중",
+          "streaming": "{game} 스트리밍 중",
+          "watching": "{game} 보는 중"
+        }
+      }
+    },
+    "nsfw": {
+      "blowjob": {
+        "mention_bot": "콘센트를 핥으려는 생각은 아니겠지?",
+        "mention_purr": "이 변태! 빨아줄 다른 사람이나 찾아! \\*{user}의 뺨을 때리며*",
+        "mention_self": "그-그래. 말리지는 않을께, {user}.",
+        "message": "{user} 가 {target} 를 빨아주고 있어!",
+        "no_mention": "최소한 빨아줄 상대 한명을 언급해줘!",
+        "request": {
+          "accepted": "{target} 가 {user} 의 요청을 수락했어!",
+          "denied": "{target} 는 {user} 의 입을 원하지 않는 모양이야. :/",
+          "message": "{target}!\n{user} 가 입으로 야한걸 해주고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "open": "욕심부리지마, {user}! 이미 네가 부탁한 사람이 있잖아.",
+          "timed_out": "아마 {target} 는 {user} 의 입을 원하지 않는 모양이야."
+        },
+        "special_user": "좋아 자기. 조금 시간을 줄래? \"장난감\"이 좀 필요하니까.\n\\*{user}의 손을 잡고 방에서 사라진다*"
+      },
+      "fuck": {
+        "mention_bot": "봇이랑 야한 걸 할 생각 마!",
+        "mention_purr": "\\*{user}의 뺨을 때리며* 안돼! 이 변태자식.",
+        "mention_self": "어떻게 너 자신이랑 하려고, {user}? .. 자기위로 같은 대답은 하지 마.",
+        "message": "{user} 가 {target} 랑 사랑을 나누고 있어!",
+        "no_mention": "최소한 사랑을 나눌 상대 한명을 언급해줘!",
+        "request": {
+          "accepted": "{target} 가 {user} 의 요청을 수락했어! OwO",
+          "denied": "{target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. >.<",
+          "message": "{target}!\n{user} 가 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "open": "발정나지 말라고, {user}! 이미 네가 부탁한 사람이 있잖아.",
+          "timed_out": "아마 {target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. .\\_."
+        }
+      },
+      "lewd": {
+        "loading": "{e:LOADING} 야한 고양이 불러오는 중...",
+        "title_gif": "야한 고양이 {e:WAGTAIL}",
+        "title_img": "야한 고양이 {e:NEKOWO}"
+      },
+      "solo": {
+        "loading": "{e:LOADING} 야한 여자아이 불러오는 중...",
+        "title": "야한 여자"
+      },
+      "threesome": {
+        "mention_bot": "일단 진정해, {user}. 봇 보단 사람들과 하는게 더 즐거울거야. ^ㅡ'",
+        "mention_purr": "그래 그래. 내가 이상한 고양이로 보였겠지. 하지만 난 *그런* 플레이는 안해, {user}!",
+        "mention_self": "내가 아는 게 맞다면, 쓰리썸은 **3** 명이서 하는게 맞지, {user}?",
+        "message": "{user} 가 {target1} 랑 {target2} 와 함께 뜨거운 밤을 보내고 있어! O//w//O",
+        "no_mention": "최소한 함께 그런 걸 할 두 사람을 언급해줘!",
+        "request": {
+          "accepted": "{target1} 와 {target2} 가 {user} 의 요청을 수락했어! >//w//<",
+          "denied": "{target1} 또는 {target2} 는 {user} 랑 야한 걸 하고 싶지 않나봐.",
+          "message": "{target1} 랑 {target2}!\n{user} 가 너희 둘이랑 함께 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n요청받은 두 사람이 같이 수락하면.. 말 안해도 알지?\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "open": "발정난 개도 어지간해야지, {user}! 이미 네가 부탁한 사람이 있잖아.",
+          "timed_out": "아마 {target1} 또는 {target2} 는 {user} 랑 야한 걸 하고 싶지 않나봐. >\\_<"
+        }
+      },
+      "yurifuck": {
+        "mention_bot": "봇이랑 사랑을 나누는건 안돼-",
+        "mention_purr": "어, 음... 저-정말 고마워, {user}. 미안하지만 나랑은 안 돼.",
+        "mention_self": "왜 자꾸 혼자 하려고 해, {user}? 다른 사람이랑 하면 좋을거라구 ;3",
+        "message": "{user} 가 {target} 랑 사랑을 나누고 있어!",
+        "no_mention": "최소한 사랑을 나눌 상대 한명을 언급해줘!",
+        "request": {
+          "accepted": "{target} 가 {user} 의 요청을 수락했어! OwO",
+          "denied": "{target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. >.<",
+          "message": "{target}!\n{user} 가 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "open": "발정나지 말라고, {user}! 이미 네가 부탁한 사람이 있잖아.",
+          "timed_out": "아마 {target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. .\\_."
+        }
+      }
+    }
+  },
+  "snuggle": {
+    "fun": {
+      "cuddle": {
+        "mention_snuggle": "\\*{user}에게 달라붙어 부비부비하는 중*"
+      },
+      "hug": {
+        "mention_snuggle": "\\*{user}에게 껴안겨서 기뻐하는 중*"
+      },
+      "kiss": {
+        "mention_purr": "언니에겐 안돼, {user}!",
+        "mention_snuggle": "에.. 좋아. 하지만 볼에다가만 해! \\*볼을 내미는 중*",
+        "special_user": "ㅇ-왜 나에게 시키는거야? 직접 가서 키스하면 되잖아, {user}."
+      },
+      "lick": {
+        "mention_snuggle": "ㅅ-싫어! 그건 응큼하다구, {user}."
+      },
+      "neko": {
+        "purr": "야옹- 내 언니라구- >w<",
+        "snuggle": "ㄴ-내 사진이네? OwO"
+      },
+      "pat": {
+        "mention_snuggle": "\\*쓰담쓰담을 즐기는 중*"
+      },
+      "poke": {
+        "mention_snuggle": "그만! 날 찌르지 마 T-T"
+      },
+      "ship": {
+        "mention_purr": "언니랑은 안된다구, {user}!",
+        "mention_snuggle": "ㅅ-싫어. 너랑 하기 싫어, {user}!",
+        "special_user": "ㅇ-왜 나에게 시키는거야, {user}?\nㄱ-가서 직접 해. >////<"
+      },
+      "slap": {
+        "mention_snuggle": "\\*{user}로부터 도망치는 중*"
+      },
+      "tickle": {
+        "mention_snuggle": "ㄱ-그만! ㄴ-나는 웃을 줄 모른.. 아하하하! \\*폭소하는 중*"
+      }
+    },
+    "info": {
+      "info": {
+        "dm_failure": "네 개인 메시지가 닫혀있어, {user}. 닫혀있다면 아무것도 보낼 수 없어.",
+        "dm_success": "\uD83D\uDCEC 너에게 편지가 왔네, {user}!",
+        "embed": {
+          "about_title": "자기소개",
+          "about_value": "반가워!\n나는 {name}이야. \\*Purr*의 여동생이고.",
+          "bot_title": "봇 정보",
+          "bot_value": "봇 버전: `{bot_version}`\n라이브러리: [`JDA {jda_version}`]({link})",
+          "commands_title": "명령어",
+          "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
+          "links_title": "유용한 링크들",
+          "links_value": "[`깃허브`]({github})\n[`후원하기`]({patreon})\n[`봇 지원 서버`]({support})\n[`공식 트위터`]({twitter})\n[`공식 웹사이트`]({website})\n[`공식 위키`]({wiki})"
+        }
+      },
+      "invite": {
+        "message": "야옹. 나는 초대할 수 없어, {user}! 내 언니를 초대해!"
+      },
+      "level": {
+        "purr_only": "야옹- 이건 \\*Purr* 언니만 가능해! >w<"
+      }
+    },
+    "nsfw": {
+      "blowjob": {
+        "mention_snuggle": "\\*도망쳐서 숨는 중* 야한건 싫어.",
+        "mention_self": "헤헤... 혼자서 쪽쪽한데- 외롭고 부끄럽겠는데, {user}.",
+        "special_user": "ㅇ-왜 나랑 하려는거야, {user}? 내 언니랑만 하는거 아니야..?"
+      },
+      "fuck": {
+        "mention_purr": "싫어! 절대로 싫어, {user}."
+      },
+      "threesome": {
+        "mention_purr": "ㄴ-나는 그런거 절대로 싫어, {user}!"
+      },
+      "yurifuck": {
+        "mention_purr": "ㅇ-왜 나랑 이런걸 하려는거야, {user}? 난 너같은 사람 몰라!"
+      }
+    }
+  }
+}
