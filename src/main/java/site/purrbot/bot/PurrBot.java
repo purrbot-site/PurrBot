@@ -130,6 +130,7 @@ public class PurrBot {
                 .startup(new RegisterableData(StaticLangHack.class))
                 .file(true, "de", "/lang/de.json", "./lang/de.json", LangUtils.lang("de"))
                 .file(true, "en", "/lang/en.json", "./lang/en.json", LangUtils.lang("en"))
+                .file(true, "ko", "/lang/ko.json", "./lang/ko.json", LangUtils.lang("ko"))
                 .build();
         
         getgFile().createOrLoad("config", "/config.json", "./config.json");
