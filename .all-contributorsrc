@@ -41,6 +41,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Katinor",
+      "name": "Oh Hyejun",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/16473891?v=4",
+      "profile": "https://github.com/Katinor",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
