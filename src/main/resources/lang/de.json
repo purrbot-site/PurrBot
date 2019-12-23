@@ -17,7 +17,7 @@
       "Du kannst diese schmutzigen dinge nur in NSFW-Kanälen sehen {user}.",
       "Alles hat seinen Platz. Und dieser Befehl gehört in einen NSFW-Kanal {user}."
     ],
-    "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {e:VANILLABLUSH}\nBitte melde dies im Discord, oder auf GitHub!"
+    "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {VANILLABLUSH}\nBitte melde dies im Discord, oder auf GitHub!"
   },
   "misc": {
     "and": "und",
@@ -27,25 +27,25 @@
   "purr": {
     "fun": {
       "cuddle": {
-        "loading": "{e:LOADING} Erhalte ein Knuddel-gif...",
-        "mention_self": "Warum knuddelst du dich selbst {user}?\nDu kannst mich knuddeln wenn du willst. {e:VANILLABLUSH}",
+        "loading": "{LOADING} Erhalte ein Knuddel-gif...",
+        "mention_self": "Warum knuddelst du dich selbst {user}?\nDu kannst mich knuddeln wenn du willst. {VANILLABLUSH}",
         "mention_purr": "\\*geniest das knuddeln von {user}*",
         "message": "{user} knuddelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum knuddeln!"
       },
       "holo": {
-        "loading": "{e:LOADING} Erhalte ein Bild von Holo...",
-        "title": "Holo {e:BLOBHOLO}"
+        "loading": "{LOADING} Erhalte ein Bild von Holo...",
+        "title": "Holo {BLOBHOLO}"
       },
       "hug": {
-        "loading": "{e:LOADING} Erhalte ein Umarmungs-gif...",
-        "mention_self": "Warum umarmst du dich selbst {user}?\nDu kannst mich umarmen wenn du willst. {e:VANILLABLUSH}",
+        "loading": "{LOADING} Erhalte ein Umarmungs-gif...",
+        "mention_self": "Warum umarmst du dich selbst {user}?\nDu kannst mich umarmen wenn du willst. {VANILLABLUSH}",
         "mention_purr": "\\*geniest die umarmung von {user}*",
         "message": "{user} umarmt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum umarmen!"
       },
       "kiss": {
-        "loading": "{e:LOADING} Erhalte einen Kuss...",
+        "loading": "{LOADING} Erhalte einen Kuss...",
         "mention_self": "Wie kannst du dich selber küssen {user}? Mit einem Spiegel?",
         "mention_purr": "O-okay. Aber nur auf die Wange! \\*Hält Wange hin*",
         "message": "{user} küsst dich {targets}",
@@ -54,11 +54,11 @@
         "target_snuggle": "NEIN! Ich werde dir nicht helfen, meine Schwester zu küssen."
       },
       "kitsune": {
-        "loading": "{e:LOADING} Erhalte ein kitsune-gif...",
-        "title": "Kitsune {e:SHIROTAILWAG}"
+        "loading": "{LOADING} Erhalte ein kitsune-gif...",
+        "title": "Kitsune {SHIROTAILWAG}"
       },
       "lick": {
-        "loading": "{e:LOADING} Erhalte ein leck-gif...",
+        "loading": "{LOADING} Erhalte ein leck-gif...",
         "mention_self": "Ich werde nicht fragen wie und vorallem *wo* du dich leckst {user}...",
         "mention_purr": "\\*weicht zurück* I-ich hab dir nie erlaubt mich zu lecken!",
         "message": "{user} leckt dich {targets}",
@@ -66,29 +66,29 @@
         "special_user": "A-aber Schatz... Doch nicht in aller öffentlichkeit. \\*Errötet*"
       },
       "neko": {
-        "loading": "{e:LOADING} Erhalte ein süsses neko Bild (oder gif)...",
-        "title_gif": "Neko {e:WAGTAIL}",
-        "title_img": "Neko {e:NEKOWO}",
+        "loading": "{LOADING} Erhalte ein süsses neko Bild (oder gif)...",
+        "title_gif": "Neko {WAGTAIL}",
+        "title_img": "Neko {NEKOWO}",
         "purr": "Hey! Das bin ich! OwO",
         "snuggle": "Das ist meine kleine Schwester! UwU"
       },
       "pat": {
-        "loading": "{e:LOADING} Erhalte Streicheleinheiten...",
+        "loading": "{LOADING} Erhalte Streicheleinheiten...",
         "mention_self": "Uhm... Gibt es nicht eine neko, welche du streicheln kannst {user}? \\*Zeigt auf sich selbst*",
         "mention_purr": "\\*Snurren™*",
         "message": "{user} streichelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum streicheln!"
       },
       "poke": {
-        "loading": "{e:LOADING} Erhalte ein stups-gif...",
+        "loading": "{LOADING} Erhalte ein stups-gif...",
         "mention_self": "Is dir langweilig oder warum stupst du dich selbst {user}?",
         "mention_purr": "\\*N-nya! Stups mich nicht! >~<*",
         "message": "{user} stupst dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum stupsen!"
       },
       "senko": {
-        "loading": "{e:LOADING} Erhalte ein Bild von Senko-san...",
-        "title": "Senko-San {e:SENKOTAILWAG}"
+        "loading": "{LOADING} Erhalte ein Bild von Senko-san...",
+        "title": "Senko-San {SENKOTAILWAG}"
       },
       "ship": {
         "mention_self": "Sich selbst verkuppeln {user}? Finde jemand anderes!",
@@ -113,14 +113,14 @@
         "target_bot": "Du kannst dich nicht wirklich mit Bots verkuppeln du Verrückter!"
       },
       "slap": {
-        "loading": "{e:LOADING} Schlage den/die User...",
+        "loading": "{LOADING} Schlage den/die User...",
         "mention_self": "Neinneinnein! Ich werde nicht dabei helfen, dich selbst zu verletzen {user}.",
         "mention_purr": "Neeeeein... Warum verletzt du mich {user}? T^T",
         "message": "{user} schlägt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum schlagen!"
       },
       "tickle": {
-        "loading": "{e:LOADING} Erhalte ein Kitzel-gif...",
+        "loading": "{LOADING} Erhalte ein Kitzel-gif...",
         "mention_self": "Okay... Wenn du dich wirklich selber kitzeln willst... \\*Kitzelt {user}*",
         "mention_purr": "N-nicht fair! I-Ich darf nicht... \\*Lacht vom kitzeln*",
         "message": "{user} kitzelt dich {targets}",
@@ -143,7 +143,7 @@
         "no_language": "Bitte gib eine Sprache an, welche du verwenden willst!"
       },
       "prefix": {
-        "few_args": "Nicht genug Argumente gegeben!\nVerwendung: `{prefix}prefix set <neuer Prefix>`",
+        "few_args": "Nicht genug Argumente gegeben!\nVerwendung: `{prefix}prefix <set <neuer Prefix>|reset>`",
         "invalid_args": "Ungültige Argumente!\nVerwendung: `{prefix}prefix <set <neuer Prefix>|reset>`",
         "no_prefix": "Du musst einen Prefix angeben!",
         "reset": "Prefix zurückgesetzt auf `.`",
@@ -183,7 +183,7 @@
         "embeds": {
           "boost_multiple": "{boost} boosts",
           "boost_single": "{boost} boost",
-          "boost_tier": "Boost Stufe: {e:BOOST_LEVEL_{level}} (Level {level})",
+          "boost_tier": "Boost Stufe: {BOOST_LEVEL_{level}} (Level {level})",
           "created": "Erstellt",
           "level": "Level",
           "levels": {
@@ -252,14 +252,14 @@
       },
       "ping": {
         "loading": [
-          "{e:TYPING} Rede mit Discord...",
-          "{e:TYPING} Fange einen Fisch...",
-          "{e:TYPING} Gebe einen Pong für den Ping.",
-          "{e:TYPING} [platzhalter_lade_text]",
-          "{e:TYPING} Hey Discord, bist du da?"
+          "{TYPING} Rede mit Discord...",
+          "{TYPING} Fange einen Fisch...",
+          "{TYPING} Gebe einen Pong für den Ping.",
+          "{TYPING} [platzhalter_lade_text]",
+          "{TYPING} Hey Discord, bist du da?"
         ],
-        "info": "{e:EDIT} Nachricht editieren: `{edit_message}`\n{e:DISCORD} Discord: `{discord}`",
-        "info_full": "{e:EDIT} Nachricht editieren: `{edit_message}`\n{e:DISCORD} Discord: `{discord}`\n{e:DOWNLOAD} RestAction: `{rest_action}`"
+        "info": "{EDIT} Nachricht editieren: `{edit_message}`\n{DISCORD} Discord: `{discord}`",
+        "info_full": "{EDIT} Nachricht editieren: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
         "embed_basic": {
@@ -352,9 +352,9 @@
         }
       },
       "lewd": {
-        "loading": "{e:LOADING} Erhalte ein ungezogenes neko Bild (Oder gif)...",
-        "title_gif": "Ungezogene neko {e:WAGTAIL}",
-        "title_img": "Ungezogene neko {e:NEKOWO}"
+        "loading": "{LOADING} Erhalte ein ungezogenes neko Bild (Oder gif)...",
+        "title_gif": "Ungezogene neko {WAGTAIL}",
+        "title_img": "Ungezogene neko {NEKOWO}"
       },
       "solo": {
         "loading": "{e:LOADING} Erhalte ein gif von einem scharfen Girl...",

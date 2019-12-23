@@ -17,7 +17,7 @@
       "그런 부끄러운 것들은 연령 제한 채널에서만 볼 수 있어, {user}.",
       "모든 것은 속한 자리가 있지. 그리고 그 명령어의 자리는 연령 제한 채널이야, {user}."
     ],
-    "unknown": "미.. 미안! 무언가 잘못된 모양이야.. {e:VANILLABLUSH}\n디스코드 혹은 깃허브에 문의해줘!"
+    "unknown": "미.. 미안! 무언가 잘못된 모양이야.. {VANILLABLUSH}\n디스코드 혹은 깃허브에 문의해줘!"
   },
   "misc": {
     "and": "그리고",
@@ -27,25 +27,25 @@
   "purr": {
     "fun": {
       "cuddle": {
-        "loading": "{e:LOADING} 부비부비 이미지 불러오는 중...",
-        "mention_self": "왜 혼자 부비부비 하고 있어, {user}?\n여기 날 부비부비하면 되잖아..{e:VANILLABLUSH}",
+        "loading": "{LOADING} 부비부비 이미지 불러오는 중...",
+        "mention_self": "왜 혼자 부비부비 하고 있어, {user}?\n여기 날 부비부비하면 되잖아..{VANILLABLUSH}",
         "mention_purr": "\\*{user}와 부비부비를 즐기는 중*",
         "message": "{user} 가 {targets} 랑 부비부비하고 있어!",
         "no_mention": "최소한 부비부비할 상대 한명을 언급해줘!"
       },
       "holo": {
-        "loading": "{e:LOADING} 호로 이미지 불러오는 중...",
-        "title": "호로 {e:BLOBHOLO}"
+        "loading": "{LOADING} 호로 이미지 불러오는 중...",
+        "title": "호로 {BLOBHOLO}"
       },
       "hug": {
-        "loading": "{e:LOADING} 포옹 이미지 불러오는 중...",
-        "mention_self": "왜 혼자 껴안으려고 해, {user}?\n여기 날 껴안으면 되잖아.. {e:VANILLABLUSH}",
+        "loading": "{LOADING} 포옹 이미지 불러오는 중...",
+        "mention_self": "왜 혼자 껴안으려고 해, {user}?\n여기 날 껴안으면 되잖아.. {VANILLABLUSH}",
         "mention_purr": "\\*{user}에게 껴안기는 중*",
         "message": "{user} 가 {targets} 를 껴안고 있어!",
         "no_mention": "최소한 껴안을 상대 한명을 언급해줘!"
       },
       "kiss": {
-        "loading": "{e:LOADING} 키스 이미지 불러오는 중...",
+        "loading": "{LOADING} 키스 이미지 불러오는 중...",
         "mention_self": "어쩧게 혼자 키스하게, {user}? 거울이랑 하려고?",
         "mention_purr": "그, 그래..! 하지만 볼에다가만 해! \\*볼을 내미는 중*",
         "mention_snuggle": "안-돼-! 내 동생이랑은 안된다구.",
@@ -54,11 +54,11 @@
         "special_user": "\\*{user}와 키스하는 중*"
       },
       "kitsune": {
-        "loading": "{e:LOADING} 여우 이미지 불러오는중...",
-        "title": "여우 {e:SHIROTAILWAG}"
+        "loading": "{LOADING} 여우 이미지 불러오는중...",
+        "title": "여우 {SHIROTAILWAG}"
       },
       "lick": {
-        "loading": "{e:LOADING} 핥짝 이미지 불러오는중...",
+        "loading": "{LOADING} 핥짝 이미지 불러오는중...",
         "mention_self": "어.. 스스로 *어딜* 어떻게 핥으려는지는 묻지 않을께, {user}...",
         "mention_purr": "\\*뒷걸음질 치며* 그-그만! 핥으라고 한 적 없어!",
         "message": "{user} 가 {targets} 를 핥고 있어!",
@@ -66,29 +66,29 @@
         "special_user": "하, 하지만 자기... 여긴 모두가 보고 있다구. \\*부끄부끄*"
       },
       "neko": {
-        "loading": "{e:LOADING} 귀여운 고양이 소녀 이미지 불러오는 중...",
-        "title_gif": "고양이 {e:WAGTAIL}",
-        "title_img": "고양이 {e:NEKOWO}",
+        "loading": "{LOADING} 귀여운 고양이 소녀 이미지 불러오는 중...",
+        "title_gif": "고양이 {WAGTAIL}",
+        "title_img": "고양이 {NEKOWO}",
         "purr": "Hey! That is me! OwO",
         "snuggle": "That is my little sister! UwU"
       },
       "pat": {
-        "loading": "{e:LOADING} 쓰담쓰담 이미지 불러오는 중...",
+        "loading": "{LOADING} 쓰담쓰담 이미지 불러오는 중...",
         "mention_self": "어.. 혹시 쓰다듬을 고양이가 없는거야, {user}? \\*자신을 가리키며*",
         "mention_purr": "\\*야옹™*",
         "message": "{user} 가 {targets} 를 쓰담쓰담 해주고 있어!",
         "no_mention": "최소한 쓰다듬을 상대 한명을 언급해줘!"
       },
       "poke": {
-        "loading": "{e:LOADING} 푹푹 이미지 불러오는 중...",
+        "loading": "{LOADING} 푹푹 이미지 불러오는 중...",
         "mention_self": "심심한거야? 왜 스스로를 찌르려고 해, {user}?",
         "mention_purr": "야-야옹-! 푹푹 찌르지 마아-! >~<",
         "message": "{user} 가 {targets} 를 손가락으로 찌르고 있어!",
         "no_mention": "최소한 손가락으로 찌를 상대 한명을 언급해줘!"
       },
       "senko": {
-        "loading": "{e:LOADING} 센코 이미지 불러오는 중...",
-        "title": "센코씨 {e:SENKOTAILWAG}"
+        "loading": "{LOADING} 센코 이미지 불러오는 중...",
+        "title": "센코씨 {SENKOTAILWAG}"
       },
       "ship": {
         "mention_self": "자기 자신이랑 연애하려고, {user}? 세상에 좋은 사람은 널려있어!",
@@ -113,14 +113,14 @@
         "target_bot": "봇이랑 사랑에 빠지지 말라구, 이 바보야!"
       },
       "slap": {
-        "loading": "{e:LOADING} 찰싹 이미지 불러오는 중...",
+        "loading": "{LOADING} 찰싹 이미지 불러오는 중...",
         "mention_self": "안돼! 거기까지. 너 자신을 상처입히지 마, {user}.",
         "mention_purr": "으아아앙.. 왜 날 상처주는거야, {user}? T^T",
         "message": "{user} 가 {targets} 를 때려버렸어!",
         "no_mention": "적어도 한대 칠 상대 한명을 언급해줘!"
       },
       "tickle": {
-        "loading": "{e:LOADING} 간질간질 이미지 불러오는 중...",
+        "loading": "{LOADING} 간질간질 이미지 불러오는 중...",
         "mention_self": "그래.. 정말 간지럽혀지고 싶다면 말야.. \\*{user}를 간지럽힌다*",
         "mention_purr": "부-불공평해! 아하하하! \\*간지러움에 폭소하며*",
         "message": "{user} 가 {targets} 를 간지럽히고 있어!",
@@ -151,6 +151,20 @@
       },
       "welcome": {
         "current_msg": "현재 메시지:\n```\n{message}\n```\n\n아래의 것들을 같이 쓸 수도 있어.\n**사용가능한 표현**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
+        "embed": {
+          "channel": "채널",
+          "color_title": "색상",
+          "color_value": "```\n형태:  {type}\n값: {value}\n```",
+          "current_settings": "현재의 환영 메시지는 이거야. `{prefix}welcome [세부 명령어]`를 사용하면 바꿀 수 있어.",
+          "image_title": "이미지",
+          "image_value": "```\n배경: {background}\n아이콘:       {icon}\n```",
+          "message_title": "메시지",
+          "message_value": "```\n{message}\n```",
+          "no_channel": "`설정된 아이콘 없음`",
+          "preview": "미리보기",
+          "subcommands_title": "세부 명령어",
+          "subcommands_value": "```\n배경    set <background>\n        reset\n채널    set <#channel>\n        reset\n색상    set <hex:rrggbb|rgb:r,g,b>\n        reset\n아이콘  set <icon>\n        reset\n메시지  set <message>\n        reset```"
+        },
         "few_args": "무언가 적게 받았어!\n`{prefix}welcome` 을 사용하면 사용 가능한 모든 세부 명령어들을 확인할 수 있어!",
         "invalid_args": "유효하지 않은 값이야!\nRun `{prefix}welcome` 을 사용하면 가능한 모든 세부 명령어들을 확인할 수 있어!",
         "invalid_bg": "유효하지 않은 배경이야. `{background}`\n[위키]({wiki:bg}) 에 가능한 배경들이 소개되어 있어.",
@@ -183,7 +197,7 @@
         "embeds": {
           "boost_multiple": "{boost} 명이 부스트 중",
           "boost_single": "{boost} 명이 부스트 중",
-          "boost_tier": "부스트 레밸: {e:BOOST_LEVEL_{level}} (Level {level})",
+          "boost_tier": "부스트 레밸: {BOOST_LEVEL_{level}} (Level {level})",
           "created": "생성 일자",
           "level": "보안 수준",
           "levels": {
@@ -252,14 +266,14 @@
       },
       "ping": {
         "loading": [
-          "{e:TYPING} 디스코드와 떠드는 중...",
-          "{e:TYPING} 물고기를 잡는 중...",
-          "{e:TYPING} 핑퐁을 준비중...",
-          "{e:TYPING} [대충 로딩한다는 내용]",
-          "{e:TYPING} 야 디스코드! 전할게."
+          "{TYPING} 디스코드와 떠드는 중...",
+          "{TYPING} 물고기를 잡는 중...",
+          "{TYPING} 핑퐁을 준비중...",
+          "{TYPING} [대충 로딩한다는 내용]",
+          "{TYPING} 야 디스코드! 전할게."
         ],
-        "info": "{e:EDIT} 메시지 수정: `{edit_message}`\n{e:DISCORD} 디스코드 도착: `{discord}`",
-        "info_full": "{e:EDIT} 메시지 수정: `{edit_message}`\n{e:DISCORD} 디스코드 도착: `{discord}`\n{e:DOWNLOAD} RestAction: `{rest_action}`"
+        "info": "{EDIT} 메시지 수정: `{edit_message}`\n{DISCORD} 디스코드 도착: `{discord}`",
+        "info_full": "{EDIT} 메시지 수정: `{edit_message}`\n{DISCORD} 디스코드 도착: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
         "embed_basic": {
@@ -352,12 +366,12 @@
         }
       },
       "lewd": {
-        "loading": "{e:LOADING} 야한 고양이 불러오는 중...",
-        "title_gif": "야한 고양이 {e:WAGTAIL}",
-        "title_img": "야한 고양이 {e:NEKOWO}"
+        "loading": "{LOADING} 야한 고양이 불러오는 중...",
+        "title_gif": "야한 고양이 {WAGTAIL}",
+        "title_img": "야한 고양이 {NEKOWO}"
       },
       "solo": {
-        "loading": "{e:LOADING} 야한 여자아이 불러오는 중...",
+        "loading": "{LOADING} 야한 여자아이 불러오는 중...",
         "title": "야한 여자"
       },
       "threesome": {
