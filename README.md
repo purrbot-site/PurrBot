@@ -52,27 +52,31 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 ## Fun
 **Permission**: `None`
 
-| Command: | Arguments:          | Description:                                               |
-| -------- | ------------------- | ---------------------------------------------------------- |
-| Cuddle   | `<@user ...>`       | Cuddles the mentioned user(s).                             |
-| Holo     |                     | Gives an image of Holo from Spice and wolf.                |
-| Hug      | `<@user ...>`       | Hugs the mentioned user(s).                                |
-| Kiss     | `<@user ...>`       | Kisses the mentioned user(s).                              |
-| Kitsune  |                     | Shows a image of a kitsune (foxgirl)                       |
-| Lick     | `<@user ...>`       | Licks the mentioned user(s).                               |
-| Neko     |                     | Shows a image of a neko (catgirl).                         |
-|          | `[--gif]`           | Shows a gif of a neko (catgirl).                           |
-| Pat      | `<@user ...>`       | Pats the mentioned user(s).                                |
-| Poke     | `<@user ...>`       | Pokes the mentioned user(s).                               |
-| Ship     | `<@user>` `[@user]` | Ships you (or another user) with someone.                  |
-| Slap     | `<@user ...>`       | Slaps the mentioned user(s).                               |
-| Tickle   | `<@user ...>`       | Tickles the mentioned user(s).                             |
+| Command: | Arguments:          | Description:                                |
+| -------- | ------------------- | ------------------------------------------- |
+| Cuddle   | `<@user ...>`       | Cuddles the mentioned user(s).              |
+| Holo     |                     | Gives an image of Holo from Spice and wolf. |
+| Hug      | `<@user ...>`       | Hugs the mentioned user(s).                 |
+| Kiss     | `<@user ...>`       | Kisses the mentioned user(s).               |
+| Kitsune  |                     | Shows a image of a kitsune (foxgirl)        |
+| Lick     | `<@user ...>`       | Licks the mentioned user(s).                |
+| Neko     |                     | Shows a image of a neko (catgirl).          |
+|          | `[--gif]`           | Shows a gif of a neko (catgirl).            |
+| Pat      | `<@user ...>`       | Pats the mentioned user(s).                 |
+| Poke     | `<@user ...>`       | Pokes the mentioned user(s).                |
+| Senko    |                     | Shows a image of Senko-San.                 |
+| Ship     | `<@user>` `[@user]` | Ships you (or another user) with someone.   |
+| Slap     | `<@user ...>`       | Slaps the mentioned user(s).                |
+| Tickle   | `<@user ...>`       | Tickles the mentioned user(s).              |
 
 ## Guild
 **Permission**: `Manage Server`
 
 | Command: | Arguments:                   | Description:                                                      |
 | -------- | ---------------------------- | ----------------------------------------------------------------- |
+| Language |                              | Shows the currently used and all available languages.             |
+|          | `set <language>`             | Sets the language for the Guild to a supported one.               |
+|          | `reset`                      | Resets the language to English (en).                              |
 | Prefix   | `set <prefix>`               | Sets the provided prefix for the Guild.                           |
 |          | `reset`                      | Resets the prefix to the default one.                             |
 | Welcome  |                              | Shows the current welcome-settings.                               |
@@ -128,23 +132,19 @@ The bot has two invite-links: A full invite and a basic invite.
 ## Full invite
 The link for the full invite gives \*Purr* all permissions, to work properly and without any issues.
 The permissions include:
-* Managing messages: Will be used to delete certain commands of users like `.invite` or `.info`
-* Adding reactions: Nothing really special. Just makes \*Purr*'s responses a bit different.
-* Attach files: Used for the welcome-channel (`.welcome`), to create a image for the joined user.
-* Use of external emojis: For using external (custom) emojis.
-* All permissions of the basic invite.
+- Managing messages: Will be used to delete certain commands of users like `.invite` or `.info`
+- Adding reactions: Nothing really special. Just makes \*Purr*'s responses a bit different.
+- Attach files: Used for the welcome-channel (`.welcome`), to create a image for the joined user.
+- Use of external emojis: For using external (custom) emojis.
+- All permissions of the basic invite.
 
 ## Basic invite
 The basic invite will only give the most necessary permissions for \*Purr* to work correctly.
 This permissions are:
-* See messages: Let \*Purr* see all channels, that don't have channel-specific permissions.
-* Send messages: Let her send messages.
-* Embed Links: \*Purr* won't work without this permission!
-
-# Voting
-\*Purr* has a integrated Vote listener that gives you a reward (currently just a role) on the [Discord].  
-Just make sure to be on the guild and vote for the bot, to receive the special role.  
-Future rewards may be added.
+- See messages: Let \*Purr* see all channels, that don't have channel-specific permissions.
+- See message history: Let \*Purr* see the message history of a channel.
+- Send messages: Let her send messages.
+- Embed Links: \*Purr* won't work without this permission!
 
 # Botlists
 \*Purr* can be found on different Botlist sites.  
