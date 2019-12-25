@@ -28,8 +28,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
-import java.text.MessageFormat;
-
 @CommandDescription(
         name = "Prefix",
         description = "Set or reset a prefix",
@@ -51,27 +49,27 @@ public class CmdPrefix implements Command{
     }
 
     private void setPrefix(Message msg, String prefix){
-
-        MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .setColor(0x00FF00)
-                .setDescription(String.format(
-                        "Prefix set to `%s`",
-                        prefix
-                ))
-                .build();
-
         bot.setPrefix(msg.getGuild().getId(), prefix);
+
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
+                .setColor(0x00FF00)
+                .setDescription(
+                        bot.getMsg(msg.getGuild().getId(), "purr.guild.prefix.set")
+                )
+                .build();
 
         msg.getTextChannel().sendMessage(embed).queue();
     }
 
     private void resetPrefix(Message msg){
-        MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .setColor(0x00FF00)
-                .setDescription("Prefix was changed back to `.`")
-                .build();
-
         bot.setPrefix(msg.getGuild().getId(), ".");
+        
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
+                .setColor(0x00FF00)
+                .setDescription(
+                        bot.getMsg(msg.getGuild().getId(), "purr.guild.prefix.reset")
+                )
+                .build();
 
         msg.getTextChannel().sendMessage(embed).queue();
     }
@@ -80,17 +78,13 @@ public class CmdPrefix implements Command{
     public void execute(Message msg, String s){
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
-        String[] args = s.split(" ");
+        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.length < 1){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                    "You need to provide arguments!\n" +
-                    "Usage: `%sprefix <set <prefix>|reset>`",
-                    bot.getPrefix(guild.getId())
-            ));
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.prefix.few_args");
             return;
         }
 
@@ -99,16 +93,12 @@ public class CmdPrefix implements Command{
         }else
         if(args[0].equalsIgnoreCase("set")){
             if(args.length == 1){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "You need to provide a prefix!");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.prefix.no_prefix");
             }else{
                 setPrefix(msg, args[1].toLowerCase());
             }
         }else{
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), MessageFormat.format(
-                    "You need to provide valid arguments!\n" +
-                    "Usage: `{0}prefix <set <prefix>|reset>`",
-                    bot.getPrefix(guild.getId())
-            ));
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.prefix.invalid_args");
         }
     }
 }

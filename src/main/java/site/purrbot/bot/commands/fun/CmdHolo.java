@@ -28,7 +28,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 @CommandDescription(
         name = "Holo",
@@ -59,21 +58,16 @@ public class CmdHolo implements Command{
             msg.delete().queue();
 
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
             return;
         }
 
-        MessageEmbed holo = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .setTitle(String.format(
-                        "Holo %s",
-                        Emotes.BLOBHOLO.getEmote()
-                ), link)
+        MessageEmbed holo = bot.getEmbedUtil().getEmbed(msg.getAuthor(), tc.getGuild())
+                .setTitle(bot.getMsg(msg.getGuild().getId(), "purr.fun.holo.title"), link)
                 .setImage(link)
                 .build();
 
-        tc.sendMessage(String.format(
-                "%s Getting a cute/hot image of Holo...",
-                Emotes.LOADING.getEmote()
-        )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(holo).queue());
+        tc.sendMessage(bot.getMsg(msg.getGuild().getId(), "purr.fun.holo.loading"))
+                .queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(holo).queue());
     }
 }

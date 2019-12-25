@@ -20,6 +20,7 @@ package site.purrbot.bot.commands;
 
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.fun.*;
+import site.purrbot.bot.commands.guild.CmdLanguage;
 import site.purrbot.bot.commands.guild.CmdPrefix;
 import site.purrbot.bot.commands.guild.CmdWelcome;
 import site.purrbot.bot.commands.info.*;
@@ -55,6 +56,7 @@ public class CommandLoader {
                 new CmdTickle(bot),
 
                 // Guild
+                new CmdLanguage(bot),
                 new CmdPrefix(bot),
                 new CmdWelcome(bot),
 

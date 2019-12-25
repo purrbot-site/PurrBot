@@ -27,7 +27,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 @CommandDescription(
         name = "Kitsune",
@@ -57,21 +56,17 @@ public class CmdKitsune implements Command{
             msg.delete().queue();
 
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
             return;
         }
 
-        EmbedBuilder kitsune = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .setTitle(String.format(
-                        "Kitsune %s",
-                        Emotes.SHIROTAILWAG.getEmote()
-                ), link)
+        EmbedBuilder kitsune = bot.getEmbedUtil().getEmbed(msg.getAuthor(), tc.getGuild())
+                .setTitle(bot.getMsg(tc.getGuild().getId(), "purr.fun.kitsune.title"), link)
                 .setImage(link);
 
-        tc.sendMessage(String.format(
-                "%s Getting a cute kitsune...",
-                Emotes.LOADING.getEmote()
-        )).queue(message -> message.editMessage(
+        tc.sendMessage(
+                bot.getMsg(tc.getGuild().getId(), "purr.fun.kitsune.loading")
+        ).queue(message -> message.editMessage(
                 EmbedBuilder.ZERO_WIDTH_SPACE
         ).embed(kitsune.build()).queue());
     }

@@ -29,7 +29,6 @@ import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +55,7 @@ public class CmdLick implements Command{
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to lick.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.lick.no_mention");
             return;
         }
 
@@ -69,62 +68,51 @@ public class CmdLick implements Command{
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
-                tc.sendMessage(String.format(
-                        "\\*blushes* W-why do you lick me %s?",
-                        member.getAsMention()
-                )).queue();
-                msg.addReaction("\uD83D\uDE33").queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.lick.mention_snuggle", member.getAsMention())
+                ).queue();
             }else{
                 if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
-                    tc.sendMessage("B-but Sweetie... Not in public \\*blushes*").queue();
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.fun.lick.special_user")
+                    ).queue();
                 }else {
-                    tc.sendMessage(String.format(
-                            "H-hey! I never allowed you to lick me %s!",
-                            member.getAsMention()
-                    )).queue();
-                    msg.addReaction("\uD83D\uDE33").queue();
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.fun.lick.mention_purr")
+                    ).queue();
                 }
             }
+            msg.addReaction("\uD83D\uDE33").queue();
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(String.format(
-                    "I won't even ask how and *where* you lick yourself %s...",
-                    member.getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.lick.mention_self", member.getAsMention())
+            ).queue();
         }
 
-        String lickedMembers = members.stream()
+        String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 
-        if(lickedMembers.isEmpty())
+        if(targets.isEmpty())
             return;
     
         String link = bot.getHttpUtil().getImage(API.GIF_LICK);
 
-        tc.sendMessage(String.format(
-                "%s Getting a lick-gif...",
-                Emotes.LOADING.getEmote()
-        )).queue(message -> {
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.lick.loading")
+        ).queue(message -> {
             if(link == null){
-                message.editMessage(String.format(
-                        "%s licks you %s",
-                        MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(
-                                bot.getMessageUtil().replaceLast(lickedMembers, ",", " and")
-                        )
+                message.editMessage(MarkdownSanitizer.escape(
+                        bot.getMsg(guild.getId(), "purr.fun.lick.message", member.getEffectiveName(), targets)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                                "%s licks you %s",
-                                MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(
-                                        bot.getMessageUtil().replaceLast(lickedMembers, ",", " and")
-                                )
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(MarkdownSanitizer.escape(
+                                bot.getMsg(guild.getId(), "purr.fun.lick.message", member.getEffectiveName(), targets)
                         )).setImage(link).build()).queue();
             }
         });

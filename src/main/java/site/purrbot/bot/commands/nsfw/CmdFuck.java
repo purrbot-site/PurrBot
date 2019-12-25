@@ -108,21 +108,19 @@ public class CmdFuck implements Command{
                             bot.getMessageUtil().getRandomAcceptFuckMsg(),
                             author.getAsMention()
                     )).queue();
-                    return;
                 }else{
                     tc.sendMessage(String.format(
                             bot.getMessageUtil().getRandomDenyFuckMsg(),
                             author.getAsMention()
                     )).queue();
-                    return;
                 }
             }else{
                 tc.sendMessage(String.format(
                         "\\*Slaps %s* Nononononono! Not with me!",
                         msg.getAuthor().getAsMention()
                 )).queue();
-                return;
             }
+            return;
         }
 
         if(target.equals(author)){

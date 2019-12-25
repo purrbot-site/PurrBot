@@ -26,7 +26,6 @@ import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 
 import java.util.List;
@@ -54,7 +53,7 @@ public class CmdKiss implements Command{
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to kiss.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.kiss.no_mention");
             return;
         }
 
@@ -76,32 +75,27 @@ public class CmdKiss implements Command{
 
         if(bot.isBeta()){
             if(members.contains(guild.getSelfMember())){
-                tc.sendMessage(String.format(
-                        "Wha-? Okay. B-but only on my cheeck %s. \\*Lets you kiss her cheek*",
-                        member.getAsMention()
-                )).queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.kiss.mention_snuggle", member.getAsMention())
+                ).queue();
             }else
             if(purr != null && members.contains(purr)){
                 if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
-                    tc.sendMessage(String.format(
-                            "W-why do you kiss my sister through my help %s? G-go and kiss her yourself... %s",
-                            member.getAsMention(),
-                            Emotes.VANILLABLUSH.getEmote()
-                    )).queue();
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "snuggle.fun.kiss.special_user", member.getAsMention())
+                    ).queue();
                 }else{
-                    tc.sendMessage(String.format(
-                            "No! N-no kissing of my sister through my help %s!",
-                            member.getAsMention()
-                    )).queue();
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "snuggle.fun.kiss.mention_purr", member.getAsMention())
+                    ).queue();
                 }
             }
         }else{
             if(members.contains(guild.getSelfMember())){
-                if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
-                    tc.sendMessage(String.format(
-                            "\\*Enjoys the kiss from %s*",
-                            member.getAsMention()
-                    )).queue(message -> {
+                if(bot.getPermUtil().isSpecial(member.getId())){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.fun.kiss.special_user", member.getAsMention())
+                    ).queue(message -> {
                         MessageEmbed kiss = bot.getEmbedUtil().getEmbed()
                                 .setImage(bot.getMessageUtil().getRandomKissImg())
                                 .build();
@@ -110,28 +104,25 @@ public class CmdKiss implements Command{
                         msg.addReaction("\uD83D\uDC8B").queue();
                     });
                 }else{
-                    tc.sendMessage(String.format(
-                            "Okay. But I only allow you to kiss my cheek %s. \\*Lets you kiss her cheek*",
-                            member.getAsMention()
-                    )).queue();
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.fun.kiss.mention_purr")
+                    ).queue();
                 }
             }else
             if(snuggle != null && members.contains(snuggle)){
-                tc.sendMessage(String.format(
-                        "No kissing of my little sister with my help %s!",
-                        member.getAsMention()
-                )).queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.kiss.mention_snuggle")
+                ).queue();
             }
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(String.format(
-                    "I have no idea, how you can actually kiss yourself %s... With a mirror?",
-                    member.getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.kiss.mention_self", member.getAsMention())
+            ).queue();
         }
 
-        String kissedMembers = members.stream()
+        String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
                 .filter(mem -> !mem.equals(purr))
@@ -141,29 +132,20 @@ public class CmdKiss implements Command{
 
         String link = bot.getHttpUtil().getImage(API.GIF_KISS);
 
-        if(kissedMembers.isEmpty())
+        if(targets.isEmpty())
             return;
 
-        tc.sendMessage(String.format(
-                "%s Getting a kiss-gif...",
-                Emotes.LOADING.getEmote()
-        )).queue(message -> {
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.kiss.loading")
+        ).queue(message -> {
             if(link == null){
-                message.editMessage(String.format(
-                        "%s kisses you %s",
-                        MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(
-                                bot.getMessageUtil().replaceLast(kissedMembers, ",", " and")
-                        )
+                message.editMessage(MarkdownSanitizer.escape(
+                        bot.getMsg(guild.getId(), "purr.fun.kiss.message", member.getEffectiveName(), targets)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                                "%s kisses you %s",
-                                MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(
-                                        bot.getMessageUtil().replaceLast(kissedMembers, ",", " and")
-                                )
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(MarkdownSanitizer.escape(
+                                bot.getMsg(guild.getId(), "purr.fun.kiss.message", member.getEffectiveName(), targets)
                         )).setImage(link).build()).queue();
             }
         });

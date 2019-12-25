@@ -22,7 +22,9 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -53,72 +55,62 @@ public class CmdNeko implements Command{
     @Override
     public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
+        Guild guild = msg.getGuild();
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
+        EmbedBuilder neko = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild);
+        String link;
+        
         if(args.toLowerCase().contains("--gif")){
-            String link = bot.getHttpUtil().getImage(API.GIF_NEKO);
+            link = bot.getHttpUtil().getImage(API.GIF_NEKO);
             if(link == null){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
                 return;
             }
-            EmbedBuilder nekogif = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                    .setTitle(String.format(
-                            "Neko %s",
-                            Emotes.WAGTAIL.getEmote()
-                    ), link)
+            
+            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_gif"), link)
                     .setImage(link);
-
-            tc.sendMessage(String.format(
-                    "%s Getting a cute neko-gif...",
-                    Emotes.LOADING.getEmote()
-            )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(nekogif.build()).queue());
-            return;
-        }
-
-        String link = bot.getHttpUtil().getImage(API.IMG_NEKO);
-
-        if(link == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
-            return;
-        }
-
-        tc.sendMessage(String.format(
-                "%s Getting a cute neko...",
-                Emotes.LOADING.getEmote()
-        )).queue(message -> {
-            EmbedBuilder neko = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                    .setTitle(String.format(
-                            "Neko %s",
-                            Emotes.NEKOWO.getEmote()
-                    ), link)
+        }else{
+            link = bot.getHttpUtil().getImage(API.IMG_NEKO);
+            if(link == null){
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
+                return;
+            }
+            
+            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_img"))
                     .setImage(link);
-
+        }
+        
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.neko.loading")
+        ).queue(message -> {
             if(link.equals("https://purrbot.site/img/sfw/neko/img/neko_076.jpg")){
                 if(bot.isBeta()){
-                    neko.setDescription("That is me! >w<");
-                    message.addReaction("❤").queue();
+                    neko.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.snuggle"));
+                    
+                    message.addReaction("\u2764").queue();
                 }else{
-                    neko.setDescription("That is my little sister!");
-
-                    if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
+                    neko.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.snuggle"));
+                    
+                    if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI)) 
                         message.addReaction(Emotes.SNUGGLE.getNameAndId()).queue();
                 }
             }else
             if(link.equals("https://purrbot.site/img/sfw/neko/img/neko_136.jpg")){
                 if(bot.isBeta()){
-                    neko.setDescription("That is my big sister!");
-
+                    neko.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.purr"));
+                    
                     if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
                         message.addReaction(Emotes.PURR.getNameAndId()).queue();
                 }else{
-                    neko.setDescription("T-that is me! OwO");
-                    message.addReaction("❤").queue();
+                    neko.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.purr"));
+                    
+                    message.addReaction("\u2764").queue();
                 }
             }
-
-            //  Editing the message to add the image ("should" prevent issues with empty embeds)
+            
             message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(neko.build()).queue();
         });
     }

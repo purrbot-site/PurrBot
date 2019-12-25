@@ -29,7 +29,6 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Links;
 
-import java.text.MessageFormat;
 import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
@@ -69,7 +68,7 @@ public class CmdInvite implements Command{
             return;
         }
         
-        EmbedBuilder invite = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder invite = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                 .setAuthor(msg.getJDA().getSelfUser().getName(),
                         Links.WEBSITE.getUrl(),
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()

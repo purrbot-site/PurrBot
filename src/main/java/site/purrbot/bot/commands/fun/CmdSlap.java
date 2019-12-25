@@ -21,12 +21,14 @@ package site.purrbot.bot.commands.fun;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,7 +55,7 @@ public class CmdSlap implements Command{
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to slap.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.slap.no_mention");
             return;
         }
 
@@ -66,55 +68,46 @@ public class CmdSlap implements Command{
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
-                tc.sendMessage(String.format(
-                        "\\*runs away from %s and hides*",
-                        member.getAsMention()
-                )).queue();
-            }else {
-                tc.sendMessage("Nuuuu... Why hurting me? T^T").queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.slap.mention_snuggle", member.getAsMention())
+                ).queue();
+            }else{
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.slap.mention_purr", member.getAsMention())
+                ).queue();
             }
             msg.addReaction("\uD83D\uDE2D").queue();
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(String.format(
-                    "\\*Holds arm of %s* NO! You won't hurt yourself.",
-                    member.getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.slap.mention_self")
+            ).queue();
         }
 
-        String slapedMembers = members.stream()
+        String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 
-        if(slapedMembers.isEmpty())
+        if(targets.isEmpty())
             return;
     
         String link = bot.getHttpUtil().getImage(API.GIF_SLAP);
 
-        tc.sendMessage(String.format(
-                "%s Getting a slap-gif...",
-                Emotes.LOADING.getEmote()
-        )).queue(message -> {
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.slap.loading")
+        ).queue(message -> {
             if(link == null){
-                message.editMessage(String.format(
-                        "%s slaps you %s",
-                        MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(
-                                bot.getMessageUtil().replaceLast(slapedMembers, ",", " and")
-                        )
+                message.editMessage(MarkdownSanitizer.escape(
+                        bot.getMsg(guild.getId(), "purr.fun.slap.message", member.getEffectiveName(), targets)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                                "%s slaps you %s",
-                                MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(
-                                        bot.getMessageUtil().replaceLast(slapedMembers, ",", " and")
-                                )
-                        )).setImage(link).build()).queue();
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(
+                                bot.getMsg(guild.getId(), "purr.fun.slap.message", member.getEffectiveName(), targets)
+                        ).setImage(link).build()).queue();
             }
         });
     }

@@ -20,12 +20,9 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDAInfo;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
@@ -54,7 +51,81 @@ public class CmdInfo implements Command{
     public CmdInfo(PurrBot bot){
         this.bot = bot;
     }
-
+    
+    private MessageEmbed getEmbed(User user, Guild guild){
+        if(bot.isBeta()){
+            return bot.getEmbedUtil().getEmbed(user, guild)
+                    .setAuthor(guild.getJDA().getSelfUser().getName(),
+                            Links.WEBSITE.getUrl(),
+                            guild.getJDA().getSelfUser().getEffectiveAvatarUrl()
+                    )
+                    .setThumbnail(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                    .addField(
+                            bot.getMsg(guild.getId(), "snuggle.info.info.embed.about_title"),
+                            bot.getMsg(guild.getId(), "snuggle.info.info.embed.about_value")
+                                    .replace("{name}", guild.getSelfMember().getAsMention()),
+                            false
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.commands_title"),
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.commands_value"),
+                            false
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_title"),
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_value")
+                                    .replace("{bot_version}", "BOT_VERSION")
+                                    .replace("{jda_version}", JDAInfo.VERSION)
+                                    .replace("{link}", JDAInfo.GITHUB),
+                            false
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.links_title"),
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.links_value"),
+                            false
+                    )
+                    .build();
+        }else{
+            return bot.getEmbedUtil().getEmbed(user, guild)
+                    .setAuthor(guild.getJDA().getSelfUser().getName(),
+                            Links.WEBSITE.getUrl(),
+                            guild.getJDA().getSelfUser().getEffectiveAvatarUrl()
+                    )
+                    .setThumbnail(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.about_title"),
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.about_value")
+                                    .replace("{name}", guild.getSelfMember().getAsMention())
+                                    .replace("{id}", IDs.ANDRE_601.getId()),
+                            false
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.commands_title"),
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.commands_value"),
+                            false
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_title"),
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_value")
+                                    .replace("{bot_version}", "BOT_VERSION")
+                                    .replace("{jda_version}", JDAInfo.VERSION)
+                                    .replace("{link}", JDAInfo.GITHUB),
+                            false
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_list_title"),
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_list_value"),
+                            false
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.links_title"),
+                            bot.getMsg(guild.getId(), "purr.info.info.embed.links_value"),
+                            false
+                    )
+                    .build();
+        }
+    }
+    
     @Override
     public void execute(Message msg, String args){
         Guild guild = msg.getGuild();
@@ -63,72 +134,22 @@ public class CmdInfo implements Command{
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        EmbedBuilder info = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .setAuthor(msg.getJDA().getSelfUser().getName(),
-                        Links.WEBSITE.getUrl(),
-                        msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
-                )
-                .setThumbnail(msg.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .addField("About me", String.format(
-                        "Oh hi there!\n" +
-                        "I'm %s. A Bot for the ~Nya Discord.\n" +
-                        "I was made by Andre_601 (<@%s>) with the help of JDA " +
-                        "and a lot of free time. ;)\n",
-                        guild.getSelfMember().getAsMention(),
-                        IDs.ANDRE_601.getId()
-                ), false)
-                .addField("Commands", String.format(
-                        "Use `%shelp` in this Discord for a list of commands.",
-                        bot.getPrefix(guild.getId())
-                ), false)
-                .addField("Bot Info", String.format(
-                        "Bot version: `BOT_VERSION`\n" +
-                        "Library: [`JDA %s`](%s)",
-                        JDAInfo.VERSION,
-                        JDAInfo.GITHUB
-                ), false)
-                .addField("Bot Lists", String.format(
-                        "[`Botlist.space`](%s)\n" +
-                        "[`Discordextremelist.xyz`](%s)\n" +
-                        "[`Discord.bots.gg`](%s)\n" +
-                        "[`LBots.org`](%s)\n" +
-                        "[`Top.gg`](%s)",
-                        Links.BOTLIST_SPACE.getUrl(),
-                        Links.DISCORDEXTREMELIST_XYZ.getUrl(),
-                        Links.DISCORD_BOTS_GG.getUrl(),
-                        Links.LBOTS_ORG.getUrl(),
-                        Links.TOP_GG.getUrl()
-                ), false)
-                .addField("Other links", String.format(
-                        "[`GitHub`](%s)\n" +
-                        "[`Patreon`](%s)\n" +
-                        "[`Support Discord`](%s)\n" +
-                        "[`Twitter`](%s)\n" +
-                        "[`Website`](%s)\n" +
-                        "[`Wiki`](%s)\n",
-                        Links.GITHUB.getUrl(),
-                        Links.PATREON.getUrl(),
-                        Links.DISCORD.getUrl(),
-                        Links.TWITTER.getUrl(),
-                        Links.WEBSITE.getUrl(),
-                        Links.WIKI.getUrl()
-                ), false);
-
         if(args.toLowerCase().contains("--dm")){
-            msg.getAuthor().openPrivateChannel().queue(
-                    pm -> pm.sendMessage(info.build()).queue(message ->
-                            tc.sendMessage(String.format(
-                                    "Check you DMs %s!",
-                                    msg.getAuthor().getAsMention()
-                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
-                    ), throwable -> tc.sendMessage(String.format(
-                            "I can't send you a DM %s!",
-                            msg.getAuthor().getAsMention()
-                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
-            );
+            msg.getAuthor().openPrivateChannel().queue(pm -> {
+                String mention = msg.getAuthor().getAsMention();
+                String prefix = bot.isBeta() ? "snuggle" : "purr";
+                pm.sendMessage(getEmbed(msg.getAuthor(), guild)).queue(
+                        message -> tc.sendMessage(
+                                bot.getMsg(guild.getId(), prefix + ".info.info.dm_success", mention)
+                        ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)),
+                        throwable -> tc.sendMessage(
+                                bot.getMsg(guild.getId(), prefix + ".info.info.dm_failure", mention)
+                        ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
+                );
+            });
             return;
         }
 
-        tc.sendMessage(info.build()).queue();
+        tc.sendMessage(getEmbed(msg.getAuthor(), guild)).queue();
     }
 }

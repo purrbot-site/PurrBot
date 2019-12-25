@@ -21,14 +21,15 @@ package site.purrbot.bot.commands.info;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.text.DecimalFormat;
-import java.text.MessageFormat;
 
 @CommandDescription(
         name = "Level",
@@ -66,7 +67,7 @@ public class CmdLevel implements Command{
         String imageName = level >= 30 ? String.format("progress_%s.png", id) : String.format("progress_%s.gif", id);
         File image = bot.getLevelManager().getImage(level);
 
-        EmbedBuilder levelEmbed = bot.getEmbedUtil().getEmbed(requester)
+        EmbedBuilder levelEmbed = bot.getEmbedUtil().getEmbed(requester, textChannel.getGuild())
                 .setDescription(String.format(
                         "Level-Info about %s",
                         member.getEffectiveName()

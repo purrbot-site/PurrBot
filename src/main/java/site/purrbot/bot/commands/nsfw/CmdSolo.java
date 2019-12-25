@@ -61,7 +61,7 @@ public class CmdSolo implements Command{
             return;
         }
 
-        EmbedBuilder girl = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder girl = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                 .setTitle("Solo girl", link)
                 .setImage(link);
 

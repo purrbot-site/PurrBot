@@ -42,7 +42,9 @@ import org.discordbots.api.client.entity.Vote;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
+import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
+import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.listener.ConnectionListener;
 import site.purrbot.bot.listener.GuildListener;
 import site.purrbot.bot.listener.ReadyListener;
@@ -128,10 +130,13 @@ public class PurrBot {
     
         Framework.builder()
                 .startup(new RegisterableData(StaticLangHack.class))
+                .main(this)
+                .pckg("site.purrbot.bot")
                 .file(true, "de", "/lang/de.json", "./lang/de.json", LangUtils.lang("de"))
                 .file(true, "en", "/lang/en.json", "./lang/en.json", LangUtils.lang("en"))
                 .file(true, "ko", "/lang/ko.json", "./lang/ko.json", LangUtils.lang("ko"))
-                .build();
+                .build()
+                .init();
         
         getgFile().createOrLoad("config", "/config.json", "./config.json");
         getgFile().createOrLoad("random", "/random.json", "./random.json");
@@ -143,7 +148,7 @@ public class PurrBot {
         permUtil      = new PermUtil();
         messageUtil   = new MessageUtil(this);
         rewardHandler = new RewardHandler(this);
-        embedUtil     = new EmbedUtil();
+        embedUtil     = new EmbedUtil(this);
         httpUtil      = new HttpUtil();
         webhookUtil   = new WebhookUtil();
         imageUtil     = new ImageUtil(this);
@@ -392,7 +397,46 @@ public class PurrBot {
     public List<String> getWelcomeIcon(){
         return getgFile().getStringlist("random", "welcome_icon");
     }
-
+    
+    public String getMsg(String id, String path, String user, String targets){
+        return getMsg(id, path, user)
+                .replace("{targets}", getMessageUtil().replaceLast(targets, ",", " " + getMsg(id, "misc.and")));
+    }
+    public String getMsg(String id, String path, String user){
+        return getMsg(id, path).replace("{user}", user);
+    }
+    
+    public String getMsg(String id, String path){
+        return LangUtils.get(getLanguage(id), path)
+                // Emotes
+                .replace("{BLOBHOLO}", Emotes.BLOBHOLO.getEmote())
+                .replace("{LOADING}", Emotes.LOADING.getEmote())
+                .replace("{NEKOWO}", Emotes.LOADING.getEmote())
+                .replace("{SENKOTAILWAG}", Emotes.SENKOTAILWAG.getEmote())
+                .replace("{SHIROTAILWAG}", Emotes.SHIROTAILWAG.getEmote())
+                .replace("{TYPING}", Emotes.TYPING.getEmote())
+                .replace("{VANILLABLUSH}", Emotes.VANILLABLUSH.getEmote())
+                .replace("{WAGTAIL}", Emotes.WAGTAIL.getEmote())
+                // Prefix
+                .replace("{prefix}", getPrefix(id))
+                // Wiki pages
+                .replace("{wiki_bg}", Links.WIKI.getUrl() + "/Welcome-images#backgrounds")
+                .replace("{wiki_icon}", Links.WIKI.getUrl() + "/Welcome-images#icons")
+                //Bot lists
+                .replace("{botlist}", Links.BOTLIST_SPACE.getUrl())
+                .replace("{del}", Links.DISCORDEXTREMELIST_XYZ.getUrl())
+                .replace("{db}", Links.DISCORD_BOTS_GG.getUrl())
+                .replace("{lbots}", Links.LBOTS_ORG.getUrl())
+                .replace("{top}", Links.TOP_GG.getUrl())
+                // Links
+                .replace("{github}", Links.GITHUB.getUrl())
+                .replace("{patreon}", Links.PATREON.getUrl())
+                .replace("{support}", Links.DISCORD.getUrl())
+                .replace("{twitter}", Links.TWITTER.getUrl())
+                .replace("{website}", Links.WEBSITE.getUrl())
+                .replace("{wiki}", Links.WIKI.getUrl());
+    }
+    
     private void startUpdate(){
         scheduler.scheduleAtFixedRate(() -> {
 

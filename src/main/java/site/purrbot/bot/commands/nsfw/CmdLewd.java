@@ -65,7 +65,7 @@ public class CmdLewd implements Command{
                 return;
             }
 
-            EmbedBuilder lewdgif = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+            EmbedBuilder lewdgif = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                     .setTitle(String.format(
                             "Lewd Neko %s",
                             Emotes.WAGTAIL.getEmote()
@@ -85,7 +85,7 @@ public class CmdLewd implements Command{
             return;
         }
 
-        EmbedBuilder lewd = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder lewd = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                 .setTitle(String.format(
                         "Lewd Neko %s",
                         Emotes.NEKOWO.getEmote()

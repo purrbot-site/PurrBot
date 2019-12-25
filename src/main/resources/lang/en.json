@@ -17,6 +17,7 @@
       "You can only see those naughty things in NSFW channels {user}.",
       "Everything has its place. And this command belongs in a NSFW-channel {user}."
     ],
+    "title": "Error",
     "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {VANILLABLUSH}\nPlease report this on the Discord, or on GitHub!"
   },
   "misc": {
@@ -187,20 +188,22 @@
           "id": "ID",
           "image": "Image",
           "link": "[`Link`]({link})",
-          "message": "Message"
+          "message": "Message",
+          "name": "Name"
         },
         "no_args": "Please provide either `:emote:` or `--search` after the command.",
         "not_found": "Could not find any emotes in the past 100 messages.",
         "unknown_guild": "Unknown Guild"
       },
       "guild": {
-        "embeds": {
+        "embed": {
           "boost_multiple": "{boost} boosts",
-          "boost_single": "{boost} boost",
-          "boost_tier": "BoostTier: {BOOST_LEVEL_{level}} (Level {level})",
+          "boost_single": "1 boost",
+          "boost_tier": "Boost Tier: {BOOST_TIER} (Level {level})",
           "created": "Created",
           "level": "Level",
           "levels": {
+            "unknown": "Unknown level",
             "none": "No level",
             "low": "Low",
             "medium": "Medium",

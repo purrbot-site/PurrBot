@@ -21,12 +21,14 @@ package site.purrbot.bot.commands.fun;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,7 +54,7 @@ public class CmdTickle implements Command{
     public void execute(Message msg, String s) {
         TextChannel tc = msg.getTextChannel();
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to tickle.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.tickle.no_mention");
             return;
         }
 
@@ -65,52 +67,45 @@ public class CmdTickle implements Command{
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
-                tc.sendMessage("\\*can't hold back and starts laughing*").queue();
-                msg.addReaction("\uD83D\uDE02").queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.tickle.mention_snuggle")
+                ).queue();
             }else {
-                tc.sendMessage("N-no... Please I... I c-can't \\*starts laughing*").queue();
-                msg.addReaction("\uD83D\uDE02").queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.tickle.mention_purr")
+                ).queue();
             }
+            msg.addReaction("\uD83D\uDE02").queue();
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(String.format(
-                    "Alright... If you really want to tickle yourself... \\*tickles %s*",
-                    member.getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.tickle.mention_self", member.getAsMention())
+            ).queue();
         }
         
-        String tickledMembers = members.stream()
+        String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 
-        if(tickledMembers.isEmpty())
+        if(targets.isEmpty())
             return;
     
         String link = bot.getHttpUtil().getImage(API.GIF_TICKLE);
 
-        tc.sendMessage(String.format(
-                "%s Getting a tickle-gif...",
-                Emotes.LOADING.getEmote()
-        )).queue(message -> {
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.tickle.loading")
+        ).queue(message -> {
             if(link == null){
-                message.editMessage(String.format(
-                        "%s tickles you %s",
-                        MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(
-                                bot.getMessageUtil().replaceLast(tickledMembers, ",", " and")
-                        )
+                message.editMessage(MarkdownSanitizer.escape(
+                        bot.getMsg(guild.getId(), "purr.fun.tickle.message", member.getEffectiveName(), targets)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                                "%s tickles you %s",
-                                MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(
-                                        bot.getMessageUtil().replaceLast(tickledMembers, ",", " and")
-                                )
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(MarkdownSanitizer.escape(
+                                bot.getMsg(guild.getId(), "purr.fun.tickle.message", member.getEffectiveName(), targets)
                         )).setImage(link).build()).queue();
             }
         });

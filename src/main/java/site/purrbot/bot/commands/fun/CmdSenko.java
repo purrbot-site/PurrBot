@@ -27,7 +27,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 @CommandDescription(
         name = "Senko",
@@ -57,21 +56,17 @@ public class CmdSenko implements Command{
             msg.delete().queue();
     
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
             return;
         }
     
-        EmbedBuilder senko = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .setTitle(String.format(
-                        "Senko-San %s",
-                        Emotes.SENKOTAILWAG.getEmote()
-                ), link)
+        EmbedBuilder senko = bot.getEmbedUtil().getEmbed(msg.getAuthor(), tc.getGuild())
+                .setTitle(bot.getMsg(tc.getGuild().getId(), "purr.fun.senko.title"), link)
                 .setImage(link);
     
-        tc.sendMessage(String.format(
-                "%s Getting an image of Senko...",
-                Emotes.LOADING.getEmote()
-        )).queue(message -> message.editMessage(
+        tc.sendMessage(
+                bot.getMsg(tc.getGuild().getId(), "purr.fun.senko.loading")
+        ).queue(message -> message.editMessage(
                 EmbedBuilder.ZERO_WIDTH_SPACE
         ).embed(senko.build()).queue());
     }

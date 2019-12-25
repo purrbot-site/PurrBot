@@ -20,13 +20,13 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.sharding.ShardManager;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -96,7 +96,7 @@ public class CmdStats implements Command{
         JDA jda = msg.getJDA();
         ShardManager shardManager = bot.getShardManager();
 
-        EmbedBuilder stats = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder stats = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
                 .setAuthor("Statistics")
                 .addField("Total", String.format(
                         "```yaml\n" +

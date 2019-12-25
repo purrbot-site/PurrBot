@@ -22,6 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -50,48 +51,49 @@ public class CmdShip implements Command{
         this.bot = bot;
     }
 
-    private String getMessage(int chance){
+    private String getMessage(int chance, String id){
 
         if(chance == 100){
-            return "Perfect love! ❤";
+            return bot.getMsg(id, "purr.fun.ship.results.100");
         }else
         if((chance <= 99) && (chance > 90)){
-            return "Don't forget to invite me to your wedding.";
+            return bot.getMsg(id, "purr.fun.ship.results.91_99");
         }else
         if((chance <= 90) && (chance > 80)){
-            return "I can imagine them marrying each other.";
+            return bot.getMsg(id, "purr.fun.ship.results.81_90");
         }else
         if((chance <= 80) && (chance > 70)){
-            return "\\*pushes both to each other*";
+            return bot.getMsg(id, "purr.fun.ship.results.71_80");
         }else
         if((chance <= 70) && (chance > 60)){
-            return "This will hold for some time.";
+            return bot.getMsg(id, "purr.fun.ship.results.61_70");
         }else
         if((chance <= 60) && (chance > 50)){
-            return "Kiss already!";
+            return bot.getMsg(id, "purr.fun.ship.results.51_60");
         }else
         if((chance <= 50) && (chance > 40)) {
-            return "Already a couple I guess?";
+            return bot.getMsg(id, "purr.fun.ship.results.41_50");
         }else
         if((chance <= 40) && (chance > 30)) {
-            return "I can actually imagine you as a couple.";
+            return bot.getMsg(id, "purr.fun.ship.results.31_40");
         }else
         if((chance <= 30) && (chance > 20)) {
-            return "Friendzone+ (With some \"extras\")";
+            return bot.getMsg(id, "purr.fun.ship.results.21_30");
         }else
         if((chance <= 20) && (chance > 10)) {
-            return "Welcome to the friendzone!";
+            return bot.getMsg(id, "purr.fun.ship.results.11_20");
         }else
         if((chance <= 10) && (chance > 0)) {
-            return "Not even friends.";
+            return bot.getMsg(id, "purr.fun.ship.results.1_10");
         }else{
-            return "If love is heat, then you're an ice block.";
+            return bot.getMsg(id, "purr.fun.ship.results.0");
         }
     }
 
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
+        Guild guild = msg.getGuild();
 
         Member member1;
         Member member2;
@@ -99,7 +101,7 @@ public class CmdShip implements Command{
         List<Member> members = msg.getMentionedMembers();
 
         if (members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Mention at least one user to ship!");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.ship.no_mention");
             return;
         }
 
@@ -114,54 +116,89 @@ public class CmdShip implements Command{
         if(member2 == null)
             return;
 
-        if(member1 == msg.getGuild().getSelfMember()){
-            if(!bot.isBeta()) {
-                if(bot.getPermUtil().isSpecial(member2.getUser().getId())){
-                    tc.sendMessage(String.format(
-                            "%s Aww sweetie. You know we will always be a 100%%.\n" +
-                            "You don't need this test for that. ^-^",
-                            member2.getAsMention()
-                    )).queue();
+        if(member1.getId().equals(IDs.PURR.getId())){
+            if(bot.isBeta()){
+                if(bot.getPermUtil().isSpecial(member2.getId())){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "snuggle.fun.ship.special_user", member2.getAsMention())
+                    ).queue();
                     return;
                 }
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
-                return;
-            }
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "D-don't ship with me. >~<");
-            return;
-        }
-
-        if(member2 == msg.getGuild().getSelfMember()) {
-            if(!bot.isBeta()){
-                if(bot.getPermUtil().isSpecial(member1.getUser().getId())){
-                    tc.sendMessage(String.format(
-                            "%s Naw sweetie. You know we will always be a 100%%.\n" +
-                            "You don't need this test for that ^-^",
-                            member1.getAsMention()
-                    )).queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member2.getAsMention())
+                ).queue();
+            }else{
+                if(bot.getPermUtil().isSpecial(member2.getId())){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member2.getAsMention())
+                    ).queue();
                     return;
                 }
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "N-no! You can't ship with me. >.<");
-                return;
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member2.getAsMention())
+                ).queue();
             }
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "D-don't ship with me. >~<");
+            return;
+        }else
+        if(member2.getId().equals(IDs.PURR.getId())){
+            if(bot.isBeta()){
+                if(bot.getPermUtil().isSpecial(member1.getId())){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "snuggle.fun.ship.special_user", member1.getAsMention())
+                    ).queue();
+                    return;
+                }
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member1.getAsMention())
+                ).queue();
+            }else{
+                if(bot.getPermUtil().isSpecial(member1.getId())){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member1.getAsMention())
+                    ).queue();
+                    return;
+                }
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member1.getAsMention())
+                ).queue();
+            }
             return;
         }
 
-        if((member1 == msg.getMember()) && (member2 == msg.getMember())){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(),
-                    "Nu! You can't ship yourself! Get someone else to ship with."
-            );
+        if(member1.getId().equals(IDs.SNUGGLE.getId())) {
+            if(bot.isBeta()){
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member2.getAsMention())
+                ).queue();
+            }else{
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member2.getAsMention())
+                ).queue();
+            }
+            return;
+        }else
+        if(member2.getId().equals(IDs.SNUGGLE.getId())){
+            if(bot.isBeta()){
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member1.getAsMention())
+                ).queue();
+            }else{
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member1.getAsMention())
+                ).queue();
+            }
             return;
         }
 
-        if(member1.getUser().getId().equals(IDs.SNUGGLE.getId()) || member2.getUser().getId().equals(IDs.SNUGGLE.getId())){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "No shipping with my sister!.");
+        if(member1.equals(msg.getMember()) && member2.equals(msg.getMember())){
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.ship.mention_self", msg.getMember().getAsMention())
+            ).queue();
             return;
         }
 
         if(member1.getUser().isBot() || member2.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "You can't ship with bots you weirdo!");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.ship.target_bot");
             return;
         }
 
@@ -173,14 +210,14 @@ public class CmdShip implements Command{
             Message message = new MessageBuilder(String.format(
                     "`%d%%` | %s",
                     result,
-                    getMessage(result)
+                    getMessage(result, guild.getId())
             )).build();
 
             tc.sendMessage(message).queue();
             return;
         }
 
-        tc.sendMessage(getMessage(result)).addFile(image, String.format(
+        tc.sendMessage(getMessage(result, guild.getId())).addFile(image, String.format(
                 "love_%s_%s.png",
                 member1.getId(),
                 member2.getId()

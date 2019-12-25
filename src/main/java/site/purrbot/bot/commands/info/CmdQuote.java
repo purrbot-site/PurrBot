@@ -141,7 +141,7 @@ public class CmdQuote implements Command{
                 }
                 String name = String.format("quote_%s.png", quote.getId());
 
-                MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                         .setDescription(String.format(
                                 "Quote from %s in %s [`[Link]`](%s)",
                                 quote.getMember() == null ? "`Unknown Member`" : quote.getMember().getEffectiveName(),
@@ -206,7 +206,7 @@ public class CmdQuote implements Command{
                 }
                 String name = String.format("quote_%s.png", quote.getId());
 
-                MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                         .setDescription(String.format(
                                 "Quote from %s in %s [`[Link]`](%s)",
                                 quote.getMember() == null ? "`Unknown Member`" : quote.getMember().getEffectiveName(),

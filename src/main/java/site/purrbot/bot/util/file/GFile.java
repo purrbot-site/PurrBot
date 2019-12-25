@@ -13,11 +13,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
 
-/**
+/*
  * Class to manage JSON files for the bot.
- * <br>
- * <br>This code was made by PiggyPiglet and is used in the Discord bot "Gary" (https://github.com/help-chat/Gary)
- * <br>Original copyright (c) PiggyPiglet 2018-2019 (https://piggypiglet.me)
+ * 
+ * This code was made by PiggyPiglet and is used in the Discord bot "Gary" (https://github.com/help-chat/Gary)
+ * Original copyright (c) PiggyPiglet 2018-2019 (https://piggypiglet.me)
  */
 public class GFile {
 

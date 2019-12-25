@@ -164,7 +164,7 @@ public class CmdUser implements Command{
 
         String imgName = String.format("userinfo_%s.png", member.getId());
 
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), tc.getGuild())
                 .addField(getName(member), String.format(
                         "```yaml\n" +
                         "%s" +

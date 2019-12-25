@@ -100,7 +100,6 @@ public class CmdBlowjob implements Command{
                         "And I don't want one.",
                         author.getAsMention()
                 )).queue();
-                return;
             }else{
                 if(bot.getPermUtil().isSpecial(author.getUser().getId())){
                     tc.sendMessage(String.format(
@@ -114,8 +113,8 @@ public class CmdBlowjob implements Command{
                         "\\*slaps %s* You perv!!! Get someone else to suck.",
                         author.getAsMention()
                 )).queue();
-                return;
             }
+            return;
         }
 
         if(target.equals(msg.getMember())){
