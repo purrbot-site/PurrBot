@@ -19,10 +19,10 @@
 package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
-import com.andre601.javabotblockapi.BotBlockAPI;
-import com.andre601.javabotblockapi.Site;
-import com.andre601.javabotblockapi.exceptions.RatelimitedException;
-import com.andre601.javabotblockapi.requests.PostAction;
+import org.botblock.javabotblockapi.BotBlockAPI;
+import org.botblock.javabotblockapi.Site;
+import org.botblock.javabotblockapi.exceptions.RatelimitedException;
+import org.botblock.javabotblockapi.requests.PostAction;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
