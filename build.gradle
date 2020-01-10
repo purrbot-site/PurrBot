@@ -30,7 +30,7 @@ dependencies {
     compile(group: 'net.dv8tion', name: 'JDA', version:'4.1.0_95'){
         exclude(module: 'opus-java')
     }
-    compile group: 'club.minnced', name: 'discord-webhooks', version: '0.1.8'
+    compile group: 'club.minnced', name: 'discord-webhooks', version: '0.2.0'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
