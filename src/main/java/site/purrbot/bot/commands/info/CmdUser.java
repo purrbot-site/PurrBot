@@ -54,7 +54,7 @@ public class CmdUser implements Command{
         List<Role> roles = member.getRoles();
 
         if(roles.size() <= 1)
-            return "`No other roles`";
+            return bot.getMsg(member.getGuild().getId(), "purr.info.user.no_other_roles");
 
         StringBuilder sb = new StringBuilder();
         for(int i = 1; i < roles.size(); i++){
@@ -64,7 +64,10 @@ public class CmdUser implements Command{
             if(sb.length() + name.length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
                 int rolesLeft = roles.size() - i;
 
-                sb.append("**__+").append(rolesLeft).append(" more__**");
+                sb.append(
+                        bot.getMsg(member.getGuild().getId(), "purr.info.user.more_roles")
+                                .replace("{remaining}", String.valueOf(rolesLeft))
+                );
                 break;
             }
 
@@ -80,7 +83,8 @@ public class CmdUser implements Command{
 
         String nick = member.getNickname();
 
-        return "Nick: " + (nick.length() > 20 ? nick.substring(0, 19) + "...\n" : nick + "\n");
+        return bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.nickname")
+                .replace("{nickname}", nick.length() > 20 ? nick.substring(0, 19) + "...\n" : nick + "\n");
     }
 
     private String getName(Member member){
@@ -97,49 +101,47 @@ public class CmdUser implements Command{
         return sb.toString();
     }
 
-    private String getGame(Activity game){
+    private String getGame(String id, Activity game){
         String type;
+        String name = game.getName();
 
         switch(game.getType()){
             default:
             case DEFAULT:
-                type = "Playing";
+                type = bot.getMsg(id, "purr.info.user.status.playing");
                 break;
 
             case WATCHING:
-                type = "Watching";
+                type = bot.getMsg(id, "purr.info.user.status.watching");
                 break;
 
             case LISTENING:
-                type = "Listening to";
+                type = bot.getMsg(id, "purr.info.user.status.listening");
                 break;
 
             case STREAMING:
-                type = "Streaming";
+                type = bot.getMsg(id, "purr.info.user.status.streaming");
                 break;
         }
 
-        return String.format(
-                "%s %s",
-                type,
-                game.getName().length() > 25 ? game.getName().substring(0, 24) + "..." : game.getName()
-        );
+        return bot.getMsg(id, "purr.info.user.embed.game")
+                .replace("{status}", type.replace("{game}", name.length() > 25 ? name.substring(0, 24) : name));
     }
 
     private String getTimes(Member member){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Account created:")
+        sb.append(bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.created"))
                 .append("\n   ")
                 .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeCreated())))
                 .append("\n\n")
-                .append("Guild joined:")
+                .append(bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.joined"))
                 .append("\n   ")
                 .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeJoined())));
 
         if(member.getTimeBoosted() != null)
             sb.append("\n\n")
-                    .append("Booster since:")
+                    .append(bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.booster"))
                     .append("\n   ")
                     .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeBoosted())));
 
@@ -150,6 +152,7 @@ public class CmdUser implements Command{
     public void execute(Message msg, String args) {
         Member member;
         TextChannel tc = msg.getTextChannel();
+        Guild guild = msg.getGuild();
 
         if(msg.getMentionedMembers().isEmpty()){
             member = msg.getMember();
@@ -158,45 +161,47 @@ public class CmdUser implements Command{
         }
 
         if(member == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "The requested Member doesn't seem to be in this Discord!");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.user.no_member");
             return;
         }
 
-        String imgName = String.format("userinfo_%s.png", member.getId());
+        String imgName = String.format("user_%s.png", member.getId());
 
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), tc.getGuild())
-                .addField(getName(member), String.format(
-                        "```yaml\n" +
-                        "%s" +
-                        "ID:   %s\n" +
-                        "%s\n" +
-                        "```",
-                        getNickname(member),
-                        member.getId(),
-                        member.getActivities().isEmpty() ? "" : "Game: " + getGame(member.getActivities().get(0))
+                .addField(
+                        getName(member),
+                        String.format(
+                                "```yaml" +
+                                "%s" +
+                                "%s\n" +
+                                "%s\n" +
+                                "```",
+                                getNickname(member),
+                                bot.getMsg(guild.getId(), "purr.info.user.embed.id")
+                                        .replace("{id}", member.getId()),
+                                member.getActivities().isEmpty() ? "" : getGame(guild.getId(), member.getActivities().get(0))
                         ),
                         false
                 )
                 .addField(
-                        "Avatar",
-                        String.format(
-                                "[`Avatar URL`](%s)",
-                                member.getUser().getEffectiveAvatarUrl()
-                        ),
+                        bot.getMsg(guild.getId(), "purr.info.user.embed.avatar"),
+                        bot.getMsg(guild.getId(), "purr.info.user.embed.avatar_url")
+                                .replace("{link}", member.getUser().getEffectiveAvatarUrl()),
                         true
                 )
                 .addField(
-                        "Highest Role",
-                        member.getRoles().isEmpty() ? "`No roles assigned`" : member.getRoles().get(0).getAsMention(),
+                        bot.getMsg(guild.getId(), "purr.info.user.embed.role_highest"),
+                        member.getRoles().isEmpty() ? bot.getMsg(guild.getId(), "purr.info.user.no_roles") : 
+                                member.getRoles().get(0).getAsMention(),
                         true
                 )
                 .addField(
-                        "Other Roles",
+                        bot.getMsg(guild.getId(), "purr.info.user.embed.role_total"),
                         getRoles(member),
                         false
                 )
                 .addField(
-                        "Dates",
+                        bot.getMsg(guild.getId(), "purr.info.user.embed.dates"),
                         String.format(
                                 "```yaml\n" +
                                 "%s\n" +
@@ -208,7 +213,7 @@ public class CmdUser implements Command{
 
         if(msg.getGuild().getId().equals(IDs.GUILD.getId()) && !member.getUser().isBot() && !bot.isBeta())
             embed.addField(
-                    "XP",
+                    bot.getMsg(guild.getId(), "purr.info.user.embed.xp"),
                     String.format(
                             "`%d/%d`",
                             bot.getDbUtil().getXp(member.getUser().getId()),
@@ -217,7 +222,7 @@ public class CmdUser implements Command{
                     true
             )
             .addField(
-                    "Level",
+                    bot.getMsg(guild.getId(), "purr.info.user.embed.level"),
                     String.format(
                             "`%d`",
                             bot.getDbUtil().getLevel(member.getUser().getId())
@@ -240,10 +245,9 @@ public class CmdUser implements Command{
             return;
         }
 
-        tc.sendFile(bytes, String.format("%s", imgName)).embed(embed.setThumbnail(String.format(
-                "attachment://%s",
+        tc.sendFile(bytes, imgName).embed(embed.setThumbnail(String.format(
+                "attachment://%s", 
                 imgName
-                )
-        ).build()).queue();
+        )).build()).queue();
     }
 }

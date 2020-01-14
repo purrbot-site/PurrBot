@@ -24,6 +24,7 @@ import site.purrbot.bot.PurrBot;
 
 import java.util.Map;
 
+@SuppressWarnings("rawtypes")
 public class DBUtil {
 
     private PurrBot bot;
@@ -37,13 +38,13 @@ public class DBUtil {
     public DBUtil(PurrBot bot){
         r = RethinkDB.r;
         connection = r.connection()
-                .hostname(bot.getgFile().getString("config", "db-ip"))
+                .hostname(bot.getFileManager().getString("config", "db-ip"))
                 .port(28015)
-                .db(bot.getgFile().getString("config", "db-name"))
+                .db(bot.getFileManager().getString("config", "db-name"))
                 .connect();
 
-        guildTable  = bot.getgFile().getString("config", "db-guildTable");
-        memberTable = bot.getgFile().getString("config", "db-memberTable");
+        guildTable  = bot.getFileManager().getString("config", "db-guildTable");
+        memberTable = bot.getFileManager().getString("config", "db-memberTable");
         this.bot = bot;
     }
 

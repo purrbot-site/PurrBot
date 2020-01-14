@@ -58,7 +58,7 @@ public class CmdLewd implements Command{
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
         
-        if(args.toLowerCase().contains("--gif")){
+        if(args.toLowerCase().contains("--gif") || args.toLowerCase().contains("—gif")){
             String gifLink = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD);
             if(gifLink == null){
                 bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");

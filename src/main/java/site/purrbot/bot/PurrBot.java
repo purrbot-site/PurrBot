@@ -19,39 +19,32 @@
 package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
-import com.andre601.javabotblockapi.BotBlockAPI;
-import com.andre601.javabotblockapi.Site;
-import com.andre601.javabotblockapi.exceptions.RatelimitedException;
-import com.andre601.javabotblockapi.requests.PostAction;
+import org.botblock.javabotblockapi.BotBlockAPI;
+import org.botblock.javabotblockapi.Site;
+import org.botblock.javabotblockapi.exceptions.RatelimitedException;
+import org.botblock.javabotblockapi.requests.PostAction;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import me.piggypiglet.framework.Framework;
-import me.piggypiglet.framework.utils.annotations.files.Config;
-import me.piggypiglet.framework.utils.annotations.registerable.RegisterableData;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Message;
-import org.discordbots.api.client.DiscordBotListAPI;
-import org.discordbots.api.client.entity.Vote;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
 import site.purrbot.bot.constants.Emotes;
-import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.listener.ConnectionListener;
 import site.purrbot.bot.listener.GuildListener;
 import site.purrbot.bot.listener.ReadyListener;
 import site.purrbot.bot.util.*;
-import site.purrbot.bot.util.file.GFile;
+import site.purrbot.bot.util.file.FileManager;
 import site.purrbot.bot.util.file.lang.LangUtils;
-import site.purrbot.bot.util.file.lang.StaticLangHack;
 import site.purrbot.bot.util.message.EmbedUtil;
 import site.purrbot.bot.util.message.MessageUtil;
 import site.purrbot.bot.util.message.WebhookUtil;
@@ -73,7 +66,7 @@ public class PurrBot {
 
     private Random random;
 
-    private GFile gFile;
+    private FileManager fileManager;
     private ReadyListener readyListener;
     private DBUtil dbUtil;
     private PermUtil permUtil;
@@ -84,10 +77,10 @@ public class PurrBot {
     private WebhookUtil webhookUtil;
     private ImageUtil imageUtil;
     private LevelManager levelManager;
+    private LangUtils langUtils;
 
     private boolean beta = false;
 
-    private DiscordBotListAPI dblApi = null;
     private BotBlockAPI botBlockAPI = null;
     private PostAction post = new PostAction();
 
@@ -126,20 +119,13 @@ public class PurrBot {
     }
 
     private void setup() throws LoginException{
-        gFile         = new GFile();
-    
-        Framework.builder()
-                .startup(new RegisterableData(StaticLangHack.class))
-                .main(this)
-                .pckg("site.purrbot.bot")
-                .file(true, "de", "/lang/de.json", "./lang/de.json", LangUtils.lang("de"))
-                .file(true, "en", "/lang/en.json", "./lang/en.json", LangUtils.lang("en"))
-                .file(true, "ko", "/lang/ko.json", "./lang/ko.json", LangUtils.lang("ko"))
-                .build()
-                .init();
+        fileManager = new FileManager();
         
-        getgFile().createOrLoad("config", "/config.json", "./config.json");
-        getgFile().createOrLoad("random", "/random.json", "./random.json");
+        getFileManager().addFile("config", "/config.json", "./config.json")
+                .addFile("random", "/random.json", "./random.json")
+                .addFile("de", "/lang/de.json", "./lang/de.json")
+                .addFile("en", "/lang/en.json", "./lang/en.json")
+                .addFile("ko", "/lang/ko.json", "./lang/ko.json");
 
         random = new Random();
 
@@ -153,15 +139,16 @@ public class PurrBot {
         webhookUtil   = new WebhookUtil();
         imageUtil     = new ImageUtil(this);
         levelManager  = new LevelManager(this);
+        langUtils     = new LangUtils(this);
 
         waiter = new EventWaiter();
 
-        beta = getgFile().getString("config", "beta").equalsIgnoreCase("true");
+        beta = getFileManager().getString("config", "beta").equalsIgnoreCase("true");
 
         CMD_HANDLER.registerCommands(new HashSet<>(new CommandLoader(this).getCommands()));
 
         shardManager = new DefaultShardManagerBuilder()
-                .setToken(getgFile().getString("config", "bot-token"))
+                .setToken(getFileManager().getString("config", "bot-token"))
                 .addEventListeners(
                         readyListener,
                         new GuildListener(this),
@@ -214,13 +201,12 @@ public class PurrBot {
                 });
 
                 post("/dbl", (request, response) -> {
-                    Vote vote = voteGson.fromJson(request.body(), Vote.class);
+                    JsonObject json = voteGson.fromJson(request.body(), JsonObject.class);
 
                     if(getReadyListener().isReady())
                         rewardHandler.discordbots_org(
-                                vote.getBotId(),
-                                vote.getUserId(),
-                                vote.isWeekend()
+                                json.get("bot").getAsString(),
+                                json.get("user").getAsString()
                         );
 
                     response.status(200);
@@ -233,18 +219,14 @@ public class PurrBot {
         }
     }
 
-    public void startUpdates(){
+    public void startUpdates(){ 
         if(!isBeta()) {
             botBlockAPI = new BotBlockAPI.Builder()
-                    .addAuthToken(Site.BOTLIST_SPACE, getgFile().getString("config", "botlist-token"))
-                    .addAuthToken(Site.DISCORD_BOTS_GG, getgFile().getString("config", "dbgg-token"))
-                    .addAuthToken(Site.LBOTS_ORG, getgFile().getString("config", "lbots-token"))
-                    .addAuthToken(Site.DISCORDEXTREMELIST_XYZ, getgFile().getString("config", "debl-token"))
-                    .build();
-
-            dblApi = new DiscordBotListAPI.Builder()
-                    .token(getgFile().getString("config", "dbl-token"))
-                    .botId(IDs.PURR.getId())
+                    .addAuthToken(Site.BOTLIST_SPACE, getFileManager().getString("config", "botlist-token"))
+                    .addAuthToken(Site.DISCORD_BOTS_GG, getFileManager().getString("config", "dbgg-token"))
+                    .addAuthToken(Site.LBOTS_ORG, getFileManager().getString("config", "lbots-token"))
+                    .addAuthToken(Site.DISCORDEXTREMELIST_XYZ, getFileManager().getString("config", "debl-token"))
+                    .addAuthToken(Site.TOP_GG, getFileManager().getString("config", "dbl-token"))
                     .build();
         }
 
@@ -267,8 +249,8 @@ public class PurrBot {
     public PermUtil getPermUtil(){
         return permUtil;
     }
-    public GFile getgFile(){
-        return gFile;
+    public FileManager getFileManager(){
+        return fileManager;
     }
     public MessageUtil getMessageUtil(){
         return messageUtil;
@@ -288,14 +270,11 @@ public class PurrBot {
     public LevelManager getLevelManager(){
         return levelManager;
     }
-
+    
     public boolean isBeta(){
         return beta;
     }
 
-    private DiscordBotListAPI getDblApi(){
-        return dblApi;
-    }
     public CommandHandler<Message> getCmdHandler(){
         return CMD_HANDLER;
     }
@@ -365,49 +344,41 @@ public class PurrBot {
     }
 
     public List<String> getAcceptFuckMsg(){
-        return getgFile().getStringlist("random", "accept_fuck_msg");
+        return getFileManager().getStringlist("random", "accept_fuck_msg");
     }
     public List<String> getBlacklist(){
-        return getgFile().getStringlist("random", "blacklist");
+        return getFileManager().getStringlist("random", "blacklist");
     }
     public List<String> getDenyFuckMsg(){
-        return getgFile().getStringlist("random", "deny_fuck_msg");
+        return getFileManager().getStringlist("random", "deny_fuck_msg");
     }
     public List<String> getKissImg(){
-        return getgFile().getStringlist("random", "kiss_img");
+        return getFileManager().getStringlist("random", "kiss_img");
     }
     public List<String> getNoNsfwMsg(){
-        return getgFile().getStringlist("random", "no_nsfw_msg");
+        return getFileManager().getStringlist("random", "no_nsfw_msg");
     }
     public List<String> getPingMsg(){
-        return getgFile().getStringlist("random", "ping_msg");
+        return getFileManager().getStringlist("random", "ping_msg");
     }
     public List<String> getShutdownImg(){
-        return getgFile().getStringlist("random", "shutdown_img");
+        return getFileManager().getStringlist("random", "shutdown_img");
     }
     public List<String> getShutdownMsg(){
-        return getgFile().getStringlist("random", "shutdown_msg");
+        return getFileManager().getStringlist("random", "shutdown_msg");
     }
     public List<String> getStartupMsg(){
-        return getgFile().getStringlist("random", "startup_msg");
+        return getFileManager().getStringlist("random", "startup_msg");
     }
     public List<String> getWelcomeBg(){
-        return getgFile().getStringlist("random", "welcome_bg");
+        return getFileManager().getStringlist("random", "welcome_bg");
     }
     public List<String> getWelcomeIcon(){
-        return getgFile().getStringlist("random", "welcome_icon");
+        return getFileManager().getStringlist("random", "welcome_icon");
     }
     
-    public String getMsg(String id, String path, String user, String targets){
-        return getMsg(id, path, user)
-                .replace("{targets}", getMessageUtil().replaceLast(targets, ",", " " + getMsg(id, "misc.and")));
-    }
-    public String getMsg(String id, String path, String user){
-        return getMsg(id, path).replace("{user}", user);
-    }
-    
-    public String getMsg(String id, String path){
-        return LangUtils.get(getLanguage(id), path)
+    private String setPlaceholders(String msg){
+        return msg
                 // Emotes
                 .replace("{BLOBHOLO}", Emotes.BLOBHOLO.getEmote())
                 .replace("{LOADING}", Emotes.LOADING.getEmote())
@@ -417,8 +388,6 @@ public class PurrBot {
                 .replace("{TYPING}", Emotes.TYPING.getEmote())
                 .replace("{VANILLABLUSH}", Emotes.VANILLABLUSH.getEmote())
                 .replace("{WAGTAIL}", Emotes.WAGTAIL.getEmote())
-                // Prefix
-                .replace("{prefix}", getPrefix(id))
                 // Wiki pages
                 .replace("{wiki_bg}", Links.WIKI.getUrl() + "/Welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI.getUrl() + "/Welcome-images#icons")
@@ -437,6 +406,26 @@ public class PurrBot {
                 .replace("{wiki}", Links.WIKI.getUrl());
     }
     
+    public String getMsg(String id, String path, String user, String targets){
+        return getMsg(id, path, user)
+                .replace("{targets}", getMessageUtil().replaceLast(targets, ",", " " + getMsg(id, "misc.and")));
+    }
+    
+    public String getMsg(String id, String path, String user){
+        return getMsg(id, path).replace("{user}", user);
+    }
+    
+    public String getMsg(String id, String path){
+        return setPlaceholders(langUtils.getString(getLanguage(id), path))
+                .replace("{prefix}", getPrefix(id));
+    }
+    
+    public String getRandomMsg(String id, String path){
+        List<String> list = langUtils.getStringList(getLanguage(id), path);
+        
+        return list.isEmpty() ? "" : setPlaceholders(list.get(getRandom().nextInt(list.size())));
+    }
+    
     private void startUpdate(){
         scheduler.scheduleAtFixedRate(() -> {
 
@@ -446,8 +435,6 @@ public class PurrBot {
             )));
             if(isBeta())
                 return;
-
-            getDblApi().setStats(getShardManager().getGuilds().size());
 
             if(botBlockAPI == null || post == null) {
                 logger.warn("PostAction and/or BotBlockAPI are null!");

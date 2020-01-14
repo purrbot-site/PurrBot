@@ -134,12 +134,13 @@
         "invalid_args": "Invalid arguments!\nUsage: `{prefix}language <set <language>|reset>`",
         "invalid_lang": "The provided language was invalid!\nUse `{prefix}language` to see all available languages.",
         "embed": {
-          "description": "You can change the language to one of the supported ones listed below using `{prefix}language set <language>`.",
+          "available_lang_title": "Available languages",
           "curr_lang_title": "Currently set language",
           "curr_lang_value": "English (en)",
-          "available_lang_title": "Available languages"
+          "description": "You can change the language to one of the supported ones listed below using `{prefix}language set <language>`.",
+          "translators_title": "Translators",
+          "translators_value": "Thanks go to all people that translated the bot!\nYou may find a full list of all current translators and their translations [here]({link})."
         },
-        "language_reset": "Language reset!",
         "language_set": "Language set to `English (en)`!",
         "no_language": "Please provide a language you want to set!"
       },
@@ -255,11 +256,15 @@
         }
       },
       "invite": {
-        "about_title": "About the Links",
-        "about_value": "Each of the links has a different purpose.\n`Recommended Invite` contains all permissions I need and a few more to make your experience more smooth.\n`Basic Invite` only has the required permissions.\n`Discord` is the invite to my support Discord.",
-        "info_title": "Invite me",
-        "info_value": "Heyo! Nice from you to invite me to your Discord. :3\nJust select one of the links below to get me on your Discord, so that I can bring fun and nekos to you.",
-        "links": "[`Recommended Invite`]({invite_full})\n[`Basic Invite`]({invite_basic})\n[`Discord`]({support})"
+        "dm_failure": "Please allow me to send you a DM {user}!",
+        "dm_success": "Send you a message in DM {user}!",
+        "embed": {
+          "about_title": "About the Links",
+          "about_value": "Each of the links has a different purpose.\n`Recommended Invite` contains all permissions I need and a few more to make your experience more smooth.\n`Basic Invite` only has the required permissions.\n`Discord` is the invite to my support Discord.",
+          "info_title": "Invite me",
+          "info_value": "Heyo! Nice from you to invite me to your Discord. :3\nJust select one of the links below to get me on your Discord, so that I can bring fun and nekos to you.",
+          "links": "[`Recommended Invite`]({invite_full})\n[`Basic Invite`]({invite_basic})\n[`Discord`]({support})"
+        }
       },
       "level": {
         "bot": "Bots can't level up. xP",
@@ -288,7 +293,7 @@
         },
         "few_args": "Too few arguments!\nUsage: `{prefix}quote <messageID> [#channel]`",
         "invalid_id": "The provided ID was invalid!\nMake sure to have developer mode enabled and that you right-clicked the **message** and selected \"Copy id\".",
-        "not_msg": "Couldn't find the message in {channel}!\nMake sure that the ID is correct and that the message is in the right channel!",
+        "no_msg": "Couldn't find the message in {channel}!\nMake sure that the ID is correct and that the message is in the right channel!",
         "no_value": "The message doesn't have any image(s) nor any text to quote!",
         "nsfw_channel": "The channel you mentioned ({channel}) is marked as NSFW, while this channel is not!\nI won't quote messages from NSFW-channels in non NSFW-channels for safety."
       },
@@ -321,12 +326,15 @@
           "created": "Account created:",
           "dates": "Dates",
           "game": "Game: {status}",
+          "id": "ID: {id}",
           "joined": "Guild joined:",
           "level": "Level",
+          "nickname": "Nick: {nickname}",
           "role_highest": "Highest Role",
           "role_total": "Other Roles",
           "xp": "XP"
         },
+        "more_roles": "__**+{remaining} more**__",
         "no_member": "The mentioned member is not in this Discord!",
         "no_roles": "`No roles assigned`",
         "no_roles_others": "`No other roles assigned`",
@@ -469,7 +477,7 @@
     },
     "nsfw": {
       "blowjob": {
-        "mention_snuggle": "\\*runs away and hides* I don't want lewd",
+        "mention_snuggle": "\\*runs away and hides* I don't want lewd {user}",
         "mention_self": "Hehehe... Sucking yourself. You must be lonely or shy {user}.",
         "special_user": "W-why do you want to do this with me {user}? Y-you have my sister for that."
       },

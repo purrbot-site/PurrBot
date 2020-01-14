@@ -24,10 +24,14 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.util.file.lang.LangUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @CommandDescription(
         name = "Language",
@@ -78,8 +82,14 @@ public class CmdLanguage implements Command{
                     )
                     .addField(
                             bot.getMsg(guild.getId(), "purr.guild.language.embed.available_lang_title"),
-                            getLangs(),
+                            getLangFiles(),
                             true
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.guild.language.embed.translators_title"),
+                            bot.getMsg(guild.getId(), "purr.guild.language.embed.translators_value")
+                                    .replace("{link}", Links.TRANSLATORS.getUrl()),
+                            false
                     )
                     .build();
             
@@ -90,9 +100,7 @@ public class CmdLanguage implements Command{
                 
                 MessageEmbed embed = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
                         .setColor(0x00FF00)
-                        .setDescription(
-                                bot.getMsg(guild.getId(), "purr.guild.language.language_reset")
-                        )
+                        .setDescription("Language reset back to `English (en)`!")
                         .build();
                 
                 tc.sendMessage(embed).queue();
@@ -103,7 +111,7 @@ public class CmdLanguage implements Command{
                     return;
                 }
                 
-                if(!LangUtils.getFileManager().exists(args[1].toLowerCase())){
+                if(!getLangs().contains(args[1].toLowerCase())){
                     bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.language.invalid_lang");
                     return;
                 }
@@ -124,19 +132,23 @@ public class CmdLanguage implements Command{
         }
     }
     
-    private String getLangs(){
-        File[] files = folder.listFiles(filter);
-        if(files == null || files.length == 0)
-            return "";
-        
+    private String getLangFiles(){
         StringBuilder builder = new StringBuilder();
-        for(File file : files){
-            builder.append(String.format(
-                    "`%s`",
-                    file.getName().replace(".json", "")
-            )).append(", ");
-        }
+        for(String name : getLangs())
+            builder.append(String.format("`%s`", name).replace(".json", "")).append(", ");
         
         return builder.toString();
+    }
+    
+    private List<String> getLangs(){
+        File[] files = folder.listFiles(filter);
+        List<String> names = new ArrayList<>();
+        if(files == null || files.length == 0)
+            return Collections.singletonList("");
+        
+        for(File file : files)
+            names.add(file.getName().replace(".json", ""));
+        
+        return names;
     }
 }

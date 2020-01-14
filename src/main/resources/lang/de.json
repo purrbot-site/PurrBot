@@ -17,6 +17,7 @@
       "Du kannst diese schmutzigen dinge nur in NSFW-Kanälen sehen {user}.",
       "Alles hat seinen Platz. Und dieser Befehl gehört in einen NSFW-Kanal {user}."
     ],
+    "title": "Fehler",
     "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {VANILLABLUSH}\nBitte melde dies im Discord, oder auf GitHub!"
   },
   "misc": {
@@ -133,12 +134,13 @@
         "invalid_args": "Ungültige Argumente!\nVewendung: `{prefix}language <set <Sprache>|reset>`",
         "invalid_lang": "Die angegebene Sprache ist ungültig!\nVewende `{prefix}language` um alle verfügbaren Sprachen zu sehen.",
         "embed": {
-          "description": "Du kannst die Sprache zu einer der unten stehenden ändern indem du `{prefix}language set <Sprache>` verwendest.",
+          "available_lang_title": "Verfügbare Sprachen",
           "curr_lang_title": "Momentan gesetzte Sprache",
           "curr_lang_value": "Deutsch (de)",
-          "available_lang_title": "Verfügbare Sprachen"
+          "description": "Du kannst die Sprache zu einer der unten stehenden ändern indem du `{prefix}language set <Sprache>` verwendest.",
+          "translators_title": "Übersetzer",
+          "translators_value": "Dank geht an alle Personen, welche den Bot übersetzt haben!\nDu kannst eine vollständige Liste aller Übersetzer und deren übersetzungen [hier]({link}) finden."
         },
-        "language_reset": "Sprache resettet!",
         "language_set": "Sprache geändert zu `Deutsch (de)`!",
         "no_language": "Bitte gib eine Sprache an, welche du verwenden willst!"
       },
@@ -151,6 +153,20 @@
       },
       "welcome": {
         "current_msg": "Aktuelle Nachricht:\n```\n{message}\n```\n\nDu kannst Platzhalter in deiner Nachricht verwenden.\n**Platzhalter**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
+        "embed": {
+          "channel": "Kanal",
+          "color_title": "Farbe",
+          "color_value": "```\nTyp:  {type}\nInhalt: {value}\n```",
+          "current_settings": "Dies sind die aktuellen Willkommens-Einstellungen von diesem Discord.\nVerwende `{prefix}welcome [unterbefehl]` um diese zu ändern.",
+          "image_title": "Bild",
+          "image_value": "```\nHintergrund: {background}\nIcon:       {icon}\n```",
+          "message_title": "Nachricht",
+          "message_value": "```\n{message}\n```",
+          "no_channel": "`Keine Nachricht gesetzt`",
+          "preview": "Vorschau",
+          "subcommands_title": "Unterbefehle",
+          "subcommands_value": "```\nbg      set <Hintergrund>\n        reset\nchannel set <#Kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <Icon>\n        reset\nmsg     set <Nachricht>\n        reset```"
+        },
         "few_args": "Nicht genug Argumente gegeben!\nVewende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
         "invalid_args": "Ungültige Argumente!\nVerwende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
         "invalid_bg": "Ungültiger Hintergrund `{background}`\nÜberpfüfe das [Wiki]({wiki:bg}) für verfügbare Hintergründe.",
@@ -169,25 +185,27 @@
       "emote": {
         "embed": {
           "emote": "Emote",
-          "guild": "Guilde",
+          "guild": "Gilde",
           "id": "ID",
           "image": "Bild",
           "link": "[`Link`]({link})",
-          "message": "Nachricht"
+          "message": "Nachricht",
+          "name": "Name"
         },
         "no_args": "Bitte gib entweder `:emote:` oder `--search` nach dem Befehl an.",
         "not_found": "Konnte kein Emote in den letzten 100 Nachrichten finden.",
-        "unknown_guild": "Unbekannte Guilde"
+        "unknown_guild": "Unbekannte Gilde"
       },
       "guild": {
-        "embeds": {
+        "embed": {
           "boost_multiple": "{boost} boosts",
-          "boost_single": "{boost} boost",
-          "boost_tier": "Boost Stufe: {BOOST_LEVEL_{level}} (Level {level})",
+          "boost_single": "1 boost",
+          "boost_tier": "Boost Stufe: {BOOST_TIER} (Level {level})",
           "created": "Erstellt",
           "level": "Level",
           "levels": {
-            "none": "Kein level",
+            "unknown": "Unbekanntes Level",
+            "none": "Kein Level",
             "low": "Niedrig",
             "medium": "Mittel",
             "high": "(╯°□°）╯︵ ┻━┻",
@@ -211,9 +229,9 @@
         "command_menu": {
           "categories": {
             "fun": "Spass",
-            "guild": "Guilde",
+            "guild": "Gilde",
             "info": "Info",
-            "list": "```\nKategorien:\n  Spass\n  Guilde\n  Info\n  NSFW\n```",
+            "list": "```\nKategorien:\n  Spass\n  Gilde\n  Info\n  NSFW\n```",
             "nsfw": "NSFW",
             "owner": "Besitzer"
           },
@@ -238,11 +256,15 @@
         }
       },
       "invite": {
-        "about_title": "Über die Links",
-        "about_value": "Jeder Link hat eine andere Verwendung.\n`Empfohlene Einladung` enthält alle Berechtigungen die ich benötige und ein paar andere, um deine Erfahrungen mit mir angenehmer zu machen.\n`Standard Einladung` hat nur die benötigten Berechtigungen.\n`Discord` ist die Einladung zu meinem Support Discord.",
-        "info_title": "Lade mich ein",
-        "info_value": "Heyo! Nett von dir, mich auf deinen Discord einzuladen. :3\nVerwende einfach einen der Links unten um mich auf deinen Discord zu kriegen, so dass ich nekos und Spass zu dir bringen kann.",
-        "links": "[`Empfohlene Einladung`]({invite_full})\n[`Standard Einladung`]({invite_basic})\n[`Discord`]({support})"
+        "dm_failure": "Bitter erlaub mir, dier eine PM zu senden {user}!",
+        "dm_success": "Hab dir eine Nachricht gesendet {user}!",
+        "embed": {
+          "about_title": "Über die Links",
+          "about_value": "Jeder der Links hat eine andere Bedeutung.\n`Empfohlene Einladung` enthält alle Rechte die ich brauche und einige mehr, um deine Erfahrungen angenehmer zu machen.\n`Standart Einladung` hat alle benötigten Rechte.\n`Discord` ist die Einladung zu meinem Support Discord.",
+          "info_title": "Lade mich ein",
+          "info_value": "Heyo! Nett von dir, mich auf deinen Discord einzuladen. :3\nWähle einfach einen der unteren Links, so dass ich dir Spass und Nekos bringen kann.",
+          "links": "[`Empfohlene Einladung`]({invite_full})\n[`Standart Einladung`]({invite_basic})\n[`Discord`]({support})"
+        }
       },
       "level": {
         "bot": "Bots können nicht aufleveln. xP",
@@ -271,7 +293,7 @@
         },
         "few_args": "Zu wenige Argumente!\nVerwendung: `{prefix}quote <messageID> [#channel]`",
         "invalid_id": "Die angegebene ID war ungültig!\nStell sicher, dass du den Entwickler-Modus aktiviert, auf die **Nachricht** rechts-klick gemacht hast und \"ID kopieren\" ausgewählt hast.",
-        "not_msg": "Konnte Nachricht in {channel} nicht finden!\nStelle sicher, dass die ID korrekt ist und dass die Nachricht im richtigen Kanal ist.",
+        "no_msg": "Konnte Nachricht in {channel} nicht finden!\nStelle sicher, dass die ID korrekt ist und dass die Nachricht im richtigen Kanal ist.",
         "no_value": "Die Nachricht hat keine Bilder oder Text zum zitieren.",
         "nsfw_channel": "Der Kanal den du erwähnt hast ({channel}) ist als NSFW markiert, während dieser hier es nicht ist!\nAus sicherheit zitiere ich keine Nachrichten von NSFW-Kanälen in Nicht NSFW-Kanälen."
       },
@@ -290,9 +312,9 @@
           "other_title": "Andere Statistiken",
           "other_value": "```yaml\nRAM: {ram}\nLaufzeit: {uptime}\n```",
           "shard_this_title": "Diese Shard",
-          "shard_this_value": "```yaml\nID: {id} # IDs starten bei 0\n\nGuilden: {guilds}\nMitglieder: {total} [{users} User, {bots} Bots]\n```",
+          "shard_this_value": "```yaml\nID: {id} # IDs starten bei 0\n\nGilden: {guilds}\nMitglieder: {total} [{users} User, {bots} Bots]\n```",
           "shard_total_title": "Total",
-          "shard_total_value": "```yaml\nShards: {shards}\n\nGuilden: {guilds}\nMitglieder: {total} [{users} User, {bots} Bots]\n```",
+          "shard_total_value": "```yaml\nShards: {shards}\n\nGilden: {guilds}\nMitglieder: {total} [{users} User, {bots} Bots]\n```",
           "title": "Statistiken"
         }
       },

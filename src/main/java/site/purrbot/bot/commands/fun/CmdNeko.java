@@ -63,7 +63,7 @@ public class CmdNeko implements Command{
         EmbedBuilder neko = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild);
         String link;
         
-        if(args.toLowerCase().contains("--gif")){
+        if(args.toLowerCase().contains("--gif") || args.toLowerCase().contains("—gif")){
             link = bot.getHttpUtil().getImage(API.GIF_NEKO);
             if(link == null){
                 bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");

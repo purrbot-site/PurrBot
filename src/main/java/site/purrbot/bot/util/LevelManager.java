@@ -38,16 +38,6 @@ public class LevelManager {
         this.bot = bot;
     }
 
-    /**
-     * Gives XP to the member.
-     *
-     * @param id
-     *        The ID of the Member.
-     * @param command
-     *        If it is a command (Give 2 XP) or a normal message (Give 1 XP).
-     * @param textChannel
-     *        The {@link net.dv8tion.jda.api.entities.TextChannel TextChannel} to send possible messages.
-     */
     public void giveXP(String id, boolean command, TextChannel textChannel) {
         if(bot.isBeta())
             return;

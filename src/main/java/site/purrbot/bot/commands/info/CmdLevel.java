@@ -53,7 +53,7 @@ public class CmdLevel implements Command{
         this.bot = bot;
     }
 
-    private void sendLevelEmbed(TextChannel textChannel, User requester, Member member){
+    private void sendLevelEmbed(TextChannel tc, User requester, Member member){
         String id = member.getUser().getId();
 
         long xp = bot.getDbUtil().getXp(id);
@@ -67,25 +67,32 @@ public class CmdLevel implements Command{
         String imageName = level >= 30 ? String.format("progress_%s.png", id) : String.format("progress_%s.gif", id);
         File image = bot.getLevelManager().getImage(level);
 
-        EmbedBuilder levelEmbed = bot.getEmbedUtil().getEmbed(requester, textChannel.getGuild())
-                .setDescription(String.format(
-                        "Level-Info about %s",
-                        member.getEffectiveName()
-                ))
-                .addField("Level", String.format(
-                        "`%d`",
-                        level
-                ), true)
-                .addField("XP", String.format(
-                        "`%d/%d (%s%%)`",
-                        xp,
-                        reqXpLong,
-                        new DecimalFormat("###.##").format(progress)
-                ), true)
+        EmbedBuilder levelEmbed = bot.getEmbedUtil().getEmbed(requester, tc.getGuild())
+                .setDescription(
+                        bot.getMsg(tc.getGuild().getId(), "purr.info.level.info", member.getEffectiveName())
+                )
+                .addField(
+                        bot.getMsg(tc.getGuild().getId(), "purr.info.level.level"), 
+                        String.format(
+                                "`%d`",
+                                level
+                        ),
+                        true
+                )
+                .addField(
+                        bot.getMsg(tc.getGuild().getId(), "purr.info.level.xp"), 
+                        String.format(
+                                "`%d/%d (%s%%)`",
+                                xp,
+                                reqXpLong,
+                                new DecimalFormat("###.##").format(progress)
+                        ), 
+                        true
+                )
                 .setThumbnail(member.getUser().getEffectiveAvatarUrl())
                 .setImage(String.format("attachment://%s", imageName));
 
-        textChannel.sendMessage(levelEmbed.build()).addFile(image, imageName).queue();
+        tc.sendMessage(levelEmbed.build()).addFile(image, imageName).queue();
     }
 
     @Override
@@ -94,13 +101,13 @@ public class CmdLevel implements Command{
         User author = msg.getAuthor();
 
         if(bot.isBeta()){
-            bot.getEmbedUtil().sendError(tc, author, "Nya! The command is only available for my Sister. >w<");
+            bot.getEmbedUtil().sendError(tc, author, "snuggle.info.level.purr_only");
             return;
         }
 
         if(!msg.getMentionedMembers().isEmpty()){
             if(msg.getMentionedMembers().get(0).getUser().isBot()){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Bots can't level up. xP");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.level.bot");
                 return;
             }
 

@@ -134,7 +134,7 @@ public class CmdInfo implements Command{
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(args.toLowerCase().contains("--dm")){
+        if(args.toLowerCase().contains("--dm") || args.toLowerCase().contains("—dm")){
             msg.getAuthor().openPrivateChannel().queue(pm -> {
                 String mention = msg.getAuthor().getAsMention();
                 String prefix = bot.isBeta() ? "snuggle" : "purr";

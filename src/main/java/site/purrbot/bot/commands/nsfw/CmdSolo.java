@@ -32,7 +32,7 @@ import site.purrbot.bot.constants.Emotes;
 @CommandDescription(
         name = "Girl",
         description = "Gives you a gif of a girl *playing* with herself.",
-        triggers = {"solo"},
+        triggers = {"solo", "girl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
                 @CommandAttribute(key = "usage", value = 

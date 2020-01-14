@@ -100,7 +100,7 @@ public class GuildListener extends ListenerAdapter{
                 .build();
         
         bot.getWebhookUtil().sendMsg(
-                bot.getgFile().getString("config", "guild-webhook"),
+                bot.getFileManager().getString("config", "guild-webhook"),
                 guild.getSelfMember().getUser().getEffectiveAvatarUrl(),
                 title,
                 text,

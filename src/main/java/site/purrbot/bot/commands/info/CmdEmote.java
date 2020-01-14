@@ -109,7 +109,7 @@ public class CmdEmote implements Command{
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(args.toLowerCase().contains("--search")){
+        if(args.toLowerCase().contains("--search") || args.toLowerCase().contains("—search")){
             if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
                 MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                         .setColor(0xFF0000)

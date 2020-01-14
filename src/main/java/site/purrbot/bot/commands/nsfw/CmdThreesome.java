@@ -212,11 +212,12 @@ public class CmdThreesome implements Command{
                             
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             
+                            String raw = msg.getContentRaw();
                             String link;
-                            if(msg.getContentRaw().toLowerCase().contains("--mmf"))
+                            if(raw.toLowerCase().contains("--mmf") || raw.toLowerCase().contains("—mmf"))
                                 link = bot.getHttpUtil().getImage(API.GIF_THREESOME_MMF_LEWD);
                             else
-                            if(msg.getContentRaw().toLowerCase().contains("--fff"))
+                            if(raw.toLowerCase().contains("--fff") || raw.toLowerCase().contains("—fff"))
                                 link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFF_LEWD);
                             else
                                 link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFM_LEWD);

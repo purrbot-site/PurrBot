@@ -20,15 +20,10 @@ package site.purrbot.bot.commands;
 
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.fun.*;
-import site.purrbot.bot.commands.guild.CmdLanguage;
-import site.purrbot.bot.commands.guild.CmdPrefix;
-import site.purrbot.bot.commands.guild.CmdWelcome;
+import site.purrbot.bot.commands.guild.*;
 import site.purrbot.bot.commands.info.*;
 import site.purrbot.bot.commands.nsfw.*;
-import site.purrbot.bot.commands.owner.CmdEval;
-import site.purrbot.bot.commands.owner.CmdLeave;
-import site.purrbot.bot.commands.owner.CmdMsg;
-import site.purrbot.bot.commands.owner.CmdShutdown;
+import site.purrbot.bot.commands.owner.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -67,7 +62,7 @@ public class CommandLoader {
                 new CmdInfo(bot),
                 new CmdInvite(bot),
                 new CmdLevel(bot),
-                new CmdPing(),
+                new CmdPing(bot),
                 new CmdQuote(bot),
                 new CmdStats(bot),
                 new CmdUser(bot),

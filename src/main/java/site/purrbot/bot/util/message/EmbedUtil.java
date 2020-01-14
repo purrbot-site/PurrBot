@@ -19,7 +19,9 @@
 package site.purrbot.bot.util.message;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import site.purrbot.bot.PurrBot;
@@ -47,23 +49,44 @@ public class EmbedUtil {
     }
     
     public void sendError(TextChannel tc, @Nullable User user, String path, @Nullable String reason){
-        EmbedBuilder errorEmbed = user == null ? getEmbed() : getEmbed(user, tc.getGuild());
+        Guild guild = tc.getGuild();
+        
+        EmbedBuilder embed = user == null ? getEmbed() : getEmbed(user, guild);
+        String msg = user == null ? bot.getMsg(guild.getId(), path) : bot.getMsg(guild.getId(), path, user.getName());
 
-        errorEmbed.setColor(0xFF0000)
-                .setDescription(bot.getMsg(tc.getGuild().getId(), path));
+        embed.setColor(0xFF0000)
+                .setDescription(msg);
 
         if(reason != null)
-            errorEmbed.addField(
+            embed.addField(
                     "Error:",
                     reason,
                     false
             );
 
-        tc.sendMessage(errorEmbed.build()).queue();
+        tc.sendMessage(embed.build()).queue();
     }
 
     public void sendError(TextChannel tc, User user, String path){
         sendError(tc, user, path, null);
+    }
+    
+    public void sendPermError(TextChannel tc, User user, @Nullable TextChannel channel, Permission permission){
+        EmbedBuilder embed = user == null ? getEmbed() : getEmbed(user, tc.getGuild());
+        String msg;
+        if(channel == null){
+            msg = bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.self")
+                    .replace("{permission}", permission.getName());
+        }else{
+            msg = bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.self_channel")
+                    .replace("{channel}", channel.getAsMention())
+                    .replace("{permission}", channel.getAsMention());
+        }
+        
+        embed.setColor(0xFF0000)
+                .setDescription(msg);
+        
+        tc.sendMessage(embed.build()).queue();
     }
 
 }

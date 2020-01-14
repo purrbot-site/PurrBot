@@ -23,7 +23,6 @@ import org.json.JSONObject;
 import site.purrbot.bot.constants.API;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class HttpUtil {
 
@@ -37,16 +36,22 @@ public class HttpUtil {
                 api.getLink()
         )).build();
 
-        Response response = CLIENT.newCall(request).execute();
-        try(ResponseBody body = response.body()){
-            if(!response.isSuccessful()) throw new IOException(String.format(
-                    "Unexpected code from endpoint %s: %s",
-                    api.getEndpoint(),
-                    response
-            ));
-            
+        try(Response response = CLIENT.newCall(request).execute()){
+            ResponseBody body = response.body();
+    
             if(body == null)
                 throw new NullPointerException("Received empty body!");
+            
+            if(body.string().isEmpty())
+                throw new NullPointerException("Received empty body!");
+                    
+            if(!response.isSuccessful())
+                throw new IOException(String.format(
+                        "Unexpected code from endpoint %s: %s", 
+                        api.getEndpoint(), 
+                        response
+                ));
+            
             
             return new JSONObject(body.string()).getString("link");
         }

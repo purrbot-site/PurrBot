@@ -23,8 +23,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Links;
@@ -55,16 +54,17 @@ public class CmdInvite implements Command{
     private String getInvite(JDA jda, Permission... permissions){
         return jda.getInviteUrl(permissions);
     }
-
+    
     @Override
     public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
+        Guild guild = msg.getGuild();
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(bot.isBeta()){
-            
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "snuggle.info.invite.message");
             return;
         }
         
@@ -73,55 +73,51 @@ public class CmdInvite implements Command{
                         Links.WEBSITE.getUrl(),
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
                 )
-                .addField("Invite me",
-                        "Heyo! Really nice of you, to invite me to your Discord. :3\n" +
-                        "Inviting me is quite simple:\n" +
-                        "Just click on one of the Links below and choose your Discord.\n",
-                        false)
-                .addField("About the Links:",
-                        "Each link has another purpose.\n" +
-                        "`Recommended Invite` is (obviously) the recommended invite, that you should use.\n" +
-                        "`Basic Invite` is almost the same as the recommended invite, but with less perms.\n" +
-                        "`Discord` is my official Discord, where you can get help."
-                        , false)
-                .addField("", String.format(
-                        "[`Recommended Invite`](%s)\n" +
-                        "[`Basic Invite`](%s)\n" +
-                        "[`Discord`](%s)",
-                        getInvite(
-                                msg.getJDA(),
-                                Permission.MESSAGE_WRITE,
-                                Permission.MESSAGE_EMBED_LINKS,
-                                Permission.MESSAGE_HISTORY,
-                                Permission.MESSAGE_ADD_REACTION,
-                                Permission.MESSAGE_EXT_EMOJI,
-                                Permission.MESSAGE_MANAGE,
-                                Permission.MANAGE_WEBHOOKS,
-                                Permission.MESSAGE_ATTACH_FILES
-                        ),
-                        getInvite(
-                                msg.getJDA(),
-                                Permission.MESSAGE_WRITE,
-                                Permission.MESSAGE_EMBED_LINKS,
-                                Permission.MESSAGE_HISTORY,
-                                Permission.MESSAGE_ADD_REACTION,
-                                Permission.MESSAGE_EXT_EMOJI
-                        ),
-                        Links.DISCORD.getUrl()
-                ), false);
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.invite.embed.info_title"),
+                        bot.getMsg(guild.getId(), "purr.info.invite.embed.info_value"),
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.invite.embed.about_title"),
+                        bot.getMsg(guild.getId(), "purr.info.invite.embed.about_value"),
+                        false
+                )
+                .addField(
+                        EmbedBuilder.ZERO_WIDTH_SPACE,
+                        bot.getMsg(guild.getId(), "purr.info.invite.embed.links")
+                                .replace("{invite_full}", getInvite(
+                                        guild.getJDA(),
+                                        Permission.MESSAGE_WRITE,
+                                        Permission.MESSAGE_EMBED_LINKS,
+                                        Permission.MESSAGE_HISTORY,
+                                        Permission.MESSAGE_ADD_REACTION,
+                                        Permission.MESSAGE_EXT_EMOJI,
+                                        Permission.MESSAGE_MANAGE,
+                                        Permission.MESSAGE_ATTACH_FILES
+                                ))
+                                .replace("{invite_basic}", getInvite(
+                                        guild.getJDA(),
+                                        Permission.MESSAGE_WRITE,
+                                        Permission.MESSAGE_EMBED_LINKS,
+                                        Permission.MESSAGE_HISTORY,
+                                        Permission.MESSAGE_ADD_REACTION,
+                                        Permission.MESSAGE_EXT_EMOJI
+                                ))
+                                .replace("{support}", Links.DISCORD.getUrl()),
+                        false
+                );
 
 
-        if(args.toLowerCase().contains("--dm")){
+        if(args.toLowerCase().contains("--dm") || args.toLowerCase().contains("—dm")){
             msg.getAuthor().openPrivateChannel().queue(
                     pm -> pm.sendMessage(invite.build()).queue(message ->
-                            tc.sendMessage(String.format(
-                                    "Check your DMs %s!",
-                                    msg.getAuthor().getAsMention()
-                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
-                    ), throwable -> tc.sendMessage(String.format(
-                            "I can't DM you %s!",
-                            msg.getAuthor().getAsMention()
-                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
+                            tc.sendMessage(
+                                    bot.getMsg(guild.getId(), "purr.info.invite.dm_success", msg.getAuthor().getAsMention())
+                            ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
+                    ), throwable -> tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", msg.getAuthor().getAsMention())
+                    ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
             );
             return;
         }

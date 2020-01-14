@@ -1,43 +1,55 @@
+/*
+ * Copyright 2020 Andre601
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package site.purrbot.bot.util.file.lang;
 
-import com.google.auto.value.AutoAnnotation;
-import com.google.inject.Inject;
-import me.piggypiglet.framework.file.FileManager;
-import me.piggypiglet.framework.file.framework.FileConfiguration;
+import site.purrbot.bot.PurrBot;
 
-// ------------------------------
-// Copyright (c) PiggyPiglet 2019
-// https://www.piggypiglet.me
-// ------------------------------
+import java.util.List;
+
 public final class LangUtils {
-    @Inject private static FileManager fileManager;
     
-    @Inject @Lang("de") private static FileConfiguration de;
-    @Inject @Lang("en") private static FileConfiguration en;
-    @Inject @Lang("ko") private static FileConfiguration ko;
-
-    @AutoAnnotation
-    public static Lang lang(String value) {
-        return new AutoAnnotation_LangUtils_lang(value);
+    private PurrBot bot;
+    public LangUtils(PurrBot bot){
+        this.bot = bot;
     }
 
-    public static String get(String language, String path) {
-        switch (language.toLowerCase()) {
+    public String getString(String language, String path){
+        switch(language.toLowerCase()){
             case "de":
-                return de.getString(path);
-
             case "en":
-                return en.getString(path);
-
             case "ko":
-                return ko.getString(path);
-
+                return bot.getFileManager().getString(language.toLowerCase(), path);
+                
             default:
-                throw new UnsupportedOperationException("That language doesn't exist.");
+                return bot.getFileManager().getString("en", path);
         }
     }
     
-    public static FileManager getFileManager(){
-        return fileManager;
+    public List<String> getStringList(String language, String path){
+        switch(language.toLowerCase()){
+            case "de":
+            case "en":
+            case "ko":
+                return bot.getFileManager().getStringlist(language.toLowerCase(), path);
+            
+            default:
+                return bot.getFileManager().getStringlist("en", path);
+        }
     }
 }
