@@ -71,12 +71,21 @@ public class EmbedUtil {
         sendError(tc, user, path, null);
     }
     
-    public void sendPermError(TextChannel tc, User user, @Nullable TextChannel channel, Permission permission){
+    public void sendPermError(TextChannel tc, User user, Permission permission, boolean self){
+        sendPermError(tc, user, null, permission, self);
+    }
+    
+    public void sendPermError(TextChannel tc, User user, @Nullable TextChannel channel, Permission permission, boolean self){
         EmbedBuilder embed = user == null ? getEmbed() : getEmbed(user, tc.getGuild());
         String msg;
         if(channel == null){
-            msg = bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.self")
-                    .replace("{permission}", permission.getName());
+            if(self){
+                msg = bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.self")
+                        .replace("{permission}", permission.getName());
+            }else{
+                msg = bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.other")
+                        .replace("{permission}", permission.getName());
+            }
         }else{
             msg = bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.self_channel")
                     .replace("{channel}", channel.getAsMention())

@@ -86,7 +86,7 @@ public class CmdStats implements Command{
         return String.format(
                 "%d %s",
                 time,
-                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.day") : bot.getMsg(id, "purr.info.stats.uptime.days")
+                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.hour") : bot.getMsg(id, "purr.info.stats.uptime.hours")
         );
     }
     
@@ -96,7 +96,7 @@ public class CmdStats implements Command{
         return String.format(
                 "%d %s",
                 time,
-                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.day") : bot.getMsg(id, "purr.info.stats.uptime.days")
+                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.minute") : bot.getMsg(id, "purr.info.stats.uptime.minutes")
         );
     }
     
@@ -106,7 +106,7 @@ public class CmdStats implements Command{
         return String.format(
                 "%d %s",
                 time,
-                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.day") : bot.getMsg(id, "purr.info.stats.uptime.days")
+                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.second") : bot.getMsg(id, "purr.info.stats.uptime.seconds")
         );
     }
 

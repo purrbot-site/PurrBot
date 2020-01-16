@@ -22,6 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
@@ -54,47 +55,34 @@ public class CmdLewd implements Command{
     @Override
     public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
-
+        Guild guild = msg.getGuild();
+        
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
         
+        EmbedBuilder neko = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild);
+        String link;
+        
         if(args.toLowerCase().contains("--gif") || args.toLowerCase().contains("—gif")){
-            String gifLink = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD);
-            if(gifLink == null){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
+            link = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD);
+            if(link == null){
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
                 return;
             }
-
-            EmbedBuilder lewdgif = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
-                    .setTitle(String.format(
-                            "Lewd Neko %s",
-                            Emotes.WAGTAIL.getEmote()
-                    ), gifLink)
-                    .setImage(gifLink);
-
-            tc.sendMessage(String.format(
-                    "%s Getting a lewd neko-gif...",
-                    Emotes.LOADING.getEmote()
-            )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(lewdgif.build()).queue());
-            return;
+            
+            neko.setTitle(bot.getMsg(guild.getId(), "purr.nsfw.lewd.title_gif"), link).setImage(link);
+        }else{
+            link = bot.getHttpUtil().getImage(API.IMG_NEKO_LEWD);
+            if(link == null){
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
+                return;
+            }
+            
+            neko.setTitle(bot.getMsg(guild.getId(), "purr.nsfw.lewd.title_img"), link).setImage(link);
         }
-
-        String link = bot.getHttpUtil().getImage(API.IMG_NEKO_LEWD);
-        if(link == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't reach the API! Try again later.");
-            return;
-        }
-
-        EmbedBuilder lewd = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
-                .setTitle(String.format(
-                        "Lewd Neko %s",
-                        Emotes.NEKOWO.getEmote()
-                ), link)
-                .setImage(link);
-
-        tc.sendMessage(String.format(
-                "%s Getting a lewd neko...",
-                Emotes.LOADING.getEmote()
-        )).queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(lewd.build()).queue());
+        
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.lewd.loading")).queue(message -> 
+                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(neko.build()).queue()
+        );
     }
 }

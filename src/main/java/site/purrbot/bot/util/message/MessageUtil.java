@@ -54,18 +54,6 @@ public class MessageUtil {
         );
     }
 
-    public String getRandomNoNsfwMsg(){
-        return bot.getNoNsfwMsg().isEmpty() ? "" : bot.getNoNsfwMsg().get(
-                bot.getRandom().nextInt(bot.getNoNsfwMsg().size())
-        );
-    }
-
-    public String getRandomPingMsg(){
-        return bot.getPingMsg().isEmpty() ? "" : bot.getPingMsg().get(
-                bot.getRandom().nextInt(bot.getPingMsg().size())
-        );
-    }
-
     public String getRandomShutdownImg(){
         return bot.getShutdownImg().isEmpty() ? "" : bot.getShutdownImg().get(
                 bot.getRandom().nextInt(bot.getShutdownImg().size())
@@ -82,10 +70,6 @@ public class MessageUtil {
         return bot.getStartupMsg().isEmpty() ? "" : bot.getStartupMsg().get(
                 bot.getRandom().nextInt(bot.getStartupMsg().size())
         );
-    }
-
-    public String firstUpperCase(String text){
-        return Character.toString(text.charAt(0)).toUpperCase() + text.substring(1).toLowerCase();
     }
 
     public String formatTime(LocalDateTime time){

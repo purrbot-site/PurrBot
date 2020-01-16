@@ -1,22 +1,29 @@
 {
   "bot-token": "TOKEN",
+  
+  "beta": false,
+  
+  "webhooks": {
+    "guild": "guild-webhook-url",
+    "log": "log-webhook-url",
+    "vote": "vote-webhook-url"
+  },
+  
+  "tokens": {
+    "blaze": "blaze-token",
+    
+    "top-gg": "top-token",
+    "discord-bots-gg": "dbgg-token",
+    "lbots-org": "lbots-token",
+    "botlist-space": "botlist-token",
+    "discordextremelist-xyz": "debl-token"
+  },
 
-  "guild-webhook": "guild-webhook_url",
-  "log-webhook": "log-webhook_url",
-  "vote-webhook": "vote-webhook_url",
 
-  "blaze-token": "blaze-token",
-
-  "dbl-token": "dbl-token",
-  "dbgg-token": "dbgg-token",
-  "lbots-token": "lbots-token",
-  "botlist-token": "botlist-token",
-  "debl-token": "debl-token",
-
-  "beta": "false",
-
-  "db-ip": "127.0.0.1",
-  "db-name": "DatabaseName",
-  "db-guildTable": "GuildTable",
-  "db-memberTable": "MemberTable"
+  "database": {
+    "ip": "127.0.0.1",
+    "name": "DatabaseName",
+    "guildTable": "GuildTable",
+    "memberTable": "MemberTable"
+  }
 }

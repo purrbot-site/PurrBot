@@ -70,8 +70,7 @@ public class CmdNeko implements Command{
                 return;
             }
             
-            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_gif"), link)
-                    .setImage(link);
+            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_gif"), link).setImage(link);
         }else{
             link = bot.getHttpUtil().getImage(API.IMG_NEKO);
             if(link == null){
@@ -79,13 +78,10 @@ public class CmdNeko implements Command{
                 return;
             }
             
-            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_img"))
-                    .setImage(link);
+            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_img")).setImage(link);
         }
         
-        tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.fun.neko.loading")
-        ).queue(message -> {
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.neko.loading")).queue(message -> {
             if(link.equals("https://purrbot.site/img/sfw/neko/img/neko_076.jpg")){
                 if(bot.isBeta()){
                     neko.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.snuggle"));

@@ -22,7 +22,9 @@ import okhttp3.*;
 import org.json.JSONObject;
 import site.purrbot.bot.constants.API;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.zip.GZIPOutputStream;
 
 public class HttpUtil {
 
@@ -31,35 +33,71 @@ public class HttpUtil {
     public HttpUtil(){}
 
     private String image(API api) throws IOException{
-        Request request = new Request.Builder().url(String.format(
-                "%s",
-                api.getLink()
-        )).build();
+        Request request = new Request.Builder()
+                .url(api.getLink())
+                .build();
 
         try(Response response = CLIENT.newCall(request).execute()){
-            ResponseBody body = response.body();
-    
-            if(body == null)
-                throw new NullPointerException("Received empty body!");
-            
-            if(body.string().isEmpty())
-                throw new NullPointerException("Received empty body!");
-                    
             if(!response.isSuccessful())
                 throw new IOException(String.format(
-                        "Unexpected code from endpoint %s: %s", 
-                        api.getEndpoint(), 
+                        "Unexpected code from endpoint %s: %s",
+                        api.getEndpoint(),
                         response
                 ));
             
+            ResponseBody body = response.body();
+            if(body == null)
+                throw new NullPointerException("Received empty body!");
             
-            return new JSONObject(body.string()).getString("link");
+            String bodyString = body.string();
+            if(bodyString.isEmpty())
+                throw new NullPointerException("Received empty body!");
+            
+            return new JSONObject(bodyString).getString("link");
+        }
+    }
+    
+    private String byteBinCode(JSONObject json) throws IOException{
+        String jsonRaw = json.toString();
+        if(jsonRaw == null || jsonRaw.isEmpty())
+            throw new IllegalStateException("JSON may not be null or empty.");
+        
+        RequestBody requestBody = RequestBody.create(jsonRaw, null);
+        
+        Request request = new Request.Builder()
+                .url("https://bytebin.lucko.me/post")
+                .post(requestBody)
+                .addHeader("Content-Type", "application/json")
+                .addHeader("User-Agent", "PurrBot BOT_VERSION")
+                .build();
+        
+        try(Response response = CLIENT.newCall(request).execute()){
+            if(!response.isSuccessful())
+                throw new IOException("Server responded with error code " + response.code() + " (" + response.message() + ")");
+            
+            ResponseBody body = response.body();
+            if(body == null)
+                throw new NullPointerException("Received empty body!");
+            
+            String bodyRaw = body.string();
+            if(bodyRaw.isEmpty())
+                throw new NullPointerException("Received empty body!");
+            
+            return new JSONObject(bodyRaw).getString("key");
         }
     }
 
     public String getImage(API api){
         try{
             return image(api);
+        }catch(IOException ex){
+            return null;
+        }
+    }
+    
+    public String getByteBinCode(JSONObject json){
+        try{
+            return byteBinCode(json);
         }catch(IOException ex){
             return null;
         }

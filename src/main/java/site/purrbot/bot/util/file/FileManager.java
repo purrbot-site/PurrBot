@@ -97,19 +97,38 @@ public class FileManager{
                 json = json.getAsJsonObject().get(key);
             }
             
-            return (json == null || json.isJsonNull()) ? null : json.getAsString();
+            if(json == null || json.isJsonNull())
+                return "";
+            
+            return json.getAsString();
         }catch(FileNotFoundException ex){
-            logger.warn(String.format(
-                    "Couldn't find file %s",
-                    name
-            ), ex);
+            logger.warn("Could not find file " + name + ".json in " + path, ex);
+            return "";
         }
-
-        return String.format(
-                "%s not found in %s",
-                path,
-                name
-        );
+    }
+    
+    public boolean getBoolean(String name, String path){
+        File file = files.get(name);
+        
+        try{
+            JsonReader reader = new JsonReader(new FileReader(file));
+            JsonElement json = JsonParser.parseReader(reader);
+            
+            for(String key : path.split("\\.")){
+                if(!json.isJsonObject())
+                    break;
+                
+                json = json.getAsJsonObject().get(key);
+            }
+            
+            if(json == null || json.isJsonNull())
+                return false;
+            
+            return json.getAsBoolean();
+        }catch(FileNotFoundException ex){
+            logger.warn("Could not find file " + name + ".json in " + path, ex);
+            return false;
+        }
     }
 
     public List<String> getStringlist(String name, String path){
@@ -127,7 +146,7 @@ public class FileManager{
             }
             
             if(json == null || json.isJsonNull())
-                return null;
+                return new ArrayList<>();
     
             Gson gson = new Gson();
             Type type = new TypeToken<List<String>>(){}.getType();
@@ -135,13 +154,9 @@ public class FileManager{
             return gson.fromJson(json.getAsJsonArray(), type);
             
         }catch(FileNotFoundException ex){
-            logger.warn(String.format(
-                    "Couldn't find file %s",
-                    name
-            ), ex);
+            logger.warn("Could not find file " + name + ".json in " + path, ex);
+            return new ArrayList<>();
         }
-
-        return Collections.singletonList(String.format("%s not found in %s", path, name));
     }
 
     private boolean export(InputStream inputStream, String destination){

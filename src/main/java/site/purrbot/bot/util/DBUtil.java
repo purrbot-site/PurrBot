@@ -38,20 +38,19 @@ public class DBUtil {
     public DBUtil(PurrBot bot){
         r = RethinkDB.r;
         connection = r.connection()
-                .hostname(bot.getFileManager().getString("config", "db-ip"))
+                .hostname(bot.getFileManager().getString("config", "database.ip"))
                 .port(28015)
-                .db(bot.getFileManager().getString("config", "db-name"))
+                .db(bot.getFileManager().getString("config", "database.name"))
                 .connect();
 
-        guildTable  = bot.getFileManager().getString("config", "db-guildTable");
-        memberTable = bot.getFileManager().getString("config", "db-memberTable");
+        guildTable  = bot.getFileManager().getString("config", "database.guildTable");
+        memberTable = bot.getFileManager().getString("config", "database.memberTable");
         this.bot = bot;
     }
 
     /*
      *  Guild Stuff
      */
-
     private void checkValue(String id, String key, String def){
         Map map = getGuild(id);
 
@@ -82,7 +81,9 @@ public class DBUtil {
     public void delGuild(String id){
         Map guild = getGuild(id);
 
-        if(guild == null) return;
+        if(guild == null) 
+            return;
+        
         r.table(guildTable).get(id).delete().run(connection);
     }
 

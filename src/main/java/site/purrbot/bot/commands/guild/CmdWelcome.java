@@ -220,8 +220,7 @@ public class CmdWelcome implements Command{
             InputStream is;
             try{
                 is = bot.getImageUtil().getWelcomeImg(
-                        msg.getAuthor(),
-                        guild.getMembers().size(),
+                        msg.getMember(),
                         bot.getWelcomeIcon(guild.getId()),
                         bot.getWelcomeBg(guild.getId()),
                         bot.getWelcomeColor(guild.getId())
@@ -236,7 +235,7 @@ public class CmdWelcome implements Command{
             }
 
             tc.sendMessage(welcomeSettings(msg.getAuthor(), guild, true))
-                    .addFile(is, "welcome.jpeg")
+                    .addFile(is, "welcome.jpg")
                     .queue();
             return;
         }
@@ -430,8 +429,7 @@ public class CmdWelcome implements Command{
                 InputStream is;
                 try{
                     is = bot.getImageUtil().getWelcomeImg(
-                            msg.getAuthor(),
-                            guild.getMembers().size(),
+                            msg.getMember(),
                             bot.getWelcomeIcon(guild.getId()),
                             bot.getWelcomeBg(guild.getId()),
                             bot.getWelcomeColor(guild.getId())

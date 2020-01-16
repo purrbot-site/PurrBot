@@ -39,13 +39,13 @@ public class RewardHandler {
         this.bot = bot;
     }
 
-    private void giveReward(String botId, String userId, Site site){
+    private boolean giveReward(String botId, String userId, Site site){
         if(!botId.equals(IDs.PURR.getId()))
-            return;
+            return false;
 
         Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
         if(guild == null)
-            return;
+            return false;
 
         Role reward = guild.getRoleById(Roles.VOTER.getId());
         String msg;
@@ -53,7 +53,7 @@ public class RewardHandler {
         String reason;
         String avatar;
         Member member = guild.getMemberById(userId);
-        String url = bot.getFileManager().getString("config", "vote-webhook");
+        String url = bot.getFileManager().getString("config", "webhooks.vote");
         
         switch(site){
             case BOTLIST_SPACE:
@@ -152,8 +152,8 @@ public class RewardHandler {
         }
         
         if(msg == null){
-            logger.info("Unknown Vote site/action.");
-            return;
+            logger.info("Received vote from unknown site (Unknown Vote action).");
+            return false;
         }
         
         if(member != null)
@@ -162,18 +162,19 @@ public class RewardHandler {
             .queue();
         
         bot.getWebhookUtil().sendMsg(url, avatar, name, msg);
+        return true;
     }
 
-    public void lbotsReward(String userId){
-        giveReward(IDs.PURR.getId(), userId, Site.LBOTS_ORG);
+    public boolean lbotsReward(String userId){
+        return giveReward(IDs.PURR.getId(), userId, Site.LBOTS_ORG);
     }
 
-    public void botlistSpaceReward(String botId, String userId){
-        giveReward(botId, userId, Site.BOTLIST_SPACE);
+    public boolean botlistSpaceReward(String botId, String userId){
+        return giveReward(botId, userId, Site.BOTLIST_SPACE);
     }
 
-    public void discordbots_org(String botId, String userId){
-        giveReward(botId, userId, Site.TOP_GG);
+    public boolean discordbots_org(String botId, String userId){
+        return giveReward(botId, userId, Site.TOP_GG);
     }
 
     private enum Site{

@@ -4,10 +4,11 @@
   },
   "errors": {
     "api_error": "Es gab einen Fehler beim erreichen der API! Bitte versuch es später erneut.",
+    "guild_only": "Doeser Befehl kann nur in [meinem Discord]({link}) verwendet werden!",
     "missing_perms": {
-      "self": "Ich benötige die Berechtigung {permission} dafür.",
-      "self_channel": "Ich benötige die Berechtigung {permission} im Textkanal {channel} dafür!",
-      "other": "Du benötigst die Berechtigung {permission} für diesen Befehl."
+      "self": "Ich benötige die Berechtigung `{permission}` dafür.",
+      "self_channel": "Ich benötige die Berechtigung `{permission}` im Textkanal {channel} dafür!",
+      "other": "Du benötigst die Berechtigung `{permission}` für diesen Befehl."
     },
     "nsfw_random": [
       "Dieser Kanal scheint keinen NSFW-Label zu haben, oder {user}?",
@@ -22,6 +23,7 @@
   },
   "misc": {
     "and": "und",
+    "info": "Hey da {user}!\nMein Prefix auf diesem Discord ist `{prefix}`\nVerwende `{prefix}help` für eine Liste von Befehlen.",
     "unknown_user": "Unbekannt",
     "welcome_member": "Du bist Mitglied #{count}"
   },
@@ -370,7 +372,7 @@
           "denied": "{target} möchte keinen Sex mit dir haben {user}. >.<",
           "message": "Hey {target}!\n{user} möchte mit dir Sex haben. Willst du das auch?\nReagiere mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Sei nicht so eine notgeile Person {user}!\nDu hast bereits eine offene Anfrage. Warte bis diese angenommen oder abgelehnt wird, oder abläuft.",
-          "timed_out": "Sieht so aus als ob {target} nicht mit dir Sex haben will {user}. .\\_."
+          "timed_out": "Sieht so aus als ob {target} nicht mit dir Sex haben will {user}. ._."
         }
       },
       "lewd": {
@@ -468,18 +470,18 @@
     },
     "nsfw": {
       "blowjob": {
-        "mention_snuggle": "\\*rennt weg und versteckt sich* Ich will nichts unanständiges machen.",
+        "mention_snuggle": "\\*rennt weg und versteckt sich* Ich will nichts unanständiges machen {user}.",
         "mention_self": "Hehehe... Sich selbst einen blasen. Du musst einsam oder sehr schüchtern sein {user}.",
         "special_user": "W-warum willst du dass mit mir machen {user}? D-du hast meine Schwester für das."
       },
       "fuck": {
-        "mention_purr": "N-nein! Ich werde dass nicht mir dir machen {user}."
+        "mention_snuggle": "N-nein! Ich werde dass nicht mir dir machen {user}."
       },
       "threesome": {
-        "mention_purr": "I-ich steh nicht auf sowas {user}!"
+        "mention_snuggle": "I-ich steh nicht auf sowas {user}!"
       },
       "yurifuck": {
-        "mention_purr": "W-warum willst du dass mit mir machen {user}? Ich kenne dich nicht!"
+        "mention_snuggle": "W-warum willst du dass mit mir machen {user}? Ich kenne dich nicht!"
       }
     }
   }

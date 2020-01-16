@@ -90,7 +90,7 @@ public class ReadyListener extends ListenerAdapter{
                 .build();
 
         bot.getWebhookUtil().sendMsg(
-                bot.getFileManager().getString("config", "log-webhook"),
+                bot.getFileManager().getString("config", "webhooks.log"),
                 jda.getSelfUser().getEffectiveAvatarUrl(),
                 "Shard ready!",
                 embed

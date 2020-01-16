@@ -125,7 +125,7 @@ public class CmdQuote implements Command{
 
         if(msg.getMentionedChannels().isEmpty()){
             if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), null, Permission.MESSAGE_HISTORY);
+                bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), Permission.MESSAGE_HISTORY, true);
                 return;
             }
 
@@ -220,7 +220,7 @@ public class CmdQuote implements Command{
                 sendImgEmbed(msg, quote, bytes, tc);
             }
         }else{
-            bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), channel, Permission.MESSAGE_HISTORY);
+            bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), channel, Permission.MESSAGE_HISTORY, true);
         }
     }
 }

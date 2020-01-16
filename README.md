@@ -18,9 +18,11 @@
 [License]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
 [background]: https://github.com/Andre601/PurrBot/wiki/Welcome-images#backgrounds
 [icon]: https://github.com/Andre601/PurrBot/wiki/Welcome-images#icons
+[translations]: https://github.com/purrbot-site/Translations
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
+[emojis]: https://allcontributors.org/docs/en/emoji-key
 
 <!-- Widgets -->
 [widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
@@ -72,24 +74,24 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 ## Guild
 **Permission**: `Manage Server`
 
-| Command: | Arguments:                   | Description:                                                      |
-| -------- | ---------------------------- | ----------------------------------------------------------------- |
-| Language |                              | Shows the currently used and all available languages.             |
-|          | `set <language>`             | Sets the language for the Guild to a supported one.               |
-|          | `reset`                      | Resets the language to English (en).                              |
-| Prefix   | `set <prefix>`               | Sets the provided prefix for the Guild.                           |
-|          | `reset`                      | Resets the prefix to the default one.                             |
-| Welcome  |                              | Shows the current welcome-settings.                               |
-|          | `bg set <background>`        | Sets the [background] of the image.                               |
-|          | `bg reset`                   | Resets the background to the default one (`color_white`)          |
-|          | `channel set <#channel>`     | Change the channel to the mentioned one.                          |
-|          | `channel reset`              | Resets the channel.                                               |
-|          | `color set <color>`          | Change the text color. Supported args are hex:rrggbb or rgb:r,g,b |
-|          | `color reset`                | Resets the text color.                                            |
-|          | `icon set <image>`           | Sets the [icon] of the image.                                     |
-|          | `icon reset`                 | Resets the icon.                                                  |
-|          | `msg set <msg>`              | Changes the greeting message.                                     |
-|          | `msg reset`                  | Resets the greeting message to "Welcome {mention}!"               |
+| Command: | Arguments:               | Description:                                                      |
+| -------- | ------------------------ | ----------------------------------------------------------------- |
+| Language |                          | Shows the currently used and all available languages.             |
+|          | `set <language>`         | Sets the language for the Guild to a supported one.               |
+|          | `reset`                  | Resets the language to English (en).                              |
+| Prefix   | `set <prefix>`           | Sets the provided prefix for the Guild.                           |
+|          | `reset`                  | Resets the prefix to the default one.                             |
+| Welcome  |                          | Shows the current welcome-settings.                               |
+|          | `bg set <background>`    | Sets the [background] of the image.                               |
+|          | `bg reset`               | Resets the background to the default one (`color_white`)          |
+|          | `channel set <#channel>` | Change the channel to the mentioned one.                          |
+|          | `channel reset`          | Resets the channel.                                               |
+|          | `color set <color>`      | Change the text color. Supported args are hex:rrggbb or rgb:r,g,b |
+|          | `color reset`            | Resets the text color.                                            |
+|          | `icon set <image>`       | Sets the [icon] of the image.                                     |
+|          | `icon reset`             | Resets the icon.                                                  |
+|          | `msg set <msg>`          | Changes the greeting message.                                     |
+|          | `msg reset`              | Resets the greeting message to "Welcome {mention}!"               |
 
 ## Info
 **Permission**: `None`
@@ -125,6 +127,12 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 |           | `[--fff]`             | Gives you a gif with females only instead of the default 1 male, 2 females.         |
 |           | `[--mmf]`             | Gives you a gif with 2 males and 1 female instead of the default 1 male, 2 females. |
 | Yurifuck  | `<@user>`             | Similar to `.fuck`, but with females only \>wO                                      |
+
+# Translations
+Version 2.5 of \*Purr* added an option to have a per-guild language set.  
+We are happy about any translations being made for the bot.
+
+If you want to contribute to the translations of the bot (Adding your own, or correcting others), take a look at the [GitHub Repository][translations] for this.
 
 # Inviting the bot
 The bot has two invite-links: A full invite and a basic invite.
@@ -180,7 +188,8 @@ Feel free to upvote or add her to your favourites to show your support.
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to the wonderful people listed below.  
+Take a look at the [emoji key][emojis] site to find out what the emojis mean.
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->

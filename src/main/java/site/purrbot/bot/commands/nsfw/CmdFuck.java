@@ -68,10 +68,9 @@ public class CmdFuck implements Command{
 
     private EmbedBuilder getFuckEmbed(Member requester, Member target, String url){
         return bot.getEmbedUtil().getEmbed()
-                .setDescription(String.format(
-                        "%s and %s are having sex!",
-                        MarkdownSanitizer.escape(requester.getEffectiveName()),
-                        MarkdownSanitizer.escape(target.getEffectiveName())
+                .setDescription(MarkdownSanitizer.escape(
+                        bot.getMsg(requester.getGuild().getId(), "purr.nsfw.fuck.message", requester.getEffectiveName())
+                                .replace("{target}", target.getEffectiveName())
                 ))
                 .setImage(url);
     }
@@ -86,7 +85,7 @@ public class CmdFuck implements Command{
             return;
 
         if(msg.getMentionedUsers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, author.getUser(), "Please mention a user to fuck.");
+            bot.getEmbedUtil().sendError(tc, author.getUser(), "purr.nsfw.fuck.no_mention");
             return;
         }
 
@@ -94,10 +93,9 @@ public class CmdFuck implements Command{
 
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
-                tc.sendMessage(String.format(
-                        "\\*Slaps %s* N-NO! Not with me!",
-                        author.getAsMention()
-                )).queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.fuck.mention_snuggle")
+                ).queue();
                 return;
             }
             if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
@@ -115,46 +113,37 @@ public class CmdFuck implements Command{
                     )).queue();
                 }
             }else{
-                tc.sendMessage(String.format(
-                        "\\*Slaps %s* Nononononono! Not with me!",
-                        msg.getAuthor().getAsMention()
-                )).queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.nsfw.fuck.mention_purr", author.getAsMention())
+                ).queue();
             }
             return;
         }
 
         if(target.equals(author)){
-            tc.sendMessage(String.format(
-                    "How can you actually fuck yourself %s?! (And no. Masturbation is not a valid answer)",
-                    msg.getAuthor().getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.nsfw.fuck.mention_self", author.getAsMention())
+            ).queue();
             return;
         }
 
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "You can't fuck with bots! >-<");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.nsfw.fuck.mention_bot");
             return;
         }
 
         if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
-            tc.sendMessage(String.format(
-                    "You already have an open request for someone to fuck with you %s!\n" +
-                    "Please wait until the person accepts or denies it, or the request times out.",
-                    author.getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.open", author.getAsMention())
+            ).queue();
             return;
         }
 
         queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
-        tc.sendMessage(String.format(
-                "Hey %s!\n" +
-                "%s wants to have sex with you. Do you want that too?\n" +
-                "React with ✅ to accept or with ❌ to deny the request.\n" +
-                "\n" +
-                "> **This request will time out in 1 minute!**",
-                target.getAsMention(),
-                MarkdownSanitizer.escape(author.getEffectiveName())
-        )).queue(message -> {
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.message", author.getEffectiveName())
+                        .replace("{target}", target.getAsMention())
+        ).queue(message -> {
             message.addReaction("✅").queue();
             message.addReaction("❌").queue();
             EventWaiter waiter = bot.getWaiter();
@@ -177,10 +166,9 @@ public class CmdFuck implements Command{
 
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
-                            ev.getChannel().sendMessage(String.format(
-                                    "%s doesn't want to lewd with you %s. >.<",
-                                    MarkdownSanitizer.escape(target.getEffectiveName()),
-                                    author.getAsMention()
+                            ev.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                    bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.denied", author.getAsMention())
+                                            .replace("{target}", target.getEffectiveName())
                             )).queue();
                             return;
                         }
@@ -192,17 +180,15 @@ public class CmdFuck implements Command{
 
                             String link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
 
-                            ev.getChannel().sendMessage(String.format(
-                                    "%s accepted your invite %s! 0w0",
-                                    MarkdownSanitizer.escape(target.getEffectiveName()),
-                                    author.getAsMention()
+                            ev.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                    bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.accepted", author.getAsMention())
+                                            .replace("{target}", target.getEffectiveName())
                             )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
 
                             if(link == null){
-                                ev.getChannel().sendMessage(String.format(
-                                        "%s and %s are having sex!",
-                                        MarkdownSanitizer.escape(author.getEffectiveName()),
-                                        MarkdownSanitizer.escape(target.getEffectiveName())
+                                ev.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                        bot.getMsg(guild.getId(), "purr.nsfw.fuck.message", author.getEffectiveName())
+                                                .replace("{target}", target.getEffectiveName())
                                 )).queue();
                                 return;
                             }
@@ -218,10 +204,9 @@ public class CmdFuck implements Command{
     
                         queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
-                        tc.sendMessage(String.format(
-                                "Looks like %s doesn't want to have sex with you %s. .\\_.",
-                                MarkdownSanitizer.escape(target.getEffectiveName()),
-                                author.getAsMention()
+                        tc.sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.timed_out", author.getAsMention())
+                                        .replace("{target}", target.getEffectiveName())
                         )).queue();
                     }
             );

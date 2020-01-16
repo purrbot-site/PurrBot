@@ -34,6 +34,7 @@ import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Message;
+import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
@@ -66,7 +67,7 @@ public class PurrBot {
 
     private Random random;
 
-    private FileManager fileManager;
+    private FileManager fileManager = new FileManager();
     private ReadyListener readyListener;
     private DBUtil dbUtil;
     private PermUtil permUtil;
@@ -78,6 +79,7 @@ public class PurrBot {
     private ImageUtil imageUtil;
     private LevelManager levelManager;
     private LangUtils langUtils;
+    private DebugUtil debugUtil;
 
     private boolean beta = false;
 
@@ -119,8 +121,6 @@ public class PurrBot {
     }
 
     private void setup() throws LoginException{
-        fileManager = new FileManager();
-        
         getFileManager().addFile("config", "/config.json", "./config.json")
                 .addFile("random", "/random.json", "./random.json")
                 .addFile("de", "/lang/de.json", "./lang/de.json")
@@ -140,10 +140,11 @@ public class PurrBot {
         imageUtil     = new ImageUtil(this);
         levelManager  = new LevelManager(this);
         langUtils     = new LangUtils(this);
+        debugUtil     = new DebugUtil(this);
 
         waiter = new EventWaiter();
 
-        beta = getFileManager().getString("config", "beta").equalsIgnoreCase("true");
+        beta = getFileManager().getBoolean("config", "beta");
 
         CMD_HANDLER.registerCommands(new HashSet<>(new CommandLoader(this).getCommands()));
 
@@ -166,6 +167,7 @@ public class PurrBot {
 
             path("/votes", () -> {
                 Gson voteGson = new Gson();
+                JSONObject json = new JSONObject();
 
                 post("/lbots", (request, response) -> {
                     JsonObject jsonObject = voteGson.fromJson(request.body(), JsonObject.class);
@@ -173,13 +175,18 @@ public class PurrBot {
                     String userId = jsonObject.get("userid").getAsString();
                     boolean isFavourite = jsonObject.get("favourited").getAsBoolean();
 
-                    if(getReadyListener().isReady())
-                        if(isFavourite)
-                            rewardHandler.lbotsReward(userId);
-
-                    response.status(200);
+                    if(getReadyListener().isReady() && isFavourite){
+                        if(rewardHandler.lbotsReward(userId)){
+                            response.status(200);
+                            json.put("code", 200).put("message", "POST-request valid!");
+                        }else{
+                            response.status(403);
+                            json.put("code", 403).put("message", "Invalid POST-request!");
+                        }
+                    }
+                    
                     response.type("application/json");
-                    response.body("{\"code\": 200,\"message\": \"POST request successful.\"}");
+                    response.body(json.toString());
 
                     return response.body();
                 });
@@ -190,28 +197,45 @@ public class PurrBot {
                     String botId = jsonObject.get("bot").getAsString();
                     String userId = jsonObject.getAsJsonObject("user").get("id").getAsString();
 
-                    if(getReadyListener().isReady())
-                        rewardHandler.botlistSpaceReward(botId, userId);
-
-                    response.status(200);
+                    if(getReadyListener().isReady()){
+                        if(rewardHandler.botlistSpaceReward(botId, userId)){
+                            response.status(200);
+                            json.put("code", 200).put("message", "POST-request valid!");
+                        }else{
+                            response.status(403);
+                            json.put("code", 403).put("message", "Invalid POST-request!");
+                        }
+                    }else{
+                        response.status(403);
+                        json.put("code", 403).put("message", "Vote-listener is not ready.");
+                    }
+                    
                     response.type("application/json");
-                    response.body("{\"code\": 200,\"message\": \"POST request successful.\"}");
+                    response.body(json.toString());
 
                     return response.body();
                 });
 
                 post("/dbl", (request, response) -> {
-                    JsonObject json = voteGson.fromJson(request.body(), JsonObject.class);
+                    JsonObject jsonObject = voteGson.fromJson(request.body(), JsonObject.class);
+                    String userId = jsonObject.get("user").getAsString();
+                    String botId = jsonObject.get("bot").getAsString();
+                    
+                    if(getReadyListener().isReady()){
+                        if(rewardHandler.discordbots_org(botId, userId)){
+                            response.status(200);
+                            json.put("code", 200).put("message", "POST-request valid!");
+                        }else{
+                            response.status(403);
+                            json.put("code", 403).put("message", "Invalid POST-request!");
+                        }
+                    }else{
+                        response.status(403);
+                        json.put("code", 403).put("message", "Vote-listener is not ready.");
+                    }
 
-                    if(getReadyListener().isReady())
-                        rewardHandler.discordbots_org(
-                                json.get("bot").getAsString(),
-                                json.get("user").getAsString()
-                        );
-
-                    response.status(200);
                     response.type("application/json");
-                    response.body("{\"code\": 200,\"message\": \"POST request successful.\"}");
+                    response.body(json.toString());
 
                     return response.body();
                 });
@@ -222,11 +246,26 @@ public class PurrBot {
     public void startUpdates(){ 
         if(!isBeta()) {
             botBlockAPI = new BotBlockAPI.Builder()
-                    .addAuthToken(Site.BOTLIST_SPACE, getFileManager().getString("config", "botlist-token"))
-                    .addAuthToken(Site.DISCORD_BOTS_GG, getFileManager().getString("config", "dbgg-token"))
-                    .addAuthToken(Site.LBOTS_ORG, getFileManager().getString("config", "lbots-token"))
-                    .addAuthToken(Site.DISCORDEXTREMELIST_XYZ, getFileManager().getString("config", "debl-token"))
-                    .addAuthToken(Site.TOP_GG, getFileManager().getString("config", "dbl-token"))
+                    .addAuthToken(
+                            Site.BOTLIST_SPACE, 
+                            getFileManager().getString("config", "tokens.botlist-space")
+                    )
+                    .addAuthToken(
+                            Site.DISCORD_BOTS_GG, 
+                            getFileManager().getString("config", "tokens.discord-bots-gg")
+                    )
+                    .addAuthToken(
+                            Site.LBOTS_ORG, 
+                            getFileManager().getString("config", "tokens.lbots-token")
+                    )
+                    .addAuthToken(
+                            Site.DISCORDEXTREMELIST_XYZ, 
+                            getFileManager().getString("config", "tokens.discordextremelist-xyz")
+                    )
+                    .addAuthToken(
+                            Site.TOP_GG, 
+                            getFileManager().getString("config", "tokens.top-gg")
+                    )
                     .build();
         }
 
@@ -269,6 +308,9 @@ public class PurrBot {
     }
     public LevelManager getLevelManager(){
         return levelManager;
+    }
+    public DebugUtil getDebugUtil(){
+        return debugUtil;
     }
     
     public boolean isBeta(){
@@ -418,6 +460,10 @@ public class PurrBot {
     public String getMsg(String id, String path){
         return setPlaceholders(langUtils.getString(getLanguage(id), path))
                 .replace("{prefix}", getPrefix(id));
+    }
+    
+    public String getRandomMsg(String id, String path, String user){
+        return getRandomMsg(id, path).replace("{user}", user);
     }
     
     public String getRandomMsg(String id, String path){

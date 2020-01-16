@@ -69,10 +69,9 @@ public class CmdYurifuck implements Command{
 
     private EmbedBuilder getFuckEmbed(Member requester, Member target, String url){
         return bot.getEmbedUtil().getEmbed()
-                .setDescription(String.format(
-                        "%s and %s are having sex!",
-                        MarkdownSanitizer.escape(requester.getEffectiveName()),
-                        MarkdownSanitizer.escape(target.getEffectiveName())
+                .setDescription(MarkdownSanitizer.escape(
+                        bot.getMsg(requester.getGuild().getId(), "purr.nsfw.yurifuck.message", requester.getEffectiveName())
+                                .replace("{target}", target.getEffectiveName())
                 ))
                 .setImage(url);
     }
@@ -87,7 +86,7 @@ public class CmdYurifuck implements Command{
             return;
 
         if(msg.getMentionedUsers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention one user to fuck!");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.nsfw.yurifuck.no_mention");
             return;
         }
 
@@ -95,10 +94,9 @@ public class CmdYurifuck implements Command{
 
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
-                tc.sendMessage(String.format(
-                        "\\*Slaps %s* Nononononono! Not with me!",
-                        author.getAsMention()
-                )).queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.yurifuck.mention_snuggle", author.getAsMention())
+                ).queue();
                 return;
             }
             if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
@@ -116,46 +114,36 @@ public class CmdYurifuck implements Command{
                     )).queue();
                 }
             }else{
-                tc.sendMessage(String.format(
-                        "Uhm... I-i'm honored, b-but I can't do it with you %s %s",
-                        msg.getAuthor().getAsMention(),
-                        Emotes.VANILLABLUSH.getEmote()
-                )).queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.nsfw.yurifuck.mention_purr", author.getAsMention())
+                ).queue();
             }
             return;
         }
 
         if(target.equals(author)){
-            tc.sendMessage(String.format(
-                    "Why do you want to only play with yourself %s? It's more fun with others. \uD83D\uDE0F",
-                    msg.getAuthor().getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.nsfw.yurifuck.mention_self", author.getAsMention())
+            ).queue();
             return;
         }
 
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "You can't fuck with bots! >-<");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.nsfw.yurifuck.mention_bot");
             return;
         }
 
         if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
-            tc.sendMessage(String.format(
-                    "%s You already asked someone to fuck with you!\n" +
-                    "Please wait until the person accepts it, or the request times out.",
-                    author.getAsMention()
+            tc.sendMessage(MarkdownSanitizer.escape(
+                    bot.getMsg(guild.getId(), "purr.nsfw.yurifuck.request.open", author.getAsMention())
             )).queue();
             return;
         }
 
         queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
-        tc.sendMessage(String.format(
-                "Hey %s!\n" +
-                "%s wants to have sex with you. Do you want that too?\n" +
-                "React with ✅ to accept or with ❌ to deny the request.\n" +
-                "\n" +
-                "> **This request will time out in 1 minute!**",
-                target.getAsMention(),
-                MarkdownSanitizer.escape(author.getEffectiveName())
+        tc.sendMessage(MarkdownSanitizer.escape(
+                bot.getMsg(guild.getId(), "purr.nsfw.yurifuck.request.message", author.getEffectiveName())
+                        .replace("{target}", target.getAsMention())
         )).queue(message -> {
             message.addReaction("✅").queue();
             message.addReaction("❌").queue();
@@ -179,10 +167,9 @@ public class CmdYurifuck implements Command{
 
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
-                            ev.getChannel().sendMessage(String.format(
-                                    "%s doesn't want to lewd with you %s. >.<",
-                                    MarkdownSanitizer.escape(target.getEffectiveName()),
-                                    author.getAsMention()
+                            ev.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                    bot.getMsg(guild.getId(), "purr.nsfw.yurifuck.request.denied", author.getAsMention())
+                                            .replace("{target}", target.getEffectiveName())
                             )).queue();
                             return;
                         }
@@ -194,17 +181,15 @@ public class CmdYurifuck implements Command{
                             
                             String link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
                             
-                            ev.getChannel().sendMessage(String.format(
-                                    "%s accepted your invite %s! 0w0",
-                                    MarkdownSanitizer.escape(target.getEffectiveName()),
-                                    author.getAsMention()
+                            ev.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                    bot.getMsg(guild.getId(), "purr.nsfw.yurifuck.request.accepted", author.getAsMention())
+                                            .replace("{target}", target.getEffectiveName())
                             )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
                             
                             if (link == null || link.isEmpty()) {
-                                ev.getChannel().sendMessage(String.format(
-                                        "%s and %s are having sex!",
-                                        MarkdownSanitizer.escape(author.getEffectiveName()),
-                                        MarkdownSanitizer.escape(target.getEffectiveName())
+                                ev.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                        bot.getMsg(guild.getId(), "purr.nsfw.yurifuck.message", author.getAsMention())
+                                                .replace("{target}", target.getEffectiveName())
                                 )).queue();
                                 return;
                             }
@@ -219,10 +204,9 @@ public class CmdYurifuck implements Command{
     
                         queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
 
-                        tc.sendMessage(String.format(
-                                "Looks like %s doesn't want to have sex with you %s. .\\_.",
-                                MarkdownSanitizer.escape(target.getEffectiveName()),
-                                author.getAsMention()
+                        tc.sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(guild.getId(), "purr.nsfw.yurifuck.request.timed_out", author.getAsMention())
+                                        .replace("{target}", target.getEffectiveName())
                         )).queue();
                     }
             );

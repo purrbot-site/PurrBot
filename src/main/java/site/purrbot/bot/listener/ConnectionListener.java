@@ -38,7 +38,7 @@ public class ConnectionListener extends ListenerAdapter{
     public ConnectionListener(PurrBot bot){
         this.bot = bot;
 
-        this.URL = bot.getFileManager().getString("config", "log-webhook");
+        this.URL = bot.getFileManager().getString("config", "webhooks.log");
     }
 
     @Override
