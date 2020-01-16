@@ -5,9 +5,9 @@
   "errors": {
     "api_error": "API 요청에 실패했어! 나중에 다시 시도해줘.",
     "missing_perms": {
-      "self": "{permission} 권한이 나에게 없어!",
-      "self_channel": "{channel} 채널에 {permission} 권한이 나에게 없어!",
-      "other": "이 명령어를 사용하려면 너에게 {permission} 권한이 있어야 해."
+      "self": "`{permission}` 권한이 나에게 없어!",
+      "self_channel": "{channel} 채널에 `{permission}` 권한이 나에게 없어!",
+      "other": "이 명령어를 사용하려면 너에게 `{permission}` 권한이 있어야 해."
     },
     "nsfw_random": [
       "이 채널은 연령 제한 채널이 아닌 것 같은데.. 그렇지, {user}?",
@@ -17,10 +17,12 @@
       "그런 부끄러운 것들은 연령 제한 채널에서만 볼 수 있어, {user}.",
       "모든 것은 속한 자리가 있지. 그리고 그 명령어의 자리는 연령 제한 채널이야, {user}."
     ],
+    "title": "에러",
     "unknown": "미.. 미안! 무언가 잘못된 모양이야.. {VANILLABLUSH}\n디스코드 혹은 깃허브에 문의해줘!"
   },
   "misc": {
     "and": "그리고",
+    "info": "Hey there {user}!\nMy prefix on this Discord is `{prefix}`\nRun `{prefix}help` for a list of commands.",
     "unknown_user": "(알 수 없음)",
     "welcome_member": "넌 {count}번 째로 들어온 사람이야!"
   },
@@ -133,12 +135,13 @@
         "invalid_args": "유효하지 않은 값이야!\n사용법: `{prefix}language <set <언어>|reset>`",
         "invalid_lang": "그 언어는 아직 모르는 언어야!\n`{prefix}language` 를 사용하면 내가 아는 언어들을 알려줄게!",
         "embed": {
-          "description": "`{prefix}language set <언어>` 를 이용하면 아래에 있는 언어들 중 원하는 언어로 바꿀 수 있어!",
+          "available_lang_title": "사용가능한 언어들",
           "curr_lang_title": "현재 사용중인 언어",
           "curr_lang_value": "한국어 (ko)",
-          "available_lang_title": "사용가능한 언어들"
+          "description": "`{prefix}language set <언어>` 를 이용하면 아래에 있는 언어들 중 원하는 언어로 바꿀 수 있어!",
+          "translators_title": "번역 기여자들",
+          "translators_value": "나를 번역해 준 분들, 정말 고마워! \n아래의 링크에 날 번역해 준 분들과, 번역된 언어들을 확인할 수 있어. [링크]({link})."
         },
-        "language_reset": "언어 초기화 성공!",
         "language_set": "언어가 `한국어 (ko)`로 변경되었어!",
         "no_language": "언어를 알려줘야 언어 설정이 가능해!"
       },
@@ -187,20 +190,22 @@
           "id": "ID",
           "image": "이미지",
           "link": "[`링크`]({link})",
-          "message": "메시지"
+          "message": "메시지",
+          "name": "이름"
         },
         "no_args": "최소한 `:이모티콘:`이나 `--search`를 명령어 뒤에 붙여줘.",
         "not_found": "최근 100개의 메시지 중에서 이모티콘이 있는 메시지를 찾을 수 없어.",
         "unknown_guild": "알 수 없는 서버"
       },
       "guild": {
-        "embeds": {
+        "embed": {
           "boost_multiple": "{boost} 명이 부스트 중",
-          "boost_single": "{boost} 명이 부스트 중",
-          "boost_tier": "부스트 레밸: {BOOST_LEVEL_{level}} (Level {level})",
+          "boost_single": "1 명이 부스트 중",
+          "boost_tier": "부스트 레밸: {BOOST_TIER} (Level {level})",
           "created": "생성 일자",
           "level": "보안 수준",
           "levels": {
+            "unknown": "알 수 없는 수준",
             "none": "없음",
             "low": "낮음",
             "medium": "중간",
@@ -252,11 +257,15 @@
         }
       },
       "invite": {
-        "about_title": "각각 링크에 대한 설명",
-        "about_value": "각각의 링크는 다른 방식으로 나를 초대해.\n`권장 초대`는 내가 필요로 하는 모든 권한들을 갖고 들어올거야. 내가 가장 자유롭게 움직일 수 있어.\n`Basic Invite`는 필수적인 권한들만 갖고 들어와.\n`봇 지원 서버`는 너를 내 지원 서버로 초대하는 링크야.",
-        "info_title": "초대하는 방법",
-        "info_value": "오 예! 날 네 서버에 초대하려 하다니 너무 기뻐. ^ㅡ^\n아래에 있는 링크들 중에서 하나를 고르면 내가 따라가서 따분함을 풀고 고양이 소녀들을 데려와 줄게!",
-        "links": "[`권장 초대`]({invite_full})\n[`기본 초대`]({invite_basic})\n[`봇 지원 서버`]({support})"
+        "dm_failure": "개인 메시지를 보낼 수 없어, {user}!",
+        "dm_success": "개인 메시지를 확인해, {user}!",
+        "embed": {
+          "about_title": "각각 링크에 대한 설명",
+          "about_value": "각각의 링크는 다른 방식으로 나를 초대해.\n`권장 초대`는 내가 필요로 하는 모든 권한들을 갖고 들어올거야. 내가 가장 자유롭게 움직일 수 있어.\n`Basic Invite`는 필수적인 권한들만 갖고 들어와.\n`봇 지원 서버`는 너를 내 지원 서버로 초대하는 링크야.",
+          "info_title": "초대하는 방법",
+          "info_value": "오 예! 날 네 서버에 초대하려 하다니 너무 기뻐. ^ㅡ^\n아래에 있는 링크들 중에서 하나를 고르면 내가 따라가서 따분함을 풀고 고양이 소녀들을 데려와 줄게!",
+          "links": "[`권장 초대`]({invite_full})\n[`기본 초대`]({invite_basic})\n[`봇 지원 서버`]({support})"
+        }
       },
       "level": {
         "bot": "봇은 래벨이 없어 xP",
@@ -285,7 +294,7 @@
         },
         "few_args": "무언가 적게 받았어!\n사용법: `{prefix}quote <메시지 ID> [#채널핑]`",
         "invalid_id": "유효하지 않은 ID야. 개발자 모드를 킨 상태에서 **메시지**를 우클릭하고 \"ID복사하기\"를 제대로 눌렀는 지 확인해봐.",
-        "not_msg": "{channel}에서 그 메시지를 찾을 수 없어!\n그 메시지가 그 채널에 제대로 있는지 확인해봐.",
+        "no_msg": "{channel}에서 그 메시지를 찾을 수 없어!\n그 메시지가 그 채널에 제대로 있는지 확인해봐.",
         "no_value": "그 메시지는 텍스트도, 이미지도 없는 빈 메시지야.",
         "nsfw_channel": "{channel}는 연령 제한 채널이지만 여기는 아니야!\n안전을 위해서 연령 제한 채널의 메시지는 여기로 불러올 수 없어."
       },
@@ -318,12 +327,15 @@
           "created": "계정생성:",
           "dates": "날짜",
           "game": "상태: {status}",
+          "id": "ID: {id}",
           "joined": "서버입장:",
           "level": "레벨",
+          "nickname": "Nick: {nickname}",
           "role_highest": "최고 역할",
           "role_total": "그 외 역할",
           "xp": "경험치"
         },
+        "more_roles": "__**+{remaining} more**__",
         "no_member": "그 사람은 이 서버에 없어.",
         "no_roles": "`가진 역할 없음`",
         "no_roles_others": "`그 외 가진 역할 없음`",
@@ -362,7 +374,7 @@
           "denied": "{target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. >.<",
           "message": "{target}!\n{user} 가 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
           "open": "발정나지 말라고, {user}! 이미 네가 부탁한 사람이 있잖아.",
-          "timed_out": "아마 {target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. .\\_."
+          "timed_out": "아마 {target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. ._."
         }
       },
       "lewd": {
@@ -466,18 +478,18 @@
     },
     "nsfw": {
       "blowjob": {
-        "mention_snuggle": "\\*도망쳐서 숨는 중* 야한건 싫어.",
+        "mention_snuggle": "\\*도망쳐서 숨는 중* 야한건 싫어, {user}.",
         "mention_self": "헤헤... 혼자서 쪽쪽한데- 외롭고 부끄럽겠는데, {user}.",
         "special_user": "ㅇ-왜 나랑 하려는거야, {user}? 내 언니랑만 하는거 아니야..?"
       },
       "fuck": {
-        "mention_purr": "싫어! 절대로 싫어, {user}."
+        "mention_snuggle": "싫어! 절대로 싫어, {user}."
       },
       "threesome": {
-        "mention_purr": "ㄴ-나는 그런거 절대로 싫어, {user}!"
+        "mention_snuggle": "ㄴ-나는 그런거 절대로 싫어, {user}!"
       },
       "yurifuck": {
-        "mention_purr": "ㅇ-왜 나랑 이런걸 하려는거야, {user}? 난 너같은 사람 몰라!"
+        "mention_snuggle": "ㅇ-왜 나랑 이런걸 하려는거야, {user}? 난 너같은 사람 몰라!"
       }
     }
   }

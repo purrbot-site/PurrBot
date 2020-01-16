@@ -171,7 +171,7 @@ public class CmdUser implements Command{
                 .addField(
                         getName(member),
                         String.format(
-                                "```yaml" +
+                                "```yaml\n" +
                                 "%s" +
                                 "%s\n" +
                                 "%s\n" +
