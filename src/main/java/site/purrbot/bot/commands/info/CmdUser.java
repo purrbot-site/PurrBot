@@ -22,6 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
@@ -59,7 +60,7 @@ public class CmdUser implements Command{
         StringBuilder sb = new StringBuilder();
         for(int i = 1; i < roles.size(); i++){
             Role role = roles.get(i);
-            String name = String.format("%s", role.getName().replace("`", "'"));
+            String name = MarkdownSanitizer.escape(role.getName());
 
             if(sb.length() + name.length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
                 int rolesLeft = roles.size() - i;
@@ -216,8 +217,8 @@ public class CmdUser implements Command{
                     bot.getMsg(guild.getId(), "purr.info.user.embed.xp"),
                     String.format(
                             "`%d/%d`",
-                            bot.getDbUtil().getXp(member.getUser().getId()),
-                            (long)bot.getLevelManager().reqXp(bot.getDbUtil().getLevel(member.getUser().getId()))
+                            bot.getXp(member.getUser().getId()),
+                            (long)bot.getLevelManager().reqXp(bot.getLevel(member.getUser().getId()))
                     ),
                     true
             )
@@ -225,7 +226,7 @@ public class CmdUser implements Command{
                     bot.getMsg(guild.getId(), "purr.info.user.embed.level"),
                     String.format(
                             "`%d`",
-                            bot.getDbUtil().getLevel(member.getUser().getId())
+                            bot.getLevel(member.getUser().getId())
                     ),
                     true
             );

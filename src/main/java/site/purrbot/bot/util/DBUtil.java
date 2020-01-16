@@ -222,7 +222,7 @@ public class DBUtil {
         return (long)member.get("xp");
     }
 
-    void setXp(String id, long xp){
+    public void setXp(String id, long xp){
         checkMember(id);
         r.table(memberTable).get(id).update(r.hashMap("xp", xp)).run(connection);
     }
@@ -234,7 +234,7 @@ public class DBUtil {
         return (long)member.get("level");
     }
 
-    void setLevel(String id, long level){
+    public void setLevel(String id, long level){
         checkMember(id);
         r.table(memberTable).get(id).update(r.hashMap("level", level)).run(connection);
     }

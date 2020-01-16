@@ -56,8 +56,8 @@ public class CmdLevel implements Command{
     private void sendLevelEmbed(TextChannel tc, User requester, Member member){
         String id = member.getUser().getId();
 
-        long xp = bot.getDbUtil().getXp(id);
-        long level = bot.getDbUtil().getLevel(id);
+        long xp = bot.getXp(id);
+        long level = bot.getLevel(id);
 
         double reqXpDouble = bot.getLevelManager().reqXp(level);
         long reqXpLong = (long)reqXpDouble;

@@ -19,6 +19,8 @@
 package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
+import com.github.benmanes.caffeine.cache.CacheWriter;
+import com.github.benmanes.caffeine.cache.RemovalCause;
 import org.botblock.javabotblockapi.BotBlockAPI;
 import org.botblock.javabotblockapi.Site;
 import org.botblock.javabotblockapi.exceptions.RatelimitedException;
@@ -34,6 +36,7 @@ import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Message;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
@@ -110,6 +113,31 @@ public class PurrBot {
             .build();
     private Cache<String, String> welcomeMsg = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
+    
+    private Cache<String, Long> xp = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .writer(new CacheWriter<String, Long>(){
+                @Override
+                public void write(@NonNull String key, @NonNull Long value){}
+    
+                @Override
+                public void delete(@NonNull String key, Long value, @NonNull RemovalCause cause){
+                    getDbUtil().setXp(key, value);
+                }
+            })
+            .build();
+    private Cache<String, Long> level = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .writer(new CacheWriter<String, Long>(){
+                @Override
+                public void write(@NonNull String key, @NonNull Long value){}
+    
+                @Override
+                public void delete(@NonNull String key, Long value, @NonNull RemovalCause cause){
+                    getDbUtil().setLevel(key, value);
+                }
+            })
             .build();
 
     public static void main(String[] args){
@@ -345,6 +373,13 @@ public class PurrBot {
     public String getWelcomeMsg(String id){
         return welcomeMsg.get(id, k -> getDbUtil().getWelcomeMsg(id));
     }
+    
+    public Long getXp(String id){
+        return xp.get(id, k -> getDbUtil().getXp(id));
+    }
+    public Long getLevel(String id){
+        return level.get(id, k -> getDbUtil().getLevel(id));
+    }
 
     public void setLanguage(String key, String value){
         getDbUtil().setLanguage(key, value);
@@ -373,6 +408,13 @@ public class PurrBot {
     public void setWelcomeMsg(String key, String value){
         getDbUtil().setWelcomeMsg(key, value);
         welcomeMsg.put(key, value);
+    }
+    
+    public void setXp(String key, Long value){
+        xp.put(key, value);
+    }
+    public void setLevel(String key, Long value){
+        level.put(key, value);
     }
 
     public void invalidateCache(String id){

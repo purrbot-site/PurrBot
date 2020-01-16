@@ -28,10 +28,9 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 @CommandDescription(
-        name = "Girl",
+        name = "Solo",
         description = "Gives you a gif of a girl *playing* with herself.",
         triggers = {"solo", "girl"},
         attributes = {

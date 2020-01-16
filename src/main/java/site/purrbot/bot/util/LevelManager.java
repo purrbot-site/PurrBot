@@ -42,18 +42,16 @@ public class LevelManager {
         if(bot.isBeta())
             return;
 
-        bot.getDbUtil().checkMember(id);
-
         long xp;
         if(command)
-            xp = bot.getDbUtil().getXp(id) + 2;
+            xp = bot.getXp(id) + 2;
         else
-            xp = bot.getDbUtil().getXp(id) + 1;
+            xp = bot.getXp(id) + 1;
 
-        bot.getDbUtil().setXp(id, xp);
+        bot.setXp(id, xp);
 
         if(isLevelup(id, xp)){
-            long level = bot.getDbUtil().getLevel(id);
+            long level = bot.getLevel(id);
 
             String imgName = String.format("levelup_%s_%d.png", id, level + 1);
             File image = new File("img/level/levelup.png");
@@ -73,8 +71,8 @@ public class LevelManager {
                     level + 1
             )).addFile(image, imgName).queue();
 
-            bot.getDbUtil().setLevel(id, level + 1);
-            bot.getDbUtil().setXp(id, xp - (long) reqXp(level));
+            bot.setLevel(id, level + 1);
+            bot.setXp(id, xp - (long)reqXp(level));
 
             updateRoles(member, level + 1);
         }
@@ -85,7 +83,7 @@ public class LevelManager {
     }
 
     private boolean isLevelup(String id, long xp) {
-        return xp >= reqXp(bot.getDbUtil().getLevel(id));
+        return xp >= reqXp(bot.getLevel(id));
     }
 
     private void updateRoles(Member member, long level) {
