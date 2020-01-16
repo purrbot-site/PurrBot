@@ -45,7 +45,7 @@ public class ImageUtil {
         this.bot = bot;
     }
 
-    private final String[] USER_AGENT = {"User-Agent", "PurrBot-UserAgent"};
+    private final String[] USER_AGENT = {"User-Agent", "PurrBot BOT_VERSION"};
     private final OkHttpClient CLIENT = new OkHttpClient();
 
     private BufferedImage getAvatar(User user) throws IOException{
@@ -176,7 +176,7 @@ public class ImageUtil {
         }
     }
 
-    public InputStream getWelcomeImg(User user, int size, String icon, String bg, String color) throws IOException, NullPointerException{
+    public InputStream getWelcomeImg(Member member, String icon, String bg, String color) throws IOException, NullPointerException{
         if(color.toLowerCase().startsWith("hex:") || color.toLowerCase().startsWith("hex:#")){
             color = color.toLowerCase().replace("hex:#", "#").replace("hex:", "#");
         }else
@@ -187,8 +187,12 @@ public class ImageUtil {
         }
 
         JSONObject json = new JSONObject()
-                .put("username", user.getName())
-                .put("members", String.format("You're member #%d", size))
+                .put("username", member.getUser().getName())
+                .put(
+                        "members", 
+                        bot.getMsg(member.getGuild().getId(), "misc.welcome_member")
+                                .replace("{count}", String.valueOf(member.getGuild().getMembers().size()))
+                )
                 .put("icon", icon.equalsIgnoreCase("random") ? 
                         bot.getHttpUtil().getImage(API.IMG_ICON) :
                         String.format("https://purrbot.site/img/sfw/icon/img/%s.png", icon)
@@ -197,17 +201,17 @@ public class ImageUtil {
                         bot.getHttpUtil().getImage(API.IMG_BACKGROUND) :
                         String.format("https://purrbot.site/img/sfw/background/img/%s.png", bg)
                 )
-                .put("avatar", user.getEffectiveAvatarUrl())
+                .put("avatar", member.getUser().getEffectiveAvatarUrl())
                 .put("color_welcome", color)
                 .put("color_username", color)
                 .put("color_members", color);
-
+        
         RequestBody body = RequestBody.create(json.toString(), null);
 
         Request request = new Request.Builder()
                 .addHeader("User-Agent", "PurrBot BOT_VERSION")
-                .addHeader("content-type", "application/json")
-                .addHeader("Authorization", bot.getgFile().getString("config", "blaze-token"))
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", bot.getFileManager().getString("config", "tokens.blaze"))
                 .post(body)
                 .url("https://api.blazedev.me/gen/welcome")
                 .build();

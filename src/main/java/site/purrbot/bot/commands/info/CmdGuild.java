@@ -20,10 +20,7 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
@@ -49,103 +46,125 @@ public class CmdGuild implements Command{
         this.bot = bot;
     }
 
-    private String getVerifyLevel(Guild.VerificationLevel level){
+    private String getVerifyLevel(Guild guild){
+        Guild.VerificationLevel level = guild.getVerificationLevel();
+        
         switch(level){
-            case HIGH:
-                return "(╯°□°）╯︵ ┻━┻";
-
             case VERY_HIGH:
-                return "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻";
-
+                return bot.getMsg(guild.getId(), "purr.info.guild.embed.levels.very_high");
+                
+            case HIGH:
+                return bot.getMsg(guild.getId(), "purr.info.guild.embed.levels.high");
+            
+            case MEDIUM:
+                return bot.getMsg(guild.getId(), "purr.info.guild.embed.levels.medium");
+            
+            case LOW:
+                return bot.getMsg(guild.getId(), "purr.info.guild.embed.levels.low");
+            
+            case NONE:
+                return bot.getMsg(guild.getId(), "purr.info.guild.embed.levels.none");
+                
             default:
-                return bot.getMessageUtil().firstUpperCase(level.name());
+            case UNKNOWN:
+                return bot.getMsg(guild.getId(), "purr.info.guild.embed.levels.unknown");
         }
     }
-
+    
+    private String getBoostMessage(Guild guild){
+        if(guild.getBoostCount() == 1)
+            return bot.getMsg(guild.getId(), "purr.info.guild.embed.boost_single");
+        
+        return bot.getMsg(guild.getId(), "purr.info.guild.embed.boost_multiple")
+                .replace("{boost}", String.valueOf(guild.getBoostCount()));
+    }
+    
+    private String getBoostEmote(Guild guild){
+        switch(guild.getBoostTier()){
+            default:
+            case NONE:
+            case UNKNOWN:
+                return Emotes.BOOST_LEVEL_0.getEmote();
+            
+            case TIER_1:
+                return Emotes.BOOST_LEVEL_1.getEmote();
+            
+            case TIER_2:
+                return Emotes.BOOST_LEVEL_2.getEmote();
+            
+            case TIER_3:
+                return Emotes.BOOST_LEVEL_3.getEmote();
+        }
+    }
+    
+    private String getOwner(Guild guild){
+        Member member = guild.getOwner();
+        if(member == null)
+            return bot.getMsg(guild.getId(), "misc.unknown_user");
+        
+        return String.format(
+                "%s | %s",
+                member.getAsMention(),
+                member.getEffectiveName()
+        );
+    }
+    
     @Override
     public void execute(Message msg, String s){
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
-        int boosts = guild.getBoostCount();
 
-        EmbedBuilder guildInfo = bot.getEmbedUtil().getEmbed(msg.getAuthor())
+        MessageEmbed guildInfo = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
                 .setTitle(guild.getName())
                 .setThumbnail(guild.getIconUrl())
-                .addField("Users", String.format(
-                        "**Total**: `%d`\n" +
-                        "\n" +
-                        "**Humans**: `%d`\n" +
-                        "**Bots**: `%d`",
-                        guild.getMemberCache().size(),
-                        guild.getMemberCache().stream().filter(member -> !member.getUser().isBot()).count(),
-                        guild.getMemberCache().stream().filter(member -> member.getUser().isBot()).count()
-                ), true)
-                .addField("Region", String.format(
-                        "%s %s",
-                        guild.getRegion().getEmoji(),
-                        guild.getRegion().getName()
-                ), true)
-                .addField("Level", getVerifyLevel(guild.getVerificationLevel()), true)
-                .addField("Owner", String.format(
-                        "%s | %s",
-                        guild.getOwner() == null ? "Unknown" : guild.getOwner().getAsMention(),
-                        guild.getOwner() == null ? "Unknown" : guild.getOwner().getEffectiveName()
-                ), true)
-                .addField("Created", String.format(
-                        "`%s`",
-                        bot.getMessageUtil().formatTime(LocalDateTime.from(guild.getTimeCreated()))
-                ), false);
-        
-        switch(guild.getBoostTier()){
-            case NONE:
-                guildInfo.addField(String.format(
-                        "Boost Tier: %s (Level 0)",
-                        Emotes.BOOST_LEVEL_0.getEmote()
-                ), boosts == 1 ? "1 boost" : boosts + " boosts", false);
-                break;
-            
-            case TIER_1:
-                guildInfo.addField(String.format(
-                        "Boost Tier: %s (Level 1)",
-                        Emotes.BOOST_LEVEL_1.getEmote()
-                ), String.format(
-                        "%d boosts",
-                        boosts
-                ), false);
-                break;
-            
-            case TIER_2:
-                guildInfo.addField(String.format(
-                        "Boost Tier: %s (Level 2)",
-                        Emotes.BOOST_LEVEL_2.getEmote()
-                ), String.format(
-                        "%d boosts",
-                        boosts
-                ), false);
-                break;
-            
-            case TIER_3:
-                guildInfo.addField(String.format(
-                        "Boost Tier: %s (Level 3)",
-                        Emotes.BOOST_LEVEL_3.getEmote()
-                ), String.format(
-                        "%d boosts",
-                        boosts
-                ), false);
-                break;
-            
-            case UNKNOWN:
-            default:
-                guildInfo.addField(String.format(
-                        "Boost Tier: %s (Unknown)",
-                        Emotes.BOOST_LEVEL_0.getEmote()
-                ), String.format(
-                        "%d boosts",
-                        boosts
-                ), false);
-                break;
-        }
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.users_title"),
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.users_value")
+                                .replace("{total}", String.valueOf(guild.getMembers().size()))
+                                .replace("{humans}", String.valueOf(
+                                        guild.getMembers().stream().filter(m -> !m.getUser().isBot()).count()
+                                ))
+                                .replace("{bots}", String.valueOf(
+                                        guild.getMembers().stream().filter(m -> m.getUser().isBot()).count()
+                                )), 
+                        true
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.region"),
+                        String.format(
+                                "%s %s",
+                                guild.getRegion().getEmoji(),
+                                guild.getRegion().getName()
+                        ),
+                        true
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.level"), 
+                        getVerifyLevel(guild), 
+                        true
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.owner"),
+                        getOwner(guild), 
+                        true
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.created"), 
+                        String.format(
+                                "`%s`",
+                                bot.getMessageUtil().formatTime(LocalDateTime.from(guild.getTimeCreated()))
+                        ), 
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.boost_tier")
+                                .replace("{level}", String.valueOf(guild.getBoostTier().getKey()))
+                                .replace("{BOOST_TIER}", getBoostEmote(guild)),
+                        getBoostMessage(guild),
+                        false
+                )
+                .build();
 
-        tc.sendMessage(guildInfo.build()).queue();
+        tc.sendMessage(guildInfo).queue();
     }
 }

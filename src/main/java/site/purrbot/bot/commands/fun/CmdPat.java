@@ -21,12 +21,14 @@ package site.purrbot.bot.commands.fun;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,7 +55,7 @@ public class CmdPat implements Command{
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to pat.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.pat.no_mention");
             return;
         }
 
@@ -66,55 +68,43 @@ public class CmdPat implements Command{
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
-                tc.sendMessage(String.format(
-                        "\\*enjoys the pat from %s",
-                        member.getAsMention()
-                )).queue();
-                msg.addReaction("❤").queue();
-            }else {
-                tc.sendMessage("\\*purr™*").queue();
-                msg.addReaction("❤").queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.pat.mention_snuggle")
+                ).queue();
+            }else{
+                tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.pat.mention_purr")).queue();
             }
+            msg.addReaction("\u2764").queue();
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(String.format(
-                    "Don't you have a neko to pat %s? \\*points to herself*",
-                    member.getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.pat.mention_self", member.getAsMention())
+            ).queue();
         }
 
-        String pattetMembers = members.stream()
+        String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 
-        if(pattetMembers.isEmpty())
+        if(targets.isEmpty())
             return;
     
         String link = bot.getHttpUtil().getImage(API.GIF_PAT);
 
-        tc.sendMessage(String.format(
-                "%s Getting a pat-gif...",
-                Emotes.ANIM_LOADING.getEmote()
-        )).queue(message -> {
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.pat.loading")
+        ).queue(message -> {
             if(link == null){
-                message.editMessage(String.format(
-                        "%s pats you %s",
-                        MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(
-                                bot.getMessageUtil().replaceLast(pattetMembers, ",", " and")
-                        )
+                message.editMessage(MarkdownSanitizer.escape(
+                        bot.getMsg(guild.getId(), "purr.fun.pat.message", member.getEffectiveName(), targets)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                                "%s pats you %s",
-                                MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(
-                                        bot.getMessageUtil().replaceLast(pattetMembers, ",", " and")
-                                )
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(MarkdownSanitizer.escape(
+                                bot.getMsg(guild.getId(), "purr.fun.pat.message", member.getEffectiveName(), targets)
                         )).setImage(link).build()).queue();
             }
         });

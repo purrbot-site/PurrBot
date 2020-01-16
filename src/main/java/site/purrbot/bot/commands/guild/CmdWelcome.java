@@ -64,13 +64,13 @@ public class CmdWelcome implements Command{
         this.bot = bot;
     }
 
-    private MessageEmbed welcomeSettings(User author, String id, boolean hasImage){
-        TextChannel tc = getWelcomeChannel(id);
+    private MessageEmbed welcomeSettings(User author, Guild guild, boolean hasImage){
+        TextChannel tc = getWelcomeChannel(guild.getId());
 
-        String[] color = bot.getWelcomeColor(id).split(":");
+        String[] color = bot.getWelcomeColor(guild.getId()).split(":");
 
         if(color.length < 2) {
-            bot.setWelcomeColor(id, "hex:ffffff");
+            bot.setWelcomeColor(guild.getId(), "hex:ffffff");
 
             color = new String[2];
 
@@ -78,57 +78,48 @@ public class CmdWelcome implements Command{
             color[1] = "ffffff";
         }
 
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(author)
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(author, guild)
                 .setTitle("Current welcome settings")
-                .setDescription(String.format(
-                        "Here is a list of all current settings for this Discord!\n" +
-                        "To change some settings use `%swelcome [subcommand]`",
-                        bot.getPrefix(id)
-                ))
-                .addField("Subcommands", 
-                        "```\n" +
-                        "bg      set <background>\n" +
-                        "        reset\n" +
-                        "channel set <#channel>\n" +
-                        "        reset\n" +
-                        "color   set <hex:rrggbb|rgb:r,g,b>\n" +
-                        "        reset\n" +
-                        "icon    set <icon>\n" +
-                        "        reset\n" +
-                        "msg     set <message>\n" +
-                        "        reset\n" +
-                        "```",
-                        false)
-                .addField("Channel", String.format(
+                .setDescription(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.current_settings")
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.subcommands_title"), 
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.subcommands_value"),
+                        false
+                )
+                .addField(bot.getMsg(guild.getId(), "purr.guild.welcome.embed.channel"), String.format(
                         "%s",
-                        tc == null ? "`No channel set`" : tc.getAsMention()
+                        tc == null ? bot.getMsg(guild.getId(), "purr.guild.welcome.embed.no_channel") : tc.getAsMention()
                 ), false)
-                .addField("Color", String.format(
-                        "```\n" +
-                        "Type:  %s\n" +
-                        "Value: %s\n" +
-                        "```",
-                        color[0].toLowerCase(),
-                        color[1].toLowerCase()
-                ), false)
-                .addField("Image", String.format(
-                        "```\n" +
-                        "Background: %s\n" +
-                        "Icon:       %s\n" +
-                        "```",
-                        bot.getWelcomeBg(id),
-                        bot.getWelcomeIcon(id)
-                ),false)
-                .addField("Message", String.format(
-                        "```\n" +
-                        "%s\n" +
-                        "```",
-                        bot.getWelcomeMsg(id)
-                ), false);
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.color_title"),
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.color_value")
+                                .replace("{type}", color[0].toLowerCase())
+                                .replace("{value}", color[1].toLowerCase()), 
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.image_title"),
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.image_value")
+                                .replace("{background}", bot.getWelcomeBg(guild.getId()))
+                                .replace("{icon}", bot.getWelcomeIcon(guild.getId())),
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.message_title"),
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.message_value")
+                                .replace("{message}", bot.getWelcomeMsg(guild.getId())), 
+                        false
+                );
 
         if(hasImage)
-            embed.addField("Preview", EmbedBuilder.ZERO_WIDTH_SPACE, false)
-                    .setImage("attachment://welcome.jpg");
+            embed.addField(
+                    bot.getMsg(guild.getId(), "purr.guild.welcome.embed.preview"), 
+                    EmbedBuilder.ZERO_WIDTH_SPACE, 
+                    false
+            )
+            .setImage("attachment://welcome.jpg");
 
         return embed.build();
     }
@@ -158,7 +149,7 @@ public class CmdWelcome implements Command{
         }
 
         msg.getTextChannel().sendMessage(
-                bot.getEmbedUtil().getEmbed(msg.getAuthor())
+                bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                         .setColor(0x00FF00)
                         .setDescription(String.format(
                                 "%s updated to %s",
@@ -195,7 +186,7 @@ public class CmdWelcome implements Command{
         }
 
         msg.getTextChannel().sendMessage(
-                bot.getEmbedUtil().getEmbed(msg.getAuthor())
+                bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                         .setColor(0x00FF00)
                         .setDescription(String.format(
                                 "%s was resetted",
@@ -206,17 +197,21 @@ public class CmdWelcome implements Command{
     }
 
     private TextChannel getWelcomeChannel(String id){
-        if(bot.getWelcomeChannel(id).equals("none")) return null;
-
-        return Objects.requireNonNull(bot.getShardManager().getGuildById(id))
-                .getTextChannelById(bot.getWelcomeChannel(id));
+        if(bot.getWelcomeChannel(id).equals("none")) 
+            return null;
+        
+        Guild guild = bot.getShardManager().getGuildById(id);
+        if(guild == null)
+            return null;
+        
+        return guild.getTextChannelById(bot.getWelcomeChannel(id));
     }
 
     @Override
     public void execute(Message msg, String s){
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
-        String[] args = s.split(" ");
+        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
@@ -225,8 +220,7 @@ public class CmdWelcome implements Command{
             InputStream is;
             try{
                 is = bot.getImageUtil().getWelcomeImg(
-                        msg.getAuthor(),
-                        guild.getMembers().size(),
+                        msg.getMember(),
                         bot.getWelcomeIcon(guild.getId()),
                         bot.getWelcomeBg(guild.getId()),
                         bot.getWelcomeColor(guild.getId())
@@ -236,12 +230,12 @@ public class CmdWelcome implements Command{
             }
 
             if(is == null){
-                tc.sendMessage(welcomeSettings(msg.getAuthor(), guild.getId(), false)).queue();
+                tc.sendMessage(welcomeSettings(msg.getAuthor(), guild, false)).queue();
                 return;
             }
 
-            tc.sendMessage(welcomeSettings(msg.getAuthor(), guild.getId(), true))
-                    .addFile(is, "welcome.jpeg")
+            tc.sendMessage(welcomeSettings(msg.getAuthor(), guild, true))
+                    .addFile(is, "welcome.jpg")
                     .queue();
             return;
         }
@@ -278,9 +272,9 @@ public class CmdWelcome implements Command{
                 }else{
                     bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
                             "Invalid argument!\n" +
-                                    "Usage: `%swelcome bg <set <bg>|reset>`\n" +
-                                    "\n" +
-                                    "A list of available backgrounds can be found on the [wiki](%s)",
+                            "Usage: `%swelcome bg <set <bg>|reset>`\n" +
+                            "\n" +
+                            "A list of available backgrounds can be found on the [wiki](%s)",
                             bot.getPrefix(guild.getId()),
                             Links.WIKI.getUrl()
                     ));
@@ -435,8 +429,7 @@ public class CmdWelcome implements Command{
                 InputStream is;
                 try{
                     is = bot.getImageUtil().getWelcomeImg(
-                            msg.getAuthor(),
-                            guild.getMembers().size(),
+                            msg.getMember(),
                             bot.getWelcomeIcon(guild.getId()),
                             bot.getWelcomeBg(guild.getId()),
                             bot.getWelcomeColor(guild.getId())
@@ -446,11 +439,11 @@ public class CmdWelcome implements Command{
                 }
 
                 if(is == null){
-                    tc.sendMessage(welcomeSettings(msg.getAuthor(), guild.getId(), false)).queue();
+                    tc.sendMessage(welcomeSettings(msg.getAuthor(), guild, false)).queue();
                     return;
                 }
 
-                tc.sendMessage(welcomeSettings(msg.getAuthor(), guild.getId(), true))
+                tc.sendMessage(welcomeSettings(msg.getAuthor(), guild, true))
                         .addFile(is, "welcome.jpg")
                         .queue();
         }

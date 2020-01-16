@@ -42,12 +42,6 @@ public class MessageUtil {
         );
     }
 
-    public String getRandomApiPingMsg(){
-        return bot.getApiPingMsg().isEmpty() ? "" : bot.getApiPingMsg().get(
-                bot.getRandom().nextInt(bot.getApiPingMsg().size())
-        );
-    }
-
     public String getRandomDenyFuckMsg(){
         return bot.getDenyFuckMsg().isEmpty() ? "" : bot.getDenyFuckMsg().get(
                 bot.getRandom().nextInt(bot.getDenyFuckMsg().size())
@@ -57,18 +51,6 @@ public class MessageUtil {
     public String getRandomKissImg(){
         return bot.getKissImg().isEmpty() ? "" : bot.getKissImg().get(
                 bot.getRandom().nextInt(bot.getKissImg().size())
-        );
-    }
-
-    public String getRandomNoNsfwMsg(){
-        return bot.getNoNsfwMsg().isEmpty() ? "" : bot.getNoNsfwMsg().get(
-                bot.getRandom().nextInt(bot.getNoNsfwMsg().size())
-        );
-    }
-
-    public String getRandomPingMsg(){
-        return bot.getPingMsg().isEmpty() ? "" : bot.getPingMsg().get(
-                bot.getRandom().nextInt(bot.getPingMsg().size())
         );
     }
 
@@ -90,39 +72,11 @@ public class MessageUtil {
         );
     }
 
-    /**
-     * Changes the provided String to have the first character uppercase and remaining ones lowercase.
-     *
-     * @param  text
-     *         The text to change.
-     *
-     * @return The text with first character uppercase and remaining ones lowercase.
-     */
-    public String firstUpperCase(String text){
-        return Character.toString(text.charAt(0)).toUpperCase() + text.substring(1).toLowerCase();
-    }
-
-    /**
-     * Returns a formatted time in the style {@code dd. MMM yyyy HH:mm:ss} and time zone UTC.
-     *
-     * @param  time
-     *         The {@link java.time.LocalDateTime Time} to format.
-     *
-     * @return The formatted time as UTC.
-     */
     public String formatTime(LocalDateTime time){
         LocalDateTime utcTime = LocalDateTime.from(time.atOffset(ZoneOffset.UTC));
         return utcTime.format(timeFormat) + " UTC";
     }
 
-    /**
-     * Tries to transform the provided String into a valid Color.
-     *
-     * @param  input
-     *         The String to get value from. Valid are either {@code rgb:r,g,b} or {@code hex:rrggbb}
-     *
-     * @return Possible-null Color.
-     */
     public Color getColor(String input){
         if(!input.toLowerCase().startsWith("rgb:") && !input.toLowerCase().startsWith("hex:")) return null;
 
@@ -156,16 +110,6 @@ public class MessageUtil {
         return result;
     }
 
-    /**
-     * Updates certain placeholders with their corresponding value.
-     *
-     * @param  message
-     *         The String to format.
-     * @param  member
-     *         The {@link net.dv8tion.jda.api.entities.Member Member} to get values from.
-     *
-     * @return The formatted text.
-     */
     public String formatPlaceholders(String message, Member member){
         return message.replaceAll("(?i)\\{mention}", member.getAsMention())
                 .replaceAll("(?i)\\{name}", member.getEffectiveName())

@@ -21,12 +21,14 @@ package site.purrbot.bot.commands.fun;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,7 +55,7 @@ public class CmdPoke implements Command{
         TextChannel tc = msg.getTextChannel();
 
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to poke.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.poke.no_mention");
             return;
         }
 
@@ -66,55 +68,43 @@ public class CmdPoke implements Command{
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
-                tc.sendMessage(String.format(
-                        "\\*covers face* W-why poking me %s? >~<",
-                        member.getAsMention()
-                )).queue();
-                msg.addReaction("\uD83D\uDE16").queue();
-            }else {
-                tc.sendMessage("Nya! Do nu poke me! >-<").queue();
-                msg.addReaction("\uD83D\uDE16").queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.poke.mention_snuggle")
+                ).queue();
+            }else{
+                tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.poke.mention_purr")).queue();
             }
+            msg.addReaction("\uD83D\uDE16").queue();
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(String.format(
-                    "Why do you poke yourself %s?",
-                    member.getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.poke.mention_self", member.getAsMention())
+            ).queue();
         }
 
-        String pokedMembers = members.stream()
+        String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 
-        if(pokedMembers.isEmpty())
+        if(targets.isEmpty())
             return;
     
         String link = bot.getHttpUtil().getImage(API.GIF_POKE);
 
-        tc.sendMessage(String.format(
-                "%s Getting a poke-gif...",
-                Emotes.ANIM_LOADING.getEmote()
-        )).queue(message -> {
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.poke.loading")
+        ).queue(message -> {
             if(link == null){
-                message.editMessage(String.format(
-                        "%s pokes you %s",
-                        MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(
-                                bot.getMessageUtil().replaceLast(pokedMembers, ",", " and")
-                        )
+                message.editMessage(MarkdownSanitizer.escape(
+                        bot.getMsg(guild.getId(), "purr.fun.poke.messahe", member.getEffectiveName(), targets)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                                "%s pokes you %s",
-                                MarkdownSanitizer.escape(member.getEffectiveName()),
-                                MarkdownSanitizer.escape(
-                                        bot.getMessageUtil().replaceLast(pokedMembers, ",", " and")
-                                )
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(MarkdownSanitizer.escape(
+                                bot.getMsg(guild.getId(), "purr.fun.poke.message", member.getEffectiveName(), targets)
                         )).setImage(link).build()).queue();
             }
         });

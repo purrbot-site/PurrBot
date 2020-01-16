@@ -24,7 +24,6 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
@@ -32,7 +31,6 @@ import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -47,9 +45,9 @@ public class CommandListener extends ListenerAdapter{
     );
 
     private PurrBot bot;
-    private final CommandHandler HANDLER;
+    private final CommandHandler<Message> HANDLER;
 
-    public CommandListener(PurrBot bot, CommandHandler handler){
+    public CommandListener(PurrBot bot, CommandHandler<Message> handler){
         this.bot = bot;
         this.HANDLER = handler;
     }
@@ -90,14 +88,9 @@ public class CommandListener extends ListenerAdapter{
                         return;
 
                     if(raw.equalsIgnoreCase(userMention) || raw.equalsIgnoreCase(memberMention)){
-                        tc.sendMessage(String.format(
-                                "Hey there %s!\n" +
-                                "My prefix on this Discord is `%s`\n" +
-                                "Run `%shelp` for a list of commands.",
-                                member.getAsMention(),
-                                prefix,
-                                prefix
-                        )).queue();
+                        tc.sendMessage(
+                                bot.getMsg(guild.getId(), "misc.info", user.getAsMention())
+                        ).queue();
                         return;
                     }
 
@@ -119,56 +112,58 @@ public class CommandListener extends ListenerAdapter{
                         return;
 
                     if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EMBED_LINKS)){
-                        tc.sendMessage(String.format(
-                                "I need permission to embed links in this channel %s!",
-                                member.getAsMention()
-                        )).queue();
+                        tc.sendMessage(
+                                bot.getMsg(guild.getId(), "errors.missing_perms.self")
+                                        .replace("{permission}", Permission.MESSAGE_EMBED_LINKS.getName())
+                        ).queue();
                         return;
                     }
                     if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                        bot.getEmbedUtil().sendError(tc, user, "I require `Read Message History` permissions to do this.");
+                        bot.getEmbedUtil().sendPermError(tc, user, Permission.MESSAGE_HISTORY, true);
                         return;
                     }
                     if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_ADD_REACTION)){
-                        bot.getEmbedUtil().sendError(tc, user, "I need permission to add reactions!");
+                        bot.getEmbedUtil().sendPermError(tc, user, Permission.MESSAGE_ADD_REACTION, true);
                         return;
                     }
                     if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                                bot.getMessageUtil().getRandomNoNsfwMsg(),
-                                member.getEffectiveName()
-                        ));
+                        MessageEmbed notNsfw = bot.getEmbedUtil().getEmbed(user, guild)
+                                .setColor(0xFF0000)
+                                .setDescription(
+                                        bot.getRandomMsg(guild.getId(), "errors.nsfw_random", member.getEffectiveName())
+                                )
+                                .build();
+                        
+                        tc.sendMessage(notNsfw).queue();
                         return;
                     }
                     if(command.hasAttribute("manage_server")){
                         if(!bot.getPermUtil().hasPermission(tc, msg.getMember(), Permission.MANAGE_SERVER)){
-                            bot.getEmbedUtil().sendError(tc, user, "You need the `manage server` permission!");
+                            bot.getEmbedUtil().sendPermError(tc, user, Permission.MANAGE_CHANNEL, false);
                             return;
                         }
                     }
                     if(command.hasAttribute("guild_only") && !guild.getId().equals(IDs.GUILD.getId())){
-                        bot.getEmbedUtil().sendError(tc, user, String.format(
-                                "This command can only be used in [my Discord](%s)!",
-                                Links.DISCORD.getUrl()
-                        ));
+                        MessageEmbed embed = bot.getEmbedUtil().getEmbed(user, guild)
+                                .setColor(0xFF0000)
+                                .setDescription(
+                                        bot.getMsg(guild.getId(), "errors.guild_only")
+                                                .replace("{link}", Links.DISCORD.getUrl())
+                                )
+                                .build();
+                        
+                        tc.sendMessage(embed).queue();
                         return;
                     }
 
                     try{
-                        //noinspection unchecked
                         HANDLER.execute(command, msg, args[1] == null ? "" : args[1]);
 
                         if(guild.getId().equals(IDs.GUILD.getId()))
                             bot.getLevelManager().giveXP(member.getId(), true, tc);
                     }catch(Exception ex){
                         logger.error("Couldn't perform command!", ex);
-                        bot.getEmbedUtil().sendError(tc, user, String.format(
-                                "Uhm... This is actually a bit embarrassing, but I had an error with a command. %s\n" +
-                                "Please [join my Discord](%s) or report the issue on [GitHub](%s)!",
-                                Emotes.VANILLABLUSH.getEmote(),
-                                Links.DISCORD.getUrl(),
-                                Links.GITHUB.getUrl()
-                        ), ex.getMessage());
+                        bot.getEmbedUtil().sendError(tc, user, "errors.unknown", ex.getMessage());
                     }
                 }
         );

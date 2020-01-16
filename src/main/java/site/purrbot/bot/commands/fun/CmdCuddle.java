@@ -29,7 +29,6 @@ import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,9 +53,10 @@ public class CmdCuddle implements Command{
     @Override
     public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
+        Guild guild = msg.getGuild();
 
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention at least one user to cuddle.");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.cuddle.no_mention");
             return;
         }
 
@@ -64,67 +64,50 @@ public class CmdCuddle implements Command{
         if(member == null)
             return;
 
-        Guild guild = msg.getGuild();
         List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
-                tc.sendMessage(String.format(
-                        "\\*snuggles up at %s*",
-                        member.getAsMention()
-                )).queue();
-                msg.addReaction("❤").queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.cuddle.mention_snuggle", member.getAsMention())
+                ).queue();
             }else{
-                tc.sendMessage(String.format(
-                        "\\*enjoys the cuddle from %s*",
-                        member.getAsMention()
-                )).queue();
-                msg.addReaction("❤").queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.cuddle.mention_purr", member.getAsMention())
+                ).queue();
             }
+            msg.addReaction("\u2764").queue();
         }
 
         if(members.contains(msg.getMember())){
-            tc.sendMessage(String.format(
-                    "Why do you cuddle yourself %s?\n" +
-                    "You can cuddle me if you want... %s",
-                    member.getAsMention(),
-                    Emotes.VANILLABLUSH.getEmote()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.cuddle.mention_self", member.getAsMention())
+            ).queue();
         }
 
 
-        String cuddledMembers = members.stream()
+        String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(msg.getMember()))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 
-        if(cuddledMembers.isEmpty())
+        if(targets.isEmpty())
             return;
         
         String link = bot.getHttpUtil().getImage(API.GIF_CUDDLE);
     
-        tc.sendMessage(String.format(
-                "%s Getting a cuddle-gif...",
-                Emotes.ANIM_LOADING.getEmote()
-        )).queue(message -> {
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.cuddle.loading")
+        ).queue(message -> {
             if(link == null){
-                message.editMessage(String.format(
-                        "%s cuddles with you %s",
-                        MarkdownSanitizer.escape(member.getEffectiveName()),
-                        MarkdownSanitizer.escape(
-                                bot.getMessageUtil().replaceLast(cuddledMembers, ",", " and")
-                        )
+                message.editMessage(MarkdownSanitizer.escape(
+                        bot.getMsg(guild.getId(), "purr.fun.cuddle.message", member.getEffectiveName(), targets)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(
-                                bot.getEmbedUtil().getEmbed().setDescription(String.format(
-                                "%s cuddles with you %s",
-                                        MarkdownSanitizer.escape(member.getEffectiveName()),
-                                        MarkdownSanitizer.escape(
-                                                bot.getMessageUtil().replaceLast(cuddledMembers, ",", " and")
-                                        )
+                        .embed(bot.getEmbedUtil().getEmbed().setDescription(MarkdownSanitizer.escape(
+                                bot.getMsg(guild.getId(), "purr.fun.cuddle.message", member.getEffectiveName(), targets)
                         )).setImage(link).build()).queue();
             }
         });

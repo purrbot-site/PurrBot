@@ -50,37 +50,53 @@ public class CmdEmote implements Command{
         this.bot = bot;
     }
 
-    private MessageEmbed emoteInfo(User user, Emote emote, @Nullable String link){
+    private MessageEmbed emoteInfo(User user, Emote emote, Guild guild, @Nullable String link){
         Emote e = bot.getShardManager().getEmoteById(emote.getId());
-        Guild guild = null;
+        Guild emoteGuild = null;
         if(e != null)
-            guild = e.getGuild();
+            emoteGuild = e.getGuild();
 
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(user)
-                .setTitle("Emote")
-                .addField("Name", String.format(
-                        "`:%s:`",
-                        emote.getName()
-                ), true)
-                .addField("ID", String.format(
-                        "`%s`",
-                        emote.getId()
-                ), true)
-                .addField("Guild", String.format(
-                        "`%s`",
-                        guild != null ? guild.getName() : "Unknown Guild"
-                ), true)
-                .addField("Image", String.format(
-                        "[`Link`](%s)",
-                        emote.getImageUrl()
-                ), true)
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(user, guild)
+                .setTitle(bot.getMsg(guild.getId(), "purr.info.emote.embed.emote"))
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.emote.embed.name"),
+                        String.format(
+                                "`:%s:`", 
+                                emote.getName()
+                        ), 
+                        true
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.emote.embed.id"), 
+                        String.format(
+                                "`%s`",
+                                emote.getId()
+                        ),
+                        true
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.emote.embed.guild"), 
+                        String.format(
+                                "`%s`", 
+                                emoteGuild != null ? emoteGuild.getName() : bot.getMsg(guild.getId(), "purr.info.emote.unknown_guild")
+                        ), 
+                        true
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.emote.embed.image"),
+                        bot.getMsg(guild.getId(), "purr.info.emote.embed.link")
+                                .replace("{link}", emote.getImageUrl()),
+                        true
+                )
                 .setThumbnail(emote.getImageUrl());
 
         if(link != null)
-            embed.addField("Message", String.format(
-                    "[`Link`](%s)",
-                    link
-            ), true);
+            embed.addField(
+                    bot.getMsg(guild.getId(), "purr.info.emote.embed.messge"),
+                    bot.getMsg(guild.getId(), "purr.info.emote.embed.link")
+                            .replace("{link}", link),
+                    true
+            );
 
         return embed.build();
     }
@@ -88,13 +104,22 @@ public class CmdEmote implements Command{
     @Override
     public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
+        Guild guild = msg.getGuild();
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(args.toLowerCase().contains("--search")){
+        if(args.toLowerCase().contains("--search") || args.toLowerCase().contains("—search")){
             if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need permission to see the channel history!");
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
+                        .setColor(0xFF0000)
+                        .setDescription(
+                                bot.getMsg(msg.getGuild().getId(), "errors.missing_perms.self")
+                                        .replace("{permission}", Permission.MESSAGE_HISTORY.getName())
+                        )
+                        .build();
+                
+                tc.sendMessage(embed).queue();
                 return;
             }
 
@@ -103,20 +128,20 @@ public class CmdEmote implements Command{
             ).findFirst().orElse(null);
 
             if(emoteMessage == null){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Couldn't find an emote in past 100 messages.");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.emote.not_found");
                 return;
             }
 
-            tc.sendMessage(emoteInfo(msg.getAuthor(), emoteMessage.getEmotes().get(0), emoteMessage.getJumpUrl())).queue();
+            tc.sendMessage(emoteInfo(msg.getAuthor(), emoteMessage.getEmotes().get(0), guild, emoteMessage.getJumpUrl())).queue();
             return;
         }
 
         if(msg.getEmotes().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please provide an `:emote:` or use `--search`");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.emote.no_args");
             return;
         }
 
-        tc.sendMessage(emoteInfo(msg.getAuthor(), msg.getEmotes().get(0), null)).queue();
+        tc.sendMessage(emoteInfo(msg.getAuthor(), msg.getEmotes().get(0), guild, null)).queue();
 
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Andre601
+ * Copyright 2020 Andre601
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,58 +16,52 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package site.purrbot.bot.commands.nsfw;
+package site.purrbot.bot.commands.guild;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
 
 @CommandDescription(
-        name = "Solo",
-        description = "Gives you a gif of a girl *playing* with herself.",
-        triggers = {"solo", "girl"},
+        name = "Debug",
+        description = "Creates a Debug with useful information.",
+        triggers = {"debug"},
         attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}solo"
-                )
+                @CommandAttribute(key = "manage_server"),
+                @CommandAttribute(key = "category", value = "guild"),
+                @CommandAttribute(key = "usage", value = "{p}debug")
         }
 )
-public class CmdSolo implements Command{
-
+public class CmdDebug implements Command{
+    
     private PurrBot bot;
-
-    public CmdSolo(PurrBot bot){
+    
+    public CmdDebug(PurrBot bot){
         this.bot = bot;
     }
-
+    
     @Override
     public void execute(Message msg, String s){
-        TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
-        String link = bot.getHttpUtil().getImage(API.GIF_SOLO_LEWD);
-
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-
-        if(link == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
-            return;
-        }
-
-        EmbedBuilder girl = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
-                .setTitle(bot.getMsg(guild.getId(), "purr.nsfw.solo.title"), link)
-                .setImage(link);
-
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.solo.loading")).queue(message -> 
-                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(girl.build()).queue()
-        );
+        TextChannel tc = msg.getTextChannel();
+        
+        tc.sendMessage(
+                "Creating debug...\n" +
+                "This may take a while."
+        ).queue(message -> {
+            String code = bot.getDebugUtil().getDebugUrl(guild, msg.getAuthor());
+            if(code == null)
+                message.editMessage("Could not create debug! There was an error. :(").queue();
+            else
+                message.editMessage(String.format(
+                        "**Debug created!**\n" +
+                        "You can find it here: <https://bytebin.lucko.me/%s>",
+                        code
+                )).queue();
+        });
     }
 }

@@ -18,9 +18,11 @@
 [License]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
 [background]: https://github.com/Andre601/PurrBot/wiki/Welcome-images#backgrounds
 [icon]: https://github.com/Andre601/PurrBot/wiki/Welcome-images#icons
+[translations]: https://github.com/purrbot-site/Translations
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
+[emojis]: https://allcontributors.org/docs/en/emoji-key
 
 <!-- Widgets -->
 [widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
@@ -52,40 +54,44 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 ## Fun
 **Permission**: `None`
 
-| Command: | Arguments:          | Description:                                               |
-| -------- | ------------------- | ---------------------------------------------------------- |
-| Cuddle   | `<@user ...>`       | Cuddles the mentioned user(s).                             |
-| Holo     |                     | Gives an image of Holo from Spice and wolf.                |
-| Hug      | `<@user ...>`       | Hugs the mentioned user(s).                                |
-| Kiss     | `<@user ...>`       | Kisses the mentioned user(s).                              |
-| Kitsune  |                     | Shows a image of a kitsune (foxgirl)                       |
-| Lick     | `<@user ...>`       | Licks the mentioned user(s).                               |
-| Neko     |                     | Shows a image of a neko (catgirl).                         |
-|          | `[--gif]`           | Shows a gif of a neko (catgirl).                           |
-| Pat      | `<@user ...>`       | Pats the mentioned user(s).                                |
-| Poke     | `<@user ...>`       | Pokes the mentioned user(s).                               |
-| Ship     | `<@user>` `[@user]` | Ships you (or another user) with someone.                  |
-| Slap     | `<@user ...>`       | Slaps the mentioned user(s).                               |
-| Tickle   | `<@user ...>`       | Tickles the mentioned user(s).                             |
+| Command: | Arguments:          | Description:                                |
+| -------- | ------------------- | ------------------------------------------- |
+| Cuddle   | `<@user ...>`       | Cuddles the mentioned user(s).              |
+| Holo     |                     | Gives an image of Holo from Spice and wolf. |
+| Hug      | `<@user ...>`       | Hugs the mentioned user(s).                 |
+| Kiss     | `<@user ...>`       | Kisses the mentioned user(s).               |
+| Kitsune  |                     | Shows a image of a kitsune (foxgirl)        |
+| Lick     | `<@user ...>`       | Licks the mentioned user(s).                |
+| Neko     |                     | Shows a image of a neko (catgirl).          |
+|          | `[--gif]`           | Shows a gif of a neko (catgirl).            |
+| Pat      | `<@user ...>`       | Pats the mentioned user(s).                 |
+| Poke     | `<@user ...>`       | Pokes the mentioned user(s).                |
+| Senko    |                     | Shows a image of Senko-San.                 |
+| Ship     | `<@user>` `[@user]` | Ships you (or another user) with someone.   |
+| Slap     | `<@user ...>`       | Slaps the mentioned user(s).                |
+| Tickle   | `<@user ...>`       | Tickles the mentioned user(s).              |
 
 ## Guild
 **Permission**: `Manage Server`
 
-| Command: | Arguments:                   | Description:                                                      |
-| -------- | ---------------------------- | ----------------------------------------------------------------- |
-| Prefix   | `set <prefix>`               | Sets the provided prefix for the Guild.                           |
-|          | `reset`                      | Resets the prefix to the default one.                             |
-| Welcome  |                              | Shows the current welcome-settings.                               |
-|          | `bg set <background>`        | Sets the [background] of the image.                               |
-|          | `bg reset`                   | Resets the background to the default one (`color_white`)          |
-|          | `channel set <#channel>`     | Change the channel to the mentioned one.                          |
-|          | `channel reset`              | Resets the channel.                                               |
-|          | `color set <color>`          | Change the text color. Supported args are hex:rrggbb or rgb:r,g,b |
-|          | `color reset`                | Resets the text color.                                            |
-|          | `icon set <image>`           | Sets the [icon] of the image.                                     |
-|          | `icon reset`                 | Resets the icon.                                                  |
-|          | `msg set <msg>`              | Changes the greeting message.                                     |
-|          | `msg reset`                  | Resets the greeting message to "Welcome {mention}!"               |
+| Command: | Arguments:               | Description:                                                      |
+| -------- | ------------------------ | ----------------------------------------------------------------- |
+| Language |                          | Shows the currently used and all available languages.             |
+|          | `set <language>`         | Sets the language for the Guild to a supported one.               |
+|          | `reset`                  | Resets the language to English (en).                              |
+| Prefix   | `set <prefix>`           | Sets the provided prefix for the Guild.                           |
+|          | `reset`                  | Resets the prefix to the default one.                             |
+| Welcome  |                          | Shows the current welcome-settings.                               |
+|          | `bg set <background>`    | Sets the [background] of the image.                               |
+|          | `bg reset`               | Resets the background to the default one (`color_white`)          |
+|          | `channel set <#channel>` | Change the channel to the mentioned one.                          |
+|          | `channel reset`          | Resets the channel.                                               |
+|          | `color set <color>`      | Change the text color. Supported args are hex:rrggbb or rgb:r,g,b |
+|          | `color reset`            | Resets the text color.                                            |
+|          | `icon set <image>`       | Sets the [icon] of the image.                                     |
+|          | `icon reset`             | Resets the icon.                                                  |
+|          | `msg set <msg>`          | Changes the greeting message.                                     |
+|          | `msg reset`              | Resets the greeting message to "Welcome {mention}!"               |
 
 ## Info
 **Permission**: `None`
@@ -122,29 +128,31 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 |           | `[--mmf]`             | Gives you a gif with 2 males and 1 female instead of the default 1 male, 2 females. |
 | Yurifuck  | `<@user>`             | Similar to `.fuck`, but with females only \>wO                                      |
 
+# Translations
+Version 2.5 of \*Purr* added an option to have a per-guild language set.  
+We are happy about any translations being made for the bot.
+
+If you want to contribute to the translations of the bot (Adding your own, or correcting others), take a look at the [GitHub Repository][translations] for this.
+
 # Inviting the bot
 The bot has two invite-links: A full invite and a basic invite.
 
 ## Full invite
 The link for the full invite gives \*Purr* all permissions, to work properly and without any issues.
 The permissions include:
-* Managing messages: Will be used to delete certain commands of users like `.invite` or `.info`
-* Adding reactions: Nothing really special. Just makes \*Purr*'s responses a bit different.
-* Attach files: Used for the welcome-channel (`.welcome`), to create a image for the joined user.
-* Use of external emojis: For using external (custom) emojis.
-* All permissions of the basic invite.
+- Managing messages: Will be used to delete certain commands of users like `.invite` or `.info`
+- Adding reactions: Nothing really special. Just makes \*Purr*'s responses a bit different.
+- Attach files: Used for the welcome-channel (`.welcome`), to create a image for the joined user.
+- Use of external emojis: For using external (custom) emojis.
+- All permissions of the basic invite.
 
 ## Basic invite
 The basic invite will only give the most necessary permissions for \*Purr* to work correctly.
 This permissions are:
-* See messages: Let \*Purr* see all channels, that don't have channel-specific permissions.
-* Send messages: Let her send messages.
-* Embed Links: \*Purr* won't work without this permission!
-
-# Voting
-\*Purr* has a integrated Vote listener that gives you a reward (currently just a role) on the [Discord].  
-Just make sure to be on the guild and vote for the bot, to receive the special role.  
-Future rewards may be added.
+- See messages: Let \*Purr* see all channels, that don't have channel-specific permissions.
+- See message history: Let \*Purr* see the message history of a channel.
+- Send messages: Let her send messages.
+- Embed Links: \*Purr* won't work without this permission!
 
 # Botlists
 \*Purr* can be found on different Botlist sites.  
@@ -180,7 +188,8 @@ Feel free to upvote or add her to your favourites to show your support.
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to the wonderful people listed below.  
+Take a look at the [emoji key][emojis] site to find out what the emojis mean.
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->

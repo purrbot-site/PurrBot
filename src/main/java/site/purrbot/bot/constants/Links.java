@@ -24,8 +24,9 @@ public enum  Links {
     DISCORD("https://purrbot.site/discord"),
 
     // GitHub links
-    GITHUB("https://purrbot.site/github"),
-    WIKI  ("https://github.com/Andre601/PurrBot/wiki"),
+    GITHUB     ("https://purrbot.site/github"),
+    WIKI       ("https://github.com/Andre601/PurrBot/wiki"),
+    TRANSLATORS("https://github.com/purrbot-site/Translations#supported-languages"),
 
     // Bot lists
     BOTLIST_SPACE         ("https://botlist.space/bot/425382319449309197"),
@@ -35,9 +36,10 @@ public enum  Links {
     TOP_GG                ("https://top.gg/bot/425382319449309197"),
 
     // Images
-    FAVOURITE     ("https://i.imgur.com/LTd5nEJ.png"),
-    UPVOTE_BOTLIST("https://i.imgur.com/Velat7C.png"),
-    UPVOTE_TOP_GG ("https://i.imgur.com/SwAz3je.png"),
+    FAVOURITE                ("https://i.imgur.com/LTd5nEJ.png"),
+    UPVOTE_BOTLIST           ("https://i.imgur.com/Velat7C.png"),
+    UPVOTE_DISCORDEXTREMELIST(""),
+    UPVOTE_TOP_GG            ("https://i.imgur.com/SwAz3je.png"),
 
     // Other links
     PATREON("https://patreon.com/purrbot"),

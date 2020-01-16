@@ -20,13 +20,10 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.sharding.ShardManager;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -52,25 +49,61 @@ public class CmdStats implements Command{
     public CmdStats(PurrBot bot){
         this.bot = bot;
     }
-
-    private String getUptime(){
-        long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
-        long d = TimeUnit.MILLISECONDS.toDays(uptime);
-        long h = TimeUnit.MILLISECONDS.toHours(uptime) - d * 24;
-        long m = TimeUnit.MILLISECONDS.toMinutes(uptime) - h * 60 - d * 1440;
-        long s = TimeUnit.MILLISECONDS.toSeconds(uptime) - m * 60 - h * 3600 - d * 86400;
-
-        String days    = d + (d == 1 ? " day" : " days");
-        String hours   = h + (h == 1 ? " hour" : " hours");
-        String minutes = m + (m == 1 ? " minute" : " minutes");
-        String seconds = s + (s == 1 ? " second" : " seconds");
-
+    
+    private long getDays(long uptime){ 
+        return TimeUnit.MILLISECONDS.toDays(uptime);
+    }
+    
+    private long getHours(long uptime){
+        return TimeUnit.MILLISECONDS.toHours(uptime) - getDays(uptime) * 24;
+    }
+    
+    private long getMinutes(long uptime){
+        return TimeUnit.MILLISECONDS.toMinutes(uptime) - getHours(uptime) * 60 - getDays(uptime) * 1440;
+    }
+    
+    private long getSeconds(long uptime){
+        return TimeUnit.MILLISECONDS.toSeconds(uptime) - getMinutes(uptime) * 60 - getHours(uptime) * 3600 - 
+                getDays(uptime) * 86400;
+    }
+    
+    private String getDaysString(long uptime, String id){
+        long time = getDays(uptime);
+        
         return String.format(
-                "%s, %s, %s and %s",
-                days,
-                hours,
-                minutes,
-                seconds
+                "%d %s",
+                time,
+                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.day") : bot.getMsg(id, "purr.info.stats.uptime.days")
+        );
+    }
+    
+    private String getHoursString(long uptime, String id){
+        long time = getHours(uptime);
+        
+        return String.format(
+                "%d %s",
+                time,
+                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.hour") : bot.getMsg(id, "purr.info.stats.uptime.hours")
+        );
+    }
+    
+    private String getMinutesString(long uptime, String id){
+        long time = getMinutes(uptime);
+        
+        return String.format(
+                "%d %s",
+                time,
+                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.minute") : bot.getMsg(id, "purr.info.stats.uptime.minutes")
+        );
+    }
+    
+    private String getSecondsString(long uptime, String id){
+        long time = getSeconds(uptime);
+        
+        return String.format(
+                "%d %s",
+                time,
+                time == 1 ? bot.getMsg(id, "purr.info.stats.uptime.second") : bot.getMsg(id, "purr.info.stats.uptime.seconds")
         );
     }
 
@@ -95,43 +128,51 @@ public class CmdStats implements Command{
         TextChannel tc = msg.getTextChannel();
         JDA jda = msg.getJDA();
         ShardManager shardManager = bot.getShardManager();
+        
+        long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
 
-        EmbedBuilder stats = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .setAuthor("Statistics")
-                .addField("Total", String.format(
-                        "```yaml\n" +
-                        "Shards:  %9d\n" +
-                        "\n" +
-                        "Guilds:  %9s\n" +
-                        "Members: %9s [%s Users, %s Bots]" +
-                        "```",
-                        shardManager.getShardCache().size(),
-                        formatNumber(shardManager.getGuildCache().size()),
-                        formatNumber(shardManager.getUserCache().size()),
-                        formatNumber(shardManager.getUserCache().stream().filter(user -> !user.isBot()).count()),
-                        formatNumber(shardManager.getUserCache().stream().filter(User::isBot).count())
-                ), false)
-                .addField("This Shard", String.format(
-                        "```yaml\n" +
-                        "ID:      %9d # Shard-IDs start at 0\n" +
-                        "\n" +
-                        "Guilds:  %9s\n" +
-                        "Members: %9s [%s Users, %s Bots]" +
-                        "```\n",
-                        jda.getShardInfo().getShardId(),
-                        formatNumber(jda.getGuildCache().size()),
-                        formatNumber(jda.getUserCache().size()),
-                        formatNumber(jda.getUserCache().stream().filter(user -> !user.isBot()).count()),
-                        formatNumber(jda.getUserCache().stream().filter(User::isBot).count())
-                ), false)
-                .addField("Other stats", String.format(
-                        "```yaml\n" +
-                        "RAM:    %s\n" +
-                        "Uptime: %s" +
-                        "```",
-                        getRAM(),
-                        getUptime()
-                ), false);
+        EmbedBuilder stats = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
+                .setAuthor(
+                        bot.getMsg(guild.getId(), "purr.info.stats.embed.title")
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_total_title"), 
+                        bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_total_value")
+                                .replace("{shards}", formatNumber(shardManager.getShardCache().size()))
+                                .replace("{guilds}", formatNumber(shardManager.getGuildCache().size()))
+                                .replace("{total}", formatNumber(shardManager.getUserCache().size()))
+                                .replace("{users}", formatNumber(shardManager.getUserCache().stream().filter(
+                                        user -> !user.isBot()
+                                ).count()))
+                                .replace("{bots}", formatNumber(shardManager.getUserCache().stream().filter(
+                                        User::isBot
+                                ).count())),
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_this_title"), 
+                        bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_this_value")
+                                .replace("{id}", String.valueOf(jda.getShardInfo().getShardId()))
+                                .replace("{guilds}", formatNumber(jda.getGuildCache().size()))
+                                .replace("{total}", formatNumber(jda.getUserCache().size()))
+                                .replace("{users}", formatNumber(jda.getUserCache().stream().filter(
+                                        user -> !user.isBot()
+                                ).count()))
+                                .replace("{bots}", formatNumber(jda.getUserCache().stream().filter(
+                                        User::isBot
+                                ).count())),
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.stats.embed.other_title"), 
+                        bot.getMsg(guild.getId(), "purr.info.stats.embed.other_value")
+                                .replace("{ram}", getRAM())
+                                .replace("{days}", getDaysString(uptime, guild.getId()))
+                                .replace("{hours}", getHoursString(uptime, guild.getId()))
+                                .replace("{minutes}", getMinutesString(uptime, guild.getId()))
+                                .replace("{seconds}", getSecondsString(uptime, guild.getId())),
+                        false
+                );
 
         tc.sendMessage(stats.build()).queue();
 

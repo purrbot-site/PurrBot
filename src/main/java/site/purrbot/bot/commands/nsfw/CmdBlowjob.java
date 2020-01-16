@@ -61,10 +61,9 @@ public class CmdBlowjob implements Command{
 
     private MessageEmbed getBJEmbed(Member requester, Member target, String link){
         return bot.getEmbedUtil().getEmbed()
-                .setDescription(String.format(
-                        "%s is giving %s a blowjob!",
-                        MarkdownSanitizer.escape(requester.getEffectiveName()),
-                        MarkdownSanitizer.escape(target.getEffectiveName())
+                .setDescription(MarkdownSanitizer.escape(
+                        bot.getMsg(requester.getGuild().getId(), "purr.nsfw.blowjob.message", requester.getEffectiveName())
+                                .replace("{target}", target.getEffectiveName())
                 ))
                 .setImage(link)
                 .build();
@@ -80,7 +79,7 @@ public class CmdBlowjob implements Command{
             return;
 
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, author.getUser(), "Please mention the user you want to give a blowjob.");
+            bot.getEmbedUtil().sendError(tc, author.getUser(), "purr.nsfw.blowjob.no_mention");
             return;
         }
 
@@ -89,65 +88,57 @@ public class CmdBlowjob implements Command{
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
                 if(bot.getPermUtil().isSpecial(author.getUser().getId())){
-                    tc.sendMessage(String.format(
-                            "W-w-what?! N-no %s! Y-you have \\*Purr* for that. >////<",
-                            author.getAsMention()
-                    )).queue();
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.special_user", author.getEffectiveName())
+                    ).queue();
                     return;
                 }
-                tc.sendMessage(String.format(
-                        "I-I'm confused now %s... How could you give me a blowjob?\n" +
-                        "And I don't want one.",
-                        author.getAsMention()
-                )).queue();
-                return;
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_snuggle", author.getEffectiveName())
+                ).queue();
             }else{
                 if(bot.getPermUtil().isSpecial(author.getUser().getId())){
-                    tc.sendMessage(String.format(
-                            "Hehe. Okay sweetie... Let me get my *\"toys\"* And have some fun.\n" +
-                            "\\*takes %s's hand and dissapears in her room*",
-                            author.getAsMention()
-                    )).queue();
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.nsfw.blowjob.special_user", author.getEffectiveName())
+                    ).queue();
                     return;
                 }
-                tc.sendMessage(String.format(
-                        "\\*slaps %s* You perv!!! Get someone else to suck.",
-                        author.getAsMention()
-                )).queue();
-                return;
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_purr")
+                ).queue();
             }
+            return;
         }
 
         if(target.equals(msg.getMember())){
-            tc.sendMessage(String.format(
-                    "Oooooookay... If you want to suck yourself off, then I won't stop you %s.",
-                    author.getAsMention()
-            )).queue();
+            if(bot.isBeta()){
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_self", author.getEffectiveName())
+                ).queue();
+            }else{
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_self", author.getEffectiveName())
+                ).queue();
+            }
             return;
         }
 
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, author.getUser(), "That would be like sticking your tongue in a socket.");
+            bot.getEmbedUtil().sendError(tc, author.getUser(), "purr.nsfw.blowjob.mention_bot");
             return;
         }
 
         if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
-            tc.sendMessage(String.format(
-                    "Don't be that greedy %s and wait for the other request to be accepted or denied!",
-                    author.getAsMention()
-            )).queue();
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.nsfw.blowjob.request.open", author.getEffectiveName())
+            ).queue();
             return;
         }
 
         queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
-        tc.sendMessage(String.format(
-                "Hey %s!\n" +
-                "%s wants to give you a blowjob. Do you want that too?\n" +
-                "React with ✅ to accept or with ❌ to deny the request.\n" +
-                "\n" +
-                "> **This request will time out in 1 minute!**",
-                target.getAsMention(),
-                MarkdownSanitizer.escape(author.getEffectiveName())
+        tc.sendMessage(MarkdownSanitizer.escape(
+                bot.getMsg(guild.getId(), "purr.nsfw.blowjob.request.message", author.getEffectiveName())
+                        .replace("{target}", target.getAsMention())
         )).queue(message -> {
             message.addReaction("✅").queue();
             message.addReaction("❌").queue();
@@ -171,10 +162,9 @@ public class CmdBlowjob implements Command{
                             message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
 
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                            event.getChannel().sendMessage(String.format(
-                                    "%s doesn't want to get sucked by you %s. :/",
-                                    MarkdownSanitizer.escape(target.getEffectiveName()),
-                                    author.getAsMention()
+                            event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                    bot.getMsg(guild.getId(), "purr.nsfw.blowjob.request.denied", author.getAsMention())
+                                            .replace("{target}", target.getEffectiveName())
                             )).queue();
                             return;
                         }
@@ -185,17 +175,15 @@ public class CmdBlowjob implements Command{
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             String link = bot.getHttpUtil().getImage(API.GIF_BLOW_JOB_LEWD);
 
-                            event.getChannel().sendMessage(String.format(
-                                    "%s accepted your request %s!",
-                                    MarkdownSanitizer.escape(target.getEffectiveName()),
-                                    author.getAsMention()
+                            event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                    bot.getMsg(guild.getId(), "purr.nsfw.blowjob.request.accepted", author.getAsMention())
+                                            .replace("{target}", target.getEffectiveName())
                             )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
 
                             if(link == null){
-                                event.getChannel().sendMessage(String.format(
-                                        "%s is giving %s a blowjob!",
-                                        MarkdownSanitizer.escape(author.getEffectiveName()),
-                                        MarkdownSanitizer.escape(target.getEffectiveName())
+                                event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.message", author.getEffectiveName())
+                                                .replace("{target}", target.getEffectiveName())
                                 )).queue();
                                 return;
                             }
@@ -207,10 +195,9 @@ public class CmdBlowjob implements Command{
                         message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
     
                         queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                        tc.sendMessage(String.format(
-                                "Looks like %s doesn't want a blowjob from you %s.",
-                                MarkdownSanitizer.escape(target.getEffectiveName()),
-                                author.getAsMention()
+                        tc.sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(guild.getId(), "purr.nsfw.blowjob.request.timed_out", author.getAsMention())
+                                        .replace("{target}", target.getEffectiveName())
                         )).queue();
                     }
             );

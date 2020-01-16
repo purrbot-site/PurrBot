@@ -21,11 +21,11 @@ package site.purrbot.bot.constants;
 public enum Emotes{
 
     // Animated emotes,
-    ANIM_LOADING     ("loading",      "590951368328740865", true),
-    ANIM_TYPING      ("typing",       "590954127727525889", true),
-    ANIM_SENKOTAILWAG("senkoTailWag", "574631381804777482", true),
-    ANIM_SHIROTAILWAG("shiroTailWag", "583782265029394473", true),
-    ANIM_WAGTAIL     ("wagTail",      "570462900234223639", true),
+    LOADING     ("loading",      "590951368328740865", true),
+    TYPING      ("typing",       "590954127727525889", true),
+    SENKOTAILWAG("senkoTailWag", "574631381804777482", true),
+    SHIROTAILWAG("shiroTailWag", "583782265029394473", true),
+    WAGTAIL     ("wagTail",      "570462900234223639", true),
 
     // Static/normal emotes
     BLOBHOLO         ("blobHolo",         "536346012546236436", false),
@@ -77,5 +77,14 @@ public enum Emotes{
 
     public String getId(){
         return this.id;
+    }
+    
+    public static String getEmoteByName(String name){
+        for(Emotes emote : values()){
+            if(emote.name().toLowerCase().equals(name))
+                return emote.getEmote();
+        }
+        
+        return "";
     }
 }

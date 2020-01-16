@@ -20,8 +20,10 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 
@@ -41,33 +43,31 @@ import java.time.temporal.ChronoUnit;
 )
 public class CmdPing implements Command{
 
-    public CmdPing(){
+    private PurrBot bot;
+    public CmdPing(PurrBot bot){
+        this.bot = bot;
     }
 
     @Override
     public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
+        Guild guild = msg.getGuild();
 
-        tc.sendMessage(String.format(
-                "%s Checking ping. Please wait...",
-                Emotes.ANIM_TYPING.getEmote()
-        )).queue(message -> msg.getJDA().getRestPing().queue((time) -> message.editMessage(String.format(
-                "%s Edit message: `%dms`\n" +
-                "%s Discord: `%sms`\n" +
-                "%s RestAction: `%sms`",
-                Emotes.EDIT.getEmote(),
-                msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS),
-                Emotes.DISCORD.getEmote(),
-                msg.getJDA().getGatewayPing(),
-                Emotes.DOWNLOAD.getEmote(),
-                time
-        )).queue(), throwable -> message.editMessage(String.format(
-                "%s Edit message: `%dms`\n" +
-                "%s Discord: `%sms`",
-                Emotes.EDIT.getEmote(),
-                msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS),
-                Emotes.DISCORD.getEmote(),
-                msg.getJDA().getGatewayPing()
-        )).queue()));
+        tc.sendMessage(
+                bot.getRandomMsg(guild.getId(), "purr.info.ping.loading")
+        ).queue(message -> msg.getJDA().getRestPing().queue((time) -> message.editMessage(
+                bot.getMsg(guild.getId(), "purr.info.ping.info_full")
+                        .replace("{edit_message}", String.valueOf(
+                                msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS)
+                        ))
+                        .replace("{discord}", String.valueOf(msg.getJDA().getGatewayPing()))
+                        .replace("{rest_action}", String.valueOf(time))
+        ).queue(), throwable -> message.editMessage(
+                bot.getMsg(guild.getId(), "purr.info.ping.info")
+                        .replace("{edit_message}", String.valueOf(
+                                msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS)
+                        ))
+                        .replace("{discord}", String.valueOf(msg.getJDA().getGatewayPing()))
+        ).queue()));
     }
 }

@@ -90,7 +90,7 @@ public class ReadyListener extends ListenerAdapter{
                 .build();
 
         bot.getWebhookUtil().sendMsg(
-                bot.getgFile().getString("config", "log-webhook"),
+                bot.getFileManager().getString("config", "webhooks.log"),
                 jda.getSelfUser().getEffectiveAvatarUrl(),
                 "Shard ready!",
                 embed
@@ -100,7 +100,7 @@ public class ReadyListener extends ListenerAdapter{
             setReady();
 
             bot.startUpdates();
-
+            
             shardManager.setPresence(OnlineStatus.ONLINE, Activity.of(Activity.ActivityType.WATCHING, String.format(
                     bot.getMessageUtil().getBotGame(),
                     shardManager.getGuildCache().size()

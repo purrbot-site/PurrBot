@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Andre601
+ * Copyright 2020 Andre601
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,27 +16,40 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package site.purrbot.bot.constants;
+package site.purrbot.bot.util.file.lang;
 
-public enum Roles {
+import site.purrbot.bot.PurrBot;
 
-    // Roles for upvoting (discordbots.org and botlist.space) or for adding it to their favourites (lbots.org)
-    VOTER("475335831649910785"),
+import java.util.List;
 
-    // Level roles.
-    VERY_ADDICTED  ("449280939839979530"),
-    SUPER_ADDICTED ("424194307881435177"),
-    ULTRA_ADDICTED ("541671949831766037"),
-    HYPER_ADDICTED ("549988541539680266"),
-    MASTER_ADDICTED("549988641464909827");
-
-    private String id;
-
-    Roles(String id){
-        this.id = id;
+public final class LangUtils {
+    
+    private PurrBot bot;
+    public LangUtils(PurrBot bot){
+        this.bot = bot;
     }
 
-    public String getId(){
-        return id;
+    public String getString(String language, String path){
+        switch(language.toLowerCase()){
+            case "de":
+            case "en":
+            case "ko":
+                return bot.getFileManager().getString(language.toLowerCase(), path);
+                
+            default:
+                return bot.getFileManager().getString("en", path);
+        }
+    }
+    
+    public List<String> getStringList(String language, String path){
+        switch(language.toLowerCase()){
+            case "de":
+            case "en":
+            case "ko":
+                return bot.getFileManager().getStringlist(language.toLowerCase(), path);
+            
+            default:
+                return bot.getFileManager().getStringlist("en", path);
+        }
     }
 }

@@ -29,7 +29,6 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.Links;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -70,22 +69,28 @@ public class CmdHelp implements Command{
     private MessageEmbed commandHelp(Message msg, Command cmd, String prefix){
         CommandDescription desc = cmd.getDescription();
         String[] triggers = desc.triggers();
-        EmbedBuilder commandInfo = bot.getEmbedUtil().getEmbed(msg.getAuthor())
-                .setTitle(String.format(
-                        "Command-help: %s",
-                        desc.name()
-                )).setDescription(desc.description())
-                .addField("Usage options", String.format(
-                        "```\n" +
-                        "%s\n" +
-                        "```\n" +
-                        "`[]` = optional\n" +
-                        "`<>` = required",
-                        cmd.getAttribute("usage").replace("{p}", prefix)
-                ), false).addField("Aliases:", String.format(
-                        "`%s`",
-                        String.join(", ", triggers)
-                ), false);
+        Guild guild = msg.getGuild();
+        
+        EmbedBuilder commandInfo = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
+                .setTitle(
+                        bot.getMsg(guild.getId(), "purr.info.help.command_info.title")
+                                .replace("{command}", desc.name())
+                )
+                .setDescription(desc.description())
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_title"),
+                        bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_value")
+                                .replace("{command}", cmd.getAttribute("usage").replace("{p}", prefix)), 
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.help.command_info.aliases"), 
+                        String.format(
+                                "`%s`",
+                                String.join(", ", triggers)
+                        ), 
+                        false
+                );
 
         return commandInfo.build();
     }
@@ -102,6 +107,7 @@ public class CmdHelp implements Command{
     public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
         String prefix = bot.getPrefix(msg.getGuild().getId());
+        Guild guild = msg.getGuild();
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
@@ -119,27 +125,18 @@ public class CmdHelp implements Command{
             String category = cmd.getAttribute("category");
 
             builders.get(category).append(String.format(
-                    "[`%s%s`](%s '%s')\n",
+                    "`%s%s`\n",
                     prefix,
-                    cmd.getDescription().name(),
-                    Links.WEBSITE.getUrl(),
-                    cmd.getDescription().description()
+                    cmd.getDescription().name()
             ));
         }
 
         builder.addItems(String.format(
-                "Use the \u25C0 or \u25B6 reactions to navigate through the pages and \u23F9 to cancel it.\n" +
-                "Hover over a command name (PC only) or use `%shelp [command]` for more info about a specific " +
-                "command.\n" +
+                "%s\n" +
                 "\n" +
-                "```\n" +
-                "Categories:\n" +
-                "  Fun\n" +
-                "  Guild\n" +
-                "  Info\n" +
-                "  NSFW\n" +
-                "```",
-                prefix
+                "%s",
+                bot.getMsg(guild.getId(), "purr.info.help.command_menu.description"),
+                bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.list")
         ));
 
         for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
@@ -148,19 +145,21 @@ public class CmdHelp implements Command{
 
             if(!tc.isNSFW() && builderEntry.getKey().equals("nsfw")){
                 builderEntry.getValue().setLength(0);
-                builderEntry.getValue().append("`Run the help command in a NSFW channel to see this!`\n");
+                builderEntry.getValue().append(
+                        bot.getMsg(guild.getId(), "purr.info.help.command_menu.nsfw_info")
+                );
             }
 
             builder.addItems(String.format(
-                    "Use the \u25C0 or \u25B6 reactions to navigate through the pages and \u23F9 to cancel it.\n" +
-                    "Hover over a command name (PC only) or use `%shelp [command]` for more info about a specific " +
-                    "command.\n" +
+                    "%s\n" +
                     "\n" +
                     "%s **%s**\n" +
                     "%s\n",
-                    prefix,
+                    bot.getMsg(guild.getId(), "purr.info.help.command_menu.description"),
                     categories.get(builderEntry.getKey()),
-                    firstUppercase(builderEntry.getKey()),
+                    firstUppercase(
+                            bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories." + builderEntry.getKey())
+                    ),
                     builderEntry.getValue()
             ));
         }
@@ -169,12 +168,12 @@ public class CmdHelp implements Command{
             Command command = (Command)bot.getCmdHandler().findCommand(args.split(" ")[0]);
 
             if(command == null || !isCommand(command)){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "This command doesn't exist!");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.help.command_info.no_command");
                 return;
             }
 
             if(!tc.isNSFW() && command.getAttribute("category").equals("nsfw")){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please run this command in a NSFW-channel!");
+                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.help.command_info.command_nsfw");
                 return;
             }
 

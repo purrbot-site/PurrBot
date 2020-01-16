@@ -100,7 +100,7 @@ public class GuildListener extends ListenerAdapter{
                 .build();
         
         bot.getWebhookUtil().sendMsg(
-                bot.getgFile().getString("config", "guild-webhook"),
+                bot.getFileManager().getString("config", "webhooks.guild"),
                 guild.getSelfMember().getUser().getEffectiveAvatarUrl(),
                 title,
                 text,
@@ -303,8 +303,7 @@ public class GuildListener extends ListenerAdapter{
 
             try {
                 is = bot.getImageUtil().getWelcomeImg(
-                        event.getUser(),
-                        guild.getMembers().size(),
+                        event.getMember(),
                         bot.getWelcomeIcon(guild.getId()),
                         bot.getWelcomeBg(guild.getId()),
                         bot.getWelcomeColor(guild.getId())

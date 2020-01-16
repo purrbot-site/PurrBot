@@ -39,134 +39,148 @@ public class RewardHandler {
         this.bot = bot;
     }
 
-    private void giveReward(String botId, String userId, Site site, boolean weekend){
-        if(!botId.equals(IDs.PURR.getId())) return;
+    private boolean giveReward(String botId, String userId, Site site){
+        if(!botId.equals(IDs.PURR.getId()))
+            return false;
 
         Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
         if(guild == null)
-            return;
+            return false;
 
-        Role reward;
+        Role reward = guild.getRoleById(Roles.VOTER.getId());
+        String msg;
+        String name;
+        String reason;
+        String avatar;
         Member member = guild.getMemberById(userId);
-
-        String url = bot.getgFile().getString("config", "vote-webhook");
-
-        if(site.equals(Site.LBOTS)){
-            if(member == null){
-                bot.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New favourite", String.format(
-                        "An anonymous person added %s to their favourites!\n" +
-                        "You can do that too on <%s>",
-                        guild.getSelfMember().getAsMention(),
-                        Links.LBOTS_ORG.getUrl()
-                ), null);
-                return;
-            }
-            reward = guild.getRoleById(Roles.FAVOURITE.getId());
-
-            guild.modifyMemberRoles(member, Collections.singletonList(reward), null)
-                    .reason("[Reward] User added Bot to favourites on LBots.org!")
-                    .queue();
-
-            bot.getWebhookUtil().sendMsg(url, Links.FAVOURITE.getUrl(), "New Favourite", String.format(
-                    "%s added %s to their favourites! Thank you. \uD83C\uDF89\n" +
-                    "You can do that too on <%s>",
-                    member.getAsMention(),
-                    guild.getSelfMember().getAsMention(),
-                    Links.LBOTS_ORG.getUrl()
-            ), null);
-        }else
-        if(site.equals(Site.DBL)){
-            if(member == null){
-                bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_TOP_GG.getUrl(), "New Upvote", String.format(
-                        "An anonymous person upvoted %s on discordbots.org!\n" +
-                        "You can do that too on <%s>",
-                        guild.getSelfMember().getAsMention(),
-                        Links.TOP_GG.getUrl()
-                ), null);
-                return;
-            }
-            reward = guild.getRoleById(Roles.UPVOTE_DBL.getId());
-
-            guild.modifyMemberRoles(member, Collections.singletonList(reward), null)
-                    .reason("[Reward] User upvoted bot on discordbots.org!")
-                    .queue();
-
-            bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_TOP_GG.getUrl(), "New Upvote", String.format(
-                    "%s upvotes %s on discordbots.org! Thank you. \uD83C\uDF89\n" +
-                    "You can do that too on <%s>",
-                    member.getAsMention(),
-                    guild.getSelfMember().getAsMention(),
-                    Links.TOP_GG.getUrl()
-            ), null);
-        }else
-        if(site.equals(Site.BOTLIST_SPACE)){
-            if(member == null){
-                bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_BOTLIST.getUrl(), "New Upvote", String.format(
-                        "An anonymous person upvoted %s on botlist.space!\n" +
-                        "You can do that too on <%s>",
-                        guild.getSelfMember().getAsMention(),
-                        Links.BOTLIST_SPACE.getUrl()
-                ), null);
-                return;
-            }
-            reward = guild.getRoleById(Roles.UPVOTE_BOTLIST.getId());
-
-            guild.modifyMemberRoles(member, Collections.singletonList(reward), null)
-                    .reason("[Reward] User upvoted bot on botlist.space!")
-                    .queue();
-
-            bot.getWebhookUtil().sendMsg(url, Links.UPVOTE_BOTLIST.getUrl(), "New upvote", String.format(
-                    "%s upvoted %s on botlist.space! Thank you. \uD83C\uDF89\n" +
-                    "You can do that too on <%s>",
-                    member.getAsMention(),
-                    guild.getSelfMember().getAsMention(),
-                    Links.BOTLIST_SPACE.getUrl()
-            ), null);
-        }else{
-            logger.info("Received unknown reward-action/Vote");
+        String url = bot.getFileManager().getString("config", "webhooks.vote");
+        
+        switch(site){
+            case BOTLIST_SPACE:
+                if(member == null){
+                    msg = String.format(
+                            "An anonymous person upvoted %s on `Botlist.space`!\n" +
+                            "You can do that too on <%s>",
+                            guild.getSelfMember().getAsMention(),
+                            Links.BOTLIST_SPACE.getUrl()
+                    );
+                }else{
+                    msg = String.format(
+                            "%s has upvoted %s on `Botlist.space`! Thank you. \uD83C\uDF89\n" +
+                            "You can do that too on <%s>",
+                            member.getAsMention(),
+                            guild.getSelfMember().getAsMention(),
+                            Links.BOTLIST_SPACE.getUrl()
+                    );
+                }
+                name = "New upvote! [Botlist.space]";
+                reason = "[Vote listener] Member upvoted bot on botlist.space";
+                avatar = Links.UPVOTE_BOTLIST.getUrl();
+                break;
+            
+            case DISCORDEXTREMELIST_XYZ:
+                if(member == null){
+                    msg = String.format(
+                            "An anonymous person upvoted %s on `Discordextremelistxyz`!\n" +
+                            "You can do that too on <%s>",
+                            guild.getSelfMember().getAsMention(),
+                            Links.DISCORDEXTREMELIST_XYZ.getUrl()
+                    );
+                }else{
+                    msg = String.format(
+                            "%s has upvoted %s on `Discordextremelistxyz`! Thank you. \uD83C\uDF89\n" +
+                            "You can do that too on <%s>",
+                            member.getAsMention(),
+                            guild.getSelfMember().getAsMention(),
+                            Links.DISCORDEXTREMELIST_XYZ.getUrl()
+                    );
+                }
+                name = "New upvote! [Discordextremelist.xyz]";
+                reason = "[Vote listener] Member upvoted bot on discordextremelist.xyz";
+                avatar = Links.UPVOTE_DISCORDEXTREMELIST.getUrl();
+                break;
+                
+            case LBOTS_ORG:
+                if(member == null){
+                    msg = String.format(
+                            "An anonymous person added %s to their favourites on `LBots.org`!\n" +
+                            "You can do that too on <%s>",
+                            guild.getSelfMember().getAsMention(),
+                            Links.LBOTS_ORG.getUrl()
+                    );
+                }else{
+                    msg = String.format(
+                            "%s added %s to their favourites on `LBots.org`! Thank you. \uD83C\uDF89\n" +
+                            "You can do that too on <%s>",
+                            member.getAsMention(),
+                            guild.getSelfMember().getAsMention(),
+                            Links.LBOTS_ORG.getUrl()
+                    );
+                }
+                name = "New Favourite! [LBots.org]";
+                reason = "[Vote listener] Member added the bot to their favourites on lbots.org";
+                avatar = Links.FAVOURITE.getUrl();
+                break;
+            
+            case TOP_GG:
+                if(member == null){
+                    msg = String.format(
+                            "An anonymous person upvoted %s on `Top.gg`!\n" +
+                            "You can do that too on <%s>",
+                            guild.getSelfMember().getAsMention(),
+                            Links.TOP_GG.getUrl()
+                    );
+                }else{
+                    msg = String.format(
+                            "%s has upvoted %s on `Top.gg`! Thank you. \uD83C\uDF89\n" +
+                            "You can do that too on <%s>",
+                            member.getAsMention(),
+                            guild.getSelfMember().getAsMention(),
+                            Links.TOP_GG.getUrl()
+                    );
+                }
+                name = "New upvote! [Top.gg]";
+                reason = "[Vote listener] Member upvoted bot on top.gg";
+                avatar = Links.UPVOTE_TOP_GG.getUrl();
+                break;
+            
+            default:
+                msg = null;
+                name = null;
+                reason = null;
+                avatar = null;
         }
+        
+        if(msg == null){
+            logger.info("Received vote from unknown site (Unknown Vote action).");
+            return false;
+        }
+        
+        if(member != null)
+            guild.modifyMemberRoles(member, Collections.singletonList(reward), null)
+            .reason(reason)
+            .queue();
+        
+        bot.getWebhookUtil().sendMsg(url, avatar, name, msg);
+        return true;
     }
 
-    /**
-     * Runs {@link #giveReward(String, String, Site, boolean)} to reward users for adding *Purr* to their favourites
-     * on <a href="https://lbots.org/bots/Purr">LBots.org</a>
-     *
-     * @param userId
-     *        The ID of the user that gave the favourite.
-     */
-    public void lbotsReward(String userId){
-        giveReward(IDs.PURR.getId(), userId, Site.LBOTS, false);
+    public boolean lbotsReward(String userId){
+        return giveReward(IDs.PURR.getId(), userId, Site.LBOTS_ORG);
     }
 
-    /**
-     * Runs {@link #giveReward(String, String, Site, boolean)} to reward users for upvoting *Purr* on
-     * <a href="https://botlist.space/bot/425382319449309197">botlist.space</a>
-     *
-     * @param botId
-     *        The ID of the bot that got a favourite.
-     * @param userId
-     *        The ID of the user that gave the favourite.
-     */
-    public void botlistSpaceReward(String botId, String userId){
-        giveReward(botId, userId, Site.BOTLIST_SPACE, false);
+    public boolean botlistSpaceReward(String botId, String userId){
+        return giveReward(botId, userId, Site.BOTLIST_SPACE);
     }
 
-    /**
-     * Runs {@link #giveReward(String, String, Site, boolean)} to reward users for upvoting *Purr* on
-     * <a href="https://discordbots.org/bot/425382319449309197">discordbots.org</a>
-     *
-     * @param botId
-     *        The ID of the bot that got a favourite.
-     * @param userId
-     *        The ID of the user that gave the favourite.
-     */
-    public void discordbots_org(String botId, String userId, boolean isWeekend){
-        giveReward(botId, userId, Site.DBL, isWeekend);
+    public boolean discordbots_org(String botId, String userId){
+        return giveReward(botId, userId, Site.TOP_GG);
     }
 
     private enum Site{
-        LBOTS,
         BOTLIST_SPACE,
-        DBL
+        DISCORDEXTREMELIST_XYZ,
+        LBOTS_ORG,
+        TOP_GG
     }
 }
