@@ -284,7 +284,7 @@ public class PurrBot {
                     )
                     .addAuthToken(
                             Site.LBOTS_ORG, 
-                            getFileManager().getString("config", "tokens.lbots-token")
+                            getFileManager().getString("config", "tokens.lbots-org")
                     )
                     .addAuthToken(
                             Site.DISCORDEXTREMELIST_XYZ, 

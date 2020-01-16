@@ -24,7 +24,6 @@
     "ip": "127.0.0.1",
     "name": "DatabaseName",
     "guildTable": "GuildTable",
-    "memberTable": "MemberTable",
-    "statsTable": "StatsTable"
+    "memberTable": "MemberTable"
   }
 }
