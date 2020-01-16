@@ -211,7 +211,7 @@ public class ImageUtil {
         Request request = new Request.Builder()
                 .addHeader("User-Agent", "PurrBot BOT_VERSION")
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", bot.getFileManager().getString("config", "token.blaze"))
+                .addHeader("Authorization", bot.getFileManager().getString("config", "tokens.blaze"))
                 .post(body)
                 .url("https://api.blazedev.me/gen/welcome")
                 .build();

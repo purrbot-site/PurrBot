@@ -397,12 +397,6 @@ public class PurrBot {
     public List<String> getKissImg(){
         return getFileManager().getStringlist("random", "kiss_img");
     }
-    public List<String> getNoNsfwMsg(){
-        return getFileManager().getStringlist("random", "no_nsfw_msg");
-    }
-    public List<String> getPingMsg(){
-        return getFileManager().getStringlist("random", "ping_msg");
-    }
     public List<String> getShutdownImg(){
         return getFileManager().getStringlist("random", "shutdown_img");
     }
