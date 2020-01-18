@@ -80,7 +80,7 @@ public class CmdHelp implements Command{
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_title"),
                         bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_value")
-                                .replace("{command}", cmd.getAttribute("usage").replace("{p}", prefix)), 
+                                .replace("{commands}", cmd.getAttribute("usage").replace("{p}", prefix)), 
                         false
                 )
                 .addField(
