@@ -46,11 +46,6 @@ public class ReadyListener extends ListenerAdapter{
         this.bot = bot;
     }
 
-    /**
-     * Returns if the bot is ready for use.
-     *
-     * @return If the bot is ready to use.
-     */
     public boolean isReady() {
         return ready;
     }
@@ -64,11 +59,10 @@ public class ReadyListener extends ListenerAdapter{
         ShardManager shardManager = bot.getShardManager();
         JDA jda = event.getJDA();
 
-        shards += 1;
-
+        shards++;
         logger.info(String.format(
                 "Shard %d (%d Guilds) ready!",
-                shards,
+                jda.getShardInfo().getShardId(),
                 jda.getGuilds().size()
         ));
 
@@ -95,7 +89,7 @@ public class ReadyListener extends ListenerAdapter{
                 "Shard ready!",
                 embed
         );
-
+        
         if(shards == jda.getShardInfo().getShardTotal()){
             setReady();
 

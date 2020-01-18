@@ -1,6 +1,6 @@
 {
   "files": [
-    "README.md"
+    "contributors.md"
   ],
   "imageSize": 100,
   "badgeTemplate": "[contributorBadge]: https://img.shields.io/badge/Contributors_✨-<%= contributors.length %>-green.svg?style=plastic",

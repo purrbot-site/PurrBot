@@ -22,7 +22,6 @@
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
-[emojis]: https://allcontributors.org/docs/en/emoji-key
 
 <!-- Widgets -->
 [widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
@@ -36,11 +35,7 @@
 [debl]: https://discordextremelist.xyz/bots/purr  
 [lbots]: https://lbots.org/bots/Purr
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[contributorBadge]: https://img.shields.io/badge/Contributors_✨-5-green.svg?style=plastic
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![contributorBadge]](#contributors-)
+[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License]
 
 # \*Purr*
 This bot was made to use the [nekos.life]-API but now moved to its very own API.
@@ -185,27 +180,3 @@ Feel free to upvote or add her to your favourites to show your support.
 * [Basic Invite]
 * [Website]
 * [Wiki]
-
-## Contributors ✨
-
-Thanks goes to the wonderful people listed below.  
-Take a look at the [emoji key][emojis] site to find out what the emojis mean.
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://nekos.life"><img src="https://avatars2.githubusercontent.com/u/21271709?v=4" width="100px;" alt=""/><br /><sub><b>Tails</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=IamTails" title="Code">💻</a></td>
-    <td align="center"><a href="https://rainestormee.github.io"><img src="https://avatars1.githubusercontent.com/u/26597492?v=4" width="100px;" alt=""/><br /><sub><b>Ryan Arrowsmith</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=rainestormee" title="Code">💻</a></td>
-    <td align="center"><a href="http://linkedin.dv8tion.net"><img src="https://avatars1.githubusercontent.com/u/1479909?v=4" width="100px;" alt=""/><br /><sub><b>Austin Keener</b></sub></a><br /><a href="#plugin-DV8FromTheWorld" title="Plugin/utility libraries">🔌</a></td>
-    <td align="center"><a href="https://www.piggypiglet.me"><img src="https://avatars3.githubusercontent.com/u/11957313?v=4" width="100px;" alt=""/><br /><sub><b>PiggyPiglet</b></sub></a><br /><a href="https://github.com/Andre601/PurrBot/commits?author=PiggyPiglet" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/Katinor"><img src="https://avatars3.githubusercontent.com/u/16473891?v=4" width="100px;" alt=""/><br /><sub><b>Oh Hyejun</b></sub></a><br /><a href="#translation-Katinor" title="Translation">🌍</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
