@@ -1,54 +1,18 @@
-# About
-As a developer do I (Andre601) appreciate any contribution that improves the bot in a positive way.  
-However I still want to keep a certain consistency and "style" in the code.
+## About
+I appreciate any contribution that helps making this bot better.  
+But before you start working on things and make a PR, read this page here first.
 
-Please read this document completely because not reading it may lead to your PR/issue being closed without any changes being made.
+### Translations
+This is not the place to commit your translations to.  
+If you want to help translating your bot to another language, go to the [Translation Repository] and PR your changes there.
 
-# Style
-I follow a certain style when coding and appreciate if you follow it too.
+### Wiki
+You can help improve the [Wiki] by commiting changes to the [wiki folder] of this repository.  
+Try to follow the general syntax of a page and make it as good looking as possible.
 
-## Javadoc comments
-I use Javadoc comments on all public methods I use to describe what it does and perhaps returns.  
-This isn't actually needed since my bot isn't an API nor offers one. However I still want public methods to have comments.
+### Bot
+When you want to commit changes to the bot, make sure to follow specific rules.
 
-### Format
-Please follow this format when making a new public method or making a previously private one public:  
-```java
-/**
- * Put a description here that explains what the method does.
- *
- * @param  param
- *         Description of the parameter.
- *
- * @return When the method returns stuff, tell what it returns.
- *
- * @see {@link #linkToMethod(String)} when the method is a shortcut of another.
- */
-public String getSomething(String param){
-    return linkToMethod(param);
-}
-```
-
-### Linking
-Please link any used methods/entities/... that a method uses through the `{@link path.to.source.here Source}` option.
-
-**Example**:  
-The method `getEmbed()` returns a EmbedBuilder from JDA (Path: `net.dv8tion.jda.core.EmbedBuilder`) so the Javadoc comment looks like this:  
-```java
-/**
- * Gets an {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder} to use.
- *
- * @return An {@link net.dv8tion.jda.core.EmbedBuilder EmbedBuilder}
- */
-public EmbedBuilder getEmbed(){
-    return new EmbedBuilder();
-}
- 
-```
-
-## Access methods
-The recode (v5.0.0) changed how the bot accesses certain classes and methods.  
-Instead of making a static method, please try to make a normal one and create and get an instance of the class through the main class.
-
-## Final words
-Again I'm happy for any contribution that improves my code in good way, but follow the above examples.
+#### Avoid static methods
+The bot tries its best to not use static methods. Instead are classes loaded through DI (Dependency injection).  
+For example do we access the DBUtil through `PurrBot#getDbUtil()` and not through static methods.
