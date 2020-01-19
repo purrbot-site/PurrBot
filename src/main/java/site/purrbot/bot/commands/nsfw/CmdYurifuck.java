@@ -141,10 +141,10 @@ public class CmdYurifuck implements Command{
         }
 
         queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
-        tc.sendMessage(MarkdownSanitizer.escape(
+        tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.nsfw.yurifuck.request.message", author.getEffectiveName())
                         .replace("{target}", target.getAsMention())
-        )).queue(message -> {
+        ).queue(message -> {
             message.addReaction("✅").queue();
             message.addReaction("❌").queue();
             EventWaiter waiter = bot.getWaiter();
