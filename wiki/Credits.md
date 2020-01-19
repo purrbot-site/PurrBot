@@ -5,18 +5,27 @@ All libraries are open source.
 
 [JDA]: https://github.com/DV8FromTheWorld/JDA
 [DV8FromTheWorld]: https://github.com/DV8FromTheWorld
+
 [RethinkDB]: https://github.com/rethinkdb/rethinkdb
 [Rethink]: https://github.com/rethinkdb
+
 [DBL-Java-library]: https://github.com/DiscordBotList/DBL-Java-Library
 [DiscordBotList]: https://github.com/DiscordBotList
+
 [Gson]: https://github.com/google/gson
 [Google]: https://github.com/google
+
 [Spark]: https://github.com/perwendel/spark
 [perwendel]: https://github.com/perwendel
+
 [jda-command]: https://github.com/rainestormee/jda-command
 [rainestormee]: https://github.com/rainestormee
+
 [JavaBotBlockAPI]: https://github.com/botblock/JavaBotBlockAPI
 [Andre601]: https://github.com/Andre601
+
+[Caffeine]: https://github.com/ben-manes/caffeine
+[ben-manes]: https://github.com/ben-manes
 
 | Name               | Author               | License              | Used for                                    |  
 | ------------------ | -------------------- | -------------------- | ------------------------------------------- |  
@@ -27,3 +36,4 @@ All libraries are open source.
 | [Spark]            | [perwendel]          | Apache 2.0           | Used for the vote-listener (web-framework)  |
 | [jda-command]      | [rainestormee]       | Apache 2.0           | Used for command-handling.                  |
 | [JavaBotBlockAPI]  | [Andre601]           | MIT                  | API for posting stats to different botlists |
+| [Caffeine]         | [ben-manes]          | Apache 2.0           | Library for high performance Caching        |
