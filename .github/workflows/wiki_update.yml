@@ -13,7 +13,7 @@ jobs:
     - name: Update Wiki
       uses: awact/wiki-action@master
       env:
-        ACTION_EMAIL: ${{ secrets.EMAIL }}
+        ACTION_MAIL: ${{ secrets.EMAIL }}
         ACTION_NAME: Andre601
         GH_PAT: ${{ secrets.GITHUB_PAT }}
         MD_FOLDER: wiki
