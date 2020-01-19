@@ -19,3 +19,4 @@ jobs:
         MD_FOLDER: wiki
         OWNER: Andre601
         REPO_NAME: PurrBot
+        SKIP_MD: README.md
