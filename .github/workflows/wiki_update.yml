@@ -1,0 +1,21 @@
+name: Update Wiki
+
+on:
+  push:
+    paths:
+      - 'wiki/**'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Update Wiki
+      uses: awact/wiki-action@master
+      env:
+        ACTION_EMAIL: ${{ secrets.EMAIL }}
+        ACTION_NAME: Andre601
+        GH_PAT: ${{ secrets.GITHUB_PAT }}
+        MD_FOLDER: wiki
+        OWNER: Andre601
+        REPO_NAME: PurrBot
