@@ -12,6 +12,7 @@ The bot has `.` as default prefix and the following default welcome settings:
 * `purr` as icon
 * `hex:000000` as text colour
 * `Welcome {mention}!` as message.
+* `en` (English) as language.
 
 ----
 > ### The Bot constantly leaves when I invite it. What's wrong?
