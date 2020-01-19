@@ -1,10 +1,14 @@
+[Translations]: https://github.com/purrbot-site/Translations
+[Wiki]: https://github.com/Andre601/PurrBot/wiki
+[Wiki folder]: https://github.com/Andre601/PurrBot/tree/master/wiki
+
 ## About
 I appreciate any contribution that helps making this bot better.  
 But before you start working on things and make a PR, read this page here first.
 
 ### Translations
 This is not the place to commit your translations to.  
-If you want to help translating your bot to another language, go to the [Translation Repository] and PR your changes there.
+If you want to help translating your bot to another language, go to the [Translation Repository][Translations] and PR your changes there.
 
 ### Wiki
 You can help improve the [Wiki] by commiting changes to the [wiki folder] of this repository.  
