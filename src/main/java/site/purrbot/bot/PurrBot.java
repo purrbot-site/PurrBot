@@ -197,7 +197,7 @@ public class PurrBot {
                 Gson voteGson = new Gson();
                 JSONObject json = new JSONObject();
 
-                post("/lbots", (request, response) -> {
+                post("/lbots_org", (request, response) -> {
                     JsonObject jsonObject = voteGson.fromJson(request.body(), JsonObject.class);
 
                     String userId = jsonObject.get("userid").getAsString();
@@ -238,30 +238,6 @@ public class PurrBot {
                         json.put("code", 403).put("message", "Vote-listener is not ready.");
                     }
                     
-                    response.type("application/json");
-                    response.body(json.toString());
-
-                    return response.body();
-                });
-
-                post("/dbl", (request, response) -> {
-                    JsonObject jsonObject = voteGson.fromJson(request.body(), JsonObject.class);
-                    String userId = jsonObject.get("user").getAsString();
-                    String botId = jsonObject.get("bot").getAsString();
-                    
-                    if(getReadyListener().isReady()){
-                        if(rewardHandler.discordbots_org(botId, userId)){
-                            response.status(200);
-                            json.put("code", 200).put("message", "POST-request valid!");
-                        }else{
-                            response.status(403);
-                            json.put("code", 403).put("message", "Invalid POST-request!");
-                        }
-                    }else{
-                        response.status(403);
-                        json.put("code", 403).put("message", "Vote-listener is not ready.");
-                    }
-
                     response.type("application/json");
                     response.body(json.toString());
 

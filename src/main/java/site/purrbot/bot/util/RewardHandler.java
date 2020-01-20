@@ -122,28 +122,6 @@ public class RewardHandler {
                 avatar = Links.FAVOURITE.getUrl();
                 break;
             
-            case TOP_GG:
-                if(member == null){
-                    msg = String.format(
-                            "An anonymous person upvoted %s on `Top.gg`!\n" +
-                            "You can do that too on <%s>",
-                            guild.getSelfMember().getAsMention(),
-                            Links.TOP_GG.getUrl()
-                    );
-                }else{
-                    msg = String.format(
-                            "%s has upvoted %s on `Top.gg`! Thank you. \uD83C\uDF89\n" +
-                            "You can do that too on <%s>",
-                            member.getAsMention(),
-                            guild.getSelfMember().getAsMention(),
-                            Links.TOP_GG.getUrl()
-                    );
-                }
-                name = "New upvote! [Top.gg]";
-                reason = "[Vote listener] Member upvoted bot on top.gg";
-                avatar = Links.UPVOTE_TOP_GG.getUrl();
-                break;
-            
             default:
                 msg = null;
                 name = null;
@@ -173,14 +151,9 @@ public class RewardHandler {
         return giveReward(botId, userId, Site.BOTLIST_SPACE);
     }
 
-    public boolean discordbots_org(String botId, String userId){
-        return giveReward(botId, userId, Site.TOP_GG);
-    }
-
     private enum Site{
         BOTLIST_SPACE,
         DISCORDEXTREMELIST_XYZ,
-        LBOTS_ORG,
-        TOP_GG
+        LBOTS_ORG
     }
 }
