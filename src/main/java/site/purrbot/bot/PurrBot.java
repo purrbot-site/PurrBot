@@ -432,7 +432,7 @@ public class PurrBot {
                 // Emotes
                 .replace("{BLOBHOLO}", Emotes.BLOBHOLO.getEmote())
                 .replace("{LOADING}", Emotes.LOADING.getEmote())
-                .replace("{NEKOWO}", Emotes.LOADING.getEmote())
+                .replace("{NEKOWO}", Emotes.NEKOWO.getEmote())
                 .replace("{SENKOTAILWAG}", Emotes.SENKOTAILWAG.getEmote())
                 .replace("{SHIROTAILWAG}", Emotes.SHIROTAILWAG.getEmote())
                 .replace("{TYPING}", Emotes.TYPING.getEmote())

@@ -78,7 +78,7 @@ public class CmdNeko implements Command{
                 return;
             }
             
-            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_img")).setImage(link);
+            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_img"), link).setImage(link);
         }
         
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.neko.loading")).queue(message -> {
