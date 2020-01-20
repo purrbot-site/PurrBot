@@ -250,7 +250,7 @@
           "bot_title": "Bot info",
           "bot_value": "Bot Version: `{bot_version}`\nLibrary: [`JDA {jda_version}`]({link})",
           "bot_list_title": "Bot lists",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})\n[`Top.gg`]({top})",
+          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})",
           "commands_title": "Commands",
           "commands_value": "Use `{prefix}help` in the Discord for a list of commands.",
           "links_title": "Other links",

@@ -249,7 +249,7 @@
           "bot_title": "봇 정보",
           "bot_value": "봇 버전: `{bot_version}`\n라이브러리: [`JDA {jda_version}`]({link})",
           "bot_list_title": "내가 등록된 사이트들",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})\n[`Top.gg`]({top})",
+          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})",
           "commands_title": "명령어",
           "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
           "links_title": "유용한 링크들",

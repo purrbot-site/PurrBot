@@ -250,7 +250,7 @@
           "bot_title": "Bot Info",
           "bot_value": "Bot Version: `{bot_version}`\nAPI: [`JDA {jda_version}`]({link})",
           "bot_list_title": "Bot Listen",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})\n[`Top.gg`]({top})",
+          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})",
           "commands_title": "Befehle",
           "commands_value": "Verwende `{prefix}help` im Discord für eine Liste von Befehlen.",
           "links_title": "Andere Links",

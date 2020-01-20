@@ -446,7 +446,6 @@ public class PurrBot {
                 .replace("{del}", Links.DISCORDEXTREMELIST_XYZ.getUrl())
                 .replace("{db}", Links.DISCORD_BOTS_GG.getUrl())
                 .replace("{lbots}", Links.LBOTS_ORG.getUrl())
-                .replace("{top}", Links.TOP_GG.getUrl())
                 // Links
                 .replace("{github}", Links.GITHUB.getUrl())
                 .replace("{patreon}", Links.PATREON.getUrl())

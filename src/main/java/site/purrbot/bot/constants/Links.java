@@ -33,7 +33,6 @@ public enum  Links {
     DISCORDEXTREMELIST_XYZ("https://discordextremelist.xyz/bots/purr"),
     DISCORD_BOTS_GG       ("https://discord.bots.gg/bots/425382319449309197"),
     LBOTS_ORG             ("https://lbots.org/bots/Purr"),
-    TOP_GG                ("https://top.gg/bot/425382319449309197"),
 
     // Images
     FAVOURITE                ("https://i.imgur.com/LTd5nEJ.png"),
