@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Update Wiki
-      uses: awact/wiki-action@master
+      uses: docker://decathlon/wiki-page-creator-action:latest
       env:
         ACTION_MAIL: ${{ secrets.EMAIL }}
         ACTION_NAME: Andre601
