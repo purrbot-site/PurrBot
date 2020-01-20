@@ -1,4 +1,5 @@
 [CONTRIBUTING.md]: https://github.com/Andre601/PurrBot/blob/master/CONTRIBUTING.md
+[Wiki]: https://github.com/Andre601/PurrBot/wiki
 
 ## Wiki
 This folder contains all files that you may find in the [Wiki] of this repository.  
