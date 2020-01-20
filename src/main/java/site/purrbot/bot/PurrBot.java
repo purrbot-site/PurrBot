@@ -266,10 +266,6 @@ public class PurrBot {
                             Site.DISCORDEXTREMELIST_XYZ, 
                             getFileManager().getString("config", "tokens.discordextremelist-xyz")
                     )
-                    .addAuthToken(
-                            Site.TOP_GG, 
-                            getFileManager().getString("config", "tokens.top-gg")
-                    )
                     .build();
         }
 
