@@ -140,14 +140,14 @@ public class CmdBlowjob implements Command{
                 bot.getMsg(guild.getId(), "purr.nsfw.blowjob.request.message", author.getEffectiveName())
                         .replace("{target}", target.getAsMention())
         ).queue(message -> {
-            message.addReaction("✅").queue();
-            message.addReaction("❌").queue();
+            message.addReaction("\u2705").queue();
+            message.addReaction("\u274C").queue();
             EventWaiter waiter = bot.getWaiter();
             waiter.waitForEvent(
                     GuildMessageReactionAddEvent.class,
                     event -> {
                         MessageReaction.ReactionEmote emoji = event.getReactionEmote();
-                        if(!emoji.getName().equals("✅") && !emoji.getName().equals("❌"))
+                        if(!emoji.getName().equals("\u2705") && !emoji.getName().equals("\u274C"))
                             return false;
                         if(event.getUser().isBot())
                             return false;
@@ -158,7 +158,7 @@ public class CmdBlowjob implements Command{
                     },
                     event -> {
                         MessageReaction.ReactionEmote emoji = event.getReactionEmote();
-                        if(emoji.getName().equals("❌")){
+                        if(emoji.getName().equals("\u274C")){
                             message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
 
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
@@ -169,7 +169,7 @@ public class CmdBlowjob implements Command{
                             return;
                         }
 
-                        if(emoji.getName().equals("✅")){
+                        if(emoji.getName().equals("\u2705")){
                             message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
     
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));

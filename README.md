@@ -25,12 +25,10 @@
 
 <!-- Widgets -->
 [widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
-[widgetTop]: https://top.gg/api/widget/425382319449309197.svg  
-[widgetdebl]: https://api.discordextremelist.xyz/v1/bot/425382319449309197/widget  
+[widgetDebl]: https://api.discordextremelist.xyz/v1/bot/425382319449309197/widget  
 
 <!-- Botlists -->
 [botlist]: https://botlist.space/bot/425382319449309197  
-[top]: https://top.gg/bot/425382319449309197  
 [discordBots]: https://discord.bots.gg/bots/425382319449309197  
 [debl]: https://discordextremelist.xyz/bots/purr  
 [lbots]: https://lbots.org/bots/Purr
@@ -157,11 +155,6 @@ Feel free to upvote or add her to your favourites to show your support.
 > Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
 
 ![widgetBotlist]
-
-### [top.gg][top] (Formerly discordbots.org)
-> Spice up your Discord experience with our diverse range of Discord bots
-
-![widgetTop]
 
 ### [Discord.bots.gg][discordBots]
 > The original Discord bot list, find the right bot for your server today.
