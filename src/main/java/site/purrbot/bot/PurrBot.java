@@ -180,8 +180,8 @@ public class PurrBot {
                 .setToken(getFileManager().getString("config", "bot-token"))
                 .addEventListeners(
                         readyListener,
-                        new GuildListener(this),
                         new ConnectionListener(this),
+                        new GuildListener(this),
                         new CommandListener(this, CMD_HANDLER),
                         waiter
                 )
@@ -438,6 +438,9 @@ public class PurrBot {
                 .replace("{TYPING}", Emotes.TYPING.getEmote())
                 .replace("{VANILLABLUSH}", Emotes.VANILLABLUSH.getEmote())
                 .replace("{WAGTAIL}", Emotes.WAGTAIL.getEmote())
+                .replace("{EDIT}", Emotes.EDIT.getEmote())
+                .replace("{DOWNLOAD}", Emotes.DOWNLOAD.getEmote())
+                .replace("{DISCORD}", Emotes.DISCORD.getEmote())
                 // Wiki pages
                 .replace("{wiki_bg}", Links.WIKI.getUrl() + "/Welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI.getUrl() + "/Welcome-images#icons")

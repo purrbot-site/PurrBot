@@ -85,6 +85,9 @@ public class FileManager{
     
     public String getString(String name, String path){
         File file = files.get(name);
+        
+        if(file == null)
+            return "";
 
         try{
             JsonReader reader = new JsonReader(new FileReader(file));
@@ -102,13 +105,16 @@ public class FileManager{
             
             return json.getAsString();
         }catch(FileNotFoundException ex){
-            logger.warn("Could not find file " + name + ".json in " + path, ex);
+            logger.warn("Could not find file " + name + ".json", ex);
             return "";
         }
     }
     
     public boolean getBoolean(String name, String path){
         File file = files.get(name);
+        
+        if(file == null)
+            return false;
         
         try{
             JsonReader reader = new JsonReader(new FileReader(file));
@@ -133,6 +139,9 @@ public class FileManager{
 
     public List<String> getStringlist(String name, String path){
         File file = files.get(name);
+        
+        if(file == null)
+            return new ArrayList<>();
 
         try{
             JsonReader reader = new JsonReader(new FileReader(file));

@@ -64,6 +64,10 @@ public class CmdWelcome implements Command{
         this.bot = bot;
     }
 
+    private String getMsg(String msg){
+        return msg.length() > MessageEmbed.VALUE_MAX_LENGTH ? msg.substring(0, 1000) + "..." : msg;
+    }
+    
     private MessageEmbed welcomeSettings(User author, Guild guild, boolean hasImage){
         TextChannel tc = getWelcomeChannel(guild.getId());
 
@@ -109,7 +113,7 @@ public class CmdWelcome implements Command{
                 .addField(
                         bot.getMsg(guild.getId(), "purr.guild.welcome.embed.message_title"),
                         bot.getMsg(guild.getId(), "purr.guild.welcome.embed.message_value")
-                                .replace("{message}", bot.getWelcomeMsg(guild.getId())), 
+                                .replace("{message}", getMsg(bot.getWelcomeMsg(guild.getId()))), 
                         false
                 );
 
