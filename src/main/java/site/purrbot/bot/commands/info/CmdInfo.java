@@ -135,18 +135,16 @@ public class CmdInfo implements Command{
             msg.delete().queue();
 
         if(args.toLowerCase().contains("--dm") || args.toLowerCase().contains("—dm")){
-            msg.getAuthor().openPrivateChannel().queue(pm -> {
-                String mention = msg.getAuthor().getAsMention();
-                String prefix = bot.isBeta() ? "snuggle" : "purr";
-                pm.sendMessage(getEmbed(msg.getAuthor(), guild)).queue(
-                        message -> tc.sendMessage(
-                                bot.getMsg(guild.getId(), prefix + ".info.info.dm_success", mention)
-                        ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)),
-                        throwable -> tc.sendMessage(
-                                bot.getMsg(guild.getId(), prefix + ".info.info.dm_failure", mention)
-                        ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
-                );
-            });
+            String mention = msg.getAuthor().getAsMention();
+            String prefix = bot.isBeta() ? "snuggle" : "purr";
+            msg.getAuthor().openPrivateChannel()
+                    .flatMap(channel -> channel.sendMessage(getEmbed(msg.getAuthor(), guild)))
+                    .queue(message -> tc.sendMessage(
+                            bot.getMsg(guild.getId(), prefix + ".info.info.dm_success", mention)
+                    ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)), 
+                    (error) -> tc.sendMessage(
+                            bot.getMsg(guild.getId(), prefix + ".info.info.dm_failure", mention)
+                    ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)));
             return;
         }
 
