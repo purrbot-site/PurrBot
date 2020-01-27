@@ -81,7 +81,7 @@ public class CmdSlap implements Command{
 
         if(members.contains(msg.getMember())){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.fun.slap.mention_self")
+                    bot.getMsg(guild.getId(), "purr.fun.slap.mention_self", msg.getMember().getAsMention())
             ).queue();
         }
 
