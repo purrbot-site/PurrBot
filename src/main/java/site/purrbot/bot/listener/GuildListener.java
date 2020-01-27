@@ -113,7 +113,7 @@ public class GuildListener extends ListenerAdapter{
                 embed = new WebhookEmbedBuilder()
                         .setColor(0xFF0000)
                         .setThumbnailUrl(guild.getIconUrl())
-                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.JOINED_GUILD.getEmote(), null))
+                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.LEFT_GUILD.getEmote(), null))
                         .addField(new WebhookEmbed.EmbedField(
                                 true, "Name", guild.getName()
                         ))
@@ -156,7 +156,7 @@ public class GuildListener extends ListenerAdapter{
                 embed = new WebhookEmbedBuilder()
                         .setColor(0xFF0000)
                         .setThumbnailUrl(guild.getIconUrl())
-                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.JOINED_GUILD.getEmote(), null))
+                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.LEFT_GUILD.getEmote(), null))
                         .addField(new WebhookEmbed.EmbedField(
                                 true, "Name", guild.getName()
                         ))
