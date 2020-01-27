@@ -223,7 +223,7 @@
         "command_info": {
           "aliases": "Aliases",
           "command_nsfw": "Please run this command in a NSFW channel.",
-          "no_command": "This command doesn't exist!\nMake sure you typed it correctly.",
+          "no_command": "This command doesn't exist!\nMake sure you typed it correctly.\n\n**Note**: Categories (e.g. NSFW) are NOT commands!",
           "title": "Command help: {command}",
           "usage_title": "Usage options",
           "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Required"
@@ -282,7 +282,7 @@
           "{TYPING} [placeholder_loading_text]",
           "{TYPING} Hey Discord, are you there?"
         ],
-        "info": "{EDIT} Edit message: `{edit_message}`\n{e:DISCORD} Discord: `{discord}`",
+        "info": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discord: `{discord}`",
         "info_full": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
@@ -380,11 +380,11 @@
       },
       "lewd": {
         "loading": "{LOADING} Getting a lewd neko image (or gif)...",
-        "title_gif": "Lewd neko {e:WAGTAIL}",
-        "title_img": "Lewd neko {e:NEKOWO}"
+        "title_gif": "Lewd neko {WAGTAIL}",
+        "title_img": "Lewd neko {NEKOWO}"
       },
       "solo": {
-        "loading": "{e:LOADING} Getting a gif of a hot girl...",
+        "loading": "{LOADING} Getting a gif of a hot girl...",
         "title": "Solo girl"
       },
       "threesome": {

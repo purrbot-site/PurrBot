@@ -223,7 +223,7 @@
         "command_info": {
           "aliases": "Aliase",
           "command_nsfw": "Bitte verwende diesen Befehl in einem NSFW-Kanal",
-          "no_command": "Dieser Befehl existiert nicht!\nStell sicher, dass du ihn richtig geschrieben hast.",
+          "no_command": "Dieser Befehl existiert nicht!\nStell sicher, dass du ihn richtig geschrieben hast.\n\n**Wichtig**: Kategorien (z.B. NSFW) sind NICHT Befehle.",
           "title": "Befehls-Hilfe: {command}",
           "usage_title": "Verwendungs Optionen",
           "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Benötigt"
@@ -384,7 +384,7 @@
         "title_img": "Ungezogene neko {NEKOWO}"
       },
       "solo": {
-        "loading": "{e:LOADING} Erhalte ein gif von einem scharfen Girl...",
+        "loading": "{LOADING} Erhalte ein gif von einem scharfen Girl...",
         "title": "Solo Girl"
       },
       "threesome": {

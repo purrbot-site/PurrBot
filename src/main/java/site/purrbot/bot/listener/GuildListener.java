@@ -54,56 +54,158 @@ public class GuildListener extends ListenerAdapter{
         long bots    = guild.getMembers().stream().filter(member -> member.getUser().isBot()).count();
         long members = guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count();
 
-        return bots > (members + 2);
+        return (100 / members * bots) > 60;
     }
-
-    private void sendWebhook(Guild guild, String title, String text, Emotes emote, int color){
+    
+    private void sendWebhook(Action action, Guild guild){
         Member owner = guild.getOwner();
-        WebhookEmbed embed = new WebhookEmbedBuilder()
-                .setColor(color)
-                .setThumbnailUrl(guild.getIconUrl())
-                .setTitle(new WebhookEmbed.EmbedTitle(emote.getEmote(), null))
-                .addField(new WebhookEmbed.EmbedField(
-                        true, "Name", guild.getName()
-                ))
-                .addField(new WebhookEmbed.EmbedField(
-                        true, "Shard [Current/Total]", guild.getJDA().getShardInfo().getShardString()
-                ))
-                .addField(new WebhookEmbed.EmbedField(
-                        false, "Owner", String.format(
-                                "%s | %s (`%s`)", 
+        long bots    = guild.getMembers().stream().filter(member -> member.getUser().isBot()).count();
+        long members = guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count();
+        
+        String title = null;
+        WebhookEmbed embed = null;
+        
+        switch(action){
+            case JOIN:
+                title = "Join";
+                embed = new WebhookEmbedBuilder()
+                        .setColor(0x00FF00)
+                        .setThumbnailUrl(guild.getIconUrl())
+                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.JOINED_GUILD.getEmote(), null))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Name", guild.getName()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Shard [Current/Total]", guild.getJDA().getShardInfo().getShardString()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false, "Owner", String.format(
+                                        "%s | %s (`%s`)", 
+                                        owner == null ? "Unknown" : owner.getAsMention(),
+                                        owner == null ? "Unknown" : owner.getUser().getName(),
+                                        owner == null ? "?" : owner.getId()
+                                )
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false, "Members", String.format(
+                                        "```yaml\n" +
+                                        "Total: %5d\n" +
+                                        "Bots:  %5d\n" +
+                                        "Users: %5d\n" +
+                                        "```",
+                                        guild.getMembers().size(),
+                                        bots,
+                                        members
+                                )
+                        ))
+                        .setFooter(new WebhookEmbed.EmbedFooter(
+                                String.format(
+                                        "Guild #%d",
+                                        bot.getShardManager().getGuildCache().size()
+                                ),
+                                null
+                        ))
+                        .setTimestamp(ZonedDateTime.now())
+                        .build();
+                break;
+            
+            case LEAVE:
+                title = "Leave";
+                embed = new WebhookEmbedBuilder()
+                        .setColor(0xFF0000)
+                        .setThumbnailUrl(guild.getIconUrl())
+                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.JOINED_GUILD.getEmote(), null))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Name", guild.getName()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Shard [Current/Total]", guild.getJDA().getShardInfo().getShardString()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false, "Owner", String.format(
+                                "%s | %s (`%s`)",
                                 owner == null ? "Unknown" : owner.getAsMention(),
                                 owner == null ? "Unknown" : owner.getUser().getName(),
                                 owner == null ? "?" : owner.getId()
                         )
-                ))
-                .addField(new WebhookEmbed.EmbedField(
-                        false, "Members", String.format(
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false, "Members", String.format(
                                 "```yaml\n" +
                                 "Total: %5d\n" +
                                 "Bots:  %5d\n" +
                                 "Users: %5d\n" +
                                 "```",
                                 guild.getMembers().size(),
-                                guild.getMembers().stream().filter(member -> member.getUser().isBot()).count(),
-                                guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count()
-                        )   
-                ))
-                .setFooter(new WebhookEmbed.EmbedFooter(
-                        String.format(
-                                "Guild #%d",
-                                bot.getShardManager().getGuildCache().size()
-                        ),
-                        null
-                ))
-                .setTimestamp(ZonedDateTime.now())
-                .build();
+                                bots,
+                                members
+                        )
+                        ))
+                        .setFooter(new WebhookEmbed.EmbedFooter(
+                                String.format(
+                                        "Guild #%d",
+                                        bot.getShardManager().getGuildCache().size()
+                                ),
+                                null
+                        ))
+                        .setTimestamp(ZonedDateTime.now())
+                        .build();
+                break;
+            
+            case AUTO_LEAVE:
+                title = "Leave [Auto]";
+                embed = new WebhookEmbedBuilder()
+                        .setColor(0x00FF00)
+                        .setThumbnailUrl(guild.getIconUrl())
+                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.JOINED_GUILD.getEmote(), null))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Name", guild.getName()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Shard [Current/Total]", guild.getJDA().getShardInfo().getShardString()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false, "Owner", String.format(
+                                "%s | %s (`%s`)",
+                                owner == null ? "Unknown" : owner.getAsMention(),
+                                owner == null ? "Unknown" : owner.getUser().getName(),
+                                owner == null ? "?" : owner.getId()
+                        )
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false, "Leave reason", String.format(
+                                        "`%s`",
+                                        isBotGuild(guild) ? "Bot Guild" : "Blacklisted"
+                                )
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false, "Members", String.format(
+                                "```yaml\n" +
+                                "Total: %5d\n" +
+                                "Bots:  %5d\n" +
+                                "Users: %5d\n" +
+                                "```",
+                                guild.getMembers().size(),
+                                bots,
+                                members
+                        )
+                        ))
+                        .setFooter(new WebhookEmbed.EmbedFooter(
+                                String.format(
+                                        "Guild #%d",
+                                        bot.getShardManager().getGuildCache().size()
+                                ),
+                                null
+                        ))
+                        .setTimestamp(ZonedDateTime.now())
+                        .build();
+                break;
+        }
         
         bot.getWebhookUtil().sendMsg(
                 bot.getFileManager().getString("config", "webhooks.guild"),
                 guild.getSelfMember().getUser().getEffectiveAvatarUrl(),
                 title,
-                text,
                 embed
         );
     }
@@ -121,7 +223,8 @@ public class GuildListener extends ListenerAdapter{
                     channel.sendMessage(String.format(
                             "I left your Discord `%s` for the following reason:\n" +
                             "```\n" +
-                            "[Auto Leave] Your Discord is blacklisted! Join [our Discord](%s) for the reason.\n" +
+                            "[Auto Leave] Your Discord is blacklisted! Join our Discord to find out why.\n" +
+                            "Link: %s\n" +
                             "```",
                             guild.getName(),
                             Links.DISCORD.getUrl()
@@ -133,6 +236,7 @@ public class GuildListener extends ListenerAdapter{
                         guild.leave().queue();
                     })
             );
+            sendWebhook(Action.AUTO_LEAVE, guild);
             return;
         }
 
@@ -159,16 +263,7 @@ public class GuildListener extends ListenerAdapter{
                             logger.info("[Auto Leave] Reason: Bot-Discord. Send successful: No");
                         })
                 );
-                sendWebhook(
-                        guild,
-                        "Leave [Auto]",
-                        String.format(
-                                "ID: %s",
-                                guild.getId()
-                        ),
-                        Emotes.LEFT_GUILD,
-                        0xFF0000
-                );
+                sendWebhook(Action.AUTO_LEAVE, guild);
 
                 return;
             }
@@ -185,16 +280,7 @@ public class GuildListener extends ListenerAdapter{
                 guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count()
         ));
         
-        sendWebhook(
-                guild,
-                "Join",
-                String.format(
-                        ".leave %s",
-                        guild.getId()
-                ),
-                Emotes.JOINED_GUILD,
-                0x00FF00
-        );
+        sendWebhook(Action.JOIN, guild);
     }
 
     @Override
@@ -225,16 +311,7 @@ public class GuildListener extends ListenerAdapter{
                 guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count()
         ));
     
-        sendWebhook(
-                guild,
-                "Leave",
-                String.format(
-                        "ID: %s",
-                        guild.getId()
-                ),
-                Emotes.LEFT_GUILD,
-                0xFF0000
-        );
+        sendWebhook(Action.LEAVE, guild);
     }
 
     @Override
@@ -265,16 +342,7 @@ public class GuildListener extends ListenerAdapter{
                         })
                 );
     
-                sendWebhook(
-                        guild,
-                        "Leave [Auto]",
-                        String.format(
-                                "ID: %s",
-                                guild.getId()
-                        ),
-                        Emotes.LEFT_GUILD,
-                        0xFF0000
-                );
+                sendWebhook(Action.AUTO_LEAVE, guild);
                 return;
             }
         }
@@ -342,5 +410,11 @@ public class GuildListener extends ListenerAdapter{
 
         if(event.getChannel().getId().equals(id))
             bot.setWelcomeChannel(guild.getId(), "none");
+    }
+    
+    enum Action{
+        JOIN,
+        LEAVE,
+        AUTO_LEAVE
     }
 }

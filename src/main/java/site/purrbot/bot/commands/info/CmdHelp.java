@@ -37,6 +37,9 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
+import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
+
 @CommandDescription(
         name = "Help",
         description = "Get a list of all commands or get info about a specific command.",
@@ -60,7 +63,7 @@ public class CmdHelp implements Command{
         {
             put("fun",   "\uD83C\uDFB2");
             put("guild", "\uD83C\uDFAE");
-            put("info",  "ℹ");
+            put("info",  "\u2139");
             put("nsfw",  "\uD83D\uDC8B");
             put("owner", "<:andre_601:411527902648074240>");
         }
@@ -182,7 +185,7 @@ public class CmdHelp implements Command{
             builder.setText(EmbedBuilder.ZERO_WIDTH_SPACE)
                     .setFinalAction(message -> {
                         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
-                            message.clearReactions().queue();
+                            message.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
                     })
                     .waitOnSinglePage(false)
                     .setItemsPerPage(1)
