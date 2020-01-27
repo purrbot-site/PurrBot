@@ -500,7 +500,7 @@ public class PurrBot {
 
             try {
                 post.postGuilds(getShardManager(), botBlockAPI);
-            } catch (Exception | RatelimitedException ex) {
+            } catch (Exception ex) {
                 logger.warn("Not able to post guild counts!", ex);
             }
         }, 1, 5, TimeUnit.MINUTES);

@@ -183,7 +183,7 @@ public class CmdFuck implements Command{
                             ev.getChannel().sendMessage(MarkdownSanitizer.escape(
                                     bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.accepted", author.getAsMention())
                                             .replace("{target}", target.getEffectiveName())
-                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
 
                             if(link == null){
                                 ev.getChannel().sendMessage(MarkdownSanitizer.escape(

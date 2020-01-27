@@ -202,7 +202,7 @@ public class CmdThreesome implements Command{
                                     bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.accepted", author.getAsMention())
                                             .replace("{target1}", target1.getEffectiveName())
                                             .replace("{target2}", target2.getEffectiveName())
-                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS));
+                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
                             
                             if(link == null || link.isEmpty()){
                                 ev.getChannel().sendMessage(MarkdownSanitizer.escape(
