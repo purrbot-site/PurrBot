@@ -155,7 +155,7 @@ public class GuildListener extends ListenerAdapter{
             case AUTO_LEAVE:
                 title = "Leave [Auto]";
                 embed = new WebhookEmbedBuilder()
-                        .setColor(0x00FF00)
+                        .setColor(0xFF0000)
                         .setThumbnailUrl(guild.getIconUrl())
                         .setTitle(new WebhookEmbed.EmbedTitle(Emotes.JOINED_GUILD.getEmote(), null))
                         .addField(new WebhookEmbed.EmbedField(
