@@ -52,9 +52,8 @@ public class GuildListener extends ListenerAdapter{
 
     private boolean isBotGuild(Guild guild){
         long bots    = guild.getMembers().stream().filter(member -> member.getUser().isBot()).count();
-        long members = guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count();
 
-        return (100 / members * bots) > 60;
+        return (100 / guild.getMembers().size() * bots) > 60;
     }
     
     private void sendWebhook(Action action, Guild guild){
