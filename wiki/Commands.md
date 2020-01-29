@@ -40,6 +40,7 @@ The default prefix is `.` but can be changed with the [[prefix-command|Commands#
 - [Invite](#invite)
 - [Ping](#ping)
 - [Quote](#quote)
+- [Shards](#shards)
 - [Stats](#stats)
 - [User](#user)
 
@@ -396,6 +397,19 @@ Quotes a message from a user, using the [PurrBotAPI](https://purrbot.site/api) t
 `[#channel]` is only needed, if the message is in a channel that isn't the same as the one you execute the command in.
 
 The bot won't quote messages from NSFW channels when the channel you're using the command in isn't one.
+
+----
+### Shards
+> **Permission**: `None`  
+> **Bot requires**: `None`
+>
+> **Aliases**:
+> - `Shardinfo`
+>
+> **Usage**:
+> - `.Shard`
+
+Lists all shards, their status, ping and Guild count.
 
 ----
 ### Stats
