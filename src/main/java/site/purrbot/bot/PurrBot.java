@@ -23,13 +23,11 @@ import com.github.benmanes.caffeine.cache.CacheWriter;
 import com.github.benmanes.caffeine.cache.RemovalCause;
 import org.botblock.javabotblockapi.BotBlockAPI;
 import org.botblock.javabotblockapi.Site;
-import org.botblock.javabotblockapi.exceptions.RatelimitedException;
 import org.botblock.javabotblockapi.requests.PostAction;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
@@ -52,6 +50,8 @@ import site.purrbot.bot.util.file.lang.LangUtils;
 import site.purrbot.bot.util.message.EmbedUtil;
 import site.purrbot.bot.util.message.MessageUtil;
 import site.purrbot.bot.util.message.WebhookUtil;
+import site.purrbot.bot.votes.Botlist;
+import site.purrbot.bot.votes.LBots;
 import spark.Spark;
 
 import javax.security.auth.login.LoginException;
@@ -198,13 +198,10 @@ public class PurrBot {
                 JSONObject json = new JSONObject();
 
                 post("/lbots_org", (request, response) -> {
-                    JsonObject jsonObject = voteGson.fromJson(request.body(), JsonObject.class);
+                    LBots lBots = voteGson.fromJson(request.body(), LBots.class);
 
-                    String userId = jsonObject.get("userid").getAsString();
-                    boolean isFavourite = jsonObject.get("favourited").getAsBoolean();
-
-                    if(getReadyListener().isReady() && isFavourite){
-                        if(rewardHandler.lbotsReward(userId)){
+                    if(getReadyListener().isReady() && lBots.isFavourited()){
+                        if(rewardHandler.lbotsReward(lBots.getUserid())){
                             response.status(200);
                             json.put("code", 200).put("message", "POST-request valid!");
                         }else{
@@ -220,13 +217,10 @@ public class PurrBot {
                 });
 
                 post("/botlist_space", (request, response) -> {
-                    JsonObject jsonObject = voteGson.fromJson(request.body(), JsonObject.class);
-
-                    String botId = jsonObject.get("bot").getAsString();
-                    String userId = jsonObject.getAsJsonObject("user").get("id").getAsString();
+                    Botlist botlist = voteGson.fromJson(request.body(), Botlist.class);
 
                     if(getReadyListener().isReady()){
-                        if(rewardHandler.botlistSpaceReward(botId, userId)){
+                        if(rewardHandler.botlistSpaceReward(botlist.getBotId(), botlist.getUserId())){
                             response.status(200);
                             json.put("code", 200).put("message", "POST-request valid!");
                         }else{

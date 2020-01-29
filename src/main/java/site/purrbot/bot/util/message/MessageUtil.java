@@ -67,7 +67,7 @@ public class MessageUtil {
     }
 
     public String getRandomStartupMsg(){
-        return bot.getStartupMsg().isEmpty() ? "" : bot.getStartupMsg().get(
+        return bot.getStartupMsg().isEmpty() ? "Starting bot..." : bot.getStartupMsg().get(
                 bot.getRandom().nextInt(bot.getStartupMsg().size())
         );
     }

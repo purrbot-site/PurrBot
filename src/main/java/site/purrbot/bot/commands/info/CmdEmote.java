@@ -92,7 +92,7 @@ public class CmdEmote implements Command{
 
         if(link != null)
             embed.addField(
-                    bot.getMsg(guild.getId(), "purr.info.emote.embed.messge"),
+                    bot.getMsg(guild.getId(), "purr.info.emote.embed.message"),
                     bot.getMsg(guild.getId(), "purr.info.emote.embed.link")
                             .replace("{link}", link),
                     true

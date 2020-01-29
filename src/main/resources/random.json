@@ -29,17 +29,6 @@
     "https://purrbot.site/images/kiss/kiss_012.gif",
     "https://purrbot.site/images/kiss/kiss_013.gif"
   ],
-  "no_nsfw_msg": [
-    "Please be a naughty person in a NSFW channel %s.",
-    "Nonono! You be a nice guy and go to a NSFW channel with that %s!",
-    "Is it me or does this channel not have a NSFW-label %s?",
-    "Nice try. But you can only use those commands in NSFW channels %s.",
-    "Please be dirty in a NSFW channel %s.",
-    "Trust me %s, it's much more fun to use those in a NSFW channel. :3",
-    "What are you trying to do? Keep your naughtyness in a NSFW channel %s!",
-    "Those naughty things can only be seen and used in NSFW channels %s.",
-    "Error: NoNSFWChannelFoundException (Not actually an error, but I guess you get the hint %s)."
-  ],
   "shutdown_img": [
     "https://purrbot.site/images/shutdown/shutdown_001.png",
     "https://purrbot.site/images/shutdown/shutdown_002.jpg",
@@ -68,10 +57,13 @@
     "Loading cute nekos...",
     "Slowly waking up.",
     "Give Andre_601 headaches",
-    "[Placeholder_text]",
+    "[placeholder_text]",
     "Breaking stuff... again",
     "Hey look! I'm a startup message!",
-    "Connecting to da interwebz"
+    "Connecting to da interwebz",
+    "[Insert loading text here]",
+    "This may take a while...",
+    "Does anyone even read those messages?"
   ],
   "welcome_bg": [
     "color_black",
