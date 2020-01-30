@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Andre601
+ * Copyright 2018 - 2020 Andre601
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -34,11 +34,14 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
+import site.purrbot.bot.constants.Roles;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class GuildListener extends ListenerAdapter{
 
@@ -391,6 +394,9 @@ public class GuildListener extends ListenerAdapter{
         }else{
             tc.sendMessage(message).queue();
         }
+        
+        if(guild.getId().equals(IDs.GUILD.getId()) && bot.isBeta())
+            giveRoles(event.getMember());
     }
 
     @Override
@@ -409,6 +415,25 @@ public class GuildListener extends ListenerAdapter{
 
         if(event.getChannel().getId().equals(id))
             bot.setWelcomeChannel(guild.getId(), "none");
+    }
+    
+    private void giveRoles(Member target){
+        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
+        
+        if(guild == null)
+            return;
+        
+        Role member = guild.getRoleById(Roles.MEMBER.getId());
+        Role special = guild.getRoleById(Roles.SPECIAL.getId());
+        Role loves = guild.getRoleById(Roles.LOVES.getId());
+        Role notifications = guild.getRoleById(Roles.NOTIFICATIONS.getId());
+        
+        guild.modifyMemberRoles(target, Arrays.asList(member, special, loves, notifications), null)
+                .reason(String.format(
+                        "[Join Roles] Giving %s roles.",
+                        target.getEffectiveName()
+                ))
+                .queue();
     }
     
     enum Action{

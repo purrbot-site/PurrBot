@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Andre601
+ * Copyright 2018 - 2020 Andre601
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -28,7 +28,14 @@ public enum Roles {
     SUPER_ADDICTED ("424194307881435177"),
     ULTRA_ADDICTED ("541671949831766037"),
     HYPER_ADDICTED ("549988541539680266"),
-    MASTER_ADDICTED("549988641464909827");
+    MASTER_ADDICTED("549988641464909827"),
+    
+    // Roles to receive on join
+    MEMBER       ("423772991520768011"),
+    SPECIAL      ("549989009934254100"),
+    LOVES        ("536686948371136512"),
+    PERSON       ("536686692321591307"),
+    NOTIFICATIONS("537369475033333765");
 
     private String id;
 
