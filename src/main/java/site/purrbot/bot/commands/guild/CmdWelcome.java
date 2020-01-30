@@ -155,12 +155,11 @@ public class CmdWelcome implements Command{
         msg.getTextChannel().sendMessage(
                 bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                         .setColor(0x00FF00)
-                        .setDescription(String.format(
-                                "%s updated to %s",
-                                type.toString().toLowerCase(),
-                                type == Type.CHANNEL ? Objects.requireNonNull(msg.getGuild().getTextChannelById(value))
-                                        .getAsMention() : value
-                        ))
+                        .setDescription(
+                                bot.getMsg(id, "purr.guild.welcome.set")
+                                .replace("{type}", type.name().toLowerCase())
+                                .replace("{value}", type == Type.CHANNEL ? "<#" + value + ">" : "`" + value + "`")
+                        )
                         .build()
         ).queue();
     }
@@ -192,10 +191,10 @@ public class CmdWelcome implements Command{
         msg.getTextChannel().sendMessage(
                 bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                         .setColor(0x00FF00)
-                        .setDescription(String.format(
-                                "%s was resetted",
-                                type.toString().toLowerCase()
-                        ))
+                        .setDescription(
+                                bot.getMsg(id, "purr.guild.welcome.reset")
+                                .replace("{type}", type.name().toLowerCase())
+                        )
                         .build()
         ).queue();
     }
@@ -247,14 +246,7 @@ public class CmdWelcome implements Command{
         switch (args[0].toLowerCase()){
             case "bg":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                            "To few arguments!\n" +
-                            "Usage: `%swelcome bg <set <bg>|reset>`\n" +
-                            "\n" +
-                            "A list of available backgrounds can be found on the [wiki](%s)",
-                            bot.getPrefix(guild.getId()),
-                            Links.WIKI.getUrl()
-                    ));
+                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -262,36 +254,22 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(args.length < 3){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please provide a background name!");
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_bg");
                         return;
                     }
                     if(!bot.getWelcomeBg().contains(args[2].toLowerCase()) && !args[2].equalsIgnoreCase("random")){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                                "Invalid background name `%s`!",
-                                args[2].toLowerCase()
-                        ));
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_bg");
                         return;
                     }
                     update(msg, Type.BACKGROUND, args[2].toLowerCase());
                 }else{
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                            "Invalid argument!\n" +
-                            "Usage: `%swelcome bg <set <bg>|reset>`\n" +
-                            "\n" +
-                            "A list of available backgrounds can be found on the [wiki](%s)",
-                            bot.getPrefix(guild.getId()),
-                            Links.WIKI.getUrl()
-                    ));
+                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_args");
                 }
                 break;
 
             case "channel":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                            "To few arguments!\n" +
-                            "Usage: `%swelcome channel <set <#channel>|reset>`",
-                            bot.getPrefix(guild.getId())
-                    ));
+                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -299,30 +277,22 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(msg.getMentionedChannels().isEmpty()){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please mention a valid textchannel!");
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_channel");
                         return;
                     }
                     if(msg.getMentionedChannels().get(0) == null){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "The provided channel was invalid!");
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_channel");
                         return;
                     }
                     update(msg, Type.CHANNEL, msg.getMentionedChannels().get(0).getId());
                 }else{
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                            "Invalid argument!\n" +
-                            "Usage: `%swelcome channel <set <#channel>|reset>`",
-                            bot.getPrefix(guild.getId())
-                    ));
+                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_args");
                 }
                 break;
 
             case "color":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                            "To few arguments!\n" +
-                            "Usage: `%swelcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
-                            bot.getPrefix(guild.getId())
-                    ));
+                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -330,40 +300,26 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(args.length < 3){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please provide a color-type and value!");
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_color");
                         return;
                     }
 
                     Color color = bot.getMessageUtil().getColor(args[2].toLowerCase());
 
                     if(color == null){
-                        bot.getEmbedUtil().sendError(
-                                tc,
-                                msg.getAuthor(),
-                                "Please provide a valid color type and value!");
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_color");
                         return;
                     }
 
                     update(msg, Type.COLOR, args[2].toLowerCase());
                 }else{
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                            "Invalid argument!\n" +
-                            "Usage: `%swelcome color <set <rgb:r,g,b|hex:#rrggbb>|reset>`",
-                            bot.getPrefix(guild.getId())
-                    ));
+                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_args");
                 }
                 break;
 
             case "icon":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                            "To few arguments!\n" +
-                            "Usage: `%swelcome icon <set <icon>|reset>`\n" +
-                            "\n" +
-                            "A list of available icons can be found on the [wiki](%s)",
-                            bot.getPrefix(guild.getId()),
-                            Links.WIKI.getUrl()
-                    ));
+                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -371,46 +327,22 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(args.length < 3){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please provide a icon name!");
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_icon");
                         return;
                     }
                     if(!bot.getWelcomeIcon().contains(args[2].toLowerCase()) && !args[2].equalsIgnoreCase("random")){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                                "Invalid icon name `%s`!",
-                                args[2].toLowerCase()
-                        ));
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_bg");
                         return;
                     }
                     update(msg, Type.ICON, args[2].toLowerCase());
                 }else{
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                            "Invalid argument!\n" +
-                            "Usage: `%swelcome icon <set <icon>|reset>`\n" +
-                            "\n" +
-                            "A list of available backgrounds can be found on the [wiki](%s)",
-                            bot.getPrefix(guild.getId()),
-                            Links.WIKI.getUrl()
-                    ));
+                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_args");
                 }
                 break;
 
             case "msg":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), String.format(
-                            "The current message is:\n" +
-                            "```\n" +
-                            "%s\n" +
-                            "```\n" +
-                            "Use `%swelcome msg set <message>` to change it.\n" +
-                            "\n" +
-                            "**Placeholders**:\n" +
-                            "`{mention}` - Mention of the joined user\n" +
-                            "`{name}` - Name of the joined user\n" +
-                            "`{guild}` - Name of the guild\n" +
-                            "`{count}` - Member count of the guild",
-                            bot.getWelcomeMsg(guild.getId()),
-                            bot.getPrefix(guild.getId())
-                    ));
+                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -418,14 +350,14 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(args.length < 3){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "Please provide a message!");
+                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_msg");
                         return;
                     }
                     StringBuilder sb = new StringBuilder();
                     for(int i = 2; i < args.length; i++){
                         sb.append(args[i]).append(" ");
                     }
-                    update(msg, Type.MESSAGE, sb.toString());
+                    update(msg, Type.MESSAGE, bot.getMessageUtil().replaceLast(sb.toString(), " ", ""));
                 }
                 break;
 

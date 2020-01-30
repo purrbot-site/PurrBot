@@ -159,7 +159,7 @@
           "channel": "Kanal",
           "color_title": "Farbe",
           "color_value": "```\nTyp:  {type}\nInhalt: {value}\n```",
-          "current_settings": "Dies sind die aktuellen Willkommens-Einstellungen von diesem Discord.\nVerwende `{prefix}welcome [unterbefehl]` um diese zu ändern.",
+          "current_settings": "Dies sind die aktuellen Willkommens-Einstellungen von diesem Discord.\nVerwende `{prefix}welcome [unterbefehl]` um diese zu ändern.\n\nEin Tutorial wie man die Einstellungen ändert kann im [Wiki]({wiki_welcome}) gefunden werden.",
           "image_title": "Bild",
           "image_value": "```\nHintergrund: {background}\nIcon:       {icon}\n```",
           "message_title": "Nachricht",
@@ -171,16 +171,17 @@
         },
         "few_args": "Nicht genug Argumente gegeben!\nVewende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
         "invalid_args": "Ungültige Argumente!\nVerwende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
-        "invalid_bg": "Ungültiger Hintergrund `{background}`\nÜberpfüfe das [Wiki]({wiki:bg}) für verfügbare Hintergründe.",
+        "invalid_bg": "Ungültiger Hintergrund `{background}`\nÜberpfüfe das [Wiki]({wiki_bg}) für verfügbare Hintergründe.",
         "invalid_channel": "Bitte erwähne einen gültigen TextKanal!",
         "invalid_color": "Die angegebene Farbe war ungültig!\nUnterstützt werden `hex:rrggbb` oder `rgb:r,g,b`",
-        "invalid_icon": "Ungültiges Icon `{icon}`!\nÜberprüfe das [Wiki]({wiki:icon}) für verfügbare Icons.",
-        "no_bg": "Bitte gib einen Hintergrund an!",
+        "invalid_icon": "Ungültiges Icon `{icon}`!\nÜberprüfe das [Wiki]({wiki_icon}) für verfügbare Icons.",
+        "no_bg": "Bitte gib einen Hintergrund an!\nEine Liste von Hintergründen kannst du [hier]({wiki_bg}) finden.",
         "no_channel": "Kein Textkanal angegeben! Stell sicher, dass du einen erwähnst.",
         "no_color": "Keine Farbe angegeben!\nBitte verwende entweder `hex:rrggbb` oder `rgb:r,g,b`",
-        "no_icon": "Bitte gib ein Icon an!",
+        "no_icon": "Bitte gib ein Icon an!\nEine Liste von Icons kannst du [hier]({wiki_icon}) finden.",
         "no_msg": "Keine Nachricht angegeben!",
-        "set": "{type} set to {value}"
+        "reset": "{type} resettet.",
+        "set": "{type} geändert zu {value}"
       }
     },
     "info": {

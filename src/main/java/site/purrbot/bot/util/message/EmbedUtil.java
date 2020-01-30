@@ -21,12 +21,10 @@ package site.purrbot.bot.util.message;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import site.purrbot.bot.PurrBot;
 
-import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 public class EmbedUtil {
@@ -48,12 +46,12 @@ public class EmbedUtil {
         );
     }
     
-    public void sendError(TextChannel tc, @Nullable User user, String path, @Nullable String reason){
+    public void sendError(TextChannel tc, User user, String path, String reason){
         Guild guild = tc.getGuild();
         
         EmbedBuilder embed = user == null ? getEmbed() : getEmbed(user, guild);
         String msg = user == null ? bot.getMsg(guild.getId(), path) : bot.getMsg(guild.getId(), path, user.getName());
-
+        
         embed.setColor(0xFF0000)
                 .setDescription(msg);
 
@@ -66,7 +64,7 @@ public class EmbedUtil {
 
         tc.sendMessage(embed.build()).queue();
     }
-
+    
     public void sendError(TextChannel tc, User user, String path){
         sendError(tc, user, path, null);
     }
@@ -75,7 +73,7 @@ public class EmbedUtil {
         sendPermError(tc, user, null, permission, self);
     }
     
-    public void sendPermError(TextChannel tc, User user, @Nullable TextChannel channel, Permission permission, boolean self){
+    public void sendPermError(TextChannel tc, User user, TextChannel channel, Permission permission, boolean self){
         EmbedBuilder embed = user == null ? getEmbed() : getEmbed(user, tc.getGuild());
         String msg;
         if(channel == null){

@@ -438,6 +438,7 @@ public class PurrBot {
                 // Wiki pages
                 .replace("{wiki_bg}", Links.WIKI.getUrl() + "/Welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI.getUrl() + "/Welcome-images#icons")
+                .replace("{wiki_welcome}", Links.WIKI.getUrl() + "/Welcome-channel")
                 //Bot lists
                 .replace("{botlist}", Links.BOTLIST_SPACE.getUrl())
                 .replace("{del}", Links.DISCORDEXTREMELIST_XYZ.getUrl())

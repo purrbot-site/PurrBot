@@ -170,15 +170,16 @@
         },
         "few_args": "받은 정보가 적어!\n`{prefix}welcome` 을 사용하면 사용 가능한 모든 세부 명령어들을 확인할 수 있어!",
         "invalid_args": "유효하지 않은 값이야!\nRun `{prefix}welcome` 을 사용하면 가능한 모든 세부 명령어들을 확인할 수 있어!",
-        "invalid_bg": "유효하지 않은 배경이야. `{background}`\n[위키]({wiki:bg}) 에 가능한 배경들이 소개되어 있어.",
+        "invalid_bg": "유효하지 않은 배경이야. `{background}`\n[위키]({wiki_bg}) 에 가능한 배경들이 소개되어 있어.",
         "invalid_channel": "유효한 텍스트 채널을 알려줘!",
         "invalid_color": "색상코드가 잘못되었어. \n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘.",
-        "invalid_icon": "그 아이콘은 유효하지 않아!\n[위키]({wiki:icon}) 에 가능한 아이콘들이 소개되어 있어.",
+        "invalid_icon": "그 아이콘은 유효하지 않아!\n[위키]({wiki_icon}) 에 가능한 아이콘들이 소개되어 있어.",
         "no_bg": "배경의 이름을 알려줘!",
         "no_channel": "아무런 텍스트 채널도 받지 못했어. 제대로 나에게 언급해줘.",
         "no_color": "아무 색도 받지 못했어!\n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘.",
         "no_icon": "아이콘의 이름을 같이 줘!",
         "no_msg": "아무런 메시지도 받지 못했어!",
+        "reset": "{type} resettet.",
         "set": "{type} 가 {value} 으로 설정되었어."
       }
     },
