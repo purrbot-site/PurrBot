@@ -4,6 +4,7 @@
   },
   "errors": {
     "api_error": "API 요청에 실패했어! 나중에 다시 시도해줘.",
+    "guild_only": "이 명령어는 [내 서버]({link})에서만 사용할 수 있어!",
     "missing_perms": {
       "self": "`{permission}` 권한이 나에게 없어!",
       "self_channel": "{channel} 채널에 `{permission}` 권한이 나에게 없어!",
@@ -32,7 +33,7 @@
         "loading": "{LOADING} 부비부비 이미지 불러오는 중...",
         "mention_self": "왜 혼자 부비부비 하고 있어, {user}?\n여기 날 부비부비하면 되잖아..{VANILLABLUSH}",
         "mention_purr": "\\*{user}와 부비부비를 즐기는 중*",
-        "message": "{user} 가 {targets} 랑 부비부비하고 있어!",
+        "message": "{user}이(가) {targets}(이)랑 부비부비하고 있어!",
         "no_mention": "최소한 부비부비할 상대 한명을 언급해줘!"
       },
       "holo": {
@@ -43,7 +44,7 @@
         "loading": "{LOADING} 포옹 이미지 불러오는 중...",
         "mention_self": "왜 혼자 껴안으려고 해, {user}?\n여기 날 껴안으면 되잖아.. {VANILLABLUSH}",
         "mention_purr": "\\*{user}에게 껴안기는 중*",
-        "message": "{user} 가 {targets} 를 껴안고 있어!",
+        "message": "{user}이(가) {targets}을(를) 껴안고 있어!",
         "no_mention": "최소한 껴안을 상대 한명을 언급해줘!"
       },
       "kiss": {
@@ -51,7 +52,7 @@
         "mention_self": "어쩧게 혼자 키스하게, {user}? 거울이랑 하려고?",
         "mention_purr": "그, 그래..! 하지만 볼에다가만 해! \\*볼을 내미는 중*",
         "mention_snuggle": "안-돼-! 내 동생이랑은 안된다구.",
-        "message": "{user} 가 {targets} 에게 키스하고 있어!",
+        "message": "{user}이(가) {targets}에게 키스하고 있어!",
         "no_mention": "최소한 키스할 상대 한명을 언급해줘!",
         "special_user": "\\*{user}와 키스하는 중*"
       },
@@ -63,7 +64,7 @@
         "loading": "{LOADING} 핥짝 이미지 불러오는중...",
         "mention_self": "어.. 스스로 *어딜* 어떻게 핥으려는지는 묻지 않을께, {user}...",
         "mention_purr": "\\*뒷걸음질 치며* 그-그만! 핥으라고 한 적 없어!",
-        "message": "{user} 가 {targets} 를 핥고 있어!",
+        "message": "{user}이(가) {targets}을(를) 핥고 있어!",
         "no_mention": "최소한 핥을 상대 한명을 언급해줘!",
         "special_user": "하, 하지만 자기... 여긴 모두가 보고 있다구. \\*부끄부끄*"
       },
@@ -78,14 +79,14 @@
         "loading": "{LOADING} 쓰담쓰담 이미지 불러오는 중...",
         "mention_self": "어.. 혹시 쓰다듬을 고양이가 없는거야, {user}? \\*자신을 가리키며*",
         "mention_purr": "\\*야옹™*",
-        "message": "{user} 가 {targets} 를 쓰담쓰담 해주고 있어!",
+        "message": "{user}이(가) {targets}을(를) 쓰담쓰담 해주고 있어!",
         "no_mention": "최소한 쓰다듬을 상대 한명을 언급해줘!"
       },
       "poke": {
         "loading": "{LOADING} 푹푹 이미지 불러오는 중...",
         "mention_self": "심심한거야? 왜 스스로를 찌르려고 해, {user}?",
         "mention_purr": "야-야옹-! 푹푹 찌르지 마아-! >~<",
-        "message": "{user} 가 {targets} 를 손가락으로 찌르고 있어!",
+        "message": "{user}이(가) {targets}을(를) 손가락으로 찌르고 있어!",
         "no_mention": "최소한 손가락으로 찌를 상대 한명을 언급해줘!"
       },
       "senko": {
@@ -118,14 +119,14 @@
         "loading": "{LOADING} 찰싹 이미지 불러오는 중...",
         "mention_self": "안돼! 거기까지. 너 자신을 상처입히지 마, {user}.",
         "mention_purr": "으아아앙.. 왜 날 상처주는거야, {user}? T^T",
-        "message": "{user} 가 {targets} 를 때려버렸어!",
+        "message": "{user}이(가) {targets} 를 때려버렸어!",
         "no_mention": "적어도 한대 칠 상대 한명을 언급해줘!"
       },
       "tickle": {
         "loading": "{LOADING} 간질간질 이미지 불러오는 중...",
-        "mention_self": "그래.. 정말 간지럽혀지고 싶다면 말야.. \\*{user}를 간지럽힌다*",
+        "mention_self": "그래.. 정말 간지럽혀지고 싶다면 말야.. \\*{user}을(를) 간지럽힌다*",
         "mention_purr": "부-불공평해! 아하하하! \\*간지러움에 폭소하며*",
-        "message": "{user} 가 {targets} 를 간지럽히고 있어!",
+        "message": "{user}이(가) {targets} 를 간지럽히고 있어!",
         "no_mention": "적어도 간지럽힐 상대 한명을 언급해줘!"
       }
     },
@@ -170,16 +171,16 @@
         },
         "few_args": "받은 정보가 적어!\n`{prefix}welcome` 을 사용하면 사용 가능한 모든 세부 명령어들을 확인할 수 있어!",
         "invalid_args": "유효하지 않은 값이야!\nRun `{prefix}welcome` 을 사용하면 가능한 모든 세부 명령어들을 확인할 수 있어!",
-        "invalid_bg": "유효하지 않은 배경이야. `{background}`\n[위키]({wiki_bg}) 에 가능한 배경들이 소개되어 있어.",
+        "invalid_bg": "`{background}`는 유효하지 않은 배경이야.\n[위키]({wiki_bg})에 가능한 배경들이 소개되어 있어.",
         "invalid_channel": "유효한 텍스트 채널을 알려줘!",
-        "invalid_color": "색상코드가 잘못되었어. \n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘.",
-        "invalid_icon": "그 아이콘은 유효하지 않아!\n[위키]({wiki_icon}) 에 가능한 아이콘들이 소개되어 있어.",
-        "no_bg": "배경의 이름을 알려줘!",
+        "invalid_color": "색상코드가 잘못되었어.\n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘.",
+        "invalid_icon": "그 아이콘은 유효하지 않아!\n[위키]({wiki_icon})에 가능한 아이콘들이 소개되어 있어.",
+        "no_bg": "배경의 이름을 알려줘!\n[위키]({wiki_bg})에 가능한 배경들이 소개되어 있어.",
         "no_channel": "아무런 텍스트 채널도 받지 못했어. 제대로 나에게 언급해줘.",
         "no_color": "아무 색도 받지 못했어!\n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘.",
         "no_icon": "아이콘의 이름을 같이 줘!",
         "no_msg": "아무런 메시지도 받지 못했어!",
-        "reset": "{type} resettet.",
+        "reset": "{type} 가 초기화되었어.",
         "set": "{type} 가 {value} 으로 설정되었어."
       }
     },
@@ -287,11 +288,11 @@
       },
       "quote": {
         "embed_basic": {
-          "channel": "#{channel} 에 올라옴",
-          "info": "{user} 가 작성한 메시지"
+          "channel": "#{channel}에 올라옴",
+          "info": "{user}이(가) 작성한 메시지"
         },
         "embed_image": {
-          "info": "{user} 가 {channel} 에 작성한 메시지 [`[Link]`]({link})"
+          "info": "{user}이(가){channel}에 작성한 메시지 [`[Link]`]({link})"
         },
         "few_args": "무언가 적게 받았어!\n사용법: `{prefix}quote <메시지 ID> [#채널핑]`",
         "invalid_id": "유효하지 않은 ID야. 개발자 모드를 킨 상태에서 **메시지**를 우클릭하고 \"ID복사하기\"를 제대로 눌렀는 지 확인해봐.",
@@ -353,14 +354,14 @@
         "mention_bot": "콘센트를 핥으려는 생각은 아니겠지?",
         "mention_purr": "이 변태! 빨아줄 다른 사람이나 찾아! \\*{user}의 뺨을 때리며*",
         "mention_self": "그-그래. 말리지는 않을께, {user}.",
-        "message": "{user} 가 {target} 를 빨아주고 있어!",
+        "message": "{user}이(가) {target}을(를) 빨아주고 있어!",
         "no_mention": "최소한 빨아줄 상대 한명을 언급해줘!",
         "request": {
-          "accepted": "{target} 가 {user} 의 요청을 수락했어!",
-          "denied": "{target} 는 {user} 의 입을 원하지 않는 모양이야. :/",
-          "message": "{target}!\n{user} 가 입으로 야한걸 해주고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "accepted": "{target}이(가) {user}의 요청을 수락했어!",
+          "denied": "{target}은(는) {user}의 입을 원하지 않는 모양이야. :/",
+          "message": "{target}!\n{user}이(가) 입으로 야한걸 해주고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
           "open": "욕심부리지마, {user}! 이미 네가 부탁한 사람이 있잖아.",
-          "timed_out": "아마 {target} 는 {user} 의 입을 원하지 않는 모양이야."
+          "timed_out": "아마 {target}은(는) {user}의 입을 원하지 않는 모양이야."
         },
         "special_user": "좋아 자기. 조금 시간을 줄래? \"장난감\"이 좀 필요하니까.\n\\*{user}의 손을 잡고 방에서 사라진다*"
       },
@@ -368,14 +369,14 @@
         "mention_bot": "봇이랑 야한 걸 할 생각 마!",
         "mention_purr": "\\*{user}의 뺨을 때리며* 안돼! 이 변태자식.",
         "mention_self": "어떻게 너 자신이랑 하려고, {user}? .. 자기위로 같은 대답은 하지 마.",
-        "message": "{user} 가 {target} 랑 사랑을 나누고 있어!",
+        "message": "{user}이(가) {target} 랑 사랑을 나누고 있어!",
         "no_mention": "최소한 사랑을 나눌 상대 한명을 언급해줘!",
         "request": {
-          "accepted": "{target} 가 {user} 의 요청을 수락했어! OwO",
-          "denied": "{target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. >.<",
-          "message": "{target}!\n{user} 가 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "accepted": "{target}이(가) {user}의 요청을 수락했어! OwO",
+          "denied": "{target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. >.<",
+          "message": "{target}!\n{user}이(가) 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
           "open": "발정나지 말라고, {user}! 이미 네가 부탁한 사람이 있잖아.",
-          "timed_out": "아마 {target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. ._."
+          "timed_out": "아마 {target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. ._."
         }
       },
       "lewd": {
@@ -391,28 +392,28 @@
         "mention_bot": "일단 진정해, {user}. 봇 보단 사람들과 하는게 더 즐거울거야. ^ㅡ'",
         "mention_purr": "그래 그래. 내가 이상한 고양이로 보였겠지. 하지만 난 *그런* 플레이는 안해, {user}!",
         "mention_self": "내가 아는 게 맞다면, 쓰리썸은 **3** 명이서 하는게 맞지, {user}?",
-        "message": "{user} 가 {target1} 랑 {target2} 와 함께 뜨거운 밤을 보내고 있어! O//w//O",
+        "message": "{user}이(가) {target1} 랑 {target2} 와 함께 뜨거운 밤을 보내고 있어! O//w//O",
         "no_mention": "최소한 함께 그런 걸 할 두 사람을 언급해줘!",
         "request": {
-          "accepted": "{target1} 와 {target2} 가 {user} 의 요청을 수락했어! >//w//<",
-          "denied": "{target1} 또는 {target2} 는 {user} 랑 야한 걸 하고 싶지 않나봐.",
-          "message": "{target1} 랑 {target2}!\n{user} 가 너희 둘이랑 함께 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n요청받은 두 사람이 같이 수락하면.. 말 안해도 알지?\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "accepted": "{target1}와 {target2}이(가) {user}의 요청을 수락했어! >//w//<",
+          "denied": "{target1} 또는 {target2}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐.",
+          "message": "{target1}(이)랑 {target2}!\n{user}이(가) 너희 둘이랑 함께 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n요청받은 두 사람이 같이 수락하면.. 말 안해도 알지?\n\n> **1분이 지나면 자동으로 거절이야!**",
           "open": "발정난 개도 어지간해야지, {user}! 이미 네가 부탁한 사람이 있잖아.",
-          "timed_out": "아마 {target1} 또는 {target2} 는 {user} 랑 야한 걸 하고 싶지 않나봐. >\\_<"
+          "timed_out": "아마 {target1} 또는 {target2}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. >\\_<"
         }
       },
       "yurifuck": {
         "mention_bot": "봇이랑 사랑을 나누는건 안돼-",
         "mention_purr": "어, 음... 저-정말 고마워, {user}. 미안하지만 나랑은 안 돼.",
         "mention_self": "왜 자꾸 혼자 하려고 해, {user}? 다른 사람이랑 하면 좋을거라구 ;3",
-        "message": "{user} 가 {target} 랑 사랑을 나누고 있어!",
+        "message": "{user}이(가) {target} 랑 사랑을 나누고 있어!",
         "no_mention": "최소한 사랑을 나눌 상대 한명을 언급해줘!",
         "request": {
-          "accepted": "{target} 가 {user} 의 요청을 수락했어! OwO",
-          "denied": "{target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. >.<",
-          "message": "{target}!\n{user} 가 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "accepted": "{target}이(가) {user}의 요청을 수락했어! OwO",
+          "denied": "{target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. >.<",
+          "message": "{target}!\n{user}이(가) 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
           "open": "발정나지 말라고, {user}! 이미 네가 부탁한 사람이 있잖아.",
-          "timed_out": "아마 {target} 는 {user} 랑 야한 걸 하고 싶지 않나봐. .\\_."
+          "timed_out": "아마 {target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. .\\_."
         }
       }
     }
