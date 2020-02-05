@@ -51,17 +51,9 @@ public class GuildListener extends ListenerAdapter{
     public GuildListener(PurrBot bot){
         this.bot = bot;
     }
-
-    private boolean isBotGuild(Guild guild){
-        long bots = guild.getMembers().stream().filter(member -> member.getUser().isBot()).count();
-
-        return (100 / guild.getMembers().size() * bots) > 60;
-    }
     
     private void sendWebhook(Action action, Guild guild){
         Member owner = guild.getOwner();
-        long bots    = guild.getMembers().stream().filter(member -> member.getUser().isBot()).count();
-        long members = guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count();
         
         String title = null;
         WebhookEmbed embed = null;
@@ -91,12 +83,8 @@ public class GuildListener extends ListenerAdapter{
                                 false, "Members", String.format(
                                         "```yaml\n" +
                                         "Total: %5d\n" +
-                                        "Bots:  %5d\n" +
-                                        "Users: %5d\n" +
                                         "```",
-                                        guild.getMembers().size(),
-                                        bots,
-                                        members
+                                        guild.getMemberCount()
                                 )
                         ))
                         .setFooter(new WebhookEmbed.EmbedFooter(
@@ -134,12 +122,8 @@ public class GuildListener extends ListenerAdapter{
                                 false, "Members", String.format(
                                 "```yaml\n" +
                                 "Total: %5d\n" +
-                                "Bots:  %5d\n" +
-                                "Users: %5d\n" +
                                 "```",
-                                guild.getMembers().size(),
-                                bots,
-                                members
+                                guild.getMemberCount()
                         )
                         ))
                         .setFooter(new WebhookEmbed.EmbedFooter(
@@ -174,21 +158,16 @@ public class GuildListener extends ListenerAdapter{
                         )
                         ))
                         .addField(new WebhookEmbed.EmbedField(
-                                false, "Leave reason", String.format(
-                                        "`%s`",
-                                        isBotGuild(guild) ? "Bot Guild" : "Blacklisted"
-                                )
+                                false, 
+                                "Leave reason", 
+                                "`Blacklisted`"
                         ))
                         .addField(new WebhookEmbed.EmbedField(
                                 false, "Members", String.format(
                                 "```yaml\n" +
                                 "Total: %5d\n" +
-                                "Bots:  %5d\n" +
-                                "Users: %5d\n" +
                                 "```",
-                                guild.getMembers().size(),
-                                bots,
-                                members
+                                guild.getMemberCount()
                         )
                         ))
                         .setFooter(new WebhookEmbed.EmbedFooter(
@@ -242,44 +221,13 @@ public class GuildListener extends ListenerAdapter{
             return;
         }
 
-        if(isBotGuild(guild)) {
-            if(guild.getOwner() == null){
-                guild.leave().queue();
-                return;
-            }
-            if(!guild.getOwner().getUser().getId().equals(IDs.ANDRE_601.getId())){
-                guild.getOwner().getUser().openPrivateChannel().queue(channel ->
-                        channel.sendMessage(String.format(
-                                "I left your Discord `%s` for the following reason:\n" +
-                                "```\n" +
-                                "[Auto Leave] Your Discord has more bots than users.\n" +
-                                "             Please reduce the amounts of bots you have\n" +
-                                "             or invite more Members.\n" +
-                                "```",
-                                guild.getName()
-                        )).queue(message -> {
-                            guild.leave().queue();
-                            logger.info("[Auto Leave] Reason: Bot-Discord. Send successful: Yes");
-                        }, throwable -> {
-                            guild.leave().queue();
-                            logger.info("[Auto Leave] Reason: Bot-Discord. Send successful: No");
-                        })
-                );
-                sendWebhook(Action.AUTO_LEAVE, guild);
-
-                return;
-            }
-        }
-
         bot.getDbUtil().addGuild(guild.getId());
 
         logger.info(String.format(
-                "[Guild join] Name: %s (%s), Members: %d (Bots: %d, Users: %d)",
+                "[Guild join] Name: %s (%s), Members: %d",
                 guild.getName(),
                 guild.getId(),
-                guild.getMembers().size(),
-                guild.getMembers().stream().filter(member -> member.getUser().isBot()).count(),
-                guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count()
+                guild.getMemberCount()
         ));
         
         sendWebhook(Action.JOIN, guild);
@@ -292,25 +240,15 @@ public class GuildListener extends ListenerAdapter{
         if(bot.getBlacklist().contains(guild.getId()))
             return;
 
-        if(isBotGuild(guild)){
-            Member owner = guild.getOwner();
-            if(owner == null)
-                return;
-            if(!owner.getId().equals(IDs.ANDRE_601.getId()))
-                return;
-        }
-
         bot.getDbUtil().delGuild(guild.getId());
 
         bot.invalidateCache(guild.getId());
 
         logger.info(String.format(
-                "[Guild leave] Name: %s (%s), Members: %d (Bots: %d, Users: %d)",
+                "[Guild leave] Name: %s (%s), Members: %d",
                 guild.getName(),
                 guild.getId(),
-                guild.getMembers().size(),
-                guild.getMembers().stream().filter(member -> member.getUser().isBot()).count(),
-                guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count()
+                guild.getMemberCount()
         ));
     
         sendWebhook(Action.LEAVE, guild);
@@ -319,35 +257,6 @@ public class GuildListener extends ListenerAdapter{
     @Override
     public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event){
         Guild guild = event.getGuild();
-
-        if(isBotGuild(guild)){
-            if(guild.getOwner() == null){
-                guild.leave().queue();
-                return;
-            }
-            if(!guild.getOwner().getUser().getId().equals(IDs.ANDRE_601.getId())) {
-                guild.getOwner().getUser().openPrivateChannel().queue(channel ->
-                        channel.sendMessage(String.format(
-                                "I left your Discord `%s` for the following reason:\n" +
-                                "```\n" +
-                                "[Auto Leave] Your Discord has more bots than users.\n" +
-                                "             Please reduce the amounts of bots you have\n" +
-                                "             or invite more Members.\n" +
-                                "```",
-                                guild.getName()
-                        )).queue(message -> {
-                            guild.leave().queue();
-                            logger.info("[Auto Leave] Reason: Bot-Discord. Send successful: Yes");
-                        }, throwable -> {
-                            guild.leave().queue();
-                            logger.info("[Auto Leave] Reason: Bot-Discord. Send successful: No");
-                        })
-                );
-    
-                sendWebhook(Action.AUTO_LEAVE, guild);
-                return;
-            }
-        }
 
         if(event.getUser().isBot())
             return;
@@ -366,7 +275,7 @@ public class GuildListener extends ListenerAdapter{
         if(msg == null)
             msg = "Hello {mention}!";
 
-        Message message = new MessageBuilder(bot.getMessageUtil().formatPlaceholders(msg, event.getMember())).build();
+        Message message = new MessageBuilder(bot.getMessageUtil().parsePlaceholders(msg, event.getMember())).build();
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)) {
             InputStream is;

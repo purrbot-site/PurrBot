@@ -110,11 +110,11 @@ public class MessageUtil {
         return result;
     }
 
-    public String formatPlaceholders(String message, Member member){
+    public String parsePlaceholders(String message, Member member){
         return message.replaceAll("(?i)\\{mention}", member.getAsMention())
                 .replaceAll("(?i)\\{name}", member.getEffectiveName())
                 .replaceAll("(?i)\\{guild}", member.getGuild().getName())
-                .replaceAll("(?i)\\{count}", String.valueOf(member.getGuild().getMembers().size()))
+                .replaceAll("(?i)\\{count}", String.valueOf(member.getGuild().getMemberCount()))
                 .replaceAll("(?i)@everyone", "everyone")
                 .replaceAll("(?i)@here", "here");
     }

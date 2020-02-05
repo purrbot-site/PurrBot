@@ -21,6 +21,7 @@ package site.purrbot.bot;
 import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.CacheWriter;
 import com.github.benmanes.caffeine.cache.RemovalCause;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
 import org.botblock.javabotblockapi.BotBlockAPI;
 import org.botblock.javabotblockapi.Site;
 import org.botblock.javabotblockapi.requests.PostAction;
@@ -82,7 +83,6 @@ public class PurrBot {
     private ImageUtil imageUtil;
     private LevelManager levelManager;
     private LangUtils langUtils;
-    private DebugUtil debugUtil;
 
     private boolean beta = false;
 
@@ -168,7 +168,6 @@ public class PurrBot {
         imageUtil     = new ImageUtil(this);
         levelManager  = new LevelManager(this);
         langUtils     = new LangUtils(this);
-        debugUtil     = new DebugUtil(this);
 
         waiter = new EventWaiter();
 
@@ -178,6 +177,7 @@ public class PurrBot {
 
         shardManager = new DefaultShardManagerBuilder()
                 .setToken(getFileManager().getString("config", "bot-token"))
+                .setChunkingFilter(ChunkingFilter.NONE)
                 .addEventListeners(
                         readyListener,
                         new ConnectionListener(this),
@@ -302,9 +302,6 @@ public class PurrBot {
     }
     public LevelManager getLevelManager(){
         return levelManager;
-    }
-    public DebugUtil getDebugUtil(){
-        return debugUtil;
     }
     
     public boolean isBeta(){

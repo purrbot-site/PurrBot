@@ -118,18 +118,6 @@ public class CmdGuild implements Command{
                 .setTitle(guild.getName())
                 .setThumbnail(guild.getIconUrl())
                 .addField(
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.users_title"),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.users_value")
-                                .replace("{total}", String.valueOf(guild.getMembers().size()))
-                                .replace("{humans}", String.valueOf(
-                                        guild.getMembers().stream().filter(m -> !m.getUser().isBot()).count()
-                                ))
-                                .replace("{bots}", String.valueOf(
-                                        guild.getMembers().stream().filter(m -> m.getUser().isBot()).count()
-                                )), 
-                        true
-                )
-                .addField(
                         bot.getMsg(guild.getId(), "purr.info.guild.embed.region"),
                         String.format(
                                 "%s %s",

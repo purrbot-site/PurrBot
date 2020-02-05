@@ -191,7 +191,7 @@ public class ImageUtil {
                 .put(
                         "members", 
                         bot.getMsg(member.getGuild().getId(), "misc.welcome_member")
-                                .replace("{count}", String.valueOf(member.getGuild().getMembers().size()))
+                                .replace("{count}", String.valueOf(member.getGuild().getMemberCount()))
                 )
                 .put("icon", icon.equalsIgnoreCase("random") ? 
                         bot.getHttpUtil().getImage(API.IMG_ICON) :
