@@ -41,7 +41,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class GuildListener extends ListenerAdapter{
 
@@ -208,6 +207,7 @@ public class GuildListener extends ListenerAdapter{
                 bot.getFileManager().getString("config", "webhooks.guild"),
                 guild.getSelfMember().getUser().getEffectiveAvatarUrl(),
                 title,
+                action == Action.JOIN ? ".leave " + guild.getId() : null,
                 embed
         );
     }
@@ -423,14 +423,15 @@ public class GuildListener extends ListenerAdapter{
         if(guild == null)
             return;
         
-        Role member = guild.getRoleById(Roles.MEMBER.getId());
-        Role special = guild.getRoleById(Roles.SPECIAL.getId());
-        Role loves = guild.getRoleById(Roles.LOVES.getId());
+        Role member        = guild.getRoleById(Roles.MEMBER.getId());
+        Role special       = guild.getRoleById(Roles.SPECIAL.getId());
+        Role loves         = guild.getRoleById(Roles.LOVES.getId());
+        Role person        = guild.getRoleById(Roles.PERSON.getId());
         Role notifications = guild.getRoleById(Roles.NOTIFICATIONS.getId());
         
-        guild.modifyMemberRoles(target, Arrays.asList(member, special, loves, notifications), null)
+        guild.modifyMemberRoles(target, Arrays.asList(member, special, loves, person, notifications), null)
                 .reason(String.format(
-                        "[Join Roles] Giving %s roles.",
+                        "[Join Roles] Giving %s join roles.",
                         target.getEffectiveName()
                 ))
                 .queue();
