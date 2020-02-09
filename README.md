@@ -162,8 +162,6 @@ Feel free to upvote or add her to your favourites to show your support.
 ### [Discordextremelist.xyz][debl]
 > Discord's unbiased list, giving small bots and small servers a big chance!
 
-![widgetDebl]
-
 ### [LBots.org][lbots]
 > A bot listing website that loves lewds~
 
