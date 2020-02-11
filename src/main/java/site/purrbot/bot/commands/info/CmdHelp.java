@@ -190,6 +190,7 @@ public class CmdHelp implements Command{
                     .waitOnSinglePage(false)
                     .setItemsPerPage(1)
                     .setColor(new Color(0x36393F))
+                    .wrapPageEnds(true)
                     .build()
                     .display(tc);
         }

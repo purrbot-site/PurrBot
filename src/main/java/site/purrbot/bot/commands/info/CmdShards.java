@@ -99,17 +99,20 @@ public class CmdShards implements Command{
         }
         
         builder.append("```").append("prolog").append("\n");
-        final StringBuilder formatLine = new StringBuilder("│");
-        for(final int width : widths)
-            formatLine.append(" %-").append(width).append("s │");
-        
-        formatLine.append("\n");
+        final StringBuilder formatLineL = new StringBuilder("│");
+        final StringBuilder formatLineR = new StringBuilder("│");
+        for(final int width : widths){
+            formatLineL.append(" %-").append(width).append("s │");
+            formatLineR.append(" %").append(width).append("s │");
+        }
+        formatLineL.append("\n");
+        formatLineR.append("\n");
         builder.append(getSeparators("┌", "┬", "┐", "─", widths));
-        builder.append(String.format(formatLine.toString(), headers.toArray()));
+        builder.append(String.format(formatLineL.toString(), headers.toArray()));
         
         builder.append(getSeparators("╞", "╪", "╡", "═", widths));
         for(final List<String> row : table)
-            builder.append(String.format(formatLine.toString(), row.toArray()));
+            builder.append(String.format(formatLineR.toString(), row.toArray()));
     
         builder.append(getSeparators("└", "┴", "┘", "─", widths));
         builder.append("```");

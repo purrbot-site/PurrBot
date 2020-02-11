@@ -215,9 +215,7 @@
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "owner": "소유자",
-          "region": "지역",
-          "users_title": "소속 인원",
-          "users_value": "**합계**: `{total}`\n\n**사용자**: `{humans}`\n**봇**: `{bots}`"
+          "region": "지역"
         }
       },
       "help": {

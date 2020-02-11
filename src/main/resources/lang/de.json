@@ -215,9 +215,7 @@
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "owner": "Besitzer",
-          "region": "Region",
-          "users_title": "User",
-          "users_value": "**Total**: `{total}`\n\n**Menschen**: `{humans}`\n**Bots**: `{bots}`"
+          "region": "Region"
         }
       },
       "help": {
