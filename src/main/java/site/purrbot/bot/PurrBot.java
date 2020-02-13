@@ -19,8 +19,6 @@
 package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
-import com.github.benmanes.caffeine.cache.CacheWriter;
-import com.github.benmanes.caffeine.cache.RemovalCause;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import org.botblock.javabotblockapi.BotBlockAPI;
 import org.botblock.javabotblockapi.Site;
@@ -28,15 +26,12 @@ import org.botblock.javabotblockapi.requests.PostAction;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
-import com.google.gson.Gson;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Message;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
@@ -51,17 +46,12 @@ import site.purrbot.bot.util.file.lang.LangUtils;
 import site.purrbot.bot.util.message.EmbedUtil;
 import site.purrbot.bot.util.message.MessageUtil;
 import site.purrbot.bot.util.message.WebhookUtil;
-import site.purrbot.bot.votes.Botlist;
-import site.purrbot.bot.votes.LBots;
-import spark.Spark;
 
 import javax.security.auth.login.LoginException;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import static spark.Spark.*;
 
 public class PurrBot {
 
@@ -72,16 +62,13 @@ public class PurrBot {
     private Random random;
 
     private FileManager fileManager = new FileManager();
-    private ReadyListener readyListener;
     private DBUtil dbUtil;
     private PermUtil permUtil;
     private MessageUtil messageUtil;
-    private RewardHandler rewardHandler;
     private EmbedUtil embedUtil;
     private HttpUtil httpUtil;
     private WebhookUtil webhookUtil;
     private ImageUtil imageUtil;
-    private LevelManager levelManager;
     private LangUtils langUtils;
 
     private boolean beta = false;
@@ -114,31 +101,6 @@ public class PurrBot {
     private Cache<String, String> welcomeMsg = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    
-    private Cache<String, Long> xp = Caffeine.newBuilder()
-            .expireAfterWrite(10, TimeUnit.MINUTES)
-            .writer(new CacheWriter<String, Long>(){
-                @Override
-                public void write(@NonNull String key, @NonNull Long value){}
-    
-                @Override
-                public void delete(@NonNull String key, Long value, @NonNull RemovalCause cause){
-                    getDbUtil().setXp(key, value);
-                }
-            })
-            .build();
-    private Cache<String, Long> level = Caffeine.newBuilder()
-            .expireAfterWrite(10, TimeUnit.MINUTES)
-            .writer(new CacheWriter<String, Long>(){
-                @Override
-                public void write(@NonNull String key, @NonNull Long value){}
-    
-                @Override
-                public void delete(@NonNull String key, Long value, @NonNull RemovalCause cause){
-                    getDbUtil().setLevel(key, value);
-                }
-            })
-            .build();
 
     public static void main(String[] args){
         try{
@@ -156,17 +118,13 @@ public class PurrBot {
                 .addFile("ko", "/lang/ko.json", "./lang/ko.json");
 
         random = new Random();
-
-        readyListener = new ReadyListener(this);
         dbUtil        = new DBUtil(this);
         permUtil      = new PermUtil();
         messageUtil   = new MessageUtil(this);
-        rewardHandler = new RewardHandler(this);
         embedUtil     = new EmbedUtil(this);
         httpUtil      = new HttpUtil();
         webhookUtil   = new WebhookUtil();
         imageUtil     = new ImageUtil(this);
-        levelManager  = new LevelManager(this);
         langUtils     = new LangUtils(this);
 
         waiter = new EventWaiter();
@@ -179,7 +137,7 @@ public class PurrBot {
                 .setToken(getFileManager().getString("config", "bot-token"))
                 .setChunkingFilter(ChunkingFilter.NONE)
                 .addEventListeners(
-                        readyListener,
+                        new ReadyListener(this),
                         new ConnectionListener(this),
                         new GuildListener(this),
                         new CommandListener(this, CMD_HANDLER),
@@ -189,56 +147,6 @@ public class PurrBot {
                 .setActivity(Activity.of(Activity.ActivityType.DEFAULT, getMessageUtil().getRandomStartupMsg()))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .build();
-
-        if(!isBeta()){
-            Spark.port(1000);
-
-            path("/votes", () -> {
-                Gson voteGson = new Gson();
-                JSONObject json = new JSONObject();
-
-                post("/lbots_org", (request, response) -> {
-                    LBots lBots = voteGson.fromJson(request.body(), LBots.class);
-
-                    if(getReadyListener().isReady() && lBots.isFavourited()){
-                        if(rewardHandler.lbotsReward(lBots.getUserid())){
-                            response.status(200);
-                            json.put("code", 200).put("message", "POST-request valid!");
-                        }else{
-                            response.status(403);
-                            json.put("code", 403).put("message", "Invalid POST-request!");
-                        }
-                    }
-                    
-                    response.type("application/json");
-                    response.body(json.toString());
-
-                    return response.body();
-                });
-
-                post("/botlist_space", (request, response) -> {
-                    Botlist botlist = voteGson.fromJson(request.body(), Botlist.class);
-
-                    if(getReadyListener().isReady()){
-                        if(rewardHandler.botlistSpaceReward(botlist.getBotId(), botlist.getUserId())){
-                            response.status(200);
-                            json.put("code", 200).put("message", "POST-request valid!");
-                        }else{
-                            response.status(403);
-                            json.put("code", 403).put("message", "Invalid POST-request!");
-                        }
-                    }else{
-                        response.status(403);
-                        json.put("code", 403).put("message", "Vote-listener is not ready.");
-                    }
-                    
-                    response.type("application/json");
-                    response.body(json.toString());
-
-                    return response.body();
-                });
-            });
-        }
     }
 
     public void startUpdates(){ 
@@ -273,9 +181,6 @@ public class PurrBot {
     public ShardManager getShardManager(){
         return shardManager;
     }
-    private ReadyListener getReadyListener(){
-        return readyListener;
-    }
     public DBUtil getDbUtil(){
         return dbUtil;
     }
@@ -299,9 +204,6 @@ public class PurrBot {
     }
     public ImageUtil getImageUtil(){
         return imageUtil;
-    }
-    public LevelManager getLevelManager(){
-        return levelManager;
     }
     
     public boolean isBeta(){
@@ -336,13 +238,6 @@ public class PurrBot {
     public String getWelcomeMsg(String id){
         return welcomeMsg.get(id, k -> getDbUtil().getWelcomeMsg(id));
     }
-    
-    public Long getXp(String id){
-        return xp.get(id, k -> getDbUtil().getXp(id));
-    }
-    public Long getLevel(String id){
-        return level.get(id, k -> getDbUtil().getLevel(id));
-    }
 
     public void setLanguage(String key, String value){
         getDbUtil().setLanguage(key, value);
@@ -371,13 +266,6 @@ public class PurrBot {
     public void setWelcomeMsg(String key, String value){
         getDbUtil().setWelcomeMsg(key, value);
         welcomeMsg.put(key, value);
-    }
-    
-    public void setXp(String key, Long value){
-        xp.put(key, value);
-    }
-    public void setLevel(String key, Long value){
-        level.put(key, value);
     }
 
     public void invalidateCache(String id){

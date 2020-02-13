@@ -19,17 +19,6 @@
 package site.purrbot.bot.constants;
 
 public enum Roles {
-
-    // Roles for upvoting (discordbots.org and botlist.space) or for adding it to their favourites (lbots.org)
-    VOTER("475335831649910785"),
-
-    // Level roles.
-    VERY_ADDICTED  ("449280939839979530"),
-    SUPER_ADDICTED ("424194307881435177"),
-    ULTRA_ADDICTED ("541671949831766037"),
-    HYPER_ADDICTED ("549988541539680266"),
-    MASTER_ADDICTED("549988641464909827"),
-    
     // Roles to receive on join
     MEMBER       ("423772991520768011"),
     SPECIAL      ("549989009934254100"),

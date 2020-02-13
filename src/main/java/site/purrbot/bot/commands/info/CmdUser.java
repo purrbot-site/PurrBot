@@ -26,7 +26,6 @@ import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
-import site.purrbot.bot.constants.IDs;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -211,25 +210,6 @@ public class CmdUser implements Command{
                         ),
                         false
                 );
-
-        if(msg.getGuild().getId().equals(IDs.GUILD.getId()) && !member.getUser().isBot() && !bot.isBeta())
-            embed.addField(
-                    bot.getMsg(guild.getId(), "purr.info.user.embed.xp"),
-                    String.format(
-                            "`%d/%d`",
-                            bot.getXp(member.getUser().getId()),
-                            (long)bot.getLevelManager().reqXp(bot.getLevel(member.getUser().getId()))
-                    ),
-                    true
-            )
-            .addField(
-                    bot.getMsg(guild.getId(), "purr.info.user.embed.level"),
-                    String.format(
-                            "`%d`",
-                            bot.getLevel(member.getUser().getId())
-                    ),
-                    true
-            );
 
         byte[] bytes;
         try {

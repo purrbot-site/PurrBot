@@ -140,13 +140,7 @@ public class CmdStats implements Command{
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_total_value")
                                 .replace("{shards}", formatNumber(shardManager.getShardCache().size()))
                                 .replace("{guilds}", formatNumber(shardManager.getGuildCache().size()))
-                                .replace("{total}", formatNumber(shardManager.getUserCache().size()))
-                                .replace("{users}", formatNumber(shardManager.getUserCache().stream().filter(
-                                        user -> !user.isBot()
-                                ).count()))
-                                .replace("{bots}", formatNumber(shardManager.getUserCache().stream().filter(
-                                        User::isBot
-                                ).count())),
+                                .replace("{total}", formatNumber(shardManager.getUserCache().size())),
                         false
                 )
                 .addField(
@@ -154,13 +148,7 @@ public class CmdStats implements Command{
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_this_value")
                                 .replace("{id}", String.valueOf(jda.getShardInfo().getShardId()))
                                 .replace("{guilds}", formatNumber(jda.getGuildCache().size()))
-                                .replace("{total}", formatNumber(jda.getUserCache().size()))
-                                .replace("{users}", formatNumber(jda.getUserCache().stream().filter(
-                                        user -> !user.isBot()
-                                ).count()))
-                                .replace("{bots}", formatNumber(jda.getUserCache().stream().filter(
-                                        User::isBot
-                                ).count())),
+                                .replace("{total}", formatNumber(jda.getUserCache().size())),
                         false
                 )
                 .addField(

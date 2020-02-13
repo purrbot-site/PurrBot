@@ -27,7 +27,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
@@ -72,8 +71,6 @@ public class CommandListener extends ListenerAdapter{
                     String userMention = "<@" + guild.getJDA().getSelfUser().getId() + ">";
 
                     if(!raw.toLowerCase().startsWith(prefix) && !raw.startsWith(userMention) && !raw.startsWith(memberMention)){
-                        if(guild.getId().equals(IDs.GUILD.getId()))
-                            bot.getLevelManager().giveXP(user.getId(), false, msg.getTextChannel());
 
                         return;
                     }
@@ -158,9 +155,6 @@ public class CommandListener extends ListenerAdapter{
 
                     try{
                         HANDLER.execute(command, msg, args[1] == null ? "" : args[1]);
-
-                        if(guild.getId().equals(IDs.GUILD.getId()))
-                            bot.getLevelManager().giveXP(member.getId(), true, tc);
                     }catch(Exception ex){
                         logger.error("Couldn't perform command!", ex);
                         bot.getEmbedUtil().sendError(tc, user, "errors.unknown", ex.getMessage());

@@ -313,9 +313,9 @@
           "other_title": "기타 정보",
           "other_value": "```yaml\n메모리 점유: {ram}\n가동 시간: {days} {hours} {minutes} {seconds}\n```",
           "shard_this_title": "현재 샤드",
-          "shard_this_value": "```yaml\nID: {id} # ID는 0부터 시작\n\n소속 서버수: {guilds}\nM총 사용자수: {total} [사용자 {users}, 봇 {bots}]\n```",
+          "shard_this_value": "```yaml\nID: {id} # ID는 0부터 시작\n\n소속 서버수: {guilds}\nM총 사용자수: {total}\n```",
           "shard_total_title": "총계",
-          "shard_total_value": "```yaml\n샤드갯수: {shards}\n\n소속 서버수: {guilds}\n총 사용자수: {total} [사용자 {users}, 봇 {bots}]\n```",
+          "shard_total_value": "```yaml\n샤드갯수: {shards}\n\n소속 서버수: {guilds}\n총 사용자수: {total}\n```",
           "title": "통계"
         }
       },

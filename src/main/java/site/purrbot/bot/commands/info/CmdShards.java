@@ -33,7 +33,7 @@ import java.util.List;
 @CommandDescription(
         name = "Shards",
         description = "Display",
-        triggers = {"shards", "shardinfo"},
+        triggers = {"shard", "shards", "shardinfo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
                 @CommandAttribute(key = "usage", value = "{p}shards")
@@ -64,7 +64,7 @@ public class CmdShards implements Command{
             final List<String> row = new ArrayList<>();
             final int shardId = jda.getShardInfo().getShardId();
             
-            row.add(shardId + (id == shardId ? " (You)" : ""));
+            row.add((id == shardId ? "(You) " : "") + shardId);
             row.add(getStatus(jda));
             row.add(String.valueOf(jda.getGatewayPing()));
             row.add(String.valueOf(jda.getGuildCache().size()));

@@ -33,7 +33,6 @@ public class DBUtil {
     private Connection connection;
 
     private String guildTable;
-    private String memberTable;
 
     public DBUtil(PurrBot bot){
         r = RethinkDB.r;
@@ -44,7 +43,6 @@ public class DBUtil {
                 .connect();
 
         guildTable  = bot.getFileManager().getString("config", "database.guildTable");
-        memberTable = bot.getFileManager().getString("config", "database.memberTable");
         this.bot = bot;
     }
 
@@ -189,53 +187,5 @@ public class DBUtil {
         checkValue(id, "welcome_message", message);
 
         r.table(guildTable).get(id).update(r.hashMap("welcome_message", message)).run(connection);
-    }
-
-    /*
-     *  XP/Level stuff
-     */
-    void checkMember(String id){
-        Map member = getMember(id);
-        
-        if(member == null)
-            addMember(id);
-    }
-
-    private Map getMember(String id){
-        return r.table(memberTable).get(id).run(connection);
-    }
-
-    void addMember(String id){
-        r.table(memberTable).insert(
-                r.array(
-                        r.hashMap("id", id)
-                        .with("xp", 0)
-                        .with("level", 0)
-                )
-        ).optArg("conflict", "update").run(connection);
-    }
-
-    public long getXp(String id){
-        checkMember(id);
-        Map member = getMember(id);
-
-        return (long)member.get("xp");
-    }
-
-    public void setXp(String id, long xp){
-        checkMember(id);
-        r.table(memberTable).get(id).update(r.hashMap("xp", xp)).run(connection);
-    }
-
-    public long getLevel(String id){
-        checkMember(id);
-        Map member = getMember(id);
-
-        return (long)member.get("level");
-    }
-
-    public void setLevel(String id, long level){
-        checkMember(id);
-        r.table(memberTable).get(id).update(r.hashMap("level", level)).run(connection);
     }
 }
