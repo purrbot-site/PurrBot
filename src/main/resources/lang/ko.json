@@ -167,7 +167,7 @@
           "no_channel": "`설정된 아이콘 없음`",
           "preview": "미리보기",
           "subcommands_title": "세부 명령어",
-          "subcommands_value": "```\n배경    set <background>\n        reset\n채널    set <#channel>\n        reset\n색상    set <hex:rrggbb|rgb:r,g,b>\n        reset\n아이콘  set <icon>\n        reset\n메시지  set <message>\n        reset```"
+          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset```"
         },
         "few_args": "받은 정보가 적어!\n`{prefix}welcome` 을 사용하면 사용 가능한 모든 세부 명령어들을 확인할 수 있어!",
         "invalid_args": "유효하지 않은 값이야!\nRun `{prefix}welcome` 을 사용하면 가능한 모든 세부 명령어들을 확인할 수 있어!",
@@ -310,6 +310,7 @@
           "seconds": "초"
         },
         "embed": {
+          "note": "**Note**:\nThe listed stats (Especially the member count) might not be 100% accurate.",
           "other_title": "기타 정보",
           "other_value": "```yaml\n메모리 점유: {ram}\n가동 시간: {days} {hours} {minutes} {seconds}\n```",
           "shard_this_title": "현재 샤드",

@@ -54,9 +54,9 @@ public class CmdUser implements Command{
         List<Role> roles = member.getRoles();
 
         if(roles.size() <= 1)
-            return bot.getMsg(member.getGuild().getId(), "purr.info.user.no_other_roles");
+            return bot.getMsg(member.getGuild().getId(), "purr.info.user.no_roles_others");
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("```\n");
         for(int i = 1; i < roles.size(); i++){
             Role role = roles.get(i);
             String name = MarkdownSanitizer.escape(role.getName());
@@ -73,6 +73,8 @@ public class CmdUser implements Command{
 
             sb.append(name).append("\n");
         }
+        
+        sb.append("```");
 
         return sb.toString();
     }
