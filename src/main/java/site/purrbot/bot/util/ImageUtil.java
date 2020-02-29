@@ -213,7 +213,7 @@ public class ImageUtil {
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", bot.getFileManager().getString("config", "tokens.blaze"))
                 .post(body)
-                .url("https://api.blazedev.me/gen/welcome")
+                .url("https://api.fluxpoint.dev/gen/welcome")
                 .build();
 
         try(Response response = CLIENT.newCall(request).execute()){
