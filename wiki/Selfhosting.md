@@ -7,7 +7,7 @@
 [IDs.java]: https://github.com/Andre601/PurrBot/blob/master/src/main/java/site/purrbot/bot/constants/IDs.java
 [Emotes.java]: https://github.com/Andre601/PurrBot/blob/master/src/main/java/site/purrbot/bot/constants/Emotes.java
 [Roles.java]: https://github.com/Andre601/PurrBot/blob/master/src/main/java/site/purrbot/bot/constants/Roles.java
-[lang-files]: https://github.com/Andre601/PurrBot/tree/master/src/main/resources/lang
+[Links.java]: https://github.com/Andre601/PurrBot/blob/master/src/main/java/site/purrbot/bot/constants/Links.java
 
 [random.json]: https://github.com/Andre601/PurrBot/blob/master/src/main/resources/random.json
 [lang-files]: https://github.com/Andre601/PurrBot/blob/master/src/main/resources/lang
@@ -38,6 +38,14 @@ Alternatively could you set "beta" in the config.json to true, to set the bot as
 If you want to alter the code, make changes to the following sections by either removing or commenting them out:
 - [PurrBot#startUpdates] (Lines 154-171)
 - [PurrBot#startUpdate] (Lines 375-385)
+
+### Update some classes
+You need to update values in specific classes to make your version work without issues.  
+Namely you have to alter the content of the following classes:
+- [IDs.java] (Contains various IDs of users or Guilds)
+- [Emotes.java] (Contains different emotes used in commands)
+- [Roles.java] (Contains roles for things like the support Guild's join roles)
+- [Links.java] (Contains various links of the bot)
 
 ### Build jar file
 When you're done with your changes, make sure to execute `gradlew clean shadowJar` to build a shaded jar containing all dependnencies required.
@@ -79,7 +87,7 @@ On first startup will it generate with the below default values.
 </details>
 
 Note that you don't have to set values for every option in the config.json.  
-If you followed the previous step on preparing the bot will you only need to set the following optins:
+If you followed the previous step on preparing the bot will you only need to set the following options:
 
 | Option:                | Value required:                                                     |
 | ---------------------- | ------------------------------------------------------------------- |
