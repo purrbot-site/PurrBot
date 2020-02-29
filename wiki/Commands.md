@@ -404,10 +404,11 @@ The bot won't quote messages from NSFW channels when the channel you're using th
 > **Bot requires**: `None`
 >
 > **Aliases**:
+> - `Shard`
 > - `Shardinfo`
 >
 > **Usage**:
-> - `.Shard`
+> - `.Shards`
 
 Lists all shards, their status, ping and Guild count.
 
@@ -456,7 +457,7 @@ Shows information about yourself or a mentioned user.
 
 **This command can only be run in NSFW-labeled channels!**
 
-Askes the mentioned user to have sex with you.  
+Asks the mentioned user to have sex with you.  
 The mentioned user can accept or deny the request by clicking on the corresponding reactions of the message.
 
 ----

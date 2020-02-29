@@ -5,8 +5,7 @@
   
   "webhooks": {
     "guild": "guild-webhook-url",
-    "log": "log-webhook-url",
-    "vote": "vote-webhook-url"
+    "log": "log-webhook-url"
   },
   
   "tokens": {
@@ -17,12 +16,10 @@
     "botlist-space": "botlist-token",
     "discordextremelist-xyz": "debl-token"
   },
-
-
+  
   "database": {
     "ip": "127.0.0.1",
     "name": "DatabaseName",
-    "guildTable": "GuildTable",
-    "memberTable": "MemberTable"
+    "guildTable": "GuildTable"
   }
 }
