@@ -122,11 +122,11 @@ public class ImageUtil {
 
         JSONObject json = new JSONObject()
                 .put("avatar", quote.getAuthor().getEffectiveAvatarUrl())
-                .put("color", member == null ? String.valueOf(0x1FFFFFFF) : String.valueOf(member.getColorRaw()))
-                .put("format", "dd. MMM yyyy")
-                .put("name", member == null ? "Anonymous" : member.getEffectiveName())
-                .put("text", quote.getContentDisplay())
-                .put("time", String.valueOf(quote.getTimeCreated().toInstant().toEpochMilli()));
+                .put("nameColor", member == null ? String.valueOf(0x1FFFFFFF) : String.valueOf(member.getColorRaw()))
+                .put("dateFormat", "dd. MMM yyyy")
+                .put("username", member == null ? "Anonymous" : member.getEffectiveName())
+                .put("message", quote.getContentDisplay())
+                .put("timestamp", String.valueOf(quote.getTimeCreated().toInstant().toEpochMilli()));
 
         RequestBody body = RequestBody.create(json.toString(), null);
 
