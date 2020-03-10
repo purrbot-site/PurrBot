@@ -34,6 +34,7 @@ public final class LangUtils {
             case "de":
             case "en":
             case "ko":
+            case "ru":
                 return bot.getFileManager().getString(language.toLowerCase(), path);
                 
             default:
@@ -46,6 +47,7 @@ public final class LangUtils {
             case "de":
             case "en":
             case "ko":
+            case "ru":
                 return bot.getFileManager().getStringlist(language.toLowerCase(), path);
             
             default:

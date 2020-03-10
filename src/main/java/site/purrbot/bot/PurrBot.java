@@ -115,7 +115,8 @@ public class PurrBot {
                 .addFile("random", "/random.json", "./random.json")
                 .addFile("de", "/lang/de.json", "./lang/de.json")
                 .addFile("en", "/lang/en.json", "./lang/en.json")
-                .addFile("ko", "/lang/ko.json", "./lang/ko.json");
+                .addFile("ko", "/lang/ko.json", "./lang/ko.json")
+                .addFile("ru", "/lang/ru.json", "./lang/ru.json");
 
         random = new Random();
         dbUtil        = new DBUtil(this);
