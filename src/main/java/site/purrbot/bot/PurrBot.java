@@ -19,7 +19,9 @@
 package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.botblock.javabotblockapi.BotBlockAPI;
 import org.botblock.javabotblockapi.Site;
 import org.botblock.javabotblockapi.requests.PostAction;
@@ -134,9 +136,18 @@ public class PurrBot {
 
         CMD_HANDLER.registerCommands(new HashSet<>(new CommandLoader(this).getCommands()));
 
-        shardManager = new DefaultShardManagerBuilder()
-                .setToken(getFileManager().getString("config", "bot-token"))
-                .setChunkingFilter(ChunkingFilter.NONE)
+        shardManager = DefaultShardManagerBuilder
+                .create(
+                        getFileManager().getString("config", "bot-token"),
+                        GatewayIntent.GUILD_MEMBERS,
+                        GatewayIntent.GUILD_MESSAGES,
+                        GatewayIntent.GUILD_EMOJIS,
+                        GatewayIntent.GUILD_PRESENCES,
+                        GatewayIntent.GUILD_MESSAGE_REACTIONS
+                )
+                .setDisabledCacheFlags(EnumSet.of(
+                        CacheFlag.VOICE_STATE
+                ))
                 .addEventListeners(
                         new ReadyListener(this),
                         new ConnectionListener(this),

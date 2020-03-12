@@ -59,7 +59,7 @@ public class CmdUser implements Command{
         StringBuilder sb = new StringBuilder("```\n");
         for(int i = 1; i < roles.size(); i++){
             Role role = roles.get(i);
-            String name = MarkdownSanitizer.escape(role.getName());
+            String name = role.getName();
 
             if(sb.length() + name.length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
                 int rolesLeft = roles.size() - i;
