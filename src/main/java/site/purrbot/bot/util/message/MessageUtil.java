@@ -19,7 +19,6 @@
 package site.purrbot.bot.util.message;
 
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 
 import java.awt.Color;

@@ -200,23 +200,32 @@ public class GuildListener extends ListenerAdapter{
                 guild.leave().queue();
                 return;
             }
-            guild.getOwner().getUser().openPrivateChannel().queue(channel ->
-                    channel.sendMessage(String.format(
+            guild.getOwner().getUser().openPrivateChannel()
+                    .flatMap(channel -> channel.sendMessageFormat(
                             "I left your Discord `%s` for the following reason:\n" +
                             "```\n" +
-                            "[Auto Leave] Your Discord is blacklisted! Join our Discord to find out why.\n" +
-                            "Link: %s\n" +
+                            "[Auto Leave] Your Discord is blacklisted! To find out why, join the\n" +
+                            "             Support Discord: %s\n" +
                             "```",
                             guild.getName(),
                             Links.DISCORD.getUrl()
-                    )).queue(message -> {
-                        logger.info("[Auto Leave] Reason: Blacklisted Guild. Send successful: Yes");
+                    ))
+                    .queue(message -> {
+                        logger.info(String.format(
+                                "[Guild Leave] Guild{name=\"%s\", members=%d}",
+                                guild.getName(),
+                                guild.getMemberCount()
+                        ));
                         guild.leave().queue();
                     }, throwable -> {
-                        logger.info("[Auto Leave] Reason: Blacklisted Guild. Send successful: No");
+                        logger.info(String.format(
+                                "[Guild Leave] Guild{name=\"%s\", members=%d}",
+                                guild.getName(),
+                                guild.getMemberCount()
+                        ));
                         guild.leave().queue();
-                    })
-            );
+                    });
+            
             sendWebhook(Action.AUTO_LEAVE, guild);
             return;
         }
@@ -224,7 +233,7 @@ public class GuildListener extends ListenerAdapter{
         bot.getDbUtil().addGuild(guild.getId());
 
         logger.info(String.format(
-                "[Guild join] Name: %s (%s), Members: %d",
+                "[Guild Join] Guild{name=\"%s\", id=%s, members=%d}",
                 guild.getName(),
                 guild.getId(),
                 guild.getMemberCount()
@@ -245,7 +254,7 @@ public class GuildListener extends ListenerAdapter{
         bot.invalidateCache(guild.getId());
 
         logger.info(String.format(
-                "[Guild leave] Name: %s (%s), Members: %d",
+                "[Guild Leave] Guild{name\"%s\", id=%s, members=%d}",
                 guild.getName(),
                 guild.getId(),
                 guild.getMemberCount()

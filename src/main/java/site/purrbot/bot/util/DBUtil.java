@@ -86,7 +86,7 @@ public class DBUtil {
     }
 
     private Map getGuild(String id){
-        return r.table(guildTable).get(id).run(connection);
+        return r.table(guildTable).get(id).run(connection, Map.class).single();
     }
     
     /*
