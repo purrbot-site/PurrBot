@@ -383,6 +383,20 @@
         "title_gif": "Ungezogene neko {WAGTAIL}",
         "title_img": "Ungezogene neko {NEKOWO}"
       },
+      "pussylick": {
+        "mention_bot": "Bots haben keine Pussy.",
+        "mention_purr": "NEIN! Ich werde dich das nicht machen lassen.",
+        "mention_self": "Wie kannst du...? Weisst du was? Ich frag nicht.",
+        "message": "{user} leckt die Pussy von {target}",
+        "no_mention": "Bitte erwähne jemanden, um dessen Pussy zu lecken.",
+        "request": {
+          "accepted": "{target} hat deine Anfrage akzeptiert {user}. ;P",
+          "denied": "{target} möchte nicht, dass du ihre Pussy leckst {user}... Hat Sie überhaupt eine?",
+          "message": "Hey {target}!\n{user} möchte deine Pussy lecken. Möchtest du das auch (Oder hast überhaupt eine)?\nReagiere mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "open": "Bist du durstig? Du hast bereits eine offene Anfrage {user}!\nWarte, bis diese angenommen, abgelehnt oder abgelaufen ist.",
+          "timed_out": "Scheint so als will {target} nicht, dass du ihre Pussy leckst {user}... Vielleicht hat sie sogar keine? o////o"
+        }
+      },
       "solo": {
         "loading": "{LOADING} Erhalte ein gif von einem scharfen Girl...",
         "title": "Solo Girl"
@@ -479,6 +493,9 @@
       },
       "fuck": {
         "mention_snuggle": "N-nein! Ich werde dass nicht mir dir machen {user}."
+      },
+      "pussylick": {
+        "mention_snuggle": "H-hey. Ich will nicht, dass du mich *dort* leckst {user}!"
       },
       "threesome": {
         "mention_snuggle": "I-ich steh nicht auf sowas {user}!"

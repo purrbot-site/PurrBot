@@ -71,6 +71,7 @@ public class CommandLoader {
                 new CmdBlowjob(bot),
                 new CmdFuck(bot),
                 new CmdLewd(bot),
+                new CmdPussylick(bot),
                 new CmdSolo(bot),
                 new CmdThreesome(bot),
                 new CmdYurifuck(bot),
@@ -87,11 +88,6 @@ public class CommandLoader {
         COMMANDS.addAll(Arrays.asList(commands));
     }
 
-    /**
-     * Returns a {@link java.util.Set Set} with {@link site.purrbot.bot.commands.Command Commands}.
-     *
-     * @return A Set with available commands.
-     */
     public Set<Command> getCommands(){
         return COMMANDS;
     }
