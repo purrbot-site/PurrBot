@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class GuildListener extends ListenerAdapter{
 
@@ -284,7 +285,7 @@ public class GuildListener extends ListenerAdapter{
         if(msg == null)
             msg = "Hello {mention}!";
 
-        Message message = new MessageBuilder(bot.getMessageUtil().parsePlaceholders(msg, event.getMember())).build();
+        String message = bot.getMessageUtil().parsePlaceholders(msg, event.getMember());
 
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)) {
             InputStream is;
@@ -352,7 +353,7 @@ public class GuildListener extends ListenerAdapter{
                         "[Join Roles] Giving %s join roles.",
                         target.getEffectiveName()
                 ))
-                .queue();
+                .queueAfter(5, TimeUnit.SECONDS);
     }
     
     enum Action{
