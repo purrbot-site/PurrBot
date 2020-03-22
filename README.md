@@ -60,7 +60,8 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 | Pat      | `<@user ...>`       | Pats the mentioned user(s).                 |
 | Poke     | `<@user ...>`       | Pokes the mentioned user(s).                |
 | Senko    |                     | Shows a image of Senko-San.                 |
-| Ship     | `<@user>` `[@user]` | Ships you (or another user) with someone.   |
+| Ship     | `<@user>`           | Ships you with the mentioned user.          |
+|          | `<@user>` `[@user]` | Ships the first with the second user.       |
 | Slap     | `<@user ...>`       | Slaps the mentioned user(s).                |
 | Tickle   | `<@user ...>`       | Tickles the mentioned user(s).              |
 
@@ -89,37 +90,40 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 ## Info
 **Permission**: `None`
 
-| Command: | Arguments:                 | Description:                                                                           |
-| -------- | -------------------------- | -------------------------------------------------------------------------------------- |
-| Emote    | `<:emote:>`                | Displays info about an emote.                                                          |
-|          | `[--search]`               | The bot will try to find an emote in the last 100 messages.                            |
-| Guild    |                            | Shows info about the guild.                                                            |
-| Help     |                            | Will display all commands available.                                                   |
-|          | `[command]`                | Shows info about the provided command.                                                 |
-| Info     |                            | Shows some info about the bot.                                                         |
-|          | `[--dm]`                   | Sends the info in DM.                                                                  |
-| Invite   |                            | Shows you some links.                                                                  |
-|          | `[--dm]`                   | Sends you the links in DM.                                                             |
-| Ping     |                            | Checks the ping. (Time the bot takes to edit the message, rest-API and websocket.)     |
-| Quote    | `<messageID>` `[#channel]` | Quotes a message. It has to be in the same channel or the channel has to be mentioned. |
-| Stats    |                            | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, etc.)       |
-| User     |                            | Gives info about you.                                                                  |
-|          | `[@user]`                  | Gives info about the mentioned user.                                                   |
+| Command: | Arguments:                 | Description:                                                                       |
+| -------- | -------------------------- | ---------------------------------------------------------------------------------- |
+| Emote    | `<:emote:>`                | Displays info about an emote.                                                      |
+|          | `[--search]`               | The bot will try to find an emote in the last 100 messages.                        |
+| Guild    |                            | Shows info about the guild.                                                        |
+| Help     |                            | Will display all commands available.                                               |
+|          | `[command]`                | Shows info about the provided command.                                             |
+| Info     |                            | Shows some info about the bot.                                                     |
+|          | `[--dm]`                   | Sends the info in DM.                                                              |
+| Invite   |                            | Shows you some links.                                                              |
+|          | `[--dm]`                   | Sends you the links in DM.                                                         |
+| Ping     |                            | Checks the ping. (Time the bot takes to edit the message, rest-API and websocket.) |
+| Quote    | `<messageId>`              | Quotes a message from the same channel the command was used in.                    |
+|          | `<messageId>` `[#channel]` | Quotes a message from the mentioned channel.                                       |
+| Stats    |                            | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, etc.)   |
+| User     |                            | Gives info about you.                                                              |
+|          | `[@user]`                  | Gives info about the mentioned user.                                               |
 
 ## NSFW
 **Permission**: `None`  
 **Extra**: This command ONLY works in NSFW-labeled channels.
 
-| Command:  | Arguments:            | Description:                                                                        |
-| --------- | --------------------- | ----------------------------------------------------------------------------------- |
-| Fuck      | `<@user>`             | Sends a invite to a user to have sex with you. They can accept or deny the request. |
-| Lewd      |                       | Shows a image of a lewd neko (catgirl).                                             |
-|           | `[--gif]`             | Shows a gif of a lewd neko (catgirl).                                               |
-| Solo      |                       | Gives a gif of a girl *playing* with herself.                                       |
-| Threesome | `<@user1>` `<@user2>` | Similar to `.fuck`, but lets you have sex with 2 people.                            |
-|           | `[--fff]`             | Gives you a gif with females only instead of the default 1 male, 2 females.         |
-|           | `[--mmf]`             | Gives you a gif with 2 males and 1 female instead of the default 1 male, 2 females. |
-| Yurifuck  | `<@user>`             | Similar to `.fuck`, but with females only \>wO                                      |
+| Command:  | Arguments:                      | Description:                                                                        |
+| --------- | ------------------------------- | ----------------------------------------------------------------------------------- |
+| Fuck      | `<@user>`                       | Sends a invite to a user to have sex with you. They can accept or deny the request. |
+|           | `<@user>` `[--anal]`            | Gives you a gif with anal sex.                                                      |
+| Lewd      |                                 | Shows a image of a lewd neko (catgirl).                                             |
+|           | `[--gif]`                       | Shows a gif of a lewd neko (catgirl).                                               |
+| Pussylick | `<@user>`                       | Similar to `.fuck`, but lets you lick someone's pussy (if they have one that is...) |
+| Solo      |                                 | Gives a gif of a girl *playing* with herself.                                       |
+| Threesome | `<@user1>` `<@user2>`           | Similar to `.fuck`, but lets you have sex with 2 people.                            |
+|           | `<@user1>` `<@user2>` `[--fff]` | Gives you a gif with females only instead of the default 1 male, 2 females.         |
+|           | `<@user1>` `<@user2>` `[--mmf]` | Gives you a gif with 2 males and 1 female instead of the default 1 male, 2 females. |
+| Yurifuck  | `<@user>`                       | Similar to `.fuck`, but with females only \>wO                                      |
 
 # Translations
 Version 2.5 of \*Purr* added an option to have a per-guild language set.  

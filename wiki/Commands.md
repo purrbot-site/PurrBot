@@ -47,6 +47,7 @@ The default prefix is `.` but can be changed with the [[prefix-command|Commands#
 ### [NSFW](#category-nsfw)
 - [Fuck](#fuck)
 - [Lewd](#lewd)
+- [Pussylick](#pussylick)
 - [Solo](#solo)
 - [Threesome](#threesome)
 - [Yurifuck](#yurifuck)
@@ -454,11 +455,13 @@ Shows information about yourself or a mentioned user.
 > 
 > **Usage**:
 > - `.Fuck <@user>`
+> - `.Fuck <@user> --anal`
 
 **This command can only be run in NSFW-labeled channels!**
 
 Asks the mentioned user to have sex with you.  
-The mentioned user can accept or deny the request by clicking on the corresponding reactions of the message.
+The mentioned user can accept or deny the request by clicking on the corresponding reactions of the message.  
+`--anal` gives a Anal fuck gif.
 
 ----
 ### Lewd
@@ -475,6 +478,23 @@ The mentioned user can accept or deny the request by clicking on the correspondi
 
 Gives an image of a lewd Neko.  
 `--gif` returns a gif of a lewd neko.
+
+----
+### Pussylick
+> **Permission**: `None`  
+> **Bot requires**: `None`
+>
+> **Aliases**:
+> - `plick`
+> - `cunni`
+>
+> **Usage**:  
+> - `.Pussylick <@user>`
+
+**This command can only be run in NSFW-Labeled channels!**
+
+Asks the mentioned user to let you licking their pussy.  
+The mentioned user can accept or deny the request by clicking on the corresponding reactions of the message.
 
 ----
 ### Solo

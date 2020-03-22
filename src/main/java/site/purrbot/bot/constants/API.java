@@ -39,6 +39,7 @@ public enum API {
     GIF_SLAP  (false, "slap",   true),
     GIF_TICKLE(false, "tickle", true),
 
+    GIF_ANAL_LEWD         (true, "anal",          true),
     GIF_BLOW_JOB_LEWD     (true, "blowjob",       true),
     GIF_FUCK_LEWD         (true, "fuck",          true),
     GIF_NEKO_LEWD         (true, "neko",          true),

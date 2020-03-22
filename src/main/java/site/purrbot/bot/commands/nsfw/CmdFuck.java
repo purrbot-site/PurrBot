@@ -41,12 +41,14 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
         description =
                 "Wanna fuck someone?\n" +
                 "Mention a user, to send a request.\n" +
-                "The mentioned user can accept it by clicking on the ✅, deny it by clicking on ❌ or let it time out.",
+                "The mentioned user can accept it by clicking on the ✅, deny it by clicking on ❌ or let it time out.\n" +
+                "\n" +
+                "Use `--anal` to get a gif with anal sex instead.",
         triggers = {"fuck", "sex"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
                 @CommandAttribute(key = "usage", value = 
-                        "{p}fuck <@user>"
+                        "{p}fuck <@user> [--anal]"
                 )
         }
 )
@@ -177,8 +179,13 @@ public class CmdFuck implements Command{
                             message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
     
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-
-                            String link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
+                            
+                            String raw = msg.getContentRaw();
+                            String link;
+                            if(raw.toLowerCase().contains("--anal") || raw.toLowerCase().contains("—anal"))
+                                link = bot.getHttpUtil().getImage(API.GIF_ANAL_LEWD);
+                            else
+                                link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
 
                             ev.getChannel().sendMessage(MarkdownSanitizer.escape(
                                     bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.accepted", author.getAsMention())
