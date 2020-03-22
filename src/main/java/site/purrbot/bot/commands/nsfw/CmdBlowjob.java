@@ -104,7 +104,7 @@ public class CmdBlowjob implements Command{
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_purr")
+                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_purr", author.getAsMention())
                 ).queue();
             }
             return;
