@@ -214,6 +214,8 @@
             "high": "(╯°□°）╯︵ ┻━┻",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
+          "members_title": "Members",
+          "members_value": "```yaml\nTotal: {members_total}\n\nHumans: {members_human}\nBots: {members_bot}\n```",
           "owner": "소유자",
           "region": "지역"
         }

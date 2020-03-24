@@ -21,7 +21,6 @@ package site.purrbot.bot.listener;
 import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
-import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
@@ -42,6 +41,9 @@ import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
+import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MEMBER;
 
 public class GuildListener extends ListenerAdapter{
 
@@ -353,7 +355,8 @@ public class GuildListener extends ListenerAdapter{
                         "[Join Roles] Giving %s join roles.",
                         target.getEffectiveName()
                 ))
-                .queueAfter(5, TimeUnit.SECONDS);
+                // We delay the request in case someone, who was muted and left, rejoins the Discord.
+                .queueAfter(2, TimeUnit.SECONDS, null, ignore(UNKNOWN_MEMBER));
     }
     
     enum Action{

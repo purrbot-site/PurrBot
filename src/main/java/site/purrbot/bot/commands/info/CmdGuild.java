@@ -109,6 +109,17 @@ public class CmdGuild implements Command{
         );
     }
     
+    private String getMembers(Guild guild){
+        int total = guild.getMembers().size();
+        long humans = guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count();
+        long bots = guild.getMembers().stream().filter(member -> member.getUser().isBot()).count();
+        
+        return bot.getMsg(guild.getId(), "purr.info.guild.embed.members_value")
+                .replace("{members_total}", String.valueOf(total))
+                .replace("{members_human}", String.valueOf(humans))
+                .replace("{members_bot}", String.valueOf(bots));
+    }
+    
     @Override
     public void execute(Message msg, String s){
         Guild guild = msg.getGuild();
@@ -149,6 +160,11 @@ public class CmdGuild implements Command{
                                 .replace("{level}", String.valueOf(guild.getBoostTier().getKey()))
                                 .replace("{BOOST_TIER}", getBoostEmote(guild)),
                         getBoostMessage(guild),
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.members_title"),
+                        getMembers(guild),
                         false
                 )
                 .build();

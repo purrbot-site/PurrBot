@@ -136,7 +136,7 @@ public class CommandListener extends ListenerAdapter{
                     }
                     if(command.hasAttribute("manage_server")){
                         if(!bot.getPermUtil().hasPermission(tc, msg.getMember(), Permission.MANAGE_SERVER)){
-                            bot.getEmbedUtil().sendPermError(tc, user, Permission.MANAGE_CHANNEL, false);
+                            bot.getEmbedUtil().sendPermError(tc, user, Permission.MANAGE_SERVER, false);
                             return;
                         }
                     }

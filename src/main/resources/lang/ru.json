@@ -214,10 +214,10 @@
             "high": "(╯°□°）╯︵ ┻━┻",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
+          "members_title": "Members",
+          "members_value": "```yaml\nTotal: {members_total}\n\nHumans: {members_human}\nBots: {members_bot}\n```",
           "owner": "Владелец",
-          "region": "Регион",
-          "users_title": "Пользователи",
-          "users_value": "**Всего**: `{total}`\n\n**Пользователей**: `{humans}`\n**Ботов**: `{bots}`"
+          "region": "Регион"
         }
       },
       "help": {

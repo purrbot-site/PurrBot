@@ -176,10 +176,10 @@ public class PurrBot {
                             Site.LBOTS_ORG, 
                             getFileManager().getString("config", "tokens.lbots-org")
                     )
-                    .addAuthToken(
-                            Site.DISCORDEXTREMELIST_XYZ, 
-                            getFileManager().getString("config", "tokens.discordextremelist-xyz")
-                    )
+                  //.addAuthToken(
+                  //        Site.DISCORDEXTREMELIST_XYZ, 
+                  //        getFileManager().getString("config", "tokens.discordextremelist-xyz")
+                  //)
                     .build();
         }
 
