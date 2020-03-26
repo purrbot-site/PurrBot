@@ -30,6 +30,7 @@ import site.purrbot.bot.constants.Links;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Objects;
 
 @CommandDescription(
@@ -134,31 +135,36 @@ public class CmdWelcome implements Command{
         switch(type){
             case BACKGROUND:
                 bot.setWelcomeBg(id, value);
+                value = "`" + value + "`";
                 break;
 
             case CHANNEL:
                 bot.setWelcomeChannel(id, value);
+                value = "<#" + value + ">";
                 break;
 
             case COLOR:
                 bot.setWelcomeColor(id, value);
+                value = "`" + value + "`";
                 break;
 
             case ICON:
                 bot.setWelcomeIcon(id, value);
+                value = "`" + value + "`";
                 break;
 
             case MESSAGE:
                 bot.setWelcomeMsg(id, value);
+                value = "\n```\n" + getMsg(value) + "\n```";
         }
-
+        
         msg.getTextChannel().sendMessage(
                 bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
                         .setColor(0x00FF00)
                         .setDescription(
                                 bot.getMsg(id, "purr.guild.welcome.set")
-                                .replace("{type}", type.name().toLowerCase())
-                                .replace("{value}", type == Type.CHANNEL ? "<#" + value + ">" : "`" + value + "`")
+                                .replace("{type}", firstUpperCase(type.name()))
+                                .replace("{value}", value)
                         )
                         .build()
         ).queue();
@@ -169,7 +175,7 @@ public class CmdWelcome implements Command{
 
         switch(type){
             case BACKGROUND:
-                bot.setWelcomeBg(id, "none");
+                bot.setWelcomeBg(id, "color_white");
                 break;
 
             case CHANNEL:
@@ -177,7 +183,7 @@ public class CmdWelcome implements Command{
                 break;
 
             case COLOR:
-                bot.setWelcomeColor(id, "none");
+                bot.setWelcomeColor(id, "hex:000000");
                 break;
 
             case ICON:
@@ -185,7 +191,7 @@ public class CmdWelcome implements Command{
                 break;
 
             case MESSAGE:
-                bot.setWelcomeMsg(id, "none");
+                bot.setWelcomeMsg(id, "Welcome {mention}!");
         }
 
         msg.getTextChannel().sendMessage(
@@ -193,7 +199,7 @@ public class CmdWelcome implements Command{
                         .setColor(0x00FF00)
                         .setDescription(
                                 bot.getMsg(id, "purr.guild.welcome.reset")
-                                .replace("{type}", type.name().toLowerCase())
+                                .replace("{type}", firstUpperCase(type.name()))
                         )
                         .build()
         ).queue();
@@ -210,12 +216,16 @@ public class CmdWelcome implements Command{
         return guild.getTextChannelById(bot.getWelcomeChannel(id));
     }
 
+    private String firstUpperCase(String word){
+        return Character.toString(word.charAt(0)).toUpperCase() + word.substring(1).toLowerCase();
+    }
+    
     @Override
     public void execute(Message msg, String s){
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
-        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
-
+        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+", 3);
+        
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
@@ -353,11 +363,7 @@ public class CmdWelcome implements Command{
                         bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_msg");
                         return;
                     }
-                    StringBuilder sb = new StringBuilder();
-                    for(int i = 2; i < args.length; i++){
-                        sb.append(args[i]).append(" ");
-                    }
-                    update(msg, Type.MESSAGE, bot.getMessageUtil().replaceLast(sb.toString(), " ", ""));
+                    update(msg, Type.MESSAGE, args[2]);
                 }
                 break;
 
