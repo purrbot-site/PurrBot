@@ -20,6 +20,7 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import com.jagrosh.jdautilities.menu.EmbedPaginator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
@@ -27,6 +28,12 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
 import javax.annotation.Nullable;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
+import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 @CommandDescription(
         name = "Emote",
@@ -50,14 +57,20 @@ public class CmdEmote implements Command{
         this.bot = bot;
     }
 
-    private MessageEmbed emoteInfo(User user, Emote emote, Guild guild, @Nullable String link){
+    private MessageEmbed emoteInfo(User user, Emote emote, Guild guild, @Nullable String link, int pos, int size){
         Emote e = bot.getShardManager().getEmoteById(emote.getId());
         Guild emoteGuild = null;
         if(e != null)
             emoteGuild = e.getGuild();
 
+        String path = size > 1 ? "purr.info.emote.embed.emote_multiple" : "purr.info.emote.embed.emote_single";
+        
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(user, guild)
-                .setTitle(bot.getMsg(guild.getId(), "purr.info.emote.embed.emote"))
+                .setTitle(
+                        bot.getMsg(guild.getId(), path)
+                                .replace("{current}", String.valueOf(pos))
+                                .replace("{total}", String.valueOf(size))
+                )
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.emote.embed.name"),
                         String.format(
@@ -111,28 +124,43 @@ public class CmdEmote implements Command{
 
         if(args.toLowerCase().contains("--search") || args.toLowerCase().contains("—search")){
             if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
-                        .setColor(0xFF0000)
-                        .setDescription(
-                                bot.getMsg(msg.getGuild().getId(), "errors.missing_perms.self")
-                                        .replace("{permission}", Permission.MESSAGE_HISTORY.getName())
-                        )
-                        .build();
-                
-                tc.sendMessage(embed).queue();
+                bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), Permission.MESSAGE_HISTORY, true);
                 return;
             }
-
-            Message emoteMessage = tc.getIterableHistory().stream().limit(100).filter(
+    
+            EmbedPaginator.Builder builder = new EmbedPaginator.Builder().setEventWaiter(bot.getWaiter())
+                    .setTimeout(1, TimeUnit.MINUTES)
+                    .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
+                    .waitOnSinglePage(true)
+                    .setFinalAction(message -> {
+                        if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                            message.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
+                    });
+            
+            List<Message> messages = tc.getIterableHistory().stream().limit(100).filter(
                     history -> !history.getEmotes().isEmpty()
-            ).findFirst().orElse(null);
+            ).collect(Collectors.toList());
 
-            if(emoteMessage == null){
+            if(messages.isEmpty()){
                 bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.emote.not_found");
                 return;
             }
-
-            tc.sendMessage(emoteInfo(msg.getAuthor(), emoteMessage.getEmotes().get(0), guild, emoteMessage.getJumpUrl())).queue();
+    
+            int size = messages.size();
+            for(int i = 0; i < messages.size(); i++){
+                Message message = messages.get(i);
+                builder.addItems(emoteInfo(
+                        msg.getAuthor(),
+                        message.getEmotes().get(0),
+                        guild,
+                        message.getJumpUrl(),
+                        i + 1,
+                        size
+                ));
+            }
+            
+            builder.build().display(tc);
+            
             return;
         }
 
@@ -141,7 +169,7 @@ public class CmdEmote implements Command{
             return;
         }
 
-        tc.sendMessage(emoteInfo(msg.getAuthor(), msg.getEmotes().get(0), guild, null)).queue();
+        tc.sendMessage(emoteInfo(msg.getAuthor(), msg.getEmotes().get(0), guild, null, 1, 1)).queue();
 
     }
 }

@@ -187,7 +187,8 @@
     "info": {
       "emote": {
         "embed": {
-          "emote": "Emote",
+          "emote_multiple": "Emote [{current} / {total}]",
+          "emote_single": "Emote",
           "guild": "Gilde",
           "id": "ID",
           "image": "Bild",

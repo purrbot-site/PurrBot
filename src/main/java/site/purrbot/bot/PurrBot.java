@@ -20,7 +20,6 @@ package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.botblock.javabotblockapi.BotBlockAPI;
 import org.botblock.javabotblockapi.Site;
@@ -145,9 +144,8 @@ public class PurrBot {
                         GatewayIntent.GUILD_PRESENCES,
                         GatewayIntent.GUILD_MESSAGE_REACTIONS
                 )
-                .setDisabledCacheFlags(EnumSet.of(
-                        CacheFlag.VOICE_STATE
-                ))
+                .disableIntents(Collections.singleton(GatewayIntent.GUILD_VOICE_STATES))
+                .disableCache(Collections.singleton(CacheFlag.VOICE_STATE))
                 .addEventListeners(
                         new ReadyListener(this),
                         new ConnectionListener(this),

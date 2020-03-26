@@ -187,7 +187,8 @@
     "info": {
       "emote": {
         "embed": {
-          "emote": "Эмодзи",
+          "emote_multiple": "Эмодзи [{current} / {total}]",
+          "emote_single": "Эмодзи",
           "guild": "Сервер",
           "id": "ID",
           "image": "Изображение",
@@ -214,8 +215,8 @@
             "high": "(╯°□°）╯︵ ┻━┻",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
-          "members_title": "Members",
-          "members_value": "```yaml\nTotal: {members_total}\n\nHumans: {members_human}\nBots: {members_bot}\n```",
+          "members_title": "Участники",
+          "members_value": "```yaml\nВсего: {members_total}\n\nЛюдей: {members_human}\nБотов: {members_bot}\n```",
           "owner": "Владелец",
           "region": "Регион"
         }
