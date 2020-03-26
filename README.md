@@ -10,14 +10,14 @@
 <!-- Website links -->
 [Website]: https://purrbot.site
 [Discord]: https://purrbot.site/discord
+[Wiki]: https://docs.purrbot.site/bot
+[image]: https://docs.purrbot.site/bot/welcome-images
+[background]: https://docs.purrbot.site/bot/welcome-images#backgrounds
+[icon]: https://docs.purrbot.site/bot/welcome-images#icons
 
 <!-- GitHub links -->
 [Issues]: https://github.com/Andre601/PurrBot/issues
-[Wiki]: https://github.com/Andre601/PurrBot/wiki
-[image]: https://github.com/Andre601/PurrBot/wiki/Welcome-images
 [License]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
-[background]: https://github.com/Andre601/PurrBot/wiki/Welcome-images#backgrounds
-[icon]: https://github.com/Andre601/PurrBot/wiki/Welcome-images#icons
 [translations]: https://github.com/purrbot-site/Translations
 
 <!-- Other links -->
