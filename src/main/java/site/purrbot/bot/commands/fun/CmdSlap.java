@@ -79,7 +79,7 @@ public class CmdSlap implements Command{
             msg.addReaction("\uD83D\uDE2D").queue();
         }
 
-        if(members.contains(msg.getMember())){
+        if(members.contains(member)){
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.fun.slap.mention_self", msg.getMember().getAsMention())
             ).queue();
@@ -87,7 +87,7 @@ public class CmdSlap implements Command{
 
         String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
-                .filter(mem -> !mem.equals(msg.getMember()))
+                .filter(mem -> !mem.equals(member))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 

@@ -21,131 +21,99 @@ package site.purrbot.bot.commands.fun;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.IDs;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @CommandDescription(
-        name = "Kiss",
-        description = "Lets you share some kisses with others!",
-        triggers = {"kiss", "love", "kissu"},
+        name = "Bite",
+        description =
+                "Lets you bite someone.",
+        triggers = {"bite", "nibble", "nom"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}kiss <@user> [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}bite <@user> [@user ...]")
         }
 )
-public class CmdKiss implements Command{
-
+public class CmdBite implements Command{
+    
     private PurrBot bot;
-
-    public CmdKiss(PurrBot bot){
+    
+    public CmdBite(PurrBot bot){
         this.bot = bot;
     }
-
+    
     @Override
-    public void execute(Message msg, String s) {
+    public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
-
+        Guild guild = msg.getGuild();
+        
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.kiss.no_mention");
+            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.bite.no_mention");
             return;
         }
-
+    
         Member member = msg.getMember();
         if(member == null)
             return;
-
-        Guild guild = msg.getGuild();
+    
         List<Member> members = msg.getMentionedMembers();
-
-        Member purr = members.stream()
-                .filter(mem -> mem.getUser().getId().equals(IDs.PURR.getId()))
-                .findFirst()
-                .orElse(null);
-        Member snuggle = members.stream()
-                .filter(mem -> mem.getUser().getId().equals(IDs.SNUGGLE.getId()))
-                .findFirst()
-                .orElse(null);
-
-        if(bot.isBeta()){
-            if(members.contains(guild.getSelfMember())){
+        
+        if(members.contains(guild.getSelfMember())){
+            if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.kiss.mention_snuggle", member.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.fun.bite.mention_snuggle", member.getAsMention())
                 ).queue();
-            }else
-            if(purr != null && members.contains(purr)){
-                if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
-                    tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.fun.kiss.special_user", member.getAsMention())
-                    ).queue();
-                }else{
-                    tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.fun.kiss.mention_purr", member.getAsMention())
-                    ).queue();
-                }
-            }
-        }else{
-            if(members.contains(guild.getSelfMember())){
+            }else{
                 if(bot.getPermUtil().isSpecial(member.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.fun.kiss.special_user", member.getAsMention())
-                    ).queue(message -> {
-                        MessageEmbed kiss = bot.getEmbedUtil().getEmbed()
-                                .setImage(bot.getMessageUtil().getRandomKissImg())
-                                .build();
-
-                        message.editMessage(kiss).queue();
-                        msg.addReaction("\uD83D\uDC8B").queue();
-                    });
+                            bot.getMsg(guild.getId(), "purr.fun.bite.special_user", member.getAsMention())
+                    ).queue();
                 }else{
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.fun.kiss.mention_purr")
+                            bot.getMsg(guild.getId(), "purr.fun.bite.mention_purr", member.getAsMention())
                     ).queue();
                 }
-            }else
-            if(snuggle != null && members.contains(snuggle)){
-                tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.kiss.mention_snuggle")
-                ).queue();
             }
+            msg.addReaction("\uD83D\uDE16").queue();
         }
-
+        
         if(members.contains(member)){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.fun.kiss.mention_self", member.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.fun.bite.mention_self", member.getAsMention())
             ).queue();
         }
-
+        
         String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(member))
-                .filter(mem -> !mem.equals(purr))
-                .filter(mem -> !mem.equals(snuggle))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
-
-        String link = bot.getHttpUtil().getImage(API.GIF_KISS);
-
+        
         if(targets.isEmpty())
             return;
-
+        
+        String link = bot.getHttpUtil().getImage(API.GIF_BITE);
+        
         tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.fun.kiss.loading")
+                bot.getMsg(guild.getId(), "purr.fun.bite.loading")
         ).queue(message -> {
             if(link == null){
                 message.editMessage(MarkdownSanitizer.escape(
-                        bot.getMsg(guild.getId(), "purr.fun.kiss.message", member.getEffectiveName(), targets)
+                        bot.getMsg(guild.getId(), "purr.fun.bite.message", member.getEffectiveName(), targets)
                 )).queue();
             }else{
                 message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                         .embed(bot.getEmbedUtil().getEmbed().setDescription(MarkdownSanitizer.escape(
-                                bot.getMsg(guild.getId(), "purr.fun.kiss.message", member.getEffectiveName(), targets)
+                                bot.getMsg(guild.getId(), "purr.fun.bite.message", member.getEffectiveName(), targets)
                         )).setImage(link).build()).queue();
             }
         });

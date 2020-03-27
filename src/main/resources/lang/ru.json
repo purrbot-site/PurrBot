@@ -29,6 +29,14 @@
   },
   "purr": {
     "fun": {
+      "bite": {
+        "loading": "{LOADING} Going to bite someone...",
+        "mention_self": "Is it canibalism, if you bite yourself {user}?",
+        "mention_purr": "W-w-wha...? I'm not tasty! >.<",
+        "message": "{user} bites you {targets}",
+        "no_mention": "Please mention at least one user to bite!",
+        "special_user": "B-but {user}! T-that is embarrassing."
+      },
       "cuddle": {
         "loading": "{LOADING} Получаю обнмашечный gif...",
         "mention_self": "Почему ты обнимаешь себя, {user}?\nТы можешь обнять меня, если хочешь. {VANILLABLUSH}",
@@ -235,9 +243,10 @@
             "fun": "Веселье",
             "guild": "Сервер",
             "info": "Информация",
-            "list": "```\nКатегории:\n  Веселье\n  Сервер\n  Информация\n  NSFW\n```",
+            "list": "```\nВеселье\nСервер\nИнформация\nNSFW\n```",
             "nsfw": "NSFW",
-            "owner": "Владелец"
+            "owner": "Владелец",
+            "title": "Categories"
           },
           "description": "Используйте \u25C0 или \u25B6 эмодзи, чтобы листать страницы и \u23F9 для отмены.\nИспользуйте `{prefix}help [команда]` для подробностей.",
           "nsfw_info": "`Используйте эту команду помощи в NSFW канале, чтобы увидеть эту страницу.`"
@@ -435,6 +444,9 @@
   },
   "snuggle": {
     "fun": {
+      "bite": {
+        "mention_snuggle": "Nya! I'm no food {user}!"
+      },
       "cuddle": {
         "mention_snuggle": "\\*прижимается к {user}*"
       },

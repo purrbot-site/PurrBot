@@ -77,7 +77,7 @@ public class CmdPoke implements Command{
             msg.addReaction("\uD83D\uDE16").queue();
         }
 
-        if(members.contains(msg.getMember())){
+        if(members.contains(member)){
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.fun.poke.mention_self", member.getAsMention())
             ).queue();
@@ -85,7 +85,7 @@ public class CmdPoke implements Command{
 
         String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
-                .filter(mem -> !mem.equals(msg.getMember()))
+                .filter(mem -> !mem.equals(member))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 

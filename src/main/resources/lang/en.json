@@ -29,6 +29,14 @@
   },
   "purr": {
     "fun": {
+      "bite": {
+        "loading": "{LOADING} Going to bite someone...",
+        "mention_self": "Is it canibalism, if you bite yourself {user}?",
+        "mention_purr": "W-w-wha...? I'm not tasty! >.<",
+        "message": "{user} bites you {targets}",
+        "no_mention": "Please mention at least one user to bite!",
+        "special_user": "B-but {user}! T-that is embarrassing."
+      },
       "cuddle": {
         "loading": "{LOADING} Receiving a cuddle-gif...",
         "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {VANILLABLUSH}",
@@ -235,9 +243,10 @@
             "fun": "Fun",
             "guild": "Guild",
             "info": "Info",
-            "list": "```\nCategories:\n  Fun\n  Guild\n  Info\n  NSFW\n```",
+            "list": "```\nFun\nGuild\nInfo\nNSFW\n```",
             "nsfw": "NSFW",
-            "owner": "Owner"
+            "owner": "Owner",
+            "title": "Categories"
           },
           "description": "Use the \u25C0 or \u25B6 reactions to navigate through the pages and \u23F9 to cancel it.\nUse `{prefix}help [command]` to get more information about a specific command.",
           "nsfw_info": "`Run the help command in a NSFW channel to see this page.`"
@@ -436,6 +445,9 @@
   },
   "snuggle": {
     "fun": {
+      "bite": {
+        "mention_snuggle": "Nya! I'm no food {user}!"
+      },
       "cuddle": {
         "mention_snuggle": "\\*snuggles up to {user}*"
       },

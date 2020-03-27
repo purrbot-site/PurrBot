@@ -20,25 +20,18 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import com.jagrosh.jdautilities.menu.Paginator;
+import com.jagrosh.jdautilities.menu.EmbedPaginator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
-import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 @CommandDescription(
         name = "Help",
@@ -102,21 +95,43 @@ public class CmdHelp implements Command{
         return cmd.getDescription() != null || cmd.hasAttribute("description");
     }
 
-    private String firstUppercase(String word){
-        return Character.toString(word.charAt(0)).toUpperCase() + word.substring(1).toLowerCase();
+    private MessageEmbed commandList(Member member, String icon, String titlePath, String commands){
+        return bot.getEmbedUtil().getEmbed(member.getUser(), member.getGuild())
+                .setDescription(bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.description"))
+                .addField(
+                        String.format(
+                                "%s %s",
+                                icon,
+                                bot.getMsg(member.getGuild().getId(), titlePath)
+                        ),
+                        commands,
+                        false
+                )
+                .build();
     }
-
+    
     @Override
     public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
         String prefix = bot.getPrefix(msg.getGuild().getId());
         Guild guild = msg.getGuild();
 
+        Member member = msg.getMember();
+        if(member == null)
+            return;
+        
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
-
-        Paginator.Builder builder = new Paginator.Builder().setEventWaiter(bot.getWaiter())
-                .setTimeout(1, TimeUnit.MINUTES);
+    
+        EmbedPaginator.Builder builder = new EmbedPaginator.Builder().setEventWaiter(bot.getWaiter())
+                .setTimeout(1, TimeUnit.MINUTES)
+                .waitOnSinglePage(true)
+                .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
+                .wrapPageEnds(true)
+                .setFinalAction(message -> {
+                    if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                        message.clearReactions().queue();
+                });
 
         HashMap<String, StringBuilder> builders = new LinkedHashMap<>();
 
@@ -134,11 +149,10 @@ public class CmdHelp implements Command{
             ));
         }
 
-        builder.addItems(String.format(
-                "%s\n" +
-                "\n" +
-                "%s",
-                bot.getMsg(guild.getId(), "purr.info.help.command_menu.description"),
+        builder.addItems(commandList(
+                member, 
+                "", 
+                "purr.info.help.command_menu.categories.title",
                 bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.list")
         ));
 
@@ -153,17 +167,11 @@ public class CmdHelp implements Command{
                 );
             }
 
-            builder.addItems(String.format(
-                    "%s\n" +
-                    "\n" +
-                    "%s **%s**\n" +
-                    "%s\n",
-                    bot.getMsg(guild.getId(), "purr.info.help.command_menu.description"),
+            builder.addItems(commandList(
+                    member,
                     categories.get(builderEntry.getKey()),
-                    firstUppercase(
-                            bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories." + builderEntry.getKey())
-                    ),
-                    builderEntry.getValue()
+                    "purr.info.help.command_menu.categories." + builderEntry.getKey(),
+                    builderEntry.getValue().toString()
             ));
         }
 
@@ -182,17 +190,8 @@ public class CmdHelp implements Command{
 
             tc.sendMessage(commandHelp(msg, command, prefix)).queue();
         }else{
-            builder.setText(EmbedBuilder.ZERO_WIDTH_SPACE)
-                    .setFinalAction(message -> {
-                        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
-                            message.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
-                    })
-                    .waitOnSinglePage(false)
-                    .setItemsPerPage(1)
-                    .setColor(new Color(0x36393F))
-                    .wrapPageEnds(true)
-                    .build()
-                    .display(tc);
+            
+            builder.build().display(tc);
         }
     }
 }

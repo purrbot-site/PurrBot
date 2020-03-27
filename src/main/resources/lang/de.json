@@ -29,6 +29,14 @@
   },
   "purr": {
     "fun": {
+      "bite": {
+        "loading": "{LOADING} Beisse jemanden...",
+        "mention_self": "Ist es kanibalismus, wenn du dich selbst beisst {user}?",
+        "mention_purr": "W-w-wa...? Ich schmeck nicht gut! >.<",
+        "message": "{user} beisst dich {targets}",
+        "no_mention": "Bitte erwähne mindestens eine Person zum beissen!",
+        "special_user": "A-aber {user}! D-das ist peinlich."
+      },
       "cuddle": {
         "loading": "{LOADING} Erhalte ein Knuddel-gif...",
         "mention_self": "Warum knuddelst du dich selbst {user}?\nDu kannst mich knuddeln wenn du willst. {VANILLABLUSH}",
@@ -235,9 +243,10 @@
             "fun": "Spass",
             "guild": "Gilde",
             "info": "Info",
-            "list": "```\nKategorien:\n  Spass\n  Gilde\n  Info\n  NSFW\n```",
+            "list": "```\nSpass\nGilde\nInfo\nNSFW\n```",
             "nsfw": "NSFW",
-            "owner": "Besitzer"
+            "owner": "Besitzer",
+            "title": "Categories"
           },
           "description": "Verwende die \u25C0 oder \u25B6 Reaktionen um durch die Seiten zu navigieren und \u23F9 zum abbrechen.\nVerwende `{prefix}help [Befehl]` um mehr infos über einen Befehl zu erhalten.",
           "nsfw_info": "`Verwende den Hilfe-Befehl in einem NSFW-Kanal um diese Seite zu sehen.`"
@@ -436,6 +445,9 @@
   },
   "snuggle": {
     "fun": {
+      "bite": {
+        "mention_snuggle": "Nya! Ich bin kein Essen {user}!"
+      },
       "cuddle": {
         "mention_snuggle": "\\*kuschelt sich an {user}*"
       },

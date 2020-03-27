@@ -87,7 +87,7 @@ public class CmdHug implements Command {
 
         String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
-                .filter(mem -> !mem.equals(msg.getMember()))
+                .filter(mem -> !mem.equals(member))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 

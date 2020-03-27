@@ -29,6 +29,7 @@ public enum API {
 
     IMG_NEKO_LEWD(true, "neko", false),
 
+    GIF_BITE  (false, "bite",   true),
     GIF_CUDDLE(false, "cuddle", true),
     GIF_HUG   (false, "hug",    true),
     GIF_KISS  (false, "kiss",   true),

@@ -29,6 +29,14 @@
   },
   "purr": {
     "fun": {
+      "bite": {
+        "loading": "{LOADING} Going to bite someone...",
+        "mention_self": "Is it canibalism, if you bite yourself {user}?",
+        "mention_purr": "W-w-wha...? I'm not tasty! >.<",
+        "message": "{user} bites you {targets}",
+        "no_mention": "Please mention at least one user to bite!",
+        "special_user": "B-but {user}! T-that is embarrassing."
+      },
       "cuddle": {
         "loading": "{LOADING} 부비부비 이미지 불러오는 중...",
         "mention_self": "왜 혼자 부비부비 하고 있어, {user}?\n여기 날 부비부비하면 되잖아..{VANILLABLUSH}",
@@ -235,9 +243,10 @@
             "fun": "재미",
             "guild": "서버",
             "info": "정보",
-            "list": "```\n종류:\n  재미\n  서버\n  정보\n  성인\n```",
+            "list": "```\n재미\n서버\n정보\n성인\n```",
             "nsfw": "성인",
-            "owner": "소유자"
+            "owner": "소유자",
+            "title": "Categories"
           },
           "description": "아래의 \u25C0 와 \u25B6 를 누르면 페이지를 바꿀 수 있어. \u23F9 를 누르면 그만둘 수 있어.\n`{prefix}help [명령어]`를 사용해서 더 자세한 정보를 확인해 봐.",
           "nsfw_info": "`연령 제한 채널에서 확인해봐!`"
@@ -436,6 +445,9 @@
   },
   "snuggle": {
     "fun": {
+      "bite": {
+        "mention_snuggle": "Nya! I'm no food {user}!"
+      },
       "cuddle": {
         "mention_snuggle": "\\*{user}에게 달라붙어 부비부비하는 중*"
       },

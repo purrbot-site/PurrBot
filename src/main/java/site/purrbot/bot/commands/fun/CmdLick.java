@@ -72,7 +72,7 @@ public class CmdLick implements Command{
                         bot.getMsg(guild.getId(), "snuggle.fun.lick.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
-                if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
+                if(bot.getPermUtil().isSpecial(member.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "purr.fun.lick.special_user")
                     ).queue();
@@ -85,7 +85,7 @@ public class CmdLick implements Command{
             msg.addReaction("\uD83D\uDE33").queue();
         }
 
-        if(members.contains(msg.getMember())){
+        if(members.contains(member)){
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.fun.lick.mention_self", member.getAsMention())
             ).queue();
@@ -93,7 +93,7 @@ public class CmdLick implements Command{
 
         String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
-                .filter(mem -> !mem.equals(msg.getMember()))
+                .filter(mem -> !mem.equals(member))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 

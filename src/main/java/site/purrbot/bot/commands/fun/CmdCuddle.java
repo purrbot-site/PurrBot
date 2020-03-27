@@ -79,16 +79,15 @@ public class CmdCuddle implements Command{
             msg.addReaction("\u2764").queue();
         }
 
-        if(members.contains(msg.getMember())){
+        if(members.contains(member)){
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.fun.cuddle.mention_self", member.getAsMention())
             ).queue();
         }
-
-
+        
         String targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
-                .filter(mem -> !mem.equals(msg.getMember()))
+                .filter(mem -> !mem.equals(member))
                 .map(Member::getEffectiveName)
                 .collect(Collectors.joining(", "));
 

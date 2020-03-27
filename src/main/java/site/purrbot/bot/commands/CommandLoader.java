@@ -36,6 +36,7 @@ public class CommandLoader {
     public CommandLoader(PurrBot bot){
         loadCommands(
                 // Fun
+                new CmdBite(bot),
                 new CmdCuddle(bot),
                 new CmdHolo(bot),
                 new CmdHug(bot),
