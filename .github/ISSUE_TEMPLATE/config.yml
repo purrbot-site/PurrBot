@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discord
+    url: https://purrbot.site/discord
+    about: Please join our Discord for support with *Purr*
+  - name: Wiki
+    url: https://docs.purrbot.site/bot
+    about: Make sure to check our wiki before asking questions.
