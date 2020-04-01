@@ -47,9 +47,8 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
         triggers = {"fuck", "sex"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}fuck <@user> [--anal]"
-                )
+                @CommandAttribute(key = "usage", value = "{p}fuck <@user> [--anal|--yuri]"),
+                @CommandAttribute(key = "help", value = "{p}fuck <@user> [--anal|--yuri]")
         }
 )
 public class CmdFuck implements Command{
@@ -184,6 +183,9 @@ public class CmdFuck implements Command{
                             String link;
                             if(raw.toLowerCase().contains("--anal") || raw.toLowerCase().contains("—anal"))
                                 link = bot.getHttpUtil().getImage(API.GIF_ANAL_LEWD);
+                            else
+                            if(raw.toLowerCase().contains("--yuri") || raw.toLowerCase().contains("—yuri"))
+                                link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
                             else
                                 link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
 

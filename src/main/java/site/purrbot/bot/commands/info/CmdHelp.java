@@ -39,9 +39,8 @@ import java.util.stream.Collectors;
         triggers = {"help", "command", "commands"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}help [command]"
-                )
+                @CommandAttribute(key = "usage", value = "{p}help [command]"),
+                @CommandAttribute(key = "help", value = "{p}help [command]")
         }
 )
 public class CmdHelp implements Command{
@@ -138,28 +137,38 @@ public class CmdHelp implements Command{
         for(Map.Entry<String, String> category : categories.entrySet()){
             builders.put(category.getKey(), new StringBuilder());
         }
-
-        for(Command cmd : bot.getCmdHandler().getCommands().stream().map(ca -> (Command)ca).collect(Collectors.toList())){
-            String category = cmd.getAttribute("category");
-
-            builders.get(category).append(String.format(
-                    "`%s%s`\n",
-                    prefix,
-                    cmd.getDescription().name()
-            ));
-        }
-
+    
         builder.addItems(commandList(
-                member, 
-                "", 
+                member,
+                "",
                 "purr.info.help.command_menu.categories.title",
                 bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.list")
         ));
+        
+        for(Command cmd : bot.getCmdHandler().getCommands().stream().map(ca -> (Command)ca).collect(Collectors.toList())){
+            String category = cmd.getAttribute("category");
+
+            if(builders.get(category).length() + cmd.getAttribute("help").length() > MessageEmbed.VALUE_MAX_LENGTH){
+                builder.addItems(commandList(
+                        member,
+                        category,
+                        "purr.info.help.command_menu.categories." + category,
+                        builders.get(category).toString()
+                ));
+                builders.get(category).setLength(0);
+            }
+            
+            builders.get(category)
+                    .append("`")
+                    .append(cmd.getAttribute("help").replace("{p}", prefix))
+                    .append("`\n");
+        }
+
 
         for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
             if(builderEntry.getKey().equals("owner") && !bot.getPermUtil().isDeveloper(msg.getAuthor()))
                 continue;
-
+            
             if(!tc.isNSFW() && builderEntry.getKey().equals("nsfw")){
                 builderEntry.getValue().setLength(0);
                 builderEntry.getValue().append(

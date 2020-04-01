@@ -40,7 +40,8 @@ import java.util.stream.Collectors;
         triggers = {"bite", "nibble", "nom"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}bite <@user> [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}bite <@user> [@user ...]"),
+                @CommandAttribute(key = "help", value = "{p}bite <@user> [@user ...]")
         }
 )
 public class CmdBite implements Command{
@@ -55,8 +56,10 @@ public class CmdBite implements Command{
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
+    
+        List<Member> members = msg.getMentionedMembers();
         
-        if(msg.getMentionedMembers().isEmpty()){
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.bite.no_mention");
             return;
         }
@@ -64,8 +67,6 @@ public class CmdBite implements Command{
         Member member = msg.getMember();
         if(member == null)
             return;
-    
-        List<Member> members = msg.getMentionedMembers();
         
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){

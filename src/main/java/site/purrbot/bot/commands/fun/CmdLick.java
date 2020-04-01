@@ -39,7 +39,8 @@ import java.util.stream.Collectors;
         triggers = {"lick"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}lick <@user> [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}lick <@user> [@user ...]"),
+                @CommandAttribute(key = "help", value = "{p}lick <@user> [@user ...]")
         }
 )
 public class CmdLick implements Command{
@@ -53,18 +54,18 @@ public class CmdLick implements Command{
     @Override
     public void execute(Message msg, String args) {
         TextChannel tc = msg.getTextChannel();
-
-        if(msg.getMentionedMembers().isEmpty()){
+        Guild guild = msg.getGuild();
+    
+        List<Member> members = msg.getMentionedMembers();
+    
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.lick.no_mention");
             return;
         }
-
+    
         Member member = msg.getMember();
         if(member == null)
             return;
-
-        Guild guild = msg.getGuild();
-        List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){

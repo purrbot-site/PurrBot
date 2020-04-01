@@ -25,11 +25,13 @@
 
 <!-- Widgets -->
 [widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
-[widgetDebl]: https://api.discordextremelist.xyz/v1/bot/425382319449309197/widget  
+[widgetDiscordBoats]: https://discord.boats/api/widget/425382319449309197  
+[widgetDebl]: https://api.discordextremelist.xyz/v1/bot/425382319449309197/widget
 
 <!-- Botlists -->
 [botlist]: https://botlist.space/bot/425382319449309197  
 [discordBots]: https://discord.bots.gg/bots/425382319449309197  
+[discordBoats]: https://discord.boats/bot/425382319449309197  
 [debl]: https://discordextremelist.xyz/bots/purr  
 [lbots]: https://lbots.org/bots/Purr
 
@@ -116,6 +118,7 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 | --------- | ------------------------------- | ----------------------------------------------------------------------------------- |
 | Fuck      | `<@user>`                       | Sends a invite to a user to have sex with you. They can accept or deny the request. |
 |           | `<@user>` `[--anal]`            | Gives you a gif with anal sex.                                                      |
+|           | `<@user>` `[--yuri]`            | Givey you a gif with two girls instead.                                             |
 | Lewd      |                                 | Shows a image of a lewd neko (catgirl).                                             |
 |           | `[--gif]`                       | Shows a gif of a lewd neko (catgirl).                                               |
 | Pussylick | `<@user>`                       | Similar to `.fuck`, but lets you lick someone's pussy (if they have one that is...) |
@@ -123,7 +126,6 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 | Threesome | `<@user1>` `<@user2>`           | Similar to `.fuck`, but lets you have sex with 2 people.                            |
 |           | `<@user1>` `<@user2>` `[--fff]` | Gives you a gif with females only instead of the default 1 male, 2 females.         |
 |           | `<@user1>` `<@user2>` `[--mmf]` | Gives you a gif with 2 males and 1 female instead of the default 1 male, 2 females. |
-| Yurifuck  | `<@user>`                       | Similar to `.fuck`, but with females only \>wO                                      |
 
 # Translations
 Version 2.5 of \*Purr* added an option to have a per-guild language set.  
@@ -159,6 +161,11 @@ Feel free to upvote or add her to your favourites to show your support.
 > Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
 
 ![widgetBotlist]
+
+### [Discord.boats][discordBoats]
+> Discord Boats is a growing directory of Discord bots to enhance your server - Find the perfect bot for your needs and add it to your server easily, quickly and for free.
+>
+>![widgetDiscordBoats]
 
 ### [Discord.bots.gg][discordBots]
 > The original Discord bot list, find the right bot for your server today.

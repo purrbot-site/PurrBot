@@ -36,9 +36,8 @@ import java.util.List;
         triggers = {"user", "member", "userinfo", "memberinfo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}user [@user]"
-                )
+                @CommandAttribute(key = "usage", value = "{p}user [@user]"),
+                @CommandAttribute(key = "help", value = "{p}user [@user]")
         }
 )
 public class CmdUser implements Command{

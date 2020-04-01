@@ -34,9 +34,8 @@ import site.purrbot.bot.constants.API;
         triggers = {"kitsune", "foxgirl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}kitsune"
-                )
+                @CommandAttribute(key = "usage", value = "{p}kitsune"),
+                @CommandAttribute(key = "help", value = "{p}kitsune")
         }
 )
 public class CmdKitsune implements Command{

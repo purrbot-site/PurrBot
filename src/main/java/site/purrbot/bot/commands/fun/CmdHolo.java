@@ -35,9 +35,8 @@ import site.purrbot.bot.constants.API;
         triggers = {"holo", "spiceandwolf"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}holo"
-                )
+                @CommandAttribute(key = "usage", value = "{p}holo"),
+                @CommandAttribute(key = "help", value = "{p}holo")
         }
 )
 public class CmdHolo implements Command{

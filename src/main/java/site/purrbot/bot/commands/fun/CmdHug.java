@@ -39,7 +39,8 @@ import java.util.stream.Collectors;
         triggers = {"hug", "hugging"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}hug <@user> [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}hug <@user> [@user ...]"),
+                @CommandAttribute(key = "help", value = "{p}hug <@user> [@user ...]")
         }
 )
 public class CmdHug implements Command {
@@ -53,18 +54,18 @@ public class CmdHug implements Command {
     @Override
     public void execute(Message msg, String s) {
         TextChannel tc = msg.getTextChannel();
-
-        if(msg.getMentionedMembers().isEmpty()){
+        Guild guild = msg.getGuild();
+    
+        List<Member> members = msg.getMentionedMembers();
+    
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.hug.no_mention");
             return;
         }
-
+    
         Member member = msg.getMember();
         if(member == null)
             return;
-
-        Guild guild = msg.getGuild();
-        List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){

@@ -45,9 +45,8 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
         triggers = {"pussylick", "plick", "cunni"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}plick <@user>"
-                )
+                @CommandAttribute(key = "usage", value = "{p}plick <@user>"),
+                @CommandAttribute(key = "help", value = "{p}plick <@user>")
         }
 )
 public class CmdPussylick implements Command{

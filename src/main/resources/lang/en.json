@@ -261,7 +261,7 @@
           "bot_title": "Bot info",
           "bot_value": "Bot Version: `{bot_version}`\nLibrary: [`JDA {jda_version}`]({link})",
           "bot_list_title": "Bot lists",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})",
+          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discord.boats`]({dboats})\n[`Discord.bots.gg`]({db})\n[`Discordextremelist.xyz`]({del})\n[`Lbots.org`]({lbots})",
           "commands_title": "Commands",
           "commands_value": "Use `{prefix}help` in the Discord for a list of commands.",
           "links_title": "Other links",
@@ -426,20 +426,6 @@
           "open": "Whoa there {user}! Show some patience you horny person!\nYou already asked people to fuck with you, so either wait for the to accept it, deny it or for the request to time out.",
           "timed_out": "Looks like either {target1} or {target2} doesn't want to fuck with you {user}. >\\_<"
         }
-      },
-      "yurifuck": {
-        "mention_bot": "You can't fuck with bots!",
-        "mention_purr": "Uhm... I-I'm kinda honored {user}, but I can't do that with you.",
-        "mention_self": "Why do you only want to play with yourself {user}? It's more fun with someone else! ;3",
-        "message": "{user} and {target} have sex!",
-        "no_mention": "Please mention a user you want to fuck with.",
-        "request": {
-          "accepted": "{target} accepted your request {user}. OwO",
-          "denied": "{target} doesn't want to have sex with you {user}. >.<",
-          "message": "Hey {target}!\n{user} wants to fuck you. Do you want that too?\nReact with \u2705 to accept or with \u274C to deny it.\n\n> **This request will time out in 1 minute!**",
-          "open": "You already asked someone to fuck with you {user}!\nWait for it to be accepted, denied or to time out.",
-          "timed_out": "Looks like {target} doesn't want to fuck with you {user}. .\\_."
-        }
       }
     }
   },
@@ -520,9 +506,6 @@
       },
       "threesome": {
         "mention_snuggle": "I-I'm not into that stuff {user}!"
-      },
-      "yurifuck": {
-        "mention_snuggle": "W-why do you want to do this with me {user}? I don't know you!"
       }
     }
   }

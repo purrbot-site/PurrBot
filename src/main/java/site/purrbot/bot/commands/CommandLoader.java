@@ -75,7 +75,6 @@ public class CommandLoader {
                 new CmdPussylick(bot),
                 new CmdSolo(bot),
                 new CmdThreesome(bot),
-                new CmdYurifuck(bot),
 
                 // Owner
                 new CmdEval(bot),

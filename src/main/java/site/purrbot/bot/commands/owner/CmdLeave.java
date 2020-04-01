@@ -28,6 +28,9 @@ import net.dv8tion.jda.api.sharding.ShardManager;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @CommandDescription(
         name = "Leave",
         description =
@@ -36,13 +39,14 @@ import site.purrbot.bot.commands.Command;
         triggers = {"leave", "bye"},
         attributes = {
                 @CommandAttribute(key = "category", value = "owner"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}leave <guildID> [--pm <message>]"
-                )
+                @CommandAttribute(key = "usage", value = "{p}leave <guildId> [--pm <message>]"),
+                @CommandAttribute(key = "help", value = "{p}leave <guildId> [--pm <message>]")
         }
 )
 public class CmdLeave implements Command{
 
+    Pattern pattern = Pattern.compile("--pm (?<message>.+)", Pattern.DOTALL);
+    
     private PurrBot bot;
 
     public CmdLeave(PurrBot bot){
@@ -55,11 +59,12 @@ public class CmdLeave implements Command{
         ShardManager shardManager = bot.getShardManager();
 
         String pm = null;
+    
+        Matcher matcher = pattern.matcher(args);
+        if(matcher.find())
+            pm = matcher.group("message");
 
-        String id = args.split(" ")[0];
-
-        if(args.split(" ").length > 2 && args.toLowerCase().contains("--pm"))
-            pm = args.split("--pm")[1];
+        String id = args.split("\\s+")[0];
 
         String finalPm = pm;
         Guild guild = shardManager.getGuildById(id);

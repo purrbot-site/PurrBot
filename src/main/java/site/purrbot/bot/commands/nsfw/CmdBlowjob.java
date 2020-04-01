@@ -42,9 +42,8 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
         triggers = {"blowjob", "bj", "bjob", "succ"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}blowjob <@user>"
-                )
+                @CommandAttribute(key = "usage", value = "{p}blowjob <@user>"),
+                @CommandAttribute(key = "help", value = "{p}blowjob <@user>")
         }
 )
 public class CmdBlowjob implements Command{

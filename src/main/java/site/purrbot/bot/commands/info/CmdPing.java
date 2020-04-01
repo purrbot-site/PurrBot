@@ -36,9 +36,8 @@ import java.time.temporal.ChronoUnit;
         triggers = {"ping"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}ping"
-                )
+                @CommandAttribute(key = "usage", value = "{p}ping"),
+                @CommandAttribute(key = "help", value = "{p}ping")
         }
 )
 public class CmdPing implements Command{

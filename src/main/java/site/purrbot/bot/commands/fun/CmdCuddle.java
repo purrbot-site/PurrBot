@@ -39,7 +39,8 @@ import java.util.stream.Collectors;
         triggers = {"cuddle", "cuddles", "snuggle", "snuggles", "squeeze"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}cuddle <@user> [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}cuddle <@user> [@user ...]"),
+                @CommandAttribute(key = "help", value = "{p}cuddle <@user> [@user ...]")
         }
 )
 public class CmdCuddle implements Command{
@@ -51,11 +52,13 @@ public class CmdCuddle implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args) {
+    public void execute(Message msg, String s) {
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
-
-        if(msg.getMentionedMembers().isEmpty()){
+    
+        List<Member> members = msg.getMentionedMembers();
+    
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.cuddle.no_mention");
             return;
         }
@@ -63,8 +66,6 @@ public class CmdCuddle implements Command{
         Member member = msg.getMember();
         if(member == null)
             return;
-
-        List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){

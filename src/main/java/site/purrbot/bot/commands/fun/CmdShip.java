@@ -39,7 +39,8 @@ import java.util.Random;
         triggers = {"ship", "shipping"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}ship <@user> [@user]")
+                @CommandAttribute(key = "usage", value = "{p}ship <@user> [@user]"),
+                @CommandAttribute(key = "help", value = "{p}ship <@user> [@user]")
         }
 )
 public class CmdShip implements Command{
@@ -106,14 +107,15 @@ public class CmdShip implements Command{
         }
 
 
-        if(members.size() > 1)
+        if(members.size() > 1){
+            member1 = members.get(0);
             member2 = members.get(1);
-        else
-            member2 = msg.getMember();
+        }else{
+            member1 = msg.getMember();
+            member2 = members.get(0);
+        }
 
-        member1 = members.get(0);
-
-        if(member2 == null)
+        if(member1 == null || member2 == null)
             return;
 
         if(member1.getId().equals(IDs.PURR.getId())){

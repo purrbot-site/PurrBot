@@ -48,9 +48,8 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
         triggers = {"threesome", "3some"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}threesome <@user1> <@user2> [--mmf|--fff]"
-                )
+                @CommandAttribute(key = "usage", value = "{p}threesome <@user1> <@user2> [--mmf|--fff]"),
+                @CommandAttribute(key = "help", value = "{p}threesome <@user1> <@user2> [--mmf|--fff]")
         }
 )
 public class CmdThreesome implements Command{

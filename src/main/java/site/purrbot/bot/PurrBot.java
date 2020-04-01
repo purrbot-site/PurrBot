@@ -335,13 +335,14 @@ public class PurrBot {
                 .replace("{DOWNLOAD}", Emotes.DOWNLOAD.getEmote())
                 .replace("{DISCORD}", Emotes.DISCORD.getEmote())
                 // Wiki pages
-                .replace("{wiki_bg}", Links.WIKI.getUrl() + "/Welcome-images#backgrounds")
-                .replace("{wiki_icon}", Links.WIKI.getUrl() + "/Welcome-images#icons")
-                .replace("{wiki_welcome}", Links.WIKI.getUrl() + "/Welcome-channel")
+                .replace("{wiki_bg}", Links.WIKI.getUrl() + "/welcome-images#backgrounds")
+                .replace("{wiki_icon}", Links.WIKI.getUrl() + "/welcome-images#icons")
+                .replace("{wiki_welcome}", Links.WIKI.getUrl() + "/welcome-channel")
                 //Bot lists
                 .replace("{botlist}", Links.BOTLIST_SPACE.getUrl())
-                .replace("{del}", Links.DISCORDEXTREMELIST_XYZ.getUrl())
+                .replace("{dboats}", Links.DISCORD_BOATS.getUrl())
                 .replace("{db}", Links.DISCORD_BOTS_GG.getUrl())
+                .replace("{del}", Links.DISCORDEXTREMELIST_XYZ.getUrl())
                 .replace("{lbots}", Links.LBOTS_ORG.getUrl())
                 // Links
                 .replace("{github}", Links.GITHUB.getUrl())

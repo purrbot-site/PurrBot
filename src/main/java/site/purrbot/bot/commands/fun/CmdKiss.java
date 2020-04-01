@@ -37,7 +37,8 @@ import java.util.stream.Collectors;
         triggers = {"kiss", "love", "kissu"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}kiss <@user> [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}kiss <@user> [@user ...]"),
+                @CommandAttribute(key = "help", value = "{p}kiss <@user> [@user ...]")
         }
 )
 public class CmdKiss implements Command{
@@ -51,8 +52,11 @@ public class CmdKiss implements Command{
     @Override
     public void execute(Message msg, String s) {
         TextChannel tc = msg.getTextChannel();
-
-        if(msg.getMentionedMembers().isEmpty()){
+        Guild guild = msg.getGuild();
+    
+        List<Member> members = msg.getMentionedMembers();
+    
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.kiss.no_mention");
             return;
         }
@@ -60,9 +64,6 @@ public class CmdKiss implements Command{
         Member member = msg.getMember();
         if(member == null)
             return;
-
-        Guild guild = msg.getGuild();
-        List<Member> members = msg.getMentionedMembers();
 
         Member purr = members.stream()
                 .filter(mem -> mem.getUser().getId().equals(IDs.PURR.getId()))

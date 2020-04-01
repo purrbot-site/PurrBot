@@ -37,7 +37,9 @@ import site.purrbot.bot.commands.Command;
                 @CommandAttribute(key = "category", value = "guild"),
                 @CommandAttribute(key = "usage", value =
                         "{p}prefix set <prefix>\n" +
-                        "{p}prefix reset")
+                        "{p}prefix reset"
+                ),
+                @CommandAttribute(key = "help", value = "{p}prefix <set <prefix>|reset>")
         }
 )
 public class CmdPrefix implements Command{

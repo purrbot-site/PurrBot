@@ -39,7 +39,8 @@ import java.util.stream.Collectors;
         triggers = {"tickle"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}tickle <@user> [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}tickle <@user> [@user ...]"),
+                @CommandAttribute(key = "help", value = "{p}tickle <@user> [@user ...]")
         }
 )
 public class CmdTickle implements Command{
@@ -53,17 +54,18 @@ public class CmdTickle implements Command{
     @Override
     public void execute(Message msg, String s) {
         TextChannel tc = msg.getTextChannel();
-        if(msg.getMentionedMembers().isEmpty()){
+        Guild guild = msg.getGuild();
+    
+        List<Member> members = msg.getMentionedMembers();
+    
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.tickle.no_mention");
             return;
         }
-
+    
         Member member = msg.getMember();
         if(member == null)
             return;
-
-        Guild guild = msg.getGuild();
-        List<Member> members = msg.getMentionedMembers();
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){

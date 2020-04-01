@@ -36,9 +36,8 @@ import java.io.IOException;
         triggers = {"quote"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}quote <messageID> [#channel]"
-                )
+                @CommandAttribute(key = "usage", value = "{p}quote <messageId> [#channel]"),
+                @CommandAttribute(key = "help", value = "{p}quote <messageId> [#channel]")
         }
 )
 public class CmdQuote implements Command{

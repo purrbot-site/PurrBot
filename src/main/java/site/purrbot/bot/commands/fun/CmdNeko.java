@@ -39,9 +39,8 @@ import site.purrbot.bot.constants.Emotes;
         triggers = {"neko", "catgirl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}neko [--gif]"
-                )
+                @CommandAttribute(key = "usage", value = "{p}neko [--gif]"),
+                @CommandAttribute(key = "help", value = "{p}neko [--gif]")
         }
 )
 public class CmdNeko implements Command{

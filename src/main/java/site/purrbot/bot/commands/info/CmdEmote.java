@@ -46,7 +46,8 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                 @CommandAttribute(key = "usage", value =
                         "{p}emote <:emote:>\n" +
                         "{p}emote <--search>"
-                )
+                ),
+                @CommandAttribute(key = "help", value = "{p}emote <:emote:|--search>")
         }
 )
 public class CmdEmote implements Command{

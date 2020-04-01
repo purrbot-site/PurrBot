@@ -261,7 +261,7 @@
           "bot_title": "봇 정보",
           "bot_value": "봇 버전: `{bot_version}`\n라이브러리: [`JDA {jda_version}`]({link})",
           "bot_list_title": "내가 등록된 사이트들",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})",
+          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discord.boats`]({dboats})\n[`Discord.bots.gg`]({db})\n[`Discordextremelist.xyz`]({del})\n[`Lbots.org`]({lbots})",
           "commands_title": "명령어",
           "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
           "links_title": "유용한 링크들",
@@ -426,20 +426,6 @@
           "open": "발정난 개도 어지간해야지, {user}! 이미 네가 부탁한 사람이 있잖아.",
           "timed_out": "아마 {target1} 또는 {target2}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. >\\_<"
         }
-      },
-      "yurifuck": {
-        "mention_bot": "봇이랑 사랑을 나누는건 안돼-",
-        "mention_purr": "어, 음... 저-정말 고마워, {user}. 미안하지만 나랑은 안 돼.",
-        "mention_self": "왜 자꾸 혼자 하려고 해, {user}? 다른 사람이랑 하면 좋을거라구 ;3",
-        "message": "{user}이(가) {target} 랑 사랑을 나누고 있어!",
-        "no_mention": "최소한 사랑을 나눌 상대 한명을 언급해줘!",
-        "request": {
-          "accepted": "{target}이(가) {user}의 요청을 수락했어! OwO",
-          "denied": "{target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. >.<",
-          "message": "{target}!\n{user}이(가) 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \u2705 를 눌러. \u274C 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
-          "open": "발정나지 말라고, {user}! 이미 네가 부탁한 사람이 있잖아.",
-          "timed_out": "아마 {target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. .\\_."
-        }
       }
     }
   },
@@ -520,9 +506,6 @@
       },
       "threesome": {
         "mention_snuggle": "ㄴ-나는 그런거 절대로 싫어, {user}!"
-      },
-      "yurifuck": {
-        "mention_snuggle": "ㅇ-왜 나랑 이런걸 하려는거야, {user}? 난 너같은 사람 몰라!"
       }
     }
   }

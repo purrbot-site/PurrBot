@@ -46,7 +46,8 @@ import java.util.List;
                         "{p}language\n" +
                         "{p}language set <language>\n" +
                         "{p}language reset"
-                )
+                ),
+                @CommandAttribute(key = "help", value = "{p}language [set <language>|reset]")
         }
 )
 public class CmdLanguage implements Command{

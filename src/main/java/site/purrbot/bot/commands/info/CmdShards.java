@@ -36,7 +36,8 @@ import java.util.List;
         triggers = {"shard", "shards", "shardinfo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}shards")
+                @CommandAttribute(key = "usage", value = "{p}shards"),
+                @CommandAttribute(key = "help", value = "{p}shards")
         }
 )
 public class CmdShards implements Command{

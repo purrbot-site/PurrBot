@@ -54,7 +54,8 @@ import java.util.Objects;
                         "{p}welcome icon reset\n" +
                         "{p}welcome msg <message>\n" +
                         "{p}welcome msg reset"
-                )
+                ),
+                @CommandAttribute(key = "help", value = "{p}welcome [options]")
         }
 )
 public class CmdWelcome implements Command{

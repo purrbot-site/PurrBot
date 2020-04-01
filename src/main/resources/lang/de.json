@@ -261,7 +261,7 @@
           "bot_title": "Bot Info",
           "bot_value": "Bot Version: `{bot_version}`\nAPI: [`JDA {jda_version}`]({link})",
           "bot_list_title": "Bot Listen",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discordextremelist.xyz`]({del})\n[`Discord.bots.gg`]({db})\n[`Lbots.org`]({lbots})",
+          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discord.boats`]({dboats})\n[`Discord.bots.gg`]({db})\n[`Discordextremelist.xyz`]({del})\n[`Lbots.org`]({lbots})",
           "commands_title": "Befehle",
           "commands_value": "Verwende `{prefix}help` im Discord für eine Liste von Befehlen.",
           "links_title": "Andere Links",
@@ -426,20 +426,6 @@
           "open": "Mal langsam {user}! Zeig etwas gedult du notgeile Person!\nDu hast bereits leute gefragt mit dir zu schlafen, also warte bis diese es entweder annehmen, ablehnen, oder die Anfrage abläuft.",
           "timed_out": "Sieht so aus als ob entweder {target1} oder {target2} nicht mit dir schlafen will {user}. >\\_<"
         }
-      },
-      "yurifuck": {
-        "mention_bot": "Du kannst nicht mit Bots schlafen!",
-        "mention_purr": "Uhm... I-ich fühl mich geehrt {user}, aber ich kann das nicht mit dir machen.",
-        "mention_self": "Warum willst du nur mit dir selber *spielen* {user}? Es macht mehr Spass mit anderen! ;3",
-        "message": "{user} und {target} haben Sex!",
-        "no_mention": "Bitte erwähne einen User mit dem du Sex haben willst.",
-        "request": {
-          "accepted": "{target} hat deine Anfrage akzeptiert {user}. O////O",
-          "denied": "{target} möchte keinen Sex mit dir haben {user}. >~<",
-          "message": "Hey {target}!\n{user} möchte mit dir Sex haben. Willst du das auch?\nReagiere mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
-          "open": "Sei nicht so eine notgeile Person {user}!\nDu hast bereits eine offene Anfrage. Warte bis diese angenommen oder abgelehnt wird, oder abläuft.",
-          "timed_out": "Sieht so aus als ob {target} nicht mit dir Sex haben will {user}. .\\_."
-        }
       }
     }
   },
@@ -514,9 +500,6 @@
       },
       "threesome": {
         "mention_snuggle": "I-ich steh nicht auf sowas {user}!"
-      },
-      "yurifuck": {
-        "mention_snuggle": "W-warum willst du dass mit mir machen {user}? Ich kenne dich nicht!"
       }
     }
   }

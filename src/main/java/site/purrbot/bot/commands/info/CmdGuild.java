@@ -33,9 +33,8 @@ import java.time.LocalDateTime;
         triggers = {"guild", "server", "guildinfo", "serverinfo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}guild"
-                )
+                @CommandAttribute(key = "usage", value = "{p}guild"),
+                @CommandAttribute(key = "help", value = "{p}guild")
         }
 )
 public class CmdGuild implements Command{

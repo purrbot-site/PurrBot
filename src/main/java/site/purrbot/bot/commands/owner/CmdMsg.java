@@ -35,9 +35,8 @@ import java.util.List;
         triggers = {"msg", "message", "send"},
         attributes = {
                 @CommandAttribute(key = "category", value = "owner"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}msg <channelID> <message>"
-                )
+                @CommandAttribute(key = "usage", value = "{p}msg <channelId> <message>"),
+                @CommandAttribute(key = "help", value = "{p}msg <channelId> <message>")
         }
 )
 public class CmdMsg implements Command{

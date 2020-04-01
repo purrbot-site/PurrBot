@@ -38,9 +38,8 @@ import site.purrbot.bot.constants.API;
         triggers = {"lewd", "lneko"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}lewd [--gif]"
-                )
+                @CommandAttribute(key = "usage", value = "{p}lewd [--gif]"),
+                @CommandAttribute(key = "help", value = "{p}lewd [--gif]")
         }
 )
 public class CmdLewd implements Command{

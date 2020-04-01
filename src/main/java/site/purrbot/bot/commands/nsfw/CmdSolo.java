@@ -35,9 +35,8 @@ import site.purrbot.bot.constants.API;
         triggers = {"solo", "girl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}solo"
-                )
+                @CommandAttribute(key = "usage", value = "{p}solo"),
+                @CommandAttribute(key = "help", value = "{p}solo")
         }
 )
 public class CmdSolo implements Command{
