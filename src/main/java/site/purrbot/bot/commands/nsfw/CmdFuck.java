@@ -43,7 +43,8 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                 "Mention a user, to send a request.\n" +
                 "The mentioned user can accept it by clicking on the ✅, deny it by clicking on ❌ or let it time out.\n" +
                 "\n" +
-                "Use `--anal` to get a gif with anal sex instead.",
+                "Use `--anal` to get a gif with anal sex instead.\n" +
+                "Use `--yuri` to get a gif with two girls.",
         triggers = {"fuck", "sex"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),

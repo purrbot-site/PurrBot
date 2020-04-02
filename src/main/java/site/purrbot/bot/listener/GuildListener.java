@@ -27,6 +27,7 @@ import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
@@ -315,9 +316,6 @@ public class GuildListener extends ListenerAdapter{
         }else{
             tc.sendMessage(message).queue();
         }
-        
-        if(guild.getId().equals(IDs.GUILD.getId()) && bot.isBeta())
-            giveRoles(event.getMember());
     }
 
     @Override
@@ -338,25 +336,40 @@ public class GuildListener extends ListenerAdapter{
             bot.setWelcomeChannel(guild.getId(), "none");
     }
     
+    @Override
+    public void onGuildMemberRoleAdd(@Nonnull GuildMemberRoleAddEvent event){
+        if(!bot.isBeta())
+            return;
+        
+        if(event.getUser().isBot())
+            return;
+        
+        Guild guild = event.getGuild();
+        if(!guild.getId().equals(IDs.GUILD.getId()))
+            return;
+        
+        Role role = guild.getRoleById(Roles.MEMBER.getId());
+        if(event.getRoles().contains(role))
+            giveRoles(event.getMember());
+    }
+    
     private void giveRoles(Member target){
         Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
         
         if(guild == null)
             return;
         
-        Role member        = guild.getRoleById(Roles.MEMBER.getId());
         Role special       = guild.getRoleById(Roles.SPECIAL.getId());
         Role loves         = guild.getRoleById(Roles.LOVES.getId());
         Role person        = guild.getRoleById(Roles.PERSON.getId());
         Role notifications = guild.getRoleById(Roles.NOTIFICATIONS.getId());
         
-        guild.modifyMemberRoles(target, Arrays.asList(member, special, loves, person, notifications), null)
+        guild.modifyMemberRoles(target, Arrays.asList(special, loves, person, notifications), null)
                 .reason(String.format(
                         "[Join Roles] Giving %s join roles.",
                         target.getEffectiveName()
                 ))
-                // We delay the request in case someone, who was muted and left, rejoins the Discord.
-                .queueAfter(2, TimeUnit.SECONDS, null, ignore(UNKNOWN_MEMBER));
+                .queue();
     }
     
     enum Action{

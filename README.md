@@ -164,8 +164,8 @@ Feel free to upvote or add her to your favourites to show your support.
 
 ### [Discord.boats][discordBoats]
 > Discord Boats is a growing directory of Discord bots to enhance your server - Find the perfect bot for your needs and add it to your server easily, quickly and for free.
->
->![widgetDiscordBoats]
+
+![widgetDiscordBoats]
 
 ### [Discord.bots.gg][discordBots]
 > The original Discord bot list, find the right bot for your server today.
