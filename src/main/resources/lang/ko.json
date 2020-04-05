@@ -30,12 +30,12 @@
   "purr": {
     "fun": {
       "bite": {
-        "loading": "{LOADING} Going to bite someone...",
-        "mention_self": "Is it canibalism, if you bite yourself {user}?",
-        "mention_purr": "W-w-wha...? I'm not tasty! >.<",
-        "message": "{user} bites you {targets}",
-        "no_mention": "Please mention at least one user to bite!",
-        "special_user": "B-but {user}! T-that is embarrassing."
+        "loading": "{LOADING} 누군가를 물러 가는중...",
+        "mention_self": "혹시 스스로 무는건 식인습성이야, {user}?",
+        "mention_purr": "ㅁ-ㅁ-뭐...? 나는 맛이 없어! >.<",
+        "message": "{user}이(가) {targets}을(를) 물고 있어!",
+        "no_mention": "최소한 물어뜯을 상대 한명을 언급해줘!",
+        "special_user": "하-하지만, {user}! 그건 부끄러워..."
       },
       "cuddle": {
         "loading": "{LOADING} 부비부비 이미지 불러오는 중...",

@@ -144,7 +144,7 @@ public class CmdGuild implements Command{
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.guild.embed.owner"),
                         getOwner(guild), 
-                        true
+                        false
                 )
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.guild.embed.created"), 

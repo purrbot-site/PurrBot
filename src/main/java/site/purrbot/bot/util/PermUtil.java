@@ -39,8 +39,4 @@ public class PermUtil {
     public boolean hasPermission(TextChannel tc, Permission... permissions){
         return hasPermission(tc, tc.getGuild().getSelfMember(), permissions);
     }
-
-    public boolean isSpecial(String id){
-        return id.equals(IDs.EVELIEN.getId()) || id.equals(IDs.KAPPACHINO.getId()) || id.equals(IDs.KORBO.getId());
-    }
 }

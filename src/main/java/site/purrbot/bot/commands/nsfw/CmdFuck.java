@@ -100,7 +100,7 @@ public class CmdFuck implements Command{
                 ).queue();
                 return;
             }
-            if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
+            if(bot.isSpecial(msg.getAuthor().getId())){
                 int random = getRandomPercent();
 
                 if(random >= 1 && random <= 3) {

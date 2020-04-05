@@ -120,8 +120,8 @@
           "1_10": "Похоже даже не друзья...",
           "0": "Если бы любовь была Солцнем, то это кубик льда."
         },
-        "special_user": "{user} Авввв дорогуша. Мы и так знаем, что вы всегда идеальная пара на все 100.\nТут даже тест не нужен.",
-        "target_bot": "Боты существуют не для шипперинга, чудила!"
+        "special_user": "{user} Авввв дорогуша. Все и так знают, что мы всегда идеальная пара на все 100.\nТут даже тест не нужен.",
+        "target_bot": "Боты существуют не для шипа, чудила!"
       },
       "slap": {
         "loading": "{LOADING} Шлёпаем по картинкам...",
@@ -294,7 +294,7 @@
           "{TYPING} Алло Discord, ты тута?"
         ],
         "info": "{EDIT} Отредактированных сообщений: `{edit_message}`\n{DISCORD} Discord: `{discord}`",
-        "info_full": "{EDIT} Отредактированных сообщений: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} ДействияОтдыха: `{rest_action}`"
+        "info_full": "{EDIT} Отредактированных сообщений: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
         "embed_basic": {

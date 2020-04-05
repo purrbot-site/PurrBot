@@ -74,7 +74,7 @@ public class CmdBite implements Command{
                         bot.getMsg(guild.getId(), "snuggle.fun.bite.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
-                if(bot.getPermUtil().isSpecial(member.getId())){
+                if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "purr.fun.bite.special_user", member.getAsMention())
                     ).queue();

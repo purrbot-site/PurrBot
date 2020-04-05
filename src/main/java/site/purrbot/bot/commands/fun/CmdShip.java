@@ -120,7 +120,7 @@ public class CmdShip implements Command{
 
         if(member1.getId().equals(IDs.PURR.getId())){
             if(bot.isBeta()){
-                if(bot.getPermUtil().isSpecial(member2.getId())){
+                if(bot.isSpecial(member2.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "snuggle.fun.ship.special_user", member2.getAsMention())
                     ).queue();
@@ -130,7 +130,7 @@ public class CmdShip implements Command{
                         bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member2.getAsMention())
                 ).queue();
             }else{
-                if(bot.getPermUtil().isSpecial(member2.getId())){
+                if(bot.isSpecial(member2.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member2.getAsMention())
                     ).queue();
@@ -144,7 +144,7 @@ public class CmdShip implements Command{
         }else
         if(member2.getId().equals(IDs.PURR.getId())){
             if(bot.isBeta()){
-                if(bot.getPermUtil().isSpecial(member1.getId())){
+                if(bot.isSpecial(member1.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "snuggle.fun.ship.special_user", member1.getAsMention())
                     ).queue();
@@ -154,7 +154,7 @@ public class CmdShip implements Command{
                         bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member1.getAsMention())
                 ).queue();
             }else{
-                if(bot.getPermUtil().isSpecial(member1.getId())){
+                if(bot.isSpecial(member1.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member1.getAsMention())
                     ).queue();

@@ -86,7 +86,7 @@ public class CmdBlowjob implements Command{
 
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
-                if(bot.getPermUtil().isSpecial(author.getUser().getId())){
+                if(bot.isSpecial(author.getUser().getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.special_user", author.getEffectiveName())
                     ).queue();
@@ -96,7 +96,7 @@ public class CmdBlowjob implements Command{
                         bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_snuggle", author.getEffectiveName())
                 ).queue();
             }else{
-                if(bot.getPermUtil().isSpecial(author.getUser().getId())){
+                if(bot.isSpecial(author.getUser().getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "purr.nsfw.blowjob.special_user", author.getEffectiveName())
                     ).queue();

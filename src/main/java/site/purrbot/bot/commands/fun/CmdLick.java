@@ -73,7 +73,7 @@ public class CmdLick implements Command{
                         bot.getMsg(guild.getId(), "snuggle.fun.lick.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
-                if(bot.getPermUtil().isSpecial(member.getId())){
+                if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "purr.fun.lick.special_user")
                     ).queue();

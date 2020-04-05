@@ -81,7 +81,7 @@ public class CmdKiss implements Command{
                 ).queue();
             }else
             if(purr != null && members.contains(purr)){
-                if(bot.getPermUtil().isSpecial(msg.getAuthor().getId())){
+                if(bot.isSpecial(msg.getAuthor().getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "snuggle.fun.kiss.special_user", member.getAsMention())
                     ).queue();
@@ -93,7 +93,7 @@ public class CmdKiss implements Command{
             }
         }else{
             if(members.contains(guild.getSelfMember())){
-                if(bot.getPermUtil().isSpecial(member.getId())){
+                if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "purr.fun.kiss.special_user", member.getAsMention())
                     ).queue(message -> {

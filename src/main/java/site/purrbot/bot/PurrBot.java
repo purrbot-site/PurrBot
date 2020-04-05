@@ -60,15 +60,16 @@ public class PurrBot {
 
     private ShardManager shardManager = null;
 
-    private Random random;
+    private Random random = new Random();
 
     private FileManager fileManager = new FileManager();
+    private PermUtil permUtil = new PermUtil();
+    private HttpUtil httpUtil = new HttpUtil();
+    private WebhookUtil webhookUtil = new WebhookUtil();
+    
     private DBUtil dbUtil;
-    private PermUtil permUtil;
     private MessageUtil messageUtil;
     private EmbedUtil embedUtil;
-    private HttpUtil httpUtil;
-    private WebhookUtil webhookUtil;
     private ImageUtil imageUtil;
     private LangUtils langUtils;
 
@@ -119,13 +120,9 @@ public class PurrBot {
                 .addFile("ko", "/lang/ko.json", "./lang/ko.json")
                 .addFile("ru", "/lang/ru.json", "./lang/ru.json");
 
-        random = new Random();
         dbUtil        = new DBUtil(this);
-        permUtil      = new PermUtil();
         messageUtil   = new MessageUtil(this);
         embedUtil     = new EmbedUtil(this);
-        httpUtil      = new HttpUtil();
-        webhookUtil   = new WebhookUtil();
         imageUtil     = new ImageUtil(this);
         langUtils     = new LangUtils(this);
 
@@ -222,6 +219,9 @@ public class PurrBot {
     
     public boolean isBeta(){
         return beta;
+    }
+    public boolean isSpecial(String id){
+        return getFileManager().getStringlist("random", "special_user").contains(id);
     }
 
     public CommandHandler<Message> getCmdHandler(){
