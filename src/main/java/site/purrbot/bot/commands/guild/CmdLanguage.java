@@ -51,7 +51,7 @@ import java.util.List;
         }
 )
 public class CmdLanguage implements Command{
-    private PurrBot bot;
+    private final PurrBot bot;
     
     public CmdLanguage(PurrBot bot){
         this.bot = bot;

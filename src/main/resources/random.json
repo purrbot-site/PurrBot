@@ -1,22 +1,12 @@
 {
-  "accept_fuck_msg": [
-    "Which bedroom %s?",
-    "\\*moves with her hand over %s's body* Lets get some privacy sweetie. 😘",
-    "Let me get my *toys* real quick and spend some time together %s."
-  ],
   "blacklist": [
     "578951136288178216",
     "591723340130156545",
     "525029165192183808",
     "610874380112625735"
   ],
-  "deny_fuck_msg": [
-    "I'm sorry %s, but I can't right now...",
-    "Can you wait a lil more %s? I don't have time right now.",
-    "\\*gives a kiss* I can't %s. Sorry."
-  ],
   "kiss_img": [
-    "https://purrbot.site/images/kiss/kiss_001.jpeg",
+    "https://purrbot.site/images/kiss/kiss_001.jpg",
     "https://purrbot.site/images/kiss/kiss_002.jpg",
     "https://purrbot.site/images/kiss/kiss_003.gif",
     "https://purrbot.site/images/kiss/kiss_004.gif",
@@ -31,17 +21,17 @@
     "https://purrbot.site/images/kiss/kiss_013.gif"
   ],
   "shutdown_img": [
-    "https://purrbot.site/images/shutdown/shutdown_001.png",
+    "https://purrbot.site/images/shutdown/shutdown_001.jpg",
     "https://purrbot.site/images/shutdown/shutdown_002.jpg",
-    "https://purrbot.site/images/shutdown/shutdown_003.jpeg",
-    "https://purrbot.site/images/shutdown/shutdown_004.png",
+    "https://purrbot.site/images/shutdown/shutdown_003.jpg",
+    "https://purrbot.site/images/shutdown/shutdown_004.jpg",
     "https://purrbot.site/images/shutdown/shutdown_005.jpg",
     "https://purrbot.site/images/shutdown/shutdown_006.jpg",
-    "https://purrbot.site/images/shutdown/shutdown_007.png",
+    "https://purrbot.site/images/shutdown/shutdown_007.jpg",
     "https://purrbot.site/images/shutdown/shutdown_008.jpg",
-    "https://purrbot.site/images/shutdown/shutdown_009.jpeg",
-    "https://purrbot.site/images/shutdown/shutdown_010.jpeg",
-    "https://purrbot.site/images/shutdown/shutdown_011.jpeg",
+    "https://purrbot.site/images/shutdown/shutdown_009.jpg",
+    "https://purrbot.site/images/shutdown/shutdown_010.jpg",
+    "https://purrbot.site/images/shutdown/shutdown_011.jpg",
     "https://purrbot.site/images/shutdown/shutdown_012.gif",
     "https://purrbot.site/images/shutdown/shutdown_013.gif",
     "https://purrbot.site/images/shutdown/shutdown_014.gif",
@@ -90,6 +80,9 @@
     "neko_hug",
     "neko_smile",
     "purr",
-    "snuggle"
+    "snuggle",
+    "senko",
+    "shiro",
+    "holo"
   ]
 }

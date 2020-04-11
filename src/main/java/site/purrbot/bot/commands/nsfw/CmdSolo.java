@@ -41,7 +41,7 @@ import site.purrbot.bot.constants.API;
 )
 public class CmdSolo implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdSolo(PurrBot bot){
         this.bot = bot;

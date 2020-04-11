@@ -41,16 +41,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
-
-import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
-import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MEMBER;
 
 public class GuildListener extends ListenerAdapter{
 
-    private Logger logger = (Logger)LoggerFactory.getLogger(GuildListener.class);
+    private final Logger logger = (Logger)LoggerFactory.getLogger(GuildListener.class);
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public GuildListener(PurrBot bot){
         this.bot = bot;
@@ -258,7 +254,7 @@ public class GuildListener extends ListenerAdapter{
         bot.invalidateCache(guild.getId());
 
         logger.info(String.format(
-                "[Guild Leave] Guild{name\"%s\", id=%s, members=%d}",
+                "[Guild Leave] Guild{name=\"%s\", id=%s, members=%d}",
                 guild.getName(),
                 guild.getId(),
                 guild.getMemberCount()

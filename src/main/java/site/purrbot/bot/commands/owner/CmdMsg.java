@@ -41,7 +41,7 @@ import java.util.List;
 )
 public class CmdMsg implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdMsg(PurrBot bot){
         this.bot = bot;

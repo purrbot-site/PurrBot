@@ -27,7 +27,7 @@ public enum IDs {
 
     GUILD("423771795523371019");
 
-    private String id;
+    private final String id;
 
     IDs(String id){
         this.id = id;

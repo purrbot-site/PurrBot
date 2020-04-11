@@ -51,9 +51,9 @@ public enum API {
     GIF_THREESOME_MMF_LEWD(true, "threesome_mmf", true),
     GIF_YURI_LEWD         (true, "yuri",          true);
 
-    private boolean nsfw;
-    private boolean gif;
-    private String endpoint;
+    private final boolean nsfw;
+    private final boolean gif;
+    private final String endpoint;
 
     API(boolean nsfw, String endpoint, boolean gif){
         this.nsfw = nsfw;

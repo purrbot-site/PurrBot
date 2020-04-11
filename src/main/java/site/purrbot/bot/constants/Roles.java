@@ -26,7 +26,7 @@ public enum Roles {
     PERSON       ("536686692321591307"),
     NOTIFICATIONS("537369475033333765");
 
-    private String id;
+    private final String id;
 
     Roles(String id){
         this.id = id;

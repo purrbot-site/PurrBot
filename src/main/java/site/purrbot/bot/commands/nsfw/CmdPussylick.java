@@ -51,13 +51,13 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 )
 public class CmdPussylick implements Command{
     
-    private PurrBot bot;
+    private final PurrBot bot;
     
     public CmdPussylick(PurrBot bot){
         this.bot = bot;
     }
     
-    private Cache<String, String> queue = Caffeine.newBuilder()
+    private final Cache<String, String> queue = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)
             .build();
     
@@ -92,6 +92,13 @@ public class CmdPussylick implements Command{
                         bot.getMsg(guild.getId(), "snuggle.nsfw.pussylick.mention_snuggle", author.getAsMention())
                 ).queue();
                 return;
+            }else{
+                if(bot.isSpecial(author.getId())){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.nsfw.pussylick.special_user", author.getAsMention())
+                    ).queue();
+                    return;
+                }
             }
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.nsfw.pussylick.mention_purr", author.getAsMention())

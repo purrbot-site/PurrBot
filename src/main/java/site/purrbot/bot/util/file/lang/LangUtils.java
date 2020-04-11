@@ -24,7 +24,7 @@ import java.util.List;
 
 public final class LangUtils {
     
-    private PurrBot bot;
+    private final PurrBot bot;
     public LangUtils(PurrBot bot){
         this.bot = bot;
     }

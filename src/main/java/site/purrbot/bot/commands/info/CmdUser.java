@@ -21,6 +21,7 @@ package site.purrbot.bot.commands.info;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -42,7 +43,7 @@ import java.util.List;
 )
 public class CmdUser implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdUser(PurrBot bot){
         this.bot = bot;
@@ -215,7 +216,8 @@ public class CmdUser implements Command{
         try {
             bytes = bot.getImageUtil().getStatusAvatar(
                     member.getUser().getEffectiveAvatarUrl(),
-                    member.getOnlineStatus().toString()
+                    member.getOnlineStatus().toString(),
+                    member.getOnlineStatus(ClientType.MOBILE) != OnlineStatus.OFFLINE
             );
         }catch(IOException ex){
             bytes = null;

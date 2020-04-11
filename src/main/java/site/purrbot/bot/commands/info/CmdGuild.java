@@ -39,7 +39,7 @@ import java.time.LocalDateTime;
 )
 public class CmdGuild implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdGuild(PurrBot bot){
         this.bot = bot;

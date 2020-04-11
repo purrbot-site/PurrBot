@@ -388,6 +388,18 @@
           "message": "Hey {target}!\n{user} möchte mit dir Sex haben. Willst du das auch?\nReagiere mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Sei nicht so eine notgeile Person {user}!\nDu hast bereits eine offene Anfrage. Warte bis diese angenommen oder abgelehnt wird, oder abläuft.",
           "timed_out": "Sieht so aus als ob {target} nicht mit dir Sex haben will {user}. ._."
+        },
+        "special_user": {
+          "accept": [
+            "Welches Schlafzimmer sollen wir verwenden {user}?",
+            "\\*bewegt Ihre Hand über {user}'s Körper* Lass uns etwas Privatsphäre haben. \uD83D\uDE18",
+            "Lass mich schnell meine *Spielzeuge* holen und etwas zeit miteinander verbringen {user}."
+          ],
+          "deny": [
+            "Tut mir leid {user}, aber ich kann gerade nicht...",
+            "Kannst du ein wenig warten {user}? Ich hab gerade keine zeit.",
+            "\\*gibt einen kuss* Ich kann nicht {user}. Sorry."
+          ]
         }
       },
       "lewd": {
@@ -407,7 +419,8 @@
           "message": "Hey {target}!\n{user} möchte deine Pussy lecken. Möchtest du das auch (Oder hast überhaupt eine)?\nReagiere mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Bist du durstig? Du hast bereits eine offene Anfrage {user}!\nWarte, bis diese angenommen, abgelehnt oder abgelaufen ist.",
           "timed_out": "Scheint so als will {target} nicht, dass du ihre Pussy leckst {user}... Vielleicht hat sie sogar keine? o////o"
-        }
+        },
+        "special_user": "Hehehe... Du bist *\"durstig\"* {user}, nicht wahr?\n\\*nimmt {user}'s hand und verschwindet in einem Raum*"
       },
       "solo": {
         "loading": "{LOADING} Erhalte ein gif von einem scharfen Girl...",
@@ -425,7 +438,8 @@
           "message": "Hey {target1} und {target2}!\n{user} möchte mit euch beiden Sex haben. Möchtet ihr das auch?\nReagiert mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\nNur wenn ihr beide dies akzeptiert, wird es passieren.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Mal langsam {user}! Zeig etwas gedult du notgeile Person!\nDu hast bereits leute gefragt mit dir zu schlafen, also warte bis diese es entweder annehmen, ablehnen, oder die Anfrage abläuft.",
           "timed_out": "Sieht so aus als ob entweder {target1} oder {target2} nicht mit dir schlafen will {user}. >\\_<"
-        }
+        },
+        "special_user": "S-so sehr ich es gern hab, unanständige Dinge mir dir zu machen, ist das etwas zu viel für mich {user}... {VANILLABLUSH}"
       }
     }
   },

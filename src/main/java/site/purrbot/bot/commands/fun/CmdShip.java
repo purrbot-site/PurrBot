@@ -45,7 +45,7 @@ import java.util.Random;
 )
 public class CmdShip implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
     Random random = new Random();
 
     public CmdShip(PurrBot bot){

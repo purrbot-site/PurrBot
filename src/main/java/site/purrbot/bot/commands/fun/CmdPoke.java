@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
 )
 public class CmdPoke implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdPoke(PurrBot bot){
         this.bot = bot;

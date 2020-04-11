@@ -28,23 +28,11 @@ import java.time.format.DateTimeFormatter;
 
 public class MessageUtil {
 
-    private PurrBot bot;
-    private DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
+    private final PurrBot bot;
+    private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
 
     public MessageUtil(PurrBot bot){
         this.bot = bot;
-    }
-
-    public String getRandomAcceptFuckMsg(){
-        return bot.getAcceptFuckMsg().isEmpty() ? "" : bot.getAcceptFuckMsg().get(
-                bot.getRandom().nextInt(bot.getAcceptFuckMsg().size())
-        );
-    }
-
-    public String getRandomDenyFuckMsg(){
-        return bot.getDenyFuckMsg().isEmpty() ? "" : bot.getDenyFuckMsg().get(
-                bot.getRandom().nextInt(bot.getDenyFuckMsg().size())
-        );
     }
 
     public String getRandomKissImg(){
@@ -119,7 +107,7 @@ public class MessageUtil {
     }
 
     public String getBotGame(){
-        return bot.isBeta() ? "My sister on %d Guilds." : "https://purrbot.site | %d Guilds";
+        return bot.isBeta() ? "My sister on %s Guilds." : "https://purrbot.site | %s Guilds";
     }
     
     public String replaceLast(String input, String target, String replacement){

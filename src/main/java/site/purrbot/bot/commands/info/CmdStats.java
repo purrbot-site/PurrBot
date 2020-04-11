@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdStats implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdStats(PurrBot bot){
         this.bot = bot;

@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdInvite implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdInvite(PurrBot bot){
         this.bot = bot;

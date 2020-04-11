@@ -36,14 +36,14 @@ import java.util.concurrent.Executors;
 
 public class CommandListener extends ListenerAdapter{
 
-    private Logger logger = (Logger)LoggerFactory.getLogger(CommandListener.class);
+    private final Logger logger = (Logger)LoggerFactory.getLogger(CommandListener.class);
 
     private final ThreadGroup CMD_THREAD = new ThreadGroup("CommandThread");
     private final Executor CMD_EXECUTOR = Executors.newCachedThreadPool(
             r -> new Thread(CMD_THREAD, r, "CommandPool")
     );
 
-    private PurrBot bot;
+    private final PurrBot bot;
     private final CommandHandler<Message> HANDLER;
 
     public CommandListener(PurrBot bot, CommandHandler<Message> handler){

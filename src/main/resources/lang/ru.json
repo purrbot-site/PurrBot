@@ -387,6 +387,18 @@
           "message": "Эй {target}!\n{user} хочет трахнуть тебя. Ты... Хочешь этого?\nНажми на \u2705, если да или этим \u274C, если нет.\n\n> **Это предложение истечет через 1 минуту!**",
           "open": "Не будь настолько пошлым(-ой), {user}!\nУ тебя все еще весит открытая заявка. Дождись принятия, отказа или истечения.",
           "timed_out": "Кхем... Похоже {target} не хочет секса с тобой, {user}. ._."
+        },
+        "special_user": {
+          "accept": [
+            "Which bedroom should we use {user}?",
+            "\\*moves with her hand over {user}'s body* Lets get some privacy sweetie. \uD83D\uDE18",
+            "Let me get my *toys* real quick and spend some time together {user}."
+          ],
+          "deny": [
+            "I'm sorry {user}, but I can't right now...",
+            "Can you wait a lil more {user}? I don't have time right now.",
+            "\\*gives a kiss* I can't {user}. Sorry."
+          ]
         }
       },
       "lewd": {
@@ -406,7 +418,8 @@
           "message": "Эй {target}!\n{user} хочет отлизать у тебя. Ты хочешь этого (если же у тебя конечно она есть)?\nЖми \u2705 для согласия или \u274C для отказа.\n\n> **Предложение действует 1 минуту!**",
           "open": "У тебя жажда? У тебя еще весит открытый запрос, {user}!\nДождмсь принятия или отказа, или дождись истечения по времени.",
           "timed_out": "Похоже {target} не хочет куни, {user}... Может у них просто *её* нету? o////o"
-        }
+        },
+        "special_user": "Hehehe... You're *\"thirsty\"* {user}, are you?\n\\*takes {user}'s hand* and disappears in a room*"
       },
       "solo": {
         "loading": "{LOADING} Собираем гифки горячих девочек...",
@@ -424,7 +437,8 @@
           "message": "Хэй {target1} и {target2}!\n{user} хочет вас трахнуть. Вы правда этого хотите?\nЕсли да, то жмите \u2705, если нет, то \u274C, чтобы отклонить.\nТолько, если оба пользователя нажму да, произойдет тройник.\n\n> **Этот запрос истекает через 1 минуту!**",
           "open": "Воу-воу, {user}! Придержи коней!\nСлишком много людей ты просишь для этого, так что жди принятия, отказа или истечения по времени.",
           "timed_out": "Похоже, {target1} и {target2} не хотят секса с тобой, {user}. >\\_<"
-        }
+        },
+        "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much for me {user}... {VANILLABLUSH}"
       }
     }
   },

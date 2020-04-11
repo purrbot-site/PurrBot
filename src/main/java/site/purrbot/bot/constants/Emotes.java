@@ -48,9 +48,9 @@ public enum Emotes{
     STATUS_READY     ("statusReady",      "592043203646193692", false);
 
 
-    private String name;
-    private String id;
-    private boolean animated;
+    private final String name;
+    private final String id;
+    private final boolean animated;
 
     Emotes(String name, String id, boolean animated){
         this.name = name;
@@ -77,14 +77,5 @@ public enum Emotes{
 
     public String getId(){
         return this.id;
-    }
-    
-    public static String getEmoteByName(String name){
-        for(Emotes emote : values()){
-            if(emote.name().toLowerCase().equals(name))
-                return emote.getEmote();
-        }
-        
-        return "";
     }
 }

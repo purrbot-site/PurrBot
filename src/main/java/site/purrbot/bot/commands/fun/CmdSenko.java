@@ -40,7 +40,7 @@ import site.purrbot.bot.constants.API;
 )
 public class CmdSenko implements Command{
     
-    PurrBot bot;
+    private final PurrBot bot;
     
     public CmdSenko(PurrBot bot){
         this.bot = bot;

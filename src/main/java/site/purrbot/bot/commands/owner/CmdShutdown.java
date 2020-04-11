@@ -41,9 +41,9 @@ import site.purrbot.bot.commands.Command;
 )
 public class CmdShutdown implements Command{
 
-    private Logger logger = (Logger)LoggerFactory.getLogger(CmdShutdown.class);
+    private final Logger logger = (Logger)LoggerFactory.getLogger(CmdShutdown.class);
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdShutdown(PurrBot bot){
         this.bot = bot;

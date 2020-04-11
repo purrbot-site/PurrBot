@@ -44,7 +44,7 @@ import site.purrbot.bot.constants.API;
 )
 public class CmdLewd implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdLewd(PurrBot bot){
         this.bot = bot;

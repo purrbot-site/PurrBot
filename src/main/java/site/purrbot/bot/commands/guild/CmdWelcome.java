@@ -60,7 +60,7 @@ import java.util.Objects;
 )
 public class CmdWelcome implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdWelcome(PurrBot bot){
         this.bot = bot;

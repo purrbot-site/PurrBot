@@ -49,6 +49,7 @@ import site.purrbot.bot.util.message.MessageUtil;
 import site.purrbot.bot.util.message.WebhookUtil;
 
 import javax.security.auth.login.LoginException;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -56,16 +57,16 @@ import java.util.concurrent.TimeUnit;
 
 public class PurrBot {
 
-    private Logger logger = (Logger)LoggerFactory.getLogger(PurrBot.class);
+    private final Logger logger = (Logger)LoggerFactory.getLogger(PurrBot.class);
 
     private ShardManager shardManager = null;
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
-    private FileManager fileManager = new FileManager();
-    private PermUtil permUtil = new PermUtil();
-    private HttpUtil httpUtil = new HttpUtil();
-    private WebhookUtil webhookUtil = new WebhookUtil();
+    private final FileManager fileManager = new FileManager();
+    private final PermUtil permUtil = new PermUtil();
+    private final HttpUtil httpUtil = new HttpUtil();
+    private final WebhookUtil webhookUtil = new WebhookUtil();
     
     private DBUtil dbUtil;
     private MessageUtil messageUtil;
@@ -76,31 +77,33 @@ public class PurrBot {
     private boolean beta = false;
 
     private BotBlockAPI botBlockAPI = null;
-    private PostAction post = new PostAction();
+    private final PostAction post = new PostAction();
+    
+    private final DecimalFormat decimalFormat = new DecimalFormat("##,###");
 
     private final CommandHandler<Message> CMD_HANDLER = new CommandHandler<>();
     private EventWaiter waiter;
-    private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
-    private Cache<String, String> language = Caffeine.newBuilder()
+    private final Cache<String, String> language = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    private Cache<String, String> prefix = Caffeine.newBuilder()
+    private final Cache<String, String> prefix = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    private Cache<String, String> welcomeBg = Caffeine.newBuilder()
+    private final Cache<String, String> welcomeBg = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    private Cache<String, String> welcomeChannel = Caffeine.newBuilder()
+    private final Cache<String, String> welcomeChannel = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    private Cache<String, String> welcomeColor = Caffeine.newBuilder()
+    private final Cache<String, String> welcomeColor = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    private Cache<String, String> welcomeIcon = Caffeine.newBuilder()
+    private final Cache<String, String> welcomeIcon = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    private Cache<String, String> welcomeMsg = Caffeine.newBuilder()
+    private final Cache<String, String> welcomeMsg = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
 
@@ -292,14 +295,8 @@ public class PurrBot {
         welcomeMsg.invalidate(id);
     }
 
-    public List<String> getAcceptFuckMsg(){
-        return getFileManager().getStringlist("random", "accept_fuck_msg");
-    }
     public List<String> getBlacklist(){
         return getFileManager().getStringlist("random", "blacklist");
-    }
-    public List<String> getDenyFuckMsg(){
-        return getFileManager().getStringlist("random", "deny_fuck_msg");
     }
     public List<String> getKissImg(){
         return getFileManager().getStringlist("random", "kiss_img");
@@ -382,12 +379,12 @@ public class PurrBot {
 
             getShardManager().setActivity(Activity.of(Activity.ActivityType.WATCHING, String.format(
                     getMessageUtil().getBotGame(),
-                    getShardManager().getGuilds().size()
+                    decimalFormat.format(getShardManager().getGuilds().size())
             )));
             if(isBeta())
                 return;
 
-            if(botBlockAPI == null || post == null) {
+            if(botBlockAPI == null) {
                 logger.warn("PostAction and/or BotBlockAPI are null!");
 
                 return;

@@ -41,7 +41,8 @@ import java.util.List;
         }
 )
 public class CmdShards implements Command{
-    private PurrBot bot;
+    
+    private final PurrBot bot;
     
     public CmdShards(PurrBot bot){
         this.bot = bot;

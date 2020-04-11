@@ -29,7 +29,7 @@ import java.time.ZonedDateTime;
 
 public class EmbedUtil {
     
-    private PurrBot bot;
+    private final PurrBot bot;
     
     public EmbedUtil(PurrBot bot){
         this.bot = bot;

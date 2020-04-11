@@ -40,7 +40,7 @@ import site.purrbot.bot.constants.API;
 )
 public class CmdKitsune implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdKitsune(PurrBot bot){
         this.bot = bot;

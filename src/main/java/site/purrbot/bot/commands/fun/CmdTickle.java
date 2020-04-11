@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
 )
 public class CmdTickle implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdTickle(PurrBot bot){
         this.bot = bot;

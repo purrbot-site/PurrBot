@@ -48,13 +48,13 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 )
 public class CmdBlowjob implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdBlowjob(PurrBot bot){
         this.bot = bot;
     }
 
-    private Cache<String, String> queue = Caffeine.newBuilder()
+    private final Cache<String, String> queue = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)
             .build();
 
@@ -86,7 +86,7 @@ public class CmdBlowjob implements Command{
 
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
-                if(bot.isSpecial(author.getUser().getId())){
+                if(bot.isSpecial(author.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.special_user", author.getEffectiveName())
                     ).queue();
@@ -96,7 +96,7 @@ public class CmdBlowjob implements Command{
                         bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_snuggle", author.getEffectiveName())
                 ).queue();
             }else{
-                if(bot.isSpecial(author.getUser().getId())){
+                if(bot.isSpecial(author.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "purr.nsfw.blowjob.special_user", author.getEffectiveName())
                     ).queue();

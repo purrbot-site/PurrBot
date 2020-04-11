@@ -39,7 +39,7 @@ import java.net.URLConnection;
 
 public class ImageUtil {
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public ImageUtil(PurrBot bot){
         this.bot = bot;
@@ -149,11 +149,12 @@ public class ImageUtil {
         }
     }
 
-    public byte[] getStatusAvatar(String avatarUrl, String status) throws IOException, NullPointerException{
+    public byte[] getStatusAvatar(String avatarUrl, String status, boolean isMobile) throws IOException, NullPointerException{
 
         JSONObject json = new JSONObject()
                 .put("avatar", avatarUrl)
-                .put("status", status);
+                .put("status", status)
+                .put("mobile", isMobile);
 
         RequestBody body = RequestBody.create(json.toString(), null);
 

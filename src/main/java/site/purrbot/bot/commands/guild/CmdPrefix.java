@@ -44,7 +44,7 @@ import site.purrbot.bot.commands.Command;
 )
 public class CmdPrefix implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdPrefix(PurrBot bot){
         this.bot = bot;

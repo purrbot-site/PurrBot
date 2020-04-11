@@ -40,7 +40,7 @@ public enum  Links {
     TWITTER("https://purrbot.site/twitter"),
     WEBSITE("https://purrbot.site");
 
-    private String url;
+    private final String url;
 
     Links(String url){
         this.url = url;

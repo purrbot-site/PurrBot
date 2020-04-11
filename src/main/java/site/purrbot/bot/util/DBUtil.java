@@ -27,12 +27,12 @@ import java.util.Map;
 @SuppressWarnings("rawtypes")
 public class DBUtil {
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     private final RethinkDB r;
-    private Connection connection;
+    private final Connection connection;
 
-    private String guildTable;
+    private final String guildTable;
 
     public DBUtil(PurrBot bot){
         r = RethinkDB.r;

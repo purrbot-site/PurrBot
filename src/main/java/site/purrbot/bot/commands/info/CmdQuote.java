@@ -42,7 +42,7 @@ import java.io.IOException;
 )
 public class CmdQuote implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdQuote(PurrBot bot){
         this.bot = bot;

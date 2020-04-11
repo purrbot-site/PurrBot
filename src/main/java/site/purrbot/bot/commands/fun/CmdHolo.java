@@ -41,7 +41,7 @@ import site.purrbot.bot.constants.API;
 )
 public class CmdHolo implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdHolo(PurrBot bot){
         this.bot = bot;

@@ -32,26 +32,18 @@ import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 
+import java.text.DecimalFormat;
 import java.time.ZonedDateTime;
 
 public class ReadyListener extends ListenerAdapter{
 
-    private Logger logger = (Logger)LoggerFactory.getLogger(ReadyListener.class);
+    private final Logger logger = (Logger)LoggerFactory.getLogger(ReadyListener.class);
 
-    private PurrBot bot;
-    private boolean ready = false;
+    private final PurrBot bot;
     private int shards = 0;
 
     public ReadyListener(PurrBot bot){
         this.bot = bot;
-    }
-
-    public boolean isReady() {
-        return ready;
-    }
-
-    private void setReady(){
-        this.ready = true;
     }
 
     @Override
@@ -91,13 +83,13 @@ public class ReadyListener extends ListenerAdapter{
         );
         
         if(shards == jda.getShardInfo().getShardTotal()){
-            setReady();
 
             bot.startUpdates();
+            DecimalFormat decimalFormat = new DecimalFormat("##,###");
             
             shardManager.setPresence(OnlineStatus.ONLINE, Activity.of(Activity.ActivityType.WATCHING, String.format(
                     bot.getMessageUtil().getBotGame(),
-                    shardManager.getGuildCache().size()
+                    decimalFormat.format(shardManager.getGuildCache().size())
             )));
 
             logger.info(String.format(

@@ -36,7 +36,7 @@ import java.util.*;
 
 public class FileManager{
 
-    private Logger logger = (Logger)LoggerFactory.getLogger(FileManager.class);
+    private final Logger logger = (Logger)LoggerFactory.getLogger(FileManager.class);
     private Map<String, File> files;
 
     public FileManager(){}

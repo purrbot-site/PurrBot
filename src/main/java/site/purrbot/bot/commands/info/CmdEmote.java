@@ -52,7 +52,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 )
 public class CmdEmote implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdEmote(PurrBot bot){
         this.bot = bot;

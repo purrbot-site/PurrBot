@@ -47,7 +47,7 @@ public class CmdLeave implements Command{
 
     Pattern pattern = Pattern.compile("--pm (?<message>.+)", Pattern.DOTALL);
     
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdLeave(PurrBot bot){
         this.bot = bot;

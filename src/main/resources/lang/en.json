@@ -388,6 +388,18 @@
           "message": "Hey {target}!\n{user} wants to fuck you. Do you want that too?\nReact with \u2705 to accept or with \u274C to deny it.\n\n> **This request will time out in 1 minute!**",
           "open": "Don't be such a horny person {user}!\nYou already have a open request. Wait for it to be accepted, denied or for it to time out.",
           "timed_out": "Looks like {target} doesn't want to fuck with you {user}. ._."
+        },
+        "special_user": {
+          "accept": [
+            "Which bedroom should we use {user}?",
+            "\\*moves with her hand over {user}'s body* Lets get some privacy sweetie. \uD83D\uDE18",
+            "Let me get my *toys* real quick and spend some time together {user}."
+          ],
+          "deny": [
+            "I'm sorry {user}, but I can't right now...",
+            "Can you wait a lil more {user}? I don't have time right now.",
+            "\\*gives a kiss* I can't {user}. Sorry."
+          ]
         }
       },
       "lewd": {
@@ -407,7 +419,8 @@
           "message": "Hey {target}!\n{user} wants to lick your pussy. Do you want that (Or do you even have one)?\nReact with \u2705 to accept or with \u274C to deny it.\n\n> **This request will time out in 1 minute!**",
           "open": "Are you thirsty? You already have a open request {user}!\nWait for the other to accept or deny it, or for the request to time out.",
           "timed_out": "Seems like {target} doesn't want you to lick their pussy {user}... Perhaps they don't even have one? o////o"
-        }
+        },
+        "special_user": "Hehehe... You're *\"thirsty\"* {user}, are you?\n\\*takes {user}'s hand* and disappears in a room*"
       },
       "solo": {
         "loading": "{LOADING} Getting a gif of a hot girl...",
@@ -425,7 +438,8 @@
           "message": "Hey {target1} and {target2}!\n{user} wants to fuck you both. Do you want that too?\nReact with \u2705 to accept or with \u274C to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This request will time out in 1 minute!**",
           "open": "Whoa there {user}! Show some patience you horny person!\nYou already asked people to fuck with you, so either wait for the to accept it, deny it or for the request to time out.",
           "timed_out": "Looks like either {target1} or {target2} doesn't want to fuck with you {user}. >\\_<"
-        }
+        },
+        "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much for me {user}... {VANILLABLUSH}"
       }
     }
   },

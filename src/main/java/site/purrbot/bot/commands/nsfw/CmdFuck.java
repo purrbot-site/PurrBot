@@ -54,19 +54,15 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 )
 public class CmdFuck implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdFuck(PurrBot bot){
         this.bot = bot;
     }
     
-    private Cache<String, String> queue = Caffeine.newBuilder()
+    private final Cache<String, String> queue = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)
             .build();
-
-    private int getRandomPercent(){
-        return bot.getRandom().nextInt(10);
-    }
 
     private EmbedBuilder getFuckEmbed(Member requester, Member target, String url){
         return bot.getEmbedUtil().getEmbed()
@@ -101,18 +97,16 @@ public class CmdFuck implements Command{
                 return;
             }
             if(bot.isSpecial(msg.getAuthor().getId())){
-                int random = getRandomPercent();
+                int random = bot.getRandom().nextInt(10);
 
                 if(random >= 1 && random <= 3) {
-                    tc.sendMessage(String.format(
-                            bot.getMessageUtil().getRandomAcceptFuckMsg(),
-                            author.getAsMention()
-                    )).queue();
+                    tc.sendMessage(
+                            bot.getRandomMsg(guild.getId(), "purr.nsfw.fuck.special_user.accept", author.getAsMention())
+                    ).queue();
                 }else{
-                    tc.sendMessage(String.format(
-                            bot.getMessageUtil().getRandomDenyFuckMsg(),
-                            author.getAsMention()
-                    )).queue();
+                    tc.sendMessage(
+                            bot.getRandomMsg(guild.getId(), "purr.nsfw.fuck.special_user.deny", author.getAsMention())
+                    ).queue();
                 }
             }else{
                 tc.sendMessage(

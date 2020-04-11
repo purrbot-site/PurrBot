@@ -42,7 +42,7 @@ import java.time.temporal.ChronoUnit;
 )
 public class CmdPing implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
     public CmdPing(PurrBot bot){
         this.bot = bot;
     }

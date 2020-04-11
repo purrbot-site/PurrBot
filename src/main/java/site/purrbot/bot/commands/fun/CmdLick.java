@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
 )
 public class CmdLick implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdLick(PurrBot bot){
         this.bot = bot;

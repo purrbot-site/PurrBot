@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
 )
 public class CmdHug implements Command {
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdHug(PurrBot bot){
         this.bot = bot;

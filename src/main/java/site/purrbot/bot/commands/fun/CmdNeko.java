@@ -45,7 +45,7 @@ import site.purrbot.bot.constants.Emotes;
 )
 public class CmdNeko implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdNeko(PurrBot bot){
         this.bot = bot;

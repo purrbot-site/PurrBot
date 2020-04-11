@@ -46,7 +46,7 @@ import java.util.List;
 )
 public class CmdEval implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdEval(PurrBot bot){
         this.bot = bot;

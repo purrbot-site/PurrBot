@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
 )
 public class CmdBite implements Command{
     
-    private PurrBot bot;
+    private final PurrBot bot;
     
     public CmdBite(PurrBot bot){
         this.bot = bot;

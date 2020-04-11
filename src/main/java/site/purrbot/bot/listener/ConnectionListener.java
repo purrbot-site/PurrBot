@@ -61,7 +61,7 @@ public class ConnectionListener extends ListenerAdapter{
                 .setFooter(new WebhookEmbed.EmbedFooter("Disconnected at", null))
                 .setTimestamp(event.getTimeDisconnected());
 
-        if(event.getCloseCode() != null)
+        if((event.getCloseCode() != null) && (event.getCloseCode().getCode() != 4900))
             embed.addField(new WebhookEmbed.EmbedField(
                     false,
                     "Reason:",

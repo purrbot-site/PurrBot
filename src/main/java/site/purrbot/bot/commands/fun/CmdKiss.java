@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
 )
 public class CmdKiss implements Command{
 
-    private PurrBot bot;
+    private final PurrBot bot;
 
     public CmdKiss(PurrBot bot){
         this.bot = bot;
