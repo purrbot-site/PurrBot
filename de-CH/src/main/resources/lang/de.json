@@ -1,79 +1,79 @@
 {
   "embed": {
-    "footer": "Requested by {user}"
+    "footer": "Angefordert von {user}"
   },
   "errors": {
-    "api_error": "There was an error reaching the API! Please try again later.",
-    "guild_only": "This command can only be used in [my Discord]({link})!",
+    "api_error": "Es gab einen Fehler beim erreichen der API! Bitter versuch es später erneut.",
+    "guild_only": "Dieser Befehl kann nur in [meinem Discord]({link}) verwendet werden!",
     "missing_perms": {
-      "self": "I require the permission `{permission}` for this.",
-      "self_channel": "I require the permission `{permission}` in the channel {channel} to do this!",
-      "other": "You require the permission `{permission}` for this command."
+      "self": "Ich benötige die Berechtigung `{permission}` dafür.",
+      "self_channel": "Ich benötige die Berechtigung `{permission}` im Kanal {channel} dafür!",
+      "other": "Du benötigst die Berechtigung `{permission}` für diesen Befehl."
     },
     "nsfw_random": [
-      "This channel doesn't seem to have a NSFW-label, does it {user}?",
-      "Please be naughty in a NSFW channel {user}.",
-      "Nonono! You're a nice person and use this command in a NSFW-channel {user}!",
-      "ChannelNotNSFWException: Command may not be used outside a NSFW channel.",
-      "You can only see those naughty things in NSFW channels {user}.",
-      "Everything has its place. And this command belongs in a NSFW-channel {user}."
+      "Dieser Kanal scheint kein NSFW-Label zu haben, oder {user}?",
+      "Bitte sei unanständig in einem NSFW Kanal {user}.",
+      "Nein nein nein! Du wirst eine brave Person sein und diesen Befehl in einem NSFW Kanal verwenden {user}!",
+      "KanalNichtNSFWFehler: Befehl kann nicht ausserhalb eines NSFW Kanals verwendet werden.",
+      "Du kannst diese unanständigen Dinge nur in NSFW Kanälen sehen {user}.",
+      "Alles hat seinen Platz. Und dieser Befehl gehört in einen NSFW Kanal {user}."
     ],
-    "title": "Error",
-    "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {VANILLABLUSH}\nPlease report this on the Discord, or on GitHub!"
+    "title": "Fehler",
+    "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler während dem ausführen einer Aktion. {VANILLABLUSH}\nBitte melder dies in meinem Discord oder auf GitHub!"
   },
   "misc": {
-    "and": "and",
-    "info": "Hey there {user}!\nMy prefix on this Discord is `{prefix}`\nRun `{prefix}help` for a list of commands.",
-    "unknown_user": "Unknown",
-    "welcome_member": "You're member #{count}"
+    "and": "und",
+    "info": "Hallo da {user}!\nMein Prefix in diesem Discord ist `{prefix}`\nVerwende `{prefix}help` für eine Liste von Befehlen.",
+    "unknown_user": "Unbekannt",
+    "welcome_member": "Du bist Mitglied #{count}"
   },
   "purr": {
     "fun": {
       "bite": {
-        "loading": "{LOADING} Going to bite someone...",
-        "mention_self": "Is it canibalism, if you bite yourself {user}?",
-        "mention_purr": "W-w-wha...? I'm not tasty! >.<",
-        "message": "{user} bites you {targets}",
-        "no_mention": "Please mention at least one user to bite!",
-        "special_user": "B-but {user}! T-that is embarrassing."
+        "loading": "{LOADING} Werde jemanden beissen...",
+        "mention_self": "Ist es Kanibalismus, wenn du dich selber beisst {user}?",
+        "mention_purr": "W-w-wa...? Ich bin nicht lecker! >.<",
+        "message": "{user} beist dich {targets}",
+        "no_mention": "Bitte erwähne mindestens eine Person zum beissen!",
+        "special_user": "A-aber {user}! D-das ist peinlich."
       },
       "cuddle": {
-        "loading": "{LOADING} Receiving a cuddle-gif...",
-        "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {VANILLABLUSH}",
-        "mention_purr": "\\*enjoys the cuddle from {user}*",
-        "message": "{user} cuddles with you {targets}",
-        "no_mention": "Please mention at least one user to cuddle!"
+        "loading": "{LOADING} Erhalte ein Knuddel-gif...",
+        "mention_self": "Warum knuddelst du dich selbst {user}?\nDu kannst mich knuddeln, wenn du willst. {VANILLABLUSH}",
+        "mention_purr": "\\*Geniesst das knuddeln von {user}*",
+        "message": "{user} knuddelt dich {targets}",
+        "no_mention": "Bitte erwähne mindestens eine Person zum knuddeln!"
       },
       "holo": {
-        "loading": "{LOADING} Receiving a image from Holo...",
+        "loading": "{LOADING} Erhalte ein Bild von Holo...",
         "title": "Holo {BLOBHOLO}"
       },
       "hug": {
-        "loading": "{LOADING} Receiving a hug-gif...",
-        "mention_self": "Why are you hugging yourself {user}?\nYou can hug me if you want. {VANILLABLUSH}",
-        "mention_purr": "\\*enjoys the hug from {user}*",
-        "message": "{user} hugs you {targets}",
-        "no_mention": "Please mention at least one user to hug!"
+        "loading": "{LOADING} Erhalte ein Umarmungs-gif...",
+        "mention_self": "Warum umarmst du dich selbst {user}?\nDu kannst mich umarmen, wenn du willst. {VANILLABLUSH}",
+        "mention_purr": "\\*Geniesst die umarmung von {user}*",
+        "message": "{user} umarmt dich {targets}",
+        "no_mention": "Bitte erwähne mindestens eine Person zum umarmen!"
       },
       "kiss": {
-        "loading": "{LOADING} Receiving a kiss...",
-        "mention_self": "How can you kiss yourself {user}? With a mirror?",
-        "mention_purr": "O-okay. But only my cheek! \\*Holds cheek out*",
-        "mention_snuggle": "NO! I won't let you kiss my sister with my help!",
-        "message": "{user} kisses you {targets}",
-        "no_mention": "Please mention at least one user to kiss!",
-        "special_user": "\\*Enjoys the kiss from {user}*"
+        "loading": "{LOADING} Erhalte einen Kuss...",
+        "mention_self": "Wie kannst du dich selbst küssen {user}? Mit einem Spiegel?",
+        "mention_purr": "O-okay. Aber nur meine Wange! \\*Hällt Wange hin*",
+        "mention_snuggle": "NEIN! Ich werde dich nicht meine Schwester mit meiner hilfe küssen lassen!",
+        "message": "{user} küsst dich {targets}",
+        "no_mention": "Bitte erwähne mindestens eine Person zum küssen!",
+        "special_user": "\\*geniesst den kuss von {user}*"
       },
       "kitsune": {
-        "loading": "{LOADING} Receiving a kitsune-gif...",
+        "loading": "{LOADING} Erhalte ein Kitsune-gif...",
         "title": "Kitsune {SHIROTAILWAG}"
       },
       "lick": {
-        "loading": "{LOADING} Receiving a lick-gif...",
-        "mention_self": "I won't ask how and *where* you lick yourself {user}...",
-        "mention_purr": "\\*backs away* I-I never allowed you to lick me!",
-        "message": "{user} licks you {targets}",
-        "no_mention": "Please mention at least one user to lick!",
+        "loading": "{LOADING} Erhalte ein Leck-gif...",
+        "mention_self": "Ich werde nicht fragen wie un *wo* du dich selbst leckst {user}...",
+        "mention_purr": "\\*weicht zurück* I-ich hab dir niemals erlaubt, mich zu lecken!",
+        "message": "{user} leckt dich {targets}",
+        "no_mention": "Bitte erwähne mindestens eine Person zum lecken!",
         "special_user": "B-but sweetie... Not in public. \\*blushes*"
       },
       "neko": {
@@ -145,51 +145,51 @@
         "invalid_lang": "The provided language was invalid!\nUse `{prefix}language` to see all available languages.",
         "embed": {
           "available_lang_title": "Available languages",
-          "curr_lang_title": "Currently set language",
-          "curr_lang_value": "English (en)",
-          "description": "You can change the language to one of the supported ones listed below using `{prefix}language set <language>`.",
-          "translators_title": "Translators",
-          "translators_value": "Thanks go to all people that translated the bot!\nYou may find a full list of all current translators and their translations [here]({link})."
+          "curr_lang_title": "Momentan gesetzte Sprache",
+          "curr_lang_value": "Deutsch (de-ch)",
+          "description": "Du kannst die Sprache zu einer von den unterstützten Sprachen ändern, welche unden angezeigt werden, indem du `{prefix}language set <language>` verwendest.",
+          "translators_title": "Übersetzungen",
+          "translators_value": "Dank gilt all denen, welche den Bot übersetzt haben!\nDu kannst eine vollständige Liste aller aktuellen Übersetzungen [hier]({link}) finden."
         },
-        "language_set": "Language set to `English (en)`!",
-        "no_language": "Please provide a language you want to set!"
+        "language_set": "Sprache gesetzt zu `Deutsch (de-ch)`!",
+        "no_language": "Bitte gib eine Sprache an, welche du setzten willst!"
       },
       "prefix": {
-        "few_args": "Not enough arguments provided!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
-        "invalid_args": "Invalid arguments!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
-        "no_prefix": "You need to provide a prefix!",
-        "reset": "Prefix reset back to `.`",
-        "set": "Prefix set to `{prefix}`"
+        "few_args": "Nicht genug Argumente gegeben!\nVerwendung: `{prefix}prefix <set <neuer Prefix>|reset>`",
+        "invalid_args": "Ungültige Argumente!\nVerwendung: `{prefix}prefix <set <neuer Prefix>|reset>`",
+        "no_prefix": "Du musst einen Prefix angeben!",
+        "reset": "Prefix zurückgesetzt zu `.`",
+        "set": "Prefix geändert zu `{prefix}`"
       },
       "welcome": {
-        "current_msg": "Current message:\n```\n{message}\n```\n\nYou may use placeholders in your message.\n**Placeholders**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
+        "current_msg": "Actuelle Nachricht:\n```\n{message}\n```\n\nDu kannst die folgenden Platzhalter in deiner Nachricht verwenden.\n**Platzhalter**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
         "embed": {
-          "channel": "Channel",
-          "color_title": "Color",
-          "color_value": "```\nType:  {type}\nValue: {value}\n```",
-          "current_settings": "This are the current Welcome-settings of this Discord.\nUse `{prefix}welcome [subcommand]` to change them.\n\nA tutorial on how to change change the settings can be found on the [wiki]({wiki_welcome}).",
-          "image_title": "Image",
-          "image_value": "```\nBackground: {background}\nIcon:       {icon}\n```",
-          "message_title": "Message",
+          "channel": "Kanal",
+          "color_title": "Farbe",
+          "color_value": "```\nTyp:    {type}\nInhalt: {value}\n```",
+          "current_settings": "Dies sind die aktuellen Willkommens-Einstellungen von deinem Discord.\nVerwende `{prefix}welcome [unterbefehl]` um diese zu ändern.\n\nEin Tutorial über das ändern der Einstellungen kann im [Wiki]({wiki_welcome}) gefunden werden.",
+          "image_title": "Bild",
+          "image_value": "```\nHintergrund: {background}\nIcon:        {icon}\n```",
+          "message_title": "Nachricht",
           "message_value": "```\n{message}\n```",
-          "no_channel": "`No channel set`",
-          "preview": "Preview",
-          "subcommands_title": "Subcommands",
-          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset```"
+          "no_channel": "`Kein Kanal gesetzt`",
+          "preview": "Vorschau",
+          "subcommands_title": "Unterbefehle",
+          "subcommands_value": "```\nbg      set <Hintergrund>\n        reset\nchannel set <#Kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <Icon>\n        reset\nmsg     set <Nachricht>\n        reset```"
         },
-        "few_args": "Not enough arguments provided!\nRun `{prefix}welcome` to see all available sub-commands.",
-        "invalid_args": "Invalid arguments!\nRun `{prefix}welcome` to see all available sub-commands.",
-        "invalid_bg": "Invalid background `{background}`\nCheck the [Wiki]({wiki_bg}) for available backgrounds.",
-        "invalid_channel": "Please mention a valid text channel!",
-        "invalid_color": "The provided color was invalid!\nSupported are `hex:rrggbb` or `rgb:r,g,b`",
-        "invalid_icon": "The provided icon was invalid!\nCheck the [Wiki]({wiki_icon}) for available icons.",
-        "no_bg": "Please provide a background name!\nA list of backgrounds can be found [here]({wiki_bg}).",
-        "no_channel": "No text channel provided! Make sure you mention one.",
-        "no_color": "No color provided!\nPlease either use `hex:rrggbb` or `rgb:r,g,b`",
-        "no_icon": "Please provide an icon name!\nA list of icons can be found [here]({wiki_icon}).",
-        "no_msg": "No message provided!",
-        "reset": "{type} resetted.",
-        "set": "{type} set to {value}"
+        "few_args": "Nicht genug Argumente angegeben!\nVerwende `{prefix}welcome` um all verfügbaren Unterbefehle zu sehen.",
+        "invalid_args": "Ungültige Argumente!\nVerwende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
+        "invalid_bg": "Ungültiger Hintergrund `{background}`\nÜberprüfe das [Wiki]({wiki_bg}) für verfügbare Hintergründe.",
+        "invalid_channel": "Bitte erwähne einen gültigen Textkanal!",
+        "invalid_color": "Die angegebene Farbe war ungültig!\nUnterstützt werden `hex:rrggbb` und `rgb:r,g,b`",
+        "invalid_icon": "Das angegebene Icon war ungültig!\nÜberprüfe das [Wiki]({wiki_icon}) für verfügbare Icons.",
+        "no_bg": "Bitte gib einen Hintergrundnamen an!\nEine Liste von Hintergründen kann [hier]({wiki_bg}) gefunden werden.",
+        "no_channel": "Kein Textkanal angegeben! Stelle sicher, dass du einen erwähnst.",
+        "no_color": "Keine Farbe angegeben!\nBitte verwende entweder `hex:rrggbb` oder `rgb:r,g,b`",
+        "no_icon": "Bitte gib einen Iconnamen an!\nEine Liste von Icons kann [hier]({wiki_icon}) gefunden werden.",
+        "no_msg": "Keine Nachricht angegeben!",
+        "reset": "{type} zurückgesetzt.",
+        "set": "{type} geändert zu {value}"
       }
     },
     "info": {
@@ -197,20 +197,20 @@
         "embed": {
           "emote_multiple": "Emote [{current} / {total}]",
           "emote_single": "Emote",
-          "guild": "Guild",
+          "guild": "Gilde",
           "id": "ID",
-          "image": "Image",
+          "image": "Bild",
           "link": "[`Link`]({link})",
-          "message": "Message",
+          "message": "Nachricht",
           "name": "Name"
         },
-        "no_args": "Please provide either `:emote:` or `--search` after the command.",
-        "not_found": "Could not find any emotes in the past 100 messages.",
-        "unknown_guild": "Unknown Guild"
+        "no_args": "Bitte gib entweder `:emote:` oder `--search` nach dem Befehl an.",
+        "not_found": "Konnte keine Emotes in den letzten 100 Nachrichten finden.",
+        "unknown_guild": "Unbekannte Gilde"
       },
       "guild": {
         "embed": {
-          "boost_multiple": "{boost} boosts",
+          "boost_multiple": "{boost} Boosts",
           "boost_single": "1 boost",
           "boost_tier": "Boost Tier: {BOOST_TIER} (Level {level})",
           "created": "Created",
@@ -287,49 +287,49 @@
       },
       "ping": {
         "loading": [
-          "{TYPING} Talking with Discord...",
-          "{TYPING} Catching a fish...",
-          "{TYPING} Giving a pong for the ping.",
-          "{TYPING} [placeholder_loading_text]",
-          "{TYPING} Hey Discord, are you there?"
+          "{TYPING} Rede mit Discord...",
+          "{TYPING} Fange einen Fisch...",
+          "{TYPING} Gebe einen Pong für den Ping.",
+          "{TYPING} [platzhalter_lade_text]",
+          "{TYPING} Hey Discord, bist du da?"
         ],
-        "info": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discord: `{discord}`",
-        "info_full": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
+        "info": "{EDIT} Nachricht bearbeiten: `{edit_message}`\n{DISCORD} Discord: `{discord}`",
+        "info_full": "{EDIT} Nachricht bearbeiten: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
         "embed_basic": {
-          "channel": "Posted in #{channel}",
-          "info": "Quote from {user}"
+          "channel": "Gepostet in #{channel}",
+          "info": "Zitat von {user}"
         },
         "embed_image": {
-          "info": "Quote from {user} in {channel} [`[Link]`]({link})"
+          "info": "Zitat von {user} in {channel} [`[Link]`]({link})"
         },
-        "few_args": "Too few arguments!\nUsage: `{prefix}quote <messageID> [#channel]`",
-        "invalid_id": "The provided ID was invalid!\nMake sure to have developer mode enabled and that you right-clicked the **message** and selected \"Copy id\".",
-        "no_msg": "Couldn't find the message in {channel}!\nMake sure that the ID is correct and that the message is in the right channel!",
-        "no_value": "The message doesn't have any image(s) nor any text to quote!",
-        "nsfw_channel": "The channel you mentioned ({channel}) is marked as NSFW, while this channel is not!\nI won't quote messages from NSFW-channels in non NSFW-channels for safety."
+        "few_args": "Zu wenige Argumente!\nVerwendung: `{prefix}quote <Nachrichten ID> [#Kanal]`",
+        "invalid_id": "Die angegebene ID war ungültig!\nStellen Sie sicher, dass der Entwicklermodus aktiviert ist und Sie mit der rechten Maustaste auf die **Nachricht** und die Option \"ID kopieren\" geklickt haben.",
+        "no_msg": "Konnte die Nachricht in {channel} nicht finden!\nStell sicher, dass die ID korrekt ist und dass die Nachricht im richtigen Kanal ist!",
+        "no_value": "Die Nachricht hat weder ein Bild noch einen Text zum zitieren!",
+        "nsfw_channel": "Der Kanal, den du erwähnt hast ({channel}) ist als NSFW markiert, während dieser Kanal das nicht ist!\nIch zitiere keine Nachrichten von NSFW-Kanälen in Nicht-NSFW-Kanälen."
       },
       "stats": {
         "uptime": {
-          "day": "day",
-          "days": "days",
-          "hour": "hour",
-          "hours": "hours",
-          "minute": "minute",
-          "minutes": "minutes",
-          "second": "second",
-          "seconds": "seconds"
+          "day": "Tag",
+          "days": "Tage",
+          "hour": "Stunde",
+          "hours": "Stunden",
+          "minute": "Minute",
+          "minutes": "Minuten",
+          "second": "Sekunde",
+          "seconds": "Sekunden"
         },
         "embed": {
-          "note": "**Note**:\nThe listed stats (Especially the member count) might not be 100% accurate.",
-          "other_title": "Other stats",
-          "other_value": "```yaml\nRAM: {ram}\nUptime: {days}, {hours}, {minutes} and {seconds}\n```",
-          "shard_this_title": "This shard",
-          "shard_this_value": "```yaml\nID: {id} # IDs start at 0\n\nGuilds: {guilds}\nMembers: {total}\n```",
-          "shard_total_title": "Total",
-          "shard_total_value": "```yaml\nShards: {shards}\n\nGuilds: {guilds}\nMembers: {total}\n```",
-          "title": "Statistics"
+          "note": "**Anmerkung**:\nDie aufgelisteten Statistiken (besonders die Mitgliederanzahl) sind möglicherweise nicht 100% genau.",
+          "other_title": "Andere Statistiken",
+          "other_value": "```yaml\nRAM: {ram}\nLaufzeit: {days}, {hours}, {minutes} und {seconds}\n```",
+          "shard_this_title": "Dieser Shard",
+          "shard_this_value": "```yaml\nID: {id} # IDs starten bei 0\n\nGilden: {guilds}\nMitglieder: {total}\n```",
+          "shard_total_title": "Gesamt",
+          "shard_total_value": "```yaml\nShards: {shards}\n\nGilden: {guilds}\nMitglieder: {total}\n```",
+          "title": "Statistiken"
         }
       },
       "user": {
