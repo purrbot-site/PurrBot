@@ -65,6 +65,7 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 | Ship     | `<@user>`           | Ships you with the mentioned user.          |
 |          | `<@user>` `[@user]` | Ships the first with the second user.       |
 | Slap     | `<@user ...>`       | Slaps the mentioned user(s).                |
+| Tail     |                     | Wag your tail (in excitement?)              |
 | Tickle   | `<@user ...>`       | Tickles the mentioned user(s).              |
 
 ## Guild
