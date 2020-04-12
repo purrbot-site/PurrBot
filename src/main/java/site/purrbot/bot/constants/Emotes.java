@@ -21,31 +21,32 @@ package site.purrbot.bot.constants;
 public enum Emotes{
 
     // Animated emotes,
-    LOADING     ("loading",      "590951368328740865", true),
-    TYPING      ("typing",       "590954127727525889", true),
-    SENKOTAILWAG("senkoTailWag", "574631381804777482", true),
-    SHIROTAILWAG("shiroTailWag", "583782265029394473", true),
-    WAGTAIL     ("wagTail",      "570462900234223639", true),
+    LOADING       ("loading",      "590951368328740865", true),
+    SENKO_TAIL_WAG("senkoTailWag", "574631381804777482", true),
+    SHIRO_TAIL_WAG("shiroTailWag", "583782265029394473", true),
+    TYPING        ("typing",       "590954127727525889", true),
+    WAGTAIL       ("wagTail",      "570462900234223639", true),
 
     // Static/normal emotes
-    BLOBHOLO         ("blobHolo",         "536346012546236436", false),
+    BLOB_HOLO        ("blobHolo",         "536346012546236436", false),
     BOOST_LEVEL_0    ("boostLevel0",      "654489023515197440", false),
     BOOST_LEVEL_1    ("boostLevel1",      "654489023623987211", false),
     BOOST_LEVEL_2    ("boostLevel2",      "654489023087116320", false),
     BOOST_LEVEL_3    ("boostLevel3",      "654489023133384725", false),
     BOT              ("isBot",            "590951368093859870", false),
     DISCORD          ("discord",          "619476059334901770", false),
-    EDIT             ("edit",             "619476058802094100", false),
-    PURR             ("purr",             "564766029608124416", false),
-    SNUGGLE          ("snuggle",          "570238657265401856", false),
     DOWNLOAD         ("download",         "619476058827390976", false),
-    VANILLABLUSH     ("vanillaBlush",     "575487690921869323", false),
+    EDIT             ("edit",             "619476058802094100", false),
     JOINED_GUILD     ("joinedGuild",      "592043203629416459", false),
     LEFT_GUILD       ("leftGuild",        "592043203042213925", false),
     NEKOWO           ("nekOwO",           "565506566690832392", false),
     OWNER            ("isOwner",          "590951368399912970", false),
+    PURR             ("purr",             "564766029608124416", false),
+    SNUGGLE          ("snuggle",          "570238657265401856", false),
     STATUS_DISCONNECT("statusDisconnect", "592043203440410624", false),
-    STATUS_READY     ("statusReady",      "592043203646193692", false);
+    STATUS_READY     ("statusReady",      "592043203646193692", false),
+    TAIL             ("tail",             "611329503876349955", false),
+    VANILLABLUSH     ("vanillaBlush",     "575487690921869323", false);
 
 
     private final String name;

@@ -320,17 +320,18 @@ public class PurrBot {
     private String setPlaceholders(String msg){
         return msg
                 // Emotes
-                .replace("{BLOBHOLO}", Emotes.BLOBHOLO.getEmote())
+                .replace("{BLOBHOLO}", Emotes.BLOB_HOLO.getEmote())
                 .replace("{LOADING}", Emotes.LOADING.getEmote())
                 .replace("{NEKOWO}", Emotes.NEKOWO.getEmote())
-                .replace("{SENKOTAILWAG}", Emotes.SENKOTAILWAG.getEmote())
-                .replace("{SHIROTAILWAG}", Emotes.SHIROTAILWAG.getEmote())
+                .replace("{SENKOTAILWAG}", Emotes.SENKO_TAIL_WAG.getEmote())
+                .replace("{SHIROTAILWAG}", Emotes.SHIRO_TAIL_WAG.getEmote())
                 .replace("{TYPING}", Emotes.TYPING.getEmote())
                 .replace("{VANILLABLUSH}", Emotes.VANILLABLUSH.getEmote())
                 .replace("{WAGTAIL}", Emotes.WAGTAIL.getEmote())
                 .replace("{EDIT}", Emotes.EDIT.getEmote())
                 .replace("{DOWNLOAD}", Emotes.DOWNLOAD.getEmote())
                 .replace("{DISCORD}", Emotes.DISCORD.getEmote())
+                .replace("{TAIL}", Emotes.TAIL.getEmote())
                 // Wiki pages
                 .replace("{wiki_bg}", Links.WIKI.getUrl() + "/welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI.getUrl() + "/welcome-images#icons")

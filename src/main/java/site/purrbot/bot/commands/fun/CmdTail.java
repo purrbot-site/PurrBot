@@ -23,6 +23,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
@@ -30,20 +31,20 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
 
 @CommandDescription(
-        name = "Senko",
-        description = "Gets an image of Senko from the anime 'Sewayaki Kitsune no Senko-san'.",
-        triggers = {"senko", "senko-san"},
+        name = "Tail",
+        description = "Get a gif of a fluffy (and perhaps wagging) tail. >w<",
+        triggers = {"tail", "wag", "wagging"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}senko"),
-                @CommandAttribute(key = "help", value = "{p}senko")
+                @CommandAttribute(key = "usage", value = "{p}tail"),
+                @CommandAttribute(key = "help", value = "{p}tail")
         }
 )
-public class CmdSenko implements Command{
+public class CmdTail implements Command{
     
     private final PurrBot bot;
     
-    public CmdSenko(PurrBot bot){
+    public CmdTail(PurrBot bot){
         this.bot = bot;
     }
     
@@ -51,24 +52,28 @@ public class CmdSenko implements Command{
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
-        String link = bot.getHttpUtil().getImage(API.IMG_SENKO);
-    
+        String link = bot.getHttpUtil().getImage(API.GIF_TAIL);
+        
         if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
-    
+        
         if(link == null){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
             return;
         }
     
-        EmbedBuilder senko = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
-                .setTitle(bot.getMsg(guild.getId(), "purr.fun.senko.title"), link)
-                .setImage(link);
+        Member member = msg.getMember();
+        if(member == null)
+            return;
     
+        EmbedBuilder tail = bot.getEmbedUtil().getEmbed()
+                .setDescription(bot.getMsg(guild.getId(), "purr.fun.tail.message", member.getEffectiveName()))
+                .setImage(link);
+        
         tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.fun.senko.loading")
+                bot.getMsg(guild.getId(), "purr.fun.tail.loading")
         ).queue(message -> message.editMessage(
                 EmbedBuilder.ZERO_WIDTH_SPACE
-        ).embed(senko.build()).queue());
+        ).embed(tail.build()).queue());
     }
 }

@@ -49,6 +49,7 @@ public class CommandLoader {
                 new CmdSenko(bot),
                 new CmdShip(bot),
                 new CmdSlap(bot),
+                new CmdTail(bot),
                 new CmdTickle(bot),
 
                 // Guild

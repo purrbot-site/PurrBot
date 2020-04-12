@@ -130,6 +130,10 @@
         "message": "{user} slaps you {targets}",
         "no_mention": "Please mention at least one user to slap!"
       },
+      "tail": {
+        "loading": "{LOADING} Wagging tail...",
+        "message": "{user} wags their tail"
+      },
       "tickle": {
         "loading": "{LOADING} Receiving a tickle-gif...",
         "mention_self": "Okay... If you really want to get tickled... \\*tickles {user}*",

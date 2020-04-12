@@ -130,6 +130,10 @@
         "message": "{user} schlägt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum schlagen!"
       },
+      "tail": {
+        "loading": "{LOADING} Wackle mit dem Schweif...",
+        "message": "{user} wedelt mit seinem/ihrem Schweif"
+      },
       "tickle": {
         "loading": "{LOADING} Erhalte ein Kitzel-gif...",
         "mention_self": "Okay... Wenn du dich wirklich selber kitzeln willst... \\*Kitzelt {user}*",

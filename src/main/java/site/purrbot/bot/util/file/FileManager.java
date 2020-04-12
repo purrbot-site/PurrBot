@@ -47,7 +47,10 @@ public class FileManager{
         return this;
     }
     
-
+    public Map<String, File> getFiles(){
+        return files;
+    }
+    
     public void createOrLoad(String name, String internal, String external){
         if(files == null) files = new HashMap<>();
 

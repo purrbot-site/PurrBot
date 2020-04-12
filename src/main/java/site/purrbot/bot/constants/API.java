@@ -38,6 +38,7 @@ public enum API {
     GIF_PAT   (false, "pat",    true),
     GIF_POKE  (false, "poke",   true),
     GIF_SLAP  (false, "slap",   true),
+    GIF_TAIL  (false, "tail",   true),
     GIF_TICKLE(false, "tickle", true),
 
     GIF_ANAL_LEWD         (true, "anal",          true),

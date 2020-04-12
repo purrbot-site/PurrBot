@@ -130,6 +130,10 @@
         "message": "{user}이(가) {targets} 를 때려버렸어!",
         "no_mention": "적어도 한대 칠 상대 한명을 언급해줘!"
       },
+      "tail": {
+        "loading": "{LOADING} Wagging tail...",
+        "message": "{user} wags their tail"
+      },
       "tickle": {
         "loading": "{LOADING} 간질간질 이미지 불러오는 중...",
         "mention_self": "그래.. 정말 간지럽혀지고 싶다면 말야.. \\*{user}을(를) 간지럽힌다*",
@@ -246,7 +250,7 @@
             "list": "```\n재미\n서버\n정보\n성인\n```",
             "nsfw": "성인",
             "owner": "소유자",
-            "title": "Categories"
+            "title": "카테고리"
           },
           "description": "아래의 \u25C0 와 \u25B6 를 누르면 페이지를 바꿀 수 있어. \u23F9 를 누르면 그만둘 수 있어.\n`{prefix}help [명령어]`를 사용해서 더 자세한 정보를 확인해 봐.",
           "nsfw_info": "`연령 제한 채널에서 확인해봐!`"
@@ -391,14 +395,14 @@
         },
         "special_user": {
           "accept": [
-            "Which bedroom should we use {user}?",
-            "\\*moves with her hand over {user}'s body* Lets get some privacy sweetie. \uD83D\uDE18",
-            "Let me get my *toys* real quick and spend some time together {user}."
+            "어느 침실을 원해, {user}?",
+            "\\*손으로 {user}의 몸을 감싸며* 우리만의 비밀을 좀 가져볼까, 자기? \uD83D\uDE18",
+            "내 *장난감들*을 좀 가져올게, 같이 좋은 시간 보내보자, {user}."
           ],
           "deny": [
-            "I'm sorry {user}, but I can't right now...",
-            "Can you wait a lil more {user}? I don't have time right now.",
-            "\\*gives a kiss* I can't {user}. Sorry."
+            "미안해, {user}. 당장은 힘들어...",
+            "조금만 기다려줄래, {user}? 지금은 조금 바빠.",
+            "\\*키스를 하며* 지금은 안돼, {user}. 미안."
           ]
         }
       },
@@ -420,7 +424,7 @@
           "open": "애정에 굶주리기라도 한거야, {user}? 이미 네가 부탁한 사람이 있잖아. 만료되기를 기다리던가, 대답을 기다려.",
           "timed_out": "아마 {target}은(는) 핥아지고 싶지 않나봐. 사실 핥아질 부위가 없는거 아냐? o////o"
         },
-        "special_user": "Hehehe... You're *\"thirsty\"* {user}, are you?\n\\*takes {user}'s hand* and disappears in a room*"
+        "special_user": "헤헤... 너 지금 *\"목마른\"* 상태구나, {user}?\n\\*{user}의 손을 잡고 함께 사라진다*"
       },
       "solo": {
         "loading": "{LOADING} 야한 여자아이 불러오는 중...",
@@ -439,14 +443,14 @@
           "open": "발정난 개도 어지간해야지, {user}! 이미 네가 부탁한 사람이 있잖아.",
           "timed_out": "아마 {target1} 또는 {target2}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. >\\_<"
         },
-        "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much for me {user}... {VANILLABLUSH}"
+        "special_user": "내가 너랑 하는 걸 좋아하는 만큼, 이게 나한테 심한 일일까? {user}... {VANILLABLUSH}"
       }
     }
   },
   "snuggle": {
     "fun": {
       "bite": {
-        "mention_snuggle": "Nya! I'm no food {user}!"
+        "mention_snuggle": "갸악! 나는 음식이 아냐, {user}!"
       },
       "cuddle": {
         "mention_snuggle": "\\*{user}에게 달라붙어 부비부비하는 중*"

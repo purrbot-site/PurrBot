@@ -25,12 +25,8 @@ import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Links;
-import site.purrbot.bot.util.file.lang.LangUtils;
 
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @CommandDescription(
@@ -57,9 +53,6 @@ public class CmdLanguage implements Command{
         this.bot = bot;
     }
     
-    private FilenameFilter filter = ((dir, name) -> name.endsWith(".json"));
-    private File folder = new File("lang/");
-    
     @Override
     public void execute(Message msg, String s){
         Guild guild = msg.getGuild();
@@ -83,7 +76,7 @@ public class CmdLanguage implements Command{
                     )
                     .addField(
                             bot.getMsg(guild.getId(), "purr.guild.language.embed.available_lang_title"),
-                            getLangFiles(),
+                            String.join(", ", getLangs()),
                             true
                     )
                     .addField(
@@ -133,23 +126,15 @@ public class CmdLanguage implements Command{
         }
     }
     
-    private String getLangFiles(){
-        StringBuilder builder = new StringBuilder();
-        for(String name : getLangs())
-            builder.append(String.format("`%s`", name).replace(".json", "")).append(", ");
-        
-        return builder.toString();
-    }
-    
     private List<String> getLangs(){
-        File[] files = folder.listFiles(filter);
-        List<String> names = new ArrayList<>();
-        if(files == null || files.length == 0)
-            return Collections.singletonList("");
+        List<String> langs = new ArrayList<>();
+        for(String lang : bot.getFileManager().getFiles().keySet()){
+            if(lang.equalsIgnoreCase("config") || lang.equalsIgnoreCase("random"))
+                continue;
+            
+            langs.add(lang);
+        }
         
-        for(File file : files)
-            names.add(file.getName().replace(".json", ""));
-        
-        return names;
+        return langs;
     }
 }
