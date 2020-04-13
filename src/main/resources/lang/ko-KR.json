@@ -131,8 +131,8 @@
         "no_mention": "적어도 한대 칠 상대 한명을 언급해줘!"
       },
       "tail": {
-        "loading": "{LOADING} Wagging tail...",
-        "message": "{user} wags their tail"
+        "loading": "{LOADING} 꼬리를 흔드는 중...",
+        "message": "{user}이(가) 꼬리를 흔들고 있어."
       },
       "tickle": {
         "loading": "{LOADING} 간질간질 이미지 불러오는 중...",
