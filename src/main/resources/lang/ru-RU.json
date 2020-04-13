@@ -283,12 +283,6 @@
           "links": "[`Рекомендованное приглашение`]({invite_full})\n[`Базовое приглашение`]({invite_basic})\n[`Discord`]({support})"
         }
       },
-      "level": {
-        "bot": "Боты не могут повышать уровень. xP",
-        "info": "Уровень участника {user}",
-        "level": "Уровень",
-        "xp": "Опыт"
-      },
       "ping": {
         "loading": [
           "{TYPING} Общаемся с Discord'ом...",
@@ -345,11 +339,9 @@
           "game": "Игра: {status}",
           "id": "ID: {id}",
           "joined": "Присоединился(-лась):",
-          "level": "Уровень",
           "nickname": "Никнейм: {nickname}",
           "role_highest": "Высшая роль",
-          "role_total": "Другие роли",
-          "xp": "Очки опыта"
+          "role_total": "Другие роли"
         },
         "more_roles": "__**+{remaining} других**__",
         "no_member": "Упомянутый пользователь не участник этого Discord-севрера!",

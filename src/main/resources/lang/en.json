@@ -283,12 +283,6 @@
           "links": "[`Recommended Invite`]({invite_full})\n[`Basic Invite`]({invite_basic})\n[`Discord`]({support})"
         }
       },
-      "level": {
-        "bot": "Bots can't level up. xP",
-        "info": "Level info of {user}",
-        "level": "Level",
-        "xp": "XP"
-      },
       "ping": {
         "loading": [
           "{TYPING} Talking with Discord...",
