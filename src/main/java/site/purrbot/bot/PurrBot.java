@@ -118,10 +118,11 @@ public class PurrBot {
     private void setup() throws LoginException{
         getFileManager().addFile("config", "/config.json", "./config.json")
                 .addFile("random", "/random.json", "./random.json")
-                .addFile("de", "/lang/de.json", "./lang/de.json")
-                .addFile("en", "/lang/en.json", "./lang/en.json")
-                .addFile("ko", "/lang/ko.json", "./lang/ko.json")
-                .addFile("ru", "/lang/ru.json", "./lang/ru.json");
+                .addLang("de-ch", "de-CH")
+                .addLang("en", "en")
+                .addLang("en-owo", "en-OWO")
+                .addLang("ko-kr", "ko-KR")
+                .addLang("ru-ru", "ru-RU");
 
         dbUtil        = new DBUtil(this);
         messageUtil   = new MessageUtil(this);

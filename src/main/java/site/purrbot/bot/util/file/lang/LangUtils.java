@@ -31,10 +31,11 @@ public final class LangUtils {
 
     public String getString(String language, String path){
         switch(language.toLowerCase()){
-            case "de":
+            case "de-ch":
             case "en":
-            case "ko":
-            case "ru":
+            case "en-owo":
+            case "ko-kr":
+            case "ru-ru":
                 return bot.getFileManager().getString(language.toLowerCase(), path);
                 
             default:
@@ -44,10 +45,11 @@ public final class LangUtils {
     
     public List<String> getStringList(String language, String path){
         switch(language.toLowerCase()){
-            case "de":
+            case "de-ch":
             case "en":
-            case "ko":
-            case "ru":
+            case "en-owo":
+            case "ko-kr":
+            case "ru-ru":
                 return bot.getFileManager().getStringlist(language.toLowerCase(), path);
             
             default:

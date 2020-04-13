@@ -2,6 +2,7 @@
 [DiscordImg]: https://img.shields.io/discord/423771795523371019?color=%237289DA&label=Chat&logo=Discord&logoColor=white&style=plastic
 [IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot?label=Issues&logo=GitHub&style=plastic
 [LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg?label=License&logo=GitHub&style=plastic
+[TranslateImg]: https://badges.crowdin.net/purrbot-translations/localized.svg
 
 <!-- Discord OAuth -->
 [Full invite]: https://discordapp.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=537258048
@@ -35,7 +36,7 @@
 [debl]: https://discordextremelist.xyz/bots/purr  
 [lbots]: https://lbots.org/bots/Purr
 
-[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License]
+[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![TranslateImg]][Translations]
 
 # \*Purr*
 This bot was made to use the [nekos.life]-API but now moved to its very own API.
