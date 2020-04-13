@@ -31,7 +31,7 @@
     "fun": {
       "bite": {
         "loading": "{LOADING} Going to bite someone...",
-        "mention_self": "Is it canibalism, if you bite yourself {user}?",
+        "mention_self": "Is it cannibalism, if you bite yourself {user}?",
         "mention_purr": "W-w-wha...? I'm not tasty! >.<",
         "message": "{user} bites you {targets}",
         "no_mention": "Please mention at least one user to bite!",
