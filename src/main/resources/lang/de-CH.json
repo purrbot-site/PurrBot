@@ -340,11 +340,9 @@
           "game": "Spiel: {status}",
           "id": "ID: {id}",
           "joined": "Guild beigetreten:",
-          "level": "Level",
           "nickname": "Nick: {nickname}",
           "role_highest": "Höchste Rolle",
-          "role_total": "Andere Rollen",
-          "xp": "XP"
+          "role_total": "Andere Rollen"
         },
         "more_roles": "__**+{remaining} mehr**__",
         "no_member": "Das erwähnte Mitglied ist nicht in diesem Discord!",
