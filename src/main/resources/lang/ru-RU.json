@@ -340,11 +340,9 @@
           "game": "Игра: {status}",
           "id": "ID: {id}",
           "joined": "Присоединился(-лась):",
-          "level": "Уровень",
           "nickname": "Никнейм: {nickname}",
           "role_highest": "Высшая роль",
-          "role_total": "Другие роли",
-          "xp": "Очки опыта"
+          "role_total": "Другие роли"
         },
         "more_roles": "__**+{remaining} других**__",
         "no_member": "Упомянутый пользователь не участник этого Discord-севрера!",
@@ -418,7 +416,7 @@
           "open": "У тебя жажда? У тебя еще весит открытый запрос, {user}!\nДождмсь принятия или отказа, или дождись истечения по времени.",
           "timed_out": "Похоже {target} не хочет куни, {user}... Может у них просто *её* нету? o////o"
         },
-        "special_user": "Hehehe... You're *\"thirsty\"* {user}, are you?\n\\*takes {user}'s hand* and disappears in a room*"
+        "special_user": "Хехехе... Одолела **жажда**, {user}?\n\\*берет {user} за руку* и исчезает, зайдя в спальню*"
       },
       "solo": {
         "loading": "{LOADING} Собираем гифки горячих девочек...",
@@ -437,14 +435,14 @@
           "open": "Воу-воу, {user}! Придержи коней!\nСлишком много людей ты просишь для этого, так что жди принятия, отказа или истечения по времени.",
           "timed_out": "Похоже, {target1} и {target2} не хотят секса с тобой, {user}. >\\_<"
         },
-        "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much for me {user}... {VANILLABLUSH}"
+        "special_user": "К-как бы я не любила заниматься с тобой пошлостями, но это перебор для меня, {user}... {VANILLABLUSH}"
       }
     }
   },
   "snuggle": {
     "fun": {
       "bite": {
-        "mention_snuggle": "Nya! I'm no food {user}!"
+        "mention_snuggle": "Ня! Я не еда, {user}!"
       },
       "cuddle": {
         "mention_snuggle": "\\*прижимается к {user}*"
