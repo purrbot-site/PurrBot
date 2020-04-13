@@ -59,10 +59,10 @@
         "loading": "{LOADING} Erhalte einen Kuss...",
         "mention_self": "Wie kannst du dich selber küssen {user}? Mit einem Spiegel?",
         "mention_purr": "O-okay. Aber nur auf die Wange! \\*Hält Wange hin*",
+        "mention_snuggle": "NEIN! Ich werde dich nicht meine Schwester durch meine hilfe küssen lassen!",
         "message": "{user} küsst dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum küssen!",
-        "special_user": "\\*Geniesst den kuss von {user}*",
-        "target_snuggle": "NEIN! Ich werde dir nicht helfen, meine Schwester zu küssen."
+        "special_user": "\\*Geniesst den kuss von {user}*"
       },
       "kitsune": {
         "loading": "{LOADING} Erhalte ein kitsune-gif...",
@@ -107,7 +107,7 @@
         "mention_snuggle": "Keine verkupplung mir meiner kleinen Schwester {user}!",
         "no_mention": "Bitte erwähne mindestens eine Person zum verkuppeln!",
         "results": {
-          "100": "Perfekte Liebe! \u2764",
+          "100": "Perfekte Liebe! ❤",
           "91_99": "Bitte ladet mich zu eurer Hochzeit ein. ^-^",
           "81_90": "Ich kann mir wirklich euch beide vorstellen, wie ihr einander heiratet.",
           "71_80": "\\*Drückt euch näher aneinander*",
@@ -250,9 +250,9 @@
             "list": "```\nSpass\nGilde\nInfo\nNSFW\n```",
             "nsfw": "NSFW",
             "owner": "Besitzer",
-            "title": "Categories"
+            "title": "Kategorien"
           },
-          "description": "Verwende die \u25C0 oder \u25B6 Reaktionen um durch die Seiten zu navigieren und \u23F9 zum abbrechen.\nVerwende `{prefix}help [Befehl]` um mehr infos über einen Befehl zu erhalten.",
+          "description": "Verwende die ◀ oder ▶ Reaktionen um durch die Seiten zu navigieren und ⏹ zum abbrechen.\nVerwende `{prefix}help [Befehl]` um mehr infos über einen Befehl zu erhalten.",
           "nsfw_info": "`Verwende den Hilfe-Befehl in einem NSFW-Kanal um diese Seite zu sehen.`"
         }
       },
@@ -338,11 +338,13 @@
           "created": "Account erstellt:",
           "dates": "Daten",
           "game": "Spiel: {status}",
-          "joined": "Guild beigetreten:",
           "id": "ID: {id}",
+          "joined": "Guild beigetreten:",
+          "level": "Level",
           "nickname": "Nick: {nickname}",
           "role_highest": "Höchste Rolle",
-          "role_total": "Andere Rollen"
+          "role_total": "Andere Rollen",
+          "xp": "XP"
         },
         "more_roles": "__**+{remaining} mehr**__",
         "no_member": "Das erwähnte Mitglied ist nicht in diesem Discord!",
@@ -366,7 +368,7 @@
         "request": {
           "accepted": "{target} hat deine Anfrage akzeptiert {user}!",
           "denied": "{target} möchte nicht von dir einen geblasen bekommen {user}. :/",
-          "message": "Hey {target}!\n{user} möchte dir einen blowjob geben. Willst du das auch?\nReagiere mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte dir einen blowjob geben. Willst du das auch?\nReagiere mit ✅ zum akzeptieren oder mit ❌ zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Sei nicht so gierig {user}! Warte bis deine vorherige Anfrage angenommen, abgelehnt oder abgelaufen ist.",
           "timed_out": "Sieht so aus als ob {target} keinen von dir geblassen bekommen will {user}."
         },
@@ -381,14 +383,14 @@
         "request": {
           "accepted": "{target} hat deine Anfrage akzeptiert {user}. OwO",
           "denied": "{target} möchte keinen Sex mit dir haben {user}. >.<",
-          "message": "Hey {target}!\n{user} möchte mit dir Sex haben. Willst du das auch?\nReagiere mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte mit dir Sex haben. Willst du das auch?\nReagiere mit ✅ zum akzeptieren oder mit ❌ zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Sei nicht so eine notgeile Person {user}!\nDu hast bereits eine offene Anfrage. Warte bis diese angenommen oder abgelehnt wird, oder abläuft.",
           "timed_out": "Sieht so aus als ob {target} nicht mit dir Sex haben will {user}. ._."
         },
         "special_user": {
           "accept": [
             "Welches Schlafzimmer sollen wir verwenden {user}?",
-            "\\*bewegt Ihre Hand über {user}'s Körper* Lass uns etwas Privatsphäre haben. \uD83D\uDE18",
+            "\\*bewegt Ihre Hand über {user}'s Körper* Lass uns etwas Privatsphäre haben. 😘",
             "Lass mich schnell meine *Spielzeuge* holen und etwas zeit miteinander verbringen {user}."
           ],
           "deny": [
@@ -412,7 +414,7 @@
         "request": {
           "accepted": "{target} hat deine Anfrage akzeptiert {user}. ;P",
           "denied": "{target} möchte nicht, dass du ihre Pussy leckst {user}... Hat Sie überhaupt eine?",
-          "message": "Hey {target}!\n{user} möchte deine Pussy lecken. Möchtest du das auch (Oder hast überhaupt eine)?\nReagiere mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte deine Pussy lecken. Möchtest du das auch (Oder hast überhaupt eine)?\nReagiere mit ✅ zum akzeptieren oder mit ❌ zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Bist du durstig? Du hast bereits eine offene Anfrage {user}!\nWarte, bis diese angenommen, abgelehnt oder abgelaufen ist.",
           "timed_out": "Scheint so als will {target} nicht, dass du ihre Pussy leckst {user}... Vielleicht hat sie sogar keine? o////o"
         },
@@ -431,7 +433,7 @@
         "request": {
           "accepted": "{target1} und {target2} haben deine Anfrage akzeptiert {user}! >//w//<",
           "denied": "Entweder {target1} oder {target2} will keinen Sex mit dir haben {user}.",
-          "message": "Hey {target1} und {target2}!\n{user} möchte mit euch beiden Sex haben. Möchtet ihr das auch?\nReagiert mit \u2705 zum akzeptieren oder mit \u274C zum ablehnen.\nNur wenn ihr beide dies akzeptiert, wird es passieren.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target1} und {target2}!\n{user} möchte mit euch beiden Sex haben. Möchtet ihr das auch?\nReagiert mit ✅ zum akzeptieren oder mit ❌ zum ablehnen.\nNur wenn ihr beide dies akzeptiert, wird es passieren.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Mal langsam {user}! Zeig etwas gedult du notgeile Person!\nDu hast bereits leute gefragt mit dir zu schlafen, also warte bis diese es entweder annehmen, ablehnen, oder die Anfrage abläuft.",
           "timed_out": "Sieht so aus als ob entweder {target1} oder {target2} nicht mit dir schlafen will {user}. >\\_<"
         },
@@ -483,10 +485,16 @@
     "info": {
       "info": {
         "dm_failure": "Deine PMs sind geschlossen {user}. Ich kann keine Infos senden, wenn deine PMs zu sind. :,(",
-        "dm_success": "\uD83D\uDCEC Du hast Post {user}!",
+        "dm_success": "📬 Du hast Post {user}!",
         "embed": {
           "about_title": "Über mich",
-          "about_value": "Oh hallo da!\nIch bin {name}. Ich bin die Schwester von \\*Purr*."
+          "about_value": "Oh hallo da!\nIch bin {name}. Ich bin die Schwester von \\*Purr*.",
+          "bot_title": "Bot Info",
+          "bot_value": "Bot Version: `{version}`\nAPI: [`JDA {version}`]({link})",
+          "commands_title": "Befehle",
+          "commands_value": "Verwende `{prefix}help` im Discord für eine Liste von Befehlen.",
+          "links_title": "Andere Links",
+          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Support Discord`]({support})\n[`Twitter`]({twitter})\n[`Webseite`]({website})\n[`Wiki`]({wiki})"
         }
       },
       "invite": {
