@@ -320,7 +320,7 @@
           "seconds": "секунд"
         },
         "embed": {
-          "note": "**Note**:\nThe listed stats (Especially the member count) might not be 100% accurate.",
+          "note": "**Заметка**:\nУказанная статистика (особенно число участников) может быть не точной.",
           "other_title": "Другие данные",
           "other_value": "```yaml\nОЗУ: {ram}\nВремя работы: {days}, {hours}, {minutes} и {seconds}\n```",
           "shard_this_title": "Эта часть",
@@ -389,14 +389,14 @@
         },
         "special_user": {
           "accept": [
-            "Which bedroom should we use {user}?",
-            "\\*moves with her hand over {user}'s body* Lets get some privacy sweetie. 😘",
-            "Let me get my *toys* real quick and spend some time together {user}."
+            "Какую спальню мы выберем на этот раз, {user}?",
+            "\\*берет {user} за талию* Давай уединимся, дорогуша. 😘",
+            "Дай ка мне достать свои *игрушки* и мы повеселимся вместе, {user}."
           ],
           "deny": [
-            "I'm sorry {user}, but I can't right now...",
-            "Can you wait a lil more {user}? I don't have time right now.",
-            "\\*gives a kiss* I can't {user}. Sorry."
+            "Прости, {user}, не сейчас...",
+            "Можешь подождать, {user}? Я сейчас занята.",
+            "\\*целует* Не могу, {user}. Прости."
           ]
         }
       },
