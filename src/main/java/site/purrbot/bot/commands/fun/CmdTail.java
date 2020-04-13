@@ -21,7 +21,6 @@ package site.purrbot.bot.commands.fun;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -32,7 +31,7 @@ import site.purrbot.bot.constants.API;
 
 @CommandDescription(
         name = "Tail",
-        description = "Get a gif of a fluffy (and perhaps wagging) tail. >w<",
+        description = "Wag a fluffy tail! >w<",
         triggers = {"tail", "wag", "wagging"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -53,9 +52,6 @@ public class CmdTail implements Command{
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
         String link = bot.getHttpUtil().getImage(API.GIF_TAIL);
-        
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
         
         if(link == null){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
