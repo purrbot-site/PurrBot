@@ -14,11 +14,11 @@
 [image]: https://docs.purrbot.site/bot/welcome-images
 [background]: https://docs.purrbot.site/bot/welcome-images#backgrounds
 [icon]: https://docs.purrbot.site/bot/welcome-images#icons
+[translations]: https://translations.purrbot.site
 
 <!-- GitHub links -->
 [Issues]: https://github.com/Andre601/PurrBot/issues
 [License]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
-[translations]: https://github.com/purrbot-site/Translations
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
@@ -132,7 +132,8 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 Version 2.5 of \*Purr* added an option to have a per-guild language set.  
 We are happy about any translations being made for the bot.
 
-If you want to contribute to the translations of the bot (Adding your own, or correcting others), take a look at the [GitHub Repository][translations] for this.
+If you want to contribute towards the translation of \*Purr*, contact Andre_601#0601 on [Discord].  
+The Translation page can be found [here][translations].
 
 # Inviting the bot
 The bot has two invite-links: A full invite and a basic invite.
