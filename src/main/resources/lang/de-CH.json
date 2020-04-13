@@ -31,7 +31,7 @@
     "fun": {
       "bite": {
         "loading": "{LOADING} Beisse jemanden...",
-        "mention_self": "Ist es kanibalismus, wenn du dich selbst beisst {user}?",
+        "mention_self": "Ist es Kanibalismus, wenn du dich selber beisst {user}?",
         "mention_purr": "W-w-wa...? Ich schmeck nicht gut! >.<",
         "message": "{user} beisst dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum beissen!",
@@ -150,12 +150,12 @@
         "embed": {
           "available_lang_title": "Verfügbare Sprachen",
           "curr_lang_title": "Momentan gesetzte Sprache",
-          "curr_lang_value": "Deutsch (de)",
+          "curr_lang_value": "Deutsch (de-CH)",
           "description": "Du kannst die Sprache zu einer der unten stehenden ändern indem du `{prefix}language set <Sprache>` verwendest.",
           "translators_title": "Übersetzer",
           "translators_value": "Dank geht an alle Personen, welche den Bot übersetzt haben!\nDu kannst eine vollständige Liste aller Übersetzer und deren übersetzungen [hier]({link}) finden."
         },
-        "language_set": "Sprache geändert zu `Deutsch (de)`!",
+        "language_set": "Sprache geändert zu `Deutsch (de-CH)`!",
         "no_language": "Bitte gib eine Sprache an, welche du verwenden willst!"
       },
       "prefix": {
