@@ -340,11 +340,9 @@
           "game": "상태: {status}",
           "id": "ID: {id}",
           "joined": "서버입장:",
-          "level": "레벨",
           "nickname": "닉네임: {nickname}",
           "role_highest": "최고 역할",
-          "role_total": "그 외 역할",
-          "xp": "경험치"
+          "role_total": "그 외 역할"
         },
         "more_roles": "__**외 {remaining} 개의 역할**__",
         "no_member": "그 사람은 이 서버에 없어.",
