@@ -4,7 +4,7 @@
   },
   "errors": {
     "api_error": "Es gab einen Fehler beim erreichen der API! Bitte versuch es später erneut.",
-    "guild_only": "Doeser Befehl kann nur in [meinem Discord]({link}) verwendet werden!",
+    "guild_only": "Dieser Befehl kann nur in [meinem Discord]({link}) verwendet werden!",
     "missing_perms": {
       "self": "Ich benötige die Berechtigung `{permission}` dafür.",
       "self_channel": "Ich benötige die Berechtigung `{permission}` im Textkanal {channel} dafür!",
@@ -273,7 +273,7 @@
         }
       },
       "invite": {
-        "dm_failure": "Bitter erlaub mir, dier eine PM zu senden {user}!",
+        "dm_failure": "Bitter erlaub mir, dir eine PM zu senden {user}!",
         "dm_success": "Hab dir eine Nachricht gesendet {user}!",
         "embed": {
           "about_title": "Über die Links",
