@@ -38,7 +38,7 @@
         "special_user": "Н-но, {user}! М-мне стыдно..."
       },
       "cuddle": {
-        "loading": "{LOADING} Получаю обнмашечный gif...",
+        "loading": "{LOADING} Получаю обнимашечную GIF-ку...",
         "mention_self": "Почему ты обнимаешь себя, {user}?\nТы можешь обнять меня, если хочешь. {VANILLABLUSH}",
         "mention_purr": "\\*наслаждается обнимашками с {user}*",
         "message": "{user} обнимается с {targets}",
