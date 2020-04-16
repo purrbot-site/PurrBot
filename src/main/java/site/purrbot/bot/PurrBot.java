@@ -172,10 +172,6 @@ public class PurrBot {
                             getFileManager().getString("config", "tokens.discord-bots-gg")
                     )
                     .addAuthToken(
-                            Site.LBOTS_ORG, 
-                            getFileManager().getString("config", "tokens.lbots-org")
-                    )
-                    .addAuthToken(
                             Site.DISCORDEXTREMELIST_XYZ, 
                             getFileManager().getString("config", "tokens.discordextremelist-xyz")
                     )
@@ -336,6 +332,7 @@ public class PurrBot {
                 .replace("{SEX}", Emotes.SEX.getEmote())
                 .replace("{ANAL}", Emotes.SEX_ANAL.getEmote())
                 .replace("{YURI}", Emotes.SEX_YURI.getEmote())
+                .replace("{ACCEPT}", Emotes.ACCEPT.getEmote())
                 .replace("{CANCEL}", Emotes.CANCEL.getEmote())
                 // Wiki pages
                 .replace("{wiki_bg}", Links.WIKI.getUrl() + "/welcome-images#backgrounds")
@@ -358,6 +355,7 @@ public class PurrBot {
     
     public String getMsg(String id, String path, String user, String targets){
         return getMsg(id, path, user)
+                .replace("{target}", targets)
                 .replace("{targets}", getMessageUtil().replaceLast(targets, ",", " " + getMsg(id, "misc.and")));
     }
     

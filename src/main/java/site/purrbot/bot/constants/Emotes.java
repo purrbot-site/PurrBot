@@ -28,6 +28,7 @@ public enum Emotes{
     NEKO_TAIL_WAG ("nekoTailWag",  "700429690732675115", true),
 
     // Static/normal emotes
+    ACCEPT           ("accept",           "700459644719464458", false),
     BLOB_HOLO        ("blobHolo",         "700429689960923187", false),
     BLUSH            ("blush",            "700429690007060671", false),
     BOOST_TIER_0     ("boostTier0",       "700429689864585256", false),
