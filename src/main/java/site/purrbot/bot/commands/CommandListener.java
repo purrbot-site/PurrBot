@@ -123,6 +123,10 @@ public class CommandListener extends ListenerAdapter{
                         bot.getEmbedUtil().sendPermError(tc, user, Permission.MESSAGE_ADD_REACTION, true);
                         return;
                     }
+                    if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI)){
+                        bot.getEmbedUtil().sendPermError(tc, user, Permission.MESSAGE_EXT_EMOJI, true);
+                        return;
+                    }
                     if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
                         MessageEmbed notNsfw = bot.getEmbedUtil().getEmbed(user, guild)
                                 .setColor(0xFF0000)

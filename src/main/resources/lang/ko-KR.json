@@ -344,7 +344,7 @@
           "role_highest": "최고 역할",
           "role_total": "그 외 역할"
         },
-        "more_roles": "__**외 {remaining} 개의 역할**__",
+        "more_roles": "외 {remaining} 개의 역할",
         "no_member": "그 사람은 이 서버에 없어.",
         "no_roles": "`가진 역할 없음`",
         "no_roles_others": "`그 외 가진 역할 없음`",
@@ -381,7 +381,7 @@
         "request": {
           "accepted": "{target}이(가) {user}의 요청을 수락했어! OwO",
           "denied": "{target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. >.<",
-          "message": "{target}!\n{user}이(가) 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 ✅ 를 눌러. ❌ 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "message": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nReact with one of the below options to choose:\n{SEX} - Normal Sex\n{ANAL} - Anal Sex\n{YURI} - Yuri Sex\n{CANCEL} - Deny Request\n\n> **This request will time out in 1 minute!**",
           "open": "발정나지 말라고, {user}! 이미 네가 부탁한 사람이 있잖아.",
           "timed_out": "아마 {target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. ._."
         },

@@ -344,7 +344,7 @@
           "role_highest": "Höchste Rolle",
           "role_total": "Andere Rollen"
         },
-        "more_roles": "__**+{remaining} mehr**__",
+        "more_roles": "+{remaining} mehr",
         "no_member": "Das erwähnte Mitglied ist nicht in diesem Discord!",
         "no_roles": "`Keine Rollen gegeben`",
         "no_roles_others": "`Keine anderen Rollen gegeben`",
@@ -381,7 +381,7 @@
         "request": {
           "accepted": "{target} hat deine Anfrage akzeptiert {user}. OwO",
           "denied": "{target} möchte keinen Sex mit dir haben {user}. >.<",
-          "message": "Hey {target}!\n{user} möchte mit dir Sex haben. Willst du das auch?\nReagiere mit ✅ zum akzeptieren oder mit ❌ zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte Sex mit dir haben. Willst du das auch?\nReagiere mit einem der unteren Optionen zum wählen:\n{SEX} - Normaler Sex\n{ANAL} - Anal Sex\n{YURI} - Yuri Sex\n{CANCEL} - Anfrage ablehnen\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Sei nicht so eine notgeile Person {user}!\nDu hast bereits eine offene Anfrage. Warte bis diese angenommen oder abgelehnt wird, oder abläuft.",
           "timed_out": "Sieht so aus als ob {target} nicht mit dir Sex haben will {user}. ._."
         },

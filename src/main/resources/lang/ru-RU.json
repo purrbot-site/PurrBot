@@ -344,7 +344,7 @@
           "role_highest": "Высшая роль",
           "role_total": "Другие роли"
         },
-        "more_roles": "__**+{remaining} других**__",
+        "more_roles": "+{remaining} других",
         "no_member": "Упомянутый пользователь не участник этого Discord-севрера!",
         "no_roles": "`Нету назначенных ролей`",
         "no_roles_others": "`Других ролей не назначено`",
@@ -381,7 +381,7 @@
         "request": {
           "accepted": "{target} принимает просьбу {user}. OwO",
           "denied": "{target} не хочет заниматься сексом с {user}. >.<",
-          "message": "Эй {target}!\n{user} хочет трахнуть тебя. Ты... Хочешь этого?\nНажми на ✅, если да или этим ❌, если нет.\n\n> **Это предложение истечет через 1 минуту!**",
+          "message": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nReact with one of the below options to choose:\n{SEX} - Normal Sex\n{ANAL} - Anal Sex\n{YURI} - Yuri Sex\n{CANCEL} - Deny Request\n\n> **This request will time out in 1 minute!**",
           "open": "Не будь настолько пошлым(-ой), {user}!\nУ тебя все еще весит открытая заявка. Дождись принятия, отказа или истечения.",
           "timed_out": "Кхем... Похоже {target} не хочет секса с тобой, {user}. ._."
         },

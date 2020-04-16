@@ -30,6 +30,7 @@ import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
+import site.purrbot.bot.constants.Emotes;
 
 import java.util.concurrent.TimeUnit;
 
@@ -41,15 +42,12 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
         description =
                 "Wanna fuck someone?\n" +
                 "Mention a user, to send a request.\n" +
-                "The mentioned user can accept it by clicking on the ✅, deny it by clicking on ❌ or let it time out.\n" +
-                "\n" +
-                "Use `--anal` to get a gif with anal sex instead.\n" +
-                "Use `--yuri` to get a gif with two girls.",
+                "The mentioned user can choose if they want to have sex or not, by clicking the matching reaction.",
         triggers = {"fuck", "sex"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}fuck <@user> [--anal|--yuri]"),
-                @CommandAttribute(key = "help", value = "{p}fuck <@user> [--anal|--yuri]")
+                @CommandAttribute(key = "usage", value = "{p}fuck <@user>"),
+                @CommandAttribute(key = "help", value = "{p}fuck <@user>")
         }
 )
 public class CmdFuck implements Command{
@@ -73,6 +71,13 @@ public class CmdFuck implements Command{
                 .setImage(url);
     }
 
+    private boolean equalsAny(String id){
+        return (
+                id.equals(Emotes.SEX.getId()) || id.equals(Emotes.SEX_ANAL.getId()) ||
+                id.equals(Emotes.SEX_YURI.getId()) || id.equals(Emotes.CANCEL.getId())
+        );
+    }
+    
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
@@ -140,15 +145,21 @@ public class CmdFuck implements Command{
                 bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.message", author.getEffectiveName())
                         .replace("{target}", target.getAsMention())
         ).queue(message -> {
-            message.addReaction("\u2705").queue();
-            message.addReaction("\u274C").queue();
+            message.addReaction(Emotes.SEX.getNameAndId()).queue();
+            message.addReaction(Emotes.SEX_ANAL.getNameAndId()).queue();
+            message.addReaction(Emotes.SEX_YURI.getNameAndId()).queue();
+            message.addReaction(Emotes.CANCEL.getNameAndId()).queue();
             EventWaiter waiter = bot.getWaiter();
             waiter.waitForEvent(
                     GuildMessageReactionAddEvent.class,
                     ev -> {
                         MessageReaction.ReactionEmote emoji = ev.getReactionEmote();
-                        if(!emoji.getName().equals("\u2705") && !emoji.getName().equals("\u274C")) 
+                        if(!emoji.isEmote())
                             return false;
+                        
+                        if(!equalsAny(emoji.getId()))
+                            return false;
+                        
                         if(ev.getUser().isBot()) 
                             return false;
                         if(!ev.getMember().equals(target)) 
@@ -157,7 +168,8 @@ public class CmdFuck implements Command{
                         return ev.getMessageId().equals(message.getId()); 
                     },
                     ev -> {
-                        if(ev.getReactionEmote().getName().equals("\u274C")){
+                        String id = ev.getReactionEmote().getId();
+                        if(id.equals(Emotes.CANCEL.getId())){
                             message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
 
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
@@ -166,29 +178,25 @@ public class CmdFuck implements Command{
                                     bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.denied", author.getAsMention())
                                             .replace("{target}", target.getEffectiveName())
                             )).queue();
-                            return;
-                        }
-
-                        if(ev.getReactionEmote().getName().equals("\u2705")){
+                        }else{
                             message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-    
+                            
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                             
-                            String raw = msg.getContentRaw();
                             String link;
-                            if(raw.toLowerCase().contains("--anal") || raw.toLowerCase().contains("—anal"))
+                            if(id.equals(Emotes.SEX_ANAL.getId()))
                                 link = bot.getHttpUtil().getImage(API.GIF_ANAL_LEWD);
                             else
-                            if(raw.toLowerCase().contains("--yuri") || raw.toLowerCase().contains("—yuri"))
+                            if(id.equals(Emotes.SEX_YURI.getId()))
                                 link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
                             else
                                 link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
-
+    
                             ev.getChannel().sendMessage(MarkdownSanitizer.escape(
                                     bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.accepted", author.getAsMention())
                                             .replace("{target}", target.getEffectiveName())
                             )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
-
+    
                             if(link == null){
                                 ev.getChannel().sendMessage(MarkdownSanitizer.escape(
                                         bot.getMsg(guild.getId(), "purr.nsfw.fuck.message", author.getEffectiveName())
@@ -196,12 +204,11 @@ public class CmdFuck implements Command{
                                 )).queue();
                                 return;
                             }
-
+    
                             ev.getChannel().sendMessage(
                                     getFuckEmbed(author, target, link).build()
                             ).queue();
-
-                        } 
+                        }
                     }, 1, TimeUnit.MINUTES,
                     () -> {
                         message.delete().queue(null, ignore(UNKNOWN_MESSAGE));

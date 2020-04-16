@@ -83,16 +83,16 @@ public class CmdGuild implements Command{
             default:
             case NONE:
             case UNKNOWN:
-                return Emotes.BOOST_LEVEL_0.getEmote();
+                return Emotes.BOOST_TIER_0.getEmote();
             
             case TIER_1:
-                return Emotes.BOOST_LEVEL_1.getEmote();
+                return Emotes.BOOST_TIER_1.getEmote();
             
             case TIER_2:
-                return Emotes.BOOST_LEVEL_2.getEmote();
+                return Emotes.BOOST_TIER_2.getEmote();
             
             case TIER_3:
-                return Emotes.BOOST_LEVEL_3.getEmote();
+                return Emotes.BOOST_TIER_3.getEmote();
         }
     }
     
