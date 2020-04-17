@@ -366,7 +366,7 @@
         "request": {
           "accepted": "{target} accepted your request {user}!",
           "denied": "{target} doesn't want to get sucked by you {user}. :/",
-          "message": "Hey {target}!\n{user} wants to give you a blowjob. Do you want that too?\nReact with \u2705 to accept or with \u274C to deny it.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to give you a blowjob. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
           "open": "Don't be that greedy {user}! Wait until your previous requests get accepted, denied or times out.",
           "timed_out": "Looks like {target} doesn't want to get sucked by you {user}."
         },
@@ -413,7 +413,7 @@
         "request": {
           "accepted": "{target} accepted your request {user}. ;P",
           "denied": "{target} doesn't want you to lick their pussy {user}... Do they even have one?",
-          "message": "Hey {target}!\n{user} wants to lick your pussy. Do you want that (Or do you even have one)?\nReact with \u2705 to accept or with \u274C to deny it.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to lick your pussy. Do you want that?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
           "open": "Are you thirsty? You already have a open request {user}!\nWait for the other to accept or deny it, or for the request to time out.",
           "timed_out": "Seems like {target} doesn't want you to lick their pussy {user}... Perhaps they don't even have one? o////o"
         },
@@ -432,7 +432,7 @@
         "request": {
           "accepted": "{target1} and {target2} accepted your request {user}! >//w//<",
           "denied": "Either {target1} or {target2} don't want to have sex with you {user}.",
-          "message": "Hey {target1} and {target2}!\n{user} wants to fuck you both. Do you want that too?\nReact with \u2705 to accept or with \u274C to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target1} and {target2}!\n{user} wants to have sex with both of you. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This request will time out in 1 minute!**",
           "open": "Whoa there {user}! Show some patience you horny person!\nYou already asked people to fuck with you, so either wait for the to accept it, deny it or for the request to time out.",
           "timed_out": "Looks like either {target1} or {target2} doesn't want to fuck with you {user}. >\\_<"
         },

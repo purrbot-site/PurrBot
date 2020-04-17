@@ -366,7 +366,7 @@
         "request": {
           "accepted": "{target} hat deine Anfrage akzeptiert {user}!",
           "denied": "{target} möchte nicht von dir einen geblasen bekommen {user}. :/",
-          "message": "Hey {target}!\n{user} möchte dir einen blowjob geben. Willst du das auch?\nReagiere mit ✅ zum akzeptieren oder mit ❌ zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte dir einen blowjob geben. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Sei nicht so gierig {user}! Warte bis deine vorherige Anfrage angenommen, abgelehnt oder abgelaufen ist.",
           "timed_out": "Sieht so aus als ob {target} keinen von dir geblassen bekommen will {user}."
         },
@@ -413,7 +413,7 @@
         "request": {
           "accepted": "{target} hat deine Anfrage akzeptiert {user}. ;P",
           "denied": "{target} möchte nicht, dass du ihre Pussy leckst {user}... Hat Sie überhaupt eine?",
-          "message": "Hey {target}!\n{user} möchte deine Pussy lecken. Möchtest du das auch (Oder hast überhaupt eine)?\nReagiere mit ✅ zum akzeptieren oder mit ❌ zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte deine Pussy lecken. Möchtest du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Bist du durstig? Du hast bereits eine offene Anfrage {user}!\nWarte, bis diese angenommen, abgelehnt oder abgelaufen ist.",
           "timed_out": "Scheint so als will {target} nicht, dass du ihre Pussy leckst {user}... Vielleicht hat sie sogar keine? o////o"
         },
@@ -432,7 +432,7 @@
         "request": {
           "accepted": "{target1} und {target2} haben deine Anfrage akzeptiert {user}! >//w//<",
           "denied": "Entweder {target1} oder {target2} will keinen Sex mit dir haben {user}.",
-          "message": "Hey {target1} und {target2}!\n{user} möchte mit euch beiden Sex haben. Möchtet ihr das auch?\nReagiert mit ✅ zum akzeptieren oder mit ❌ zum ablehnen.\nNur wenn ihr beide dies akzeptiert, wird es passieren.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target1} und {target2}!\n{user} möchte mit euch beiden Sex haben. Möchtet ihr das auch?\nReagiert mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\nNur wenn ihr beide dies akzeptiert, wird es passieren.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Mal langsam {user}! Zeig etwas gedult du notgeile Person!\nDu hast bereits leute gefragt mit dir zu schlafen, also warte bis diese es entweder annehmen, ablehnen, oder die Anfrage abläuft.",
           "timed_out": "Sieht so aus als ob entweder {target1} oder {target2} nicht mit dir schlafen will {user}. >\\_<"
         },
