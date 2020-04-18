@@ -118,10 +118,11 @@ public class PurrBot {
     private void setup() throws LoginException{
         getFileManager().addFile("config", "/config.json", "./config.json")
                 .addFile("random", "/random.json", "./random.json")
-                .addFile("de", "/lang/de.json", "./lang/de.json")
-                .addFile("en", "/lang/en.json", "./lang/en.json")
-                .addFile("ko", "/lang/ko.json", "./lang/ko.json")
-                .addFile("ru", "/lang/ru.json", "./lang/ru.json");
+                .addLang("de-ch", "de-CH")
+                .addLang("en", "en")
+                .addLang("en-owo", "en-OWO")
+                .addLang("ko-kr", "ko-KR")
+                .addLang("ru-ru", "ru-RU");
 
         dbUtil        = new DBUtil(this);
         messageUtil   = new MessageUtil(this);
@@ -169,10 +170,6 @@ public class PurrBot {
                     .addAuthToken(
                             Site.DISCORD_BOTS_GG, 
                             getFileManager().getString("config", "tokens.discord-bots-gg")
-                    )
-                    .addAuthToken(
-                            Site.LBOTS_ORG, 
-                            getFileManager().getString("config", "tokens.lbots-org")
                     )
                     .addAuthToken(
                             Site.DISCORDEXTREMELIST_XYZ, 
@@ -326,12 +323,17 @@ public class PurrBot {
                 .replace("{SENKOTAILWAG}", Emotes.SENKO_TAIL_WAG.getEmote())
                 .replace("{SHIROTAILWAG}", Emotes.SHIRO_TAIL_WAG.getEmote())
                 .replace("{TYPING}", Emotes.TYPING.getEmote())
-                .replace("{VANILLABLUSH}", Emotes.VANILLABLUSH.getEmote())
-                .replace("{WAGTAIL}", Emotes.WAGTAIL.getEmote())
+                .replace("{VANILLABLUSH}", Emotes.BLUSH.getEmote())
+                .replace("{WAGTAIL}", Emotes.NEKO_TAIL_WAG.getEmote())
                 .replace("{EDIT}", Emotes.EDIT.getEmote())
                 .replace("{DOWNLOAD}", Emotes.DOWNLOAD.getEmote())
                 .replace("{DISCORD}", Emotes.DISCORD.getEmote())
                 .replace("{TAIL}", Emotes.TAIL.getEmote())
+                .replace("{SEX}", Emotes.SEX.getEmote())
+                .replace("{ANAL}", Emotes.SEX_ANAL.getEmote())
+                .replace("{YURI}", Emotes.SEX_YURI.getEmote())
+                .replace("{ACCEPT}", Emotes.ACCEPT.getEmote())
+                .replace("{CANCEL}", Emotes.CANCEL.getEmote())
                 // Wiki pages
                 .replace("{wiki_bg}", Links.WIKI.getUrl() + "/welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI.getUrl() + "/welcome-images#icons")
@@ -353,6 +355,7 @@ public class PurrBot {
     
     public String getMsg(String id, String path, String user, String targets){
         return getMsg(id, path, user)
+                .replace("{target}", targets)
                 .replace("{targets}", getMessageUtil().replaceLast(targets, ",", " " + getMsg(id, "misc.and")));
     }
     

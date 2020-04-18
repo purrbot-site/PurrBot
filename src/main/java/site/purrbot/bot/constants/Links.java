@@ -26,7 +26,7 @@ public enum  Links {
     // GitHub links
     GITHUB     ("https://purrbot.site/github"),
     WIKI       ("https://docs.purrbot.site/bot"),
-    TRANSLATORS("https://github.com/purrbot-site/Translations#supported-languages"),
+    TRANSLATORS("https://translations.purrbot.site"),
 
     // Bot lists
     BOTLIST_SPACE         ("https://botlist.space/bot/425382319449309197"),

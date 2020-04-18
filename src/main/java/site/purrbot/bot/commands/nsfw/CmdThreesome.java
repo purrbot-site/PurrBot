@@ -29,6 +29,7 @@ import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
+import site.purrbot.bot.constants.Emotes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,11 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
         triggers = {"threesome", "3some"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}threesome <@user1> <@user2> [--mmf|--fff]"),
+                @CommandAttribute(key = "usage", value = 
+                        "{p}threesome <@user1> <@user2>\n" +
+                        "{p}threesome <@user1> <@user2> --fff\n" +
+                        "{p}threesome <@user1> <@user2> --mmf"
+                ),
                 @CommandAttribute(key = "help", value = "{p}threesome <@user1> <@user2> [--mmf|--fff]")
         }
 )
@@ -76,10 +81,10 @@ public class CmdThreesome implements Command{
     }
     
     private boolean allUser(List<String> list, String id, String emoji){
-        if(emoji.equals("❌"))
+        if(emoji.equals(Emotes.CANCEL.getId()))
             return true;
         
-        if(!emoji.equals("✅"))
+        if(!emoji.equals(Emotes.ACCEPT.getId()))
             return false;
         
         list.remove(id);
@@ -155,14 +160,18 @@ public class CmdThreesome implements Command{
                         .replace("{target1}", target1.getAsMention())
                         .replace("{target2}", target2.getAsMention())
         ).queue(message -> { 
-            message.addReaction("\u2705").queue();
-            message.addReaction("\u274C").queue();
+            message.addReaction(Emotes.ACCEPT.getNameAndId()).queue();
+            message.addReaction(Emotes.CANCEL.getNameAndId()).queue();
             EventWaiter waiter = bot.getWaiter();
             waiter.waitForEvent(
                     GuildMessageReactionAddEvent.class,
                     ev -> {
                         MessageReaction.ReactionEmote emoji = ev.getReactionEmote();
-                        if(!emoji.getName().equals("\u2705") && !emoji.getName().equals("\u274C")) 
+                        if(!emoji.isEmote())
+                            return false;
+                        
+                        String id = emoji.getId();
+                        if(!id.equals(Emotes.ACCEPT.getId()) && !id.equals(Emotes.CANCEL.getId())) 
                             return false;
                         if(ev.getUser().isBot()) 
                             return false;
@@ -171,10 +180,10 @@ public class CmdThreesome implements Command{
                         if(!ev.getMessageId().equals(message.getId()))
                             return false;
                         
-                        return allUser(list, ev.getUser().getId(), emoji.getName());
+                        return allUser(list, ev.getUser().getId(), emoji.getId());
                     },
                     ev -> {
-                        if(ev.getReactionEmote().getName().equals("\u274C")){
+                        if(ev.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
                             message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                             
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
@@ -186,10 +195,7 @@ public class CmdThreesome implements Command{
                                             .replace("{target1}", target1.getEffectiveName())
                                             .replace("{target2}", target2.getEffectiveName())
                             )).queue();
-                            return;
-                        }
-                        
-                        if(ev.getReactionEmote().getName().equals("\u2705")){
+                        }else{
                             message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                             
                             queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
