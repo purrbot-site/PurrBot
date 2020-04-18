@@ -153,7 +153,7 @@
           "curr_lang_value": "Engwish UwU (en-owo)",
           "description": "You can change the wanguage to one of the suppowted ones wisted bewow using `{prefix}language set <language>`",
           "translators_title": "Twanslators",
-          "translators_value": "Thanks go to aww peopwe that twanswated the bot!\nYou may find a fuww wist of aww cuwwent twanswators and theiw twanswations [here]({link})."
+          "translators_value": "Thanks go to aww peopwe that twanswated the bot!\nYou may find the twanswation pwoject [here]({link})."
         },
         "language_set": "Wanguage set to `Engwish OwO (en-owo)`!",
         "no_language": "Pwease pwovide a wanguage you want to set!"
@@ -381,8 +381,8 @@
         "request": {
           "accepted": "{target} accepted your wequest {user}. OwO",
           "denied": "{target} doesn't want to have sex with you {user}. >.<",
-          "message": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny the request.\n\n> **This request will time out in 1 minute!**",
-          "message_choose": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nReact with one of the below options to choose:\n{SEX} - Normal Sex\n{ANAL} - Anal Sex\n{YURI} - Yuri Sex\n{CANCEL} - Deny Request\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to have sex with you OwO. Do you want that too?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This wequest wiww time out in 1 minute!**",
+          "message_choose": "Hey {target}!\n{user} wants to have sex with you OwO. Do you want that too?\nWeact with one of the bewow options to choose:\n{SEX} - Nowmaw Sex UwU\n{ANAL} - Anaw Sex OwO\n{YURI} - Yuwi Sex\n{CANCEL} - Deny Wequest\n\n> **This wequest wiww time out in 1 minute!**",
           "open": "Don't be such a howny person {user}!\nYou awweady have a open request. Wait for it to be accepted, denied or fow it to time out.",
           "timed_out": "Looks like {target} doesn't want to fuck with you {user}. ._."
         },
@@ -413,7 +413,7 @@
         "request": {
           "accepted": "{target} accepted youw wequest {user}. ;P",
           "denied": "{target} doesn't want you to wick theiw pussy {user}... Do they even have one?",
-          "message": "Hey {target}!\n{user} wants to wick youw pussy. Do you want that?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This wequest will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to wick youw pussy. Do you want that (Ow do you even have one)?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This wequest will time out in 1 minute!**",
           "open": "Are you thiwsty? You alweady have a open request {user}!\nWait for the othew to accept or deny it, or fow the wequest to time out.",
           "timed_out": "Seems like {target} doesn't want you to lick theiw pussy {user}... Pewhaps they don't even have one? o////o"
         },
@@ -432,7 +432,7 @@
         "request": {
           "accepted": "{target1} and {target2} accepted youw wequest {user}! >//w//<",
           "denied": "Eithew {target1} ow {target2} don't want to have sex with you {user}.",
-          "message": "Hey {target1} and {target2}!\n{user} wants to have sex with you both OwO. Do you want that too?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This wequest will time out in 1 minute!**",
+          "message": "Hey {target1} and {target2}!\n{user} wants to have sex you both OwO. Do you want that too?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This wequest will time out in 1 minute!**",
           "open": "Whoa thewe {user}! Show some patience you howny pewson!\nYou awweady asked people to fuck with you, so eithew wait fow then to accept it, deny it or for the wequest to time out.",
           "timed_out": "Looks like eithew {target1} ow {target2} doesn't want to fuck with you {user}. >\\_<"
         },
