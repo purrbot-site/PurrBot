@@ -217,6 +217,8 @@
           "boost_multiple": "{boost} бусты",
           "boost_single": "1 буст",
           "boost_tier": "Уровень буста: {BOOST_TIER} (Уровень {level})",
+          "channels_title": "Каналы",
+          "channels_value": "{CATEGORY} Всего: {channels_total}\n{TEXTCHANNEL} Текстовых каналов: {channels_text}\n{VOICECHANNEL} Голосовых каналов: {channels_voice}",
           "created": "Создано",
           "level": "Уровень",
           "levels": {
@@ -228,7 +230,7 @@
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Участники",
-          "members_value": "```yaml\nВсего: {members_total}\n\nЛюдей: {members_human}\nБотов: {members_bot}\n```",
+          "members_value": "{MEMBERS} Всего: {members_total}\n{FACE} Людей: {members_human}\n{BOTICON} Ботов: {members_bot}",
           "owner": "Владелец",
           "region": "Регион"
         }
