@@ -6,7 +6,7 @@ plugins {
     id 'net.kyori.blossom' version '1.1.0'
 }
 
-version = '2.14.2'
+version = '2.14.3'
 
 description = """"""
 
