@@ -217,8 +217,8 @@
           "boost_multiple": "{boost} 명이 부스트 중",
           "boost_single": "1 명이 부스트 중",
           "boost_tier": "부스트 레밸: {BOOST_TIER} (Level {level})",
-          "channels_title": "Channels",
-          "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Text Channels: {channels_text}\n{VOICECHANNEL} Voice Channels: {channels_voice}",
+          "channels_title": "채널",
+          "channels_value": "{CATEGORY} 합계: {channels_total}\n\n{TEXTCHANNEL} 텍스트 채널: {channels_text}\n{VOICECHANNEL} 음성 채널: {channels_voice}",
           "created": "생성 일자",
           "level": "보안 수준",
           "levels": {
@@ -230,7 +230,7 @@
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "사용자",
-          "members_value": "전체: {members_total}\n\n사람: {members_human}\n봇: {members_bot}",
+          "members_value": "{MEMBERS} 전체: {members_total}\n\n{FACE} 사람: {members_human}\n{BOTICON} 봇: {members_bot}",
           "owner": "소유자",
           "region": "지역"
         }
