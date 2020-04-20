@@ -18,6 +18,7 @@
       "You can onwy see those naughty things in NSFW channews {user}.",
       "Evewything has its pwace. And this command bewongs in a NSFW-channel {user]! OwO"
     ],
+    "nsfw_request_error": "Thewe was an ewwow while handling the request TwT. Make suwe that my message wasn't deleted and that I have sufficient pewmissions!",
     "title": "Ewwow",
     "unknown": "T-that is a bit embawwasing now, but I had an ewwow while pewfowming an action. {VANILLABLUSH}\nPwease wepowt this on the Discowd, ow on GitHub!"
   },
@@ -217,8 +218,8 @@
           "boost_multiple": "{boost} boosts",
           "boost_single": "1 boost",
           "boost_tier": "Boost Tiew: {BOOST_TIER} (Level {level})",
-          "channels_title": "Channels",
-          "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Text Channels: {channels_text}\n{VOICECHANNEL} Voice Channels: {channels_voice}",
+          "channels_title": "Channews",
+          "channels_value": "{CATEGORY} Totaw: {channels_total}\n\n{TEXTCHANNEL} Text Channews: {channels_text}\n{VOICECHANNEL} Voice Channews: {channels_voice}",
           "created": "Cweated",
           "level": "Wevew",
           "levels": {
