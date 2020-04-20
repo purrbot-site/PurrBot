@@ -28,9 +28,9 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
 import javax.annotation.Nullable;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
 import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
@@ -133,29 +133,42 @@ public class CmdEmote implements Command{
                     .setTimeout(1, TimeUnit.MINUTES)
                     .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
                     .waitOnSinglePage(true)
+                    .addUsers(msg.getAuthor())
                     .setFinalAction(message -> {
                         if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
                             message.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
                     });
             
-            List<Message> messages = tc.getIterableHistory().stream().limit(100).filter(
-                    history -> !history.getEmotes().isEmpty()
-            ).collect(Collectors.toList());
-
-            if(messages.isEmpty()){
+            if(guild.getOwner() != null)
+                builder.addUsers(guild.getOwner().getUser());
+            
+            Map<Emote, String> emotes = new LinkedHashMap<>();
+            for(Message message : tc.getIterableHistory().limit(100).complete()){
+                if(message.getEmotes().isEmpty()){
+                    continue;
+                }
+                
+                String link = message.getJumpUrl();
+                for(Emote emote : message.getEmotes()){
+                    emotes.put(emote, link);
+                }
+            }
+            
+            if(emotes.isEmpty()){
                 bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.emote.not_found");
                 return;
             }
-    
-            int size = messages.size();
-            for(int i = 0; i < messages.size(); i++){
-                Message message = messages.get(i);
+            
+            int size = emotes.size();
+            int pos = 0;
+            for(Map.Entry<Emote, String> info : emotes.entrySet()){
+                pos++;
                 builder.addItems(emoteInfo(
                         msg.getAuthor(),
-                        message.getEmotes().get(0),
+                        info.getKey(),
                         guild,
-                        message.getJumpUrl(),
-                        i + 1,
+                        info.getValue(),
+                        pos,
                         size
                 ));
             }

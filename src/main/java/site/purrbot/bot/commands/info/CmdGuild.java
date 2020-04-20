@@ -119,6 +119,17 @@ public class CmdGuild implements Command{
                 .replace("{members_bot}", String.valueOf(bots));
     }
     
+    private String getChannels(Guild guild){
+        int total = guild.getChannels().size();
+        long text = guild.getChannels().stream().filter(chan -> chan.getType().equals(ChannelType.TEXT)).count();
+        long voice = guild.getChannels().stream().filter(chan -> chan.getType().equals(ChannelType.VOICE)).count();
+        
+        return bot.getMsg(guild.getId(), "purr.info.guild.embed.channels_value")
+                .replace("{channels_total}", String.valueOf(total))
+                .replace("{channels_text}", String.valueOf(text))
+                .replace("{channels_voice}", String.valueOf(voice));
+    }
+    
     @Override
     public void execute(Message msg, String s){
         Guild guild = msg.getGuild();
@@ -164,7 +175,12 @@ public class CmdGuild implements Command{
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.guild.embed.members_title"),
                         getMembers(guild),
-                        false
+                        true
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.channels_title"),
+                        getChannels(guild),
+                        true
                 )
                 .build();
 

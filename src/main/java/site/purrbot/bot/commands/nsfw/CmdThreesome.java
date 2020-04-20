@@ -92,6 +92,105 @@ public class CmdThreesome implements Command{
         return list.isEmpty();
     }
     
+    public void handleEvent(List<String> ids, Message msg, Message botMsg, Member author, Member target1, Member target2){
+        Guild guild = botMsg.getGuild();
+        EventWaiter waiter = bot.getWaiter();
+        waiter.waitForEvent(
+                GuildMessageReactionAddEvent.class,
+                event -> {
+                    MessageReaction.ReactionEmote emote = event.getReactionEmote();
+                    if(!emote.isEmote())
+                        return false;
+                    
+                    if(!emote.getId().equals(Emotes.ACCEPT.getId()) && !emote.getId().equals(Emotes.CANCEL.getId()))
+                        return false;
+                    
+                    if(event.getUser().isBot())
+                        return false;
+                    
+                    if(!event.getMember().equals(target1) && event.getMember().equals(target2))
+                        return false;
+                    
+                    if(!event.getMessageId().equals(botMsg.getId()))
+                        return false;
+                    
+                    return allUser(ids, event.getUserId(), emote.getId());
+                },
+                event -> {
+                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
+                    botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    
+                    if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
+                        ids.remove(target1.getId());
+                        ids.remove(target2.getId());
+                        
+                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(
+                                        guild.getId(), 
+                                        "purr.nsfw.threesome.request.denied", 
+                                        author.getAsMention()
+                                )
+                                        .replace("{target1}", target1.getEffectiveName())
+                                        .replace("{target2}", target2.getEffectiveName())
+                        )).queue();
+                    }else{
+                        String raw = msg.getContentRaw().toLowerCase();
+                        String link;
+                        if(raw.contains("--mmf"))
+                            link = bot.getHttpUtil().getImage(API.GIF_THREESOME_MMF_LEWD);
+                        else
+                        if(raw.contains("--fff"))
+                            link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFF_LEWD);
+                        else
+                            link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFM_LEWD);
+                        
+                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(
+                                        guild.getId(),
+                                        "purr.nsfw.threesome.request.accepted",
+                                        author.getAsMention()
+                                )
+                                        .replace("{target1}", target1.getEffectiveName())
+                                        .replace("{target2}", target2.getEffectiveName())
+                        )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
+                        
+                        if(link == null){
+                            event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                    bot.getMsg(
+                                            guild.getId(),
+                                            "purr.nsfw.threesome.message",
+                                            author.getEffectiveName()
+                                    )
+                                            .replace("{target1}", target1.getEffectiveName())
+                                            .replace("{target2}", target2.getEffectiveName())
+                            )).queue();
+                            return;
+                        }
+                        
+                        event.getChannel().sendMessage(
+                                getEmbed(author, target1, target1, link)
+                        ).queue();
+                    }
+                }, 1, TimeUnit.MINUTES,
+                () -> {
+                    botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
+                    ids.remove(target1.getId());
+                    ids.remove(target2.getId());
+                    
+                    botMsg.getTextChannel().sendMessage(MarkdownSanitizer.escape(
+                            bot.getMsg(
+                                    guild.getId(),
+                                    "purr.nsfw.threesome.request.timed_out",
+                                    author.getAsMention()
+                            )
+                                    .replace("{target1}", target1.getEffectiveName())
+                                    .replace("{target2}", target2.getEffectiveName())
+                    )).queue();
+                }
+        );
+    }
+    
     @Override
     public void execute(Message msg, String s){
         TextChannel tc = msg.getTextChannel();
@@ -159,89 +258,12 @@ public class CmdThreesome implements Command{
                 bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.message", author.getEffectiveName())
                         .replace("{target1}", target1.getAsMention())
                         .replace("{target2}", target2.getAsMention())
-        ).queue(message -> { 
-            message.addReaction(Emotes.ACCEPT.getNameAndId()).queue();
-            message.addReaction(Emotes.CANCEL.getNameAndId()).queue();
-            EventWaiter waiter = bot.getWaiter();
-            waiter.waitForEvent(
-                    GuildMessageReactionAddEvent.class,
-                    ev -> {
-                        MessageReaction.ReactionEmote emoji = ev.getReactionEmote();
-                        if(!emoji.isEmote())
-                            return false;
-                        
-                        String id = emoji.getId();
-                        if(!id.equals(Emotes.ACCEPT.getId()) && !id.equals(Emotes.CANCEL.getId())) 
-                            return false;
-                        if(ev.getUser().isBot()) 
-                            return false;
-                        if(!ev.getMember().equals(target1) && !ev.getMember().equals(target2)) 
-                            return false;
-                        if(!ev.getMessageId().equals(message.getId()))
-                            return false;
-                        
-                        return allUser(list, ev.getUser().getId(), emoji.getId());
-                    },
-                    ev -> {
-                        if(ev.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
-                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                            
-                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                            list.remove(target1.getId());
-                            list.remove(target2.getId());
-                            
-                            ev.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.denied", author.getAsMention())
-                                            .replace("{target1}", target1.getEffectiveName())
-                                            .replace("{target2}", target2.getEffectiveName())
-                            )).queue();
-                        }else{
-                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                            
-                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                            
-                            String raw = msg.getContentRaw();
-                            String link;
-                            if(raw.toLowerCase().contains("--mmf") || raw.toLowerCase().contains("—mmf"))
-                                link = bot.getHttpUtil().getImage(API.GIF_THREESOME_MMF_LEWD);
-                            else
-                            if(raw.toLowerCase().contains("--fff") || raw.toLowerCase().contains("—fff"))
-                                link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFF_LEWD);
-                            else
-                                link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFM_LEWD);
-                            
-                            ev.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.accepted", author.getAsMention())
-                                            .replace("{target1}", target1.getEffectiveName())
-                                            .replace("{target2}", target2.getEffectiveName())
-                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
-                            
-                            if(link == null || link.isEmpty()){
-                                ev.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                        bot.getMsg(guild.getId(), "purr.nsfw.threesome.message", author.getEffectiveName())
-                                                .replace("{target1}", target1.getEffectiveName())
-                                                .replace("{target2}", target2.getEffectiveName())
-                                )).queue();
-                                return;
-                            }
-                            
-                            ev.getChannel().sendMessage(getEmbed(author, target1, target2, link)).queue();
-                        }
-                    }, 1, TimeUnit.MINUTES,
-                    () -> {
-                        message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                        
-                        queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                        list.remove(target1.getId());
-                        list.remove(target2.getId());
-                        
-                        tc.sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.timed_out", author.getAsMention())
-                                        .replace("{target1}", target1.getEffectiveName())
-                                        .replace("{target2}", target2.getEffectiveName())
-                        )).queue();
-                    }
-            );
-        });
+        ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
+                .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
+                .queue(
+                        v -> handleEvent(list, msg, message, author, target1, target2),
+                        e -> bot.getEmbedUtil().sendError(tc, author.getUser(), "errors.nsfw_request_error")
+                )
+        );
     }
 }

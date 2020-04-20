@@ -18,6 +18,7 @@
       "You can only see those naughty things in NSFW channels {user}.",
       "Everything has its place. And this command belongs in a NSFW-channel {user}."
     ],
+    "nsfw_request_error": "There was an error while handling the request. Make sure that my message wasn't deleted and that I have sufficient permissions!",
     "title": "Error",
     "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {VANILLABLUSH}\nPlease report this on the Discord, or on GitHub!"
   },

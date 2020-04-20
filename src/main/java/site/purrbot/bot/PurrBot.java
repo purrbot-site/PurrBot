@@ -334,6 +334,12 @@ public class PurrBot {
                 .replace("{YURI}", Emotes.SEX_YURI.getEmote())
                 .replace("{ACCEPT}", Emotes.ACCEPT.getEmote())
                 .replace("{CANCEL}", Emotes.CANCEL.getEmote())
+                .replace("{BOTICON}", Emotes.BOT_ICON.getEmote())
+                .replace("{CATEGORY}", Emotes.CATEGORY.getEmote())
+                .replace("{TEXTCHANNEL}", Emotes.TEXT_CHANNEL.getEmote())
+                .replace("{VOICECHANNEL}", Emotes.VOICE_CHANNEL.getEmote())
+                .replace("{MEMBERS}", Emotes.MEMBERS.getEmote())
+                .replace("{FACE}", Emotes.FACE.getEmote())
                 // Wiki pages
                 .replace("{wiki_bg}", Links.WIKI.getUrl() + "/welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI.getUrl() + "/welcome-images#icons")

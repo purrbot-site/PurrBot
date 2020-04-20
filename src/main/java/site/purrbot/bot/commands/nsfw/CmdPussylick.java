@@ -62,13 +62,83 @@ public class CmdPussylick implements Command{
             .expireAfterWrite(2, TimeUnit.MINUTES)
             .build();
     
-    private EmbedBuilder getLickEmbed(Member requester, Member target, String url){
+    private MessageEmbed getLickEmbed(Member requester, Member target, String url){
         return bot.getEmbedUtil().getEmbed()
                 .setDescription(MarkdownSanitizer.escape(
                         bot.getMsg(requester.getGuild().getId(), "purr.nsfw.pussylick.message", requester.getEffectiveName())
                             .replace("{target}", target.getEffectiveName())
                 ))
-                .setImage(url);
+                .setImage(url)
+                .build();
+    }
+    
+    private void handleEvent(Message message, Member author, Member target){
+        Guild guild = message.getGuild();
+        EventWaiter waiter = bot.getWaiter();
+        waiter.waitForEvent(
+                GuildMessageReactionAddEvent.class,
+                event -> {
+                    MessageReaction.ReactionEmote emote = event.getReactionEmote();
+                    if(!emote.isEmote())
+                        return false;
+                    
+                    if(!emote.getId().equals(Emotes.ACCEPT.getId()) && !emote.getId().equals(Emotes.CANCEL.getId()))
+                        return false;
+                    
+                    if(event.getUser().isBot())
+                        return false;
+                    
+                    if(!event.getMember().equals(target))
+                        return false;
+                    
+                    return event.getMessageId().equals(message.getId());
+                },
+                event -> {
+                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
+                    message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    
+                    if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
+                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(
+                                        guild.getId(),
+                                        "purr.nsfw.pussylick.request.denied",
+                                        author.getAsMention(),
+                                        target.getEffectiveName()
+                                )
+                        )).queue();
+                    }else{
+                        String link = bot.getHttpUtil().getImage(API.GIF_PUSSYLICK_LEWD);
+                        
+                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(
+                                        guild.getId(),
+                                        "purr.nsfw.pussylick.request.accepted",
+                                        author.getAsMention(),
+                                        target.getEffectiveName()
+                                )
+                        )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
+                        
+                        if(link == null){
+                            event.getChannel().sendMessage(
+                                    bot.getMsg(
+                                            guild.getId(),
+                                            "purr.nsfw.pussylick.message",
+                                            author.getEffectiveName(),
+                                            target.getEffectiveName()
+                                    )
+                            ).queue();
+                            return;
+                        }
+                        
+                        event.getChannel().sendMessage(
+                                getLickEmbed(author, target, link)
+                        ).queue();
+                    }
+                }, 1, TimeUnit.MINUTES,
+                () -> {
+                    
+                }
+        );
     }
     
     @Override
@@ -130,73 +200,12 @@ public class CmdPussylick implements Command{
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.message", author.getEffectiveName())
                     .replace("{target}", target.getAsMention())
-        ).queue(message -> {
-            message.addReaction(Emotes.ACCEPT.getNameAndId()).queue();
-            message.addReaction(Emotes.CANCEL.getNameAndId()).queue();
-            EventWaiter waiter = bot.getWaiter();
-            waiter.waitForEvent(
-                    GuildMessageReactionAddEvent.class,
-                    ev -> {
-                        MessageReaction.ReactionEmote emoji = ev.getReactionEmote();
-                        if(!emoji.isEmote())
-                            return false;
-                        
-                        String id = emoji.getId();
-                        if(!id.equals(Emotes.ACCEPT.getId()) && !id.equals(Emotes.CANCEL.getId()))
-                            return false;
-                        if(ev.getUser().isBot())
-                            return false;
-                        if(!ev.getMember().equals(target))
-                            return false;
-                        
-                        return ev.getMessageId().equals(message.getId());
-                    },
-                    ev -> {
-                        if(ev.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
-                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                            
-                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                            
-                            ev.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.denied", author.getAsMention())
-                                        .replace("{target}", target.getEffectiveName())
-                            )).queue();
-                        }else{
-                            message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-    
-                            queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                            
-                            String link = bot.getHttpUtil().getImage(API.GIF_PUSSYLICK_LEWD);
-                            
-                            ev.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.accepted", author.getAsMention())
-                                        .replace("{target}", target.getEffectiveName())
-                            )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
-                            
-                            if(link == null){
-                                ev.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                        bot.getMsg(guild.getId(), "purr.nsfw.pussylick.message", author.getEffectiveName())
-                                            .replace("{target}", target.getEffectiveName())
-                                )).queue();
-                                return;
-                            }
-                            
-                            ev.getChannel().sendMessage(
-                                    getLickEmbed(author, target, link).build()
-                            ).queue();
-                        }
-                    }, 1, TimeUnit.MINUTES,
-                    () -> {
-                        message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                        
-                        queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                        
-                        tc.sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.timed_out", author.getAsMention())
-                                    .replace("{target}", target.getEffectiveName())
-                        )).queue();
-                    }
-            );
-        });
+        ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
+                .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
+                .queue(
+                        v -> handleEvent(message, author, target),
+                        e -> bot.getEmbedUtil().sendError(tc, author.getUser(), "errors.nsfw_request_error")
+                )
+        );
     }
 }

@@ -36,12 +36,16 @@ public enum Emotes{
     BOOST_TIER_2     ("boostTier2",       "700429689864323144", false),
     BOOST_TIER_3     ("boostLevel3",      "700429690107723826", false),
     BOT              ("bot",              "700429689835094066", false),
+    BOT_ICON         ("botIcon",          "701210618140557383", false),
     CANCEL           ("cancel",           "700439540875395112", false),
+    CATEGORY         ("category",         "701213334657040415", false),
     DISCORD          ("discord",          "700429689503744161", false),
     DOWNLOAD         ("download",         "700429689444892703", false),
     EDIT             ("edit",             "700429689428377672", false),
+    FACE             ("face",             "701217337776537652", false),
     JOINED_GUILD     ("joinedGuild",      "592043203629416459", false),
     LEFT_GUILD       ("leftGuild",        "592043203042213925", false),
+    MEMBERS          ("members",          "701217337692651541", false),
     NEKOWO           ("nekOwO",           "700429690309050409", false),
     OWNER            ("owner",            "700429689918849105", false),
     PURR             ("purr",             "700429690405519370", false),
@@ -51,7 +55,9 @@ public enum Emotes{
     SNUGGLE          ("snuggle",          "700429690086752338", false),
     STATUS_DISCONNECT("statusDisconnect", "592043203440410624", false),
     STATUS_READY     ("statusReady",      "592043203646193692", false),
-    TAIL             ("tail",             "700429690321633363", false);
+    TAIL             ("tail",             "700429690321633363", false),
+    TEXT_CHANNEL     ("textChannel",      "701213334409576540", false),
+    VOICE_CHANNEL    ("voiceChannel",     "701213334715891742", false);
 
 
     private final String name;
