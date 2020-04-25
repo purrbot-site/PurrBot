@@ -54,7 +54,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                         "{p}threesome <@user1> <@user2> --fff\n" +
                         "{p}threesome <@user1> <@user2> --mmf"
                 ),
-                @CommandAttribute(key = "help", value = "{p}threesome <@user1> <@user2> [--mmf|--fff]")
+                @CommandAttribute(key = "help", value = "{p}threesome <@user1> <@user2> [--fff|--mmf]")
         }
 )
 public class CmdThreesome implements Command{
@@ -92,8 +92,17 @@ public class CmdThreesome implements Command{
         return list.isEmpty();
     }
     
-    public void handleEvent(List<String> ids, Message msg, Message botMsg, Member author, Member target1, Member target2){
+    public void handleEvent(Message msg, Message botMsg, Member author, Member target1, Member target2){
         Guild guild = botMsg.getGuild();
+        List<String> list = new ArrayList<>();
+        list.add(target1.getId());
+        list.add(target2.getId());
+        
+        queue.put(
+                String.format("%s:%s", author.getId(), guild.getId()), 
+                String.format("%s:%s", target1.getId(), target2.getId())
+        );
+        
         EventWaiter waiter = bot.getWaiter();
         waiter.waitForEvent(
                 GuildMessageReactionAddEvent.class,
@@ -108,21 +117,21 @@ public class CmdThreesome implements Command{
                     if(event.getUser().isBot())
                         return false;
                     
-                    if(!event.getMember().equals(target1) && event.getMember().equals(target2))
+                    if(!event.getMember().equals(target1) && !event.getMember().equals(target2))
                         return false;
                     
                     if(!event.getMessageId().equals(botMsg.getId()))
                         return false;
                     
-                    return allUser(ids, event.getUserId(), emote.getId());
+                    return allUser(list, event.getUserId(), emote.getId());
                 },
                 event -> {
                     queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                     botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                     
                     if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
-                        ids.remove(target1.getId());
-                        ids.remove(target2.getId());
+                        list.remove(target1.getId());
+                        list.remove(target2.getId());
                         
                         event.getChannel().sendMessage(MarkdownSanitizer.escape(
                                 bot.getMsg(
@@ -168,15 +177,15 @@ public class CmdThreesome implements Command{
                         }
                         
                         event.getChannel().sendMessage(
-                                getEmbed(author, target1, target1, link)
+                                getEmbed(author, target1, target2, link)
                         ).queue();
                     }
                 }, 1, TimeUnit.MINUTES,
                 () -> {
                     botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                     queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                    ids.remove(target1.getId());
-                    ids.remove(target2.getId());
+                    list.remove(target1.getId());
+                    list.remove(target2.getId());
                     
                     botMsg.getTextChannel().sendMessage(MarkdownSanitizer.escape(
                             bot.getMsg(
@@ -249,11 +258,6 @@ public class CmdThreesome implements Command{
             return;
         }
         
-        queue.put(String.format("%s:%s", author.getId(), guild.getId()), String.format("%s:%s", target1.getId(), target2.getId()));
-        List<String> list = new ArrayList<>();
-        list.add(target1.getId());
-        list.add(target2.getId());
-        
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.message", author.getEffectiveName())
                         .replace("{target1}", target1.getAsMention())
@@ -261,7 +265,7 @@ public class CmdThreesome implements Command{
         ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
-                        v -> handleEvent(list, msg, message, author, target1, target2),
+                        v -> handleEvent(msg, message, author, target1, target2),
                         e -> bot.getEmbedUtil().sendError(tc, author.getUser(), "errors.nsfw_request_error")
                 )
         );

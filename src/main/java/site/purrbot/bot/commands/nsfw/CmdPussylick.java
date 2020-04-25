@@ -74,6 +74,8 @@ public class CmdPussylick implements Command{
     
     private void handleEvent(Message message, Member author, Member target){
         Guild guild = message.getGuild();
+        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
+        
         EventWaiter waiter = bot.getWaiter();
         waiter.waitForEvent(
                 GuildMessageReactionAddEvent.class,
@@ -136,7 +138,18 @@ public class CmdPussylick implements Command{
                     }
                 }, 1, TimeUnit.MINUTES,
                 () -> {
+                    TextChannel channel = message.getTextChannel();
+                    message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
                     
+                    channel.sendMessage(MarkdownSanitizer.escape(
+                            bot.getMsg(
+                                    guild.getId(),
+                                    "purr.nsfw.pussylick.request.timed_out",
+                                    author.getAsMention(),
+                                    target.getEffectiveName()
+                            )
+                    )).queue();
                 }
         );
     }
@@ -196,7 +209,6 @@ public class CmdPussylick implements Command{
             return;
         }
         
-        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.message", author.getEffectiveName())
                     .replace("{target}", target.getAsMention())

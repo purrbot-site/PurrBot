@@ -71,6 +71,8 @@ public class CmdBlowjob implements Command{
 
     private void handleEvent(Message message, Member author, Member target){
         Guild guild = message.getGuild();
+        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
+        
         EventWaiter waiter = bot.getWaiter();
         waiter.waitForEvent(
                 GuildMessageReactionAddEvent.class,
@@ -214,8 +216,7 @@ public class CmdBlowjob implements Command{
             ).queue();
             return;
         }
-
-        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
+        
         tc.sendMessage(
                 bot.getMsg(
                         guild.getId(), 

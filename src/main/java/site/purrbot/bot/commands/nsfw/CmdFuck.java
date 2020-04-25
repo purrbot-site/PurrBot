@@ -98,6 +98,8 @@ public class CmdFuck implements Command{
     
     private void handleEvent(Message msg, Message botMsg, Member author, Member target){
         Guild guild = botMsg.getGuild();
+        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
+        
         EventWaiter waiter = bot.getWaiter();
         waiter.waitForEvent(
                 GuildMessageReactionAddEvent.class,
@@ -122,7 +124,7 @@ public class CmdFuck implements Command{
                 },
                 event -> {
                     String id = event.getReactionEmote().getId();
-                    String content = botMsg.getContentRaw().toLowerCase();
+                    String content = msg.getContentRaw().toLowerCase();
                     
                     botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                     queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
@@ -260,8 +262,6 @@ public class CmdFuck implements Command{
             ).queue();
             return;
         }
-
-        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
         
         String path = hasArgs(msg.getContentRaw()) ? "purr.nsfw.fuck.request.message" : "purr.nsfw.fuck.request.message_choose";
         tc.sendMessage(

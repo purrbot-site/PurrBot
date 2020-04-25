@@ -24,6 +24,7 @@ import com.jagrosh.jdautilities.menu.EmbedPaginator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.requests.ErrorResponse;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -32,6 +33,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
 
 @CommandDescription(
         name = "Help",
@@ -129,7 +132,7 @@ public class CmdHelp implements Command{
                 .wrapPageEnds(true)
                 .setFinalAction(message -> {
                     if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
-                        message.clearReactions().queue();
+                        message.clearReactions().queue(null, ignore(ErrorResponse.UNKNOWN_MESSAGE));
                 });
 
         HashMap<String, StringBuilder> builders = new LinkedHashMap<>();
