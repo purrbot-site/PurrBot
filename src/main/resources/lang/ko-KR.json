@@ -18,7 +18,7 @@
       "그런 부끄러운 것들은 연령 제한 채널에서만 볼 수 있어, {user}.",
       "모든 것은 속한 자리가 있지. 그리고 그 명령어의 자리는 연령 제한 채널이야, {user}."
     ],
-    "nsfw_request_error": "There was an error while handling the request. Make sure that my message wasn't deleted and that I have sufficient permissions!",
+    "nsfw_request_error": "요청을 처리하는 도중에 에러가 발생했어. 내 메시지가 삭제되지는 않았는지, 아니면 내 권한이 충분하지 않은지 다시 한번 확인해줘!",
     "title": "에러",
     "unknown": "미.. 미안! 무언가 잘못된 모양이야.. {VANILLABLUSH}\n디스코드 혹은 깃허브에 문의해줘!"
   },
