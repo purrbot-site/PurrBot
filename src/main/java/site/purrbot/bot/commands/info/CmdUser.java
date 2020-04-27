@@ -78,57 +78,36 @@ public class CmdUser implements Command{
         return sb.toString();
     }
 
-    private String getNickname(Member member){
-        if(member.getNickname() == null)
-            return "";
-
-        String nick = member.getNickname();
-
-        return bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.nickname")
-                .replace("{nickname}", nick.length() > 20 ? nick.substring(0, 19) + "...\n" : nick + "\n");
-    }
-
     private String getName(Member member){
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(member.getUser().getName());
 
         if(member.isOwner())
-            sb.append(Emotes.OWNER.getEmote()).append(" ");
+            sb.append(Emotes.OWNER.getEmote());
 
         if(member.getUser().isBot())
-            sb.append(Emotes.BOT.getEmote()).append(" ");
-
-        sb.append(member.getUser().getName());
-
+            sb.append(Emotes.BOT.getEmote());
+        
         return sb.toString();
     }
 
-    private String getGame(String id, Activity game){
-        String type;
-        String name = game.getName();
-
-        switch(game.getType()){
-            default:
-            case DEFAULT:
-                type = bot.getMsg(id, "purr.info.user.status.playing");
-                break;
-
-            case WATCHING:
-                type = bot.getMsg(id, "purr.info.user.status.watching");
-                break;
-
-            case LISTENING:
-                type = bot.getMsg(id, "purr.info.user.status.listening");
-                break;
-
-            case STREAMING:
-                type = bot.getMsg(id, "purr.info.user.status.streaming");
-                break;
+    private String getUserInfo(Member member){
+        StringBuilder sb = new StringBuilder(
+                bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.id")
+                        .replace("{id}", member.getId())
+        );
+        
+        if(member.getNickname() != null){
+            String nick = member.getNickname();
+            sb.append("\n")
+                    .append(
+                            bot.getMsg(member.getGuild().getId(), "purr.info-user.embed.nickname")
+                                    .replace("{nickname}", nick.length() > 20 ? nick.substring(0, 19) + "..." : nick)
+                    );
         }
-
-        return bot.getMsg(id, "purr.info.user.embed.game")
-                .replace("{status}", type.replace("{game}", name.length() > 25 ? name.substring(0, 24) : name));
+        
+        return sb.toString();
     }
-
+    
     private String getTimes(Member member){
         StringBuilder sb = new StringBuilder();
 
@@ -174,13 +153,8 @@ public class CmdUser implements Command{
                         String.format(
                                 "```yaml\n" +
                                 "%s" +
-                                "%s\n" +
-                                "%s\n" +
                                 "```",
-                                getNickname(member),
-                                bot.getMsg(guild.getId(), "purr.info.user.embed.id")
-                                        .replace("{id}", member.getId()),
-                                member.getActivities().isEmpty() ? "" : getGame(guild.getId(), member.getActivities().get(0))
+                                getUserInfo(member)
                         ),
                         false
                 )

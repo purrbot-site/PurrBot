@@ -172,7 +172,7 @@
           "channel": "Channel",
           "color_title": "Color",
           "color_value": "```\nType:  {type}\nValue: {value}\n```",
-          "current_settings": "This are the current Welcome-settings of this Discord.\nUse `{prefix}welcome [subcommand]` to change them.\n\nA tutorial on how to change change the settings can be found on the [wiki]({wiki_welcome}).",
+          "current_settings": "These are the current Welcome-settings of this Discord.\nUse `{prefix}welcome [subcommand]` to change them.\n\nA tutorial on how to change the settings can be found on the [wiki]({wiki_welcome}).",
           "image_title": "Image",
           "image_value": "```\nBackground: {background}\nIcon:       {icon}\n```",
           "message_title": "Message",
@@ -340,7 +340,6 @@
           "booster": "Booster since:",
           "created": "Account created:",
           "dates": "Dates",
-          "game": "Game: {status}",
           "id": "ID: {id}",
           "joined": "Guild joined:",
           "nickname": "Nick: {nickname}",
@@ -350,13 +349,7 @@
         "more_roles": "+{remaining} more",
         "no_member": "The mentioned member is not in this Discord!",
         "no_roles": "`No roles assigned`",
-        "no_roles_others": "`No other roles assigned`",
-        "status": {
-          "listening": "Listening to {game}",
-          "playing": "Playing {game}",
-          "streaming": "Streaming {game}",
-          "watching": "Watching {game}"
-        }
+        "no_roles_others": "`No other roles assigned`"
       }
     },
     "nsfw": {

@@ -36,7 +36,7 @@ public class EmbedUtil {
     }
     
     public EmbedBuilder getEmbed(){
-        return new EmbedBuilder().setColor(0x36393F).setTimestamp(ZonedDateTime.now());
+        return new EmbedBuilder().setColor(0x802F3136).setTimestamp(ZonedDateTime.now());
     }
 
     public EmbedBuilder getEmbed(User user, Guild guild){
