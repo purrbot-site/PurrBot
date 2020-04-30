@@ -112,7 +112,7 @@
           "91_99": "Bitte ladet mich zu eurer Hochzeit ein. ^-^",
           "81_90": "Ich kann mir wirklich euch beide vorstellen, wie ihr einander heiratet.",
           "71_80": "\\*Drückt euch näher aneinander*",
-          "61_70": "Das scheint etwas ernstes zu sein.",
+          "61_70": "Das scheint etwas ernsthaftes zu sein.",
           "51_60": "Küsst euch endlich!!!",
           "41_50": "Bereits ein Paar?",
           "31_40": "Ihr könntet ein Paar werden.",
@@ -172,7 +172,7 @@
           "channel": "Kanal",
           "color_title": "Farbe",
           "color_value": "```\nTyp:  {type}\nInhalt: {value}\n```",
-          "current_settings": "Dies sind die aktuellen Willkommens-Einstellungen von diesem Discord.\nVerwende `{prefix}welcome [unterbefehl]` um diese zu ändern.\n\nEin Tutorial wie man die Einstellungen ändert kann im [Wiki]({wiki_welcome}) gefunden werden.",
+          "current_settings": "Dies sind die aktuellen Willkommens-Einstellungen von deinem Discord.\nVerwende `{prefix}welcome [unterbefehl]` um diese zu ändern.\n\nEin Tutorial über das ändern der Einstellungen kann im [Wiki]({wiki_welcome}) gefunden werden.",
           "image_title": "Bild",
           "image_value": "```\nHintergrund: {background}\nIcon:       {icon}\n```",
           "message_title": "Nachricht",
@@ -340,7 +340,6 @@
           "booster": "Booster seit:",
           "created": "Account erstellt:",
           "dates": "Daten",
-          "game": "Spiel: {status}",
           "id": "ID: {id}",
           "joined": "Guild beigetreten:",
           "nickname": "Nick: {nickname}",
@@ -350,13 +349,7 @@
         "more_roles": "+{remaining} weitere",
         "no_member": "Das erwähnte Mitglied ist nicht in diesem Discord!",
         "no_roles": "`Keine Rollen gegeben`",
-        "no_roles_others": "`Keine anderen Rollen gegeben`",
-        "status": {
-          "listening": "Hört {game} zu",
-          "playing": "Spielt {game}",
-          "streaming": "Streamt {game}",
-          "watching": "Schaut {game}"
-        }
+        "no_roles_others": "`Keine anderen Rollen gegeben`"
       }
     },
     "nsfw": {

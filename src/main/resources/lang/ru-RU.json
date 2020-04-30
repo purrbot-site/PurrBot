@@ -172,7 +172,7 @@
           "channel": "Канал",
           "color_title": "Цвет",
           "color_value": "```\nВид:  {type}\nЗначение: {value}\n```",
-          "current_settings": "Текущие настройки для сообщения Добро пожаловать для этого сервера.\nИспользуйте `{prefix}welcome [подкоманда]` для изменения.\n\nГайд по установке приветсвия может быть найден на [wiki]({wiki_welcome}).",
+          "current_settings": "Текущие настройки приветствия на этом сервере.\nИспользуйте `{prefix}welcome [подкоманда]`, чтобы изменить его.\n\nКраткий гайд по настройке (на английском) [wiki]({wiki_welcome}).",
           "image_title": "Изображение",
           "image_value": "```\nЗадний фон: {background}\nИконка:       {icon}\n```",
           "message_title": "Сообщение",
@@ -340,7 +340,6 @@
           "booster": "Буст с:",
           "created": "Аккаунт создан:",
           "dates": "Даты",
-          "game": "Игра: {status}",
           "id": "ID: {id}",
           "joined": "Дата присоединения:",
           "nickname": "Никнейм: {nickname}",
@@ -350,13 +349,7 @@
         "more_roles": "+{remaining} других",
         "no_member": "Упомянутый пользователь не участник этого Discord-севрера!",
         "no_roles": "`Нету назначенных ролей`",
-        "no_roles_others": "`Других ролей не назначено`",
-        "status": {
-          "listening": "Слушает {game}",
-          "playing": "Играет {game}",
-          "streaming": "Стримит {game}",
-          "watching": "Смотрит {game}"
-        }
+        "no_roles_others": "`Других ролей не назначено`"
       }
     },
     "nsfw": {
