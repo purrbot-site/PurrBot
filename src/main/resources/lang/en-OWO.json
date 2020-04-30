@@ -172,7 +172,7 @@
           "channel": "Channew",
           "color_title": "Cowow",
           "color_value": "```\nType:  {type}\nValue: {value}\n```",
-          "current_settings": "This awe the cuwwent Wewcome-settings of this Discord.\nUse `{prefix}welcome [subcommand]` to change them.\n\nA tutowiaw on how to change the settings can be found on the [wiki]({wiki_welcome}).",
+          "current_settings": "These awe the cuwwent Wewcome-settings of this Discord.\nUse `{prefix}welcome [subcommand]` to change them.\n\nA tutowiaw on how to change the settings can be found on the [wiki]({wiki_welcome}).",
           "image_title": "Image",
           "image_value": "```\nBackgwound: {background}\nIcon:       {icon}\n```",
           "message_title": "Message",
@@ -340,7 +340,6 @@
           "booster": "Boostew since:",
           "created": "Account cweated:",
           "dates": "Dates",
-          "game": "Game: {status}",
           "id": "ID: {id}",
           "joined": "Guiwd joined:",
           "nickname": "Nick: {nickname}",
@@ -350,13 +349,7 @@
         "more_roles": "+{remaining} mowe",
         "no_member": "The mentioned membew is not in this Discord!",
         "no_roles": "`No wowes assigned`",
-        "no_roles_others": "`No other wowes assigned`",
-        "status": {
-          "listening": "Wistening to {game}",
-          "playing": "Pwaying {game}",
-          "streaming": "Stweaming {game}",
-          "watching": "Watching {game}"
-        }
+        "no_roles_others": "`No other wowes assigned`"
       }
     },
     "nsfw": {
