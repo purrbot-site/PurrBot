@@ -1,0 +1,519 @@
+{
+  "embed": {
+    "footer": "Palus {user}"
+  },
+  "errors": {
+    "api_error": "Tekkis viga API ühenduses! Palun proovi hiljem uuesti.",
+    "guild_only": "Seda käsklust saab kasutada ainult [minu Discordis] ({link})!",
+    "missing_perms": {
+      "self": "Mul on vaja `{permission}` luba selle jaoks.",
+      "self_channel": "Mul on vaja `{permission}` luba {channel} kanalis et seda tegevust teostada!",
+      "other": "Sul on vaja `{permission}` luba selle käskluse jaoks."
+    },
+    "nsfw_random": [
+      "Sellel kanalil ei tundu olevat NSFW märgist, või kuidas {user}?",
+      "Palun ole kiimane NSFW märgisega kanalis {user}.",
+      "Eieiei! Sa ole hea inimene ja kasuta seda käsklust NSFW märgisega kanalis {user}!",
+      "ChannelNotNSFWException: Käsklust ei saa kasutada väljaspool NSFW märgisega kanalit.",
+      "Sa saad näha neid erutavaid asju ainut NSFW märgisega kanalites {user}.",
+      "Igal asjal on oma koht. Ja see käsklus kuulub NSFW märgisega kanalisse {user}."
+    ],
+    "nsfw_request_error": "Protsessi käigus tekkis tõrge. Palun tee kindlaks, et mu sõnum ei ole kustutatud ning mul on vastavad load!",
+    "title": "Viga",
+    "unknown": "S-see on nüüd natukene piinlik, aga mul tekkis tõrge selle protessi käigus.\n{VANILLABLUSH}\nPalun anna sellest teada Discordi või GitHubi kaudu!"
+  },
+  "misc": {
+    "and": "ja",
+    "info": "Hei {user}!\nMinu eeslide/prefiks siin serveris on `{prefix}`\nSisestage `{prefix}help` et saada nimekirja käsklustest.",
+    "unknown_user": "Tundmatu",
+    "welcome_member": "Sa oled liige number #{count}"
+  },
+  "purr": {
+    "fun": {
+      "bite": {
+        "loading": "{LOADING} Hammustan kohe kedagi...",
+        "mention_self": "Kas see pole mitte kannibalism kui sa ennast hammustad {user}?",
+        "mention_purr": "Mi- mi- mida...? Ma ei ole maitsev! >.<",
+        "message": "{user} hammustab sind {targets}",
+        "no_mention": "Palun maini vähemalt ühte kasutajat keda hammustada!",
+        "special_user": "A-aga {user}! Se-see on piinlik."
+      },
+      "cuddle": {
+        "loading": "{LOADING} Laen kaisutuse-giffi...",
+        "mention_self": "Miks sa tahad ennast kaisutada {user}?\nSa saad kaisutada mind kui tahad. {VANILLABLUSH}",
+        "mention_purr": "\\*rõõmustab kasutaja {user} kaisutuse üle*",
+        "message": "{user} kaisutab sinuga {targets}",
+        "no_mention": "Palun maini vähemalt ühte kasutajat keda kaisutada!"
+      },
+      "holo": {
+        "loading": "{LOADING} Laen pilti Holo-st...",
+        "title": "Holo {BLOBHOLO}"
+      },
+      "hug": {
+        "loading": "{LOADING} Laen kallistamise-giffi...",
+        "mention_self": "Miks sa kallistad ennast {user}?\nSa võid kallistada mind kui sa tahad. {VANILLABLUSH}",
+        "mention_purr": "\\*rõõmustab kasutaja {user} kallistuse üle*",
+        "message": "{user} kallistab sind {targets}",
+        "no_mention": "Palun maini vähemalt ühte kasutajat keda kallistada!"
+      },
+      "kiss": {
+        "loading": "{LOADING} Laen musi...",
+        "mention_self": "Kuidas sa saad endale musi teha {user}? Peegliga?",
+        "mention_purr": "O- okei. Aga ainult põsele! \\*Toob põse esile*",
+        "mention_snuggle": "EI! Ma ei lase sul musitada mu õde minu abiga!",
+        "message": "{user} musitab sind {targets}",
+        "no_mention": "Palun maini vähemalt ühte kasutajat keda musitada!",
+        "special_user": "\\*Rõõmustab kasutaja {user} musi üle*"
+      },
+      "kitsune": {
+        "loading": "{LOADING} Laen kitsune-giffi...",
+        "title": "Kitsune {SHIROTAILWAG}"
+      },
+      "lick": {
+        "loading": "{LOADING} Laen lakkumise-giffi...",
+        "mention_self": "Ma ei küsi kuidas ja *kust* sa lakud ennast {user}...",
+        "mention_purr": "\\*tõmbub eemale* M- ma ei ole lubanud sul mind lakkuda!",
+        "message": "{user} lakub sind {targets}",
+        "no_mention": "Palun maini vähemalt ühte kasutajat keda lakkuda!",
+        "special_user": "A- aga kallis... Mitte avalikult. \\*punastab*"
+      },
+      "neko": {
+        "loading": "{LOADING} Laen armsa neko pilti (või giffi)...",
+        "title_gif": "Neko {WAGTAIL}",
+        "title_img": "Neko {NEKOWO}",
+        "purr": "Hei! See olen ju mina! OwO",
+        "snuggle": "See on mu väike õde! UwU"
+      },
+      "pat": {
+        "loading": "{LOADING} Laen paisi...",
+        "mention_self": "Hm... Kas siin pole mitte nekot keda sasks paitada {user}? \\*Osutab iseendale*",
+        "mention_purr": "\\*nurr™*",
+        "message": "{user} paitab sind {targets}",
+        "no_mention": "Palun maini vähemalt ühte kasutajat keda paitada!"
+      },
+      "poke": {
+        "loading": "{LOADING} Laen toksimise-giffi...",
+        "mention_self": "Kas sul on igav või miks sa toksid ennast {user}?",
+        "mention_purr": "M- mjäu! Ära toksi mind! >~<",
+        "message": "{user} toksib sind {targets}",
+        "no_mention": "Palun maini vähemalt ühte kasutajat keda toksida!"
+      },
+      "senko": {
+        "loading": "{LOADING} Laen pilti Senko-sanist...",
+        "title": "Senko-San {SENKOTAILWAG}"
+      },
+      "ship": {
+        "mention_self": "Paaritad iseendaga {user}? Parem otsi keegi teine!",
+        "mention_purr": "E- ei! Sa ei saa mind endaga paari panna {user}!",
+        "mention_snuggle": "Ma ei lase sul ennast paari panna oma väikese õega {user}!",
+        "no_mention": "Palun maini vähemalt ühte kasutajat keda paaritada!",
+        "results": {
+          "100": "Perfektne armastus! ❤",
+          "91_99": "Palun kutsuge mind oma pulma. ^-^",
+          "81_90": "Ma kujutan teid ette omavahel abiellumas.",
+          "71_80": "\\*Lükkab teid mõlemaid üksteisele lähemale*",
+          "61_70": "See paistab olevat midagi tõsist.",
+          "51_60": "Suudelge juba!!!",
+          "41_50": "Juba paar?",
+          "31_40": "Teist võiks saada paar.",
+          "21_30": "Friendzone+ (Koos *lisadega*)",
+          "11_20": "Friendzone",
+          "1_10": "Tundub et isegi mitte sõbrad",
+          "0": "Kui armastus oleks kuumus, siis sina oleks jääplokk."
+        },
+        "special_user": "{user} Awww kullakene. Sa tead et me oleme alati perfektne sada.\nSelleks ei ole vaja testi.",
+        "target_bot": "Sa ei saa väga ennast botiga paari panna sa imelik inimene!"
+      },
+      "slap": {
+        "loading": "{Loading} Laksan kasutajate nägu...",
+        "mention_self": "Eieiei! Ma ei aita sul endale haiget teha {user}.",
+        "mention_purr": "Niuks... M- miks sa teed mulle haiget {user}? T^T",
+        "message": "{user} laksab sind {targets}",
+        "no_mention": "Palun maini vähemalt ühte kasutajat kellele laksu anda!"
+      },
+      "tail": {
+        "loading": "{LOADING} Liputan saba...",
+        "message": "{user} liputab oma saba"
+      },
+      "tickle": {
+        "loading": "{LOADING} Laen kõdi-giffi",
+        "mention_self": "Okei... Kui sa nii väga tahad... \\*Kõdistab kasutajat {user}*",
+        "mention_purr": "E- ebaaus! Ma.. ma ei saa \\* Naerukrampides*",
+        "message": "{user} kõdistab sind {targets}",
+        "no_mention": "Palun maini vähemalt ühte kasutajat keda kõdistada!"
+      }
+    },
+    "guild": {
+      "language": {
+        "few_args": "Ei ole antud piisavalt argumente! \nKasutus: `{prefix}language set <keel>`",
+        "invalid_args": "Vigased argumendid\nKasutus: `{prefix}language <set <keel>|reset>`",
+        "invalid_lang": "Sisestatud keel on tundmatu!\nKasuta `{prefix}language` et näha olemasolevaid keeli.",
+        "embed": {
+          "available_lang_title": "Olemasolevad keeled",
+          "curr_lang_title": "Hetkel kasutusel olev keel",
+          "curr_lang_value": "Eesti (et-EE)",
+          "description": "Sa saad keelt vahetada olemasolevate keelte vastu sisestades \n`{prefix}language set <keel>",
+          "translators_title": "Tõlkijad",
+          "translators_value": "Tänud lähevad kõigile kes on botti tõlkinud\nTõlkeprojekti leiad [siit]({link})."
+        },
+        "language_set": "Määrati keel `Eesti (et-EE)`!",
+        "no_language": "Palun määra keel mida soovid kasutada!"
+      },
+      "prefix": {
+        "few_args": "Ei saanud piisavalt argumente! \nKasutus: `{prefix}prefix <set <uus prefiks>|reset>`",
+        "invalid_args": "Vigased argumendid!\nKasutus: `{prefix}prefix <set <uus prefiks>|reset>`",
+        "no_prefix": "Sa pead sisestama prefiksi!",
+        "reset": "Prefiks taastati algseks `.` tagasi",
+        "set": "Prefiksiks määrati `{prefix}`"
+      },
+      "welcome": {
+        "current_msg": "Praegune sõnum:\n```\n{message}\n```\n\nSa võid kasutada muutujaid oma sõnumis.\n**Muutujad**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
+        "embed": {
+          "channel": "Kanal",
+          "color_title": "Värv",
+          "color_value": "```\nTüüp:  {type}\nVäärtus: {value}\n```",
+          "current_settings": "Need on praegused tervitus sätted siin Discordis.\nKasuta `{prefix}welcome [alakäsklus]` et neid muuta.\n\nÕpetuse kuidas sätteid muuta leiab [vikist]({wiki_welcome}).",
+          "image_title": "Pilt",
+          "image_value": "```\nTaust: {background}\nIkoon:       {icon}\n```",
+          "message_title": "Sõnum",
+          "message_value": "```\n{message}\n```",
+          "no_channel": "`Ühtegi kanalit pole määratud`",
+          "preview": "Eelvaade",
+          "subcommands_title": "Alamkäsklused",
+          "subcommands_value": "```\nbg      set <taust>\n        reset\nchannel set <#kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <ikoon>\n        reset\nmsg     set <sõnum>\n        reset```"
+        },
+        "few_args": "Ei ole piisavalt argumente!\nSisesta `{prefix}welcome` et näha kõiki alamkäskluseid.",
+        "invalid_args": "Vigased argumendid!\nSisesta `{prefix}welcome` et näha kõiki alamkäsklusi.",
+        "invalid_bg": "Vigane taust `{background}`\nVaata [vikit]({wiki_bg}) et näha olemasolevaid tauste.",
+        "invalid_channel": "Palun maini olemasolevat tekstikanalit!",
+        "invalid_color": "Sisestatud värv on vigane!\nToetatud värvivormingud on `hex:rrggbb` ja `rgb:r,g,b`",
+        "invalid_icon": "Sisestatud ikoon on vigane!\nVaata [vikit]({wiki_icon}) et näha olemasolevaid ikoone.",
+        "no_bg": "Palun sisesta tausta nimi!\nErinevaid tauste saab näha [vikist]({wiki_bg}).",
+        "no_channel": "Ühtegi tekstikanalit ei ole sisestatud! Palun maini kindlasti ühte tekstikanalit.",
+        "no_color": "Ühtegi värvi ei ole sisestatud!\nPalun kasuta kas `hex:rrggbb` või `rgb:r,g,b` vormingut.",
+        "no_icon": "Palun sisesta ikooni nimi!\nErinevaid ikoone saab näha [vikist]({wiki_icon}).",
+        "no_msg": "Sõnumit pole sisestatud!",
+        "reset": "{type} taastatud.",
+        "set": "{type} määrati {value}"
+      }
+    },
+    "info": {
+      "emote": {
+        "embed": {
+          "emote_multiple": "Emotikon [{current} / {total}]",
+          "emote_single": "Emotikon",
+          "guild": "Gild",
+          "id": "ID",
+          "image": "Pilt",
+          "link": "[`Link`]({link})",
+          "message": "Sõnum",
+          "name": "Nimi"
+        },
+        "no_args": "Palun sisesta käskluse järele `:emote:` või `--search`.",
+        "not_found": "Ei suutnud viimase saja sõnumi seast leida emotikone.",
+        "unknown_guild": "Tundmatu gild"
+      },
+      "guild": {
+        "embed": {
+          "boost_multiple": "{boost} boostid",
+          "boost_single": "Üks boost",
+          "boost_tier": "Boosti tase: {BOOST_TIER} (Level {level})",
+          "channels_title": "Kanalid",
+          "channels_value": "{CATEGORY} Kokku: {channels_total}\n\n{TEXTCHANNEL} Teksti kanaleid: {channels_text}\n{VOICECHANNEL} Hääle kanaleid: {channels_voice}",
+          "created": "Loodud",
+          "level": "Level",
+          "levels": {
+            "unknown": "Teadmata level",
+            "none": "Level puudub",
+            "low": "Madal",
+            "medium": "Keskmine",
+            "high": "(╯°□°）╯︵ ┻━┻",
+            "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
+          },
+          "members_title": "Liikmed",
+          "members_value": "{MEMBERS} Kokku: {members_total}\n\n{FACE} Inimesi: {members_human}\n{BOTICON} Botte: {members_bot}",
+          "owner": "Omanik",
+          "region": "Piirkond"
+        }
+      },
+      "help": {
+        "command_info": {
+          "aliases": "Aliased",
+          "command_nsfw": "Palun kasuta seda käsklust NSFW märgisega kanalis!",
+          "no_command": "Seda käsklust ei eksisteeri!\nTee kindlaks et kirjutasid käskluse õigesti .\n\n**Märkus**: Katekooriad (nt NSFW) ei ole käsklused!",
+          "title": "Abikäsklus: {command}",
+          "usage_title": "Kasutusvõimalused",
+          "usage_value": "```\n{commands}\n```\n`[]` = Valikulised\n`<>` = Kohustuslikud"
+        },
+        "command_menu": {
+          "categories": {
+            "fun": "Lõbus",
+            "guild": "Gild",
+            "info": "Informatsioon",
+            "list": "```\nLõbus\nGild\nInformatsioon\nTäiskasvanutele\n```",
+            "nsfw": "Täiskasvanutele",
+            "owner": "Omanik",
+            "title": "Katekooriad"
+          },
+          "description": "Kasuta navigeerimiseks ◀ ▶ reaktsioone ning tühistamiseks ⏹.\nKasuta `{prefix}help [katergooria]` et saada rohkem informatsiooni käskluste kohta.",
+          "nsfw_info": "`Et näha seda lehte sisesta käsklus NSFW märgisega kanalis.`"
+        }
+      },
+      "info": {
+        "dm_failure": "Ma ei saa sulle saata privaatsõnumit {user}!",
+        "dm_success": "Vaata oma privaatsõnumeid {user}!",
+        "embed": {
+          "about_title": "Minu kohta",
+          "about_value": "Oh hei sina!\nMina olen {name}. Bott ~Nya Discordile.\nMa olen valmistatud Andre_601 (<@{id}>) poolt kellel on olnud liiga palju aega ning JDA abiga. ;)",
+          "bot_title": "Boti informatsioon",
+          "bot_value": "Boti versioon: `{bot_version}`\nLaiend: [`JDA {jda_version}`]({link})",
+          "bot_list_title": "Boti nimekirjad",
+          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discord.boats`]({dboats})\n[`Discord.bots.gg`]({db})\n[`Discordextremelist.xyz`]({del})\n[`Lbots.org`]({lbots})",
+          "commands_title": "Käsklused",
+          "commands_value": "Sisesta `{prefix}help` et saada nimekirja erinevatest käsklustest.",
+          "links_title": "Teised lingid",
+          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Toetus Discord`]({support})\n[`Twitter`]({twitter})\n[`Koduleht`]({website})\n[`Viki`]({wiki})"
+        }
+      },
+      "invite": {
+        "dm_failure": "Palun luba mul saata privaatsõnumeid {user}!",
+        "dm_success": "Saatsin sulle privaatsõnumi {user}!",
+        "embed": {
+          "about_title": "Linkidest",
+          "about_value": "Igal lingil on oma eesmärk.\n`Soovitatud kutse` sisaldab kõiki vajalikke lube ja mõnginaid veel sujuvaks kasutuskogemuseks.\n`Põhiline kutse` sisaldab ainult vajalikke lube.\n`Discord` on kutse minu Discordi.",
+          "info_title": "Kutsu mind",
+          "info_value": "Heihoo! Tore et kutsusid mind enda Discordi. :3\nLihtsalt vali üks link altpoolt et saada mind oma Discordi, siis ma saan tuua sulle lõbu ja nekosi.",
+          "links": "[`Soovitatud kutse`]({invite_full})\n[`Põhiline kutse`]({invite_basic})\n[`Discord`]({support})"
+        }
+      },
+      "ping": {
+        "loading": [
+          "{TYPING} Räägin Discordiga...",
+          "{TYPING} Püüan kala...",
+          "{TYPING} Annan pongi et saada pingi",
+          "{TYPING} [muutuja_teksti_laadimine]",
+          "{TYPING} Hei Discord, oled sa seal?"
+        ],
+        "info": "{EDIT} Sõnumi muutus: `{edit_message}`\n{DISCORD} Discord: `{discord}`",
+        "info_full": "{EDIT} Sõnumi muutus: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
+      },
+      "quote": {
+        "embed_basic": {
+          "channel": "Postitaud kanlisse: #{channel}",
+          "info": "Fraas kasutajalt {user}"
+        },
+        "embed_image": {
+          "info": "Fraas kasutajalt {user}, kanalis {channel}[`[Link]`]({link})"
+        },
+        "few_args": "Liiga vähe argumente!\nKasutus; `{prefix}quote <sõnumi ID> [#kanal]`",
+        "invalid_id": "Sisestatud ID oli kehtetu!\nTee kindlaks et sa kasutad arendaja sätteid ja et sa parem klõpsasid **sõnumil** ja valisid \"Copy id\".",
+        "no_msg": "Ei suutunud leida sõnumit kanalist {channel}!\nPalun tee kindlaks, et sõnumi ID on korrektne ning sõnum on õigest kanalist!",
+        "no_value": "Sõnumil ei ole pilte ega teksti mida tsiteerida!",
+        "nsfw_channel": "Kanal mida mainisid ({channel}) on NSFW märgisega, aga see kanal ei ole!\nMa ei tsiteeri sõnumeid NSFW märgisega kanalitest NSFW märgiseta kanalisse."
+      },
+      "stats": {
+        "uptime": {
+          "day": "päev",
+          "days": "päevad",
+          "hour": "tund",
+          "hours": "tundi",
+          "minute": "minut",
+          "minutes": "minutit",
+          "second": "sekund",
+          "seconds": "sekundit"
+        },
+        "embed": {
+          "note": "**Märkus**:\nStatistika (Eriti liikmete arv) ei pruugi olla 100% täpne.",
+          "other_title": "Muu statistika",
+          "other_value": "```yaml\nRAM: {ram}\nÜleval olnud: {days}, {hours}, {minutes} and {seconds}\n```",
+          "shard_this_title": "See kild",
+          "shard_this_value": "```yaml\nID: {id} # ID alustatakse nullist\n\nGilde: {guilds}\nLiikmeid: {total}\n```",
+          "shard_total_title": "Kokku",
+          "shard_total_value": "```yaml\nKilde: {shards}\n\nGilde: {guilds}\nLiikmeid: {total}\n```",
+          "title": "Statistika"
+        }
+      },
+      "user": {
+        "embed": {
+          "avatar": "Avatar",
+          "avatar_url": "[`Avatari link`]({link})",
+          "booster": "Boostija alates:",
+          "created": "Kasutaja loodud:",
+          "dates": "Kuupäevad",
+          "id": "ID: {id}",
+          "joined": "Liitunud gildiga:",
+          "nickname": "Hüüdnimi: {nickname}",
+          "role_highest": "Kõrgeim roll",
+          "role_total": "Teised rollid"
+        },
+        "more_roles": "+{remaining} veel",
+        "no_member": "Mainitud kasutajat ei ole selles Discordis!",
+        "no_roles": "`Ühtegi rolli pole määratud`",
+        "no_roles_others": "`Teisi rolle pole`"
+      }
+    },
+    "nsfw": {
+      "blowjob": {
+        "mention_bot": "See oleks nagu pistaks keele pistikupessa.",
+        "mention_purr": "Pervert! Võta suhu kelleltki teiselt! \\*laksab {user}*",
+        "mention_self": "Okeeei... Kui sa tahad endalt imeda, siis ma ei keela sind {user}.",
+        "message": "{user} imeb kasutajalt {target} lahti!",
+        "no_mention": "Palun maini kasutajat kellelt sa tahad suhu võtta.",
+        "request": {
+          "accepted": "{target} nõustus sinu pakkumisega {user}!",
+          "denied": "{target} ei soovi sinu poolt lahti imemist {user}. :/",
+          "message": "Heii {target}!\n{user} tahab sult lahti imeda. Kas sa nõustud pakkumisega?\nReageeri {ACCEPT} et nõustuda või {CANCEL} et keelduda.\n\n**See pakkumine lõppeb ūhe minuti jooksul!**",
+          "open": "Ära ole nii ahne {user}! Oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
+          "timed_out": "Paistab et {target} ei soovi et sa talt suhu võtad {user}."
+        },
+        "special_user": "Okei armsake. Las ma võtan oma \"mänguasjad\" er meil oleks lõbusam.\n\\* Võtab kasutaja {user} käest kinni ja kaob oma tuppa\""
+      },
+      "fuck": {
+        "mention_bot": "Sa ei saa keppida botte!",
+        "mention_purr": "\\*laksab {user}* EI! Mitte minuga pervert!",
+        "mention_self": "Kuidas sa saad ennast keppida {user}?! (Ei. Masturbatsioon ei ole vastus)",
+        "message": "{user} ja {target} seksivad!",
+        "no_mention": "Palun maini ühte inimest keda sa soovid keppida.",
+        "request": {
+          "accepted": "{target} nõustus sinu pakkumisega {user}. OwO",
+          "denied": "(target} ei taha sinuga seksida {user}. >.<",
+          "message": "Heii {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n**See pakkumine lõppeb ūhe minuti jooksul!**",
+          "message_choose": "Heii {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri vastavate reaktsioonidega\n{SEX} - Normaalne seks\n{ANAL} - Anaalseks\n{YURI} - Yuri seks\n{CANCEL} - Keeldu pakkumisest!\n\n>**See pakkumine lõppeb ūhe minuti jooksul!**",
+          "open": "Ära ole nii kiimane {user}!\nSa oled juba pakkumise teinud. Oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
+          "timed_out": "Paistab et {target} ei soovi sinuga keppida {user}. ._."
+        },
+        "special_user": {
+          "accept": [
+            "Millist magamistuba me kasutame {user}?",
+            "\\*käib käega üle {user} keha* Lähme natuke e privaatsemasse kohta armsake. 😘",
+            "Las ma võtan kiiresti oma *mänguasjad* ning siis veedame aega koos {user}."
+          ],
+          "deny": [
+            "Vabandust {user}, aga ma ei saa praegu...",
+            "Kas sa saaksid natukene kauem oodata {user}? Mul ei ole praegu aega.",
+            "\\*annab musi* Ma ei saa praegu {user}. Vabandust."
+          ]
+        }
+      },
+      "lewd": {
+        "loading": "{LOADING} Laen lewdi neko pilti (või giffi)...",
+        "title_gif": "Lewd neko {WAGTAIL}",
+        "title_img": "Lewd neko {NEKOWO}"
+      },
+      "pussylick": {
+        "mention_bot": "Bottidel ei ole vittu.",
+        "mention_purr": "EI! Ma ei lase sul seda teha.",
+        "mention_self": "Kuidas... ? Tead mida? Ma ei küsi.",
+        "message": "{user} lakub kasutaja {target} vittu",
+        "no_mention": "Palun maini kelle vittu sa soovid lakkuda.",
+        "request": {
+          "accepted": "{target} nõustus sinu pakkumisega {user}. ;P",
+          "denied": "{target} ei soovi et sa ta vittu lakuksid {user}...\nKas tal üldse on?",
+          "message": "Heii {target}!\n{user} tahab sinu vittu lakkuda. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n>**See pakkumine lõppeb ūhe minuti jooksul!**",
+          "open": "Kas sa oled janune? Sa oled juba pakkumise teinud {user}!\nOota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
+          "timed_out": "Tundub et {target} ei taha et sa lakuksid tema vittu {user}... Äkki neil polegi? o///o"
+        },
+        "special_user": "Hehehe... Sa oled *\"janune\"* {user}, õigus?\n\\*võtab kasutaja käest kinni* ja kaob kusagile ruumi*"
+      },
+      "solo": {
+        "loading": "{LOADING} Otsin giffi kuumadest tüdrukutest...",
+        "title": "Soolo tüdruk"
+      },
+      "threesome": {
+        "mention_bot": "Usu min {user}. See on rohkem lõbusam inimestega kui bottidega. ;)",
+        "mention_purr": "Ma tean et ma tundun natukene segane, aga ma ei ole väga just *sellesse* {user}!",
+        "mention_self": "Paranda mind kui soovid, aga kas kolmekas mitte ei vaja **kolme** inimest {user}?",
+        "message": "{user} seksib koos kasutajatega {target1} ja {target2}! O//w//O",
+        "no_mention": "Palun maini kahte kasutajat keda sa soovid keppida!",
+        "request": {
+          "accepted": "{target1} ja {target2} nõustusid sinu pakkumisega {user}! >//w//<",
+          "denied": "Kumbgi {target1} või {target2} ei soovi sinuga seksida {user}.",
+          "message": "Hei {target1} ja {target2}!\n{user} soovib teiega seksida. Kas te nõustute pakkumisega?\nReageerige sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\nOnly if both of you accept this, will this happen.\n\n> **See pakkumine lõppeb ühe minuti jooksul!**",
+          "open": "Voah {user}! Ole kannatlik sa kiimas inimene!\nSa juba palusid inimesi endaga seksisma, nüüd oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
+          "timed_out": "Tundub et kumbgi {target1} või {target2} ei soovi sinuga keppida {user}. >\\_<"
+        },
+        "special_user": "M- ma tean kui palju veidraid asju mulle meeldib teha, aga see on natukene liiga palju minu jaoks {user}... {VANILLABLUSH}"
+      }
+    }
+  },
+  "snuggle": {
+    "fun": {
+      "bite": {
+        "mention_snuggle": "Nya! Ma ei ole toit {user}!"
+      },
+      "cuddle": {
+        "mention_snuggle": "\\*Poeb {user} kaissu*"
+      },
+      "hug": {
+        "mention_snuggle": "\\*naudib {user} kallistust*"
+      },
+      "kiss": {
+        "mention_purr": "Ma ei lase sul musitada mu õde läbi minu!",
+        "mention_snuggle": "Mi- Mida? O- Olgu. Aga sa tohid ainult musitada minu põsele {user}! \\*Laseb sul musitada põsele*",
+        "special_user": "Mi- Miks sa tahad musitada mu õde läbi minu? S-Sa saad musitada teda ise {user}."
+      },
+      "lick": {
+        "mention_snuggle": "H-HEI! S-See on lewd {user}."
+      },
+      "neko": {
+        "purr": "Nya. See on mu suur õde. >w<",
+        "snuggle": "K-kas see olen mina? OwO"
+      },
+      "pat": {
+        "mention_snuggle": "\\*naudib paid*"
+      },
+      "poke": {
+        "mention_snuggle": "Nuuuu. Ära toksi mind!"
+      },
+      "ship": {
+        "mention_purr": "Ei! Mitte mingit paaritamist minu suure õega {user}!",
+        "mention_snuggle": "E- ei. Ma ei taha sind oma paariliseks {user}.",
+        "special_user": "M-miks ma peaksin teid paari panema {user}?\nM-mine tee seda ise. >////<"
+      },
+      "slap": {
+        "mention_snuggle": "\\*jookseb {user} eest minema*"
+      },
+      "tickle": {
+        "mention_snuggle": "A-appi! M-ma ei tohi nae- \\*hakkab naerma*"
+      }
+    },
+    "info": {
+      "info": {
+        "dm_failure": "Sinu privaatsõnumid on kinni {user}. Ma ei saa informatsiooni saata kui see on kinni. :,(",
+        "dm_success": "📬 Sulle tuli sõnum {user}!",
+        "embed": {
+          "about_title": "Minu kohta",
+          "about_value": "Oh Tere!\nMina olen {name}. Ma olen \\*Purri* õde.",
+          "bot_title": "Boti informatsioon",
+          "bot_value": "Boti versioon: `{version}`\nLaiend: [`JDA {version}`]({link})",
+          "commands_title": "Käsklused",
+          "commands_value": "Sisesta `{prefix}help` et saada nimekirja erinevatest käsklustest.",
+          "links_title": "Teised lingid",
+          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Toetus Discord`]({support})\n[`Twitter`]({twitter})\n[`Koduleht`]({website})\n[`Viki`]({wiki})"
+        }
+      },
+      "invite": {
+        "message": "Nya! Sa ei saa mind kutsuda oma Discordi {user}! Selle asemel kutsu minu õde!"
+      },
+      "level": {
+        "purr_only": "Nya! See käsklus on ainult olemas mu õel \\*Purr*! >w<"
+      }
+    },
+    "nsfw": {
+      "blowjob": {
+        "mention_snuggle": "\\*Jookseb minema ja poeb peitu* Mulle ei meeldi lewd {user}",
+        "mention_self": "Hehehe.. Võtab iseendalt suhu. Sa oled kas väga üksik, või häbelik {user}.",
+        "special_user": "M-Miks sa seda tahad minuga teha {user}? S- sul on mu õde selleks."
+      },
+      "fuck": {
+        "mention_snuggle": "E- ei! Ma ei tee seda sinuga {user}."
+      },
+      "pussylick": {
+        "mention_snuggle": "H-Hei. Ma ei taha et sa mind *sealt* lakud {user}!"
+      },
+      "threesome": {
+        "mention_snuggle": "M- Ma ei huvitu sellistest asjadest {user}!"
+      }
+    }
+  }
+}
