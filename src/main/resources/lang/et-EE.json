@@ -347,7 +347,7 @@
           "role_total": "Teised rollid"
         },
         "more_roles": "+{remaining} veel",
-        "no_member": "Mainitud kasutajat ei ole selles Discordis!",
+        "no_member": "Mainitud kasutajat ei ole selles Discord!",
         "no_roles": "`Ühtegi rolli pole määratud`",
         "no_roles_others": "`Teisi rolle pole`"
       }
@@ -483,7 +483,7 @@
         "dm_success": "📬 Sulle tuli sõnum {user}!",
         "embed": {
           "about_title": "Minu kohta",
-          "about_value": "Oh Tere!\nMina olen {name}. Ma olen \\*Purri* õde.",
+          "about_value": "Oh Tere!\nMina olen {name}. Ma olen \\*Purr* õde.",
           "bot_title": "Boti informatsioon",
           "bot_value": "Boti versioon: `{version}`\nLaiend: [`JDA {version}`]({link})",
           "commands_title": "Käsklused",
