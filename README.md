@@ -12,10 +12,8 @@
 [Website]: https://purrbot.site
 [Discord]: https://purrbot.site/discord
 [Wiki]: https://docs.purrbot.site/bot
-[image]: https://docs.purrbot.site/bot/welcome-images
-[background]: https://docs.purrbot.site/bot/welcome-images#backgrounds
-[icon]: https://docs.purrbot.site/bot/welcome-images#icons
 [translations]: https://translations.purrbot.site
+[commands]: https://docs.purrbot.site/bot/commands
 
 <!-- GitHub links -->
 [Issues]: https://github.com/Andre601/PurrBot/issues
@@ -44,94 +42,18 @@ This bot was made to use the [nekos.life]-API but now moved to its very own API.
 # Commands
 **Default Prefix**: `.` (You can mention the bot to know the used prefix or change it with the prefix-command)
 
-`Permission` is the permission you require in order to use the commands of that category.  
-`<arguments>` are required, `[arguments]` are optional and `...` means you can use multiple arguments of the same type.
-
-## Fun
-**Permission**: `None`
-
-| Command: | Arguments:          | Description:                                |
-| -------- | ------------------- | ------------------------------------------- |
-| Cuddle   | `<@user ...>`       | Cuddles the mentioned user(s).              |
-| Holo     |                     | Gives an image of Holo from Spice and wolf. |
-| Hug      | `<@user ...>`       | Hugs the mentioned user(s).                 |
-| Kiss     | `<@user ...>`       | Kisses the mentioned user(s).               |
-| Kitsune  |                     | Shows a image of a kitsune (foxgirl)        |
-| Lick     | `<@user ...>`       | Licks the mentioned user(s).                |
-| Neko     |                     | Shows a image of a neko (catgirl).          |
-|          | `[--gif]`           | Shows a gif of a neko (catgirl).            |
-| Pat      | `<@user ...>`       | Pats the mentioned user(s).                 |
-| Poke     | `<@user ...>`       | Pokes the mentioned user(s).                |
-| Senko    |                     | Shows a image of Senko-San.                 |
-| Ship     | `<@user>`           | Ships you with the mentioned user.          |
-|          | `<@user>` `[@user]` | Ships the first with the second user.       |
-| Slap     | `<@user ...>`       | Slaps the mentioned user(s).                |
-| Tail     |                     | Wag your tail (in excitement?)              |
-| Tickle   | `<@user ...>`       | Tickles the mentioned user(s).              |
-
-## Guild
-**Permission**: `Manage Server`
-
-| Command: | Arguments:               | Description:                                                      |
-| -------- | ------------------------ | ----------------------------------------------------------------- |
-| Language |                          | Shows the currently used and all available languages.             |
-|          | `set <language>`         | Sets the language for the Guild to a supported one.               |
-|          | `reset`                  | Resets the language to English (en).                              |
-| Prefix   | `set <prefix>`           | Sets the provided prefix for the Guild.                           |
-|          | `reset`                  | Resets the prefix to the default one.                             |
-| Welcome  |                          | Shows the current welcome-settings.                               |
-|          | `bg set <background>`    | Sets the [background] of the image.                               |
-|          | `bg reset`               | Resets the background to the default one (`color_white`)          |
-|          | `channel set <#channel>` | Change the channel to the mentioned one.                          |
-|          | `channel reset`          | Resets the channel.                                               |
-|          | `color set <color>`      | Change the text color. Supported args are hex:rrggbb or rgb:r,g,b |
-|          | `color reset`            | Resets the text color.                                            |
-|          | `icon set <image>`       | Sets the [icon] of the image.                                     |
-|          | `icon reset`             | Resets the icon.                                                  |
-|          | `msg set <msg>`          | Changes the greeting message.                                     |
-|          | `msg reset`              | Resets the greeting message to "Welcome {mention}!"               |
-
-## Info
-**Permission**: `None`
-
-| Command: | Arguments:                 | Description:                                                                       |
-| -------- | -------------------------- | ---------------------------------------------------------------------------------- |
-| Emote    | `<:emote:>`                | Displays info about an emote.                                                      |
-|          | `[--search]`               | The bot will try to find an emote in the last 100 messages.                        |
-| Guild    |                            | Shows info about the guild.                                                        |
-| Help     |                            | Will display all commands available.                                               |
-|          | `[command]`                | Shows info about the provided command.                                             |
-| Info     |                            | Shows some info about the bot.                                                     |
-|          | `[--dm]`                   | Sends the info in DM.                                                              |
-| Invite   |                            | Shows you some links.                                                              |
-|          | `[--dm]`                   | Sends you the links in DM.                                                         |
-| Ping     |                            | Checks the ping. (Time the bot takes to edit the message, rest-API and websocket.) |
-| Quote    | `<messageId>`              | Quotes a message from the same channel the command was used in.                    |
-|          | `<messageId>` `[#channel]` | Quotes a message from the mentioned channel.                                       |
-| Stats    |                            | Shows stats about the Bot. (Discords she's online, Text and VoiceChannels, etc.)   |
-| User     |                            | Gives info about you.                                                              |
-|          | `[@user]`                  | Gives info about the mentioned user.                                               |
-
-## NSFW
-**Permission**: `None`  
-**Extra**: This command ONLY works in NSFW-labeled channels.
-
-| Command:  | Arguments:                      | Description:                                                                        |
-| --------- | ------------------------------- | ----------------------------------------------------------------------------------- |
-| Fuck      | `<@user>`                       | Sends a invite to a user to have sex with you. They can accept or deny the request. |
-|           | `<@user>` `[--anal]`            | Gives you a gif with anal sex.                                                      |
-|           | `<@user>` `[--yuri]`            | Givey you a gif with two girls instead.                                             |
-| Lewd      |                                 | Shows a image of a lewd neko (catgirl).                                             |
-|           | `[--gif]`                       | Shows a gif of a lewd neko (catgirl).                                               |
-| Pussylick | `<@user>`                       | Similar to `.fuck`, but lets you lick someone's pussy (if they have one that is...) |
-| Solo      |                                 | Gives a gif of a girl *playing* with herself.                                       |
-| Threesome | `<@user1>` `<@user2>`           | Similar to `.fuck`, but lets you have sex with 2 people.                            |
-|           | `<@user1>` `<@user2>` `[--fff]` | Gives you a gif with females only instead of the default 1 male, 2 females.         |
-|           | `<@user1>` `<@user2>` `[--mmf]` | Gives you a gif with 2 males and 1 female instead of the default 1 male, 2 females. |
+A full list of all commands can be found on the [wiki][commands].  
+All commands require the following permissions:  
+- Read Messages
+- Send Messages
+- Embed Links
+- Read Message History
+- Add Reactions
+- Use External Emojis
 
 # Translations
 Version 2.5 of \*Purr* added an option to have a per-guild language set.  
-We are happy about any translations being made for the bot.
+We are happy about any translations made for the bot.
 
 If you want to contribute towards the translation of \*Purr*, contact Andre_601#0601 on [Discord].  
 The Translation page can be found [here][translations].
@@ -145,7 +67,6 @@ The permissions include:
 - Managing messages: Will be used to delete certain commands of users like `.invite` or `.info`
 - Adding reactions: Nothing really special. Just makes \*Purr*'s responses a bit different.
 - Attach files: Used for the welcome-channel (`.welcome`), to create a image for the joined user.
-- Use of external emojis: For using external (custom) emojis.
 - All permissions of the basic invite.
 
 ## Basic invite
@@ -155,10 +76,11 @@ This permissions are:
 - See message history: Let \*Purr* see the message history of a channel.
 - Send messages: Let her send messages.
 - Embed Links: \*Purr* won't work without this permission!
+- Use of external emojis: For using external (custom) emojis.
 
 # Botlists
 \*Purr* can be found on different Botlist sites.  
-Feel free to upvote or add her to your favourites to show your support.
+Feel free to upvote her to show your support.
 
 ### [Botlist.space][botlist]
 > Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
@@ -180,8 +102,8 @@ Feel free to upvote or add her to your favourites to show your support.
 > A bot listing website that loves lewds~
 
 # Usefull Links
-* [Discord Server][Discord]
-* [Full invite] (Recommended)
-* [Basic Invite]
-* [Website]
-* [Wiki]
+- [Discord Server][Discord]
+- [Full invite] (Recommended)
+- [Basic Invite]
+- [Website]
+- [Wiki]

@@ -84,7 +84,7 @@ public class ReadyListener extends ListenerAdapter{
         
         if(shards == jda.getShardInfo().getShardTotal()){
 
-            bot.startUpdates();
+            bot.startUpdater();
             DecimalFormat decimalFormat = new DecimalFormat("##,###");
             
             shardManager.setPresence(OnlineStatus.ONLINE, Activity.of(Activity.ActivityType.WATCHING, String.format(

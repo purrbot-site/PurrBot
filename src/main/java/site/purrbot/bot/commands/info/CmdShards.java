@@ -32,7 +32,7 @@ import java.util.List;
 
 @CommandDescription(
         name = "Shards",
-        description = "Display",
+        description = "Display the current shards \\*Purr* has",
         triggers = {"shard", "shards", "shardinfo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

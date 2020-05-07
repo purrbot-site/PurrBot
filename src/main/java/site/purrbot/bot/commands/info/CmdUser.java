@@ -21,24 +21,22 @@ package site.purrbot.bot.commands.info;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @CommandDescription(
         name = "User",
-        description = "Gives you information about yourself or a mentioned user",
+        description = "Gives you information about yourself",
         triggers = {"user", "member", "userinfo", "memberinfo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}user [@user]"),
-                @CommandAttribute(key = "help", value = "{p}user [@user]")
+                @CommandAttribute(key = "usage", value = "{p}user"),
+                @CommandAttribute(key = "help", value = "{p}user")
         }
 )
 public class CmdUser implements Command{
@@ -100,7 +98,7 @@ public class CmdUser implements Command{
             String nick = member.getNickname();
             sb.append("\n")
                     .append(
-                            bot.getMsg(member.getGuild().getId(), "purr.info-user.embed.nickname")
+                            bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.nickname")
                                     .replace("{nickname}", nick.length() > 20 ? nick.substring(0, 19) + "..." : nick)
                     );
         }
@@ -130,24 +128,17 @@ public class CmdUser implements Command{
 
     @Override
     public void execute(Message msg, String args) {
-        Member member;
+        Member member = msg.getMember();
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
-
-        if(msg.getMentionedMembers().isEmpty()){
-            member = msg.getMember();
-        }else{
-            member = msg.getMentionedMembers().get(0);
-        }
 
         if(member == null){
             bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.user.no_member");
             return;
         }
 
-        String imgName = String.format("user_%s.png", member.getId());
-
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), tc.getGuild())
+                .setThumbnail(member.getUser().getEffectiveAvatarUrl())
                 .addField(
                         getName(member),
                         String.format(
@@ -186,25 +177,6 @@ public class CmdUser implements Command{
                         false
                 );
 
-        byte[] bytes;
-        try {
-            bytes = bot.getImageUtil().getStatusAvatar(
-                    member.getUser().getEffectiveAvatarUrl(),
-                    member.getOnlineStatus().toString(),
-                    member.getOnlineStatus(ClientType.MOBILE) != OnlineStatus.OFFLINE
-            );
-        }catch(IOException ex){
-            bytes = null;
-        }
-
-        if(bytes == null){
-            tc.sendMessage(embed.setThumbnail(member.getUser().getEffectiveAvatarUrl()).build()).queue();
-            return;
-        }
-
-        tc.sendFile(bytes, imgName).embed(embed.setThumbnail(String.format(
-                "attachment://%s", 
-                imgName
-        )).build()).queue();
+        tc.sendMessage(embed.build()).queue();
     }
 }

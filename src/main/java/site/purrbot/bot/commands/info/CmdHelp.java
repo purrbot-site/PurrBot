@@ -54,7 +54,7 @@ public class CmdHelp implements Command{
         this.bot = bot;
     }
 
-    private HashMap<String, String> categories = new LinkedHashMap<String, String>(){
+    private final HashMap<String, String> categories = new LinkedHashMap<String, String>(){
         {
             put("fun",   "\uD83C\uDFB2");
             put("guild", "\uD83C\uDFAE");
@@ -130,10 +130,14 @@ public class CmdHelp implements Command{
                 .waitOnSinglePage(true)
                 .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
                 .wrapPageEnds(true)
+                .addUsers(member.getUser())
                 .setFinalAction(message -> {
                     if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
                         message.clearReactions().queue(null, ignore(ErrorResponse.UNKNOWN_MESSAGE));
                 });
+        
+        if(guild.getOwner() != null)
+            builder.addUsers(guild.getOwner().getUser());
 
         HashMap<String, StringBuilder> builders = new LinkedHashMap<>();
 

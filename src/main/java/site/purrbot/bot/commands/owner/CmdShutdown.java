@@ -63,7 +63,7 @@ public class CmdShutdown implements Command{
 
         tc.sendMessage(embed).queue(message -> {
             logger.info("Disabling bot! Good bye...");
-            System.exit(0);
+            bot.disable();
         });
     }
 }

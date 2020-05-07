@@ -12,10 +12,10 @@
     "blaze": "blaze-token",
     
     "discord-bots-gg": "dbgg-token",
-    "lbots-org": "lbots-token",
     "botlist-space": "botlist-token",
     "discordextremelist-xyz": "debl-token",
-    "discord-boats": "discord-boats-token"
+    "discord-boats": "discord-boats-token",
+    "discordservices-net": "discordservices-net-token"
   },
   
   "database": {
