@@ -4,7 +4,7 @@
   },
   "errors": {
     "api_error": "Tekkis viga API ühenduses! Palun proovi hiljem uuesti.",
-    "guild_only": "Seda käsklust saab kasutada ainult [minu Discordis] ({link})!",
+    "guild_only": "Seda käsklust saab kasutada ainult [minu Discord] ({link})!",
     "missing_perms": {
       "self": "Mul on vaja `{permission}` luba selle jaoks.",
       "self_channel": "Mul on vaja `{permission}` luba {channel} kanalis et seda tegevust teostada!",
@@ -20,7 +20,7 @@
     ],
     "nsfw_request_error": "Protsessi käigus tekkis tõrge. Palun tee kindlaks, et mu sõnum ei ole kustutatud ning mul on vastavad load!",
     "title": "Viga",
-    "unknown": "S-see on nüüd natukene piinlik, aga mul tekkis tõrge selle protessi käigus.\n{VANILLABLUSH}\nPalun anna sellest teada Discordi või GitHubi kaudu!"
+    "unknown": "S-see on nüüd natukene piinlik, aga mul tekkis tõrge selle protessi käigus.\n{VANILLABLUSH}\nPalun anna sellest teada Discord või GitHub kaudu!"
   },
   "misc": {
     "and": "ja",
@@ -172,7 +172,7 @@
           "channel": "Kanal",
           "color_title": "Värv",
           "color_value": "```\nTüüp:  {type}\nVäärtus: {value}\n```",
-          "current_settings": "Need on praegused tervitus sätted siin Discordis.\nKasuta `{prefix}welcome [alakäsklus]` et neid muuta.\n\nÕpetuse kuidas sätteid muuta leiab [vikist]({wiki_welcome}).",
+          "current_settings": "Need on praegused tervitus sätted siin Discord.\nKasuta `{prefix}welcome [alakäsklus]` et neid muuta.\n\nÕpetuse kuidas sätteid muuta leiab [vikist]({wiki_welcome}).",
           "image_title": "Pilt",
           "image_value": "```\nTaust: {background}\nIkoon:       {icon}\n```",
           "message_title": "Sõnum",
@@ -264,7 +264,7 @@
         "dm_success": "Vaata oma privaatsõnumeid {user}!",
         "embed": {
           "about_title": "Minu kohta",
-          "about_value": "Oh hei sina!\nMina olen {name}. Bott ~Nya Discordile.\nMa olen valmistatud Andre_601 (<@{id}>) poolt kellel on olnud liiga palju aega ning JDA abiga. ;)",
+          "about_value": "Oh hei sina!\nMina olen {name}. Bott ~Nya Discord.\nMa olen valmistatud Andre_601 (<@{id}>) poolt kellel on olnud liiga palju aega ning JDA abiga. ;)",
           "bot_title": "Boti informatsioon",
           "bot_value": "Boti versioon: `{bot_version}`\nLaiend: [`JDA {jda_version}`]({link})",
           "bot_list_title": "Boti nimekirjad",
@@ -280,9 +280,9 @@
         "dm_success": "Saatsin sulle privaatsõnumi {user}!",
         "embed": {
           "about_title": "Linkidest",
-          "about_value": "Igal lingil on oma eesmärk.\n`Soovitatud kutse` sisaldab kõiki vajalikke lube ja mõnginaid veel sujuvaks kasutuskogemuseks.\n`Põhiline kutse` sisaldab ainult vajalikke lube.\n`Discord` on kutse minu Discordi.",
+          "about_value": "Igal lingil on oma eesmärk.\n`Soovitatud kutse` sisaldab kõiki vajalikke lube ja mõnginaid veel sujuvaks kasutuskogemuseks.\n`Põhiline kutse` sisaldab ainult vajalikke lube.\n`Discord` on kutse minu Discord.",
           "info_title": "Kutsu mind",
-          "info_value": "Heihoo! Tore et kutsusid mind enda Discordi. :3\nLihtsalt vali üks link altpoolt et saada mind oma Discordi, siis ma saan tuua sulle lõbu ja nekosi.",
+          "info_value": "Heihoo! Tore et kutsusid mind enda Discord. :3\nLihtsalt vali üks link altpoolt et saada mind oma Discordi, siis ma saan tuua sulle lõbu ja nekosi.",
           "links": "[`Soovitatud kutse`]({invite_full})\n[`Põhiline kutse`]({invite_basic})\n[`Discord`]({support})"
         }
       },
