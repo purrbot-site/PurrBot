@@ -201,16 +201,9 @@ public class CmdThreesome implements Command{
     }
     
     @Override
-    public void execute(Message msg, String s){
-        TextChannel tc = msg.getTextChannel();
-        Member author = msg.getMember();
-        Guild guild = msg.getGuild();
-        
-        if(author == null)
-            return;
-        
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(msg.getMentionedMembers().isEmpty() || msg.getMentionedMembers().size() < 2){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.nsfw.threesome.no_mention");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.threesome.no_mention");
             return;
         }
         
@@ -220,53 +213,53 @@ public class CmdThreesome implements Command{
         if(target1.equals(guild.getSelfMember()) || target2.equals(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.nsfw.threesome.mention_snuggle", author.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.threesome.mention_snuggle", member.getAsMention())
                 ).queue();
                 return;
             }else{
-                if(bot.isSpecial(author.getId())){
+                if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.nsfw.threesome.special_user", author.getAsMention())
+                            bot.getMsg(guild.getId(), "purr.nsfw.threesome.special_user", member.getAsMention())
                     ).queue();
                     return;
                 }
             }
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.mention_purr", author.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.mention_purr", member.getAsMention())
             ).queue();
             return;
         }
         
-        if(target1.equals(author) || target2.equals(author)){
+        if(target1.equals(member) || target2.equals(member)){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.mention_self", author.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.mention_self", member.getAsMention())
             ).queue();
             return;
         }
         
         if(target1.getUser().isBot() || target2.getUser().isBot()){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.mention_bot", author.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.mention_bot", member.getAsMention())
             ).queue();
             return;
         }
         
-        if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
+        if(queue.getIfPresent(String.format("%s:%s", member.getId(), guild.getId())) != null){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.open", author.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.open", member.getAsMention())
             ).queue();
             return;
         }
         
         tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.message", author.getEffectiveName())
+                bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.message", member.getEffectiveName())
                         .replace("{target1}", target1.getAsMention())
                         .replace("{target2}", target2.getAsMention())
         ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
-                        v -> handleEvent(msg, message, author, target1, target2),
-                        e -> bot.getEmbedUtil().sendError(tc, author.getUser(), "errors.nsfw_request_error")
+                        v -> handleEvent(msg, message, member, target1, target2),
+                        e -> bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.nsfw_request_error")
                 )
         );
     }

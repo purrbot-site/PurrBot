@@ -48,19 +48,13 @@ public class CmdTail implements Command{
     }
     
     @Override
-    public void execute(Message msg, String s){
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         String link = bot.getHttpUtil().getImage(API.GIF_TAIL);
         
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
             return;
         }
-    
-        Member member = msg.getMember();
-        if(member == null)
-            return;
     
         EmbedBuilder tail = bot.getEmbedUtil().getEmbed()
                 .setDescription(bot.getMsg(guild.getId(), "purr.fun.tail.message", member.getEffectiveName()))

@@ -73,7 +73,7 @@ public class CmdQuote implements Command{
         EmbedBuilder quoteEmbed = bot.getEmbedUtil().getEmbed()
                 .setAuthor(
                         bot.getMsg(guild.getId(), "purr.info.quote.embed_basic.info", name), 
-                        msg.getJumpUrl(), 
+                        msg.getJumpUrl(),
                         msg.getAuthor().getEffectiveAvatarUrl()
                 )
                 .setDescription(msg.getContentRaw())
@@ -109,29 +109,25 @@ public class CmdQuote implements Command{
     }
 
     @Override
-    public void execute(Message msg, String s){
-        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.length == 0){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.quote.few_args");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.quote.few_args");
             return;
         }
 
         if(msg.getMentionedChannels().isEmpty()){
             if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), Permission.MESSAGE_HISTORY, true);
+                bot.getEmbedUtil().sendPermError(tc, member.getUser(), Permission.MESSAGE_HISTORY, true);
                 return;
             }
 
             Message quote = getMessage(args[0], tc);
 
             if(quote == null){
-                MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
                         .setColor(0xFF0000)
                         .setDescription(
                                 bot.getMsg(guild.getId(), "purr.info.quote.no_msg")
@@ -147,7 +143,7 @@ public class CmdQuote implements Command{
                         .map(Message.Attachment::getUrl).orElse(null);
 
                 if(link == null && quote.getContentRaw().isEmpty()){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.quote.no_value");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.quote.no_value");
                     return;
                 }
 
@@ -173,7 +169,7 @@ public class CmdQuote implements Command{
 
         TextChannel channel = msg.getMentionedChannels().get(0);
         if(channel.isNSFW() && !tc.isNSFW()){
-            MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
+            MessageEmbed embed = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
                     .setColor(0xFF0000)
                     .setDescription(
                             bot.getMsg(guild.getId(), "purr.info.quote.nsfw_channel")
@@ -189,7 +185,7 @@ public class CmdQuote implements Command{
             Message quote = getMessage(args[0], channel);
 
             if(quote == null){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.quote.invalid_id");
+                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.quote.invalid_id");
                 return;
             }
 
@@ -198,7 +194,7 @@ public class CmdQuote implements Command{
                         .map(Message.Attachment::getUrl).orElse(null);
 
                 if(link == null && quote.getContentRaw().isEmpty()){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.quote.no_value");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.quote.no_value");
                     return;
                 }
 
@@ -219,7 +215,7 @@ public class CmdQuote implements Command{
                 sendImgEmbed(msg, quote, bytes, tc);
             }
         }else{
-            bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), channel, Permission.MESSAGE_HISTORY, true);
+            bot.getEmbedUtil().sendPermError(tc, member.getUser(), channel, Permission.MESSAGE_HISTORY, true);
         }
     }
 }

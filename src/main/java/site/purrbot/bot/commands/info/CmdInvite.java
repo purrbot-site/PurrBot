@@ -55,19 +55,16 @@ public class CmdInvite implements Command{
     }
     
     @Override
-    public void execute(Message msg, String args){
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(bot.isBeta()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "snuggle.info.invite.message");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "snuggle.info.invite.message");
             return;
         }
         
-        EmbedBuilder invite = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
+        EmbedBuilder invite = bot.getEmbedUtil().getEmbed(member.getUser(), msg.getGuild())
                 .setAuthor(msg.getJDA().getSelfUser().getName(),
                         Links.WEBSITE.getUrl(),
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
@@ -106,27 +103,27 @@ public class CmdInvite implements Command{
                                 .replace("{support}", Links.DISCORD.getUrl()),
                         false
                 );
-
-
-        if(args.toLowerCase().contains("--dm") || args.toLowerCase().contains("—dm")){
-            msg.getAuthor().openPrivateChannel()
+        
+        String s = msg.getContentRaw();
+        if(s.toLowerCase().contains("--dm") || s.toLowerCase().contains("—dm")){
+            member.getUser().openPrivateChannel()
                     .flatMap((channel) -> channel.sendMessage(invite.build()))
                     .queue(message -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.info.invite.dm_success", msg.getAuthor().getAsMention())
+                            bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getUser().getAsMention())
                     ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)), 
                     (error) -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", msg.getAuthor().getAsMention())
+                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getUser().getAsMention())
                     ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)));
             
             
             
-            msg.getAuthor().openPrivateChannel().queue(
+            member.getUser().openPrivateChannel().queue(
                     pm -> pm.sendMessage(invite.build()).queue(message ->
                             tc.sendMessage(
-                                    bot.getMsg(guild.getId(), "purr.info.invite.dm_success", msg.getAuthor().getAsMention())
+                                    bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getUser().getAsMention())
                             ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
                     ), throwable -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", msg.getAuthor().getAsMention())
+                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getUser().getAsMention())
                     ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
             );
             return;

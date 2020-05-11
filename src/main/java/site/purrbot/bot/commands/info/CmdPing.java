@@ -21,6 +21,7 @@ package site.purrbot.bot.commands.info;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
@@ -48,10 +49,7 @@ public class CmdPing implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args){
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         tc.sendMessage(
                 bot.getRandomMsg(guild.getId(), "purr.info.ping.loading")
         ).queue(message -> msg.getJDA().getRestPing().queue((time) -> message.editMessage(

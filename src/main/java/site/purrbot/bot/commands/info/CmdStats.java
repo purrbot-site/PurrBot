@@ -122,15 +122,13 @@ public class CmdStats implements Command{
     }
 
     @Override
-    public void execute(Message msg, String s){
-        Guild guild = msg.getGuild();
-        TextChannel tc = msg.getTextChannel();
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         JDA jda = msg.getJDA();
         ShardManager shardManager = bot.getShardManager();
         
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
 
-        EmbedBuilder stats = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
+        EmbedBuilder stats = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
                 .setAuthor(
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.title")
                 )

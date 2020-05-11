@@ -52,20 +52,13 @@ public class CmdTickle implements Command{
     }
 
     @Override
-    public void execute(Message msg, String s) {
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-    
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         List<Member> members = msg.getMentionedMembers();
     
         if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.tickle.no_mention");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.tickle.no_mention");
             return;
         }
-    
-        Member member = msg.getMember();
-        if(member == null)
-            return;
 
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){

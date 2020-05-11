@@ -20,6 +20,8 @@ package site.purrbot.bot.commands.owner;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
@@ -52,31 +54,31 @@ public class CmdMsg implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args) {
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         List<String> split = new LinkedList<>();
-        String channelID = args.split(" ")[0];
-        Collections.addAll(split, args.split(" "));
+        String channelID = args[0];
+        Collections.addAll(split, args);
 
         if(!isValidChannel(channelID)){
             bot.getEmbedUtil().sendError(
                     msg.getTextChannel(),
-                    msg.getAuthor(),
-                    "The provided ID was invalid. Make sure it's an actual channel-ID!"
+                    member.getUser(),
+                    "errors.unknown"
             );
             return;
         }
         split.remove(0);
 
         if(split.isEmpty()){
-            bot.getEmbedUtil().sendError(msg.getTextChannel(), msg.getAuthor(), "Please provide a message!");
+            bot.getEmbedUtil().sendError(msg.getTextChannel(), member.getUser(), "Please provide a message!");
             return;
         }
 
-        TextChannel tc = bot.getShardManager().getTextChannelById(channelID);
-        if(tc == null)
+        TextChannel channel = bot.getShardManager().getTextChannelById(channelID);
+        if(channel == null)
             return;
-
-        tc.sendMessage(String.join(" ", split)).queue(
+    
+        channel.sendMessage(String.join(" ", split)).queue(
                 message -> msg.addReaction("✅").queue()
         );
     }

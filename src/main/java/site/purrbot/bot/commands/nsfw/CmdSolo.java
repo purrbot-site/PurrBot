@@ -23,6 +23,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
@@ -48,20 +49,18 @@ public class CmdSolo implements Command{
     }
 
     @Override
-    public void execute(Message msg, String s){
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         String link = bot.getHttpUtil().getImage(API.GIF_SOLO_LEWD);
 
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
             return;
         }
 
-        EmbedBuilder girl = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
+        EmbedBuilder girl = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
                 .setTitle(bot.getMsg(guild.getId(), "purr.nsfw.solo.title"), link)
                 .setImage(link);
 

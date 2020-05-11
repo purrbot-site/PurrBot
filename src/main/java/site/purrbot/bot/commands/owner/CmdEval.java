@@ -22,6 +22,8 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
@@ -84,14 +86,12 @@ public class CmdEval implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args) {
-        TextChannel tc = msg.getTextChannel();
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         if(msg.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(args.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "I need at least one argument!");
+        if(args.length == 0){
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "I need at least one argument!");
             return;
         }
 
@@ -99,14 +99,11 @@ public class CmdEval implements Command{
 
         se.put("jda", msg.getJDA());
         se.put("shardManager", bot.getShardManager());
-        se.put("guild", msg.getGuild());
-        se.put("channel", msg.getTextChannel());
+        se.put("guild", guild);
+        se.put("channel", tc);
         se.put("msg", msg);
 
-        List<String> split = new LinkedList<>();
-        Collections.addAll(split, msg.getContentRaw().split(" "));
-        split.remove(0);
-        String statement = String.join(" ", split);
+        String statement = String.join(" ", args);
 
         long startTime = System.currentTimeMillis();
 

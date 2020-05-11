@@ -131,7 +131,11 @@ public class CommandListener extends ListenerAdapter{
                     }
 
                     if(!self.hasPermission(tc, Permission.MESSAGE_EMBED_LINKS)){
-                        bot.getEmbedUtil().sendPermError(tc, member.getUser(), tc, Permission.MESSAGE_EMBED_LINKS,true);
+                        tc.sendMessage(
+                                bot.getMsg(guild.getId(), "errors.missing_perms.self_channel")
+                                        .replace("{channel}", tc.getAsMention())
+                                        .replace("{permission}", Permission.MESSAGE_EMBED_LINKS.getName())
+                        ).queue();
                         return;
                     }
                     

@@ -22,9 +22,7 @@ import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -50,9 +48,7 @@ public class CmdShutdown implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args){
-        TextChannel tc = msg.getTextChannel();
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(msg.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 

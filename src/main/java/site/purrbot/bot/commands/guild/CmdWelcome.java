@@ -219,11 +219,7 @@ public class CmdWelcome implements Command{
     }
     
     @Override
-    public void execute(Message msg, String s){
-        Guild guild = msg.getGuild();
-        TextChannel tc = msg.getTextChannel();
-        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+", 3);
-        
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
@@ -241,11 +237,11 @@ public class CmdWelcome implements Command{
             }
 
             if(is == null){
-                tc.sendMessage(welcomeSettings(msg.getAuthor(), guild, false)).queue();
+                tc.sendMessage(welcomeSettings(member.getUser(), guild, false)).queue();
                 return;
             }
 
-            tc.sendMessage(welcomeSettings(msg.getAuthor(), guild, true))
+            tc.sendMessage(welcomeSettings(member.getUser(), guild, true))
                     .addFile(is, "welcome.jpg")
                     .queue();
             return;
@@ -254,7 +250,7 @@ public class CmdWelcome implements Command{
         switch (args[0].toLowerCase()){
             case "bg":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -262,22 +258,22 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(args.length < 3){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_bg");
+                        bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.no_bg");
                         return;
                     }
                     if(!bot.getWelcomeBg().contains(args[2].toLowerCase()) && !args[2].equalsIgnoreCase("random")){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_bg");
+                        bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.invalid_bg");
                         return;
                     }
                     update(msg, Type.BACKGROUND, args[2].toLowerCase());
                 }else{
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_args");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.invalid_args");
                 }
                 break;
 
             case "channel":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -285,22 +281,22 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(msg.getMentionedChannels().isEmpty()){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_channel");
+                        bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.no_channel");
                         return;
                     }
                     if(msg.getMentionedChannels().get(0) == null){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_channel");
+                        bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.invalid_channel");
                         return;
                     }
                     update(msg, Type.CHANNEL, msg.getMentionedChannels().get(0).getId());
                 }else{
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_args");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.invalid_args");
                 }
                 break;
 
             case "color":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -308,26 +304,26 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(args.length < 3){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_color");
+                        bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.no_color");
                         return;
                     }
 
                     Color color = bot.getMessageUtil().getColor(args[2].toLowerCase());
 
                     if(color == null){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_color");
+                        bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.invalid_color");
                         return;
                     }
 
                     update(msg, Type.COLOR, args[2].toLowerCase());
                 }else{
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_args");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.invalid_args");
                 }
                 break;
 
             case "icon":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -335,22 +331,22 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(args.length < 3){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_icon");
+                        bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.no_icon");
                         return;
                     }
                     if(!bot.getWelcomeIcon().contains(args[2].toLowerCase()) && !args[2].equalsIgnoreCase("random")){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_bg");
+                        bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.invalid_bg");
                         return;
                     }
                     update(msg, Type.ICON, args[2].toLowerCase());
                 }else{
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.invalid_args");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.invalid_args");
                 }
                 break;
 
             case "msg":
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.few_args");
+                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.few_args");
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -358,7 +354,7 @@ public class CmdWelcome implements Command{
                 }else
                 if(args[1].equalsIgnoreCase("set")){
                     if(args.length < 3){
-                        bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.welcome.no_msg");
+                        bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.no_msg");
                         return;
                     }
                     update(msg, Type.MESSAGE, args[2]);
@@ -379,11 +375,11 @@ public class CmdWelcome implements Command{
                 }
 
                 if(is == null){
-                    tc.sendMessage(welcomeSettings(msg.getAuthor(), guild, false)).queue();
+                    tc.sendMessage(welcomeSettings(member.getUser(), guild, false)).queue();
                     return;
                 }
 
-                tc.sendMessage(welcomeSettings(msg.getAuthor(), guild, true))
+                tc.sendMessage(welcomeSettings(member.getUser(), guild, true))
                         .addFile(is, "welcome.jpg")
                         .queue();
         }

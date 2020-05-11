@@ -92,17 +92,14 @@ public class CmdShip implements Command{
     }
 
     @Override
-    public void execute(Message msg, String s){
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         Member member1;
         Member member2;
 
         List<Member> members = msg.getMentionedMembers();
 
         if (members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.ship.no_mention");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.ship.no_mention");
             return;
         }
 
@@ -111,7 +108,7 @@ public class CmdShip implements Command{
             member1 = members.get(0);
             member2 = members.get(1);
         }else{
-            member1 = msg.getMember();
+            member1 = member;
             member2 = members.get(0);
         }
 
@@ -200,7 +197,7 @@ public class CmdShip implements Command{
         }
 
         if(member1.getUser().isBot() || member2.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.ship.target_bot");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.ship.target_bot");
             return;
         }
 

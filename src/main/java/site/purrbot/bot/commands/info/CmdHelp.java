@@ -113,14 +113,8 @@ public class CmdHelp implements Command{
     }
     
     @Override
-    public void execute(Message msg, String args) {
-        TextChannel tc = msg.getTextChannel();
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         String prefix = bot.getPrefix(msg.getGuild().getId());
-        Guild guild = msg.getGuild();
-
-        Member member = msg.getMember();
-        if(member == null)
-            return;
         
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
@@ -173,7 +167,7 @@ public class CmdHelp implements Command{
 
 
         for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
-            if(builderEntry.getKey().equals("owner") && !bot.getPermUtil().isDeveloper(msg.getAuthor()))
+            if(builderEntry.getKey().equals("owner") && !bot.getPermUtil().isDeveloper(member.getUser()))
                 continue;
             
             if(!tc.isNSFW() && builderEntry.getKey().equals("nsfw")){
@@ -191,16 +185,16 @@ public class CmdHelp implements Command{
             ));
         }
 
-        if(args.length() != 0){
-            Command command = (Command)bot.getCmdHandler().findCommand(args.split(" ")[0]);
+        if(args.length != 0){
+            Command command = (Command)bot.getCmdHandler().findCommand(args[0]);
 
             if(command == null || !isCommand(command)){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.help.command_info.no_command");
+                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.help.command_info.no_command");
                 return;
             }
 
             if(!tc.isNSFW() && command.getAttribute("category").equals("nsfw")){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.help.command_info.command_nsfw");
+                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.help.command_info.command_nsfw");
                 return;
             }
 

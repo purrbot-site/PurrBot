@@ -52,11 +52,13 @@ public class GuildListener extends ListenerAdapter{
         this.bot = bot;
     }
     
-    private void sendWebhook(Action action, Guild guild){
-        Member owner = guild.getOwner();
-        
+    private void sendWebhook(Member owner, Guild guild, Action action) {
         String title = null;
         WebhookEmbed embed = null;
+    
+        String mention = owner == null ? "Unknown" : owner.getAsMention();
+        String name    = owner == null ? "Unknown" : owner.getUser().getName();
+        String id      = owner == null ? "?" : owner.getId();
         
         switch(action){
             case JOIN:
@@ -73,10 +75,10 @@ public class GuildListener extends ListenerAdapter{
                         ))
                         .addField(new WebhookEmbed.EmbedField(
                                 false, "Owner", String.format(
-                                        "%s | %s (`%s`)", 
-                                        owner == null ? "Unknown" : owner.getAsMention(),
-                                        owner == null ? "Unknown" : owner.getUser().getName(),
-                                        owner == null ? "?" : owner.getId()
+                                        "%s | %s (`%s`)",
+                                        mention,
+                                        name,
+                                        id
                                 )
                         ))
                         .addField(new WebhookEmbed.EmbedField(
@@ -113,9 +115,9 @@ public class GuildListener extends ListenerAdapter{
                         .addField(new WebhookEmbed.EmbedField(
                                 false, "Owner", String.format(
                                 "%s | %s (`%s`)",
-                                owner == null ? "Unknown" : owner.getAsMention(),
-                                owner == null ? "Unknown" : owner.getUser().getName(),
-                                owner == null ? "?" : owner.getId()
+                                mention,
+                                name,
+                                id
                         )
                         ))
                         .addField(new WebhookEmbed.EmbedField(
@@ -152,9 +154,9 @@ public class GuildListener extends ListenerAdapter{
                         .addField(new WebhookEmbed.EmbedField(
                                 false, "Owner", String.format(
                                 "%s | %s (`%s`)",
-                                owner == null ? "Unknown" : owner.getAsMention(),
-                                owner == null ? "Unknown" : owner.getUser().getName(),
-                                owner == null ? "?" : owner.getId()
+                                mention,
+                                name,
+                                id
                         )
                         ))
                         .addField(new WebhookEmbed.EmbedField(
@@ -226,7 +228,10 @@ public class GuildListener extends ListenerAdapter{
                         guild.leave().queue();
                     });
             
-            sendWebhook(Action.AUTO_LEAVE, guild);
+            guild.retrieveOwner().queue(
+                    owner -> sendWebhook(owner, guild, Action.AUTO_LEAVE),
+                    e -> sendWebhook(null, guild, Action.AUTO_LEAVE)
+            );
             return;
         }
 
@@ -239,7 +244,10 @@ public class GuildListener extends ListenerAdapter{
                 guild.getMemberCount()
         ));
         
-        sendWebhook(Action.JOIN, guild);
+        guild.retrieveOwner().queue(
+                owner -> sendWebhook(owner, guild, Action.JOIN),
+                e -> sendWebhook(null, guild, Action.JOIN)
+        );
     }
 
     @Override
@@ -260,7 +268,10 @@ public class GuildListener extends ListenerAdapter{
                 guild.getMemberCount()
         ));
     
-        sendWebhook(Action.LEAVE, guild);
+        guild.retrieveOwner().queue(
+                owner -> sendWebhook(owner, guild, Action.LEAVE),
+                e -> sendWebhook(null, guild, Action.LEAVE)
+        );
     }
 
     @Override

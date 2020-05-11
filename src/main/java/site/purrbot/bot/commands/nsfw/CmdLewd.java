@@ -23,6 +23,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
@@ -51,20 +52,18 @@ public class CmdLewd implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args){
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-        
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
         
-        EmbedBuilder neko = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild);
+        EmbedBuilder neko = bot.getEmbedUtil().getEmbed(member.getUser(), guild);
         String link;
         
-        if(args.toLowerCase().contains("--gif") || args.toLowerCase().contains("—gif")){
+        String s = msg.getContentRaw();
+        if(s.toLowerCase().contains("--gif") || s.toLowerCase().contains("—gif")){
             link = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD);
             if(link == null){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
+                bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
                 return;
             }
             
@@ -72,7 +71,7 @@ public class CmdLewd implements Command{
         }else{
             link = bot.getHttpUtil().getImage(API.IMG_NEKO_LEWD);
             if(link == null){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
+                bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
                 return;
             }
             

@@ -126,27 +126,27 @@ public class CmdInfo implements Command{
     }
     
     @Override
-    public void execute(Message msg, String args){
-        Guild guild = msg.getGuild();
-        TextChannel tc = msg.getTextChannel();
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(args.toLowerCase().contains("--dm") || args.toLowerCase().contains("—dm")){
-            String mention = msg.getAuthor().getAsMention();
+        String s = msg.getContentRaw();
+        if(s.toLowerCase().contains("--dm") || s.toLowerCase().contains("—dm")){
+            String mention = member.getUser().getAsMention();
             String prefix = bot.isBeta() ? "snuggle" : "purr";
-            msg.getAuthor().openPrivateChannel()
-                    .flatMap(channel -> channel.sendMessage(getEmbed(msg.getAuthor(), guild)))
-                    .queue(message -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), prefix + ".info.info.dm_success", mention)
-                    ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)), 
-                    (error) -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), prefix + ".info.info.dm_failure", mention)
-                    ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)));
+            member.getUser().openPrivateChannel()
+                    .flatMap(channel -> channel.sendMessage(getEmbed(member.getUser(), guild)))
+                    .queue(
+                            message -> tc.sendMessage(
+                                    bot.getMsg(guild.getId(), prefix + ".info.info.dm_success", mention)
+                            ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)), 
+                            error -> tc.sendMessage(
+                                    bot.getMsg(guild.getId(), prefix + ".info.info.dm_failure", mention)
+                            ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
+                    );
             return;
         }
 
-        tc.sendMessage(getEmbed(msg.getAuthor(), guild)).queue();
+        tc.sendMessage(getEmbed(member.getUser(), guild)).queue();
     }
 }

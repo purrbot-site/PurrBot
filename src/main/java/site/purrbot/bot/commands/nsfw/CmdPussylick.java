@@ -155,16 +155,9 @@ public class CmdPussylick implements Command{
     }
     
     @Override
-    public void execute(Message msg, String s){
-        TextChannel tc = msg.getTextChannel();
-        Member author = msg.getMember();
-        Guild guild = msg.getGuild();
-        
-        if(author == null)
-            return;
-        
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(msg.getMentionedUsers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, author.getUser(), "purr.nsfw.pussylick.no_mention");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.pussylick.no_mention");
             return;
         }
         
@@ -173,50 +166,50 @@ public class CmdPussylick implements Command{
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.nsfw.pussylick.mention_snuggle", author.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.pussylick.mention_snuggle", member.getAsMention())
                 ).queue();
                 return;
             }else{
-                if(bot.isSpecial(author.getId())){
+                if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.nsfw.pussylick.special_user", author.getAsMention())
+                            bot.getMsg(guild.getId(), "purr.nsfw.pussylick.special_user", member.getAsMention())
                     ).queue();
                     return;
                 }
             }
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.mention_purr", author.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.mention_purr", member.getAsMention())
             ).queue();
             return;
         }
         
-        if(target.equals(author)){
+        if(target.equals(member)){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.mention_self", author.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.mention_self", member.getAsMention())
             ).queue();
             return;
         }
         
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, author.getUser(), "purr.nsfw.pussylick.mention_bot");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.pussylick.mention_bot");
             return;
         }
         
-        if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
+        if(queue.getIfPresent(String.format("%s:%s", member.getId(), guild.getId())) != null){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.open", author.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.open", member.getAsMention())
             ).queue();
             return;
         }
         
         tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.message", author.getEffectiveName())
+                bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.message", member.getEffectiveName())
                     .replace("{target}", target.getAsMention())
         ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
-                        v -> handleEvent(message, author, target),
-                        e -> bot.getEmbedUtil().sendError(tc, author.getUser(), "errors.nsfw_request_error")
+                        v -> handleEvent(message, member, target),
+                        e -> bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.nsfw_request_error")
                 )
         );
     }

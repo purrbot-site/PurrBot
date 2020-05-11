@@ -22,9 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
@@ -48,25 +46,23 @@ public class CmdHolo implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args) {
-        TextChannel tc = msg.getTextChannel();
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         String link = bot.getHttpUtil().getImage(API.IMG_HOLO);
 
-        if(msg.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "errors.api_error");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
             return;
         }
 
-        MessageEmbed holo = bot.getEmbedUtil().getEmbed(msg.getAuthor(), tc.getGuild())
-                .setTitle(bot.getMsg(msg.getGuild().getId(), "purr.fun.holo.title"), link)
+        MessageEmbed holo = bot.getEmbedUtil().getEmbed(member.getUser(), tc.getGuild())
+                .setTitle(bot.getMsg(guild.getId(), "purr.fun.holo.title"), link)
                 .setImage(link)
                 .build();
 
-        tc.sendMessage(bot.getMsg(msg.getGuild().getId(), "purr.fun.holo.loading"))
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.holo.loading"))
                 .queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(holo).queue());
     }
 }

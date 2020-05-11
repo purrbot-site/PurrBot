@@ -55,17 +55,9 @@ public class CmdLanguage implements Command{
     }
     
     @Override
-    public void execute(Message msg, String s){
-        Guild guild = msg.getGuild();
-        TextChannel tc = msg.getTextChannel();
-        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
-        
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
-    
-        Member member = msg.getMember();
-        if(member == null)
-            return;
         
         if(args.length < 1){
             MessageEmbed embed = bot.getEmbedUtil().getEmbed(member.getUser(), guild)

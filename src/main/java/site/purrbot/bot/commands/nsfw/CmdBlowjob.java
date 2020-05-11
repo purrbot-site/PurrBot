@@ -152,16 +152,9 @@ public class CmdBlowjob implements Command{
     }
     
     @Override
-    public void execute(Message msg, String args){
-        TextChannel tc = msg.getTextChannel();
-        Member author = msg.getMember();
-        Guild guild = msg.getGuild();
-
-        if(author == null)
-            return;
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, author.getUser(), "purr.nsfw.blowjob.no_mention");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.blowjob.no_mention");
             return;
         }
 
@@ -169,24 +162,24 @@ public class CmdBlowjob implements Command{
 
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
-                if(bot.isSpecial(author.getId())){
+                if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.special_user", author.getEffectiveName())
+                            bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.special_user", member.getEffectiveName())
                     ).queue();
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_snuggle", author.getEffectiveName())
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_snuggle", member.getEffectiveName())
                 ).queue();
             }else{
-                if(bot.isSpecial(author.getId())){
+                if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.nsfw.blowjob.special_user", author.getEffectiveName())
+                            bot.getMsg(guild.getId(), "purr.nsfw.blowjob.special_user", member.getEffectiveName())
                     ).queue();
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_purr", author.getAsMention())
+                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_purr", member.getAsMention())
                 ).queue();
             }
             return;
@@ -195,24 +188,24 @@ public class CmdBlowjob implements Command{
         if(target.equals(msg.getMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_self", author.getEffectiveName())
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_self", member.getEffectiveName())
                 ).queue();
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_self", author.getEffectiveName())
+                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_self", member.getEffectiveName())
                 ).queue();
             }
             return;
         }
 
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, author.getUser(), "purr.nsfw.blowjob.mention_bot");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.blowjob.mention_bot");
             return;
         }
 
-        if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
+        if(queue.getIfPresent(String.format("%s:%s", member.getId(), guild.getId())) != null){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.blowjob.request.open", author.getEffectiveName())
+                    bot.getMsg(guild.getId(), "purr.nsfw.blowjob.request.open", member.getEffectiveName())
             ).queue();
             return;
         }
@@ -220,15 +213,15 @@ public class CmdBlowjob implements Command{
         tc.sendMessage(
                 bot.getMsg(
                         guild.getId(), 
-                        "purr.nsfw.blowjob.request.message", 
-                        author.getEffectiveName(),
+                        "purr.nsfw.blowjob.request.message",
+                        member.getEffectiveName(),
                         target.getAsMention()
                 )
         ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
-                        v -> handleEvent(message, author, target), 
-                        e -> bot.getEmbedUtil().sendError(tc, author.getUser(), "errors.nsfw_request_error")
+                        v -> handleEvent(message, member, target), 
+                        e -> bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.nsfw_request_error")
                 ));
     }
 }

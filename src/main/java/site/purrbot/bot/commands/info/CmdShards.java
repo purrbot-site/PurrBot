@@ -21,7 +21,10 @@ package site.purrbot.bot.commands.info;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.apache.commons.lang.StringUtils;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -49,7 +52,7 @@ public class CmdShards implements Command{
     }
     
     @Override
-    public void execute(Message msg, String s){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         List<String> headers = new ArrayList<>();
         
         headers.add("ID");

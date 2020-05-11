@@ -105,5 +105,4 @@ public class EmbedUtil {
     public void sendPermError(TextChannel tc, User user, TextChannel channel, Permission permission, boolean self){
         tc.sendMessage(getPermErrorEmbed(user, tc.getGuild(), channel, permission, self, false)).queue();
     }
-
 }

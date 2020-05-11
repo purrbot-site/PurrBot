@@ -19,6 +19,23 @@
 package site.purrbot.bot.commands;
 
 import com.github.rainestormee.jdacommand.AbstractCommand;
-import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.*;
 
-public interface Command extends AbstractCommand<Message>{}
+public interface Command extends AbstractCommand<Message>{
+    
+    @Override
+    default void execute(Message message, String s){
+        Guild guild = message.getGuild();
+        TextChannel tc = message.getTextChannel();
+        Member member = message.getMember();
+        
+        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
+        
+        if(member == null)
+            return;
+        
+        run(guild, tc, message, member, args);
+    }
+    
+    void run(Guild guild, TextChannel tc, Message msg, Member member, String... args);
+}

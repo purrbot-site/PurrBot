@@ -21,10 +21,7 @@ package site.purrbot.bot.commands.guild;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -77,16 +74,12 @@ public class CmdPrefix implements Command{
     }
 
     @Override
-    public void execute(Message msg, String s){
-        Guild guild = msg.getGuild();
-        TextChannel tc = msg.getTextChannel();
-        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.length < 1){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.prefix.few_args");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.prefix.few_args");
             return;
         }
 
@@ -95,12 +88,12 @@ public class CmdPrefix implements Command{
         }else
         if(args[0].equalsIgnoreCase("set")){
             if(args.length == 1){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.prefix.no_prefix");
+                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.prefix.no_prefix");
             }else{
                 setPrefix(msg, args[1].toLowerCase());
             }
         }else{
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.guild.prefix.invalid_args");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.prefix.invalid_args");
         }
     }
 }

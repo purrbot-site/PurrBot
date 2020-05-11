@@ -54,43 +54,57 @@ public class CmdLeave implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args) {
-        TextChannel tc = msg.getTextChannel();
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         ShardManager shardManager = bot.getShardManager();
 
         String pm = null;
     
-        Matcher matcher = pattern.matcher(args);
+        String s = msg.getContentRaw();
+        Matcher matcher = pattern.matcher(s);
         if(matcher.find())
             pm = matcher.group("message");
 
-        String id = args.split("\\s+")[0];
+        String id = args[0];
 
         String finalPm = pm;
-        Guild guild = shardManager.getGuildById(id);
+        Guild targetGuild = shardManager.getGuildById(id);
 
-        if(guild == null)
+        if(targetGuild == null)
             return;
 
-        Member owner = guild.getOwner();
+        Member owner = targetGuild.getOwner();
         if(owner == null){
-            guild.leave().queue();
+            targetGuild.leave().queue();
             return;
         }
 
-        guild.getOwner().getUser().openPrivateChannel().queue(
+        owner.getUser().openPrivateChannel()
+                .flatMap(channel -> channel.sendMessage(String.format(
+                        "I left your Discord `%s` for the following reason:\n" +
+                        "```\n" +
+                        "%s\n" +
+                        "```",
+                        targetGuild.getName(),
+                        finalPm == null ? "No reason given" : finalPm
+                )))
+                .queue(
+                        message -> targetGuild.leave().queue(),
+                        throwable -> targetGuild.leave().queue()
+                );
+        
+        targetGuild.getOwner().getUser().openPrivateChannel().queue(
                 privateChannel -> privateChannel.sendMessage(String.format(
                         "I left your Discord `%s` for the following reason:\n" +
                         "```\n" +
                         "%s\n" +
                         "```",
-                        guild.getName(),
+                        targetGuild.getName(),
                         finalPm == null ? "No reason given" : finalPm
-                )).queue(message -> guild.leave().queue(),
-                        throwable -> guild.leave().queue()),
+                )).queue(message -> targetGuild.leave().queue(),
+                        throwable -> targetGuild.leave().queue()),
                 throwable -> {
                     tc.sendMessage("Couldn't send PM to user!").queue();
-                    guild.leave().queue();
+                    targetGuild.leave().queue();
                 }
         );
     }

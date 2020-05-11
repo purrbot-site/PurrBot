@@ -127,17 +127,8 @@ public class CmdUser implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args) {
-        Member member = msg.getMember();
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-
-        if(member == null){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.user.no_member");
-            return;
-        }
-
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), tc.getGuild())
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member.getUser(), tc.getGuild())
                 .setThumbnail(member.getUser().getEffectiveAvatarUrl())
                 .addField(
                         getName(member),

@@ -202,16 +202,10 @@ public class CmdFuck implements Command{
     }
     
     @Override
-    public void execute(Message msg, String s){
-        TextChannel tc = msg.getTextChannel();
-        Member author = msg.getMember();
-        Guild guild = msg.getGuild();
-
-        if(author == null)
-            return;
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
 
         if(msg.getMentionedUsers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, author.getUser(), "purr.nsfw.fuck.no_mention");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.fuck.no_mention");
             return;
         }
 
@@ -220,52 +214,52 @@ public class CmdFuck implements Command{
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.nsfw.fuck.mention_snuggle", author.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.fuck.mention_snuggle", member.getAsMention())
                 ).queue();
                 return;
             }
-            if(bot.isSpecial(msg.getAuthor().getId())){
+            if(bot.isSpecial(member.getUser().getId())){
                 int random = bot.getRandom().nextInt(10);
 
                 if(random >= 1 && random <= 3) {
                     tc.sendMessage(
-                            bot.getRandomMsg(guild.getId(), "purr.nsfw.fuck.special_user.accept", author.getAsMention())
+                            bot.getRandomMsg(guild.getId(), "purr.nsfw.fuck.special_user.accept", member.getAsMention())
                     ).queue();
                 }else{
                     tc.sendMessage(
-                            bot.getRandomMsg(guild.getId(), "purr.nsfw.fuck.special_user.deny", author.getAsMention())
+                            bot.getRandomMsg(guild.getId(), "purr.nsfw.fuck.special_user.deny", member.getAsMention())
                     ).queue();
                 }
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.nsfw.fuck.mention_purr", author.getAsMention())
+                        bot.getMsg(guild.getId(), "purr.nsfw.fuck.mention_purr", member.getAsMention())
                 ).queue();
             }
             return;
         }
 
-        if(target.equals(author)){
+        if(target.equals(member)){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.fuck.mention_self", author.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.fuck.mention_self", member.getAsMention())
             ).queue();
             return;
         }
 
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.nsfw.fuck.mention_bot");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.fuck.mention_bot");
             return;
         }
 
-        if(queue.getIfPresent(String.format("%s:%s", author.getId(), guild.getId())) != null){
+        if(queue.getIfPresent(String.format("%s:%s", member.getId(), guild.getId())) != null){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.open", author.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.open", member.getAsMention())
             ).queue();
             return;
         }
         
         String path = hasArgs(msg.getContentRaw()) ? "purr.nsfw.fuck.request.message" : "purr.nsfw.fuck.request.message_choose";
         tc.sendMessage(
-                bot.getMsg(guild.getId(), path, author.getEffectiveName(), target.getAsMention())
+                bot.getMsg(guild.getId(), path, member.getEffectiveName(), target.getAsMention())
         ).queue(message -> {
             if(!hasArgs(msg.getContentRaw())){
                 message.addReaction(Emotes.SEX.getNameAndId())
@@ -273,10 +267,10 @@ public class CmdFuck implements Command{
                         .flatMap(v -> message.addReaction(Emotes.SEX_YURI.getNameAndId()))
                         .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                         .queue(
-                                v -> handleEvent(msg, message, author, target),
+                                v -> handleEvent(msg, message, member, target),
                                 e -> bot.getEmbedUtil().sendError(
                                         tc,
-                                        author.getUser(),
+                                        member.getUser(),
                                         "errors.nsfw_request_error"
                                 )
                         );
@@ -284,10 +278,10 @@ public class CmdFuck implements Command{
                 message.addReaction(Emotes.ACCEPT.getNameAndId())
                         .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                         .queue(
-                                v -> handleEvent(msg, message, author, target),
+                                v -> handleEvent(msg, message, member, target),
                                 e -> bot.getEmbedUtil().sendError(
                                         tc,
-                                        author.getUser(),
+                                        member.getUser(),
                                         "errors.nsfw_request_error"
                                 )
                         );

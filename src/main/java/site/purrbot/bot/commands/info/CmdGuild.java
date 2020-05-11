@@ -131,11 +131,8 @@ public class CmdGuild implements Command{
     }
     
     @Override
-    public void execute(Message msg, String s){
-        Guild guild = msg.getGuild();
-        TextChannel tc = msg.getTextChannel();
-
-        MessageEmbed guildInfo = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild)
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+        MessageEmbed guildInfo = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
                 .setTitle(guild.getName())
                 .setThumbnail(guild.getIconUrl())
                 .addField(

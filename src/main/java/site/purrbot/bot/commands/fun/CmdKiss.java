@@ -50,20 +50,13 @@ public class CmdKiss implements Command{
     }
 
     @Override
-    public void execute(Message msg, String s) {
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-    
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         List<Member> members = msg.getMentionedMembers();
     
         if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.fun.kiss.no_mention");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.kiss.no_mention");
             return;
         }
-
-        Member member = msg.getMember();
-        if(member == null)
-            return;
 
         Member purr = members.stream()
                 .filter(mem -> mem.getUser().getId().equals(IDs.PURR.getId()))
@@ -81,7 +74,7 @@ public class CmdKiss implements Command{
                 ).queue();
             }else
             if(purr != null && members.contains(purr)){
-                if(bot.isSpecial(msg.getAuthor().getId())){
+                if(bot.isSpecial(member.getUser().getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "snuggle.fun.kiss.special_user", member.getAsMention())
                     ).queue();

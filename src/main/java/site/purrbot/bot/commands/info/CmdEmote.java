@@ -116,16 +116,14 @@ public class CmdEmote implements Command{
     }
 
     @Override
-    public void execute(Message msg, String args){
-        TextChannel tc = msg.getTextChannel();
-        Guild guild = msg.getGuild();
-
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(args.toLowerCase().contains("--search") || args.toLowerCase().contains("—search")){
+        String s = msg.getContentRaw();
+        if(s.toLowerCase().contains("--search") || s.toLowerCase().contains("—search")){
             if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), Permission.MESSAGE_HISTORY, true);
+                bot.getEmbedUtil().sendPermError(tc, member.getUser(), Permission.MESSAGE_HISTORY, true);
                 return;
             }
     
@@ -133,7 +131,7 @@ public class CmdEmote implements Command{
                     .setTimeout(1, TimeUnit.MINUTES)
                     .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
                     .waitOnSinglePage(true)
-                    .addUsers(msg.getAuthor())
+                    .addUsers(member.getUser())
                     .setFinalAction(message -> {
                         if(guild.getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
                             message.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
@@ -155,7 +153,7 @@ public class CmdEmote implements Command{
             }
             
             if(emotes.isEmpty()){
-                bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.emote.not_found");
+                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.emote.not_found");
                 return;
             }
             
@@ -164,7 +162,7 @@ public class CmdEmote implements Command{
             for(Map.Entry<Emote, String> info : emotes.entrySet()){
                 pos++;
                 builder.addItems(emoteInfo(
-                        msg.getAuthor(),
+                        member.getUser(),
                         info.getKey(),
                         guild,
                         info.getValue(),
@@ -179,11 +177,11 @@ public class CmdEmote implements Command{
         }
 
         if(msg.getEmotes().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, msg.getAuthor(), "purr.info.emote.no_args");
+            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.emote.no_args");
             return;
         }
 
-        tc.sendMessage(emoteInfo(msg.getAuthor(), msg.getEmotes().get(0), guild, null, 1, 1)).queue();
+        tc.sendMessage(emoteInfo(member.getUser(), msg.getEmotes().get(0), guild, null, 1, 1)).queue();
 
     }
 }
