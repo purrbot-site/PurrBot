@@ -3,12 +3,14 @@
     "footer": "Angefordert von {user}"
   },
   "errors": {
+    "administrator": "**Administrator Berechtigung**\nIch habe Administrator Rechte für diesen Discord.\nDies ist ein grosses Sicherheitsrisiko und sollte vermieden werden. Gib Bots KEIN Administrator!\nBitte entferne die Administrator Berechtigung und setzte stattdessen die verlangten Rechte.\n__Ich werden keine Befehle ausführen, so lange ich diese Berechtigung habe!__",
     "api_error": "Es gab einen Fehler beim erreichen der API! Bitte versuch es später erneut.",
     "guild_only": "Dieser Befehl kann nur in [meinem Discord]({link}) verwendet werden!",
     "missing_perms": {
-      "self": "Ich benötige die Berechtigung `{permission}` dafür.",
-      "self_channel": "Ich benötige die Berechtigung `{permission}` im Textkanal {channel} dafür!",
-      "other": "Du benötigst die Berechtigung `{permission}` für diesen Befehl."
+      "self": "Mir fehlt die Berechtigung `{permission}` dafür.",
+      "self_channel": "Mir fehlt die Berechtigung `{permission}` im Textkanal {channel} dafür!",
+      "self_dm": "Mir fehlt die Berechtigung `{permission}` in der Gilde `{guild}` (Textkanal: {channel})!",
+      "other": "Dir fehlt die Berechtigung `{permission}` für diesen Befehl."
     },
     "nsfw_random": [
       "Dieser Kanal scheint keinen NSFW-Label zu haben, oder {user}?",
