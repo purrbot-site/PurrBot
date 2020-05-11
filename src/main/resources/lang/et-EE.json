@@ -3,12 +3,14 @@
     "footer": "Palus {user}"
   },
   "errors": {
+    "administrator": "**Administraatori load**\nMul on administraatori load siin Discordis.\nSee on suur turvaauk mida tuleks vältida. ÄRA ANNA bottidele administraatori õiguseid!\nPalun eemalda administraatori õigused ja seadista ainult vajalikud sätted.\n__Ma ei võta käsklusi selle loaga vastu!__",
     "api_error": "Tekkis viga API ühenduses! Palun proovi hiljem uuesti.",
     "guild_only": "Seda käsklust saab kasutada ainult [minu Discord] ({link})!",
     "missing_perms": {
-      "self": "Mul on vaja `{permission}` luba selle jaoks.",
-      "self_channel": "Mul on vaja `{permission}` luba {channel} kanalis et seda tegevust teostada!",
-      "other": "Sul on vaja `{permission}` luba selle käskluse jaoks."
+      "self": "Mul puudub luba `{permission}` selle jaoks.",
+      "self_channel": "Mul puudub luba `{permission}` kanalis {channel} et seda teostada!",
+      "self_dm": "Mul puudub luba`{permission}` gildis`{guild}` (kanalis: {channel})!",
+      "other": "Sul puudub luba `{permission}` selle käskluse jaoks."
     },
     "nsfw_random": [
       "Sellel kanalil ei tundu olevat NSFW märgist, või kuidas {user}?",
