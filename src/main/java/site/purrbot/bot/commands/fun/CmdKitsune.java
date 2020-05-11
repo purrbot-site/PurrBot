@@ -51,7 +51,7 @@ public class CmdKitsune implements Command{
         TextChannel tc = msg.getTextChannel();
         String link = bot.getHttpUtil().getImage(API.IMG_KITSUNE);
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(msg.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(link == null){

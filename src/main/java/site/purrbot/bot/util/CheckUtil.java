@@ -18,25 +18,14 @@
 
 package site.purrbot.bot.util;
 
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import site.purrbot.bot.constants.IDs;
 
-public class PermUtil {
+public class CheckUtil{
 
-    public PermUtil(){}
+    public CheckUtil(){}
 
     public boolean isDeveloper(User user){
         return user.getId().equals(IDs.ANDRE_601.getId());
-    }
-
-    public boolean hasPermission(TextChannel tc, Member member, Permission... permissions){
-        return member.hasPermission(tc, permissions);
-    }
-
-    public boolean hasPermission(TextChannel tc, Permission... permissions){
-        return hasPermission(tc, tc.getGuild().getSelfMember(), permissions);
     }
 }

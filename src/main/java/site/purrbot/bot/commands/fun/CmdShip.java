@@ -208,7 +208,7 @@ public class CmdShip implements Command{
 
         byte[] image = bot.getImageUtil().getShipImg(member1, member2, result);
 
-        if(image == null || !bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+        if(image == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
             Message message = new MessageBuilder(String.format(
                     "`%d%%` | %s",
                     result,

@@ -53,7 +53,7 @@ public class CmdSolo implements Command{
         Guild guild = msg.getGuild();
         String link = bot.getHttpUtil().getImage(API.GIF_SOLO_LEWD);
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(link == null){

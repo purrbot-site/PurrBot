@@ -114,7 +114,7 @@ public class CmdQuote implements Command{
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.length == 0){
@@ -123,7 +123,7 @@ public class CmdQuote implements Command{
         }
 
         if(msg.getMentionedChannels().isEmpty()){
-            if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
+            if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_HISTORY)){
                 bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), Permission.MESSAGE_HISTORY, true);
                 return;
             }
@@ -185,7 +185,7 @@ public class CmdQuote implements Command{
             return;
         }
 
-        if(bot.getPermUtil().hasPermission(channel, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY)){
+        if(guild.getSelfMember().hasPermission(channel, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY)){
             Message quote = getMessage(args[0], channel);
 
             if(quote == null){

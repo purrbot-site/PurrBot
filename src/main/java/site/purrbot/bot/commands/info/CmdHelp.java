@@ -122,7 +122,7 @@ public class CmdHelp implements Command{
         if(member == null)
             return;
         
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
     
         EmbedPaginator.Builder builder = new EmbedPaginator.Builder().setEventWaiter(bot.getWaiter())
@@ -132,7 +132,7 @@ public class CmdHelp implements Command{
                 .wrapPageEnds(true)
                 .addUsers(member.getUser())
                 .setFinalAction(message -> {
-                    if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                    if(guild.getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
                         message.clearReactions().queue(null, ignore(ErrorResponse.UNKNOWN_MESSAGE));
                 });
         

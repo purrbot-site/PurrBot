@@ -59,7 +59,7 @@ public class CmdInvite implements Command{
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(bot.isBeta()){

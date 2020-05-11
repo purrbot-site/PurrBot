@@ -71,7 +71,7 @@ public class PurrBot {
     private final Random random = new Random();
 
     private final FileManager fileManager = new FileManager();
-    private final PermUtil permUtil = new PermUtil();
+    private final CheckUtil permUtil = new CheckUtil();
     private final HttpUtil httpUtil = new HttpUtil();
     private final WebhookUtil webhookUtil = new WebhookUtil();
     private final CommandLoader commandLoader = new CommandLoader(this);
@@ -123,11 +123,12 @@ public class PurrBot {
     private void setup() throws LoginException{
         getFileManager().addFile("config", "/config.json", "./config.json")
                 .addFile("random", "/random.json", "./random.json")
-                .addLang("de-ch", "de-CH")
-                .addLang("en", "en")
-                .addLang("en-owo", "en-OWO")
-                .addLang("ko-kr", "ko-KR")
-                .addLang("ru-ru", "ru-RU");
+                .addLang("de-CH")
+                .addLang("en")
+                .addLang("en-OWO")
+                .addLang("et-EE")
+                .addLang("ko-KR")
+                .addLang("ru-RU");
 
         dbUtil        = new DBUtil(this);
         messageUtil   = new MessageUtil(this);
@@ -182,7 +183,7 @@ public class PurrBot {
     public DBUtil getDbUtil(){
         return dbUtil;
     }
-    public PermUtil getPermUtil(){
+    public CheckUtil getPermUtil(){
         return permUtil;
     }
     public FileManager getFileManager(){

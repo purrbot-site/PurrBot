@@ -130,7 +130,7 @@ public class CmdInfo implements Command{
         Guild guild = msg.getGuild();
         TextChannel tc = msg.getTextChannel();
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.toLowerCase().contains("--dm") || args.toLowerCase().contains("—dm")){

@@ -53,7 +53,7 @@ public class CmdShutdown implements Command{
     public void execute(Message msg, String args){
         TextChannel tc = msg.getTextChannel();
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(msg.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         MessageEmbed embed = bot.getEmbedUtil().getEmbed()

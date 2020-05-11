@@ -82,7 +82,7 @@ public class CmdPrefix implements Command{
         TextChannel tc = msg.getTextChannel();
         String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.length < 1){

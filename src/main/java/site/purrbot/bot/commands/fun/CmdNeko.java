@@ -56,7 +56,7 @@ public class CmdNeko implements Command{
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         EmbedBuilder neko = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild);
@@ -89,16 +89,14 @@ public class CmdNeko implements Command{
                 }else{
                     neko.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.snuggle"));
                     
-                    if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI)) 
-                        message.addReaction(Emotes.SNUGGLE.getNameAndId()).queue();
+                    message.addReaction(Emotes.SNUGGLE.getNameAndId()).queue();
                 }
             }else
             if(link.equals("https://purrbot.site/img/sfw/neko/img/neko_136.jpg")){
                 if(bot.isBeta()){
                     neko.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.purr"));
                     
-                    if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_EXT_EMOJI))
-                        message.addReaction(Emotes.PURR.getNameAndId()).queue();
+                    message.addReaction(Emotes.PURR.getNameAndId()).queue();
                 }else{
                     neko.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.purr"));
                     

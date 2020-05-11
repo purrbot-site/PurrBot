@@ -3,12 +3,14 @@
     "footer": "Requested by {user}"
   },
   "errors": {
+    "administrator": "**Administrator Permission**\nI have Administrator rights for this Discord.\nThis is a huge security risk and should be avoided. Do NOT give Bots Administrator!\nPlease remove the Administrator permission and instead setup the required permissions.\n__I won't handle any commands as long as this permission is granted!__",
     "api_error": "There was an error reaching the API! Please try again later.",
     "guild_only": "This command can only be used in [my Discord]({link})!",
     "missing_perms": {
-      "self": "I require the permission `{permission}` for this.",
-      "self_channel": "I require the permission `{permission}` in the channel {channel} to do this!",
-      "other": "You require the permission `{permission}` for this command."
+      "self": "I lack the permission `{permission}` for this.",
+      "self_channel": "I lack the permission `{permission}` in the channel {channel} to do this!",
+      "self_dm": "I lack the permission `{permission}` in the Guild `{guild}` (Channel: {channel})!",
+      "other": "You lack the permission `{permission}` for this command."
     },
     "nsfw_random": [
       "This channel doesn't seem to have a NSFW-label, does it {user}?",

@@ -48,8 +48,8 @@ public class FileManager{
     }
     
     // Convenience method do add new languages more easy.
-    public FileManager addLang(String name, String file){
-        return addFile(name, "/lang/" + file + ".json", "./lang/" + file + ".json");
+    public FileManager addLang(String file){
+        return addFile(file.toLowerCase(), "/lang/" + file + ".json", "./lang/" + file + ".json");
     }
     
     public Map<String, File> getFiles(){

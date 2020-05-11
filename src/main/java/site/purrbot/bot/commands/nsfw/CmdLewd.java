@@ -55,7 +55,7 @@ public class CmdLewd implements Command{
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
         
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
         
         EmbedBuilder neko = bot.getEmbedUtil().getEmbed(msg.getAuthor(), guild);

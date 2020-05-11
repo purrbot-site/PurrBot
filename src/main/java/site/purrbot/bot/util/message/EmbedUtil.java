@@ -21,6 +21,7 @@ package site.purrbot.bot.util.message;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import site.purrbot.bot.PurrBot;
@@ -44,6 +45,34 @@ public class EmbedUtil {
                 bot.getMsg(guild.getId(), "embed.footer", user.getAsTag()), 
                 user.getEffectiveAvatarUrl()
         );
+    }
+    
+    public MessageEmbed getPermErrorEmbed(User user, Guild guild, TextChannel channel, Permission perm, boolean self, boolean dm){
+        EmbedBuilder embed = user == null ? getEmbed() : getEmbed(user, guild);
+        String msg;
+        if(channel == null){
+            if(self){
+                msg = bot.getMsg(guild.getId(), "errors.missing_perms.self")
+                        .replace("{permission}", perm.getName());
+            }else{
+                msg = bot.getMsg(guild.getId(), "errors.missing_perms.other")
+                        .replace("{permission}", perm.getName());
+            }
+        }else{
+            if(dm){
+                msg = bot.getMsg(guild.getId(), "errors.missing_perms.self_dm")
+                        .replace("{channel}", channel.getAsMention())
+                        .replace("{guild}", guild.getName())
+                        .replace("{permission}", perm.getName());
+            }else{
+                msg = bot.getMsg(guild.getId(), "errors.missing_perms.self_channel")
+                        .replace("{channel}", channel.getAsMention())
+                        .replace("{permission}", perm.getName());
+            }
+        }
+        
+        return embed.setColor(0xFF0000).setDescription(msg).build();
+        
     }
     
     public void sendError(TextChannel tc, User user, String path, String reason){
@@ -74,26 +103,7 @@ public class EmbedUtil {
     }
     
     public void sendPermError(TextChannel tc, User user, TextChannel channel, Permission permission, boolean self){
-        EmbedBuilder embed = user == null ? getEmbed() : getEmbed(user, tc.getGuild());
-        String msg;
-        if(channel == null){
-            if(self){
-                msg = bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.self")
-                        .replace("{permission}", permission.getName());
-            }else{
-                msg = bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.other")
-                        .replace("{permission}", permission.getName());
-            }
-        }else{
-            msg = bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.self_channel")
-                    .replace("{channel}", channel.getAsMention())
-                    .replace("{permission}", channel.getAsMention());
-        }
-        
-        embed.setColor(0xFF0000)
-                .setDescription(msg);
-        
-        tc.sendMessage(embed.build()).queue();
+        tc.sendMessage(getPermErrorEmbed(user, tc.getGuild(), channel, permission, self, false)).queue();
     }
 
 }

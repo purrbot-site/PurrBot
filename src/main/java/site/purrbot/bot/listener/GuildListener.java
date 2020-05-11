@@ -277,7 +277,7 @@ public class GuildListener extends ListenerAdapter{
         if(tc == null)
             return;
 
-        if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_WRITE))
+        if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_WRITE))
             return;
 
         String msg = bot.getWelcomeMsg(guild.getId());
@@ -286,7 +286,7 @@ public class GuildListener extends ListenerAdapter{
 
         String message = bot.getMessageUtil().parsePlaceholders(msg, event.getMember());
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)) {
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)) {
             InputStream is;
 
             try {

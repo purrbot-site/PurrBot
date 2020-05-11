@@ -120,11 +120,11 @@ public class CmdEmote implements Command{
         TextChannel tc = msg.getTextChannel();
         Guild guild = msg.getGuild();
 
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
         if(args.toLowerCase().contains("--search") || args.toLowerCase().contains("—search")){
-            if(!bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_HISTORY)){
+            if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_HISTORY)){
                 bot.getEmbedUtil().sendPermError(tc, msg.getAuthor(), Permission.MESSAGE_HISTORY, true);
                 return;
             }
@@ -135,7 +135,7 @@ public class CmdEmote implements Command{
                     .waitOnSinglePage(true)
                     .addUsers(msg.getAuthor())
                     .setFinalAction(message -> {
-                        if(bot.getPermUtil().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                        if(guild.getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
                             message.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
                     });
             

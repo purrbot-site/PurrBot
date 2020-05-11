@@ -27,6 +27,7 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Links;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @CommandDescription(
@@ -59,7 +60,7 @@ public class CmdLanguage implements Command{
         TextChannel tc = msg.getTextChannel();
         String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
         
-        if(bot.getPermUtil().hasPermission(tc, Permission.MESSAGE_MANAGE))
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
     
         Member member = msg.getMember();
@@ -134,6 +135,7 @@ public class CmdLanguage implements Command{
             
             langs.add(lang);
         }
+        Collections.sort(langs);
         
         return langs;
     }
