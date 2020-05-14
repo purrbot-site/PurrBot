@@ -267,14 +267,30 @@
         "embed": {
           "about_title": "About me",
           "about_value": "Oh hi there!\nI'm {name}. A bot for the ~Nya Discord.\nI was made by Andre_601 (<@{id}>) with the help of JDA and a lot of free time. ;)",
-          "bot_title": "Bot info",
-          "bot_value": "Bot Version: `{bot_version}`\nLibrary: [`JDA {jda_version}`]({link})",
-          "bot_list_title": "Bot lists",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discord.boats`]({dboats})\n[`Discord.bots.gg`]({db})\n[`Discordextremelist.xyz`]({del})\n[`Lbots.org`]({lbots})",
+          "bot_info": {
+            "library": "Library: `JDA {jda_version}`",
+            "title": "Bot Info",
+            "version": "Bot Version: `PurrBot {bot_version}`"
+          },
+          "bot_lists": {
+            "botlist_space": "`Botlist.space`",
+            "discord_boats": "`Discord.boats`",
+            "discord_bots_gg": "`Discord.bots.gg`",
+            "discordextremelist_xyz": "`Discordextremelist.xyz`",
+            "lbots_org": "`Lbots.org` (Not supported)",
+            "title": "Bot Lists"
+          },
           "commands_title": "Commands",
           "commands_value": "Use `{prefix}help` in the Discord for a list of commands.",
-          "links_title": "Other links",
-          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Support Discord`]({support})\n[`Twitter`]({twitter})\n[`Website`]({website})\n[`Wiki`]({wiki})"
+          "links": {
+            "discord": "`Discord (Support)`",
+            "github": "`GitHub`",
+            "patreon": "`Patreon`",
+            "title": "Other Links",
+            "twitter": "`Twitter`",
+            "website": "`Website`",
+            "wiki": "`Wiki`"
+          }
         }
       },
       "invite": {
@@ -285,7 +301,11 @@
           "about_value": "Each of the links has a different purpose.\n`Recommended Invite` contains all permissions I need and a few more to make your experience more smooth.\n`Basic Invite` only has the required permissions.\n`Discord` is the invite to my support Discord.",
           "info_title": "Invite me",
           "info_value": "Heyo! Nice from you to invite me to your Discord. :3\nJust select one of the links below to get me on your Discord, so that I can bring fun and nekos to you.",
-          "links": "[`Recommended Invite`]({invite_full})\n[`Basic Invite`]({invite_basic})\n[`Discord`]({support})"
+          "links": {
+            "discord": "`Discord (Support)`",
+            "invite_basic": "`Basic Invite`",
+            "invite_full": "`Recommended Invite`"
+          }
         }
       },
       "ping": {
@@ -485,13 +505,7 @@
         "dm_success": "\uD83D\uDCEC You got mail {user}!",
         "embed": {
           "about_title": "About me",
-          "about_value": "Oh hi there!\nI'm {name}. I'm the sister of \\*Purr*.",
-          "bot_title": "Bot info",
-          "bot_value": "Bot Version: `{version}`\nLibrary: [`JDA {version}`]({link})",
-          "commands_title": "Commands",
-          "commands_value": "Use `{prefix}help` in the Discord for a list of commands.",
-          "links_title": "Other links",
-          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Support Discord`]({support})\n[`Twitter`]({twitter})\n[`Website`]({website})\n[`Wiki`]({wiki})"
+          "about_value": "Oh hi there!\nI'm {name}. I'm the sister of \\*Purr*."
         }
       },
       "invite": {
