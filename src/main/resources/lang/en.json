@@ -188,7 +188,7 @@
         "invalid_args": "Invalid arguments!\nRun `{prefix}welcome` to see all available sub-commands.",
         "invalid_bg": "Invalid background `{background}`\nCheck the [Wiki]({wiki_bg}) for available backgrounds.",
         "invalid_channel": "Please mention a valid text channel!",
-        "invalid_color": "The provided color was invalid!\nSupported are `hex:rrggbb` or `rgb:r,g,b` and `random`!",
+        "invalid_color": "The provided color was invalid!\nSupported are `hex:rrggbb`, `rgb:r,g,b` or `random`!",
         "invalid_icon": "The provided icon was invalid!\nCheck the [Wiki]({wiki_icon}) for available icons.",
         "no_bg": "Please provide a background name!\nA list of backgrounds can be found [here]({wiki_bg}).",
         "no_channel": "No text channel provided! Make sure you mention one.",
