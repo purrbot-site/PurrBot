@@ -188,7 +188,7 @@
         "invalid_args": "Vigased argumendid!\nSisesta `{prefix}welcome` et näha kõiki alamkäsklusi.",
         "invalid_bg": "Vigane taust `{background}`\nVaata [vikit]({wiki_bg}) et näha olemasolevaid tauste.",
         "invalid_channel": "Palun maini olemasolevat tekstikanalit!",
-        "invalid_color": "Sisestatud värv on väär!\nToetatud on `hex:rrggbb` või `rgb:r,g,b` ja `random`!",
+        "invalid_color": "Sisestatud värv on väär!\nToetatud on `hex:rrggbb`, `rgb:r,g,b` või `random`!",
         "invalid_icon": "Sisestatud ikoon on vigane!\nVaata [vikit]({wiki_icon}) et näha olemasolevaid ikoone.",
         "no_bg": "Palun sisesta tausta nimi!\nErinevaid tauste saab näha [vikist]({wiki_bg}).",
         "no_channel": "Ühtegi tekstikanalit ei ole sisestatud! Palun maini kindlasti ühte tekstikanalit.",
@@ -267,14 +267,30 @@
         "embed": {
           "about_title": "Minu kohta",
           "about_value": "Oh hei sina!\nMina olen {name}. Bott ~Nya Discord.\nMa olen valmistatud Andre_601 (<@{id}>) poolt kellel on olnud liiga palju aega ning JDA abiga. ;)",
-          "bot_title": "Boti informatsioon",
-          "bot_value": "Boti versioon: `{bot_version}`\nLaiend: [`JDA {jda_version}`]({link})",
-          "bot_list_title": "Boti nimekirjad",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discord.boats`]({dboats})\n[`Discord.bots.gg`]({db})\n[`Discordextremelist.xyz`]({del})\n[`Lbots.org`]({lbots})",
+          "bot_info": {
+            "library": "Laiend: `JDA {jda_version}`",
+            "title": "Boti informatsioon",
+            "version": "Boti versioon: `PurrBot {bot_version}`"
+          },
+          "bot_lists": {
+            "botlist_space": "`Botlist.space`",
+            "discord_boats": "`Discord.boats`",
+            "discord_bots_gg": "`Discord.bots.gg`",
+            "discordextremelist_xyz": "`Discordextremelist.xyz`",
+            "lbots_org": "`Lbots.org` (Mitte toetatud)",
+            "title": "Boti nimekirjad"
+          },
           "commands_title": "Käsklused",
           "commands_value": "Sisesta `{prefix}help` et saada nimekirja erinevatest käsklustest.",
-          "links_title": "Teised lingid",
-          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Toetus Discord`]({support})\n[`Twitter`]({twitter})\n[`Koduleht`]({website})\n[`Viki`]({wiki})"
+          "links": {
+            "discord": "`Discord (Tugi)`",
+            "github": "`GitHub`",
+            "patreon": "`Patreon`",
+            "title": "Teised lingid",
+            "twitter": "`Twitter`",
+            "website": "`Veebisait`",
+            "wiki": "`Viki`"
+          }
         }
       },
       "invite": {
@@ -285,7 +301,11 @@
           "about_value": "Igal lingil on oma eesmärk.\n`Soovitatud kutse` sisaldab kõiki vajalikke lube ja mõnginaid veel sujuvaks kasutuskogemuseks.\n`Põhiline kutse` sisaldab ainult vajalikke lube.\n`Discord` on kutse minu Discord.",
           "info_title": "Kutsu mind",
           "info_value": "Heihoo! Tore et kutsusid mind enda Discord. :3\nLihtsalt vali üks link altpoolt et saada mind oma Discordi, siis ma saan tuua sulle lõbu ja nekosi.",
-          "links": "[`Soovitatud kutse`]({invite_full})\n[`Põhiline kutse`]({invite_basic})\n[`Discord`]({support})"
+          "links": {
+            "discord": "`Discord (Tugi)`",
+            "invite_basic": "`Põhiline kutse`",
+            "invite_full": "`Soovitatav kutse`"
+          }
         }
       },
       "ping": {
@@ -485,13 +505,7 @@
         "dm_success": "📬 Sulle tuli sõnum {user}!",
         "embed": {
           "about_title": "Minu kohta",
-          "about_value": "Oh Tere!\nMina olen {name}. Ma olen \\*Purr* õde.",
-          "bot_title": "Boti informatsioon",
-          "bot_value": "Boti versioon: `{version}`\nLaiend: [`JDA {version}`]({link})",
-          "commands_title": "Käsklused",
-          "commands_value": "Sisesta `{prefix}help` et saada nimekirja erinevatest käsklustest.",
-          "links_title": "Teised lingid",
-          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Toetus Discord`]({support})\n[`Twitter`]({twitter})\n[`Koduleht`]({website})\n[`Viki`]({wiki})"
+          "about_value": "Oh Tere!\nMina olen {name}. Ma olen \\*Purr* õde."
         }
       },
       "invite": {
