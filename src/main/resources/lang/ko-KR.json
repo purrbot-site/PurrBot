@@ -176,7 +176,7 @@
           "color_value": "```\n형태:  {type}\n값: {value}\n```",
           "current_settings": "현재의 환영 메시지는 이거야.\n`{prefix}welcome [세부 명령어]`를 사용하면 바꿀 수 있어.\n\n어떻게 바꾸는지는 [위키]({wiki_welcome})에 잘 설명이 되어있으니 참고해!",
           "image_title": "이미지",
-          "image_value": "```\n배경: {background}\n아이콘:       {icon}\n```",
+          "image_value": "```\n배경(bg)        : {background}\n색(color)        :      {color}\n아이콘(icon) :       {icon}\n```",
           "message_title": "메시지",
           "message_value": "```\n{message}\n```",
           "no_channel": "`설정된 아이콘 없음`",
@@ -188,7 +188,7 @@
         "invalid_args": "유효하지 않은 값이야!\nRun `{prefix}welcome` 을 사용하면 가능한 모든 세부 명령어들을 확인할 수 있어!",
         "invalid_bg": "`{background}`는 유효하지 않은 배경이야.\n[위키]({wiki_bg})에 가능한 배경들이 소개되어 있어.",
         "invalid_channel": "유효한 텍스트 채널을 알려줘!",
-        "invalid_color": "색상코드가 잘못되었어.\n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘.",
+        "invalid_color": "색상코드가 잘못되었어.\n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘. 아니면 `random` 이라던가!",
         "invalid_icon": "그 아이콘은 유효하지 않아!\n[위키]({wiki_icon})에 가능한 아이콘들이 소개되어 있어.",
         "no_bg": "배경의 이름을 알려줘!\n[위키]({wiki_bg})에 가능한 배경들이 소개되어 있어.",
         "no_channel": "아무런 텍스트 채널도 받지 못했어. 제대로 나에게 언급해줘.",
@@ -267,14 +267,30 @@
         "embed": {
           "about_title": "자기소개",
           "about_value": "반가워!\n나는 ~Nya 서버에서 활동하는 {name}이야. \n난 Andre_601 (<@{id}>) 가 JDA와 압도적인 노동력을 바탕으로 만들어졌어. ^ㅡ'",
-          "bot_title": "봇 정보",
-          "bot_value": "봇 버전: `{bot_version}`\n라이브러리: [`JDA {jda_version}`]({link})",
-          "bot_list_title": "내가 등록된 사이트들",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discord.boats`]({dboats})\n[`Discord.bots.gg`]({db})\n[`Discordextremelist.xyz`]({del})\n[`Lbots.org`]({lbots})",
+          "bot_info": {
+            "library": "라이브러리: `JDA {jda_version}`",
+            "title": "봇 정보",
+            "version": "Bot Version: `PurrBot {bot_version}`"
+          },
+          "bot_lists": {
+            "botlist_space": "`Botlist.space`",
+            "discord_boats": "`Discord.boats`",
+            "discord_bots_gg": "`Discord.bots.gg`",
+            "discordextremelist_xyz": "`Discordextremelist.xyz`",
+            "lbots_org": "`Lbots.org` (Not supported)",
+            "title": "Bot Lists"
+          },
           "commands_title": "명령어",
           "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
-          "links_title": "유용한 링크들",
-          "links_value": "[`깃허브`]({github})\n[`후원하기`]({patreon})\n[`봇 지원 서버`]({support})\n[`공식 트위터`]({twitter})\n[`공식 웹사이트`]({website})\n[`공식 위키`]({wiki})"
+          "links": {
+            "discord": "`Discord (Support)`",
+            "github": "`GitHub`",
+            "patreon": "`Patreon`",
+            "title": "Other Links",
+            "twitter": "`Twitter`",
+            "website": "`Website`",
+            "wiki": "`Wiki`"
+          }
         }
       },
       "invite": {
@@ -285,7 +301,11 @@
           "about_value": "각각의 링크는 다른 방식으로 나를 초대해.\n`권장 초대`는 내가 필요로 하는 모든 권한들을 갖고 들어올거야. 내가 가장 자유롭게 움직일 수 있어.\n`Basic Invite`는 필수적인 권한들만 갖고 들어와.\n`봇 지원 서버`는 너를 내 지원 서버로 초대하는 링크야.",
           "info_title": "초대하는 방법",
           "info_value": "오 예! 날 네 서버에 초대하려 하다니 너무 기뻐. ^ㅡ^\n아래에 있는 링크들 중에서 하나를 고르면 내가 따라가서 따분함을 풀고 고양이 소녀들을 데려와 줄게!",
-          "links": "[`권장 초대`]({invite_full})\n[`기본 초대`]({invite_basic})\n[`봇 지원 서버`]({support})"
+          "links": {
+            "discord": "`Discord (Support)`",
+            "invite_basic": "`Basic Invite`",
+            "invite_full": "`Recommended Invite`"
+          }
         }
       },
       "ping": {
@@ -485,13 +505,7 @@
         "dm_success": "📬 너에게 편지가 왔네, {user}!",
         "embed": {
           "about_title": "자기소개",
-          "about_value": "반가워!\n나는 {name}이야. \\*Purr*의 여동생이고.",
-          "bot_title": "봇 정보",
-          "bot_value": "봇 버전: `{bot_version}`\n라이브러리: [`JDA {jda_version}`]({link})",
-          "commands_title": "명령어",
-          "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
-          "links_title": "유용한 링크들",
-          "links_value": "[`깃허브`]({github})\n[`후원하기`]({patreon})\n[`봇 지원 서버`]({support})\n[`공식 트위터`]({twitter})\n[`공식 웹사이트`]({website})\n[`공식 위키`]({wiki})"
+          "about_value": "반가워!\n나는 {name}이야. \\*Purr*의 여동생이고."
         }
       },
       "invite": {

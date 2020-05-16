@@ -176,7 +176,7 @@
           "color_value": "```\nType:  {type}\nValue: {value}\n```",
           "current_settings": "These awe the cuwwent Wewcome-settings of this Discord.\nUse `{prefix}welcome [subcommand]` to change them.\n\nA tutowiaw on how to change the settings can be found on the [wiki]({wiki_welcome}).",
           "image_title": "Image",
-          "image_value": "```\nBackgwound: {background}\nIcon:       {icon}\n```",
+          "image_value": "```\nBackgwound: {background}\nCowow:      {color}\nIcon:       {icon}\n```",
           "message_title": "Message",
           "message_value": "```\n{message}\n```",
           "no_channel": "`No channew set`",
@@ -188,7 +188,7 @@
         "invalid_args": "Invawid awguments!\nUsage: `{prefix}welcome` to see aww avaiwabwe sub-commands.",
         "invalid_bg": "Invawid backgwound `{background}`\nCheck the [Wiki]({wiki_bg}) for avaiwabwe backgwounds.",
         "invalid_channel": "Pwease mention a vawid text channew!",
-        "invalid_color": "The pwovided cowow was invawid!\nSuppowted awe `hex:rrggbb` ow `rgb:r,g,b`",
+        "invalid_color": "The pwovided cowow was invawid!\nSuppowted awe `hex:rrggbb`, `rgb:r,g,b` ow `random`!",
         "invalid_icon": "The pwovided icon was invawid!\nCheck the [Wiki]({wiki_icon}) fow avaiwabwe icons.",
         "no_bg": "Pwease pwovide a backgwound name!\nA list of backgwounds can be found [hewe]({wiki_bg}).",
         "no_channel": "No text channew pwovided! Make suwe you mention one.",
@@ -267,14 +267,30 @@
         "embed": {
           "about_title": "About me",
           "about_value": "Oh hi thewe!\nI'm {name}. A bot for the ~Nya Discord.\nI was made by Andre_601 (<@{id}>) with the hewp of JDA and a wot of fwee time. ;)",
-          "bot_title": "Bot info",
-          "bot_value": "Bot Vewsion: `{bot_version}`\nWibrary: [`JDA {jda_version}`]({link})",
-          "bot_list_title": "Bot wists",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discord.boats`]({dboats})\n[`Discord.bots.gg`]({db})\n[`Discordextremelist.xyz`]({del})\n[`Lbots.org`]({lbots})",
+          "bot_info": {
+            "library": "Wibwawy: `JDA {jda_version}`",
+            "title": "Bot info",
+            "version": "Bot Vewsion: ``PurrBot {bot_version}`"
+          },
+          "bot_lists": {
+            "botlist_space": "`Botlist.space`",
+            "discord_boats": "`Discord.boats`",
+            "discord_bots_gg": "`Discord.bots.gg`",
+            "discordextremelist_xyz": "`Discordextremelist.xyz`",
+            "lbots_org": "`Lbots.org` (Not suppowted)",
+            "title": "Bot Lists"
+          },
           "commands_title": "Commands",
           "commands_value": "Use `{prefix}help` in the Discord for a wist of commands.",
-          "links_title": "Othew winks",
-          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Support Discord`]({support})\n[`Twitter`]({twitter})\n[`Website`]({website})\n[`Wiki`]({wiki})"
+          "links": {
+            "discord": "`Discord (Suppowt)`",
+            "github": "`GitHub`",
+            "patreon": "`Patreon`",
+            "title": "Othew Links",
+            "twitter": "`Twitter`",
+            "website": "`Website`",
+            "wiki": "`Wiki`"
+          }
         }
       },
       "invite": {
@@ -285,7 +301,11 @@
           "about_value": "Each of the winks has a diffewent puwpose.\n`Recommended Invite` contains all pewmissions I need and a few mowe to make youw expewience mowe smooth.\n`Basic Invite` only has the wequiwed pewmissions.\n`Discord` is the invite to my suppowt Discowd.",
           "info_title": "Invite me",
           "info_value": "Heyo! Nice fwom you to invite me to youw Discowd. :3\nJust sewect one of the winks below to get me on youw Discord, so that I can bwing fun and nekos to you.",
-          "links": "[`Wecommended Invite`]({invite_full})\n[`Basic Invite`]({invite_basic})\n[`Discowd`]({support})"
+          "links": {
+            "discord": "`Discord (Suppwrt)`",
+            "invite_basic": "`Basic Invite`",
+            "invite_full": "`Recommended Invite`"
+          }
         }
       },
       "ping": {
@@ -485,13 +505,7 @@
         "dm_success": "📬 You got mail {user}!",
         "embed": {
           "about_title": "About me",
-          "about_value": "Oh hi thewe!\nI'm {name}. I'm the sistew of \\*Purr*.",
-          "bot_title": "Bot info",
-          "bot_value": "Bot Vewsion: `{version}`\nWibrary: [`JDA {version}`]({link})",
-          "commands_title": "Commands",
-          "commands_value": "Use `{prefix}help` in the Discord for a list of commands.",
-          "links_title": "Other links",
-          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Support Discord`]({support})\n[`Twitter`]({twitter})\n[`Website`]({website})\n[`Wiki`]({wiki})"
+          "about_value": "Oh hi thewe!\nI'm {name}. I'm the sistew of \\*Purr*."
         }
       },
       "invite": {

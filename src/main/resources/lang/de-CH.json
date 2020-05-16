@@ -176,7 +176,7 @@
           "color_value": "```\nTyp:  {type}\nInhalt: {value}\n```",
           "current_settings": "Dies sind die aktuellen Willkommens-Einstellungen von deinem Discord.\nVerwende `{prefix}welcome [unterbefehl]` um diese zu ändern.\n\nEin Tutorial über das ändern der Einstellungen kann im [Wiki]({wiki_welcome}) gefunden werden.",
           "image_title": "Bild",
-          "image_value": "```\nHintergrund: {background}\nIcon:       {icon}\n```",
+          "image_value": "```\nHintergrund: {background}\nFarbe:      {color}\nIcon:       {icon}\n```",
           "message_title": "Nachricht",
           "message_value": "```\n{message}\n```",
           "no_channel": "`Keine Nachricht gesetzt`",
@@ -188,7 +188,7 @@
         "invalid_args": "Ungültige Argumente!\nVerwende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
         "invalid_bg": "Ungültiger Hintergrund `{background}`\nÜberpfüfe das [Wiki]({wiki_bg}) für verfügbare Hintergründe.",
         "invalid_channel": "Bitte erwähne einen gültigen TextKanal!",
-        "invalid_color": "Die angegebene Farbe war ungültig!\nUnterstützt werden `hex:rrggbb` oder `rgb:r,g,b`",
+        "invalid_color": "Die angegebene Farbe war ungültig!\nUnterstützt werden `hex:rrggbb`, `rgb:r,g,b` oder `random`!",
         "invalid_icon": "Ungültiges Icon `{icon}`!\nÜberprüfe das [Wiki]({wiki_icon}) für verfügbare Icons.",
         "no_bg": "Bitte gib einen Hintergrund an!\nEine Liste von Hintergründen kannst du [hier]({wiki_bg}) finden.",
         "no_channel": "Kein Textkanal angegeben! Stell sicher, dass du einen erwähnst.",
@@ -267,14 +267,30 @@
         "embed": {
           "about_title": "Über mich",
           "about_value": "Oh hallo da!\nIch bin {name}. Ein Bot für den ~Nya Discord.\nIch wurde von Andre_601 (<@{id}>) mit der Hilfe von JDA und viel Freizeit erstellt. ;)",
-          "bot_title": "Bot Info",
-          "bot_value": "Bot Version: `{bot_version}`\nAPI: [`JDA {jda_version}`]({link})",
-          "bot_list_title": "Bot Listen",
-          "bot_list_value": "[`Botlist.space`]({botlist})\n[`Discord.boats`]({dboats})\n[`Discord.bots.gg`]({db})\n[`Discordextremelist.xyz`]({del})\n[`Lbots.org`]({lbots})",
+          "bot_info": {
+            "library": "Bibliothek: `JDA {jda_version}`",
+            "title": "Bot Info",
+            "version": "Bot Version: `PurrBot {bot_version}`"
+          },
+          "bot_lists": {
+            "botlist_space": "`Botlist.space`",
+            "discord_boats": "`Discord.boats`",
+            "discord_bots_gg": "`Discord.bots.gg`",
+            "discordextremelist_xyz": "Discordextremelist.xyz",
+            "lbots_org": "`Lbots.org` (Nicht unterstützt)",
+            "title": "Bot Listen"
+          },
           "commands_title": "Befehle",
           "commands_value": "Verwende `{prefix}help` im Discord für eine Liste von Befehlen.",
-          "links_title": "Andere Links",
-          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Support Discord`]({support})\n[`Twitter`]({twitter})\n[`Webseite`]({website})\n[`Wiki`]({wiki})"
+          "links": {
+            "discord": "`Discord (Support)`",
+            "github": "`GitHub`",
+            "patreon": "`Patreon`",
+            "title": "Andere Links",
+            "twitter": "`Twitter`",
+            "website": "`Webseite`",
+            "wiki": "`Wiki`"
+          }
         }
       },
       "invite": {
@@ -285,7 +301,11 @@
           "about_value": "Jeder der Links hat eine andere Bedeutung.\n`Empfohlene Einladung` enthält alle Rechte die ich brauche und einige mehr, um deine Erfahrungen angenehmer zu machen.\n`Standart Einladung` hat alle benötigten Rechte.\n`Discord` ist die Einladung zu meinem Support Discord.",
           "info_title": "Lade mich ein",
           "info_value": "Heyo! Nett von dir, mich auf deinen Discord einzuladen. :3\nWähle einfach einen der unteren Links, so dass ich dir Spass und Nekos bringen kann.",
-          "links": "[`Empfohlene Einladung`]({invite_full})\n[`Standart Einladung`]({invite_basic})\n[`Discord`]({support})"
+          "links": {
+            "discord": "`Discord (Support)`",
+            "invite_basic": "`Standarteinladung`",
+            "invite_full": "`Empfohlene Einladung`"
+          }
         }
       },
       "ping": {
@@ -485,13 +505,7 @@
         "dm_success": "📬 Du hast Post {user}!",
         "embed": {
           "about_title": "Über mich",
-          "about_value": "Oh hallo da!\nIch bin {name}. Ich bin die Schwester von \\*Purr*.",
-          "bot_title": "Bot Info",
-          "bot_value": "Bot Version: `{version}`\nAPI: [`JDA {version}`]({link})",
-          "commands_title": "Befehle",
-          "commands_value": "Verwende `{prefix}help` im Discord für eine Liste von Befehlen.",
-          "links_title": "Andere Links",
-          "links_value": "[`GitHub`]({github})\n[`Patreon`]({patreon})\n[`Support Discord`]({support})\n[`Twitter`]({twitter})\n[`Webseite`]({website})\n[`Wiki`]({wiki})"
+          "about_value": "Oh hallo da!\nIch bin {name}. Ich bin die Schwester von \\*Purr*."
         }
       },
       "invite": {
