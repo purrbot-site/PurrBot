@@ -210,7 +210,7 @@ public class GuildListener extends ListenerAdapter{
                             "             Support Discord: %s\n" +
                             "```",
                             guild.getName(),
-                            Links.DISCORD.getUrl()
+                            Links.DISCORD
                     ))
                     .queue(message -> {
                         logger.info(String.format(
@@ -352,24 +352,24 @@ public class GuildListener extends ListenerAdapter{
             return;
         
         Guild guild = event.getGuild();
-        if(!guild.getId().equals(IDs.GUILD.getId()))
+        if(!guild.getId().equals(IDs.GUILD))
             return;
         
-        Role role = guild.getRoleById(Roles.MEMBER.getId());
+        Role role = guild.getRoleById(Roles.MEMBER);
         if(event.getRoles().contains(role))
             giveRoles(event.getMember());
     }
     
     private void giveRoles(Member target){
-        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD.getId());
+        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD);
         
         if(guild == null)
             return;
         
-        Role special       = guild.getRoleById(Roles.SPECIAL.getId());
-        Role loves         = guild.getRoleById(Roles.LOVES.getId());
-        Role person        = guild.getRoleById(Roles.PERSON.getId());
-        Role notifications = guild.getRoleById(Roles.NOTIFICATIONS.getId());
+        Role special       = guild.getRoleById(Roles.SPECIAL);
+        Role loves         = guild.getRoleById(Roles.LOVES);
+        Role person        = guild.getRoleById(Roles.PERSON);
+        Role notifications = guild.getRoleById(Roles.NOTIFICATIONS);
         
         guild.modifyMemberRoles(target, Arrays.asList(special, loves, person, notifications), null)
                 .reason(String.format(

@@ -71,7 +71,6 @@ public class PurrBot {
     private final Random random = new Random();
 
     private final FileManager fileManager = new FileManager();
-    private final CheckUtil permUtil = new CheckUtil();
     private final HttpUtil httpUtil = new HttpUtil();
     private final WebhookUtil webhookUtil = new WebhookUtil();
     private final CommandLoader commandLoader = new CommandLoader(this);
@@ -81,6 +80,7 @@ public class PurrBot {
     private EmbedUtil embedUtil;
     private ImageUtil imageUtil;
     private LangUtils langUtils;
+    private CheckUtil checkUtil;
 
     private boolean beta = false;
     
@@ -130,11 +130,12 @@ public class PurrBot {
                 .addLang("ko-KR")
                 .addLang("ru-RU");
 
-        dbUtil        = new DBUtil(this);
-        messageUtil   = new MessageUtil(this);
-        embedUtil     = new EmbedUtil(this);
-        imageUtil     = new ImageUtil(this);
-        langUtils     = new LangUtils(this);
+        dbUtil      = new DBUtil(this);
+        messageUtil = new MessageUtil(this);
+        embedUtil   = new EmbedUtil(this);
+        imageUtil   = new ImageUtil(this);
+        langUtils   = new LangUtils(this);
+        checkUtil   = new CheckUtil(this);
 
         waiter = new EventWaiter();
 
@@ -183,8 +184,8 @@ public class PurrBot {
     public DBUtil getDbUtil(){
         return dbUtil;
     }
-    public CheckUtil getPermUtil(){
-        return permUtil;
+    public CheckUtil getCheckUtil(){
+        return checkUtil;
     }
     public FileManager getFileManager(){
         return fileManager;
@@ -329,22 +330,9 @@ public class PurrBot {
                 .replace("{MEMBERS}", Emotes.MEMBERS.getEmote())
                 .replace("{FACE}", Emotes.FACE.getEmote())
                 // Wiki pages
-                .replace("{wiki_bg}", Links.WIKI.getUrl() + "/welcome-images#backgrounds")
-                .replace("{wiki_icon}", Links.WIKI.getUrl() + "/welcome-images#icons")
-                .replace("{wiki_welcome}", Links.WIKI.getUrl() + "/welcome-channel")
-                //Bot lists
-                .replace("{botlist}", Links.BOTLIST_SPACE.getUrl())
-                .replace("{dboats}", Links.DISCORD_BOATS.getUrl())
-                .replace("{db}", Links.DISCORD_BOTS_GG.getUrl())
-                .replace("{del}", Links.DISCORDEXTREMELIST_XYZ.getUrl())
-                .replace("{lbots}", Links.LBOTS_ORG.getUrl())
-                // Links
-                .replace("{github}", Links.GITHUB.getUrl())
-                .replace("{patreon}", Links.PATREON.getUrl())
-                .replace("{support}", Links.DISCORD.getUrl())
-                .replace("{twitter}", Links.TWITTER.getUrl())
-                .replace("{website}", Links.WEBSITE.getUrl())
-                .replace("{wiki}", Links.WIKI.getUrl());
+                .replace("{wiki_bg}", Links.WIKI + "/welcome-images#backgrounds")
+                .replace("{wiki_icon}", Links.WIKI + "/welcome-images#icons")
+                .replace("{wiki_welcome}", Links.WIKI + "/welcome-channel");
     }
     
     public String getMsg(String id, String path, String user, String targets){
@@ -397,7 +385,7 @@ public class PurrBot {
     
             DServices4J dServices4J = new DServices4J.Builder()
                     .setToken(getFileManager().getString("config", "tokens.discordservices-net"))
-                    .setId(IDs.PURR.getId())
+                    .setId(IDs.PURR)
                     .build();
             Commands commands = dServices4J.getCommands();
             Stats stats = dServices4J.getStats();

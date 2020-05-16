@@ -2,20 +2,15 @@
 
     <property name="DEV_HOME" value="./logs"/>
 
-    <!--STDOUT-->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
-        </filter>
+    <!--CONSOLE -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%cyan([) %boldWhite(%d{dd.MM.yyyy HH:mm:ss}) %cyan(%-5level]) %boldBlue([%t]) %boldWhite([%logger{0}]) %boldRed(-->) %white(%msg) %n
-            </pattern>
+            <pattern>%highlight([) %boldWhite(%d{dd.MM.yyyy HH:mm:ss}) %highlight(%-5level) %highlight(]) %cyan([%t]) %boldWhite([%logger{0}]) %boldRed(-) %white(%msg) %n</pattern>
         </encoder>
     </appender>
 
     <!--FILE OUT-->
-    <appender name="FILE-AUDIT"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="FILE-AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
@@ -34,7 +29,7 @@
 
     <!--Root logger-->
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE-AUDIT"/>
     </root>
 </configuration>

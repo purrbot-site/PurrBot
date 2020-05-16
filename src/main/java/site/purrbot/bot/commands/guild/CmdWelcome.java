@@ -26,7 +26,6 @@ import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -70,17 +69,6 @@ public class CmdWelcome implements Command{
     private MessageEmbed welcomeSettings(User author, Guild guild, boolean hasImage){
         TextChannel tc = getWelcomeChannel(guild.getId());
 
-        String[] color = bot.getWelcomeColor(guild.getId()).split(":");
-
-        if(color.length < 2) {
-            bot.setWelcomeColor(guild.getId(), "hex:ffffff");
-
-            color = new String[2];
-
-            color[0] = "hex";
-            color[1] = "ffffff";
-        }
-
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(author, guild)
                 .setTitle("Current welcome settings")
                 .setDescription(
@@ -96,17 +84,11 @@ public class CmdWelcome implements Command{
                         tc == null ? bot.getMsg(guild.getId(), "purr.guild.welcome.embed.no_channel") : tc.getAsMention()
                 ), false)
                 .addField(
-                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.color_title"),
-                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.color_value")
-                                .replace("{type}", color[0].toLowerCase())
-                                .replace("{value}", color[1].toLowerCase()), 
-                        false
-                )
-                .addField(
                         bot.getMsg(guild.getId(), "purr.guild.welcome.embed.image_title"),
                         bot.getMsg(guild.getId(), "purr.guild.welcome.embed.image_value")
                                 .replace("{background}", bot.getWelcomeBg(guild.getId()))
-                                .replace("{icon}", bot.getWelcomeIcon(guild.getId())),
+                                .replace("{icon}", bot.getWelcomeIcon(guild.getId()))
+                                .replace("{color}", bot.getWelcomeColor(guild.getId())),
                         false
                 )
                 .addField(
@@ -122,7 +104,7 @@ public class CmdWelcome implements Command{
                     EmbedBuilder.ZERO_WIDTH_SPACE, 
                     false
             )
-            .setImage("attachment://welcome.jpg");
+            .setImage("attachment://welcome_preview.jpg");
 
         return embed.build();
     }
@@ -242,7 +224,7 @@ public class CmdWelcome implements Command{
             }
 
             tc.sendMessage(welcomeSettings(member.getUser(), guild, true))
-                    .addFile(is, "welcome.jpg")
+                    .addFile(is, "welcome_preview.jpg")
                     .queue();
             return;
         }
@@ -308,9 +290,7 @@ public class CmdWelcome implements Command{
                         return;
                     }
 
-                    Color color = bot.getMessageUtil().getColor(args[2].toLowerCase());
-
-                    if(color == null){
+                    if(bot.getMessageUtil().getColor(args[2].toLowerCase()) == null){
                         bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.welcome.invalid_color");
                         return;
                     }
@@ -380,7 +360,7 @@ public class CmdWelcome implements Command{
                 }
 
                 tc.sendMessage(welcomeSettings(member.getUser(), guild, true))
-                        .addFile(is, "welcome.jpg")
+                        .addFile(is, "welcome_preview.jpg")
                         .queue();
         }
     }

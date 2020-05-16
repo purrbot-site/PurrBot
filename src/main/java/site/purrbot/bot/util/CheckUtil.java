@@ -18,14 +18,50 @@
 
 package site.purrbot.bot.util;
 
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
+import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
 
 public class CheckUtil{
 
-    public CheckUtil(){}
-
+    private final PurrBot bot;
+    
+    public CheckUtil(PurrBot bot){
+        this.bot = bot;
+    }
+    
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isDeveloper(User user){
-        return user.getId().equals(IDs.ANDRE_601.getId());
+        return user.getId().equals(IDs.ANDRE_601);
+    }
+    
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public boolean checkPermission(TextChannel tc, User author, Member member, Permission permission){
+        if(member.equals(tc.getGuild().getSelfMember())){
+            if(member.hasPermission(tc, permission)){
+                return true;
+            }else{
+                if(permission.equals(Permission.MESSAGE_EMBED_LINKS))
+                    tc.sendMessage(
+                            bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.self_channel")
+                                    .replace("{channel}", tc.getAsMention())
+                                    .replace("{permission}", permission.getName())
+                    ).queue();
+                else
+                    bot.getEmbedUtil().sendPermError(tc, author, tc, permission, true);
+                
+                return false;
+            }
+        }else{
+            if(member.hasPermission(tc, permission)){
+                return true;
+            }else{
+                bot.getEmbedUtil().sendPermError(tc, author, tc, permission, false);
+                return false;
+            }
+        }
     }
 }

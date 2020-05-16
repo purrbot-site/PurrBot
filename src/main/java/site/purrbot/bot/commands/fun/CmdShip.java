@@ -18,6 +18,8 @@
 
 package site.purrbot.bot.commands.fun;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.MessageBuilder;
@@ -32,6 +34,7 @@ import site.purrbot.bot.constants.IDs;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Ship",
@@ -47,6 +50,10 @@ public class CmdShip implements Command{
 
     private final PurrBot bot;
     Random random = new Random();
+    
+    Cache<String, Integer> cache = Caffeine.newBuilder()
+            .expireAfterWrite(2, TimeUnit.MINUTES)
+            .build();
 
     public CmdShip(PurrBot bot){
         this.bot = bot;
@@ -66,7 +73,13 @@ public class CmdShip implements Command{
         if((chance <= 80) && (chance > 70)){
             return bot.getMsg(id, "purr.fun.ship.results.71_80");
         }else
-        if((chance <= 70) && (chance > 60)){
+        if(chance == 70){
+            return bot.getMsg(id, "purr.fun.ship.results.61_70");
+        }else
+        if(chance == 69){
+            return bot.getMsg(id, "purr.fun.ship.results.69");
+        }else
+        if((chance <= 68) && (chance > 60)){
             return bot.getMsg(id, "purr.fun.ship.results.61_70");
         }else
         if((chance <= 60) && (chance > 50)){
@@ -115,83 +128,83 @@ public class CmdShip implements Command{
         if(member1 == null || member2 == null)
             return;
 
-        if(member1.getId().equals(IDs.PURR.getId())){
+        if(member1.getId().equals(IDs.PURR)){
             if(bot.isBeta()){
                 if(bot.isSpecial(member2.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.fun.ship.special_user", member2.getAsMention())
+                            bot.getMsg(guild.getId(), "snuggle.fun.ship.special_user", member.getAsMention())
                     ).queue();
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member2.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }else{
                 if(bot.isSpecial(member2.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member2.getAsMention())
+                            bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member.getAsMention())
                     ).queue();
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member2.getAsMention())
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }
             return;
         }else
-        if(member2.getId().equals(IDs.PURR.getId())){
+        if(member2.getId().equals(IDs.PURR)){
             if(bot.isBeta()){
                 if(bot.isSpecial(member1.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.fun.ship.special_user", member1.getAsMention())
+                            bot.getMsg(guild.getId(), "snuggle.fun.ship.special_user", member.getAsMention())
                     ).queue();
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member1.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }else{
                 if(bot.isSpecial(member1.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member1.getAsMention())
+                            bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member.getAsMention())
                     ).queue();
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member1.getAsMention())
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }
             return;
         }
 
-        if(member1.getId().equals(IDs.SNUGGLE.getId())) {
+        if(member1.getId().equals(IDs.SNUGGLE)) {
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member2.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member2.getAsMention())
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member.getAsMention())
                 ).queue();
             }
             return;
         }else
-        if(member2.getId().equals(IDs.SNUGGLE.getId())){
+        if(member2.getId().equals(IDs.SNUGGLE)){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member1.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member1.getAsMention())
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member.getAsMention())
                 ).queue();
             }
             return;
         }
 
-        if(member1.equals(msg.getMember()) && member2.equals(msg.getMember())){
+        if(member1.equals(member) && member2.equals(member)){
             tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.fun.ship.mention_self", msg.getMember().getAsMention())
+                    bot.getMsg(guild.getId(), "purr.fun.ship.mention_self", member.getAsMention())
             ).queue();
             return;
         }
@@ -201,9 +214,18 @@ public class CmdShip implements Command{
             return;
         }
 
-        int result = random.nextInt(101);
-
-        byte[] image = bot.getImageUtil().getShipImg(member1, member2, result);
+        byte[] image;
+        
+        Integer result = cache.getIfPresent(String.format("%s:%s", member1.getId(), member2.getId()));
+        
+        if(result != null){
+            image = bot.getImageUtil().getShipImg(member1, member2, result);
+        }else{
+            result = random.nextInt(101);
+            
+            image = bot.getImageUtil().getShipImg(member1, member2, result);
+            cache.put(String.format("%s:%s", member1.getId(), member2.getId()), result);
+        }
 
         if(image == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
             Message message = new MessageBuilder(String.format(

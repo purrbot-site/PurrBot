@@ -24,6 +24,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Links;
@@ -50,8 +51,14 @@ public class CmdInvite implements Command{
         this.bot = bot;
     }
     
-    private String getInvite(JDA jda, Permission... permissions){
-        return jda.getInviteUrl(permissions);
+    private String getInvite(Guild guild, String path, Permission... permissions){
+        return getLink(guild.getId(), path, guild.getJDA().getInviteUrl(permissions));
+    }
+    
+    private String getLink(String id, String path, String link){
+        String text = bot.getMsg(id, "purr.info.invite.embed.links." + path);
+        
+        return MarkdownUtil.maskedLink(text, link);
     }
     
     @Override
@@ -64,26 +71,45 @@ public class CmdInvite implements Command{
             return;
         }
         
+        String id = guild.getId();
+        
         EmbedBuilder invite = bot.getEmbedUtil().getEmbed(member.getUser(), msg.getGuild())
-                .setAuthor(msg.getJDA().getSelfUser().getName(),
-                        Links.WEBSITE.getUrl(),
+                .setAuthor(
+                        msg.getJDA().getSelfUser().getName(),
+                        Links.WEBSITE,
                         msg.getJDA().getSelfUser().getEffectiveAvatarUrl()
                 )
                 .addField(
-                        bot.getMsg(guild.getId(), "purr.info.invite.embed.info_title"),
-                        bot.getMsg(guild.getId(), "purr.info.invite.embed.info_value"),
+                        bot.getMsg(id, "purr.info.invite.embed.info_title"),
+                        bot.getMsg(id, "purr.info.invite.embed.info_value"),
                         false
                 )
                 .addField(
-                        bot.getMsg(guild.getId(), "purr.info.invite.embed.about_title"),
-                        bot.getMsg(guild.getId(), "purr.info.invite.embed.about_value"),
+                        bot.getMsg(id, "purr.info.invite.embed.about_title"),
+                        bot.getMsg(id, "purr.info.invite.embed.about_value"),
                         false
                 )
                 .addField(
                         EmbedBuilder.ZERO_WIDTH_SPACE,
-                        bot.getMsg(guild.getId(), "purr.info.invite.embed.links")
-                                .replace("{invite_full}", getInvite(
-                                        guild.getJDA(),
+                        String.join(
+                                "\n",
+                                getLink(
+                                        id,
+                                        "discord",
+                                        Links.DISCORD
+                                ),
+                                getInvite(
+                                        guild,
+                                        "invite_basic",
+                                        Permission.MESSAGE_WRITE,
+                                        Permission.MESSAGE_EMBED_LINKS,
+                                        Permission.MESSAGE_HISTORY,
+                                        Permission.MESSAGE_ADD_REACTION,
+                                        Permission.MESSAGE_EXT_EMOJI
+                                ),
+                                getInvite(
+                                        guild,
+                                        "invite_full",
                                         Permission.MESSAGE_WRITE,
                                         Permission.MESSAGE_EMBED_LINKS,
                                         Permission.MESSAGE_HISTORY,
@@ -91,16 +117,8 @@ public class CmdInvite implements Command{
                                         Permission.MESSAGE_EXT_EMOJI,
                                         Permission.MESSAGE_MANAGE,
                                         Permission.MESSAGE_ATTACH_FILES
-                                ))
-                                .replace("{invite_basic}", getInvite(
-                                        guild.getJDA(),
-                                        Permission.MESSAGE_WRITE,
-                                        Permission.MESSAGE_EMBED_LINKS,
-                                        Permission.MESSAGE_HISTORY,
-                                        Permission.MESSAGE_ADD_REACTION,
-                                        Permission.MESSAGE_EXT_EMOJI
-                                ))
-                                .replace("{support}", Links.DISCORD.getUrl()),
+                                )
+                        ),
                         false
                 );
         

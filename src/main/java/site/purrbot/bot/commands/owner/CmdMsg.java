@@ -20,6 +20,7 @@ package site.purrbot.bot.commands.owner;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -27,9 +28,8 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @CommandDescription(
         name = "Message",
@@ -42,44 +42,58 @@ import java.util.List;
         }
 )
 public class CmdMsg implements Command{
-
+    
+    private final Pattern imagePattern;
+    private final Pattern textPattern;
+    
     private final PurrBot bot;
 
     public CmdMsg(PurrBot bot){
         this.bot = bot;
-    }
-
-    private boolean isValidChannel(String id){
-        return bot.getShardManager().getTextChannelById(id) != null;
+        
+        this.imagePattern = Pattern.compile("--img=\"(?<image>http(?:s)?://.+\\.(?:png|jpg|gif))\"");
+        this.textPattern = Pattern.compile("--msg=\"(?<message>.+)\"", Pattern.DOTALL | Pattern.MULTILINE);
     }
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
-        List<String> split = new LinkedList<>();
-        String channelID = args[0];
-        Collections.addAll(split, args);
+        Pattern text = Pattern.compile(
+                Pattern.quote(bot.getPrefix(guild.getId())) + "(?:msg|message|send) (?<id>\\d+) (?<msg>.+)", 
+                Pattern.DOTALL | Pattern.MULTILINE | Pattern.CASE_INSENSITIVE
+        );
 
-        if(!isValidChannel(channelID)){
-            bot.getEmbedUtil().sendError(
-                    msg.getTextChannel(),
-                    member.getUser(),
-                    "errors.unknown"
-            );
+        Matcher matcher = text.matcher(msg.getContentRaw());
+        if(!matcher.matches())
             return;
-        }
-        split.remove(0);
-
-        if(split.isEmpty()){
-            bot.getEmbedUtil().sendError(msg.getTextChannel(), member.getUser(), "Please provide a message!");
-            return;
-        }
-
-        TextChannel channel = bot.getShardManager().getTextChannelById(channelID);
+        
+        String id = matcher.group("id");
+        String message = matcher.group("msg");
+    
+        TextChannel channel = bot.getShardManager().getTextChannelById(id);
         if(channel == null)
             return;
+
+        if(msg.getContentRaw().contains("--embed")){
+            Matcher imageMatcher = imagePattern.matcher(message);
+            Matcher textMatcher = textPattern.matcher(message);
     
-        channel.sendMessage(String.join(" ", split)).queue(
-                message -> msg.addReaction("✅").queue()
+            EmbedBuilder embed = new EmbedBuilder().setColor(0x802F3136);
+            
+            if(textMatcher.find())
+                embed.setDescription(textMatcher.group("message"));
+            
+            if(imageMatcher.find())
+                embed.setImage(imageMatcher.group("image"));
+            
+            channel.sendMessage(embed.build()).queue(
+                    mes -> msg.addReaction("\u2705").queue()
+            );
+            
+            return;
+        }
+        
+        channel.sendMessage(message).queue(
+                mes -> msg.addReaction("\u2705").queue()
         );
     }
 }

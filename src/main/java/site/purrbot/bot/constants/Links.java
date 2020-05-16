@@ -18,35 +18,25 @@
 
 package site.purrbot.bot.constants;
 
-public enum  Links {
+public class Links {
 
     // Discord invite
-    DISCORD("https://purrbot.site/discord"),
+    public static final String DISCORD = "https://purrbot.site/discord";
 
     // GitHub links
-    GITHUB     ("https://purrbot.site/github"),
-    WIKI       ("https://docs.purrbot.site/bot"),
-    TRANSLATORS("https://translations.purrbot.site"),
+    public static final String GITHUB = "https://purrbot.site/github";
 
     // Bot lists
-    BOTLIST_SPACE         ("https://botlist.space/bot/425382319449309197"),
-    DISCORD_BOATS         ("https://discord.boats/bot/425382319449309197"),
-    DISCORD_BOTS_GG       ("https://discord.bots.gg/bots/425382319449309197"),
-    DISCORDEXTREMELIST_XYZ("https://discordextremelist.xyz/bots/purr"),
-    LBOTS_ORG             ("https://lbots.org/bots/Purr"),
+    public static final String BOTLIST_SPACE          = "https://botlist.space/bot/425382319449309197";
+    public static final String DISCORD_BOATS          = "https://discord.boats/bot/425382319449309197";
+    public static final String DISCORD_BOTS_GG        = "https://discord.bots.gg/bots/425382319449309197";
+    public static final String DISCORDEXTREMELIST_XYZ = "https://discordextremelist.xyz/bots/purr";
+    public static final String LBOTS_ORG              = "https://lbots.org/bots/Purr";
 
     // Other links
-    PATREON("https://patreon.com/purrbot"),
-    TWITTER("https://purrbot.site/twitter"),
-    WEBSITE("https://purrbot.site");
-
-    private final String url;
-
-    Links(String url){
-        this.url = url;
-    }
-
-    public String getUrl() {
-        return url;
-    }
+    public static final String PATREON     = "https://patreon.com/purrbot";
+    public static final String TRANSLATORS = "https://translations.purrbot.site";
+    public static final String TWITTER     = "https://purrbot.site/twitter";
+    public static final String WEBSITE     = "https://purrbot.site";
+    public static final String WIKI        = "https://docs.purrbot.site/bot";
 }

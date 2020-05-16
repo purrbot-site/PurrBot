@@ -106,8 +106,8 @@
       },
       "ship": {
         "mention_self": "Shipping yourself {user}? Actually get someone else!",
-        "mention_purr": "N-nu! You can't ship with me {user}!",
-        "mention_snuggle": "I won't let you ship with my little sister {user}!",
+        "mention_purr": "N-nu! You can't ship me {user}!",
+        "mention_snuggle": "I won't let you ship my little sister {user}!",
         "no_mention": "Please mention at least one user to ship!",
         "results": {
           "100": "Perfect love! \u2764",
@@ -115,6 +115,7 @@
           "81_90": "I can really imagine you both marrying each other.",
           "71_80": "\\*pushes both of you closer to each other*",
           "61_70": "That seems to be something serious.",
+          "69": "Oh... So it's *that* kind of love huh...? \uD83D\uDE0F",
           "51_60": "Kiss already!!!",
           "41_50": "Already a couple?",
           "31_40": "You could become a couple.",
@@ -488,8 +489,8 @@
         "mention_snuggle": "Nuuu. Do nu poke me!"
       },
       "ship": {
-        "mention_purr": "No! No shipping with my big sister {user}!",
-        "mention_snuggle": "N-no. I don't want to ship with you {user}.",
+        "mention_purr": "No! No shipping of my big sister {user}!",
+        "mention_snuggle": "N-no. I don't want to be shipped {user}.",
         "special_user": "W-why should I ship you two {user}?\nG-go and do that yourself. >////<"
       },
       "slap": {

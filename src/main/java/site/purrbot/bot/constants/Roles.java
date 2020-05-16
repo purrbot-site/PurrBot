@@ -18,21 +18,11 @@
 
 package site.purrbot.bot.constants;
 
-public enum Roles {
+public class Roles {
     // Roles to receive on join
-    MEMBER       ("423772991520768011"),
-    SPECIAL      ("549989009934254100"),
-    LOVES        ("536686948371136512"),
-    PERSON       ("536686692321591307"),
-    NOTIFICATIONS("537369475033333765");
-
-    private final String id;
-
-    Roles(String id){
-        this.id = id;
-    }
-
-    public String getId(){
-        return id;
-    }
+    public static final String MEMBER        = "423772991520768011";
+    public static final String SPECIAL       = "549989009934254100";
+    public static final String LOVES         = "536686948371136512";
+    public static final String PERSON        = "536686692321591307";
+    public static final String NOTIFICATIONS = "537369475033333765";
 }

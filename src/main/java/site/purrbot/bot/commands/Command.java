@@ -23,19 +23,25 @@ import net.dv8tion.jda.api.entities.*;
 
 public interface Command extends AbstractCommand<Message>{
     
+    /*
+     * We convert the default "execute(Message, String)" to our own "run(Guild, TextChannel, Message, Member, String...)"
+     * method to have a better command system.
+     * 
+     * This method isn't automatically implemented into the classes, since it's being overriden here.
+     */
     @Override
     default void execute(Message message, String s){
-        Guild guild = message.getGuild();
-        TextChannel tc = message.getTextChannel();
-        Member member = message.getMember();
+        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+", 3);
         
-        String[] args = s.isEmpty() ? new String[0] : s.split("\\s+");
-        
-        if(member == null)
+        if(message.getMember() == null)
             return;
         
-        run(guild, tc, message, member, args);
+        // We trigger the below method to run the commands.
+        run(message.getGuild(), message.getTextChannel(), message, message.getMember(), args);
     }
     
+    /*
+     * This is the method we use in the commands to provide the information for easier handling.
+     */
     void run(Guild guild, TextChannel tc, Message msg, Member member, String... args);
 }

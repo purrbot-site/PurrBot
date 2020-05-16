@@ -75,7 +75,7 @@ public class CmdLanguage implements Command{
                     .addField(
                             bot.getMsg(guild.getId(), "purr.guild.language.embed.translators_title"),
                             bot.getMsg(guild.getId(), "purr.guild.language.embed.translators_value")
-                                    .replace("{link}", Links.TRANSLATORS.getUrl()),
+                                    .replace("{link}", Links.TRANSLATORS),
                             false
                     )
                     .build();

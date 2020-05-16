@@ -25,11 +25,15 @@ import java.awt.Color;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MessageUtil {
 
     private final PurrBot bot;
     private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
+    private final Pattern placeholder = Pattern.compile("\\{(?<type>[a-z]+)}", Pattern.CASE_INSENSITIVE);
 
     public MessageUtil(PurrBot bot){
         this.bot = bot;
@@ -65,36 +69,46 @@ public class MessageUtil {
     }
 
     public Color getColor(String input){
-        if(!input.toLowerCase().startsWith("rgb:") && !input.toLowerCase().startsWith("hex:")) return null;
-
-        String type = input.split(":")[0].toLowerCase();
-        String value = input.split(":")[1].toLowerCase();
-
-        if(value.isEmpty()) return null;
-
-        Color result = null;
-
-        switch(type){
-            case "rgb":
-                String[] rgb = value.replace(" ", "").split(",");
-
-                try{
-                    result = new Color(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
-                }catch(Exception ex){
-                    return null;
-                }
-                break;
-
-            case "hex":
-                try{
-                    result = Color.decode(value.startsWith("#") ? value : "#" + value);
-                }catch(Exception ex){
-                    return null;
-                }
-                break;
+        input = input.toLowerCase();
+        if(!input.equals("random") && !(input.startsWith("hex:") || input.startsWith("rgb:")))
+            return null;
+        
+        Color color = null;
+        
+        if(input.equals("random")){
+            int r = bot.getRandom().nextInt(256);
+            int g = bot.getRandom().nextInt(256);
+            int b = bot.getRandom().nextInt(256);
+    
+            return new Color(r, g, b);
         }
-
-        return result;
+        
+        String type = input.split(":")[0];
+        
+        switch(type){
+            case "hex":
+                input = input.replace("hex:", "");
+                if(input.isEmpty())
+                    return null;
+                
+                color = Color.decode(input.startsWith("#") ? input : "#" + input);
+                break;
+            
+            case "rgb":
+                input = input.replace("rgb:", "");
+                if(input.isEmpty())
+                    return null;
+                
+                String[] rgb = Arrays.copyOf(input.split(","), 3);
+                
+                try{
+                    color = new Color(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
+                }catch(Exception ignored){
+                    return null;
+                }
+        }
+        
+        return color;
     }
 
     public String parsePlaceholders(String message, Member member){

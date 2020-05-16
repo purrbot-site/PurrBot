@@ -20,9 +20,11 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDAInfo;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
@@ -52,77 +54,84 @@ public class CmdInfo implements Command{
     }
     
     private MessageEmbed getEmbed(User user, Guild guild){
+        String id = guild.getId();
+        EmbedBuilder builder = bot.getEmbedUtil().getEmbed(user, guild);
         if(bot.isBeta()){
-            return bot.getEmbedUtil().getEmbed(user, guild)
-                    .setAuthor(guild.getJDA().getSelfUser().getName(),
-                            Links.WEBSITE.getUrl(),
-                            guild.getJDA().getSelfUser().getEffectiveAvatarUrl()
-                    )
-                    .setThumbnail(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                    .addField(
-                            bot.getMsg(guild.getId(), "snuggle.info.info.embed.about_title"),
-                            bot.getMsg(guild.getId(), "snuggle.info.info.embed.about_value")
-                                    .replace("{name}", guild.getSelfMember().getAsMention()),
-                            false
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.commands_title"),
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.commands_value"),
-                            false
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_title"),
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_value")
-                                    .replace("{bot_version}", "BOT_VERSION")
-                                    .replace("{jda_version}", JDAInfo.VERSION)
-                                    .replace("{link}", JDAInfo.GITHUB),
-                            false
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.links_title"),
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.links_value"),
-                            false
-                    )
-                    .build();
-        }else{
-            return bot.getEmbedUtil().getEmbed(user, guild)
-                    .setAuthor(guild.getJDA().getSelfUser().getName(),
-                            Links.WEBSITE.getUrl(),
-                            guild.getJDA().getSelfUser().getEffectiveAvatarUrl()
-                    )
-                    .setThumbnail(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.about_title"),
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.about_value")
-                                    .replace("{name}", guild.getSelfMember().getAsMention())
-                                    .replace("{id}", IDs.ANDRE_601.getId()),
-                            false
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.commands_title"),
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.commands_value"),
-                            false
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_title"),
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_value")
-                                    .replace("{bot_version}", "BOT_VERSION")
-                                    .replace("{jda_version}", JDAInfo.VERSION)
-                                    .replace("{link}", JDAInfo.GITHUB),
-                            false
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_list_title"),
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.bot_list_value"),
-                            false
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.links_title"),
-                            bot.getMsg(guild.getId(), "purr.info.info.embed.links_value"),
-                            false
-                    )
-                    .build();
+            builder.setAuthor(guild.getJDA().getSelfUser().getName(),
+                    Links.WEBSITE,
+                    guild.getJDA().getSelfUser().getEffectiveAvatarUrl()
+            )
+            .setThumbnail(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
+            .addField(
+                    bot.getMsg(id, "snuggle.info.info.embed.about_title"),
+                    bot.getMsg(id, "snuggle.info.info.embed.about_value")
+                            .replace("{name}", guild.getSelfMember().getAsMention()),
+                    false
+            );
+        }else{ 
+            builder.setAuthor(guild.getJDA().getSelfUser().getName(),
+                    Links.WEBSITE,
+                    guild.getJDA().getSelfUser().getEffectiveAvatarUrl()
+            )
+            .setThumbnail(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
+            .addField(
+                    bot.getMsg(guild.getId(), "purr.info.info.embed.about_title"),
+                    bot.getMsg(guild.getId(), "purr.info.info.embed.about_value")
+                            .replace("{name}", guild.getSelfMember().getAsMention())
+                            .replace("{id}", IDs.ANDRE_601),
+                    false
+            );
         }
+        
+        builder.addField(
+                bot.getMsg(id, "purr.info.info.embed.commands_title"),
+                bot.getMsg(id, "purr.info.info.embed.commands_value"),
+                false
+        )
+        .addField(
+                bot.getMsg(id, "purr.info.info.embed.bot_info.title"),
+                String.join(
+                        "\n",
+                        getLink(id, "bot_info.version", Links.GITHUB)
+                                .replace("{bot_version}", "BOT_VERSION"),
+                        getLink(id, "bot_info.library", JDAInfo.GITHUB)
+                                .replace("{jda_version}", JDAInfo.VERSION)
+                ),
+                false
+        )
+        .addField(
+                bot.getMsg(id, "purr.info.info.embed.bot_lists.title"), 
+                String.join(
+                        "\n",
+                        getLink(id, "bot_lists.botlist_space", Links.BOTLIST_SPACE),
+                        getLink(id, "bot_lists.discord_boats", Links.DISCORD_BOATS),
+                        getLink(id, "bot_lists.discord_bots_gg", Links.DISCORD_BOTS_GG),
+                        getLink(id, "bot_lists.discordextremelist_xyz", Links.DISCORDEXTREMELIST_XYZ),
+                        getLink(id, "bot_lists.lbots_org", Links.LBOTS_ORG)
+                ),
+                false
+        )
+        .addField(
+                bot.getMsg(id, "purr.info.info.embed.links.title"),
+                String.join(
+                        "\n",
+                        getLink(id, "links.discord", Links.DISCORD),
+                        getLink(id, "links.github", Links.GITHUB),
+                        getLink(id, "links.patreon", Links.PATREON),
+                        getLink(id, "links.twitter", Links.TWITTER),
+                        getLink(id, "links.website", Links.WEBSITE),
+                        getLink(id, "links.wiki", Links.WIKI)
+                ),
+                false
+        );
+        
+        return builder.build();
+    }
+    
+    private String getLink(String id, String path, String link){
+        String text = bot.getMsg(id, "purr.info.info.embed." + path);
+        
+        return MarkdownUtil.maskedLink(text, link);
     }
     
     @Override

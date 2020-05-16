@@ -59,11 +59,11 @@ public class CmdKiss implements Command{
         }
 
         Member purr = members.stream()
-                .filter(mem -> mem.getUser().getId().equals(IDs.PURR.getId()))
+                .filter(mem -> mem.getUser().getId().equals(IDs.PURR))
                 .findFirst()
                 .orElse(null);
         Member snuggle = members.stream()
-                .filter(mem -> mem.getUser().getId().equals(IDs.SNUGGLE.getId()))
+                .filter(mem -> mem.getUser().getId().equals(IDs.SNUGGLE))
                 .findFirst()
                 .orElse(null);
 

@@ -28,14 +28,15 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
-import site.purrbot.bot.constants.Links;
 
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CommandListener extends ListenerAdapter{
-
+    
     private final Logger logger = (Logger)LoggerFactory.getLogger(CommandListener.class);
 
     private final ThreadGroup CMD_THREAD = new ThreadGroup("CommandThread");
@@ -63,19 +64,50 @@ public class CommandListener extends ListenerAdapter{
                     if(user.isBot())
                         return;
 
-                    String prefix = bot.getPrefix(guild.getId());
+                    Pattern prefixPattern = Pattern.compile(
+                            Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 
+                            Pattern.DOTALL
+                    );
 
                     String raw = msg.getContentRaw();
 
                     String memberMention = "<@!" + guild.getJDA().getSelfUser().getId() + ">";
                     String userMention = "<@" + guild.getJDA().getSelfUser().getId() + ">";
-
-                    if(!raw.toLowerCase().startsWith(prefix) && !raw.startsWith(userMention) && !raw.startsWith(memberMention))
+    
+                    Matcher matcher = prefixPattern.matcher(raw);
+                    
+                    if(!matcher.matches() && !(raw.equals(userMention) || raw.equals(memberMention)))
                         return;
                     
                     TextChannel tc = event.getChannel();
                     Member self = guild.getSelfMember();
+
+                    Member member = msg.getMember();
+                    if(member == null)
+                        return;
                     
+                    if(raw.equalsIgnoreCase(userMention) || raw.equalsIgnoreCase(memberMention)){
+                        if(!self.hasPermission(tc, Permission.MESSAGE_WRITE))
+                            return;
+                        
+                        tc.sendMessage(
+                                bot.getMsg(guild.getId(), "misc.info", user.getAsMention())
+                        ).queue();
+                        return;
+                    }
+                    
+                    raw = matcher.group("command");
+
+                    String[] args = Arrays.copyOf(raw.split("\\s+", 2), 2);
+
+                    if(args[0] == null)
+                        return;
+
+                    Command command = (Command)HANDLER.findCommand(args[0].toLowerCase());
+    
+                    if(command == null)
+                        return;
+    
                     if(!self.hasPermission(tc, Permission.MESSAGE_WRITE)){
                         user.openPrivateChannel()
                                 .flatMap(channel -> channel.sendMessage(bot.getEmbedUtil().getPermErrorEmbed(
@@ -87,7 +119,7 @@ public class CommandListener extends ListenerAdapter{
                                         true
                                 )))
                                 .queue(
-                                        null, 
+                                        null,
                                         error -> logger.warn(String.format(
                                                 "I lack the permission to send messages in %s (%s)",
                                                 guild.getName(),
@@ -97,62 +129,25 @@ public class CommandListener extends ListenerAdapter{
                         return;
                     }
 
-                    Member member = msg.getMember();
-                    if(member == null)
-                        return;
-
-                    if(raw.equalsIgnoreCase(userMention) || raw.equalsIgnoreCase(memberMention)){
-                        tc.sendMessage(
-                                bot.getMsg(guild.getId(), "misc.info", user.getAsMention())
-                        ).queue();
-                        return;
-                    }
-
-                    if(!raw.toLowerCase().startsWith(prefix))
-                        return;
-
-                    String[] args = split(raw, prefix.length());
-                    String cmdString = args[0];
-
-                    if(cmdString == null)
-                        return;
-
-                    Command command = (Command)HANDLER.findCommand(cmdString.toLowerCase());
-
-                    if(command == null)
-                        return;
-
-                    if(command.getAttribute("category").equals("owner") && !user.getId().equals(IDs.ANDRE_601.getId()))
+                    if(command.getAttribute("category").equals("owner") && !bot.getCheckUtil().isDeveloper(user))
                         return;
                     
                     if(self.hasPermission(Permission.ADMINISTRATOR)){
                         bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.administrator");
                         return;
                     }
-
-                    if(!self.hasPermission(tc, Permission.MESSAGE_EMBED_LINKS)){
-                        tc.sendMessage(
-                                bot.getMsg(guild.getId(), "errors.missing_perms.self_channel")
-                                        .replace("{channel}", tc.getAsMention())
-                                        .replace("{permission}", Permission.MESSAGE_EMBED_LINKS.getName())
-                        ).queue();
-                        return;
-                    }
                     
-                    if(!self.hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                        bot.getEmbedUtil().sendPermError(tc, user, tc, Permission.MESSAGE_HISTORY, true);
+                    if(!bot.getCheckUtil().checkPermission(tc, user, self, Permission.MESSAGE_EMBED_LINKS))
                         return;
-                    }
                     
-                    if(!self.hasPermission(tc, Permission.MESSAGE_ADD_REACTION)){
-                        bot.getEmbedUtil().sendPermError(tc, user, tc, Permission.MESSAGE_ADD_REACTION, true);
+                    if(!bot.getCheckUtil().checkPermission(tc, user, self, Permission.MESSAGE_HISTORY))
                         return;
-                    }
                     
-                    if(!self.hasPermission(tc, Permission.MESSAGE_EXT_EMOJI)){
-                        bot.getEmbedUtil().sendPermError(tc, user, tc, Permission.MESSAGE_EXT_EMOJI, true);
+                    if(!bot.getCheckUtil().checkPermission(tc, user, self, Permission.MESSAGE_ADD_REACTION))
                         return;
-                    }
+                    
+                    if(!bot.getCheckUtil().checkPermission(tc, user, self, Permission.MESSAGE_EXT_EMOJI))
+                        return;
                     
                     if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
                         MessageEmbed notNsfw = bot.getEmbedUtil().getEmbed(user, guild)
@@ -167,23 +162,8 @@ public class CommandListener extends ListenerAdapter{
                     }
                     
                     if(command.hasAttribute("manage_server")){
-                        if(!member.hasPermission(Permission.MANAGE_SERVER)){
-                            bot.getEmbedUtil().sendPermError(tc, user, Permission.MANAGE_SERVER, false);
+                        if(!bot.getCheckUtil().checkPermission(tc, user, member, Permission.MESSAGE_MANAGE))
                             return;
-                        }
-                    }
-                    
-                    if(command.hasAttribute("guild_only") && !guild.getId().equals(IDs.GUILD.getId())){
-                        MessageEmbed embed = bot.getEmbedUtil().getEmbed(user, guild)
-                                .setColor(0xFF0000)
-                                .setDescription(
-                                        bot.getMsg(guild.getId(), "errors.guild_only")
-                                                .replace("{link}", Links.DISCORD.getUrl())
-                                )
-                                .build();
-                        
-                        tc.sendMessage(embed).queue();
-                        return;
                     }
 
                     try{
@@ -194,9 +174,5 @@ public class CommandListener extends ListenerAdapter{
                     }
                 }
         );
-    }
-
-    private String[] split(String raw, int length){
-        return Arrays.copyOf(raw.substring(length).trim().split("\\s+", 2), 2);
     }
 }

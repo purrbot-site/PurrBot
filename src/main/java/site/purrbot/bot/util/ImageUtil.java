@@ -149,43 +149,13 @@ public class ImageUtil {
         }
     }
 
-    public byte[] getStatusAvatar(String avatarUrl, String status, boolean isMobile) throws IOException, NullPointerException{
-
-        JSONObject json = new JSONObject()
-                .put("avatar", avatarUrl)
-                .put("status", status)
-                .put("mobile", isMobile);
-
-        RequestBody body = RequestBody.create(json.toString(), null);
-
-        Request request = new Request.Builder()
-                .addHeader("User-Agent", "PurrBot BOT_VERSION")
-                .addHeader("content-type", "application/json")
-                .post(body)
-                .url("https://purrbot.site/api/status")
-                .build();
-
-        try(Response response = CLIENT.newCall(request).execute()){
-            if(!response.isSuccessful())
-                throw new IOException("Couldn't get status image.");
-
-            ResponseBody responseBody = response.body();
-            if(responseBody == null)
-                throw new NullPointerException("Received empty response (null).");
-
-            return IOUtil.readFully(responseBody.byteStream());
-        }
-    }
-
     public InputStream getWelcomeImg(Member member, String icon, String bg, String color) throws IOException, NullPointerException{
-        if(color.toLowerCase().startsWith("hex:") || color.toLowerCase().startsWith("hex:#")){
-            color = color.toLowerCase().replace("hex:#", "#").replace("hex:", "#");
-        }else
-        if(color.toLowerCase().startsWith("rgb:")){
-            color = color.toLowerCase().replace("rgb:", "");
-        }else{
+        Color col = bot.getMessageUtil().getColor(color);
+        
+        if(col == null)
             color = "#000000";
-        }
+        else
+            color = String.format("%d,%d,%d", col.getRed(), col.getGreen(), col.getBlue());
 
         JSONObject json = new JSONObject()
                 .put("username", member.getUser().getName())
@@ -194,18 +164,34 @@ public class ImageUtil {
                         bot.getMsg(member.getGuild().getId(), "misc.welcome_member")
                                 .replace("{count}", String.valueOf(member.getGuild().getMemberCount()))
                 )
-                .put("icon", icon.equalsIgnoreCase("random") ? 
-                        bot.getHttpUtil().getImage(API.IMG_ICON) :
-                        String.format("https://purrbot.site/img/sfw/icon/img/%s.png", icon)
+                .put(
+                        "icon",
+                        icon.equalsIgnoreCase("random") ? 
+                                bot.getHttpUtil().getImage(API.IMG_ICON) : 
+                                String.format("https://purrbot.site/img/sfw/icon/img/%s.png", icon)
                 )
-                .put("banner", bg.equalsIgnoreCase("random") ?
-                        bot.getHttpUtil().getImage(API.IMG_BACKGROUND) :
-                        String.format("https://purrbot.site/img/sfw/background/img/%s.png", bg)
+                .put(
+                        "banner", 
+                        bg.equalsIgnoreCase("random") ? 
+                                bot.getHttpUtil().getImage(API.IMG_BACKGROUND) : 
+                                String.format("https://purrbot.site/img/sfw/background/img/%s.png", bg)
                 )
-                .put("avatar", member.getUser().getEffectiveAvatarUrl())
-                .put("color_welcome", color)
-                .put("color_username", color)
-                .put("color_members", color);
+                .put(
+                        "avatar", 
+                        member.getUser().getEffectiveAvatarUrl()
+                )
+                .put(
+                        "color_welcome", 
+                        color
+                )
+                .put(
+                        "color_username", 
+                        color
+                )
+                .put(
+                        "color_members", 
+                        color
+                );
         
         RequestBody body = RequestBody.create(json.toString(), null);
 

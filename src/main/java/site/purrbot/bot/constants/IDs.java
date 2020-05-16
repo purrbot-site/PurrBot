@@ -18,22 +18,15 @@
 
 package site.purrbot.bot.constants;
 
-public enum IDs {
+public class IDs {
 
-    ANDRE_601 ("204232208049766400"),
-
-    PURR   ("425382319449309197"),
-    SNUGGLE("439829950686822410"),
-
-    GUILD("423771795523371019");
-
-    private final String id;
-
-    IDs(String id){
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
-    }
+    // Developer of the bot
+    public static final String ANDRE_601 = "204232208049766400";
+    
+    // IDs of the Bot and the beta version
+    public static final String PURR    = "425382319449309197";
+    public static final String SNUGGLE = "439829950686822410";
+    
+    // Main Guild of the bot
+    public static final String GUILD = "423771795523371019";
 }
