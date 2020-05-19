@@ -115,6 +115,7 @@
           "81_90": "Ma kujutan teid ette omavahel abiellumas.",
           "71_80": "\\*Lükkab teid mõlemaid üksteisele lähemale*",
           "61_70": "See paistab olevat midagi tõsist.",
+          "69": "Oh... Niiet see on *selline* armastus mh... ? 😏",
           "51_60": "Suudelge juba!!!",
           "41_50": "Juba paar?",
           "31_40": "Teist võiks saada paar.",
@@ -489,7 +490,7 @@
       },
       "ship": {
         "mention_purr": "Ei! Mitte mingit paaritamist minu suure õega {user}!",
-        "mention_snuggle": "E- ei. Ma ei taha sind oma paariliseks {user}.",
+        "mention_snuggle": "E- ei. Ma ei taha et mind paaritataks {user}.",
         "special_user": "M-miks ma peaksin teid paari panema {user}?\nM-mine tee seda ise. >////<"
       },
       "slap": {
