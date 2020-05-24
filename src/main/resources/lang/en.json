@@ -359,7 +359,7 @@
       "user": {
         "embed": {
           "avatar": "Avatar",
-          "avatar_url": "[`Avatar URL`]({link})",
+          "avatar_url": "`Avatar URL`",
           "badges": "Badges",
           "booster": "Booster since:",
           "created": "Account created:",
