@@ -360,12 +360,14 @@
         "embed": {
           "avatar": "Avatar",
           "avatar_url": "[`Avatar URL`]({link})",
+          "badges": "Badges",
           "booster": "Booster since:",
           "created": "Account created:",
           "dates": "Dates",
           "id": "ID: {id}",
           "joined": "Guild joined:",
           "nickname": "Nick: {nickname}",
+          "no_badges": "`No badges`",
           "role_highest": "Highest Role",
           "role_total": "Other Roles"
         },
