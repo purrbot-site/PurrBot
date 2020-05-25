@@ -359,13 +359,15 @@
       "user": {
         "embed": {
           "avatar": "Аватар",
-          "avatar_url": "[`Ссылка на аватарку`]({link})",
+          "avatar_url": "`Ссылка на аватар`",
+          "badges": "Значки",
           "booster": "Буст с:",
           "created": "Аккаунт создан:",
           "dates": "Даты",
           "id": "ID: {id}",
           "joined": "Дата присоединения:",
           "nickname": "Никнейм: {nickname}",
+          "no_badges": "`Нет значков`",
           "role_highest": "Высшая роль",
           "role_total": "Другие роли"
         },
