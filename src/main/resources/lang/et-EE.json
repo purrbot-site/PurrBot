@@ -359,13 +359,15 @@
       "user": {
         "embed": {
           "avatar": "Avatar",
-          "avatar_url": "[`Avatari link`]({link})",
+          "avatar_url": "`Avatari link`",
+          "badges": "Märgid",
           "booster": "Boostija alates:",
           "created": "Kasutaja loodud:",
           "dates": "Kuupäevad",
           "id": "ID: {id}",
           "joined": "Liitunud gildiga:",
           "nickname": "Hüüdnimi: {nickname}",
+          "no_badges": "`Märke pole`",
           "role_highest": "Kõrgeim roll",
           "role_total": "Teised rollid"
         },
