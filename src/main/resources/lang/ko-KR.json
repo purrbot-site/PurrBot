@@ -358,14 +358,16 @@
       },
       "user": {
         "embed": {
-          "avatar": "아바타",
-          "avatar_url": "[`서버저장본`]({link})",
+          "avatar": "프로필 사진",
+          "avatar_url": "`프로필 사진 주소`",
+          "badges": "뱃지",
           "booster": "부스트 시작:",
           "created": "계정생성:",
           "dates": "날짜",
           "id": "ID: {id}",
           "joined": "서버입장:",
           "nickname": "닉네임: {nickname}",
+          "no_badges": "`뱃지 없음`",
           "role_highest": "최고 역할",
           "role_total": "그 외 역할"
         },
