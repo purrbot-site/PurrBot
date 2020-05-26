@@ -359,13 +359,15 @@
       "user": {
         "embed": {
           "avatar": "Avatar",
-          "avatar_url": "[`Avatar URL`]({link})",
+          "avatar_url": "`Avatar URL`",
+          "badges": "Abzeichen",
           "booster": "Booster seit:",
           "created": "Account erstellt:",
           "dates": "Daten",
           "id": "ID: {id}",
           "joined": "Guild beigetreten:",
           "nickname": "Nick: {nickname}",
+          "no_badges": "`Keine Abzeichen`",
           "role_highest": "Höchste Rolle",
           "role_total": "Andere Rollen"
         },
