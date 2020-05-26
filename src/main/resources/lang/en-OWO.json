@@ -106,8 +106,8 @@
       },
       "ship": {
         "mention_self": "Shippping youwsewf {user}? Actuawwy get someone ewse! òwó",
-        "mention_purr": "N-nu! You can't ship with me {user}! òwó",
-        "mention_snuggle": "I won't wet you ship with my wittwe sistew {user}! òwó",
+        "mention_purr": "N-nu! You can't ship me {user}! >:c",
+        "mention_snuggle": "I won't wet you ship my wittwe sistew {user}! òwó",
         "no_mention": "Pwease mention at weast one user to ship!",
         "results": {
           "100": "Pewfect wuv! ❤",
@@ -115,6 +115,7 @@
           "81_90": "I can weawwy imagine you both mawwying each othew. UwU",
           "71_80": "\\*pushes both of you cwosew to each othew*",
           "61_70": "That seems to be something sewious.",
+          "69": "Oh... So it's *that* kind of wove huh...? 😏",
           "51_60": "Kiss awweady!!! òwó",
           "41_50": "Awweady a coupwe?",
           "31_40": "You couwd become a coupwe.",
@@ -358,13 +359,15 @@
       "user": {
         "embed": {
           "avatar": "Avataw",
-          "avatar_url": "[`Avataw URL`]({link})",
+          "avatar_url": "`Avataw URL`",
+          "badges": "Badges",
           "booster": "Boostew since:",
           "created": "Account cweated:",
           "dates": "Dates",
           "id": "ID: {id}",
           "joined": "Guiwd joined:",
           "nickname": "Nick: {nickname}",
+          "no_badges": "`No badges`",
           "role_highest": "Highest Wowe",
           "role_total": "Othew Wowes"
         },
@@ -488,8 +491,8 @@
         "mention_snuggle": "Nuuu. Do nu poke me!"
       },
       "ship": {
-        "mention_purr": "No! No shipping with my big sistew {user}!",
-        "mention_snuggle": "N-no. I don't want to ship with you {user}.",
+        "mention_purr": "No! No shipping of my big sistew {user}!",
+        "mention_snuggle": "N-no. I don't want to be shipped {user}. --w--",
         "special_user": "W-why should I ship you two {user}?\nG-go and do that youwsewf. >////<"
       },
       "slap": {

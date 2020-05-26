@@ -106,8 +106,8 @@
       },
       "ship": {
         "mention_self": "Sich selbst verkuppeln {user}? Finde jemand anderes!",
-        "mention_purr": "N-nein! Du kannst dich nicht mit mir verkuppeln {user}!",
-        "mention_snuggle": "Keine verkupplung mir meiner kleinen Schwester {user}!",
+        "mention_purr": "N-nein! Du kannst mich nicht verkuppeln {user}!",
+        "mention_snuggle": "Keine verkupplung mit meiner kleinen Schwester {user}!",
         "no_mention": "Bitte erwähne mindestens eine Person zum verkuppeln!",
         "results": {
           "100": "Perfekte Liebe! ❤",
@@ -115,6 +115,7 @@
           "81_90": "Ich kann mir wirklich euch beide vorstellen, wie ihr einander heiratet.",
           "71_80": "\\*Drückt euch näher aneinander*",
           "61_70": "Das scheint etwas ernsthaftes zu sein.",
+          "69": "Oh... Es ist also *diese* art von Liebe huh...? 😏",
           "51_60": "Küsst euch endlich!!!",
           "41_50": "Bereits ein Paar?",
           "31_40": "Ihr könntet ein Paar werden.",
@@ -358,13 +359,15 @@
       "user": {
         "embed": {
           "avatar": "Avatar",
-          "avatar_url": "[`Avatar URL`]({link})",
+          "avatar_url": "`Avatar URL`",
+          "badges": "Abzeichen",
           "booster": "Booster seit:",
           "created": "Account erstellt:",
           "dates": "Daten",
           "id": "ID: {id}",
           "joined": "Guild beigetreten:",
           "nickname": "Nick: {nickname}",
+          "no_badges": "`Keine Abzeichen`",
           "role_highest": "Höchste Rolle",
           "role_total": "Andere Rollen"
         },
@@ -488,7 +491,7 @@
         "mention_snuggle": "Nuuu. Stups mich nicht!"
       },
       "ship": {
-        "mention_purr": "Nein! Kein verkuppeln mit meiner grossen Schwester {user}!",
+        "mention_purr": "Nein! Kein verkuppeln meiner grossen Schwester {user}!",
         "mention_snuggle": "N-nein. Ich möchte nicht verkuppelt werden {user}.",
         "special_user": "W-warum soll ich euch beide verkuppeln {user}?\nG-geh und mach dass selbst. >////<"
       },
