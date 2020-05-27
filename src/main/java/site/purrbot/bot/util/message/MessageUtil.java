@@ -26,14 +26,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MessageUtil {
 
     private final PurrBot bot;
     private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
-    private final Pattern placeholder = Pattern.compile("\\{(?<type>[a-z]+)}", Pattern.CASE_INSENSITIVE);
 
     public MessageUtil(PurrBot bot){
         this.bot = bot;

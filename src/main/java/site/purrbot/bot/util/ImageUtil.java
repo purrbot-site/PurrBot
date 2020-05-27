@@ -126,7 +126,7 @@ public class ImageUtil {
                 .put("dateFormat", "dd. MMM yyyy")
                 .put("username", member == null ? "Anonymous" : member.getEffectiveName())
                 .put("message", quote.getContentDisplay())
-                .put("timestamp", String.valueOf(quote.getTimeCreated().toInstant().toEpochMilli()));
+                .put("timestamp", quote.getTimeCreated().toInstant().toEpochMilli());
 
         RequestBody body = RequestBody.create(json.toString(), null);
 

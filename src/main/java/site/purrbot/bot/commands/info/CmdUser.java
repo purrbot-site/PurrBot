@@ -22,6 +22,8 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
+import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
@@ -77,13 +79,17 @@ public class CmdUser implements Command{
     }
 
     private String getName(Member member){
-        StringBuilder sb = new StringBuilder(member.getUser().getName());
-
+        StringBuilder sb = new StringBuilder(MarkdownSanitizer.escape(member.getUser().getName()));
+        
         if(member.isOwner())
-            sb.append(Emotes.OWNER.getEmote());
+            sb.append(" ").append(Emotes.OWNER.getEmote());
 
-        if(member.getUser().isBot())
-            sb.append(Emotes.BOT.getEmote());
+        User user = member.getUser();
+        if(user.isBot())
+            if(user.getFlags().contains(User.UserFlag.VERIFIED_BOT))
+                sb.append(" ").append(Emotes.VERIFIED_BOT_1.getEmote()).append(Emotes.VERIFIED_BOT_2.getEmote());
+            else
+                sb.append(" ").append(Emotes.BOT_1.getEmote()).append(Emotes.BOT_2.getEmote());
         
         return sb.toString();
     }
@@ -125,36 +131,109 @@ public class CmdUser implements Command{
 
         return sb.toString();
     }
+    
+    private String getBadges(Member member){
+        StringBuilder sb = new StringBuilder();
+        
+        for(User.UserFlag flag : member.getUser().getFlags()){
+            switch(flag){
+                case STAFF:
+                    if(sb.length() > 0)
+                        sb.append(" ");
+                    sb.append(Emotes.STAFF.getEmote());
+                    break;
+                
+                case PARTNER:
+                    if(sb.length() > 0)
+                        sb.append(" ");
+                    sb.append(Emotes.PARTNER.getEmote());
+                    break;
+                
+                case BUG_HUNTER_LEVEL_1:
+                case BUG_HUNTER_LEVEL_2:
+                    if(sb.length() > 0)
+                        sb.append(" ");
+                    sb.append(Emotes.BUGHUNTER.getEmote());
+                    break;
+                
+                case EARLY_SUPPORTER:
+                    if(sb.length() > 0)
+                        sb.append(" ");
+                    sb.append(Emotes.EARLY_SUPPORTER.getEmote());
+                    break;
+                
+                case HYPESQUAD:
+                    if(sb.length() > 0)
+                        sb.append(" ");
+                    sb.append(Emotes.HYPESQUAD_EVENTS.getEmote());
+                    break;
+                
+                case HYPESQUAD_BALANCE:
+                    if(sb.length() > 0)
+                        sb.append(" ");
+                    sb.append(Emotes.HYPESQUAD_BALANCE.getEmote());
+                    break;
+                
+                case HYPESQUAD_BRAVERY:
+                    if(sb.length() > 0)
+                        sb.append(" ");
+                    sb.append(Emotes.HYPESQUAD_BRAVERY.getEmote());
+                    break;
+                
+                case HYPESQUAD_BRILLIANCE:
+                    if(sb.length() > 0)
+                        sb.append(" ");
+                    sb.append(Emotes.HYPESQUAD_BRILLIANCE.getEmote());
+                    break;
+                
+                case VERIFIED_DEVELOPER:
+                    if(sb.length() > 0)
+                        sb.append(" ");
+                    sb.append(Emotes.VERIFIED_DEV.getEmote());
+            }
+        }
+        
+        return sb.length() == 0 ? bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.no_badges") : sb.toString();
+    }
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
+        Member target = msg.getMentionedMembers().isEmpty() ? member : msg.getMentionedMembers().get(0);
+        
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member.getUser(), tc.getGuild())
-                .setThumbnail(member.getUser().getEffectiveAvatarUrl())
+                .setThumbnail(target.getUser().getEffectiveAvatarUrl())
                 .addField(
-                        getName(member),
+                        getName(target),
                         String.format(
                                 "```yaml\n" +
                                 "%s" +
                                 "```",
-                                getUserInfo(member)
+                                getUserInfo(target)
                         ),
                         false
                 )
                 .addField(
+                        bot.getMsg(guild.getId(), "purr.info.user.embed.badges"),
+                        getBadges(target),
+                        true
+                )
+                .addField(
                         bot.getMsg(guild.getId(), "purr.info.user.embed.avatar"),
-                        bot.getMsg(guild.getId(), "purr.info.user.embed.avatar_url")
-                                .replace("{link}", member.getUser().getEffectiveAvatarUrl()),
+                        MarkdownUtil.maskedLink(
+                                bot.getMsg(guild.getId(), "purr.info.user.embed.avatar_url"),
+                                member.getUser().getEffectiveAvatarUrl()
+                        ),
                         true
                 )
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.user.embed.role_highest"),
-                        member.getRoles().isEmpty() ? bot.getMsg(guild.getId(), "purr.info.user.no_roles") : 
-                                member.getRoles().get(0).getAsMention(),
+                        target.getRoles().isEmpty() ? bot.getMsg(guild.getId(), "purr.info.user.no_roles") :
+                                target.getRoles().get(0).getAsMention(),
                         true
                 )
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.user.embed.role_total"),
-                        getRoles(member),
+                        getRoles(target),
                         false
                 )
                 .addField(
@@ -163,7 +242,7 @@ public class CmdUser implements Command{
                                 "```yaml\n" +
                                 "%s\n" +
                                 "```",
-                                getTimes(member)
+                                getTimes(target)
                         ),
                         false
                 );

@@ -20,16 +20,10 @@ package site.purrbot.bot.commands.owner;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import site.purrbot.bot.constants.Emotes;
 
 @CommandDescription(
         name = "Message",
@@ -43,57 +37,50 @@ import java.util.regex.Pattern;
 )
 public class CmdMsg implements Command{
     
-    private final Pattern imagePattern;
-    private final Pattern textPattern;
-    
     private final PurrBot bot;
 
     public CmdMsg(PurrBot bot){
         this.bot = bot;
-        
-        this.imagePattern = Pattern.compile("--img=\"(?<image>http(?:s)?://.+\\.(?:png|jpg|gif))\"");
-        this.textPattern = Pattern.compile("--msg=\"(?<message>.+)\"", Pattern.DOTALL | Pattern.MULTILINE);
     }
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
-        Pattern text = Pattern.compile(
-                Pattern.quote(bot.getPrefix(guild.getId())) + "(?:msg|message|send) (?<id>\\d+) (?<msg>.+)", 
-                Pattern.DOTALL | Pattern.MULTILINE | Pattern.CASE_INSENSITIVE
-        );
-
-        Matcher matcher = text.matcher(msg.getContentRaw());
-        if(!matcher.matches())
-            return;
         
-        String id = matcher.group("id");
-        String message = matcher.group("msg");
-    
-        TextChannel channel = bot.getShardManager().getTextChannelById(id);
-        if(channel == null)
-            return;
-
-        if(msg.getContentRaw().contains("--embed")){
-            Matcher imageMatcher = imagePattern.matcher(message);
-            Matcher textMatcher = textPattern.matcher(message);
-    
-            EmbedBuilder embed = new EmbedBuilder().setColor(0x802F3136);
-            
-            if(textMatcher.find())
-                embed.setDescription(textMatcher.group("message"));
-            
-            if(imageMatcher.find())
-                embed.setImage(imageMatcher.group("image"));
-            
-            channel.sendMessage(embed.build()).queue(
-                    mes -> msg.addReaction("\u2705").queue()
-            );
-            
+        if(args.length <= 1){
+            msg.addReaction(Emotes.CANCEL.getNameAndId()).queue();
             return;
         }
         
-        channel.sendMessage(message).queue(
-                mes -> msg.addReaction("\u2705").queue()
-        );
+        TextChannel channel = bot.getShardManager().getTextChannelById(args[0]);
+        if(channel == null){
+            msg.addReaction(Emotes.CANCEL.getNameAndId()).queue();
+            return;
+        }
+        
+        if(args[1].equalsIgnoreCase("msg")){
+            String content = args[2];
+            
+            channel.sendMessage(content).queue(
+                    message -> msg.addReaction(Emotes.ACCEPT.getNameAndId()).queue(),
+                    failure -> msg.addReaction(Emotes.CANCEL.getNameAndId()).queue()
+            );
+        }else
+        if(args[1].equalsIgnoreCase("edit")){
+            String msgId = args[2].split("\\s+")[0];
+            
+            Message message = channel.retrieveMessageById(msgId).complete();
+            if(message == null || !message.getAuthor().equals(guild.getSelfMember().getUser())){
+                tc.sendMessage("Invalid message! It was either null or I'm not the author of it.").queue(
+                        m -> msg.addReaction(Emotes.CANCEL.getNameAndId()).queue()
+                );
+                return;
+            }
+            
+            message.editMessage(args[2].substring(msgId.length() + 1)).queue(
+                    m -> msg.addReaction(Emotes.ACCEPT.getNameAndId()).queue(),
+                    failure -> msg.addReaction(Emotes.CANCEL.getNameAndId()).queue());
+        }else{
+            tc.sendMessage("Invalid message type! Allowed are `msg` and `embed`").queue();
+        }
     }
 }

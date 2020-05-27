@@ -27,7 +27,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.constants.IDs;
 
 import java.util.Arrays;
 import java.util.concurrent.Executor;
@@ -66,7 +65,7 @@ public class CommandListener extends ListenerAdapter{
 
                     Pattern prefixPattern = Pattern.compile(
                             Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 
-                            Pattern.DOTALL
+                            Pattern.DOTALL | Pattern.CASE_INSENSITIVE
                     );
 
                     String raw = msg.getContentRaw();
