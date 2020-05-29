@@ -278,11 +278,12 @@
             "discord_boats": "`Discord.boats`",
             "discord_bots_gg": "`Discord.bots.gg`",
             "discordextremelist_xyz": "`Discordextremelist.xyz`",
-            "lbots_org": "`Lbots.org` (Not supported)",
             "title": "Bot Lists"
           },
           "commands_title": "Commands",
           "commands_value": "Use `{prefix}help` in the Discord for a list of commands.",
+          "donators_title": "Donators",
+          "donators_value": "All donators (Either single or continued donations) are listed here.\nTo get listed too, make sure to be on the ~Nya Discord and let Andre_601 know about it.",
           "links": {
             "discord": "`Discord (Support)`",
             "github": "`GitHub`",
@@ -291,7 +292,9 @@
             "twitter": "`Twitter`",
             "website": "`Website`",
             "wiki": "`Wiki`"
-          }
+          },
+          "support_title": "Support",
+          "support_value": "Keeping this bot up and running is expensive. That's why I always welcome donations of any kind!\nYou can choose between two options to donate:\n\n- [`PayPal`]({paypal}) (Single donations)\n- [`Patreon`]({patreon}) (Continued donations)"
         }
       },
       "invite": {
