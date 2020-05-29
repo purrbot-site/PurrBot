@@ -278,11 +278,12 @@
             "discord_boats": "`Discord.boats`",
             "discord_bots_gg": "`Discord.bots.gg`",
             "discordextremelist_xyz": "`Discordextremelist.xyz`",
-            "lbots_org": "`Lbots.org` (Не поддерживается)",
             "title": "Сайты с ботом"
           },
           "commands_title": "Команды",
           "commands_value": "Используйте `{prefix}help` в Discord для списка команд.",
+          "donators_title": "Пожертвователи",
+          "donators_value": "Все пожертвователи (Либо единичные, либо долгосрочные через Patreon) перечислены здесь.\nЧтобы попасть в список, убедитесь, что находитесь на Discord сервере ~Nya и сообщите Andre_601 об этом.",
           "links": {
             "discord": "`Discord (Сервер)`",
             "github": "`GitHub`",
@@ -291,7 +292,9 @@
             "twitter": "`Twitter`",
             "website": "`Сайт`",
             "wiki": "`Вики`"
-          }
+          },
+          "support_title": "Поддержать",
+          "support_value": "Поддерживать бота очень дорого. Поэтому мы принимаем любого вида пожертвования!\nВыберите категорию здесь:\n\n- [`PayPal`]({paypal}) (Единичные пожертвования)\n- [`Patreon`]({patreon}) (Ежемесячные отчисления)"
         }
       },
       "invite": {
