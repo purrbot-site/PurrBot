@@ -278,11 +278,12 @@
             "discord_boats": "`Discord.boats`",
             "discord_bots_gg": "`Discord.bots.gg`",
             "discordextremelist_xyz": "`Discordextremelist.xyz`",
-            "lbots_org": "`Lbots.org` (아직 지원안함)",
             "title": "내가 등록된 사이트들"
           },
           "commands_title": "명령어",
           "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
+          "donators_title": "후원자",
+          "donators_value": "모든 후원자들에 대한 목록은 지속여부에 관계없이 여기에 있습니다.\n이 리스트에 들어오고 싶으시다면, ~Nya 디스코드 서버에 들어와 Andre_601에게 후원사실을 알려주세요.",
           "links": {
             "discord": "`공식 디스코드`",
             "github": "`GitHub`",
@@ -291,7 +292,9 @@
             "twitter": "`트위터`",
             "website": "`홈페이지`",
             "wiki": "`위키`"
-          }
+          },
+          "support_title": "후원",
+          "support_value": "이 봇을 유지보수하는데에는 큰 비용이 들어갑니다. 후원을 해주신다면 정말 고마워할거에요!\n두가지 중 하나를 선택해 후원하실 수 있습니다.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (단순후원)\n{PATREON} [`Patreon`]({patreon_url}) (지속후원)"
         }
       },
       "invite": {
