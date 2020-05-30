@@ -58,7 +58,7 @@ public class CmdMsg implements Command{
         }
         
         if(args[1].equalsIgnoreCase("msg")){
-            String content = args[2];
+            String content = args[2].replaceAll("\\{#(\\d+)}", "<#$1>");
             
             channel.sendMessage(content).queue(
                     message -> msg.addReaction(Emotes.ACCEPT.getNameAndId()).queue(),
@@ -76,7 +76,8 @@ public class CmdMsg implements Command{
                 return;
             }
             
-            message.editMessage(args[2].substring(msgId.length() + 1)).queue(
+            String content = args[2].substring(msgId.length() + 1).replaceAll("\\{#(\\d+)}", "<#$1>");
+            message.editMessage(content).queue(
                     m -> msg.addReaction(Emotes.ACCEPT.getNameAndId()).queue(),
                     failure -> msg.addReaction(Emotes.CANCEL.getNameAndId()).queue());
         }else{

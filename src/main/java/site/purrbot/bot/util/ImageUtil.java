@@ -129,7 +129,7 @@ public class ImageUtil {
                 .put("timestamp", quote.getTimeCreated().toInstant().toEpochMilli());
 
         RequestBody body = RequestBody.create(json.toString(), null);
-
+        
         Request request = new Request.Builder()
                 .addHeader("User-Agent", "PurrBot BOT_VERSION")
                 .addHeader("content-type", "application/json")

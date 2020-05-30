@@ -31,11 +31,11 @@ public class Links {
     public static final String DISCORD_BOATS          = "https://discord.boats/bot/425382319449309197";
     public static final String DISCORD_BOTS_GG        = "https://discord.bots.gg/bots/425382319449309197";
     public static final String DISCORDEXTREMELIST_XYZ = "https://discordextremelist.xyz/bots/purr";
-    public static final String LBOTS_ORG              = "https://lbots.org/bots/Purr";
 
     // Other links
-    public static final String PATREON     = "https://patreon.com/purrbot";
-    public static final String TRANSLATORS = "https://translations.purrbot.site";
+    public static final String PATREON     = "https://patreon.com/andre_601";
+    public static final String PAYPAL      = "https://purrbot.site/donate";
+    public static final String TRANSLATORS = "https://lang.purrbot.site";
     public static final String TWITTER     = "https://purrbot.site/twitter";
     public static final String WEBSITE     = "https://purrbot.site";
     public static final String WIKI        = "https://docs.purrbot.site/bot";

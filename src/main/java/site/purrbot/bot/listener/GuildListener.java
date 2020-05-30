@@ -84,7 +84,7 @@ public class GuildListener extends ListenerAdapter{
                         .addField(new WebhookEmbed.EmbedField(
                                 false, "Members", String.format(
                                         "```yaml\n" +
-                                        "Total: %5d\n" +
+                                        "Total: %d\n" +
                                         "```",
                                         guild.getMemberCount()
                                 )
@@ -123,7 +123,7 @@ public class GuildListener extends ListenerAdapter{
                         .addField(new WebhookEmbed.EmbedField(
                                 false, "Members", String.format(
                                 "```yaml\n" +
-                                "Total: %5d\n" +
+                                "Total: %d\n" +
                                 "```",
                                 guild.getMemberCount()
                         )

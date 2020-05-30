@@ -106,8 +106,7 @@ public class CmdInfo implements Command{
                         getLink(id, "bot_lists.botlist_space", Links.BOTLIST_SPACE),
                         getLink(id, "bot_lists.discord_boats", Links.DISCORD_BOATS),
                         getLink(id, "bot_lists.discord_bots_gg", Links.DISCORD_BOTS_GG),
-                        getLink(id, "bot_lists.discordextremelist_xyz", Links.DISCORDEXTREMELIST_XYZ),
-                        getLink(id, "bot_lists.lbots_org", Links.LBOTS_ORG)
+                        getLink(id, "bot_lists.discordextremelist_xyz", Links.DISCORDEXTREMELIST_XYZ)
                 ),
                 false
         )
@@ -117,11 +116,20 @@ public class CmdInfo implements Command{
                         "\n",
                         getLink(id, "links.discord", Links.DISCORD),
                         getLink(id, "links.github", Links.GITHUB),
-                        getLink(id, "links.patreon", Links.PATREON),
                         getLink(id, "links.twitter", Links.TWITTER),
                         getLink(id, "links.website", Links.WEBSITE),
                         getLink(id, "links.wiki", Links.WIKI)
                 ),
+                false
+        )
+        .addField(
+                bot.getMsg(id, "purr.info.info.embed.support_title"),
+                bot.getMsg(id, "purr.info.info.embed.support_value"),
+                false
+        )
+        .addField(
+                bot.getMsg(id, "purr.info.info.embed.donators_title"),
+                getDonators(id),
                 false
         );
         
@@ -132,6 +140,18 @@ public class CmdInfo implements Command{
         String text = bot.getMsg(id, "purr.info.info.embed." + path);
         
         return MarkdownUtil.maskedLink(text, link);
+    }
+    
+    private String getDonators(String id){
+        StringBuilder builder = new StringBuilder(bot.getMsg(id, "purr.info.info.embed.donators_value")).append("\n");
+        for(String userId : bot.getDonators()){
+            if(builder.length() > 0)
+                builder.append("\n");
+            
+            builder.append("<@").append(userId).append(">");
+        }
+        
+        return builder.toString();
     }
     
     @Override

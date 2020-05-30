@@ -56,6 +56,8 @@ public enum Emotes{
     NEKOWO              ("nekOwO",               "700429690309050409", false),
     OWNER               ("owner",                "700429689918849105", false),
     PARTNER             ("partner",              "712650362254917664", false),
+    PATREON             ("patreon",              "716023483967995964", false),
+    PAYPAL              ("paypal",               "716023483653554197", false),
     PURR                ("purr",                 "700429690405519370", false),
     SEX                 ("sex",                  "700427729673125908", false),
     SEX_ANAL            ("sex_anal",             "700427729476255785", false),

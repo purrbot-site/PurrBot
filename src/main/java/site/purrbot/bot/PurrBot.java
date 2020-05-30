@@ -284,6 +284,9 @@ public class PurrBot {
     public List<String> getBlacklist(){
         return getFileManager().getStringlist("random", "blacklist");
     }
+    public List<String> getDonators(){
+        return getFileManager().getStringlist("random", "donators");
+    }
     public List<String> getKissImg(){
         return getFileManager().getStringlist("random", "kiss_img");
     }
@@ -329,10 +332,15 @@ public class PurrBot {
                 .replace("{VOICECHANNEL}", Emotes.VOICE_CHANNEL.getEmote())
                 .replace("{MEMBERS}", Emotes.MEMBERS.getEmote())
                 .replace("{FACE}", Emotes.FACE.getEmote())
+                .replace("{PAYPAL}", Emotes.PAYPAL.getEmote())
+                .replace("{PATREON}", Emotes.PATREON.getEmote())
                 // Wiki pages
                 .replace("{wiki_bg}", Links.WIKI + "/welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI + "/welcome-images#icons")
-                .replace("{wiki_welcome}", Links.WIKI + "/welcome-channel");
+                .replace("{wiki_welcome}", Links.WIKI + "/welcome-channel")
+                // Other pages
+                .replace("{paypal_url}", Links.PAYPAL)
+                .replace("{patreon_url}", Links.PATREON);
     }
     
     public String getMsg(String id, String path, String user, String targets){
