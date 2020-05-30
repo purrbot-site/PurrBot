@@ -294,7 +294,7 @@
             "wiki": "`Wiki`"
           },
           "support_title": "Unterstützen",
-          "support_value": "Einen Bot am laufen zu halten ist teuer. Deshalb begrüsse ich immer Spenden aller art!\nDu kannst zwischen zwei Spendenoptionen wählen:\n\n- [`PayPal`]({paypal}) (Einzelspenden)\n- [`Patreon`]({patreon}) (Wiederkehrende Spenden)"
+          "support_value": "Einen Bot am laufen zu halten ist teuer. Deshalb begrüsse ich immer Spenden aller art!\nDu kannst zwischen zwei Spendenoptionen wählen:\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Einzelspenden)\n{PATREON} [`Patreon`]({patreon_url}) (Wiederkehrende Spenden)"
         }
       },
       "invite": {
