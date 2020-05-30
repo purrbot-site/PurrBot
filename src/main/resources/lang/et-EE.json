@@ -278,11 +278,12 @@
             "discord_boats": "`Discord.boats`",
             "discord_bots_gg": "`Discord.bots.gg`",
             "discordextremelist_xyz": "`Discordextremelist.xyz`",
-            "lbots_org": "`Lbots.org` (Mitte toetatud)",
             "title": "Boti nimekirjad"
           },
           "commands_title": "Käsklused",
           "commands_value": "Sisesta `{prefix}help` et saada nimekirja erinevatest käsklustest.",
+          "donators_title": "Annetajad",
+          "donators_value": "Kõik annetajad (Nii ühekordsed kui ka igakuised) näidatakse siin.\nEt saada ka nimistusse, ole kindel et oled ~Nya Discordis ja anna Andre_601 teada oma annetusest.",
           "links": {
             "discord": "`Discord (Tugi)`",
             "github": "`GitHub`",
@@ -291,7 +292,9 @@
             "twitter": "`Twitter`",
             "website": "`Veebisait`",
             "wiki": "`Viki`"
-          }
+          },
+          "support_title": "Tugi",
+          "support_value": "Selle boti üleval hoidmine on kulukas. Seepärast olen tänulik igasugusele annetustele!\nSa saad valida kahe võimaluse vahel:\n{PAYPAL} [`PayPal`]({paypal_url}) (Ühekordne maksmine)\n{PATREON} [`Patreon`]({patreon_url}) (Igakuine maksmine)"
         }
       },
       "invite": {
