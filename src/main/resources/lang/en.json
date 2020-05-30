@@ -294,7 +294,7 @@
             "wiki": "`Wiki`"
           },
           "support_title": "Support",
-          "support_value": "Keeping this bot up and running is expensive. That's why I always welcome donations of any kind!\nYou can choose between two options to donate:\n\n- [`PayPal`]({paypal}) (Single donations)\n- [`Patreon`]({patreon}) (Continued donations)"
+          "support_value": "Keeping this bot up and running is expensive. That's why I always welcome donations of any kind!\nYou can choose between two options to donate:\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single donations)\n{PATREON} [`Patreon`]({patreon_url}) (Continued donations)"
         }
       },
       "invite": {
