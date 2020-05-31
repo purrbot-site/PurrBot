@@ -20,7 +20,7 @@
       "Sa saad näha neid erutavaid asju ainut NSFW märgisega kanalites {user}.",
       "Igal asjal on oma koht. Ja see käsklus kuulub NSFW märgisega kanalisse {user}."
     ],
-    "nsfw_request_error": "Protsessi käigus tekkis tõrge. Palun tee kindlaks, et mu sõnum ei ole kustutatud ning mul on vastavad load!",
+    "request_error": "Protsessi käigus tekkis tõrge. Palun tee kindlaks, et mu sõnum ei ole kustutatud ning mul on vastavad load!",
     "title": "Viga",
     "unknown": "S-see on nüüd natukene piinlik, aga mul tekkis tõrge selle protessi käigus.\n{VANILLABLUSH}\nPalun anna sellest teada Discord või GitHub kaudu!"
   },
@@ -46,6 +46,20 @@
         "mention_purr": "\\*rõõmustab kasutaja {user} kaisutuse üle*",
         "message": "{user} kaisutab sinuga {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kaisutada!"
+      },
+      "feed": {
+        "mention_bot": "Botid ei saa süüa totu! Nad saavad süüa ainult sinu andmeid. O_O",
+        "mention_purr": "Söök? Minule? Aitäh {user}! \\*Näksib toitu ja liputab saba*",
+        "mention_self": "Sa toidad iseennast totu. Parem jaga seda. \\*vaatab kasutajat {user} suurte silmadega*",
+        "message": "{user} annab {target} midagi süüa.",
+        "no_mention": "Palun maini kedagi kellele anda süüa.",
+        "request": {
+          "accepted": "{target} nõustus sinu pakkumisega {user}",
+          "denied": "{target} ei soovi sinu süüa {user}",
+          "message": "Hei {target}!\n{user} tahab anda sulle süüa. Kas sa soovid seda?\nReageeri {ACCEPT} et nõustuda või {CANCEL} et keelduda.\n\n> **See pakkumine lõppeb ühe minuti jooksul!**",
+          "open": "Sa juba palusid kedagi {user}! Palun oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
+          "timed_out": "Paisab et {target} ei soovi sinu toitu {user}."
+        }
       },
       "holo": {
         "loading": "{LOADING} Laen pilti Holo-st...",
@@ -471,6 +485,9 @@
       },
       "cuddle": {
         "mention_snuggle": "\\*Poeb {user} kaissu*"
+      },
+      "feed": {
+        "mention_snuggle": "S-sa annad mulle süüa {user}? A-aitäh. \\*Punastab süües*"
       },
       "hug": {
         "mention_snuggle": "\\*naudib {user} kallistust*"
