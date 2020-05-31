@@ -20,7 +20,7 @@
       "You can only see those naughty things in NSFW channels {user}.",
       "Everything has its place. And this command belongs in a NSFW-channel {user}."
     ],
-    "nsfw_request_error": "There was an error while handling the request. Make sure that my message wasn't deleted and that I have sufficient permissions!",
+    "request_error": "There was an error while handling the request. Make sure that my message wasn't deleted and that I have sufficient permissions!",
     "title": "Error",
     "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {VANILLABLUSH}\nPlease report this on the Discord, or on GitHub!"
   },
@@ -46,6 +46,20 @@
         "mention_purr": "\\*enjoys the cuddle from {user}*",
         "message": "{user} cuddles with you {targets}",
         "no_mention": "Please mention at least one user to cuddle!"
+      },
+      "feed": {
+        "mention_bot": "Bots can't eat food silly! They can only eat your data. O_O",
+        "mention_purr": "Food? For me? Thank chu {user}! \\*noms food and wags tail*",
+        "mention_self": "You're feeding yourself silly. It's better to share it. \\*looks at {user} with big eyes*",
+        "message": "{user} gives {target} something to eat.",
+        "no_mention": "Please mention someone to give some food.",
+        "request": {
+          "accepted": "{target} accepted your request {user}",
+          "denied": "{target} doesn't want food from you {user}",
+          "message": "Hey {target}!\n{user} wants to give you some food to eat. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
+          "open": "You already asked someone {user}! Please wait for the request to be accepted, denied or for it to time out.",
+          "timed_out": "Looks like {target} doesn't want food from you {user}."
+        }
       },
       "holo": {
         "loading": "{LOADING} Receiving a image from Holo...",
@@ -471,6 +485,9 @@
       },
       "cuddle": {
         "mention_snuggle": "\\*snuggles up to {user}*"
+      },
+      "feed": {
+        "mention_snuggle": "Y-you give me some food {user}? T-thanks. \\*blushes while eating the food*"
       },
       "hug": {
         "mention_snuggle": "\\*loves the hug from {user}*"
