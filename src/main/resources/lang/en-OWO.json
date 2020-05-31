@@ -20,7 +20,7 @@
       "You can onwy see those naughty things in NSFW channews {user}.",
       "Evewything has its pwace. And this command bewongs in a NSFW-channel {user]! OwO"
     ],
-    "nsfw_request_error": "Thewe was an ewwow while handling the request TwT. Make suwe that my message wasn't deleted and that I have sufficient pewmissions!",
+    "request_error": "Thewe was an ewwow while handwing the wequest TwT. Make suwe that my message wasn't deweted and that I have sufficient pewmissions!",
     "title": "Ewwow",
     "unknown": "T-that is a bit embawwasing now, but I had an ewwow while pewfowming an action. {VANILLABLUSH}\nPwease wepowt this on the Discowd, ow on GitHub!"
   },
@@ -46,6 +46,20 @@
         "mention_purr": "\\*enjoys the cuddwe fwom {user}*",
         "message": "{user} cuddwes with you {targets}",
         "no_mention": "Pwease mention at weast one user to cuddwe!"
+      },
+      "feed": {
+        "mention_bot": "Bots can't eat food siwwy! They can onwy eat your data. O_O",
+        "mention_purr": "Food? Fow me OwO? Thank chu {user}! \\*noms food and wags tail* UwU",
+        "mention_self": "You'we feeding youwsewf siwwy. It's bettew to shawe it. \\*wooks at {user} with big eyes OwO*",
+        "message": "{user} gives {target} something to eat. UwU",
+        "no_mention": "Please mention someone to give some food. -_-",
+        "request": {
+          "accepted": "{target} accepted youw wequest {user}",
+          "denied": "{target} doesn't want food fwom you {user} v_v",
+          "message": "Hey {target}!\n{user} wants to give you a some food to eat. Do you want that too?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This wequest wiww time out in 1 minute!**",
+          "open": "You awweady asked someone {user}! Pwease wait fow the wequest to be accepted, denied or fow it to time out. >:c",
+          "timed_out": "Looks like {target} doesn't want food fwom you {user} v_v."
+        }
       },
       "holo": {
         "loading": "{LOADING} Weceiving an image fwom Holo...",
@@ -283,7 +297,7 @@
           "commands_title": "Commands",
           "commands_value": "Use `{prefix}help` in the Discord for a wist of commands.",
           "donators_title": "Donatows",
-          "donators_value": "All donatows (Eithew single ow continued donations) awe listed hewe.\nTo get listed too, make suwe to be on the ~Nya Discowd and let Andre_601 know about it.",
+          "donators_value": "Aww donatows (Eithew singwe ow continued donations) awe wisted hewe.\nTo get wisted too, make suwe to be on the ~Nya Discowd and wet Andre_601 know about it!",
           "links": {
             "discord": "`Discord (Suppowt)`",
             "github": "`GitHub`",
@@ -294,7 +308,7 @@
             "wiki": "`Wiki`"
           },
           "support_title": "Suppowt",
-          "support_value": "Keeping this bot up and wunning is expensive TwT. That's why I always welcome donations of any kind!\nYou can choose between two options to donate:\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single donations)\n{PATREON} [`Patreon`]({patreon_url}) (Continued donations)"
+          "support_value": "Keeping this bot up and wunning is expensive TwT. That's why I always wewcome donations of any kind!\nYou can choose between two options to donate:\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single donations)\n{PATREON} [`Patreon`]({patreon_url}) (Continued donations)"
         }
       },
       "invite": {
@@ -471,6 +485,9 @@
       },
       "cuddle": {
         "mention_snuggle": "\\*snuggwes up to {user}*"
+      },
+      "feed": {
+        "mention_snuggle": "Y-you give me some food {user}? T-thanks. \\*blushes while eating the food* OwO"
       },
       "hug": {
         "mention_snuggle": "\\*wuvs the hug from {user}*"
