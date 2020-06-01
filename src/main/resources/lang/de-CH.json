@@ -20,7 +20,7 @@
       "Du kannst diese schmutzigen dinge nur in NSFW-Kanälen sehen {user}.",
       "Alles hat seinen Platz. Und dieser Befehl gehört in einen NSFW-Kanal {user}."
     ],
-    "nsfw_request_error": "Bei der Bearbeitung der Anfrage ist ein Fehler aufgetreten. Vergewissere dich, dass meine Nachricht nicht gelöscht wurde und dass ich über ausreichende Berechtigungen verfüge!",
+    "request_error": "Bei der Bearbeitung der Anfrage ist ein Fehler aufgetreten. Vergewissere dich, dass meine Nachricht nicht gelöscht wurde und dass ich über ausreichende Berechtigungen verfüge!",
     "title": "Fehler",
     "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {VANILLABLUSH}\nBitte melde dies im Discord, oder auf GitHub!"
   },
@@ -46,6 +46,20 @@
         "mention_purr": "\\*geniest das knuddeln von {user}*",
         "message": "{user} knuddelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum knuddeln!"
+      },
+      "feed": {
+        "mention_bot": "Bots können keine Nahrung essen Dummerchen! Sie können nur deine Daten essen. O_O",
+        "mention_purr": "Essen? Für mich? Danke schön {user}! \\*Isst das Essen wedelt mit dem Schwanz*",
+        "mention_self": "Du fütterst dich selbst Dummerchen. Es ist besser, es zu teilen. \\*schaut {user} mit grossen Augen an*",
+        "message": "{user} gibt {target} etwas zu essen.",
+        "no_mention": "Bitte erwähne jemandem, um etwas Essen zu geben.",
+        "request": {
+          "accepted": "{target} hat deine anfrage akzeptiert {user}",
+          "denied": "{target} will kein Essen von dir {user}",
+          "message": "Hey {target}!\n{user} möchte dir etwas Essen geben. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "open": "Du hast bereits jemanden {user}gefragt! Bitte warte, bis die Anfrage angenommen oder abgelehnt wird, oder bis sie abgelaufen ist.",
+          "timed_out": "Sieht so aus als ob {target} kein Essen von dir will {user}."
+        }
       },
       "holo": {
         "loading": "{LOADING} Erhalte ein Bild von Holo...",
@@ -471,6 +485,9 @@
       },
       "cuddle": {
         "mention_snuggle": "\\*kuschelt sich an {user}*"
+      },
+      "feed": {
+        "mention_snuggle": "D-du gibst mir etwas zu essen {user}? D-danke. \\*errötet während dem essen*"
       },
       "hug": {
         "mention_snuggle": "\\*liebt die Umarmung von {user}*"
