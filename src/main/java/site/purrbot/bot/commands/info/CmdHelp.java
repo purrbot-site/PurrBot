@@ -28,9 +28,7 @@ import net.dv8tion.jda.api.requests.ErrorResponse;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -112,6 +110,13 @@ public class CmdHelp implements Command{
                 .build();
     }
     
+    private List<Command> getCommands(){
+        return bot.getCmdHandler().getCommands().stream()
+                .map(cmd -> (Command)cmd)
+                .sorted(Comparator.comparing(cmd -> cmd.getDescription().name()))
+                .collect(Collectors.toList());
+    }
+    
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         String prefix = bot.getPrefix(msg.getGuild().getId());
@@ -146,7 +151,8 @@ public class CmdHelp implements Command{
                 bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.list")
         ));
         
-        for(Command cmd : bot.getCmdHandler().getCommands().stream().map(ca -> (Command)ca).collect(Collectors.toList())){
+        
+        for(Command cmd : getCommands()){
             String category = cmd.getAttribute("category");
 
             if(builders.get(category).length() + cmd.getAttribute("help").length() > MessageEmbed.VALUE_MAX_LENGTH){

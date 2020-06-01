@@ -259,7 +259,7 @@ public class CmdThreesome implements Command{
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
                         v -> handleEvent(msg, message, member, target1, target2),
-                        e -> bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.nsfw_request_error")
+                        e -> bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.request_error")
                 )
         );
     }

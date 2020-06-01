@@ -31,6 +31,7 @@ public enum API {
 
     GIF_BITE  (false, "bite",   true),
     GIF_CUDDLE(false, "cuddle", true),
+    GIF_FEED  (false, "feed", true),
     GIF_HUG   (false, "hug",    true),
     GIF_KISS  (false, "kiss",   true),
     GIF_LICK  (false, "lick",   true),

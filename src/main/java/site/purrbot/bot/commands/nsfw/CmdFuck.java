@@ -218,7 +218,7 @@ public class CmdFuck implements Command{
                 ).queue();
                 return;
             }
-            if(bot.isSpecial(member.getUser().getId())){
+            if(bot.isSpecial(member.getId())){
                 int random = bot.getRandom().nextInt(10);
 
                 if(random >= 1 && random <= 3) {
@@ -271,7 +271,7 @@ public class CmdFuck implements Command{
                                 e -> bot.getEmbedUtil().sendError(
                                         tc,
                                         member.getUser(),
-                                        "errors.nsfw_request_error"
+                                        "errors.request_error"
                                 )
                         );
             }else{
@@ -282,7 +282,7 @@ public class CmdFuck implements Command{
                                 e -> bot.getEmbedUtil().sendError(
                                         tc,
                                         member.getUser(),
-                                        "errors.nsfw_request_error"
+                                        "errors.request_error"
                                 )
                         );
             }

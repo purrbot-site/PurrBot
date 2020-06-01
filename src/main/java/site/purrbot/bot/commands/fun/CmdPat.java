@@ -66,7 +66,9 @@ public class CmdPat implements Command{
                         bot.getMsg(guild.getId(), "snuggle.fun.pat.mention_snuggle")
                 ).queue();
             }else{
-                tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.pat.mention_purr")).queue();
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.pat.mention_purr")
+                ).queue();
             }
             msg.addReaction("\u2764").queue();
         }

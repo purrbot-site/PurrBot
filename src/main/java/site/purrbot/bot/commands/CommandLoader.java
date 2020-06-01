@@ -38,6 +38,7 @@ public class CommandLoader {
                 // Fun
                 new CmdBite(bot),
                 new CmdCuddle(bot),
+                new CmdFeed(bot),
                 new CmdHolo(bot),
                 new CmdHug(bot),
                 new CmdKiss(bot),
