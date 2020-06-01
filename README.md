@@ -2,11 +2,11 @@
 [DiscordImg]: https://img.shields.io/discord/423771795523371019?color=%237289DA&label=Chat&logo=Discord&logoColor=white&style=plastic
 [IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot?label=Issues&logo=GitHub&style=plastic
 [LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg?label=License&logo=GitHub&style=plastic
-[translateImg]: https://img.shields.io/badge/Translations-on%20Crowdin-blue?style=plastic
+[TranslateImg]: https://img.shields.io/badge/Translations-on%20Crowdin-blue?style=plastic
 
 <!-- Discord OAuth -->
-[Full invite]: https://discordapp.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=537258048
-[Basic invite]: https://discordapp.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=346176
+[Full invite]: https://discord.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=387136
+[Basic invite]: https://discord.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=346176
 
 <!-- Website links -->
 [Website]: https://purrbot.site
@@ -16,8 +16,8 @@
 [commands]: https://docs.purrbot.site/bot/commands
 
 <!-- GitHub links -->
-[Issues]: https://github.com/Andre601/PurrBot/issues
-[License]: https://github.com/Andre601/PurrBot/blob/master/LICENSE
+[Issues]: https://github.com/purrbot-site/PurrBot/issues
+[License]: https://github.com/purrbot-site/PurrBot/blob/master/LICENSE
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
@@ -31,10 +31,9 @@
 [botlist]: https://botlist.space/bot/425382319449309197  
 [discordBots]: https://discord.bots.gg/bots/425382319449309197  
 [discordBoats]: https://discord.boats/bot/425382319449309197  
-[debl]: https://discordextremelist.xyz/bots/purr  
-[lbots]: https://lbots.org/bots/Purr
+[debl]: https://discordextremelist.xyz/bots/purr
 
-[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![translateImg]][translations]
+[![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![TranslateImg]][translations]
 
 # \*Purr*
 This bot was made to use the [nekos.life]-API but now moved to its very own API.
@@ -97,9 +96,6 @@ Feel free to upvote her to show your support.
 
 ### [Discordextremelist.xyz][debl]
 > Discord's unbiased list, giving small bots and small servers a big chance!
-
-### [LBots.org][lbots]
-> A bot listing website that loves lewds~
 
 # Usefull Links
 - [Discord Server][Discord]
