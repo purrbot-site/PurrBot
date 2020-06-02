@@ -197,7 +197,7 @@
           "no_channel": "`No channel set`",
           "preview": "Preview",
           "subcommands_title": "Subcommands",
-          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset```"
+          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset\ntest\n```"
         },
         "few_args": "Not enough arguments provided!\nRun `{prefix}welcome` to see all available sub-commands.",
         "invalid_args": "Invalid arguments!\nRun `{prefix}welcome` to see all available sub-commands.",
