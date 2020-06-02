@@ -197,7 +197,7 @@
           "no_channel": "`Канал не выбран`",
           "preview": "Предпоказ",
           "subcommands_title": "Подкоманды",
-          "subcommands_value": "```\nbg      set <задний фон>\n        reset\nchannel set <#канал>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <иконка>\n        reset\nmsg     set <сообщение>\n        reset```"
+          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset\ntest\n```"
         },
         "few_args": "Недостаточно аргументов!\nИспользуйте `{prefix}welcome`, чтобы увидеть все подкоманды.",
         "invalid_args": "Неправильные аргументы!\nИспользуйте `{prefix}welcome`, чтобы увидеть все подкоманды.",
