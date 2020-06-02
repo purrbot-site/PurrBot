@@ -197,7 +197,7 @@
           "no_channel": "`설정된 아이콘 없음`",
           "preview": "미리보기",
           "subcommands_title": "세부 명령어",
-          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset```"
+          "subcommands_value": "```\nbg      set <배경>\n        reset\nchannel set <#채널>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <아이콘>\n        reset\nmsg     set <메시지>\n        reset\ntest\n```"
         },
         "few_args": "받은 정보가 적어!\n`{prefix}welcome` 을 사용하면 사용 가능한 모든 세부 명령어들을 확인할 수 있어!",
         "invalid_args": "유효하지 않은 값이야!\nRun `{prefix}welcome` 을 사용하면 가능한 모든 세부 명령어들을 확인할 수 있어!",
