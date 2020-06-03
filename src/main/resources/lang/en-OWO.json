@@ -184,7 +184,6 @@
         "set": "Pwefix set to `{prefix}."
       },
       "welcome": {
-        "current_msg": "Cuwwent message:\n```\n{message}\n```\n\nYou may use pwacehowders in youw message.\n**Placeholders**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
         "embed": {
           "channel": "Channew",
           "color_title": "Cowow",
@@ -193,11 +192,10 @@
           "image_title": "Image",
           "image_value": "```\nBackgwound: {background}\nCowow:      {color}\nIcon:       {icon}\n```",
           "message_title": "Message",
-          "message_value": "```\n{message}\n```",
           "no_channel": "`No channew set`",
           "preview": "Pweview",
           "subcommands_title": "Subcommands",
-          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset```"
+          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset\ntest\n```"
         },
         "few_args": "Not enough awguments pwovided!\nUsage: `{prefix}welcome` to see aww avaiwabwe sub-commands.",
         "invalid_args": "Invawid awguments!\nUsage: `{prefix}welcome` to see aww avaiwabwe sub-commands.",
@@ -205,11 +203,13 @@
         "invalid_channel": "Pwease mention a vawid text channew!",
         "invalid_color": "The pwovided cowow was invawid!\nSuppowted awe `hex:rrggbb`, `rgb:r,g,b` ow `random`!",
         "invalid_icon": "The pwovided icon was invawid!\nCheck the [Wiki]({wiki_icon}) fow avaiwabwe icons.",
+        "message_title": "Cuwwent Message",
         "no_bg": "Pwease pwovide a backgwound name!\nA list of backgwounds can be found [hewe]({wiki_bg}).",
         "no_channel": "No text channew pwovided! Make suwe you mention one.",
         "no_color": "No cowow pwovided!\nPwease eithew use `hex:rrggbb` ow `rgb:r,g,b`",
         "no_icon": "Pwease pwovide an icon name!\nA list of icons can be found [hewe]({wiki_icon}).",
         "no_msg": "No message pwovided!",
+        "placeholders_title": "Avaiwabwe Pwacehowders",
         "reset": "{type} wesetted.",
         "set": "{type} set to {value}"
       }
