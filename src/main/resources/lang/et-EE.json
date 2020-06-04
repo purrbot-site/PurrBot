@@ -184,7 +184,6 @@
         "set": "Prefiksiks määrati `{prefix}`"
       },
       "welcome": {
-        "current_msg": "Praegune sõnum:\n```\n{message}\n```\n\nSa võid kasutada muutujaid oma sõnumis.\n**Muutujad**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
         "embed": {
           "channel": "Kanal",
           "color_title": "Värv",
@@ -193,11 +192,10 @@
           "image_title": "Pilt",
           "image_value": "```\nTaust: {background}\nVärv:      {color}\nIkoon:       {icon}\n```",
           "message_title": "Sõnum",
-          "message_value": "```\n{message}\n```",
           "no_channel": "`Ühtegi kanalit pole määratud`",
           "preview": "Eelvaade",
           "subcommands_title": "Alamkäsklused",
-          "subcommands_value": "```\nbg      set <taust>\n        reset\nchannel set <#kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <ikoon>\n        reset\nmsg     set <sõnum>\n        reset```"
+          "subcommands_value": "```\nbg      set <taust>\n        reset\nchannel set <#kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <ikoon>\n        reset\nmsg     set <sõnum>\n        reset\ntest\n```"
         },
         "few_args": "Ei ole piisavalt argumente!\nSisesta `{prefix}welcome` et näha kõiki alamkäskluseid.",
         "invalid_args": "Vigased argumendid!\nSisesta `{prefix}welcome` et näha kõiki alamkäsklusi.",
@@ -205,11 +203,13 @@
         "invalid_channel": "Palun maini olemasolevat tekstikanalit!",
         "invalid_color": "Sisestatud värv on väär!\nToetatud on `hex:rrggbb`, `rgb:r,g,b` või `random`!",
         "invalid_icon": "Sisestatud ikoon on vigane!\nVaata [vikit]({wiki_icon}) et näha olemasolevaid ikoone.",
+        "message_title": "Praegune sõnum",
         "no_bg": "Palun sisesta tausta nimi!\nErinevaid tauste saab näha [vikist]({wiki_bg}).",
         "no_channel": "Ühtegi tekstikanalit ei ole sisestatud! Palun maini kindlasti ühte tekstikanalit.",
         "no_color": "Ühtegi värvi ei ole sisestatud!\nPalun kasuta kas `hex:rrggbb` või `rgb:r,g,b` vormingut.",
         "no_icon": "Palun sisesta ikooni nimi!\nErinevaid ikoone saab näha [vikist]({wiki_icon}).",
         "no_msg": "Sõnumit pole sisestatud!",
+        "placeholders_title": "Olemasolevad kohahoidjad",
         "reset": "{type} taastatud.",
         "set": "{type} määrati {value}"
       }

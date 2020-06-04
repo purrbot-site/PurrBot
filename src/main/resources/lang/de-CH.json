@@ -184,7 +184,6 @@
         "set": "Prefix geändert zu `{prefix}`"
       },
       "welcome": {
-        "current_msg": "Aktuelle Nachricht:\n```\n{message}\n```\n\nDu kannst Platzhalter in deiner Nachricht verwenden.\n**Platzhalter**:\n`{mention}`\n`{name}`\n`{guild}`\n`{count}`",
         "embed": {
           "channel": "Kanal",
           "color_title": "Farbe",
@@ -193,11 +192,10 @@
           "image_title": "Bild",
           "image_value": "```\nHintergrund: {background}\nFarbe:      {color}\nIcon:       {icon}\n```",
           "message_title": "Nachricht",
-          "message_value": "```\n{message}\n```",
           "no_channel": "`Keine Nachricht gesetzt`",
           "preview": "Vorschau",
           "subcommands_title": "Unterbefehle",
-          "subcommands_value": "```\nbg      set <Hintergrund>\n        reset\nchannel set <#Kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b>\n        reset\nicon    set <Icon>\n        reset\nmsg     set <Nachricht>\n        reset```"
+          "subcommands_value": "```\nbg      set <Hintergrund>\n        reset\nchannel set <#Kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <Icon>\n        reset\nmsg     set <Nachricht>\n        reset\ntest\n```"
         },
         "few_args": "Nicht genug Argumente gegeben!\nVewende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
         "invalid_args": "Ungültige Argumente!\nVerwende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
@@ -205,11 +203,13 @@
         "invalid_channel": "Bitte erwähne einen gültigen TextKanal!",
         "invalid_color": "Die angegebene Farbe war ungültig!\nUnterstützt werden `hex:rrggbb`, `rgb:r,g,b` oder `random`!",
         "invalid_icon": "Ungültiges Icon `{icon}`!\nÜberprüfe das [Wiki]({wiki_icon}) für verfügbare Icons.",
+        "message_title": "Aktuelle Nachricht",
         "no_bg": "Bitte gib einen Hintergrund an!\nEine Liste von Hintergründen kannst du [hier]({wiki_bg}) finden.",
         "no_channel": "Kein Textkanal angegeben! Stell sicher, dass du einen erwähnst.",
         "no_color": "Keine Farbe angegeben!\nBitte verwende entweder `hex:rrggbb` oder `rgb:r,g,b`",
         "no_icon": "Bitte gib ein Icon an!\nEine Liste von Icons kannst du [hier]({wiki_icon}) finden.",
         "no_msg": "Keine Nachricht angegeben!",
+        "placeholders_title": "Verfügbare Platzhalter",
         "reset": "{type} resettet.",
         "set": "{type} geändert zu {value}"
       }
