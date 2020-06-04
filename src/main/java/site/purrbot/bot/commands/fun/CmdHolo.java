@@ -50,14 +50,14 @@ public class CmdHolo implements Command{
         String link = bot.getHttpUtil().getImage(API.IMG_HOLO);
 
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
+            msg.delete().reason("test").queue();
 
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
+            bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
             return;
         }
 
-        MessageEmbed holo = bot.getEmbedUtil().getEmbed(member.getUser(), tc.getGuild())
+        MessageEmbed holo = bot.getEmbedUtil().getEmbed(member)
                 .setTitle(bot.getMsg(guild.getId(), "purr.fun.holo.title"), link)
                 .setImage(link)
                 .build();

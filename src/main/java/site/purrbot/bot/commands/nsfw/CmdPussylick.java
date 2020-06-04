@@ -157,7 +157,7 @@ public class CmdPussylick implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(msg.getMentionedUsers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.pussylick.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.pussylick.no_mention");
             return;
         }
         
@@ -191,7 +191,7 @@ public class CmdPussylick implements Command{
         }
         
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.pussylick.mention_bot");
+            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.pussylick.mention_bot");
             return;
         }
         
@@ -209,7 +209,7 @@ public class CmdPussylick implements Command{
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
                         v -> handleEvent(message, member, target),
-                        e -> bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.nsfw_request_error")
+                        e -> bot.getEmbedUtil().sendError(tc, member, "errors.nsfw_request_error")
                 )
         );
     }

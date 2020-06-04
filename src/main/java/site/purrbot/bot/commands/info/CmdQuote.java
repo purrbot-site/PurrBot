@@ -88,12 +88,12 @@ public class CmdQuote implements Command{
         channel.sendMessage(quoteEmbed.build()).queue();
     }
     
-    private void sendImgEmbed(Message msg, Message quote, byte[] bytes, TextChannel textChannel){
-        Guild guild = msg.getGuild();
+    private void sendImgEmbed(Member member, Message quote, byte[] bytes, TextChannel textChannel){
+        Guild guild = member.getGuild();
         String filename = String.format("quote_%s.png", quote.getId());
         String name = getMember(guild, quote.getMember());
         
-        MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                 .setDescription(
                         bot.getMsg(guild.getId(), "purr.info.quote.embed_image.info", name)
                                 .replace("{channel}", quote.getTextChannel().getAsMention())
@@ -114,20 +114,20 @@ public class CmdQuote implements Command{
             msg.delete().queue();
 
         if(args.length == 0){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.quote.few_args");
+            bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.few_args");
             return;
         }
 
         if(msg.getMentionedChannels().isEmpty()){
             if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                bot.getEmbedUtil().sendPermError(tc, member.getUser(), Permission.MESSAGE_HISTORY, true);
+                bot.getEmbedUtil().sendPermError(tc, member, Permission.MESSAGE_HISTORY, true);
                 return;
             }
 
             Message quote = getMessage(args[0], tc);
 
             if(quote == null){
-                MessageEmbed embed = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                         .setColor(0xFF0000)
                         .setDescription(
                                 bot.getMsg(guild.getId(), "purr.info.quote.no_msg")
@@ -143,7 +143,7 @@ public class CmdQuote implements Command{
                         .map(Message.Attachment::getUrl).orElse(null);
 
                 if(link == null && quote.getContentRaw().isEmpty()){
-                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.quote.no_value");
+                    bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.no_value");
                     return;
                 }
 
@@ -162,14 +162,14 @@ public class CmdQuote implements Command{
                     return;
                 }
 
-                sendImgEmbed(msg, quote, bytes, tc);
+                sendImgEmbed(member, quote, bytes, tc);
             }
             return;
         }
 
         TextChannel channel = msg.getMentionedChannels().get(0);
         if(channel.isNSFW() && !tc.isNSFW()){
-            MessageEmbed embed = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
+            MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                     .setColor(0xFF0000)
                     .setDescription(
                             bot.getMsg(guild.getId(), "purr.info.quote.nsfw_channel")
@@ -185,7 +185,7 @@ public class CmdQuote implements Command{
             Message quote = getMessage(args[0], channel);
 
             if(quote == null){
-                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.quote.invalid_id");
+                bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.invalid_id");
                 return;
             }
 
@@ -194,7 +194,7 @@ public class CmdQuote implements Command{
                         .map(Message.Attachment::getUrl).orElse(null);
 
                 if(link == null && quote.getContentRaw().isEmpty()){
-                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.quote.no_value");
+                    bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.no_value");
                     return;
                 }
 
@@ -212,10 +212,10 @@ public class CmdQuote implements Command{
                     sendQuoteEmbed(quote, null, tc);
                     return;
                 }
-                sendImgEmbed(msg, quote, bytes, tc);
+                sendImgEmbed(member, quote, bytes, tc);
             }
         }else{
-            bot.getEmbedUtil().sendPermError(tc, member.getUser(), channel, Permission.MESSAGE_HISTORY, true);
+            bot.getEmbedUtil().sendPermError(tc, member, channel, Permission.MESSAGE_HISTORY, true);
         }
     }
 }

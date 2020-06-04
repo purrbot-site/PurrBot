@@ -56,7 +56,7 @@ public class CmdSlap implements Command{
         List<Member> members = msg.getMentionedMembers();
     
         if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.slap.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.slap.no_mention");
             return;
         }
 

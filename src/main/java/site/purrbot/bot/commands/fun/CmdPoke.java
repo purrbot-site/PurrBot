@@ -56,7 +56,7 @@ public class CmdPoke implements Command{
         List<Member> members = msg.getMentionedMembers();
     
         if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.poke.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.poke.no_mention");
             return;
         }
 

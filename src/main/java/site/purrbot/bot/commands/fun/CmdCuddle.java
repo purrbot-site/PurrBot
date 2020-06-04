@@ -56,7 +56,7 @@ public class CmdCuddle implements Command{
         List<Member> members = msg.getMentionedMembers();
     
         if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.cuddle.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.cuddle.no_mention");
             return;
         }
 

@@ -56,11 +56,11 @@ public class CmdKitsune implements Command{
             msg.delete().queue();
 
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
+            bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
             return;
         }
 
-        EmbedBuilder kitsune = bot.getEmbedUtil().getEmbed(member.getUser(), tc.getGuild())
+        EmbedBuilder kitsune = bot.getEmbedUtil().getEmbed(member)
                 .setTitle(bot.getMsg(tc.getGuild().getId(), "purr.fun.kitsune.title"), link)
                 .setImage(link);
 

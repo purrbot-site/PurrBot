@@ -56,7 +56,7 @@ public class CmdLick implements Command{
         List<Member> members = msg.getMentionedMembers();
     
         if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.lick.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.lick.no_mention");
             return;
         }
 

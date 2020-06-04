@@ -20,10 +20,7 @@ package site.purrbot.bot.util.message;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 
 import java.time.ZonedDateTime;
@@ -40,15 +37,15 @@ public class EmbedUtil {
         return new EmbedBuilder().setColor(0x802F3136).setTimestamp(ZonedDateTime.now());
     }
 
-    public EmbedBuilder getEmbed(User user, Guild guild){
+    public EmbedBuilder getEmbed(Member member){
         return getEmbed().setFooter(
-                bot.getMsg(guild.getId(), "embed.footer", user.getAsTag()), 
-                user.getEffectiveAvatarUrl()
+                bot.getMsg(member.getGuild().getId(), "embed.footer", member.getUser().getAsTag()), 
+                member.getUser().getEffectiveAvatarUrl()
         );
     }
     
-    public MessageEmbed getPermErrorEmbed(User user, Guild guild, TextChannel channel, Permission perm, boolean self, boolean dm){
-        EmbedBuilder embed = user == null ? getEmbed() : getEmbed(user, guild);
+    public MessageEmbed getPermErrorEmbed(Member member, Guild guild, TextChannel channel, Permission perm, boolean self, boolean dm){
+        EmbedBuilder embed = member == null ? getEmbed() : getEmbed(member);
         String msg;
         if(channel == null){
             if(self){
@@ -75,11 +72,11 @@ public class EmbedUtil {
         
     }
     
-    public void sendError(TextChannel tc, User user, String path, String reason){
+    public void sendError(TextChannel tc, Member member, String path, String reason){
         Guild guild = tc.getGuild();
         
-        EmbedBuilder embed = user == null ? getEmbed() : getEmbed(user, guild);
-        String msg = user == null ? bot.getMsg(guild.getId(), path) : bot.getMsg(guild.getId(), path, user.getName());
+        EmbedBuilder embed = member == null ? getEmbed() : getEmbed(member);
+        String msg = member == null ? bot.getMsg(guild.getId(), path) : bot.getMsg(guild.getId(), path, member.getEffectiveName());
         
         embed.setColor(0xFF0000)
                 .setDescription(msg);
@@ -94,15 +91,15 @@ public class EmbedUtil {
         tc.sendMessage(embed.build()).queue();
     }
     
-    public void sendError(TextChannel tc, User user, String path){
-        sendError(tc, user, path, null);
+    public void sendError(TextChannel tc, Member member, String path){
+        sendError(tc, member, path, null);
     }
     
-    public void sendPermError(TextChannel tc, User user, Permission permission, boolean self){
-        sendPermError(tc, user, null, permission, self);
+    public void sendPermError(TextChannel tc, Member member, Permission permission, boolean self){
+        sendPermError(tc, member, null, permission, self);
     }
     
-    public void sendPermError(TextChannel tc, User user, TextChannel channel, Permission permission, boolean self){
-        tc.sendMessage(getPermErrorEmbed(user, tc.getGuild(), channel, permission, self, false)).queue();
+    public void sendPermError(TextChannel tc, Member member, TextChannel channel, Permission permission, boolean self){
+        tc.sendMessage(getPermErrorEmbed(member, tc.getGuild(), channel, permission, self, false)).queue();
     }
 }

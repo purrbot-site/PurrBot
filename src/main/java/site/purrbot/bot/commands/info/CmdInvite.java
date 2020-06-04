@@ -67,13 +67,13 @@ public class CmdInvite implements Command{
             msg.delete().queue();
 
         if(bot.isBeta()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "snuggle.info.invite.message");
+            bot.getEmbedUtil().sendError(tc, member, "snuggle.info.invite.message");
             return;
         }
         
         String id = guild.getId();
         
-        EmbedBuilder invite = bot.getEmbedUtil().getEmbed(member.getUser(), msg.getGuild())
+        EmbedBuilder invite = bot.getEmbedUtil().getEmbed(member)
                 .setAuthor(
                         msg.getJDA().getSelfUser().getName(),
                         Links.WEBSITE,
@@ -127,10 +127,10 @@ public class CmdInvite implements Command{
             member.getUser().openPrivateChannel()
                     .flatMap((channel) -> channel.sendMessage(invite.build()))
                     .queue(message -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getUser().getAsMention())
+                            bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getAsMention())
                     ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)), 
                     (error) -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getUser().getAsMention())
+                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getAsMention())
                     ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)));
             
             
@@ -138,10 +138,10 @@ public class CmdInvite implements Command{
             member.getUser().openPrivateChannel().queue(
                     pm -> pm.sendMessage(invite.build()).queue(message ->
                             tc.sendMessage(
-                                    bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getUser().getAsMention())
+                                    bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getAsMention())
                             ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
                     ), throwable -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getUser().getAsMention())
+                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getAsMention())
                     ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
             );
             return;

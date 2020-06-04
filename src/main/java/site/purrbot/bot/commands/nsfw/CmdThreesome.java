@@ -203,7 +203,7 @@ public class CmdThreesome implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(msg.getMentionedMembers().isEmpty() || msg.getMentionedMembers().size() < 2){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.threesome.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.threesome.no_mention");
             return;
         }
         
@@ -259,7 +259,7 @@ public class CmdThreesome implements Command{
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
                         v -> handleEvent(msg, message, member, target1, target2),
-                        e -> bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.request_error")
+                        e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
                 )
         );
     }

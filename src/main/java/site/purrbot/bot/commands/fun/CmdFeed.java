@@ -158,7 +158,7 @@ public class CmdFeed implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.feed.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.feed.no_mention");
             return;
         }
         
@@ -186,7 +186,7 @@ public class CmdFeed implements Command{
         }
         
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.feed.mention_bot");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.feed.mention_bot");
             return;
         }
         
@@ -208,7 +208,7 @@ public class CmdFeed implements Command{
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
                         v -> handleEvent(message, member, target),
-                        e -> bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.request_error")
+                        e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
                 )
         );
     }

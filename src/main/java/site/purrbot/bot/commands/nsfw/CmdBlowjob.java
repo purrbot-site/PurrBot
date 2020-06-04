@@ -159,7 +159,7 @@ public class CmdBlowjob implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.blowjob.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.blowjob.no_mention");
             return;
         }
 
@@ -204,7 +204,7 @@ public class CmdBlowjob implements Command{
         }
 
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.blowjob.mention_bot");
+            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.blowjob.mention_bot");
             return;
         }
 
@@ -226,7 +226,7 @@ public class CmdBlowjob implements Command{
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
                         v -> handleEvent(message, member, target), 
-                        e -> bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.request_error")
+                        e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
                 )
         );
     }

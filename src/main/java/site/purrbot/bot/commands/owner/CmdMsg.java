@@ -80,8 +80,17 @@ public class CmdMsg implements Command{
             message.editMessage(content).queue(
                     m -> msg.addReaction(Emotes.ACCEPT.getNameAndId()).queue(),
                     failure -> msg.addReaction(Emotes.CANCEL.getNameAndId()).queue());
+        }else
+        if(args[1].equalsIgnoreCase("embed")){
+            String content = args[2].replaceAll("\\{#(\\d+)}", "<#$1>");
+            
+            MessageEmbed embed = bot.getEmbedUtil().getEmbed()
+                    .setDescription(content)
+                    .build();
+            
+            channel.sendMessage(embed).queue();
         }else{
-            tc.sendMessage("Invalid message type! Allowed are `msg` and `embed`").queue();
+            tc.sendMessage("Invalid message type! Allowed are `msg`, `edit` and `embed`").queue();
         }
     }
 }

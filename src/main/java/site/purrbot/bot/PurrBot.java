@@ -371,7 +371,9 @@ public class PurrBot {
     public void startUpdater(){
         
         if(!isBeta()){
-            PostAction post = new PostAction();
+            String userAgent = "*Purr*-6875/BOT_VERSION (JDA; +https://purrbot.site) DBots/{id}";
+            
+            PostAction post = new PostAction(userAgent, IDs.PURR);
             BotBlockAPI botBlockAPI = new BotBlockAPI.Builder()
                     .addAuthToken(
                             Site.BOTLIST_SPACE,

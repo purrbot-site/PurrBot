@@ -54,7 +54,7 @@ public class CmdKiss implements Command{
         List<Member> members = msg.getMentionedMembers();
     
         if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.kiss.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.kiss.no_mention");
             return;
         }
 
@@ -74,7 +74,7 @@ public class CmdKiss implements Command{
                 ).queue();
             }else
             if(purr != null && members.contains(purr)){
-                if(bot.isSpecial(member.getUser().getId())){
+                if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "snuggle.fun.kiss.special_user", member.getAsMention())
                     ).queue();

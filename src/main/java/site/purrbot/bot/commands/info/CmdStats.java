@@ -128,7 +128,7 @@ public class CmdStats implements Command{
         
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
 
-        EmbedBuilder stats = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
+        EmbedBuilder stats = bot.getEmbedUtil().getEmbed(member)
                 .setAuthor(
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.title")
                 )

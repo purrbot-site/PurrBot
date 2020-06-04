@@ -110,7 +110,7 @@ public class CommandListener extends ListenerAdapter{
                     if(!self.hasPermission(tc, Permission.MESSAGE_WRITE)){
                         user.openPrivateChannel()
                                 .flatMap(channel -> channel.sendMessage(bot.getEmbedUtil().getPermErrorEmbed(
-                                        user,
+                                        member,
                                         guild,
                                         tc,
                                         Permission.MESSAGE_WRITE,
@@ -128,28 +128,28 @@ public class CommandListener extends ListenerAdapter{
                         return;
                     }
 
-                    if(command.getAttribute("category").equals("owner") && !bot.getCheckUtil().isDeveloper(user))
+                    if(command.getAttribute("category").equals("owner") && !bot.getCheckUtil().isDeveloper(member))
                         return;
                     
                     if(self.hasPermission(Permission.ADMINISTRATOR)){
-                        bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.administrator");
+                        bot.getEmbedUtil().sendError(tc, member, "errors.administrator");
                         return;
                     }
                     
-                    if(!bot.getCheckUtil().checkPermission(tc, user, self, Permission.MESSAGE_EMBED_LINKS))
+                    if(!bot.getCheckUtil().checkPermission(tc, member, self, Permission.MESSAGE_EMBED_LINKS))
                         return;
                     
-                    if(!bot.getCheckUtil().checkPermission(tc, user, self, Permission.MESSAGE_HISTORY))
+                    if(!bot.getCheckUtil().checkPermission(tc, member, self, Permission.MESSAGE_HISTORY))
                         return;
                     
-                    if(!bot.getCheckUtil().checkPermission(tc, user, self, Permission.MESSAGE_ADD_REACTION))
+                    if(!bot.getCheckUtil().checkPermission(tc, member, self, Permission.MESSAGE_ADD_REACTION))
                         return;
                     
-                    if(!bot.getCheckUtil().checkPermission(tc, user, self, Permission.MESSAGE_EXT_EMOJI))
+                    if(!bot.getCheckUtil().checkPermission(tc, member, self, Permission.MESSAGE_EXT_EMOJI))
                         return;
                     
                     if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
-                        MessageEmbed notNsfw = bot.getEmbedUtil().getEmbed(user, guild)
+                        MessageEmbed notNsfw = bot.getEmbedUtil().getEmbed(member)
                                 .setColor(0xFF0000)
                                 .setDescription(
                                         bot.getRandomMsg(guild.getId(), "errors.nsfw_random", member.getEffectiveName())
@@ -161,7 +161,7 @@ public class CommandListener extends ListenerAdapter{
                     }
                     
                     if(command.hasAttribute("manage_server")){
-                        if(!bot.getCheckUtil().checkPermission(tc, user, member, Permission.MESSAGE_MANAGE))
+                        if(!bot.getCheckUtil().checkPermission(tc, member, member, Permission.MESSAGE_MANAGE))
                             return;
                     }
 
@@ -169,7 +169,7 @@ public class CommandListener extends ListenerAdapter{
                         HANDLER.execute(command, msg, args[1] == null ? "" : args[1]);
                     }catch(Exception ex){
                         logger.error("Couldn't perform command!", ex);
-                        bot.getEmbedUtil().sendError(tc, user, "errors.unknown", ex.getMessage());
+                        bot.getEmbedUtil().sendError(tc, member, "errors.unknown", ex.getMessage());
                     }
                 }
         );

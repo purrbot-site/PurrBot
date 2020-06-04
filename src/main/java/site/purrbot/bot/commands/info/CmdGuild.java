@@ -132,7 +132,7 @@ public class CmdGuild implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        MessageEmbed guildInfo = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
+        MessageEmbed guildInfo = bot.getEmbedUtil().getEmbed(member)
                 .setTitle(guild.getName())
                 .setThumbnail(guild.getIconUrl())
                 .addField(

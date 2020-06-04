@@ -21,7 +21,6 @@ package site.purrbot.bot.util;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
 
@@ -34,14 +33,14 @@ public class CheckUtil{
     }
     
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean isDeveloper(User user){
-        return user.getId().equals(IDs.ANDRE_601);
+    public boolean isDeveloper(Member member){
+        return member.getId().equals(IDs.ANDRE_601);
     }
     
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean checkPermission(TextChannel tc, User author, Member member, Permission permission){
-        if(member.equals(tc.getGuild().getSelfMember())){
-            if(member.hasPermission(tc, permission)){
+    public boolean checkPermission(TextChannel tc, Member member, Member target, Permission permission){
+        if(target.equals(tc.getGuild().getSelfMember())){
+            if(target.hasPermission(tc, permission)){
                 return true;
             }else{
                 if(permission.equals(Permission.MESSAGE_EMBED_LINKS))
@@ -51,15 +50,15 @@ public class CheckUtil{
                                     .replace("{permission}", permission.getName())
                     ).queue();
                 else
-                    bot.getEmbedUtil().sendPermError(tc, author, tc, permission, true);
+                    bot.getEmbedUtil().sendPermError(tc, member, tc, permission, true);
                 
                 return false;
             }
         }else{
-            if(member.hasPermission(tc, permission)){
+            if(target.hasPermission(tc, permission)){
                 return true;
             }else{
-                bot.getEmbedUtil().sendPermError(tc, author, tc, permission, false);
+                bot.getEmbedUtil().sendPermError(tc, member, tc, permission, false);
                 return false;
             }
         }

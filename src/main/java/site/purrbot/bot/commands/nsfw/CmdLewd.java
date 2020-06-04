@@ -56,14 +56,14 @@ public class CmdLewd implements Command{
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
         
-        EmbedBuilder neko = bot.getEmbedUtil().getEmbed(member.getUser(), guild);
+        EmbedBuilder neko = bot.getEmbedUtil().getEmbed(member);
         String link;
         
         String s = msg.getContentRaw();
         if(s.toLowerCase().contains("--gif") || s.toLowerCase().contains("—gif")){
             link = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD);
             if(link == null){
-                bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
+                bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
                 return;
             }
             
@@ -71,7 +71,7 @@ public class CmdLewd implements Command{
         }else{
             link = bot.getHttpUtil().getImage(API.IMG_NEKO_LEWD);
             if(link == null){
-                bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
+                bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
                 return;
             }
             

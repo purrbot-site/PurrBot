@@ -60,7 +60,7 @@ public class CmdLanguage implements Command{
             msg.delete().queue();
         
         if(args.length < 1){
-            MessageEmbed embed = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
+            MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                     .setDescription(bot.getMsg(guild.getId(), "purr.guild.language.embed.description"))
                     .addField(
                             bot.getMsg(guild.getId(), "purr.guild.language.embed.curr_lang_title"),
@@ -85,7 +85,7 @@ public class CmdLanguage implements Command{
             if(args[0].toLowerCase().equals("reset")){
                 bot.setLanguage(guild.getId(), "en");
                 
-                MessageEmbed embed = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                         .setColor(0x00FF00)
                         .setDescription("Language reset back to `English (en)`!")
                         .build();
@@ -94,18 +94,18 @@ public class CmdLanguage implements Command{
             }else
             if(args[0].toLowerCase().equals("set")){
                 if(args.length < 2){
-                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.language.few_args");
+                    bot.getEmbedUtil().sendError(tc, member, "purr.guild.language.few_args");
                     return;
                 }
                 
                 if(!getLangs().contains(args[1].toLowerCase())){
-                    bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.language.invalid_lang");
+                    bot.getEmbedUtil().sendError(tc, member, "purr.guild.language.invalid_lang");
                     return;
                 }
                 
                 bot.setLanguage(guild.getId(), args[1].toLowerCase());
     
-                MessageEmbed embed = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                         .setColor(0x00FF00)
                         .setDescription(
                                 bot.getMsg(guild.getId(), "purr.guild.language.language_set")
@@ -114,7 +114,7 @@ public class CmdLanguage implements Command{
                 
                 tc.sendMessage(embed).queue();
             }else{
-                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.language.invalid_args");
+                bot.getEmbedUtil().sendError(tc, member, "purr.guild.language.invalid_args");
             }
         }
     }

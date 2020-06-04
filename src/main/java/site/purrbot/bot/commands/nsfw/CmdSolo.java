@@ -56,11 +56,11 @@ public class CmdSolo implements Command{
             msg.delete().queue();
 
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
+            bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
             return;
         }
 
-        EmbedBuilder girl = bot.getEmbedUtil().getEmbed(member.getUser(), guild)
+        EmbedBuilder girl = bot.getEmbedUtil().getEmbed(member)
                 .setTitle(bot.getMsg(guild.getId(), "purr.nsfw.solo.title"), link)
                 .setImage(link);
 

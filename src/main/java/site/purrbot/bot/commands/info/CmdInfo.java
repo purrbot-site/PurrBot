@@ -53,9 +53,9 @@ public class CmdInfo implements Command{
         this.bot = bot;
     }
     
-    private MessageEmbed getEmbed(User user, Guild guild){
-        String id = guild.getId();
-        EmbedBuilder builder = bot.getEmbedUtil().getEmbed(user, guild);
+    private MessageEmbed getEmbed(Member member){
+        Guild guild = member.getGuild();
+        EmbedBuilder builder = bot.getEmbedUtil().getEmbed(member);
         if(bot.isBeta()){
             builder.setAuthor(guild.getJDA().getSelfUser().getName(),
                     Links.WEBSITE,
@@ -63,8 +63,8 @@ public class CmdInfo implements Command{
             )
             .setThumbnail(guild.getJDA().getSelfUser().getEffectiveAvatarUrl())
             .addField(
-                    bot.getMsg(id, "snuggle.info.info.embed.about_title"),
-                    bot.getMsg(id, "snuggle.info.info.embed.about_value")
+                    bot.getMsg(guild.getId(), "snuggle.info.info.embed.about_title"),
+                    bot.getMsg(guild.getId(), "snuggle.info.info.embed.about_value")
                             .replace("{name}", guild.getSelfMember().getAsMention()),
                     false
             );
@@ -84,52 +84,52 @@ public class CmdInfo implements Command{
         }
         
         builder.addField(
-                bot.getMsg(id, "purr.info.info.embed.commands_title"),
-                bot.getMsg(id, "purr.info.info.embed.commands_value"),
+                bot.getMsg(guild.getId(), "purr.info.info.embed.commands_title"),
+                bot.getMsg(guild.getId(), "purr.info.info.embed.commands_value"),
                 false
         )
         .addField(
-                bot.getMsg(id, "purr.info.info.embed.bot_info.title"),
+                bot.getMsg(guild.getId(), "purr.info.info.embed.bot_info.title"),
                 String.join(
                         "\n",
-                        getLink(id, "bot_info.version", Links.GITHUB)
+                        getLink(guild.getId(), "bot_info.version", Links.GITHUB)
                                 .replace("{bot_version}", "BOT_VERSION"),
-                        getLink(id, "bot_info.library", JDAInfo.GITHUB)
+                        getLink(guild.getId(), "bot_info.library", JDAInfo.GITHUB)
                                 .replace("{jda_version}", JDAInfo.VERSION)
                 ),
                 false
         )
         .addField(
-                bot.getMsg(id, "purr.info.info.embed.bot_lists.title"), 
+                bot.getMsg(guild.getId(), "purr.info.info.embed.bot_lists.title"), 
                 String.join(
                         "\n",
-                        getLink(id, "bot_lists.botlist_space", Links.BOTLIST_SPACE),
-                        getLink(id, "bot_lists.discord_boats", Links.DISCORD_BOATS),
-                        getLink(id, "bot_lists.discord_bots_gg", Links.DISCORD_BOTS_GG),
-                        getLink(id, "bot_lists.discordextremelist_xyz", Links.DISCORDEXTREMELIST_XYZ)
+                        getLink(guild.getId(), "bot_lists.botlist_space", Links.BOTLIST_SPACE),
+                        getLink(guild.getId(), "bot_lists.discord_boats", Links.DISCORD_BOATS),
+                        getLink(guild.getId(), "bot_lists.discord_bots_gg", Links.DISCORD_BOTS_GG),
+                        getLink(guild.getId(), "bot_lists.discordextremelist_xyz", Links.DISCORDEXTREMELIST_XYZ)
                 ),
                 false
         )
         .addField(
-                bot.getMsg(id, "purr.info.info.embed.links.title"),
+                bot.getMsg(guild.getId(), "purr.info.info.embed.links.title"),
                 String.join(
                         "\n",
-                        getLink(id, "links.discord", Links.DISCORD),
-                        getLink(id, "links.github", Links.GITHUB),
-                        getLink(id, "links.twitter", Links.TWITTER),
-                        getLink(id, "links.website", Links.WEBSITE),
-                        getLink(id, "links.wiki", Links.WIKI)
+                        getLink(guild.getId(), "links.discord", Links.DISCORD),
+                        getLink(guild.getId(), "links.github", Links.GITHUB),
+                        getLink(guild.getId(), "links.twitter", Links.TWITTER),
+                        getLink(guild.getId(), "links.website", Links.WEBSITE),
+                        getLink(guild.getId(), "links.wiki", Links.WIKI)
                 ),
                 false
         )
         .addField(
-                bot.getMsg(id, "purr.info.info.embed.support_title"),
-                bot.getMsg(id, "purr.info.info.embed.support_value"),
+                bot.getMsg(guild.getId(), "purr.info.info.embed.support_title"),
+                bot.getMsg(guild.getId(), "purr.info.info.embed.support_value"),
                 false
         )
         .addField(
-                bot.getMsg(id, "purr.info.info.embed.donators_title"),
-                getDonators(id),
+                bot.getMsg(guild.getId(), "purr.info.info.embed.donators_title"),
+                getDonators(guild.getId()),
                 false
         );
         
@@ -145,10 +145,11 @@ public class CmdInfo implements Command{
     private String getDonators(String id){
         StringBuilder builder = new StringBuilder(bot.getMsg(id, "purr.info.info.embed.donators_value")).append("\n");
         for(String userId : bot.getDonators()){
-            if(builder.length() > 0)
-                builder.append("\n");
             
-            builder.append("<@").append(userId).append(">");
+            builder.append("\n")
+                   .append("<@")
+                   .append(userId)
+                   .append(">");
         }
         
         return builder.toString();
@@ -161,10 +162,10 @@ public class CmdInfo implements Command{
 
         String s = msg.getContentRaw();
         if(s.toLowerCase().contains("--dm") || s.toLowerCase().contains("—dm")){
-            String mention = member.getUser().getAsMention();
+            String mention = member.getAsMention();
             String prefix = bot.isBeta() ? "snuggle" : "purr";
             member.getUser().openPrivateChannel()
-                    .flatMap(channel -> channel.sendMessage(getEmbed(member.getUser(), guild)))
+                    .flatMap(channel -> channel.sendMessage(getEmbed(member)))
                     .queue(
                             message -> tc.sendMessage(
                                     bot.getMsg(guild.getId(), prefix + ".info.info.dm_success", mention)
@@ -176,6 +177,6 @@ public class CmdInfo implements Command{
             return;
         }
 
-        tc.sendMessage(getEmbed(member.getUser(), guild)).queue();
+        tc.sendMessage(getEmbed(member)).queue();
     }
 }

@@ -56,7 +56,7 @@ public class CmdTickle implements Command{
         List<Member> members = msg.getMentionedMembers();
     
         if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.tickle.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.tickle.no_mention");
             return;
         }
 

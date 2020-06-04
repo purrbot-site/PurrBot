@@ -91,7 +91,7 @@ public class CmdEval implements Command{
             msg.delete().queue();
 
         if(args.length == 0){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "I need at least one argument!");
+            bot.getEmbedUtil().sendError(tc, member, "I need at least one argument!");
             return;
         }
 

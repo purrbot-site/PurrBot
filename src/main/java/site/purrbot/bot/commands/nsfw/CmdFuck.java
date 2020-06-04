@@ -205,7 +205,7 @@ public class CmdFuck implements Command{
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
 
         if(msg.getMentionedUsers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.fuck.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.fuck.no_mention");
             return;
         }
 
@@ -246,7 +246,7 @@ public class CmdFuck implements Command{
         }
 
         if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.nsfw.fuck.mention_bot");
+            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.fuck.mention_bot");
             return;
         }
 
@@ -270,7 +270,7 @@ public class CmdFuck implements Command{
                                 v -> handleEvent(msg, message, member, target),
                                 e -> bot.getEmbedUtil().sendError(
                                         tc,
-                                        member.getUser(),
+                                        member,
                                         "errors.request_error"
                                 )
                         );
@@ -281,7 +281,7 @@ public class CmdFuck implements Command{
                                 v -> handleEvent(msg, message, member, target),
                                 e -> bot.getEmbedUtil().sendError(
                                         tc,
-                                        member.getUser(),
+                                        member,
                                         "errors.request_error"
                                 )
                         );

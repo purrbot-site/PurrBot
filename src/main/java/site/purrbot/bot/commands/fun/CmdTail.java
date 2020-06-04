@@ -52,7 +52,7 @@ public class CmdTail implements Command{
         String link = bot.getHttpUtil().getImage(API.GIF_TAIL);
         
         if(link == null){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "errors.api_error");
+            bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
             return;
         }
     

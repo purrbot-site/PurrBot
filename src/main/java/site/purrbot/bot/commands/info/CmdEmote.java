@@ -58,7 +58,7 @@ public class CmdEmote implements Command{
         this.bot = bot;
     }
 
-    private MessageEmbed emoteInfo(User user, Emote emote, Guild guild, @Nullable String link, int pos, int size){
+    private MessageEmbed emoteInfo(Member member, Emote emote, Guild guild, @Nullable String link, int pos, int size){
         Emote e = bot.getShardManager().getEmoteById(emote.getId());
         Guild emoteGuild = null;
         if(e != null)
@@ -66,7 +66,7 @@ public class CmdEmote implements Command{
 
         String path = size > 1 ? "purr.info.emote.embed.emote_multiple" : "purr.info.emote.embed.emote_single";
         
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(user, guild)
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
                 .setTitle(
                         bot.getMsg(guild.getId(), path)
                                 .replace("{current}", String.valueOf(pos))
@@ -123,7 +123,7 @@ public class CmdEmote implements Command{
         String s = msg.getContentRaw();
         if(s.toLowerCase().contains("--search") || s.toLowerCase().contains("—search")){
             if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                bot.getEmbedUtil().sendPermError(tc, member.getUser(), Permission.MESSAGE_HISTORY, true);
+                bot.getEmbedUtil().sendPermError(tc, member, Permission.MESSAGE_HISTORY, true);
                 return;
             }
     
@@ -153,7 +153,7 @@ public class CmdEmote implements Command{
             }
             
             if(emotes.isEmpty()){
-                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.emote.not_found");
+                bot.getEmbedUtil().sendError(tc, member, "purr.info.emote.not_found");
                 return;
             }
             
@@ -162,7 +162,7 @@ public class CmdEmote implements Command{
             for(Map.Entry<Emote, String> info : emotes.entrySet()){
                 pos++;
                 builder.addItems(emoteInfo(
-                        member.getUser(),
+                        member,
                         info.getKey(),
                         guild,
                         info.getValue(),
@@ -177,11 +177,11 @@ public class CmdEmote implements Command{
         }
 
         if(msg.getEmotes().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.emote.no_args");
+            bot.getEmbedUtil().sendError(tc, member, "purr.info.emote.no_args");
             return;
         }
 
-        tc.sendMessage(emoteInfo(member.getUser(), msg.getEmotes().get(0), guild, null, 1, 1)).queue();
+        tc.sendMessage(emoteInfo(member, msg.getEmotes().get(0), guild, null, 1, 1)).queue();
 
     }
 }

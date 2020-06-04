@@ -47,30 +47,30 @@ public class CmdPrefix implements Command{
         this.bot = bot;
     }
 
-    private void setPrefix(Message msg, String prefix){
-        bot.setPrefix(msg.getGuild().getId(), prefix);
+    private void setPrefix(TextChannel tc, Member member, String prefix){
+        bot.setPrefix(member.getGuild().getId(), prefix);
 
-        MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                 .setColor(0x00FF00)
                 .setDescription(
-                        bot.getMsg(msg.getGuild().getId(), "purr.guild.prefix.set")
+                        bot.getMsg(member.getGuild().getId(), "purr.guild.prefix.set")
                 )
                 .build();
 
-        msg.getTextChannel().sendMessage(embed).queue();
+        tc.sendMessage(embed).queue();
     }
 
-    private void resetPrefix(Message msg){
-        bot.setPrefix(msg.getGuild().getId(), ".");
+    private void resetPrefix(TextChannel tc, Member member){
+        bot.setPrefix(member.getGuild().getId(), ".");
         
-        MessageEmbed embed = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                 .setColor(0x00FF00)
                 .setDescription(
-                        bot.getMsg(msg.getGuild().getId(), "purr.guild.prefix.reset")
+                        bot.getMsg(member.getGuild().getId(), "purr.guild.prefix.reset")
                 )
                 .build();
 
-        msg.getTextChannel().sendMessage(embed).queue();
+        tc.sendMessage(embed).queue();
     }
 
     @Override
@@ -79,21 +79,21 @@ public class CmdPrefix implements Command{
             msg.delete().queue();
 
         if(args.length < 1){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.prefix.few_args");
+            bot.getEmbedUtil().sendError(tc, member, "purr.guild.prefix.few_args");
             return;
         }
 
         if(args[0].equalsIgnoreCase("reset")){
-            resetPrefix(msg);
+            resetPrefix(tc, member);
         }else
         if(args[0].equalsIgnoreCase("set")){
             if(args.length == 1){
-                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.prefix.no_prefix");
+                bot.getEmbedUtil().sendError(tc, member, "purr.guild.prefix.no_prefix");
             }else{
-                setPrefix(msg, args[1].toLowerCase());
+                setPrefix(tc, member, args[1].toLowerCase());
             }
         }else{
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.guild.prefix.invalid_args");
+            bot.getEmbedUtil().sendError(tc, member, "purr.guild.prefix.invalid_args");
         }
     }
 }

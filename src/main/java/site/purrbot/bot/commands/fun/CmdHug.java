@@ -56,7 +56,7 @@ public class CmdHug implements Command {
         List<Member> members = msg.getMentionedMembers();
     
         if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.hug.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.hug.no_mention");
             return;
         }
 

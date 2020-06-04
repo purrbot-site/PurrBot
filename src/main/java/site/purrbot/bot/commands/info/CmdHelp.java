@@ -62,12 +62,12 @@ public class CmdHelp implements Command{
         }
     };
 
-    private MessageEmbed commandHelp(Message msg, Command cmd, String prefix){
+    private MessageEmbed commandHelp(Member member, Command cmd, String prefix){
         CommandDescription desc = cmd.getDescription();
         String[] triggers = desc.triggers();
-        Guild guild = msg.getGuild();
+        Guild guild = member.getGuild();
         
-        EmbedBuilder commandInfo = bot.getEmbedUtil().getEmbed(msg.getAuthor(), msg.getGuild())
+        EmbedBuilder commandInfo = bot.getEmbedUtil().getEmbed(member)
                 .setTitle(
                         bot.getMsg(guild.getId(), "purr.info.help.command_info.title")
                                 .replace("{command}", desc.name())
@@ -96,7 +96,7 @@ public class CmdHelp implements Command{
     }
 
     private MessageEmbed commandList(Member member, String icon, String titlePath, String commands){
-        return bot.getEmbedUtil().getEmbed(member.getUser(), member.getGuild())
+        return bot.getEmbedUtil().getEmbed(member)
                 .setDescription(bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.description"))
                 .addField(
                         String.format(
@@ -173,7 +173,7 @@ public class CmdHelp implements Command{
 
 
         for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
-            if(builderEntry.getKey().equals("owner") && !bot.getCheckUtil().isDeveloper(member.getUser()))
+            if(builderEntry.getKey().equals("owner") && !bot.getCheckUtil().isDeveloper(member))
                 continue;
             
             if(!tc.isNSFW() && builderEntry.getKey().equals("nsfw")){
@@ -195,16 +195,16 @@ public class CmdHelp implements Command{
             Command command = (Command)bot.getCmdHandler().findCommand(args[0]);
 
             if(command == null || !isCommand(command)){
-                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.help.command_info.no_command");
+                bot.getEmbedUtil().sendError(tc, member, "purr.info.help.command_info.no_command");
                 return;
             }
 
             if(!tc.isNSFW() && command.getAttribute("category").equals("nsfw")){
-                bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.info.help.command_info.command_nsfw");
+                bot.getEmbedUtil().sendError(tc, member, "purr.info.help.command_info.command_nsfw");
                 return;
             }
 
-            tc.sendMessage(commandHelp(msg, command, prefix)).queue();
+            tc.sendMessage(commandHelp(member, command, prefix)).queue();
         }else{
             
             builder.build().display(tc);

@@ -112,7 +112,7 @@ public class CmdShip implements Command{
         List<Member> members = msg.getMentionedMembers();
 
         if (members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.ship.no_mention");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.ship.no_mention");
             return;
         }
 
@@ -210,7 +210,7 @@ public class CmdShip implements Command{
         }
 
         if(member1.getUser().isBot() || member2.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, member.getUser(), "purr.fun.ship.target_bot");
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.ship.target_bot");
             return;
         }
 

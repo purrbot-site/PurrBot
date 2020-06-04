@@ -18,7 +18,9 @@
 
 package site.purrbot.bot.util.message;
 
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 import site.purrbot.bot.PurrBot;
 
 import java.awt.Color;
@@ -26,11 +28,16 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MessageUtil {
 
     private final PurrBot bot;
     private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
+    
+    private final Pattern placeholder = Pattern.compile("(\\{(.+?)})", Pattern.CASE_INSENSITIVE);
+    private final Pattern rolePattern = Pattern.compile("(\\{r_(name|mention):(\\d+)})", Pattern.CASE_INSENSITIVE);
 
     public MessageUtil(PurrBot bot){
         this.bot = bot;
@@ -109,12 +116,60 @@ public class MessageUtil {
     }
 
     public String parsePlaceholders(String message, Member member){
-        return message.replaceAll("(?i)\\{mention}", member.getAsMention())
-                .replaceAll("(?i)\\{name}", member.getEffectiveName())
-                .replaceAll("(?i)\\{guild}", member.getGuild().getName())
-                .replaceAll("(?i)\\{count}", String.valueOf(member.getGuild().getMemberCount()))
-                .replaceAll("(?i)@everyone", "everyone")
-                .replaceAll("(?i)@here", "here");
+        Guild guild = member.getGuild();
+    
+        Matcher roleMatcher = rolePattern.matcher(message);
+        if(roleMatcher.find()){
+            StringBuffer buffer = new StringBuffer();
+            do{
+                Role role = guild.getRoleById(roleMatcher.group(3));
+                if(role == null)
+                    continue;
+                
+                switch(roleMatcher.group(2).toLowerCase()){
+                    case "name":
+                        roleMatcher.appendReplacement(buffer, role.getName());
+                        break;
+                    
+                    case "mention":
+                        roleMatcher.appendReplacement(buffer, role.getAsMention());
+                        break;
+                }
+            }while(roleMatcher.find());
+            
+            roleMatcher.appendTail(buffer);
+            message = buffer.toString();
+        }
+    
+        Matcher matcher = placeholder.matcher(message);
+        if(matcher.find()){
+            StringBuffer buffer = new StringBuffer();
+            do{
+                switch(matcher.group(2).toLowerCase()){
+                    case "mention":
+                        matcher.appendReplacement(buffer, member.getAsMention());
+                        break;
+                    
+                    case "name":
+                        matcher.appendReplacement(buffer, member.getEffectiveName());
+                        break;
+                    
+                    case "guild":
+                        matcher.appendReplacement(buffer, guild.getName());
+                        break;
+                    
+                    case "count":
+                        matcher.appendReplacement(buffer, String.valueOf(guild.getMemberCount()));
+                        break;
+                }
+            }while(matcher.find());
+            
+            matcher.appendTail(buffer);
+            message = buffer.toString();
+        }
+        
+        return message.replace("@everyone", "everyone")
+                .replace("@here", "here");
     }
 
     public String getBotGame(){
