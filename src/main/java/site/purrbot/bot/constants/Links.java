@@ -28,7 +28,7 @@ public class Links {
 
     // Bot lists
     public static final String BOTLIST_SPACE          = "https://botlist.space/bot/425382319449309197";
-    public static final String DISCORD_BOATS          = "https://discord.boats/bot/425382319449309197";
+    public static final String DISCORD_BOATS          = "https://discord.boats/bot/purr";
     public static final String DISCORD_BOTS_GG        = "https://discord.bots.gg/bots/425382319449309197";
     public static final String DISCORDEXTREMELIST_XYZ = "https://discordextremelist.xyz/bots/purr";
 

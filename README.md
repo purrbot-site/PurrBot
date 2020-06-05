@@ -30,7 +30,7 @@
 <!-- Botlists -->
 [botlist]: https://botlist.space/bot/425382319449309197  
 [discordBots]: https://discord.bots.gg/bots/425382319449309197  
-[discordBoats]: https://discord.boats/bot/425382319449309197  
+[discordBoats]: https://discord.boats/bot/purr  
 [debl]: https://discordextremelist.xyz/bots/purr
 
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![TranslateImg]][translations]

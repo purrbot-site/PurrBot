@@ -211,26 +211,28 @@ public class CmdWelcome implements Command{
             msg.delete().queue();
 
         if(args.length < 1){
-            InputStream is;
-            try{
-                is = bot.getImageUtil().getWelcomeImg(
-                        msg.getMember(),
-                        bot.getWelcomeIcon(guild.getId()),
-                        bot.getWelcomeBg(guild.getId()),
-                        bot.getWelcomeColor(guild.getId())
-                );
-            }catch(IOException ex){
-                is = null;
-            }
-
-            if(is == null){
-                tc.sendMessage(welcomeSettings(member, guild, false)).queue();
-                return;
-            }
-
-            tc.sendMessage(welcomeSettings(member, guild, true))
-                    .addFile(is, "welcome_preview.jpg")
-                    .queue();
+            tc.sendTyping().queue(v -> {
+                InputStream is;
+                try{
+                    is = bot.getImageUtil().getWelcomeImg(
+                            msg.getMember(),
+                            bot.getWelcomeIcon(guild.getId()),
+                            bot.getWelcomeBg(guild.getId()),
+                            bot.getWelcomeColor(guild.getId())
+                    );
+                }catch(IOException ex){
+                    is = null;
+                }
+    
+                if(is == null){
+                    tc.sendMessage(welcomeSettings(member, guild, false)).queue();
+                    return;
+                }
+    
+                tc.sendMessage(welcomeSettings(member, guild, true))
+                        .addFile(is, "welcome_preview.jpg")
+                        .queue();
+            });
             return;
         }
 
@@ -365,55 +367,59 @@ public class CmdWelcome implements Command{
                 break;
             
             case "test":
-                InputStream image;
-                try{
-                    image = bot.getImageUtil().getWelcomeImg(
-                            member,
-                            bot.getWelcomeIcon(guild.getId()),
-                            bot.getWelcomeBg(guild.getId()),
-                            bot.getWelcomeColor(guild.getId())
-                    );
-                }catch(IOException ex){
-                    image = null;
-                }
-                
-                if(image == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+                tc.sendTyping().queue(v -> {
+                    InputStream image;
+                    try{
+                        image = bot.getImageUtil().getWelcomeImg(
+                                member,
+                                bot.getWelcomeIcon(guild.getId()),
+                                bot.getWelcomeBg(guild.getId()),
+                                bot.getWelcomeColor(guild.getId())
+                        );
+                    }catch(IOException ex){
+                        image = null;
+                    }
+    
+                    if(image == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+                        tc.sendMessage(bot.getMessageUtil().parsePlaceholders(
+                                bot.getWelcomeMsg(guild.getId()),
+                                member
+                        )).queue();
+                        return;
+                    }
+    
                     tc.sendMessage(bot.getMessageUtil().parsePlaceholders(
                             bot.getWelcomeMsg(guild.getId()),
                             member
-                    )).queue();
-                    return;
-                }
-                
-                tc.sendMessage(bot.getMessageUtil().parsePlaceholders(
-                        bot.getWelcomeMsg(guild.getId()),
-                        member
-                ))
-                .addFile(image, "welcome_preview.jpg")
-                .queue();
+                    ))
+                            .addFile(image, "welcome_preview.jpg")
+                            .queue();
+                });
                 break;
 
             default:
-                InputStream is;
-                try{
-                    is = bot.getImageUtil().getWelcomeImg(
-                            member,
-                            bot.getWelcomeIcon(guild.getId()),
-                            bot.getWelcomeBg(guild.getId()),
-                            bot.getWelcomeColor(guild.getId())
-                    );
-                }catch(IOException ex){
-                    is = null;
-                }
-
-                if(is == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
-                    tc.sendMessage(welcomeSettings(member, guild, false)).queue();
-                    return;
-                }
-
-                tc.sendMessage(welcomeSettings(member, guild, true))
-                        .addFile(is, "welcome_preview.jpg")
-                        .queue();
+                tc.sendTyping().queue(v -> {
+                    InputStream is;
+                    try{
+                        is = bot.getImageUtil().getWelcomeImg(
+                                member,
+                                bot.getWelcomeIcon(guild.getId()),
+                                bot.getWelcomeBg(guild.getId()),
+                                bot.getWelcomeColor(guild.getId())
+                        );
+                    }catch(IOException ex){
+                        is = null;
+                    }
+    
+                    if(is == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+                        tc.sendMessage(welcomeSettings(member, guild, false)).queue();
+                        return;
+                    }
+    
+                    tc.sendMessage(welcomeSettings(member, guild, true))
+                            .addFile(is, "welcome_preview.jpg")
+                            .queue();
+                });
         }
     }
 
