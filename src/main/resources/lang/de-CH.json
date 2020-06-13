@@ -195,7 +195,8 @@
           "no_channel": "`Keine Nachricht gesetzt`",
           "preview": "Vorschau",
           "subcommands_title": "Unterbefehle",
-          "subcommands_value": "```\nbg      set <Hintergrund>\n        reset\nchannel set <#Kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <Icon>\n        reset\nmsg     set <Nachricht>\n        reset\ntest\n```"
+          "subcommands_value": "```\nbg      set <Hintergrund>\n        reset\nchannel set <#Kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <Icon>\n        reset\nmsg     set <Nachricht>\n        reset\ntest\n```",
+          "title": "Aktuelle Willkommenseinstellungen"
         },
         "few_args": "Nicht genug Argumente gegeben!\nVewende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
         "invalid_args": "Ungültige Argumente!\nVerwende `{prefix}welcome` um alle verfügbaren Unterbefehle zu sehen.",
