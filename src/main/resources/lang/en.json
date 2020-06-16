@@ -352,6 +352,20 @@
         "no_value": "The message doesn't have any image(s) nor any text to quote!",
         "nsfw_channel": "The channel you mentioned ({channel}) is marked as NSFW, while this channel is not!\nI won't quote messages from NSFW-channels in non NSFW-channels for safety."
       },
+      "shards": {
+        "embed": {
+          "current_title": "Current Shard?",
+          "guilds_title": "Guilds",
+          "ping_title": "Ping (ms)",
+          "status_title": "Status",
+          "title": "Shard Info [{shard_id}/{shard_total}]"
+        },
+        "status": {
+          "connected": "Connected",
+          "disconnected": "Disconnected",
+          "reconnect": "Reconnecting..."
+        }
+      },
       "stats": {
         "uptime": {
           "day": "day",
