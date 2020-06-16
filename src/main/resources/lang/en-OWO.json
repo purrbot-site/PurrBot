@@ -195,7 +195,8 @@
           "no_channel": "`No channew set`",
           "preview": "Pweview",
           "subcommands_title": "Subcommands",
-          "subcommands_value": "```\nbg      set <background>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset\ntest\n```"
+          "subcommands_value": "```\nbg      set <backgwound>\n        reset\nchannel set <#channel>\n        reset\ncolor   set <hex:wwggbb|rgb:w,g,b|random>\n        reset\nicon    set <icon>\n        reset\nmsg     set <message>\n        reset\ntest\n```",
+          "title": "Cuwwent Welcome Settings"
         },
         "few_args": "Not enough awguments pwovided!\nUsage: `{prefix}welcome` to see aww avaiwabwe sub-commands.",
         "invalid_args": "Invawid awguments!\nUsage: `{prefix}welcome` to see aww avaiwabwe sub-commands.",
