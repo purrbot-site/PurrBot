@@ -195,7 +195,8 @@
           "no_channel": "`Ühtegi kanalit pole määratud`",
           "preview": "Eelvaade",
           "subcommands_title": "Alamkäsklused",
-          "subcommands_value": "```\nbg      set <taust>\n        reset\nchannel set <#kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <ikoon>\n        reset\nmsg     set <sõnum>\n        reset\ntest\n```"
+          "subcommands_value": "```\nbg      set <taust>\n        reset\nchannel set <#kanal>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|random>\n        reset\nicon    set <ikoon>\n        reset\nmsg     set <sõnum>\n        reset\ntest\n```",
+          "title": "Praegused tervitus sätted"
         },
         "few_args": "Ei ole piisavalt argumente!\nSisesta `{prefix}welcome` et näha kõiki alamkäskluseid.",
         "invalid_args": "Vigased argumendid!\nSisesta `{prefix}welcome` et näha kõiki alamkäsklusi.",
