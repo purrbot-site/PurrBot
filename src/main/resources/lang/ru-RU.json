@@ -352,6 +352,20 @@
         "no_value": "Сообщений не имеет в себе картинок или текста для цитаты!",
         "nsfw_channel": "Канал, упомянутый Вами ({channel}) помечен, как NSWF, а этот канал нет!\nЯ не буду цитировать сообщения из NSFW каналов в не NSFW каналы для безопастности."
       },
+      "shards": {
+        "embed": {
+          "current_title": "Текущий shard?",
+          "guilds_title": "Сервера",
+          "ping_title": "Пинг (мс)",
+          "status_title": "Статус",
+          "title": "Информация о shard [{shard_id}/{shard_total}]"
+        },
+        "status": {
+          "connected": "Подключено",
+          "disconnected": "Отсоединено",
+          "reconnect": "Переподключение..."
+        }
+      },
       "stats": {
         "uptime": {
           "day": "день",
