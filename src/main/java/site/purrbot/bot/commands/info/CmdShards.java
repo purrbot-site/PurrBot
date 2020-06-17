@@ -30,9 +30,10 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
 
@@ -93,7 +94,9 @@ public class CmdShards implements Command{
             builder.addUsers(guild.getOwner().getUser());
     
         int id = msg.getJDA().getShardInfo().getShardId();
-        final List<JDA> shards = new ArrayList<>(bot.getShardManager().getShards());
+        final List<JDA> shards = bot.getShardManager().getShardCache().stream()
+                .sorted(Comparator.comparing(jda -> jda.getShardInfo().getShardId()))
+                .collect(Collectors.toList());
         
         for(final JDA jda : shards){
             int currId = jda.getShardInfo().getShardId();
