@@ -124,7 +124,8 @@ public class CmdHelp implements Command{
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
     
-        EmbedPaginator.Builder builder = new EmbedPaginator.Builder().setEventWaiter(bot.getWaiter())
+        EmbedPaginator.Builder builder = new EmbedPaginator.Builder()
+                .setEventWaiter(bot.getWaiter())
                 .setTimeout(1, TimeUnit.MINUTES)
                 .waitOnSinglePage(true)
                 .setText(EmbedBuilder.ZERO_WIDTH_SPACE)

@@ -24,6 +24,7 @@ import net.discordservices.dservices4j.DServices4J;
 import net.discordservices.dservices4j.Stats;
 import net.discordservices.dservices4j.exceptions.RatelimitedException;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.botblock.javabotblockapi.BotBlockAPI;
@@ -142,7 +143,11 @@ public class PurrBot {
         beta = getFileManager().getBoolean("config", "beta");
 
         CMD_HANDLER.registerCommands(new HashSet<>(commandLoader.getCommands()));
-
+    
+        MessageAction.setDefaultMentions(EnumSet.of(
+                Message.MentionType.ROLE,
+                Message.MentionType.USER
+        ));
         shardManager = DefaultShardManagerBuilder
                 .create(
                         getFileManager().getString("config", "bot-token"),

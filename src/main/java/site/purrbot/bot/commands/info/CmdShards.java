@@ -20,18 +20,21 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import com.jagrosh.jdautilities.menu.EmbedPaginator;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import org.apache.commons.lang.StringUtils;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.requests.ErrorResponse;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.constants.Emotes;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
 
 @CommandDescription(
         name = "Shards",
@@ -51,100 +54,81 @@ public class CmdShards implements Command{
         this.bot = bot;
     }
     
+    private String getStatus(JDA jda, String id){
+        String status;
+        switch(jda.getStatus()){
+            case CONNECTED:
+                status = bot.getMsg(id, "purr.info.shards.status.connected");
+                break;
+            
+            case ATTEMPTING_TO_RECONNECT:
+            case RECONNECT_QUEUED:
+                status = bot.getMsg(id, "purr.info.shards.status.reconnect");
+                break;
+    
+            case DISCONNECTED:
+            default:
+                status = bot.getMsg(id, "purr.info.shards.status.disconnected");
+                break;
+        }
+        
+        return "`" + status + "`";
+    }
+    
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        List<String> headers = new ArrayList<>();
+        EmbedPaginator.Builder builder = new EmbedPaginator.Builder()
+                .setEventWaiter(bot.getWaiter())
+                .addUsers(member.getUser())
+                .waitOnSinglePage(true)
+                .wrapPageEnds(true)
+                .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
+                .setTimeout(1, TimeUnit.MINUTES)
+                .setFinalAction(message -> {
+                    if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
+                        message.clearReactions().queue(null, ignore(ErrorResponse.UNKNOWN_MESSAGE));
+                });
         
-        headers.add("ID");
-        headers.add("Status");
-        headers.add("Ping");
-        headers.add("Guilds");
-        
-        List<List<String>> table = new ArrayList<>();
+        if(guild.getOwner() != null)
+            builder.addUsers(guild.getOwner().getUser());
+    
         int id = msg.getJDA().getShardInfo().getShardId();
         final List<JDA> shards = new ArrayList<>(bot.getShardManager().getShards());
-        Collections.reverse(shards);
         
         for(final JDA jda : shards){
-            final List<String> row = new ArrayList<>();
-            final int shardId = jda.getShardInfo().getShardId();
+            int currId = jda.getShardInfo().getShardId();
+            MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
+                    .setTitle(
+                            bot.getMsg(guild.getId(), "purr.info.shards.embed.title")
+                                    .replace("{shard_id}", String.valueOf(currId))
+                                    .replace("{shard_total}", String.valueOf(shards.size()))
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.shards.embed.current_title"),
+                            currId == id ? Emotes.ACCEPT.getEmote() : Emotes.CANCEL.getEmote(),
+                            true
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.shards.embed.guilds_title"),
+                            String.format("`%d`", jda.getGuildCache().size()),
+                            true
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.shards.embed.status_title"),
+                            getStatus(jda, guild.getId()),
+                            true
+                    )
+                    .addField(
+                            bot.getMsg(guild.getId(), "purr.info.shards.embed.ping_title"),
+                            String.format("`%d`", jda.getGatewayPing()),
+                            true
+                    )
+                    .build();
             
-            row.add((id == shardId ? "(You) " : "") + shardId);
-            row.add(getStatus(jda));
-            row.add(String.valueOf(jda.getGatewayPing()));
-            row.add(String.valueOf(jda.getGuildCache().size()));
-            
-            table.add(row);
-            
-            if(table.size() == 20){
-                msg.getTextChannel().sendMessage(createTable(headers, table)).queue();
-                table = new ArrayList<>();
-            }
+            builder.addItems(embed);
         }
         
-        if(!table.isEmpty())
-            msg.getTextChannel().sendMessage(createTable(headers, table)).queue();
-    }
-    
-    private String createTable(List<String> headers, List<List<String>> table){
-        final StringBuilder builder = new StringBuilder();
-        final int[] widths = new int[headers.size()];
-        
-        for(int i = 0; i < headers.size(); i++){
-            if(headers.get(i).length() > widths[i])
-                widths[i] = headers.get(i).length();
-        }
-        
-        for(final List<String> row : table){
-            for(int i = 0; i < row.size(); i++){
-                final String cell = row.get(i);
-                if(cell.length() > widths[i])
-                    widths[i] = cell.length();
-            }
-        }
-        
-        builder.append("```").append("prolog").append("\n");
-        final StringBuilder formatLineL = new StringBuilder("│");
-        final StringBuilder formatLineR = new StringBuilder("│");
-        for(final int width : widths){
-            formatLineL.append(" %-").append(width).append("s │");
-            formatLineR.append(" %").append(width).append("s │");
-        }
-        formatLineL.append("\n");
-        formatLineR.append("\n");
-        builder.append(getSeparators("┌", "┬", "┐", "─", widths));
-        builder.append(String.format(formatLineL.toString(), headers.toArray()));
-        
-        builder.append(getSeparators("╞", "╪", "╡", "═", widths));
-        for(final List<String> row : table)
-            builder.append(String.format(formatLineR.toString(), row.toArray()));
-    
-        builder.append(getSeparators("└", "┴", "┘", "─", widths));
-        builder.append("```");
-        
-        return builder.toString();
-    }
-    
-    private String getSeparators(String left, String middle, String right, String line, int... widths){
-        boolean first = true;
-        final StringBuilder builder = new StringBuilder();
-        for(final int size : widths){
-            if(first){
-                first = false;
-                builder.append(left).append(StringUtils.repeat(line, size + 2));
-            }else{
-                builder.append(middle).append(StringUtils.repeat(line, size + 2));
-            }
-        }
-        
-        return builder.append(right).append("\n").toString();
-    }
-    
-    private String getStatus(JDA jda){
-        return firstUppercase(jda.getStatus().toString().replace("_", " "));
-    }
-    
-    private String firstUppercase(String word){
-        return Character.toString(word.charAt(0)).toUpperCase() + word.substring(1).toLowerCase();
+        builder.build()
+               .display(tc);
     }
 }

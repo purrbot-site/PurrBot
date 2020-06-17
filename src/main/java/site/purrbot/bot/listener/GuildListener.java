@@ -294,35 +294,21 @@ public class GuildListener extends ListenerAdapter{
         String msg = bot.getWelcomeMsg(guild.getId());
         if(msg == null)
             msg = "Hello {mention}!";
-
-        String message = bot.getMessageUtil().parsePlaceholders(msg, event.getMember());
-
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)) {
-            InputStream is;
-
-            try {
-                is = bot.getImageUtil().getWelcomeImg(
-                        event.getMember(),
-                        bot.getWelcomeIcon(guild.getId()),
-                        bot.getWelcomeBg(guild.getId()),
-                        bot.getWelcomeColor(guild.getId())
-                );
-            }catch(IOException ex){
-                is = null;
-            }
-
-            if(is == null){
-                tc.sendMessage(message).queue();
-                return;
-            }
-
-            tc.sendMessage(message).addFile(is, String.format(
-                    "welcome_%s.jpg",
-                    event.getUser().getId()
-            )).queue();
-        }else{
-            tc.sendMessage(message).queue();
+        
+        InputStream image;
+    
+        try {
+            image = bot.getImageUtil().getWelcomeImg(
+                    event.getMember(),
+                    bot.getWelcomeIcon(guild.getId()),
+                    bot.getWelcomeBg(guild.getId()),
+                    bot.getWelcomeColor(guild.getId())
+            );
+        }catch(IOException ex){
+            image = null;
         }
+        
+        bot.getMessageUtil().sendWelcomeMsg(tc, msg, event.getMember(), image);
     }
 
     @Override

@@ -32,9 +32,6 @@ import site.purrbot.bot.commands.Command;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 @CommandDescription(
         name = "Eval",
@@ -102,6 +99,7 @@ public class CmdEval implements Command{
         se.put("guild", guild);
         se.put("channel", tc);
         se.put("msg", msg);
+        se.put("embed", bot.getEmbedUtil().getEmbed().setTimestamp(null));
 
         String statement = String.join(" ", args);
 

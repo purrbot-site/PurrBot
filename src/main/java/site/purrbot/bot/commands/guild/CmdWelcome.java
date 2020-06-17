@@ -72,11 +72,14 @@ public class CmdWelcome implements Command{
         );
     }
     
-    private MessageEmbed welcomeSettings(Member member, Guild guild, boolean hasImage){
-        TextChannel tc = getWelcomeChannel(guild.getId());
+    private void welcomeSettings(TextChannel tc, Member member, InputStream file){
+        Guild guild = tc.getGuild();
+        String welcomeChannel = getWelcomeChannel(guild.getId());
 
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
-                .setTitle("Current welcome settings")
+                .setTitle(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.title")
+                )
                 .setDescription(
                         bot.getMsg(guild.getId(), "purr.guild.welcome.embed.current_settings")
                 )
@@ -87,7 +90,7 @@ public class CmdWelcome implements Command{
                 )
                 .addField(bot.getMsg(guild.getId(), "purr.guild.welcome.embed.channel"), String.format(
                         "%s",
-                        tc == null ? bot.getMsg(guild.getId(), "purr.guild.welcome.embed.no_channel") : tc.getAsMention()
+                        welcomeChannel
                 ), false)
                 .addField(
                         bot.getMsg(guild.getId(), "purr.guild.welcome.embed.image_title"),
@@ -103,15 +106,21 @@ public class CmdWelcome implements Command{
                         false
                 );
 
-        if(hasImage)
+        if(file == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+            tc.sendMessage(embed.build()).queue();
+        }else{
             embed.addField(
-                    bot.getMsg(guild.getId(), "purr.guild.welcome.embed.preview"), 
-                    EmbedBuilder.ZERO_WIDTH_SPACE, 
+                    bot.getMsg(guild.getId(), "purr.guild.welcome.embed.preview"),
+                    EmbedBuilder.ZERO_WIDTH_SPACE,
                     false
             )
             .setImage("attachment://welcome_preview.jpg");
+            
+            tc.sendMessage(embed.build())
+              .addFile(file, "welcome_preview.jpg")
+              .queue();
+        }
 
-        return embed.build();
     }
 
     private void update(TextChannel tc, Member member, Type type, String value){
@@ -190,15 +199,15 @@ public class CmdWelcome implements Command{
         ).queue();
     }
 
-    private TextChannel getWelcomeChannel(String id){
+    private String getWelcomeChannel(String id){
         if(bot.getWelcomeChannel(id).equals("none")) 
-            return null;
+            return bot.getMsg(id, "purr.guild.welcome.embed.no_channel");
         
         Guild guild = bot.getShardManager().getGuildById(id);
         if(guild == null)
-            return null;
+            return bot.getMsg(id, "purr.guild.welcome.embed.no_channel");
         
-        return guild.getTextChannelById(bot.getWelcomeChannel(id));
+        return String.format("<#%s>", bot.getWelcomeChannel(id));
     }
 
     private String firstUpperCase(String word){
@@ -212,26 +221,19 @@ public class CmdWelcome implements Command{
 
         if(args.length < 1){
             tc.sendTyping().queue(v -> {
-                InputStream is;
+                InputStream image;
                 try{
-                    is = bot.getImageUtil().getWelcomeImg(
+                    image = bot.getImageUtil().getWelcomeImg(
                             msg.getMember(),
                             bot.getWelcomeIcon(guild.getId()),
                             bot.getWelcomeBg(guild.getId()),
                             bot.getWelcomeColor(guild.getId())
                     );
                 }catch(IOException ex){
-                    is = null;
+                    image = null;
                 }
-    
-                if(is == null){
-                    tc.sendMessage(welcomeSettings(member, guild, false)).queue();
-                    return;
-                }
-    
-                tc.sendMessage(welcomeSettings(member, guild, true))
-                        .addFile(is, "welcome_preview.jpg")
-                        .queue();
+                
+                welcomeSettings(tc, member, image);
             });
             return;
         }
@@ -341,10 +343,10 @@ public class CmdWelcome implements Command{
                             )
                             .addField(
                                     bot.getMsg(guild.getId(), "purr.guild.welcome.placeholders_title"),
-                                    "`{count}`\n" +
-                                    "`{guild}`\n" +
+                                    "`{count}` / `{members}`\n" +
+                                    "`{guild}` / `{server}`\n" +
                                     "`{mention}`\n" +
-                                    "`{name}`\n" +
+                                    "`{name}` / `{username}`\n" +
                                     "`{r_mention:<id>}`\n" +
                                     "`{r_name:<id>}`",
                                     false
@@ -379,46 +381,26 @@ public class CmdWelcome implements Command{
                     }catch(IOException ex){
                         image = null;
                     }
-    
-                    if(image == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
-                        tc.sendMessage(bot.getMessageUtil().parsePlaceholders(
-                                bot.getWelcomeMsg(guild.getId()),
-                                member
-                        )).queue();
-                        return;
-                    }
-    
-                    tc.sendMessage(bot.getMessageUtil().parsePlaceholders(
-                            bot.getWelcomeMsg(guild.getId()),
-                            member
-                    ))
-                            .addFile(image, "welcome_preview.jpg")
-                            .queue();
+                    
+                    bot.getMessageUtil().sendWelcomeMsg(tc, bot.getWelcomeMsg(guild.getId()), member, image);
                 });
                 break;
 
             default:
                 tc.sendTyping().queue(v -> {
-                    InputStream is;
+                    InputStream image;
                     try{
-                        is = bot.getImageUtil().getWelcomeImg(
+                        image = bot.getImageUtil().getWelcomeImg(
                                 member,
                                 bot.getWelcomeIcon(guild.getId()),
                                 bot.getWelcomeBg(guild.getId()),
                                 bot.getWelcomeColor(guild.getId())
                         );
                     }catch(IOException ex){
-                        is = null;
+                        image = null;
                     }
     
-                    if(is == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
-                        tc.sendMessage(welcomeSettings(member, guild, false)).queue();
-                        return;
-                    }
-    
-                    tc.sendMessage(welcomeSettings(member, guild, true))
-                            .addFile(is, "welcome_preview.jpg")
-                            .queue();
+                    welcomeSettings(tc, member, image);
                 });
         }
     }

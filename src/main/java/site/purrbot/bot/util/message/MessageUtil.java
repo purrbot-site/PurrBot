@@ -18,12 +18,15 @@
 
 package site.purrbot.bot.util.message;
 
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 
 import java.awt.Color;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -115,7 +118,7 @@ public class MessageUtil {
         return color;
     }
 
-    public String parsePlaceholders(String message, Member member){
+    public void sendWelcomeMsg(TextChannel tc, String message, Member member, InputStream file){
         Guild guild = member.getGuild();
     
         Matcher roleMatcher = rolePattern.matcher(message);
@@ -151,14 +154,17 @@ public class MessageUtil {
                         break;
                     
                     case "name":
+                    case "username":
                         matcher.appendReplacement(buffer, member.getEffectiveName());
                         break;
                     
                     case "guild":
+                    case "server":
                         matcher.appendReplacement(buffer, guild.getName());
                         break;
                     
                     case "count":
+                    case "members":
                         matcher.appendReplacement(buffer, String.valueOf(guild.getMemberCount()));
                         break;
                 }
@@ -168,8 +174,17 @@ public class MessageUtil {
             message = buffer.toString();
         }
         
-        return message.replace("@everyone", "everyone")
-                .replace("@here", "here");
+        if(file == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+            tc.sendMessage(message).queue();
+            return;
+        }
+        
+        tc.sendMessage(message)
+          .addFile(file, String.format(
+                  "welcome_%s.jpg",
+                  member.getId()
+          ))
+          .queue();
     }
 
     public String getBotGame(){
