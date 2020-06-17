@@ -352,6 +352,20 @@
         "no_value": "Sõnumil ei ole pilte ega teksti mida tsiteerida!",
         "nsfw_channel": "Kanal mida mainisid ({channel}) on NSFW märgisega, aga see kanal ei ole!\nMa ei tsiteeri sõnumeid NSFW märgisega kanalitest NSFW märgiseta kanalisse."
       },
+      "shards": {
+        "embed": {
+          "current_title": "Praegune kild?",
+          "guilds_title": "Gildid",
+          "ping_title": "Ping (ms)",
+          "status_title": "Staatus",
+          "title": "Killu info [{shard_id}/{shard_total}]"
+        },
+        "status": {
+          "connected": "Ühendatud",
+          "disconnected": "Katkestatud",
+          "reconnect": "Taasühendamine..."
+        }
+      },
       "stats": {
         "uptime": {
           "day": "päev",

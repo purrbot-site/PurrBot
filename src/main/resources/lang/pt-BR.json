@@ -352,6 +352,20 @@
         "no_value": "A mensagem não tem nenhuma imagem(ns) nem nenhum texto para citar!",
         "nsfw_channel": "O canal que você mencionou ({channel}) está marcado como NSFW, enquanto este canal não está!\nNão citarei mensagens de canais NSFW em canais não-NSFW-por segurança."
       },
+      "shards": {
+        "embed": {
+          "current_title": "Fragmento atual?",
+          "guilds_title": "Guildas",
+          "ping_title": "Ping (ms)",
+          "status_title": "Status",
+          "title": "Informações de fragmento [{shard_id}/{shard_total}]"
+        },
+        "status": {
+          "connected": "Conectado",
+          "disconnected": "Desconectado",
+          "reconnect": "Reconectando..."
+        }
+      },
       "stats": {
         "uptime": {
           "day": "dia",
