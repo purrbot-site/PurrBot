@@ -1,0 +1,41 @@
+labels:
+  - name: 'Type: Support request'
+    labeled:
+      issue:
+        body: |-
+          Hello @{{ sender.login }},
+          
+          Thank you for reaching out to us.
+          Unfortunately is the issue tracker not the right place to ask questions.
+          Please join our [Discord Server](https://purrbot.site/discord) or check out the [Wiki](https://docs.purrbot.site/bot).
+        action: close
+  - name: 'Type: Duplicate'
+    labeled:
+      issue:
+        body: |-
+          Your issue is already known and a separate issue with the exact same report/feature request already exist.
+          
+          Please comment on the already existing issue with your information instead of opening your own.
+        action: close
+  - name: 'Problem: Need more info'
+    labeled:
+      issue:
+        body: |-
+          In order to help you with the issue/bug you encounter do we need more information about the issue in particular.
+          
+          Please make sure to (at least) provide the following information:
+          - Where does it happen?
+              - Provide the ID of the Server, if it happens there.
+              - The bot won't work in Private messages.
+          - What permissions does the Bot have?
+    unlabeled:
+      issue:
+        body: |-
+          Thank you for providing additional information.
+          The developer will look at your issue and let you know about any possible fixes.
+  - name: 'Result: Invalid issue'
+    labeled:
+      issue:
+        body: |-
+          Your issue has beeen marked as invalid.
+          Make sure to use and follow the provided issue templates as blank ones will be ignored.
