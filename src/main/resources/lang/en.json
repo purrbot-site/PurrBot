@@ -47,6 +47,10 @@
         "message": "{user} cuddles with you {targets}",
         "no_mention": "Please mention at least one user to cuddle!"
       },
+      "eevee": {
+        "loading": "{LOADING} Capturing a cute Eevee...",
+        "title": "Eevee"
+      },
       "feed": {
         "mention_bot": "Bots can't eat food silly! They can only eat your data. O_O",
         "mention_purr": "Food? For me? Thank chu {user}! \\*noms food and wags tail*",
