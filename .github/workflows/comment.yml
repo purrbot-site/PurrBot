@@ -1,0 +1,20 @@
+name: Comment
+
+on:
+  issues:
+    types:
+    - labeled
+    - unlabeled
+  pull_requests:
+    types:
+    - labeled
+    - unlabeled
+
+jobs:
+  give_comment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send Issue/Pull request comment
+      uses: peaceiris/actions-label-commenter@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
