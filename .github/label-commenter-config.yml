@@ -3,8 +3,9 @@ labels:
     labeled:
       issue:
         body: |-
-          Thank you for reaching out to us!
+          Hello @{{ sender.login }},
           
+          Thank you for reaching out to us.
           Unfortunately is the issue tracker not the right place to ask questions.
           Please join our [Discord Server](https://purrbot.site/discord) or check out the [Wiki](https://docs.purrbot.site/bot).
         action: close
