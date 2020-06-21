@@ -258,7 +258,7 @@
         "command_info": {
           "aliases": "같은 명령어",
           "command_nsfw": "이 명령어는 연령 제한 채널에서만 사용할 수 있어.",
-          "no_command": "그런 명령어는 없어!\n제대로 친 게 맞는지 확인해 봐.",
+          "no_command": "`{command}`는 존재하지 않는 명령어야.\n제대로 쳤는지, 아니면 지원하는 명령어가 맞는지 다시 확인해 봐!\n\n**참고**: 카테고리 (Fun, Guild, Info, NSFW) 는 명령어가 아니야!",
           "title": "명령어 도움말: {command}",
           "usage_title": "사용법",
           "usage_value": "```\n{commands}\n```\n`[]` = 선택가능\n`<>` = 필수"
@@ -297,8 +297,9 @@
           },
           "commands_title": "명령어",
           "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
+          "donators_more": "...그리고 {remaining} 명의 추가 후원자들!",
           "donators_title": "후원자",
-          "donators_value": "모든 후원자들에 대한 목록은 지속여부에 관계없이 여기에 있습니다.\n이 리스트에 들어오고 싶으시다면, ~Nya 디스코드 서버에 들어와 Andre_601에게 후원사실을 알려주세요.",
+          "donators_value": "모든 후원자들에 대한 목록은 지속여부에 관계없이 여기에 있습니다.\n이 리스트에 들어오고 싶으시다면, ~Nya 디스코드 서버에 들어와 후원해주세요. (자세한 사항은 Andre_601에게 문의하세요)",
           "links": {
             "discord": "`공식 디스코드`",
             "github": "`GitHub`",
