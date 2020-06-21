@@ -258,7 +258,7 @@
         "command_info": {
           "aliases": "Aliased",
           "command_nsfw": "Palun kasuta seda käsklust NSFW märgisega kanalis!",
-          "no_command": "Seda käsklust ei eksisteeri!\nTee kindlaks et kirjutasid käskluse õigesti .\n\n**Märkus**: Katekooriad (nt NSFW) ei ole käsklused!",
+          "no_command": "Sisestatud käsklust (`{command}`) ei eksisteeri!\nTee kindlaks et kirjutasid käskluse õigesti ja sisestasid ainult käskluse nime .\n\n**Märkus**: Katekooriad (nt NSFW) ei ole käsklused!",
           "title": "Abikäsklus: {command}",
           "usage_title": "Kasutusvõimalused",
           "usage_value": "```\n{commands}\n```\n`[]` = Valikulised\n`<>` = Kohustuslikud"
@@ -297,8 +297,9 @@
           },
           "commands_title": "Käsklused",
           "commands_value": "Sisesta `{prefix}help` et saada nimekirja erinevatest käsklustest.",
+          "donators_more": "Ja {remaining} veel...",
           "donators_title": "Annetajad",
-          "donators_value": "Kõik annetajad (Nii ühekordsed kui ka igakuised) näidatakse siin.\nEt saada ka nimistusse, ole kindel et oled ~Nya Discordis ja anna Andre_601 teada oma annetusest.",
+          "donators_value": "Kõik annetajad (Nii ühekordsed kui ka igakuised) näidatakse siin.\nEt saada ka nimistusse, tee annetus ja ole kindel et oled ~Nya Discordis (Kontakteeru Andre_601 muudeks põhjusteks) .",
           "links": {
             "discord": "`Discord (Tugi)`",
             "github": "`GitHub`",
