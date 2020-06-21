@@ -258,7 +258,7 @@
         "command_info": {
           "aliases": "Aliases",
           "command_nsfw": "Please run this command in a NSFW channel.",
-          "no_command": "This command doesn't exist!\nMake sure you typed it correctly.\n\n**Note**: Categories (e.g. NSFW) are NOT commands!",
+          "no_command": "The provided command (`{command}`) doesn't exist!\nMake sure you typed it correctly and only provided the command name!\n\n**Note**: Categories (Fun, Guild, Info, NSFW) are NOT commands!",
           "title": "Command help: {command}",
           "usage_title": "Usage options",
           "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Required"
@@ -297,8 +297,9 @@
           },
           "commands_title": "Commands",
           "commands_value": "Use `{prefix}help` in the Discord for a list of commands.",
+          "donators_more": "And {remaining} more...",
           "donators_title": "Donators",
-          "donators_value": "All donators (Either single or continued donations) are listed here.\nTo get listed too, make sure to be on the ~Nya Discord and let Andre_601 know about it.",
+          "donators_value": "All donators (Either single or continued donations) are listed here.\nTo get listed too, make a donation and be sure to be on the ~Nya Discord (Contact Andre_601 for everything else).",
           "links": {
             "discord": "`Discord (Support)`",
             "github": "`GitHub`",
