@@ -47,6 +47,10 @@
         "message": "{user} knuddelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum knuddeln!"
       },
+      "eevee": {
+        "loading": "{LOADING} Fange ein süsses Evoli...",
+        "title": "Evoli"
+      },
       "feed": {
         "mention_bot": "Bots können keine Nahrung essen Dummerchen! Sie können nur deine Daten essen. O_O",
         "mention_purr": "Essen? Für mich? Danke schön {user}! \\*Isst das Essen wedelt mit dem Schwanz*",
