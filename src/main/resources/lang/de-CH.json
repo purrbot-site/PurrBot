@@ -258,7 +258,7 @@
         "command_info": {
           "aliases": "Aliase",
           "command_nsfw": "Bitte verwende diesen Befehl in einem NSFW-Kanal",
-          "no_command": "Dieser Befehl existiert nicht!\nStell sicher, dass du ihn richtig geschrieben hast.\n\n**Wichtig**: Kategorien (z.B. NSFW) sind NICHT Befehle.",
+          "no_command": "Der angegebene Befehl (`{command}`) existiert nicht!\nStelle sicher, dass du ihn korrekt eingegeben hast und nur den Befehlsnamen angegeben hast!\n\n**Hinweis**: Kategorien (Fun, Gilde, Info, NSFW) sind KEINE Befehle!",
           "title": "Befehls-Hilfe: {command}",
           "usage_title": "Verwendungs Optionen",
           "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Benötigt"
@@ -297,8 +297,9 @@
           },
           "commands_title": "Befehle",
           "commands_value": "Verwende `{prefix}help` im Discord für eine Liste von Befehlen.",
+          "donators_more": "Und {remaining} weitere...",
           "donators_title": "Spender",
-          "donators_value": "Alle Spender (Egak ob einzelne oder wiederkehrende Spenden) sind hier gelisted.\nUm auch gelistet zu werden, stell sicher, dass du auf dem ~Nya Discord bist und lasse Andre_601 darüber wissen.",
+          "donators_value": "Alle Spender (Egak ob einzelne oder wiederkehrende Spenden) sind hier gelisted.\nUm auch gelistet zu werden, mache eine Spende und stell sicher, dass du auf dem ~Nya Discord bist (Kontaktiere Andre_601 für alles weitere).",
           "links": {
             "discord": "`Discord (Support)`",
             "github": "`GitHub`",
