@@ -47,6 +47,10 @@
         "message": "{user} kaisutab sinuga {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kaisutada!"
       },
+      "eevee": {
+        "loading": "{LOADING} Püüan armast Eeveet...",
+        "title": "Eevee"
+      },
       "feed": {
         "mention_bot": "Botid ei saa süüa totu! Nad saavad süüa ainult sinu andmeid. O_O",
         "mention_purr": "Söök? Minule? Aitäh {user}! \\*Näksib toitu ja liputab saba*",
