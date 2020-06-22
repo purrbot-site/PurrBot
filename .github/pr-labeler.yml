@@ -1,1 +1,5 @@
+#
+# This makes the pr-labeler action automatically apply the "Type: Translation" label to
+# any Pull request that has the l10n_master branch as base branch.
+#
 'Type: Translation': l10n_master
