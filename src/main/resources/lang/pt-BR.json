@@ -47,6 +47,10 @@
         "message": "{user} te abraça você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para dar um abraço!"
       },
+      "eevee": {
+        "loading": "{LOADING} Capturando um Eevee fofinho...",
+        "title": "Eevee"
+      },
       "feed": {
         "mention_bot": "Os bots não podem comer comida bobinho(a)! Eles só podem comer os seus dados. O_O",
         "mention_purr": "Comida? Para mim? Obrigado {user}! \\*come a comida e balança sua cauda*",
