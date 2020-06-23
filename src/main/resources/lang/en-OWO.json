@@ -47,6 +47,10 @@
         "message": "{user} cuddwes with you {targets}",
         "no_mention": "Pwease mention at weast one user to cuddwe!"
       },
+      "eevee": {
+        "loading": "{LOADING} Captuwing a cute Eevee... UwU",
+        "title": "Eevee"
+      },
       "feed": {
         "mention_bot": "Bots can't eat food siwwy! They can onwy eat your data. O_O",
         "mention_purr": "Food? Fow me OwO? Thank chu {user}! \\*noms food and wags tail* UwU",
@@ -258,7 +262,7 @@
         "command_info": {
           "aliases": "Awiases",
           "command_nsfw": "Pwease wun this command in a NSFW channel. ÒwÓ",
-          "no_command": "This command doesn't exist!\nMake suwe you typed it correctly.\n\n**Note**: Categowies (e.g. NSFW) awe NOT commands!",
+          "no_command": "The pwovided command (`{command}`) doesn't exist! -w-\nMake suwe you typed it cowwectwy and onwy pwovided the command name!\n\n**Note**: Categowies (Fun, Guild, Info, NSFW) are NOT commands!",
           "title": "Command hewp: {command}",
           "usage_title": "Usage options",
           "usage_value": "```\n{commands}\n```\n`[]` = Optionaw\n`<>` = Requiwed"
@@ -297,8 +301,9 @@
           },
           "commands_title": "Commands",
           "commands_value": "Use `{prefix}help` in the Discord for a wist of commands.",
+          "donators_more": "And {remaining} mowe...",
           "donators_title": "Donatows",
-          "donators_value": "Aww donatows (Eithew singwe ow continued donations) awe wisted hewe.\nTo get wisted too, make suwe to be on the ~Nya Discowd and wet Andre_601 know about it!",
+          "donators_value": "Aww donatows (Eithew singwe ow continued donations) are wisted hewe.\nTo get wisted too, make a donation and be sure to be on the ~Nya Discowd (Contact Andre_601 for evewything ewse). OwO",
           "links": {
             "discord": "`Discord (Suppowt)`",
             "github": "`GitHub`",
@@ -355,15 +360,15 @@
       "shards": {
         "embed": {
           "current_title": "Cuwwent Shawd?",
-          "guilds_title": "Guilds",
+          "guilds_title": "Guiwds",
           "ping_title": "Ping (ms)",
           "status_title": "Status",
           "title": "Shawd Info [{shard_id}/{shard_total}]"
         },
         "status": {
-          "connected": "Connected",
-          "disconnected": "Disconnected",
-          "reconnect": "Weconnecting..."
+          "connected": "Connected UwU",
+          "disconnected": "Disconnected >:C",
+          "reconnect": "Weconnecting... UwU"
         }
       },
       "stats": {
