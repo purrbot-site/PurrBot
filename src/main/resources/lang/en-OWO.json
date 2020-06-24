@@ -5,7 +5,6 @@
   "errors": {
     "administrator": "**Administwatow Pewmission**\nI have Administwatow wights for this Discord.\nThis is a huge secuwity wisk and should be avoided. Do NOT give bots Administwatow!\nPwease wemove the Administwatow pewmission and instead setup the wequiwed pewmissions.\n__I won't handwe any commands as wong as this pewmission is gwanted!__",
     "api_error": "Thewe was an ewwow weaching the API! Pwease twy again water.",
-    "guild_only": "This command can onwy be used in [my Discord]({link})!",
     "missing_perms": {
       "self": "I lack the pewmission `{permssion}` fow this. :c",
       "self_channel": "I lack the pewmission `{permission}` in the channew {channel} to do this!",
