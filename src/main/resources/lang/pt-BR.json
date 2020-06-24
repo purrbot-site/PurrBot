@@ -5,7 +5,6 @@
   "errors": {
     "administrator": "**Permissão de Administrador**\nEu tenho direitos de administrador para este Discord.\nIsso é um grande risco de segurança e deve ser evitado. NÃO dê um administrador de bots!\nPor favor remova a permissão de administrador e, em vez disso, configure as permissões necessárias.\n__Eu não vou lidar com nenhum comando enquanto essa permissão for concedida!__",
     "api_error": "Houve um erro alcançando a API! Tente novamente mais tarde.",
-    "guild_only": "Esse comando só pode ser usado no [meu Discord]({link})!",
     "missing_perms": {
       "self": "Eu preciso da permissão `{permission}` para isso.",
       "self_channel": "Eu preciso da permissão `{permission}` no canal {channel} para fazer isso!",
