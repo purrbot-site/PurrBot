@@ -5,7 +5,6 @@
   "errors": {
     "administrator": "**관리자 권한**\n이 서버에서 나는 관리자 권한을 갖고 있어.\n되도록이면 나나 다른 봇들에게 관리자 권한을 안주는게 좋을거야. 엄청 큰 보안 위협이 있거든.\n정말 미안하지만 나에게서 관리자 권한을 없애주고 required permissions(권장 권한)으로 다시 불러와 줘.\n__앞으로의 위협을 막기 위해 권한 뺄 때 까지 반응 안할거야!__",
     "api_error": "API 요청에 실패했어! 나중에 다시 시도해줘.",
-    "guild_only": "이 명령어는 [내 서버]({link})에서만 사용할 수 있어!",
     "missing_perms": {
       "self": "`{permission}` 권한이 없어서 할 수 없어!",
       "self_channel": "나에게는 {channel} 채널을 위한 `{permission}` 권한이 없어!",
@@ -46,6 +45,10 @@
         "mention_purr": "\\*{user}와 부비부비를 즐기는 중*",
         "message": "{user}이(가) {targets}(이)랑 부비부비하고 있어!",
         "no_mention": "최소한 부비부비할 상대 한명을 언급해줘!"
+      },
+      "eevee": {
+        "loading": "{LOADING} 귀여운 이브이 잡아오는 중...",
+        "title": "이브이"
       },
       "feed": {
         "mention_bot": "봇은 음식을 못먹는다구, 바보! 걔들은 니 데이터에나 관심있어. O_O",
