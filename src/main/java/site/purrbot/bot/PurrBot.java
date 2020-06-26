@@ -26,6 +26,7 @@ import net.discordservices.dservices4j.exceptions.RatelimitedException;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.botblock.javabotblockapi.BotBlockAPI;
 import org.botblock.javabotblockapi.Site;
@@ -129,6 +130,7 @@ public class PurrBot {
                 .addLang("en-OWO")
                 .addLang("et-EE")
                 .addLang("ko-KR")
+                .addLang("pt-BR")
                 .addLang("ru-RU");
 
         dbUtil      = new DBUtil(this);

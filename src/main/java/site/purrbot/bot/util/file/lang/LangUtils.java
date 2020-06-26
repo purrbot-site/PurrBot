@@ -36,6 +36,7 @@ public final class LangUtils {
             case "en-owo":
             case "et-ee":
             case "ko-kr":
+            case "pt-br":
             case "ru-ru":
                 return bot.getFileManager().getString(language.toLowerCase(), path);
                 
@@ -51,6 +52,7 @@ public final class LangUtils {
             case "en-owo":
             case "et-ee":
             case "ko-kr":
+            case "pt-br":
             case "ru-ru":
                 return bot.getFileManager().getStringlist(language.toLowerCase(), path);
             

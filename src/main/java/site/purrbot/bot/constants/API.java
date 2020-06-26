@@ -21,6 +21,7 @@ package site.purrbot.bot.constants;
 public enum API {
 
     IMG_BACKGROUND(false, "background", false),
+    IMG_EEVEE     (false, "eevee",      false),
     IMG_HOLO      (false, "holo",       false),
     IMG_ICON      (false, "icon",       false),
     IMG_KITSUNE   (false, "kitsune",    false),
@@ -31,7 +32,8 @@ public enum API {
 
     GIF_BITE  (false, "bite",   true),
     GIF_CUDDLE(false, "cuddle", true),
-    GIF_FEED  (false, "feed", true),
+    GIF_EEVEE (false, "eevee",  true),
+    GIF_FEED  (false, "feed",   true),
     GIF_HUG   (false, "hug",    true),
     GIF_KISS  (false, "kiss",   true),
     GIF_LICK  (false, "lick",   true),

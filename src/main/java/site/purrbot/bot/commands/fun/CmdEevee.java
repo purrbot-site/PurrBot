@@ -28,41 +28,48 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
 
 @CommandDescription(
-        name = "Holo",
-        description = "Gives a lovely image of Holo from the anime \"Spice and Wolf\"",
-        triggers = {"holo", "spiceandwolf"},
+        name = "Eevee",
+        description = "Get a image/gif of an adorable Eevee.",
+        triggers = {"eevee"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}holo"),
-                @CommandAttribute(key = "help", value = "{p}holo")
+                @CommandAttribute(key = "usage", value = "{p}eevee [--gif]"),
+                @CommandAttribute(key = "help", value = "{p}eevee [--gif]")
         }
 )
-public class CmdHolo implements Command{
-
+public class CmdEevee implements Command{
+    
     private final PurrBot bot;
-
-    public CmdHolo(PurrBot bot){
+    
+    public CmdEevee(PurrBot bot){
         this.bot = bot;
     }
-
+    
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        String link = bot.getHttpUtil().getImage(API.IMG_HOLO);
-
+        
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
-
+    
+        String s = msg.getContentRaw();
+        String link;
+        if(s.toLowerCase().contains("--gif"))
+            link = bot.getHttpUtil().getImage(API.GIF_EEVEE);
+        else
+            link = bot.getHttpUtil().getImage(API.IMG_EEVEE);
+        
+        
         if(link == null){
             bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
             return;
         }
-
-        MessageEmbed holo = bot.getEmbedUtil().getEmbed(member)
-                .setTitle(bot.getMsg(guild.getId(), "purr.fun.holo.title"), link)
+    
+        MessageEmbed eevee = bot.getEmbedUtil().getEmbed(member)
+                .setTitle(bot.getMsg(guild.getId(), "purr.fun.eevee.title"), link)
                 .setImage(link)
                 .build();
-
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.holo.loading"))
-                .queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(holo).queue());
+        
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.eevee.loading"))
+                .queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(eevee).queue());
     }
 }

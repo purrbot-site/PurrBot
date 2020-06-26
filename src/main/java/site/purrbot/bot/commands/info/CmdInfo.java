@@ -18,18 +18,22 @@
 
 package site.purrbot.bot.commands.info;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDAInfo;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
@@ -47,6 +51,10 @@ import java.util.concurrent.TimeUnit;
 )
 public class CmdInfo implements Command{
 
+    private final Cache<String, String> cache = Caffeine.newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
+    
     private final PurrBot bot;
 
     public CmdInfo(PurrBot bot){
@@ -142,14 +150,34 @@ public class CmdInfo implements Command{
         return MarkdownUtil.maskedLink(text, link);
     }
     
+    private String getUser(String id){
+        User user = bot.getShardManager().retrieveUserById(id).complete();
+        
+        return MarkdownSanitizer.escape(String.format("%s (%s)", user.getAsTag(), user.getAsMention()));
+    }
+    
     private String getDonators(String id){
         StringBuilder builder = new StringBuilder(bot.getMsg(id, "purr.info.info.embed.donators_value")).append("\n");
-        for(String userId : bot.getDonators()){
+        List<String> donators = bot.getDonators();
+        
+        for(int i = 0; i < donators.size(); i++){
+            int finalI = i;
+            String donator = cache.get(donators.get(i), k -> getUser(donators.get(finalI)));
+            if(donator == null)
+                continue;
+            
+            if(builder.length() + donator.length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
+                int remaining = donators.size() - i;
+                
+                builder.append("\n").append(bot.getMsg(id, "purr.info.embed.donators_more")
+                       .replace("{remaining}", String.valueOf(remaining))
+                );
+                
+                break;
+            }
             
             builder.append("\n")
-                   .append("<@")
-                   .append(userId)
-                   .append(">");
+                   .append(donator);
         }
         
         return builder.toString();

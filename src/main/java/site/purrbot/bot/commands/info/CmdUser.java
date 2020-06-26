@@ -65,7 +65,7 @@ public class CmdUser implements Command{
 
                 sb.append(
                         bot.getMsg(member.getGuild().getId(), "purr.info.user.more_roles")
-                                .replace("{remaining}", String.valueOf(rolesLeft))
+                           .replace("{remaining}", String.valueOf(rolesLeft))
                 );
                 break;
             }

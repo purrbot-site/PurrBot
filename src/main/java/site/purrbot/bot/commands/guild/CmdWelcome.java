@@ -348,7 +348,8 @@ public class CmdWelcome implements Command{
                                     "`{mention}`\n" +
                                     "`{name}` / `{username}`\n" +
                                     "`{r_mention:<id>}`\n" +
-                                    "`{r_name:<id>}`",
+                                    "`{r_name:<id>}`\n" +
+                                    "`{tag}`",
                                     false
                             )
                             .build();

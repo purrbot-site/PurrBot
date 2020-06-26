@@ -167,6 +167,10 @@ public class MessageUtil {
                     case "members":
                         matcher.appendReplacement(buffer, String.valueOf(guild.getMemberCount()));
                         break;
+                    
+                    case "tag":
+                        matcher.appendReplacement(buffer, member.getUser().getAsTag());
+                        break;
                 }
             }while(matcher.find());
             

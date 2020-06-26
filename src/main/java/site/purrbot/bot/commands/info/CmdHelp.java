@@ -196,7 +196,16 @@ public class CmdHelp implements Command{
             Command command = (Command)bot.getCmdHandler().findCommand(args[0]);
 
             if(command == null || !isCommand(command)){
-                bot.getEmbedUtil().sendError(tc, member, "purr.info.help.command_info.no_command");
+                MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
+                        .setColor(0xFF0000)
+                        .setDescription(
+                                bot.getMsg(guild.getId(), "purr.info.help.command_info.no_command")
+                                   .replace("{command}", args[0])
+                        )
+                        .build();
+                
+                tc.sendMessage(embed).queue();
+                
                 return;
             }
 
