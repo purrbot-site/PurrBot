@@ -5,7 +5,6 @@
   "errors": {
     "administrator": "**Administrator Berechtigung**\nIch habe Administrator Rechte für diesen Discord.\nDies ist ein grosses Sicherheitsrisiko und sollte vermieden werden. Gib Bots KEIN Administrator!\nBitte entferne die Administrator Berechtigung und setzte stattdessen die verlangten Rechte.\n__Ich werden keine Befehle ausführen, so lange ich diese Berechtigung habe!__",
     "api_error": "Es gab einen Fehler beim erreichen der API! Bitte versuch es später erneut.",
-    "guild_only": "Dieser Befehl kann nur in [meinem Discord]({link}) verwendet werden!",
     "missing_perms": {
       "self": "Mir fehlt die Berechtigung `{permission}` dafür.",
       "self_channel": "Mir fehlt die Berechtigung `{permission}` im Textkanal {channel} dafür!",
@@ -46,6 +45,10 @@
         "mention_purr": "\\*geniest das knuddeln von {user}*",
         "message": "{user} knuddelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum knuddeln!"
+      },
+      "eevee": {
+        "loading": "{LOADING} Fange ein süsses Evoli...",
+        "title": "Evoli"
       },
       "feed": {
         "mention_bot": "Bots können keine Nahrung essen Dummerchen! Sie können nur deine Daten essen. O_O",
@@ -258,7 +261,7 @@
         "command_info": {
           "aliases": "Aliase",
           "command_nsfw": "Bitte verwende diesen Befehl in einem NSFW-Kanal",
-          "no_command": "Dieser Befehl existiert nicht!\nStell sicher, dass du ihn richtig geschrieben hast.\n\n**Wichtig**: Kategorien (z.B. NSFW) sind NICHT Befehle.",
+          "no_command": "Der angegebene Befehl (`{command}`) existiert nicht!\nStelle sicher, dass du ihn korrekt eingegeben hast und nur den Befehlsnamen angegeben hast!\n\n**Hinweis**: Kategorien (Fun, Gilde, Info, NSFW) sind KEINE Befehle!",
           "title": "Befehls-Hilfe: {command}",
           "usage_title": "Verwendungs Optionen",
           "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Benötigt"
@@ -297,8 +300,9 @@
           },
           "commands_title": "Befehle",
           "commands_value": "Verwende `{prefix}help` im Discord für eine Liste von Befehlen.",
+          "donators_more": "Und {remaining} weitere...",
           "donators_title": "Spender",
-          "donators_value": "Alle Spender (Egak ob einzelne oder wiederkehrende Spenden) sind hier gelisted.\nUm auch gelistet zu werden, stell sicher, dass du auf dem ~Nya Discord bist und lasse Andre_601 darüber wissen.",
+          "donators_value": "Alle Spender (Egak ob einzelne oder wiederkehrende Spenden) sind hier gelisted.\nUm auch gelistet zu werden, mache eine Spende und stell sicher, dass du auf dem ~Nya Discord bist (Kontaktiere Andre_601 für alles weitere).",
           "links": {
             "discord": "`Discord (Support)`",
             "github": "`GitHub`",

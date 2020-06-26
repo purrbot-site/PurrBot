@@ -5,7 +5,6 @@
   "errors": {
     "administrator": "**Permissão de Administrador**\nEu tenho direitos de administrador para este Discord.\nIsso é um grande risco de segurança e deve ser evitado. NÃO dê um administrador de bots!\nPor favor remova a permissão de administrador e, em vez disso, configure as permissões necessárias.\n__Eu não vou lidar com nenhum comando enquanto essa permissão for concedida!__",
     "api_error": "Houve um erro alcançando a API! Tente novamente mais tarde.",
-    "guild_only": "Esse comando só pode ser usado no [meu Discord]({link})!",
     "missing_perms": {
       "self": "Eu preciso da permissão `{permission}` para isso.",
       "self_channel": "Eu preciso da permissão `{permission}` no canal {channel} para fazer isso!",
@@ -46,6 +45,10 @@
         "mention_purr": "\\*aprecia o abraço de {user}*",
         "message": "{user} te abraça você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para dar um abraço!"
+      },
+      "eevee": {
+        "loading": "{LOADING} Capturando um Eevee fofinho...",
+        "title": "Eevee"
       },
       "feed": {
         "mention_bot": "Os bots não podem comer comida bobinho(a)! Eles só podem comer os seus dados. O_O",
@@ -258,7 +261,7 @@
         "command_info": {
           "aliases": "Apelidos",
           "command_nsfw": "Por favor, execute esse comando em um canal NSFW.",
-          "no_command": "Este comando não existe!\nCertifique-se de que você o digitou corretamente.\n\n**Nota**: Categorias (por exemplo, NSFW) NÃO são comandos!",
+          "no_command": "O comando fornecido (`{command}`) não existe!\nCertifique-se de digitá-lo corretamente e somente informe o nome do comando!\n\n**Nota**: Categorias (Diversão, Guilda, Informação, NSFW) NÃO são comandos!",
           "title": "Ajuda no comando: {command}",
           "usage_title": "Opções de uso",
           "usage_value": "```\n{commands}\n```\n`[]` = Opcional\n`<>` = Obrigatório"
@@ -297,8 +300,9 @@
           },
           "commands_title": "Comandos",
           "commands_value": "Use `{prefix}help` no Discord para uma lista de comandos.",
+          "donators_more": "E mais {remaining}...",
           "donators_title": "doadores",
-          "donators_value": "Todos os doadores (Doações individuais ou contínuas) estão listados aqui.\nPara ficar listado também, certifique-se de estar no Discord do ~Nya e avise o Andre_601 a respeito.",
+          "donators_value": "Todos os doadores (Doações individuais ou contínuas) estão listados aqui.\nPara ficar listado também, certifique-se de estar no Discord ~Nya (Entre em contato com Andre_601 para tudo mais).",
           "links": {
             "discord": "`Discord (Support)`",
             "github": "`GitHub`",

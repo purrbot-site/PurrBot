@@ -5,7 +5,6 @@
   "errors": {
     "administrator": "**Administraatori load**\nMul on administraatori load siin Discordis.\nSee on suur turvaauk mida tuleks vältida. ÄRA ANNA bottidele administraatori õiguseid!\nPalun eemalda administraatori õigused ja seadista ainult vajalikud sätted.\n__Ma ei võta käsklusi selle loaga vastu!__",
     "api_error": "Tekkis viga API ühenduses! Palun proovi hiljem uuesti.",
-    "guild_only": "Seda käsklust saab kasutada ainult [minu Discord] ({link})!",
     "missing_perms": {
       "self": "Mul puudub luba `{permission}` selle jaoks.",
       "self_channel": "Mul puudub luba `{permission}` kanalis {channel} et seda teostada!",
@@ -46,6 +45,10 @@
         "mention_purr": "\\*rõõmustab kasutaja {user} kaisutuse üle*",
         "message": "{user} kaisutab sinuga {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kaisutada!"
+      },
+      "eevee": {
+        "loading": "{LOADING} Püüan armast Eeveet...",
+        "title": "Eevee"
       },
       "feed": {
         "mention_bot": "Botid ei saa süüa totu! Nad saavad süüa ainult sinu andmeid. O_O",
@@ -258,7 +261,7 @@
         "command_info": {
           "aliases": "Aliased",
           "command_nsfw": "Palun kasuta seda käsklust NSFW märgisega kanalis!",
-          "no_command": "Seda käsklust ei eksisteeri!\nTee kindlaks et kirjutasid käskluse õigesti .\n\n**Märkus**: Katekooriad (nt NSFW) ei ole käsklused!",
+          "no_command": "Sisestatud käsklust (`{command}`) ei eksisteeri!\nTee kindlaks et kirjutasid käskluse õigesti ja sisestasid ainult käskluse nime .\n\n**Märkus**: Katekooriad (nt NSFW) ei ole käsklused!",
           "title": "Abikäsklus: {command}",
           "usage_title": "Kasutusvõimalused",
           "usage_value": "```\n{commands}\n```\n`[]` = Valikulised\n`<>` = Kohustuslikud"
@@ -297,8 +300,9 @@
           },
           "commands_title": "Käsklused",
           "commands_value": "Sisesta `{prefix}help` et saada nimekirja erinevatest käsklustest.",
+          "donators_more": "Ja {remaining} veel...",
           "donators_title": "Annetajad",
-          "donators_value": "Kõik annetajad (Nii ühekordsed kui ka igakuised) näidatakse siin.\nEt saada ka nimistusse, ole kindel et oled ~Nya Discordis ja anna Andre_601 teada oma annetusest.",
+          "donators_value": "Kõik annetajad (Nii ühekordsed kui ka igakuised) näidatakse siin.\nEt saada ka nimistusse, tee annetus ja ole kindel et oled ~Nya Discordis (Kontakteeru Andre_601 muudeks põhjusteks) .",
           "links": {
             "discord": "`Discord (Tugi)`",
             "github": "`GitHub`",
