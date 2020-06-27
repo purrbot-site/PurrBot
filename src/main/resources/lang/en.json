@@ -357,6 +357,12 @@
         "nsfw_channel": "The channel you mentioned ({channel}) is marked as NSFW, while this channel is not!\nI won't quote messages from NSFW-channels in non NSFW-channels for safety."
       },
       "shards": {
+        "average": {
+          "title": "Average",
+          "description": "Those are the average Ping and Guild count.",
+          "guilds": "Average Guilds per Shard",
+          "ping": "Average Ping per Shard"
+        },
         "embed": {
           "current_title": "Current Shard?",
           "guilds_title": "Guilds",
