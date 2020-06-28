@@ -364,7 +364,7 @@
           "ping": "Average Ping per Shard"
         },
         "embed": {
-          "current_title": "Current Shard?",
+          "current_title": "Your Shard?",
           "guilds_title": "Guilds",
           "ping_title": "Ping (ms)",
           "status_title": "Status",
