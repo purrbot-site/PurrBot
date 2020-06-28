@@ -7,3 +7,12 @@ updates:
   open-pull-requests-limit: 10
   labels:
   - "Type: Dependency update"
+  - "Target: Gradle"
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  labels:
+  - "Type: Dependency update"
+  - "Target: GitHub Actions"
