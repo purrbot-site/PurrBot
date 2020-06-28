@@ -357,8 +357,14 @@
         "nsfw_channel": "The channew you mentioned ({channel}) is marked as NSFW, whiwe this channew is not! ÒwÓ\nI won't quote messages fwom NSFW-channews in non NSFW-channews for safety. UwU"
       },
       "shards": {
+        "average": {
+          "title": "Avewage",
+          "description": "Those awe the avewage Ping and Guiwd counts.",
+          "guilds": "Avewage Guiwds pew Shawd.",
+          "ping": "Avewage Ping per Shawd"
+        },
         "embed": {
-          "current_title": "Cuwwent Shawd?",
+          "current_title": "Youw Shawd?",
           "guilds_title": "Guiwds",
           "ping_title": "Ping (ms)",
           "status_title": "Status",
