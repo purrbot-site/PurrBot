@@ -357,8 +357,14 @@
         "nsfw_channel": "{channel}는 연령 제한 채널이지만 여기는 아니야!\n안전을 위해서 연령 제한 채널의 메시지는 여기로 불러올 수 없어."
       },
       "shards": {
+        "average": {
+          "title": "평균",
+          "description": "여기 평균 지연시간 및 서버갯수야.",
+          "guilds": "샤드 당 평균 서버수",
+          "ping": "샤드 당 평균 지연시간"
+        },
         "embed": {
-          "current_title": "현재 샤드 여부",
+          "current_title": "현재 서버에 배당된 샤드 여부",
           "guilds_title": "서버",
           "ping_title": "지연시간 (ms)",
           "status_title": "상태",
