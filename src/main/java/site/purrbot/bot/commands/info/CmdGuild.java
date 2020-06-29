@@ -26,6 +26,7 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @CommandDescription(
         name = "Guild",
@@ -109,9 +110,10 @@ public class CmdGuild implements Command{
     }
     
     private String getMembers(Guild guild){
-        int total = guild.getMembers().size();
-        long humans = guild.getMembers().stream().filter(member -> !member.getUser().isBot()).count();
-        long bots = guild.getMembers().stream().filter(member -> member.getUser().isBot()).count();
+        List<Member> members = guild.loadMembers().get();
+        int total = members.size();
+        long humans = members.stream().filter(member -> !member.getUser().isBot()).count();
+        long bots = members.stream().filter(member -> member.getUser().isBot()).count();
         
         return bot.getMsg(guild.getId(), "purr.info.guild.embed.members_value")
                 .replace("{members_total}", String.valueOf(total))

@@ -30,6 +30,8 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -97,9 +99,16 @@ public class CmdShards implements Command{
         final List<JDA> shards = bot.getShardManager().getShardCache().stream()
                 .sorted(Comparator.comparing(jda -> jda.getShardInfo().getShardId()))
                 .collect(Collectors.toList());
+        List<MessageEmbed> embeds = new ArrayList<>();
+        
+        double ping = 0;
+        double guilds = 0;
         
         for(final JDA jda : shards){
             int currId = jda.getShardInfo().getShardId();
+            
+            ping += jda.getGatewayPing();
+            guilds += jda.getGuildCache().size();
             MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                     .setTitle(
                             bot.getMsg(guild.getId(), "purr.info.shards.embed.title")
@@ -128,8 +137,32 @@ public class CmdShards implements Command{
                     )
                     .build();
             
-            builder.addItems(embed);
+            embeds.add(embed);
         }
+        
+        double avgPing = (ping / bot.getShardManager().getShardCache().size());
+        double avgGuilds = (guilds / bot.getShardManager().getShardCache().size());
+    
+        DecimalFormat format = new DecimalFormat("#,###.##");
+        
+        MessageEmbed average = bot.getEmbedUtil().getEmbed(member)
+                .setTitle(bot.getMsg(guild.getId(), "purr.info.shards.average.title"))
+                .setDescription(bot.getMsg(guild.getId(), "purr.info.shards.average.description"))
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.shards.average.guilds"),
+                        String.format("`%s`", format.format(avgGuilds)),
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.shards.average.ping"),
+                        String.format("`%s`", format.format(avgPing)),
+                        false
+                )
+                .build();
+        
+        builder.addItems(average);
+        for(MessageEmbed embed : embeds)
+            builder.addItems(embed);
         
         builder.build()
                .display(tc);

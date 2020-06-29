@@ -35,6 +35,7 @@ public final class LangUtils {
             case "en":
             case "en-owo":
             case "et-ee":
+            case "it-it":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
@@ -51,6 +52,7 @@ public final class LangUtils {
             case "en":
             case "en-owo":
             case "et-ee":
+            case "it-it":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":

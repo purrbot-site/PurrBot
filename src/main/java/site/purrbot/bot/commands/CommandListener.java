@@ -27,6 +27,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
+import site.purrbot.bot.constants.Emotes;
 
 import java.util.Arrays;
 import java.util.concurrent.Executor;
@@ -108,23 +109,9 @@ public class CommandListener extends ListenerAdapter{
                         return;
     
                     if(!self.hasPermission(tc, Permission.MESSAGE_WRITE)){
-                        user.openPrivateChannel()
-                                .flatMap(channel -> channel.sendMessage(bot.getEmbedUtil().getPermErrorEmbed(
-                                        member,
-                                        guild,
-                                        tc,
-                                        Permission.MESSAGE_WRITE,
-                                        true,
-                                        true
-                                )))
-                                .queue(
-                                        null,
-                                        error -> logger.warn(String.format(
-                                                "I lack the permission to send messages in %s (%s)",
-                                                guild.getName(),
-                                                guild.getId()
-                                        ))
-                                );
+                        if(self.hasPermission(tc, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI))
+                            msg.addReaction(Emotes.CANCEL.getNameAndId()).queue();
+                        
                         return;
                     }
 

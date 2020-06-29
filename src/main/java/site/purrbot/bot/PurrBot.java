@@ -129,6 +129,7 @@ public class PurrBot {
                 .addLang("en")
                 .addLang("en-OWO")
                 .addLang("et-EE")
+                .addLang("it-IT")
                 .addLang("ko-KR")
                 .addLang("pt-BR")
                 .addLang("ru-RU");
@@ -168,6 +169,7 @@ public class PurrBot {
                         CacheFlag.CLIENT_STATUS
                 )
                 .setChunkingFilter(ChunkingFilter.NONE)
+                .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .addEventListeners(
                         new ReadyListener(this),
                         new ConnectionListener(this),
