@@ -357,8 +357,14 @@
         "nsfw_channel": "Kanal mida mainisid ({channel}) on NSFW märgisega, aga see kanal ei ole!\nMa ei tsiteeri sõnumeid NSFW märgisega kanalitest NSFW märgiseta kanalisse."
       },
       "shards": {
+        "average": {
+          "title": "Keskmine",
+          "description": "See on keskmine pingi ja gildi arv.",
+          "guilds": "Keskmiselt gilde killu kohta",
+          "ping": "Keskmine ping killu kohta"
+        },
         "embed": {
-          "current_title": "Praegune kild?",
+          "current_title": "Sinu kild?",
           "guilds_title": "Gildid",
           "ping_title": "Ping (ms)",
           "status_title": "Staatus",

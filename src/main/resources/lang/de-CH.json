@@ -357,8 +357,14 @@
         "nsfw_channel": "Der Kanal den du erwähnt hast ({channel}) ist als NSFW markiert, während dieser hier es nicht ist!\nAus sicherheit zitiere ich keine Nachrichten von NSFW-Kanälen in Nicht NSFW-Kanälen."
       },
       "shards": {
+        "average": {
+          "title": "Durchschnitt",
+          "description": "Dies ist der durchschnittliche Ping und Gilden anzahl.",
+          "guilds": "Durchschnittliche Gilden pro Shard",
+          "ping": "Durchschnittlicher Ping pro Shard"
+        },
         "embed": {
-          "current_title": "Aktueller Shard?",
+          "current_title": "Deine Shard?",
           "guilds_title": "Gilden",
           "ping_title": "Ping (ms)",
           "status_title": "Status",
