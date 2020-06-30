@@ -27,18 +27,18 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
+import site.purrbot.bot.util.message.WebhookUtil;
 
 import java.time.ZonedDateTime;
 
 public class ConnectionListener extends ListenerAdapter{
 
-    private PurrBot bot;
-    private final String URL;
+    private final PurrBot bot;
+    private final WebhookUtil webhookUtil;
 
     public ConnectionListener(PurrBot bot){
         this.bot = bot;
-
-        this.URL = bot.getFileManager().getString("config", "webhooks.log");
+        this.webhookUtil = new WebhookUtil(bot.getFileManager().getString("config", "webhooks.log"));
     }
 
     @Override
@@ -74,9 +74,8 @@ public class ConnectionListener extends ListenerAdapter{
                             event.getCloseCode().getMeaning()
                     )
             ));
-
-        bot.getWebhookUtil().sendMsg(
-                URL,
+    
+        webhookUtil.sendMsg(
                 jda.getSelfUser().getEffectiveAvatarUrl(),
                 "Disconnected",
                 embed.build()
@@ -103,9 +102,8 @@ public class ConnectionListener extends ListenerAdapter{
                 .setFooter(new WebhookEmbed.EmbedFooter("Resumed at", null))
                 .setTimestamp(ZonedDateTime.now())
                 .build();
-
-        bot.getWebhookUtil().sendMsg(
-                URL,
+    
+        webhookUtil.sendMsg(
                 jda.getSelfUser().getEffectiveAvatarUrl(),
                 "Resumed session",
                 embed

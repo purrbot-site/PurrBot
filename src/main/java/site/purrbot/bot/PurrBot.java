@@ -54,7 +54,6 @@ import site.purrbot.bot.util.file.FileManager;
 import site.purrbot.bot.util.file.lang.LangUtils;
 import site.purrbot.bot.util.message.EmbedUtil;
 import site.purrbot.bot.util.message.MessageUtil;
-import site.purrbot.bot.util.message.WebhookUtil;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -74,7 +73,6 @@ public class PurrBot {
 
     private final FileManager fileManager = new FileManager();
     private final HttpUtil httpUtil = new HttpUtil();
-    private final WebhookUtil webhookUtil = new WebhookUtil();
     private final CommandLoader commandLoader = new CommandLoader(this);
     
     private DBUtil dbUtil;
@@ -169,7 +167,7 @@ public class PurrBot {
                         CacheFlag.CLIENT_STATUS
                 )
                 .setChunkingFilter(ChunkingFilter.NONE)
-                .setMemberCachePolicy(MemberCachePolicy.ALL)
+                .setMemberCachePolicy(MemberCachePolicy.OWNER)
                 .addEventListeners(
                         new ReadyListener(this),
                         new ConnectionListener(this),
@@ -207,9 +205,6 @@ public class PurrBot {
     }
     public HttpUtil getHttpUtil(){
         return httpUtil;
-    }
-    public WebhookUtil getWebhookUtil(){
-        return webhookUtil;
     }
     public ImageUtil getImageUtil(){
         return imageUtil;

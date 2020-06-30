@@ -35,6 +35,7 @@ import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.constants.Roles;
+import site.purrbot.bot.util.message.WebhookUtil;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -47,9 +48,11 @@ public class GuildListener extends ListenerAdapter{
     private final Logger logger = (Logger)LoggerFactory.getLogger(GuildListener.class);
 
     private final PurrBot bot;
+    private final WebhookUtil webhookUtil;
 
     public GuildListener(PurrBot bot){
         this.bot = bot;
+        this.webhookUtil = new WebhookUtil(bot.getFileManager().getString("config", "webhooks.guild"));
     }
     
     private void sendWebhook(Member owner, Guild guild, Action action) {
@@ -183,9 +186,8 @@ public class GuildListener extends ListenerAdapter{
                         .build();
                 break;
         }
-        
-        bot.getWebhookUtil().sendMsg(
-                bot.getFileManager().getString("config", "webhooks.guild"),
+    
+        webhookUtil.sendMsg(
                 guild.getSelfMember().getUser().getEffectiveAvatarUrl(),
                 title,
                 action == Action.JOIN ? ".leave " + guild.getId() : null,

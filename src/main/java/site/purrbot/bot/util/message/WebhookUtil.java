@@ -21,33 +21,32 @@ package site.purrbot.bot.util.message;
 import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.WebhookClientBuilder;
 import club.minnced.discord.webhook.send.WebhookEmbed;
+import club.minnced.discord.webhook.send.WebhookMessage;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 
 import javax.annotation.Nullable;
 
 public class WebhookUtil {
+    
+    private final WebhookClient client;
+    
+    public WebhookUtil(String url){
+        client = new WebhookClientBuilder(url).build();
+    }
 
-    public void sendMsg(String url, String avatar, String name, String message, @Nullable WebhookEmbed embed){
+    public void sendMsg(String avatar, String name, String message, WebhookEmbed embed){
 
-        WebhookClient client = new WebhookClientBuilder(url).build();
-        WebhookMessageBuilder builder = new WebhookMessageBuilder()
+        WebhookMessage msg = new WebhookMessageBuilder()
                 .setAvatarUrl(avatar)
                 .setUsername(name)
-                .setContent(message);
+                .setContent(message)
+                .addEmbeds(embed)
+                .build();
 
-        if(embed != null)
-            builder.addEmbeds(embed);
-
-        client.send(builder.build());
-        client.close();
-    }
-
-    public void sendMsg(String url, String avatar, String name, WebhookEmbed embed){
-        sendMsg(url, avatar, name, null, embed);
+        client.send(msg);
     }
     
-    public void sendMsg(String url, String avatar, String name, String message){
-        sendMsg(url, avatar, name, message, null);
+    public void sendMsg(String avatar, String name, WebhookEmbed embed){
+        sendMsg(avatar, name, null, embed);
     }
-
 }

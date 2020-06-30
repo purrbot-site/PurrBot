@@ -31,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
+import site.purrbot.bot.util.message.WebhookUtil;
 
 import java.text.DecimalFormat;
 import java.time.ZonedDateTime;
@@ -40,10 +41,13 @@ public class ReadyListener extends ListenerAdapter{
     private final Logger logger = (Logger)LoggerFactory.getLogger(ReadyListener.class);
 
     private final PurrBot bot;
+    private final WebhookUtil webhookUtil;
+    
     private int shards = 0;
 
     public ReadyListener(PurrBot bot){
         this.bot = bot;
+        this.webhookUtil = new WebhookUtil(bot.getFileManager().getString("config", "webhooks.log"));
     }
 
     @Override
@@ -74,9 +78,8 @@ public class ReadyListener extends ListenerAdapter{
                 .setFooter(new WebhookEmbed.EmbedFooter("Ready at", null))
                 .setTimestamp(ZonedDateTime.now())
                 .build();
-
-        bot.getWebhookUtil().sendMsg(
-                bot.getFileManager().getString("config", "webhooks.log"),
+    
+        webhookUtil.sendMsg(
                 jda.getSelfUser().getEffectiveAvatarUrl(),
                 "Shard ready!",
                 embed
