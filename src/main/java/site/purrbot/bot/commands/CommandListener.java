@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
 public class CommandListener extends ListenerAdapter{
     
     private final Logger logger = (Logger)LoggerFactory.getLogger(CommandListener.class);
+    
 
     private final ThreadGroup CMD_THREAD = new ThreadGroup("CommandThread");
     private final Executor CMD_EXECUTOR = Executors.newCachedThreadPool(
@@ -68,15 +69,14 @@ public class CommandListener extends ListenerAdapter{
                             Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 
                             Pattern.DOTALL | Pattern.CASE_INSENSITIVE
                     );
+                    Pattern mentionPattern = Pattern.compile("<@!?(\\d+)>");
 
                     String raw = msg.getContentRaw();
-
-                    String memberMention = "<@!" + guild.getJDA().getSelfUser().getId() + ">";
-                    String userMention = "<@" + guild.getJDA().getSelfUser().getId() + ">";
     
-                    Matcher matcher = prefixPattern.matcher(raw);
+                    Matcher commandMatcher = prefixPattern.matcher(raw);
+                    Matcher mentionMatcher = mentionPattern.matcher(raw);
                     
-                    if(!matcher.matches() && !(raw.equals(userMention) || raw.equals(memberMention)))
+                    if(!commandMatcher.matches() && !mentionMatcher.matches())
                         return;
                     
                     TextChannel tc = event.getChannel();
@@ -86,8 +86,11 @@ public class CommandListener extends ListenerAdapter{
                     if(member == null)
                         return;
                     
-                    if(raw.equalsIgnoreCase(userMention) || raw.equalsIgnoreCase(memberMention)){
+                    if(mentionMatcher.matches()){
                         if(!self.hasPermission(tc, Permission.MESSAGE_WRITE))
+                            return;
+                        
+                        if(!mentionMatcher.group(1).equalsIgnoreCase(guild.getSelfMember().getId()))
                             return;
                         
                         tc.sendMessage(
@@ -96,7 +99,7 @@ public class CommandListener extends ListenerAdapter{
                         return;
                     }
                     
-                    raw = matcher.group("command");
+                    raw = commandMatcher.group("command");
 
                     String[] args = Arrays.copyOf(raw.split("\\s+", 2), 2);
 

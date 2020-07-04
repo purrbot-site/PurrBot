@@ -95,6 +95,20 @@ public class ReadyListener extends ListenerAdapter{
                     decimalFormat.format(shardManager.getGuildCache().size())
             )));
 
+            WebhookEmbed finished = new WebhookEmbedBuilder()
+                    .setColor(0x00FF00)
+                    .setTitle(new WebhookEmbed.EmbedTitle("\\*Purr* ready!", null))
+                    .setDescription(
+                            "\\*Purr* is online and ready to bring you fun and nekos. <:catUwU:703924268022497340>"
+                    )
+                    .build();
+            
+            webhookUtil.sendMsg(
+                    jda.getSelfUser().getEffectiveAvatarUrl(),
+                    "*Purr* online!",
+                    finished
+            );
+            
             logger.info(String.format(
                     "Loaded Bot %s vBOT_VERSION with %d shard(s) and %d guilds!",
                     jda.getSelfUser().getAsTag(),

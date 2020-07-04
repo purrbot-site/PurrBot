@@ -157,17 +157,13 @@ public class PurrBot {
                         GatewayIntent.GUILD_EMOJIS,
                         GatewayIntent.GUILD_MESSAGE_REACTIONS
                 )
-                .disableIntents(
-                        GatewayIntent.GUILD_VOICE_STATES, 
-                        GatewayIntent.GUILD_PRESENCES
-                )
                 .disableCache(
                         CacheFlag.ACTIVITY, 
                         CacheFlag.VOICE_STATE,
                         CacheFlag.CLIENT_STATUS
                 )
                 .setChunkingFilter(ChunkingFilter.NONE)
-                .setMemberCachePolicy(MemberCachePolicy.OWNER)
+                .setMemberCachePolicy(beta ? MemberCachePolicy.ALL : MemberCachePolicy.OWNER)
                 .addEventListeners(
                         new ReadyListener(this),
                         new ConnectionListener(this),
