@@ -1,14 +1,6 @@
 {
-  "blacklist": [
-    "578951136288178216",
-    "591723340130156545",
-    "525029165192183808",
-    "610874380112625735"
-  ],
-  "donators": [
-    "284018850796666890",
-    "433894627553181696"
-  ],
+  "blacklist": [],
+  "donators": [],
   "kiss_img": [
     "https://purrbot.site/images/kiss/kiss_001.jpg",
     "https://purrbot.site/images/kiss/kiss_002.jpg",
@@ -78,7 +70,8 @@
     "gradient_dark_red",
     "gradient_green",
     "gradient_orange",
-    "gradient_red"
+    "gradient_red",
+    "rainbow"
   ],
   "welcome_icon": [
     "neko_hug",
