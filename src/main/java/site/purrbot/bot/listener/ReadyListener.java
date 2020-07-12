@@ -97,15 +97,22 @@ public class ReadyListener extends ListenerAdapter{
 
             WebhookEmbed finished = new WebhookEmbedBuilder()
                     .setColor(0x00FF00)
-                    .setTitle(new WebhookEmbed.EmbedTitle("\\*Purr* ready!", null))
-                    .setDescription(
-                            "\\*Purr* is online and ready to bring you fun and nekos. <:catUwU:703924268022497340>"
-                    )
+                    .setTitle(new WebhookEmbed.EmbedTitle(String.format(
+                            "\\%s ready!",
+                            jda.getSelfUser().getName()
+                    ), null))
+                    .setDescription(String.format(
+                            "\\%s is online and ready to bring you fun and nekos. <:catUwU:703924268022497340>",
+                            jda.getSelfUser().getName()
+                    ))
                     .build();
             
             webhookUtil.sendMsg(
                     jda.getSelfUser().getEffectiveAvatarUrl(),
-                    "*Purr* online!",
+                    String.format(
+                            "%s ready!",
+                            jda.getSelfUser().getName()
+                    ),
                     finished
             );
             

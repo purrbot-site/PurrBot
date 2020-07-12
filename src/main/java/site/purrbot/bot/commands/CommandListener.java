@@ -90,7 +90,7 @@ public class CommandListener extends ListenerAdapter{
                         if(!self.hasPermission(tc, Permission.MESSAGE_WRITE))
                             return;
                         
-                        if(!mentionMatcher.group(1).equalsIgnoreCase(guild.getSelfMember().getId()))
+                        if(!mentionMatcher.group(1).equalsIgnoreCase(self.getId()))
                             return;
                         
                         tc.sendMessage(
@@ -139,14 +139,7 @@ public class CommandListener extends ListenerAdapter{
                         return;
                     
                     if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
-                        MessageEmbed notNsfw = bot.getEmbedUtil().getEmbed(member)
-                                .setColor(0xFF0000)
-                                .setDescription(
-                                        bot.getRandomMsg(guild.getId(), "errors.nsfw_random", member.getEffectiveName())
-                                )
-                                .build();
-                        
-                        tc.sendMessage(notNsfw).queue();
+                        bot.getEmbedUtil().sendRandomError(tc, member, "errors.nsfw_random");
                         return;
                     }
                     

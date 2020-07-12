@@ -58,7 +58,7 @@ public class CmdHelp implements Command{
             put("guild", "\uD83C\uDFAE");
             put("info",  "\u2139");
             put("nsfw",  "\uD83D\uDC8B");
-            put("owner", "<:andre_601:411527902648074240>");
+            put("owner", "<:andre_601:730944556119359588>");
         }
     };
 
@@ -155,7 +155,7 @@ public class CmdHelp implements Command{
         
         for(Command cmd : getCommands()){
             String category = cmd.getAttribute("category");
-
+            
             if(builders.get(category).length() + cmd.getAttribute("help").length() > MessageEmbed.VALUE_MAX_LENGTH){
                 builder.addItems(commandList(
                         member,

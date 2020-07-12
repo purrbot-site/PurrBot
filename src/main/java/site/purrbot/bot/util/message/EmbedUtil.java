@@ -79,7 +79,7 @@ public class EmbedUtil {
         String msg = member == null ? bot.getMsg(guild.getId(), path) : bot.getMsg(guild.getId(), path, member.getEffectiveName());
         
         embed.setColor(0xFF0000)
-                .setDescription(msg);
+             .setDescription(msg);
 
         if(reason != null)
             embed.addField(
@@ -101,5 +101,19 @@ public class EmbedUtil {
     
     public void sendPermError(TextChannel tc, Member member, TextChannel channel, Permission permission, boolean self){
         tc.sendMessage(getPermErrorEmbed(member, tc.getGuild(), channel, permission, self, false)).queue();
+    }
+    
+    public void sendRandomError(TextChannel tc, Member member, String path){
+        String msg;
+        if(member != null)
+            msg = bot.getRandomMsg(tc.getGuild().getId(), path, member.getEffectiveName());
+        else
+            msg = bot.getRandomMsg(tc.getGuild().getId(), path);
+        
+        EmbedBuilder embed = member == null ? getEmbed() : getEmbed(member);
+        embed.setColor(0xFF0000)
+             .setDescription(msg);
+        
+        tc.sendMessage(embed.build()).queue();
     }
 }
