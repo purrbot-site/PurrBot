@@ -276,7 +276,7 @@
             "owner": "Proprietario",
             "title": "Categorie"
           },
-          "description": "Usa ◀ o ▶ per navigare tra le pagine e ⏹ per cancellarlo.\nUsa `{prefix}help [command]` per ottenere ulteriori informazioni su un comando specifico.",
+          "description": "Usa le reazioni ◀ or ▶ per cambiare pagina e ⏹ per cancellarlo.\nUsa `{prefix}aiuto [command]` per ottenere più informazioni su un comando specifico.\nNota le categorie Divertimento, Gilda, info e NSFW NON sono comandi!",
           "nsfw_info": "`Esegui il comando di aiuto in un canale NSFW per vedere questa pagina.`"
         }
       },
