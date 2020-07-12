@@ -276,7 +276,7 @@
             "owner": "Besitzer",
             "title": "Kategorien"
           },
-          "description": "Verwende die ◀ oder ▶ Reaktionen um durch die Seiten zu navigieren und ⏹ zum abbrechen.\nVerwende `{prefix}help [Befehl]` um mehr infos über einen Befehl zu erhalten.",
+          "description": "Verwende die ◀ oder ▶ Reactionen um durch die Seiten zu navigieren und ⏹ um abzubrechen.\nVerwende `{prefix}help [Befehl]` um weitere informationen über einen bestimmten Befehl zu erhalten.\nBeachte, dass die Kategorien Fun, Guild, Info und NSFW KEINE Befehle sind!",
           "nsfw_info": "`Verwende den Hilfe-Befehl in einem NSFW-Kanal um diese Seite zu sehen.`"
         }
       },
