@@ -210,7 +210,7 @@
         "message_title": "Current Message",
         "no_bg": "Please provide a background name!\nA list of backgrounds can be found [here]({wiki_bg}).",
         "no_channel": "No text channel provided! Make sure you mention one.",
-        "no_color": "No color provided!\nPlease either use `hex:rrggbb` or `rgb:r,g,b`",
+        "no_color": "No color provided!\nPlease either use `hex:rrggbb`, `rgb:r,g,b` or `random`",
         "no_icon": "Please provide an icon name!\nA list of icons can be found [here]({wiki_icon}).",
         "no_msg": "No message provided!",
         "placeholders_title": "Available Placeholders",
