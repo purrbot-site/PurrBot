@@ -28,14 +28,20 @@ labels:
               - Provide the ID of the Server, if it happens there.
               - The bot won't work in Private messages.
           - What permissions does the Bot have?
+              - The bot won't work when having a role with Administrator permission.
     unlabeled:
       issue:
         body: |-
           Thank you for providing additional information.
-          The developer will look at your issue and let you know about any possible fixes.
+          The Developer will now look at your issue and let you know about any possible fixes or similar.
   - name: 'Result: Invalid issue'
     labeled:
       issue:
         body: |-
           Your issue has beeen marked as invalid.
-          Make sure to use and follow the provided issue templates as blank ones will be ignored.
+          Make sure to use and follow the provided issue templates as blank issues and issues not following a template will be ignored.
+    unlabeled:
+      issue:
+        body: |-
+          Thank you for following the issue template.  
+          The Developer will take a look at your issue now.
