@@ -210,7 +210,7 @@
         "message_title": "Messaggio corrente",
         "no_bg": "Fornisci un nome dello sfondo!\nPuoi trovare la lista dei sfondi [here]({wiki_bg}).",
         "no_channel": "Nessun canale testuale fornito! Assicurati di menzionarne uno.",
-        "no_color": "Nessun colore fornito!\nUsa o `hex:rrggbb` o` rgb:r,g,b` per favore",
+        "no_color": "Nessun colore fornito!\nUsa `hex:rrggbb`, `rgb:r,g,b` o `random` per favore.",
         "no_icon": "Fornisci un nome all'icona!\nPuoi trovarli una lista di icone[here]({wiki_icon}).",
         "no_msg": "Nessun messaggio fornito!",
         "placeholders_title": "Segnaposti disponibili",
