@@ -210,7 +210,7 @@
         "message_title": "Aktuelle Nachricht",
         "no_bg": "Bitte gib einen Hintergrund an!\nEine Liste von Hintergründen kannst du [hier]({wiki_bg}) finden.",
         "no_channel": "Kein Textkanal angegeben! Stell sicher, dass du einen erwähnst.",
-        "no_color": "Keine Farbe angegeben!\nBitte verwende entweder `hex:rrggbb` oder `rgb:r,g,b`",
+        "no_color": "Keine Farbe angegeben!\nBitte verwende entweder `hex:rrggbb`, `rgb:r,g,b` oder `random`",
         "no_icon": "Bitte gib ein Icon an!\nEine Liste von Icons kannst du [hier]({wiki_icon}) finden.",
         "no_msg": "Keine Nachricht angegeben!",
         "placeholders_title": "Verfügbare Platzhalter",
