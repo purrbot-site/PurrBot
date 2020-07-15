@@ -210,7 +210,7 @@
         "message_title": "Praegune sõnum",
         "no_bg": "Palun sisesta tausta nimi!\nErinevaid tauste saab näha [vikist]({wiki_bg}).",
         "no_channel": "Ühtegi tekstikanalit ei ole sisestatud! Palun maini kindlasti ühte tekstikanalit.",
-        "no_color": "Ühtegi värvi ei ole sisestatud!\nPalun kasuta kas `hex:rrggbb` või `rgb:r,g,b` vormingut.",
+        "no_color": "Ühtegi värvi ei ole sisestatud!\nPalun kasuta kas `hex:rrggbb`, `rgb:r,g,b` või `random`",
         "no_icon": "Palun sisesta ikooni nimi!\nErinevaid ikoone saab näha [vikist]({wiki_icon}).",
         "no_msg": "Sõnumit pole sisestatud!",
         "placeholders_title": "Olemasolevad kohahoidjad",
@@ -276,7 +276,7 @@
             "owner": "Omanik",
             "title": "Katekooriad"
           },
-          "description": "Kasuta navigeerimiseks ◀ ▶ reaktsioone ning tühistamiseks ⏹.\nKasuta `{prefix}help [katergooria]` et saada rohkem informatsiooni käskluste kohta.",
+          "description": "Kasuta navigeerimiseks ◀ ▶ reaktsioone ning tühistamiseks ⏹.\nKasuta `{prefix}help [käsklus]` et saada rohkem informatsiooni käskluse kohta.\nPane tähele et katekooriad Lõbus, Gild, Informatsioon ja Täiskasvanutele ei ole käsklused!",
           "nsfw_info": "`Et näha seda lehte sisesta käsklus NSFW märgisega kanalis.`"
         }
       },
