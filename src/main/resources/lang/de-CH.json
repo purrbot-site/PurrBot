@@ -34,7 +34,11 @@
       "bite": {
         "loading": "{LOADING} Beisse jemanden...",
         "mention_self": "Ist es Kanibalismus, wenn du dich selber beisst {user}?",
-        "mention_purr": "W-w-wa...? Ich schmeck nicht gut! >.<",
+        "mention_purr": [
+          "W-w-wa...? Ich schmeck nicht gut! >.<",
+          "H-hey! Ich bin kein Essen.",
+          "K-knabber nicht an mir rum."
+        ],
         "message": "{user} beisst dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum beissen!",
         "special_user": "A-aber {user}! D-das ist peinlich."
@@ -42,7 +46,11 @@
       "cuddle": {
         "loading": "{LOADING} Erhalte ein Knuddel-gif...",
         "mention_self": "Warum knuddelst du dich selbst {user}?\nDu kannst mich knuddeln wenn du willst. {VANILLABLUSH}",
-        "mention_purr": "\\*geniest das knuddeln von {user}*",
+        "mention_purr": [
+          "\\*geniesst das knuddeln von {user}*",
+          "\\*kuschelt sich stark an {user} heran*",
+          "Danke für das angenehme knuddeln {user}. UwU"
+        ],
         "message": "{user} knuddelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum knuddeln!"
       },
@@ -52,7 +60,11 @@
       },
       "feed": {
         "mention_bot": "Bots können keine Nahrung essen Dummerchen! Sie können nur deine Daten essen. O_O",
-        "mention_purr": "Essen? Für mich? Danke schön {user}! \\*Isst das Essen wedelt mit dem Schwanz*",
+        "mention_purr": [
+          "Essen? Für mich? Dankeschön {user}! \\*Isst das Essen und wedelt mit dem Schwanz*",
+          "Danke für das Essen {user}.",
+          "\\*Isst das Essen mit Freude*"
+        ],
         "mention_self": "Du fütterst dich selbst Dummerchen. Es ist besser, es zu teilen. \\*schaut {user} mit grossen Augen an*",
         "message": "{user} gibt {target} etwas zu essen.",
         "no_mention": "Bitte erwähne jemandem, um etwas Essen zu geben.",
@@ -71,14 +83,22 @@
       "hug": {
         "loading": "{LOADING} Erhalte ein Umarmungs-gif...",
         "mention_self": "Warum umarmst du dich selbst {user}?\nDu kannst mich umarmen wenn du willst. {VANILLABLUSH}",
-        "mention_purr": "\\*geniest die umarmung von {user}*",
+        "mention_purr": [
+          "\\*geniesst die umarmung von {user}*",
+          "\\*schnurrt leise beim geniessen der Umarmung*",
+          "Ich mag immer Umarmungen {user}"
+        ],
         "message": "{user} umarmt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum umarmen!"
       },
       "kiss": {
         "loading": "{LOADING} Erhalte einen Kuss...",
         "mention_self": "Wie kannst du dich selber küssen {user}? Mit einem Spiegel?",
-        "mention_purr": "O-okay. Aber nur auf die Wange! \\*Hält Wange hin*",
+        "mention_purr": [
+          "O-okay. Aber nur meine Wange! \\*Hält Wange hin*",
+          "Nur meine Wange, okay?",
+          "D-das ist ein wenig lewd, aber okay. \\*errötet*"
+        ],
         "mention_snuggle": "NEIN! Ich werde dich nicht meine Schwester durch meine hilfe küssen lassen!",
         "message": "{user} küsst dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum küssen!",
@@ -91,7 +111,11 @@
       "lick": {
         "loading": "{LOADING} Erhalte ein leck-gif...",
         "mention_self": "Ich werde nicht fragen wie und vorallem *wo* du dich leckst {user}...",
-        "mention_purr": "\\*weicht zurück* I-ich hab dir nie erlaubt mich zu lecken!",
+        "mention_purr": [
+          "\\*weicht zurück* I-ich hab dir niemals erlaubt mich zu lecken {user}!",
+          "H-hey! Leck mich nicht! >.<",
+          "Nya! D-das ist unanständig!"
+        ],
         "message": "{user} leckt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum lecken.",
         "special_user": "A-aber Schatz... Doch nicht in aller öffentlichkeit. \\*Errötet*"
@@ -106,14 +130,21 @@
       "pat": {
         "loading": "{LOADING} Erhalte Streicheleinheiten...",
         "mention_self": "Uhm... Gibt es nicht eine neko, welche du streicheln kannst {user}? \\*Zeigt auf sich selbst*",
-        "mention_purr": "\\*Snurren™*",
+        "mention_purr": [
+          "\\*Snurren™*",
+          "\\*drückt den Kopf gegen {user}'s Hand*",
+          "Nya... Danke für die Streicheleinheit."
+        ],
         "message": "{user} streichelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum streicheln!"
       },
       "poke": {
         "loading": "{LOADING} Erhalte ein stups-gif...",
         "mention_self": "Is dir langweilig oder warum stupst du dich selbst {user}?",
-        "mention_purr": "\\*N-nya! Stups mich nicht! >~<*",
+        "mention_purr": [
+          "N-nya! Stups mich nicht! >~<",
+          "W-warum stupst du mich?"
+        ],
         "message": "{user} stupst dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum stupsen!"
       },
@@ -147,7 +178,10 @@
       "slap": {
         "loading": "{LOADING} Schlage den/die User...",
         "mention_self": "Neinneinnein! Ich werde nicht dabei helfen, dich selbst zu verletzen {user}.",
-        "mention_purr": "Neeeeein... Warum verletzt du mich {user}? T^T",
+        "mention_purr": [
+          "Neeeeein... W-warum verletzt du mich {user}? T^T",
+          "\\*schlägt zurück* Kein schlagen von mir ohne Konsequenzen {user}!"
+        ],
         "message": "{user} schlägt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum schlagen!"
       },
@@ -158,7 +192,11 @@
       "tickle": {
         "loading": "{LOADING} Erhalte ein Kitzel-gif...",
         "mention_self": "Okay... Wenn du dich wirklich selber kitzeln willst... \\*Kitzelt {user}*",
-        "mention_purr": "N-nicht fair! I-Ich darf nicht... \\*Lacht vom kitzeln*",
+        "mention_purr": [
+          "N-nicht fair! Ich k-kann nicht \\*lacht vom kitzeln*",
+          "\\*versucht nicht zu lachen aber scheitert*",
+          "W-wieso muss ich n-nur so kitzlich sein? >~<"
+        ],
         "message": "{user} kitzelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum kitzeln!"
       }
@@ -506,34 +544,66 @@
   "snuggle": {
     "fun": {
       "bite": {
-        "mention_snuggle": "Nya! Ich bin kein Essen {user}!"
+        "mention_snuggle": [
+          "Nya! Ich bin kein Essen {user}!",
+          "B-bitte nicht {user}. D-das ist unanständig O////O",
+          "W-wieso knabberst du an mir?"
+        ]
       },
       "cuddle": {
-        "mention_snuggle": "\\*kuschelt sich an {user}*"
+        "mention_snuggle": [
+          "\\*kuschelt sich an {user}*",
+          "\\*knuddelt {user} ziemlich nah*",
+          "Das ist so gemütlich. UwU"
+        ]
       },
       "feed": {
-        "mention_snuggle": "D-du gibst mir etwas zu essen {user}? D-danke. \\*errötet während dem essen*"
+        "mention_snuggle": [
+          "D-du gibst mir etwas Essen {user}? D-danke. \\*errötet während dem essen*",
+          "Yay! Kostenloses Essen. Danke {user}.",
+          "\\*nimmt leise das Essen und knabbert daran*"
+        ]
       },
       "hug": {
-        "mention_snuggle": "\\*liebt die Umarmung von {user}*"
+        "mention_snuggle": [
+          "\\*liebt die umarmung von {user}*",
+          "Umarmungen sind immer so gemütlich {user}.",
+          "\\*sagt leise \"nya\" während sie {user} umarmt*"
+        ]
       },
       "kiss": {
         "mention_purr": "Ich werde dir nicht helfen meine Schwester zu küssen {user}!",
-        "mention_snuggle": "Wa-? O-okay. A-aber du kannst mich nur auf die Wange küssen {user}! \\*lässt dich ihre Wange küssen*",
+        "mention_snuggle": [
+          "Wa-? O-okay. A-aber du kannst nur meine Wange küssen {user}! \\*Lässt dich ihre Wange küssen*",
+          "A-aber {user}... Das ist peinlich hier in der Öffentlichkeit. \\*schaut schüchtern* O-okay gut, aber nur ein einziger Kuss. Q////Q",
+          "N-nya! Das ist unanständig {user}..."
+        ],
         "special_user": "W-warum küsst du meine Schwester durch mich? D-du kannst sie selber küssen {user}."
       },
       "lick": {
-        "mention_snuggle": "H-HEY! D-das ist ungezogen {user}."
+        "mention_snuggle": [
+          "H-HEY! D-das ist unanständig {user}.",
+          "I-ich bin nicht eine art Essen {user}.",
+          "Nein. Das ist zu unanständig {user}! >////<"
+        ]
       },
       "neko": {
         "purr": "Nya. Das ist meine grosse Schwester. >w<",
         "snuggle": "B-bin das ich? OwO"
       },
       "pat": {
-        "mention_snuggle": "\\*geniesst die Streicheleinheit*"
+        "mention_snuggle": [
+          "\\*geniesst die Streicheleinheit*",
+          "Yay! Eine Streicheleinheit. Danke {user}.",
+          "\\*lächelt während sie die Streicheleinheit geniesst*"
+        ]
       },
       "poke": {
-        "mention_snuggle": "Nuuu. Stups mich nicht!"
+        "mention_snuggle": [
+          "Neeeein. Stups mich nicht!",
+          "EEP! \\*schaut erschrocken* W-warum stupst du mich?",
+          "Warum stupst du mich? Hab ich etwas falsch gemacht? Q////Q"
+        ]
       },
       "ship": {
         "mention_purr": "Nein! Kein verkuppeln meiner grossen Schwester {user}!",
@@ -541,10 +611,18 @@
         "special_user": "W-warum soll ich euch beide verkuppeln {user}?\nG-geh und mach dass selbst. >////<"
       },
       "slap": {
-        "mention_snuggle": "\\*rennt weg von {user}*"
+        "mention_snuggle": [
+          "\\*rennt weg von {user}*",
+          "\\*rennt weg und versteckt sich unter einer Decke* {user} ist ein grosser Böser!",
+          "Neeeeein. \\*beginnt zu weinen*"
+        ]
       },
       "tickle": {
-        "mention_snuggle": "H-hilfe! I d-darf nicht lac- \\*fängt an zu lachen*"
+        "mention_snuggle": [
+          "H-hilfe! I k-kann nicht la- \\*fängt zu lachen an*",
+          "D-das ist so unfair. I-ich kann dich nicht zurück kitzeln... \\*fängt an zu lachen*",
+          "\\*versucht sich normal zu verhalten, kann es aber nicht*"
+        ]
       }
     },
     "info": {
@@ -558,9 +636,6 @@
       },
       "invite": {
         "message": "Nya! Du kannst mich nicht auf deinen Discord einladen {user}! Geh lade stattdessen meine Schwester ein!"
-      },
-      "level": {
-        "purr_only": "Nya! Dieser Befehl ist nut für meine Schwester \\*Purr* verfügbar! >w<"
       }
     },
     "nsfw": {
