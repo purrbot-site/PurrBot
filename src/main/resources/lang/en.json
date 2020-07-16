@@ -34,7 +34,11 @@
       "bite": {
         "loading": "{LOADING} Going to bite someone...",
         "mention_self": "Is it cannibalism, if you bite yourself {user}?",
-        "mention_purr": "W-w-wha...? I'm not tasty! >.<",
+        "mention_purr": [
+          "W-w-wha...? I'm not tasty! >.<",
+          "H-hey! I'm not food.",
+          "D-don't nibble on me."
+        ],
         "message": "{user} bites you {targets}",
         "no_mention": "Please mention at least one user to bite!",
         "special_user": "B-but {user}! T-that is embarrassing."
@@ -42,7 +46,11 @@
       "cuddle": {
         "loading": "{LOADING} Receiving a cuddle-gif...",
         "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {VANILLABLUSH}",
-        "mention_purr": "\\*enjoys the cuddle from {user}*",
+        "mention_purr": [
+          "\\*enjoys the cuddle from {user}*",
+          "\\*snuggles tight at {user}*",
+          "Thank you for the comfy snuggle {user}. UwU"
+        ],
         "message": "{user} cuddles with you {targets}",
         "no_mention": "Please mention at least one user to cuddle!"
       },
@@ -52,7 +60,11 @@
       },
       "feed": {
         "mention_bot": "Bots can't eat food silly! They can only eat your data. O_O",
-        "mention_purr": "Food? For me? Thank chu {user}! \\*noms food and wags tail*",
+        "mention_purr": [
+          "Food? For me? Thank chu {user}! \\*noms food and wags tail*",
+          "Thank you for the food {user}.",
+          "\\*Eats the food with joy*"
+        ],
         "mention_self": "You're feeding yourself silly. It's better to share it. \\*looks at {user} with big eyes*",
         "message": "{user} gives {target} something to eat.",
         "no_mention": "Please mention someone to give some food.",
@@ -71,14 +83,22 @@
       "hug": {
         "loading": "{LOADING} Receiving a hug-gif...",
         "mention_self": "Why are you hugging yourself {user}?\nYou can hug me if you want. {VANILLABLUSH}",
-        "mention_purr": "\\*enjoys the hug from {user}*",
+        "mention_purr": [
+          "\\*enjoys the hug from {user}*",
+          "\\*silently purrs while enjoying the hug*",
+          "I always like hugs {user}"
+        ],
         "message": "{user} hugs you {targets}",
         "no_mention": "Please mention at least one user to hug!"
       },
       "kiss": {
         "loading": "{LOADING} Receiving a kiss...",
         "mention_self": "How can you kiss yourself {user}? With a mirror?",
-        "mention_purr": "O-okay. But only my cheek! \\*Holds cheek out*",
+        "mention_purr": [
+          "O-okay. But only my cheek! \\*Holds cheek out*",
+          "Only my cheek, okay?",
+          "T-that's a bit lewd, but okay. \\*blushes*"
+        ],
         "mention_snuggle": "NO! I won't let you kiss my sister with my help!",
         "message": "{user} kisses you {targets}",
         "no_mention": "Please mention at least one user to kiss!",
@@ -91,7 +111,11 @@
       "lick": {
         "loading": "{LOADING} Receiving a lick-gif...",
         "mention_self": "I won't ask how and *where* you lick yourself {user}...",
-        "mention_purr": "\\*backs away* I-I never allowed you to lick me!",
+        "mention_purr": [
+          "\\*backs away* I-I never allowed you to lick me {user}!",
+          "H-hey! Don't lick me! >.<",
+          "Nya! T-that is naughty!"
+        ],
         "message": "{user} licks you {targets}",
         "no_mention": "Please mention at least one user to lick!",
         "special_user": "B-but sweetie... Not in public. \\*blushes*"
@@ -106,14 +130,21 @@
       "pat": {
         "loading": "{LOADING} Receiving pats...",
         "mention_self": "Uhm... Isn't there a neko that you can pat {user}? \\*points to herself*",
-        "mention_purr": "\\*purr™*",
+        "mention_purr": [
+          "\\*purr™*",
+          "\\*presses head against {user}'s hand*",
+          "Nya... Thank you for the pat."
+        ],
         "message": "{user} pats you {targets}",
         "no_mention": "Please mention at least one user to pat!"
       },
       "poke": {
         "loading": "{LOADING} Receiving a poke-gif...",
         "mention_self": "Are you bored or why do you poke yourself {user}?",
-        "mention_purr": "N-nya! Nu poking me! >~<",
+        "mention_purr": [
+          "N-nya! Nu poking me! >~<",
+          "W-why are you poking me?"
+        ],
         "message": "{user} pokes you {targets}",
         "no_mention": "Please mention at least one user to poke!"
       },
@@ -147,7 +178,10 @@
       "slap": {
         "loading": "{LOADING} Slapping the users...",
         "mention_self": "Nononono! I won't help you hurting yourself {user}.",
-        "mention_purr": "Nuuuu... W-why hurting me {user}? T^T",
+        "mention_purr": [
+          "Nuuuu... W-why hurting me {user}? T^T",
+          "\\*slaps back* No slapping me without consequences {user}!"
+        ],
         "message": "{user} slaps you {targets}",
         "no_mention": "Please mention at least one user to slap!"
       },
@@ -158,7 +192,11 @@
       "tickle": {
         "loading": "{LOADING} Receiving a tickle-gif...",
         "mention_self": "Okay... If you really want to get tickled... \\*tickles {user}*",
-        "mention_purr": "N-not fair! I c-can't \\*laughs from the tickles*",
+        "mention_purr": [
+          "N-not fair! I c-can't \\*laughs from the tickles*",
+          "\\*tries not to laugh but fails*",
+          "W-why do I have t-to be that t-ticklish? >~<"
+        ],
         "message": "{user} tickles you {targets}",
         "no_mention": "Please mention at least one user to tickle!"
       }
@@ -506,34 +544,66 @@
   "snuggle": {
     "fun": {
       "bite": {
-        "mention_snuggle": "Nya! I'm no food {user}!"
+        "mention_snuggle": [
+          "Nya! I'm no food {user}!",
+          "P-please not {user}. T-that's lewd O////O",
+          "W-why nibbling me?"
+        ]
       },
       "cuddle": {
-        "mention_snuggle": "\\*snuggles up to {user}*"
+        "mention_snuggle": [
+          "\\*snuggles up to {user}*",
+          "\\*cuddles {user} extremely tight*",
+          "This is so comfy. UwU"
+        ]
       },
       "feed": {
-        "mention_snuggle": "Y-you give me some food {user}? T-thanks. \\*blushes while eating the food*"
+        "mention_snuggle": [
+          "Y-you give me some food {user}? T-thanks. \\*blushes while eating the food*",
+          "Yay! Free food. Thanks {user}.",
+          "\\*silently takes the food and nibbles on it*"
+        ]
       },
       "hug": {
-        "mention_snuggle": "\\*loves the hug from {user}*"
+        "mention_snuggle": [
+          "\\*loves the hug from {user}*",
+          "Hugs are always so comfy {user}.",
+          "\\*silently says \"nya\" while hugging {user}*"
+        ]
       },
       "kiss": {
         "mention_purr": "I won't help you kissing my sister through me {user}!",
-        "mention_snuggle": "Wha-? O-okay. B-but you can only kiss my cheek {user}! \\*Lets you kiss her cheek*",
+        "mention_snuggle": [
+          "Wha-? O-okay. B-but you can only kiss my cheek {user}! \\*Lets you kiss her cheek*",
+          "B-but {user}... That is embarrassing here in public. \\*looks shy* O-okay fine, but only a single kiss. Q////Q",
+          "N-nya! That is lewd {user}..."
+        ],
         "special_user": "W-why do you kiss my sister through me? Y-you can kiss her yourself {user}."
       },
       "lick": {
-        "mention_snuggle": "H-HEY! T-that is lewd {user}."
+        "mention_snuggle": [
+          "H-HEY! T-that is lewd {user}.",
+          "I-I'm not some kind of food {user}.",
+          "Nu. That is too lewd {user}! >////<"
+        ]
       },
       "neko": {
         "purr": "Nya. That is my big sister. >w<",
         "snuggle": "I-is that me? OwO"
       },
       "pat": {
-        "mention_snuggle": "\\*enjoys the pat*"
+        "mention_snuggle": [
+          "\\*enjoys the pat*",
+          "Yay! A pat. Thank you {user}.",
+          "\\*smiles while enjoying the pat*"
+        ]
       },
       "poke": {
-        "mention_snuggle": "Nuuu. Do nu poke me!"
+        "mention_snuggle": [
+          "Nuuu. Do nu poke me!",
+          "EEP! \\*looks scared* W-why poking me?",
+          "Why are you poking me? Did I do something wrong? Q////Q"
+        ]
       },
       "ship": {
         "mention_purr": "No! No shipping of my big sister {user}!",
@@ -541,10 +611,18 @@
         "special_user": "W-why should I ship you two {user}?\nG-go and do that yourself. >////<"
       },
       "slap": {
-        "mention_snuggle": "\\*runs away from {user}*"
+        "mention_snuggle": [
+          "\\*runs away from {user}*",
+          "\\*runs and hides under a blanket* {user} is a big meanie!",
+          "Nuuuuu. \\*starts crying*"
+        ]
       },
       "tickle": {
-        "mention_snuggle": "H-help! I c-can't lau- \\*starts laughing*"
+        "mention_snuggle": [
+          "H-help! I c-can't lau- \\*starts laughing*",
+          "T-this is so unfair. I-I can't tickle you back... \\*starts laughing*",
+          "\\*tries to act normal but can't*"
+        ]
       }
     },
     "info": {
@@ -558,9 +636,6 @@
       },
       "invite": {
         "message": "Nya! You can't invite me to your Discord {user}! Go and invite my sister instead!"
-      },
-      "level": {
-        "purr_only": "Nya! This command is only available for my Sister \\*Purr*! >w<"
       }
     },
     "nsfw": {
