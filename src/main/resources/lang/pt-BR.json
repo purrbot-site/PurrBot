@@ -34,7 +34,11 @@
       "bite": {
         "loading": "{LOADING} Vou morder alguém...",
         "mention_self": "é canibalismo, se você se morder {user}?",
-        "mention_purr": "O-o-o que-? Eu não tenho gosto bom! >.<",
+        "mention_purr": [
+          "O-o-o que-? Eu não tenho gosto bom! >.<",
+          "Oi! Eu não sou comida.",
+          "D-não me morda."
+        ],
         "message": "{user} morde você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para morder!",
         "special_user": "M-mas {user}! I-isso é constrangedor"
@@ -42,7 +46,11 @@
       "cuddle": {
         "loading": "{LOADING} Recebendo um gif de abraço...",
         "mention_self": "Por que você está se abraça {user}?\nVocê pode me abraçar se quiser. {VANILLABLUSH}",
-        "mention_purr": "\\*aprecia o abraço de {user}*",
+        "mention_purr": [
+          "\\*aprecia o abraço de {user}*",
+          "\\*aconchega-se perto de {user}*",
+          "Obrigado pelo aconchego comfortável {user}. UwU"
+        ],
         "message": "{user} te abraça você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para dar um abraço!"
       },
@@ -52,7 +60,11 @@
       },
       "feed": {
         "mention_bot": "Os bots não podem comer comida bobinho(a)! Eles só podem comer os seus dados. O_O",
-        "mention_purr": "Comida? Para mim? Obrigado {user}! \\*come a comida e balança sua cauda*",
+        "mention_purr": [
+          "Comida? Para mim? Obrigado {user}! \\*come a comida e balança sua cauda*",
+          "Obrigado pela comida {user}.",
+          "\\*Coma a comida com alegria*"
+        ],
         "mention_self": "Você está se alimentando bobo. É melhor compartilhar. \\*olha para {user} com olhos grandes*",
         "message": "{user} dá {target} algo para comer",
         "no_mention": "Por favor, mencione alguém para dar um pouco de comida.",
@@ -71,14 +83,22 @@
       "hug": {
         "loading": "{LOADING} Recebendo um gif de abraço",
         "mention_self": "Por que você está se abraçando {user}?\nVocê pode me abraçar se quiser. {VANILLABLUSH}",
-        "mention_purr": "\\*aprecia o abraço de {user}*",
+        "mention_purr": [
+          "\\*aprecia o abraço de {user}*",
+          "\\*ronrona silenciosamente enquanto curte o abraço*",
+          "Eu sempre gosto de abraços {user}"
+        ],
         "message": "{user} abraça você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para abraçar!"
       },
       "kiss": {
         "loading": "{LOADING} Recebendo um beijo...",
         "mention_self": "Como você pode se beijar{user}? Com um espelho?",
-        "mention_purr": "O-okay. Mas apenas em minha bochecha! \\*deixa a bochecha a mostra*",
+        "mention_purr": [
+          "O-okay. Mas apenas em minha bochecha! \\*deixa a bochecha a mostra*",
+          "Só minha bochecha, ok?",
+          "T-It é um pouco sensual, mas ok. \\*cora*"
+        ],
         "mention_snuggle": "NÃO! eu não vou deixar você beijar minha irmã com minha ajuda",
         "message": "{user} beija você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para beijar!",
@@ -91,7 +111,11 @@
       "lick": {
         "loading": "{LOADING} Recebendo um gif de lambida",
         "mention_self": "Eu não vou perguntar como e *onde* você se lambe {user}...",
-        "mention_purr": "\\*se afasta* E-eu nunca deixei você me lamber!",
+        "mention_purr": [
+          "\\*se afasta* E-eu nunca deixei você me lamber {user}!",
+          "Ei! Não me lamba! >.<",
+          "Nya! Isso é pervertido!"
+        ],
         "message": "{user} lambe você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para lamber!",
         "special_user": "M-mas querida... Não em público. \\*cora*"
@@ -106,14 +130,21 @@
       "pat": {
         "loading": "{LOADING} Recebendo carícia",
         "mention_self": "Uhm... Não há neko que você possa acariciar {user}? \\*aponta para si mesma*",
-        "mention_purr": "\\*purr™*",
+        "mention_purr": [
+          "\\*ronrono™*",
+          "\\*pressiona a cabeça contra a mão de {user}*",
+          "Nya... Obrigado pelo carinho."
+        ],
         "message": "{user} acaricia você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para acariciar!"
       },
       "poke": {
         "loading": "{LOADING} Recebendo um gif de cutucada",
         "mention_self": "Você está entediado ou por que você se cutuca {user}?",
-        "mention_purr": "N-nya! Sem me cutucar! >~<",
+        "mention_purr": [
+          "N-nya! Sem me cutucar! >~<",
+          "Por que você está me cutucando?"
+        ],
         "message": "{user} cutuca você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para cutucar!"
       },
@@ -147,7 +178,10 @@
       "slap": {
         "loading": "{LOADING} Dando um tapa nos usuários...",
         "mention_self": "Nãonãonãonão! Eu não vou ajudar você a se machucar {user}.",
-        "mention_purr": "nããão... por que você está me machucando {user}? T^T",
+        "mention_purr": [
+          "nããão... por que você está me machucando {user}? T^T",
+          "\\*devolve o tapa* Sem bater em mim sem consequências {user}!"
+        ],
         "message": "{user} deu um tapa em {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para dar um tapa!"
       },
@@ -158,7 +192,11 @@
       "tickle": {
         "loading": "{LOADING} Recebendo um gif de cócegas...",
         "mention_self": "Okay... Se você quer tanto cócegas.. \\*faz cócegas em {user}*",
-        "mention_purr": "N-não é justo! Eu não \\*rindo das cócegas*",
+        "mention_purr": [
+          "N-não é justo! Eu não \\*rindo das cócegas*",
+          "\\*tenta não rir, mas falha*",
+          "Por que tenho de ser tão sensível assim? >~<"
+        ],
         "message": "{user} faz cócegas em {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para fazer cócegas!"
       }
@@ -210,7 +248,7 @@
         "message_title": "Mensagem atual",
         "no_bg": "Por favor, forneça um nome de plano de fundo!\nUma lista de fundos pode ser encontrada [here]({wiki_bg}).",
         "no_channel": "Nenhum canal de texto fornecido! Certifique-se de mencionar um.",
-        "no_color": "Nenhuma cor fornecida!\nPor favor, use `hex:rrggbb` ou `rgb:r,g,b`",
+        "no_color": "Nenhuma cor fornecida!\nPor favor, use `hex:rrggbb`, `rgb:r,g,b` or `random`",
         "no_icon": "Por favor, forneça um nome de ícone!\nUma lista de ícones pode ser encontrada [here]({wiki_icon}).",
         "no_msg": "Nenhuma mensagem fornecida!",
         "placeholders_title": "Espaços reservados disponíveis",
@@ -276,7 +314,7 @@
             "owner": "Dono",
             "title": "Categorias"
           },
-          "description": "Use as reações ◀ ou ▶ para navegar pelas páginas e ⏹ para cancelá-lo.\nUse `{prefix}help [command]` para obter mais informações sobre um comando específico.",
+          "description": "Use as reações ◀ ou ▶ para navegar pelas páginas e ⏹ para cancelá-lo.\nUse `{prefix}help [command]` para obter mais informações sobre um comando específico.\nNote que as categorias divertidas, Guild, Info e NSFW NÃO são comandos!",
           "nsfw_info": "`Execute o comando de ajuda em um canal NSFW para ver esta página.`"
         }
       },
@@ -307,6 +345,7 @@
             "discord": "`Discord (Support)`",
             "github": "`GitHub`",
             "patreon": "`Patreon`",
+            "policy": "Política de privacidade e termos de serviço",
             "title": "Outros links",
             "twitter": "Twitter",
             "website": "`Website`",
@@ -506,34 +545,66 @@
   "snuggle": {
     "fun": {
       "bite": {
-        "mention_snuggle": "Nya! Eu não sou comida {user}!"
+        "mention_snuggle": [
+          "Nya! Eu não sou comida {user}!",
+          "P-, por favor, não {user}. I-isto é sensual O///O",
+          "Por que me morder?"
+        ]
       },
       "cuddle": {
-        "mention_snuggle": "\\*aconchega-se perto de {user}*"
+        "mention_snuggle": [
+          "\\*aconchega-se perto de {user}*",
+          "\\*abraça {user} extremamente apertado*",
+          "Isto é tão confortável. UwU"
+        ]
       },
       "feed": {
-        "mention_snuggle": "Você me dá algumas comidas {user}? O-obrigada \\*cora enquanto come a comida*"
+        "mention_snuggle": [
+          "Você me dá algumas comidas {user}? O-obrigada \\*cora enquanto come a comida*",
+          "Viva! Comida gratuita. Obrigado {user}.",
+          "\\*silenciosamente leva a comida e mordisca nela*"
+        ]
       },
       "hug": {
-        "mention_snuggle": "\\*aprecia o abraço de {user}*"
+        "mention_snuggle": [
+          "\\*ama o abraço de {user}*",
+          "Os abraços sempre são tão confortáveis {user}.",
+          "\\*silenciosamente diz \"nya\" abraçando {user}*"
+        ]
       },
       "kiss": {
         "mention_purr": "Não vou ajudar você a beijar minha irmã através de mim {user}!",
-        "mention_snuggle": "Wha-? O-OK. M-mas você só pode beijar a minha bochecha {user}! \\*Deixe você beijar a bochecha dela*",
+        "mention_snuggle": [
+          "Wha-? O-OK. M-mas você só pode beijar a minha bochecha {user}! \\*Deixe você beijar a bochecha dela*",
+          "M-mas {user}... Isso é embaraçoso aqui em público. \\*parece tímido* O-okay bem, mas apenas um único beijo. Q////Q",
+          "H-HEY! I-isso é safado {user}..."
+        ],
         "special_user": "Por que você beijou minha irmã através de mim? Y-você pode beijá-la você mesmo {user}."
       },
       "lick": {
-        "mention_snuggle": "H-HEY! I-isso é safado {user}."
+        "mention_snuggle": [
+          "H-HEY! I-isso é safado {user}.",
+          "Eu não sou um tipo de comida {user}.",
+          "Nu. Isso está muito sensual {user}! >////<"
+        ]
       },
       "neko": {
         "purr": "Nya. Essa é minha irmã mais Velha. >w<",
         "snuggle": "E-esta sou eu? OwO"
       },
       "pat": {
-        "mention_snuggle": "\\*aproveita a caricia*"
+        "mention_snuggle": [
+          "\\*aproveita a caricia*",
+          "Opa! Uma caricia. Obrigada {user}.",
+          "\\*sorri enquanto curte a caricia*"
+        ]
       },
       "poke": {
-        "mention_snuggle": "Nãããã. sem me cutucar"
+        "mention_snuggle": [
+          "Nãããã. sem me cutucar",
+          "EEP! \\*parece assustada* P-por que me cutucar?",
+          "Por que você está me cutucando? Fiz algo errado? Q////Q"
+        ]
       },
       "ship": {
         "mention_purr": "Não! sem shippar com minha irmã mais velha {user}!",
@@ -541,10 +612,18 @@
         "special_user": "P-porque eu deveria shipar vocês dois {user}?\nV-vá e faça isto você mesmo. >///<"
       },
       "slap": {
-        "mention_snuggle": "\\*fugiu de {user}*"
+        "mention_snuggle": [
+          "\\*fugiu de {user}*",
+          "\\*corre e se esconde sob um cobertor* {user} é um grande malvado!",
+          "Nuuuuu. \\*começa a chorar*"
+        ]
       },
       "tickle": {
-        "mention_snuggle": "A-Ajuda! Eu n-não posso ri \\*começa a rir*"
+        "mention_snuggle": [
+          "A-Ajuda! Eu n-não posso ri- \\*começa a rir*",
+          "T-this é tão injusto. Eu não posso te fazer cócegas de volta... \\*começa a rir*",
+          "\\*tenta agir normalmente, mas não pode*"
+        ]
       }
     },
     "info": {
@@ -558,9 +637,6 @@
       },
       "invite": {
         "message": "Nya! Você não pode me convidar para o seu Discord {user}! Convide minha irmã!"
-      },
-      "level": {
-        "purr_only": "Nya! Este comando só está disponível para minha Irmã \\*Purr*! >w<"
       }
     },
     "nsfw": {
