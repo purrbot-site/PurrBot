@@ -274,19 +274,22 @@
       },
       "guild": {
         "embed": {
-          "boost_multiple": "{boost} бусты",
-          "boost_single": "1 буст",
-          "boost_tier": "Уровень буста: {BOOST_TIER} (Уровень {level})",
+          "boost": {
+            "multiple": "{boost} бустов",
+            "single": "1 бутт",
+            "title": "Бусты",
+            "value": "{boosts} (Уровень {level} {BOOST_TIER})"
+          },
           "channels_title": "Каналы",
           "channels_value": "{CATEGORY} Всего: {channels_total}\n{TEXTCHANNEL} Текстовых каналов: {channels_text}\n{VOICECHANNEL} Голосовых каналов: {channels_voice}",
           "created": "Создано",
-          "level": "Уровень",
           "levels": {
-            "unknown": "Неизвестный уровень",
-            "none": "Уровня нет",
+            "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Низкий",
             "medium": "Средний",
-            "high": "(╯°□°）╯︵ ┻━┻",
+            "none": "Уровня нет",
+            "title": "Уровень проверки",
+            "unknown": "Неизвестный уровень",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Участники",
@@ -345,6 +348,7 @@
             "discord": "`Discord (Сервер)`",
             "github": "`GitHub`",
             "patreon": "`Patreon`",
+            "policy": "Политика конфиденциальности и Правила Пользования",
             "title": "Другие ссылки",
             "twitter": "`Twitter`",
             "website": "`Сайт`",
