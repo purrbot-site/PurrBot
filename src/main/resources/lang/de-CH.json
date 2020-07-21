@@ -274,19 +274,22 @@
       },
       "guild": {
         "embed": {
-          "boost_multiple": "{boost} boosts",
-          "boost_single": "1 boost",
-          "boost_tier": "Boost Stufe: {BOOST_TIER} (Level {level})",
+          "boost": {
+            "multiple": "{boost} Boosts",
+            "single": "1 Boost",
+            "title": "Boosten",
+            "value": "{boosts} (Level {level} {BOOST_TIER})"
+          },
           "channels_title": "Kanäle",
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Textkanäle: {channels_text}\n{VOICECHANNEL} Sprachkanäle: {channels_voice}",
           "created": "Erstellt",
-          "level": "Level",
           "levels": {
-            "unknown": "Unbekanntes Level",
-            "none": "Kein Level",
+            "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Niedrig",
             "medium": "Mittel",
-            "high": "(╯°□°）╯︵ ┻━┻",
+            "none": "Kein Level",
+            "title": "Verifizierungslevel",
+            "unknown": "Unbekanntes Level",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Mitglieder",
