@@ -288,7 +288,7 @@
             "low": "Low",
             "medium": "Medium",
             "none": "No wevel",
-            "title": "Vewification Level",
+            "title": "Vewification Wevew",
             "unknown": "Unknown wevew",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
@@ -565,21 +565,21 @@
         "mention_snuggle": [
           "Y-you give me some food {user}? OwO T-thanks. \\*blushes while eating da food*",
           "Yay! Fwee food. Thanks {user}. UwU",
-          "\\*silently takes da food and nibbles on it*"
+          "\\*siwentwy takes da food and nibbwes on it*"
         ]
       },
       "hug": {
         "mention_snuggle": [
-          "\\*lovew the hug fwom {user}*",
-          "Hugs awe always so comfy {user}. UwU",
-          "\\*silenltly \"nyas\" while hugging {user}*"
+          "\\*woves the hug fwom {user}*",
+          "Hugs awe awways so comfy {user}. UwU",
+          "\\*siwentwy \"nyas\" whiwe hugging {user}*"
         ]
       },
       "kiss": {
         "mention_purr": "I won't hewp you kissing my sistew thwough me {user}!",
         "mention_snuggle": [
-          "Wha-? O-okay. B-but you can only kissu my cheek {user}! \\*Lets you kiss hew cheek*",
-          "B-but {user}... That is so embawwassing here in public. \\*looks shy* O-okay fine, but only a single kiss. Q////Q",
+          "Wha-? O-okay. B-but you can onwy kissu my cheek {user}! \\*Lets you kiss hew cheek*",
+          "B-but {user}... That is so embawwassing here in pubwic. \\*wooks shy* O-okay fine, but onwy a singwe kiss. Q////Q",
           "N-nya! That is lewd {user}... O////O"
         ],
         "special_user": "W-why do you kiss my sistew thwough me? Y-you can kiss hew youwsewf {user}."
@@ -599,13 +599,13 @@
         "mention_snuggle": [
           "\\*enjoys the pat*",
           "Yay! A pat. Thank you {user}. ^^",
-          "\\*smiles while enjoying da pat*"
+          "\\*smiwes while enjoying da pat*"
         ]
       },
       "poke": {
         "mention_snuggle": [
           "Nuuu. Do nu poke me!",
-          "EEP! \\*looks scawed* W-why poking me?",
+          "EEP! \\*wooks scawed* W-why poking me?",
           "Why awe you poking me? Did I do something wwong? Q////Q"
         ]
       },
@@ -623,8 +623,8 @@
       },
       "tickle": {
         "mention_snuggle": [
-          "H-halp! I c-can't lau- \\*stawts laughing*",
-          "T-this is so unfaiw. I-I can't tickle you back... \\*stawts kaughing*",
+          "H-halp! I c-can't wau- \\*stawts waughing*",
+          "T-this is so unfaiw. I-I can't tickwe you back... \\*stawts kaughing*",
           "\\*twies to act nowmaw but can't > - <\\*"
         ]
       }
