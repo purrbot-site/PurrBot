@@ -283,7 +283,6 @@
           "channels_title": "Channels",
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Text Channels: {channels_text}\n{VOICECHANNEL} Voice Channels: {channels_voice}",
           "created": "Created",
-          "general": "General Info",
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Low",
