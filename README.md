@@ -18,6 +18,7 @@
 <!-- GitHub links -->
 [Issues]: https://github.com/purrbot-site/PurrBot/issues
 [License]: https://github.com/purrbot-site/PurrBot/blob/master/LICENSE
+[translations.md]: https://github.com/purrbot-site/PurrBot/blob/master/translations.md
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
@@ -54,8 +55,8 @@ All commands require the following permissions:
 Version 2.5 of \*Purr* added an option to have a per-guild language set.  
 We are happy about any translations made for the bot.
 
-If you want to contribute towards the translation of \*Purr*, contact Andre_601#0601 on [Discord].  
-The Translation page can be found [here][translations].
+If you would like to get added for a new or existing language to be translated, head over to the [translations.md] file for more info on how to get added.  
+You can find the currently made translations on https://lang.purrbot.site.
 
 # Inviting the bot
 The bot has two invite-links: A full invite and a basic invite.
