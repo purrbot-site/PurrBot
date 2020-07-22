@@ -348,7 +348,7 @@
             "discord": "`Discord (Support)`",
             "github": "`GitHub`",
             "patreon": "`Patreon`",
-            "policy": "Datenschutzerklärung und Nutzungsbedingungen",
+            "policy": "`Datenschutzerklärung und Nutzungsbedingungen`",
             "title": "Andere Links",
             "twitter": "`Twitter`",
             "website": "`Webseite`",
@@ -639,7 +639,7 @@
         }
       },
       "invite": {
-        "message": "Nya! Du kannst mich nicht auf deinen Discord einladen {user}! Geh lade stattdessen meine Schwester ein!"
+        "message": "Nya! Du kannst mich nicht zu deiner Discord einladen, es sei denn, du unterstützt meinen Vater Andre_601 auf [Patreon]({patreon_url}) (15$ Stufe)\n\nDu kannst jedoch meine grosse Schwester einladen!"
       }
     },
     "nsfw": {
