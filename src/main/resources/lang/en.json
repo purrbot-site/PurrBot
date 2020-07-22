@@ -639,7 +639,7 @@
         }
       },
       "invite": {
-        "message": "Nya! You can't invite me to your Discord {user}! Go and invite my sister instead!"
+        "message": "Nya! You can't invite me to your Discord, unless you support my Dad Andre_601 on [Patreon]({patreon_url}) ($15 tier)\n\nYou can however invite my big Sister!"
       }
     },
     "nsfw": {
