@@ -274,19 +274,22 @@
       },
       "guild": {
         "embed": {
-          "boost_multiple": "{boost} boosts",
-          "boost_single": "1 boost",
-          "boost_tier": "Nível de boost: {BOOST_TIER} (Nível {level})",
+          "boost": {
+            "multiple": "{boost} impulsos",
+            "single": "1 boost",
+            "title": "impulsionando",
+            "value": "{boosts} (Nível {level} {BOOST_TIER})"
+          },
           "channels_title": "Canais",
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Canais: {channels_text}\n{VOICECHANNEL} Canais: {channels_voice}",
           "created": "Criado",
-          "level": "Nível",
           "levels": {
-            "unknown": "Nível desconhecido",
-            "none": "Sem nível",
+            "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Baixo",
             "medium": "Médio",
-            "high": "(╯°□°）╯︵ ┻━┻",
+            "none": "Sem nível",
+            "title": "Nível de Verificação",
+            "unknown": "Nível desconhecido",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Membros",
@@ -345,7 +348,7 @@
             "discord": "`Discord (Support)`",
             "github": "`GitHub`",
             "patreon": "`Patreon`",
-            "policy": "Política de privacidade e termos de serviço",
+            "policy": "`Política de privacidade e termos de serviço`",
             "title": "Outros links",
             "twitter": "Twitter",
             "website": "`Website`",
@@ -636,7 +639,7 @@
         }
       },
       "invite": {
-        "message": "Nya! Você não pode me convidar para o seu Discord {user}! Convide minha irmã!"
+        "message": "Nya! Você não pode me convidar para o seu Discord, a não ser que você apoie o meu pai Andre_601 no [Patreon]({patreon_url}) (nível de $15)\n\nVocê pode, no entanto, convidar a minha irmã mais velha!"
       }
     },
     "nsfw": {
