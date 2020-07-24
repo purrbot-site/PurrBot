@@ -477,6 +477,10 @@
         },
         "special_user": "Okay dolcezza, Fammi prendere i miei \"giocattoli\" così possiamo divertirci.\n\\*prende la mano di {user} e sparisce nella sua camera*"
       },
+      "cum": {
+        "loading": "{LOADING} Preparandosi a sborrare...",
+        "message": "{user} status sborrando."
+      },
       "fuck": {
         "mention_bot": "Non puoi avere sesso con un bot!",
         "mention_purr": "\\*da un ceffone a {user}* NO! No non con me, pervertito!",
