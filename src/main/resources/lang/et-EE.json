@@ -274,19 +274,22 @@
       },
       "guild": {
         "embed": {
-          "boost_multiple": "{boost} boostid",
-          "boost_single": "Üks boost",
-          "boost_tier": "Boosti tase: {BOOST_TIER} (Level {level})",
+          "boost": {
+            "multiple": "{boost} boostid",
+            "single": "1 boost",
+            "title": "Boostimine",
+            "value": "{boosts} (Level {level} {BOOST_TIER})"
+          },
           "channels_title": "Kanalid",
           "channels_value": "{CATEGORY} Kokku: {channels_total}\n\n{TEXTCHANNEL} Teksti kanaleid: {channels_text}\n{VOICECHANNEL} Hääle kanaleid: {channels_voice}",
           "created": "Loodud",
-          "level": "Level",
           "levels": {
-            "unknown": "Teadmata level",
-            "none": "Level puudub",
+            "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Madal",
             "medium": "Keskmine",
-            "high": "(╯°□°）╯︵ ┻━┻",
+            "none": "Level puudub",
+            "title": "Kinnitamise level",
+            "unknown": "Teadmata level",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Liikmed",
@@ -345,7 +348,7 @@
             "discord": "`Discord (Tugi)`",
             "github": "`GitHub`",
             "patreon": "`Patreon`",
-            "policy": "Privaatsuspoliitika ja Kasutustingimused",
+            "policy": "`Privaatsuspoliitika ja Kasutustingimused`",
             "title": "Teised lingid",
             "twitter": "`Twitter`",
             "website": "`Veebisait`",
@@ -473,6 +476,10 @@
           "timed_out": "Paistab et {target} ei soovi et sa talt suhu võtad {user}."
         },
         "special_user": "Okei armsake. Las ma võtan oma \"mänguasjad\" er meil oleks lõbusam.\n\\* Võtab kasutaja {user} käest kinni ja kaob oma tuppa\""
+      },
+      "cum": {
+        "loading": "{LOADING} Valmistun jobistamiseks...",
+        "message": "{user} jobistab."
       },
       "fuck": {
         "mention_bot": "Sa ei saa keppida botte!",
@@ -636,7 +643,7 @@
         }
       },
       "invite": {
-        "message": "Nya! Sa ei saa mind kutsuda oma Discordi {user}! Selle asemel kutsu minu õde!"
+        "message": "Nya! Sa ei saa kutsuda mind oma discordi, välja arvatud juhul kui sa toetad mu isa Andre_601 [Patreonis]({patreon_url}) ($15 tase)\n\nAga sa saad kutsuda mu suure Õe!"
       }
     },
     "nsfw": {
