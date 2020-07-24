@@ -477,6 +477,10 @@
         },
         "special_user": "Okay sweetie. Let me get my \"toys\" so that we can have fun.\n\\*takes {user}'s hand and disappears in her room*"
       },
+      "cum": {
+        "loading": "{LOADING} Preparing to cum...",
+        "message": "{user} is cumming."
+      },
       "fuck": {
         "mention_bot": "You can't fuck with bots!",
         "mention_purr": "\\*slaps {user}* NO! Not with me you perv!",
