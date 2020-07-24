@@ -477,6 +477,10 @@
         },
         "special_user": "Okay Süsse. Lass mich schnell meine \"Spielzeuge\" holen, so dass wir Spass haben können.\n\\*nimmt {user}'s Hand und verschwindet in ihrem Raum*"
       },
+      "cum": {
+        "loading": "{LOADING} Bereite das kommen vor...",
+        "message": "{user} kommt."
+      },
       "fuck": {
         "mention_bot": "Du kannst nicht mit Bots schlafen!",
         "mention_purr": "\\*schlägt {user}* NEIN! Nicht mit mir du Perverser!",
