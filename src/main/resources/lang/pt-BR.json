@@ -477,6 +477,10 @@
         },
         "special_user": "Ok, doce. Deixe-me pegar meus \"brinquedos\" para que possamos nos divertir.\n\\*pega a mão de {user}e desaparece em seu quarto*"
       },
+      "cum": {
+        "loading": "{LOADING} Preparando-se para gozar...",
+        "message": "{user} está gozando."
+      },
       "fuck": {
         "mention_bot": "Você não pode ter sexo com bots!",
         "mention_purr": "\\*da um tapa em {user}* NÃO! Não comigo seu pervertido!",
