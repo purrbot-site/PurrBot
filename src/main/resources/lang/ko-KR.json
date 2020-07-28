@@ -274,19 +274,22 @@
       },
       "guild": {
         "embed": {
-          "boost_multiple": "{boost} 명이 부스트 중",
-          "boost_single": "1 명이 부스트 중",
-          "boost_tier": "부스트 레밸: {BOOST_TIER} (Level {level})",
+          "boost": {
+            "multiple": "서버부스트 {boost} 개",
+            "single": "서버부스트 1 개",
+            "title": "서버부스트 중",
+            "value": "{boosts} (레벨 {level} {BOOST_TIER})"
+          },
           "channels_title": "채널",
           "channels_value": "{CATEGORY} 합계: {channels_total}\n\n{TEXTCHANNEL} 텍스트 채널: {channels_text}\n{VOICECHANNEL} 음성 채널: {channels_voice}",
           "created": "생성 일자",
-          "level": "보안 수준",
           "levels": {
-            "unknown": "알 수 없는 수준",
-            "none": "없음",
+            "high": "(╯°□°）╯︵ ┻━┻",
             "low": "낮음",
             "medium": "중간",
-            "high": "(╯°□°）╯︵ ┻━┻",
+            "none": "없음",
+            "title": "인증 레벨",
+            "unknown": "알 수 없는 수준",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "사용자",
@@ -345,7 +348,7 @@
             "discord": "`공식 디스코드`",
             "github": "`GitHub`",
             "patreon": "`후원(Patreon)`",
-            "policy": "개인정보 보호 및 약관",
+            "policy": "`개인정보 보호 및 약관`",
             "title": "다른 링크들",
             "twitter": "`트위터`",
             "website": "`홈페이지`",
@@ -473,6 +476,10 @@
           "timed_out": "아마 {target}은(는) {user}의 입을 원하지 않는 모양이야."
         },
         "special_user": "좋아 자기. 조금 시간을 줄래? \"장난감\"이 좀 필요하니까.\n\\*{user}의 손을 잡고 방에서 사라진다*"
+      },
+      "cum": {
+        "loading": "{LOADING} 싸는 모습을 준비하는 중...",
+        "message": "{user}가 결국 싸버렸어."
       },
       "fuck": {
         "mention_bot": "봇이랑 야한 걸 할 생각 마!",
@@ -636,7 +643,7 @@
         }
       },
       "invite": {
-        "message": "야옹. 나는 초대할 수 없어, {user}! 내 언니를 초대해!"
+        "message": "야옹! 내 아버지 Andre_601을 [Patreon]({patreon_url}) 에서 돕지 않는다면 날 네 서버에 초대할 수 없어. ($15 tier 후원 필요)\n\n대신 내 언니를 초대하는건 괜찮아!"
       }
     },
     "nsfw": {
