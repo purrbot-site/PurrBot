@@ -34,7 +34,11 @@
       "bite": {
         "loading": "{LOADING} Sto per mordere qualcuno...",
         "mention_self": "é cannibalismo, se ti mordi da solo {user}?",
-        "mention_purr": "C-c-cosa...? Non sono appetitosa! >.<",
+        "mention_purr": [
+          "C-c-cosa...? Non sono appetitosa! >.<",
+          "H-hey! Non sono da mangiare",
+          "N-non mordicchiarmi."
+        ],
         "message": "{user} ti morde {targets}",
         "no_mention": "Menziona almeno un utente da mordere per favore",
         "special_user": "M-ma {user}! È imbarazzante"
@@ -42,7 +46,11 @@
       "cuddle": {
         "loading": "{LOADING} Ricevendo una gif coccolosa...",
         "mention_self": "PerchP ti stai coccolando da solo {user}?\nPuoi coccolarmi se vuoi.{VANILLABLUSH}",
-        "mention_purr": "*apprezza le coccole da {user}*",
+        "mention_purr": [
+          "\\*apprezza le coccole da {user}*",
+          "\\*si rannicchia vicino a{user}*",
+          "Grazie per le coccole {user}. uwu"
+        ],
         "message": "{user} si coccola con {targets}",
         "no_mention": "Menziona almeno un utente da coccolare per favore!"
       },
@@ -52,7 +60,11 @@
       },
       "feed": {
         "mention_bot": "I Bot non possono mangiare stupido! Possono solo mangiare i tuoi dati O_O",
-        "mention_purr": "Cibo? Per me? Grazie {user}! \\*nom il cibo e scodinzola*",
+        "mention_purr": [
+          "Cibo? Per me? Grazie {user}! \\*morde il cibo e scodinzola*",
+          "Grazie per il cibo {user}.",
+          "\\*Mangia felicemente*"
+        ],
         "mention_self": "Ti stai dando da mangiare da solo stupido. Dovresti condividerlo. \\*Guarda {user} con degli occhioni*",
         "message": "{user} da a {target}qualcosa da mangiare.",
         "no_mention": "Menziona qualcuno a cui dare del cibo per favore.",
@@ -71,14 +83,22 @@
       "hug": {
         "loading": "{LOADING} Ricevendo una gif di un abbraccio...",
         "mention_self": "Perché ti stai abbracciando da solo {user}?\nPuoi abbracciare me se vuoi. {VANILLABLUSH}",
-        "mention_purr": "*apprezza l'abbraccio da {user}*",
+        "mention_purr": [
+          "\\*apprezza l'abbraccio da {user}*",
+          "\\*silenziosamente fa le fusa e si gode l'abbraccio*",
+          "Mi piacciono sempre gli abbracci {user}"
+        ],
         "message": "{user} ti abbraccia {targets}",
         "no_mention": "Menziona almeno un utente da abbracciare per favore!"
       },
       "kiss": {
         "loading": "{LOADING} ricevendo un bacio...",
         "mention_self": "Come fai a baciarti da solo {user}? Con uno specchio?",
-        "mention_purr": "O-okay. ma solo sulla guancia *porge la guancia*",
+        "mention_purr": [
+          "O-okay. ma solo sulla guancia! \\*porge la guancia*",
+          "Solo sulla guancia, okay?",
+          "è un po' sconcio ma okay. \\*arrossisce*"
+        ],
         "mention_snuggle": "NO! Non ti farò baciare mia sorella con il mio aiuto!",
         "message": "{user} ti bacia {targets}",
         "no_mention": "Menziona almeno un utente da baciare per favore!",
@@ -91,7 +111,11 @@
       "lick": {
         "loading": "{LOADING} Ricevendo una lick-gif",
         "mention_self": "Non chiederò *dove* ti lecchi {user}...",
-        "mention_purr": "*si tira indietro* N-non ti ho mai dato il permesso di leccarmi!",
+        "mention_purr": [
+          "\\*indietreggia* Non ti ho mai dato il permesso di leccarmi{user}!",
+          "H-hey! Non leccarmi! >.<",
+          "Nya! è sconcio!"
+        ],
         "message": "{user} ti lecca {targets}",
         "no_mention": "Menziona almeno un utente da leccare per favore!",
         "special_user": "M-ma caro... Non in pubblico. *blushes*"
@@ -106,14 +130,21 @@
       "pat": {
         "loading": "{LOADING} ricevendo carezze...",
         "mention_self": "Uhm... Non c'è una Neko che puoi accarezzare {user}? *si punta*",
-        "mention_purr": "\\*purr™*",
+        "mention_purr": [
+          "\\*purr™*",
+          "\\*mette la testa contro la mano di{user}*",
+          "Nya... grazie per la carezza"
+        ],
         "message": "{user} ti accarezza {targets}",
         "no_mention": "Menziona almeno un utente da accarezzare per favore!"
       },
       "poke": {
         "loading": "{LOADING} ricevendo una gif di stuzzico",
         "mention_self": "Sei annoiato o cosa che ti stuzzichi da solo {user}?",
-        "mention_purr": "N-nya! Non stuzzicarmi! >\u001a~<",
+        "mention_purr": [
+          "N-nya! Non stuzzicarmi! >\u001a~<",
+          "P-perche mi stai stuzzicando?"
+        ],
         "message": "{user} ti stuzzica {targets}",
         "no_mention": "Menziona almeno un utente da stuzzicare"
       },
@@ -147,7 +178,10 @@
       "slap": {
         "loading": "{LOADING} Dando un ceffone ad un utente...",
         "mention_self": "Nononono! Non ti aiuterò a ferirti da solo {user}.",
-        "mention_purr": "Noooo... Perché vuoi farmi male {user}? T^T",
+        "mention_purr": [
+          "Noooo... Perché mi sta facendo del male {user}? T^T",
+          "\\*da un ceffone* Non puoi schiaffeggiarmi senza consequenze{user}!"
+        ],
         "message": "{user} ti da un ceffone {targets}",
         "no_mention": "Me aziona almeno un utente a cui dare un ceffone per favore!"
       },
@@ -158,7 +192,11 @@
       "tickle": {
         "loading": "{LOADING} ricevendo una gif sul solletico",
         "mention_self": "Okay... se vuoi veramente farti fare il solletico... *solletica {user}*",
-        "mention_purr": "N-non è giusto! non resisto *ride dal solletico*",
+        "mention_purr": [
+          "N-non è giusto! non resisto *ride per il solletico*",
+          "\\*cerca di non ridere ma fallisce*",
+          "Perché non resisto al solletico! >~<"
+        ],
         "message": "{user} ti solletica {targets}",
         "no_mention": "Menziona almeno un utente da solleticare per favore!"
       }
@@ -210,7 +248,7 @@
         "message_title": "Messaggio corrente",
         "no_bg": "Fornisci un nome dello sfondo!\nPuoi trovare la lista dei sfondi [here]({wiki_bg}).",
         "no_channel": "Nessun canale testuale fornito! Assicurati di menzionarne uno.",
-        "no_color": "Nessun colore fornito!\nUsa o `hex:rrggbb` o` rgb:r,g,b` per favore",
+        "no_color": "Nessun colore fornito!\nUsa `hex:rrggbb`, `rgb:r,g,b` o `random` per favore.",
         "no_icon": "Fornisci un nome all'icona!\nPuoi trovarli una lista di icone[here]({wiki_icon}).",
         "no_msg": "Nessun messaggio fornito!",
         "placeholders_title": "Segnaposti disponibili",
@@ -236,19 +274,22 @@
       },
       "guild": {
         "embed": {
-          "boost_multiple": "{boost} boosts",
-          "boost_single": "1 boost",
-          "boost_tier": "Livello boost: {BOOST_TIER} (Level {level})",
+          "boost": {
+            "multiple": "{boost} boost",
+            "single": "Un boost",
+            "title": "Boostare",
+            "value": "{boosts} (Livello {level} {BOOST_TIER})"
+          },
           "channels_title": "Canali",
           "channels_value": "{CATEGORY} Totale: {channels_total}\n\n{TEXTCHANNEL}canale testuale: {channels_text}\n{VOICECHANNEL} Canale vocale: {channels_voice}",
           "created": "Creato",
-          "level": "Livello",
           "levels": {
-            "unknown": "Livello sconosciuto",
-            "none": "Nessun livello",
+            "high": "(╯°□°)╯( ┻━┻",
             "low": "Basso",
             "medium": "Medio",
-            "high": "(╯°□°)╯( ┻━┻",
+            "none": "Nessun livello",
+            "title": "Livello di verifica",
+            "unknown": "Livello sconosciuto",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ノ 彡 ┻━┻"
           },
           "members_title": "Membri",
@@ -276,7 +317,7 @@
             "owner": "Proprietario",
             "title": "Categorie"
           },
-          "description": "Usa ◀ o ▶ per navigare tra le pagine e ⏹ per cancellarlo.\nUsa `{prefix}help [command]` per ottenere ulteriori informazioni su un comando specifico.",
+          "description": "Usa le reazioni ◀ or ▶ per cambiare pagina e ⏹ per cancellarlo.\nUsa `{prefix}aiuto [command]` per ottenere più informazioni su un comando specifico.\nNota le categorie Divertimento, Gilda, info e NSFW NON sono comandi!",
           "nsfw_info": "`Esegui il comando di aiuto in un canale NSFW per vedere questa pagina.`"
         }
       },
@@ -307,6 +348,7 @@
             "discord": "`Discord (Support)`",
             "github": "`GitHub`",
             "patreon": "`Patreon`",
+            "policy": "`Informativa sulla Privacy e ToS`",
             "title": "Altri link",
             "twitter": "`Twitter`",
             "website": "`Sito web`",
@@ -435,6 +477,10 @@
         },
         "special_user": "Okay dolcezza, Fammi prendere i miei \"giocattoli\" così possiamo divertirci.\n\\*prende la mano di {user} e sparisce nella sua camera*"
       },
+      "cum": {
+        "loading": "{LOADING} Preparandosi a sborrare...",
+        "message": "{user} status sborrando."
+      },
       "fuck": {
         "mention_bot": "Non puoi avere sesso con un bot!",
         "mention_purr": "\\*da un ceffone a {user}* NO! No non con me, pervertito!",
@@ -506,34 +552,66 @@
   "snuggle": {
     "fun": {
       "bite": {
-        "mention_snuggle": "Nya! Non sono cibo {user}!"
+        "mention_snuggle": [
+          "Nya! Non sono commestibile {user}!",
+          "P-per favore no{user}. é sconcio O////O",
+          "P-perché mi mordicchi?"
+        ]
       },
       "cuddle": {
-        "mention_snuggle": "\\*coccola con {user}*"
+        "mention_snuggle": [
+          "\\*si rannicchia vicino a {user}*",
+          "\\*so coccola con {user}*",
+          "é così comodo. uwu"
+        ]
       },
       "feed": {
-        "mention_snuggle": "M-mi stai dando del cibo {user}? G-grazie. \\*arrossisce mentre mangia*"
+        "mention_snuggle": [
+          "Mi stai dando del cibo {user}? G-grazie. \\*Arrossisce mentre mangia*",
+          "Yay!! Cibo gratis. Grazie {user}.",
+          "\\*Silenziosamente prende il cibo e lo sgranocchia*"
+        ]
       },
       "hug": {
-        "mention_snuggle": "\\*ama l'abbraccio da {user}*"
+        "mention_snuggle": [
+          "\\*ama l'abbraccio di {user}*",
+          "Gli abbracci sono sempre belli {user}.",
+          "\\*silenziosamente dive \"nya\" mentre abbraccia {user}*"
+        ]
       },
       "kiss": {
         "mention_purr": "Non ti permetterò di baciare mia sorella tramite me {user}!",
-        "mention_snuggle": "Cosa? O-okay. M-ma solo sulla guancia {user}! \\*ti lascia baciare la sua guancia*",
+        "mention_snuggle": [
+          "Cosa? O-okay. Ma solo sulla guancia {user}! \\*lascia che tu la baci sulla guancia*",
+          "M-a {user}… é imbarazzante in pubblico… O-okay, ma solo un bacio. Q////Q",
+          "N-nya! é sconcio {user}..."
+        ],
         "special_user": "p-perché baci mia sorella via me? P-puoi baciarla da solo {user}."
       },
       "lick": {
-        "mention_snuggle": "H-HEY! Q-quello è sconcio {user}."
+        "mention_snuggle": [
+          "H-HEY! é sconcio{user}.",
+          "N-non sono commestibile {user}.",
+          "No. é troppo sconcio {user}! >////<"
+        ]
       },
       "neko": {
         "purr": "Nya. Quella è la mia sorellona. >w<",
         "snuggle": "Q-quella sono io? OwO"
       },
       "pat": {
-        "mention_snuggle": "\\*apprezza la carezza*"
+        "mention_snuggle": [
+          "\\*apprezza la carezza*",
+          "Yay! Una carezza, grazie {user}.",
+          "\\*sorride mentre si gode la carezza*"
+        ]
       },
       "poke": {
-        "mention_snuggle": "Nooo. Non stuzzicarmi!"
+        "mention_snuggle": [
+          "Nooo. Non stuzzicarmi!",
+          "EEP! \\*ti guarda spaventata* perché mi stuzzichI?",
+          "Perché mi stuzzichi? Ho fatto qualcosa di sbagliato? Q////Q"
+        ]
       },
       "ship": {
         "mention_purr": "No! non shippare mia sorellona {user}!",
@@ -541,10 +619,18 @@
         "special_user": "P-perché dovrei shippare voi due {user}?\nVai a farlo da solo. >////<"
       },
       "slap": {
-        "mention_snuggle": "\\*scappa da {user}*"
+        "mention_snuggle": [
+          "\\*scappa da{user}*",
+          "\\*scappa e si nasconde sotto una coperta* {user} è cattivo!",
+          "Noooo. \\*inizia a piangere*"
+        ]
       },
       "tickle": {
-        "mention_snuggle": "A-aiuto! n-non posso ride- \\*inizia a ridere*"
+        "mention_snuggle": [
+          "A-aiuto! n-non posso ride- \\*inizia a ridere*",
+          "N-non è giusto. N-non posso farti il solletico... \\*inizia a ridere*",
+          "\\*cerca di comportarsi normalmente ma non ci riesce*"
+        ]
       }
     },
     "info": {
@@ -557,10 +643,7 @@
         }
       },
       "invite": {
-        "message": "Nya! non puoi invitarmi sul tuo server {user}! Invita mia sorella invece!"
-      },
-      "level": {
-        "purr_only": "Nya! Questo comando può eseguirlo solo mia sorella \\*Purr* >w<"
+        "message": "Nya! Non puoi invitarmi al tuo server discord se non supporti mio padre Andre_601 su [Patreon]({patreon_url}) ($15 tier)\n\nPuoi comunque invitare la mia sorellona"
       }
     },
     "nsfw": {

@@ -34,7 +34,11 @@
       "bite": {
         "loading": "{LOADING} Hammustan kohe kedagi...",
         "mention_self": "Kas see pole mitte kannibalism kui sa ennast hammustad {user}?",
-        "mention_purr": "Mi- mi- mida...? Ma ei ole maitsev! >.<",
+        "mention_purr": [
+          "Mi- mi- mida...? Ma ei ole maitsev! >.<",
+          "H-hei! Ma ei ole toit.",
+          "Ä-ära näksi mind."
+        ],
         "message": "{user} hammustab sind {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda hammustada!",
         "special_user": "A-aga {user}! Se-see on piinlik."
@@ -42,7 +46,11 @@
       "cuddle": {
         "loading": "{LOADING} Laen kaisutuse-giffi...",
         "mention_self": "Miks sa tahad ennast kaisutada {user}?\nSa saad kaisutada mind kui tahad. {VANILLABLUSH}",
-        "mention_purr": "\\*rõõmustab kasutaja {user} kaisutuse üle*",
+        "mention_purr": [
+          "\\*rõõmustab kasutaja {user} kaisutuse üle*",
+          "\\*Poeb tihedalt {user} kaissu*",
+          "Aitäh mõnusa kaisutuse eest {user}. UwU"
+        ],
         "message": "{user} kaisutab sinuga {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kaisutada!"
       },
@@ -52,7 +60,11 @@
       },
       "feed": {
         "mention_bot": "Botid ei saa süüa totu! Nad saavad süüa ainult sinu andmeid. O_O",
-        "mention_purr": "Söök? Minule? Aitäh {user}! \\*Näksib toitu ja liputab saba*",
+        "mention_purr": [
+          "Söök? Minule? Aitäh {user}! \\*Näksib toitu ja liputab saba*",
+          "Aitäh toidu eest {user}.",
+          "\\*Sööb toitu rõõmuga*"
+        ],
         "mention_self": "Sa toidad iseennast totu. Parem jaga seda. \\*vaatab kasutajat {user} suurte silmadega*",
         "message": "{user} annab {target} midagi süüa.",
         "no_mention": "Palun maini kedagi kellele anda süüa.",
@@ -71,14 +83,22 @@
       "hug": {
         "loading": "{LOADING} Laen kallistamise-giffi...",
         "mention_self": "Miks sa kallistad ennast {user}?\nSa võid kallistada mind kui sa tahad. {VANILLABLUSH}",
-        "mention_purr": "\\*rõõmustab kasutaja {user} kallistuse üle*",
+        "mention_purr": [
+          "\\*rõõmustab kasutaja {user} kallistuse üle*",
+          "\\*Nurrub vaikselt rõõmustades kallistuse üle*",
+          "Mulle alati meeldivad kallistused {user}"
+        ],
         "message": "{user} kallistab sind {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kallistada!"
       },
       "kiss": {
         "loading": "{LOADING} Laen musi...",
         "mention_self": "Kuidas sa saad endale musi teha {user}? Peegliga?",
-        "mention_purr": "O- okei. Aga ainult põsele! \\*Toob põse esile*",
+        "mention_purr": [
+          "O- okei. Aga ainult põsele! \\*Toob põse esile*",
+          "Ainult põsele, okei?",
+          "S-see on natukene imelik, aga okei. \\*punastab*"
+        ],
         "mention_snuggle": "EI! Ma ei lase sul musitada mu õde minu abiga!",
         "message": "{user} musitab sind {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda musitada!",
@@ -91,7 +111,11 @@
       "lick": {
         "loading": "{LOADING} Laen lakkumise-giffi...",
         "mention_self": "Ma ei küsi kuidas ja *kust* sa lakud ennast {user}...",
-        "mention_purr": "\\*tõmbub eemale* M- ma ei ole lubanud sul mind lakkuda!",
+        "mention_purr": [
+          "\\*tõmbub eemale* M- ma ei ole lubanud sul mind lakkuda {user}!",
+          "H-hei! Ära laku mind! >.<",
+          "Nya! S-see on räpane!"
+        ],
         "message": "{user} lakub sind {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda lakkuda!",
         "special_user": "A- aga kallis... Mitte avalikult. \\*punastab*"
@@ -106,14 +130,21 @@
       "pat": {
         "loading": "{LOADING} Laen paisi...",
         "mention_self": "Hm... Kas siin pole mitte nekot keda sasks paitada {user}? \\*Osutab iseendale*",
-        "mention_purr": "\\*nurr™*",
+        "mention_purr": [
+          "\\*nurr™*",
+          "\\*hõõrub oma pead vastu {user} kätt*",
+          "Nya... Aitäh pai eest."
+        ],
         "message": "{user} paitab sind {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda paitada!"
       },
       "poke": {
         "loading": "{LOADING} Laen toksimise-giffi...",
         "mention_self": "Kas sul on igav või miks sa toksid ennast {user}?",
-        "mention_purr": "M- mjäu! Ära toksi mind! >~<",
+        "mention_purr": [
+          "M- mjäu! Ära toksi mind! >~<",
+          "M-miks sa mind toksid?"
+        ],
         "message": "{user} toksib sind {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda toksida!"
       },
@@ -147,7 +178,10 @@
       "slap": {
         "loading": "{Loading} Laksan kasutajate nägu...",
         "mention_self": "Eieiei! Ma ei aita sul endale haiget teha {user}.",
-        "mention_purr": "Niuks... M- miks sa teed mulle haiget {user}? T^T",
+        "mention_purr": [
+          "Niuks... M- miks sa teed mulle haiget {user}? T^T",
+          "\\*Laksab tagasi* Ei laksa mind ilma tagajärgedeta {user}!"
+        ],
         "message": "{user} laksab sind {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat kellele laksu anda!"
       },
@@ -158,7 +192,11 @@
       "tickle": {
         "loading": "{LOADING} Laen kõdi-giffi",
         "mention_self": "Okei... Kui sa nii väga tahad... \\*Kõdistab kasutajat {user}*",
-        "mention_purr": "E- ebaaus! Ma.. ma ei saa \\* Naerukrampides*",
+        "mention_purr": [
+          "E- ebaaus! Ma.. ma ei saa \\* Naerukrampides*",
+          "\\*üritab mitte naerda kuid ebaõnnestub*",
+          "M-miks ma p-pean kartma k-kõdi? >~<"
+        ],
         "message": "{user} kõdistab sind {targets}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kõdistada!"
       }
@@ -210,7 +248,7 @@
         "message_title": "Praegune sõnum",
         "no_bg": "Palun sisesta tausta nimi!\nErinevaid tauste saab näha [vikist]({wiki_bg}).",
         "no_channel": "Ühtegi tekstikanalit ei ole sisestatud! Palun maini kindlasti ühte tekstikanalit.",
-        "no_color": "Ühtegi värvi ei ole sisestatud!\nPalun kasuta kas `hex:rrggbb` või `rgb:r,g,b` vormingut.",
+        "no_color": "Ühtegi värvi ei ole sisestatud!\nPalun kasuta kas `hex:rrggbb`, `rgb:r,g,b` või `random`",
         "no_icon": "Palun sisesta ikooni nimi!\nErinevaid ikoone saab näha [vikist]({wiki_icon}).",
         "no_msg": "Sõnumit pole sisestatud!",
         "placeholders_title": "Olemasolevad kohahoidjad",
@@ -236,19 +274,22 @@
       },
       "guild": {
         "embed": {
-          "boost_multiple": "{boost} boostid",
-          "boost_single": "Üks boost",
-          "boost_tier": "Boosti tase: {BOOST_TIER} (Level {level})",
+          "boost": {
+            "multiple": "{boost} boostid",
+            "single": "1 boost",
+            "title": "Boostimine",
+            "value": "{boosts} (Level {level} {BOOST_TIER})"
+          },
           "channels_title": "Kanalid",
           "channels_value": "{CATEGORY} Kokku: {channels_total}\n\n{TEXTCHANNEL} Teksti kanaleid: {channels_text}\n{VOICECHANNEL} Hääle kanaleid: {channels_voice}",
           "created": "Loodud",
-          "level": "Level",
           "levels": {
-            "unknown": "Teadmata level",
-            "none": "Level puudub",
+            "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Madal",
             "medium": "Keskmine",
-            "high": "(╯°□°）╯︵ ┻━┻",
+            "none": "Level puudub",
+            "title": "Kinnitamise level",
+            "unknown": "Teadmata level",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Liikmed",
@@ -276,7 +317,7 @@
             "owner": "Omanik",
             "title": "Katekooriad"
           },
-          "description": "Kasuta navigeerimiseks ◀ ▶ reaktsioone ning tühistamiseks ⏹.\nKasuta `{prefix}help [katergooria]` et saada rohkem informatsiooni käskluste kohta.",
+          "description": "Kasuta navigeerimiseks ◀ ▶ reaktsioone ning tühistamiseks ⏹.\nKasuta `{prefix}help [käsklus]` et saada rohkem informatsiooni käskluse kohta.\nPane tähele et katekooriad Lõbus, Gild, Informatsioon ja Täiskasvanutele ei ole käsklused!",
           "nsfw_info": "`Et näha seda lehte sisesta käsklus NSFW märgisega kanalis.`"
         }
       },
@@ -307,6 +348,7 @@
             "discord": "`Discord (Tugi)`",
             "github": "`GitHub`",
             "patreon": "`Patreon`",
+            "policy": "`Privaatsuspoliitika ja Kasutustingimused`",
             "title": "Teised lingid",
             "twitter": "`Twitter`",
             "website": "`Veebisait`",
@@ -435,6 +477,10 @@
         },
         "special_user": "Okei armsake. Las ma võtan oma \"mänguasjad\" er meil oleks lõbusam.\n\\* Võtab kasutaja {user} käest kinni ja kaob oma tuppa\""
       },
+      "cum": {
+        "loading": "{LOADING} Valmistun jobistamiseks...",
+        "message": "{user} jobistab."
+      },
       "fuck": {
         "mention_bot": "Sa ei saa keppida botte!",
         "mention_purr": "\\*laksab {user}* EI! Mitte minuga pervert!",
@@ -506,34 +552,66 @@
   "snuggle": {
     "fun": {
       "bite": {
-        "mention_snuggle": "Nya! Ma ei ole toit {user}!"
+        "mention_snuggle": [
+          "Nya! Ma ei ole toit {user}!",
+          "Palun ei {user}. S-see on alatu O////O",
+          "M-miks näksid mind?"
+        ]
       },
       "cuddle": {
-        "mention_snuggle": "\\*Poeb {user} kaissu*"
+        "mention_snuggle": [
+          "\\*Poeb {user} kaissu*",
+          "\\*kaisutab {user} väga tugevasti*",
+          "See on nii mõnna. UwU"
+        ]
       },
       "feed": {
-        "mention_snuggle": "S-sa annad mulle süüa {user}? A-aitäh. \\*Punastab süües*"
+        "mention_snuggle": [
+          "S-sa annad mulle süüa {user}? A-aitäh. \\*Punastab süües*",
+          "Yay! Tasuta toit. Aitäh {user}.",
+          "\\*vaikselt võtab toidu ja näksib seda*"
+        ]
       },
       "hug": {
-        "mention_snuggle": "\\*naudib {user} kallistust*"
+        "mention_snuggle": [
+          "\\*naudib {user} kallistust*",
+          "Kallistused on nii mõnusad {user}.",
+          "\\*vaikselt ütleb \"nya\" samal ajal kallistades {user}*"
+        ]
       },
       "kiss": {
         "mention_purr": "Ma ei lase sul musitada mu õde läbi minu!",
-        "mention_snuggle": "Mi- Mida? O- Olgu. Aga sa tohid ainult musitada minu põsele {user}! \\*Laseb sul musitada põsele*",
+        "mention_snuggle": [
+          "Mi- Mida? O- Olgu. Aga sa tohid ainult musitada minu põsele {user}! \\*Laseb sul musitada põsele*",
+          "A-aga {user}... See on piinlik niimoodi avalikult. \\*häbelik* O-Olgu, aga ainult üks musi. Q////Q",
+          "N-nya! see on vääritu {user}..."
+        ],
         "special_user": "Mi- Miks sa tahad musitada mu õde läbi minu? S-Sa saad musitada teda ise {user}."
       },
       "lick": {
-        "mention_snuggle": "H-HEI! S-See on lewd {user}."
+        "mention_snuggle": [
+          "H-Hei! S-See on vääritu {user}.",
+          "M-ma ei ole mingisugune toit {user}.",
+          "Ei. See on liiga vääritu {user}! >////<"
+        ]
       },
       "neko": {
         "purr": "Nya. See on mu suur õde. >w<",
         "snuggle": "K-kas see olen mina? OwO"
       },
       "pat": {
-        "mention_snuggle": "\\*naudib paid*"
+        "mention_snuggle": [
+          "\\*naudib paid*",
+          "Yay! Pai. Aitäh {user}.",
+          "\\*Naeratab samal ajal nautides paid*"
+        ]
       },
       "poke": {
-        "mention_snuggle": "Nuuuu. Ära toksi mind!"
+        "mention_snuggle": [
+          "Eiii. Ei toksi mind!",
+          "Aaa! \\*hirmunud* M-miks sa toksid mind?",
+          "Miks sa toksid mind? Kas ma tegin midagi valesti? Q////Q"
+        ]
       },
       "ship": {
         "mention_purr": "Ei! Mitte mingit paaritamist minu suure õega {user}!",
@@ -541,10 +619,18 @@
         "special_user": "M-miks ma peaksin teid paari panema {user}?\nM-mine tee seda ise. >////<"
       },
       "slap": {
-        "mention_snuggle": "\\*jookseb {user} eest minema*"
+        "mention_snuggle": [
+          "\\*jookseb {user} eest minema*",
+          "\\*põgeneb ja peidab end teki alla* {user} on suur kuri!",
+          "Eiiiii. \\*hakkab nutma*"
+        ]
       },
       "tickle": {
-        "mention_snuggle": "A-appi! M-ma ei tohi nae- \\*hakkab naerma*"
+        "mention_snuggle": [
+          "A-appi! Ma e-ei saa naer- \\*hakkab naerma*",
+          "S-see on nii ebaaus. M-ma ei saa sind kõditada... \\*hakkab naerma*",
+          "\\*üritab käituda normaalselt kuid ebaõnnestub*"
+        ]
       }
     },
     "info": {
@@ -557,10 +643,7 @@
         }
       },
       "invite": {
-        "message": "Nya! Sa ei saa mind kutsuda oma Discordi {user}! Selle asemel kutsu minu õde!"
-      },
-      "level": {
-        "purr_only": "Nya! See käsklus on ainult olemas mu õel \\*Purr*! >w<"
+        "message": "Nya! Sa ei saa kutsuda mind oma discordi, välja arvatud juhul kui sa toetad mu isa Andre_601 [Patreonis]({patreon_url}) ($15 tase)\n\nAga sa saad kutsuda mu suure Õe!"
       }
     },
     "nsfw": {

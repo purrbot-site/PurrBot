@@ -34,7 +34,11 @@
       "bite": {
         "loading": "{LOADING} Going to bite someone...",
         "mention_self": "Is it cannibawism, if you bite youwsewf {user}?",
-        "mention_purr": "W-w-wha...? I ish not tasty! >.<",
+        "mention_purr": [
+          "W-w-wha...? I ish not tasty! >.<",
+          "H-hey! I'm not food! OwO",
+          "D-don't nibbwe on me. OwO"
+        ],
         "message": "{user} bites you {targets} OwO",
         "no_mention": "Pwease mention at weast one user to bite!",
         "special_user": "B-but {user}! T-that is embawwassing."
@@ -42,7 +46,11 @@
       "cuddle": {
         "loading": "{LOADING} Weceiving a cuddle-gif...",
         "mention_self": "Why do you want to cuddwe youwsewf {user}?\nYou can cuddwe me if you want. {VANILLABLUSH}",
-        "mention_purr": "\\*enjoys the cuddwe fwom {user}*",
+        "mention_purr": [
+          "\\*enjoys the cuddwe fwom {user}*",
+          "\\*snuggwes tight at {user}*",
+          "Thanks chu fow the comfy snuggwe {user}. UwU"
+        ],
         "message": "{user} cuddwes with you {targets}",
         "no_mention": "Pwease mention at weast one user to cuddwe!"
       },
@@ -52,7 +60,11 @@
       },
       "feed": {
         "mention_bot": "Bots can't eat food siwwy! They can onwy eat your data. O_O",
-        "mention_purr": "Food? Fow me OwO? Thank chu {user}! \\*noms food and wags tail* UwU",
+        "mention_purr": [
+          "Food? Fow me OwO? Thank chu {user}! \\*noms food and wags tail* UwU",
+          "Thank you fow the food {user}! OwO",
+          "\\*Eats the food with joy\\*"
+        ],
         "mention_self": "You'we feeding youwsewf siwwy. It's bettew to shawe it. \\*wooks at {user} with big eyes OwO*",
         "message": "{user} gives {target} something to eat. UwU",
         "no_mention": "Please mention someone to give some food. -_-",
@@ -71,14 +83,22 @@
       "hug": {
         "loading": "{LOADING} Weceiving a hug-gif...",
         "mention_self": "Why are you hugging youwsewf {user}?\nYou can hug me if you want. {VANILLABLUSH}",
-        "mention_purr": "\\*enjoys the hug fwom {user}*",
+        "mention_purr": [
+          "\\*enjoys the hug from {user}*",
+          "\\*siwentwy puwws whiwe enjoying the hug*",
+          "I awways wike hugs {user}"
+        ],
         "message": "{user} hugs you {targets} UwU",
         "no_mention": "Pwease mention at weast one user to hug!"
       },
       "kiss": {
         "loading": "{LOADING} Weceiving a kiss...",
         "mention_self": "How can you kiss youwselwf {user}? With a miwwow?",
-        "mention_purr": "O-okay. But only my cheek! \\*Howds cheek out*",
+        "mention_purr": [
+          "O-okay. But onwy my cheek! \\*Howds cheek out*",
+          "Onwy my cheek, okay?",
+          "T-that's a bit wewd, but okay. \\*bwushes* OwO"
+        ],
         "mention_snuggle": "NO! I won't wet you kiss my sistew with my hewp! òwó",
         "message": "{user} kisses you {targets} OwO",
         "no_mention": "Pwease mention at weast one user to kiss!",
@@ -91,7 +111,11 @@
       "lick": {
         "loading": "{LOADING} Weceiving a lick-gif...",
         "mention_self": "I won't ask how and *whewe* you lick youwsewf {user}...",
-        "mention_purr": "\\*backs away\\* I-I nevew awwowed you to lick me!",
+        "mention_purr": [
+          "\\*backs away\\* I-I nevew awwowed you to lick me {user}!",
+          "H-hey! Don't wick me! >.<",
+          "Nya! T-that ish naughty!"
+        ],
         "message": "{user} licks you {targets} OwO",
         "no_mention": "Pwease mention at weast one user to lick!",
         "special_user": "B-but sweetie... Not in pubwic. \\*blushes\\*"
@@ -106,14 +130,21 @@
       "pat": {
         "loading": "{LOADING} Weceiving pats... UwU",
         "mention_self": "Uhm... Isn't thewe a neko that you can pat {user}? \\*points to hewsewf\\*",
-        "mention_purr": "\\*purr™*",
+        "mention_purr": [
+          "\\*purr™*",
+          "\\*pwesses head against {user}'s hand*",
+          "Nya... Thank you for the pat. UwU"
+        ],
         "message": "{user} pats you {targets} UwU",
         "no_mention": "Pwease mention at weast one user to pat!"
       },
       "poke": {
         "loading": "{LOADING} Weceiving a poke-gif...",
         "mention_self": "Are you bowed ow why do you poke youwsewf {user}?",
-        "mention_purr": "N-nya! Nu poking me! >~<",
+        "mention_purr": [
+          "N-nya! Nu poking me! >~<",
+          "W-why awe you poking me? OwO"
+        ],
         "message": "{user} pokes you {targets} OwO",
         "no_mention": "Pwease mention at weast one user to poke!"
       },
@@ -147,7 +178,10 @@
       "slap": {
         "loading": "{LOADING} Slapping the usews...",
         "mention_self": "Nononono! I won't hewp you huwting youwsewf {user}.",
-        "mention_purr": "Nuuuu... W-why huwting me {user}? T^T",
+        "mention_purr": [
+          "Nuuuu... W-why huwting me {user}? T^T",
+          "\\*slaps back* No slapping me without consequences {user}! >:C"
+        ],
         "message": "{user} slaps you {targets} OwO",
         "no_mention": "Pwease mention at weast one user to slap!"
       },
@@ -158,7 +192,11 @@
       "tickle": {
         "loading": "{LOADING} Weceiving a tickle-gif...",
         "mention_self": "Okay... If you weawwy want to get tickwed... \\*tickwes {user}*",
-        "mention_purr": "N-not faiw! I c-can't \\*laughs fwom the tickwes*",
+        "mention_purr": [
+          "N-not faiw! I c-can't \\*waughs from the tickwes*",
+          "\\*twies not to waugh but faiws*",
+          "W-why do I have t-to be that t-tickwish? >~<"
+        ],
         "message": "{user} tickles you {targets} UwU",
         "no_mention": "Pwease mention at weast one user to tickwe!"
       }
@@ -210,7 +248,7 @@
         "message_title": "Cuwwent Message",
         "no_bg": "Pwease pwovide a backgwound name!\nA list of backgwounds can be found [hewe]({wiki_bg}).",
         "no_channel": "No text channew pwovided! Make suwe you mention one.",
-        "no_color": "No cowow pwovided!\nPwease eithew use `hex:rrggbb` ow `rgb:r,g,b`",
+        "no_color": "No cowow pwovided!\nPwease eithew use `hex:rrggbb`, `rgb:r,g,b` ow `random`",
         "no_icon": "Pwease pwovide an icon name!\nA list of icons can be found [hewe]({wiki_icon}).",
         "no_msg": "No message pwovided!",
         "placeholders_title": "Avaiwabwe Pwacehowders",
@@ -236,19 +274,22 @@
       },
       "guild": {
         "embed": {
-          "boost_multiple": "{boost} boosts",
-          "boost_single": "1 boost",
-          "boost_tier": "Boost Tiew: {BOOST_TIER} (Level {level})",
+          "boost": {
+            "multiple": "{boost} boosts",
+            "single": "1 boost",
+            "title": "Boosting",
+            "value": "{boosts} (Level {level} {BOOST_TIER})"
+          },
           "channels_title": "Channews",
           "channels_value": "{CATEGORY} Totaw: {channels_total}\n\n{TEXTCHANNEL} Text Channews: {channels_text}\n{VOICECHANNEL} Voice Channews: {channels_voice}",
           "created": "Cweated",
-          "level": "Wevew",
           "levels": {
-            "unknown": "Unknown wevew",
-            "none": "No wevel",
+            "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Low",
             "medium": "Medium",
-            "high": "(╯°□°）╯︵ ┻━┻",
+            "none": "No wevel",
+            "title": "Vewification Wevew",
+            "unknown": "Unknown wevew",
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Membews",
@@ -276,7 +317,7 @@
             "owner": "Ownew",
             "title": "Categowies"
           },
-          "description": "Use the ◀ or ▶ weactions to navigate thwough the pages and ⏹ to cancew it.\nUse `{prefix}help [command]` to get more infowmation about a specific command.",
+          "description": "Use the ◀ or ▶ weactions to navigate thwough the pages and ⏹ to cancew it.\nUse `{prefix}help [command]` to get more infowmation about a specific command.\nNote that the categowies Fun, Guild, Info and NSFW awe NOT commands!",
           "nsfw_info": "`Run the hewp command in a NSFW channel to see this page.`"
         }
       },
@@ -307,6 +348,7 @@
             "discord": "`Discord (Suppowt)`",
             "github": "`GitHub`",
             "patreon": "`Patreon`",
+            "policy": "`Pwivacy Powicy and ToS`",
             "title": "Othew Links",
             "twitter": "`Twitter`",
             "website": "`Website`",
@@ -435,6 +477,10 @@
         },
         "special_user": "Okay sweetie. Wet me get my \"toys\" so that we can have fun.\n\\*takes {user}'s hand and disappeaws in hew woom*"
       },
+      "cum": {
+        "loading": "{LOADING} Pwepawing to cum!!! OWO",
+        "message": "{user} IS CUMMING!!! UwU"
+      },
       "fuck": {
         "mention_bot": "You can't fuck with bots!",
         "mention_purr": "\\*slaps {user}* NO! Not with me you pewv!",
@@ -506,34 +552,66 @@
   "snuggle": {
     "fun": {
       "bite": {
-        "mention_snuggle": "Nya! I'm no food {user}! OwO"
+        "mention_snuggle": [
+          "Nya! I'm no food {user}! >:C",
+          "P-pwease not {user}. T-that's lewd O////O",
+          "W-why nibbwing me?"
+        ]
       },
       "cuddle": {
-        "mention_snuggle": "\\*snuggwes up to {user}*"
+        "mention_snuggle": [
+          "\\*snuggwes up to {user}*",
+          "\\*cuddwes {user} extwemewy tight*",
+          "This is so comfy. UwU"
+        ]
       },
       "feed": {
-        "mention_snuggle": "Y-you give me some food {user}? T-thanks. \\*blushes while eating the food* OwO"
+        "mention_snuggle": [
+          "Y-you give me some food {user}? OwO T-thanks. \\*blushes while eating da food*",
+          "Yay! Fwee food. Thanks {user}. UwU",
+          "\\*siwentwy takes da food and nibbwes on it*"
+        ]
       },
       "hug": {
-        "mention_snuggle": "\\*wuvs the hug from {user}*"
+        "mention_snuggle": [
+          "\\*woves the hug fwom {user}*",
+          "Hugs awe awways so comfy {user}. UwU",
+          "\\*siwentwy \"nyas\" whiwe hugging {user}*"
+        ]
       },
       "kiss": {
         "mention_purr": "I won't hewp you kissing my sistew thwough me {user}!",
-        "mention_snuggle": "Wha-? O-okay. B-but you can onwy kiss my cheek {user}! \\*Lets you kiss hew cheek*",
+        "mention_snuggle": [
+          "Wha-? O-okay. B-but you can onwy kissu my cheek {user}! \\*Lets you kiss hew cheek*",
+          "B-but {user}... That is so embawwassing here in pubwic. \\*wooks shy* O-okay fine, but onwy a singwe kiss. Q////Q",
+          "N-nya! That is lewd {user}... O////O"
+        ],
         "special_user": "W-why do you kiss my sistew thwough me? Y-you can kiss hew youwsewf {user}."
       },
       "lick": {
-        "mention_snuggle": "H-HEY! T-that ish lewd {user}."
+        "mention_snuggle": [
+          "H-HEY! T-that is lewd {user}.",
+          "I-I'm not some kind of food {user}.",
+          "Nu. That is too lewd {user}! >////<"
+        ]
       },
       "neko": {
         "purr": "Nya. That is my big sistew. >w<",
         "snuggle": "I-ish that me? OwO"
       },
       "pat": {
-        "mention_snuggle": "\\*enjoys the pat*"
+        "mention_snuggle": [
+          "\\*enjoys the pat*",
+          "Yay! A pat. Thank you {user}. ^^",
+          "\\*smiwes while enjoying da pat*"
+        ]
       },
       "poke": {
-        "mention_snuggle": "Nuuu. Do nu poke me!"
+        "mention_snuggle": [
+          "Nuuu. Do nu poke me!",
+          "EEP! \\*wooks scawed* W-why poking me?",
+          "Why awe you poking me? Did I do something wwong? Q////Q"
+        ]
       },
       "ship": {
         "mention_purr": "No! No shipping of my big sistew {user}!",
@@ -541,10 +619,18 @@
         "special_user": "W-why should I ship you two {user}?\nG-go and do that youwsewf. >////<"
       },
       "slap": {
-        "mention_snuggle": "\\*wuns away from {user}*"
+        "mention_snuggle": [
+          "\\*wuns away fwom {user}*",
+          "\\*wuns and hides undew a blanku* {user} is a big meanie! :C",
+          "Nuuuuu. \\*stawts cwying* T-T"
+        ]
       },
       "tickle": {
-        "mention_snuggle": "H-help! I c-can't lau- \\*starts laughing*"
+        "mention_snuggle": [
+          "H-halp! I c-can't wau- \\*stawts waughing*",
+          "T-this is so unfaiw. I-I can't tickwe you back... \\*stawts kaughing*",
+          "\\*twies to act nowmaw but can't > - <\\*"
+        ]
       }
     },
     "info": {
@@ -557,10 +643,7 @@
         }
       },
       "invite": {
-        "message": "Nya! You can't invite me to youw Discord {user}! Go and invite my sistew instead!"
-      },
-      "level": {
-        "purr_only": "Nya! This command is onwy avaiwabwe fow my Sistew \\*Purr*! >w<"
+        "message": "Nya! You can't invite me to youw Discowd, unwess you suppowt my Dad Andre_601 on [Patweon]({patreon_url}) ($15 tier)\n\nYou can howevew invite my big Sistew!"
       }
     },
     "nsfw": {
