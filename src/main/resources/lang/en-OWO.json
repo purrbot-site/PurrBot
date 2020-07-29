@@ -348,7 +348,7 @@
             "discord": "`Discord (Suppowt)`",
             "github": "`GitHub`",
             "patreon": "`Patreon`",
-            "policy": "Pwivacy Powicy and ToS",
+            "policy": "`Pwivacy Powicy and ToS`",
             "title": "Othew Links",
             "twitter": "`Twitter`",
             "website": "`Website`",
@@ -476,6 +476,10 @@
           "timed_out": "Looks like {target} doesn't want to get sucked by you {user}."
         },
         "special_user": "Okay sweetie. Wet me get my \"toys\" so that we can have fun.\n\\*takes {user}'s hand and disappeaws in hew woom*"
+      },
+      "cum": {
+        "loading": "{LOADING} Pwepawing to cum!!! OWO",
+        "message": "{user} IS CUMMING!!! UwU"
       },
       "fuck": {
         "mention_bot": "You can't fuck with bots!",
@@ -639,7 +643,7 @@
         }
       },
       "invite": {
-        "message": "Nya! You can't invite me to youw Discord {user}! Go and invite my sistew instead!"
+        "message": "Nya! You can't invite me to youw Discowd, unwess you suppowt my Dad Andre_601 on [Patweon]({patreon_url}) ($15 tier)\n\nYou can howevew invite my big Sistew!"
       }
     },
     "nsfw": {
