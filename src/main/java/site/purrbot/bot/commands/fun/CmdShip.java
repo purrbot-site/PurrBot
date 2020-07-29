@@ -137,7 +137,7 @@ public class CmdShip implements Command{
                     return;
                 }
                 tc.sendMessage(
-                        bot.getRandomMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }else{
                 if(bot.isSpecial(member2.getId())){
@@ -147,7 +147,7 @@ public class CmdShip implements Command{
                     return;
                 }
                 tc.sendMessage(
-                        bot.getRandomMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }
             return;
@@ -161,7 +161,7 @@ public class CmdShip implements Command{
                     return;
                 }
                 tc.sendMessage(
-                        bot.getRandomMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
+                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }else{
                 if(bot.isSpecial(member1.getId())){
@@ -171,7 +171,7 @@ public class CmdShip implements Command{
                     return;
                 }
                 tc.sendMessage(
-                        bot.getRandomMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
+                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }
             return;

@@ -99,13 +99,13 @@ public class CmdKiss implements Command{
                     });
                 }else{
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.fun.kiss.mention_purr")
+                            bot.getRandomMsg(guild.getId(), "purr.fun.kiss.mention_purr")
                     ).queue();
                 }
             }else
             if(snuggle != null && members.contains(snuggle)){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.kiss.mention_snuggle")
+                        bot.getRandomMsg(guild.getId(), "purr.fun.kiss.mention_snuggle")
                 ).queue();
             }
         }
