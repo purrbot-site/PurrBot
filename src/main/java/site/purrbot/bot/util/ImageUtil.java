@@ -21,14 +21,11 @@ package site.purrbot.bot.util;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
-
 import net.dv8tion.jda.internal.utils.IOUtil;
 import okhttp3.*;
-
 import org.json.JSONObject;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.API;
-
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -99,9 +96,8 @@ public class ImageUtil {
 
             int imgWidth = template.getWidth();
 
-            int patting = 480;
             int textWidth = img.getFontMetrics().stringWidth(text);
-            int textX = imgWidth - patting - (textWidth / 2);
+            int textX = (imgWidth / 2) - (textWidth / 2);
 
             img.drawString(text, textX, 190);
 

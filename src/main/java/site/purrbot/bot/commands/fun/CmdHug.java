@@ -63,11 +63,11 @@ public class CmdHug implements Command {
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.hug.mention_snuggle", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.hug.mention_snuggle", member.getAsMention())
                 ).queue();
             }else {
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.hug.mention_purr", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "purr.fun.hug.mention_purr", member.getAsMention())
                 ).queue();
             }
             msg.addReaction("\u2764").queue();

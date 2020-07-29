@@ -63,10 +63,12 @@ public class CmdPoke implements Command{
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.poke.mention_snuggle")
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.poke.mention_snuggle")
                 ).queue();
             }else{
-                tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.poke.mention_purr")).queue();
+                tc.sendMessage(
+                        bot.getRandomMsg(guild.getId(), "purr.fun.poke.mention_purr")
+                ).queue();
             }
             msg.addReaction("\uD83D\uDE16").queue();
         }

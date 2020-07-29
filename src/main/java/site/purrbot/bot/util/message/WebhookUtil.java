@@ -24,8 +24,6 @@ import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookMessage;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 
-import javax.annotation.Nullable;
-
 public class WebhookUtil {
     
     private final WebhookClient client;

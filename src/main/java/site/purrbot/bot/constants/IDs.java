@@ -29,4 +29,11 @@ public class IDs {
     
     // Main Guild of the bot
     public static final String GUILD = "423771795523371019";
+    
+    public static final String ACCEPTED_SUGGESTIONS = "736916118790340629";
+    public static final String DENIED_SUGGESTIONS   = "736916252353626144";
+    public static final String SUGGESTIONS          = "735986543293890613";
+    
+    public static final String NEKOHOLIC  = "423773042964037632";
+    public static final String NEKO_LOVER = "714217479219707978";
 }

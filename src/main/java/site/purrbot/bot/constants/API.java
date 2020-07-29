@@ -46,6 +46,7 @@ public enum API {
 
     GIF_ANAL_LEWD         (true, "anal",          true),
     GIF_BLOW_JOB_LEWD     (true, "blowjob",       true),
+    GIF_CUM_LEWD          (true, "cum",           true),
     GIF_FUCK_LEWD         (true, "fuck",          true),
     GIF_NEKO_LEWD         (true, "neko",          true),
     GIF_PUSSYLICK_LEWD    (true, "pussylick",     true),

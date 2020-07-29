@@ -72,11 +72,17 @@ public class CmdGuild implements Command{
     }
     
     private String getBoostMessage(Guild guild){
+        String boostMsg;
         if(guild.getBoostCount() == 1)
-            return bot.getMsg(guild.getId(), "purr.info.guild.embed.boost_single");
+            boostMsg = bot.getMsg(guild.getId(), "purr.info.guild.embed.boost.single");
+        else
+            boostMsg = bot.getMsg(guild.getId(), "purr.info.guild.embed.boost.multiple")
+                          .replace("{boost}", String.valueOf(guild.getBoostCount()));
         
-        return bot.getMsg(guild.getId(), "purr.info.guild.embed.boost_multiple")
-                .replace("{boost}", String.valueOf(guild.getBoostCount()));
+        return bot.getMsg(guild.getId(), "purr.info.guild.embed.boost.value")
+                  .replace("{boosts}", boostMsg)
+                  .replace("{level}", String.valueOf(guild.getBoostTier().getKey()))
+                  .replace("{BOOST_TIER}", getBoostEmote(guild));
     }
     
     private String getBoostEmote(Guild guild){
@@ -116,9 +122,9 @@ public class CmdGuild implements Command{
         long bots = members.stream().filter(member -> member.getUser().isBot()).count();
         
         return bot.getMsg(guild.getId(), "purr.info.guild.embed.members_value")
-                .replace("{members_total}", String.valueOf(total))
-                .replace("{members_human}", String.valueOf(humans))
-                .replace("{members_bot}", String.valueOf(bots));
+                .replace("{members_total}", bot.getMessageUtil().formatNumber(total))
+                .replace("{members_human}", bot.getMessageUtil().formatNumber(humans))
+                .replace("{members_bot}", bot.getMessageUtil().formatNumber(bots));
     }
     
     private String getChannels(Guild guild){
@@ -127,9 +133,9 @@ public class CmdGuild implements Command{
         long voice = guild.getChannels().stream().filter(chan -> chan.getType().equals(ChannelType.VOICE)).count();
         
         return bot.getMsg(guild.getId(), "purr.info.guild.embed.channels_value")
-                .replace("{channels_total}", String.valueOf(total))
-                .replace("{channels_text}", String.valueOf(text))
-                .replace("{channels_voice}", String.valueOf(voice));
+                .replace("{channels_total}", bot.getMessageUtil().formatNumber(total))
+                .replace("{channels_text}", bot.getMessageUtil().formatNumber(text))
+                .replace("{channels_voice}", bot.getMessageUtil().formatNumber(voice));
     }
     
     @Override
@@ -137,50 +143,36 @@ public class CmdGuild implements Command{
         MessageEmbed guildInfo = bot.getEmbedUtil().getEmbed(member)
                 .setTitle(guild.getName())
                 .setThumbnail(guild.getIconUrl())
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.region"),
-                        String.format(
-                                "%s %s",
-                                guild.getRegion().getEmoji(),
-                                guild.getRegion().getName()
-                        ),
-                        true
-                )
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.level"), 
-                        getVerifyLevel(guild), 
-                        true
-                )
-                .addField(
+                .setDescription(String.format(
+                        "**%s**: %s\n" + 
+                        "**%s**: `%s`\n" +
+                        "\n" + 
+                        "**%s**: %s %s\n" +
+                        "**%s**: %s\n" +
+                        "\n" +
+                        "**%s**: %s\n" +
+                        "\n" +
+                        "**%s**\n" +
+                        "%s\n" +
+                        "\n" +
+                        "**%s**\n" +
+                        "%s",
                         bot.getMsg(guild.getId(), "purr.info.guild.embed.owner"),
-                        getOwner(guild), 
-                        false
-                )
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.created"), 
-                        String.format(
-                                "`%s`",
-                                bot.getMessageUtil().formatTime(LocalDateTime.from(guild.getTimeCreated()))
-                        ), 
-                        false
-                )
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.boost_tier")
-                                .replace("{level}", String.valueOf(guild.getBoostTier().getKey()))
-                                .replace("{BOOST_TIER}", getBoostEmote(guild)),
+                        getOwner(guild),
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.created"),
+                        bot.getMessageUtil().formatTime(LocalDateTime.from(guild.getTimeCreated())),
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.region"),
+                        guild.getRegion().getEmoji(),
+                        guild.getRegion().getName(),
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.levels.title"),
+                        getVerifyLevel(guild),
+                        bot.getMsg(guild.getId(), "purr.info.guild.embed.boost.title"),
                         getBoostMessage(guild),
-                        false
-                )
-                .addField(
                         bot.getMsg(guild.getId(), "purr.info.guild.embed.members_title"),
                         getMembers(guild),
-                        true
-                )
-                .addField(
                         bot.getMsg(guild.getId(), "purr.info.guild.embed.channels_title"),
-                        getChannels(guild),
-                        true
-                )
+                        getChannels(guild)
+                ))
                 .build();
 
         tc.sendMessage(guildInfo).queue();

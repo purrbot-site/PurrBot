@@ -19,27 +19,27 @@
 package site.purrbot.bot;
 
 import ch.qos.logback.classic.Logger;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.rainestormee.jdacommand.CommandHandler;
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.discordservices.dservices4j.Commands;
 import net.discordservices.dservices4j.DServices4J;
 import net.discordservices.dservices4j.Stats;
 import net.discordservices.dservices4j.exceptions.RatelimitedException;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
+import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
+import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.botblock.javabotblockapi.BotBlockAPI;
 import org.botblock.javabotblockapi.Site;
 import org.botblock.javabotblockapi.requests.PostAction;
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.rainestormee.jdacommand.CommandHandler;
-import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
-import net.dv8tion.jda.api.sharding.ShardManager;
-import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Message;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
@@ -48,8 +48,12 @@ import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.listener.ConnectionListener;
 import site.purrbot.bot.listener.GuildListener;
+import site.purrbot.bot.listener.ReactionListener;
 import site.purrbot.bot.listener.ReadyListener;
-import site.purrbot.bot.util.*;
+import site.purrbot.bot.util.CheckUtil;
+import site.purrbot.bot.util.DBUtil;
+import site.purrbot.bot.util.HttpUtil;
+import site.purrbot.bot.util.ImageUtil;
 import site.purrbot.bot.util.file.FileManager;
 import site.purrbot.bot.util.file.lang.LangUtils;
 import site.purrbot.bot.util.message.EmbedUtil;
@@ -57,7 +61,6 @@ import site.purrbot.bot.util.message.MessageUtil;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -83,8 +86,6 @@ public class PurrBot {
     private CheckUtil checkUtil;
 
     private boolean beta = false;
-    
-    private final DecimalFormat decimalFormat = new DecimalFormat("##,###");
 
     private final CommandHandler<Message> CMD_HANDLER = new CommandHandler<>();
     private EventWaiter waiter;
@@ -168,6 +169,7 @@ public class PurrBot {
                         new ReadyListener(this),
                         new ConnectionListener(this),
                         new GuildListener(this),
+                        new ReactionListener(this),
                         new CommandListener(this, CMD_HANDLER),
                         waiter
                 )
@@ -334,6 +336,8 @@ public class PurrBot {
                 .replace("{FACE}", Emotes.FACE.getEmote())
                 .replace("{PAYPAL}", Emotes.PAYPAL.getEmote())
                 .replace("{PATREON}", Emotes.PATREON.getEmote())
+                // Guild link
+                .replace("{guild_invite}", Links.DISCORD)
                 // Wiki pages
                 .replace("{wiki_bg}", Links.WIKI + "/welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI + "/welcome-images#icons")
@@ -409,10 +413,10 @@ public class PurrBot {
     
             scheduler.scheduleAtFixedRate(() -> {
         
-                getShardManager().setActivity(Activity.of(Activity.ActivityType.WATCHING, String.format(
-                        getMessageUtil().getBotGame(),
-                        decimalFormat.format(getShardManager().getGuilds().size())
-                )));
+                getShardManager().setActivity(Activity.of(
+                        Activity.ActivityType.WATCHING,
+                        getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
+                ));
         
                 if(isBeta())
                     return;
@@ -434,10 +438,10 @@ public class PurrBot {
             }, 1, 5, TimeUnit.MINUTES);
         }else{
             scheduler.scheduleAtFixedRate(() -> 
-                    getShardManager().setActivity(Activity.of(Activity.ActivityType.WATCHING, String.format(
-                            getMessageUtil().getBotGame(),
-                            decimalFormat.format(getShardManager().getGuildCache().size())
-                    )))
+                    getShardManager().setActivity(Activity.of(
+                            Activity.ActivityType.WATCHING,
+                            getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
+                    ))
             , 1, 5, TimeUnit.MINUTES);
         }
     }

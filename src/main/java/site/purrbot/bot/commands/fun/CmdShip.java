@@ -137,7 +137,7 @@ public class CmdShip implements Command{
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }else{
                 if(bot.isSpecial(member2.getId())){
@@ -147,7 +147,7 @@ public class CmdShip implements Command{
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }
             return;
@@ -161,7 +161,7 @@ public class CmdShip implements Command{
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }else{
                 if(bot.isSpecial(member1.getId())){
@@ -171,7 +171,7 @@ public class CmdShip implements Command{
                     return;
                 }
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }
             return;
@@ -180,11 +180,11 @@ public class CmdShip implements Command{
         if(member1.getId().equals(IDs.SNUGGLE)) {
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member.getAsMention())
                 ).queue();
             }
             return;
@@ -192,11 +192,11 @@ public class CmdShip implements Command{
         if(member2.getId().equals(IDs.SNUGGLE)){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.ship.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "purr.fun.ship.mention_snuggle", member.getAsMention())
                 ).queue();
             }
             return;
@@ -216,16 +216,13 @@ public class CmdShip implements Command{
 
         byte[] image;
         
-        Integer result = cache.getIfPresent(String.format("%s:%s", member1.getId(), member2.getId()));
-        
-        if(result != null){
-            image = bot.getImageUtil().getShipImg(member1, member2, result);
-        }else{
+        Integer result = cache.get(String.format("%s:%s", member1.getId(), member2.getId()), k -> random.nextInt(101));
+        if(result == null){
             result = random.nextInt(101);
-            
-            image = bot.getImageUtil().getShipImg(member1, member2, result);
             cache.put(String.format("%s:%s", member1.getId(), member2.getId()), result);
         }
+        
+        image = bot.getImageUtil().getShipImg(member1, member2, result);
 
         if(image == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
             Message message = new MessageBuilder(String.format(

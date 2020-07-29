@@ -25,8 +25,9 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 
-import java.awt.Color;
+import java.awt.*;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -41,6 +42,8 @@ public class MessageUtil {
     
     private final Pattern placeholder = Pattern.compile("(\\{(.+?)})", Pattern.CASE_INSENSITIVE);
     private final Pattern rolePattern = Pattern.compile("(\\{r_(name|mention):(\\d+)})", Pattern.CASE_INSENSITIVE);
+    
+    private final DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
 
     public MessageUtil(PurrBot bot){
         this.bot = bot;
@@ -191,8 +194,11 @@ public class MessageUtil {
           .queue();
     }
 
-    public String getBotGame(){
-        return bot.isBeta() ? "My sister on %s Guilds." : "https://purrbot.site | %s Guilds";
+    public String getBotGame(long guilds){
+        String game = bot.isBeta() ? "My sister on %s guilds." : "https://purrbot.site | %s Guilds";
+        
+        
+        return String.format(game, formatNumber(guilds));
     }
     
     public String replaceLast(String input, String target, String replacement){
@@ -203,5 +209,9 @@ public class MessageUtil {
         builder.replace(input.lastIndexOf(target), input.lastIndexOf(target) + 1, replacement);
         
         return builder.toString();
+    }
+    
+    public String formatNumber(long number){
+        return decimalFormat.format(number);
     }
 }

@@ -126,7 +126,8 @@ public class CmdInfo implements Command{
                         getLink(guild.getId(), "links.github", Links.GITHUB),
                         getLink(guild.getId(), "links.twitter", Links.TWITTER),
                         getLink(guild.getId(), "links.website", Links.WEBSITE),
-                        getLink(guild.getId(), "links.wiki", Links.WIKI)
+                        getLink(guild.getId(), "links.wiki", Links.WIKI),
+                        getLink(guild.getId(), "links.policy", Links.POLICY)
                 ),
                 false
         )

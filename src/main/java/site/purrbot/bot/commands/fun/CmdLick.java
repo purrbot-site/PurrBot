@@ -63,7 +63,7 @@ public class CmdLick implements Command{
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.lick.mention_snuggle", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.lick.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
                 if(bot.isSpecial(member.getId())){
@@ -72,7 +72,7 @@ public class CmdLick implements Command{
                     ).queue();
                 }else {
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.fun.lick.mention_purr")
+                            bot.getRandomMsg(guild.getId(), "purr.fun.lick.mention_purr", member.getAsMention())
                     ).queue();
                 }
             }

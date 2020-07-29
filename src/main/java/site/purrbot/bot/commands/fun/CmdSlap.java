@@ -63,11 +63,11 @@ public class CmdSlap implements Command{
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.slap.mention_snuggle", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.slap.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.slap.mention_purr", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "purr.fun.slap.mention_purr", member.getAsMention())
                 ).queue();
             }
             msg.addReaction("\uD83D\uDE2D").queue();

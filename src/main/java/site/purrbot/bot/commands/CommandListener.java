@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
+import site.purrbot.bot.constants.IDs;
 
 import java.util.Arrays;
 import java.util.concurrent.Executor;
@@ -64,6 +65,16 @@ public class CommandListener extends ListenerAdapter{
 
                     if(user.isBot())
                         return;
+                    
+                    if(event.getChannel().getId().equals(IDs.SUGGESTIONS)){
+                        if(!bot.isBeta())
+                            return;
+                        
+                        event.getMessage().addReaction(Emotes.ACCEPT.getNameAndId())
+                                          .flatMap(v -> event.getMessage().addReaction(Emotes.CANCEL.getNameAndId()))
+                                          .queue();
+                        return;
+                    }
 
                     Pattern prefixPattern = Pattern.compile(
                             Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 

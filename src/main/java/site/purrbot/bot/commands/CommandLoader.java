@@ -20,7 +20,9 @@ package site.purrbot.bot.commands;
 
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.fun.*;
-import site.purrbot.bot.commands.guild.*;
+import site.purrbot.bot.commands.guild.CmdLanguage;
+import site.purrbot.bot.commands.guild.CmdPrefix;
+import site.purrbot.bot.commands.guild.CmdWelcome;
 import site.purrbot.bot.commands.info.*;
 import site.purrbot.bot.commands.nsfw.*;
 import site.purrbot.bot.commands.owner.*;
@@ -73,6 +75,7 @@ public class CommandLoader {
 
                 // NSFW
                 new CmdBlowjob(bot),
+                new CmdCum(bot),
                 new CmdFuck(bot),
                 new CmdLewd(bot),
                 new CmdPussylick(bot),
@@ -80,6 +83,7 @@ public class CommandLoader {
                 new CmdThreesome(bot),
 
                 // Owner
+                new CmdCheck(bot),
                 new CmdEval(bot),
                 new CmdLeave(bot),
                 new CmdMsg(bot),

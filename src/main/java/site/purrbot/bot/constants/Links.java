@@ -35,6 +35,7 @@ public class Links {
     // Other links
     public static final String PATREON     = "https://patreon.com/andre_601";
     public static final String PAYPAL      = "https://purrbot.site/donate";
+    public static final String POLICY      = "https://docs.purrbot.site/legal";
     public static final String TRANSLATORS = "https://lang.purrbot.site";
     public static final String TWITTER     = "https://purrbot.site/twitter";
     public static final String WEBSITE     = "https://purrbot.site";

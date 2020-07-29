@@ -63,11 +63,11 @@ public class CmdTickle implements Command{
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.tickle.mention_snuggle")
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.tickle.mention_snuggle")
                 ).queue();
             }else {
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.tickle.mention_purr")
+                        bot.getRandomMsg(guild.getId(), "purr.fun.tickle.mention_purr")
                 ).queue();
             }
             msg.addReaction("\uD83D\uDE02").queue();

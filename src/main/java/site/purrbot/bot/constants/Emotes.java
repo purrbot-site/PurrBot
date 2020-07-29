@@ -53,6 +53,7 @@ public enum Emotes{
     JOINED_GUILD        ("joinedGuild",         "592043203629416459", false),
     LEFT_GUILD          ("leftGuild",           "592043203042213925", false),
     MEMBERS             ("members",             "701217337692651541", false),
+    MINUS               ("minus",               "592043203042213925", false),
     NEKOWO              ("nekOwO",              "700429690309050409", false),
     OWNER               ("owner",               "700429689918849105", false),
     PARTNER             ("partner",             "712650362254917664", false),

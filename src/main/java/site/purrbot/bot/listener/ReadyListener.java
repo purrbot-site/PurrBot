@@ -21,19 +21,18 @@ package site.purrbot.bot.listener;
 import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
-import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.sharding.ShardManager;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.util.message.WebhookUtil;
 
-import java.text.DecimalFormat;
 import java.time.ZonedDateTime;
 
 public class ReadyListener extends ListenerAdapter{
@@ -88,12 +87,11 @@ public class ReadyListener extends ListenerAdapter{
         if(shards == jda.getShardInfo().getShardTotal()){
 
             bot.startUpdater();
-            DecimalFormat decimalFormat = new DecimalFormat("##,###");
             
-            shardManager.setPresence(OnlineStatus.ONLINE, Activity.of(Activity.ActivityType.WATCHING, String.format(
-                    bot.getMessageUtil().getBotGame(),
-                    decimalFormat.format(shardManager.getGuildCache().size())
-            )));
+            shardManager.setPresence(OnlineStatus.ONLINE, Activity.of(
+                    Activity.ActivityType.WATCHING, 
+                    bot.getMessageUtil().getBotGame(shardManager.getGuildCache().size())
+            ));
 
             WebhookEmbed finished = new WebhookEmbedBuilder()
                     .setColor(0x00FF00)

@@ -167,11 +167,11 @@ public class CmdFeed implements Command{
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.feed.mention_snuggle", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.feed.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.feed.mention_purr", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "purr.fun.feed.mention_purr", member.getAsMention())
                 ).queue();
             }
             msg.addReaction("\u2764").queue();

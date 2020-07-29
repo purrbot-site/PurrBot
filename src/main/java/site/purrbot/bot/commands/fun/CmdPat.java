@@ -63,11 +63,11 @@ public class CmdPat implements Command{
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.pat.mention_snuggle")
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.pat.mention_snuggle", member.getAsMention())
                 ).queue();
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.fun.pat.mention_purr")
+                        bot.getRandomMsg(guild.getId(), "purr.fun.pat.mention_purr", member.getAsMention())
                 ).queue();
             }
             msg.addReaction("\u2764").queue();

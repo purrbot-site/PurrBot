@@ -70,7 +70,7 @@ public class CmdKiss implements Command{
         if(bot.isBeta()){
             if(members.contains(guild.getSelfMember())){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.fun.kiss.mention_snuggle", member.getAsMention())
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.kiss.mention_snuggle", member.getAsMention())
                 ).queue();
             }else
             if(purr != null && members.contains(purr)){
@@ -80,7 +80,7 @@ public class CmdKiss implements Command{
                     ).queue();
                 }else{
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.fun.kiss.mention_purr", member.getAsMention())
+                            bot.getRandomMsg(guild.getId(), "snuggle.fun.kiss.mention_purr", member.getAsMention())
                     ).queue();
                 }
             }

@@ -19,7 +19,10 @@
 package site.purrbot.bot.commands;
 
 import com.github.rainestormee.jdacommand.AbstractCommand;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 public interface Command extends AbstractCommand<Message>{
     
