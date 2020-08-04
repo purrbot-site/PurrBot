@@ -434,9 +434,9 @@
           "other_title": "Outras estatísticas",
           "other_value": "```yaml\nRAM: {ram}\nTempo de atividade: {days}, {hours}, {minutes} and {seconds}\n```",
           "shard_this_title": "Este fragmento",
-          "shard_this_value": "```yaml\nID: {id} # IDs começam em 0\n\nGuildas: {guilds}\nMembros: {total}\n```",
+          "shard_this_value": "```yaml\nID: {id} # IDs começam em 0\n\nGuildas: {guilds}\n```",
           "shard_total_title": "Total",
-          "shard_total_value": "```yaml\nShards: {shards}\n\nGuildas: {guilds}\nMembros: {total}\n```",
+          "shard_total_value": "```yaml\nShards: {shards}\n\nGuildas: {guilds}\n```",
           "title": "Estatísticas"
         }
       },

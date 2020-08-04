@@ -434,9 +434,9 @@
           "other_title": "Andere Statistiken",
           "other_value": "```yaml\nRAM: {ram}\nLaufzeit: {uptime}\n```",
           "shard_this_title": "Diese Shard",
-          "shard_this_value": "```yaml\nID: {id} # IDs starten bei 0\n\nGilden: {guilds}\nMitglieder: {total}\n```",
+          "shard_this_value": "```yaml\nID: {id} # IDs starten bei 0\n\nGilden: {guilds}\n```",
           "shard_total_title": "Total",
-          "shard_total_value": "```yaml\nShards: {shards}\n\nGilden: {guilds}\nMitglieder: {total}\n```",
+          "shard_total_value": "```yaml\nShards: {shards}\n\nGilden: {guilds}\n```",
           "title": "Statistiken"
         }
       },

@@ -434,9 +434,9 @@
           "other_title": "Altre statistiche",
           "other_value": "```yaml\nRAM: {ram}\nUptime: {days}, {hours}, {minutes} e {seconds}\n```",
           "shard_this_title": "Questo frammento",
-          "shard_this_value": "```yaml\nID: {id} # ID inizia da 0\n\nGilde: {guilds}\nMembri: {total}\n```",
+          "shard_this_value": "```yaml\nID: {id} # ID inizia da 0\n\nGilde: {guilds}\n```",
           "shard_total_title": "Totale",
-          "shard_total_value": "```yaml\nFrammenti: {shards}\n\nGilde: {guilds}\nMembri: {total}\n```",
+          "shard_total_value": "```yaml\nFrammenti: {shards}\n\nGilde: {guilds}\n```",
           "title": "Statistiche"
         }
       },
