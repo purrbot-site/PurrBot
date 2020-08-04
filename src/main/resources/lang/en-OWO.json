@@ -434,9 +434,9 @@
           "other_title": "Othew stats",
           "other_value": "```yaml\nDedotated WAM: {ram} UwU\nUptime: {days}, {hours}, {minutes} and {seconds} OwO\n```",
           "shard_this_title": "This shawd",
-          "shard_this_value": "```yaml\nID: {id} # IDs start at 0\n\nGuiwds: {guilds}\nMembers: {total}\n```",
+          "shard_this_value": "```yaml\nID: {id} # IDs stawt at 0\n\nGuiwds: {guilds}\n```",
           "shard_total_title": "Totaw",
-          "shard_total_value": "```yaml\nShawds: {shards}\n\nGuiwds: {guilds}\nMembews: {total}\n```",
+          "shard_total_value": "```yaml\nShawds: {shards}\n\nGuiwds: {guilds}\n```",
           "title": "Statistics"
         }
       },
