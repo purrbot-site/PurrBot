@@ -434,9 +434,9 @@
           "other_title": "Другие данные",
           "other_value": "```yaml\nОЗУ: {ram}\nВремя работы: {days}, {hours}, {minutes} и {seconds}\n```",
           "shard_this_title": "Эта часть",
-          "shard_this_value": "```yaml\nID: {id} # ID начинается с 0\n\nСервера: {guilds}\nУчастники: {total} [{users} участников, {bots} ботов]\n```",
+          "shard_this_value": "```yaml\nID: {id} # ID начинается с 0\n\nСервера: {guilds}\n```",
           "shard_total_title": "Всего",
-          "shard_total_value": "```yaml\nЧастей: {shards}\n\nСерверов: {guilds}\nУчастники: {total} [{users} участников, {bots} ботов]\n```",
+          "shard_total_value": "```yaml\nЧастей: {shards}\n\nСерверов: {guilds}\n```",
           "title": "Статистика"
         }
       },
