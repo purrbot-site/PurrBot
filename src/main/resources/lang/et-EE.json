@@ -434,9 +434,9 @@
           "other_title": "Muu statistika",
           "other_value": "```yaml\nRAM: {ram}\nÜleval olnud: {days}, {hours}, {minutes} and {seconds}\n```",
           "shard_this_title": "See kild",
-          "shard_this_value": "```yaml\nID: {id} # ID alustatakse nullist\n\nGilde: {guilds}\nLiikmeid: {total}\n```",
+          "shard_this_value": "```yaml\nID: {id} # ID alustatakse nullist\n\nGilde: {guilds}\n```",
           "shard_total_title": "Kokku",
-          "shard_total_value": "```yaml\nKilde: {shards}\n\nGilde: {guilds}\nLiikmeid: {total}\n```",
+          "shard_total_value": "```yaml\nKilde: {shards}\n\nGilde: {guilds}\n```",
           "title": "Statistika"
         }
       },
