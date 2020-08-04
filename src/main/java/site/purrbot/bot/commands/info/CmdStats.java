@@ -142,16 +142,14 @@ public class CmdStats implements Command{
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_total_title"), 
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_total_value")
                                 .replace("{shards}", formatNumber(shardManager.getShardCache().size()))
-                                .replace("{guilds}", formatNumber(shardManager.getGuildCache().size()))
-                                .replace("{total}", formatNumber(shardManager.getUserCache().size())),
+                                .replace("{guilds}", formatNumber(shardManager.getGuildCache().size())),
                         false
                 )
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_this_title"), 
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_this_value")
                                 .replace("{id}", String.valueOf(jda.getShardInfo().getShardId()))
-                                .replace("{guilds}", formatNumber(jda.getGuildCache().size()))
-                                .replace("{total}", formatNumber(jda.getUserCache().size())),
+                                .replace("{guilds}", formatNumber(jda.getGuildCache().size())),
                         false
                 )
                 .addField(
