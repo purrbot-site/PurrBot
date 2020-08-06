@@ -21,8 +21,9 @@ package site.purrbot.bot.util.file.lang;
 import site.purrbot.bot.PurrBot;
 
 import java.util.List;
+import java.util.Locale;
 
-public final class LangUtils {
+public final class LangUtils{
     
     private final PurrBot bot;
     public LangUtils(PurrBot bot){
@@ -32,7 +33,6 @@ public final class LangUtils {
     public String getString(String language, String path){
         switch(language.toLowerCase()){
             case "de-ch":
-            case "en":
             case "en-owo":
             case "et-ee":
             case "it-it":
@@ -49,7 +49,6 @@ public final class LangUtils {
     public List<String> getStringList(String language, String path){
         switch(language.toLowerCase()){
             case "de-ch":
-            case "en":
             case "en-owo":
             case "et-ee":
             case "it-it":
@@ -60,6 +59,37 @@ public final class LangUtils {
             
             default:
                 return bot.getFileManager().getStringlist("en", path);
+        }
+    }
+    
+    public enum GuildLanguage{
+        DE   ("de-ch"),
+        EN_GB("en"),
+        EN_US("en"),
+        IT   ("it-it"),
+        KO   ("ko-kr"),
+        PT_BR("pt-br"),
+        RU   ("ru-ru"),
+        
+        DEFAULT("en");
+        
+        private final String lang;
+        
+        GuildLanguage(String lang){
+            this.lang = lang;
+        }
+        
+        public String getLang(){
+            return lang;
+        }
+        
+        public static String getLang(Locale locale){
+            for(GuildLanguage guildLanguage : values()){
+                if(guildLanguage.name().equalsIgnoreCase(locale.toString()))
+                    return guildLanguage.getLang();
+            }
+            
+            return GuildLanguage.DEFAULT.getLang();
         }
     }
 }
