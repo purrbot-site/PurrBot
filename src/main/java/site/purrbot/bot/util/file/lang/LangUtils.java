@@ -62,6 +62,12 @@ public final class LangUtils{
         }
     }
     
+    /*
+     * Used to get the supported language (if available)
+     * 
+     * Supported "Prefered language"'s by Discord:
+     * https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales
+     */
     public enum GuildLanguage{
         DE   ("de-ch"),
         EN_GB("en"),
