@@ -2,7 +2,7 @@
 [DiscordImg]: https://img.shields.io/discord/423771795523371019?color=%237289DA&label=Chat&logo=Discord&logoColor=white&style=plastic
 [IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot?label=Issues&logo=GitHub&style=plastic
 [LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg?label=License&logo=GitHub&style=plastic
-[TranslateImg]: https://img.shields.io/badge/Translations-on%20Crowdin-blue?style=plastic
+[TranslateImg]: https://img.shields.io/badge/Translations-on%20Crowdin-blue?style=plastic&logo=Crowdin
 
 <!-- Discord OAuth -->
 [Full invite]: https://discord.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=387136
