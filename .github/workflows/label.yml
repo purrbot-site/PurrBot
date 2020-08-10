@@ -6,7 +6,7 @@ on:
 
 jobs:
   label:
-    if: 'github.head_ref == l10n_master'
+    if: '${{ github.head_ref }} == l10n_master'
     runs-on: ubuntu-latest
     steps:
       - name: Label Pull request
