@@ -76,6 +76,24 @@
           "timed_out": "Looks like {target} doesn't want food from you {user}."
         }
       },
+      "fluff": {
+        "mention_bot": "Bots don't have a tail... sadly!",
+        "mention_purr": [
+          "Wha-! That is lewd {user}! \\*Holds her tail to protect it*",
+          "N-no {user}. I don't allow strangers to fluff me!"
+        ],
+        "mention_self": "Nawww... Don't you have someone that could fluff your tail? Or are you just shy?",
+        "message": "{user} fluffs {target}'s tail.",
+        "no_mention": "Please mention someone you want to fluff.",
+        "request": {
+          "accepted": "{target} accepted your request {user}",
+          "denied": "{target} doesn't want to get fluffed by you {user}",
+          "message": "Hey {target}!\n{user} wants to fluff your tail. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
+          "open": "You already asked someone to get fluffed {user}! Please wait for the request to be accepted, denied or for it to time out.",
+          "timed_out": "Looks like {target} doesn't want their tail to get fluffed by you {user}."
+        },
+        "special_user": "B-but {user}. That is lewd to do that in public."
+      },
       "holo": {
         "loading": "{LOADING} Receiving a image from Holo...",
         "title": "Holo {BLOBHOLO}"
@@ -571,6 +589,13 @@
           "Yay! Free food. Thanks {user}.",
           "\\*silently takes the food and nibbles on it*"
         ]
+      },
+      "fluff": {
+        "mention_snuggle": [
+          "N-nya! Nu. My tail can't be fluffed by you {user}!",
+          "\\*holds her tail* No."
+        ],
+        "special_user": "W-why do you want to fluff my tail {user}? You have my big sister for that!"
       },
       "hug": {
         "mention_snuggle": [
