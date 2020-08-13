@@ -3,7 +3,7 @@
     "footer": "Palus {user}"
   },
   "errors": {
-    "administrator": "**Administraatori load**\nMul on administraatori load siin Discordis.\nSee on suur turvaauk mida tuleks vältida. ÄRA ANNA bottidele administraatori õiguseid!\nPalun eemalda administraatori õigused ja seadista ainult vajalikud sätted.\n__Ma ei võta käsklusi selle loaga vastu!__",
+    "administrator": "**Administraatori luba tuvastatud**\nMul on `Administratoori` luba mis on suur turvaauk!\n__Ma ei käsitle ühtegi käsklust, vältimaks pahaendelist kasutust.__\n\nEt seda parandada, vali üks järgmistest:\n- Eemalda roll millel on administraatori luba.\n- Eemalda alljärgnevad load.\n\nAdministraator tuvastati järgmistel rollidel:\n{roles}",
     "api_error": "Tekkis viga API ühenduses! Palun proovi hiljem uuesti.",
     "missing_perms": {
       "self": "Mul puudub luba `{permission}` selle jaoks.",
