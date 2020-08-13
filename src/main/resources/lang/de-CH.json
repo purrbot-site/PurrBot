@@ -3,7 +3,7 @@
     "footer": "Angefordert von {user}"
   },
   "errors": {
-    "administrator": "**Administrator Berechtigung**\nIch habe Administrator Rechte für diesen Discord.\nDies ist ein grosses Sicherheitsrisiko und sollte vermieden werden. Gib Bots KEIN Administrator!\nBitte entferne die Administrator Berechtigung und setzte stattdessen die verlangten Rechte.\n__Ich werden keine Befehle ausführen, so lange ich diese Berechtigung habe!__",
+    "administrator": "**Administrator Berechtigung erkannt**\nIch habe die `Administrator` Berechtigung welches ein grosses Sicherheitsrisiko ist!\n__Ich werde keine Befehle ausführen so lange ich diese Berechtigung habe, um möglichen Missbrauch zu verhindern.__\n\nUm dies zu beheben, führe eines der folgenden Dinge aus:\n- Entferne die Rolle, welche die Administrator Rechte hat von mir.\n- Entferne doe Berechtigung von der Rolle/den Rollen welche unten aufgeführt ist.\n\nAdministrator wurde in folgenden Rollen gefunden:\n{roles}",
     "api_error": "Es gab einen Fehler beim erreichen der API! Bitte versuch es später erneut.",
     "missing_perms": {
       "self": "Mir fehlt die Berechtigung `{permission}` dafür.",
