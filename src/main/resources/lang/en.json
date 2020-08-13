@@ -3,7 +3,7 @@
     "footer": "Requested by {user}"
   },
   "errors": {
-    "administrator": "**Administrator Permission**\nI have Administrator rights for this Discord.\nThis is a huge security risk and should be avoided. Do NOT give Bots Administrator!\nPlease remove the Administrator permission and instead setup the required permissions.\n__I won't handle any commands as long as this permission is granted!__",
+    "administrator": "**Administrator Permission detected**\nI have the `Administrator` Permission which is a huge security risk!\n__I won't perform any commands as long as I have this Permission, to prevent possible abuse.__\n\nTo fix this, do one of the following things:\n- Remove the role which has Administrator from me.\n- Remove the Permission from the Role(s) listed below.\n\nAdministrator was detected in the following roles:\n{roles}",
     "api_error": "There was an error reaching the API! Please try again later.",
     "missing_perms": {
       "self": "I lack the permission `{permission}` for this.",
