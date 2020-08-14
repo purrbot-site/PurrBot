@@ -8,7 +8,6 @@
     "missing_perms": {
       "self": "Mir fehlt die Berechtigung `{permission}` dafür.",
       "self_channel": "Mir fehlt die Berechtigung `{permission}` im Textkanal {channel} dafür!",
-      "self_dm": "Mir fehlt die Berechtigung `{permission}` in der Gilde `{guild}` (Textkanal: {channel})!",
       "other": "Dir fehlt die Berechtigung `{permission}` für diesen Befehl."
     },
     "nsfw_random": [
