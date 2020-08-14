@@ -8,7 +8,6 @@
     "missing_perms": {
       "self": "У меня нету права `{permission}` для этого.",
       "self_channel": "У меня нету права `{permission}` в канале {channel}, чтобы сделать это!",
-      "self_dm": "У меня нету права `{permission}` на сервере `{guild}` (Канал: {channel})!",
       "other": "У вас нету права `{permission}` для этой команды."
     },
     "nsfw_random": [
