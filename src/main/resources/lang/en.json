@@ -8,7 +8,6 @@
     "missing_perms": {
       "self": "I lack the permission `{permission}` for this.",
       "self_channel": "I lack the permission `{permission}` in the channel {channel} to do this!",
-      "self_dm": "I lack the permission `{permission}` in the Guild `{guild}` (Channel: {channel})!",
       "other": "You lack the permission `{permission}` for this command."
     },
     "nsfw_random": [
