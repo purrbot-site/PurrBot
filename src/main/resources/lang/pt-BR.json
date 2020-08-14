@@ -8,7 +8,6 @@
     "missing_perms": {
       "self": "Eu preciso da permissão `{permission}` para isso.",
       "self_channel": "Eu preciso da permissão `{permission}` no canal {channel} para fazer isso!",
-      "self_dm": "Eu preciso da permissão `{permission}` no servidor `{guild}` (Canal: `{channel}`)!",
       "other": "Você precisa da permissão `{permission}` para este comando."
     },
     "nsfw_random": [
