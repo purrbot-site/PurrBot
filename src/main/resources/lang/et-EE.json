@@ -8,7 +8,6 @@
     "missing_perms": {
       "self": "Mul puudub luba `{permission}` selle jaoks.",
       "self_channel": "Mul puudub luba `{permission}` kanalis {channel} et seda teostada!",
-      "self_dm": "Mul puudub luba`{permission}` gildis`{guild}` (kanalis: {channel})!",
       "other": "Sul puudub luba `{permission}` selle käskluse jaoks."
     },
     "nsfw_random": [
