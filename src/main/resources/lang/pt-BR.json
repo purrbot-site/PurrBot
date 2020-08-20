@@ -508,7 +508,7 @@
           "accepted": "{target} aceitou o seu pedido {user}! OwO",
           "denied": "{target} não quer ter sexo com você {user}. >.<",
           "message": "Ei {target}!\n{user} quer ter sexo com você. Você também quer isso?\nReaja com {ACCEPT} para aceitar ou com {CANCEL} para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
-          "message_choose": "Ei {target}!\n{user} quer fazer sexo com você. Vocês querem isso também?\nReact com uma das opções abaixo para escolher:\n{SEX} - Sexo normal\n{ANAL} - Sexo Anal\n{YURI} - Sexo Yuri\n{CANCEL} - Negar Pedido\n\n> **Este pedido irá expirar em 1 minuto!**",
+          "message_choose": "Ei {target}!\n{user} quer fazer sexo com você. Vocês querem isso também?\nReact com uma das opções abaixo para escolher:\n{SEX} - Sexo normal\n{ANAL} - Sexo Anal\n{YAOI} - Sexo Yaoi\n{YURI} - Sexo Yuri\n{CANCEL} - Negar Pedido\n\n> **Este pedido irá expirar em 1 minuto!**",
           "open": "Não seja uma pessoa tão excitada {user}!\nVocê já tem uma solicitação aberta. Aguarde a aceitação, negação ou o tempo limite.",
           "timed_out": "Pareçe que {target} não quer ter sexo com você {user}. ._."
         },
