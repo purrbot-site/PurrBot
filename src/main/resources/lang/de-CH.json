@@ -508,7 +508,7 @@
           "accepted": "{target} hat deine Anfrage akzeptiert {user}. OwO",
           "denied": "{target} möchte keinen Sex mit dir haben {user}. >.<",
           "message": "Hey {target}!\n{user} möchte Sex mit dir haben. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen der Anfrage.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
-          "message_choose": "Hallo {target}!\n{user} möchte Sex mit dir haben. Willst du das auch?\nReagiere mit einer der folgenden Optionen, um zu wählen:\n{SEX} - Normaler Sex\n{ANAL} - Anal Sex\n{YURI} - Yuri Sex\n{CANCEL} - Anfrage ablehnen\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
+          "message_choose": "Hey {target}!\n{user} möchte Sex mit dir haben. Willst du das auch?\nReagiere mit einer der folgenden Optionen um zu wählen:\n{SEX} - Normaler Sex\n{ANAL} - Anal Sex\n{YAOI} - Schwuler Sex\n{YURI} - Lesbischer Sex\n{CANCEL} - Anfrage ablehnen\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
           "open": "Sei nicht so eine notgeile Person {user}!\nDu hast bereits eine offene Anfrage. Warte bis diese angenommen oder abgelehnt wird, oder abläuft.",
           "timed_out": "Sieht so aus als ob {target} nicht mit dir Sex haben will {user}. ._."
         },
