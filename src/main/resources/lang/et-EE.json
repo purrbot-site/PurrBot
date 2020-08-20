@@ -3,7 +3,7 @@
     "footer": "Palus {user}"
   },
   "errors": {
-    "administrator": "**Administraatori luba tuvastatud**\nMul on `Administratoori` luba mis on suur turvaauk!\n__Ma ei käsitle ühtegi käsklust, vältimaks pahaendelist kasutust.__\n\nEt seda parandada, vali üks järgmistest:\n- Eemalda roll millel on administraatori luba.\n- Eemalda alljärgnevad load.\n\nAdministraator tuvastati järgmistel rollidel:\n{roles}",
+    "administrator": "**Administraatori luba tuvastatud**\nMul on `Administratori` luba mis on suur turvaauk!\n__Ma ei käsitle ühtegi käsklust, vältimaks pahaendelist kasutust.__\n\nEt seda parandada, vali üks järgmistest:\n- Eemalda roll millel on administraatori luba.\n- Eemalda alljärgnevad load.\n\nAdministraator tuvastati järgmistel rollidel:\n{roles}",
     "api_error": "Tekkis viga API ühenduses! Palun proovi hiljem uuesti.",
     "missing_perms": {
       "self": "Mul puudub luba `{permission}` selle jaoks.",
@@ -508,7 +508,7 @@
           "accepted": "{target} nõustus sinu pakkumisega {user}. OwO",
           "denied": "(target} ei taha sinuga seksida {user}. >.<",
           "message": "Hei {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n**See pakkumine lõppeb ühe minuti jooksul!**",
-          "message_choose": "Hei {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri vastavate reaktsioonidega\n{SEX} - Normaalne seks\n{ANAL} - Anaalseks\n{YURI} - Yuri seks\n{CANCEL} - Keeldu pakkumisest!\n\n>**See pakkumine lõppeb ühe minuti jooksul!**",
+          "message_choose": "Hei {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri vastavate reaktsioonidega\n{SEX} - Normaalne seks\n{ANAL} - Anaalseks\n{YURI} - Yuri seks\n{YAOI} - Yaoi Sex\n{CANCEL} - Keeldu pakkumisest!\n\n>**See pakkumine lõppeb ühe minuti jooksul!**",
           "open": "Ära ole nii kiimane {user}!\nSa oled juba pakkumise teinud. Oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
           "timed_out": "Paistab et {target} ei soovi sinuga keppida {user}. ._."
         },
