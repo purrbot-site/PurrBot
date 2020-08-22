@@ -3,12 +3,11 @@
     "footer": "Richiesto da {user}"
   },
   "errors": {
-    "administrator": "**Permessi da amministratore**\nHo i permessi da amministratore per questo server\nQuesto è un rischio enorme e dovrebbe essere evitato. NON date i permessi da amministratore ai bot!\nRimuovete i permessi da amministratore per favore e configura le permissioni richieste\n__Non risponderò a nessun comando finché ho quei permessi!__",
+    "administrator": "**permessi da amministratore rilevati*\nHo i permessi da `amministratore` che sono un enorme rischio per la sicuressa!\n__non risponderò a nessun comando finché avrò questi permessi per prevenire possibili abusi__\nPer risolvere questo problema, fai una di queste due cose:\n- Rimuovi il ruolo che ha l'amministratore da me.\n- rimuovi i permessi da il/i ruolo/i elencati in seguito.\nAmministratore è stato rilevato in questi ruoli:\n{roles}",
     "api_error": "Si è verificato un errore nel raggiungere l'API! Riprova più tardi.",
     "missing_perms": {
       "self": "Non ho il permesso '{permission}' per questo.",
       "self_channel": "Non ho il permesso '{permission}' nel canale {channel} per fare questo!",
-      "self_dm": "Mi mancano i permessi '{permission}' nella gilda '{guild}' (canale: {channel})!",
       "other": "Non hai i permessi '{permission}' per questo comando"
     },
     "nsfw_random": [
@@ -75,6 +74,24 @@
           "open": "Hai già chiesto a qualcuno {user}! Aspetta che la richiesta sia accettata, rifiutata o che scada",
           "timed_out": "{target} non vuole del cibo da te {user}."
         }
+      },
+      "fluff": {
+        "mention_bot": "I bot non hanno una coda... sfortunatamente",
+        "mention_purr": [
+          "Cos-! È sconcio {user}! \\prende la sua coda e la protegge*",
+          "N-no {user}. Non lascio gli sconosciuti di accarezzarmi la coda!"
+        ],
+        "mention_self": "Nawww... Non hai nessuno a cui accarezzare la coda? O sei solo timido?",
+        "message": "{user} accarezzaa coda di {target}.",
+        "no_mention": "Menziona qualcuno a cui vuoi accarezzare la coda per favore.",
+        "request": {
+          "accepted": "{target} ha accettato la tua richiesta {user}",
+          "denied": "{target} non vuole che gli/le tocchi la coda da te {user}",
+          "message": "Hey {target}!\n{user} vuole accarezzarti la coda? Lo vuoi anche te?\nReagisci con{ACCEPT} per accettare o con {CANCEL} per declinare.\n\n > **Questa richiesta scadrà in 1 minuto!**",
+          "open": "Hai già chiesto a qualcuno di accarezzargli/le la coda {user}! Aspetta che la richiesta sia accettata, rifiutata o che scada",
+          "timed_out": "Sembra che {target} non voglia farsi accarezzare la coda da te {user}."
+        },
+        "special_user": "M-ma {user}. È troppo sconcio da farlo in pubblico."
       },
       "holo": {
         "loading": "{LOADING} Ricevendo un immagine di Holo",
@@ -491,7 +508,7 @@
           "accepted": "{target} ha accettato la tua richiesta {user}. OwO",
           "denied": "{target} non vuole fare sesso con te {user}. >.<",
           "message": "Hey {target}!\n{user} vuole fare sesso con te. Lo vuoi fare anche te?\nReagisci con {ACCEPT} per accettare o con {CANCEL} per rifiutare.\n\n>**Questa richiesta finirà in un minuto!**",
-          "message_choose": "Ciao {target}!\n{user} vuole fare sesso con te. Anche te vuoi?\nReagisci con una delle opzioni sotto indicate per scegliere:\n{SEX} - Sesso Normale\n{ANAL} - Sesso Anale\n{YURI} - Yuri Sex\n{CANCEL} - Rifiuta\n\n> **Questa richiesta scadrà in 1 minuto!**",
+          "message_choose": "Hey {target}!\n{user} vuole avere sesso con te. Lo vuoi anche te?\nReagisci con una delle opzioni elencate:\n{SEX} - Sesso normale\n{ANAL} - Sesso anale\n{YAOI} - Sesso yaoi\n{YURI} - Sesso yuri\n{CANCEL} - Rifiuta l'offerta\n\n> **Questa richiesta scadrà in 1 minuto!**",
           "open": "Non essere una persona così arrapata {user}!\nHai già mandato una richiesta. Aspetta che sia accettata o che scada.",
           "timed_out": "Sembra che {target} non voglia fare sesso con te {user}. ._."
         },
@@ -571,6 +588,13 @@
           "Yay!! Cibo gratis. Grazie {user}.",
           "\\*Silenziosamente prende il cibo e lo sgranocchia*"
         ]
+      },
+      "fluff": {
+        "mention_snuggle": [
+          "N-nya! No. La mia coda non può essere accarezzata da te {user}!",
+          "\\*tiene la sua coda* No."
+        ],
+        "special_user": "P-perché vuoi accarezzare l mia coda {user}? Hai la mia sorellona per questo!"
       },
       "hug": {
         "mention_snuggle": [

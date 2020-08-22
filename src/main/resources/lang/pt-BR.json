@@ -3,12 +3,11 @@
     "footer": "Solicitado por {user}"
   },
   "errors": {
-    "administrator": "**Permissão de Administrador**\nEu tenho direitos de administrador para este Discord.\nIsso é um grande risco de segurança e deve ser evitado. NÃO dê um administrador de bots!\nPor favor remova a permissão de administrador e, em vez disso, configure as permissões necessárias.\n__Eu não vou lidar com nenhum comando enquanto essa permissão for concedida!__",
+    "administrator": "**Permissão de Administrador detectada**\nTenho a permissão de `Administrador`, que é um enorme risco de segurança!\n__Eu não vou executar nenhum comando enquanto tiver esta Permissão, para evitar possíveis abusos. _\n\nPara consertar isso, faça uma das seguintes coisas:\n- Remova a função que tem Administrador de mim.\n- Remover a permissão dos cargos listados abaixo.\n\nO administrador foi detectado nas seguintes funções:\n{roles}",
     "api_error": "Houve um erro alcançando a API! Tente novamente mais tarde.",
     "missing_perms": {
       "self": "Eu preciso da permissão `{permission}` para isso.",
       "self_channel": "Eu preciso da permissão `{permission}` no canal {channel} para fazer isso!",
-      "self_dm": "Eu preciso da permissão `{permission}` no servidor `{guild}` (Canal: `{channel}`)!",
       "other": "Você precisa da permissão `{permission}` para este comando."
     },
     "nsfw_random": [
@@ -75,6 +74,24 @@
           "open": "Você já pediu a alguém {user}! Por favor, aguarde a solicitação ser aceita, negada ou um tempo limite.",
           "timed_out": "Parece que {target} não quer comida de você {user}."
         }
+      },
+      "fluff": {
+        "mention_bot": "Os robôs não têm uma cauda... tristemente!",
+        "mention_purr": [
+          "Uhu! Isso é pervertido {user}! \\*Segure a cauda dela para protegê-la*",
+          "N-no {user}. Eu não permitir que estranhos brinquem com minha cauda!"
+        ],
+        "mention_self": "Nawww... Você não tem alguém que possa acariciar sua cauda? Ou você é apenas tímido?",
+        "message": "{user} acaricia a cauda de {target}.",
+        "no_mention": "Por favor, mencione usuários que você quer afofar a cauda.",
+        "request": {
+          "accepted": "{target} aceitou o seu pedido {user}",
+          "denied": "{target} não quer ser afofado por você {user}",
+          "message": "Ei {target}!\n{user} quer afofar sua cauda. Você também quer isso?\nReaja com {ACCEPT} para aceitar ou com {CANCEL} para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "open": "Você já pediu para afofar a cauda de alguém {user}! Por favor, aguarde a solicitação ser aceita, negada ou um tempo limite.",
+          "timed_out": "Pareçe que {target} não quer ter sua cauda afofada por você {user}."
+        },
+        "special_user": "B-but {user}. Isso é pervertido fazer isso em público."
       },
       "holo": {
         "loading": "{LOADING} Recebendo uma imagem de Holo",
@@ -491,7 +508,7 @@
           "accepted": "{target} aceitou o seu pedido {user}! OwO",
           "denied": "{target} não quer ter sexo com você {user}. >.<",
           "message": "Ei {target}!\n{user} quer ter sexo com você. Você também quer isso?\nReaja com {ACCEPT} para aceitar ou com {CANCEL} para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
-          "message_choose": "Ei {target}!\n{user} quer fazer sexo com você. Vocês querem isso também?\nReact com uma das opções abaixo para escolher:\n{SEX} - Sexo normal\n{ANAL} - Sexo Anal\n{YURI} - Sexo Yuri\n{CANCEL} - Negar Pedido\n\n> **Este pedido irá expirar em 1 minuto!**",
+          "message_choose": "Ei {target}!\n{user} quer fazer sexo com você. Vocês querem isso também?\nReact com uma das opções abaixo para escolher:\n{SEX} - Sexo normal\n{ANAL} - Sexo Anal\n{YAOI} - Sexo Yaoi\n{YURI} - Sexo Yuri\n{CANCEL} - Negar Pedido\n\n> **Este pedido irá expirar em 1 minuto!**",
           "open": "Não seja uma pessoa tão excitada {user}!\nVocê já tem uma solicitação aberta. Aguarde a aceitação, negação ou o tempo limite.",
           "timed_out": "Pareçe que {target} não quer ter sexo com você {user}. ._."
         },
@@ -571,6 +588,13 @@
           "Viva! Comida gratuita. Obrigado {user}.",
           "\\*silenciosamente leva a comida e mordisca nela*"
         ]
+      },
+      "fluff": {
+        "mention_snuggle": [
+          "Nau! Minha cauda não pode ser afofada por você {user}!",
+          "\\*segura a cauda* Não."
+        ],
+        "special_user": "P-Por que você quer afofar minha cauda {user}? Você tem minha irmã pra isso!"
       },
       "hug": {
         "mention_snuggle": [

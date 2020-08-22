@@ -3,12 +3,11 @@
     "footer": "Palus {user}"
   },
   "errors": {
-    "administrator": "**Administraatori load**\nMul on administraatori load siin Discordis.\nSee on suur turvaauk mida tuleks vältida. ÄRA ANNA bottidele administraatori õiguseid!\nPalun eemalda administraatori õigused ja seadista ainult vajalikud sätted.\n__Ma ei võta käsklusi selle loaga vastu!__",
+    "administrator": "**Administraatori luba tuvastatud**\nMul on `Administratori` luba mis on suur turvaauk!\n__Ma ei käsitle ühtegi käsklust, vältimaks pahaendelist kasutust.__\n\nEt seda parandada, vali üks järgmistest:\n- Eemalda roll millel on administraatori luba.\n- Eemalda alljärgnevad load.\n\nAdministraator tuvastati järgmistel rollidel:\n{roles}",
     "api_error": "Tekkis viga API ühenduses! Palun proovi hiljem uuesti.",
     "missing_perms": {
       "self": "Mul puudub luba `{permission}` selle jaoks.",
       "self_channel": "Mul puudub luba `{permission}` kanalis {channel} et seda teostada!",
-      "self_dm": "Mul puudub luba`{permission}` gildis`{guild}` (kanalis: {channel})!",
       "other": "Sul puudub luba `{permission}` selle käskluse jaoks."
     },
     "nsfw_random": [
@@ -75,6 +74,24 @@
           "open": "Sa juba palusid kedagi {user}! Palun oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
           "timed_out": "Paisab et {target} ei soovi sinu toitu {user}."
         }
+      },
+      "fluff": {
+        "mention_bot": "Bottidel ei ole saba... kahjuks!",
+        "mention_purr": [
+          "Mis! See on vääritu {user}! \\*Hoiab oma saba et seda kaitseda*",
+          "E-ei {user}. Ma ei luba võõrastel ennast kohelvile ajada!"
+        ],
+        "mention_self": "Eiiiii... Kas sul pole kedagi kes vusserdaks su saba? Või sa oled lihtsalt häbelik?",
+        "message": "{user} vusserdab {target} saba.",
+        "no_mention": "Palun maini kedagi keda sa tahad vusserdada.",
+        "request": {
+          "accepted": "{target} nõustus sinu pakkumisega {user}",
+          "denied": "{target} ei soovi sinu poolt vusserdamist {user}",
+          "message": "Hei {target}!\n{user} tahab sinu saba vusserdada. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n> **See pakkumine lõppeb ühe minuti jooksul!**",
+          "open": "Sa juba palusid kedagi vusserdada {user}! Palun oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
+          "timed_out": "Paistab et {target} ei soovi et sa teda vusserdad {user}."
+        },
+        "special_user": "A-aga {user}. Seda on piinlik avalikult teha."
       },
       "holo": {
         "loading": "{LOADING} Laen pilti Holo-st...",
@@ -471,7 +488,7 @@
         "request": {
           "accepted": "{target} nõustus sinu pakkumisega {user}!",
           "denied": "{target} ei soovi sinu poolt lahti imemist {user}. :/",
-          "message": "Heii {target}!\n{user} tahab sult lahti imeda. Kas sa nõustud pakkumisega?\nReageeri {ACCEPT} et nõustuda või {CANCEL} et keelduda.\n\n**See pakkumine lõppeb ūhe minuti jooksul!**",
+          "message": "Hei {target}!\n{user} tahab sult lahti imeda. Kas sa nõustud pakkumisega?\nReageeri {ACCEPT} et nõustuda või {CANCEL} et keelduda.\n\n**See pakkumine lõppeb ühe minuti jooksul!**",
           "open": "Ära ole nii ahne {user}! Oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
           "timed_out": "Paistab et {target} ei soovi et sa talt suhu võtad {user}."
         },
@@ -490,8 +507,8 @@
         "request": {
           "accepted": "{target} nõustus sinu pakkumisega {user}. OwO",
           "denied": "(target} ei taha sinuga seksida {user}. >.<",
-          "message": "Heii {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n**See pakkumine lõppeb ūhe minuti jooksul!**",
-          "message_choose": "Heii {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri vastavate reaktsioonidega\n{SEX} - Normaalne seks\n{ANAL} - Anaalseks\n{YURI} - Yuri seks\n{CANCEL} - Keeldu pakkumisest!\n\n>**See pakkumine lõppeb ūhe minuti jooksul!**",
+          "message": "Hei {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n**See pakkumine lõppeb ühe minuti jooksul!**",
+          "message_choose": "Hei {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri vastavate reaktsioonidega\n{SEX} - Normaalne seks\n{ANAL} - Anaalseks\n{YURI} - Yuri seks\n{YAOI} - Yaoi Sex\n{CANCEL} - Keeldu pakkumisest!\n\n>**See pakkumine lõppeb ühe minuti jooksul!**",
           "open": "Ära ole nii kiimane {user}!\nSa oled juba pakkumise teinud. Oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
           "timed_out": "Paistab et {target} ei soovi sinuga keppida {user}. ._."
         },
@@ -522,7 +539,7 @@
         "request": {
           "accepted": "{target} nõustus sinu pakkumisega {user}. ;P",
           "denied": "{target} ei soovi et sa ta vittu lakuksid {user}...\nKas tal üldse on?",
-          "message": "Heii {target}!\n{user} tahab sinu vittu lakkuda. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n>**See pakkumine lõppeb ūhe minuti jooksul!**",
+          "message": "Hei {target}!\n{user} tahab sinu vittu lakkuda. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n>**See pakkumine lõppeb ühe minuti jooksul!**",
           "open": "Kas sa oled janune? Sa oled juba pakkumise teinud {user}!\nOota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
           "timed_out": "Tundub et {target} ei taha et sa lakuksid tema vittu {user}... Äkki neil polegi? o///o"
         },
@@ -571,6 +588,13 @@
           "Yay! Tasuta toit. Aitäh {user}.",
           "\\*vaikselt võtab toidu ja näksib seda*"
         ]
+      },
+      "fluff": {
+        "mention_snuggle": [
+          "N-nya! Ei. Sa ei saa vusserdada minu sabaga {user}!",
+          "\\*hoiab oma saba* Ei."
+        ],
+        "special_user": "Mi-miks sa tahad vusserdada mu saba {user}? Sul on selleks mu suur õde!"
       },
       "hug": {
         "mention_snuggle": [
