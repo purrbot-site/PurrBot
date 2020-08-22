@@ -3,12 +3,11 @@
     "footer": "Wequested by {user}"
   },
   "errors": {
-    "administrator": "**Administwatow Pewmission**\nI have Administwatow wights for this Discord.\nThis is a huge secuwity wisk and should be avoided. Do NOT give bots Administwatow!\nPwease wemove the Administwatow pewmission and instead setup the wequiwed pewmissions.\n__I won't handwe any commands as wong as this pewmission is gwanted!__",
+    "administrator": "**Administwatow Pewmission detected**\nI have the `Administwatow` Pewmission which is a huge secuwity wisk! >~<\n__I won't pewfowm any commands as long as I have this Pewmission, to pwevent possible abuse.__\n\nTo fix this, do one of the following things:\n- Wemove the wole which has Administwatow from me.\n- Wemove the Pewmission fwom the Wole(s) listed below.\n\nAdministwatow was detected in the following woles:\n{roles}",
     "api_error": "Thewe was an ewwow weaching the API! Pwease twy again water.",
     "missing_perms": {
       "self": "I lack the pewmission `{permssion}` fow this. :c",
       "self_channel": "I lack the pewmission `{permission}` in the channew {channel} to do this!",
-      "self_dm": "I lack the pewmission `{permission}` in the Guiwd `{guild}` (Channew: {channel})!",
       "other": "You lack the pewmission `{permission}` fow this command."
     },
     "nsfw_random": [
@@ -75,6 +74,24 @@
           "open": "You awweady asked someone {user}! Pwease wait fow the wequest to be accepted, denied or fow it to time out. >:c",
           "timed_out": "Looks like {target} doesn't want food fwom you {user} v_v."
         }
+      },
+      "fluff": {
+        "mention_bot": "Bots don't have a tail... sadly! TwT",
+        "mention_purr": [
+          "Wha-! That is lewd {user}! \\*Holds hew tail to pwotect it* QwQ",
+          "N-no {user}. I don't allow stwangews to fluff me!"
+        ],
+        "mention_self": "Nawww... Don't you have someone that could fluff youw tail? Ow awe you just shy? QwQ",
+        "message": "{user} fluffs {target}'s tail.",
+        "no_mention": "Pwease mention someone you want to fluff.",
+        "request": {
+          "accepted": "{target} accepted youw wequest {user}",
+          "denied": "{target} doesn't want to get fluffed by you {user} TwT",
+          "message": "Hey {target}!\n{user} wants to fluww youw tail. Do you want that too?\nWeact with {ACCEPT} to accept ow with {CANCEL} to deny it.\n\n> **This wequest will time out in q minute!**",
+          "open": "You alweady asked someone to get fluffed {user}! Pwease wait for the wequest to be accepted, denied or fow it to time out. >:c",
+          "timed_out": "Looks like {target} doesn't want to get fluffed by you {user}."
+        },
+        "special_user": "B-but {user}. That is lewd to do that in public. O////O"
       },
       "holo": {
         "loading": "{LOADING} Weceiving an image fwom Holo...",
@@ -491,7 +508,7 @@
           "accepted": "{target} accepted your wequest {user}. OwO",
           "denied": "{target} doesn't want to have sex with you {user}. >.<",
           "message": "Hey {target}!\n{user} wants to have sex with you OwO. Do you want that too?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This wequest wiww time out in 1 minute!**",
-          "message_choose": "Hey {target}!\n{user} wants to have sex with you OwO. Do you want that too?\nWeact with one of the bewow options to choose:\n{SEX} - Nowmaw Sex UwU\n{ANAL} - Anaw Sex OwO\n{YURI} - Yuwi Sex\n{CANCEL} - Deny Wequest\n\n> **This wequest wiww time out in 1 minute!**",
+          "message_choose": "Hey {target}!\n{user} wants to have sex with you OwO. Do you want that too?\nWeact with one of the bewow options to choose:\n{SEX} - Nowmaw Sex UwU\n{ANAL} - Anaw Sex OwO\n{YAOI} - Yaowi Sex\n{YURI} - Yuwi Sex\n{CANCEL} - Deny Wequest\n\n> **This wequest wiww time out in 1 minute!**",
           "open": "Don't be such a howny person {user}!\nYou awweady have a open request. Wait for it to be accepted, denied or fow it to time out.",
           "timed_out": "Looks like {target} doesn't want to fuck with you {user}. ._."
         },
@@ -571,6 +588,13 @@
           "Yay! Fwee food. Thanks {user}. UwU",
           "\\*siwentwy takes da food and nibbwes on it*"
         ]
+      },
+      "fluff": {
+        "mention_snuggle": [
+          "N-nya! Nu. My taiw can't be fluffed by you {user}! O////O",
+          "\\*holds hew tail* No."
+        ],
+        "special_user": "W-why do you want to fluww my tail {user}? You have my big sistew for that! O////O"
       },
       "hug": {
         "mention_snuggle": [
