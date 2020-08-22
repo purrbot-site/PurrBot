@@ -23,6 +23,7 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
@@ -43,7 +44,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                 "Mention a user, to send a request.\n" +
                 "The mentioned user can choose if they want to have sex or not, by clicking the matching reaction.\n" +
                 "When no arg is provided can the mentioned user choose the type of sex.\n" +
-                "You can provide `--anal`, `--normal` or `--yuri` to already choose an option for the request.",
+                "You can provide `--anal`, `--normal`, `--yaoi` or `--yuri` to already choose an option for the request.",
         triggers = {"fuck", "sex"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
@@ -51,9 +52,10 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                         "{p}fuck <@user>\n" +
                         "{p}fuck <@user> --anal\n" +
                         "{p}fuck <@user> --normal\n" +
+                        "{p}fuck <@user> --yaoi\n" +
                         "{p}fuck <@user> --yuri"
                 ),
-                @CommandAttribute(key = "help", value = "{p}fuck <@user> [--anal|--normal|--yuri]")
+                @CommandAttribute(key = "help", value = "{p}fuck <@user> [--anal|--normal|--yaoi|--yuri]")
         }
 )
 public class CmdFuck implements Command{
@@ -67,139 +69,6 @@ public class CmdFuck implements Command{
     private final Cache<String, String> queue = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)
             .build();
-
-    private MessageEmbed getFuckEmbed(Member requester, Member target, String url){
-        return bot.getEmbedUtil().getEmbed()
-                .setDescription(MarkdownSanitizer.escape(
-                        bot.getMsg(requester.getGuild().getId(), "purr.nsfw.fuck.message", requester.getEffectiveName())
-                                .replace("{target}", target.getEffectiveName())
-                ))
-                .setImage(url)
-                .build();
-    }
-
-    private boolean equalsAny(String id){
-        return (
-                id.equals(Emotes.SEX.getId()) ||
-                id.equals(Emotes.SEX_ANAL.getId()) ||
-                id.equals(Emotes.SEX_YURI.getId()) ||
-                id.equals(Emotes.ACCEPT.getId()) ||
-                id.equals(Emotes.CANCEL.getId())
-        );
-    }
-    
-    private boolean hasArgs(String message){
-        return (
-                message.toLowerCase().contains("--anal") || 
-                message.toLowerCase().contains("--normal") || 
-                message.toLowerCase().contains("--yuri")
-        );
-    }
-    
-    private void handleEvent(Message msg, Message botMsg, Member author, Member target){
-        Guild guild = botMsg.getGuild();
-        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
-        
-        EventWaiter waiter = bot.getWaiter();
-        waiter.waitForEvent(
-                GuildMessageReactionAddEvent.class,
-                event -> {
-                    MessageReaction.ReactionEmote emote = event.getReactionEmote();
-                    if(!emote.isEmote())
-                        return false;
-                    
-                    if(!equalsAny(emote.getId()))
-                        return false;
-                    
-                    if(emote.getId().equals(Emotes.ACCEPT.getId()) && !hasArgs(msg.getContentRaw()))
-                        return false;
-                    
-                    if(event.getUser().isBot())
-                        return false;
-                    
-                    if(!event.getMember().equals(target))
-                        return false;
-                    
-                    return event.getMessageId().equals(botMsg.getId());
-                },
-                event -> {
-                    String id = event.getReactionEmote().getId();
-                    String content = msg.getContentRaw().toLowerCase();
-                    
-                    botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                    
-                    if(id.equals(Emotes.CANCEL.getId())){
-                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(
-                                        guild.getId(), 
-                                        "purr.nsfw.fuck.request.denied", 
-                                        author.getAsMention(),
-                                        target.getEffectiveName()
-                                )
-                        )).queue();
-                        return;
-                    }
-                    String link;
-                    if(!hasArgs(content)){
-                        if(id.equals(Emotes.SEX_ANAL.getId()))
-                            link = bot.getHttpUtil().getImage(API.GIF_ANAL_LEWD);
-                        else
-                        if(id.equals(Emotes.SEX_YURI.getId()))
-                            link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
-                        else
-                            link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
-                    }else{
-                        if(content.contains("--anal"))
-                            link = bot.getHttpUtil().getImage(API.GIF_ANAL_LEWD);
-                        else
-                        if(content.contains("--yuri"))
-                            link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
-                        else
-                            link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
-                    }
-                    
-                    event.getChannel().sendMessage(MarkdownSanitizer.escape(
-                            bot.getMsg(
-                                    guild.getId(),
-                                    "purr.nsfw.fuck.request.accepted",
-                                    author.getAsMention(),
-                                    target.getEffectiveName()
-                            )
-                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
-                    
-                    if(link == null){
-                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(
-                                        guild.getId(),
-                                        "purr.nsfw.fuck.message",
-                                        author.getEffectiveName(),
-                                        target.getEffectiveName()
-                                )
-                        )).queue();
-                        return;
-                    }
-                    
-                    event.getChannel().sendMessage(
-                            getFuckEmbed(author, target, link)
-                    ).queue();
-                }, 1, TimeUnit.MINUTES,
-                () -> {
-                    TextChannel channel = botMsg.getTextChannel();
-                    botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                    
-                    channel.sendMessage(MarkdownSanitizer.escape(
-                            bot.getMsg(
-                                    guild.getId(),
-                                    "purr.nsfw.fuck.request.timed_out",
-                                    author.getAsMention(),
-                                    target.getEffectiveName()
-                            )
-                    )).queue();
-                }
-        );
-    }
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
@@ -264,6 +133,7 @@ public class CmdFuck implements Command{
             if(!hasArgs(msg.getContentRaw())){
                 message.addReaction(Emotes.SEX.getNameAndId())
                         .flatMap(v -> message.addReaction(Emotes.SEX_ANAL.getNameAndId()))
+                        .flatMap(v -> message.addReaction(Emotes.SEX_YAOI.getNameAndId()))
                         .flatMap(v -> message.addReaction(Emotes.SEX_YURI.getNameAndId()))
                         .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                         .queue(
@@ -287,5 +157,147 @@ public class CmdFuck implements Command{
                         );
             }
         });
+    }
+    
+    private MessageEmbed getFuckEmbed(Member requester, Member target, String url){
+        return bot.getEmbedUtil().getEmbed()
+                .setDescription(MarkdownSanitizer.escape(
+                        bot.getMsg(requester.getGuild().getId(), "purr.nsfw.fuck.message", requester.getEffectiveName())
+                                .replace("{target}", target.getEffectiveName())
+                ))
+                .setImage(url)
+                .build();
+    }
+    
+    private boolean equalsAny(String id){
+        return (
+                id.equals(Emotes.SEX.getId()) ||
+                        id.equals(Emotes.SEX_ANAL.getId()) ||
+                        id.equals(Emotes.SEX_YURI.getId()) ||
+                        id.equals(Emotes.SEX_YAOI.getId()) ||
+                        id.equals(Emotes.ACCEPT.getId()) ||
+                        id.equals(Emotes.CANCEL.getId())
+        );
+    }
+    
+    private boolean hasArgs(String message){
+        return (
+                message.toLowerCase().contains("--anal") ||
+                        message.toLowerCase().contains("--normal") ||
+                        message.toLowerCase().contains("--yuri") ||
+                        message.toLowerCase().contains("--yaoi")
+        );
+    }
+    
+    private void handleEvent(Message msg, Message botMsg, Member author, Member target){
+        Guild guild = botMsg.getGuild();
+        queue.put(bot.getMessageUtil().getQueueString(author), target.getId());
+        
+        EventWaiter waiter = bot.getWaiter();
+        waiter.waitForEvent(
+                GuildMessageReactionAddEvent.class,
+                event -> {
+                    MessageReaction.ReactionEmote emote = event.getReactionEmote();
+                    if(!emote.isEmote())
+                        return false;
+                    
+                    if(!equalsAny(emote.getId()))
+                        return false;
+                    
+                    if(emote.getId().equals(Emotes.ACCEPT.getId()) && !hasArgs(msg.getContentRaw()))
+                        return false;
+                    
+                    if(event.getUser().isBot())
+                        return false;
+                    
+                    if(!event.getMember().equals(target))
+                        return false;
+                    
+                    return event.getMessageId().equals(botMsg.getId());
+                },
+                event -> {
+                    String id = event.getReactionEmote().getId();
+                    String content = msg.getContentRaw().toLowerCase();
+                    
+                    TextChannel channel = event.getChannel();
+                    botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
+                    
+                    if(id.equals(Emotes.CANCEL.getId())){
+                        channel.sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(
+                                        guild.getId(),
+                                        "purr.nsfw.fuck.request.denied",
+                                        author.getAsMention(),
+                                        target.getEffectiveName()
+                                )
+                        )).queue();
+                        return;
+                    }
+                    String link;
+                    if(!hasArgs(content)){
+                        if(id.equals(Emotes.SEX_ANAL.getId()))
+                            link = bot.getHttpUtil().getImage(API.GIF_ANAL_LEWD);
+                        else
+                        if(id.equals(Emotes.SEX_YURI.getId()))
+                            link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
+                        else
+                        if(id.equals(Emotes.SEX_YAOI.getId()))
+                            link = bot.getHttpUtil().getImage(API.GIF_YAOI_LEWD);
+                        else
+                            link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
+                    }else{
+                        if(content.contains("--anal"))
+                            link = bot.getHttpUtil().getImage(API.GIF_ANAL_LEWD);
+                        else
+                        if(content.contains("--yuri"))
+                            link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
+                        else
+                        if(content.contains("--yaoi"))
+                            link = bot.getHttpUtil().getImage(API.GIF_YAOI_LEWD);
+                        else
+                            link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
+                    }
+                    
+                    channel.sendMessage(MarkdownSanitizer.escape(
+                            bot.getMsg(
+                                    guild.getId(),
+                                    "purr.nsfw.fuck.request.accepted",
+                                    author.getAsMention(),
+                                    target.getEffectiveName()
+                            )
+                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
+                    
+                    if(link == null){
+                        channel.sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(
+                                        guild.getId(),
+                                        "purr.nsfw.fuck.message",
+                                        author.getEffectiveName(),
+                                        target.getEffectiveName()
+                                )
+                        )).queue();
+                        return;
+                    }
+                    
+                    channel.sendMessage(
+                            getFuckEmbed(author, target, link)
+                    ).queue();
+                }, 1, TimeUnit.MINUTES,
+                () -> {
+                    TextChannel channel = botMsg.getTextChannel();
+                    botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
+                    
+                    channel.sendMessage(MarkdownSanitizer.escape(
+                            bot.getMsg(
+                                    guild.getId(),
+                                    "purr.nsfw.fuck.request.timed_out",
+                                    author.getAsMention(),
+                                    target.getEffectiveName()
+                            )
+                    )).queue();
+                }
+        );
     }
 }

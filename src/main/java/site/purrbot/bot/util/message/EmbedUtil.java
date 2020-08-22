@@ -47,42 +47,57 @@ public class EmbedUtil {
         );
     }
     
-    public MessageEmbed getPermErrorEmbed(Member member, Guild guild, TextChannel channel, Permission perm, boolean self, boolean dm){
-        EmbedBuilder embed = member == null ? getEmbed() : getEmbed(member);
+    public EmbedBuilder getErrorEmbed(Member member){
+        return member == null ? getEmbed().setColor(0xFF0000) : getEmbed(member).setColor(0xFF0000);
+    }
+    
+    public MessageEmbed getPermErrorEmbed(Member member, Guild guild, TextChannel channel, Permission perm, boolean self){
+        EmbedBuilder embed = getErrorEmbed(member);
         String msg;
-        if(channel == null){
-            if(self){
+        if(self){
+            if(channel == null){
                 msg = bot.getMsg(guild.getId(), "errors.missing_perms.self")
-                        .replace("{permission}", perm.getName());
-            }else{
-                msg = bot.getMsg(guild.getId(), "errors.missing_perms.other")
-                        .replace("{permission}", perm.getName());
-            }
-        }else{
-            if(dm){
-                msg = bot.getMsg(guild.getId(), "errors.missing_perms.self_dm")
-                        .replace("{channel}", channel.getAsMention())
-                        .replace("{guild}", guild.getName())
-                        .replace("{permission}", perm.getName());
+                         .replace("{permission}", perm.getName());
             }else{
                 msg = bot.getMsg(guild.getId(), "errors.missing_perms.self_channel")
-                        .replace("{channel}", channel.getAsMention())
-                        .replace("{permission}", perm.getName());
+                         .replace("{permission}", perm.getName())
+                         .replace("{channel}", channel.getAsMention());
+            }
+        }else{
+            if(channel == null){
+                msg = bot.getMsg(guild.getId(), "errors.missing_perms.other")
+                         .replace("{permission}", perm.getName());
+            }else{
+                msg = bot.getMsg(guild.getId(), "errors.missing_perms.other_channel")
+                         .replace("{permission}", perm.getName())
+                         .replace("{channel}", channel.getAsMention());
             }
         }
         
-        return embed.setColor(0xFF0000).setDescription(msg).build();
+        return embed.setDescription(msg).build();
         
     }
     
-    public void sendError(TextChannel tc, Member member, String path, String reason){
+    public void sendError(TextChannel tc, Member member, String path){
+        sendError(tc, member, path, false);
+    }
+    
+    public void sendError(TextChannel tc, Member member, String path, boolean random){
+        sendError(tc, member, path, null, random);
+    }
+    
+    public void sendError(TextChannel tc, Member member, String path, String reason, boolean random){
         Guild guild = tc.getGuild();
         
-        EmbedBuilder embed = member == null ? getEmbed() : getEmbed(member);
-        String msg = member == null ? bot.getMsg(guild.getId(), path) : bot.getMsg(guild.getId(), path, member.getEffectiveName());
+        EmbedBuilder embed = getErrorEmbed(member);
+        String msg;
+        if(random){
+            msg = member == null ? bot.getRandomMsg(guild.getId(), path) : bot.getRandomMsg(guild.getId(), path, member.getEffectiveName());
+        }else{
+            msg = member == null ? bot.getMsg(guild.getId(), path) : bot.getMsg(guild.getId(), path, member.getEffectiveName());
+        }
         
-        embed.setColor(0xFF0000)
-             .setDescription(msg);
+        embed.setDescription(msg);
 
         if(reason != null)
             embed.addField(
@@ -94,29 +109,34 @@ public class EmbedUtil {
         tc.sendMessage(embed.build()).queue();
     }
     
-    public void sendError(TextChannel tc, Member member, String path){
-        sendError(tc, member, path, null);
-    }
     
     public void sendPermError(TextChannel tc, Member member, Permission permission, boolean self){
         sendPermError(tc, member, null, permission, self);
     }
     
     public void sendPermError(TextChannel tc, Member member, TextChannel channel, Permission permission, boolean self){
-        tc.sendMessage(getPermErrorEmbed(member, tc.getGuild(), channel, permission, self, false)).queue();
-    }
-    
-    public void sendRandomError(TextChannel tc, Member member, String path){
-        String msg;
-        if(member != null)
-            msg = bot.getRandomMsg(tc.getGuild().getId(), path, member.getEffectiveName());
-        else
-            msg = bot.getRandomMsg(tc.getGuild().getId(), path);
+        if(permission.equals(Permission.MESSAGE_EMBED_LINKS)){
+            if(channel == null){
+                tc.sendMessage(
+                        bot.getMsg(
+                                tc.getGuild().getId(),
+                                "errors.missing_perms.self"
+                        )
+                        .replace("{permission}", permission.getName())
+                ).queue();
+            }else{
+                tc.sendMessage(
+                        bot.getMsg(
+                                tc.getGuild().getId(),
+                                "errors.missing_perms.self_channel"
+                        )
+                        .replace("{permission}", permission.getName())
+                        .replace("{channel}", channel.getAsMention())
+                ).queue();
+            }
+            return;
+        }
         
-        EmbedBuilder embed = member == null ? getEmbed() : getEmbed(member);
-        embed.setColor(0xFF0000)
-             .setDescription(msg);
-        
-        tc.sendMessage(embed.build()).queue();
+        tc.sendMessage(getPermErrorEmbed(member, tc.getGuild(), channel, permission, self)).queue();
     }
 }

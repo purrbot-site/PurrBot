@@ -62,6 +62,7 @@ public enum Emotes{
     PURR                ("purr",                "700429690405519370", false),
     SEX                 ("sex",                 "700427729673125908", false),
     SEX_ANAL            ("sex_anal",            "700427729476255785", false),
+    SEX_YAOI            ("sex_yaoi",            "700427729102700644", false),
     SEX_YURI            ("sex_yuri",            "700427729040048208", false),
     SNUGGLE             ("snuggle",             "700429690086752338", false),
     STAFF               ("staff",               "712650362372489276", false),

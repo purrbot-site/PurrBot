@@ -34,6 +34,7 @@ public enum API {
     GIF_CUDDLE(false, "cuddle", true),
     GIF_EEVEE (false, "eevee",  true),
     GIF_FEED  (false, "feed",   true),
+    GIF_FLUFF (false, "fluff", true),
     GIF_HUG   (false, "hug",    true),
     GIF_KISS  (false, "kiss",   true),
     GIF_LICK  (false, "lick",   true),
@@ -54,16 +55,17 @@ public enum API {
     GIF_THREESOME_FFF_LEWD(true, "threesome_fff", true),
     GIF_THREESOME_FFM_LEWD(true, "threesome_ffm", true),
     GIF_THREESOME_MMF_LEWD(true, "threesome_mmf", true),
+    GIF_YAOI_LEWD         (true, "yaoi",          true),
     GIF_YURI_LEWD         (true, "yuri",          true);
 
     private final boolean nsfw;
-    private final boolean gif;
     private final String endpoint;
+    private final boolean gif;
 
     API(boolean nsfw, String endpoint, boolean gif){
         this.nsfw = nsfw;
-        this.gif = gif;
         this.endpoint = endpoint;
+        this.gif = gif;
     }
 
     public String getLink(){

@@ -85,6 +85,7 @@ public class CmdMsg implements Command{
             String content = args[2].replaceAll("\\{#(\\d+)}", "<#$1>");
             
             MessageEmbed embed = bot.getEmbedUtil().getEmbed()
+                    .setTimestamp(null)
                     .setDescription(content)
                     .build();
             

@@ -16,7 +16,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package site.purrbot.bot.commands.nsfw;
+package site.purrbot.bot.commands.fun;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -37,104 +37,47 @@ import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
 import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 @CommandDescription(
-        name = "PussyLick",
+        name = "Fluff",
         description = 
-                "Lick the pussy of someone. Ow<\n" +
-                "\n" +
-                "The person asked has to accept the request.",
-        triggers = {"pussylick", "plick", "cunni"},
+                "Allows you to ask someone, if you can fluff their tail.\n" +
+                "The asked user can then accept or decline the request.",
+        triggers = {"fluff", "fluffing"},
         attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}plick <@user>"),
-                @CommandAttribute(key = "help", value = "{p}plick <@user>")
+                @CommandAttribute(key = "category", value = "fun"),
+                @CommandAttribute(key = "usage", value = "{p}fluff <@user>"),
+                @CommandAttribute(key = "help", value = "{p}fluff <@user>")
         }
 )
-public class CmdPussylick implements Command{
-    
-    private final PurrBot bot;
-    
-    public CmdPussylick(PurrBot bot){
-        this.bot = bot;
-    }
+public class CmdFluff implements Command{
     
     private final Cache<String, String> queue = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)
             .build();
     
-    @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentionedUsers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.pussylick.no_mention");
-            return;
-        }
-        
-        Member target = msg.getMentionedMembers().get(0);
-        
-        if(target.equals(guild.getSelfMember())){
-            if(bot.isBeta()){
-                tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.nsfw.pussylick.mention_snuggle", member.getAsMention())
-                ).queue();
-                return;
-            }else{
-                if(bot.isSpecial(member.getId())){
-                    tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.nsfw.pussylick.special_user", member.getAsMention())
-                    ).queue();
-                    return;
-                }
-            }
-            tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.mention_purr", member.getAsMention())
-            ).queue();
-            return;
-        }
-        
-        if(target.equals(member)){
-            tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.mention_self", member.getAsMention())
-            ).queue();
-            return;
-        }
-        
-        if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.pussylick.mention_bot");
-            return;
-        }
-        
-        if(queue.getIfPresent(String.format("%s:%s", member.getId(), guild.getId())) != null){
-            tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.open", member.getAsMention())
-            ).queue();
-            return;
-        }
-        
-        tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.nsfw.pussylick.request.message", member.getEffectiveName())
-                    .replace("{target}", target.getAsMention())
-        ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
-                .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
-                .queue(
-                        v -> handleEvent(message, member, target),
-                        e -> bot.getEmbedUtil().sendError(tc, member, "errors.nsfw_request_error")
-                )
-        );
+    private final PurrBot bot;
+    
+    public CmdFluff(PurrBot bot){
+        this.bot = bot;
     }
     
-    private MessageEmbed getLickEmbed(Member requester, Member target, String url){
+    private MessageEmbed getFluffEmbed(Member author, Member target, String link){
         return bot.getEmbedUtil().getEmbed()
                 .setDescription(MarkdownSanitizer.escape(
-                        bot.getMsg(requester.getGuild().getId(), "purr.nsfw.pussylick.message", requester.getEffectiveName())
-                                .replace("{target}", target.getEffectiveName())
+                        bot.getMsg(
+                                author.getGuild().getId(),
+                                "purr.fun.fluff.message",
+                                author.getEffectiveName(),
+                                target.getEffectiveName()
+                        )
                 ))
-                .setImage(url)
+                .setImage(link)
                 .build();
     }
     
     private void handleEvent(Message message, Member author, Member target){
         Guild guild = message.getGuild();
         queue.put(bot.getMessageUtil().getQueueString(author), target.getId());
-        
+    
         EventWaiter waiter = bot.getWaiter();
         waiter.waitForEvent(
                 GuildMessageReactionAddEvent.class,
@@ -156,47 +99,48 @@ public class CmdPussylick implements Command{
                 },
                 event -> {
                     TextChannel channel = event.getChannel();
-                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
                     message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
                     
                     if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
                         channel.sendMessage(MarkdownSanitizer.escape(
                                 bot.getMsg(
                                         guild.getId(),
-                                        "purr.nsfw.pussylick.request.denied",
-                                        author.getAsMention(),
+                                        "purr.fun.fluff.request.denied",
+                                        author.getEffectiveName(),
                                         target.getEffectiveName()
                                 )
                         )).queue();
                     }else{
-                        String link = bot.getHttpUtil().getImage(API.GIF_PUSSYLICK_LEWD);
+                        String link = bot.getHttpUtil().getImage(API.GIF_FLUFF);
                         
                         channel.sendMessage(MarkdownSanitizer.escape(
                                 bot.getMsg(
                                         guild.getId(),
-                                        "purr.nsfw.pussylick.request.accepted",
+                                        "purr.fun.fluff.request.accepted",
                                         author.getAsMention(),
                                         target.getEffectiveName()
                                 )
                         )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
                         
                         if(link == null){
-                            channel.sendMessage(
+                            channel.sendMessage(MarkdownSanitizer.escape(
                                     bot.getMsg(
                                             guild.getId(),
-                                            "purr.nsfw.pussylick.message",
+                                            "purr.fun.fluff.message",
                                             author.getEffectiveName(),
                                             target.getEffectiveName()
                                     )
-                            ).queue();
+                            )).queue();
                             return;
                         }
                         
                         channel.sendMessage(
-                                getLickEmbed(author, target, link)
+                                getFluffEmbed(author, target, link)
                         ).queue();
                     }
-                }, 1, TimeUnit.MINUTES,
+                },
+                1, TimeUnit.MINUTES,
                 () -> {
                     TextChannel channel = message.getTextChannel();
                     message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
@@ -205,12 +149,83 @@ public class CmdPussylick implements Command{
                     channel.sendMessage(MarkdownSanitizer.escape(
                             bot.getMsg(
                                     guild.getId(),
-                                    "purr.nsfw.pussylick.request.timed_out",
+                                    "purr.fun.fluff.request.timed_out",
                                     author.getAsMention(),
                                     target.getEffectiveName()
                             )
                     )).queue();
                 }
+        );
+    }
+    
+    @Override
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+        if(msg.getMentionedMembers().isEmpty()){
+            bot.getEmbedUtil().sendError(tc, member, "purr.fun.fluff.no_mention");
+            return;
+        }
+        
+        Member target = msg.getMentionedMembers().get(0);
+        
+        if(target.equals(guild.getSelfMember())){
+            if(bot.isSpecial(member.getId())){
+                if(bot.isBeta()){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "snuggle.fun.fluff.special_user", member.getAsMention())
+                    ).queue();
+                }else{
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.fun.fluff.special_user", member.getAsMention())
+                    ).queue();
+                }
+            }else{
+                if(bot.isBeta()){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "snuggle.fun.fluff.special_user", member.getAsMention())
+                    ).queue();
+                }else{
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.fun.fluff.special_user", member.getAsMention())
+                    ).queue();
+                }
+            }
+            return;
+        }
+        
+        if(target.equals(member)){
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.fluff.mention_self", member.getAsMention())
+            ).queue();
+            return;
+        }
+        
+        if(target.getUser().isBot()){
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.fluff.mention_bot", member.getAsMention())
+            ).queue();
+            return;
+        }
+        
+        if(queue.getIfPresent(String.format("%s:%s", member.getId(), guild.getId())) != null){
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.fluff.request.open", member.getAsMention())
+            ).queue();
+            return;
+        }
+        
+        tc.sendMessage(
+                bot.getMsg(
+                        guild.getId(),
+                        "purr.fun.fluff.request.message",
+                        member.getEffectiveName(),
+                        target.getAsMention()
+                )
+        ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
+                .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
+                .queue(
+                        v -> handleEvent(message, member, target),
+                        e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
+                )
         );
     }
 }

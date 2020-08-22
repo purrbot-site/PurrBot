@@ -42,6 +42,7 @@ public class CommandLoader {
                 new CmdCuddle(bot),
                 new CmdEevee(bot),
                 new CmdFeed(bot),
+                new CmdFluff(bot),
                 new CmdHolo(bot),
                 new CmdHug(bot),
                 new CmdKiss(bot),

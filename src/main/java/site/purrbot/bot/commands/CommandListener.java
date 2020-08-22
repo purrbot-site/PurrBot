@@ -129,33 +129,31 @@ public class CommandListener extends ListenerAdapter{
                         return;
                     }
 
-                    if(command.getAttribute("category").equals("owner") && !bot.getCheckUtil().isDeveloper(member))
+                    if(command.getAttribute("category").equals("owner") && bot.getCheckUtil().isNotDeveloper(member))
                         return;
                     
-                    if(self.hasPermission(Permission.ADMINISTRATOR)){
-                        bot.getEmbedUtil().sendError(tc, member, "errors.administrator");
-                        return;
-                    }
-                    
-                    if(!bot.getCheckUtil().checkPermission(tc, member, self, Permission.MESSAGE_EMBED_LINKS))
+                    if(bot.getCheckUtil().hasAdmin(member, tc))
                         return;
                     
-                    if(!bot.getCheckUtil().checkPermission(tc, member, self, Permission.MESSAGE_HISTORY))
+                    if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_EMBED_LINKS))
                         return;
                     
-                    if(!bot.getCheckUtil().checkPermission(tc, member, self, Permission.MESSAGE_ADD_REACTION))
+                    if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_HISTORY))
                         return;
                     
-                    if(!bot.getCheckUtil().checkPermission(tc, member, self, Permission.MESSAGE_EXT_EMOJI))
+                    if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_ADD_REACTION))
+                        return;
+                    
+                    if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_EXT_EMOJI))
                         return;
                     
                     if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
-                        bot.getEmbedUtil().sendRandomError(tc, member, "errors.nsfw_random");
+                        bot.getEmbedUtil().sendError(tc, member, "errors.nsfw_random", true);
                         return;
                     }
                     
                     if(command.hasAttribute("manage_server")){
-                        if(!bot.getCheckUtil().checkPermission(tc, member, member, Permission.MESSAGE_MANAGE))
+                        if(bot.getCheckUtil().lacksPermission(tc, member, Permission.MANAGE_SERVER))
                             return;
                     }
 
@@ -163,7 +161,7 @@ public class CommandListener extends ListenerAdapter{
                         HANDLER.execute(command, msg, args[1] == null ? "" : args[1]);
                     }catch(Exception ex){
                         logger.error("Couldn't perform command!", ex);
-                        bot.getEmbedUtil().sendError(tc, member, "errors.unknown", ex.getMessage());
+                        bot.getEmbedUtil().sendError(tc, member, "errors.unknown", ex.getMessage(), false);
                     }
                 }
         );

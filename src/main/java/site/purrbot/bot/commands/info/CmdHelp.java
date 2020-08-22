@@ -174,7 +174,7 @@ public class CmdHelp implements Command{
 
 
         for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
-            if(builderEntry.getKey().equals("owner") && !bot.getCheckUtil().isDeveloper(member))
+            if(builderEntry.getKey().equals("owner") && bot.getCheckUtil().isNotDeveloper(member))
                 continue;
             
             if(!tc.isNSFW() && builderEntry.getKey().equals("nsfw")){

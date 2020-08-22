@@ -214,4 +214,8 @@ public class MessageUtil {
     public String formatNumber(long number){
         return decimalFormat.format(number);
     }
+    
+    public String getQueueString(Member member){
+        return member.getId() + ":" + member.getGuild().getId();
+    }
 }

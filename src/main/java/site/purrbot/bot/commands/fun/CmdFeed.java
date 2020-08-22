@@ -74,7 +74,7 @@ public class CmdFeed implements Command{
     
     private void handleEvent(Message message, Member author, Member target){
         Guild guild = message.getGuild();
-        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
+        queue.put(bot.getMessageUtil().getQueueString(author), target.getId());
     
         EventWaiter waiter = bot.getWaiter();
         waiter.waitForEvent(
@@ -96,11 +96,13 @@ public class CmdFeed implements Command{
                     return event.getMessageId().equals(message.getId());
                 },
                 event -> {
-                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
+                    TextChannel channel = event.getChannel();
                     message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
+    
                     
                     if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
-                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                        channel.sendMessage(MarkdownSanitizer.escape(
                                 bot.getMsg(
                                         guild.getId(),
                                         "purr.fun.feed.request.denied",
@@ -110,8 +112,8 @@ public class CmdFeed implements Command{
                         )).queue();
                     }else{
                         String link = bot.getHttpUtil().getImage(API.GIF_FEED);
-                        
-                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
+    
+                        channel.sendMessage(MarkdownSanitizer.escape(
                                 bot.getMsg(
                                         guild.getId(),
                                         "purr.fun.feed.request.accepted",
@@ -121,7 +123,7 @@ public class CmdFeed implements Command{
                         )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
                         
                         if(link == null){
-                            event.getChannel().sendMessage(MarkdownSanitizer.escape(
+                            channel.sendMessage(MarkdownSanitizer.escape(
                                     bot.getMsg(
                                             guild.getId(),
                                             "purr.fun.feed.message",
@@ -131,8 +133,8 @@ public class CmdFeed implements Command{
                             )).queue();
                             return;
                         }
-                        
-                        event.getChannel().sendMessage(
+    
+                        channel.sendMessage(
                                 getFeedEmbed(author, target, link)
                         ).queue();
                     }
@@ -141,7 +143,7 @@ public class CmdFeed implements Command{
                 () -> {
                     TextChannel channel = message.getTextChannel();
                     message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
+                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
                     
                     channel.sendMessage(MarkdownSanitizer.escape(
                             bot.getMsg(

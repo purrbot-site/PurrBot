@@ -37,9 +37,9 @@ import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.botblock.javabotblockapi.BotBlockAPI;
-import org.botblock.javabotblockapi.Site;
-import org.botblock.javabotblockapi.requests.PostAction;
+import org.botblock.javabotblockapi.core.BotBlockAPI;
+import org.botblock.javabotblockapi.core.Site;
+import org.botblock.javabotblockapi.jda.PostAction;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
@@ -50,10 +50,7 @@ import site.purrbot.bot.listener.ConnectionListener;
 import site.purrbot.bot.listener.GuildListener;
 import site.purrbot.bot.listener.ReactionListener;
 import site.purrbot.bot.listener.ReadyListener;
-import site.purrbot.bot.util.CheckUtil;
-import site.purrbot.bot.util.DBUtil;
-import site.purrbot.bot.util.HttpUtil;
-import site.purrbot.bot.util.ImageUtil;
+import site.purrbot.bot.util.*;
 import site.purrbot.bot.util.file.FileManager;
 import site.purrbot.bot.util.file.lang.LangUtils;
 import site.purrbot.bot.util.message.EmbedUtil;
@@ -90,7 +87,7 @@ public class PurrBot {
     private final CommandHandler<Message> CMD_HANDLER = new CommandHandler<>();
     private EventWaiter waiter;
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-
+    
     private final Cache<String, String> language = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
@@ -325,6 +322,7 @@ public class PurrBot {
                 .replace("{TAIL}", Emotes.TAIL.getEmote())
                 .replace("{SEX}", Emotes.SEX.getEmote())
                 .replace("{ANAL}", Emotes.SEX_ANAL.getEmote())
+                .replace("{YAOI}", Emotes.SEX_YAOI.getEmote())
                 .replace("{YURI}", Emotes.SEX_YURI.getEmote())
                 .replace("{ACCEPT}", Emotes.ACCEPT.getEmote())
                 .replace("{CANCEL}", Emotes.CANCEL.getEmote())
@@ -375,9 +373,7 @@ public class PurrBot {
     public void startUpdater(){
         
         if(!isBeta()){
-            String userAgent = "*Purr*-6875/BOT_VERSION (JDA; +https://purrbot.site) DBots/{id}";
-            
-            PostAction post = new PostAction(userAgent, IDs.PURR);
+            PostAction post = new PostAction(getShardManager());
             BotBlockAPI botBlockAPI = new BotBlockAPI.Builder()
                     .addAuthToken(
                             Site.BOTLIST_SPACE,

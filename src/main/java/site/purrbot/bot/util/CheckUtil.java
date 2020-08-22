@@ -19,10 +19,11 @@
 package site.purrbot.bot.util;
 
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
+
+import java.util.stream.Collectors;
 
 public class CheckUtil{
 
@@ -32,35 +33,65 @@ public class CheckUtil{
         this.bot = bot;
     }
     
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean isDeveloper(Member member){
-        return member.getId().equals(IDs.ANDRE_601);
+    public boolean isNotDeveloper(Member member){
+        return !member.getId().equals(IDs.ANDRE_601);
     }
     
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean checkPermission(TextChannel tc, Member member, Member target, Permission permission){
-        if(target.equals(tc.getGuild().getSelfMember())){
-            if(target.hasPermission(tc, permission)){
-                return true;
+    public boolean lacksPermission(TextChannel tc, Member member, Permission permission){
+        return lacksPermission(tc, member, false, null, permission);
+    }
+    
+    public boolean lacksPermission(TextChannel tc, Member member, boolean isSelf, TextChannel channel, Permission permission){
+        Guild guild = tc.getGuild();
+        if(isSelf){
+            Member self = guild.getSelfMember();
+            if(channel == null){
+                if(self.hasPermission(permission)){
+                    return false;
+                }else{
+                    bot.getEmbedUtil().sendPermError(tc, member, permission, true);
+                    return true;
+                }
             }else{
-                if(permission.equals(Permission.MESSAGE_EMBED_LINKS))
-                    tc.sendMessage(
-                            bot.getMsg(tc.getGuild().getId(), "errors.missing_perms.self_channel")
-                                    .replace("{channel}", tc.getAsMention())
-                                    .replace("{permission}", permission.getName())
-                    ).queue();
-                else
-                    bot.getEmbedUtil().sendPermError(tc, member, tc, permission, true);
-                
-                return false;
+                if(self.hasPermission(channel, permission)){
+                    return false;
+                }else{
+                    bot.getEmbedUtil().sendPermError(tc, member, channel, permission, true);
+                    return true;
+                }
             }
         }else{
-            if(target.hasPermission(tc, permission)){
-                return true;
-            }else{
-                bot.getEmbedUtil().sendPermError(tc, member, tc, permission, false);
+            if(member.hasPermission(permission)){
                 return false;
+            }else{
+                bot.getEmbedUtil().sendPermError(tc, member, permission, false);
+                return true;
             }
         }
+    }
+    
+    public boolean hasAdmin(Member executor, TextChannel tc){
+        Guild guild = tc.getGuild();
+        Member self = guild.getSelfMember();
+        if(!self.hasPermission(Permission.ADMINISTRATOR))
+            return false;
+        
+        String roles = self.getRoles().stream()
+                .filter(role -> role.getPermissions().contains(Permission.ADMINISTRATOR))
+                .map(role -> "- " + role.getAsMention())
+                .collect(Collectors.joining("\n"));
+        
+        if(guild.getPublicRole().getPermissions().contains(Permission.ADMINISTRATOR))
+            roles += (roles.isEmpty() ? "" : "\n") + "- @everyone";
+    
+        MessageEmbed embed = bot.getEmbedUtil().getErrorEmbed(executor)
+                .setDescription(
+                        bot.getMsg(guild.getId(), "errors.administrator")
+                           .replace("{roles}", roles)
+                ).build();
+        
+        tc.sendMessage(embed).queue();
+        
+        return true;
     }
 }

@@ -58,103 +58,6 @@ public class CmdBlowjob implements Command{
     private final Cache<String, String> queue = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)
             .build();
-
-    private MessageEmbed getBJEmbed(Member requester, Member target, String link){
-        return bot.getEmbedUtil().getEmbed()
-                .setDescription(MarkdownSanitizer.escape(
-                        bot.getMsg(
-                                requester.getGuild().getId(), 
-                                "purr.nsfw.blowjob.message", 
-                                requester.getEffectiveName(),
-                                target.getEffectiveName()
-                        )
-                ))
-                .setImage(link)
-                .build();
-    }
-
-    private void handleEvent(Message message, Member author, Member target){
-        Guild guild = message.getGuild();
-        queue.put(String.format("%s:%s", author.getId(), guild.getId()), target.getId());
-        
-        EventWaiter waiter = bot.getWaiter();
-        waiter.waitForEvent(
-                GuildMessageReactionAddEvent.class,
-                event -> {
-                    MessageReaction.ReactionEmote emote = event.getReactionEmote();
-                    if(!emote.isEmote())
-                        return false;
-                    
-                    if(!emote.getId().equals(Emotes.ACCEPT.getId()) && !emote.getId().equals(Emotes.CANCEL.getId()))
-                        return false;
-                    
-                    if(event.getUser().isBot())
-                        return false;
-                    
-                    if(!event.getMember().equals(target))
-                        return false;
-                    
-                    return event.getMessageId().equals(message.getId());
-                },
-                event -> {
-                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                    message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                    
-                    if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
-                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(
-                                        guild.getId(),
-                                        "purr.nsfw.blowjob.request.denied",
-                                        author.getAsMention(),
-                                        target.getEffectiveName()
-                                )
-                        )).queue();
-                    }else{
-                        String link = bot.getHttpUtil().getImage(API.GIF_BLOW_JOB_LEWD);
-                        
-                        event.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(
-                                        guild.getId(),
-                                        "purr.nsfw.blowjob.request.accepted",
-                                        author.getAsMention(),
-                                        target.getEffectiveName()
-                                )
-                        )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
-                        
-                        if(link == null){
-                            event.getChannel().sendMessage(MarkdownSanitizer.escape(
-                                    bot.getMsg(
-                                            guild.getId(),
-                                            "purr.nsfw.blowjob.message",
-                                            author.getEffectiveName(),
-                                            target.getEffectiveName()
-                                    )
-                            )).queue();
-                            return;
-                        }
-                        
-                        event.getChannel().sendMessage(
-                                getBJEmbed(author, target, link)
-                        ).queue();
-                    }
-                }, 
-                1, TimeUnit.MINUTES,
-                () -> {
-                    TextChannel channel = message.getTextChannel();
-                    message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                    queue.invalidate(String.format("%s:%s", author.getId(), guild.getId()));
-                    
-                    channel.sendMessage(MarkdownSanitizer.escape(
-                            bot.getMsg(
-                                    guild.getId(),
-                                    "purr.nsfw.blowjob.request.timed_out",
-                                    author.getAsMention(),
-                                    target.getEffectiveName()
-                            )
-                    )).queue();
-                }
-        );
-    }
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
@@ -228,6 +131,104 @@ public class CmdBlowjob implements Command{
                         v -> handleEvent(message, member, target), 
                         e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
                 )
+        );
+    }
+    
+    private MessageEmbed getBJEmbed(Member requester, Member target, String link){
+        return bot.getEmbedUtil().getEmbed()
+                .setDescription(MarkdownSanitizer.escape(
+                        bot.getMsg(
+                                requester.getGuild().getId(),
+                                "purr.nsfw.blowjob.message",
+                                requester.getEffectiveName(),
+                                target.getEffectiveName()
+                        )
+                ))
+                .setImage(link)
+                .build();
+    }
+    
+    private void handleEvent(Message message, Member author, Member target){
+        Guild guild = message.getGuild();
+        queue.put(bot.getMessageUtil().getQueueString(author), target.getId());
+        
+        EventWaiter waiter = bot.getWaiter();
+        waiter.waitForEvent(
+                GuildMessageReactionAddEvent.class,
+                event -> {
+                    MessageReaction.ReactionEmote emote = event.getReactionEmote();
+                    if(!emote.isEmote())
+                        return false;
+                    
+                    if(!emote.getId().equals(Emotes.ACCEPT.getId()) && !emote.getId().equals(Emotes.CANCEL.getId()))
+                        return false;
+                    
+                    if(event.getUser().isBot())
+                        return false;
+                    
+                    if(!event.getMember().equals(target))
+                        return false;
+                    
+                    return event.getMessageId().equals(message.getId());
+                },
+                event -> {
+                    TextChannel channel = event.getChannel();
+                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
+                    message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    
+                    if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
+                        channel.sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(
+                                        guild.getId(),
+                                        "purr.nsfw.blowjob.request.denied",
+                                        author.getAsMention(),
+                                        target.getEffectiveName()
+                                )
+                        )).queue();
+                    }else{
+                        String link = bot.getHttpUtil().getImage(API.GIF_BLOW_JOB_LEWD);
+                        
+                        channel.sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(
+                                        guild.getId(),
+                                        "purr.nsfw.blowjob.request.accepted",
+                                        author.getAsMention(),
+                                        target.getEffectiveName()
+                                )
+                        )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
+                        
+                        if(link == null){
+                            channel.sendMessage(MarkdownSanitizer.escape(
+                                    bot.getMsg(
+                                            guild.getId(),
+                                            "purr.nsfw.blowjob.message",
+                                            author.getEffectiveName(),
+                                            target.getEffectiveName()
+                                    )
+                            )).queue();
+                            return;
+                        }
+                        
+                        channel.sendMessage(
+                                getBJEmbed(author, target, link)
+                        ).queue();
+                    }
+                },
+                1, TimeUnit.MINUTES,
+                () -> {
+                    TextChannel channel = message.getTextChannel();
+                    message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
+                    
+                    channel.sendMessage(MarkdownSanitizer.escape(
+                            bot.getMsg(
+                                    guild.getId(),
+                                    "purr.nsfw.blowjob.request.timed_out",
+                                    author.getAsMention(),
+                                    target.getEffectiveName()
+                            )
+                    )).queue();
+                }
         );
     }
 }
