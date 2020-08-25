@@ -447,7 +447,6 @@
           "seconds": "Sekunden"
         },
         "embed": {
-          "note": "**Hinweis**:\nDie gezeigten Statistiken (Speziell die Mitglieder) können eventuell nicht 100% genau sein.",
           "other_title": "Andere Statistiken",
           "other_value": "```yaml\nRAM: {ram}\nLaufzeit: {uptime}\n```",
           "shard_this_title": "Diese Shard",
