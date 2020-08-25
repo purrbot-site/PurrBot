@@ -447,7 +447,6 @@
           "seconds": "secondi"
         },
         "embed": {
-          "note": "**Nota**\nL'elenco delle statistiche (specialmente il numero di membri) non potrebbero essere accurate al 100%",
           "other_title": "Altre statistiche",
           "other_value": "```yaml\nRAM: {ram}\nUptime: {days}, {hours}, {minutes} e {seconds}\n```",
           "shard_this_title": "Questo frammento",
