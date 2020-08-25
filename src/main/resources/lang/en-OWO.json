@@ -447,7 +447,6 @@
           "seconds": "seconds"
         },
         "embed": {
-          "note": "**Note**:\nThe wisted stats (Especiawwy the membew count) might not be 100% accuwate.",
           "other_title": "Othew stats",
           "other_value": "```yaml\nDedotated WAM: {ram} UwU\nUptime: {days}, {hours}, {minutes} and {seconds} OwO\n```",
           "shard_this_title": "This shawd",
