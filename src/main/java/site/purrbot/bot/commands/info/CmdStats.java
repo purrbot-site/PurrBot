@@ -135,9 +135,6 @@ public class CmdStats implements Command{
                 .setAuthor(
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.title")
                 )
-                .setDescription(
-                        bot.getMsg(guild.getId(), "purr.info.stats.embed.note")
-                )
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_total_title"), 
                         bot.getMsg(guild.getId(), "purr.info.stats.embed.shard_total_value")
