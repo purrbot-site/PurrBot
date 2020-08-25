@@ -447,7 +447,6 @@
           "seconds": "초"
         },
         "embed": {
-          "note": "**Note**:\n여기 나와있는 통계들(특히 멤버의 수)은 정확하지 않아. ",
           "other_title": "기타 정보",
           "other_value": "```yaml\n메모리 점유: {ram}\n가동 시간: {days} {hours} {minutes} {seconds}\n```",
           "shard_this_title": "현재 샤드",
