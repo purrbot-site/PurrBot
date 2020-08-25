@@ -447,7 +447,6 @@
           "seconds": "segundos"
         },
         "embed": {
-          "note": "**Nota**:\nAs estatísticas listadas (especialmente a contagem de membros) podem não ser 100% corretas.",
           "other_title": "Outras estatísticas",
           "other_value": "```yaml\nRAM: {ram}\nTempo de atividade: {days}, {hours}, {minutes} and {seconds}\n```",
           "shard_this_title": "Este fragmento",
