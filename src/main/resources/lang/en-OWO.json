@@ -89,7 +89,7 @@
           "denied": "{target} doesn't want to get fluffed by you {user} TwT",
           "message": "Hey {target}!\n{user} wants to fluww youw tail. Do you want that too?\nWeact with {ACCEPT} to accept ow with {CANCEL} to deny it.\n\n> **This wequest will time out in q minute!**",
           "open": "You alweady asked someone to get fluffed {user}! Pwease wait for the wequest to be accepted, denied or fow it to time out. >:c",
-          "timed_out": "Looks like {target} doesn't want to get fluffed by you {user}."
+          "timed_out": "Looks like {target} doesn't want to get fwuffed by you {user}."
         },
         "special_user": "B-but {user}. That is lewd to do that in public. O////O"
       },
