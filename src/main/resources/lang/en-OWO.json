@@ -3,7 +3,7 @@
     "footer": "Wequested by {user}"
   },
   "errors": {
-    "administrator": "**Administwatow Pewmission detected**\nI have the `Administwatow` Pewmission which is a huge secuwity wisk! >~<\n__I won't pewfowm any commands as long as I have this Pewmission, to pwevent possible abuse.__\n\nTo fix this, do one of the following things:\n- Wemove the wole which has Administwatow from me.\n- Wemove the Pewmission fwom the Wole(s) listed below.\n\nAdministwatow was detected in the following woles:\n{roles}",
+    "administrator": "**Administwatow Pewmission detected**\nI have the `Administwatow` Pewmission which is a huge secuwity wisk! >~<\n__I won't pewfowm any commands as long as I have this Pewmission, to pwevent possibwe abuse.__\n\nTo fix this, do one of the fowwowing things:\n- Wemove the wole which has Administwatow from me.\n- Wemove the Pewmission fwom the Wole(s) listed bewow.\n\nAdministwatow was detected in the following woles:\n{roles}",
     "api_error": "Thewe was an ewwow weaching the API! Pwease twy again water.",
     "missing_perms": {
       "self": "I lack the pewmission `{permssion}` fow this. :c",
