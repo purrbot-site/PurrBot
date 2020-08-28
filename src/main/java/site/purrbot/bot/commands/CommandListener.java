@@ -39,7 +39,6 @@ import java.util.regex.Pattern;
 public class CommandListener extends ListenerAdapter{
     
     private final Logger logger = (Logger)LoggerFactory.getLogger(CommandListener.class);
-    
 
     private final ThreadGroup CMD_THREAD = new ThreadGroup("CommandThread");
     private final Executor CMD_EXECUTOR = Executors.newCachedThreadPool(
@@ -66,16 +65,9 @@ public class CommandListener extends ListenerAdapter{
                     if(user.isBot())
                         return;
                     
-                    if(event.getChannel().getId().equals(IDs.SUGGESTIONS)){
-                        if(!bot.isBeta())
-                            return;
-                        
-                        event.getMessage().addReaction(Emotes.ACCEPT.getNameAndId())
-                                          .flatMap(v -> event.getMessage().addReaction(Emotes.CANCEL.getNameAndId()))
-                                          .queue();
+                    if(event.getChannel().getId().equals(IDs.SUGGESTIONS))
                         return;
-                    }
-
+                    
                     Pattern prefixPattern = Pattern.compile(
                             Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 
                             Pattern.DOTALL | Pattern.CASE_INSENSITIVE

@@ -29,6 +29,10 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 @CommandDescription(
         name = "Check",
         description =
@@ -48,37 +52,45 @@ public class CmdCheck implements Command{
         this.bot = bot;
     }
     
-    private void checkShards(Message msg){
-        StringBuilder builder = new StringBuilder(msg.getContentRaw());
-        int shards = 0;
-        for(JDA shard : bot.getShardManager().getShardCache()){
-            builder.append("\n").append(String.format(
-                    "Shard %s [Status: %s]",
-                    shard.getShardInfo().getShardId(),
-                    shard.getStatus().name()
-            ));
-            msg.editMessage(builder.toString()).queue();
-            shards++;
-            
-            if(shards == shard.getShardInfo().getShardTotal()){
-                String message = builder.toString().replace(String.format(
-                        "%s Performing Status checks on Shards. Please wait...",
-                        Emotes.TYPING.getEmote()
-                ),String.format(
-                        "%s Status Check complete!",
-                        Emotes.ACCEPT.getEmote()
-                ));
-                
-                msg.editMessage(message).queue();
-            }
-        }
-    }
-    
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         tc.sendMessage(String.format(
                 "%s Performing Status checks on Shards. Please wait...",
                 Emotes.TYPING.getEmote()
         )).queue(this::checkShards);
+    }
+    
+    private void checkShards(Message msg){
+        List<JDA> shards = new ArrayList<>(bot.getShardManager().getShards());
+        StringBuilder builder = new StringBuilder("```");
+        int checkedShards = 0;
+    
+        shards.sort(Comparator.comparing(jda -> jda.getShardInfo().getShardId()));
+        
+        for(JDA shard : shards){
+            if(builder.length() + getShardStatus(shard).length() > Message.MAX_CONTENT_LENGTH){
+                builder.append("\n```");
+                msg.getTextChannel().sendMessage(builder.toString()).queue();
+                builder = new StringBuilder("```");
+            }
+            
+            builder.append(getShardStatus(shard));
+            checkedShards++;
+            
+            if(checkedShards == shards.size())
+                msg.editMessage(String.format("%s Status Check complete!", Emotes.ACCEPT.getEmote())).queue();
+            
+        }
+        
+        if(builder.length() > 0){
+            String text = builder.toString();
+            if(!text.endsWith("```"))
+                text += "\n```";
+            msg.getTextChannel().sendMessage(text).queue();
+        }
+    }
+    
+    private String getShardStatus(JDA jda){
+        return String.format("\nShard %2d [Status: %s]", jda.getShardInfo().getShardId(), jda.getStatus().name());
     }
 }
