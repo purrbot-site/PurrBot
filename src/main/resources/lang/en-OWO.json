@@ -68,11 +68,9 @@
         "message": "{user} gives {target} something to eat. UwU",
         "no_mention": "Please mention someone to give some food. -_-",
         "request": {
-          "accepted": "{target} accepted youw wequest {user}",
           "denied": "{target} doesn't want food fwom you {user} v_v",
           "message": "Hey {target}!\n{user} wants to give you a some food to eat. Do you want that too?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This wequest wiww time out in 1 minute!**",
-          "open": "You awweady asked someone {user}! Pwease wait fow the wequest to be accepted, denied or fow it to time out. >:c",
-          "timed_out": "Looks like {target} doesn't want food fwom you {user} v_v."
+          "open": "You awweady asked someone {user}! Pwease wait fow the wequest to be accepted, denied or fow it to time out. >:c"
         }
       },
       "fluff": {
@@ -85,11 +83,9 @@
         "message": "{user} fluffs {target}'s tail.",
         "no_mention": "Pwease mention someone you want to fluff.",
         "request": {
-          "accepted": "{target} accepted youw wequest {user}",
           "denied": "{target} doesn't want to get fluffed by you {user} TwT",
-          "message": "Hey {target}!\n{user} wants to fluww youw tail. Do you want that too?\nWeact with {ACCEPT} to accept ow with {CANCEL} to deny it.\n\n> **This wequest will time out in q minute!**",
-          "open": "You alweady asked someone to get fluffed {user}! Pwease wait for the wequest to be accepted, denied or fow it to time out. >:c",
-          "timed_out": "Looks like {target} doesn't want to get fwuffed by you {user}."
+          "message": "Hey {target}!\n{user} wants to fluww youw tail. Do you want that too?\nWeact with {ACCEPT} to accept ow with {CANCEL} to deny it.\n\n> **This wequest will time out in 1 minute!**",
+          "open": "You alweady asked someone to get fluffed {user}! Pwease wait for the wequest to be accepted, denied or fow it to time out. >:c"
         },
         "special_user": "B-but {user}. That is lewd to do that in public. O////O"
       },
@@ -109,16 +105,20 @@
         "no_mention": "Pwease mention at weast one user to hug!"
       },
       "kiss": {
-        "loading": "{LOADING} Weceiving a kiss...",
-        "mention_self": "How can you kiss youwselwf {user}? With a miwwow?",
+        "mention_bot": "This would be quite a *\"shocking\"* experience... ⚡",
         "mention_purr": [
           "O-okay. But onwy my cheek! \\*Howds cheek out*",
           "Onwy my cheek, okay?",
           "T-that's a bit wewd, but okay. \\*bwushes* OwO"
         ],
-        "mention_snuggle": "NO! I won't wet you kiss my sistew with my hewp! òwó",
-        "message": "{user} kisses you {targets} OwO",
+        "mention_self": "How can you kiss youwselwf {user}? With a miwwow?",
+        "message": "{user} kisses {target}",
         "no_mention": "Pwease mention at weast one user to kiss!",
+        "request": {
+          "denied": "{target} doesn't want a kiss from you {user} :c",
+          "message": "Hey {target}!\n{user} wants to kiss you. Do you want that too?\nWeact with {ACCEPT} to accept ow with {CANCEL} to deny it.\n\n> **This wequest will time out in 1 minute!**",
+          "open": "You awweady asked someone {user}! Pwease wait for the wequest to be accepted, denied or fow it to time out. >:C"
+        },
         "special_user": "\\*Enjoys the kiss fwom {user}*"
       },
       "kitsune": {
@@ -485,11 +485,9 @@
         "message": "{user} is giving {target} a bwowjob!",
         "no_mention": "Pwease mention a usew you want to suck.",
         "request": {
-          "accepted": "{target} accepted youw wequest {user}!",
           "denied": "{target} doesn't want to get sucked by you {user}. :/",
           "message": "Hey {target}!\n{user} wants to give you a bwowjob. Do you want that too?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This wequest wiww time out in 1 minute!**",
-          "open": "Don't be that gweedy {user}! Wait untiw your previous wequests get accepted, denied or times out. ÒwÓ",
-          "timed_out": "Looks like {target} doesn't want to get sucked by you {user}."
+          "open": "Don't be that gweedy {user}! Wait untiw your previous wequests get accepted, denied or times out. ÒwÓ"
         },
         "special_user": "Okay sweetie. Wet me get my \"toys\" so that we can have fun.\n\\*takes {user}'s hand and disappeaws in hew woom*"
       },
@@ -504,12 +502,10 @@
         "message": "{user} and {target} have sex!",
         "no_mention": "Pwease mention a usew you want to fuck with.",
         "request": {
-          "accepted": "{target} accepted your wequest {user}. OwO",
           "denied": "{target} doesn't want to have sex with you {user}. >.<",
           "message": "Hey {target}!\n{user} wants to have sex with you OwO. Do you want that too?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This wequest wiww time out in 1 minute!**",
           "message_choose": "Hey {target}!\n{user} wants to have sex with you OwO. Do you want that too?\nWeact with one of the bewow options to choose:\n{SEX} - Nowmaw Sex UwU\n{ANAL} - Anaw Sex OwO\n{YAOI} - Yaowi Sex\n{YURI} - Yuwi Sex\n{CANCEL} - Deny Wequest\n\n> **This wequest wiww time out in 1 minute!**",
-          "open": "Don't be such a howny person {user}!\nYou awweady have a open request. Wait for it to be accepted, denied or fow it to time out.",
-          "timed_out": "Looks like {target} doesn't want to fuck with you {user}. ._."
+          "open": "Don't be such a howny person {user}!\nYou awweady have a open request. Wait for it to be accepted, denied or fow it to time out."
         },
         "special_user": {
           "accept": [
@@ -536,11 +532,9 @@
         "message": "{user} is wicking the pussy of {target}",
         "no_mention": "Pwease mention a usew you want to wick the pussy of.",
         "request": {
-          "accepted": "{target} accepted youw wequest {user}. ;P",
           "denied": "{target} doesn't want you to wick theiw pussy {user}... Do they even have one?",
           "message": "Hey {target}!\n{user} wants to wick youw pussy. Do you want that (Ow do you even have one)?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This wequest will time out in 1 minute!**",
-          "open": "Are you thiwsty? You alweady have a open request {user}!\nWait for the othew to accept or deny it, or fow the wequest to time out.",
-          "timed_out": "Seems like {target} doesn't want you to lick theiw pussy {user}... Pewhaps they don't even have one? o////o"
+          "open": "Are you thiwsty? You alweady have a open request {user}!\nWait for the othew to accept or deny it, or fow the wequest to time out."
         },
         "special_user": "Hehehe... You'we *\"thiwsty\"* {user}, awe you?\n\\*takes {user}'s hand* and disappears in a room*"
       },
@@ -555,15 +549,17 @@
         "message": "{user} has sex with {target1} and {target2}! O//w//O",
         "no_mention": "Please mention 2 usews you want to fuck!",
         "request": {
-          "accepted": "{target1} and {target2} accepted youw wequest {user}! >//w//<",
           "denied": "Eithew {target1} ow {target2} don't want to have sex with you {user}.",
           "message": "Hey {target1} and {target2}!\n{user} wants to have sex you both OwO. Do you want that too?\nWeact with {ACCEPT} to accept or with {CANCEL} to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This wequest will time out in 1 minute!**",
-          "open": "Whoa thewe {user}! Show some patience you howny pewson!\nYou awweady asked people to fuck with you, so eithew wait fow then to accept it, deny it or for the wequest to time out.",
-          "timed_out": "Looks like eithew {target1} ow {target2} doesn't want to fuck with you {user}. >\\_<"
+          "open": "Whoa thewe {user}! Show some patience you howny pewson!\nYou awweady asked people to fuck with you, so eithew wait fow then to accept it, deny it or for the wequest to time out."
         },
         "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much fow me {user}... {VANILLABLUSH}"
       }
     }
+  },
+  "request": {
+    "accepted": "{target} accepted youw wequest. ([Message]({link}))",
+    "timed_out": "Youw wequest timed out {user}. {target} didn't respond fast enough."
   },
   "snuggle": {
     "fun": {
@@ -603,7 +599,6 @@
         ]
       },
       "kiss": {
-        "mention_purr": "I won't hewp you kissing my sistew thwough me {user}!",
         "mention_snuggle": [
           "Wha-? O-okay. B-but you can onwy kissu my cheek {user}! \\*Lets you kiss hew cheek*",
           "B-but {user}... That is so embawwassing here in pubwic. \\*wooks shy* O-okay fine, but onwy a singwe kiss. Q////Q",
