@@ -68,7 +68,7 @@
         "message": "{user} gibt {target} etwas zu essen.",
         "no_mention": "Bitte erwähne jemandem, um etwas Essen zu geben.",
         "request": {
-          "accepted": "{target} hat deine anfrage akzeptiert {user}",
+          "accepted": "{target} hat deine anfrage akzeptiert. ([Nachricht]({link})",
           "denied": "{target} will kein Essen von dir {user}",
           "message": "Hey {target}!\n{user} möchte dir etwas Essen geben. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Du hast bereits jemanden {user}gefragt! Bitte warte, bis die Anfrage angenommen oder abgelehnt wird, oder bis sie abgelaufen ist.",
@@ -85,7 +85,7 @@
         "message": "{user} flufft {target}'s Schweif.",
         "no_mention": "Bitte erwähne jemanden, welchen du fluffen willst.",
         "request": {
-          "accepted": "{target} hat deine anfrage akzeptiert {user}",
+          "accepted": "{target} hat deine anfrage akzeptiert. ([Nachricht]({link})",
           "denied": "{target} möchte nicht von dir geflufft werden {user}",
           "message": "Hey {target}!\n{user} möchte deinen Schweif fluffen. Möchtest du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Du hast bereits jemanden zum fluffen gefragt {user}! Bitte warte bis die Anfrage angenommen oder abgelehnt wird, oder bis sie abgelaufen ist.",
@@ -109,16 +109,22 @@
         "no_mention": "Bitte erwähne mindestens eine Person zum umarmen!"
       },
       "kiss": {
-        "loading": "{LOADING} Erhalte einen Kuss...",
-        "mention_self": "Wie kannst du dich selber küssen {user}? Mit einem Spiegel?",
+        "mention_bot": "Das wäre eine ziemlich *\"schokierende\"* erfahrung...",
         "mention_purr": [
           "O-okay. Aber nur meine Wange! \\*Hält Wange hin*",
           "Nur meine Wange, okay?",
           "D-das ist ein wenig lewd, aber okay. \\*errötet*"
         ],
-        "mention_snuggle": "NEIN! Ich werde dich nicht meine Schwester durch meine hilfe küssen lassen!",
-        "message": "{user} küsst dich {targets}",
+        "mention_self": "Wie kannst du dich selber küssen {user}? Mit einem Spiegel?",
+        "message": "{user} küsst {target}",
         "no_mention": "Bitte erwähne mindestens eine Person zum küssen!",
+        "request": {
+          "accepted": "{target} hat deine anfrage akzeptiert. ([Nachricht]({link})",
+          "denied": "{target} möchte keinen Kuss von dir {user}",
+          "message": "Hey {target}!\n{user} möchte dich küssen. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "open": "Du hast bereits jemanden gefragt {user}! Bitte warte, bis die Anfrage angenommen, abgelehnt oder abgelaufen ist.",
+          "timed_out": "Sieht so aus als ob {target} keinen Kuss von dir will {user}."
+        },
         "special_user": "\\*Geniesst den kuss von {user}*"
       },
       "kitsune": {
@@ -485,7 +491,7 @@
         "message": "{user} gibt {target} einen blowjob!",
         "no_mention": "Bitte erwähnen einen User den du lutschen willst.",
         "request": {
-          "accepted": "{target} hat deine Anfrage akzeptiert {user}!",
+          "accepted": "{target} hat deine anfrage akzeptiert. ([Nachricht]({link})",
           "denied": "{target} möchte nicht von dir einen geblasen bekommen {user}. :/",
           "message": "Hey {target}!\n{user} möchte dir einen Blowjob geben. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mir {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Sei nicht so gierig {user}! Warte bis deine vorherige Anfrage angenommen, abgelehnt oder abgelaufen ist.",
@@ -504,7 +510,7 @@
         "message": "{user} und {target} haben Sex!",
         "no_mention": "Bitte erwähne einen User mit dem du Sex haben willst.",
         "request": {
-          "accepted": "{target} hat deine Anfrage akzeptiert {user}. OwO",
+          "accepted": "{target} hat deine anfrage akzeptiert. ([Nachricht]({link})",
           "denied": "{target} möchte keinen Sex mit dir haben {user}. >.<",
           "message": "Hey {target}!\n{user} möchte Sex mit dir haben. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen der Anfrage.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
           "message_choose": "Hey {target}!\n{user} möchte Sex mit dir haben. Willst du das auch?\nReagiere mit einer der folgenden Optionen um zu wählen:\n{SEX} - Normaler Sex\n{ANAL} - Anal Sex\n{YAOI} - Schwuler Sex\n{YURI} - Lesbischer Sex\n{CANCEL} - Anfrage ablehnen\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
@@ -536,7 +542,7 @@
         "message": "{user} leckt die Pussy von {target}",
         "no_mention": "Bitte erwähne jemanden, um dessen Pussy zu lecken.",
         "request": {
-          "accepted": "{target} hat deine Anfrage akzeptiert {user}. ;P",
+          "accepted": "{target} hat deine anfrage akzeptiert. ([Nachricht]({link})",
           "denied": "{target} möchte nicht, dass du ihre Pussy leckst {user}... Hat Sie überhaupt eine?",
           "message": "Hey {target}!\n{user} möchte deinen Pussy lecken. Willst du das auch?\nReagiere mit {ACCEPT} zum annehmen oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Bist du durstig? Du hast bereits eine offene Anfrage {user}!\nWarte, bis diese angenommen, abgelehnt oder abgelaufen ist.",
@@ -555,7 +561,7 @@
         "message": "{user} hat Sex mit {target1} und {target2}! O//w//O",
         "no_mention": "Bitte erwähne 2 Personen mit welchen du Sex haben willst!",
         "request": {
-          "accepted": "{target1} und {target2} haben deine Anfrage akzeptiert {user}! >//w//<",
+          "accepted": "{target} hat deine anfrage akzeptiert. ([Nachricht]({link})",
           "denied": "Entweder {target1} oder {target2} will keinen Sex mit dir haben {user}.",
           "message": "Hey {target1} und {target2}!\n{user} möchte mit euch beiden Sex haben. Wollt Ihr das auch?\nReagiert mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\nNur wenn Ihr beide dies akzeptiert, wird es geschehen.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
           "open": "Mal langsam {user}! Zeig etwas gedult du notgeile Person!\nDu hast bereits leute gefragt mit dir zu schlafen, also warte bis diese es entweder annehmen, ablehnen, oder die Anfrage abläuft.",
@@ -603,7 +609,6 @@
         ]
       },
       "kiss": {
-        "mention_purr": "Ich werde dir nicht helfen meine Schwester zu küssen {user}!",
         "mention_snuggle": [
           "Wa-? O-okay. A-aber du kannst nur meine Wange küssen {user}! \\*Lässt dich ihre Wange küssen*",
           "A-aber {user}... Das ist peinlich hier in der Öffentlichkeit. \\*schaut schüchtern* O-okay gut, aber nur ein einziger Kuss. Q////Q",
