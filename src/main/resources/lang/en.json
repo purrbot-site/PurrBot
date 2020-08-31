@@ -68,7 +68,7 @@
         "message": "{user} gives {target} something to eat.",
         "no_mention": "Please mention someone to give some food.",
         "request": {
-          "accepted": "{target} accepted your request {user}",
+          "accepted": "{target} accepted your request. ([Message]({link}))",
           "denied": "{target} doesn't want food from you {user}",
           "message": "Hey {target}!\n{user} wants to give you some food to eat. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
           "open": "You already asked someone {user}! Please wait for the request to be accepted, denied or for it to time out.",
@@ -85,7 +85,7 @@
         "message": "{user} fluffs {target}'s tail.",
         "no_mention": "Please mention someone you want to fluff.",
         "request": {
-          "accepted": "{target} accepted your request {user}",
+          "accepted": "{target} accepted your request. ([Message]({link}))",
           "denied": "{target} doesn't want to get fluffed by you {user}",
           "message": "Hey {target}!\n{user} wants to fluff your tail. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
           "open": "You already asked someone to get fluffed {user}! Please wait for the request to be accepted, denied or for it to time out.",
@@ -109,16 +109,22 @@
         "no_mention": "Please mention at least one user to hug!"
       },
       "kiss": {
-        "loading": "{LOADING} Receiving a kiss...",
-        "mention_self": "How can you kiss yourself {user}? With a mirror?",
+        "mention_bot": "This would be quite a *\"shocking\"* experience...",
         "mention_purr": [
           "O-okay. But only my cheek! \\*Holds cheek out*",
           "Only my cheek, okay?",
           "T-that's a bit lewd, but okay. \\*blushes*"
         ],
-        "mention_snuggle": "NO! I won't let you kiss my sister with my help!",
-        "message": "{user} kisses you {targets}",
+        "mention_self": "How can you kiss yourself {user}? With a mirror?",
+        "message": "{user} kisses {target}",
         "no_mention": "Please mention at least one user to kiss!",
+        "request": {
+          "accepted": "{target} accepted your request. ([Message]({link}))",
+          "denied": "{target} doesn't want a kiss from you {user}",
+          "message": "Hey {target}!\n{user} wants to kiss you. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
+          "open": "You already asked someone {user}! Please wait for the request to be accepted, denied or for it to time out.",
+          "timed_out": "Looks like {target} doesn't want a kiss from you {user}."
+        },
         "special_user": "\\*Enjoys the kiss from {user}*"
       },
       "kitsune": {
@@ -485,7 +491,7 @@
         "message": "{user} is giving {target} a blowjob!",
         "no_mention": "Please mention a user you want to suck.",
         "request": {
-          "accepted": "{target} accepted your request {user}!",
+          "accepted": "{target} accepted your request. ([Message]({link}))",
           "denied": "{target} doesn't want to get sucked by you {user}. :/",
           "message": "Hey {target}!\n{user} wants to give you a blowjob. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
           "open": "Don't be that greedy {user}! Wait until your previous requests get accepted, denied or times out.",
@@ -504,7 +510,7 @@
         "message": "{user} and {target} have sex!",
         "no_mention": "Please mention a user you want to fuck with.",
         "request": {
-          "accepted": "{target} accepted your request {user}. OwO",
+          "accepted": "{target} accepted your request. ([Message]({link}))",
           "denied": "{target} doesn't want to have sex with you {user}. >.<",
           "message": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny the request.\n\n> **This request will time out in 1 minute!**",
           "message_choose": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nReact with one of the below options to choose:\n{SEX} - Normal Sex\n{ANAL} - Anal Sex\n{YAOI} - Yaoi Sex\n{YURI} - Yuri Sex\n{CANCEL} - Deny Request\n\n> **This request will time out in 1 minute!**",
@@ -536,7 +542,7 @@
         "message": "{user} is licking the pussy of {target}",
         "no_mention": "Please mention a user that you want to lick the pussy of.",
         "request": {
-          "accepted": "{target} accepted your request {user}. ;P",
+          "accepted": "{target} accepted your request. ([Message]({link}))",
           "denied": "{target} doesn't want you to lick their pussy {user}... Do they even have one?",
           "message": "Hey {target}!\n{user} wants to lick your pussy. Do you want that?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
           "open": "Are you thirsty? You already have a open request {user}!\nWait for the other to accept or deny it, or for the request to time out.",
@@ -555,7 +561,7 @@
         "message": "{user} has sex with {target1} and {target2}! O//w//O",
         "no_mention": "Please mention 2 users you want to fuck!",
         "request": {
-          "accepted": "{target1} and {target2} accepted your request {user}! >//w//<",
+          "accepted": "{target} accepted your request. ([Message]({link}))",
           "denied": "Either {target1} or {target2} don't want to have sex with you {user}.",
           "message": "Hey {target1} and {target2}!\n{user} wants to have sex with both of you. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This request will time out in 1 minute!**",
           "open": "Whoa there {user}! Show some patience you horny person!\nYou already asked people to fuck with you, so either wait for the to accept it, deny it or for the request to time out.",
@@ -603,7 +609,6 @@
         ]
       },
       "kiss": {
-        "mention_purr": "I won't help you kissing my sister through me {user}!",
         "mention_snuggle": [
           "Wha-? O-okay. B-but you can only kiss my cheek {user}! \\*Lets you kiss her cheek*",
           "B-but {user}... That is embarrassing here in public. \\*looks shy* O-okay fine, but only a single kiss. Q////Q",
