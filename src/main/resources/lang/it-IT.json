@@ -335,7 +335,9 @@
             "title": "Categorie"
           },
           "description": "Usa le reazioni ◀ or ▶ per cambiare pagina e ⏹ per cancellarlo.\nUsa `{prefix}aiuto [command]` per ottenere più informazioni su un comando specifico.\nNota le categorie Divertimento, Gilda, info e NSFW NON sono comandi!",
-          "nsfw_info": "`Esegui il comando di aiuto in un canale NSFW per vedere questa pagina.`"
+          "nsfw_info": "`Esegui il comando di aiuto in un canale NSFW per vedere questa pagina.`",
+          "support_title": "Ti piace il bot?",
+          "support_value": "{PAYPAL} [`PayPal`]({paypal_url}) per donazioni singole.\n{PATREON} [`Patreon`]({patreon_url}) per donazioni continue."
         }
       },
       "info": {
