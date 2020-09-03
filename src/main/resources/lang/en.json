@@ -335,7 +335,9 @@
             "title": "Categories"
           },
           "description": "Use the \u25C0 or \u25B6 reactions to navigate through the pages and \u23F9 to cancel it.\nUse `{prefix}help [command]` to get more information about a specific command.\nNote that the categories Fun, Guild, Info and NSFW are NOT commands!",
-          "nsfw_info": "`Run the help command in a NSFW channel to see this page.`"
+          "nsfw_info": "`Run the help command in a NSFW channel to see this page.`",
+          "support_title": "Love the bot?",
+          "support_value": "Consider supporting the bot through donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) for single donations.\n{PATREON} [`Patreon`]({patreon_url}) for continuous donations."
         }
       },
       "info": {
