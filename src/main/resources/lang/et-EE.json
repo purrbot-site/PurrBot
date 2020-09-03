@@ -335,7 +335,9 @@
             "title": "Katekooriad"
           },
           "description": "Kasuta navigeerimiseks ◀ ▶ reaktsioone ning tühistamiseks ⏹.\nKasuta `{prefix}help [käsklus]` et saada rohkem informatsiooni käskluse kohta.\nPane tähele et katekooriad Lõbus, Gild, Informatsioon ja Täiskasvanutele ei ole käsklused!",
-          "nsfw_info": "`Et näha seda lehte sisesta käsklus NSFW märgisega kanalis.`"
+          "nsfw_info": "`Et näha seda lehte sisesta käsklus NSFW märgisega kanalis.`",
+          "support_title": "Armastad botti?",
+          "support_value": "{PAYPAL} [`PayPal`]({paypal_url}) (Ühekordne annetus)\n{PATREON} [`Patreon`]({patreon_url}) (Igakuine annetus)."
         }
       },
       "info": {
@@ -372,7 +374,7 @@
             "wiki": "`Viki`"
           },
           "support_title": "Tugi",
-          "support_value": "Selle boti üleval hoidmine on kulukas. Seepärast olen tänulik igasugusele annetustele!\nSa saad valida kahe võimaluse vahel:\n{PAYPAL} [`PayPal`]({paypal_url}) (Ühekordne maksmine)\n{PATREON} [`Patreon`]({patreon_url}) (Igakuine maksmine)"
+          "support_value": "Selle boti üleval hoidmine on kulukas. Seepärast olen tänulik igasugusele annetustele!\nSa saad valida kahe võimaluse vahel:\n{PAYPAL} [`PayPal`]({paypal_url}) (Ühekordne annetus)\n{PATREON} [`Patreon`]({patreon_url}) (Igakuine annetus)"
         }
       },
       "invite": {
