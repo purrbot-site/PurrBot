@@ -335,7 +335,9 @@
             "title": "Kategorien"
           },
           "description": "Verwende die ◀ oder ▶ Reactionen um durch die Seiten zu navigieren und ⏹ um abzubrechen.\nVerwende `{prefix}help [Befehl]` um weitere informationen über einen bestimmten Befehl zu erhalten.\nBeachte, dass die Kategorien Fun, Guild, Info und NSFW KEINE Befehle sind!",
-          "nsfw_info": "`Verwende den Hilfe-Befehl in einem NSFW-Kanal um diese Seite zu sehen.`"
+          "nsfw_info": "`Verwende den Hilfe-Befehl in einem NSFW-Kanal um diese Seite zu sehen.`",
+          "support_title": "Magst du den Bot?",
+          "support_value": "Überlege dir den Bot durch eine Spende zu unterstützen.\n\n{PAYPAL} [`PayPal`]({paypal_url}) für einzelne Spenden.\n{PATREON} [`Patreon`]({patreon_url}) für kontinuierliche Spenden."
         }
       },
       "info": {
