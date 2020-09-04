@@ -25,8 +25,7 @@
 
 <!-- Widgets -->
 [widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
-[widgetDiscordBoats]: https://discord.boats/api/widget/425382319449309197  
-[widgetDebl]: https://api.discordextremelist.xyz/v1/bot/425382319449309197/widget
+[widgetDiscordBoats]: https://discord.boats/api/widget/425382319449309197
 
 <!-- Botlists -->
 [botlist]: https://botlist.space/bot/425382319449309197  
