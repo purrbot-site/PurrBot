@@ -335,7 +335,9 @@
             "title": "Categowies"
           },
           "description": "Use the ◀ or ▶ weactions to navigate thwough the pages and ⏹ to cancew it.\nUse `{prefix}help [command]` to get more infowmation about a specific command.\nNote that the categowies Fun, Guild, Info and NSFW awe NOT commands!",
-          "nsfw_info": "`Run the hewp command in a NSFW channel to see this page.`"
+          "nsfw_info": "`Run the hewp command in a NSFW channel to see this page.`",
+          "support_title": "Do- do you love the bot O\\\\W\\\\O?",
+          "support_value": "Considew suppowting the bot twough donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) for single donations owo.\n{PATREON} [`Patreon`]({patreon_url}) for continuous donations uwu."
         }
       },
       "info": {
