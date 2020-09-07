@@ -68,11 +68,9 @@
         "message": "{user} annab {target} midagi süüa.",
         "no_mention": "Palun maini kedagi kellele anda süüa.",
         "request": {
-          "accepted": "{target} nõustus sinu pakkumisega {user}",
           "denied": "{target} ei soovi sinu süüa {user}",
           "message": "Hei {target}!\n{user} tahab anda sulle süüa. Kas sa soovid seda?\nReageeri {ACCEPT} et nõustuda või {CANCEL} et keelduda.\n\n> **See pakkumine lõppeb ühe minuti jooksul!**",
-          "open": "Sa juba palusid kedagi {user}! Palun oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
-          "timed_out": "Paisab et {target} ei soovi sinu toitu {user}."
+          "open": "Sa juba palusid kedagi {user}! Palun oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse."
         }
       },
       "fluff": {
@@ -85,11 +83,9 @@
         "message": "{user} vusserdab {target} saba.",
         "no_mention": "Palun maini kedagi keda sa tahad vusserdada.",
         "request": {
-          "accepted": "{target} nõustus sinu pakkumisega {user}",
           "denied": "{target} ei soovi sinu poolt vusserdamist {user}",
           "message": "Hei {target}!\n{user} tahab sinu saba vusserdada. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n> **See pakkumine lõppeb ühe minuti jooksul!**",
-          "open": "Sa juba palusid kedagi vusserdada {user}! Palun oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
-          "timed_out": "Paistab et {target} ei soovi et sa teda vusserdad {user}."
+          "open": "Sa juba palusid kedagi vusserdada {user}! Palun oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse."
         },
         "special_user": "A-aga {user}. Seda on piinlik avalikult teha."
       },
@@ -109,16 +105,20 @@
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kallistada!"
       },
       "kiss": {
-        "loading": "{LOADING} Laen musi...",
-        "mention_self": "Kuidas sa saad endale musi teha {user}? Peegliga?",
+        "mention_bot": "See oleks üpriski *\"šokeeriv\"* kogemus...",
         "mention_purr": [
           "O- okei. Aga ainult põsele! \\*Toob põse esile*",
           "Ainult põsele, okei?",
           "S-see on natukene imelik, aga okei. \\*punastab*"
         ],
-        "mention_snuggle": "EI! Ma ei lase sul musitada mu õde minu abiga!",
-        "message": "{user} musitab sind {targets}",
+        "mention_self": "Kuidas sa saad endale musi teha {user}? Peegliga?",
+        "message": "{user} musitab {target}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda musitada!",
+        "request": {
+          "denied": "{target} ei taha sinult musi {user}",
+          "message": "Hei {target}!\n{user} tahab sulle musi teha. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n> **See pakkumine lõppeb ühe minuti jooksul!**",
+          "open": "Sa juba palusid kedagi {user}! Palun oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse."
+        },
         "special_user": "\\*Rõõmustab kasutaja {user} musi üle*"
       },
       "kitsune": {
@@ -335,7 +335,9 @@
             "title": "Katekooriad"
           },
           "description": "Kasuta navigeerimiseks ◀ ▶ reaktsioone ning tühistamiseks ⏹.\nKasuta `{prefix}help [käsklus]` et saada rohkem informatsiooni käskluse kohta.\nPane tähele et katekooriad Lõbus, Gild, Informatsioon ja Täiskasvanutele ei ole käsklused!",
-          "nsfw_info": "`Et näha seda lehte sisesta käsklus NSFW märgisega kanalis.`"
+          "nsfw_info": "`Et näha seda lehte sisesta käsklus NSFW märgisega kanalis.`",
+          "support_title": "Armastad botti?",
+          "support_value": "{PAYPAL} [`PayPal`]({paypal_url}) (Ühekordne annetus)\n{PATREON} [`Patreon`]({patreon_url}) (Igakuine annetus)."
         }
       },
       "info": {
@@ -372,7 +374,7 @@
             "wiki": "`Viki`"
           },
           "support_title": "Tugi",
-          "support_value": "Selle boti üleval hoidmine on kulukas. Seepärast olen tänulik igasugusele annetustele!\nSa saad valida kahe võimaluse vahel:\n{PAYPAL} [`PayPal`]({paypal_url}) (Ühekordne maksmine)\n{PATREON} [`Patreon`]({patreon_url}) (Igakuine maksmine)"
+          "support_value": "Selle boti üleval hoidmine on kulukas. Seepärast olen tänulik igasugusele annetustele!\nSa saad valida kahe võimaluse vahel:\n{PAYPAL} [`PayPal`]({paypal_url}) (Ühekordne annetus)\n{PATREON} [`Patreon`]({patreon_url}) (Igakuine annetus)"
         }
       },
       "invite": {
@@ -485,11 +487,9 @@
         "message": "{user} imeb kasutajalt {target} lahti!",
         "no_mention": "Palun maini kasutajat kellelt sa tahad suhu võtta.",
         "request": {
-          "accepted": "{target} nõustus sinu pakkumisega {user}!",
           "denied": "{target} ei soovi sinu poolt lahti imemist {user}. :/",
           "message": "Hei {target}!\n{user} tahab sult lahti imeda. Kas sa nõustud pakkumisega?\nReageeri {ACCEPT} et nõustuda või {CANCEL} et keelduda.\n\n**See pakkumine lõppeb ühe minuti jooksul!**",
-          "open": "Ära ole nii ahne {user}! Oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
-          "timed_out": "Paistab et {target} ei soovi et sa talt suhu võtad {user}."
+          "open": "Ära ole nii ahne {user}! Oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse."
         },
         "special_user": "Okei armsake. Las ma võtan oma \"mänguasjad\" er meil oleks lõbusam.\n\\* Võtab kasutaja {user} käest kinni ja kaob oma tuppa\""
       },
@@ -504,12 +504,10 @@
         "message": "{user} ja {target} seksivad!",
         "no_mention": "Palun maini ühte inimest keda sa soovid keppida.",
         "request": {
-          "accepted": "{target} nõustus sinu pakkumisega {user}. OwO",
           "denied": "(target} ei taha sinuga seksida {user}. >.<",
           "message": "Hei {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n**See pakkumine lõppeb ühe minuti jooksul!**",
           "message_choose": "Hei {target}!\n{user} tahab sinuga seksida. Kas sa nõustud pakkumisega?\nReageeri vastavate reaktsioonidega\n{SEX} - Normaalne seks\n{ANAL} - Anaalseks\n{YURI} - Yuri seks\n{YAOI} - Yaoi Sex\n{CANCEL} - Keeldu pakkumisest!\n\n>**See pakkumine lõppeb ühe minuti jooksul!**",
-          "open": "Ära ole nii kiimane {user}!\nSa oled juba pakkumise teinud. Oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
-          "timed_out": "Paistab et {target} ei soovi sinuga keppida {user}. ._."
+          "open": "Ära ole nii kiimane {user}!\nSa oled juba pakkumise teinud. Oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse."
         },
         "special_user": {
           "accept": [
@@ -536,11 +534,9 @@
         "message": "{user} lakub kasutaja {target} vittu",
         "no_mention": "Palun maini kelle vittu sa soovid lakkuda.",
         "request": {
-          "accepted": "{target} nõustus sinu pakkumisega {user}. ;P",
           "denied": "{target} ei soovi et sa ta vittu lakuksid {user}...\nKas tal üldse on?",
           "message": "Hei {target}!\n{user} tahab sinu vittu lakkuda. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n>**See pakkumine lõppeb ühe minuti jooksul!**",
-          "open": "Kas sa oled janune? Sa oled juba pakkumise teinud {user}!\nOota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
-          "timed_out": "Tundub et {target} ei taha et sa lakuksid tema vittu {user}... Äkki neil polegi? o///o"
+          "open": "Kas sa oled janune? Sa oled juba pakkumise teinud {user}!\nOota kuni sellele reageeritakse, või kuni see kaotab kehtivuse."
         },
         "special_user": "Hehehe... Sa oled *\"janune\"* {user}, õigus?\n\\*võtab kasutaja käest kinni* ja kaob kusagile ruumi*"
       },
@@ -555,15 +551,17 @@
         "message": "{user} seksib koos kasutajatega {target1} ja {target2}! O//w//O",
         "no_mention": "Palun maini kahte kasutajat keda sa soovid keppida!",
         "request": {
-          "accepted": "{target1} ja {target2} nõustusid sinu pakkumisega {user}! >//w//<",
           "denied": "Kumbgi {target1} või {target2} ei soovi sinuga seksida {user}.",
           "message": "Hei {target1} ja {target2}!\n{user} soovib teiega seksida. Kas te nõustute pakkumisega?\nReageerige sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\nOnly if both of you accept this, will this happen.\n\n> **See pakkumine lõppeb ühe minuti jooksul!**",
-          "open": "Voah {user}! Ole kannatlik sa kiimas inimene!\nSa juba palusid inimesi endaga seksisma, nüüd oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse.",
-          "timed_out": "Tundub et kumbgi {target1} või {target2} ei soovi sinuga keppida {user}. >\\_<"
+          "open": "Voah {user}! Ole kannatlik sa kiimas inimene!\nSa juba palusid inimesi endaga seksisma, nüüd oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse."
         },
         "special_user": "M- ma tean kui palju veidraid asju mulle meeldib teha, aga see on natukene liiga palju minu jaoks {user}... {VANILLABLUSH}"
       }
     }
+  },
+  "request": {
+    "accepted": "{target} nõustus sinu pakkumisega. ([Message]({link}))",
+    "timed_out": "Sinu palve kaotas kehtivuse {user}. {target} ei reageerinud piisavalt kiiresti."
   },
   "snuggle": {
     "fun": {
@@ -603,7 +601,6 @@
         ]
       },
       "kiss": {
-        "mention_purr": "Ma ei lase sul musitada mu õde läbi minu!",
         "mention_snuggle": [
           "Mi- Mida? O- Olgu. Aga sa tohid ainult musitada minu põsele {user}! \\*Laseb sul musitada põsele*",
           "A-aga {user}... See on piinlik niimoodi avalikult. \\*häbelik* O-Olgu, aga ainult üks musi. Q////Q",

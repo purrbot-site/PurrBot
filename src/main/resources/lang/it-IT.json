@@ -68,11 +68,9 @@
         "message": "{user} da a {target}qualcosa da mangiare.",
         "no_mention": "Menziona qualcuno a cui dare del cibo per favore.",
         "request": {
-          "accepted": "{target} ha accettato la tua richiesta {user}",
           "denied": "{target} non vuole del cibo da te {user}",
           "message": "Hey {target}!\n{user} vuole darti del cibo. Lo vuoi?\nReagisci con {ACCEPT} per accettare o con {CANCEL} per rifiutare.\n\n>**Questa richiesta finirà in un minuto!**",
-          "open": "Hai già chiesto a qualcuno {user}! Aspetta che la richiesta sia accettata, rifiutata o che scada",
-          "timed_out": "{target} non vuole del cibo da te {user}."
+          "open": "Hai già chiesto a qualcuno {user}! Aspetta che la richiesta sia accettata, rifiutata o che scada"
         }
       },
       "fluff": {
@@ -85,11 +83,9 @@
         "message": "{user} accarezzaa coda di {target}.",
         "no_mention": "Menziona qualcuno a cui vuoi accarezzare la coda per favore.",
         "request": {
-          "accepted": "{target} ha accettato la tua richiesta {user}",
           "denied": "{target} non vuole che gli/le tocchi la coda da te {user}",
           "message": "Hey {target}!\n{user} vuole accarezzarti la coda? Lo vuoi anche te?\nReagisci con{ACCEPT} per accettare o con {CANCEL} per declinare.\n\n > **Questa richiesta scadrà in 1 minuto!**",
-          "open": "Hai già chiesto a qualcuno di accarezzargli/le la coda {user}! Aspetta che la richiesta sia accettata, rifiutata o che scada",
-          "timed_out": "Sembra che {target} non voglia farsi accarezzare la coda da te {user}."
+          "open": "Hai già chiesto a qualcuno di accarezzargli/le la coda {user}! Aspetta che la richiesta sia accettata, rifiutata o che scada"
         },
         "special_user": "M-ma {user}. È troppo sconcio da farlo in pubblico."
       },
@@ -109,16 +105,20 @@
         "no_mention": "Menziona almeno un utente da abbracciare per favore!"
       },
       "kiss": {
-        "loading": "{LOADING} ricevendo un bacio...",
-        "mention_self": "Come fai a baciarti da solo {user}? Con uno specchio?",
+        "mention_bot": "Questa sarebbe un'esperienza abbastanza *\"scioccante\"*...",
         "mention_purr": [
           "O-okay. ma solo sulla guancia! \\*porge la guancia*",
           "Solo sulla guancia, okay?",
           "è un po' sconcio ma okay. \\*arrossisce*"
         ],
-        "mention_snuggle": "NO! Non ti farò baciare mia sorella con il mio aiuto!",
-        "message": "{user} ti bacia {targets}",
+        "mention_self": "Come fai a baciarti da solo {user}? Con uno specchio?",
+        "message": "{user} bacia {target}",
         "no_mention": "Menziona almeno un utente da baciare per favore!",
+        "request": {
+          "denied": "{target} non vuole essere baciato da te {user}",
+          "message": "Hey {target}!\n{user} vuole baciarti. Vuoi che succeda?\nReagisci con {ACCEPT} per accettare o con {CANCEL} per declinare.\n\n>**Questa richiesta scadta in un minuto**",
+          "open": "Hai già chiesto a qualcuno {user}! Aspetta che venga accettata, rifiutata o che scada."
+        },
         "special_user": "*apprezza il bacio da {user}*"
       },
       "kitsune": {
@@ -335,7 +335,9 @@
             "title": "Categorie"
           },
           "description": "Usa le reazioni ◀ or ▶ per cambiare pagina e ⏹ per cancellarlo.\nUsa `{prefix}aiuto [command]` per ottenere più informazioni su un comando specifico.\nNota le categorie Divertimento, Gilda, info e NSFW NON sono comandi!",
-          "nsfw_info": "`Esegui il comando di aiuto in un canale NSFW per vedere questa pagina.`"
+          "nsfw_info": "`Esegui il comando di aiuto in un canale NSFW per vedere questa pagina.`",
+          "support_title": "Ti piace il bot?",
+          "support_value": "{PAYPAL} [`PayPal`]({paypal_url}) per donazioni singole.\n{PATREON} [`Patreon`]({patreon_url}) per donazioni continue."
         }
       },
       "info": {
@@ -485,11 +487,9 @@
         "message": "{user} sta dando un pompino a {target}!",
         "no_mention": "Menziona un utente a cui vuoi dare un pompino.",
         "request": {
-          "accepted": "{target} ha accettato la tua richiesta {user}!",
           "denied": "{target} non vuole ricevere un pompino da te {user}. :/",
           "message": "Hey {target}!\n{user} vuole darti un pompino. Lo vuoi?\nReagisci con {ACCEPT} per accettarlo o con {CANCEL} per rifiutarlo.\n\n>**questa richiesta scadrà in un minuto!**",
-          "open": "Non essere così goloso/a {user}! Aspetta che la tua richiesta precedente venga accettata, rifiutata o che scada.",
-          "timed_out": "Sembra che {target} non voglia ricevere un pompino da te {user}."
+          "open": "Non essere così goloso/a {user}! Aspetta che la tua richiesta precedente venga accettata, rifiutata o che scada."
         },
         "special_user": "Okay dolcezza, Fammi prendere i miei \"giocattoli\" così possiamo divertirci.\n\\*prende la mano di {user} e sparisce nella sua camera*"
       },
@@ -504,12 +504,10 @@
         "message": "{user} e {target} hanno sesso",
         "no_mention": "Menziona l'utente con cui vuoi avere sesso per favore.",
         "request": {
-          "accepted": "{target} ha accettato la tua richiesta {user}. OwO",
           "denied": "{target} non vuole fare sesso con te {user}. >.<",
           "message": "Hey {target}!\n{user} vuole fare sesso con te. Lo vuoi fare anche te?\nReagisci con {ACCEPT} per accettare o con {CANCEL} per rifiutare.\n\n>**Questa richiesta finirà in un minuto!**",
           "message_choose": "Hey {target}!\n{user} vuole avere sesso con te. Lo vuoi anche te?\nReagisci con una delle opzioni elencate:\n{SEX} - Sesso normale\n{ANAL} - Sesso anale\n{YAOI} - Sesso yaoi\n{YURI} - Sesso yuri\n{CANCEL} - Rifiuta l'offerta\n\n> **Questa richiesta scadrà in 1 minuto!**",
-          "open": "Non essere una persona così arrapata {user}!\nHai già mandato una richiesta. Aspetta che sia accettata o che scada.",
-          "timed_out": "Sembra che {target} non voglia fare sesso con te {user}. ._."
+          "open": "Non essere una persona così arrapata {user}!\nHai già mandato una richiesta. Aspetta che sia accettata o che scada."
         },
         "special_user": {
           "accept": [
@@ -536,11 +534,9 @@
         "message": "{user} sta leccando la figa di {target}",
         "no_mention": "Menziona l'utente a cui vuoi leccare la figa.",
         "request": {
-          "accepted": "{target} ha accettato la tua richiesta {user}. ;P",
           "denied": "{target} bib vuole farsi leccare la figa {user}... Ne hanno una?",
           "message": "Hey {target}!\n{user} vuole leccarti la figa. Lo vuoi?\nReagisci con {ACCEPT} per accettare o con {CANCEL} per rifiutare.\n\n> **Questa richiesta scadrà in un minuto**",
-          "open": "Sei eccitato? Hai già mandato una richiesta {user}!\nAspetta che sia accettata, rifiutata o che scada.",
-          "timed_out": "Sembra che {target} non vuole avere la sua figa leccata {user}... Forse manco non ce l'hanno o////o"
+          "open": "Sei eccitato? Hai già mandato una richiesta {user}!\nAspetta che sia accettata, rifiutata o che scada."
         },
         "special_user": "Hehehe... sei arrapato {user}, vero?\n\\* prende la mano di {user} e sparisce in una stanza*"
       },
@@ -555,15 +551,17 @@
         "message": "{user} scopa con {target1} e {target2}! O//w//O",
         "no_mention": "Menziona due utenti con cui vuoi fare sesso!",
         "request": {
-          "accepted": "{target1} e {target2} hanno accettato la tua richiesta {user}! >//w//<",
           "denied": "O {target1} o {target2} non vuole fare sesso con te {user}.",
           "message": "Hey {target1} e {target2}!\n{user} vuole fare sesso con vuoi due. lo volete anche voi?\nReagite con {ACCEPT} per accettare o {CANCEL} per rifiutare.\nSolo se accettate entrambi, questo succederà.\n\n> **questa richiesta scadrà in un minuto!**",
-          "open": "Whoa {user}! Aspetta un attimo, arrapato!\nHai già chiesto di fare sesso con te, quindi o aspetti che accettino, rifiutino o aspetti che la richiesta scada.",
-          "timed_out": "Sembra che o {target1} o {target2} non vogliano fare sesso con te {user}. >\\_<"
+          "open": "Whoa {user}! Aspetta un attimo, arrapato!\nHai già chiesto di fare sesso con te, quindi o aspetti che accettino, rifiutino o aspetti che la richiesta scada."
         },
         "special_user": "P-Per quanto mi piaccia fai cose sconce con te, quello è un po troppo per me {user}... {VANILLABLUSH}"
       }
     }
+  },
+  "request": {
+    "accepted": "{target} ha accettato la tua richiesta. (Messaggio({link})",
+    "timed_out": "La tua richiesta è scaduta {user}. {target} non ha risposto abbastanza in fretta."
   },
   "snuggle": {
     "fun": {
@@ -603,7 +601,6 @@
         ]
       },
       "kiss": {
-        "mention_purr": "Non ti permetterò di baciare mia sorella tramite me {user}!",
         "mention_snuggle": [
           "Cosa? O-okay. Ma solo sulla guancia {user}! \\*lascia che tu la baci sulla guancia*",
           "M-a {user}… é imbarazzante in pubblico… O-okay, ma solo un bacio. Q////Q",
