@@ -23,7 +23,6 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
@@ -163,7 +162,7 @@ public class CmdFuck implements Command{
         return bot.getEmbedUtil().getEmbed()
                 .setDescription(MarkdownSanitizer.escape(
                         bot.getMsg(requester.getGuild().getId(), "purr.nsfw.fuck.message", requester.getEffectiveName())
-                                .replace("{target}", target.getEffectiveName())
+                           .replace("{target}", target.getEffectiveName())
                 ))
                 .setImage(url)
                 .build();
@@ -220,10 +219,10 @@ public class CmdFuck implements Command{
                     String content = msg.getContentRaw().toLowerCase();
                     
                     TextChannel channel = event.getChannel();
-                    botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                     queue.invalidate(bot.getMessageUtil().getQueueString(author));
                     
                     if(id.equals(Emotes.CANCEL.getId())){
+                        botMsg.delete().queue();
                         channel.sendMessage(MarkdownSanitizer.escape(
                                 bot.getMsg(
                                         guild.getId(),
@@ -259,30 +258,13 @@ public class CmdFuck implements Command{
                             link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
                     }
                     
-                    channel.sendMessage(MarkdownSanitizer.escape(
-                            bot.getMsg(
-                                    guild.getId(),
-                                    "purr.nsfw.fuck.request.accepted",
-                                    author.getAsMention(),
-                                    target.getEffectiveName()
-                            )
-                    )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
-                    
-                    if(link == null){
-                        channel.sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(
-                                        guild.getId(),
-                                        "purr.nsfw.fuck.message",
-                                        author.getEffectiveName(),
-                                        target.getEffectiveName()
-                                )
-                        )).queue();
-                        return;
-                    }
-                    
-                    channel.sendMessage(
-                            getFuckEmbed(author, target, link)
-                    ).queue();
+                    bot.getMessageUtil().editMessage(
+                            botMsg,
+                            "purr.nsfw.fuck.",
+                            author,
+                            target.getEffectiveName(),
+                            link
+                    );
                 }, 1, TimeUnit.MINUTES,
                 () -> {
                     TextChannel channel = botMsg.getTextChannel();

@@ -18,23 +18,16 @@
 
 package site.purrbot.bot.commands.fun;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
-
-import java.util.concurrent.TimeUnit;
-
-import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
-import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
+import site.purrbot.bot.util.message.MessageUtil;
 
 @CommandDescription(
         name = "Feed",
@@ -48,113 +41,10 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 )
 public class CmdFeed implements Command{
     
-    private final Cache<String, String> queue = Caffeine.newBuilder()
-            .expireAfterWrite(2, TimeUnit.MINUTES)
-            .build();
-    
     private final PurrBot bot;
     
     public CmdFeed(PurrBot bot){
         this.bot = bot;
-    }
-    
-    private MessageEmbed getFeedEmbed(Member author, Member target, String link){
-        return bot.getEmbedUtil().getEmbed()
-                .setDescription(MarkdownSanitizer.escape(
-                        bot.getMsg(
-                                author.getGuild().getId(),
-                                "purr.fun.feed.message",
-                                author.getEffectiveName(),
-                                target.getEffectiveName()
-                        )
-                ))
-                .setImage(link)
-                .build();
-    }
-    
-    private void handleEvent(Message message, Member author, Member target){
-        Guild guild = message.getGuild();
-        queue.put(bot.getMessageUtil().getQueueString(author), target.getId());
-    
-        EventWaiter waiter = bot.getWaiter();
-        waiter.waitForEvent(
-                GuildMessageReactionAddEvent.class,
-                event -> {
-                    MessageReaction.ReactionEmote emote = event.getReactionEmote();
-                    if(!emote.isEmote())
-                        return false;
-                    
-                    if(!emote.getId().equals(Emotes.ACCEPT.getId()) && !emote.getId().equals(Emotes.CANCEL.getId()))
-                        return false;
-                    
-                    if(event.getUser().isBot())
-                        return false;
-                    
-                    if(!event.getMember().equals(target))
-                        return false;
-                    
-                    return event.getMessageId().equals(message.getId());
-                },
-                event -> {
-                    TextChannel channel = event.getChannel();
-                    message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
-    
-                    
-                    if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
-                        channel.sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(
-                                        guild.getId(),
-                                        "purr.fun.feed.request.denied",
-                                        author.getAsMention(),
-                                        target.getEffectiveName()
-                                )
-                        )).queue();
-                    }else{
-                        String link = bot.getHttpUtil().getImage(API.GIF_FEED);
-    
-                        channel.sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(
-                                        guild.getId(),
-                                        "purr.fun.feed.request.accepted",
-                                        author.getAsMention(),
-                                        target.getEffectiveName()
-                                )
-                        )).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE)));
-                        
-                        if(link == null){
-                            channel.sendMessage(MarkdownSanitizer.escape(
-                                    bot.getMsg(
-                                            guild.getId(),
-                                            "purr.fun.feed.message",
-                                            author.getEffectiveName(),
-                                            target.getEffectiveName()
-                                    )
-                            )).queue();
-                            return;
-                        }
-    
-                        channel.sendMessage(
-                                getFeedEmbed(author, target, link)
-                        ).queue();
-                    }
-                },
-                1, TimeUnit.MINUTES,
-                () -> {
-                    TextChannel channel = message.getTextChannel();
-                    message.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
-                    
-                    channel.sendMessage(MarkdownSanitizer.escape(
-                            bot.getMsg(
-                                    guild.getId(),
-                                    "purr.fun.feed.request.timed_out",
-                                    author.getAsMention(),
-                                    target.getEffectiveName()
-                            )
-                    )).queue();
-                }
-        );
     }
     
     @Override
@@ -191,27 +81,13 @@ public class CmdFeed implements Command{
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.feed.mention_bot");
             return;
         }
-        
-        if(queue.getIfPresent(String.format("%s:%s", member.getId(), guild.getId())) != null){
-            tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.fun.feed.request.open", member.getAsMention())
-            ).queue();
-            return;
-        }
-        
-        tc.sendMessage(
-                bot.getMsg(
-                        guild.getId(), 
-                        "purr.fun.feed.request.message",
-                        member.getEffectiveName(), 
-                        target.getAsMention()
-                )
-        ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
-                .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
-                .queue(
-                        v -> handleEvent(message, member, target),
-                        e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
-                )
+    
+        MessageUtil.ReactionEventEntity instance = new MessageUtil.ReactionEventEntity(
+                member,
+                target,
+                API.GIF_FEED,
+                "fun"
         );
+        bot.getMessageUtil().handleReactionEvent(tc, instance);
     }
 }

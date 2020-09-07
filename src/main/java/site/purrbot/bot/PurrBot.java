@@ -48,9 +48,11 @@ import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.listener.ConnectionListener;
 import site.purrbot.bot.listener.GuildListener;
-import site.purrbot.bot.listener.ReactionListener;
 import site.purrbot.bot.listener.ReadyListener;
-import site.purrbot.bot.util.*;
+import site.purrbot.bot.util.CheckUtil;
+import site.purrbot.bot.util.DBUtil;
+import site.purrbot.bot.util.HttpUtil;
+import site.purrbot.bot.util.ImageUtil;
 import site.purrbot.bot.util.file.FileManager;
 import site.purrbot.bot.util.file.lang.LangUtils;
 import site.purrbot.bot.util.message.EmbedUtil;
@@ -166,7 +168,6 @@ public class PurrBot {
                         new ReadyListener(this),
                         new ConnectionListener(this),
                         new GuildListener(this),
-                        new ReactionListener(this),
                         new CommandListener(this, CMD_HANDLER),
                         waiter
                 )

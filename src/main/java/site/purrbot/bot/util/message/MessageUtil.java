@@ -18,12 +18,17 @@
 
 package site.purrbot.bot.util.message;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
+import site.purrbot.bot.constants.API;
+import site.purrbot.bot.constants.Emotes;
 
 import java.awt.*;
 import java.io.InputStream;
@@ -32,8 +37,12 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
+import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 public class MessageUtil {
 
@@ -44,6 +53,10 @@ public class MessageUtil {
     private final Pattern rolePattern = Pattern.compile("(\\{r_(name|mention):(\\d+)})", Pattern.CASE_INSENSITIVE);
     
     private final DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
+    
+    private final Cache<String, String> queue = Caffeine.newBuilder()
+            .expireAfterWrite(2, TimeUnit.MINUTES)
+            .build();
 
     public MessageUtil(PurrBot bot){
         this.bot = bot;
@@ -217,5 +230,184 @@ public class MessageUtil {
     
     public String getQueueString(Member member){
         return member.getId() + ":" + member.getGuild().getId();
+    }
+    
+    public void handleReactionEvent(TextChannel tc, ReactionEventEntity instance){
+        Guild guild = tc.getGuild();
+        
+        Member author = instance.getAuthor();
+        Member target = instance.getTarget();
+        
+        API api = instance.getApi();
+        String path = "purr." + instance.getCategory() + "." + api.getEndpoint() + ".";
+        
+        if(queue.getIfPresent(queueString(api.getEndpoint(), guild.getId(), author.getId())) != null){
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), path + "request.open", author.getAsMention())
+            ).queue();
+            return;
+        }
+        
+        tc.sendMessage(
+                bot.getMsg(
+                        guild.getId(),
+                        path + "request.message",
+                        author.getEffectiveName(),
+                        target.getAsMention()
+                )
+        ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
+                .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
+                .queue(v -> handle(message, path, api, guild, author, target))
+        );
+    }
+    
+    private void handle(Message msg, String path, API api, Guild guild, Member author, Member target){
+        queue.put(queueString(
+                api.getEndpoint(),
+                guild.getId(),
+                author.getId()
+        ), target.getId());
+    
+        EventWaiter eventWaiter = bot.getWaiter();
+        eventWaiter.waitForEvent(
+                GuildMessageReactionAddEvent.class,
+                event -> {
+                    MessageReaction.ReactionEmote emote = event.getReactionEmote();
+                    if(!emote.isEmote())
+                        return false;
+                
+                    if(!emote.getId().equals(Emotes.ACCEPT.getId()) && !emote.getId().equals(Emotes.CANCEL.getId()))
+                        return false;
+                
+                    if(event.getUser().isBot())
+                        return false;
+                
+                    if(!event.getMember().equals(target))
+                        return false;
+                
+                    return event.getMessageId().equals(msg.getId());
+                },
+                event -> {
+                    TextChannel channel = event.getChannel();
+                    queue.invalidate(queueString(api.getEndpoint(), guild.getId(), author.getId()));
+                
+                    if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
+                        channel.sendMessage(MarkdownSanitizer.escape(
+                                bot.getMsg(
+                                        guild.getId(),
+                                        path + "request.denied",
+                                        author.getAsMention(),
+                                        target.getEffectiveName()
+                                )
+                        )).queue();
+                    }else{
+                        String link = bot.getHttpUtil().getImage(api);
+                    
+                        editMessage(msg, path, author, target.getEffectiveName(), link);
+                    }
+                },
+                1, TimeUnit.MINUTES,
+                () -> {
+                    TextChannel channel = msg.getTextChannel();
+                    msg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
+                    queue.invalidate(queueString(api.getEndpoint(), guild.getId(), author.getId()));
+                
+                    channel.sendMessage(MarkdownSanitizer.escape(
+                            bot.getMsg(
+                                    guild.getId(),
+                                    path + "request.timed_out",
+                                    author.getAsMention(),
+                                    target.getEffectiveName()
+                            )
+                    )).queue();
+                });
+    }
+    
+    public void editMessage(Message msg, String path, Member author, String target, String link){
+        Guild guild = msg.getGuild();
+        
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed()
+                .setDescription(MarkdownSanitizer.escape(
+                        bot.getMsg(
+                                guild.getId(),
+                                path + "message",
+                                author.getEffectiveName(),
+                                target
+                        )
+                ));
+        
+        if(link != null)
+            embed.setImage(link);
+        
+        if(guild.getSelfMember().hasPermission(msg.getTextChannel(), Permission.MESSAGE_MANAGE))
+            msg.clearReactions().queue();
+        
+        msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
+                .embed(embed.build())
+                .queue(message -> message.getTextChannel().sendMessage(author.getAsMention())
+                                .embed(acceptedEmbed(guild.getId(), target, message.getJumpUrl()))
+                                .queue(
+                                        del -> del.delete().queueAfter(10, TimeUnit.SECONDS)
+                                ),
+                        e -> msg.getTextChannel().sendMessage(embed.build()).queue(message ->
+                                message.getTextChannel().sendMessage(author.getAsMention())
+                                       .embed(acceptedEmbed(guild.getId(), target, message.getJumpUrl()))
+                                       .queue(
+                                               del -> del.delete().queueAfter(10, TimeUnit.SECONDS)
+                                       )
+                        )
+                );
+    }
+    
+    private MessageEmbed acceptedEmbed(String id, String name, String link){
+        return bot.getEmbedUtil().getEmbed()
+                .setDescription(MarkdownSanitizer.escape(
+                        bot.getMsg(
+                                id,
+                                "request.accepted"
+                        )
+                        .replace("{target}", name)
+                        .replace("{link}", link)
+                ))
+                .setTimestamp(null)
+                .build();
+    }
+    
+    private String queueString(String api, String guildId, String authorId){
+        return api + ":" + guildId + ":" + authorId;
+    }
+    
+    public static class ReactionEventEntity{
+        private final Member author;
+        private final Member target;
+        
+        private final API api;
+        
+        private final String category;
+        
+        public ReactionEventEntity(Member author, Member target, API api, String category){
+            this.author = author;
+            this.target = target;
+            
+            this.api = api;
+            
+            this.category = category;
+        }
+    
+        public Member getAuthor(){
+            return author;
+        }
+    
+        public Member getTarget(){
+            return target;
+        }
+    
+        public API getApi(){
+            return api;
+        }
+    
+        public String getCategory(){
+            return category;
+        }
     }
 }

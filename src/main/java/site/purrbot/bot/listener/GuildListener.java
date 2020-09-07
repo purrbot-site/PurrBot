@@ -24,27 +24,23 @@ import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
-import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
-import site.purrbot.bot.constants.Roles;
 import site.purrbot.bot.util.message.WebhookUtil;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
 
 public class GuildListener extends ListenerAdapter{
 
@@ -56,146 +52,6 @@ public class GuildListener extends ListenerAdapter{
     public GuildListener(PurrBot bot){
         this.bot = bot;
         this.webhookUtil = new WebhookUtil(bot.getFileManager().getString("config", "webhooks.guild"));
-    }
-    
-    private void sendWebhook(Member owner, Guild guild, Action action) {
-        String title = null;
-        WebhookEmbed embed = null;
-    
-        String mention = owner == null ? "Unknown" : owner.getAsMention();
-        String name    = owner == null ? "Unknown" : owner.getUser().getName();
-        String id      = owner == null ? "?" : owner.getId();
-        
-        switch(action){
-            case JOIN:
-                title = "Join";
-                embed = new WebhookEmbedBuilder()
-                        .setColor(0x00FF00)
-                        .setThumbnailUrl(guild.getIconUrl())
-                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.JOINED_GUILD.getEmote(), null))
-                        .addField(new WebhookEmbed.EmbedField(
-                                true, "Name", guild.getName()
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                true, "Shard [Current/Total]", guild.getJDA().getShardInfo().getShardString()
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                false, "Owner", String.format(
-                                        "%s | %s (`%s`)",
-                                        mention,
-                                        name,
-                                        id
-                                )
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                false, "Members", String.format(
-                                        "```yaml\n" +
-                                        "Total: %d\n" +
-                                        "```",
-                                        guild.getMemberCount()
-                                )
-                        ))
-                        .setFooter(new WebhookEmbed.EmbedFooter(
-                                String.format(
-                                        "Guild #%d",
-                                        bot.getShardManager().getGuildCache().size()
-                                ),
-                                null
-                        ))
-                        .setTimestamp(ZonedDateTime.now())
-                        .build();
-                break;
-            
-            case LEAVE:
-                title = "Leave";
-                embed = new WebhookEmbedBuilder()
-                        .setColor(0xFF0000)
-                        .setThumbnailUrl(guild.getIconUrl())
-                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.LEFT_GUILD.getEmote(), null))
-                        .addField(new WebhookEmbed.EmbedField(
-                                true, "Name", guild.getName()
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                true, "Shard [Current/Total]", guild.getJDA().getShardInfo().getShardString()
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                false, "Owner", String.format(
-                                "%s | %s (`%s`)",
-                                mention,
-                                name,
-                                id
-                        )
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                false, "Members", String.format(
-                                "```yaml\n" +
-                                "Total: %d\n" +
-                                "```",
-                                guild.getMemberCount()
-                        )
-                        ))
-                        .setFooter(new WebhookEmbed.EmbedFooter(
-                                String.format(
-                                        "Guild #%d",
-                                        bot.getShardManager().getGuildCache().size()
-                                ),
-                                null
-                        ))
-                        .setTimestamp(ZonedDateTime.now())
-                        .build();
-                break;
-            
-            case AUTO_LEAVE:
-                title = "Leave [Auto]";
-                embed = new WebhookEmbedBuilder()
-                        .setColor(0xFF0000)
-                        .setThumbnailUrl(guild.getIconUrl())
-                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.LEFT_GUILD.getEmote(), null))
-                        .addField(new WebhookEmbed.EmbedField(
-                                true, "Name", guild.getName()
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                true, "Shard [Current/Total]", guild.getJDA().getShardInfo().getShardString()
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                false, "Owner", String.format(
-                                "%s | %s (`%s`)",
-                                mention,
-                                name,
-                                id
-                        )
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                false, 
-                                "Leave reason", 
-                                "`Blacklisted`"
-                        ))
-                        .addField(new WebhookEmbed.EmbedField(
-                                false, "Members", String.format(
-                                "```yaml\n" +
-                                "Total: %d\n" +
-                                "```",
-                                guild.getMemberCount()
-                        )
-                        ))
-                        .setFooter(new WebhookEmbed.EmbedFooter(
-                                String.format(
-                                        "Guild #%d",
-                                        bot.getShardManager().getGuildCache().size()
-                                ),
-                                null
-                        ))
-                        .setTimestamp(ZonedDateTime.now())
-                        .build();
-                break;
-        }
-    
-        webhookUtil.sendMsg(
-                guild.getSelfMember().getUser().getEffectiveAvatarUrl(),
-                title,
-                action == Action.JOIN ? ".leave " + guild.getId() : null,
-                embed
-        );
     }
 
     @Override
@@ -334,40 +190,158 @@ public class GuildListener extends ListenerAdapter{
             bot.setWelcomeChannel(guild.getId(), "none");
     }
     
-    @Override
-    public void onGuildMemberRoleAdd(@Nonnull GuildMemberRoleAddEvent event){
-        if(!bot.isBeta())
-            return;
+    private void sendWebhook(Member owner, Guild guild, Action action) {
+        String title = null;
+        WebhookEmbed embed = null;
         
-        if(event.getUser().isBot())
-            return;
+        String mention = owner == null ? "Unknown" : owner.getAsMention();
+        String name    = owner == null ? "Unknown" : owner.getUser().getName();
+        String id      = owner == null ? "?" : owner.getId();
         
-        Guild guild = event.getGuild();
-        if(!guild.getId().equals(IDs.GUILD))
-            return;
+        switch(action){
+            case JOIN:
+                title = "Join";
+                embed = new WebhookEmbedBuilder()
+                        .setColor(0x00FF00)
+                        .setThumbnailUrl(guild.getIconUrl())
+                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.PLUS.getEmote(), null))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Name", guild.getName()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Shard [Current/Total]", guild.getJDA().getShardInfo().getShardString()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false,
+                                "Owner",
+                                String.format(
+                                        "%s | %s (`%s`)", 
+                                        mention, 
+                                        MarkdownSanitizer.escape(name), 
+                                        id
+                                )
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false,
+                                "Members", 
+                                String.format(
+                                        "```yaml\n" + 
+                                        "Total: %d\n" + 
+                                        "```", 
+                                guild.getMemberCount()
+                        )
+                        ))
+                        .setFooter(new WebhookEmbed.EmbedFooter(
+                                String.format(
+                                        "Guild #%d",
+                                        bot.getShardManager().getGuildCache().size()
+                                ),
+                                null
+                        ))
+                        .setTimestamp(ZonedDateTime.now())
+                        .build();
+                break;
+            
+            case LEAVE:
+                title = "Leave";
+                embed = new WebhookEmbedBuilder()
+                        .setColor(0xFF0000)
+                        .setThumbnailUrl(guild.getIconUrl())
+                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.MINUS.getEmote(), null))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Name", guild.getName()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true, "Shard [Current/Total]", guild.getJDA().getShardInfo().getShardString()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false, "Owner", String.format(
+                                "%s | %s (`%s`)",
+                                mention,
+                                MarkdownSanitizer.escape(name),
+                                id
+                        )
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false,
+                                "Members",
+                                String.format(
+                                        "```yaml\n" + 
+                                        "Total: %d\n" + 
+                                        "```", 
+                                        guild.getMemberCount()
+                                )
+                        ))
+                        .setFooter(new WebhookEmbed.EmbedFooter(
+                                String.format(
+                                        "Guild #%d",
+                                        bot.getShardManager().getGuildCache().size()
+                                ),
+                                null
+                        ))
+                        .setTimestamp(ZonedDateTime.now())
+                        .build();
+                break;
+            
+            case AUTO_LEAVE:
+                title = "Leave [Auto]";
+                embed = new WebhookEmbedBuilder()
+                        .setColor(0xFF0000)
+                        .setThumbnailUrl(guild.getIconUrl())
+                        .setTitle(new WebhookEmbed.EmbedTitle(Emotes.MINUS.getEmote(), null))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true,
+                                "Name",
+                                guild.getName()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                true,
+                                "Shard [Current/Total]",
+                                guild.getJDA().getShardInfo().getShardString()
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false,
+                                "Owner",
+                                String.format(
+                                        "%s | %s (`%s`)", 
+                                        mention, 
+                                        MarkdownSanitizer.escape(name), 
+                                        id
+                                )
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false,
+                                "Leave reason",
+                                "`Blacklisted`"
+                        ))
+                        .addField(new WebhookEmbed.EmbedField(
+                                false,
+                                "Members",
+                                String.format(
+                                        "```yaml\n" + 
+                                        "Total: %d\n" + 
+                                        "```", 
+                                        guild.getMemberCount()
+                                )
+                        ))
+                        .setFooter(new WebhookEmbed.EmbedFooter(
+                                String.format(
+                                        "Guild #%d",
+                                        bot.getShardManager().getGuildCache().size()
+                                ),
+                                null
+                        ))
+                        .setTimestamp(ZonedDateTime.now())
+                        .build();
+                break;
+        }
         
-        Role role = guild.getRoleById(Roles.MEMBER);
-        if(event.getRoles().contains(role))
-            giveRoles(event.getMember());
-    }
-    
-    private void giveRoles(Member target){
-        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD);
-        
-        if(guild == null)
-            return;
-        
-        Role special       = guild.getRoleById(Roles.SPECIAL);
-        Role loves         = guild.getRoleById(Roles.LOVES);
-        Role person        = guild.getRoleById(Roles.PERSON);
-        Role notifications = guild.getRoleById(Roles.NOTIFICATIONS);
-        
-        guild.modifyMemberRoles(target, Arrays.asList(special, loves, person, notifications), null)
-                .reason(String.format(
-                        "[Join Roles] Giving %s join roles.",
-                        target.getEffectiveName()
-                ))
-                .queue();
+        webhookUtil.sendMsg(
+                guild.getSelfMember().getUser().getEffectiveAvatarUrl(),
+                title,
+                action == Action.JOIN ? ".leave " + guild.getId() : null,
+                embed
+        );
     }
     
     enum Action{

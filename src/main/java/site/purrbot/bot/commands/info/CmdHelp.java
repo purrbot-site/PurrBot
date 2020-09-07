@@ -107,6 +107,11 @@ public class CmdHelp implements Command{
                         commands,
                         false
                 )
+                .addField(
+                        bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.support_title"),
+                        bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.support_value"),
+                        false
+                )
                 .build();
     }
     
