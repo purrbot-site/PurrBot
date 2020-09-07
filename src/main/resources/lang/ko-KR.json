@@ -68,11 +68,9 @@
         "message": "{user}이(가) {target}에게 먹을 것을 주고있어.",
         "no_mention": "최소한 음식을 받을 상대 한 명을 언급해줘!",
         "request": {
-          "accepted": "{target}이(가) {user}의 요청을 수락했어",
           "denied": "{target}이(가) {user}의 음식을 먹고싶지 않나봐.",
           "message": "{target}!\n{user}이(가) 널 위해 음식을 준비했어. 한번 먹어볼래?\n수락하려면 {ACCEPT} 를 눌러. {CANCEL} 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
-          "open": "이미 누군가에게 주고 있잖아, {user}! 적어도 그 사람이 음식을 받던 말던 기다려줘.",
-          "timed_out": "아마 {target}이(가) {user}의 음식을 먹고싶지 않나봐."
+          "open": "이미 누군가에게 주고 있잖아, {user}! 적어도 그 사람이 음식을 받던 말던 기다려줘."
         }
       },
       "fluff": {
@@ -85,11 +83,9 @@
         "message": "{user}이(가) {target}의 꼬리를 만지고 있어.",
         "no_mention": "최소한 꼬리를 만지고 싶은 상대 한 명을 언급해줘!",
         "request": {
-          "accepted": "{target}이(가) {user}의 요청을 수락했어",
           "denied": "{target}은(는) {user}이(가) 꼬리를 만져주는게 싫은가봐.",
           "message": "{target}!\n{user}이(가) 네 꼬리를 만져보고 싶대. 그래도 괜찮아?\n수락하려면 {ACCEPT} 를 눌러. {CANCEL} 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
-          "open": "이미 누군가에게 꼬리를 만져달라고 했잖아, {user}! 적어도 그게 받아들여지던, 거부되던, 만료되길 기다려 줘.",
-          "timed_out": "아마 {target}은(는) {user}에게 꼬리를 주고 싶지 않은 모양이야."
+          "open": "이미 누군가에게 꼬리를 만져달라고 했잖아, {user}! 적어도 그게 받아들여지던, 거부되던, 만료되길 기다려 줘."
         },
         "special_user": "ㅎ-하지만, {user}. 여기서 하기엔 너무 야해."
       },
@@ -109,16 +105,20 @@
         "no_mention": "최소한 껴안을 상대 한 명을 언급해줘!"
       },
       "kiss": {
-        "loading": "{LOADING} 키스 이미지 불러오는 중...",
-        "mention_self": "어쩧게 혼자 키스하게, {user}? 거울이랑 하려고?",
+        "mention_bot": "이거 정말 *\"충격적인\"* 경험이 될거같은데...",
         "mention_purr": [
           "그, 그래..! 하지만 볼에다가만 해! \\*볼을 내미는 중*",
           "내 볼에만 해. 알았지?",
           "그-그건 좀 야하지만.. 뭐 알았어. \\*얼굴을 붉히는 중*"
         ],
-        "mention_snuggle": "안-돼-! 내 동생이랑은 안된다구.",
-        "message": "{user}이(가) {targets}에게 키스하고 있어!",
+        "mention_self": "어쩧게 혼자 키스하게, {user}? 거울이랑 하려고?",
+        "message": "{user}이(가) {target}에게 키스하고 있어!",
         "no_mention": "최소한 키스할 상대 한 명을 언급해줘!",
+        "request": {
+          "denied": "{target}이(가) {user}에게 키스를 받기 싫은가 봐.",
+          "message": "{target}!\n{user}이(가) 너와 키스하고 싶대. 그래도 괜찮아?\n수락하려면 {ACCEPT} 를 눌러. {CANCEL} 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "open": "이미 누군가에게 물어보고 있잖아, {user}! 적어도 그 요청이 받아들여지던, 거부되던, 만료되길 기다려 줘."
+        },
         "special_user": "\\*{user}와 키스하는 중*"
       },
       "kitsune": {
@@ -335,7 +335,9 @@
             "title": "카테고리"
           },
           "description": "◀ 나 ▶ 를 눌러서 다른 페이지로 이동하고 ⏹ 로 취소할 수 있어.\n`{prefix}help [command]` 를 사용하면 특정 명령어에 대한 정보를 확인할 수 있어.\n재미, 서버, 정보 그리고 성인은 카테고리야. 명령어가 아니니까 조심해!",
-          "nsfw_info": "`연령 제한 채널에서 확인해봐!`"
+          "nsfw_info": "`연령 제한 채널에서 확인해봐!`",
+          "support_title": "봇이 마음에 든다면?",
+          "support_value": "이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) 로 평범하게 후원할 수 있습니다.\n{PATREON} [`Patreon`]({patreon_url}) 로 정기후원을 할 수 있습니다."
         }
       },
       "info": {
@@ -485,11 +487,9 @@
         "message": "{user}이(가) {target}을(를) 빨아주고 있어!",
         "no_mention": "최소한 빨아줄 상대 한 명을 언급해줘!",
         "request": {
-          "accepted": "{target}이(가) {user}의 요청을 수락했어!",
           "denied": "{target}은(는) {user}의 입을 원하지 않는 모양이야. :/",
           "message": "{target}!\n{user}이(가) 입으로 야한걸 해주고 싶대. 너도 하고싶어?\n수락하려면 {ACCEPT} 를 눌러. {CANCEL} 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
-          "open": "욕심부리지마, {user}! 이미 네가 부탁한 사람이 있잖아.",
-          "timed_out": "아마 {target}은(는) {user}의 입을 원하지 않는 모양이야."
+          "open": "욕심부리지마, {user}! 이미 네가 부탁한 사람이 있잖아."
         },
         "special_user": "좋아 자기. 조금 시간을 줄래? \"장난감\"이 좀 필요하니까.\n\\*{user}의 손을 잡고 방에서 사라진다*"
       },
@@ -504,12 +504,10 @@
         "message": "{user}이(가) {target} 랑 사랑을 나누고 있어!",
         "no_mention": "최소한 사랑을 나눌 상대 한 명을 언급해줘!",
         "request": {
-          "accepted": "{target}이(가) {user}의 요청을 수락했어! OwO",
           "denied": "{target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. >.<",
           "message": "{target}!\n{user}이(가) 너랑 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 {ACCEPT} 를 눌러. {CANCEL} 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
           "message_choose": "{target}!\n{user}이(가) 너랑 함께 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n아래의 선택지중 하나의 반응을 눌러줘!\n{SEX} - 평범\n{ANAL} - 뒷구멍\n{YAOI} - 야오이\n{YURI} - 백합\n{CANCEL} - 요청 거부\n\n> **1분이 지나면 자동으로 거절이야!**",
-          "open": "발정나지 말라고, {user}! 이미 네가 부탁한 사람이 있잖아.",
-          "timed_out": "아마 {target}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. ._."
+          "open": "발정나지 말라고, {user}! 이미 네가 부탁한 사람이 있잖아."
         },
         "special_user": {
           "accept": [
@@ -536,11 +534,9 @@
         "message": "{user}이(가) {target}의 것을 핥아주고 있어!",
         "no_mention": "최소한 핥아줄 상대 한 명을 언급해줘!",
         "request": {
-          "accepted": "{target}이(가) {user}의 요청을 수락했어! ;P",
           "denied": "{target}은(는) {user}이(가) 핥아주는 걸 원하지 않나봐... 사실 핥아줄 부위가 없는거 아냐?",
           "message": "{target}!\n{user}이(가) 네 은밀한 부분을 핥아주고 싶대. ...핥아질 부위를 가지고 있는건 맞지?\n수락하려면 {ACCEPT} 를 눌러. {CANCEL} 를 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
-          "open": "애정에 굶주리기라도 한거야, {user}? 이미 네가 부탁한 사람이 있잖아. 만료되기를 기다리던가, 대답을 기다려.",
-          "timed_out": "아마 {target}은(는) 핥아지고 싶지 않나봐. 사실 핥아질 부위가 없는거 아냐? o////o"
+          "open": "애정에 굶주리기라도 한거야, {user}? 이미 네가 부탁한 사람이 있잖아. 만료되기를 기다리던가, 대답을 기다려."
         },
         "special_user": "헤헤... 너 지금 *\"목마른\"* 상태구나, {user}?\n\\*{user}의 손을 잡고 함께 사라진다*"
       },
@@ -555,15 +551,17 @@
         "message": "{user}이(가) {target1} 랑 {target2} 와 함께 뜨거운 밤을 보내고 있어! O//w//O",
         "no_mention": "최소한 함께 그런 걸 할 두 사람을 언급해줘!",
         "request": {
-          "accepted": "{target1}와 {target2}이(가) {user}의 요청을 수락했어! >//w//<",
           "denied": "{target1} 또는 {target2}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐.",
           "message": "{target1}(이)랑 {target2}!\n{user}이(가) 너희 둘이랑 함께 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 {ACCEPT} 를 눌러. {CANCEL} 를 누르면 거절할 수 있어.\n요청받은 두 사람이 같이 수락하면.. 말 안해도 알지?\n\n> **1분이 지나면 자동으로 거절이야!**",
-          "open": "발정난 개도 어지간해야지, {user}! 이미 네가 부탁한 사람이 있잖아.",
-          "timed_out": "아마 {target1} 또는 {target2}은(는) {user}(이)랑 야한 걸 하고 싶지 않나봐. >\\_<"
+          "open": "발정난 개도 어지간해야지, {user}! 이미 네가 부탁한 사람이 있잖아."
         },
         "special_user": "내가 너랑 하는 걸 좋아하는 만큼, 이게 나한테 심한 일일까? {user}... {VANILLABLUSH}"
       }
     }
+  },
+  "request": {
+    "accepted": "{target}이(가) 요청을 수락했어. ([Message]({link}))",
+    "timed_out": "{user}, 네 요청에 대한 대기시간이 만료되었어. {target}이(가) 시간 내로 반응하지 않았거든."
   },
   "snuggle": {
     "fun": {
@@ -603,7 +601,6 @@
         ]
       },
       "kiss": {
-        "mention_purr": "언니에겐 안돼, {user}!",
         "mention_snuggle": [
           "에.. 좋아, {user}! 하지만 볼에다가만 해! \\*볼을 내미는 중*",
           "하, 하지만, {user}... 사람들이 보고있는데 부끄러. \\*얼굴을 붉히며* ㅈ-좋아, 하지만 한번만 잠깐이야. Q////Q",
