@@ -315,7 +315,7 @@ public class MessageUtil {
                     channel.sendMessage(MarkdownSanitizer.escape(
                             bot.getMsg(
                                     guild.getId(),
-                                    path + "request.timed_out",
+                                    "request.timed_out",
                                     author.getAsMention(),
                                     target.getEffectiveName()
                             )

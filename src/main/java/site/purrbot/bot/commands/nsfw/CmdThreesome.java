@@ -181,7 +181,6 @@ public class CmdThreesome implements Command{
                 event -> {
                     TextChannel channel = event.getChannel();
                     queue.invalidate(bot.getMessageUtil().getQueueString(author));
-                    botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                     
                     if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
                         list.remove(target1.getId());

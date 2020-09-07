@@ -112,7 +112,7 @@ public class CmdBlowjob implements Command{
                 member,
                 target,
                 API.GIF_BLOW_JOB_LEWD,
-                "fun"
+                "nsfw"
         );
     
         bot.getMessageUtil().handleReactionEvent(tc, instance);
