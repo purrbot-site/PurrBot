@@ -548,7 +548,7 @@
         "mention_bot": "Twust me {user}. It's mowe fun with humans and not bots. :3",
         "mention_purr": "I know that I seem a bit kinky, but I'm not into *that* kind of stuff {user}! OwO",
         "mention_self": "Cowwect me if I'm wrong, but does a thweesome usually not wequiwe **3** people {user}?",
-        "message": "{user} has sex with {target1} and {target2}! O//w//O",
+        "message": "{user} fa sesso con {targets}! O//W//O",
         "no_mention": "Please mention 2 usews you want to fuck!",
         "request": {
           "denied": "Eithew {target1} ow {target2} don't want to have sex with you {user}.",
