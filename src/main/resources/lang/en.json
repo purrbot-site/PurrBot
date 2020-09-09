@@ -387,8 +387,7 @@
           "info_value": "Heyo! Nice from you to invite me to your Discord. :3\nJust select one of the links below to get me on your Discord, so that I can bring fun and nekos to you.",
           "links": {
             "discord": "`Discord (Support)`",
-            "invite_basic": "`Basic Invite`",
-            "invite_full": "`Recommended Invite`"
+            "invite": "`Bot Invite`"
           }
         }
       },
