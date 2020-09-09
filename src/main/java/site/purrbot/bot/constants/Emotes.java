@@ -50,7 +50,7 @@ public enum Emotes{
     HYPESQUAD_BRAVERY   ("hypesquadBravery",    "712650361814646839", false),
     HYPESQUAD_BRILLIANCE("hypesquadBrilliance", "712650362083082320", false),
     HYPESQUAD_EVENTS    ("hypesquadEvents",     "712650362057916486", false),
-    PLUS                ("plus       ",         "592043203629416459", false),
+    PLUS                ("plus",                "592043203629416459", false),
     MEMBERS             ("members",             "701217337692651541", false),
     MINUS               ("minus",               "592043203042213925", false),
     NEKOWO              ("nekOwO",              "700429690309050409", false),

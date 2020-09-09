@@ -206,7 +206,12 @@ public class CmdThreesome implements Command{
                         else
                             link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFM_LEWD);
                         
-                        String target = target1.getEffectiveName() + " and " + target2.getEffectiveName();
+                        String target = String.join(
+                                " ",
+                                target1.getEffectiveName(),
+                                bot.getMsg(guild.getId(), "misc.and"),
+                                target2.getEffectiveName()
+                        );
                         
                         bot.getMessageUtil().editMessage(
                                 botMsg,

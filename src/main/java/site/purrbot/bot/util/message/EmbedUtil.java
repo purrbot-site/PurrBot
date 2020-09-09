@@ -48,7 +48,7 @@ public class EmbedUtil {
     }
     
     public EmbedBuilder getErrorEmbed(Member member){
-        return member == null ? getEmbed().setColor(0xFF0000) : getEmbed(member).setColor(0xFF0000);
+        return (member == null ? getEmbed() : getEmbed(member)).setColor(0xFF0000);
     }
     
     public MessageEmbed getPermErrorEmbed(Member member, Guild guild, TextChannel channel, Permission perm, boolean self){

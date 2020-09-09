@@ -274,7 +274,7 @@ public class CmdFuck implements Command{
                     channel.sendMessage(MarkdownSanitizer.escape(
                             bot.getMsg(
                                     guild.getId(),
-                                    "purr.nsfw.fuck.request.timed_out",
+                                    "request.timed_out",
                                     author.getAsMention(),
                                     target.getEffectiveName()
                             )

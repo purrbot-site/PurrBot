@@ -292,6 +292,7 @@ public class MessageUtil {
                     queue.invalidate(queueString(api.getEndpoint(), guild.getId(), author.getId()));
                 
                     if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
+                        msg.delete().queue();
                         channel.sendMessage(MarkdownSanitizer.escape(
                                 bot.getMsg(
                                         guild.getId(),

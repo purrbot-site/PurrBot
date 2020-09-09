@@ -548,7 +548,7 @@
         "mention_bot": "Trust me {user}. It's more fun with humans and not bots. ;)",
         "mention_purr": "I know that I seem a bit kinky, but I'm not into *that* kind of stuff {user}!",
         "mention_self": "Correct me if I'm wrong, but does a threesome usually not require **3** people {user}?",
-        "message": "{user} has sex with {target1} and {target2}! O//w//O",
+        "message": "{user} has sex with {targets}! O//w//O",
         "no_mention": "Please mention 2 users you want to fuck!",
         "request": {
           "denied": "Either {target1} or {target2} don't want to have sex with you {user}.",
