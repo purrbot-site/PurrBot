@@ -548,7 +548,7 @@
         "mention_bot": "Confie em mim {user}. É mais divertido com humanos e não com bots. ;)",
         "mention_purr": "Sei que pareço um pouco excêntrica, mas não gosto desse tipo de coisa {user}!",
         "mention_self": "Corrija-me se eu estiver errado, mas um triplo geralmente não requer **3** pessoas {user}?",
-        "message": "{user} faz sexo com {target1} e {target2}! O//w/O",
+        "message": "{user} tem sexo com {targets}! O//w/O",
         "no_mention": "Por favor, mencione 2 usuários que você quer ter sexo com!",
         "request": {
           "denied": "{target1} ou {target2} não querem fazer sexo com você {user}.",
