@@ -387,8 +387,7 @@
           "info_value": "Heyo! Nett von dir, mich auf deinen Discord einzuladen. :3\nWähle einfach einen der unteren Links, so dass ich dir Spass und Nekos bringen kann.",
           "links": {
             "discord": "`Discord (Support)`",
-            "invite_basic": "`Standarteinladung`",
-            "invite_full": "`Empfohlene Einladung`"
+            "invite": "`Bot Einladung`"
           }
         }
       },
@@ -548,7 +547,7 @@
         "mention_bot": "Glaub mir {user}. Es ist viel mehr Spass mit Menschen als mit Bots. ;)",
         "mention_purr": "Ich weiss, dass ich etwas kinky bin, aber ich steh nicht auf so etwas {user}!",
         "mention_self": "Korrigier mich, wenn ich falsch liege, aber braucht ein dreier nicht **3** Leute {user}?",
-        "message": "{user} hat Sex mit {target1} und {target2}! O//w//O",
+        "message": "{user} hat Sex mit {targets}! O//w//O",
         "no_mention": "Bitte erwähne 2 Personen mit welchen du Sex haben willst!",
         "request": {
           "denied": "Entweder {target1} oder {target2} will keinen Sex mit dir haben {user}.",
