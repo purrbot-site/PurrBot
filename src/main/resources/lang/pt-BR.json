@@ -105,7 +105,7 @@
         "no_mention": "Por favor, mencione pelo menos um usuário para abraçar!"
       },
       "kiss": {
-        "mention_bot": "Isso seria uma experiência *\"chocante\"*...",
+        "loading": "{LOADING} Recebendo um beijo...",
         "mention_purr": [
           "O-okay. Mas apenas em minha bochecha! \\*deixa a bochecha a mostra*",
           "Só minha bochecha, ok?",
@@ -114,11 +114,6 @@
         "mention_self": "Como você pode se beijar{user}? Com um espelho?",
         "message": "{user} beija {target}",
         "no_mention": "Por favor, mencione pelo menos um usuário para beijar!",
-        "request": {
-          "denied": "{target} não quer um beijo de você {user}",
-          "message": "Ei {target}!\n{user} quer te beijara. Você também quer isso?\nReaja com {ACCEPT} para aceitar ou com {CANCEL} para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
-          "open": "Você já pediu a alguém {user}! Por favor, aguarde a solicitação ser aceita, negada ou um tempo limite."
-        },
         "special_user": "\\*Aprecia o beijo de {user}*"
       },
       "kitsune": {
@@ -387,8 +382,7 @@
           "info_value": "Heyo! Foi gentil da sua parte me convidar para seu Discord. :3\nBasta selecionar um dos links abaixo para me convidar para seu Discord, para que eu possa trazer diversão e nekos para você.",
           "links": {
             "discord": "`Discord (Support)`",
-            "invite_basic": "`convite básico`",
-            "invite_full": "`Convite Recomendado`"
+            "invite": "`Bot Invite`"
           }
         }
       },
