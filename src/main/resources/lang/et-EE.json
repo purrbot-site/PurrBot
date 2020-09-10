@@ -387,8 +387,7 @@
           "info_value": "Heihoo! Tore et kutsusid mind enda Discord. :3\nLihtsalt vali üks link altpoolt et saada mind oma Discordi, siis ma saan tuua sulle lõbu ja nekosi.",
           "links": {
             "discord": "`Discord (Tugi)`",
-            "invite_basic": "`Põhiline kutse`",
-            "invite_full": "`Soovitatav kutse`"
+            "invite": "`Boti kutse`"
           }
         }
       },
@@ -548,7 +547,7 @@
         "mention_bot": "Usu min {user}. See on rohkem lõbusam inimestega kui bottidega. ;)",
         "mention_purr": "Ma tean et ma tundun natukene segane, aga ma ei ole väga just *sellesse* {user}!",
         "mention_self": "Paranda mind kui soovid, aga kas kolmekas mitte ei vaja **kolme** inimest {user}?",
-        "message": "{user} seksib koos kasutajatega {target1} ja {target2}! O//w//O",
+        "message": "{user} seksib koos {targets}! O//w//O",
         "no_mention": "Palun maini kahte kasutajat keda sa soovid keppida!",
         "request": {
           "denied": "Kumbgi {target1} või {target2} ei soovi sinuga seksida {user}.",
