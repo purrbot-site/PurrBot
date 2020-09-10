@@ -105,7 +105,7 @@
         "no_mention": "Please mention at least one user to hug!"
       },
       "kiss": {
-        "mention_bot": "This would be quite a *\"shocking\"* experience...",
+        "loading": "{LOADING} Receiving a kiss...",
         "mention_purr": [
           "O-okay. But only my cheek! \\*Holds cheek out*",
           "Only my cheek, okay?",
@@ -114,11 +114,6 @@
         "mention_self": "How can you kiss yourself {user}? With a mirror?",
         "message": "{user} kisses {target}",
         "no_mention": "Please mention at least one user to kiss!",
-        "request": {
-          "denied": "{target} doesn't want a kiss from you {user}",
-          "message": "Hey {target}!\n{user} wants to kiss you. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
-          "open": "You already asked someone {user}! Please wait for the request to be accepted, denied or for it to time out."
-        },
         "special_user": "\\*Enjoys the kiss from {user}*"
       },
       "kitsune": {
