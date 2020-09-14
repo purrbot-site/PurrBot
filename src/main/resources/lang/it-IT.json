@@ -382,7 +382,7 @@
           "info_value": "Ciao! è stato carino che tu mi abbia invitato nel tuo server discord. :3\nSeleziona un dei link sotto per farmi entrare sul tuo server, così che io possa portare divertimento e Neko a voi",
           "links": {
             "discord": "`Discord (Support)`",
-            "invite": "Bot Invite"
+            "invite": "`Bot invitare`"
           }
         }
       },
@@ -542,7 +542,7 @@
         "mention_bot": "Fidati {user}. È più divertente con gli umani e non i bots. ;)",
         "mention_purr": "Lo so che sembro molto perversa, ma non mi piace *quella* roba {user}!",
         "mention_self": "Correggimi se ho torto, ma una threesome non richiede **3** persone normalmente {user}?",
-        "message": "{user} has sex with {targets}! O//w//O",
+        "message": "{user} fa sesso con {targets}! O//w//O",
         "no_mention": "Menziona due utenti con cui vuoi fare sesso!",
         "request": {
           "denied": "O {target1} o {target2} non vuole fare sesso con te {user}.",
