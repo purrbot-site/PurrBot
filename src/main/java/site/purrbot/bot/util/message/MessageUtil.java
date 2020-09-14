@@ -348,13 +348,13 @@ public class MessageUtil {
                 .queue(message -> message.getTextChannel().sendMessage(author.getAsMention())
                                 .embed(acceptedEmbed(guild.getId(), target, message.getJumpUrl()))
                                 .queue(
-                                        del -> del.delete().queueAfter(10, TimeUnit.SECONDS)
+                                        del -> del.delete().queueAfter(10, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE))
                                 ),
                         e -> msg.getTextChannel().sendMessage(embed.build()).queue(message ->
                                 message.getTextChannel().sendMessage(author.getAsMention())
                                        .embed(acceptedEmbed(guild.getId(), target, message.getJumpUrl()))
                                        .queue(
-                                               del -> del.delete().queueAfter(10, TimeUnit.SECONDS)
+                                               del -> del.delete().queueAfter(10, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE))
                                        )
                         )
                 );

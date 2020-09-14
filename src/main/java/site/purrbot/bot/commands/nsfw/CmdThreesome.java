@@ -185,7 +185,8 @@ public class CmdThreesome implements Command{
                     if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
                         list.remove(target1.getId());
                         list.remove(target2.getId());
-                        
+    
+                        botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                         channel.sendMessage(MarkdownSanitizer.escape(
                                 bot.getMsg(
                                         guild.getId(),
@@ -206,7 +207,7 @@ public class CmdThreesome implements Command{
                         else
                             link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFM_LEWD);
                         
-                        String target = String.join(
+                        String targets = String.join(
                                 " ",
                                 target1.getEffectiveName(),
                                 bot.getMsg(guild.getId(), "misc.and"),
@@ -217,7 +218,7 @@ public class CmdThreesome implements Command{
                                 botMsg,
                                 "purr.nsfw.threesome.",
                                 author,
-                                target,
+                                targets,
                                 link
                         );
                     }
@@ -229,15 +230,20 @@ public class CmdThreesome implements Command{
                     
                     list.remove(target1.getId());
                     list.remove(target2.getId());
-                    
-                    String target = target1.getEffectiveName() + " and " + target2.getEffectiveName();
+    
+                    String targets = String.join(
+                            " ",
+                            target1.getEffectiveName(),
+                            bot.getMsg(guild.getId(), "misc.and"),
+                            target2.getEffectiveName()
+                    );
                     
                     channel.sendMessage(MarkdownSanitizer.escape(
                             bot.getMsg(
                                     guild.getId(),
                                     "request.timed_out",
                                     author.getAsMention(),
-                                    target
+                                    targets
                             )
                     )).queue();
                 }

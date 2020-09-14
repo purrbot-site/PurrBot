@@ -102,16 +102,7 @@ public class CmdInvite implements Command{
                                 ),
                                 getInvite(
                                         guild,
-                                        "invite_basic",
-                                        Permission.MESSAGE_WRITE,
-                                        Permission.MESSAGE_EMBED_LINKS,
-                                        Permission.MESSAGE_HISTORY,
-                                        Permission.MESSAGE_ADD_REACTION,
-                                        Permission.MESSAGE_EXT_EMOJI
-                                ),
-                                getInvite(
-                                        guild,
-                                        "invite_full",
+                                        "invite",
                                         Permission.MESSAGE_WRITE,
                                         Permission.MESSAGE_EMBED_LINKS,
                                         Permission.MESSAGE_HISTORY,

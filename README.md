@@ -60,22 +60,25 @@ You can find the currently made translations on https://lang.purrbot.site.
 # Inviting the bot
 The bot has two invite-links: A full invite and a basic invite.
 
-## Full invite
-The link for the full invite gives \*Purr* all permissions, to work properly and without any issues.
-The permissions include:
-- Managing messages: Will be used to delete certain commands of users like `.invite` or `.info`
-- Adding reactions: Nothing really special. Just makes \*Purr*'s responses a bit different.
-- Attach files: Used for the welcome-channel (`.welcome`), to create a image for the joined user.
-- All permissions of the basic invite.
+## Full invite (Recommended)
+The Full Invite contains all permissions that the [Basic Invite](#basic-invite) gives and some additional ones to improve your overall experience with her.
+
+Alonside the other perms of the Basic Invite are the following perms added:
+
+- `Attach Files`: Allows the direct attachment of files to messages.
 
 ## Basic invite
-The basic invite will only give the most necessary permissions for \*Purr* to work correctly.
-This permissions are:
-- See messages: Let \*Purr* see all channels, that don't have channel-specific permissions.
-- See message history: Let \*Purr* see the message history of a channel.
-- Send messages: Let her send messages.
-- Embed Links: \*Purr* won't work without this permission!
-- Use of external emojis: For using external (custom) emojis.
+The Basic Invite only contains all permissions that are nessesary for \*Purr* to work as expected.
+
+Permissions are:
+
+- `Send Message`: She can't send messages without this... Duh.
+- `Embed Links`: Most responses are send through embeds which require this permission.
+- `See Message History`: Certain commands require her to be able to see the past of the channel.
+- `Add Reactions`: Help menu and other things use it for navigation and more.
+- `Use external Emotes`: Some commands use custom emotes and reactions.
+
+
 
 # Botlists
 \*Purr* can be found on different Botlist sites.  
