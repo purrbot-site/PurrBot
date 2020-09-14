@@ -3,7 +3,7 @@ labels:
     labeled:
       issue:
         body: |-
-          Hello @{{ sender.login }},
+          Hello @{{ issue.user.login }},
           
           Thank you for reaching out to us.
           Unfortunately is the issue tracker not the right place to ask questions.
