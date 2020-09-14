@@ -105,7 +105,7 @@
         "no_mention": "Pwease mention at weast one user to hug!"
       },
       "kiss": {
-        "mention_bot": "This would be quite a *\"shocking\"* experience... ⚡",
+        "loading": "{LOADING} Weceiving a kiss...",
         "mention_purr": [
           "O-okay. But onwy my cheek! \\*Howds cheek out*",
           "Onwy my cheek, okay?",
@@ -114,11 +114,6 @@
         "mention_self": "How can you kiss youwselwf {user}? With a miwwow?",
         "message": "{user} kisses {target}",
         "no_mention": "Pwease mention at weast one user to kiss!",
-        "request": {
-          "denied": "{target} doesn't want a kiss from you {user} :c",
-          "message": "Hey {target}!\n{user} wants to kiss you. Do you want that too?\nWeact with {ACCEPT} to accept ow with {CANCEL} to deny it.\n\n> **This wequest will time out in 1 minute!**",
-          "open": "You awweady asked someone {user}! Pwease wait for the wequest to be accepted, denied or fow it to time out. >:C"
-        },
         "special_user": "\\*Enjoys the kiss fwom {user}*"
       },
       "kitsune": {
@@ -387,8 +382,7 @@
           "info_value": "Heyo! Nice fwom you to invite me to youw Discowd. :3\nJust sewect one of the winks below to get me on youw Discord, so that I can bwing fun and nekos to you.",
           "links": {
             "discord": "`Discord (Suppwrt)`",
-            "invite_basic": "`Basic Invite`",
-            "invite_full": "`Recommended Invite`"
+            "invite": "`Bot Invite`"
           }
         }
       },
@@ -548,7 +542,7 @@
         "mention_bot": "Twust me {user}. It's mowe fun with humans and not bots. :3",
         "mention_purr": "I know that I seem a bit kinky, but I'm not into *that* kind of stuff {user}! OwO",
         "mention_self": "Cowwect me if I'm wrong, but does a thweesome usually not wequiwe **3** people {user}?",
-        "message": "{user} has sex with {target1} and {target2}! O//w//O",
+        "message": "{user} has sex with {targets}! O//W//O",
         "no_mention": "Please mention 2 usews you want to fuck!",
         "request": {
           "denied": "Eithew {target1} ow {target2} don't want to have sex with you {user}.",

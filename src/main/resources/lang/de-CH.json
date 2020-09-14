@@ -105,7 +105,7 @@
         "no_mention": "Bitte erwähne mindestens eine Person zum umarmen!"
       },
       "kiss": {
-        "mention_bot": "Das wäre eine ziemlich *\"schokierende\"* erfahrung...",
+        "loading": "{LOADING} Erhalte einen Kuss...",
         "mention_purr": [
           "O-okay. Aber nur meine Wange! \\*Hält Wange hin*",
           "Nur meine Wange, okay?",
@@ -114,11 +114,6 @@
         "mention_self": "Wie kannst du dich selber küssen {user}? Mit einem Spiegel?",
         "message": "{user} küsst {target}",
         "no_mention": "Bitte erwähne mindestens eine Person zum küssen!",
-        "request": {
-          "denied": "{target} möchte keinen Kuss von dir {user}",
-          "message": "Hey {target}!\n{user} möchte dich küssen. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
-          "open": "Du hast bereits jemanden gefragt {user}! Bitte warte, bis die Anfrage angenommen, abgelehnt oder abgelaufen ist."
-        },
         "special_user": "\\*Geniesst den kuss von {user}*"
       },
       "kitsune": {
@@ -387,8 +382,7 @@
           "info_value": "Heyo! Nett von dir, mich auf deinen Discord einzuladen. :3\nWähle einfach einen der unteren Links, so dass ich dir Spass und Nekos bringen kann.",
           "links": {
             "discord": "`Discord (Support)`",
-            "invite_basic": "`Standarteinladung`",
-            "invite_full": "`Empfohlene Einladung`"
+            "invite": "`Bot Einladung`"
           }
         }
       },
@@ -548,7 +542,7 @@
         "mention_bot": "Glaub mir {user}. Es ist viel mehr Spass mit Menschen als mit Bots. ;)",
         "mention_purr": "Ich weiss, dass ich etwas kinky bin, aber ich steh nicht auf so etwas {user}!",
         "mention_self": "Korrigier mich, wenn ich falsch liege, aber braucht ein dreier nicht **3** Leute {user}?",
-        "message": "{user} hat Sex mit {target1} und {target2}! O//w//O",
+        "message": "{user} hat Sex mit {targets}! O//w//O",
         "no_mention": "Bitte erwähne 2 Personen mit welchen du Sex haben willst!",
         "request": {
           "denied": "Entweder {target1} oder {target2} will keinen Sex mit dir haben {user}.",

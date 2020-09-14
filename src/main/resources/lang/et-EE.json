@@ -105,7 +105,7 @@
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kallistada!"
       },
       "kiss": {
-        "mention_bot": "See oleks üpriski *\"šokeeriv\"* kogemus...",
+        "loading": "{LOADING} Laen musi...",
         "mention_purr": [
           "O- okei. Aga ainult põsele! \\*Toob põse esile*",
           "Ainult põsele, okei?",
@@ -114,11 +114,6 @@
         "mention_self": "Kuidas sa saad endale musi teha {user}? Peegliga?",
         "message": "{user} musitab {target}",
         "no_mention": "Palun maini vähemalt ühte kasutajat keda musitada!",
-        "request": {
-          "denied": "{target} ei taha sinult musi {user}",
-          "message": "Hei {target}!\n{user} tahab sulle musi teha. Kas sa nõustud pakkumisega?\nReageeri sõnumile {ACCEPT} reaktsiooniga et nõustuda või {CANCEL} reaktsiooniga et keelduda.\n\n> **See pakkumine lõppeb ühe minuti jooksul!**",
-          "open": "Sa juba palusid kedagi {user}! Palun oota kuni sellele reageeritakse, või kuni see kaotab kehtivuse."
-        },
         "special_user": "\\*Rõõmustab kasutaja {user} musi üle*"
       },
       "kitsune": {
@@ -387,8 +382,7 @@
           "info_value": "Heihoo! Tore et kutsusid mind enda Discord. :3\nLihtsalt vali üks link altpoolt et saada mind oma Discordi, siis ma saan tuua sulle lõbu ja nekosi.",
           "links": {
             "discord": "`Discord (Tugi)`",
-            "invite_basic": "`Põhiline kutse`",
-            "invite_full": "`Soovitatav kutse`"
+            "invite": "`Boti kutse`"
           }
         }
       },
@@ -548,7 +542,7 @@
         "mention_bot": "Usu min {user}. See on rohkem lõbusam inimestega kui bottidega. ;)",
         "mention_purr": "Ma tean et ma tundun natukene segane, aga ma ei ole väga just *sellesse* {user}!",
         "mention_self": "Paranda mind kui soovid, aga kas kolmekas mitte ei vaja **kolme** inimest {user}?",
-        "message": "{user} seksib koos kasutajatega {target1} ja {target2}! O//w//O",
+        "message": "{user} seksib koos {targets}! O//w//O",
         "no_mention": "Palun maini kahte kasutajat keda sa soovid keppida!",
         "request": {
           "denied": "Kumbgi {target1} või {target2} ei soovi sinuga seksida {user}.",
