@@ -31,6 +31,7 @@
   "purr": {
     "fun": {
       "bite": {
+        "description": "Lets you bite one or multiple people.",
         "loading": "{LOADING} Going to bite someone...",
         "mention_self": "Is it cannibalism, if you bite yourself {user}?",
         "mention_purr": [
@@ -43,6 +44,7 @@
         "special_user": "B-but {user}! T-that is embarrassing."
       },
       "cuddle": {
+        "description": "Lets you cuddle one or multiple people.",
         "loading": "{LOADING} Receiving a cuddle-gif...",
         "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {VANILLABLUSH}",
         "mention_purr": [
@@ -54,10 +56,12 @@
         "no_mention": "Please mention at least one user to cuddle!"
       },
       "eevee": {
+        "description": "Gives you an image or gif of a cute Eevee.",
         "loading": "{LOADING} Capturing a cute Eevee...",
-        "title": "Eevee"
+        "message": "Eevee"
       },
       "feed": {
+        "description": "Lets you feed a person with some yummy food.",
         "mention_bot": "Bots can't eat food silly! They can only eat your data. O_O",
         "mention_purr": [
           "Food? For me? Thank chu {user}! \\*noms food and wags tail*",
@@ -74,6 +78,7 @@
         }
       },
       "fluff": {
+        "description": "Fluff the tail of someone... if they want that.",
         "mention_bot": "Bots don't have a tail... sadly!",
         "mention_purr": [
           "Wha-! That is lewd {user}! \\*Holds her tail to protect it*",
@@ -90,10 +95,12 @@
         "special_user": "B-but {user}. That is lewd to do that in public."
       },
       "holo": {
+        "description": "Get an image of the apple eating, alcohol drinking wise wolf.",
         "loading": "{LOADING} Receiving a image from Holo...",
-        "title": "Holo {BLOBHOLO}"
+        "message": "Holo {BLOBHOLO}"
       },
       "hug": {
+        "description": "Share some hugs with other people. \\(>w<)/",
         "loading": "{LOADING} Receiving a hug-gif...",
         "mention_self": "Why are you hugging yourself {user}?\nYou can hug me if you want. {VANILLABLUSH}",
         "mention_purr": [
@@ -105,6 +112,7 @@
         "no_mention": "Please mention at least one user to hug!"
       },
       "kiss": {
+        "description": "Give one or multiple people a kiss.",
         "loading": "{LOADING} Receiving a kiss...",
         "mention_purr": [
           "O-okay. But only my cheek! \\*Holds cheek out*",
@@ -117,10 +125,12 @@
         "special_user": "\\*Enjoys the kiss from {user}*"
       },
       "kitsune": {
+        "description": "Get an image of a Kitsune (fox girl).",
         "loading": "{LOADING} Receiving a kitsune-gif...",
-        "title": "Kitsune {SHIROTAILWAG}"
+        "message": "Kitsune {SHIROTAILWAG}"
       },
       "lick": {
+        "description": "Lick people... In a SFW way obviously.",
         "loading": "{LOADING} Receiving a lick-gif...",
         "mention_self": "I won't ask how and *where* you lick yourself {user}...",
         "mention_purr": [
@@ -133,13 +143,14 @@
         "special_user": "B-but sweetie... Not in public. \\*blushes*"
       },
       "neko": {
+        "description": "Get an image or gif of an adorable Neko.",
         "loading": "{LOADING} Receiving a cute neko image (or gif)...",
-        "title_gif": "Neko {WAGTAIL}",
-        "title_img": "Neko {NEKOWO}",
+        "message": "Neko {NEKOWO}",
         "purr": "Hey! That is me! OwO",
         "snuggle": "That is my little sister! UwU"
       },
       "pat": {
+        "description": "Pat people!",
         "loading": "{LOADING} Receiving pats...",
         "mention_self": "Uhm... Isn't there a neko that you can pat {user}? \\*points to herself*",
         "mention_purr": [
@@ -151,6 +162,7 @@
         "no_mention": "Please mention at least one user to pat!"
       },
       "poke": {
+        "description": "Poke people!",
         "loading": "{LOADING} Receiving a poke-gif...",
         "mention_self": "Are you bored or why do you poke yourself {user}?",
         "mention_purr": [
@@ -161,10 +173,12 @@
         "no_mention": "Please mention at least one user to poke!"
       },
       "senko": {
+        "description": "Get an image of the divine messenger that can pamper you.",
         "loading": "{LOADING} Receiving an image of Senko-san...",
-        "title": "Senko-San {SENKOTAILWAG}"
+        "message": "Senko-San {SENKOTAILWAG}"
       },
       "ship": {
+        "description": "Ship yourself with someone or two people with each other to see their chance of love.",
         "mention_self": "Shipping yourself {user}? Actually get someone else!",
         "mention_purr": "N-nu! You can't ship me {user}!",
         "mention_snuggle": "I won't let you ship my little sister {user}!",
@@ -188,6 +202,7 @@
         "target_bot": "You can't really ship with bots you weirdo!"
       },
       "slap": {
+        "description": "Slap da meanies! >:C",
         "loading": "{LOADING} Slapping the users...",
         "mention_self": "Nononono! I won't help you hurting yourself {user}.",
         "mention_purr": [
@@ -198,10 +213,12 @@
         "no_mention": "Please mention at least one user to slap!"
       },
       "tail": {
+        "description": "Wag your tail... In excitement I hope.",
         "loading": "{LOADING} Wagging tail...",
         "message": "{user} wags their tail"
       },
       "tickle": {
+        "description": "Tickle people to make them laugh.",
         "loading": "{LOADING} Receiving a tickle-gif...",
         "mention_self": "Okay... If you really want to get tickled... \\*tickles {user}*",
         "mention_purr": [
@@ -215,6 +232,7 @@
     },
     "guild": {
       "language": {
+        "description": "Change the language used for the Bot in the current Guild.\nRun this without any arguments to see the current settings.\n\nYou need the `Manage Server` permission for this.",
         "few_args": "Not enough arguments provided!\nUsage: `{prefix}language set <language>`",
         "invalid_args": "Invalid arguments!\nUsage: `{prefix}language <set <language>|reset>`",
         "invalid_lang": "The provided language was invalid!\nUse `{prefix}language` to see all available languages.",
@@ -230,6 +248,7 @@
         "no_language": "Please provide a language you want to set!"
       },
       "prefix": {
+        "description": "Change the prefix used by the bot for commands.\nYou can always `@mention` the bot to find out what the prefix of the guild is.\n\nYou need the `Manage Server` permission for this.",
         "few_args": "Not enough arguments provided!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
         "invalid_args": "Invalid arguments!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
         "no_prefix": "You need to provide a prefix!",
@@ -237,6 +256,7 @@
         "set": "Prefix set to `{prefix}`"
       },
       "welcome": {
+        "description": "Greet joining Members on your Discord with a message and image!\nNot providing any arguments will display the current settings.\nCheck out [the wiki article]({wiki_welcome}) for help.\n\nYou need the `Manage Server` permission for this.",
         "embed": {
           "channel": "Channel",
           "color_title": "Color",
@@ -270,6 +290,7 @@
     },
     "info": {
       "emote": {
+        "description": "Get basic information about one or multiple emotes (custom Discord Emojis).\nYou can use the `--search` argument to list all emotes used in the past 100 messages.",
         "embed": {
           "emote_multiple": "Emote [{current} / {total}]",
           "emote_single": "Emote",
@@ -285,6 +306,7 @@
         "unknown_guild": "Unknown Guild"
       },
       "guild": {
+        "description": "Get basic Guild information.",
         "embed": {
           "boost": {
             "multiple": "{boost} boosts",
@@ -311,6 +333,7 @@
         }
       },
       "help": {
+        "description": "List all available commands the bot has.\nYou can add the name of a command after it, to receive some additional info about that specified command.",
         "command_info": {
           "aliases": "Aliases",
           "command_nsfw": "Please run this command in a NSFW channel.",
@@ -336,6 +359,7 @@
         }
       },
       "info": {
+        "description": "Get basic information about the bot.",
         "dm_failure": "I can't send you a DM {user}!",
         "dm_success": "Check your DMs {user}!",
         "embed": {
@@ -373,6 +397,7 @@
         }
       },
       "invite": {
+        "description": "Get links for either inviting the bot, or to join the official Support Server.",
         "dm_failure": "Please allow me to send you a DM {user}!",
         "dm_success": "Send you a message in DM {user}!",
         "embed": {
@@ -387,6 +412,7 @@
         }
       },
       "ping": {
+        "description": "Check the current ping the bot has.",
         "loading": [
           "{TYPING} Talking with Discord...",
           "{TYPING} Catching a fish...",
@@ -398,6 +424,7 @@
         "info_full": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "description": "Quote the message of someone. You can optionally provide a channel to search for the message there.",
         "embed_basic": {
           "channel": "Posted in #{channel}",
           "info": "Quote from {user}"
@@ -412,6 +439,7 @@
         "nsfw_channel": "The channel you mentioned ({channel}) is marked as NSFW, while this channel is not!\nI won't quote messages from NSFW-channels in non NSFW-channels for safety."
       },
       "shards": {
+        "description": "List basic info about all shards the bot currently has.",
         "average": {
           "title": "Average",
           "description": "Those are the average Ping and Guild count.",
@@ -432,6 +460,7 @@
         }
       },
       "stats": {
+        "description": "Boring statistics... 'nuf said.",
         "uptime": {
           "day": "day",
           "days": "days",
@@ -453,6 +482,7 @@
         }
       },
       "user": {
+        "description": "Get basic info about yourself or someone else.",
         "embed": {
           "avatar": "Avatar",
           "avatar_url": "`Avatar URL`",
@@ -475,6 +505,7 @@
     },
     "nsfw": {
       "blowjob": {
+        "description": "Lets you ask someone, if you can suck them.\n\nThis command can only be executed in NSFW-labeled channels!",
         "mention_bot": "That would be like sticking your tongue into a socket.",
         "mention_purr": "You perv! Get someone else to suck! \\*slaps {user}*",
         "mention_self": "Oooookay. If you want to suck yourself, then I won't stop you {user}.",
@@ -488,10 +519,12 @@
         "special_user": "Okay sweetie. Let me get my \"toys\" so that we can have fun.\n\\*takes {user}'s hand and disappears in her room*"
       },
       "cum": {
+        "description": "No description needed.\n\nThis command can only be executed in NSFW-labeled channels!",
         "loading": "{LOADING} Preparing to cum...",
         "message": "{user} is cumming."
       },
       "fuck": {
+        "description": "Lets you ask someone, if you can have sex with them.\nIf you didn't pre-select an option can the other choose between normal, anal, yuri and yaoi.\nUse one of the following args to pre-select:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nThis command can only be executed in NSFW-labeled channels!",
         "mention_bot": "You can't fuck with bots!",
         "mention_purr": "\\*slaps {user}* NO! Not with me you perv!",
         "mention_self": "How can you actually fuck yourself {user}?! (No. Masturbation is not an answer)",
@@ -517,11 +550,12 @@
         }
       },
       "lewd": {
+        "description": "Gives an image or gif of a naughty neko.\n\nThis command can only be executed in NSFW-labeled channels!",
         "loading": "{LOADING} Getting a lewd neko image (or gif)...",
-        "title_gif": "Lewd neko {WAGTAIL}",
-        "title_img": "Lewd neko {NEKOWO}"
+        "message": "Lewd neko {NEKOWO}"
       },
       "pussylick": {
+        "description": "Lets you ask someone, if you can lick their pussy.\n\nThis command can only be executed in NSFW-labeled channels!",
         "mention_bot": "Bots don't have a pussy.",
         "mention_purr": "NO! I won't let you do that.",
         "mention_self": "How can you...? You know what? I won't ask.",
@@ -535,10 +569,12 @@
         "special_user": "Hehehe... You're *\"thirsty\"* {user}, are you?\n\\*takes {user}'s hand* and disappears in a room*"
       },
       "solo": {
+        "description": "Gives you a gif of a girl having fun with themself.\n\nThis command can only be executed in NSFW-labeled channels!",
         "loading": "{LOADING} Getting a gif of a hot girl...",
         "title": "Solo girl"
       },
       "threesome": {
+        "description": "Lets you ask **2** people, if they want to have sex with you.\nBy default is `--ffm` (2 Female, 1 Male) used, but you can use either `--mmf` or `--fff` for 2 Male, 1 Female and Only Females respectively.\n\nThis command can only be executed in NSFW-labeled channels!",
         "mention_bot": "Trust me {user}. It's more fun with humans and not bots. ;)",
         "mention_purr": "I know that I seem a bit kinky, but I'm not into *that* kind of stuff {user}!",
         "mention_self": "Correct me if I'm wrong, but does a threesome usually not require **3** people {user}?",
