@@ -402,9 +402,9 @@
         "dm_success": "Send you a message in DM {user}!",
         "embed": {
           "about_title": "About the Links",
-          "about_value": "Each of the links has a different purpose.\n`Recommended Invite` contains all permissions I need and a few more to make your experience more smooth.\n`Basic Invite` only has the required permissions.\n`Discord` is the invite to my support Discord.",
+          "about_value": "Each of the links has a different purpose.\n`Bot Invite` lets you invite me to one of your servers\n`Discord` is the invite to my support Discord.",
           "info_title": "Invite me",
-          "info_value": "Heyo! Nice from you to invite me to your Discord. :3\nJust select one of the links below to get me on your Discord, so that I can bring fun and nekos to you.",
+          "info_value": "Heyo! Nice from you to invite me to your Discord. :3\nJust select the `Bot Invite` option below to get me on your Discord, so that I can bring fun and nekos to you.",
           "links": {
             "discord": "`Discord (Support)`",
             "invite": "`Bot Invite`"
