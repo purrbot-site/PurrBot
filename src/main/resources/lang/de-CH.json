@@ -24,7 +24,6 @@
   },
   "misc": {
     "and": "und",
-    "flag": "🇨🇭",
     "info": "Hey da {user}!\nMein Prefix auf diesem Discord ist `{prefix}`\nVerwende `{prefix}help` für eine Liste von Befehlen.",
     "language": "Deutsch (de-ch)",
     "unknown_user": "Unbekannt",
