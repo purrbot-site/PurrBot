@@ -25,6 +25,7 @@
   "misc": {
     "and": "e",
     "info": "Olá {user}!\nMeu prefixo nesse discord é `{prefix}`\nexecute `{prefix}help` para uma lista de comandos",
+    "language": "Português (pt)",
     "unknown_user": "Desconhecido",
     "welcome_member": "você é o membro #{count}"
   },
@@ -238,8 +239,6 @@
         "invalid_lang": "A linguagem fornecida era inválida!\nUse `{prefix}idiomas` para ver todos os idiomas disponíveis.",
         "embed": {
           "available_lang_title": "Idiomas disponíveis",
-          "curr_lang_title": "Idioma atualmente selecionado",
-          "curr_lang_value": "Português (pt)",
           "description": "Você pode alterar o idioma para um dos compatíveis listados abaixo usando `{prefix}definir idioma <language>`.",
           "translators_title": "Tradutores",
           "translators_value": "Obrigado a todas as pessoas que traduziram o bot!\nVocê pode encontrar o projeto de tradução [here]({link})."
@@ -318,7 +317,7 @@
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Canais: {channels_text}\n{VOICECHANNEL} Canais: {channels_voice}",
           "created": "Criado",
           "levels": {
-            "high": "(╯°□°）╯︵ ┻━┻",
+            "high": "(╯°□°)╯( ┻━┻",
             "low": "Baixo",
             "medium": "Médio",
             "none": "Sem nível",
@@ -370,13 +369,7 @@
             "title": "Informações do Bot",
             "version": "Versão do bot: `PurrBot {bot_version}`"
           },
-          "bot_lists": {
-            "botlist_space": "`Botlist.space`",
-            "discord_boats": "`Discord.boats`",
-            "discord_bots_gg": "`Discord.bots.gg`",
-            "discordextremelist_xyz": "`Discordextremelist.xyz`",
-            "title": "Lista de bots"
-          },
+          "bot_lists_title": "Lista de bots:",
           "commands_title": "Comandos",
           "commands_value": "Use `{prefix}help` no Discord para uma lista de comandos.",
           "donators_more": "E mais {remaining}...",
@@ -384,11 +377,8 @@
           "donators_value": "Todos os doadores (Doações individuais ou contínuas) estão listados aqui.\nPara ficar listado também, certifique-se de estar no Discord ~Nya (Entre em contato com Andre_601 para tudo mais).",
           "links": {
             "discord": "`Discord (Support)`",
-            "github": "`GitHub`",
-            "patreon": "`Patreon`",
             "policy": "`Política de privacidade e termos de serviço`",
             "title": "Outros links",
-            "twitter": "Twitter",
             "website": "`Website`",
             "wiki": "`Wiki`"
           },
@@ -450,7 +440,7 @@
           "current_title": "Seu Fragmento?",
           "guilds_title": "Guildas",
           "ping_title": "Ping (ms)",
-          "status_title": "Status",
+          "status_title": "Estado",
           "title": "Informações de fragmento [{shard_id}/{shard_total}]"
         },
         "status": {
