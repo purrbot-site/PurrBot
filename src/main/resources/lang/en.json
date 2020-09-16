@@ -24,7 +24,9 @@
   },
   "misc": {
     "and": "and",
+    "flag": "\uD83C\uDDEC\uD83C\uDDE7",
     "info": "Hey there {user}!\nMy prefix on this Discord is `{prefix}`\nRun `{prefix}help` for a list of commands.",
+    "language": "English (en)",
     "unknown_user": "Unknown",
     "welcome_member": "You're member #{count}"
   },
@@ -233,13 +235,11 @@
     "guild": {
       "language": {
         "description": "Change the language used for the Bot in the current Guild.\nRun this without any arguments to see the current settings.\n\nYou need the `Manage Server` permission for this.",
-        "few_args": "Not enough arguments provided!\nUsage: `{prefix}language set <language>`",
+        "few_args": "Not enough arguments provided!\nUsage: `{prefix}language set <language>`\n\n**Current language**: {flag} {language}",
         "invalid_args": "Invalid arguments!\nUsage: `{prefix}language <set <language>|reset>`",
         "invalid_lang": "The provided language was invalid!\nUse `{prefix}language` to see all available languages.",
         "embed": {
           "available_lang_title": "Available languages",
-          "curr_lang_title": "Currently set language",
-          "curr_lang_value": "English (en)",
           "description": "You can change the language to one of the supported ones listed below using `{prefix}language set <language>`.",
           "translators_title": "Translators",
           "translators_value": "Thanks go to all people that translated the bot!\nYou may find the translation project [here]({link})."
