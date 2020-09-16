@@ -33,7 +33,7 @@ import java.util.List;
 
 @CommandDescription(
         name = "User",
-        description = "Gives you information about yourself",
+        description = "purr.info.user.description",
         triggers = {"user", "member", "userinfo", "memberinfo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

@@ -35,9 +35,7 @@ import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Invite",
-        description =
-                "Receive links for inviting the bot or joining the support-guild.\n" +
-                "`--dm` to send it in DM.",
+        description = "purr.info.invite.description",
         triggers = {"invite", "links"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

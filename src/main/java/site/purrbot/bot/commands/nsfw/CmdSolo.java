@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.nsfw;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -28,11 +27,11 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
+import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
         name = "Solo",
-        description = "Gives you a gif of a girl *playing* with herself.",
+        description = "purr.nsfw.solo.description",
         triggers = {"solo", "girl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
@@ -40,7 +39,7 @@ import site.purrbot.bot.constants.API;
                 @CommandAttribute(key = "help", value = "{p}solo")
         }
 )
-public class CmdSolo implements Command{
+public class CmdSolo implements Command, HttpUtil.ImageAPI{
 
     private final PurrBot bot;
 
@@ -50,22 +49,31 @@ public class CmdSolo implements Command{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        String link = bot.getHttpUtil().getImage(API.GIF_SOLO_LEWD);
-
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        if(link == null){
-            bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
-            return;
-        }
-
-        EmbedBuilder girl = bot.getEmbedUtil().getEmbed(member)
-                .setTitle(bot.getMsg(guild.getId(), "purr.nsfw.solo.title"), link)
-                .setImage(link);
-
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.solo.loading")).queue(message -> 
-                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(girl.build()).queue()
-        );
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.nsfw.solo.loading")
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, true));
+    }
+    
+    @Override
+    public String getCategory(){
+        return "nsfw";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "solo";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return true;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return true;
     }
 }

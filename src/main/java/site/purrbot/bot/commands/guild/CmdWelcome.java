@@ -31,9 +31,7 @@ import java.io.InputStream;
 
 @CommandDescription(
         name = "Welcome",
-        description =
-                "Greet people with a welcome message and Image!\n" +
-                "You can customize stuff like the background, icon, message and text color in the image.",
+        description = "purr.guild.welcome.description",
         triggers = {"welcome"},
         attributes = {
                 @CommandAttribute(key = "manage_server"),

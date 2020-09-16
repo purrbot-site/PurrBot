@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -28,11 +27,11 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
+import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
         name = "Senko",
-        description = "Gets an image of Senko from the anime 'Sewayaki Kitsune no Senko-san'.",
+        description = "purr.fun.senko.description",
         triggers = {"senko", "senko-san"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -40,7 +39,7 @@ import site.purrbot.bot.constants.API;
                 @CommandAttribute(key = "help", value = "{p}senko")
         }
 )
-public class CmdSenko implements Command{
+public class CmdSenko implements Command, HttpUtil.ImageAPI{
     
     private final PurrBot bot;
     
@@ -50,24 +49,31 @@ public class CmdSenko implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        String link = bot.getHttpUtil().getImage(API.IMG_SENKO);
-    
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
     
-        if(link == null){
-            bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
-            return;
-        }
-    
-        EmbedBuilder senko = bot.getEmbedUtil().getEmbed(member)
-                .setTitle(bot.getMsg(guild.getId(), "purr.fun.senko.title"), link)
-                .setImage(link);
-    
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.fun.senko.loading")
-        ).queue(message -> message.editMessage(
-                EmbedBuilder.ZERO_WIDTH_SPACE
-        ).embed(senko.build()).queue());
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, false));
+    }
+    
+    @Override
+    public String getCategory(){
+        return "fun";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "senko";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return true;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return false;
     }
 }

@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Stats",
-        description = "Everybody loves statistics... right?",
+        description = "purr.info.stats.description",
         triggers = {"stats", "stat", "statistic", "statistics"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

@@ -26,12 +26,11 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
-import site.purrbot.bot.util.message.MessageUtil;
+import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
         name = "Feed",
-        description = "Give someone some food to nom at. \uD83E\uDD24",
+        description = "purr.fun.feed.description",
         triggers = {"feed", "food", "eat"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -39,7 +38,7 @@ import site.purrbot.bot.util.message.MessageUtil;
                 @CommandAttribute(key = "help", value = "{p}feed <@user>")
         }
 )
-public class CmdFeed implements Command{
+public class CmdFeed implements Command, HttpUtil.ImageAPI{
     
     private final PurrBot bot;
     
@@ -81,13 +80,27 @@ public class CmdFeed implements Command{
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.feed.mention_bot");
             return;
         }
+        
+        bot.getMessageUtil().handleReactionEvent(tc, member, target, this);
+    }
     
-        MessageUtil.ReactionEventEntity instance = new MessageUtil.ReactionEventEntity(
-                member,
-                target,
-                API.GIF_FEED,
-                "fun"
-        );
-        bot.getMessageUtil().handleReactionEvent(tc, instance);
+    @Override
+    public String getCategory(){
+        return "fun";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "feed";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return false;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return false;
     }
 }

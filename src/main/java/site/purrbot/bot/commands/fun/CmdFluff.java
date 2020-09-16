@@ -28,16 +28,13 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
-import site.purrbot.bot.util.message.MessageUtil;
+import site.purrbot.bot.util.HttpUtil;
 
 import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Fluff",
-        description = 
-                "Allows you to ask someone, if you can fluff their tail.\n" +
-                "The asked user can then accept or decline the request.",
+        description = "purr.fun.fluff.description",
         triggers = {"fluff", "fluffing"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -45,7 +42,7 @@ import java.util.concurrent.TimeUnit;
                 @CommandAttribute(key = "help", value = "{p}fluff <@user>")
         }
 )
-public class CmdFluff implements Command{
+public class CmdFluff implements Command, HttpUtil.ImageAPI{
     
     private final Cache<String, String> queue = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)
@@ -104,14 +101,27 @@ public class CmdFluff implements Command{
             ).queue();
             return;
         }
-    
-        MessageUtil.ReactionEventEntity instance = new MessageUtil.ReactionEventEntity(
-                member,
-                target,
-                API.GIF_FLUFF,
-                "fun"
-        );
         
-        bot.getMessageUtil().handleReactionEvent(tc, instance);
+        bot.getMessageUtil().handleReactionEvent(tc, member, target, this);
+    }
+    
+    @Override
+    public String getCategory(){
+        return "fun";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "fluff";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return true;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return false;
     }
 }

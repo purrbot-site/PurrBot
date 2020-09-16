@@ -20,16 +20,18 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
+import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
         name = "Eevee",
-        description = "Get a image/gif of an adorable Eevee.",
+        description = "purr.fun.eevee.description",
         triggers = {"eevee"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -37,7 +39,7 @@ import site.purrbot.bot.constants.API;
                 @CommandAttribute(key = "help", value = "{p}eevee [--gif]")
         }
 )
-public class CmdEevee implements Command{
+public class CmdEevee implements Command, HttpUtil.ImageAPI{
     
     private final PurrBot bot;
     
@@ -47,29 +49,34 @@ public class CmdEevee implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
     
         String s = msg.getContentRaw();
-        String link;
-        if(s.toLowerCase().contains("--gif"))
-            link = bot.getHttpUtil().getImage(API.GIF_EEVEE);
-        else
-            link = bot.getHttpUtil().getImage(API.IMG_EEVEE);
+        boolean isGif = s.toLowerCase().contains("--gif");
         
-        
-        if(link == null){
-            bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
-            return;
-        }
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.eevee.loading")
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, isGif));
+    }
     
-        MessageEmbed eevee = bot.getEmbedUtil().getEmbed(member)
-                .setTitle(bot.getMsg(guild.getId(), "purr.fun.eevee.title"), link)
-                .setImage(link)
-                .build();
-        
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.eevee.loading"))
-                .queue(message -> message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(eevee).queue());
+    @Override
+    public String getCategory(){
+        return "fun";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "eevee";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return true;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return false;
     }
 }

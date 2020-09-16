@@ -20,18 +20,18 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
+import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
         name = "Tail",
-        description = "Wag a fluffy tail! >w<",
+        description = "purr.fun.tail.description",
         triggers = {"tail", "wag", "wagging"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -39,7 +39,7 @@ import site.purrbot.bot.constants.API;
                 @CommandAttribute(key = "help", value = "{p}tail")
         }
 )
-public class CmdTail implements Command{
+public class CmdTail implements Command, HttpUtil.ImageAPI{
     
     private final PurrBot bot;
     
@@ -49,21 +49,31 @@ public class CmdTail implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        String link = bot.getHttpUtil().getImage(API.GIF_TAIL);
-        
-        if(link == null){
-            bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
-            return;
-        }
-    
-        EmbedBuilder tail = bot.getEmbedUtil().getEmbed()
-                .setDescription(bot.getMsg(guild.getId(), "purr.fun.tail.message", member.getEffectiveName()))
-                .setImage(link);
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
+            msg.delete().queue();
         
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.fun.tail.loading")
-        ).queue(message -> message.editMessage(
-                EmbedBuilder.ZERO_WIDTH_SPACE
-        ).embed(tail.build()).queue());
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, true));
+    }
+    
+    @Override
+    public String getCategory(){
+        return "fun";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "tail";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return true;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return false;
     }
 }

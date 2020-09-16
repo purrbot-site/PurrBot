@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.nsfw;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -28,14 +27,11 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
+import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
         name = "Lewd",
-        description =
-        "Get images of naughty nekos. >w<\n" +
-        "\n" +
-        "Use `--gif` to get a gif of a lewd neko.",
+        description = "purr.nsfw.lewd.description",
         triggers = {"lewd", "lneko"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
@@ -43,7 +39,7 @@ import site.purrbot.bot.constants.API;
                 @CommandAttribute(key = "help", value = "{p}lewd [--gif]")
         }
 )
-public class CmdLewd implements Command{
+public class CmdLewd implements Command, HttpUtil.ImageAPI{
 
     private final PurrBot bot;
 
@@ -56,30 +52,31 @@ public class CmdLewd implements Command{
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
         
-        EmbedBuilder neko = bot.getEmbedUtil().getEmbed(member);
-        String link;
-        
         String s = msg.getContentRaw();
-        if(s.toLowerCase().contains("--gif") || s.toLowerCase().contains("—gif")){
-            link = bot.getHttpUtil().getImage(API.GIF_NEKO_LEWD);
-            if(link == null){
-                bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
-                return;
-            }
-            
-            neko.setTitle(bot.getMsg(guild.getId(), "purr.nsfw.lewd.title_gif"), link).setImage(link);
-        }else{
-            link = bot.getHttpUtil().getImage(API.IMG_NEKO_LEWD);
-            if(link == null){
-                bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
-                return;
-            }
-            
-            neko.setTitle(bot.getMsg(guild.getId(), "purr.nsfw.lewd.title_img"), link).setImage(link);
-        }
+        boolean isGif = s.contains("--gif");
         
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.lewd.loading")).queue(message -> 
-                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(neko.build()).queue()
-        );
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.nsfw.lewd.loading")
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, isGif));
+    }
+    
+    @Override
+    public String getCategory(){
+        return "nsfw";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "neko";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return true;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return true;
     }
 }

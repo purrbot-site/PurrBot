@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Ship",
-        description = "Checks how well you and someone else match. Mention two people to ship them instead.",
+        description = "purr.fun.ship.description",
         triggers = {"ship", "shipping"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),

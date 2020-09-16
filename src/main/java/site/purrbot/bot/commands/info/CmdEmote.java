@@ -37,9 +37,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 @CommandDescription(
         name = "Emote",
-        description =
-                "Get info about a emote (custom emoji)\n" +
-                "`--search` to search for an emote in the past 100 messages.",
+        description = "purr.info.emote.description",
         triggers = {"emote", "e"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

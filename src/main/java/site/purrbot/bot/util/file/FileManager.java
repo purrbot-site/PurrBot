@@ -41,6 +41,7 @@ public class FileManager{
 
     private final Logger logger = (Logger)LoggerFactory.getLogger(FileManager.class);
     private Map<String, File> files;
+    private List<String> languages;
 
     public FileManager(){}
     
@@ -52,6 +53,10 @@ public class FileManager{
     
     // Convenience method do add new languages more easy.
     public FileManager addLang(String file){
+        if(languages == null)
+            languages = new ArrayList<>();
+        
+        languages.add(file.toLowerCase());
         return addFile(file.toLowerCase(), "/lang/" + file + ".json", "./lang/" + file + ".json");
     }
     
@@ -59,8 +64,13 @@ public class FileManager{
         return files;
     }
     
+    public List<String> getLanguages(){
+        return languages;
+    }
+    
     public void createOrLoad(String name, String internal, String external){
-        if(files == null) files = new HashMap<>();
+        if(files == null)
+            files = new HashMap<>();
 
         File file = new File(external);
         String[] split = external.split("/");
@@ -128,7 +138,7 @@ public class FileManager{
             
             return json.getAsString();
         }catch(FileNotFoundException ex){
-            logger.warn("Could not find file " + name + ".json", ex);
+            logger.warn("Could not find \"" + path + "\" in file " + name + ".json", ex);
             return "";
         }
     }
@@ -155,7 +165,7 @@ public class FileManager{
             
             return json.getAsBoolean();
         }catch(FileNotFoundException ex){
-            logger.warn("Could not find file " + name + ".json in " + path, ex);
+            logger.warn("Could not find \"" + path + "\" in file " + name + ".json", ex);
             return false;
         }
     }
@@ -186,7 +196,7 @@ public class FileManager{
             return gson.fromJson(json.getAsJsonArray(), type);
             
         }catch(FileNotFoundException ex){
-            logger.warn("Could not find file " + name + ".json in " + path, ex);
+            logger.warn("Could not find \"" + path + "\" in file " + name + ".json", ex);
             return new ArrayList<>();
         }
     }

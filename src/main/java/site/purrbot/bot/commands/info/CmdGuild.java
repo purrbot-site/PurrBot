@@ -30,7 +30,7 @@ import java.util.List;
 
 @CommandDescription(
         name = "Guild",
-        description = "Basic Guild-info",
+        description = "purr.info.guild.description",
         triggers = {"guild", "server", "guildinfo", "serverinfo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

@@ -25,16 +25,14 @@ import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Links;
+import site.purrbot.bot.util.file.lang.LangUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @CommandDescription(
         name = "Language",
-        description = 
-                "Allows you to set the language used in the Discord.\n" +
-                "Just write the command without any arguments, to see the currently used and all available languages.",
+        description = "purr.guild.language.description",
         triggers = {"language", "lang"},
         attributes = {
                 @CommandAttribute(key = "manage_server"),
@@ -61,16 +59,15 @@ public class CmdLanguage implements Command{
         
         if(args.length < 1){
             MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
-                    .setDescription(bot.getMsg(guild.getId(), "purr.guild.language.embed.description"))
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.guild.language.embed.curr_lang_title"),
-                            bot.getMsg(guild.getId(), "purr.guild.language.embed.curr_lang_value"),
-                            true
+                    .setDescription(
+                            bot.getMsg(guild.getId(), "purr.guild.language.embed.description")
+                                    .replace("{flag}", LangUtils.Language.getEmote(bot.getLanguage(guild.getId())))
+                                    .replace("{language}", bot.getMsg(guild.getId(), "misc.language"))
                     )
                     .addField(
                             bot.getMsg(guild.getId(), "purr.guild.language.embed.available_lang_title"),
-                            String.join(", ", getLangs()),
-                            true
+                            getLanguages(),
+                            false
                     )
                     .addField(
                             bot.getMsg(guild.getId(), "purr.guild.language.embed.translators_title"),
@@ -98,7 +95,7 @@ public class CmdLanguage implements Command{
                     return;
                 }
                 
-                if(!getLangs().contains(args[1].toLowerCase())){
+                if(!getLangList().contains(args[1].toLowerCase())){
                     bot.getEmbedUtil().sendError(tc, member, "purr.guild.language.invalid_lang");
                     return;
                 }
@@ -119,16 +116,22 @@ public class CmdLanguage implements Command{
         }
     }
     
-    private List<String> getLangs(){
-        List<String> langs = new ArrayList<>();
-        for(String lang : bot.getFileManager().getFiles().keySet()){
-            if(lang.equalsIgnoreCase("config") || lang.equalsIgnoreCase("random"))
-                continue;
-            
-            langs.add(lang);
-        }
+    private List<String> getLangList(){
+        return bot.getFileManager().getLanguages();
+    }
+    
+    private String getLanguages(){
+        List<String> langs = getLangList();
         Collections.sort(langs);
         
-        return langs;
+        StringBuilder builder = new StringBuilder();
+        for(String language : langs){
+            if(builder.length() > 1)
+                builder.append("\n");
+            
+            builder.append(LangUtils.Language.getString(language));
+        }
+        
+        return builder.toString();
     }
 }

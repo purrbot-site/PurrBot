@@ -62,6 +62,45 @@ public final class LangUtils{
         }
     }
     
+    public enum Language{
+        DE_CH ("\uDDE8", "\uDDED"),
+        EN    ("\uDDEC", "\uDDE7"),
+        EN_OWO("\uDDEC", "\uDDE7"),
+        ET_EE ("\uDDEA", "\uDDEA"),
+        IT_IT ("\uDDEE", "\uDDF9"),
+        KO_KR ("\uDDF0", "\uDDF7"),
+        PR_BR ("\uDDE7", "\uDDF7"),
+        RU_RU ("\uDDF7", "\uDDFA"),
+        
+        UNKNOWN("\uDDFA", "\uDDF3");
+        
+        private final String emote;
+        
+        Language(String code1, String code2){
+            this.emote = "\uD83C" + code1 + "\uD83C" + code2;
+        }
+        
+        public static String getEmote(String lang){
+            for(Language language : values()){
+                String name = language.name().toLowerCase().replace("_", "-");
+                if(name.equals(lang))
+                    return language.emote;
+            }
+            
+            return UNKNOWN.emote;
+        }
+        
+        public static String getString(String lang){
+            for(Language language : values()){
+                String name = language.name().toLowerCase().replace("_", "-");
+                if(name.equals(lang))
+                    return language.emote + " " + name;
+            }
+            
+            return UNKNOWN.emote + " " + UNKNOWN.name().toLowerCase();
+        }
+    }
+    
     /*
      * Used to get the supported language (if available)
      * 

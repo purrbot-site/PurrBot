@@ -20,22 +20,20 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
+import site.purrbot.bot.util.HttpUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @CommandDescription(
         name = "Lick",
-        description = "Lets you lick one or multiple users.",
+        description = "purr.fun.lick.description",
         triggers = {"lick"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -43,7 +41,7 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}lick <@user> [@user ...]")
         }
 )
-public class CmdLick implements Command{
+public class CmdLick implements Command, HttpUtil.ImageAPI{
 
     private final PurrBot bot;
 
@@ -93,22 +91,29 @@ public class CmdLick implements Command{
 
         if(targets.isEmpty())
             return;
-    
-        String link = bot.getHttpUtil().getImage(API.GIF_LICK);
 
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.fun.lick.loading")
-        ).queue(message -> {
-            if(link == null){
-                message.editMessage(MarkdownSanitizer.escape(
-                        bot.getMsg(guild.getId(), "purr.fun.lick.message", member.getEffectiveName(), targets)
-                )).queue();
-            }else{
-                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(bot.getEmbedUtil().getEmbed().setDescription(MarkdownSanitizer.escape(
-                                bot.getMsg(guild.getId(), "purr.fun.lick.message", member.getEffectiveName(), targets)
-                        )).setImage(link).build()).queue();
-            }
-        });
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, targets, true));
+    }
+    
+    @Override
+    public String getCategory(){
+        return "fun";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "lick";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return false;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return false;
     }
 }

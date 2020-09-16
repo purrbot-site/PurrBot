@@ -28,8 +28,8 @@ import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEve
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Emotes;
+import site.purrbot.bot.util.HttpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +40,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 @CommandDescription(
         name = "Threesome",
-        description = 
-                "Lets you have sex with two other people at the same time. OwO\n" +
-                "Both can accept the request by clicking on ✅ or deny it by clicking on ❌.\n" +
-                "The request is denied if even just one of the users denies it, or when it times out.\n" +
-                "\n" +
-                "Use `--mmf` to get gifs with 2 man and 1 female or `--fff` with only females.",
+        description = "purr.nsfw.threesome.description",
         triggers = {"threesome", "3some"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
@@ -57,7 +52,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                 @CommandAttribute(key = "help", value = "{p}threesome <@user1> <@user2> [--fff|--mmf]")
         }
 )
-public class CmdThreesome implements Command{
+public class CmdThreesome implements Command, HttpUtil.ImageAPI{
     
     private final PurrBot bot;
     
@@ -198,29 +193,19 @@ public class CmdThreesome implements Command{
                         )).queue();
                     }else{
                         String raw = msg.getContentRaw().toLowerCase();
-                        String link;
-                        if(raw.contains("--mmf"))
-                            link = bot.getHttpUtil().getImage(API.GIF_THREESOME_MMF_LEWD);
-                        else
-                        if(raw.contains("--fff"))
-                            link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFF_LEWD);
-                        else
-                            link = bot.getHttpUtil().getImage(API.GIF_THREESOME_FFM_LEWD);
-                        
                         String targets = String.join(
                                 " ",
                                 target1.getEffectiveName(),
                                 bot.getMsg(guild.getId(), "misc.and"),
                                 target2.getEffectiveName()
                         );
-                        
-                        bot.getMessageUtil().editMessage(
-                                botMsg,
-                                "purr.nsfw.threesome.",
-                                author,
-                                targets,
-                                link
-                        );
+                        if(raw.contains("--mmf"))
+                            bot.getHttpUtil().handleRequest(this, "threesome_mmf", author, botMsg, targets, true);
+                        else
+                        if(raw.contains("--fff"))
+                            bot.getHttpUtil().handleRequest(this, "threesome_fff", author, botMsg, targets, true);
+                        else
+                            bot.getHttpUtil().handleRequest(this, "threesome_ffm", author, botMsg, targets, true);
                     }
                 }, 1, TimeUnit.MINUTES,
                 () -> {
@@ -248,5 +233,25 @@ public class CmdThreesome implements Command{
                     )).queue();
                 }
         );
+    }
+    
+    @Override
+    public String getCategory(){
+        return "nsfw";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "threesome";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return false;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return true;
     }
 }

@@ -41,7 +41,7 @@ import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
 
 @CommandDescription(
         name = "Shards",
-        description = "Display the current shards \\*Purr* has",
+        description = "purr.info.shards.description",
         triggers = {"shard", "shards", "shardinfo"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

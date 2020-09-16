@@ -27,8 +27,8 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Emotes;
+import site.purrbot.bot.util.HttpUtil;
 
 import java.awt.*;
 import java.io.InputStream;
@@ -60,12 +60,6 @@ public class MessageUtil {
 
     public MessageUtil(PurrBot bot){
         this.bot = bot;
-    }
-
-    public String getRandomKissImg(){
-        return bot.getKissImg().isEmpty() ? "" : bot.getKissImg().get(
-                bot.getRandom().nextInt(bot.getKissImg().size())
-        );
     }
 
     public String getRandomShutdownImg(){
@@ -232,14 +226,9 @@ public class MessageUtil {
         return member.getId() + ":" + member.getGuild().getId();
     }
     
-    public void handleReactionEvent(TextChannel tc, ReactionEventEntity instance){
+    public void handleReactionEvent(TextChannel tc, Member author, Member target, HttpUtil.ImageAPI api){
         Guild guild = tc.getGuild();
-        
-        Member author = instance.getAuthor();
-        Member target = instance.getTarget();
-        
-        API api = instance.getApi();
-        String path = "purr." + instance.getCategory() + "." + api.getEndpoint() + ".";
+        String path = "purr." + api.getCategory() + "." + api.getEndpoint() + ".";
         
         if(queue.getIfPresent(queueString(api.getEndpoint(), guild.getId(), author.getId())) != null){
             tc.sendMessage(
@@ -261,7 +250,7 @@ public class MessageUtil {
         );
     }
     
-    private void handle(Message msg, String path, API api, Guild guild, Member author, Member target){
+    private void handle(Message msg, String path, HttpUtil.ImageAPI api, Guild guild, Member author, Member target){
         queue.put(queueString(
                 api.getEndpoint(),
                 guild.getId(),
@@ -302,9 +291,10 @@ public class MessageUtil {
                                 )
                         )).queue();
                     }else{
-                        String link = bot.getHttpUtil().getImage(api);
-                    
-                        editMessage(msg, path, author, target.getEffectiveName(), link);
+                        if(guild.getSelfMember().hasPermission(channel, Permission.MESSAGE_MANAGE))
+                            msg.clearReactions().queue();
+                        
+                        bot.getHttpUtil().handleRequest(api, author, msg, target.getEffectiveName(), true);
                     }
                 },
                 1, TimeUnit.MINUTES,
@@ -376,39 +366,5 @@ public class MessageUtil {
     
     private String queueString(String api, String guildId, String authorId){
         return api + ":" + guildId + ":" + authorId;
-    }
-    
-    public static class ReactionEventEntity{
-        private final Member author;
-        private final Member target;
-        
-        private final API api;
-        
-        private final String category;
-        
-        public ReactionEventEntity(Member author, Member target, API api, String category){
-            this.author = author;
-            this.target = target;
-            
-            this.api = api;
-            
-            this.category = category;
-        }
-    
-        public Member getAuthor(){
-            return author;
-        }
-    
-        public Member getTarget(){
-            return target;
-        }
-    
-        public API getApi(){
-            return api;
-        }
-    
-        public String getCategory(){
-            return category;
-        }
     }
 }

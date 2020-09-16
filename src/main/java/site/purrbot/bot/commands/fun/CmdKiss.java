@@ -20,22 +20,21 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
-import site.purrbot.bot.util.message.MessageUtil;
+import site.purrbot.bot.util.HttpUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @CommandDescription(
         name = "Kiss",
-        description = "Lets you share some kisses with others!",
+        description = "purr.fun.kiss.description",
         triggers = {"kiss", "love", "kissu"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -43,8 +42,8 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}kiss <@user> [@user ...]")
         }
 )
-public class CmdKiss implements Command{
-
+public class CmdKiss implements Command, HttpUtil.ImageAPI{
+    
     private final PurrBot bot;
 
     public CmdKiss(PurrBot bot){
@@ -100,19 +99,28 @@ public class CmdKiss implements Command{
         if(targets.isEmpty())
             return;
         
-        String link = bot.getHttpUtil().getImage(API.GIF_KISS);
-        
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.fun.kiss.loading")
-        ).queue(message -> {
-            String text = MarkdownSanitizer.escape(bot.getMsg(guild.getId(), "purr.fun.kiss.message", member.getEffectiveName(), targets));
-            
-            if(link == null){
-                message.editMessage(text).queue();
-            }else{
-                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(bot.getEmbedUtil().getEmbed().setDescription(text).setImage(link).build()).queue();
-            }
-        });
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, targets, true));
+    }
+    
+    @Override
+    public String getCategory(){
+        return "fun";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "kiss";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return false;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return false;
     }
 }

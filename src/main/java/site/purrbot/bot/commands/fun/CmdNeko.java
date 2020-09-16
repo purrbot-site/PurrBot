@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -28,15 +27,11 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
-import site.purrbot.bot.constants.Emotes;
+import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
         name = "Neko",
-        description =
-                "Gives you a lovely neko (catgirl)\n" +
-                "\n" +
-                "Use `--gif` to show a gif of a neko.",
+        description = "purr.fun.neko.description",
         triggers = {"neko", "catgirl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -44,7 +39,7 @@ import site.purrbot.bot.constants.Emotes;
                 @CommandAttribute(key = "help", value = "{p}neko [--gif]")
         }
 )
-public class CmdNeko implements Command{
+public class CmdNeko implements Command, HttpUtil.ImageAPI{
 
     private final PurrBot bot;
 
@@ -58,52 +53,30 @@ public class CmdNeko implements Command{
             msg.delete().queue();
 
         String s = msg.getContentRaw();
-        EmbedBuilder neko = bot.getEmbedUtil().getEmbed(member);
-        String link;
+        boolean isGif = s.contains("--gif");
         
-        if(s.toLowerCase().contains("--gif") || s.toLowerCase().contains("—gif")){
-            link = bot.getHttpUtil().getImage(API.GIF_NEKO);
-            if(link == null){
-                bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
-                return;
-            }
-            
-            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_gif"), link).setImage(link);
-        }else{
-            link = bot.getHttpUtil().getImage(API.IMG_NEKO);
-            if(link == null){
-                bot.getEmbedUtil().sendError(tc, member, "errors.api_error");
-                return;
-            }
-            
-            neko.setTitle(bot.getMsg(guild.getId(), "purr.fun.neko.title_img"), link).setImage(link);
-        }
-        
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.neko.loading")).queue(message -> {
-            if(link.equals("https://purrbot.site/img/sfw/neko/img/neko_076.jpg")){
-                if(bot.isBeta()){
-                    neko.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.snuggle"));
-                    
-                    message.addReaction("\u2764").queue();
-                }else{
-                    neko.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.snuggle"));
-                    
-                    message.addReaction(Emotes.SNUGGLE.getNameAndId()).queue();
-                }
-            }else
-            if(link.equals("https://purrbot.site/img/sfw/neko/img/neko_136.jpg")){
-                if(bot.isBeta()){
-                    neko.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.purr"));
-                    
-                    message.addReaction(Emotes.PURR.getNameAndId()).queue();
-                }else{
-                    neko.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.purr"));
-                    
-                    message.addReaction("\u2764").queue();
-                }
-            }
-            
-            message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(neko.build()).queue();
-        });
+        tc.sendMessage(
+                bot.getMsg(guild.getId(), "purr.fun.neko.loading")
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, isGif));
+    }
+    
+    @Override
+    public String getCategory(){
+        return "fun";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "neko";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return true;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return false;
     }
 }

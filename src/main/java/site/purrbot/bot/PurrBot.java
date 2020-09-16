@@ -74,7 +74,7 @@ public class PurrBot {
     private final Random random = new Random();
 
     private final FileManager fileManager = new FileManager();
-    private final HttpUtil httpUtil = new HttpUtil();
+    private final HttpUtil httpUtil = new HttpUtil(this);
     private final CommandLoader commandLoader = new CommandLoader(this);
     
     private DBUtil dbUtil;
@@ -316,7 +316,6 @@ public class PurrBot {
                 .replace("{SHIROTAILWAG}", Emotes.SHIRO_TAIL_WAG.getEmote())
                 .replace("{TYPING}", Emotes.TYPING.getEmote())
                 .replace("{VANILLABLUSH}", Emotes.BLUSH.getEmote())
-                .replace("{WAGTAIL}", Emotes.NEKO_TAIL_WAG.getEmote())
                 .replace("{EDIT}", Emotes.EDIT.getEmote())
                 .replace("{DOWNLOAD}", Emotes.DOWNLOAD.getEmote())
                 .replace("{DISCORD}", Emotes.DISCORD.getEmote())

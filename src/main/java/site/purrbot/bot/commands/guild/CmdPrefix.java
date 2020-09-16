@@ -27,7 +27,7 @@ import site.purrbot.bot.commands.Command;
 
 @CommandDescription(
         name = "Prefix",
-        description = "Set or reset a prefix",
+        description = "purr.guild.prefix.description",
         triggers = {"prefix"},
         attributes = {
                 @CommandAttribute(key = "manage_server"),

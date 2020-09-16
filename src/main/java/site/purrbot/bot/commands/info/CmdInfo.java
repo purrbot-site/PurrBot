@@ -38,10 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Info",
-        description =
-                "Get some basic info about the bot.\n" +
-                "\n" +
-                "Use `--dm` to send it in DM.",
+        description = "purr.info.info.description",
         triggers = {"info", "infos", "information"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

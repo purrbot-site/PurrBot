@@ -25,7 +25,6 @@ import net.dv8tion.jda.internal.utils.IOUtil;
 import okhttp3.*;
 import org.json.JSONObject;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.constants.API;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -163,13 +162,13 @@ public class ImageUtil {
                 .put(
                         "icon",
                         icon.equalsIgnoreCase("random") ? 
-                                bot.getHttpUtil().getImage(API.IMG_ICON) : 
+                                bot.getHttpUtil().getImage("https://purrbot.site/api/img/sfw/icon/img") : 
                                 String.format("https://purrbot.site/img/sfw/icon/img/%s.png", icon)
                 )
                 .put(
                         "banner", 
                         bg.equalsIgnoreCase("random") ? 
-                                bot.getHttpUtil().getImage(API.IMG_BACKGROUND) : 
+                                bot.getHttpUtil().getImage("https://purrbot.site/api/img/sfw/background/img") : 
                                 String.format("https://purrbot.site/img/sfw/background/img/%s.png", bg)
                 )
                 .put(

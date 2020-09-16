@@ -20,23 +20,20 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
+import site.purrbot.bot.util.HttpUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @CommandDescription(
         name = "Bite",
-        description =
-                "Lets you bite someone.",
+        description = "purr.fun.bite.description",
         triggers = {"bite", "nibble", "nom"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
@@ -44,7 +41,7 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}bite <@user> [@user ...]")
         }
 )
-public class CmdBite implements Command{
+public class CmdBite implements Command, HttpUtil.ImageAPI{
     
     private final PurrBot bot;
     
@@ -95,21 +92,28 @@ public class CmdBite implements Command{
         if(targets.isEmpty())
             return;
         
-        String link = bot.getHttpUtil().getImage(API.GIF_BITE);
-        
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.fun.bite.loading")
-        ).queue(message -> {
-            if(link == null){
-                message.editMessage(MarkdownSanitizer.escape(
-                        bot.getMsg(guild.getId(), "purr.fun.bite.message", member.getEffectiveName(), targets)
-                )).queue();
-            }else{
-                message.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                        .embed(bot.getEmbedUtil().getEmbed().setDescription(MarkdownSanitizer.escape(
-                                bot.getMsg(guild.getId(), "purr.fun.bite.message", member.getEffectiveName(), targets)
-                        )).setImage(link).build()).queue();
-            }
-        });
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, targets, true));
+    }
+    
+    @Override
+    public String getCategory(){
+        return "fun";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "bite";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return false;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return false;
     }
 }

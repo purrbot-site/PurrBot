@@ -28,8 +28,8 @@ import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEve
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
 import site.purrbot.bot.constants.Emotes;
+import site.purrbot.bot.util.HttpUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,12 +38,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
 
 @CommandDescription(
         name = "Fuck",
-        description =
-                "Wanna fuck someone?\n" +
-                "Mention a user, to send a request.\n" +
-                "The mentioned user can choose if they want to have sex or not, by clicking the matching reaction.\n" +
-                "When no arg is provided can the mentioned user choose the type of sex.\n" +
-                "You can provide `--anal`, `--normal`, `--yaoi` or `--yuri` to already choose an option for the request.",
+        description = "purr.nsfw.fuck.description",
         triggers = {"fuck", "sex"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
@@ -57,7 +52,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                 @CommandAttribute(key = "help", value = "{p}fuck <@user> [--anal|--normal|--yaoi|--yuri]")
         }
 )
-public class CmdFuck implements Command{
+public class CmdFuck implements Command, HttpUtil.ImageAPI{
 
     private final PurrBot bot;
 
@@ -158,16 +153,6 @@ public class CmdFuck implements Command{
         });
     }
     
-    private MessageEmbed getFuckEmbed(Member requester, Member target, String url){
-        return bot.getEmbedUtil().getEmbed()
-                .setDescription(MarkdownSanitizer.escape(
-                        bot.getMsg(requester.getGuild().getId(), "purr.nsfw.fuck.message", requester.getEffectiveName())
-                           .replace("{target}", target.getEffectiveName())
-                ))
-                .setImage(url)
-                .build();
-    }
-    
     private boolean equalsAny(String id){
         return (
                 id.equals(Emotes.SEX.getId()) ||
@@ -233,38 +218,30 @@ public class CmdFuck implements Command{
                         )).queue();
                         return;
                     }
-                    String link;
+                    
                     if(!hasArgs(content)){
                         if(id.equals(Emotes.SEX_ANAL.getId()))
-                            link = bot.getHttpUtil().getImage(API.GIF_ANAL_LEWD);
+                            bot.getHttpUtil().handleRequest(this, "anal", author, botMsg, target.getEffectiveName(), true);
                         else
                         if(id.equals(Emotes.SEX_YURI.getId()))
-                            link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
+                            bot.getHttpUtil().handleRequest(this, "yuri", author, botMsg, target.getEffectiveName(), true);
                         else
                         if(id.equals(Emotes.SEX_YAOI.getId()))
-                            link = bot.getHttpUtil().getImage(API.GIF_YAOI_LEWD);
+                            bot.getHttpUtil().handleRequest(this, "yaoi", author, botMsg, target.getEffectiveName(), true);
                         else
-                            link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
+                            bot.getHttpUtil().handleRequest(this, "fuck", author, botMsg, target.getEffectiveName(), true);
                     }else{
                         if(content.contains("--anal"))
-                            link = bot.getHttpUtil().getImage(API.GIF_ANAL_LEWD);
+                            bot.getHttpUtil().handleRequest(this, "anal", author, botMsg, target.getEffectiveName(), true);
                         else
                         if(content.contains("--yuri"))
-                            link = bot.getHttpUtil().getImage(API.GIF_YURI_LEWD);
+                            bot.getHttpUtil().handleRequest(this, "yuri", author, botMsg, target.getEffectiveName(), true);
                         else
                         if(content.contains("--yaoi"))
-                            link = bot.getHttpUtil().getImage(API.GIF_YAOI_LEWD);
+                            bot.getHttpUtil().handleRequest(this, "yaoi", author, botMsg, target.getEffectiveName(), true);
                         else
-                            link = bot.getHttpUtil().getImage(API.GIF_FUCK_LEWD);
+                            bot.getHttpUtil().handleRequest(this, "fuck", author, botMsg, target.getEffectiveName(), true);
                     }
-                    
-                    bot.getMessageUtil().editMessage(
-                            botMsg,
-                            "purr.nsfw.fuck.",
-                            author,
-                            target.getEffectiveName(),
-                            link
-                    );
                 }, 1, TimeUnit.MINUTES,
                 () -> {
                     TextChannel channel = botMsg.getTextChannel();
@@ -281,5 +258,25 @@ public class CmdFuck implements Command{
                     )).queue();
                 }
         );
+    }
+    
+    @Override
+    public String getCategory(){
+        return "nsfw";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "fuck";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return false;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return true;
     }
 }

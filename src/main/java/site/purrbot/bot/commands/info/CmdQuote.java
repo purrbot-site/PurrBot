@@ -30,9 +30,7 @@ import java.io.IOException;
 
 @CommandDescription(
         name = "Quote",
-        description =
-                "Quote a message of a member from a channel.\n" +
-                "You have to mention a channel when the message isn't in the same one.",
+        description = "purr.info.quote.description",
         triggers = {"quote"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

@@ -18,8 +18,6 @@
 
 package site.purrbot.bot.commands.nsfw;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
@@ -28,17 +26,11 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
-import site.purrbot.bot.util.message.MessageUtil;
-
-import java.util.concurrent.TimeUnit;
+import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
         name = "PussyLick",
-        description = 
-                "Lick the pussy of someone. Ow<\n" +
-                "\n" +
-                "The person asked has to accept the request.",
+        description = "purr.nsfw.pussylick.description",
         triggers = {"pussylick", "plick", "cunni"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
@@ -46,17 +38,13 @@ import java.util.concurrent.TimeUnit;
                 @CommandAttribute(key = "help", value = "{p}plick <@user>")
         }
 )
-public class CmdPussylick implements Command{
+public class CmdPussylick implements Command, HttpUtil.ImageAPI{
     
     private final PurrBot bot;
     
     public CmdPussylick(PurrBot bot){
         this.bot = bot;
     }
-    
-    private final Cache<String, String> queue = Caffeine.newBuilder()
-            .expireAfterWrite(2, TimeUnit.MINUTES)
-            .build();
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
@@ -98,14 +86,27 @@ public class CmdPussylick implements Command{
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.pussylick.mention_bot");
             return;
         }
-    
-        MessageUtil.ReactionEventEntity instance = new MessageUtil.ReactionEventEntity(
-                member,
-                target,
-                API.GIF_PUSSYLICK_LEWD,
-                "nsfw"
-        );
         
-        bot.getMessageUtil().handleReactionEvent(tc, instance);
+        bot.getMessageUtil().handleReactionEvent(tc, member, target, this);
+    }
+    
+    @Override
+    public String getCategory(){
+        return "nsfw";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "pussylick";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return false;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return true;
     }
 }

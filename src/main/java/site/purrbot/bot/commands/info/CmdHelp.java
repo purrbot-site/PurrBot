@@ -36,7 +36,7 @@ import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
 
 @CommandDescription(
         name = "Help",
-        description = "Get a list of all commands or get info about a specific command.",
+        description = "purr.info.help.description",
         triggers = {"help", "command", "commands"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),
@@ -61,66 +61,6 @@ public class CmdHelp implements Command{
             put("owner", "<:andre_601:730944556119359588>");
         }
     };
-
-    private MessageEmbed commandHelp(Member member, Command cmd, String prefix){
-        CommandDescription desc = cmd.getDescription();
-        String[] triggers = desc.triggers();
-        Guild guild = member.getGuild();
-        
-        EmbedBuilder commandInfo = bot.getEmbedUtil().getEmbed(member)
-                .setTitle(
-                        bot.getMsg(guild.getId(), "purr.info.help.command_info.title")
-                                .replace("{command}", desc.name())
-                )
-                .setDescription(desc.description())
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_title"),
-                        bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_value")
-                                .replace("{commands}", cmd.getAttribute("usage").replace("{p}", prefix)), 
-                        false
-                )
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.info.help.command_info.aliases"), 
-                        String.format(
-                                "`%s`",
-                                String.join(", ", triggers)
-                        ), 
-                        false
-                );
-
-        return commandInfo.build();
-    }
-
-    private boolean isCommand(Command cmd){
-        return cmd.getDescription() != null || cmd.hasAttribute("description");
-    }
-
-    private MessageEmbed commandList(Member member, String icon, String titlePath, String commands){
-        return bot.getEmbedUtil().getEmbed(member)
-                .setDescription(bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.description"))
-                .addField(
-                        String.format(
-                                "%s %s",
-                                icon,
-                                bot.getMsg(member.getGuild().getId(), titlePath)
-                        ),
-                        commands,
-                        false
-                )
-                .addField(
-                        bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.support_title"),
-                        bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.support_value"),
-                        false
-                )
-                .build();
-    }
-    
-    private List<Command> getCommands(){
-        return bot.getCmdHandler().getCommands().stream()
-                .map(cmd -> (Command)cmd)
-                .sorted(Comparator.comparing(cmd -> cmd.getDescription().name()))
-                .collect(Collectors.toList());
-    }
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
@@ -224,5 +164,67 @@ public class CmdHelp implements Command{
             
             builder.build().display(tc);
         }
+    }
+    
+    private MessageEmbed commandHelp(Member member, Command cmd, String prefix){
+        CommandDescription desc = cmd.getDescription();
+        String[] triggers = desc.triggers();
+        Guild guild = member.getGuild();
+        
+        EmbedBuilder commandInfo = bot.getEmbedUtil().getEmbed(member)
+                .setTitle(
+                        bot.getMsg(guild.getId(), "purr.info.help.command_info.title")
+                                .replace("{command}", desc.name())
+                )
+                .setDescription(
+                        bot.getMsg(guild.getId(), desc.description())
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_title"),
+                        bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_value")
+                                .replace("{commands}", cmd.getAttribute("usage").replace("{p}", prefix)),
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.help.command_info.aliases"),
+                        String.format(
+                                "`%s`",
+                                String.join(", ", triggers)
+                        ),
+                        false
+                );
+        
+        return commandInfo.build();
+    }
+    
+    private boolean isCommand(Command cmd){
+        return cmd.getDescription() != null || cmd.hasAttribute("description");
+    }
+    
+    private MessageEmbed commandList(Member member, String icon, String titlePath, String commands){
+        return bot.getEmbedUtil().getEmbed(member)
+                .setDescription(bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.description"))
+                .addField(
+                        String.format(
+                                "%s %s",
+                                icon,
+                                bot.getMsg(member.getGuild().getId(), titlePath)
+                        ),
+                        commands,
+                        false
+                )
+                .addField(
+                        bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.support_title"),
+                        bot.getMsg(member.getGuild().getId(), "purr.info.help.command_menu.support_value"),
+                        false
+                )
+                .build();
+    }
+    
+    private List<Command> getCommands(){
+        return bot.getCmdHandler().getCommands().stream()
+                .map(cmd -> (Command)cmd)
+                .sorted(Comparator.comparing(cmd -> cmd.getDescription().name()))
+                .collect(Collectors.toList());
     }
 }

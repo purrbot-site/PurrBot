@@ -28,15 +28,13 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.API;
-import site.purrbot.bot.util.message.MessageUtil;
+import site.purrbot.bot.util.HttpUtil;
 
 import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Blowjob",
-        description =
-                "Get a gif of someone trying to get some *milk*",
+        description = "purr.nsfw.blowjob.description",
         triggers = {"blowjob", "bj", "bjob", "succ"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
@@ -44,7 +42,7 @@ import java.util.concurrent.TimeUnit;
                 @CommandAttribute(key = "help", value = "{p}blowjob <@user>")
         }
 )
-public class CmdBlowjob implements Command{
+public class CmdBlowjob implements Command, HttpUtil.ImageAPI{
 
     private final PurrBot bot;
 
@@ -108,13 +106,26 @@ public class CmdBlowjob implements Command{
             return;
         }
     
-        MessageUtil.ReactionEventEntity instance = new MessageUtil.ReactionEventEntity(
-                member,
-                target,
-                API.GIF_BLOW_JOB_LEWD,
-                "nsfw"
-        );
+        bot.getMessageUtil().handleReactionEvent(tc, member, target, this);
+    }
     
-        bot.getMessageUtil().handleReactionEvent(tc, instance);
+    @Override
+    public String getCategory(){
+        return "nsfw";
+    }
+    
+    @Override
+    public String getEndpoint(){
+        return "blowjob";
+    }
+    
+    @Override
+    public boolean isImgRequired(){
+        return false;
+    }
+    
+    @Override
+    public boolean isNSFW(){
+        return true;
     }
 }

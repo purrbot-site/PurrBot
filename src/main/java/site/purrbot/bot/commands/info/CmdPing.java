@@ -31,8 +31,7 @@ import java.time.temporal.ChronoUnit;
 
 @CommandDescription(
         name = "Ping",
-        description =
-                "Pong I guess?",
+        description = "purr.info.ping.description",
         triggers = {"ping"},
         attributes = {
                 @CommandAttribute(key = "category", value = "info"),

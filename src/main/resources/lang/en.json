@@ -24,7 +24,6 @@
   },
   "misc": {
     "and": "and",
-    "flag": "\uD83C\uDDEC\uD83C\uDDE7",
     "info": "Hey there {user}!\nMy prefix on this Discord is `{prefix}`\nRun `{prefix}help` for a list of commands.",
     "language": "English (en)",
     "unknown_user": "Unknown",
