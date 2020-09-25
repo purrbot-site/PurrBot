@@ -243,7 +243,7 @@
           "translators_title": "Tradutores",
           "translators_value": "Obrigado a todas as pessoas que traduziram o bot!\nVocê pode encontrar o projeto de tradução [here]({link})."
         },
-        "language_set": "Idioma definido para `Português (pt)`!",
+        "language_set": "Idioma definido para `Português (pt-br)`!",
         "no_language": "Por favor, forneça um idioma que deseja definir!"
       },
       "prefix": {
