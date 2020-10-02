@@ -18,82 +18,37 @@
 
 package site.purrbot.bot.commands;
 
-import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.fun.*;
-import site.purrbot.bot.commands.guild.CmdLanguage;
-import site.purrbot.bot.commands.guild.CmdPrefix;
-import site.purrbot.bot.commands.guild.CmdWelcome;
-import site.purrbot.bot.commands.info.*;
-import site.purrbot.bot.commands.nsfw.*;
-import site.purrbot.bot.commands.owner.*;
+import org.reflections.Reflections;
 
-import java.util.Arrays;
+import org.reflections.scanners.SubTypesScanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import site.purrbot.bot.PurrBot;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class CommandLoader {
 
+    private static final Logger LOG=LoggerFactory.getLogger(CommandLoader.class);
+
     private final Set<Command> COMMANDS = new HashSet<>();
 
     public CommandLoader(PurrBot bot){
-        loadCommands(
-                // Fun
-                new CmdBite(bot),
-                new CmdCuddle(bot),
-                new CmdEevee(bot),
-                new CmdFeed(bot),
-                new CmdFluff(bot),
-                new CmdHolo(bot),
-                new CmdHug(bot),
-                new CmdKiss(bot),
-                new CmdKitsune(bot),
-                new CmdLick(bot),
-                new CmdNeko(bot),
-                new CmdPat(bot),
-                new CmdPoke(bot),
-                new CmdSenko(bot),
-                new CmdShip(bot),
-                new CmdSlap(bot),
-                new CmdTail(bot),
-                new CmdTickle(bot),
+        Reflections reflections=new Reflections("site.purrbot.bot.commands",new SubTypesScanner());
 
-                // Guild
-                new CmdLanguage(bot),
-                new CmdPrefix(bot),
-                new CmdWelcome(bot),
+        for (Class<? extends Command> cl : reflections.getSubTypesOf(Command.class)) {
+            try {
+                COMMANDS.add(cl.getConstructor(PurrBot.class).newInstance(bot));
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                if (LOG.isErrorEnabled())
+                    LOG.error("An exception occurred trying to create and register an instance of the class {}.",
+                            cl.getCanonicalName(), e);
+            }
+        }
+        LOG.info("{}",COMMANDS);
 
-                // Info
-                new CmdEmote(bot),
-                new CmdGuild(bot),
-                new CmdHelp(bot),
-                new CmdInfo(bot),
-                new CmdInvite(bot),
-                new CmdPing(bot),
-                new CmdQuote(bot),
-                new CmdShards(bot),
-                new CmdStats(bot),
-                new CmdUser(bot),
-
-                // NSFW
-                new CmdBlowjob(bot),
-                new CmdCum(bot),
-                new CmdFuck(bot),
-                new CmdLewd(bot),
-                new CmdPussylick(bot),
-                new CmdSolo(bot),
-                new CmdThreesome(bot),
-
-                // Owner
-                new CmdCheck(bot),
-                new CmdEval(bot),
-                new CmdLeave(bot),
-                new CmdMsg(bot),
-                new CmdShutdown(bot)
-        );
-    }
-
-    private void loadCommands(Command... commands){
-        COMMANDS.addAll(Arrays.asList(commands));
     }
 
     public Set<Command> getCommands(){
