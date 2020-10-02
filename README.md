@@ -63,14 +63,14 @@ The bot has two invite-links: A full invite and a basic invite.
 ## Full invite (Recommended)
 The Full Invite contains all permissions that the [Basic Invite](#basic-invite) gives and some additional ones to improve your overall experience with her.
 
-Alonside the other perms of the Basic Invite are the following perms added:
+Alongside, the other perms of the Basic Invite the following perms are added:
 
 - `Attach Files`: Allows the direct attachment of files to messages.
 
 ## Basic invite
 The Basic Invite only contains all permissions that are nessesary for \*Purr* to work as expected.
 
-Permissions are:
+Those permissions are:
 
 - `Send Message`: She can't send messages without this... Duh.
 - `Embed Links`: Most responses are send through embeds which require this permission.
@@ -100,7 +100,7 @@ Feel free to upvote her to show your support.
 ### [Discordextremelist.xyz][debl]
 > Discord's unbiased list, giving small bots and small servers a big chance!
 
-# Usefull Links
+# Useful Links
 - [Discord Server][Discord]
 - [Full invite] (Recommended)
 - [Basic Invite]
