@@ -25,12 +25,14 @@
   "misc": {
     "and": "그리고",
     "info": "{user}, 반가워!\n이 디스코드 서버에서의 접두어는 `{prefix}` 이야.\n`{prefix}help` 에서 더 많은 명령어들을 확인할 수 있어.",
+    "language": "English (en)",
     "unknown_user": "(알 수 없음)",
     "welcome_member": "넌 {count}번 째로 들어온 사람이야!"
   },
   "purr": {
     "fun": {
       "bite": {
+        "description": "한 명 또는 여러 사람들을 깨뭅니다.",
         "loading": "{LOADING} 누군가를 물러 가는중...",
         "mention_self": "혹시 스스로 무는건 식인습성이야, {user}?",
         "mention_purr": [
@@ -43,6 +45,7 @@
         "special_user": "하-하지만, {user}! 그건 부끄러워..."
       },
       "cuddle": {
+        "description": "한 명 또는 여러 사람들을 격하게 껴안습니다.",
         "loading": "{LOADING} 부비부비 이미지 불러오는 중...",
         "mention_self": "왜 혼자 부비부비 하고 있어, {user}?\n여기 날 부비부비하면 되잖아..{VANILLABLUSH}",
         "mention_purr": [
@@ -54,10 +57,12 @@
         "no_mention": "최소한 부비부비할 상대 한 명을 언급해줘!"
       },
       "eevee": {
+        "description": "이브이 짤 또는 움짤을 보여줍니다.",
         "loading": "{LOADING} 귀여운 이브이 잡아오는 중...",
-        "title": "이브이"
+        "message": "이브이"
       },
       "feed": {
+        "description": "대상에게 음식을 제공합니다.",
         "mention_bot": "봇은 음식을 못먹는다구, 바보! 걔들은 니 데이터에나 관심있어. O_O",
         "mention_purr": [
           "응? 이 음식, 날 위한거야? 고마워, {user}! \\*음식을 먹으며 꼬리를 흔드는 중*",
@@ -74,6 +79,7 @@
         }
       },
       "fluff": {
+        "description": "대상의 꼬리를 가지고 놉니다. 만약 그 사람이 원한다면요!",
         "mention_bot": "봇들은 꼬리가 없어... 슬프지만!",
         "mention_purr": [
           "뭐-! 그건 불건전해, {user}! \\*꼬리를 안아서 보호하는 중*",
@@ -90,10 +96,12 @@
         "special_user": "ㅎ-하지만, {user}. 여기서 하기엔 너무 야해."
       },
       "holo": {
+        "description": "사과 먹으면서 술이나 퍼 마시며 노는 지혜로운 늑대의 짤을 보여줍니다.",
         "loading": "{LOADING} 호로 이미지 불러오는 중...",
-        "title": "호로 {BLOBHOLO}"
+        "message": "호로 {BLOBHOLO}"
       },
       "hug": {
+        "description": "다른 사람들과 포옹을 나눕니다. \\(>w<)/",
         "loading": "{LOADING} 포옹 이미지 불러오는 중...",
         "mention_self": "왜 혼자 껴안으려고 해, {user}?\n여기 날 껴안으면 되잖아.. {VANILLABLUSH}",
         "mention_purr": [
@@ -105,6 +113,7 @@
         "no_mention": "최소한 껴안을 상대 한 명을 언급해줘!"
       },
       "kiss": {
+        "description": "한 명 또는 여러 사람들과 키스합니다.",
         "loading": "{LOADING} 키스 이미지 불러오는 중...",
         "mention_purr": [
           "그, 그래..! 하지만 볼에다가만 해! \\*볼을 내미는 중*",
@@ -117,10 +126,12 @@
         "special_user": "\\*{user}와 키스하는 중*"
       },
       "kitsune": {
+        "description": "여우소녀 짤을 보여줍니다.",
         "loading": "{LOADING} 여우 이미지 불러오는중...",
-        "title": "여우 {SHIROTAILWAG}"
+        "message": "여우소녀 {SHIROTAILWAG}"
       },
       "lick": {
+        "description": "사람들을 핥습니다. 물론, 건전하게요.",
         "loading": "{LOADING} 핥짝 이미지 불러오는중...",
         "mention_self": "어.. 스스로 *어딜* 어떻게 핥으려는지는 묻지 않을께, {user}...",
         "mention_purr": [
@@ -133,13 +144,14 @@
         "special_user": "하, 하지만 자기... 여긴 모두가 보고 있다구. \\*부끄부끄*"
       },
       "neko": {
+        "description": "사랑스러운 고양이 소녀의 짤 또는 움짤을 가져옵니다.",
         "loading": "{LOADING} 귀여운 고양이 소녀 이미지 불러오는 중...",
-        "title_gif": "고양이 {WAGTAIL}",
-        "title_img": "고양이 {NEKOWO}",
+        "message": "고양이소녀 {NEKOWO}",
         "purr": "야~ 이거 나야! OwO",
         "snuggle": "이건 내 여동생이야! UwU"
       },
       "pat": {
+        "description": "사람들을 쓰다듬어줍니다!",
         "loading": "{LOADING} 쓰담쓰담 이미지 불러오는 중...",
         "mention_self": "어.. 혹시 쓰다듬을 고양이가 없는거야, {user}? \\*자신을 가리키며*",
         "mention_purr": [
@@ -151,6 +163,7 @@
         "no_mention": "최소한 쓰다듬을 상대 한 명을 언급해줘!"
       },
       "poke": {
+        "description": "사람들을 콕콕 찔러봅니다!",
         "loading": "{LOADING} 푹푹 이미지 불러오는 중...",
         "mention_self": "심심한거야? 왜 스스로를 찌르려고 해, {user}?",
         "mention_purr": [
@@ -161,10 +174,12 @@
         "no_mention": "최소한 손가락으로 찌를 상대 한 명을 언급해줘!"
       },
       "senko": {
+        "description": "당신을 소중하게 돌봐줄 수 있는 성스러운 전달자의 짤을 보여줍니다.",
         "loading": "{LOADING} 센코 이미지 불러오는 중...",
-        "title": "센코씨 {SENKOTAILWAG}"
+        "message": "센코씨 {SENKOTAILWAG}"
       },
       "ship": {
+        "description": "자기 자신과 다른 사람 또는 서로 다른 두 사람이 사귈 확률이 얼마나 될 지 보여줍니다.",
         "mention_self": "자기 자신이랑 연애하려고, {user}? 세상에 좋은 사람은 널려있어!",
         "mention_purr": "아-안돼! 나는 임자있는 몸이라구, {user}!",
         "mention_snuggle": "내 동생은 누구에게도 줄 수 없어, {user}!",
@@ -188,6 +203,7 @@
         "target_bot": "봇이랑 사랑에 빠지지 말라구, 이 바보야!"
       },
       "slap": {
+        "description": "나쁜 사람들의 뺨을 때립니다! >:C",
         "loading": "{LOADING} 찰싹 이미지 불러오는 중...",
         "mention_self": "안돼! 거기까지. 너 자신을 상처입히지 마, {user}.",
         "mention_purr": [
@@ -198,10 +214,12 @@
         "no_mention": "적어도 한대 칠 상대 한 명을 언급해줘!"
       },
       "tail": {
+        "description": "꼬리를 흔듭니다. 기분이 좋아서겠죠..?",
         "loading": "{LOADING} 꼬리를 흔드는 중...",
         "message": "{user}이(가) 꼬리를 흔들고 있어."
       },
       "tickle": {
+        "description": "사람들을 간지럽혀서 웃게 만듭니다.",
         "loading": "{LOADING} 간질간질 이미지 불러오는 중...",
         "mention_self": "그래.. 정말 간지럽혀지고 싶다면 말야.. \\*{user}을(를) 간지럽힌다*",
         "mention_purr": [
@@ -215,13 +233,12 @@
     },
     "guild": {
       "language": {
+        "description": "현재 서버에 적용된 이 봇의 언어설정을 변경합니다.\n아무런 인자가 없다면 현재 설정을 보여줍니다.\n\n`서버 관리` 권한이 있는 사람만 사용할 수 있습니다.",
         "few_args": "받은 정보가 적어!\n사용법: `{prefix}language set <언어>`",
         "invalid_args": "유효하지 않은 값이야!\n사용법: `{prefix}language <set <언어>|reset>`",
         "invalid_lang": "그 언어는 아직 모르는 언어야!\n`{prefix}language` 를 사용하면 내가 아는 언어들을 알려줄게!",
         "embed": {
           "available_lang_title": "사용가능한 언어들",
-          "curr_lang_title": "현재 사용중인 언어",
-          "curr_lang_value": "한국어 (ko-KR)",
           "description": "`{prefix}language set <언어>` 를 이용하면 아래에 있는 언어들 중 원하는 언어로 바꿀 수 있어!",
           "translators_title": "번역 기여자들",
           "translators_value": "이 봇을 번역해줘서 정말로 고마워!\n[여기]({link}) 에서 번역 프로젝트에 대한 것들을 볼 수 있어!"
@@ -230,6 +247,7 @@
         "no_language": "언어를 알려줘야 언어 설정이 가능해!"
       },
       "prefix": {
+        "description": "현재 서버에 적용된 이 봇의 접두어를 변경합니다.\n확인하고 싶다면 언제든지 봇을 `@언급` 해주세요.\n\n`서버 관리` 권한이 있는 사람만 사용할 수 있습니다.",
         "few_args": "받은 정보가 적어!\n사용법: `{prefix}prefix <set <새 접두어>|reset>`",
         "invalid_args": "유효하지 않은 값이야!\n사용법: `{prefix}prefix <set <새 접두어>|reset>`",
         "no_prefix": "!",
@@ -237,6 +255,7 @@
         "set": "접두어가 `{prefix}` 로 설정되었어."
       },
       "welcome": {
+        "description": "당신의 서버에 들어온 사람들에게 인사와 이미지를 통해 환영해보세요!\n아무런 인자가 없다면 현재 설정을 보여줍니다.\n[위키 자료]({wiki_welcome})를 확인하면 더 자세히 알 수 있습니다.\n\n`서버 관리` 권한이 있는 사람만 사용할 수 있습니다.",
         "embed": {
           "channel": "채널",
           "color_title": "색상",
@@ -270,6 +289,7 @@
     },
     "info": {
       "emote": {
+        "description": "하나 또는 여러개의 이모티콘에 대한 간단한 정보를 확인할 수 있습니다. (커스텀 서버 이모티콘)\n`--search` 인자를 사용하면 최근 100건의 메시지에 대한 모든 이모티콘을 확인할 수 있습니다.",
         "embed": {
           "emote_multiple": "이모티콘 [{current} / {total}]",
           "emote_single": "이모티콘",
@@ -285,6 +305,7 @@
         "unknown_guild": "알 수 없는 서버"
       },
       "guild": {
+        "description": "현재 서버에 대한 정보를 확인합니다.",
         "embed": {
           "boost": {
             "multiple": "서버부스트 {boost} 개",
@@ -311,6 +332,7 @@
         }
       },
       "help": {
+        "description": "이 봇이 사용가능한 모든 명령어를 보여줍니다.\n원하는 명령어의 이름을 뒤에 붙여 쓸 경우 그 명령어에 대한 설명을 보여줍니다.",
         "command_info": {
           "aliases": "같은 명령어",
           "command_nsfw": "이 명령어는 연령 제한 채널에서만 사용할 수 있어.",
@@ -336,6 +358,7 @@
         }
       },
       "info": {
+        "description": "이 봇에 대한 간단한 정보를 확인합니다.",
         "dm_failure": "개인 메시지를 보낼 수 없어, {user}!",
         "dm_success": "개인 메시지를 확인해, {user}!",
         "embed": {
@@ -346,13 +369,7 @@
             "title": "봇 정보",
             "version": "봇 버전: `PurrBot {bot_version}`"
           },
-          "bot_lists": {
-            "botlist_space": "`Botlist.space`",
-            "discord_boats": "`Discord.boats`",
-            "discord_bots_gg": "`Discord.bots.gg`",
-            "discordextremelist_xyz": "`Discordextremelist.xyz`",
-            "title": "내가 등록된 사이트들"
-          },
+          "bot_lists_title": "내가 등록된 사이트들:",
           "commands_title": "명령어",
           "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
           "donators_more": "...그리고 {remaining} 명의 추가 후원자들!",
@@ -360,11 +377,8 @@
           "donators_value": "모든 후원자들에 대한 목록은 지속여부에 관계없이 여기에 있습니다.\n이 리스트에 들어오고 싶으시다면, ~Nya 디스코드 서버에 들어와 후원해주세요. (자세한 사항은 Andre_601에게 문의하세요)",
           "links": {
             "discord": "`공식 디스코드`",
-            "github": "`GitHub`",
-            "patreon": "`후원(Patreon)`",
             "policy": "`개인정보 보호 및 약관`",
             "title": "다른 링크들",
-            "twitter": "`트위터`",
             "website": "`홈페이지`",
             "wiki": "`위키`"
           },
@@ -373,6 +387,7 @@
         }
       },
       "invite": {
+        "description": "봇을 초대하기 위한 링크 또는 봇 공식 지원 서버를 가기 위한 링크를 제공합니다.",
         "dm_failure": "개인 메시지를 보낼 수 없어, {user}!",
         "dm_success": "개인 메시지를 확인해, {user}!",
         "embed": {
@@ -387,6 +402,7 @@
         }
       },
       "ping": {
+        "description": "현재 봇의 처리 지연시간을 확인합니다.",
         "loading": [
           "{TYPING} 디스코드와 떠드는 중...",
           "{TYPING} 물고기를 잡는 중...",
@@ -398,6 +414,7 @@
         "info_full": "{EDIT} 메시지 수정: `{edit_message}`\n{DISCORD} 디스코드 도착: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "description": "누군가가 한 말을 인용합니다. 채널을 인자로 쓸 경우 그 곳에서 메시지를 찾습니다.",
         "embed_basic": {
           "channel": "#{channel}에 올라옴",
           "info": "{user}이(가) 작성한 메시지"
@@ -412,6 +429,7 @@
         "nsfw_channel": "{channel}는 연령 제한 채널이지만 여기는 아니야!\n안전을 위해서 연령 제한 채널의 메시지는 여기로 불러올 수 없어."
       },
       "shards": {
+        "description": "현재 봇이 갖고 있는 모든 샤드들의 간단한 정보를 보여줍니다.",
         "average": {
           "title": "평균",
           "description": "여기 평균 지연시간 및 서버갯수야.",
@@ -432,6 +450,7 @@
         }
       },
       "stats": {
+        "description": "지겨운 통계나 툭 보여줍니다.",
         "uptime": {
           "day": "일",
           "days": "일",
@@ -453,6 +472,7 @@
         }
       },
       "user": {
+        "description": "자기 자신 또는 다른 누군가에 대한 간단한 정보를 보여줍니다.",
         "embed": {
           "avatar": "프로필 사진",
           "avatar_url": "`프로필 사진 주소`",
@@ -475,6 +495,7 @@
     },
     "nsfw": {
       "blowjob": {
+        "description": "대상에게 당신이 그 사람을 빨아도 되는지 물어봅니다.\n\n연령 제한 채널에서만 사용가능합니다.",
         "mention_bot": "콘센트를 핥으려는 생각은 아니겠지?",
         "mention_purr": "이 변태! 빨아줄 다른 사람이나 찾아! \\*{user}의 뺨을 때리며*",
         "mention_self": "그-그래. 말리지는 않을께, {user}.",
@@ -488,10 +509,12 @@
         "special_user": "좋아 자기. 조금 시간을 줄래? \"장난감\"이 좀 필요하니까.\n\\*{user}의 손을 잡고 방에서 사라진다*"
       },
       "cum": {
+        "description": "설명이 필요없어보이네요.\n\n연령 제한 채널에서만 사용가능합니다.",
         "loading": "{LOADING} 싸는 모습을 준비하는 중...",
         "message": "{user}가 결국 싸버렸어."
       },
       "fuck": {
+        "description": "대상에게 당신이 그 사람과 뜨거운 밤을 보내도 되는지 물어봅니다.\n만약 미리 지정하지 않는다면, 그 대상에게 어떤 밤이 좋은지 물어봅니다.\n미리 지정하고 싶다면 다음 중 하나의 인자를 넣어주세요.\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\n연령 제한 채널에서만 사용가능합니다.",
         "mention_bot": "봇이랑 야한 걸 할 생각 마!",
         "mention_purr": "\\*{user}의 뺨을 때리며* 안돼! 이 변태자식.",
         "mention_self": "어떻게 너 자신이랑 하려고, {user}? .. 자기위로 같은 대답은 하지 마.",
@@ -517,11 +540,12 @@
         }
       },
       "lewd": {
+        "description": "야한 고양이 소녀의 짤 또는 움짤을 보여줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",
         "loading": "{LOADING} 야한 고양이 불러오는 중...",
-        "title_gif": "야한 고양이 {WAGTAIL}",
-        "title_img": "야한 고양이 {NEKOWO}"
+        "message": "야한 고양이 소녀 {NEKOWO}"
       },
       "pussylick": {
+        "description": "대상에게 당신이 그 사람의 소중한 부위를 핥아도 되는지 물어봅니다.\n\n연령 제한 채널에서만 사용가능합니다.",
         "mention_bot": "봇은 그런 부위가 없어.",
         "mention_purr": "안 돼! 하게 할 것 같아?.",
         "mention_self": "어떻게...? 진짜? 묻지는 않을게.",
@@ -535,10 +559,12 @@
         "special_user": "헤헤... 너 지금 *\"목마른\"* 상태구나, {user}?\n\\*{user}의 손을 잡고 함께 사라진다*"
       },
       "solo": {
+        "description": "혼자서 즐기고 있는 소녀의 움짤을 보여줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",
         "loading": "{LOADING} 야한 여자아이 불러오는 중...",
         "title": "야한 여자"
       },
       "threesome": {
+        "description": "서로 다른 두 대상에게 당신이 그들과 뜨거운 밤을 보내도 되는지 물어봅니다.\n기본적으로는 `--ffm`(여자 2, 남자 1)가 지정되지만, `--mmf` 를 통해 남자 2, 여자 1을, `--fff`를 통해 여자 셋이서 즐기도록 설정할 수 있습니다.\n\n연령 제한 채널에서만 사용가능합니다.",
         "mention_bot": "일단 진정해, {user}. 봇 보단 사람들과 하는게 더 즐거울거야. ^ㅡ'",
         "mention_purr": "그래 그래. 내가 이상한 고양이로 보였겠지. 하지만 난 *그런* 플레이는 안해, {user}!",
         "mention_self": "내가 아는 게 맞다면, 쓰리썸은 **3** 명이서 하는게 맞지, {user}?",
