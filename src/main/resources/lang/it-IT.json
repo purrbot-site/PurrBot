@@ -137,7 +137,7 @@
         "mention_purr": [
           "\\*indietreggia* Non ti ho mai dato il permesso di leccarmi{user}!",
           "H-hey! Non leccarmi! >.<",
-          "Nya! è sconcio!"
+          "Nya! Sei sconcio!"
         ],
         "message": "{user} ti lecca {targets}",
         "no_mention": "Menziona almeno un utente da leccare per favore!",
@@ -148,84 +148,84 @@
         "loading": "{LOADING} Ricevendo una immagine o gif di una neko carina...",
         "message": "Neko {NEKOWO}",
         "purr": "Hey! Sono io! OwO",
-        "snuggle": "Quella è mia sorella! UwU"
+        "snuggle": "Questa è mia sorella! UwU"
       },
       "pat": {
         "description": "Dai carezze alle persone!",
         "loading": "{LOADING} ricevendo carezze...",
-        "mention_self": "Uhm... Non c'è una Neko che puoi accarezzare {user}? *si punta*",
+        "mention_self": "Uhm... Non c'è una Neko che puoi accarezzare {user}? *punta a se stessa*",
         "mention_purr": [
           "\\*purr™*",
-          "\\*mette la testa contro la mano di{user}*",
+          "\\*preme la testa contro la mano di {user}*",
           "Nya... grazie per la carezza"
         ],
-        "message": "{user} ti accarezza {targets}",
+        "message": "{user} ti accarezza la testa {targets}",
         "no_mention": "Menziona almeno un utente da accarezzare per favore!"
       },
       "poke": {
         "description": "Punzecchia gli altri!",
-        "loading": "{LOADING} ricevendo una gif di stuzzico",
+        "loading": "{LOADING} ricevendo una gif per stuzzicare...",
         "mention_self": "Sei annoiato o cosa che ti stuzzichi da solo {user}?",
         "mention_purr": [
           "N-nya! Non stuzzicarmi! >\u001a~<",
-          "P-perche mi stai stuzzicando?"
+          "P-perché mi stai stuzzicando?"
         ],
         "message": "{user} ti stuzzica {targets}",
         "no_mention": "Menziona almeno un utente da stuzzicare"
       },
       "senko": {
         "description": "Ottieni un'immagine della messaggera divina Senko per vizziarti.",
-        "loading": "{LOADING} Ricevendo un'immagine di Senso-san...",
+        "loading": "{LOADING} Ricevendo un'immagine di Senko-san...",
         "message": "Senko-San {SENKOTAILWAG}"
       },
       "ship": {
         "description": "Shippati con qualcun'altro o altre due persone per vedere la probabilità di amore.",
-        "mention_self": "Ti shippi con te stesso {user}? Trovati qualcun'altro",
-        "mention_purr": "N-no! non puoi shipparti con me {user}!",
-        "mention_snuggle": "Non ti lascerò shippare con la mia sorellina {user}!",
+        "mention_self": "Ti shippi da solo {user}? Trovati qualcun'altro per accompagnarti!",
+        "mention_purr": "N-no! Non puoi shipparti con me {user}!",
+        "mention_snuggle": "Non ti lascerò shippare la mia sorellina {user}!",
         "no_mention": "Menziona almeno una persona da shippare per favore!",
         "results": {
           "100": "Amore perfetto! ❤",
-          "91_99": "Invitami al tuo matrimonio per favore. ^-^",
-          "81_90": "Posso seriamente immaginarmi voi due che vi sposate.",
-          "71_80": "*spinge entrambi più vicini*",
-          "61_70": "Sembra qualcosa di serio.",
+          "91_99": "Invitatemi al vostro matrimonio per favore. ^-^",
+          "81_90": "Posso seriamente immaginarmi che voi due vi sposerete.",
+          "71_80": "\\*spinge entrambi l'uno contro l'altro*",
+          "61_70": "Sembra essere qualcosa di serio.",
           "69": "Oh... quindi è *quel* tipo di amore eh...?😏",
           "51_60": "Baciatevi!!!",
-          "41_50": "Siete già una coppia?",
+          "41_50": "Siete già una coppia per caso?",
           "31_40": "Potreste diventare una coppia.",
           "21_30": "Friendzone+ (con *benefici*)",
           "11_20": "Friendzone",
-          "1_10": "Non sembrate manco amici...",
+          "1_10": "Manco amici sembrerebbe...",
           "0": "Se l'amore fosse calore, questo sarebbe un blocco di ghiaccio."
         },
         "special_user": "{user} Awww cucciolo. Sai che noi due siamo un 100 spaccato.\nNon devi provarlo.",
         "target_bot": "Non puoi shipparti con un bot!"
       },
       "slap": {
-        "description": "Prendi a schiaffi coloro che lo meritano! >:C",
+        "description": "Tira ceffoni a coloro che lo meritano! >:C",
         "loading": "{LOADING} Dando un ceffone ad un utente...",
         "mention_self": "Nononono! Non ti aiuterò a ferirti da solo {user}.",
         "mention_purr": [
           "Noooo... Perché mi sta facendo del male {user}? T^T",
-          "\\*da un ceffone* Non puoi schiaffeggiarmi senza consequenze{user}!"
+          "\\*ti da un ceffone* Non puoi schiaffeggiarmi senza consequenze {user}!"
         ],
         "message": "{user} ti da un ceffone {targets}",
-        "no_mention": "Me aziona almeno un utente a cui dare un ceffone per favore!"
+        "no_mention": "Menziona almeno un utente a cui dare un ceffone per favore!"
       },
       "tail": {
         "description": "Scodinzola... Per l'entusiasmo spero.",
-        "loading": "{LOADING} coda scodinzolante",
+        "loading": "{LOADING} scodinzolando coda...",
         "message": "{user} scodinzola"
       },
       "tickle": {
-        "description": "Fai il solletico alle persone, falle ridere!",
-        "loading": "{LOADING} ricevendo una gif sul solletico",
-        "mention_self": "Okay... se vuoi veramente farti fare il solletico... *solletica {user}*",
+        "description": "Fai il solletico alle persone per farle ridere.",
+        "loading": "{LOADING} ricevendo una gif solletico...",
+        "mention_self": "Okay... se vuoi veramente soffrire il solletico... *solletica {user}*",
         "mention_purr": [
-          "N-non è giusto! non resisto *ride per il solletico*",
+          "N-non è giusto! Non riesco \\*ride per il solletico*",
           "\\*cerca di non ridere ma fallisce*",
-          "Perché non resisto al solletico! >~<"
+          "Perché non resisto al solletico? >~<"
         ],
         "message": "{user} ti solletica {targets}",
         "no_mention": "Menziona almeno un utente da solleticare per favore!"
