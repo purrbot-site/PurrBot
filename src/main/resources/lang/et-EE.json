@@ -25,12 +25,14 @@
   "misc": {
     "and": "ja",
     "info": "Hei {user}!\nMinu eeslide/prefiks siin serveris on `{prefix}`\nSisestage `{prefix}help` et saada nimekirja käsklustest.",
+    "language": "Eesti (et-EE)",
     "unknown_user": "Tundmatu",
     "welcome_member": "Sa oled liige number #{count}"
   },
   "purr": {
     "fun": {
       "bite": {
+        "description": "Laseb sul hammustada ühte või mitut inimest.",
         "loading": "{LOADING} Hammustan kohe kedagi...",
         "mention_self": "Kas see pole mitte kannibalism kui sa ennast hammustad {user}?",
         "mention_purr": [
@@ -43,6 +45,7 @@
         "special_user": "A-aga {user}! Se-see on piinlik."
       },
       "cuddle": {
+        "description": "Laseb sul kaisutada ühte või mitut inimest.",
         "loading": "{LOADING} Laen kaisutuse-giffi...",
         "mention_self": "Miks sa tahad ennast kaisutada {user}?\nSa saad kaisutada mind kui tahad. {VANILLABLUSH}",
         "mention_purr": [
@@ -54,10 +57,12 @@
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kaisutada!"
       },
       "eevee": {
+        "description": "Annab sulle pildi või gifi armsast Eeveest.",
         "loading": "{LOADING} Püüan armast Eeveet...",
-        "title": "Eevee"
+        "message": "Eevee"
       },
       "feed": {
+        "description": "Laseb sul maitsva toiduga inimest toita.",
         "mention_bot": "Botid ei saa süüa totu! Nad saavad süüa ainult sinu andmeid. O_O",
         "mention_purr": [
           "Söök? Minule? Aitäh {user}! \\*Näksib toitu ja liputab saba*",
@@ -74,6 +79,7 @@
         }
       },
       "fluff": {
+        "description": "Kohenda kellegi saba... kui ta seda soovib.",
         "mention_bot": "Bottidel ei ole saba... kahjuks!",
         "mention_purr": [
           "Mis! See on vääritu {user}! \\*Hoiab oma saba et seda kaitseda*",
@@ -90,10 +96,12 @@
         "special_user": "A-aga {user}. Seda on piinlik avalikult teha."
       },
       "holo": {
+        "description": "Saa pilt targast hundist kes sööb õuna ja joob alkoholi.",
         "loading": "{LOADING} Laen pilti Holo-st...",
-        "title": "Holo {BLOBHOLO}"
+        "message": "Holo {BLOBHOLO}"
       },
       "hug": {
+        "description": "Jaga kallistusi teiste inimestega. \\(>w<)/",
         "loading": "{LOADING} Laen kallistamise-giffi...",
         "mention_self": "Miks sa kallistad ennast {user}?\nSa võid kallistada mind kui sa tahad. {VANILLABLUSH}",
         "mention_purr": [
@@ -105,6 +113,7 @@
         "no_mention": "Palun maini vähemalt ühte kasutajat keda kallistada!"
       },
       "kiss": {
+        "description": "Anna ühele või mitmele inimesele musi.",
         "loading": "{LOADING} Laen musi...",
         "mention_purr": [
           "O- okei. Aga ainult põsele! \\*Toob põse esile*",
@@ -117,10 +126,12 @@
         "special_user": "\\*Rõõmustab kasutaja {user} musi üle*"
       },
       "kitsune": {
+        "description": "Saa Kitsunest (rebase tüdrukust) pilt.",
         "loading": "{LOADING} Laen kitsune-giffi...",
-        "title": "Kitsune {SHIROTAILWAG}"
+        "message": "Kitsune {SHIROTAILWAG}"
       },
       "lick": {
+        "description": "Laku inimesi... SFW viisil muidugi.",
         "loading": "{LOADING} Laen lakkumise-giffi...",
         "mention_self": "Ma ei küsi kuidas ja *kust* sa lakud ennast {user}...",
         "mention_purr": [
@@ -133,13 +144,14 @@
         "special_user": "A- aga kallis... Mitte avalikult. \\*punastab*"
       },
       "neko": {
+        "description": "Saa pilt või gif armsast Nekost.",
         "loading": "{LOADING} Laen armsa neko pilti (või giffi)...",
-        "title_gif": "Neko {WAGTAIL}",
-        "title_img": "Neko {NEKOWO}",
+        "message": "Neko {NEKOWO}",
         "purr": "Hei! See olen ju mina! OwO",
         "snuggle": "See on mu väike õde! UwU"
       },
       "pat": {
+        "description": "Paita inimesi!",
         "loading": "{LOADING} Laen paisi...",
         "mention_self": "Hm... Kas siin pole mitte nekot keda sasks paitada {user}? \\*Osutab iseendale*",
         "mention_purr": [
@@ -151,6 +163,7 @@
         "no_mention": "Palun maini vähemalt ühte kasutajat keda paitada!"
       },
       "poke": {
+        "description": "Toksi inimesi!",
         "loading": "{LOADING} Laen toksimise-giffi...",
         "mention_self": "Kas sul on igav või miks sa toksid ennast {user}?",
         "mention_purr": [
@@ -161,10 +174,12 @@
         "no_mention": "Palun maini vähemalt ühte kasutajat keda toksida!"
       },
       "senko": {
+        "description": "Sa pilt jumalikust sõnumitoojast kes saab sind hellitada.",
         "loading": "{LOADING} Laen pilti Senko-sanist...",
-        "title": "Senko-San {SENKOTAILWAG}"
+        "message": "Senko-San {SENKOTAILWAG}"
       },
       "ship": {
+        "description": "Paarita ennast kellegiga, või kahe erineva inimesega, et näha nende armumis võimalust.",
         "mention_self": "Paaritad iseendaga {user}? Parem otsi keegi teine!",
         "mention_purr": "E- ei! Sa ei saa mind endaga paari panna {user}!",
         "mention_snuggle": "Ma ei lase sul ennast paari panna oma väikese õega {user}!",
@@ -188,6 +203,7 @@
         "target_bot": "Sa ei saa väga ennast botiga paari panna sa imelik inimene!"
       },
       "slap": {
+        "description": "Laksa kurisid! >:C",
         "loading": "{Loading} Laksan kasutajate nägu...",
         "mention_self": "Eieiei! Ma ei aita sul endale haiget teha {user}.",
         "mention_purr": [
@@ -198,10 +214,12 @@
         "no_mention": "Palun maini vähemalt ühte kasutajat kellele laksu anda!"
       },
       "tail": {
+        "description": "Raputa oma saba... Rõõmustusest ma loodan.",
         "loading": "{LOADING} Liputan saba...",
         "message": "{user} liputab oma saba"
       },
       "tickle": {
+        "description": "Kõdista inimesi, et neid naerma ajada.",
         "loading": "{LOADING} Laen kõdi-giffi",
         "mention_self": "Okei... Kui sa nii väga tahad... \\*Kõdistab kasutajat {user}*",
         "mention_purr": [
@@ -215,13 +233,12 @@
     },
     "guild": {
       "language": {
+        "description": "Vaheta keelt mida bot kasutab selles Gildis.\nSisesta see käsklus ilma argumenditeta, et näha praeguseid sätteid.\n\nSa vajad selle jaoks `Manage Server` luba.",
         "few_args": "Ei ole antud piisavalt argumente! \nKasutus: `{prefix}language set <keel>`",
         "invalid_args": "Vigased argumendid\nKasutus: `{prefix}language <set <keel>|reset>`",
         "invalid_lang": "Sisestatud keel on tundmatu!\nKasuta `{prefix}language` et näha olemasolevaid keeli.",
         "embed": {
           "available_lang_title": "Olemasolevad keeled",
-          "curr_lang_title": "Hetkel kasutusel olev keel",
-          "curr_lang_value": "Eesti (et-EE)",
           "description": "Sa saad keelt vahetada olemasolevate keelte vastu sisestades \n`{prefix}language set <keel>",
           "translators_title": "Tõlkijad",
           "translators_value": "Tänud lähevad kõigile kes on botti tõlkinud\nTõlkeprojekti leiad [siit]({link})."
@@ -230,6 +247,7 @@
         "no_language": "Palun määra keel mida soovid kasutada!"
       },
       "prefix": {
+        "description": "Muuda boti käskluste prefiksit.\nSa saad alati `@mainida` botti, et teada saa mis prefiks gildis kasutusel on.\n\nSa vajad selle jaoks `Manage Server` luba.",
         "few_args": "Ei saanud piisavalt argumente! \nKasutus: `{prefix}prefix <set <uus prefiks>|reset>`",
         "invalid_args": "Vigased argumendid!\nKasutus: `{prefix}prefix <set <uus prefiks>|reset>`",
         "no_prefix": "Sa pead sisestama prefiksi!",
@@ -237,6 +255,7 @@
         "set": "Prefiksiks määrati `{prefix}`"
       },
       "welcome": {
+        "description": "Tereta tulevasi liikmeid enda Discordis sõnumi ja pildiga!\nSisestama argumente on võimalik näha praeguseid sätteid.\nVaata abi jaoks [viki artiklit]({wiki_welcome}).",
         "embed": {
           "channel": "Kanal",
           "color_title": "Värv",
@@ -270,6 +289,7 @@
     },
     "info": {
       "emote": {
+        "description": "Saa põhiline informatsioon ühe või mitme emoti kohta (kohandatud Discordi emotikonid).\nSa saad kasutada `--search` argumenti, et näha nimekirja 100 viimati kasutatud emoti kohta sõnumites.",
         "embed": {
           "emote_multiple": "Emotikon [{current} / {total}]",
           "emote_single": "Emotikon",
@@ -285,6 +305,7 @@
         "unknown_guild": "Tundmatu gild"
       },
       "guild": {
+        "description": "Saa põhiline gildi informatsioon.",
         "embed": {
           "boost": {
             "multiple": "{boost} boostid",
@@ -311,6 +332,7 @@
         }
       },
       "help": {
+        "description": "Nimekiri kõigist käsklustest mis botil on.\nSa saad lisada käskluse nime peale seda, et saada lisa informatsiooni selle kindla käskluse kohta.",
         "command_info": {
           "aliases": "Aliased",
           "command_nsfw": "Palun kasuta seda käsklust NSFW märgisega kanalis!",
@@ -336,6 +358,7 @@
         }
       },
       "info": {
+        "description": "Saa põhiline informatsioon boti kohta.",
         "dm_failure": "Ma ei saa sulle saata privaatsõnumit {user}!",
         "dm_success": "Vaata oma privaatsõnumeid {user}!",
         "embed": {
@@ -346,13 +369,7 @@
             "title": "Boti informatsioon",
             "version": "Boti versioon: `PurrBot {bot_version}`"
           },
-          "bot_lists": {
-            "botlist_space": "`Botlist.space`",
-            "discord_boats": "`Discord.boats`",
-            "discord_bots_gg": "`Discord.bots.gg`",
-            "discordextremelist_xyz": "`Discordextremelist.xyz`",
-            "title": "Boti nimekirjad"
-          },
+          "bot_lists_title": "Boti nimekirjad:",
           "commands_title": "Käsklused",
           "commands_value": "Sisesta `{prefix}help` et saada nimekirja erinevatest käsklustest.",
           "donators_more": "Ja {remaining} veel...",
@@ -360,11 +377,8 @@
           "donators_value": "Kõik annetajad (Nii ühekordsed kui ka igakuised) näidatakse siin.\nEt saada ka nimistusse, tee annetus ja ole kindel et oled ~Nya Discordis (Kontakteeru Andre_601 muudeks põhjusteks) .",
           "links": {
             "discord": "`Discord (Tugi)`",
-            "github": "`GitHub`",
-            "patreon": "`Patreon`",
             "policy": "`Privaatsuspoliitika ja Kasutustingimused`",
             "title": "Teised lingid",
-            "twitter": "`Twitter`",
             "website": "`Veebisait`",
             "wiki": "`Viki`"
           },
@@ -373,6 +387,7 @@
         }
       },
       "invite": {
+        "description": "Saa boti kutse või ametliku toe serveri lingid.",
         "dm_failure": "Palun luba mul saata privaatsõnumeid {user}!",
         "dm_success": "Saatsin sulle privaatsõnumi {user}!",
         "embed": {
@@ -387,6 +402,7 @@
         }
       },
       "ping": {
+        "description": "Uuri praegust boti viivitust.",
         "loading": [
           "{TYPING} Räägin Discordiga...",
           "{TYPING} Püüan kala...",
@@ -398,6 +414,7 @@
         "info_full": "{EDIT} Sõnumi muutus: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "description": "Tsiteeri kelleti sõnumit. Valikuliselt sa saad täpsustada kanalit milles see sõnum on.",
         "embed_basic": {
           "channel": "Postitaud kanlisse: #{channel}",
           "info": "Fraas kasutajalt {user}"
@@ -412,6 +429,7 @@
         "nsfw_channel": "Kanal mida mainisid ({channel}) on NSFW märgisega, aga see kanal ei ole!\nMa ei tsiteeri sõnumeid NSFW märgisega kanalitest NSFW märgiseta kanalisse."
       },
       "shards": {
+        "description": "Koostab infonimekirja kõikidest boti kildudest.",
         "average": {
           "title": "Keskmine",
           "description": "See on keskmine pingi ja gildi arv.",
@@ -432,6 +450,7 @@
         }
       },
       "stats": {
+        "description": "Igav statistika... ebahuvitav.",
         "uptime": {
           "day": "päev",
           "days": "päevad",
@@ -453,8 +472,9 @@
         }
       },
       "user": {
+        "description": "Saa põhiline informatsioon enda või kellegi teise kohta.",
         "embed": {
-          "avatar": "Avatar",
+          "avatar": "Avataar",
           "avatar_url": "`Avatari link`",
           "badges": "Märgid",
           "booster": "Boostija alates:",
@@ -475,6 +495,7 @@
     },
     "nsfw": {
       "blowjob": {
+        "description": "Laseb sul küsida kellegi käest luba imeda.\n\nSeda käsklust saab kasutada ainult NSFW-tähisega kanalites!",
         "mention_bot": "See oleks nagu pistaks keele pistikupessa.",
         "mention_purr": "Pervert! Võta suhu kelleltki teiselt! \\*laksab {user}*",
         "mention_self": "Okeeei... Kui sa tahad endalt imeda, siis ma ei keela sind {user}.",
@@ -488,10 +509,12 @@
         "special_user": "Okei armsake. Las ma võtan oma \"mänguasjad\" er meil oleks lõbusam.\n\\* Võtab kasutaja {user} käest kinni ja kaob oma tuppa\""
       },
       "cum": {
+        "description": "Kirjeldust pole vaja.\n\nSeda käsklust saab kasutada ainult NSFW-tähisega kanalites!",
         "loading": "{LOADING} Valmistun jobistamiseks...",
         "message": "{user} jobistab."
       },
       "fuck": {
+        "description": "Laseb sul küsida kellegi käest seksi.\nKui sa eelnevalt ei valinud midagi, siis on sul võimalus valida normaalne, anaal, yuri ja yaoi vahel.\nValikuks kasuta järgmisi argumente:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nSeda käsklust saab kasutada ainult NSFW-tähisega kanalites!",
         "mention_bot": "Sa ei saa keppida botte!",
         "mention_purr": "\\*laksab {user}* EI! Mitte minuga pervert!",
         "mention_self": "Kuidas sa saad ennast keppida {user}?! (Ei. Masturbatsioon ei ole vastus)",
@@ -517,11 +540,12 @@
         }
       },
       "lewd": {
+        "description": "Annab pildi või gifi lustakast nekost.\n\nSeda käsklust saab kasutada ainult NSFW-tähisega kanalites!",
         "loading": "{LOADING} Laen lewdi neko pilti (või giffi)...",
-        "title_gif": "Lewd neko {WAGTAIL}",
-        "title_img": "Lewd neko {NEKOWO}"
+        "message": "Lustakas neko {NEKOWO}"
       },
       "pussylick": {
+        "description": "Laseb sul küsida kellegi käest luba tussu lakkumiseks.\n\nSeda käsklust saab kasutada ainult NSFW-tähisega kanalites!",
         "mention_bot": "Bottidel ei ole vittu.",
         "mention_purr": "EI! Ma ei lase sul seda teha.",
         "mention_self": "Kuidas... ? Tead mida? Ma ei küsi.",
@@ -535,10 +559,12 @@
         "special_user": "Hehehe... Sa oled *\"janune\"* {user}, õigus?\n\\*võtab kasutaja käest kinni* ja kaob kusagile ruumi*"
       },
       "solo": {
+        "description": "Annab sulle tüdruku või tüdruku kes lõbusteb ise-endaga.\n\nSeda käsklust saab kasutada ainult NSFW-tähisega kanalites!",
         "loading": "{LOADING} Otsin giffi kuumadest tüdrukutest...",
         "title": "Soolo tüdruk"
       },
       "threesome": {
+        "description": "Laseb sul küsida **kahe** inimese käest seksi.\nVaikimisi on `--ffm` (kaks naist, üks mees), aga sa saad kasutada ka `--mmf`(kaks meest, üks naine) või `--fff` (ainult naised).\n\nSeda käsklust saab kasutada ainult NSFW-tähisega kanalites!",
         "mention_bot": "Usu min {user}. See on rohkem lõbusam inimestega kui bottidega. ;)",
         "mention_purr": "Ma tean et ma tundun natukene segane, aga ma ei ole väga just *sellesse* {user}!",
         "mention_self": "Paranda mind kui soovid, aga kas kolmekas mitte ei vaja **kolme** inimest {user}?",
