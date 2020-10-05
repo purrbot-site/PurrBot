@@ -127,7 +127,7 @@ public class PurrBot {
                 .addLang("en")
                 .addLang("en-OWO")
                 .addLang("et-EE")
-                .addLang("it-IT")
+                //.addLang("it-IT")
                 .addLang("ko-KR")
                 .addLang("pt-BR")
                 .addLang("ru-RU");
@@ -286,9 +286,6 @@ public class PurrBot {
     }
     public List<String> getDonators(){
         return getFileManager().getStringlist("random", "donators");
-    }
-    public List<String> getKissImg(){
-        return getFileManager().getStringlist("random", "kiss_img");
     }
     public List<String> getShutdownImg(){
         return getFileManager().getStringlist("random", "shutdown_img");

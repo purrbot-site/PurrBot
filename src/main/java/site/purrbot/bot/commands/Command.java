@@ -27,13 +27,13 @@ import net.dv8tion.jda.api.entities.TextChannel;
 public interface Command extends AbstractCommand<Message>{
     
     /*
-     * We convert the default "execute(Message, String)" to our own "run(Guild, TextChannel, Message, Member, String...)"
+     * We convert the default "execute(Message, String, String)" to our own "run(Guild, TextChannel, Message, Member, String...)"
      * method to have a better command system.
      * 
      * This method isn't automatically implemented into the classes, since it's being overriden here.
      */
     @Override
-    default void execute(Message message, String s){
+    default void execute(Message message, String s, String trigger){
         String[] args = s.isEmpty() ? new String[0] : s.split("\\s+", 3);
         
         if(message.getMember() == null)

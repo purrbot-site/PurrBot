@@ -131,7 +131,25 @@ public class MessageUtil {
     public void sendWelcomeMsg(TextChannel tc, String message, Member member, InputStream file){
         Guild guild = member.getGuild();
     
-        Matcher roleMatcher = rolePattern.matcher(message);
+        message = formatPlaceholders(message, member);
+        
+        if(file == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+            tc.sendMessage(message).queue();
+            return;
+        }
+        
+        tc.sendMessage(message)
+          .addFile(file, String.format(
+                  "welcome_%s.jpg",
+                  member.getId()
+          ))
+          .queue();
+    }
+    
+    public String formatPlaceholders(String msg, Member member){
+        Guild guild = member.getGuild();
+        
+        Matcher roleMatcher = rolePattern.matcher(msg);
         if(roleMatcher.find()){
             StringBuffer buffer = new StringBuffer();
             do{
@@ -151,10 +169,10 @@ public class MessageUtil {
             }while(roleMatcher.find());
             
             roleMatcher.appendTail(buffer);
-            message = buffer.toString();
+            msg = buffer.toString();
         }
-    
-        Matcher matcher = placeholder.matcher(message);
+        
+        Matcher matcher = placeholder.matcher(msg);
         if(matcher.find()){
             StringBuffer buffer = new StringBuffer();
             do{
@@ -178,27 +196,21 @@ public class MessageUtil {
                         matcher.appendReplacement(buffer, String.valueOf(guild.getMemberCount()));
                         break;
                     
+                    case "count_formatted":
+                    case "members_formatted":
+                        matcher.appendReplacement(buffer, formatNumber(guild.getMemberCount()));
+                        break;
+                    
                     case "tag":
                         matcher.appendReplacement(buffer, member.getUser().getAsTag());
-                        break;
                 }
             }while(matcher.find());
             
             matcher.appendTail(buffer);
-            message = buffer.toString();
+            msg = buffer.toString();
         }
         
-        if(file == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
-            tc.sendMessage(message).queue();
-            return;
-        }
-        
-        tc.sendMessage(message)
-          .addFile(file, String.format(
-                  "welcome_%s.jpg",
-                  member.getId()
-          ))
-          .queue();
+        return msg;
     }
 
     public String getBotGame(long guilds){
@@ -246,7 +258,10 @@ public class MessageUtil {
                 )
         ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
-                .queue(v -> handle(message, path, api, guild, author, target))
+                .queue(
+                        v -> handle(message, path, api, guild, author, target),
+                        e -> bot.getEmbedUtil().sendError(tc, author, "errors.request_error")
+                )
         );
     }
     
@@ -291,9 +306,6 @@ public class MessageUtil {
                                 )
                         )).queue();
                     }else{
-                        if(guild.getSelfMember().hasPermission(channel, Permission.MESSAGE_MANAGE))
-                            msg.clearReactions().queue();
-                        
                         bot.getHttpUtil().handleRequest(api, author, msg, target.getEffectiveName(), true);
                     }
                 },

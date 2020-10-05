@@ -561,7 +561,7 @@
       "solo": {
         "description": "Annab sulle tüdruku või tüdruku kes lõbusteb ise-endaga.\n\nSeda käsklust saab kasutada ainult NSFW-tähisega kanalites!",
         "loading": "{LOADING} Otsin giffi kuumadest tüdrukutest...",
-        "title": "Soolo tüdruk"
+        "message": "Soolo tüdruk"
       },
       "threesome": {
         "description": "Laseb sul küsida **kahe** inimese käest seksi.\nVaikimisi on `--ffm` (kaks naist, üks mees), aga sa saad kasutada ka `--mmf`(kaks meest, üks naine) või `--fff` (ainult naised).\n\nSeda käsklust saab kasutada ainult NSFW-tähisega kanalites!",

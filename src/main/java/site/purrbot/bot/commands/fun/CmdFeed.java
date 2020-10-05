@@ -103,4 +103,9 @@ public class CmdFeed implements Command, HttpUtil.ImageAPI{
     public boolean isNSFW(){
         return false;
     }
+    
+    @Override
+    public boolean isRequest(){
+        return true;
+    }
 }

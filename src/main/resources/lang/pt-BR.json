@@ -561,7 +561,7 @@
       "solo": {
         "description": "Dá a você um gif de uma garota se divertindo consigo mesma.\n\nEsse comando só pode ser executado em canais com rótulo NSFW!",
         "loading": "{LOADING} Obtendo um gif de uma garota gostosa ...",
-        "title": "Menina sozinha"
+        "message": "Menina sozinha"
       },
       "threesome": {
         "description": "Permite que você pergunte a **2** pessoas, se elas querem fazer sexo com você.\nPor padrão é `--ffm` (2 Femininos, 1 Masculino) é usado, mas você pode usar `--mmf` ou `--fff` para 2 Masculinos, 1 feminino e somente femininos respectivamente.\n\nEsse comando só pode ser executado em canais com rótulo NSFW!",

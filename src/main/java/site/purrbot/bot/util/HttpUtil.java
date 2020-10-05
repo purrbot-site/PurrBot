@@ -20,8 +20,11 @@ package site.purrbot.bot.util;
 
 import ch.qos.logback.classic.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class HttpUtil {
 
@@ -86,8 +90,8 @@ public class HttpUtil {
         client.newCall(request).enqueue(new Callback(){
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException ex){
-                logger.warn("HTTP Request failed for endpoint " + endpoint, ex);
-                editMsg(api.getCategory(), api.getEndpoint(), member, msg, targets, null, api.isImgRequired());
+                logger.warn("HTTP Request failed for endpoint " + apiEndpoint, ex);
+                editMsg(api, member, msg, targets, null);
             }
     
             @Override
@@ -96,14 +100,14 @@ public class HttpUtil {
                     if(!response.isSuccessful()){
                         logger.warn("Received non-successful response: " + response.code() + " (" + response.message() + ")");
                         logger.warn("Endpoint: " + endpoint);
-                        editMsg(api.getCategory(), api.getEndpoint(), member, msg, targets, null, api.isImgRequired());
+                        editMsg(api, member, msg, targets, null);
                         return;
                     }
                     
                     if(responseBody == null){
                         logger.warn("Received empty response body.");
                         logger.warn("Endpoint: " + endpoint);
-                        editMsg(api.getCategory(), api.getEndpoint(), member, msg, targets, null, api.isImgRequired());
+                        editMsg(api, member, msg, targets, null);
                         return;
                     }
                     
@@ -111,12 +115,12 @@ public class HttpUtil {
                     if(body.isEmpty()){
                         logger.warn("Received empty response body.");
                         logger.warn("Endpoint: " + endpoint);
-                        editMsg(api.getCategory(), api.getEndpoint(), member, msg, targets, null, api.isImgRequired());
+                        editMsg(api, member, msg, targets, null);
                         return;
                     }
                     
                     String link = new JSONObject(body).optString("link", null);
-                    editMsg(api.getCategory(), api.getEndpoint(), member, msg, targets, link, api.isImgRequired());
+                    editMsg(api, member, msg, targets, link);
                 }
             }
         });
@@ -130,8 +134,12 @@ public class HttpUtil {
         }
     }
     
-    public void editMsg(String cat, String endpoint, Member member, Message msg, String targets, String link, boolean imgRequired){
-        String path = getPath(cat, endpoint) + "message";
+    private void editMsg(ImageAPI api, Member member, Message msg, String targets, String link){
+        String path = getPath(api.getCategory(), api.getEndpoint()) + "message";
+        Guild guild = msg.getGuild();
+        boolean imgRequired = api.isImgRequired();
+        boolean isRequest = api.isRequest();
+        
         if(link == null){
             if(imgRequired){
                 bot.getEmbedUtil().sendError(msg.getTextChannel(), member, "errors.api_error");
@@ -140,33 +148,69 @@ public class HttpUtil {
             }
             
             msg.editMessage(MarkdownSanitizer.escape(
-                    bot.getMsg(member.getGuild().getId(), path, member.getEffectiveName(), targets)
+                    bot.getMsg(guild.getId(), path, member.getEffectiveName(), targets)
             )).queue();
             return;
         }
     
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed()
                 .setDescription(MarkdownSanitizer.escape(
-                        bot.getMsg(msg.getGuild().getId(), path, member.getEffectiveName(), targets)
+                        bot.getMsg(guild.getId(), path, member.getEffectiveName(), targets)
                 ))
                 .setImage(link);
         
+        if(guild.getSelfMember().hasPermission(msg.getTextChannel(), Permission.MESSAGE_MANAGE))
+            msg.clearReactions().queue();
+        
         if(link.equalsIgnoreCase("https://purrbot.site/img/sfw/neko/img/neko_076.jpg")){
             if(bot.isBeta()){
-                embed.setDescription(bot.getMsg(msg.getGuild().getId(), "snuggle.fun.neko.snuggle"));
+                embed.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.snuggle"));
             }else{
-                embed.setDescription(bot.getMsg(msg.getGuild().getId(), "purr.fun.neko.snuggle"));
+                embed.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.snuggle"));
             }
         }else
         if(link.equalsIgnoreCase("https://purrbot.site/img/sfw/neko/img/neko_136.jpg")){
             if(bot.isBeta()){
-                embed.setDescription(bot.getMsg(msg.getGuild().getId(), "snuggle.fun.neko.purr"));
+                embed.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.purr"));
             }else{
-                embed.setDescription(bot.getMsg(msg.getGuild().getId(), "purr.fun.neko.purr"));
+                embed.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.purr"));
             }
         }
         
-        msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(embed.build()).queue();
+        msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(embed.build()).queue(
+                v -> {
+                    if(isRequest){
+                        MessageEmbed success = bot.getEmbedUtil().getEmbed()
+                                .setDescription(
+                                        bot.getMsg(guild.getId(), "request.accepted", member.getEffectiveName(), targets)
+                                                .replace("{link}", msg.getJumpUrl())
+                                )
+                                .build();
+                        
+                        msg.getTextChannel().sendMessage(member.getAsMention())
+                                .embed(success)
+                                .queue(del -> del.delete().queueAfter(10, TimeUnit.SECONDS));
+                    }
+                },
+                e -> {
+                    if(isRequest){
+                        msg.getTextChannel().sendMessage(embed.build()).queue(
+                                result -> {
+                                    MessageEmbed success = bot.getEmbedUtil().getEmbed()
+                                            .setDescription(
+                                                    bot.getMsg(guild.getId(), "request.accepted", member.getEffectiveName(), targets)
+                                                            .replace("{link}", result.getJumpUrl())
+                                            )
+                                            .build();
+                                    
+                                    msg.getTextChannel().sendMessage(member.getAsMention())
+                                            .embed(success)
+                                            .queue(del -> del.delete().queueAfter(10, TimeUnit.SECONDS));
+                                }
+                        );
+                    }
+                }
+        );
     }
     
     private String getUrl(boolean nsfw, String endpoint, boolean gif){
@@ -185,5 +229,7 @@ public class HttpUtil {
         boolean isImgRequired();
         
         boolean isNSFW();
+        
+        boolean isRequest();
     }
 }

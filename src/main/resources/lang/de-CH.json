@@ -561,7 +561,7 @@
       "solo": {
         "description": "Gibt dir ein gif von einer Frau, welche Spass mit sich selbst hat.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwenden werden!",
         "loading": "{LOADING} Erhalte ein gif von einem scharfen Girl...",
-        "title": "Solo Girl"
+        "message": "Solo Girl"
       },
       "threesome": {
         "description": "Lässt dich **2** Personen fragen, ob sie Sex mit dir haben wollen.\nStandardmässig wird `--ffm` (2 Frauen, 1 Mann) verwendet, aber du kannst entweder `--mmf` oder `--fff` für 2 Männer, 1 Frau oder nur Frauen verwenden.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwenden werden!",

@@ -31,6 +31,7 @@ public class Links {
     public static final String DISCORD_BOATS          = "https://discord.boats/bot/purr";
     public static final String DISCORD_BOTS_GG        = "https://discord.bots.gg/bots/425382319449309197";
     public static final String DISCORDEXTREMELIST_XYZ = "https://discordextremelist.xyz/bots/purr";
+    public static final String DISCORDSERVICES_NET    = "https://discordservices.net/bot/425382319449309197";
 
     // Other links
     public static final String PATREON     = "https://patreon.com/andre_601";

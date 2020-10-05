@@ -76,4 +76,9 @@ public class CmdSenko implements Command, HttpUtil.ImageAPI{
     public boolean isNSFW(){
         return false;
     }
+    
+    @Override
+    public boolean isRequest(){
+        return false;
+    }
 }

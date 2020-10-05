@@ -109,4 +109,9 @@ public class CmdPussylick implements Command, HttpUtil.ImageAPI{
     public boolean isNSFW(){
         return true;
     }
+    
+    @Override
+    public boolean isRequest(){
+        return true;
+    }
 }

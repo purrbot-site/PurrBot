@@ -57,7 +57,7 @@ public class CmdLewd implements Command, HttpUtil.ImageAPI{
         
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.nsfw.lewd.loading")
-        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, isGif));
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, "neko", member, msg, "", isGif));
     }
     
     @Override
@@ -67,7 +67,7 @@ public class CmdLewd implements Command, HttpUtil.ImageAPI{
     
     @Override
     public String getEndpoint(){
-        return "neko";
+        return "lewd";
     }
     
     @Override
@@ -78,5 +78,10 @@ public class CmdLewd implements Command, HttpUtil.ImageAPI{
     @Override
     public boolean isNSFW(){
         return true;
+    }
+    
+    @Override
+    public boolean isRequest(){
+        return false;
     }
 }

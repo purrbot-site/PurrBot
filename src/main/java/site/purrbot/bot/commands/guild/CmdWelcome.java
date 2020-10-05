@@ -60,157 +60,6 @@ public class CmdWelcome implements Command{
     public CmdWelcome(PurrBot bot){
         this.bot = bot;
     }
-
-    private String getMsg(String msg){
-        return String.format(
-                "```md\n" +
-                "%s\n" +
-                "```",
-                msg.length() > 1000 ? msg.substring(0, 990) + "..." : msg
-        );
-    }
-    
-    private void welcomeSettings(TextChannel tc, Member member, InputStream file){
-        Guild guild = tc.getGuild();
-        String welcomeChannel = getWelcomeChannel(guild.getId());
-
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
-                .setTitle(
-                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.title")
-                )
-                .setDescription(
-                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.current_settings")
-                )
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.subcommands_title"), 
-                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.subcommands_value"),
-                        false
-                )
-                .addField(bot.getMsg(guild.getId(), "purr.guild.welcome.embed.channel"), String.format(
-                        "%s",
-                        welcomeChannel
-                ), false)
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.image_title"),
-                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.image_value")
-                                .replace("{background}", bot.getWelcomeBg(guild.getId()))
-                                .replace("{icon}", bot.getWelcomeIcon(guild.getId()))
-                                .replace("{color}", bot.getWelcomeColor(guild.getId())),
-                        false
-                )
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.message_title"),
-                        getMsg(bot.getWelcomeMsg(guild.getId())), 
-                        false
-                );
-
-        if(file == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
-            tc.sendMessage(embed.build()).queue();
-        }else{
-            embed.addField(
-                    bot.getMsg(guild.getId(), "purr.guild.welcome.embed.preview"),
-                    EmbedBuilder.ZERO_WIDTH_SPACE,
-                    false
-            )
-            .setImage("attachment://welcome_preview.jpg");
-            
-            tc.sendMessage(embed.build())
-              .addFile(file, "welcome_preview.jpg")
-              .queue();
-        }
-
-    }
-
-    private void update(TextChannel tc, Member member, Type type, String value){
-        String id = member.getGuild().getId();
-
-        switch(type){
-            case BACKGROUND:
-                bot.setWelcomeBg(id, value);
-                value = "`" + value + "`";
-                break;
-
-            case CHANNEL:
-                bot.setWelcomeChannel(id, value);
-                value = "<#" + value + ">";
-                break;
-
-            case COLOR:
-                bot.setWelcomeColor(id, value);
-                value = "`" + value + "`";
-                break;
-
-            case ICON:
-                bot.setWelcomeIcon(id, value);
-                value = "`" + value + "`";
-                break;
-
-            case MESSAGE:
-                bot.setWelcomeMsg(id, value);
-                value = getMsg(value);
-        }
-        
-        tc.sendMessage(
-                bot.getEmbedUtil().getEmbed(member)
-                        .setColor(0x00FF00)
-                        .setDescription(
-                                bot.getMsg(id, "purr.guild.welcome.set")
-                                .replace("{type}", firstUpperCase(type.name()))
-                                .replace("{value}", value)
-                        )
-                        .build()
-        ).queue();
-    }
-
-    private void reset(TextChannel tc, Member member, Type type){
-        String id = member.getGuild().getId();
-
-        switch(type){
-            case BACKGROUND:
-                bot.setWelcomeBg(id, "color_white");
-                break;
-
-            case CHANNEL:
-                bot.setWelcomeChannel(id, "none");
-                break;
-
-            case COLOR:
-                bot.setWelcomeColor(id, "hex:000000");
-                break;
-
-            case ICON:
-                bot.setWelcomeIcon(id, "purr");
-                break;
-
-            case MESSAGE:
-                bot.setWelcomeMsg(id, "Welcome {mention}!");
-        }
-
-        tc.sendMessage(
-                bot.getEmbedUtil().getEmbed(member)
-                        .setColor(0x00FF00)
-                        .setDescription(
-                                bot.getMsg(id, "purr.guild.welcome.reset")
-                                .replace("{type}", firstUpperCase(type.name()))
-                        )
-                        .build()
-        ).queue();
-    }
-
-    private String getWelcomeChannel(String id){
-        if(bot.getWelcomeChannel(id).equals("none")) 
-            return bot.getMsg(id, "purr.guild.welcome.embed.no_channel");
-        
-        Guild guild = bot.getShardManager().getGuildById(id);
-        if(guild == null)
-            return bot.getMsg(id, "purr.guild.welcome.embed.no_channel");
-        
-        return String.format("<#%s>", bot.getWelcomeChannel(id));
-    }
-
-    private String firstUpperCase(String word){
-        return Character.toString(word.charAt(0)).toUpperCase() + word.substring(1).toLowerCase();
-    }
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
@@ -333,6 +182,8 @@ public class CmdWelcome implements Command{
 
             case "msg":
                 if(args.length == 1){
+                    String roleId = member.getRoles().size() >= 1 ? member.getRoles().get(0).getId() : guild.getPublicRole().getId();
+                    
                     MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                             .addField(
                                     bot.getMsg(guild.getId(), "purr.guild.welcome.message_title"),
@@ -342,13 +193,30 @@ public class CmdWelcome implements Command{
                             .addField(
                                     bot.getMsg(guild.getId(), "purr.guild.welcome.placeholders_title"),
                                     "`{count}` / `{members}`\n" +
+                                    "`{count_formatted}` / `{members_formatted}`\n" +
                                     "`{guild}` / `{server}`\n" +
                                     "`{mention}`\n" +
                                     "`{name}` / `{username}`\n" +
                                     "`{r_mention:<id>}`\n" +
                                     "`{r_name:<id>}`\n" +
                                     "`{tag}`",
-                                    false
+                                    true
+                            )
+                            .addField(
+                                    EmbedBuilder.ZERO_WIDTH_SPACE,
+                                    bot.getMessageUtil().formatPlaceholders(String.format(
+                                            "{count}\n" +
+                                            "{count_formatted}\n" +
+                                            "{guild}\n" +
+                                            "{mention}\n" +
+                                            "{name}\n" +
+                                            "{r_mention:%s}\n" +
+                                            "{r_name:%s}\n" +
+                                            "{tag}",
+                                            roleId,
+                                            roleId
+                                    ), member),
+                                    true
                             )
                             .build();
                     
@@ -402,6 +270,157 @@ public class CmdWelcome implements Command{
                     welcomeSettings(tc, member, image);
                 });
         }
+    }
+    
+    private String getMsg(String msg){
+        return String.format(
+                "```md\n" +
+                "%s\n" +
+                "```",
+                msg.length() > 1000 ? msg.substring(0, 990) + "..." : msg
+        );
+    }
+    
+    private void welcomeSettings(TextChannel tc, Member member, InputStream file){
+        Guild guild = tc.getGuild();
+        String welcomeChannel = getWelcomeChannel(guild.getId());
+        
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
+                .setTitle(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.title")
+                )
+                .setDescription(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.current_settings")
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.subcommands_title"),
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.subcommands_value"),
+                        false
+                )
+                .addField(bot.getMsg(guild.getId(), "purr.guild.welcome.embed.channel"), String.format(
+                        "%s",
+                        welcomeChannel
+                ), false)
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.image_title"),
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.image_value")
+                                .replace("{background}", bot.getWelcomeBg(guild.getId()))
+                                .replace("{icon}", bot.getWelcomeIcon(guild.getId()))
+                                .replace("{color}", bot.getWelcomeColor(guild.getId())),
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.guild.welcome.embed.message_title"),
+                        getMsg(bot.getWelcomeMsg(guild.getId())),
+                        false
+                );
+        
+        if(file == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+            tc.sendMessage(embed.build()).queue();
+        }else{
+            embed.addField(
+                    bot.getMsg(guild.getId(), "purr.guild.welcome.embed.preview"),
+                    EmbedBuilder.ZERO_WIDTH_SPACE,
+                    false
+            )
+                    .setImage("attachment://welcome_preview.jpg");
+            
+            tc.sendMessage(embed.build())
+                    .addFile(file, "welcome_preview.jpg")
+                    .queue();
+        }
+        
+    }
+    
+    private void update(TextChannel tc, Member member, Type type, String value){
+        String id = member.getGuild().getId();
+        
+        switch(type){
+            case BACKGROUND:
+                bot.setWelcomeBg(id, value);
+                value = "`" + value + "`";
+                break;
+            
+            case CHANNEL:
+                bot.setWelcomeChannel(id, value);
+                value = "<#" + value + ">";
+                break;
+            
+            case COLOR:
+                bot.setWelcomeColor(id, value);
+                value = "`" + value + "`";
+                break;
+            
+            case ICON:
+                bot.setWelcomeIcon(id, value);
+                value = "`" + value + "`";
+                break;
+            
+            case MESSAGE:
+                bot.setWelcomeMsg(id, value);
+                value = getMsg(value);
+        }
+        
+        tc.sendMessage(
+                bot.getEmbedUtil().getEmbed(member)
+                        .setColor(0x00FF00)
+                        .setDescription(
+                                bot.getMsg(id, "purr.guild.welcome.set")
+                                        .replace("{type}", firstUpperCase(type.name()))
+                                        .replace("{value}", value)
+                        )
+                        .build()
+        ).queue();
+    }
+    
+    private void reset(TextChannel tc, Member member, Type type){
+        String id = member.getGuild().getId();
+        
+        switch(type){
+            case BACKGROUND:
+                bot.setWelcomeBg(id, "color_white");
+                break;
+            
+            case CHANNEL:
+                bot.setWelcomeChannel(id, "none");
+                break;
+            
+            case COLOR:
+                bot.setWelcomeColor(id, "hex:000000");
+                break;
+            
+            case ICON:
+                bot.setWelcomeIcon(id, "purr");
+                break;
+            
+            case MESSAGE:
+                bot.setWelcomeMsg(id, "Welcome {mention}!");
+        }
+        
+        tc.sendMessage(
+                bot.getEmbedUtil().getEmbed(member)
+                        .setColor(0x00FF00)
+                        .setDescription(
+                                bot.getMsg(id, "purr.guild.welcome.reset")
+                                        .replace("{type}", firstUpperCase(type.name()))
+                        )
+                        .build()
+        ).queue();
+    }
+    
+    private String getWelcomeChannel(String id){
+        if(bot.getWelcomeChannel(id).equals("none"))
+            return bot.getMsg(id, "purr.guild.welcome.embed.no_channel");
+        
+        Guild guild = bot.getShardManager().getGuildById(id);
+        if(guild == null)
+            return bot.getMsg(id, "purr.guild.welcome.embed.no_channel");
+        
+        return String.format("<#%s>", bot.getWelcomeChannel(id));
+    }
+    
+    private String firstUpperCase(String word){
+        return Character.toString(word.charAt(0)).toUpperCase() + word.substring(1).toLowerCase();
     }
 
     private enum Type{

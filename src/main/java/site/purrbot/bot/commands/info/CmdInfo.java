@@ -105,26 +105,40 @@ public class CmdInfo implements Command{
                 false
         )
         .addField(
-                bot.getMsg(guild.getId(), "purr.info.info.embed.bot_lists.title"), 
-                String.join(
-                        "\n",
-                        getLink(guild.getId(), "bot_lists.botlist_space", Links.BOTLIST_SPACE),
-                        getLink(guild.getId(), "bot_lists.discord_boats", Links.DISCORD_BOATS),
-                        getLink(guild.getId(), "bot_lists.discord_bots_gg", Links.DISCORD_BOTS_GG),
-                        getLink(guild.getId(), "bot_lists.discordextremelist_xyz", Links.DISCORDEXTREMELIST_XYZ)
+                bot.getMsg(guild.getId(), "purr.info.info.embed.bot_lists_title"), 
+                String.format(
+                        "[`Botlist.space`](%s)\n" +
+                        "[`Discord.boats`](%s)" +
+                        "[`Discord.bots.gg`](%s)\n" +
+                        "[`Discordextremelist.xyz`](%s)\n" +
+                        "[`Discordservices.net`](%s)",
+                        Links.BOTLIST_SPACE,
+                        Links.DISCORD_BOATS,
+                        Links.DISCORD_BOTS_GG,
+                        Links.DISCORDEXTREMELIST_XYZ,
+                        Links.DISCORDSERVICES_NET
                 ),
                 false
         )
         .addField(
                 bot.getMsg(guild.getId(), "purr.info.info.embed.links.title"),
-                String.join(
-                        "\n",
-                        getLink(guild.getId(), "links.discord", Links.DISCORD),
-                        getLink(guild.getId(), "links.github", Links.GITHUB),
-                        getLink(guild.getId(), "links.twitter", Links.TWITTER),
-                        getLink(guild.getId(), "links.website", Links.WEBSITE),
-                        getLink(guild.getId(), "links.wiki", Links.WIKI),
-                        getLink(guild.getId(), "links.policy", Links.POLICY)
+                String.format(
+                        "[%s](%s)\n" +
+                        "[`GitHub`](%s)\n" +
+                        "[`Twitter`](%s)\n" +
+                        "[%s](%s)\n" +
+                        "[%s](%s)\n" +
+                        "[%s](%s)",
+                        bot.getMsg(guild.getId(), "purr.info.info.embed.links.discord"),
+                        Links.DISCORD,
+                        Links.GITHUB,
+                        Links.TWITTER,
+                        bot.getMsg(guild.getId(), "purr.info.info.embed.links.website"),
+                        Links.WEBSITE,
+                        bot.getMsg(guild.getId(), "purr.info.info.embed.links.wiki"),
+                        Links.WIKI,
+                        bot.getMsg(guild.getId(), "purr.info.info.embed.links.policy"),
+                        Links.POLICY
                 ),
                 false
         )
@@ -159,8 +173,8 @@ public class CmdInfo implements Command{
         List<String> donators = bot.getDonators();
         
         for(int i = 0; i < donators.size(); i++){
-            int finalI = i;
-            String donator = cache.get(donators.get(i), k -> getUser(donators.get(finalI)));
+            int finalId = i;
+            String donator = cache.get(donators.get(i), k -> getUser(donators.get(finalId)));
             if(donator == null)
                 continue;
             
@@ -186,12 +200,13 @@ public class CmdInfo implements Command{
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
+        MessageEmbed embed = getEmbed(member);
         String s = msg.getContentRaw();
         if(s.toLowerCase().contains("--dm") || s.toLowerCase().contains("—dm")){
             String mention = member.getAsMention();
             String prefix = bot.isBeta() ? "snuggle" : "purr";
             member.getUser().openPrivateChannel()
-                    .flatMap(channel -> channel.sendMessage(getEmbed(member)))
+                    .flatMap(channel -> channel.sendMessage(embed))
                     .queue(
                             message -> tc.sendMessage(
                                     bot.getMsg(guild.getId(), prefix + ".info.info.dm_success", mention)
@@ -203,6 +218,6 @@ public class CmdInfo implements Command{
             return;
         }
 
-        tc.sendMessage(getEmbed(member)).queue();
+        tc.sendMessage(embed).queue();
     }
 }

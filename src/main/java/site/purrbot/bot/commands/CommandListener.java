@@ -150,7 +150,7 @@ public class CommandListener extends ListenerAdapter{
                     }
 
                     try{
-                        HANDLER.execute(command, msg, args[1] == null ? "" : args[1]);
+                        HANDLER.execute(command, msg, args[1] == null ? "" : args[1], args[0]);
                     }catch(Exception ex){
                         logger.error("Couldn't perform command!", ex);
                         bot.getEmbedUtil().sendError(tc, member, "errors.unknown", ex.getMessage(), false);

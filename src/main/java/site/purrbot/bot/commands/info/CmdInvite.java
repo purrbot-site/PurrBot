@@ -29,6 +29,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
 import java.util.concurrent.TimeUnit;
@@ -49,16 +50,6 @@ public class CmdInvite implements Command{
 
     public CmdInvite(PurrBot bot){
         this.bot = bot;
-    }
-    
-    private String getInvite(Guild guild, String path, Permission... permissions){
-        return getLink(guild.getId(), path, guild.getJDA().getInviteUrl(permissions));
-    }
-    
-    private String getLink(String id, String path, String link){
-        String text = bot.getMsg(id, "purr.info.invite.embed.links." + path);
-        
-        return MarkdownUtil.maskedLink(text, link);
     }
     
     @Override
@@ -100,7 +91,6 @@ public class CmdInvite implements Command{
                                 ),
                                 getInvite(
                                         guild,
-                                        "invite",
                                         Permission.MESSAGE_WRITE,
                                         Permission.MESSAGE_EMBED_LINKS,
                                         Permission.MESSAGE_HISTORY,
@@ -139,5 +129,17 @@ public class CmdInvite implements Command{
         }
 
         tc.sendMessage(invite.build()).queue();
+    }
+    
+    private String getInvite(Guild guild, Permission... permissions){
+        String invite = "https://addbotl.ink?id=" + IDs.PURR + "&perms=" + Permission.getRaw(permissions);
+        
+        return getLink(guild.getId(), "invite", invite);
+    }
+    
+    private String getLink(String id, String path, String link){
+        String text = bot.getMsg(id, "purr.info.invite.embed.links." + path);
+        
+        return MarkdownUtil.maskedLink(text, link);
     }
 }
