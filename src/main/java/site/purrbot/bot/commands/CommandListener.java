@@ -68,6 +68,9 @@ public class CommandListener extends ListenerAdapter{
                     if(event.getChannel().getId().equals(IDs.SUGGESTIONS))
                         return;
                     
+                    if(event.getChannel().isNews())
+                        return;
+                    
                     Pattern prefixPattern = Pattern.compile(
                             Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 
                             Pattern.DOTALL | Pattern.CASE_INSENSITIVE

@@ -35,6 +35,9 @@ import site.purrbot.bot.PurrBot;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
+import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
+
 public class HttpUtil {
 
     private final PurrBot bot;
@@ -160,7 +163,7 @@ public class HttpUtil {
                 .setImage(link);
         
         if(guild.getSelfMember().hasPermission(msg.getTextChannel(), Permission.MESSAGE_MANAGE))
-            msg.clearReactions().queue();
+            msg.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
         
         if(link.equalsIgnoreCase("https://purrbot.site/img/sfw/neko/img/neko_076.jpg")){
             if(bot.isBeta()){

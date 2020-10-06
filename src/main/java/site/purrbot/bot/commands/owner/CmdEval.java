@@ -100,7 +100,7 @@ public class CmdEval implements Command{
         se.put("channel", tc);
         se.put("msg", msg);
         se.put("embed", bot.getEmbedUtil().getEmbed().setTimestamp(null));
-
+        
         String statement = String.join(" ", args);
 
         long startTime = System.currentTimeMillis();

@@ -57,7 +57,7 @@ public class CmdLewd implements Command, HttpUtil.ImageAPI{
         
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.nsfw.lewd.loading")
-        ).queue(message -> bot.getHttpUtil().handleRequest(this, "neko", member, msg, "", isGif));
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, "neko", member, message, "", isGif));
     }
     
     @Override
