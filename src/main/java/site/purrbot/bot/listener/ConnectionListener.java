@@ -18,6 +18,7 @@
 
 package site.purrbot.bot.listener;
 
+import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import net.dv8tion.jda.api.JDA;
@@ -25,6 +26,7 @@ import net.dv8tion.jda.api.events.DisconnectEvent;
 import net.dv8tion.jda.api.events.ResumedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.util.message.WebhookUtil;
@@ -33,11 +35,10 @@ import java.time.ZonedDateTime;
 
 public class ConnectionListener extends ListenerAdapter{
 
-    private final PurrBot bot;
+    private final Logger logger = (Logger)LoggerFactory.getLogger(ConnectionListener.class);
     private final WebhookUtil webhookUtil;
 
     public ConnectionListener(PurrBot bot){
-        this.bot = bot;
         this.webhookUtil = new WebhookUtil(bot.getFileManager().getString("config", "webhooks.log"));
     }
 
@@ -80,6 +81,7 @@ public class ConnectionListener extends ListenerAdapter{
                 "Disconnected",
                 embed.build()
         );
+        logger.info("Got disconnected on shard {}. Resume connection...", jda.getShardInfo().getShardId());
     }
 
     @Override
@@ -108,6 +110,7 @@ public class ConnectionListener extends ListenerAdapter{
                 "Resumed session",
                 embed
         );
+        logger.info("Connection successfully resumed for shard {}!", jda.getShardInfo().getShardId());
     }
 
 }

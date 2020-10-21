@@ -20,6 +20,7 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import com.jagrosh.jdautilities.commons.utils.FinderUtil;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
@@ -29,6 +30,7 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @CommandDescription(
@@ -47,153 +49,6 @@ public class CmdUser implements Command{
 
     public CmdUser(PurrBot bot){
         this.bot = bot;
-    }
-
-    private String getRoles(Member member){
-        List<Role> roles = member.getRoles();
-
-        if(roles.size() <= 1)
-            return bot.getMsg(member.getGuild().getId(), "purr.info.user.no_roles_others");
-
-        StringBuilder sb = new StringBuilder("```\n");
-        for(int i = 1; i < roles.size(); i++){
-            Role role = roles.get(i);
-            String name = role.getName();
-
-            if(sb.length() + name.length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
-                int rolesLeft = roles.size() - i;
-
-                sb.append(
-                        bot.getMsg(member.getGuild().getId(), "purr.info.user.more_roles")
-                           .replace("{remaining}", String.valueOf(rolesLeft))
-                );
-                break;
-            }
-
-            sb.append(name).append("\n");
-        }
-        
-        sb.append("```");
-
-        return sb.toString();
-    }
-
-    private String getName(Member member){
-        StringBuilder sb = new StringBuilder(MarkdownSanitizer.escape(member.getUser().getName()));
-        
-        if(member.isOwner())
-            sb.append(" ").append(Emotes.OWNER.getEmote());
-
-        User user = member.getUser();
-        if(user.isBot())
-            if(user.getFlags().contains(User.UserFlag.VERIFIED_BOT))
-                sb.append(" ").append(Emotes.VERIFIED_BOT_1.getEmote()).append(Emotes.VERIFIED_BOT_2.getEmote());
-            else
-                sb.append(" ").append(Emotes.BOT_1.getEmote()).append(Emotes.BOT_2.getEmote());
-        
-        return sb.toString();
-    }
-
-    private String getUserInfo(Member member){
-        StringBuilder sb = new StringBuilder(
-                bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.id")
-                        .replace("{id}", member.getId())
-        );
-        
-        if(member.getNickname() != null){
-            String nick = member.getNickname();
-            sb.append("\n")
-                    .append(
-                            bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.nickname")
-                                    .replace("{nickname}", nick.length() > 20 ? nick.substring(0, 19) + "..." : nick)
-                    );
-        }
-        
-        return sb.toString();
-    }
-    
-    private String getTimes(Member member){
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.created"))
-                .append("\n   ")
-                .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeCreated())))
-                .append("\n\n")
-                .append(bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.joined"))
-                .append("\n   ")
-                .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeJoined())));
-
-        if(member.getTimeBoosted() != null)
-            sb.append("\n\n")
-                    .append(bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.booster"))
-                    .append("\n   ")
-                    .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeBoosted())));
-
-        return sb.toString();
-    }
-    
-    private String getBadges(Member member){
-        StringBuilder sb = new StringBuilder();
-        
-        for(User.UserFlag flag : member.getUser().getFlags()){
-            switch(flag){
-                case STAFF:
-                    if(sb.length() > 0)
-                        sb.append(" ");
-                    sb.append(Emotes.STAFF.getEmote());
-                    break;
-                
-                case PARTNER:
-                    if(sb.length() > 0)
-                        sb.append(" ");
-                    sb.append(Emotes.PARTNER.getEmote());
-                    break;
-                
-                case BUG_HUNTER_LEVEL_1:
-                case BUG_HUNTER_LEVEL_2:
-                    if(sb.length() > 0)
-                        sb.append(" ");
-                    sb.append(Emotes.BUGHUNTER.getEmote());
-                    break;
-                
-                case EARLY_SUPPORTER:
-                    if(sb.length() > 0)
-                        sb.append(" ");
-                    sb.append(Emotes.EARLY_SUPPORTER.getEmote());
-                    break;
-                
-                case HYPESQUAD:
-                    if(sb.length() > 0)
-                        sb.append(" ");
-                    sb.append(Emotes.HYPESQUAD_EVENTS.getEmote());
-                    break;
-                
-                case HYPESQUAD_BALANCE:
-                    if(sb.length() > 0)
-                        sb.append(" ");
-                    sb.append(Emotes.HYPESQUAD_BALANCE.getEmote());
-                    break;
-                
-                case HYPESQUAD_BRAVERY:
-                    if(sb.length() > 0)
-                        sb.append(" ");
-                    sb.append(Emotes.HYPESQUAD_BRAVERY.getEmote());
-                    break;
-                
-                case HYPESQUAD_BRILLIANCE:
-                    if(sb.length() > 0)
-                        sb.append(" ");
-                    sb.append(Emotes.HYPESQUAD_BRILLIANCE.getEmote());
-                    break;
-                
-                case VERIFIED_DEVELOPER:
-                    if(sb.length() > 0)
-                        sb.append(" ");
-                    sb.append(Emotes.VERIFIED_DEV.getEmote());
-            }
-        }
-        
-        return sb.length() == 0 ? bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.no_badges") : sb.toString();
     }
 
     @Override
@@ -221,7 +76,7 @@ public class CmdUser implements Command{
                         bot.getMsg(guild.getId(), "purr.info.user.embed.avatar"),
                         MarkdownUtil.maskedLink(
                                 bot.getMsg(guild.getId(), "purr.info.user.embed.avatar_url"),
-                                member.getUser().getEffectiveAvatarUrl()
+                                target.getUser().getEffectiveAvatarUrl()
                         ),
                         true
                 )
@@ -248,5 +103,137 @@ public class CmdUser implements Command{
                 );
 
         tc.sendMessage(embed.build()).queue();
+    }
+    
+    private String getRoles(Member member){
+        List<Role> roles = member.getRoles();
+        
+        if(roles.size() <= 1)
+            return bot.getMsg(member.getGuild().getId(), "purr.info.user.no_roles_others");
+        
+        StringBuilder sb = new StringBuilder("```\n");
+        for(int i = 1; i < roles.size(); i++){
+            Role role = roles.get(i);
+            String name = role.getName();
+            
+            if(sb.length() + name.length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
+                int rolesLeft = roles.size() - i;
+                
+                sb.append(
+                        bot.getMsg(member.getGuild().getId(), "purr.info.user.more_roles")
+                                .replace("{remaining}", String.valueOf(rolesLeft))
+                );
+                break;
+            }
+            
+            sb.append(name).append("\n");
+        }
+        
+        sb.append("```");
+        
+        return sb.toString();
+    }
+    
+    private String getName(Member member){
+        StringBuilder sb = new StringBuilder(MarkdownSanitizer.escape(member.getUser().getName()));
+        
+        if(member.isOwner())
+            sb.append(" ").append(Emotes.OWNER.getEmote());
+        
+        User user = member.getUser();
+        if(user.isBot())
+            if(user.getFlags().contains(User.UserFlag.VERIFIED_BOT))
+                sb.append(" ").append(Emotes.VERIFIED_BOT_1.getEmote()).append(Emotes.VERIFIED_BOT_2.getEmote());
+            else
+                sb.append(" ").append(Emotes.BOT_1.getEmote()).append(Emotes.BOT_2.getEmote());
+        
+        return sb.toString();
+    }
+    
+    private String getUserInfo(Member member){
+        StringBuilder sb = new StringBuilder(
+                bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.id")
+                        .replace("{id}", member.getId())
+        );
+        
+        if(member.getNickname() != null){
+            String nick = member.getNickname();
+            sb.append("\n")
+                    .append(
+                            bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.nickname")
+                                    .replace("{nickname}", nick.length() > 20 ? nick.substring(0, 19) + "..." : nick)
+                    );
+        }
+        
+        return sb.toString();
+    }
+    
+    private String getTimes(Member member){
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.created"))
+                .append("\n   ")
+                .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeCreated())))
+                .append("\n\n")
+                .append(bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.joined"))
+                .append("\n   ")
+                .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeJoined())));
+        
+        if(member.getTimeBoosted() != null)
+            sb.append("\n\n")
+                    .append(bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.booster"))
+                    .append("\n   ")
+                    .append(bot.getMessageUtil().formatTime(LocalDateTime.from(member.getTimeBoosted())));
+        
+        return sb.toString();
+    }
+    
+    private String getBadges(Member member){
+        StringBuilder sb = new StringBuilder();
+        
+        for(User.UserFlag flag : member.getUser().getFlags()){
+            if(sb.length() > 0)
+                sb.append(" ");
+            
+            switch(flag){
+                case STAFF:
+                    sb.append(Emotes.STAFF.getEmote());
+                    break;
+                
+                case PARTNER:
+                    sb.append(Emotes.PARTNER.getEmote());
+                    break;
+                
+                case BUG_HUNTER_LEVEL_1:
+                case BUG_HUNTER_LEVEL_2:
+                    sb.append(Emotes.BUGHUNTER.getEmote());
+                    break;
+                
+                case EARLY_SUPPORTER:
+                    sb.append(Emotes.EARLY_SUPPORTER.getEmote());
+                    break;
+                
+                case HYPESQUAD:
+                    sb.append(Emotes.HYPESQUAD_EVENTS.getEmote());
+                    break;
+                
+                case HYPESQUAD_BALANCE:
+                    sb.append(Emotes.HYPESQUAD_BALANCE.getEmote());
+                    break;
+                
+                case HYPESQUAD_BRAVERY:
+                    sb.append(Emotes.HYPESQUAD_BRAVERY.getEmote());
+                    break;
+                
+                case HYPESQUAD_BRILLIANCE:
+                    sb.append(Emotes.HYPESQUAD_BRILLIANCE.getEmote());
+                    break;
+                
+                case VERIFIED_DEVELOPER:
+                    sb.append(Emotes.VERIFIED_DEV.getEmote());
+            }
+        }
+        
+        return sb.length() == 0 ? bot.getMsg(member.getGuild().getId(), "purr.info.user.embed.no_badges") : sb.toString();
     }
 }

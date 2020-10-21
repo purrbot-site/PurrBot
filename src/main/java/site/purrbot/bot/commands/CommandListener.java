@@ -124,7 +124,7 @@ public class CommandListener extends ListenerAdapter{
                         return;
                     }
 
-                    if(command.getAttribute("category").equals("owner") && bot.getCheckUtil().isNotDeveloper(member))
+                    if(command.getAttribute("category").equals("owner") && bot.getCheckUtil().notDeveloper(member))
                         return;
                     
                     if(bot.getCheckUtil().hasAdmin(member, tc))
@@ -155,7 +155,7 @@ public class CommandListener extends ListenerAdapter{
                     try{
                         HANDLER.execute(command, msg, args[1] == null ? "" : args[1], args[0]);
                     }catch(Exception ex){
-                        logger.error("Couldn't perform command!", ex);
+                        logger.error("Couldn't perform command {}!", args[0], ex);
                         bot.getEmbedUtil().sendError(tc, member, "errors.unknown", ex.getMessage(), false);
                     }
                 }

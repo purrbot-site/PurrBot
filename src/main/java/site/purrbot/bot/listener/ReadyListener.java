@@ -55,11 +55,7 @@ public class ReadyListener extends ListenerAdapter{
         JDA jda = event.getJDA();
 
         shards++;
-        logger.info(String.format(
-                "Shard %d (%d Guilds) ready!",
-                jda.getShardInfo().getShardId(),
-                jda.getGuilds().size()
-        ));
+        logger.info("Shard {} ({} Guilds) ready!", jda.getShardInfo().getShardId(), jda.getGuildCache().size());
 
         WebhookEmbed embed = new WebhookEmbedBuilder()
                 .setColor(0x00FF00)
@@ -114,12 +110,12 @@ public class ReadyListener extends ListenerAdapter{
                     finished
             );
             
-            logger.info(String.format(
-                    "Loaded Bot %s vBOT_VERSION with %d shard(s) and %d guilds!",
+            logger.info(
+                    "Loaded Bot {} vBOT_VERSION with {} shard(s) and {} guilds!",
                     jda.getSelfUser().getAsTag(),
                     shardManager.getShardCache().size(),
                     shardManager.getGuildCache().size()
-            ));
+            );
         }
     }
 }

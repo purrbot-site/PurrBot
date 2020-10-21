@@ -18,6 +18,8 @@
 
 package site.purrbot.bot.commands;
 
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.fun.*;
 import site.purrbot.bot.commands.guild.CmdLanguage;
@@ -36,6 +38,7 @@ public class CommandLoader {
     private final Set<Command> COMMANDS = new HashSet<>();
 
     public CommandLoader(PurrBot bot){
+        final Logger logger = (Logger)LoggerFactory.getLogger(CommandLoader.class); 
         loadCommands(
                 // Fun
                 new CmdBite(bot),
@@ -90,6 +93,8 @@ public class CommandLoader {
                 new CmdMsg(bot),
                 new CmdShutdown(bot)
         );
+        
+        logger.info("Loaded {} commands!", COMMANDS.size());
     }
 
     private void loadCommands(Command... commands){

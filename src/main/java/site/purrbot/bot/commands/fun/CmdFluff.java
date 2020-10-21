@@ -18,8 +18,6 @@
 
 package site.purrbot.bot.commands.fun;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
@@ -29,8 +27,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
-
-import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
         name = "Fluff",
@@ -43,10 +39,6 @@ import java.util.concurrent.TimeUnit;
         }
 )
 public class CmdFluff implements Command, HttpUtil.ImageAPI{
-    
-    private final Cache<String, String> queue = Caffeine.newBuilder()
-            .expireAfterWrite(2, TimeUnit.MINUTES)
-            .build();
     
     private final PurrBot bot;
     

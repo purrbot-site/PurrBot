@@ -132,7 +132,7 @@ public class CmdInvite implements Command{
     }
     
     private String getInvite(Guild guild, Permission... permissions){
-        String invite = "https://addbotl.ink?id=" + IDs.PURR + "&perms=" + Permission.getRaw(permissions);
+        String invite = "https://add.botl.ink?id=" + IDs.PURR + "&perms=" + Permission.getRaw(permissions);
         
         return getLink(guild.getId(), "invite", invite);
     }

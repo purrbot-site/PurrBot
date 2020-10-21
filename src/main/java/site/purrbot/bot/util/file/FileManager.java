@@ -79,40 +79,25 @@ public class FileManager{
             if(!file.exists()){
                 if((split.length == 2 && !split[0].equals(".")) || (split.length >= 3 && split[0].equals("."))){
                     if(!file.getParentFile().mkdirs() && !file.getParentFile().exists()){
-                        logger.warn(String.format(
-                                "Failed to create directory %s",
-                                split[1]
-                        ));
+                        logger.warn("Failed to create directory {}", split[1]);
                         return;
                     }
                 }
                 if(file.createNewFile()){
                     if(export(PurrBot.class.getResourceAsStream(internal), external)){
-                        logger.info(String.format(
-                                "Successfully created %s!",
-                                name
-                        ));
+                        logger.info("Successfully created {}!", name);
                         files.put(name, file);
                     }else{
-                        logger.warn(String.format(
-                                "Failed to create %s",
-                                name
-                        ));
+                        logger.warn("Failed to create {}!", name);
                     }
                 }
             }else{
-                logger.info(String.format(
-                        "Loaded %s",
-                        name
-                ));
+                logger.info("Successfully loaded {}!", name);
 
                 files.put(name, file);
             }
         }catch(IOException ex){
-            logger.warn(String.format(
-                    "Couldn't create or load %s.",
-                    name
-            ), ex);
+            logger.warn("Couldn't create nor load {}", name, ex);
         }
     }
     
@@ -138,7 +123,7 @@ public class FileManager{
             
             return json.getAsString();
         }catch(FileNotFoundException ex){
-            logger.warn("Could not find \"" + path + "\" in file " + name + ".json", ex);
+            logger.warn("Couldn't find \"{}\" in file {}.json", path, name, ex);
             return "";
         }
     }
@@ -165,7 +150,7 @@ public class FileManager{
             
             return json.getAsBoolean();
         }catch(FileNotFoundException ex){
-            logger.warn("Could not find \"" + path + "\" in file " + name + ".json", ex);
+            logger.warn("Couldn't find \"{}\" in file {}.json", path, name, ex);
             return false;
         }
     }
@@ -196,7 +181,7 @@ public class FileManager{
             return gson.fromJson(json.getAsJsonArray(), type);
             
         }catch(FileNotFoundException ex){
-            logger.warn("Could not find \"" + path + "\" in file " + name + ".json", ex);
+            logger.warn("Couldn't find \"{}\" in file {}.json", path, name, ex);
             return new ArrayList<>();
         }
     }

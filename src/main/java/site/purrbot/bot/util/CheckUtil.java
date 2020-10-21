@@ -36,7 +36,7 @@ public class CheckUtil{
         this.bot = bot;
     }
     
-    public boolean isNotDeveloper(Member member){
+    public boolean notDeveloper(Member member){
         return !member.getId().equals(IDs.ANDRE_601);
     }
     

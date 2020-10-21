@@ -2,6 +2,7 @@
   "bot-token": "TOKEN",
   
   "beta": false,
+  "debug": false,
   
   "webhooks": {
     "guild": "guild-webhook-url",

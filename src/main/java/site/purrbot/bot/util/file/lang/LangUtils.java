@@ -35,12 +35,12 @@ public final class LangUtils{
             case "de-ch":
             case "en-owo":
             case "et-ee":
+            case "it-it":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
                 return bot.getFileManager().getString(language.toLowerCase(), path);
     
-            case "it-it":
             default:
                 return bot.getFileManager().getString("en", path);
         }
@@ -51,12 +51,12 @@ public final class LangUtils{
             case "de-ch":
             case "en-owo":
             case "et-ee":
+            case "it-it":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
                 return bot.getFileManager().getStringlist(language.toLowerCase(), path);
     
-            case "it-it":
             default:
                 return bot.getFileManager().getStringlist("en", path);
         }

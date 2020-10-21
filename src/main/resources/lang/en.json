@@ -44,6 +44,11 @@
         "no_mention": "Please mention at least one user to bite!",
         "special_user": "B-but {user}! T-that is embarrassing."
       },
+      "blush": {
+        "description": "Makes you blush. o////o",
+        "loading": "{LOADING} Making you blush...",
+        "message": "{user} is blushing"
+      },
       "cuddle": {
         "description": "Lets you cuddle one or multiple people.",
         "loading": "{LOADING} Receiving a cuddle-gif...",

@@ -93,7 +93,7 @@ public class HttpUtil {
         client.newCall(request).enqueue(new Callback(){
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException ex){
-                logger.warn("HTTP Request failed for endpoint " + apiEndpoint, ex);
+                logger.warn("HTTP Request failed for endpoint {}", apiEndpoint, ex);
                 editMsg(api, member, msg, targets, null);
             }
     
@@ -101,15 +101,15 @@ public class HttpUtil {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException{
                 try(ResponseBody responseBody = response.body()){
                     if(!response.isSuccessful()){
-                        logger.warn("Received non-successful response: " + response.code() + " (" + response.message() + ")");
-                        logger.warn("Endpoint: " + endpoint);
+                        logger.warn("Received non-successful response {} ({})", response.code(), response.message());
+                        logger.warn("Endpoint: {}", endpoint);
                         editMsg(api, member, msg, targets, null);
                         return;
                     }
                     
                     if(responseBody == null){
                         logger.warn("Received empty response body.");
-                        logger.warn("Endpoint: " + endpoint);
+                        logger.warn("Endpoint: {}", endpoint);
                         editMsg(api, member, msg, targets, null);
                         return;
                     }
@@ -117,7 +117,7 @@ public class HttpUtil {
                     String body = responseBody.string();
                     if(body.isEmpty()){
                         logger.warn("Received empty response body.");
-                        logger.warn("Endpoint: " + endpoint);
+                        logger.warn("Endpoint: {}", endpoint);
                         editMsg(api, member, msg, targets, null);
                         return;
                     }
@@ -156,7 +156,7 @@ public class HttpUtil {
             return;
         }
     
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed()
+        EmbedBuilder embed = (imgRequired ? bot.getEmbedUtil().getEmbed(member) : bot.getEmbedUtil().getEmbed())
                 .setDescription(MarkdownSanitizer.escape(
                         bot.getMsg(guild.getId(), path, member.getEffectiveName(), targets)
                 ))

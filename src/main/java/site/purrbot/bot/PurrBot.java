@@ -127,7 +127,7 @@ public class PurrBot {
                 .addLang("en")
                 .addLang("en-OWO")
                 .addLang("et-EE")
-                //.addLang("it-IT")
+                .addLang("it-IT")
                 .addLang("ko-KR")
                 .addLang("pt-BR")
                 .addLang("ru-RU");

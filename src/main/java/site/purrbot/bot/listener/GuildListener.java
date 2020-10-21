@@ -74,18 +74,10 @@ public class GuildListener extends ListenerAdapter{
                             Links.DISCORD
                     ))
                     .queue(message -> {
-                        logger.info(String.format(
-                                "[Guild Leave] Guild{name=\"%s\", members=%d}",
-                                guild.getName(),
-                                guild.getMemberCount()
-                        ));
+                        logger.info("[Guild Leave] {}(id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
                         guild.leave().queue();
                     }, throwable -> {
-                        logger.info(String.format(
-                                "[Guild Leave] Guild{name=\"%s\", members=%d}",
-                                guild.getName(),
-                                guild.getMemberCount()
-                        ));
+                        logger.info("[Guild Leave] {}(id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
                         guild.leave().queue();
                     });
             
@@ -97,13 +89,8 @@ public class GuildListener extends ListenerAdapter{
         }
         
         bot.getDbUtil().addGuild(guild.getId(), guild.getLocale());
-
-        logger.info(String.format(
-                "[Guild Join] Guild{name=\"%s\", id=%s, members=%d}",
-                guild.getName(),
-                guild.getId(),
-                guild.getMemberCount()
-        ));
+        
+        logger.info("[Guild Join] {}(id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
         
         guild.retrieveOwner().queue(
                 owner -> sendWebhook(owner, guild, Action.JOIN),
@@ -121,13 +108,8 @@ public class GuildListener extends ListenerAdapter{
         bot.getDbUtil().delGuild(guild.getId());
 
         bot.invalidateCache(guild.getId());
-
-        logger.info(String.format(
-                "[Guild Leave] Guild{name=\"%s\", id=%s, members=%d}",
-                guild.getName(),
-                guild.getId(),
-                guild.getMemberCount()
-        ));
+    
+        logger.info("[Guild Leave] {}(id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
     
         guild.retrieveOwner().queue(
                 owner -> sendWebhook(owner, guild, Action.LEAVE),
