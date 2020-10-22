@@ -44,6 +44,11 @@
         "no_mention": "Palun maini vähemalt ühte kasutajat keda hammustada!",
         "special_user": "A-aga {user}! Se-see on piinlik."
       },
+      "blush": {
+        "description": "Paneb sind punastama. o////o",
+        "loading": "{LOADING} Panen sind punastama...",
+        "message": "{user} punastab"
+      },
       "cuddle": {
         "description": "Laseb sul kaisutada ühte või mitut inimest.",
         "loading": "{LOADING} Laen kaisutuse-giffi...",
