@@ -44,6 +44,11 @@
         "no_mention": "Por favor, mencione pelo menos um usuário para morder!",
         "special_user": "M-mas {user}! I-isso é constrangedor"
       },
+      "blush": {
+        "description": "Faz você ficar corado. o////o",
+        "loading": "{LOADING} Te deixando corado...",
+        "message": "{user} está corando"
+      },
       "cuddle": {
         "description": "Permite que você abraçe uma ou várias pessoas.",
         "loading": "{LOADING} Recebendo um gif de abraço...",
