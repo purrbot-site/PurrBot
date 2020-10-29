@@ -156,7 +156,7 @@ public class HttpUtil {
             return;
         }
     
-        EmbedBuilder embed = (imgRequired ? bot.getEmbedUtil().getEmbed(member) : bot.getEmbedUtil().getEmbed())
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
                 .setDescription(MarkdownSanitizer.escape(
                         bot.getMsg(guild.getId(), path, member.getEffectiveName(), targets)
                 ))
