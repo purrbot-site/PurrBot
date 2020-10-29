@@ -44,6 +44,11 @@
         "no_mention": "최소한 물어뜯을 상대 한 명을 언급해줘!",
         "special_user": "하-하지만, {user}! 그건 부끄러워..."
       },
+      "blush": {
+        "description": "다른 사람의 얼굴이 붉어지게 만듭니다. o////o",
+        "loading": "{LOADING} 당신의 얼굴을 빨갛게 만드는 중...",
+        "message": "{user}가 부끄러워하고 있어"
+      },
       "cuddle": {
         "description": "한 명 또는 여러 사람들을 격하게 껴안습니다.",
         "loading": "{LOADING} 부비부비 이미지 불러오는 중...",
