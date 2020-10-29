@@ -44,6 +44,11 @@
         "no_mention": "Menziona almeno un utente da mordere per favore",
         "special_user": "M-ma {user}! È imbarazzante"
       },
+      "blush": {
+        "description": "Ti fa arrossire. o////o",
+        "loading": "{LOADING} Ti fa arrossire...",
+        "message": "{user} sta arrossendo"
+      },
       "cuddle": {
         "description": "Permette di mordere una o più persone.",
         "loading": "{LOADING} Ricevendo una gif coccolosa...",
