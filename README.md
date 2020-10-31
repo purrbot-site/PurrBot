@@ -58,27 +58,19 @@ If you would like to get added for a new or existing language to be translated, 
 You can find the currently made translations on https://lang.purrbot.site.
 
 # Inviting the bot
-The bot has two invite-links: A full invite and a basic invite.
+> Link: https://add.botl.ink/?id=425382319449309197&perms=387136
 
-## Full invite (Recommended)
-The Full Invite contains all permissions that the [Basic Invite](#basic-invite) gives and some additional ones to improve your overall experience with her.
+The above invite allows you to invite \*Purr* with the following permissions:
 
-Alongside, the other perms of the Basic Invite the following perms are added:
+- `Send Messages` - Required for obvious reasons...
+- `Manage Message` - Can be disabled if desired.
+- `Embed Links` - Required to send Embeds in chat.
+- `Attach Files` - Required for different commands and the welcome feature.
+- `View Message History` - To prevent errors.
+- `Add Reactions` - For the Help Menu and other Menus.
+- `Use External Reactions` - Required.
 
-- `Attach Files`: Allows the direct attachment of files to messages.
-
-## Basic invite
-The Basic Invite only contains all permissions that are nessesary for \*Purr* to work as expected.
-
-Those permissions are:
-
-- `Send Message`: She can't send messages without this... Duh.
-- `Embed Links`: Most responses are send through embeds which require this permission.
-- `See Message History`: Certain commands require her to be able to see the past of the channel.
-- `Add Reactions`: Help menu and other things use it for navigation and more.
-- `Use external Emotes`: Some commands use custom emotes and reactions.
-
-
+If you have a dedicated role for bots can you change the `&perms=387136` to `&perms=0` or ommit it altogether.
 
 # Botlists
 \*Purr* can be found on different Botlist sites.  
