@@ -281,13 +281,18 @@
         "invalid_channel": "Please mention a valid text channel!",
         "invalid_color": "The provided color was invalid!\nSupported are `hex:rrggbb`, `rgb:r,g,b` or `random`!",
         "invalid_icon": "The provided icon was invalid!\nCheck the [Wiki]({wiki_icon}) for available icons.",
-        "message_title": "Current Message",
         "no_bg": "Please provide a background name!\nA list of backgrounds can be found [here]({wiki_bg}).",
         "no_channel": "No text channel provided! Make sure you mention one.",
         "no_color": "No color provided!\nPlease either use `hex:rrggbb`, `rgb:r,g,b` or `random`",
         "no_icon": "Please provide an icon name!\nA list of icons can be found [here]({wiki_icon}).",
         "no_msg": "No message provided!",
-        "placeholders_title": "Available Placeholders",
+        "placeholders": {
+          "message_title": "Current Message",
+          "note_title": "Note",
+          "note_value": "The placeholder `{c_mention:<id>}` may only work with IDs of Text Channels.",
+          "placeholders_title": "Available Placeholders",
+          "result_title": "Result"
+        },
         "reset": "{type} resetted.",
         "set": "{type} set to {value}"
       }
