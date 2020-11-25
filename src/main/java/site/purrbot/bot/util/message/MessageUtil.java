@@ -51,6 +51,7 @@ public class MessageUtil {
     
     private final Pattern placeholder = Pattern.compile("(\\{(.+?)})", Pattern.CASE_INSENSITIVE);
     private final Pattern rolePattern = Pattern.compile("(\\{r_(name|mention):(\\d+)})", Pattern.CASE_INSENSITIVE);
+    private final Pattern channelPattern = Pattern.compile("(\\{c_(name|mention):(\\d+)})", Pattern.CASE_INSENSITIVE);
     
     private final DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
     
@@ -169,6 +170,36 @@ public class MessageUtil {
             }while(roleMatcher.find());
             
             roleMatcher.appendTail(buffer);
+            msg = buffer.toString();
+        }
+        
+        Matcher channelMatcher = channelPattern.matcher(msg);
+        if(channelMatcher.find()){
+            StringBuffer buffer = new StringBuffer();
+            do{
+                GuildChannel channel = guild.getGuildChannelById(channelMatcher.group(3));
+                if(channel == null)
+                    continue;
+                
+                switch(channelMatcher.group(2).toLowerCase()){
+                    case "name":
+                        channelMatcher.appendReplacement(buffer, channel.getName());
+                        break;
+                    
+                    case "mention":
+                        if(!channel.getType().equals(ChannelType.TEXT))
+                            continue;
+                        
+                        TextChannel tc = guild.getTextChannelById(channelMatcher.group(3));
+                        if(tc == null)
+                            continue;
+                        
+                        channelMatcher.appendReplacement(buffer, tc.getAsMention());
+                        break;
+                }
+            }while(channelMatcher.find());
+            
+            channelMatcher.appendTail(buffer);
             msg = buffer.toString();
         }
         

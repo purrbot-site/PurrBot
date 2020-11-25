@@ -29,6 +29,7 @@ public class Links {
     // Bot lists
     public static final String BOTLIST_SPACE          = "https://botlist.space/bot/425382319449309197";
     public static final String DISCORD_BOATS          = "https://discord.boats/bot/purr";
+    public static final String DISCORDBOTLIST_COM     = "https://discordbotlist.com/bots/purr";
     public static final String DISCORD_BOTS_GG        = "https://discord.bots.gg/bots/425382319449309197";
     public static final String DISCORDEXTREMELIST_XYZ = "https://discordextremelist.xyz/bots/purr";
     public static final String DISCORDSERVICES_NET    = "https://discordservices.net/bot/425382319449309197";
@@ -36,7 +37,7 @@ public class Links {
     // Other links
     public static final String PATREON     = "https://patreon.com/andre_601";
     public static final String PAYPAL      = "https://purrbot.site/donate";
-    public static final String POLICY      = "https://docs.purrbot.site/legal";
+    public static final String POLICY      = "https://docs.purrbot.site/legal/bot";
     public static final String TRANSLATORS = "https://lang.purrbot.site";
     public static final String TWITTER     = "https://purrbot.site/twitter";
     public static final String WEBSITE     = "https://purrbot.site";

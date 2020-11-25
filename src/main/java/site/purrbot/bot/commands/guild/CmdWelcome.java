@@ -186,37 +186,70 @@ public class CmdWelcome implements Command{
                     
                     MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                             .addField(
-                                    bot.getMsg(guild.getId(), "purr.guild.welcome.message_title"),
+                                    bot.getMsg(guild.getId(), "purr.guild.welcome.placeholders.message_title"),
                                     getMsg(bot.getWelcomeMsg(guild.getId())),
                                     false
                             )
                             .addField(
-                                    bot.getMsg(guild.getId(), "purr.guild.welcome.placeholders_title"),
-                                    "`{count}` / `{members}`\n" +
-                                    "`{count_formatted}` / `{members_formatted}`\n" +
-                                    "`{guild}` / `{server}`\n" +
+                                    bot.getMsg(guild.getId(), "purr.guild.welcome.placeholders.placeholders_title"),
+                                    "`{count}`\n" +
+                                    "`{members}`\n" +
+                                    "\n" +
+                                    "`{count_formatted}`\n" +
+                                    "`{members_formatted}`\n" +
+                                    "\n" +
+                                    "`{guild}`\n" +
+                                    "`{server}`\n" +
+                                    "\n" +
                                     "`{mention}`\n" +
-                                    "`{name}` / `{username}`\n" +
+                                    "\n" +
+                                    "`{name}`\n" +
+                                    "`{username}`\n" +
+                                    "\n" +
+                                    "`{c_mention:<id>}`\n" +
+                                    "`{c_name:<id>}`\n" +
+                                    "\n" +
                                     "`{r_mention:<id>}`\n" +
                                     "`{r_name:<id>}`\n" +
+                                    "\n" +
                                     "`{tag}`",
                                     true
                             )
                             .addField(
-                                    EmbedBuilder.ZERO_WIDTH_SPACE,
+                                    bot.getMsg(guild.getId(), "purr.guild.welcome.placeholders.result_title"),
                                     bot.getMessageUtil().formatPlaceholders(String.format(
                                             "{count}\n" +
+                                            "{members}\n" +
+                                            "\n" +
                                             "{count_formatted}\n" +
+                                            "{members_formatted}\n" +
+                                            "\n" +
                                             "{guild}\n" +
+                                            "{server}\n" +
+                                            "\n" +
                                             "{mention}\n" +
+                                            "\n" +
                                             "{name}\n" +
+                                            "{username}\n" +
+                                            "\n" +
+                                            "{c_mention:%s}\n" +
+                                            "{c_name:%s}\n" +
+                                            "\n" +
                                             "{r_mention:%s}\n" +
                                             "{r_name:%s}\n" +
+                                            "\n" +
                                             "{tag}",
+                                            tc.getId(),
+                                            tc.getId(),
                                             roleId,
                                             roleId
                                     ), member),
                                     true
+                            )
+                            .addField(
+                                    bot.getMsg(guild.getId(), "purr.guild.welcome.placeholders.note_title"),
+                                    bot.getMsg(guild.getId(), "purr.guild.welcome.placeholders.note_value"),
+                                    false
                             )
                             .build();
                     

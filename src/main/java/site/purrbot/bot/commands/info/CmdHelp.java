@@ -68,74 +68,6 @@ public class CmdHelp implements Command{
         
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
-    
-        EmbedPaginator.Builder builder = new EmbedPaginator.Builder()
-                .setEventWaiter(bot.getWaiter())
-                .setTimeout(1, TimeUnit.MINUTES)
-                .waitOnSinglePage(true)
-                .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
-                .wrapPageEnds(true)
-                .addUsers(member.getUser())
-                .setFinalAction(message -> {
-                    if(guild.getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
-                        message.clearReactions().queue(null, ignore(ErrorResponse.UNKNOWN_MESSAGE));
-                });
-        
-        if(guild.getOwner() != null)
-            builder.addUsers(guild.getOwner().getUser());
-
-        HashMap<String, StringBuilder> builders = new LinkedHashMap<>();
-
-        for(Map.Entry<String, String> category : categories.entrySet()){
-            builders.put(category.getKey(), new StringBuilder());
-        }
-    
-        builder.addItems(commandList(
-                member,
-                "",
-                "purr.info.help.command_menu.categories.title",
-                bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.list")
-        ));
-        
-        
-        for(Command cmd : getCommands()){
-            String category = cmd.getAttribute("category");
-            
-            if(builders.get(category).length() + cmd.getAttribute("help").length() > MessageEmbed.VALUE_MAX_LENGTH){
-                builder.addItems(commandList(
-                        member,
-                        category,
-                        "purr.info.help.command_menu.categories." + category,
-                        builders.get(category).toString()
-                ));
-                builders.get(category).setLength(0);
-            }
-            
-            builders.get(category)
-                    .append("`")
-                    .append(cmd.getAttribute("help").replace("{p}", prefix))
-                    .append("`\n");
-        }
-
-
-        for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
-            if(builderEntry.getKey().equals("owner") && bot.getCheckUtil().notDeveloper(member))
-                continue;
-            
-            if(!tc.isNSFW() && builderEntry.getKey().equals("nsfw")){
-                builderEntry.getValue().setLength(0);
-                builderEntry.getValue().append(
-                        bot.getMsg(guild.getId(), "purr.info.help.command_menu.nsfw_info")
-                );
-            }
-
-            builder.addItems(commandList(
-                    member,
-                    categories.get(builderEntry.getKey()),
-                    "purr.info.help.command_menu.categories." + builderEntry.getKey(),
-                    builderEntry.getValue().toString()
-            ));
-        }
 
         if(args.length != 0){
             Command command = (Command)bot.getCmdHandler().findCommand(args[0]);
@@ -161,9 +93,81 @@ public class CmdHelp implements Command{
 
             tc.sendMessage(commandHelp(member, command, prefix)).queue();
         }else{
-            
-            builder.build().display(tc);
+            showHelpMenu(member, tc);
         }
+    }
+    
+    private void showHelpMenu(Member member, TextChannel channel){
+        Guild guild = channel.getGuild();
+        String prefix = bot.getPrefix(guild.getId());
+        
+        EmbedPaginator.Builder builder = new EmbedPaginator.Builder()
+                .setEventWaiter(bot.getWaiter())
+                .setTimeout(1, TimeUnit.MINUTES)
+                .waitOnSinglePage(true)
+                .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
+                .wrapPageEnds(true)
+                .addUsers(member.getUser())
+                .setFinalAction(message -> {
+                    if(guild.getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                        message.clearReactions().queue(null, ignore(ErrorResponse.UNKNOWN_MESSAGE));
+                });
+        
+        if(guild.getOwner() != null)
+            builder.addUsers(guild.getOwner().getUser());
+    
+        HashMap<String, StringBuilder> builders = new LinkedHashMap<>();
+    
+        for(Map.Entry<String, String> category : categories.entrySet()){
+            builders.put(category.getKey(), new StringBuilder());
+        }
+    
+        builder.addItems(commandList(
+                member,
+                "",
+                "purr.info.help.command_menu.categories.title",
+                bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.list")
+        ));
+    
+        for(Command cmd : getCommands()){
+            String category = cmd.getAttribute("category");
+        
+            if(builders.get(category).length() + cmd.getAttribute("help").length() > MessageEmbed.VALUE_MAX_LENGTH){
+                builder.addItems(commandList(
+                        member,
+                        category,
+                        "purr.info.help.command_menu.categories." + category,
+                        builders.get(category).toString()
+                ));
+                builders.get(category).setLength(0);
+            }
+        
+            builders.get(category)
+                    .append("`")
+                    .append(cmd.getAttribute("help").replace("{p}", prefix))
+                    .append("`\n");
+        }
+        
+        for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
+            if(builderEntry.getKey().equals("owner") && bot.getCheckUtil().notDeveloper(member))
+                continue;
+        
+            if(!channel.isNSFW() && builderEntry.getKey().equals("nsfw")){
+                builderEntry.getValue().setLength(0);
+                builderEntry.getValue().append(
+                        bot.getMsg(guild.getId(), "purr.info.help.command_menu.nsfw_info")
+                );
+            }
+        
+            builder.addItems(commandList(
+                    member,
+                    categories.get(builderEntry.getKey()),
+                    "purr.info.help.command_menu.categories." + builderEntry.getKey(),
+                    builderEntry.getValue().toString()
+            ));
+        }
+        
+        builder.build().display(channel);
     }
     
     private MessageEmbed commandHelp(Member member, Command cmd, String prefix){

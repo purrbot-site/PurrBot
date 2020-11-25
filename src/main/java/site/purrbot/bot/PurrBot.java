@@ -388,6 +388,10 @@ public class PurrBot {
                             Site.DISCORD_BOATS,
                             getFileManager().getString("config", "tokens.discord-boats")
                     )
+                    .addAuthToken(
+                            Site.DISCORDBOTLIST_COM,
+                            getFileManager().getString("config", "tokens.discordbotlist-com")
+                    )
                     .build();
     
             DServices4J dServices4J = new DServices4J.Builder()
