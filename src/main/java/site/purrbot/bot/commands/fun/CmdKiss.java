@@ -62,7 +62,7 @@ public class CmdKiss implements Command, HttpUtil.ImageAPI{
             if(bot.isBeta()){
                 if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.fun.kiss.special_member", member.getAsMention())
+                            bot.getMsg(guild.getId(), "snuggle.fun.kiss.special_user", member.getAsMention())
                     ).queue();
                 }else{
                     tc.sendMessage(
@@ -72,7 +72,7 @@ public class CmdKiss implements Command, HttpUtil.ImageAPI{
             }else{
                 if(bot.isSpecial(member.getId())){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.fun.kiss.special_member", member.getAsMention())
+                            bot.getMsg(guild.getId(), "purr.fun.kiss.special_user", member.getAsMention())
                     ).queue();
                 }else{
                     tc.sendMessage(
