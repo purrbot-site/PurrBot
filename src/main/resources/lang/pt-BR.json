@@ -281,13 +281,18 @@
         "invalid_channel": "Por favor, mencione um canal de texto válido!",
         "invalid_color": "A cor fornecida era inválida!\nSuportada é `hex:rggbb`, `rgb:r,g,b` ou `random`!",
         "invalid_icon": "O ícone fornecido é inválido!\nVerifique o [Wiki]({wiki_icon}) para ver os ícones disponíveis.",
-        "message_title": "Mensagem atual",
         "no_bg": "Por favor, forneça um nome de plano de fundo!\nUma lista de fundos pode ser encontrada [here]({wiki_bg}).",
         "no_channel": "Nenhum canal de texto fornecido! Certifique-se de mencionar um.",
         "no_color": "Nenhuma cor fornecida!\nPor favor, use `hex:rrggbb`, `rgb:r,g,b` or `random`",
         "no_icon": "Por favor, forneça um nome de ícone!\nUma lista de ícones pode ser encontrada [here]({wiki_icon}).",
         "no_msg": "Nenhuma mensagem fornecida!",
-        "placeholders_title": "Espaços reservados disponíveis",
+        "placeholders": {
+          "message_title": "Mensagem atual",
+          "note_title": "Anotação",
+          "note_value": "O espaço reservado `{c_mention:<id>}` só pode funcionar com IDs de canais de texto.",
+          "placeholders_title": "Espaços reservados disponíveis",
+          "result_title": "Resultado"
+        },
         "reset": "{type} resetado.",
         "set": "{type} definido como {value}"
       }

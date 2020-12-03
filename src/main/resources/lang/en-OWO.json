@@ -281,13 +281,18 @@
         "invalid_channel": "Pwease mention a vawid text channew!",
         "invalid_color": "The pwovided cowow was invawid!\nSuppowted awe `hex:rrggbb`, `rgb:r,g,b` ow `random`!",
         "invalid_icon": "The pwovided icon was invawid!\nCheck the [Wiki]({wiki_icon}) fow avaiwabwe icons.",
-        "message_title": "Cuwwent Message",
         "no_bg": "Pwease pwovide a backgwound name!\nA list of backgwounds can be found [hewe]({wiki_bg}).",
         "no_channel": "No text channew pwovided! Make suwe you mention one.",
         "no_color": "No cowow pwovided!\nPwease eithew use `hex:rrggbb`, `rgb:r,g,b` ow `random`",
         "no_icon": "Pwease pwovide an icon name!\nA list of icons can be found [hewe]({wiki_icon}).",
         "no_msg": "No message pwovided!",
-        "placeholders_title": "Avaiwabwe Pwacehowders",
+        "placeholders": {
+          "message_title": "Cuwwent Message",
+          "note_title": "Note",
+          "note_value": "The placeholder `{c_mention:<id>}` may onwy wowk with IDs of Text Channels.",
+          "placeholders_title": "Available Pwacehowdews",
+          "result_title": "Wesult"
+        },
         "reset": "{type} wesetted.",
         "set": "{type} set to {value}"
       }

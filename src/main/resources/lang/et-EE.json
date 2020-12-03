@@ -281,13 +281,18 @@
         "invalid_channel": "Palun maini olemasolevat tekstikanalit!",
         "invalid_color": "Sisestatud värv on väär!\nToetatud on `hex:rrggbb`, `rgb:r,g,b` või `random`!",
         "invalid_icon": "Sisestatud ikoon on vigane!\nVaata [vikit]({wiki_icon}) et näha olemasolevaid ikoone.",
-        "message_title": "Praegune sõnum",
         "no_bg": "Palun sisesta tausta nimi!\nErinevaid tauste saab näha [vikist]({wiki_bg}).",
         "no_channel": "Ühtegi tekstikanalit ei ole sisestatud! Palun maini kindlasti ühte tekstikanalit.",
         "no_color": "Ühtegi värvi ei ole sisestatud!\nPalun kasuta kas `hex:rrggbb`, `rgb:r,g,b` või `random`",
         "no_icon": "Palun sisesta ikooni nimi!\nErinevaid ikoone saab näha [vikist]({wiki_icon}).",
         "no_msg": "Sõnumit pole sisestatud!",
-        "placeholders_title": "Olemasolevad kohahoidjad",
+        "placeholders": {
+          "message_title": "Current Message",
+          "note_title": "Note",
+          "note_value": "The placeholder `{c_mention:<id>}` may only work with IDs of Text Channels.",
+          "placeholders_title": "Available Placeholders",
+          "result_title": "Result"
+        },
         "reset": "{type} taastatud.",
         "set": "{type} määrati {value}"
       }

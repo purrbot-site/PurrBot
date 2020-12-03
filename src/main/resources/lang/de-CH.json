@@ -281,13 +281,18 @@
         "invalid_channel": "Bitte erwähne einen gültigen TextKanal!",
         "invalid_color": "Die angegebene Farbe war ungültig!\nUnterstützt werden `hex:rrggbb`, `rgb:r,g,b` oder `random`!",
         "invalid_icon": "Ungültiges Icon `{icon}`!\nÜberprüfe das [Wiki]({wiki_icon}) für verfügbare Icons.",
-        "message_title": "Aktuelle Nachricht",
         "no_bg": "Bitte gib einen Hintergrund an!\nEine Liste von Hintergründen kannst du [hier]({wiki_bg}) finden.",
         "no_channel": "Kein Textkanal angegeben! Stell sicher, dass du einen erwähnst.",
         "no_color": "Keine Farbe angegeben!\nBitte verwende entweder `hex:rrggbb`, `rgb:r,g,b` oder `random`",
         "no_icon": "Bitte gib ein Icon an!\nEine Liste von Icons kannst du [hier]({wiki_icon}) finden.",
         "no_msg": "Keine Nachricht angegeben!",
-        "placeholders_title": "Verfügbare Platzhalter",
+        "placeholders": {
+          "message_title": "Aktuelle Nachricht",
+          "note_title": "Hinweis",
+          "note_value": "The Platzhalter `{c_mention:<id>}` kann nur mit IDs von Textkanälen funktionieren.",
+          "placeholders_title": "Verfügbare Platzhalter",
+          "result_title": "Resultat"
+        },
         "reset": "{type} resettet.",
         "set": "{type} geändert zu {value}"
       }
