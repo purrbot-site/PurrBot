@@ -61,6 +61,11 @@
         "message": "{user}이(가) {targets}(이)랑 부비부비하고 있어!",
         "no_mention": "최소한 부비부비할 상대 한 명을 언급해줘!"
       },
+      "cry": {
+        "description": "당신을 울게 합니다. ;-;",
+        "loading": "{LOADING} 눈물을 모으는중...",
+        "message": "{user}가 울고있어"
+      },
       "eevee": {
         "description": "이브이 짤 또는 움짤을 보여줍니다.",
         "loading": "{LOADING} 귀여운 이브이 잡아오는 중...",
