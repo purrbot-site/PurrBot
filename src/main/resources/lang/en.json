@@ -61,6 +61,11 @@
         "message": "{user} cuddles with you {targets}",
         "no_mention": "Please mention at least one user to cuddle!"
       },
+      "cry": {
+        "description": "Lets you cry. ;-;",
+        "loading": "{LOADING} Collecting tears...",
+        "message": "{user} is crying"
+      },
       "eevee": {
         "description": "Gives you an image or gif of a cute Eevee.",
         "loading": "{LOADING} Capturing a cute Eevee...",
