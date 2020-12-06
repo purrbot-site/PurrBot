@@ -61,6 +61,11 @@
         "message": "{user} te abraça você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para dar um abraço!"
       },
+      "cry": {
+        "description": "Deixa você chorar. ;-;",
+        "loading": "{LOADING} Coletando Lágrimas...",
+        "message": "{user} está chorando"
+      },
       "eevee": {
         "description": "Te dá uma imagem ou um gif de um Eevee.",
         "loading": "{LOADING} Capturando um Eevee fofinho...",
