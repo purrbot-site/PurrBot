@@ -61,6 +61,11 @@
         "message": "{user} cuddwes with you {targets}",
         "no_mention": "Pwease mention at weast one user to cuddwe!"
       },
+      "cry": {
+        "description": "Lets you cwy. ;-;",
+        "loading": "{LOADING} Cowwecting teaws... ;-;",
+        "message": "{user} is cwying"
+      },
       "eevee": {
         "description": "Gives you an image or gif of a cute Eevee. OwO",
         "loading": "{LOADING} Captuwing a cute Eevee... UwU",
