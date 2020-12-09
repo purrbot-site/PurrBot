@@ -88,7 +88,7 @@ public class GuildListener extends ListenerAdapter{
             return;
         }
         
-        bot.getDbUtil().addGuild(guild.getId(), guild.getLocale());
+        bot.getDbUtil().addGuild(guild.getId());
         
         logger.info("[Guild Join] {}(id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
         

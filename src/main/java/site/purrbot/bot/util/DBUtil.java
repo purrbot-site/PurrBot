@@ -21,9 +21,7 @@ package site.purrbot.bot.util;
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.net.Connection;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.util.file.lang.LangUtils;
 
-import java.util.Locale;
 import java.util.Map;
 
 @SuppressWarnings("rawtypes")
@@ -55,7 +53,7 @@ public class DBUtil {
         Map map = getGuild(id);
 
         if(map == null){
-            addGuild(id, Locale.ENGLISH);
+            addGuild(id);
             return;
         }
 
@@ -63,11 +61,11 @@ public class DBUtil {
             r.table(guildTable).get(id).update(r.hashMap(key, def)).run(connection);
     }
 
-    public void addGuild(String id, Locale guildLanguage){
+    public void addGuild(String id){
         r.table(guildTable).insert(
                 r.array(
                         r.hashMap("id", id)
-                                .with("language", LangUtils.GuildLanguage.getLang(guildLanguage))
+                                .with("language", "en")
                                 .with("prefix", bot.isBeta() ? ".." : ".")
                                 .with("welcome_background", "color_white")
                                 .with("welcome_channel", "none")

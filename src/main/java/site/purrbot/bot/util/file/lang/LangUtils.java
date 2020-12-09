@@ -21,7 +21,6 @@ package site.purrbot.bot.util.file.lang;
 import site.purrbot.bot.PurrBot;
 
 import java.util.List;
-import java.util.Locale;
 
 public final class LangUtils{
     
@@ -34,13 +33,13 @@ public final class LangUtils{
         switch(language.toLowerCase()){
             case "de-ch":
             case "en-owo":
-            case "et-ee":
             case "it-it":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
                 return bot.getFileManager().getString(language.toLowerCase(), path);
     
+            case "et-ee":
             default:
                 return bot.getFileManager().getString("en", path);
         }
@@ -50,13 +49,13 @@ public final class LangUtils{
         switch(language.toLowerCase()){
             case "de-ch":
             case "en-owo":
-            case "et-ee":
             case "it-it":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
                 return bot.getFileManager().getStringlist(language.toLowerCase(), path);
     
+            case "et-ee":
             default:
                 return bot.getFileManager().getStringlist("en", path);
         }
@@ -66,7 +65,7 @@ public final class LangUtils{
         DE_CH ("\uDDE8", "\uDDED"),
         EN    ("\uDDEC", "\uDDE7"),
         EN_OWO("\uDDEC", "\uDDE7"),
-        ET_EE ("\uDDEA", "\uDDEA"),
+        //ET_EE ("\uDDEA", "\uDDEA"),
         IT_IT ("\uDDEE", "\uDDF9"),
         KO_KR ("\uDDF0", "\uDDF7"),
         PT_BR ("\uDDE7", "\uDDF7"),
@@ -98,43 +97,6 @@ public final class LangUtils{
             }
             
             return UNKNOWN.emote + " " + UNKNOWN.name().toLowerCase();
-        }
-    }
-    
-    /*
-     * Used to get the supported language (if available)
-     * 
-     * Supported "Prefered language"'s by Discord:
-     * https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales
-     */
-    public enum GuildLanguage{
-        DE   ("de-ch"),
-        EN_GB("en"),
-        EN_US("en"),
-        IT   ("it-it"),
-        KO   ("ko-kr"),
-        PT_BR("pt-br"),
-        RU   ("ru-ru"),
-        
-        DEFAULT("en");
-        
-        private final String lang;
-        
-        GuildLanguage(String lang){
-            this.lang = lang;
-        }
-        
-        public String getLang(){
-            return lang;
-        }
-        
-        public static String getLang(Locale locale){
-            for(GuildLanguage guildLanguage : values()){
-                if(guildLanguage.name().equalsIgnoreCase(locale.toString()))
-                    return guildLanguage.getLang();
-            }
-            
-            return GuildLanguage.DEFAULT.getLang();
         }
     }
 }

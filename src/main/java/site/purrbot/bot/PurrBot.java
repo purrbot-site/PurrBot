@@ -23,10 +23,12 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
+import io.javalin.Javalin;
 import net.discordservices.dservices4j.Commands;
 import net.discordservices.dservices4j.DServices4J;
 import net.discordservices.dservices4j.Stats;
 import net.discordservices.dservices4j.exceptions.RatelimitedException;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
@@ -40,6 +42,8 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.botblock.javabotblockapi.core.BotBlockAPI;
 import org.botblock.javabotblockapi.core.Site;
 import org.botblock.javabotblockapi.jda.PostAction;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
@@ -126,7 +130,6 @@ public class PurrBot {
                 .addLang("de-CH")
                 .addLang("en")
                 .addLang("en-OWO")
-                .addLang("et-EE")
                 .addLang("it-IT")
                 .addLang("ko-KR")
                 .addLang("pt-BR")
@@ -175,6 +178,8 @@ public class PurrBot {
                 .setActivity(Activity.of(Activity.ActivityType.DEFAULT, getMessageUtil().getRandomStartupMsg()))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .build();
+        
+        setupStatusAPI();
     }
 
     public Random getRandom(){
@@ -303,45 +308,6 @@ public class PurrBot {
         return getFileManager().getStringlist("random", "welcome_icon");
     }
     
-    private String setPlaceholders(String msg){
-        return msg
-                // Emotes
-                .replace("{BLOBHOLO}", Emotes.BLOB_HOLO.getEmote())
-                .replace("{LOADING}", Emotes.LOADING.getEmote())
-                .replace("{NEKOWO}", Emotes.NEKOWO.getEmote())
-                .replace("{SENKOTAILWAG}", Emotes.SENKO_TAIL_WAG.getEmote())
-                .replace("{SHIROTAILWAG}", Emotes.SHIRO_TAIL_WAG.getEmote())
-                .replace("{TYPING}", Emotes.TYPING.getEmote())
-                .replace("{VANILLABLUSH}", Emotes.BLUSH.getEmote())
-                .replace("{EDIT}", Emotes.EDIT.getEmote())
-                .replace("{DOWNLOAD}", Emotes.DOWNLOAD.getEmote())
-                .replace("{DISCORD}", Emotes.DISCORD.getEmote())
-                .replace("{TAIL}", Emotes.TAIL.getEmote())
-                .replace("{SEX}", Emotes.SEX.getEmote())
-                .replace("{ANAL}", Emotes.SEX_ANAL.getEmote())
-                .replace("{YAOI}", Emotes.SEX_YAOI.getEmote())
-                .replace("{YURI}", Emotes.SEX_YURI.getEmote())
-                .replace("{ACCEPT}", Emotes.ACCEPT.getEmote())
-                .replace("{CANCEL}", Emotes.CANCEL.getEmote())
-                .replace("{BOTICON}", Emotes.BOT_ICON.getEmote())
-                .replace("{CATEGORY}", Emotes.CATEGORY.getEmote())
-                .replace("{TEXTCHANNEL}", Emotes.TEXT_CHANNEL.getEmote())
-                .replace("{VOICECHANNEL}", Emotes.VOICE_CHANNEL.getEmote())
-                .replace("{MEMBERS}", Emotes.MEMBERS.getEmote())
-                .replace("{FACE}", Emotes.FACE.getEmote())
-                .replace("{PAYPAL}", Emotes.PAYPAL.getEmote())
-                .replace("{PATREON}", Emotes.PATREON.getEmote())
-                // Guild link
-                .replace("{guild_invite}", Links.DISCORD)
-                // Wiki pages
-                .replace("{wiki_bg}", Links.WIKI + "/welcome-images#backgrounds")
-                .replace("{wiki_icon}", Links.WIKI + "/welcome-images#icons")
-                .replace("{wiki_welcome}", Links.WIKI + "/welcome-channel")
-                // Other pages
-                .replace("{paypal_url}", Links.PAYPAL)
-                .replace("{patreon_url}", Links.PATREON);
-    }
-    
     public String getMsg(String id, String path, String user, String targets){
         return getMsg(id, path, user)
                 .replace("{target}", targets)
@@ -443,6 +409,51 @@ public class PurrBot {
         }
     }
     
+    public void disable(){
+        scheduler.shutdown();
+        shardManager.shutdown();
+        System.exit(0);
+    }
+    
+    private String setPlaceholders(String msg){
+        return msg
+                // Emotes
+                .replace("{BLOBHOLO}", Emotes.BLOB_HOLO.getEmote())
+                .replace("{LOADING}", Emotes.LOADING.getEmote())
+                .replace("{NEKOWO}", Emotes.NEKOWO.getEmote())
+                .replace("{SENKOTAILWAG}", Emotes.SENKO_TAIL_WAG.getEmote())
+                .replace("{SHIROTAILWAG}", Emotes.SHIRO_TAIL_WAG.getEmote())
+                .replace("{TYPING}", Emotes.TYPING.getEmote())
+                .replace("{VANILLABLUSH}", Emotes.BLUSH.getEmote())
+                .replace("{EDIT}", Emotes.EDIT.getEmote())
+                .replace("{DOWNLOAD}", Emotes.DOWNLOAD.getEmote())
+                .replace("{DISCORD}", Emotes.DISCORD.getEmote())
+                .replace("{TAIL}", Emotes.TAIL.getEmote())
+                .replace("{SEX}", Emotes.SEX.getEmote())
+                .replace("{ANAL}", Emotes.SEX_ANAL.getEmote())
+                .replace("{YAOI}", Emotes.SEX_YAOI.getEmote())
+                .replace("{YURI}", Emotes.SEX_YURI.getEmote())
+                .replace("{ACCEPT}", Emotes.ACCEPT.getEmote())
+                .replace("{CANCEL}", Emotes.CANCEL.getEmote())
+                .replace("{BOTICON}", Emotes.BOT_ICON.getEmote())
+                .replace("{CATEGORY}", Emotes.CATEGORY.getEmote())
+                .replace("{TEXTCHANNEL}", Emotes.TEXT_CHANNEL.getEmote())
+                .replace("{VOICECHANNEL}", Emotes.VOICE_CHANNEL.getEmote())
+                .replace("{MEMBERS}", Emotes.MEMBERS.getEmote())
+                .replace("{FACE}", Emotes.FACE.getEmote())
+                .replace("{PAYPAL}", Emotes.PAYPAL.getEmote())
+                .replace("{PATREON}", Emotes.PATREON.getEmote())
+                // Guild link
+                .replace("{guild_invite}", Links.DISCORD)
+                // Wiki pages
+                .replace("{wiki_bg}", Links.WIKI + "/welcome-images#backgrounds")
+                .replace("{wiki_icon}", Links.WIKI + "/welcome-images#icons")
+                .replace("{wiki_welcome}", Links.WIKI + "/welcome-channel")
+                // Other pages
+                .replace("{paypal_url}", Links.PAYPAL)
+                .replace("{patreon_url}", Links.PATREON);
+    }
+    
     private List<Commands.CommandInfo> getCommands(){
         List<Commands.CommandInfo> commandInfoList = new ArrayList<>();
         for(site.purrbot.bot.commands.Command command : commandLoader.getCommands()){
@@ -459,9 +470,31 @@ public class PurrBot {
         return commandInfoList;
     }
     
-    public void disable(){
-        scheduler.shutdown();
-        shardManager.shutdown();
-        System.exit(0);
+    private void setupStatusAPI(){
+        if(this.isBeta())
+            return;
+        
+        Javalin app = Javalin.create(config -> config.defaultContentType = "application/json")
+                .start(7000);
+        
+        app.get("shards", response -> response.status(200).result(getShardInfo()));
+    }
+    
+    private String getShardInfo(){
+        
+        JSONArray array = new JSONArray();
+        for(JDA shard : shardManager.getShardCache()){
+            JSONObject shardInfo = new JSONObject()
+                    .put("id", shard.getShardInfo().getShardId())
+                    .put("status", shard.getStatus());
+            
+            array.put(shardInfo);
+        }
+        
+        JSONObject result = new JSONObject().put("shard_count", shardManager.getShardCache().size())
+                .put("timestamp", System.currentTimeMillis())
+                .put("shards", array);
+        
+        return result.toString(2);
     }
 }

@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 @CommandDescription(
         name = "Pat",
         description = "purr.fun.pat.description",
-        triggers = {"pat", "patting", "pet"},
+        triggers = {"pat", "patting", "pet", "patto"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
                 @CommandAttribute(key = "usage", value = "{p}pat <@user> [@user ...]"),
