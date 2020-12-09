@@ -61,6 +61,11 @@
         "message": "{user} si coccola con {targets}",
         "no_mention": "Menziona almeno un utente da coccolare per favore!"
       },
+      "cry": {
+        "description": "Ti permette di piangere ;-;",
+        "loading": "{LOADING} Accumulo lacrime...",
+        "message": "{user} sta piangendo"
+      },
       "eevee": {
         "description": "Ti fornisce un'immagine o una gif di Eevee",
         "loading": "{LOADING} catturando un Eevee carino...",

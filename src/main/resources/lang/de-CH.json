@@ -61,6 +61,11 @@
         "message": "{user} knuddelt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum knuddeln!"
       },
+      "cry": {
+        "description": "Lässt dich weinen. ;-;",
+        "loading": "{LOADING} Sammle Tränen...",
+        "message": "{user} weint"
+      },
       "eevee": {
         "description": "Gibt dir ein Bild oder gif eines süssen Evoli.",
         "loading": "{LOADING} Fange ein süsses Evoli...",
