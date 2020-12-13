@@ -223,6 +223,11 @@
         "message": "{user} schlägt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum schlagen!"
       },
+      "smile": {
+        "description": "Lässt dich lächeln. :3",
+        "loading": "{LOADING} Lasse dich lächeln...",
+        "message": "{user} lächelt"
+      },
       "tail": {
         "description": "Wedele mit deinem Schweif... In Aufregung hoffe ich.",
         "loading": "{LOADING} Wackle mit dem Schweif...",
