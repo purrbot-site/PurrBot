@@ -223,6 +223,11 @@
         "message": "{user} ti da un ceffone {targets}",
         "no_mention": "Menziona almeno un utente a cui dare un ceffone per favore!"
       },
+      "smile": {
+        "description": "Ti fa sorridere. :3",
+        "loading": "{LOADING} Ti fa sorridere...",
+        "message": "{user} sta sorridendo"
+      },
       "tail": {
         "description": "Scodinzola... Per l'entusiasmo spero.",
         "loading": "{LOADING} scodinzolando coda...",
