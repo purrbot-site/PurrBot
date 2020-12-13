@@ -223,6 +223,11 @@
         "message": "{user} slaps you {targets} OwO",
         "no_mention": "Pwease mention at weast one user to slap!"
       },
+      "smile": {
+        "description": "Lets you smiwe :3",
+        "loading": "{LOADING} Making you smiwe...",
+        "message": "{user} is smiwing :3"
+      },
       "tail": {
         "description": "Wag youw taiw... In excitement I hope.",
         "loading": "{LOADING} Wagging taiw... UwU",
