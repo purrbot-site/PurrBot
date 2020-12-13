@@ -223,6 +223,11 @@
         "message": "{user} deu um tapa em {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para dar um tapa!"
       },
+      "smile": {
+        "description": "Deixa você sorrir. :3",
+        "loading": "{LOADING} Te fazendo sorrir...",
+        "message": "{user} está sorrindo"
+      },
       "tail": {
         "description": "Balance a sua cauda... Em emoção, espero eu",
         "loading": "{LOADING} Abanando a cauda...",
