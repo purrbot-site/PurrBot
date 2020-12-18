@@ -20,7 +20,7 @@
     ],
     "request_error": "Thewe was an ewwow while handwing the wequest TwT. Make suwe that my message wasn't deweted and that I have sufficient pewmissions!",
     "title": "Ewwow",
-    "unknown": "T-that is a bit embawwasing now, but I had an ewwow while pewfowming an action. {VANILLABLUSH}\nPwease wepowt this on the Discowd, ow on GitHub!"
+    "unknown": "T-that is a bit embwwrassing now, but I had an ewwow while perfowming an action. {VANILLABLUSH}\nPlease weport this on [the Discord]({guild_invite}), or on [GitHub]({github_url})!"
   },
   "misc": {
     "and": "and",
@@ -308,6 +308,17 @@
       }
     },
     "info": {
+      "donate": {
+        "description": "Donate something to hewp keeping this bot awive! :3",
+        "dm_success": "Check youw pwivate messages {user}!  {VANILLABLUSH}",
+        "dm_failure": "I couwdn`t send you a DM {user}. Did you make sure to have youw DMs open?",
+        "embed": {
+          "description": "Wunning this bot is vewy vewy expensive. That's why any donations - eithew big or smaww - are wewcome.\nYou can choose if you want to onwy donate once using PayPal, or if you want to make continuous donations on Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donations)\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donations)",
+          "donators_more": "*and {remaining} mowe...*",
+          "donators_title": "Donatows",
+          "donators_value": "Aww donatows - eithew singwe ow continuous donations - awe wisted bewow as a thank you.\nThanks to them can the bot stay active fow evewyone and fow fwee!\nIf you wouwd wike to get wisted, make suwe to be on the [~Nya Discord]({guild_invite}) and contact Andre_601 about it!"
+        }
+      },
       "emote": {
         "description": "Get basic infowmation about one or muwtipwe emotes (custom Discord Emojis).\nYou can use the `--search` awgument to wist aww emotes used in the past 100 messages.",
         "embed": {
@@ -392,18 +403,17 @@
           "bot_lists_title": "Bot Lists:",
           "commands_title": "Commands",
           "commands_value": "Use `{prefix}help` in the Discord for a wist of commands.",
-          "donators_more": "And {remaining} mowe...",
-          "donators_title": "Donatows",
-          "donators_value": "Aww donatows (Eithew singwe ow continued donations) are wisted hewe.\nTo get wisted too, make a donation and be sure to be on the ~Nya Discowd (Contact Andre_601 for evewything ewse). OwO",
           "links": {
-            "discord": "`Discord (Suppowt)`",
-            "policy": "`Pwivacy Powicy and ToS`",
+            "discord": "[`Discord (Support)`]({guild_invite})",
+            "github": "[`GitHub`]({github_url})",
+            "policy": "[`Privacy Policy and ToS`]({policy_url})",
             "title": "Othew Links",
-            "website": "`Website`",
-            "wiki": "`Wiki`"
+            "twitter": "[`Twitter`]({twitter_url})",
+            "website": "[`Website`]({website_url})",
+            "wiki": "[`Wiki`]({wiki})"
           },
-          "support_title": "Suppowt",
-          "support_value": "Keeping this bot up and wunning is expensive TwT. That's why I always wewcome donations of any kind!\nYou can choose between two options to donate:\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single donations)\n{PATREON} [`Patreon`]({patreon_url}) (Continued donations)"
+          "support_title": "Suppowt this bot! UwU",
+          "support_value": "Hewp suppowting this bot by making a donation! OwO\nWun `{prefix}donate` fow mowe info!"
         }
       },
       "invite": {
