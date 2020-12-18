@@ -20,7 +20,7 @@
     ],
     "request_error": "Houve um erro ao lidar com a solicitação. Certifique-se de que a minha mensagem não foi excluída e de que eu tenho permissões suficientes!",
     "title": "Erro",
-    "unknown": "I-isso é um pouco embaraçoso, mas houve um erro realizando uma ação. {VANILLABLUSH}\nPor favor reporte isso no Discord, ou no GitHub"
+    "unknown": "I-isso é um pouco embaraçoso, mas houve um erro realizando uma ação. {VANILLABLUSH}\nPor favor reporte isso [no Discord]({guild_invite}), ou no [GitHub]({github_url})!"
   },
   "misc": {
     "and": "e",
@@ -308,6 +308,17 @@
       }
     },
     "info": {
+      "donate": {
+        "description": "Doe algo para ajudar a manter este bot vivo!",
+        "dm_success": "Verifique suas mensagens privadas {user}!",
+        "dm_failure": "Não consegui enviar uma DM para você {user}. Você tem certeza que as suas DMs estão abertas ?",
+        "embed": {
+          "description": "Executar esse bot é caro. É por isso que qualquer doação - grande ou pequena - é bem-vinda.\nVocê pode escolher se você deseja doar apenas uma vez usando PayPal, ou se você deseja fazer doações contínuas no Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Doações individuais)\n{PATREON} [`Patreon`]({patreon_url}) (Doações Contínuas)",
+          "donators_more": "*e {remaining} outros...*",
+          "donators_title": "Doadores",
+          "donators_value": "Todos os doadores - seja uma doação única ou contínua - estão listados abaixo como um agradecimento.\nGraças a eles pode o bot ficar ativo para todos e de graça!\nSe você gostaria de ser listado, certifique-se de estar no [~Nya Discord]({guild_invite}) e entrar em contato com Andre_601 sobre isso!"
+        }
+      },
       "emote": {
         "description": "Obter informações básicas sobre um ou vários emotes (emojis personalizados do Discord).\nVocê pode usar o argumento `--search` para listar todos os emotes usados nas últimas 100 mensagens.",
         "embed": {
@@ -392,18 +403,17 @@
           "bot_lists_title": "Lista de bots:",
           "commands_title": "Comandos",
           "commands_value": "Use `{prefix}help` no Discord para uma lista de comandos.",
-          "donators_more": "E mais {remaining}...",
-          "donators_title": "doadores",
-          "donators_value": "Todos os doadores (Doações individuais ou contínuas) estão listados aqui.\nPara ficar listado também, certifique-se de estar no Discord ~Nya (Entre em contato com Andre_601 para tudo mais).",
           "links": {
-            "discord": "`Discord (Support)`",
-            "policy": "`Política de privacidade e termos de serviço`",
+            "discord": "[`Discord (Support)`]({guild_invite})",
+            "github": "[`GitHub`]({github_url})",
+            "policy": "[`Política de Privacidade e ToS`]({policy_url})",
             "title": "Outros links",
-            "website": "`Website`",
-            "wiki": "`Wiki`"
+            "twitter": "[`Twitter`]({twitter_url})",
+            "website": "[`Site`]({website_url})",
+            "wiki": "[`Wiki`]({wiki})"
           },
-          "support_title": "Suporte",
-          "support_value": "Manter esse bot em funcionamento é caro. É por isso que sempre recebo doações de qualquer tipo!\nVocê pode escolher entre duas opções para doar:\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Doações únicas)\n{PATREON} [`Patreon`]({patreon_url}) (Doações contínuas)"
+          "support_title": "Apoie este bot",
+          "support_value": "Ajude a apoiar este bot fazendo uma doação!\nExecute `{prefix}donate` para mais informações."
         }
       },
       "invite": {
