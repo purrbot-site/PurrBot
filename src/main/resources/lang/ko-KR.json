@@ -20,7 +20,7 @@
     ],
     "request_error": "요청을 처리하는데 오류가 발생했어. 내 메시지가 삭제되지는 않았는지, 아니면 내 권한이 부족한건 아닌지 확인해줘!",
     "title": "에러",
-    "unknown": "미.. 미안! 무언가 잘못된 모양이야.. {VANILLABLUSH}\n디스코드 혹은 깃허브에 문의해줘!"
+    "unknown": "부.. 부끄럽지만, 무언가 잘못된 모양이야. {VANILLABLUSH}\n이걸 [디스코드]({guild_invite}) 혹은 [GitHub]({github_url})에 문의해주지 않을래?"
   },
   "misc": {
     "and": "그리고",
@@ -223,6 +223,11 @@
         "message": "{user}이(가) {targets} 를 때려버렸어!",
         "no_mention": "적어도 한대 칠 상대 한 명을 언급해줘!"
       },
+      "smile": {
+        "description": "당신을 미소짓게 합니다. :3",
+        "loading": "{LOADING} 당신을 미소짓게 하는 중...",
+        "message": "{user}가 웃고있어."
+      },
       "tail": {
         "description": "꼬리를 흔듭니다. 기분이 좋아서겠죠..?",
         "loading": "{LOADING} 꼬리를 흔드는 중...",
@@ -303,6 +308,17 @@
       }
     },
     "info": {
+      "donate": {
+        "description": "이 봇이 계속 유지되도록 후원해주세요!",
+        "dm_success": "네 개인 메시지를 확인해봐, {user}!",
+        "dm_failure": "{user}. 너에게 메시지를 보낼 수 없어. 개인 메시지 설정을 다시 확인해줄래?",
+        "embed": {
+          "description": "이 봇을 유지하는 비용은 큽니다. 크기에 상관없이 어떤 후원이든 큰 도움이 됩니다.\n정기후원을 원하신다면 Patreon을, 아니라면 Paypal을 사용해 이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{PATREON} [`Patreon`]({patreon_url}) (정기후원)",
+          "donators_more": "*...그리고 {remaining} 명의 추가 후원자들!*",
+          "donators_title": "후원자",
+          "donators_value": "아래에 있는 사람들은 모두 이 봇을 후원해주신 분들입니다. 감사합니다.\n이분들 덕분에 이 봇이 모두에게 무료로 서비스를 제공하고 있습니다!\n만약 이곳에 자신이 포함되고 싶으시다면, [공식 지원 서버]({guild_invite})에 들어오셔서 Andre_601에게 연락주세요!"
+        }
+      },
       "emote": {
         "description": "하나 또는 여러개의 이모티콘에 대한 간단한 정보를 확인할 수 있습니다. (커스텀 서버 이모티콘)\n`--search` 인자를 사용하면 최근 100건의 메시지에 대한 모든 이모티콘을 확인할 수 있습니다.",
         "embed": {
@@ -387,18 +403,17 @@
           "bot_lists_title": "내가 등록된 사이트들:",
           "commands_title": "명령어",
           "commands_value": "`{prefix}help`를 사용하면 명령어들을 볼 수 있어.",
-          "donators_more": "...그리고 {remaining} 명의 추가 후원자들!",
-          "donators_title": "후원자",
-          "donators_value": "모든 후원자들에 대한 목록은 지속여부에 관계없이 여기에 있습니다.\n이 리스트에 들어오고 싶으시다면, ~Nya 디스코드 서버에 들어와 후원해주세요. (자세한 사항은 Andre_601에게 문의하세요)",
           "links": {
-            "discord": "`공식 디스코드`",
-            "policy": "`개인정보 보호 및 약관`",
+            "discord": "[`지원 디스코드 서버`]({guild_invite})",
+            "github": "[`GitHub`]({github_url})",
+            "policy": "[`개인정보처리방침 및 이용약관`]({policy_url})",
             "title": "다른 링크들",
-            "website": "`홈페이지`",
-            "wiki": "`위키`"
+            "twitter": "[`트위터`]({twitter_url})",
+            "website": "[`웹사이트`]({website_url})",
+            "wiki": "[`위키`]({wiki})"
           },
-          "support_title": "후원",
-          "support_value": "이 봇을 유지보수하는데에는 큰 비용이 들어갑니다. 후원을 해주신다면 정말 고마워할거에요!\n두가지 중 하나를 선택해 후원하실 수 있습니다.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (단순후원)\n{PATREON} [`Patreon`]({patreon_url}) (지속후원)"
+          "support_title": "이 봇을 후원해주세요!",
+          "support_value": "후원을 통해 이 봇을 도와주세요!\n`{prefix}donate` 를 통해 자세히 알아보세요."
         }
       },
       "invite": {
