@@ -311,7 +311,7 @@
       "donate": {
         "description": "Dona qualcosa per aiutare a mantenere vivo questo robot!",
         "dm_success": "Controlla i tuoi messaggi privati {user}!",
-        "dm_failure": "Non ho potuto inviarti un DM {user}. Sei sicuro di avere i tuoi DM aperti?",
+        "dm_failure": "Non ho potuto inviarti un messaggio privato {user}. Sei sicuro di avere i tuoi DM aperti?",
         "embed": {
           "description": "Tenere il bot in funzione è costoso. Ecco perché le donazioni - grandi o piccole - sono sempre benvenute.\nPuoi scegliere se desideri donare una volta sola usando PayPal o se desideri donare mensilmente con Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Donazione singola)\n{PATREON} [`Patreon`]({patreon_url}) (Donazioni continue)",
           "donators_more": "*e {remaining} ancora...*",
@@ -404,7 +404,7 @@
           "commands_title": "Comandi",
           "commands_value": "Usa `{prefix}help` nel server discord per la lista dei miei comandi",
           "links": {
-            "discord": "[`Discord (Support)`]({guild_invite})",
+            "discord": "[`Discord (Supporto)`]({guild_invite})",
             "github": "[`GitHub`]({github_url})",
             "policy": "[`Informazioni sulla privacy e termini di utilizzo`]({policy_url})",
             "title": "Altri link",
