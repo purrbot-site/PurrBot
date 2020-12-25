@@ -20,7 +20,7 @@
     ],
     "request_error": "Bei der Bearbeitung der Anfrage ist ein Fehler aufgetreten. Vergewissere dich, dass meine Nachricht nicht gelöscht wurde und dass ich über ausreichende Berechtigungen verfüge!",
     "title": "Fehler",
-    "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {VANILLABLUSH}\nBitte melde dies im Discord, oder auf GitHub!"
+    "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {VANILLABLUSH}\nBitte melde dies [im Discord]({guild_invite}), oder auf [GitHub]({github_url})!"
   },
   "misc": {
     "and": "und",
@@ -223,6 +223,11 @@
         "message": "{user} schlägt dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum schlagen!"
       },
+      "smile": {
+        "description": "Lässt dich lächeln. :3",
+        "loading": "{LOADING} Lasse dich lächeln...",
+        "message": "{user} lächelt"
+      },
       "tail": {
         "description": "Wedele mit deinem Schweif... In Aufregung hoffe ich.",
         "loading": "{LOADING} Wackle mit dem Schweif...",
@@ -303,6 +308,17 @@
       }
     },
     "info": {
+      "donate": {
+        "description": "Spende etwas, um diesen Bot am Leben zu erhalten!",
+        "dm_success": "Überprüfe deine privaten Nachrichten {user}!",
+        "dm_failure": "I konnte dir keine DM senden {user}. Hast du sichergestellt, dass deine DMs offen sind?",
+        "embed": {
+          "description": "Der Betrieb dieses Bots ist teuer. Deshalb sind alle Spenden - ob gross oder klein - willkommen.\nDu kannst wählen, ob du nur einmal mit PayPal spenden möchtest oder ob du fortwährende Spenden bei Patreon machen möchtest.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Einzelne Spende)\n{PATREON} [`Patreon`]({patreon_url}) (Kontinuierliche Spenden)",
+          "donators_more": "*und {remaining} weitere...*",
+          "donators_title": "Spender",
+          "donators_value": "Alle Spender - entweder einzelne oder kontinuierliche Spenden - sind unten als Dankeschön aufgelistet.\nDank ihnen kann der Bot für alle aktiv und kostenlos bleiben!\nWenn du aufgelistet werden möchtest, solltest du auf dem [~Nya Discord]({guild_invite}) sein undAndre_601 darüber kontaktieren!"
+        }
+      },
       "emote": {
         "description": "Erhalte einfache Informationen über eine oder mehrere Emotes (Discord's benutzerdefinierte Emojis).\nDu kannst das `--search` Argument verwenden um alle Emotes, welche in den vergangenen 100 Nachrichten verwendet wurden, zu zeigen.",
         "embed": {
@@ -387,18 +403,17 @@
           "bot_lists_title": "Bot Listen:",
           "commands_title": "Befehle",
           "commands_value": "Verwende `{prefix}help` im Discord für eine Liste von Befehlen.",
-          "donators_more": "Und {remaining} weitere...",
-          "donators_title": "Spender",
-          "donators_value": "Alle Spender (Egak ob einzelne oder wiederkehrende Spenden) sind hier gelisted.\nUm auch gelistet zu werden, mache eine Spende und stell sicher, dass du auf dem ~Nya Discord bist (Kontaktiere Andre_601 für alles weitere).",
           "links": {
-            "discord": "`Discord (Support)`",
-            "policy": "`Datenschutzerklärung und Nutzungsbedingungen`",
+            "discord": "[`Discord (Support)`]({guild_invite})",
+            "github": "[`GitHub`]({github_url})",
+            "policy": "[`Datenschutzerklärung und ToS`]({policy_url})",
             "title": "Andere Links",
-            "website": "`Webseite`",
-            "wiki": "`Wiki`"
+            "twitter": "[`Twitter`]({twitter_url})",
+            "website": "[`Webseite`]({website_url})",
+            "wiki": "[`Wiki`]({wiki})"
           },
-          "support_title": "Unterstützen",
-          "support_value": "Einen Bot am laufen zu halten ist teuer. Deshalb begrüsse ich immer Spenden aller art!\nDu kannst zwischen zwei Spendenoptionen wählen:\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Einzelspenden)\n{PATREON} [`Patreon`]({patreon_url}) (Wiederkehrende Spenden)"
+          "support_title": "Unterstütze diesen Bot!",
+          "support_value": "Unterstütze diesen Bot durch eine Spende!\nFühre `{prefix}donate` aus für weitere Informationen."
         }
       },
       "invite": {
