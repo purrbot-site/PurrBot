@@ -103,16 +103,17 @@ public class CmdInvite implements Command{
                         false
                 );
         
-        String s = msg.getContentRaw();
-        if(s.toLowerCase().contains("--dm") || s.toLowerCase().contains("—dm")){
+        if(bot.getMessageUtil().hasArg("dm", args)){
             member.getUser().openPrivateChannel()
                     .flatMap((channel) -> channel.sendMessage(invite.build()))
-                    .queue(message -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getAsMention())
-                    ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)), 
-                    (error) -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getAsMention())
-                    ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)));
+                    .queue(
+                            message -> tc.sendMessage(
+                                    bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getAsMention())
+                            ).queue(), 
+                            (error) -> tc.sendMessage(
+                                    bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getAsMention())
+                            ).queue()
+                    );
             
             
             

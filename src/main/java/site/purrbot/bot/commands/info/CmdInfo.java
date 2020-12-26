@@ -18,22 +18,18 @@
 
 package site.purrbot.bot.commands.info;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDAInfo;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
@@ -47,10 +43,6 @@ import java.util.concurrent.TimeUnit;
         }
 )
 public class CmdInfo implements Command{
-
-    private final Cache<String, String> cache = Caffeine.newBuilder()
-            .expireAfterWrite(10, TimeUnit.MINUTES)
-            .build();
     
     private final PurrBot bot;
 
@@ -64,8 +56,7 @@ public class CmdInfo implements Command{
             msg.delete().queue();
 
         MessageEmbed embed = getEmbed(member);
-        String s = msg.getContentRaw();
-        if(s.toLowerCase().contains("--dm") || s.toLowerCase().contains("—dm")){
+        if(bot.getMessageUtil().hasArg("dm", args)){
             String mention = member.getAsMention();
             String prefix = bot.isBeta() ? "snuggle" : "purr";
             member.getUser().openPrivateChannel()
@@ -73,10 +64,10 @@ public class CmdInfo implements Command{
                     .queue(
                             message -> tc.sendMessage(
                                     bot.getMsg(guild.getId(), prefix + ".info.info.dm_success", mention)
-                            ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS)), 
+                            ).queue(), 
                             error -> tc.sendMessage(
                                     bot.getMsg(guild.getId(), prefix + ".info.info.dm_failure", mention)
-                            ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
+                            ).queue()
                     );
             return;
         }
@@ -132,52 +123,30 @@ public class CmdInfo implements Command{
                 )
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.info.embed.bot_lists_title"),
-                        String.format(
-                                "[`Botlist.space`](%s)\n" +
-                                        "[`Discord.boats`](%s)\n" +
-                                        "[`Discordbotlist.com`](%s)\n" +
-                                        "[`Discord.bots.gg`](%s)\n" +
-                                        "[`Discordextremelist.xyz`](%s)\n" +
-                                        "[`Discordservices.net`](%s)",
-                                Links.BOTLIST_SPACE,
-                                Links.DISCORD_BOATS,
-                                Links.DISCORDBOTLIST_COM,
-                                Links.DISCORD_BOTS_GG,
-                                Links.DISCORDEXTREMELIST_XYZ,
-                                Links.DISCORDSERVICES_NET
-                        ),
+                        "[`Botlist.space`](" +          Links.BOTLIST_SPACE +          ")\n" +
+                        "[`Discord.boats`](" +          Links.DISCORD_BOATS +          ")\n" +
+                        "[`Discordbotlist.com`](" +     Links.DISCORDBOTLIST_COM +     ")\n" +
+                        "[`Discord.bots.gg`](" +        Links.DISCORD_BOTS_GG +        ")\n" +
+                        "[`Discordextremelist.xyz`](" + Links.DISCORDEXTREMELIST_XYZ + ")\n" +
+                        "[`Discordservices.net`](" +    Links.DISCORDSERVICES_NET +    ")",
                         false
                 )
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.info.embed.links.title"),
-                        String.format(
-                                "[%s](%s)\n" +
-                                        "[`GitHub`](%s)\n" +
-                                        "[`Twitter`](%s)\n" +
-                                        "[%s](%s)\n" +
-                                        "[%s](%s)\n" +
-                                        "[%s](%s)",
+                        String.join(
+                                "\n",
                                 bot.getMsg(guild.getId(), "purr.info.info.embed.links.discord"),
-                                Links.DISCORD,
-                                Links.GITHUB,
-                                Links.TWITTER,
-                                bot.getMsg(guild.getId(), "purr.info.info.embed.links.website"),
-                                Links.WEBSITE,
-                                bot.getMsg(guild.getId(), "purr.info.info.embed.links.wiki"),
-                                Links.WIKI,
+                                bot.getMsg(guild.getId(), "purr.info.info.embed.links.github"),
                                 bot.getMsg(guild.getId(), "purr.info.info.embed.links.policy"),
-                                Links.POLICY
+                                bot.getMsg(guild.getId(), "purr.info.info.embed.links.twitter"),
+                                bot.getMsg(guild.getId(), "purr.info.info.embed.links.website"),
+                                bot.getMsg(guild.getId(), "purr.info.info.embed.links.wiki")
                         ),
                         false
                 )
                 .addField(
                         bot.getMsg(guild.getId(), "purr.info.info.embed.support_title"),
                         bot.getMsg(guild.getId(), "purr.info.info.embed.support_value"),
-                        false
-                )
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.info.info.embed.donators_title"),
-                        getDonators(guild.getId()),
                         false
                 );
         
@@ -188,38 +157,5 @@ public class CmdInfo implements Command{
         String text = bot.getMsg(id, "purr.info.info.embed." + path);
         
         return MarkdownUtil.maskedLink(text, link);
-    }
-    
-    private String getUser(String id){
-        User user = bot.getShardManager().retrieveUserById(id).complete();
-        
-        return MarkdownSanitizer.escape(String.format("%s (%s)", user.getAsTag(), user.getAsMention()));
-    }
-    
-    private String getDonators(String id){
-        StringBuilder builder = new StringBuilder(bot.getMsg(id, "purr.info.info.embed.donators_value")).append("\n");
-        List<String> donators = bot.getDonators();
-        
-        for(int i = 0; i < donators.size(); i++){
-            int finalId = i;
-            String donator = cache.get(donators.get(i), k -> getUser(donators.get(finalId)));
-            if(donator == null)
-                continue;
-            
-            if(builder.length() + donator.length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
-                int remaining = donators.size() - i;
-                
-                builder.append("\n").append(bot.getMsg(id, "purr.info.embed.donators_more")
-                        .replace("{remaining}", String.valueOf(remaining))
-                );
-                
-                break;
-            }
-            
-            builder.append("\n")
-                    .append(donator);
-        }
-        
-        return builder.toString();
     }
 }

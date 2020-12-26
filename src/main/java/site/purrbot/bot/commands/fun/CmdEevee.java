@@ -52,8 +52,7 @@ public class CmdEevee implements Command, HttpUtil.ImageAPI{
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
     
-        String s = msg.getContentRaw();
-        boolean isGif = s.toLowerCase().contains("--gif");
+        boolean isGif = bot.getMessageUtil().hasArg("gif", args);
         
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.fun.eevee.loading")

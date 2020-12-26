@@ -59,6 +59,7 @@ public class CommandLoader {
                 new CmdSenko(bot),
                 new CmdShip(bot),
                 new CmdSlap(bot),
+                new CmdSmile(bot),
                 new CmdTail(bot),
                 new CmdTickle(bot),
 
@@ -68,6 +69,7 @@ public class CommandLoader {
                 new CmdWelcome(bot),
 
                 // Info
+                new CmdDonate(bot),
                 new CmdEmote(bot),
                 new CmdGuild(bot),
                 new CmdHelp(bot),

@@ -122,7 +122,7 @@ public class CmdThreesome implements Command, HttpUtil.ImageAPI{
         ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
                 .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                 .queue(
-                        v -> handleEvent(msg, message, member, target1, target2),
+                        v -> handleEvent(message, member, target1, target2, args),
                         e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
                 )
         );
@@ -140,7 +140,7 @@ public class CmdThreesome implements Command, HttpUtil.ImageAPI{
         return list.isEmpty();
     }
     
-    public void handleEvent(Message msg, Message botMsg, Member author, Member target1, Member target2){
+    public void handleEvent(Message botMsg, Member author, Member target1, Member target2, String... args){
         Guild guild = botMsg.getGuild();
         List<String> list = new ArrayList<>();
         list.add(target1.getId());
@@ -192,17 +192,16 @@ public class CmdThreesome implements Command, HttpUtil.ImageAPI{
                                 .replace("{target2}", target2.getEffectiveName())
                         )).queue();
                     }else{
-                        String raw = msg.getContentRaw().toLowerCase();
                         String targets = String.join(
                                 " ",
                                 target1.getEffectiveName(),
                                 bot.getMsg(guild.getId(), "misc.and"),
                                 target2.getEffectiveName()
                         );
-                        if(raw.contains("--mmf"))
+                        if(bot.getMessageUtil().hasArg("mmf", args))
                             bot.getHttpUtil().handleRequest(this, "threesome_mmf", author, botMsg, targets, true);
                         else
-                        if(raw.contains("--fff"))
+                        if(bot.getMessageUtil().hasArg("fff", args))
                             bot.getHttpUtil().handleRequest(this, "threesome_fff", author, botMsg, targets, true);
                         else
                             bot.getHttpUtil().handleRequest(this, "threesome_ffm", author, botMsg, targets, true);

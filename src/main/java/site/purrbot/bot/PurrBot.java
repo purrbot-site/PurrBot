@@ -126,6 +126,7 @@ public class PurrBot {
 
     private void setup() throws LoginException{
         getFileManager().addFile("config", "/config.json", "./config.json")
+                .addFile("data", "/data.json", "./data.json")
                 .addFile("random", "/random.json", "./random.json")
                 .addLang("de-CH")
                 .addLang("en")
@@ -165,7 +166,8 @@ public class PurrBot {
                         CacheFlag.VOICE_STATE,
                         CacheFlag.CLIENT_STATUS
                 )
-                .setChunkingFilter(ChunkingFilter.NONE)
+                .disableCache(CacheFlag.VOICE_STATE)
+                .setChunkingFilter(ChunkingFilter.include(Long.parseLong(IDs.GUILD)))
                 .setMemberCachePolicy(beta ? MemberCachePolicy.ALL : MemberCachePolicy.OWNER)
                 .addEventListeners(
                         new ReadyListener(this),
@@ -215,7 +217,7 @@ public class PurrBot {
         return beta;
     }
     public boolean isSpecial(String id){
-        return getFileManager().getStringlist("random", "special_user").contains(id);
+        return getFileManager().getStringlist("data", "special").contains(id);
     }
 
     public CommandHandler<Message> getCmdHandler(){
@@ -287,10 +289,10 @@ public class PurrBot {
     }
 
     public List<String> getBlacklist(){
-        return getFileManager().getStringlist("random", "blacklist");
+        return getFileManager().getStringlist("data", "blacklist");
     }
     public List<String> getDonators(){
-        return getFileManager().getStringlist("random", "donators");
+        return getFileManager().getStringlist("data", "donators");
     }
     public List<String> getShutdownImg(){
         return getFileManager().getStringlist("random", "shutdown_img");
@@ -302,10 +304,10 @@ public class PurrBot {
         return getFileManager().getStringlist("random", "startup_msg");
     }
     public List<String> getWelcomeBg(){
-        return getFileManager().getStringlist("random", "welcome_bg");
+        return getFileManager().getStringlist("data", "welcome.background");
     }
     public List<String> getWelcomeIcon(){
-        return getFileManager().getStringlist("random", "welcome_icon");
+        return getFileManager().getStringlist("random", "welcome.icon");
     }
     
     public String getMsg(String id, String path, String user, String targets){
@@ -334,7 +336,6 @@ public class PurrBot {
     }
     
     public void startUpdater(){
-        
         if(!isBeta()){
             PostAction post = new PostAction(getShardManager());
             BotBlockAPI botBlockAPI = new BotBlockAPI.Builder()
@@ -364,6 +365,7 @@ public class PurrBot {
                     .setToken(getFileManager().getString("config", "tokens.discordservices-net"))
                     .setId(IDs.PURR)
                     .build();
+            
             Commands commands = dServices4J.getCommands();
             Stats stats = dServices4J.getStats();
             
@@ -380,9 +382,6 @@ public class PurrBot {
                         Activity.ActivityType.WATCHING,
                         getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
                 ));
-        
-                if(isBeta())
-                    return;
         
                 try{
                     post.postGuilds(getShardManager(), botBlockAPI);
@@ -446,10 +445,15 @@ public class PurrBot {
                 // Guild link
                 .replace("{guild_invite}", Links.DISCORD)
                 // Wiki pages
+                .replace("{wiki}", Links.WIKI)
                 .replace("{wiki_bg}", Links.WIKI + "/welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI + "/welcome-images#icons")
                 .replace("{wiki_welcome}", Links.WIKI + "/welcome-channel")
                 // Other pages
+                .replace("{github_url}", Links.GITHUB)
+                .replace("{twitter_url}", Links.TWITTER)
+                .replace("{website_url}", Links.WEBSITE)
+                .replace("{policy_url}", Links.POLICY)
                 .replace("{paypal_url}", Links.PAYPAL)
                 .replace("{patreon_url}", Links.PATREON);
     }
@@ -462,7 +466,7 @@ public class PurrBot {
             
             commandInfoList.add(new Commands.CommandInfo(
                     command.getDescription().name(),
-                    command.getDescription().description(),
+                    langUtils.getString("en", command.getDescription().description()),
                     command.getAttribute("category")
             ));
         }

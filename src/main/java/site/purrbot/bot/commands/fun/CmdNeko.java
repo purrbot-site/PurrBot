@@ -52,8 +52,7 @@ public class CmdNeko implements Command, HttpUtil.ImageAPI{
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
 
-        String s = msg.getContentRaw();
-        boolean isGif = s.contains("--gif");
+        boolean isGif = bot.getMessageUtil().hasArg("gif", args);
         
         tc.sendMessage(
                 bot.getMsg(guild.getId(), "purr.fun.neko.loading")

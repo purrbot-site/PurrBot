@@ -120,18 +120,18 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
             return;
         }
         
-        String path = hasArgs(msg.getContentRaw()) ? "purr.nsfw.fuck.request.message" : "purr.nsfw.fuck.request.message_choose";
+        String path = hasArgs(args) ? "purr.nsfw.fuck.request.message" : "purr.nsfw.fuck.request.message_choose";
         tc.sendMessage(
                 bot.getMsg(guild.getId(), path, member.getEffectiveName(), target.getAsMention())
         ).queue(message -> {
-            if(!hasArgs(msg.getContentRaw())){
+            if(!hasArgs(args)){
                 message.addReaction(Emotes.SEX.getNameAndId())
                         .flatMap(v -> message.addReaction(Emotes.SEX_ANAL.getNameAndId()))
                         .flatMap(v -> message.addReaction(Emotes.SEX_YAOI.getNameAndId()))
                         .flatMap(v -> message.addReaction(Emotes.SEX_YURI.getNameAndId()))
                         .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                         .queue(
-                                v -> handleEvent(msg, message, member, target),
+                                v -> handleEvent(message, member, target, args),
                                 e -> bot.getEmbedUtil().sendError(
                                         tc,
                                         member,
@@ -142,7 +142,7 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
                 message.addReaction(Emotes.ACCEPT.getNameAndId())
                         .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
                         .queue(
-                                v -> handleEvent(msg, message, member, target),
+                                v -> handleEvent(message, member, target, args),
                                 e -> bot.getEmbedUtil().sendError(
                                         tc,
                                         member,
@@ -156,24 +156,29 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
     private boolean equalsAny(String id){
         return (
                 id.equals(Emotes.SEX.getId()) ||
-                        id.equals(Emotes.SEX_ANAL.getId()) ||
-                        id.equals(Emotes.SEX_YURI.getId()) ||
-                        id.equals(Emotes.SEX_YAOI.getId()) ||
-                        id.equals(Emotes.ACCEPT.getId()) ||
-                        id.equals(Emotes.CANCEL.getId())
+                id.equals(Emotes.SEX_ANAL.getId()) ||
+                id.equals(Emotes.SEX_YURI.getId()) ||
+                id.equals(Emotes.SEX_YAOI.getId()) ||
+                id.equals(Emotes.ACCEPT.getId()) ||
+                id.equals(Emotes.CANCEL.getId())
         );
     }
     
-    private boolean hasArgs(String message){
-        return (
-                message.toLowerCase().contains("--anal") ||
-                        message.toLowerCase().contains("--normal") ||
-                        message.toLowerCase().contains("--yuri") ||
-                        message.toLowerCase().contains("--yaoi")
-        );
+    private boolean hasArgs(String... args){
+        if(bot.getMessageUtil().hasArg("anal", args)){
+            return true;
+        }else
+        if(bot.getMessageUtil().hasArg("normal", args)){
+            return true;
+        }else
+        if(bot.getMessageUtil().hasArg("yaoi", args)){
+            return true;
+        }else{
+            return bot.getMessageUtil().hasArg("yuri", args);
+        }
     }
     
-    private void handleEvent(Message msg, Message botMsg, Member author, Member target){
+    private void handleEvent(Message botMsg, Member author, Member target, String... args){
         Guild guild = botMsg.getGuild();
         queue.put(bot.getMessageUtil().getQueueString(author), target.getId());
         
@@ -188,7 +193,7 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
                     if(!equalsAny(emote.getId()))
                         return false;
                     
-                    if(emote.getId().equals(Emotes.ACCEPT.getId()) && !hasArgs(msg.getContentRaw()))
+                    if(emote.getId().equals(Emotes.ACCEPT.getId()) && !hasArgs(args))
                         return false;
                     
                     if(event.getUser().isBot())
@@ -201,7 +206,6 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
                 },
                 event -> {
                     String id = event.getReactionEmote().getId();
-                    String content = msg.getContentRaw().toLowerCase();
                     
                     TextChannel channel = event.getChannel();
                     queue.invalidate(bot.getMessageUtil().getQueueString(author));
@@ -219,7 +223,7 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
                         return;
                     }
                     
-                    if(!hasArgs(content)){
+                    if(!hasArgs(args)){
                         if(id.equals(Emotes.SEX_ANAL.getId()))
                             bot.getHttpUtil().handleRequest(this, "anal", author, botMsg, target.getEffectiveName(), true);
                         else
@@ -231,13 +235,13 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
                         else
                             bot.getHttpUtil().handleRequest(this, "fuck", author, botMsg, target.getEffectiveName(), true);
                     }else{
-                        if(content.contains("--anal"))
+                        if(bot.getMessageUtil().hasArg("anal", args))
                             bot.getHttpUtil().handleRequest(this, "anal", author, botMsg, target.getEffectiveName(), true);
                         else
-                        if(content.contains("--yuri"))
+                        if(bot.getMessageUtil().hasArg("yuri", args))
                             bot.getHttpUtil().handleRequest(this, "yuri", author, botMsg, target.getEffectiveName(), true);
                         else
-                        if(content.contains("--yaoi"))
+                        if(bot.getMessageUtil().hasArg("yaoi", args))
                             bot.getHttpUtil().handleRequest(this, "yaoi", author, botMsg, target.getEffectiveName(), true);
                         else
                             bot.getHttpUtil().handleRequest(this, "fuck", author, botMsg, target.getEffectiveName(), true);

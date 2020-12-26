@@ -74,10 +74,10 @@ public class GuildListener extends ListenerAdapter{
                             Links.DISCORD
                     ))
                     .queue(message -> {
-                        logger.info("[Guild Leave] {}(id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
+                        logger.info("[Guild Leave] {} (id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
                         guild.leave().queue();
                     }, throwable -> {
-                        logger.info("[Guild Leave] {}(id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
+                        logger.info("[Guild Leave] {} (id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
                         guild.leave().queue();
                     });
             
@@ -90,7 +90,7 @@ public class GuildListener extends ListenerAdapter{
         
         bot.getDbUtil().addGuild(guild.getId());
         
-        logger.info("[Guild Join] {}(id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
+        logger.info("[Guild Join] {} (id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
         
         guild.retrieveOwner().queue(
                 owner -> sendWebhook(owner, guild, Action.JOIN),
@@ -109,7 +109,7 @@ public class GuildListener extends ListenerAdapter{
 
         bot.invalidateCache(guild.getId());
     
-        logger.info("[Guild Leave] {}(id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
+        logger.info("[Guild Leave] {} (id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
     
         guild.retrieveOwner().queue(
                 owner -> sendWebhook(owner, guild, Action.LEAVE),

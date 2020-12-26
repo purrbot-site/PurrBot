@@ -21,7 +21,6 @@ package site.purrbot.bot.util.message;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
@@ -265,6 +264,21 @@ public class MessageUtil {
         return decimalFormat.format(number);
     }
     
+    public boolean hasArg(String value, String... args){
+        if(args.length == 0)
+            return false;
+        
+        for(String arg : args){
+            if(arg.equalsIgnoreCase("--" + value))
+                return true;
+            
+            if(arg.equalsIgnoreCase("—" + value))
+                return true;
+        }
+        
+        return false;
+    }
+    
     public String getQueueString(Member member){
         return member.getId() + ":" + member.getGuild().getId();
     }
@@ -355,56 +369,6 @@ public class MessageUtil {
                             )
                     )).queue();
                 });
-    }
-    
-    public void editMessage(Message msg, String path, Member author, String target, String link){
-        Guild guild = msg.getGuild();
-        
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed()
-                .setDescription(MarkdownSanitizer.escape(
-                        bot.getMsg(
-                                guild.getId(),
-                                path + "message",
-                                author.getEffectiveName(),
-                                target
-                        )
-                ));
-        
-        if(link != null)
-            embed.setImage(link);
-        
-        if(guild.getSelfMember().hasPermission(msg.getTextChannel(), Permission.MESSAGE_MANAGE))
-            msg.clearReactions().queue();
-        
-        msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                .embed(embed.build())
-                .queue(message -> message.getTextChannel().sendMessage(author.getAsMention())
-                                .embed(acceptedEmbed(guild.getId(), target, message.getJumpUrl()))
-                                .queue(
-                                        del -> del.delete().queueAfter(10, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE))
-                                ),
-                        e -> msg.getTextChannel().sendMessage(embed.build()).queue(message ->
-                                message.getTextChannel().sendMessage(author.getAsMention())
-                                       .embed(acceptedEmbed(guild.getId(), target, message.getJumpUrl()))
-                                       .queue(
-                                               del -> del.delete().queueAfter(10, TimeUnit.SECONDS, null, ignore(UNKNOWN_MESSAGE))
-                                       )
-                        )
-                );
-    }
-    
-    private MessageEmbed acceptedEmbed(String id, String name, String link){
-        return bot.getEmbedUtil().getEmbed()
-                .setDescription(MarkdownSanitizer.escape(
-                        bot.getMsg(
-                                id,
-                                "request.accepted"
-                        )
-                        .replace("{target}", name)
-                        .replace("{link}", link)
-                ))
-                .setTimestamp(null)
-                .build();
     }
     
     private String queueString(String api, String guildId, String authorId){

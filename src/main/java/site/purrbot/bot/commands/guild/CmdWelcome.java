@@ -47,7 +47,7 @@ import java.io.InputStream;
                         "{p}welcome icon set <icon>\n" +
                         "{p}welcome icon reset\n" +
                         "{p}welcome msg <message>\n" +
-                        "{p}welcome msg reset" +
+                        "{p}welcome msg reset\n" +
                         "{p}welcome test"
                 ),
                 @CommandAttribute(key = "help", value = "{p}welcome [options]")

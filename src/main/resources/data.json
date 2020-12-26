@@ -1,0 +1,32 @@
+{
+  "blacklist": [],
+  "donators": [],
+  "special": [],
+  "welcome": {
+    "background": [
+      "color_black",
+      "color_blue",
+      "color_green",
+      "color_grey",
+      "color_red",
+      "color_white",
+      "gradient",
+      "gradient_blue",
+      "gradient_dark_red",
+      "gradient_green",
+      "gradient_orange",
+      "gradient_red",
+      "rainbow"
+    ],
+    "icon": [
+      "neko_hug",
+      "neko_smile",
+      "purr",
+      "snuggle",
+      "snuggle_lurk",
+      "senko",
+      "shiro",
+      "holo"
+    ]
+  }
+}
