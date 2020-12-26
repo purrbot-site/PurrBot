@@ -382,7 +382,12 @@
             "owner": "Owner",
             "title": "Categories"
           },
-          "description": "Use the \u25C0 or \u25B6 reactions to navigate through the pages and \u23F9 to cancel it.\nUse `{prefix}help [command]` to get more information about a specific command.\nNote that the categories Fun, Guild, Info and NSFW are NOT commands!",
+          "description": {
+            "command_title": "More Info",
+            "command_value": "To get more info about a specific command run `{prefix}help [command]`\n__The categories Fun, Guild, Info and NSFW will NOT work with this command!__",
+            "nav_title": "Navigation",
+            "nav_value": "Click the reactions for the following actions:\n\n\u25C0 - Previous Page\n\u25B6 - Next Page\n\u23F9 - Cancel Menu"
+          },
           "nsfw_info": "`Run the help command in a NSFW channel to see this page.`",
           "support_title": "Love the bot?",
           "support_value": "Consider supporting the bot through donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) for single donations.\n{PATREON} [`Patreon`]({patreon_url}) for continuous donations."
