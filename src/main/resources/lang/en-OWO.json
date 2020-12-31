@@ -382,7 +382,12 @@
             "owner": "Ownew",
             "title": "Categowies"
           },
-          "description": "Use the ◀ or ▶ weactions to navigate thwough the pages and ⏹ to cancew it.\nUse `{prefix}help [command]` to get more infowmation about a specific command.\nNote that the categowies Fun, Guild, Info and NSFW awe NOT commands!",
+          "description": {
+            "command_title": "Mowe Info",
+            "command_value": "To get mowe info about a specific command wun `{prefix}help [command]`\n__The categowies Fun, Guild, Info and NSFW will NOT wowk with this command!__",
+            "nav_title": "Navigation",
+            "nav_value": "Cwick the weactions fow the fowwowing actions:\n\n◀ - Pwevious Page\n▶ - Next Page\n⏹ - Cancew Menu"
+          },
           "nsfw_info": "`Run the hewp command in a NSFW channel to see this page.`",
           "support_title": "Do- do you love the bot O\\\\W\\\\O?",
           "support_value": "Considew suppowting the bot twough donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) for single donations owo.\n{PATREON} [`Patreon`]({patreon_url}) for continuous donations uwu."
