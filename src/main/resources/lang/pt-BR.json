@@ -382,7 +382,12 @@
             "owner": "Dono",
             "title": "Categorias"
           },
-          "description": "Use as reações ◀ ou ▶ para navegar pelas páginas e ⏹ para cancelá-lo.\nUse `{prefix}help [command]` para obter mais informações sobre um comando específico.\nNote que as categorias divertidas, Guild, Info e NSFW NÃO são comandos!",
+          "description": {
+            "command_title": "mais informações",
+            "command_value": "Para obter mais informações sobre um comando específico execute `{prefix}help [command]`\n__As categorias diversão, Guilda, Informações e NSFW NÃO funcionarão com esse comando!__",
+            "nav_title": "Navegação",
+            "nav_value": "Clique nas reações para as seguintes ações:\n\n◀ - Página Anterior\n▶ - Próxima página\n⏹ - Cancelar Menu"
+          },
           "nsfw_info": "`Execute o comando de ajuda em um canal NSFW para ver esta página.`",
           "support_title": "Ama o bot?",
           "support_value": "Considere apoiar o bot através da doações.\n\n{PAYPAL} [`PayPal`]({paypal_url}) para doações únicas.\n{PATREON} [`Patreon`]({patreon_url}) para doações contínuas."

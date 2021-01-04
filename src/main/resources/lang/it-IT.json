@@ -382,7 +382,12 @@
             "owner": "Proprietario",
             "title": "Categorie"
           },
-          "description": "Usa le reazioni ◀ or ▶ per cambiare pagina e ⏹ per cancellarlo.\nUsa `{prefix}aiuto [command]` per ottenere più informazioni su un comando specifico.\nNota le categorie Divertimento, Gilda, info e NSFW NON sono comandi!",
+          "description": {
+            "command_title": "Informazioni aggiuntive",
+            "command_value": "Per avere maggiori informazioni su un comando specifico esegui `{prefix}help [command]`\n__Le categorie Divertimento, Gilda, Info e NSFW NON funzioneranno con questo comando!__",
+            "nav_title": "Navigazione",
+            "nav_value": "Clicca sulle reazioni per eseguire le seguenti azioni:\n\n◀ - Pagina precedente\n▶ - Pagina successiva\n⏹ - Annulla Menu"
+          },
           "nsfw_info": "`Esegui il comando di aiuto in un canale NSFW per vedere questa pagina.`",
           "support_title": "Ti piace il bot?",
           "support_value": "{PAYPAL} [`PayPal`]({paypal_url}) per donazioni singole.\n{PATREON} [`Patreon`]({patreon_url}) per donazioni continue."
