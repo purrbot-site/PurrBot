@@ -1,19 +1,19 @@
 /*
- * Copyright 2018 - 2020 Andre601
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
- * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *  Copyright 2018 - 2021 Andre601
+ *  
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ *  documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+ *  the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ *  and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *  
+ *  The above copyright notice and this permission notice shall be included in all copies or substantial
+ *  portions of the Software.
+ *  
+ *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ *  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ *  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ *  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ *  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package site.purrbot.bot.util;
@@ -24,7 +24,6 @@ import site.purrbot.bot.PurrBot;
 
 import java.util.Map;
 
-@SuppressWarnings("rawtypes")
 public class DBUtil {
 
     private final PurrBot bot;
@@ -50,7 +49,7 @@ public class DBUtil {
      *  Guild Stuff
      */
     private void checkValue(String id, String key, String def){
-        Map map = getGuild(id);
+        Map<?,?> map = getGuild(id);
 
         if(map == null){
             addGuild(id);
@@ -65,19 +64,19 @@ public class DBUtil {
         r.table(guildTable).insert(
                 r.array(
                         r.hashMap("id", id)
-                                .with("language", "en")
-                                .with("prefix", bot.isBeta() ? ".." : ".")
-                                .with("welcome_background", "color_white")
-                                .with("welcome_channel", "none")
-                                .with("welcome_color", "hex:000000")
-                                .with("welcome_icon", "purr")
-                                .with("welcome_message", "Welcome {mention}!")
+                         .with("language", "en")
+                         .with("prefix", bot.isBeta() ? ".." : ".")
+                         .with("welcome_background", "color_white")
+                         .with("welcome_channel", "none")
+                         .with("welcome_color", "hex:000000")
+                         .with("welcome_icon", "purr")
+                         .with("welcome_message", "Welcome {mention}!")
                 )
         ).optArg("conflict", "update").run(connection);
     }
 
     public void delGuild(String id){
-        Map guild = getGuild(id);
+        Map<?,?> guild = getGuild(id);
 
         if(guild == null) 
             return;
@@ -85,8 +84,11 @@ public class DBUtil {
         r.table(guildTable).get(id).delete().run(connection);
     }
 
-    private Map getGuild(String id){
-        return r.table(guildTable).get(id).run(connection, Map.class).single();
+    private Map<?,?> getGuild(String id){
+        return r.table(guildTable)
+                .get(id)
+                .run(connection, Map.class)
+                .single();
     }
     
     /*
@@ -94,7 +96,7 @@ public class DBUtil {
      */
     public String getLanguage(String id){
         checkValue(id, "language", "en");
-        Map guild = getGuild(id);
+        Map<?,?> guild = getGuild(id);
         
         return guild.get("language").toString();
     }
@@ -110,7 +112,7 @@ public class DBUtil {
      */
     public String getPrefix(String id){
         checkValue(id, "prefix", ".");
-        Map guild = getGuild(id);
+        Map<?,?> guild = getGuild(id);
 
         return guild.get("prefix").toString();
     }
@@ -126,7 +128,7 @@ public class DBUtil {
      */
     public String getWelcomeBg(String id){
         checkValue(id, "welcome_background", "color_white");
-        Map guild = getGuild(id);
+        Map<?,?> guild = getGuild(id);
 
         return guild.get("welcome_background").toString();
     }
@@ -139,7 +141,7 @@ public class DBUtil {
 
     public String getWelcomeChannel(String id){
         checkValue(id, "welcome_channel", "none");
-        Map guild = getGuild(id);
+        Map<?,?> guild = getGuild(id);
 
         return guild.get("welcome_channel").toString();
     }
@@ -152,7 +154,7 @@ public class DBUtil {
 
     public String getWelcomeColor(String id){
         checkValue(id, "welcome_color", "hex:000000");
-        Map guild = getGuild(id);
+        Map<?,?> guild = getGuild(id);
 
         return guild.get("welcome_color").toString();
     }
@@ -165,7 +167,7 @@ public class DBUtil {
 
     public String getWelcomeIcon(String id){
         checkValue(id, "welcome_icon", "purr");
-        Map guild = getGuild(id);
+        Map<?,?> guild = getGuild(id);
 
         return guild.get("welcome_icon").toString();
     }
@@ -178,7 +180,7 @@ public class DBUtil {
 
     public String getWelcomeMsg(String id){
         checkValue(id, "welcome_message", "Welcome {mention}!");
-        Map guild = getGuild(id);
+        Map<?,?> guild = getGuild(id);
 
         return guild.get("welcome_message").toString();
     }

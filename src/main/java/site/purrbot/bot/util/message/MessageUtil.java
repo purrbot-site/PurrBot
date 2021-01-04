@@ -1,19 +1,19 @@
 /*
- * Copyright 2018 - 2020 Andre601
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
- * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *  Copyright 2018 - 2021 Andre601
+ *  
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ *  documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+ *  the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ *  and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *  
+ *  The above copyright notice and this permission notice shall be included in all copies or substantial
+ *  portions of the Software.
+ *  
+ *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ *  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ *  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ *  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ *  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package site.purrbot.bot.util.message;
@@ -100,23 +100,25 @@ public class MessageUtil {
             return new Color(r, g, b);
         }
         
-        String type = input.split(":")[0];
+        String[] split = input.split(":");
+        if(split.length <= 1)
+            return null;
         
-        switch(type){
+        String value = split[1];
+        
+        switch(split[0]){
             case "hex":
-                input = input.replace("hex:", "");
-                if(input.isEmpty())
+                if(value.isEmpty())
                     return null;
                 
-                color = Color.decode(input.startsWith("#") ? input : "#" + input);
+                color = Color.decode(value.startsWith("#") ? value : "#" + value);
                 break;
             
             case "rgb":
-                input = input.replace("rgb:", "");
-                if(input.isEmpty())
+                if(value.isEmpty())
                     return null;
                 
-                String[] rgb = Arrays.copyOf(input.split(","), 3);
+                String[] rgb = Arrays.copyOf(value.split(","), 3);
                 
                 try{
                     color = new Color(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2]));
