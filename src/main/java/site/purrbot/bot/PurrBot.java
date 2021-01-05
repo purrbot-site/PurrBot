@@ -478,7 +478,10 @@ public class PurrBot {
     private String getShardInfo(){
         
         JSONArray array = new JSONArray();
-        for(JDA shard : shardManager.getShardCache()){
+        List<JDA> shards = new ArrayList<>(shardManager.getShards());
+        
+        shards.sort(Comparator.comparing(jda -> jda.getShardInfo().getShardId()));
+        for(JDA shard : shards){
             JSONObject shardInfo = new JSONObject()
                     .put("id", shard.getShardInfo().getShardId())
                     .put("status", shard.getStatus());

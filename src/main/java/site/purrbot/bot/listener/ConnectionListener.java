@@ -83,9 +83,9 @@ public class ConnectionListener extends ListenerAdapter{
         );
         logger.info("Got disconnected on shard {}. Resume connection...", jda.getShardInfo().getShardId());
     }
-
+    
     @Override
-    public void onResume(@NotNull ResumedEvent event){
+    public void onResumed(@NotNull ResumedEvent event){
         JDA jda = event.getJDA();
 
         WebhookEmbed embed = new WebhookEmbedBuilder()
