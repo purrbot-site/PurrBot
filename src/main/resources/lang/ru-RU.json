@@ -66,6 +66,11 @@
         "loading": "{LOADING} Пускаем слезы...",
         "message": "{user} плачет"
       },
+      "dance": {
+        "description": "Заставляет вас затанцевать. ~(^.^)~",
+        "loading": "{LOADING} Ищем приятную музыку для танцев...",
+        "message": "{user} танцует"
+      },
       "eevee": {
         "description": "Показывает вам картинку или гифку с Иви.",
         "loading": "{LOADING} Ловим милых Иви...",
