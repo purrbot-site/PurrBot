@@ -66,6 +66,11 @@
         "loading": "{LOADING} Coletando Lágrimas...",
         "message": "{user} está chorando"
       },
+      "dance": {
+        "description": "Deixa você dançar. ~(^.^)~",
+        "loading": "{LOADING} Procurando músicas legais para dançar...",
+        "message": "{user} está dançando"
+      },
       "eevee": {
         "description": "Te dá uma imagem ou um gif de um Eevee.",
         "loading": "{LOADING} Capturando um Eevee fofinho...",
