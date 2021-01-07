@@ -157,7 +157,6 @@ public class PurrBot {
                 .createDefault(getFileManager().getString("config", "bot-token"))
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .disableCache(CacheFlag.VOICE_STATE)
-                .disableCache(CacheFlag.VOICE_STATE)
                 .setChunkingFilter(ChunkingFilter.include(Long.parseLong(IDs.GUILD)))
                 .setMemberCachePolicy(beta ? MemberCachePolicy.ALL : MemberCachePolicy.OWNER)
                 .addEventListeners(
