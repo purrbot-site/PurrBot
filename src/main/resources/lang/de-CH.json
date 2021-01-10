@@ -66,6 +66,11 @@
         "loading": "{LOADING} Sammle Tränen...",
         "message": "{user} weint"
       },
+      "dance": {
+        "description": "Erlaubt dir zu tanzen. ~(^.^)~",
+        "loading": "{LOADING} Finde nette Musik zum tanzen...",
+        "message": "{user} tanzt"
+      },
       "eevee": {
         "description": "Gibt dir ein Bild oder gif eines süssen Evoli.",
         "loading": "{LOADING} Fange ein süsses Evoli...",

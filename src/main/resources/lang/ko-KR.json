@@ -66,6 +66,11 @@
         "loading": "{LOADING} 눈물을 모으는중...",
         "message": "{user}가 울고있어"
       },
+      "dance": {
+        "description": "당신을 춤추게 합니다. ;-;",
+        "loading": "{LOADING} 춤을 추기 위해 좋은 노래를 찾는중...",
+        "message": "{user}가 춤추고 있어"
+      },
       "eevee": {
         "description": "이브이 짤 또는 움짤을 보여줍니다.",
         "loading": "{LOADING} 귀여운 이브이 잡아오는 중...",
