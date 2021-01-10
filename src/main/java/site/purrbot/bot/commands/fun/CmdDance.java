@@ -20,6 +20,7 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -28,67 +29,32 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @CommandDescription(
-        name = "Cuddle",
-        description = "purr.fun.cuddle.description",
-        triggers = {"cuddle", "cuddles", "snuggle", "snuggles", "squeeze", "squish"},
+        name = "Dance",
+        description = "purr.fun.dance.description",
+        triggers = {"dance", "dancing"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}cuddle <@user> [@user ...]"),
-                @CommandAttribute(key = "help", value = "{p}cuddle <@user> [@user ...]")
+                @CommandAttribute(key = "usage", value = "{p}dance"),
+                @CommandAttribute(key = "help", value = "{p}dance")
         }
 )
-public class CmdCuddle implements Command, HttpUtil.ImageAPI{
-
+public class CmdDance implements Command, HttpUtil.ImageAPI{
+    
     private final PurrBot bot;
-
-    public CmdCuddle(PurrBot bot){
+    
+    public CmdDance(PurrBot bot){
         this.bot = bot;
     }
-
+    
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        List<Member> members = msg.getMentionedMembers();
-    
-        if(members.isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member, "purr.fun.cuddle.no_mention");
-            return;
-        }
-
-        if(members.contains(guild.getSelfMember())){
-            if(bot.isBeta()){
-                tc.sendMessage(
-                        bot.getRandomMsg(guild.getId(), "snuggle.fun.cuddle.mention_snuggle", member.getAsMention())
-                ).queue();
-            }else{
-                tc.sendMessage(
-                        bot.getRandomMsg(guild.getId(), "purr.fun.cuddle.mention_purr", member.getAsMention())
-                ).queue();
-            }
-            msg.addReaction("\u2764").queue();
-        }
-
-        if(members.contains(member)){
-            tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.fun.cuddle.mention_self", member.getAsMention())
-            ).queue();
-        }
-        
-        String targets = members.stream()
-                .filter(mem -> !mem.equals(guild.getSelfMember()))
-                .filter(mem -> !mem.equals(member))
-                .map(Member::getEffectiveName)
-                .collect(Collectors.joining(", "));
-
-        if(targets.isEmpty())
-            return;
+        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
+            msg.delete().queue();
     
         tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.fun.cuddle.loading")
-        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, targets, true));
+                bot.getMsg(guild.getId(), "purr.fun.dance.loading")
+        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, true));
     }
     
     @Override
@@ -98,7 +64,7 @@ public class CmdCuddle implements Command, HttpUtil.ImageAPI{
     
     @Override
     public String getEndpoint(){
-        return "cuddle";
+        return "dance";
     }
     
     @Override

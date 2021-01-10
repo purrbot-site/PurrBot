@@ -153,7 +153,7 @@ public class MessageUtil {
         
         Matcher roleMatcher = rolePattern.matcher(msg);
         if(roleMatcher.find()){
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder builder = new StringBuilder();
             do{
                 Role role = guild.getRoleById(roleMatcher.group(3));
                 if(role == null)
@@ -161,22 +161,22 @@ public class MessageUtil {
                 
                 switch(roleMatcher.group(2).toLowerCase()){
                     case "name":
-                        roleMatcher.appendReplacement(buffer, role.getName());
+                        roleMatcher.appendReplacement(builder, role.getName());
                         break;
                     
                     case "mention":
-                        roleMatcher.appendReplacement(buffer, role.getAsMention());
+                        roleMatcher.appendReplacement(builder, role.getAsMention());
                         break;
                 }
             }while(roleMatcher.find());
             
-            roleMatcher.appendTail(buffer);
-            msg = buffer.toString();
+            roleMatcher.appendTail(builder);
+            msg = builder.toString();
         }
         
         Matcher channelMatcher = channelPattern.matcher(msg);
         if(channelMatcher.find()){
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder builder = new StringBuilder();
             do{
                 GuildChannel channel = guild.getGuildChannelById(channelMatcher.group(3));
                 if(channel == null)
@@ -184,7 +184,7 @@ public class MessageUtil {
                 
                 switch(channelMatcher.group(2).toLowerCase()){
                     case "name":
-                        channelMatcher.appendReplacement(buffer, channel.getName());
+                        channelMatcher.appendReplacement(builder, channel.getName());
                         break;
                     
                     case "mention":
@@ -195,51 +195,51 @@ public class MessageUtil {
                         if(tc == null)
                             continue;
                         
-                        channelMatcher.appendReplacement(buffer, tc.getAsMention());
+                        channelMatcher.appendReplacement(builder, tc.getAsMention());
                         break;
                 }
             }while(channelMatcher.find());
             
-            channelMatcher.appendTail(buffer);
-            msg = buffer.toString();
+            channelMatcher.appendTail(builder);
+            msg = builder.toString();
         }
         
         Matcher matcher = placeholder.matcher(msg);
         if(matcher.find()){
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder builder = new StringBuilder();
             do{
                 switch(matcher.group(2).toLowerCase()){
                     case "mention":
-                        matcher.appendReplacement(buffer, member.getAsMention());
+                        matcher.appendReplacement(builder, member.getAsMention());
                         break;
                     
                     case "name":
                     case "username":
-                        matcher.appendReplacement(buffer, member.getEffectiveName());
+                        matcher.appendReplacement(builder, member.getEffectiveName());
                         break;
                     
                     case "guild":
                     case "server":
-                        matcher.appendReplacement(buffer, guild.getName());
+                        matcher.appendReplacement(builder, guild.getName());
                         break;
                     
                     case "count":
                     case "members":
-                        matcher.appendReplacement(buffer, String.valueOf(guild.getMemberCount()));
+                        matcher.appendReplacement(builder, String.valueOf(guild.getMemberCount()));
                         break;
                     
                     case "count_formatted":
                     case "members_formatted":
-                        matcher.appendReplacement(buffer, formatNumber(guild.getMemberCount()));
+                        matcher.appendReplacement(builder, formatNumber(guild.getMemberCount()));
                         break;
                     
                     case "tag":
-                        matcher.appendReplacement(buffer, member.getUser().getAsTag());
+                        matcher.appendReplacement(builder, member.getUser().getAsTag());
                 }
             }while(matcher.find());
             
-            matcher.appendTail(buffer);
-            msg = buffer.toString();
+            matcher.appendTail(builder);
+            msg = builder.toString();
         }
         
         return msg;
