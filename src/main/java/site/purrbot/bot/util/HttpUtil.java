@@ -31,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
+import site.purrbot.bot.constants.Emotes;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -171,6 +172,7 @@ public class HttpUtil {
             }else{
                 embed.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.snuggle"));
             }
+            msg.addReaction(Emotes.SNUGGLE.getNameAndId()).queue();
         }else
         if(link.equalsIgnoreCase("https://purrbot.site/img/sfw/neko/img/neko_136.jpg")){
             if(bot.isBeta()){
@@ -178,6 +180,7 @@ public class HttpUtil {
             }else{
                 embed.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.purr"));
             }
+            msg.addReaction(Emotes.PURR.getNameAndId()).queue();
         }
         
         msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(embed.build()).queue(

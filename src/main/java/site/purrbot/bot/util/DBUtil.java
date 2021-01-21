@@ -20,6 +20,7 @@ package site.purrbot.bot.util;
 
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.net.Connection;
+import com.rethinkdb.utils.Types;
 import site.purrbot.bot.PurrBot;
 
 import java.util.Map;
@@ -84,10 +85,10 @@ public class DBUtil {
         r.table(guildTable).get(id).delete().run(connection);
     }
 
-    private Map<?,?> getGuild(String id){
+    private Map<String,String> getGuild(String id){
         return r.table(guildTable)
                 .get(id)
-                .run(connection, Map.class)
+                .run(connection, Types.mapOf(String.class, String.class))
                 .single();
     }
     
@@ -96,9 +97,9 @@ public class DBUtil {
      */
     public String getLanguage(String id){
         checkValue(id, "language", "en");
-        Map<?,?> guild = getGuild(id);
+        Map<String,String> guild = getGuild(id);
         
-        return guild.get("language").toString();
+        return guild.get("language");
     }
     
     public void setLanguage(String id, String language){
@@ -112,9 +113,9 @@ public class DBUtil {
      */
     public String getPrefix(String id){
         checkValue(id, "prefix", ".");
-        Map<?,?> guild = getGuild(id);
+        Map<String,String> guild = getGuild(id);
 
-        return guild.get("prefix").toString();
+        return guild.get("prefix");
     }
 
     public void setPrefix(String id, String prefix){
@@ -128,9 +129,9 @@ public class DBUtil {
      */
     public String getWelcomeBg(String id){
         checkValue(id, "welcome_background", "color_white");
-        Map<?,?> guild = getGuild(id);
+        Map<String,String> guild = getGuild(id);
 
-        return guild.get("welcome_background").toString();
+        return guild.get("welcome_background");
     }
 
     public void setWelcomeBg(String id, String background){
@@ -141,9 +142,9 @@ public class DBUtil {
 
     public String getWelcomeChannel(String id){
         checkValue(id, "welcome_channel", "none");
-        Map<?,?> guild = getGuild(id);
+        Map<String,String> guild = getGuild(id);
 
-        return guild.get("welcome_channel").toString();
+        return guild.get("welcome_channel");
     }
 
     public void setWelcomeChannel(String id, String channelID){
@@ -154,9 +155,9 @@ public class DBUtil {
 
     public String getWelcomeColor(String id){
         checkValue(id, "welcome_color", "hex:000000");
-        Map<?,?> guild = getGuild(id);
+        Map<String,String> guild = getGuild(id);
 
-        return guild.get("welcome_color").toString();
+        return guild.get("welcome_color");
     }
 
     public void setWelcomeColor(String id, String color){
@@ -167,9 +168,9 @@ public class DBUtil {
 
     public String getWelcomeIcon(String id){
         checkValue(id, "welcome_icon", "purr");
-        Map<?,?> guild = getGuild(id);
+        Map<String,String> guild = getGuild(id);
 
-        return guild.get("welcome_icon").toString();
+        return guild.get("welcome_icon");
     }
 
     public void setWelcomeIcon(String id, String icon){
@@ -180,9 +181,9 @@ public class DBUtil {
 
     public String getWelcomeMsg(String id){
         checkValue(id, "welcome_message", "Welcome {mention}!");
-        Map<?,?> guild = getGuild(id);
+        Map<String,String> guild = getGuild(id);
 
-        return guild.get("welcome_message").toString();
+        return guild.get("welcome_message");
     }
 
     public void setWelcomeMsg(String id, String message){

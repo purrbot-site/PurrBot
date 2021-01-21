@@ -30,8 +30,6 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
-import java.util.concurrent.TimeUnit;
-
 @CommandDescription(
         name = "Info",
         description = "purr.info.info.description",

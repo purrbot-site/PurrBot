@@ -27,7 +27,6 @@ import io.javalin.Javalin;
 import net.discordservices.dservices4j.Commands;
 import net.discordservices.dservices4j.DServices4J;
 import net.discordservices.dservices4j.Stats;
-import net.discordservices.dservices4j.exceptions.RatelimitedException;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -47,6 +46,7 @@ import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
+import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
@@ -63,7 +63,6 @@ import site.purrbot.bot.util.message.EmbedUtil;
 import site.purrbot.bot.util.message.MessageUtil;
 
 import javax.security.auth.login.LoginException;
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -360,11 +359,8 @@ public class PurrBot {
             Stats stats = dServices4J.getStats();
             
             commands.addCommands(getCommands());
-            try{
-                commands.postCommands();
-            }catch(IOException | RatelimitedException ex){
-                logger.warn("Could not post Commands", ex);
-            }
+                
+            commands.postCommands();
     
             scheduler.scheduleAtFixedRate(() -> {
         
@@ -379,14 +375,10 @@ public class PurrBot {
                     logger.warn("Not able to post guild counts!", ex);
                 }
                 
-                try{
-                    stats.postStats(
-                            getShardManager().getGuildCache().size(),
-                            getShardManager().getShardCache().size()
-                    );
-                }catch(IOException | RatelimitedException ex){
-                    logger.warn("Could not post Server stats", ex);
-                }
+                stats.postStats(
+                        getShardManager().getGuildCache().size(),
+                        getShardManager().getShardCache().size()
+                );
             }, 1, 5, TimeUnit.MINUTES);
         }else{
             scheduler.scheduleAtFixedRate(() -> 
@@ -450,7 +442,7 @@ public class PurrBot {
     
     private List<Commands.CommandInfo> getCommands(){
         List<Commands.CommandInfo> commandInfoList = new ArrayList<>();
-        for(site.purrbot.bot.commands.Command command : commandLoader.getCommands()){
+        for(Command command : commandLoader.getCommands()){
             if(command.getAttribute("category").equals("owner"))
                 continue;
             
