@@ -162,7 +162,7 @@
         "description": "Erhalte ein Bild oder gif einer süssen Neko.",
         "loading": "{LOADING} Erhalte ein süsses neko Bild (oder gif)...",
         "message": "Neko {NEKOWO}",
-        "purr": "Hey! Das bin ich! OwO",
+        "purr": "Hab... Hab ich damals wirklich so ausgesehen? {VANILLABLUSH}",
         "snuggle": "Das ist meine kleine Schwester! UwU"
       },
       "pat": {
@@ -676,7 +676,7 @@
         ]
       },
       "neko": {
-        "purr": "Nya. Das ist meine grosse Schwester. >w<",
+        "purr": "Nya. Das ist ein altes Bild von meiner grossen Schwester. >w<",
         "snuggle": "B-bin das ich? OwO"
       },
       "pat": {
