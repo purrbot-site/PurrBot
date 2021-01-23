@@ -162,7 +162,7 @@
         "description": "Get an image or gif of an adowabwe Neko. UwU",
         "loading": "{LOADING} Weceiving a cute neko image (ow gif)... UwU",
         "message": "Neko {NEKOWO}",
-        "purr": "Hey! That ish me! OwO",
+        "purr": "Did... Did I weally look like this in the past? {VANILLABLUSH}",
         "snuggle": "That is my wittwe sistew! UwU"
       },
       "pat": {
@@ -676,7 +676,7 @@
         ]
       },
       "neko": {
-        "purr": "Nya. That is my big sistew. >w<",
+        "purr": "Nya. That is an old pictuwe of my big sistew. >w<",
         "snuggle": "I-ish that me? OwO"
       },
       "pat": {
