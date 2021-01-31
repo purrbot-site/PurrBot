@@ -162,7 +162,7 @@
         "description": "사랑스러운 고양이 소녀의 짤 또는 움짤을 가져옵니다.",
         "loading": "{LOADING} 귀여운 고양이 소녀 이미지 불러오는 중...",
         "message": "고양이소녀 {NEKOWO}",
-        "purr": "야~ 이거 나야! OwO",
+        "purr": "ㄴ.. 나 정말 옛날엔 저렇게 생겼던거야? {VANILLABLUSH}",
         "snuggle": "이건 내 여동생이야! UwU"
       },
       "pat": {
@@ -676,7 +676,7 @@
         ]
       },
       "neko": {
-        "purr": "야옹- 내 언니라구- >w<",
+        "purr": "냥! 그건 내 언니의 옛 사진이야 >w<",
         "snuggle": "ㄴ-내 사진이네? OwO"
       },
       "pat": {
