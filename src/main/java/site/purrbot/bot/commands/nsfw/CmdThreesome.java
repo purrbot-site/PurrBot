@@ -25,6 +25,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -119,9 +120,11 @@ public class CmdThreesome implements Command, HttpUtil.ImageAPI{
                 bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.message", member.getEffectiveName())
                         .replace("{target1}", target1.getAsMention())
                         .replace("{target2}", target2.getAsMention())
-        ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
-                .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
-                .queue(
+        ).queue(
+                message -> RestAction.allOf(
+                        message.addReaction(Emotes.ACCEPT.getNameAndId()), 
+                        message.addReaction(Emotes.CANCEL.getNameAndId())
+                ).queue(
                         v -> handleEvent(message, member, target1, target2, args),
                         e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
                 )

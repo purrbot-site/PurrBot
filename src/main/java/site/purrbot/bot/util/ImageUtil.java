@@ -28,6 +28,9 @@ import site.purrbot.bot.PurrBot;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
@@ -41,13 +44,12 @@ public class ImageUtil {
         this.bot = bot;
     }
 
-    private final String[] USER_AGENT = {"User-Agent", "PurrBot BOT_VERSION"};
     private final OkHttpClient CLIENT = new OkHttpClient();
 
     private BufferedImage getAvatar(User user) throws IOException{
         URL url = new URL(user.getEffectiveAvatarUrl());
         URLConnection connection = url.openConnection();
-        connection.setRequestProperty(USER_AGENT[0], USER_AGENT[1]);
+        connection.setRequestProperty("User-Agent", "PurrBot BOT_VERSION");
         connection.connect();
 
         return ImageIO.read(connection.getInputStream());
@@ -56,49 +58,93 @@ public class ImageUtil {
     public byte[] getShipImg(Member member1, Member member2, int chance){
         try{
             BufferedImage template = ImageIO.read(new File("img/LoveTemplate.png"));
-            BufferedImage background = new BufferedImage(template.getWidth(), template.getHeight(), template.getType());
             BufferedImage avatar1 = getAvatar(member1.getUser());
             BufferedImage avatar2 = getAvatar(member2.getUser());
+    
+            BufferedImage background = new BufferedImage(template.getWidth(), template.getHeight(), template.getType());
 
             Graphics2D img = background.createGraphics();
 
-            Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 80);
-            img.setFont(font);
-
-            Color color;
+            Color outlineColor = Color.BLACK;
+            Color fillColor;
 
             if(chance == 100){
-                color = new Color(0x58F10F);
+                fillColor = new Color(0x00FF00);
             }else
-            if(chance <= 99 && chance > 75){
-                color = new Color(0xBBF10F);
+            if(inRange(chance, 99, 90)){
+                fillColor = new Color(0x80FF00);
             }else
-            if(chance <= 75 && chance > 50){
-                color = new Color(0xF1C40F);
+            if(inRange(chance, 90, 80)){
+                fillColor = new Color(0xB3FF00);
             }else
-            if(chance <= 50 && chance > 25){
-                color = new Color(0xF39C12);
+            if(inRange(chance, 80, 70)){
+                fillColor = new Color(0xD0FF00);
             }else
-            if(chance <= 25 && chance > 0){
-                color = new Color(0xE67E22);
+            if(chance == 70){
+                fillColor = new Color(0xF7FF00);
+            }else
+            if(chance == 69){
+                fillColor = new Color(0xFF8080);
+            }else
+            if(inRange(chance, 68, 60)){
+                fillColor = new Color(0xF7FF00);
+            }else
+            if(inRange(chance, 60, 50)){
+                fillColor = new Color(0xFFF200);
+            }else
+            if(inRange(chance, 50, 40)){
+                fillColor = new Color(0xFFBF00);
+            }else
+            if(inRange(chance, 40, 30)){
+                fillColor = new Color(0xFFAA00);
+            }else
+            if(inRange(chance, 30, 20)){
+                fillColor = new Color(0xFF8C00);
+            }else
+            if(inRange(chance, 20, 10)){
+                fillColor = new Color(0xFF5100);
+            }else
+            if(inRange(chance, 10, 0)){
+                fillColor = new Color(0xFF0000);
             }else{
-                color = new Color(0xE74C3C);
+                fillColor = Color.BLACK;
             }
-
-            img.setColor(color);
-
-            String text = chance + "%";
 
             img.drawImage(avatar1, 0, 0, 320, 320, null);
             img.drawImage(avatar2, 640, 0, 320, 320, null);
             img.drawImage(template, 0, 0, null);
-
-            int imgWidth = template.getWidth();
-
-            int textWidth = img.getFontMetrics().stringWidth(text);
-            int textX = (imgWidth / 2) - (textWidth / 2);
-
-            img.drawString(text, textX, 190);
+    
+            Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 80);
+            
+            img.setColor(fillColor);
+            img.setFont(font);
+            
+            String text = chance + "%";
+            
+            img.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            img.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+    
+            FontRenderContext context = img.getFontRenderContext();
+            
+            int textWidth = img.getFontMetrics(font).stringWidth(text);
+            
+            int textX = (template.getWidth() / 2) - (textWidth / 2);
+            int textY = (template.getHeight() / 2) + 40;
+            
+            img.drawString(text, textX, textY);
+    
+            TextLayout layout = new TextLayout(text, font, context);
+            AffineTransform transform = img.getTransform();
+            
+            Shape outline = layout.getOutline(null);
+            
+            transform.translate(textX, textY);
+            
+            img.transform(transform);
+            img.setColor(outlineColor);
+            img.draw(outline);
+            
+            img.setClip(outline);
 
             img.dispose();
 
@@ -212,5 +258,9 @@ public class ImageUtil {
 
             return new ByteArrayInputStream(responseBody.bytes());
         }
+    }
+    
+    private boolean inRange(int value, int max, int biggerThan){
+        return value <= max && value > biggerThan;
     }
 }

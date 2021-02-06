@@ -59,51 +59,6 @@ public class CmdShip implements Command{
         this.bot = bot;
     }
 
-    private String getMessage(int chance, String id){
-
-        if(chance == 100){
-            return bot.getMsg(id, "purr.fun.ship.results.100");
-        }else
-        if((chance <= 99) && (chance > 90)){
-            return bot.getMsg(id, "purr.fun.ship.results.91_99");
-        }else
-        if((chance <= 90) && (chance > 80)){
-            return bot.getMsg(id, "purr.fun.ship.results.81_90");
-        }else
-        if((chance <= 80) && (chance > 70)){
-            return bot.getMsg(id, "purr.fun.ship.results.71_80");
-        }else
-        if(chance == 70){
-            return bot.getMsg(id, "purr.fun.ship.results.61_70");
-        }else
-        if(chance == 69){
-            return bot.getMsg(id, "purr.fun.ship.results.69");
-        }else
-        if((chance <= 68) && (chance > 60)){
-            return bot.getMsg(id, "purr.fun.ship.results.61_70");
-        }else
-        if((chance <= 60) && (chance > 50)){
-            return bot.getMsg(id, "purr.fun.ship.results.51_60");
-        }else
-        if((chance <= 50) && (chance > 40)) {
-            return bot.getMsg(id, "purr.fun.ship.results.41_50");
-        }else
-        if((chance <= 40) && (chance > 30)) {
-            return bot.getMsg(id, "purr.fun.ship.results.31_40");
-        }else
-        if((chance <= 30) && (chance > 20)) {
-            return bot.getMsg(id, "purr.fun.ship.results.21_30");
-        }else
-        if((chance <= 20) && (chance > 10)) {
-            return bot.getMsg(id, "purr.fun.ship.results.11_20");
-        }else
-        if((chance <= 10) && (chance > 0)) {
-            return bot.getMsg(id, "purr.fun.ship.results.1_10");
-        }else{
-            return bot.getMsg(id, "purr.fun.ship.results.0");
-        }
-    }
-
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         Member member1;
@@ -205,5 +160,49 @@ public class CmdShip implements Command{
                 member2.getId()
         )).queue();
 
+    }
+    
+    private String getMessage(int chance, String id){
+        if(chance == 100){
+            return bot.getMsg(id, "purr.fun.ship.results.100");
+        }else
+        if((chance <= 99) && (chance > 90)){
+            return bot.getMsg(id, "purr.fun.ship.results.91_99");
+        }else
+        if((chance <= 90) && (chance > 80)){
+            return bot.getMsg(id, "purr.fun.ship.results.81_90");
+        }else
+        if((chance <= 80) && (chance > 70)){
+            return bot.getMsg(id, "purr.fun.ship.results.71_80");
+        }else
+        if(chance == 70){
+            return bot.getMsg(id, "purr.fun.ship.results.61_70");
+        }else
+        if(chance == 69){
+            return bot.getMsg(id, "purr.fun.ship.results.69");
+        }else
+        if((chance <= 68) && (chance > 60)){
+            return bot.getMsg(id, "purr.fun.ship.results.61_70");
+        }else
+        if((chance <= 60) && (chance > 50)){
+            return bot.getMsg(id, "purr.fun.ship.results.51_60");
+        }else
+        if((chance <= 50) && (chance > 40)) {
+            return bot.getMsg(id, "purr.fun.ship.results.41_50");
+        }else
+        if((chance <= 40) && (chance > 30)) {
+            return bot.getMsg(id, "purr.fun.ship.results.31_40");
+        }else
+        if((chance <= 30) && (chance > 20)) {
+            return bot.getMsg(id, "purr.fun.ship.results.21_30");
+        }else
+        if((chance <= 20) && (chance > 10)) {
+            return bot.getMsg(id, "purr.fun.ship.results.11_20");
+        }else
+        if((chance <= 10) && (chance > 0)) {
+            return bot.getMsg(id, "purr.fun.ship.results.1_10");
+        }else{
+            return bot.getMsg(id, "purr.fun.ship.results.0");
+        }
     }
 }

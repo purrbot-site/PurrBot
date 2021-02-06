@@ -29,8 +29,10 @@ import site.purrbot.bot.commands.Command;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
 import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
@@ -49,24 +51,24 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
         }
 )
 public class CmdEmote implements Command{
-
+    
     private final PurrBot bot;
-
+    
     public CmdEmote(PurrBot bot){
         this.bot = bot;
     }
-
+    
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
             msg.delete().queue();
-
+        
         if(bot.getMessageUtil().hasArg("search", args)){
             if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_HISTORY)){
                 bot.getEmbedUtil().sendPermError(tc, member, Permission.MESSAGE_HISTORY, true);
                 return;
             }
-    
+            
             EmbedPaginator.Builder builder = new EmbedPaginator.Builder().setEventWaiter(bot.getWaiter())
                     .setTimeout(1, TimeUnit.MINUTES)
                     .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
@@ -80,49 +82,47 @@ public class CmdEmote implements Command{
             if(guild.getOwner() != null)
                 builder.addUsers(guild.getOwner().getUser());
             
-            Map<Emote, String> emotes = new LinkedHashMap<>();
-            for(Message message : tc.getIterableHistory().limit(100).complete()){
-                if(message.getEmotes().isEmpty()){
-                    continue;
-                }
-                
-                String link = message.getJumpUrl();
-                for(Emote emote : message.getEmotes()){
-                    emotes.put(emote, link);
-                }
-            }
-            
-            if(emotes.isEmpty()){
-                bot.getEmbedUtil().sendError(tc, member, "purr.info.emote.not_found");
-                return;
-            }
-            
-            int size = emotes.size();
-            int pos = 0;
-            for(Map.Entry<Emote, String> info : emotes.entrySet()){
-                pos++;
-                builder.addItems(emoteInfo(
-                        member,
-                        info.getKey(),
-                        guild,
-                        info.getValue(),
-                        pos,
-                        size
-                ));
-            }
-            
-            builder.build().display(tc);
-            
+            tc.getIterableHistory()
+                    .cache(false)
+                    .takeAsync(100)
+                    .thenApply(List::stream)
+                    .thenApply(stream -> stream.filter(message -> !message.getEmotes().isEmpty()))
+                    .thenApply(stream -> stream.collect(Collectors.toMap(
+                            Message::getJumpUrl,
+                            Message::getEmotes,
+                            (existing, replacement) -> existing,
+                            LinkedHashMap::new
+                    )))
+                    .thenAccept(emotes -> send(builder, tc, member, emotes));
             return;
         }
-
+        
         if(msg.getEmotes().isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.info.emote.no_args");
             return;
         }
-
+        
         tc.sendMessage(emoteInfo(member, msg.getEmotes().get(0), guild, null, 1, 1)).queue();
-
+        
+    }
+    
+    private void send(EmbedPaginator.Builder builder, TextChannel tc, Member member, Map<String, List<Emote>> emotes){
+        int pos = 0;
+        for(Map.Entry<String, List<Emote>> entry : emotes.entrySet()){
+            for(Emote emote : entry.getValue()){
+                pos++;
+                builder.addItems(emoteInfo(
+                        member,
+                        emote,
+                        member.getGuild(),
+                        entry.getKey(),
+                        pos,
+                        emotes.size()
+                ));
+            }
+        }
+        
+        builder.build().display(tc);
     }
     
     private MessageEmbed emoteInfo(Member member, Emote emote, Guild guild, @Nullable String link, int pos, int size){

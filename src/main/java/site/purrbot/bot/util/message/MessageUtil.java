@@ -24,6 +24,7 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
@@ -303,8 +304,11 @@ public class MessageUtil {
                         author.getEffectiveName(),
                         target.getAsMention()
                 )
-        ).queue(message -> message.addReaction(Emotes.ACCEPT.getNameAndId())
-                .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
+        ).queue(
+                message -> RestAction.allOf(
+                        message.addReaction(Emotes.ACCEPT.getNameAndId()),
+                        message.addReaction(Emotes.CANCEL.getNameAndId())
+                )
                 .queue(
                         v -> handle(message, path, api, guild, author, target),
                         e -> bot.getEmbedUtil().sendError(tc, author, "errors.request_error")

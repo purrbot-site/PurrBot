@@ -81,13 +81,12 @@ public class ReadyListener extends ListenerAdapter{
         );
         
         if(shards == jda.getShardInfo().getShardTotal()){
-
-            bot.startUpdater();
-            
             shardManager.setPresence(OnlineStatus.ONLINE, Activity.of(
-                    Activity.ActivityType.WATCHING, 
+                    Activity.ActivityType.WATCHING,
                     bot.getMessageUtil().getBotGame(shardManager.getGuildCache().size())
             ));
+            
+            bot.startUpdater();
 
             WebhookEmbed finished = new WebhookEmbedBuilder()
                     .setColor(0x00FF00)
@@ -103,10 +102,7 @@ public class ReadyListener extends ListenerAdapter{
             
             webhookUtil.sendMsg(
                     jda.getSelfUser().getEffectiveAvatarUrl(),
-                    String.format(
-                            "%s ready!",
-                            jda.getSelfUser().getName()
-                    ),
+                    "Ready!",
                     finished
             );
             

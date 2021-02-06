@@ -25,6 +25,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -125,30 +126,32 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
                 bot.getMsg(guild.getId(), path, member.getEffectiveName(), target.getAsMention())
         ).queue(message -> {
             if(!hasArgs(args)){
-                message.addReaction(Emotes.SEX.getNameAndId())
-                        .flatMap(v -> message.addReaction(Emotes.SEX_ANAL.getNameAndId()))
-                        .flatMap(v -> message.addReaction(Emotes.SEX_YAOI.getNameAndId()))
-                        .flatMap(v -> message.addReaction(Emotes.SEX_YURI.getNameAndId()))
-                        .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
-                        .queue(
-                                v -> handleEvent(message, member, target, args),
-                                e -> bot.getEmbedUtil().sendError(
-                                        tc,
-                                        member,
-                                        "errors.request_error"
-                                )
-                        );
+                RestAction.allOf(
+                        message.addReaction(Emotes.SEX.getNameAndId()),
+                        message.addReaction(Emotes.SEX_ANAL.getNameAndId()),
+                        message.addReaction(Emotes.SEX_YAOI.getNameAndId()),
+                        message.addReaction(Emotes.SEX_YURI.getNameAndId()),
+                        message.addReaction(Emotes.CANCEL.getNameAndId())
+                ).queue(
+                        v -> handleEvent(message, member, target, args),
+                        e -> bot.getEmbedUtil().sendError(
+                                tc,
+                                member,
+                                "errors.request_error"
+                        )
+                );
             }else{
-                message.addReaction(Emotes.ACCEPT.getNameAndId())
-                        .flatMap(v -> message.addReaction(Emotes.CANCEL.getNameAndId()))
-                        .queue(
-                                v -> handleEvent(message, member, target, args),
-                                e -> bot.getEmbedUtil().sendError(
-                                        tc,
-                                        member,
-                                        "errors.request_error"
-                                )
-                        );
+                RestAction.allOf(
+                        message.addReaction(Emotes.ACCEPT.getNameAndId()),
+                        message.addReaction(Emotes.CANCEL.getNameAndId())
+                ).queue(
+                        v -> handleEvent(message, member, target, args),
+                        e -> bot.getEmbedUtil().sendError(
+                                tc,
+                                member,
+                                "errors.request_error"
+                        )
+                );
             }
         });
     }
