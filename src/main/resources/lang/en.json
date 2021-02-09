@@ -205,16 +205,16 @@
           "81_90": "I can really imagine you both marrying each other.",
           "71_80": "\\*pushes both of you closer to each other*",
           "61_70": "That seems to be something serious.",
-          "69": "Oh... So it's *that* kind of love huh...? \uD83D\uDE0F",
-          "51_60": "Kiss already!!!",
-          "41_50": "Already a couple?",
+          "69": "Oh... So it's *that* kind of love, huh...? \uD83D\uDE0F",
+          "51_60": "Kiss already!",
+          "41_50": "Already a couple I guess?",
           "31_40": "You could become a couple.",
           "21_30": "Friendzone+ (With *benefits*)",
           "11_20": "Friendzone",
           "1_10": "Not even friends it seems...",
           "0": "If love was heat, then this would be an ice block."
         },
-        "special_user": "{user} Awww sweetie. You know we both are always a perfect 100.\nYou don't need the test for that.",
+        "special_user": "Awww {user} sweetie. You know we both are always a perfect 100.",
         "target_bot": "You can't really ship with bots you weirdo!"
       },
       "slap": {
@@ -372,7 +372,7 @@
         "command_info": {
           "aliases": "Aliases",
           "command_nsfw": "Please run this command in a NSFW channel.",
-          "no_command": "The provided command (`{command}`) doesn't exist!\nMake sure you typed it correctly and only provided the command name!\n\n**Note**: Categories (Fun, Guild, Info, NSFW) are NOT commands!",
+          "no_command": "The provided command (`{command}`) doesn't exist!\nMake sure you typed it correctly and only provided the command name!",
           "title": "Command help: {command}",
           "usage_title": "Usage options",
           "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Required"
@@ -382,18 +382,17 @@
             "fun": "Fun",
             "guild": "Guild",
             "info": "Info",
-            "list": "```\nFun\nGuild\nInfo\nNSFW\n```",
+            "list": "Fun\nGuild\nInfo\nNSFW",
             "nsfw": "NSFW",
             "owner": "Owner",
             "title": "Categories"
           },
           "description": {
-            "command_title": "More Info",
-            "command_value": "To get more info about a specific command run `{prefix}help [command]`\n__The categories Fun, Guild, Info and NSFW will NOT work with this command!__",
+            "command_value": "To get more info about a specific command run `{prefix}help [command]` or `{prefix}help [category]`",
             "nav_title": "Navigation",
             "nav_value": "Click the reactions for the following actions:\n\n\u25C0 - Previous Page\n\u25B6 - Next Page\n\u23F9 - Cancel Menu"
           },
-          "nsfw_info": "`Run the help command in a NSFW channel to see this page.`",
+          "nsfw_info": "Run the help command in a NSFW channel to see this page.",
           "support_title": "Love the bot?",
           "support_value": "Consider supporting the bot through donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) for single donations.\n{PATREON} [`Patreon`]({patreon_url}) for continuous donations."
         }
