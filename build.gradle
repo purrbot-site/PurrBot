@@ -24,7 +24,7 @@ plugins {
     id 'net.kyori.blossom' version '1.1.0'
 }
 
-version = '2.33.2'
+version = '2.34.0'
 
 description = """"""
 
@@ -40,7 +40,7 @@ repositories {
     jcenter()
     mavenCentral()
     maven { url = 'https://jitpack.io' }
-    maven { url = 'https://dl.bintray.com/andre601/maven' }
+    maven { url = 'https://repo.codemc.io/repository/maven-public' }
 }
 
 dependencies {
@@ -60,8 +60,9 @@ dependencies {
     compile group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.5'
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '2.8.0'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
-    compile group: 'org.botblock', name: 'javabotblockapi', version: '6.4.2'
-    compile group: 'net.discordservices', name: 'DServices4J', version: '1.2.0'
+    compile group: 'org.botblock', name: 'javabotblockapi-core', version: '6.4.2_327'
+    compile group: 'org.botblock', name: 'javabotblockapi-jda', version: '6.4.2_327'
+    compile group: 'net.discordservices', name: 'dservices4j', version: '1.2.0_3'
     compile group: 'io.javalin', name: 'javalin', version: '3.13.3'
     compile group: 'org.json', name: 'json', version: '20201115'
 }
