@@ -372,7 +372,7 @@
         "command_info": {
           "aliases": "Aliases",
           "command_nsfw": "Please run this command in a NSFW channel.",
-          "no_command": "The provided command (`{command}`) doesn't exist!\nMake sure you typed it correctly and only provided the command name!",
+          "no_command": "The provided command (`{command}`) doesn't exist!\nMake sure you typed it correctly.\n\nCategory names need to be prefixed with `cat:` (e.g. `{prefix}help cat:fun`)!",
           "title": "Command help: {command}",
           "usage_title": "Usage options",
           "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Required"
@@ -388,7 +388,7 @@
             "title": "Categories"
           },
           "description": {
-            "command_value": "To get more info about a specific command run `{prefix}help [command]` or `{prefix}help [category]`",
+            "command_value": "To get more info about a specific command run `{prefix}help [command]`.\nYou can also run `{prefix}help cat:[category]` to show the commands of a specific category.",
             "nav_title": "Navigation",
             "nav_value": "Click the reactions for the following actions:\n\n\u25C0 - Previous Page\n\u25B6 - Next Page\n\u23F9 - Cancel Menu"
           },
