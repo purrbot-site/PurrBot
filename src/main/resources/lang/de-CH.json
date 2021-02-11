@@ -372,7 +372,7 @@
         "command_info": {
           "aliases": "Aliase",
           "command_nsfw": "Bitte verwende diesen Befehl in einem NSFW-Kanal",
-          "no_command": "Der angegebene Befehl (`{command}`) existiert nicht!\nStelle sicher, dass du ihn korrekt geschrieben hast und nur den Befehlsnamen angegeben hast!",
+          "no_command": "Der angegebene Befehl (`{command}`) existiert nicht!\nStelle sicher, dass du Ihn richtig geschrieben hast.\n\nKategorienamen müssen mit `cat:` gestartet werden (z.B. `{prefix}help cat:fun`",
           "title": "Befehls-Hilfe: {command}",
           "usage_title": "Verwendungs Optionen",
           "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Benötigt"
@@ -388,7 +388,7 @@
             "title": "Kategorien"
           },
           "description": {
-            "command_value": "Um mehr informationen über einen Befehl zu erhalten, führe `{prefix}help [Befehl]` oder `{prefix}help [Kategorie]` aus.",
+            "command_value": "Um mehr infos über einen bestimmten Befehl zu erhalten, führe `{prefix}help [Befehl]` aus.\nDu kannst auch `{prefix}help cat:[Kategorie]` ausführen um die Befehle einer bestimmten Kategorie zu zeigen.",
             "nav_title": "Navigation",
             "nav_value": "Klicke auf die Reaktionen für folgende Aktionen:\n\n◀ - Vorherige Seite\n▶ - Nächste Seite\n⏹ - Menü abbrechen"
           },
