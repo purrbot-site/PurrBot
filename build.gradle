@@ -61,7 +61,7 @@ dependencies {
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '2.8.0'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
     compile group: 'org.botblock', name: 'javabotblockapi-core', version: '6.5.0_329'
-    compile group: 'org.botblock', name: 'javabotblockapi-jda', version: '6.5.0_329'
+    compile group: 'org.botblock', name: 'javabotblockapi-jda', version: '6.5.1_331'
     compile group: 'net.discordservices', name: 'dservices4j', version: '1.2.0_3'
     compile group: 'io.javalin', name: 'javalin', version: '3.13.3'
     compile group: 'org.json', name: 'json', version: '20201115'
