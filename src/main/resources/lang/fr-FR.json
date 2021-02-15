@@ -51,12 +51,12 @@
       },
       "cuddle": {
         "description": "Vous permet de câliner une ou plusieurs personnes.",
-        "loading": "{LOADING} Réception d'un gif-câlin...",
-        "mention_self": "Pourquoi te câline tu {user}?\nTu peut me câliner si tu veut. {VANILLABLUSH}",
+        "loading": "{LOADING} Réception d'un gif-câlinage...",
+        "mention_self": "Pourquoi te câline tu toi même {user}?\nTu peut me câliner si tu veut. {VANILLABLUSH}",
         "mention_purr": [
           "\\*Apprécie être câliner par {user}*",
           "\\*Se blottit contre {user}*",
-          "Merci pour le confortable câlin {user}. UwU"
+          "Merci pour le confortable câlinage {user}. UwU"
         ],
         "message": "{user} vous câlines {targets}",
         "no_mention": "Veuillez mentionner au moins un utilisateur a câliner!"
@@ -124,12 +124,12 @@
           "\\*ronronne silencieusement en profitant du câlin*",
           "J'aime toujours les câlins {user}"
         ],
-        "message": "{user} vous fait un câlin {targets}",
+        "message": "{user} te fait un câlin {targets}",
         "no_mention": "Veuillez mentionner au moins un utilisateur pour faire un câlin!"
       },
       "kiss": {
         "description": "Donnez un baisser à une ou plusieurs personnes.",
-        "loading": "{LOADING} Réception d'un bisou...",
+        "loading": "{LOADING} Réception d'un baiser...",
         "mention_purr": [
           "D-d'accord. Mais seulement ma joue ! \\*tend la joue*",
           "Seulement ma joue, d'accord?",
@@ -138,7 +138,7 @@
         "mention_self": "Comment peut t'embrasser toi-même {user}? Avec un miroir?",
         "message": "{user} embrasse {target}",
         "no_mention": "Veuillez mentionner au moins un utilisateur a embrasser!",
-        "special_user": "\\*Apprécie le bisou de {user}*"
+        "special_user": "\\*Apprécie le baiser de {user}*"
       },
       "kitsune": {
         "description": "Obtenez une image d'une Kitsune (fille renard).",
@@ -166,13 +166,13 @@
         "snuggle": "C'est ma petite sœur! UwU"
       },
       "pat": {
-        "description": "caresse les gens",
+        "description": "caresse les gens!",
         "loading": "{LOADING} Réception de caresse",
         "mention_self": "Euh... N'y a-t-il pas un neko que vous pouvez caresser {user}? \\*se pointe du doigt*",
         "mention_purr": [
           "\\*Ronronne*",
           "\\*presse sa tête contre la main de {user}*",
-          "« Nya... Merci pour cette caresse. »"
+          "Nya... Merci pour cette caresse."
         ],
         "message": "{user} te caresse {targets}",
         "no_mention": "S'il vous plaît mentionner au moins un utilisateur à caresser!"
@@ -555,14 +555,14 @@
         "description": "Vous permet de demander à quelqu'un, si vous pouvez avoir des relations sexuelles avec lui.\nSi vous n'avez pas présélectionné une option l'autre peut choisir entre normal, anal, yuri et yaoi.\nUtilisez l'un des arguments suivants pour présélectionner :\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nCette commande ne peut être exécutée que dans les salons NSFW!",
         "mention_bot": "Vous ne pouvez pas faire l'amour a des robots !",
         "mention_purr": "\\*baffe {user}* NON! Pas avec moi pervers!",
-        "mention_self": "Comment peut tu te baisé toi même {user}?! (Non la masturbation n'est pas une réponse)",
+        "mention_self": "Comment peut tu faire l'amour a toi même {user}?! (Non la masturbation n'est pas une réponse)",
         "message": "{user} et {target} font l'amour!",
-        "no_mention": "Veuillez mentionner un utilisateur avec lequel vous voulez baiser.",
+        "no_mention": "Veuillez mentionner un utilisateur avec lequel vous voulez avoir une relation sexuelle.",
         "request": {
           "denied": "{target} ne veut pas avoir de relations sexuelles avec vous {user}. >.<",
           "message": "Salut {target}!\n{user} veut avoir du sexe avec vous. Voulez-vous cela aussi ?\nRéagissez avec {ACCEPT} pour accepter ou avec {CANCEL} pour refuser la requête.\n\n> **Cette demande prendra fin dans 1 minute !**",
           "message_choose": "Hé {target}!\n{user} veut avoir du sexe avec vous.Le voulez-vous aussi ?\nRéagissez avec l'un des options ci-dessous pour choisir :\n{SEX} - Normal Sex\n{ANAL} - Anal Sex\n{YAOI} - Yaoi Sex\n{YURI} - Yuri Sex\n{CANCEL} - Refuser\n\n> **Cette demande prendra fin dans 1 minute !**",
-          "open": "Ne soyez pas une personne si en chaleur {user}!\nVous avez déjà une demande ouverte. Attendez qu'elle soit acceptée, refusée ou qu'elle expire."
+          "open": "Ne soyez pas une personne si pervers {user}!\nVous avez déjà une demande ouverte. Attendez qu'elle soit acceptée, refusée ou qu'elle expire."
         },
         "special_user": {
           "accept": [
@@ -655,7 +655,7 @@
         "mention_snuggle": [
           "\\*adore le câlin de {user}*",
           "Les câlins sont toujours si confortables {user}.",
-          "\\*dit silencieusement \"nya\" en câlinent {user}*"
+          "\\*dit silencieusement \"nya\" en faisan un câlin a {user}*"
         ]
       },
       "kiss": {
