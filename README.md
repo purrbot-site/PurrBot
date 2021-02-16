@@ -24,14 +24,15 @@
 [nekos.life]: https://nekos.life
 
 <!-- Widgets -->
-[widgetBotlist]: https://api.botlist.space/widget/425382319449309197/6  
-[widgetDiscordBoats]: https://discord.boats/api/widget/425382319449309197
+[widget_botlist_space]: https://api.botlist.space/widget/425382319449309197/6  
+[widget_discord_boats]: https://discord.boats/api/widget/425382319449309197
 
 <!-- Botlists -->
-[botlist]: https://botlist.space/bot/425382319449309197  
-[discordBots]: https://discord.bots.gg/bots/425382319449309197  
-[discordBoats]: https://discord.boats/bot/purr  
-[debl]: https://discordextremelist.xyz/bots/purr
+[botlist_space]: https://botlist.space/bot/425382319449309197  
+[discord_boats]: https://discord.boats/bot/purr  
+[discordbotlist_com]: https://discordbotlist.com/bots/purr
+[discord_bots_gg]: https://discord.bots.gg/bots/425382319449309197  
+[discordextremelist_xyz]: https://discordextremelist.xyz/bots/purr
 
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![TranslateImg]][translations]
 
@@ -76,20 +77,24 @@ If you have a dedicated role for bots can you change the `&perms=387136` to `&pe
 \*Purr* can be found on different Botlist sites.  
 Feel free to upvote her to show your support.
 
-### [Botlist.space][botlist]
+### [Botlist.space][botlist_space]
 > Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
 
-![widgetBotlist]
+![widget_botlist_space]
 
-### [Discord.boats][discordBoats]
+### [Discord.boats][discord_boats]
 > Discord Boats is a growing directory of Discord bots to enhance your server - Find the perfect bot for your needs and add it to your server easily, quickly and for free.
 
-![widgetDiscordBoats]
+![widget_discord_boats]
 
-### [Discord.bots.gg][discordBots]
+### [Discordbotlist.com][discordbotlist_com]
+> Find the best Discord bots for your server with our discord bot list.
+> Browse information on each bot and vote for your favourites.
+
+### [Discord.bots.gg][discord_bots_gg]
 > The original Discord bot list, find the right bot for your server today.
 
-### [Discordextremelist.xyz][debl]
+### [Discordextremelist.xyz][discordextremelist_xyz]
 > Discord's unbiased list, giving small bots and small servers a big chance!
 
 # Useful Links
