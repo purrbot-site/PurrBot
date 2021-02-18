@@ -36,13 +36,13 @@
         "loading": "{LOADING} va mordre quelqu'un...",
         "mention_self": "Est que c'est du cannibalisme, si tu te mord toi-même {user}?",
         "mention_purr": [
-          "Q-q-quoi...? Je ne suis pas délicieux! >.<",
-          "Hé! je ne suis pas de la nourriture",
+          "Q-q-quoi...? Je ne suis pas délicieuse! >.<",
+          "Hé! je ne suis pas de la nourriture.",
           "N-ne me grignote pas."
         ],
         "message": "{user} te mord {targets}",
-        "no_mention": "Veuillez mentionner au moins un utilisateur à mordre !",
-        "special_user": "M-mais {user}! C-c'est embarrassent"
+        "no_mention": "Veuillez mentionner au moins un utilisateur à mordre!",
+        "special_user": "M-mais {user}! C-c'est embarrassent."
       },
       "blush": {
         "description": "Vous fait rougir. o////o",
@@ -94,11 +94,11 @@
         }
       },
       "fluff": {
-        "description": "touche la queue de quelqu'un... s'il le veule.",
+        "description": "toucher la queue de quelqu'un... s'il le veule.",
         "mention_bot": "Les bots n'ont pas de queue... malheureusement !",
         "mention_purr": [
-          "Qu-! C'est lubrique {user}! \\*tient sa queue pour la protéger*",
-          "« N-non {user}! Je n'autorise pas les étrangers a toucher ma queue! »"
+          "Qu-! C'est pervers {user}! \\*tient sa queue pour la protéger*",
+          "N-non {user}. Je n'autorise pas les étrangers a toucher ma queue!"
         ],
         "mention_self": "Nawww... Tu na pas quelqu'un qui pourrait toucher ta queue? Ou est-tu juste timide?",
         "message": "{user} touche la queue de {target}.",
@@ -111,7 +111,7 @@
         "special_user": "M-mais {user}. C'est pervers de faire ça en public."
       },
       "holo": {
-        "description": "Obtenez une image du mangeur de pommes, buveur d'alcool loup avisé.",
+        "description": "Obtenez une image de la mangeuse de pommes, louve avisé buveuse d'alcool.",
         "loading": "{LOADING} Réception d'une image de Holo...",
         "message": "Holo {BLOBHOLO}"
       },
@@ -194,7 +194,7 @@
         "message": "Senko-San {SENKOTAILWAG}"
       },
       "ship": {
-        "description": "évalue votre relation avec quelqu'un ou entre deux personne pour voit leur chance d'être amoureux.",
+        "description": "évalue votre relation avec quelqu'un ou entre deux personne pour voir leur chance d'être amoureux.",
         "mention_self": "évaluée ta relation avec toi même {user}? En fait trouve quelqu'un d'autre?",
         "mention_purr": "N-non! Tu ne peux évaluée ta relation avec moi {user}!",
         "mention_snuggle": "Je ne te laisserai pas évaluée ta relation avec ma petit sœur {user}!",
@@ -664,7 +664,7 @@
           "M-mais {user}... C'est embarrassant ici en public. \\*semble timide* O-okay très bien, mais seulement un baiser. Q////Q",
           "N-nya ! C'est pervert {user}..."
         ],
-        "special_user": "« P-pourquoi tu embrasse ma sœur à travers moi? T-tu peut l'embrasser toi-même, {user}. »"
+        "special_user": "P-pourquoi tu embrasse ma sœur à travers moi? T-tu peut l'embrasser toi-même, {user}."
       },
       "lick": {
         "mention_snuggle": [
@@ -686,7 +686,7 @@
       },
       "poke": {
         "mention_snuggle": [
-          "« Nonn. Ne me tapoter pas! »",
+          "Nonn. Ne me tapoter pas!",
           "IIP ! \\*a l'air effrayé* P-pourquoi tu me tapote?",
           "Pourquoi me tapote tu ? Ai-je fait quelque chose de mal ? Q////Q"
         ]
