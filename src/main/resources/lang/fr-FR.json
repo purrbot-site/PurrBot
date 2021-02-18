@@ -168,7 +168,7 @@
       "pat": {
         "description": "caresse les gens!",
         "loading": "{LOADING} Réception de caresse",
-        "mention_self": "Euh... N'y a-t-il pas un neko que vous pouvez caresser {user}? \\*se pointe du doigt*",
+        "mention_self": "Euh... N'y a-t-il pas un neko que tu peut caresser {user}? \\*se pointe du doigt*",
         "mention_purr": [
           "\\*Ronronne*",
           "\\*presse sa tête contre la main de {user}*",
@@ -220,7 +220,7 @@
       "slap": {
         "description": "Baffe ce méchant! >:C",
         "loading": "{LOADING}Baffe l'utilisateur...",
-        "mention_self": "Non non non! Je ne vous aiderai pas à vous blesser, {user}.",
+        "mention_self": "Non non non! Je ne t'aiderai pas à te blesser, {user}.",
         "mention_purr": [
           "Nuuuu... P-pourquoi me faire mal {user}? T^T",
           "\\*Baffe en retour* On ne me Baffe pas sans conséquences {user}!"
@@ -241,7 +241,7 @@
       "tickle": {
         "description": "Chatouillé les gens pour les faire rire.",
         "loading": "{LOADING} Réception d'un gif-chatouille...",
-        "mention_self": "Ok... Si vous voulez vraiment être chatouillé... \\*chatouille {user}*",
+        "mention_self": "Ok... Si tu veux vraiment être chatouillé... \\*chatouille {user}*",
         "mention_purr": [
           "P-pas juste ! Je ne p-peux pas\\*Rie des chatouilles*",
           "\\*essaie de ne pas rire mais échoue *",
@@ -562,7 +562,7 @@
           "denied": "{target} ne veut pas avoir de relations sexuelles avec vous {user}. >.<",
           "message": "Salut {target}!\n{user} veut avoir du sexe avec vous. Voulez-vous cela aussi ?\nRéagissez avec {ACCEPT} pour accepter ou avec {CANCEL} pour refuser la requête.\n\n> **Cette demande prendra fin dans 1 minute !**",
           "message_choose": "Hé {target}!\n{user} veut avoir du sexe avec vous.Le voulez-vous aussi ?\nRéagissez avec l'un des options ci-dessous pour choisir :\n{SEX} - Normal Sex\n{ANAL} - Anal Sex\n{YAOI} - Yaoi Sex\n{YURI} - Yuri Sex\n{CANCEL} - Refuser\n\n> **Cette demande prendra fin dans 1 minute !**",
-          "open": "Ne soyez pas une personne si pervers {user}!\nVous avez déjà une demande ouverte. Attendez qu'elle soit acceptée, refusée ou qu'elle expire."
+          "open": "Ne soi pas une personne si pervers {user}!\nTu a déjà une demande ouverte. Attend qu'elle soit acceptée, refusée ou qu'elle expire."
         },
         "special_user": {
           "accept": [
@@ -572,7 +572,7 @@
           ],
           "deny": [
             "Je suis désolé {user}, mais je ne peux pas pour le moment...",
-            "Pouvez-vous attendre un peu plus {user}? Je n'ai pas le temps pour le moment.",
+            "Peut tu attendre un peu plus {user}? Je n'ai pas le temps pour le moment.",
             "\\*donne un bisou* Je ne peux pas {user}. Désolé."
           ]
         }
@@ -626,7 +626,7 @@
       "bite": {
         "mention_snuggle": [
           "Nya ! Je ne suis pas de la nourriture {user}!",
-          "non s'il vous plaît {user}. C-c'est pervers O////O",
+          "non s'il te plaît {user}. C-c'est pervers O////O",
           "P-pourquoi me grignoter?"
         ]
       },
@@ -714,7 +714,7 @@
     "info": {
       "info": {
         "dm_failure": "Vos MP sont fermés {user}. Je ne peux pas envoyer les informations si elles sont fermées. :,(",
-        "dm_success": "📬 Vous avez reçu un message {user}!",
+        "dm_success": "📬 Tu a reçu un message {user}!",
         "embed": {
           "about_title": "À propos de moi",
           "about_value": "Oh salut !\nJe suis {name}. Je suis la sœur de \\*Purr*."
