@@ -202,12 +202,12 @@
         "results": {
           "100": "Amour parfait ! ❤",
           "91_99": "S'il vous plaît invitez-moi à votre mariage. ^-^",
-          "81_90": "Je peux vraiment vous imaginer mariiez l'un a l'autre.",
+          "81_90": "Je peux vraiment vous imaginer mariez l'un a l'autre.",
           "71_80": "\\*vous pousse tous les deux vers l'autre*",
           "61_70": "cela semble être quelque chose de sérieux.",
           "69": "Oh... Donc c'est *Ce* genre d'amour, hein...? 😏",
           "51_60": "Embrassez vous déjà !",
-          "41_50": "Déjà un couple que je suppose ?",
+          "41_50": "Déjà un couple je suppose ?",
           "31_40": "Vous pourriez devenir un couple.",
           "21_30": "Friendzone+ (avec *avantages*)",
           "11_20": "Friendzone",
@@ -215,7 +215,7 @@
           "0": "Si l'amour était la chaleur, ce serait un bloc de glace."
         },
         "special_user": "Awww {user} mon chou. tu sais que nous sommes tous les deux toujours un parfaits 100.",
-        "target_bot": "tu ne peut pas avoir de relation avec des bots, tes bizarre!"
+        "target_bot": "Tu ne peut pas avoir de relation avec des bots, tes bizarre!"
       },
       "slap": {
         "description": "Baffe ce méchant! >:C",
@@ -223,7 +223,7 @@
         "mention_self": "Non non non! Je ne vous aiderai pas à vous blesser, {user}.",
         "mention_purr": [
           "Nuuuu... P-pourquoi me faire mal {user}? T^T",
-          "\\*Baffe* Personne ne me Baffe sans conséquences {user}!"
+          "\\*Baffe en retour* On ne me Baffe pas sans conséquences {user}!"
         ],
         "message": "{user} vous baffe {targets}",
         "no_mention": "Veuillez mentionner au moins un utilisateur à baffer!"
@@ -234,7 +234,7 @@
         "message": "{user} sourit"
       },
       "tail": {
-        "description": "remue ta queue...D'excitement j'espère.",
+        "description": "Remue ta queue...D'excitement j'espère.",
         "loading": "{LOADING} Remue la queue...",
         "message": "{user} remue la queue"
       },
@@ -318,9 +318,9 @@
         "dm_success": "Vérifiez vos messages privés {user}!",
         "dm_failure": "Je ne pouvais pas t'envoyer un MP {user}. êtes-tu sûr d'avoir ouvert tes MP?",
         "embed": {
-          "description": "Exécuter ce bot est coûteux. C'est pourquoi tous les dons - petits ou grands - sont les bienvenus.\nVous pouvez choisir si vous ne voulez faire qu'une seule don en utilisant PayPal, ou si vous voulez faire des dons continus sur Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (une donation)\n{PATREON} [`Patreon`]({patreon_url}) (donation continue)",
+          "description": "Faire fonctionner ce bot est coûteux. C'est pourquoi tous les dons - petits ou grands - sont les bienvenus.\nVous pouvez choisir si vous ne voulez faire qu'une seule don en utilisant PayPal, ou si vous voulez faire des dons continus sur Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (une donation)\n{PATREON} [`Patreon`]({patreon_url}) (donation continue)",
           "donators_more": "*et {remaining} en plus...*",
-          "donators_title": "Donateur",
+          "donators_title": "Donateurs",
           "donators_value": "Tous les donateurs, donation simples ou continus, sont énumérés ci-dessous comme remerciement.\nGrâce à eux, le bot peut rester actif pour tout le monde et gratuitement !\nSi vous souhaitez être listé, assurez-vous d'être sur le [~Nya Discord]({guild_invite}) et de contacter Andre_601 à ce sujet !"
         }
       },
@@ -408,7 +408,7 @@
             "title": "Bot Info",
             "version": "Version du bot : `PurrBot {bot_version}`"
           },
-          "bot_lists_title": "Listes de Bot :",
+          "bot_lists_title": "Listes Bot :",
           "commands_title": "Commandes",
           "commands_value": "Utilisez `{prefix}help` dans Discord pour une liste de commandes.",
           "links": {
@@ -426,8 +426,8 @@
       },
       "invite": {
         "description": "Obtenez des liens pour inviter le bot, ou pour rejoindre le serveur de support officiel.",
-        "dm_failure": "Permettez-moi de vous envoyer un DM {user}!",
-        "dm_success": "Vous envoie un message en MP {user}!",
+        "dm_failure": "Permet-moi de t'envoyer un MP {user}!",
+        "dm_success": "t'envoie un message en MP {user}!",
         "embed": {
           "about_title": "À propos des liens",
           "about_value": "Chacun des liens a un but différent.\n`Bot Invite` vous permet de m'inviter sur l'un de vos serveurs\n`Discord` est l'invitation à mon support Discord.",
@@ -475,7 +475,7 @@
           "ping": "moyennes de ping par shard"
         },
         "embed": {
-          "current_title": "Votre shard ?",
+          "current_title": "Votre shard?",
           "guilds_title": "Serveurs",
           "ping_title": "Ping (ms)",
           "status_title": "Statut",
