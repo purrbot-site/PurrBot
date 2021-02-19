@@ -86,7 +86,6 @@ public class CmdKiss implements Command, HttpUtil.ImageAPI{
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.fun.kiss.mention_self", member.getAsMention())
             ).queue();
-            return;
         }
         
         String targets = members.stream()

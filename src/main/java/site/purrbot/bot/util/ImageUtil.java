@@ -64,51 +64,15 @@ public class ImageUtil {
             BufferedImage background = new BufferedImage(template.getWidth(), template.getHeight(), template.getType());
 
             Graphics2D img = background.createGraphics();
+            
+            float r = (100 - (float)chance) / 100;
+            float g = (float)chance / 100;
 
             Color outlineColor = Color.BLACK;
-            Color fillColor;
-
-            if(chance == 100){
-                fillColor = new Color(0x00FF00);
-            }else
-            if(inRange(chance, 99, 90)){
-                fillColor = new Color(0x80FF00);
-            }else
-            if(inRange(chance, 90, 80)){
-                fillColor = new Color(0xB3FF00);
-            }else
-            if(inRange(chance, 80, 70)){
-                fillColor = new Color(0xD0FF00);
-            }else
-            if(chance == 70){
-                fillColor = new Color(0xF7FF00);
-            }else
-            if(chance == 69){
-                fillColor = new Color(0xFF8080);
-            }else
-            if(inRange(chance, 68, 60)){
-                fillColor = new Color(0xF7FF00);
-            }else
-            if(inRange(chance, 60, 50)){
-                fillColor = new Color(0xFFF200);
-            }else
-            if(inRange(chance, 50, 40)){
-                fillColor = new Color(0xFFBF00);
-            }else
-            if(inRange(chance, 40, 30)){
-                fillColor = new Color(0xFFAA00);
-            }else
-            if(inRange(chance, 30, 20)){
-                fillColor = new Color(0xFF8C00);
-            }else
-            if(inRange(chance, 20, 10)){
-                fillColor = new Color(0xFF5100);
-            }else
-            if(inRange(chance, 10, 0)){
-                fillColor = new Color(0xFF0000);
-            }else{
-                fillColor = Color.BLACK;
-            }
+            Color fillColor = new Color(r, g, 0.0f);
+            
+            if(chance == 69)
+                fillColor = new Color(0xFF8989); // This number is "special"
 
             img.drawImage(avatar1, 0, 0, 320, 320, null);
             img.drawImage(avatar2, 640, 0, 320, 320, null);
@@ -139,6 +103,8 @@ public class ImageUtil {
             Shape outline = layout.getOutline(null);
             
             transform.translate(textX, textY);
+            
+            img.setStroke(new BasicStroke(2.0f));
             
             img.transform(transform);
             img.setColor(outlineColor);
@@ -258,9 +224,5 @@ public class ImageUtil {
 
             return new ByteArrayInputStream(responseBody.bytes());
         }
-    }
-    
-    private boolean inRange(int value, int max, int biggerThan){
-        return value <= max && value > biggerThan;
     }
 }

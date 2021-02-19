@@ -96,6 +96,19 @@ public class CmdShip implements Command{
                 ).queue();
             }else{
                 if((bot.isSpecial(member1.getId()) || bot.isSpecial(member2.getId())) && bot.isSpecial(member.getId())){
+                    byte[] img = bot.getImageUtil().getShipImg(member1, member2, 100);
+                    
+                    if(img != null && guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
+                        tc.sendMessage(
+                                bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member.getAsMention())
+                        ).addFile(img, String.format(
+                                "love_%s_%s.png",
+                                member1.getId(),
+                                member2.getId()
+                        )).queue();
+                        return;
+                    }
+                    
                     tc.sendMessage(
                             bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member.getAsMention())
                     ).queue();
@@ -132,14 +145,14 @@ public class CmdShip implements Command{
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.ship.target_bot");
             return;
         }
-
-        byte[] image;
         
         Integer result = cache.get(String.format("%s:%s", member1.getId(), member2.getId()), k -> random.nextInt(101));
         if(result == null){
             result = random.nextInt(101);
             cache.put(String.format("%s:%s", member1.getId(), member2.getId()), result);
         }
+        
+        byte[] image;
         
         image = bot.getImageUtil().getShipImg(member1, member2, result);
 

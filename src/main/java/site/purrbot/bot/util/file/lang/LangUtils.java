@@ -33,6 +33,7 @@ public final class LangUtils{
         switch(language.toLowerCase()){
             case "de-ch":
             case "en-owo":
+            case "fr-fr":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
@@ -49,6 +50,7 @@ public final class LangUtils{
         switch(language.toLowerCase()){
             case "de-ch":
             case "en-owo":
+            case "fr-fr":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
@@ -66,6 +68,7 @@ public final class LangUtils{
         EN    ("\uDDEC", "\uDDE7"),
         EN_OWO("\uDDEC", "\uDDE7"),
         //ET_EE ("\uDDEA", "\uDDEA"),
+        FR_FR ("\uDDEB", "\uDDF7"),
         //IT_IT ("\uDDEE", "\uDDF9"),
         KO_KR ("\uDDF0", "\uDDF7"),
         PT_BR ("\uDDE7", "\uDDF7"),

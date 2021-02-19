@@ -130,6 +130,7 @@ public class PurrBot {
                 .addLang("de-CH")
                 .addLang("en")
                 .addLang("en-OWO")
+                .addLang("fr-FR")
                 //.addLang("it-IT") // Discontinued at the moment.
                 .addLang("ko-KR")
                 .addLang("pt-BR")

@@ -47,20 +47,17 @@ import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
 public class CmdHelp implements Command{
 
     private final PurrBot bot;
+    private final HashMap<String, String> categories = new LinkedHashMap<>();
 
     public CmdHelp(PurrBot bot){
         this.bot = bot;
+        
+        categories.put("fun", "\uD83C\uDF82");
+        categories.put("guild", "\uD83C\uDFAE");
+        categories.put("info", "\u2139");
+        categories.put("nsfw", "\uD83D\uDC88");
+        categories.put("owner", "<:andre_601:730944556119359588>");
     }
-
-    private final HashMap<String, String> categories = new LinkedHashMap<String, String>(){
-        {
-            put("fun",   "\uD83C\uDFB2");
-            put("guild", "\uD83C\uDFAE");
-            put("info",  "\u2139");
-            put("nsfw",  "\uD83D\uDC8B");
-            put("owner", "<:andre_601:730944556119359588>");
-        }
-    };
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
@@ -73,16 +70,21 @@ public class CmdHelp implements Command{
             Command command = (Command)bot.getCmdHandler().findCommand(args[0]);
 
             if(command == null || !isCommand(command)){
-                MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
-                        .setColor(0xFF0000)
-                        .setDescription(
-                                bot.getMsg(guild.getId(), "purr.info.help.command_info.no_command")
-                                   .replace("{command}", args[0])
-                        )
-                        .build();
+                int cat = getCategoryPage(guild.getId(), args[0]);
                 
-                tc.sendMessage(embed).queue();
-                
+                if(cat == -1){
+                    MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
+                            .setColor(0xFF0000)
+                            .setDescription(
+                                    bot.getMsg(guild.getId(), "purr.info.help.command_info.no_command")
+                                            .replace("{command}", args[0])
+                            )
+                            .build();
+    
+                    tc.sendMessage(embed).queue();
+                }else{
+                    showHelpMenu(member, tc, cat);
+                }
                 return;
             }
 
@@ -93,11 +95,11 @@ public class CmdHelp implements Command{
 
             tc.sendMessage(commandHelp(member, command, prefix)).queue();
         }else{
-            showHelpMenu(member, tc);
+            showHelpMenu(member, tc, 1);
         }
     }
     
-    private void showHelpMenu(Member member, TextChannel channel){
+    private void showHelpMenu(Member member, TextChannel channel, int page){
         Guild guild = channel.getGuild();
         String prefix = bot.getPrefix(guild.getId());
         
@@ -126,16 +128,22 @@ public class CmdHelp implements Command{
                 member,
                 "",
                 "purr.info.help.command_menu.categories.title",
-                bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.list")
+                String.join(
+                        "\n",
+                        bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.fun"),
+                        bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.guild"),
+                        bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.info"),
+                        bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.nsfw")
+                )
         ));
     
         for(Command cmd : getCommands()){
             String category = cmd.getAttribute("category");
         
-            if(builders.get(category).length() + cmd.getAttribute("help").length() > MessageEmbed.VALUE_MAX_LENGTH){
+            if(builders.get(category).length() + cmd.getAttribute("help").length()  + 10 > MessageEmbed.VALUE_MAX_LENGTH){
                 builder.addItems(commandList(
                         member,
-                        category,
+                        categories.get(category),
                         "purr.info.help.command_menu.categories." + category,
                         builders.get(category).toString()
                 ));
@@ -143,9 +151,8 @@ public class CmdHelp implements Command{
             }
         
             builders.get(category)
-                    .append("`")
                     .append(cmd.getAttribute("help").replace("{p}", prefix))
-                    .append("`\n");
+                    .append("\n");
         }
         
         for(Map.Entry<String, StringBuilder> builderEntry : builders.entrySet()){
@@ -167,7 +174,7 @@ public class CmdHelp implements Command{
             ));
         }
         
-        builder.build().display(channel);
+        builder.build().paginate(channel, page);
     }
     
     private MessageEmbed commandHelp(Member member, Command cmd, String prefix){
@@ -214,7 +221,7 @@ public class CmdHelp implements Command{
                         false
                 )
                 .addField(
-                        bot.getMsg(id, "purr.info.help.command_menu.description.command_title"),
+                        EmbedBuilder.ZERO_WIDTH_SPACE,
                         bot.getMsg(id, "purr.info.help.command_menu.description.command_value"),
                         false
                 )
@@ -224,7 +231,12 @@ public class CmdHelp implements Command{
                                 icon,
                                 bot.getMsg(id, titlePath)
                         ),
-                        commands,
+                        String.format(
+                                "```\n" +
+                                "%s\n" +
+                                "```",
+                                commands
+                        ),
                         false
                 )
                 .addField(
@@ -240,5 +252,28 @@ public class CmdHelp implements Command{
                 .map(cmd -> (Command)cmd)
                 .sorted(Comparator.comparing(cmd -> cmd.getDescription().name()))
                 .collect(Collectors.toList());
+    }
+    
+    // Method to check, if text equals either a translated category name or the english one.
+    private int getCategoryPage(String id, String text){
+        String fun   = "cat:" + bot.getMsg(id, "purr.info.help.command_menu.categories.fun");
+        String guild = "cat:" + bot.getMsg(id, "purr.info.help.command_menu.categories.guild");
+        String info  = "cat:" + bot.getMsg(id, "purr.info.help.command_menu.categories.info");
+        String nsfw  = "cat:" + bot.getMsg(id, "purr.info.help.command_menu.categories.nsfw");
+        
+        if(text.equalsIgnoreCase(fun) || text.equalsIgnoreCase("cat:fun")){
+            return 2;
+        }else
+        if(text.equalsIgnoreCase(guild) || text.equalsIgnoreCase("cat:guild")){
+            return 3;
+        }else
+        if(text.equalsIgnoreCase(info) || text.equalsIgnoreCase("cat:info")){
+            return 4;
+        }else
+        if(text.equalsIgnoreCase(nsfw) || text.equalsIgnoreCase("cat:nsfw")){
+            return 5;
+        }else{
+            return -1;
+        }
     }
 }
