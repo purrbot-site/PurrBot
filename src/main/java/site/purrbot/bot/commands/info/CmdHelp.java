@@ -52,10 +52,10 @@ public class CmdHelp implements Command{
     public CmdHelp(PurrBot bot){
         this.bot = bot;
         
-        categories.put("fun", "\uD83C\uDF82");
+        categories.put("fun", "\uD83C\uDFB2");
         categories.put("guild", "\uD83C\uDFAE");
         categories.put("info", "\u2139");
-        categories.put("nsfw", "\uD83D\uDC88");
+        categories.put("nsfw", "\uD83D\uDC8B");
         categories.put("owner", "<:andre_601:730944556119359588>");
     }
     

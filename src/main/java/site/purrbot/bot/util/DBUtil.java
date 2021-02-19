@@ -66,7 +66,7 @@ public class DBUtil {
                 r.array(
                         r.hashMap("id", id)
                          .with("language", "en")
-                         .with("prefix", bot.isBeta() ? ".." : ".")
+                         .with("prefix", bot.isBeta() ? "p.." : "p.")
                          .with("welcome_background", "color_white")
                          .with("welcome_channel", "none")
                          .with("welcome_color", "hex:000000")
@@ -112,7 +112,7 @@ public class DBUtil {
      *  Prefix Stuff
      */
     public String getPrefix(String id){
-        checkValue(id, "prefix", ".");
+        checkValue(id, "prefix", "p.");
         Map<String,String> guild = getGuild(id);
 
         return guild.get("prefix");
