@@ -206,15 +206,15 @@
           "71_80": "\\*Drückt euch näher aneinander*",
           "61_70": "Das scheint etwas ernsthaftes zu sein.",
           "69": "Oh... Es ist also *diese* art von Liebe huh...? 😏",
-          "51_60": "Küsst euch endlich!!!",
-          "41_50": "Bereits ein Paar?",
+          "51_60": "Küsst euch endlich!",
+          "41_50": "Bereits ein paar anscheinend?",
           "31_40": "Ihr könntet ein Paar werden.",
           "21_30": "Friendzone+ (Mit *Vorteilen*)",
           "11_20": "Friendzone",
           "1_10": "Anscheinend nicht einmal Freunde...",
           "0": "Wenn Liebe wärme wäre, dann wär dies ein Eisblock."
         },
-        "special_user": "{user} Awww Süsse. Du weisst doch dass wir zwei immer eine perfekte 100 sind.\nDu brauchst diesen Test nicht dafür.",
+        "special_user": "Awww {user} Süsse. Du weisst doch dass wir beide immer eine perfekte 100 sind.",
         "target_bot": "Du kannst dich nicht wirklich mit Bots verkuppeln du Verrückter!"
       },
       "slap": {
@@ -372,7 +372,7 @@
         "command_info": {
           "aliases": "Aliase",
           "command_nsfw": "Bitte verwende diesen Befehl in einem NSFW-Kanal",
-          "no_command": "Der angegebene Befehl (`{command}`) existiert nicht!\nStelle sicher, dass du ihn korrekt eingegeben hast und nur den Befehlsnamen angegeben hast!\n\n**Hinweis**: Kategorien (Fun, Gilde, Info, NSFW) sind KEINE Befehle!",
+          "no_command": "Der angegebene Befehl (`{command}`) existiert nicht!\nStelle sicher, dass du Ihn richtig geschrieben hast.\n\nKategorienamen müssen mit `cat:` gestartet werden (z.B. `{prefix}help cat:fun`",
           "title": "Befehls-Hilfe: {command}",
           "usage_title": "Verwendungs Optionen",
           "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Benötigt"
@@ -382,18 +382,16 @@
             "fun": "Spass",
             "guild": "Gilde",
             "info": "Info",
-            "list": "```\nSpass\nGilde\nInfo\nNSFW\n```",
             "nsfw": "NSFW",
             "owner": "Besitzer",
             "title": "Kategorien"
           },
           "description": {
-            "command_title": "Mehr Infos",
-            "command_value": "Ume mehr Informationen über einen bestimmten Befehl zu erhalten, führe `{prefix}help [Befehl]` aus.\n__Die Kategorien Spass, Gilde, Info und NSFW funktionieren NICHT mit diesem Befehl!__",
+            "command_value": "Um mehr infos über einen bestimmten Befehl zu erhalten, führe `{prefix}help [Befehl]` aus.\nDu kannst auch `{prefix}help cat:[Kategorie]` ausführen um die Befehle einer bestimmten Kategorie zu zeigen.",
             "nav_title": "Navigation",
             "nav_value": "Klicke auf die Reaktionen für folgende Aktionen:\n\n◀ - Vorherige Seite\n▶ - Nächste Seite\n⏹ - Menü abbrechen"
           },
-          "nsfw_info": "`Verwende den Hilfe-Befehl in einem NSFW-Kanal um diese Seite zu sehen.`",
+          "nsfw_info": "Führe den Hilfe-Befehl in einem NSFW-Kanal aus um diese Seite zu sehen.",
           "support_title": "Magst du den Bot?",
           "support_value": "Überlege dir den Bot durch eine Spende zu unterstützen.\n\n{PAYPAL} [`PayPal`]({paypal_url}) für einzelne Spenden.\n{PATREON} [`Patreon`]({patreon_url}) für kontinuierliche Spenden."
         }

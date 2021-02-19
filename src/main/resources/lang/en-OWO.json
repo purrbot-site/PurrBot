@@ -205,16 +205,16 @@
           "81_90": "I can weawwy imagine you both mawwying each othew. UwU",
           "71_80": "\\*pushes both of you cwosew to each othew*",
           "61_70": "That seems to be something sewious.",
-          "69": "Oh... So it's *that* kind of wove huh...? 😏",
-          "51_60": "Kiss awweady!!! òwó",
-          "41_50": "Awweady a coupwe?",
+          "69": "Oh... So it's *that* kind of wuv, huh...? 😏",
+          "51_60": "Kiss awweady!!!",
+          "41_50": "Awweady a coupwe I guess? ",
           "31_40": "You couwd become a coupwe.",
           "21_30": "Fwiendzone+ (With *benefits*) OwO",
           "11_20": "Fwiendzone",
           "1_10": "Not even fwiends it seems...",
           "0": "If wuv was heat, then this wouwd be an ice bwock. UwU"
         },
-        "special_user": "{user} Awww sweetie. You know that we both awe awways a pewfect 100.\nYou don't need the test fow that.",
+        "special_user": "Awww {user} sweetie. You know we both awe awways a pewfect 100.",
         "target_bot": "You can't weawwy ship with bots you weiwdo! òwó"
       },
       "slap": {
@@ -372,7 +372,7 @@
         "command_info": {
           "aliases": "Awiases",
           "command_nsfw": "Pwease wun this command in a NSFW channel. ÒwÓ",
-          "no_command": "The pwovided command (`{command}`) doesn't exist! -w-\nMake suwe you typed it cowwectwy and onwy pwovided the command name!\n\n**Note**: Categowies (Fun, Guild, Info, NSFW) are NOT commands!",
+          "no_command": "The pwovided command (`{command}`) doesn't exist!\nMake suwe you typed it cowwectwy.\n\nCategowy names need to be pwefixed with `cat:` (e.g. `{prefix}help cat:fun`)!",
           "title": "Command hewp: {command}",
           "usage_title": "Usage options",
           "usage_value": "```\n{commands}\n```\n`[]` = Optionaw\n`<>` = Requiwed"
@@ -382,18 +382,16 @@
             "fun": "Fun",
             "guild": "Guiwd",
             "info": "Info",
-            "list": "```\nFun\nGuiwd\nInfo\nNSFW\n```",
             "nsfw": "NSFW",
             "owner": "Ownew",
             "title": "Categowies"
           },
           "description": {
-            "command_title": "Mowe Info",
-            "command_value": "To get mowe info about a specific command wun `{prefix}help [command]`\n__The categowies Fun, Guild, Info and NSFW will NOT wowk with this command!__",
+            "command_value": "To get mowe info about a specific command wun `{prefix}help [command]`\nYou can awso wun `{prefix}help cat:[category]` to show the commands of a specific categowy!",
             "nav_title": "Navigation",
             "nav_value": "Cwick the weactions fow the fowwowing actions:\n\n◀ - Pwevious Page\n▶ - Next Page\n⏹ - Cancew Menu"
           },
-          "nsfw_info": "`Run the hewp command in a NSFW channel to see this page.`",
+          "nsfw_info": "Wun the hewp command in a NSFW channew to see this page! O//w//O",
           "support_title": "Do- do you love the bot O\\\\W\\\\O?",
           "support_value": "Considew suppowting the bot twough donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) for single donations owo.\n{PATREON} [`Patreon`]({patreon_url}) for continuous donations uwu."
         }

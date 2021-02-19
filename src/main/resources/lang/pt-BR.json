@@ -205,16 +205,16 @@
           "81_90": "Posso realmente imaginar que vocês dois se casando.",
           "71_80": "\\*empurra ambos para perto um do outro*",
           "61_70": "Isso parece ser algo sério.",
-          "69": "Oh... Então é *aquele* tipo de amor huh...? 😏",
+          "69": "Oh... Então é *aquele* tipo de amor, huh...? 😏",
           "51_60": "Se beijem!",
-          "41_50": "Já são um casal?",
+          "41_50": "Já são um casal, eu acho?",
           "31_40": "Vocês podem se tornar um par.",
           "21_30": "Friendzone+ (com *benefícios*)",
           "11_20": "Friendzone",
           "1_10": "Nem amigos ao que parece...",
           "0": "Se o amor fosse calor, isso seria um bloco de gelo."
         },
-        "special_user": "{user} Aww querida. Você sabe que ambos somos sempre um 100 perfeito.\nVocê não precisa do teste para isso.",
+        "special_user": "Owww {user} amor. Você sabe que ambos somos sempre um perfeito 100.",
         "target_bot": "Você não pode shippar com bots seu estranho!"
       },
       "slap": {
@@ -372,7 +372,7 @@
         "command_info": {
           "aliases": "Apelidos",
           "command_nsfw": "Por favor, execute esse comando em um canal NSFW.",
-          "no_command": "O comando fornecido (`{command}`) não existe!\nCertifique-se de digitá-lo corretamente e somente informe o nome do comando!\n\n**Nota**: Categorias (Diversão, Guilda, Informação, NSFW) NÃO são comandos!",
+          "no_command": "O comando fornecido (`{command}`) não existe!\nCertifique-se de digitá-lo corretamente.\n\nNomes de categoria precisam ser prefixados com `cat:` (por exemplo, `{prefix}ajuda cat:fun`)!",
           "title": "Ajuda no comando: {command}",
           "usage_title": "Opções de uso",
           "usage_value": "```\n{commands}\n```\n`[]` = Opcional\n`<>` = Obrigatório"
@@ -382,18 +382,16 @@
             "fun": "Diversão",
             "guild": "Guilda",
             "info": "Informação",
-            "list": "```\nDiversão\nGuilda\nInformação\nNSFW\n```",
             "nsfw": "NSFW",
             "owner": "Dono",
             "title": "Categorias"
           },
           "description": {
-            "command_title": "mais informações",
-            "command_value": "Para obter mais informações sobre um comando específico execute `{prefix}help [command]`\n__As categorias diversão, Guilda, Informações e NSFW NÃO funcionarão com esse comando!__",
+            "command_value": "Para obter mais informações sobre um comando específico, execute `{prefix}help [command]`.\nVocê também pode executar `{prefix}ajuda cat:[category]` para mostrar os comandos de uma categoria específica.",
             "nav_title": "Navegação",
             "nav_value": "Clique nas reações para as seguintes ações:\n\n◀ - Página Anterior\n▶ - Próxima página\n⏹ - Cancelar Menu"
           },
-          "nsfw_info": "`Execute o comando de ajuda em um canal NSFW para ver esta página.`",
+          "nsfw_info": "Execute o comando de ajuda em um canal NSFW para ver esta página.",
           "support_title": "Ama o bot?",
           "support_value": "Considere apoiar o bot através da doações.\n\n{PAYPAL} [`PayPal`]({paypal_url}) para doações únicas.\n{PATREON} [`Patreon`]({patreon_url}) para doações contínuas."
         }
