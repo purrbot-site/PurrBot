@@ -318,7 +318,7 @@
         "dm_success": "Überprüfe deine privaten Nachrichten {user}!",
         "dm_failure": "I konnte dir keine DM senden {user}. Hast du sichergestellt, dass deine DMs offen sind?",
         "embed": {
-          "description": "Der Betrieb dieses Bots ist teuer. Deshalb sind alle Spenden - ob gross oder klein - willkommen.\nDu kannst wählen, ob du nur einmal mit PayPal spenden möchtest oder ob du fortwährende Spenden bei Patreon machen möchtest.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Einzelne Spende)\n{PATREON} [`Patreon`]({patreon_url}) (Kontinuierliche Spenden)",
+          "description": "Der Betrieb dieses Bots ist teuer. Deshalb sind alle Spenden - ob gross oder klein - willkommen.\nDu kannst wählen, ob du nur einmal mit PayPal oder Ko-fi spenden möchtest oder ob du fortwährende Spenden bei Patreon machen möchtest.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Einzelne Spende)\n{KOFI} [`Ko-fi`]({kofi_url}) (Einzelne Spende)\n{PATREON} [`Patreon`]({patreon_url}) (Kontinuierliche Spenden)",
           "donators_more": "*und {remaining} weitere...*",
           "donators_title": "Spender",
           "donators_value": "Alle Spender - entweder einzelne oder kontinuierliche Spenden - sind unten als Dankeschön aufgelistet.\nDank ihnen kann der Bot für alle aktiv und kostenlos bleiben!\nWenn du aufgelistet werden möchtest, solltest du auf dem [~Nya Discord]({guild_invite}) sein undAndre_601 darüber kontaktieren!"
@@ -393,7 +393,7 @@
           },
           "nsfw_info": "Führe den Hilfe-Befehl in einem NSFW-Kanal aus um diese Seite zu sehen.",
           "support_title": "Magst du den Bot?",
-          "support_value": "Überlege dir den Bot durch eine Spende zu unterstützen.\n\n{PAYPAL} [`PayPal`]({paypal_url}) für einzelne Spenden.\n{PATREON} [`Patreon`]({patreon_url}) für kontinuierliche Spenden."
+          "support_value": "Überlege dir den Bot durch eine Spende zu unterstützen.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Einzelne Spende)\n{KOFI} [`Ko-fi`]({kofi_url}) (Einzelne Spende)\n{PATREON} [`Patreon`]({patreon_url}) (Kontinuierliche Spenden)"
         }
       },
       "info": {
