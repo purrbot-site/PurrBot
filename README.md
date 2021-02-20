@@ -4,6 +4,10 @@
 [LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg?label=License&logo=GitHub&style=plastic
 [TranslateImg]: https://img.shields.io/badge/Translations-on%20Crowdin-blue?style=plastic&logo=Crowdin
 
+[ko-fiImg]: https://img.shields.io/badge/Buy%20me%20a-Coffee-blue?logo=ko-fi&logoColor=white
+[patreonImg]: https://img.shields.io/badge/Support%20me%20on-Patreon-blue?logo=patreon&logoColor=white
+[paypalImg]: https://img.shields.io/badge/Donate%20with-PayPal-blue?logo=paypal&logoColor=white
+
 <!-- Discord OAuth -->
 [Full invite]: https://discord.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=387136
 [Basic invite]: https://discord.com/oauth2/authorize?scope=bot&client_id=425382319449309197&permissions=346176
@@ -22,6 +26,10 @@
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
+
+[ko-fi]: https://ko-fi.com/andre_601
+[patreon]: https://patreon.com/andre_601
+[paypal]: https://purrbot.site/donate
 
 <!-- Widgets -->
 [widget_botlist_space]: https://api.botlist.space/widget/425382319449309197/6  
@@ -72,6 +80,12 @@ The above invite allows you to invite \*Purr* with the following permissions:
 - `Use External Reactions` - Required.
 
 If you have a dedicated role for bots can you change the `&perms=387136` to `&perms=0` or ommit it altogether.
+
+# Donations
+[![ko-fiImg]][ko-fi] [![patreonImg]][patreon] [![paypalImg]][paypal]
+
+Donations help me (Andre_601) keeping this bot alive for you and for free.  
+If you really enjoy the features of this bot, consider supporting my work with a donation.
 
 # Botlists
 \*Purr* can be found on different Botlist sites.  
