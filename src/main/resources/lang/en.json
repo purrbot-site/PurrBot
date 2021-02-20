@@ -318,7 +318,7 @@
         "dm_success": "Check your private messages {user}!",
         "dm_failure": "I couldn't send you a DM {user}. Did you make sure to have your DMs open?",
         "embed": {
-          "description": "Running this bot is expensive. That's why any donations - either big or small - are welcome.\nYou can choose if you want to only donate once using PayPal, or if you want to make continuous donations on Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donations)\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donations)",
+          "description": "Running this bot is expensive. That's why any donations - either big or small - are welcome.\nYou can choose if you want to only donate once using PayPal or Ko-fi, or if you want to make continuous donations on Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donations)\n{KOFI} [`Ko-fi`]({kofi_url}) (Single Donation)\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donations)",
           "donators_more": "*and {remaining} more...*",
           "donators_title": "Donators",
           "donators_value": "All donators - Either single or continuous donations - are listed below as a thank you.\nThanks to them can the bot stay active for everyone and for free!\nIf you would like to get listed, make sure to be on the [~Nya Discord]({guild_invite}) and contact Andre_601 about it!"
@@ -393,7 +393,7 @@
           },
           "nsfw_info": "Run the help command in a NSFW channel to see this page.",
           "support_title": "Love the bot?",
-          "support_value": "Consider supporting the bot through donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) for single donations.\n{PATREON} [`Patreon`]({patreon_url}) for continuous donations."
+          "support_value": "Consider supporting the bot through donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donation)\n{KOFI} [`Ko-fi`]({kofi_url}) (Single Donation).\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donation)"
         }
       },
       "info": {
