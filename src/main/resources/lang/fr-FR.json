@@ -318,7 +318,7 @@
         "dm_success": "Vérifiez vos messages privés {user}!",
         "dm_failure": "Je ne pouvais pas t'envoyer un MP {user}. êtes-tu sûr d'avoir ouvert tes MP?",
         "embed": {
-          "description": "Faire fonctionner ce bot est coûteux. C'est pourquoi tous les dons - petits ou grands - sont les bienvenus.\nVous pouvez choisir si vous ne voulez faire qu'une seule don en utilisant PayPal ou Ko-fi, ou si vous voulez faire des dons continus sur Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (une donation)\n{KOFI} [`Ko-fi`]({kofi_url}) (une donation)\n{PATREON} [`Patreon`]({patreon_url}) (donation continue)",
+          "description": "Faire fonctionner ce bot est coûteux. C'est pourquoi tous les dons - petits ou grands - sont les bienvenus.\nVous pouvez choisir si vous ne voulez faire qu'une seule don en utilisant PayPal ou Ko-fi, ou si vous voulez faire des dons continus sur Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (donation unique)\n{KOFI} [`Ko-fi`]({kofi_url}) (donation unique)\n{PATREON} [`Patreon`]({patreon_url}) (donation continue)",
           "donators_more": "*et {remaining} en plus...*",
           "donators_title": "Donateurs",
           "donators_value": "Tous les donateurs, donation simples ou continus, sont énumérés ci-dessous comme remerciement.\nGrâce à eux, le bot peut rester actif pour tout le monde et gratuitement !\nSi vous souhaitez être listé, assurez-vous d'être sur le [~Nya Discord]({guild_invite}) et de contacter Andre_601 à ce sujet !"
@@ -393,7 +393,7 @@
           },
           "nsfw_info": "Exécutez la commande help dans un salon NSFW pour voir cette page.",
           "support_title": "Vous aimez le bot?",
-          "support_value": "Envisagez de soutenir le bot en faisant un don.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (un don)\n{KOFI} [`Ko-fi`]({kofi_url}) (un don).\n{PATREON} [`Patreon`]({patreon_url}) (dons continus)"
+          "support_value": "Envisagez de soutenir le bot en faisant un don.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (donation unique)\n{KOFI} [`Ko-fi`]({kofi_url}) (donation unique).\n{PATREON} [`Patreon`]({patreon_url}) (donations continus)"
         }
       },
       "info": {
