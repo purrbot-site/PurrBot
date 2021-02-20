@@ -25,7 +25,7 @@
   "misc": {
     "and": "et",
     "info": "Hé la {user}!\nMon préfix sur ce serveur est `{prefix}`\nFait `{prefix}help` pour une liste des commandes.",
-    "language": "Français (fr-fr)",
+    "language": "Français (fr)",
     "unknown_user": "Inconnu",
     "welcome_member": "tu est le membre #{count}"
   },
@@ -271,7 +271,7 @@
         "few_args": "Pas assez d'arguments fournis!\nUtilisation: `{prefix}prefix <set <new prefix>|reset>`",
         "invalid_args": "Arguments invalides!\nUtilisation: `{prefix}prefix <set <new prefix>|reset>`",
         "no_prefix": "Vous devez fournir un préfixe !",
-        "reset": "Préfixe réinitialisé à `.`",
+        "reset": "Préfixe réinitialisé à `{prefix}`",
         "set": "Préfixe défini à `{prefix}`"
       },
       "welcome": {
