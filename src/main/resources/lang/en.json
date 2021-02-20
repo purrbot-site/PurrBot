@@ -271,7 +271,7 @@
         "few_args": "Not enough arguments provided!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
         "invalid_args": "Invalid arguments!\nUsage: `{prefix}prefix <set <new prefix>|reset>`",
         "no_prefix": "You need to provide a prefix!",
-        "reset": "Prefix reset back to `.`",
+        "reset": "Prefix reset back to `{prefix}`",
         "set": "Prefix set to `{prefix}`"
       },
       "welcome": {
