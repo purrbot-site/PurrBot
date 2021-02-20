@@ -271,7 +271,7 @@
         "few_args": "Argumentos insuficientes fornecidos!\nUse: `{prefix}prefix <set <new prefix>|reset>`",
         "invalid_args": "Argumentos inválidos!\nUse: `{prefix}prefix <set <new prefix>|reset>`",
         "no_prefix": "Você precisa me informar um prefixo!",
-        "reset": "Prefixo reiniciado para `.`",
+        "reset": "Prefixo redefinido para `{prefix}`",
         "set": "Prefixo definido para `{prefix}`"
       },
       "welcome": {
