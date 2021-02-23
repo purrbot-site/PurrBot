@@ -318,7 +318,7 @@
         "dm_success": "Verifique suas mensagens privadas {user}!",
         "dm_failure": "Não consegui enviar uma DM para você {user}. Você tem certeza que as suas DMs estão abertas ?",
         "embed": {
-          "description": "Executar esse bot é caro. É por isso que qualquer doação - grande ou pequena - é bem-vinda.\nVocê pode escolher se você deseja doar apenas uma vez usando PayPal, ou se você deseja fazer doações contínuas no Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Doações individuais)\n{PATREON} [`Patreon`]({patreon_url}) (Doações Contínuas)",
+          "description": "hospedar esse bot é caro. É por isso que qualquer doação - grande ou pequena - é bem-vinda.\nVocê pode escolher se você deseja doar apenas uma vez usando PayPal, ou se você deseja fazer doações contínuas no Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Doações individuais)\n{KOFI} [`Ko-fi`]({kofi_url}) (doações únicas)\n{PATREON} [`Patreon`]({patreon_url}) (Doações Contínuas)",
           "donators_more": "*e {remaining} outros...*",
           "donators_title": "Doadores",
           "donators_value": "Todos os doadores - seja uma doação única ou contínua - estão listados abaixo como um agradecimento.\nGraças a eles pode o bot ficar ativo para todos e de graça!\nSe você gostaria de ser listado, certifique-se de estar no [~Nya Discord]({guild_invite}) e entrar em contato com Andre_601 sobre isso!"
@@ -393,7 +393,7 @@
           },
           "nsfw_info": "Execute o comando de ajuda em um canal NSFW para ver esta página.",
           "support_title": "Ama o bot?",
-          "support_value": "Considere apoiar o bot através da doações.\n\n{PAYPAL} [`PayPal`]({paypal_url}) para doações únicas.\n{PATREON} [`Patreon`]({patreon_url}) para doações contínuas."
+          "support_value": "Considere apoiar o bot através de doações.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Doação única)\n{KOFI} [`Ko-fi`]({kofi_url}) (Doação única).\n{PATREON} [`Patreon`]({patreon_url}) (Doação Contínua)"
         }
       },
       "info": {
