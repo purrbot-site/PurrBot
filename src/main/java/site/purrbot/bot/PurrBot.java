@@ -425,6 +425,7 @@ public class PurrBot {
                 .replace("{FACE}", Emotes.FACE.getEmote())
                 .replace("{PAYPAL}", Emotes.PAYPAL.getEmote())
                 .replace("{PATREON}", Emotes.PATREON.getEmote())
+                .replace("{KOFI}", Emotes.KOFI.getEmote())
                 // Guild link
                 .replace("{guild_invite}", Links.DISCORD)
                 // Wiki pages
@@ -438,7 +439,8 @@ public class PurrBot {
                 .replace("{website_url}", Links.WEBSITE)
                 .replace("{policy_url}", Links.POLICY)
                 .replace("{paypal_url}", Links.PAYPAL)
-                .replace("{patreon_url}", Links.PATREON);
+                .replace("{patreon_url}", Links.PATREON)
+                .replace("{kofi_url}", Links.KOFI);
     }
     
     private List<Commands.CommandInfo> getCommands(){

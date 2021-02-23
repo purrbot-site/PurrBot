@@ -47,32 +47,6 @@ public class CmdPrefix implements Command{
         this.bot = bot;
     }
 
-    private void setPrefix(TextChannel tc, Member member, String prefix){
-        bot.setPrefix(member.getGuild().getId(), prefix);
-
-        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
-                .setColor(0x00FF00)
-                .setDescription(
-                        bot.getMsg(member.getGuild().getId(), "purr.guild.prefix.set")
-                )
-                .build();
-
-        tc.sendMessage(embed).queue();
-    }
-
-    private void resetPrefix(TextChannel tc, Member member){
-        bot.setPrefix(member.getGuild().getId(), ".");
-        
-        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
-                .setColor(0x00FF00)
-                .setDescription(
-                        bot.getMsg(member.getGuild().getId(), "purr.guild.prefix.reset")
-                )
-                .build();
-
-        tc.sendMessage(embed).queue();
-    }
-
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
@@ -95,5 +69,31 @@ public class CmdPrefix implements Command{
         }else{
             bot.getEmbedUtil().sendError(tc, member, "purr.guild.prefix.invalid_args");
         }
+    }
+    
+    private void setPrefix(TextChannel tc, Member member, String prefix){
+        bot.setPrefix(member.getGuild().getId(), prefix);
+        
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
+                .setColor(0x00FF00)
+                .setDescription(
+                        bot.getMsg(member.getGuild().getId(), "purr.guild.prefix.set")
+                )
+                .build();
+        
+        tc.sendMessage(embed).queue();
+    }
+    
+    private void resetPrefix(TextChannel tc, Member member){
+        bot.setPrefix(member.getGuild().getId(), ".");
+        
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
+                .setColor(0x00FF00)
+                .setDescription(
+                        bot.getMsg(member.getGuild().getId(), "purr.guild.prefix.reset")
+                )
+                .build();
+        
+        tc.sendMessage(embed).queue();
     }
 }

@@ -35,6 +35,7 @@ public class Links {
     public static final String DISCORDSERVICES_NET    = "https://discordservices.net/bot/425382319449309197";
 
     // Other links
+    public static final String KOFI        = "https://ko-fi.com/andre_601";
     public static final String PATREON     = "https://patreon.com/andre_601";
     public static final String PAYPAL      = "https://purrbot.site/donate";
     public static final String POLICY      = "https://docs.purrbot.site/legal/bot";

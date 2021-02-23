@@ -25,7 +25,6 @@ public enum Emotes{
     SENKO_TAIL_WAG("senkoTailWag", "700429690854440990", true),
     SHIRO_TAIL_WAG("shiroTailWag", "700429690598326414", true),
     TYPING        ("typing",       "700429689851740160", true),
-    NEKO_TAIL_WAG ("nekoTailWag",  "700429690732675115", true),
 
     // Static/normal emotes
     ACCEPT              ("accept",              "700459644719464458", false),
@@ -50,6 +49,7 @@ public enum Emotes{
     HYPESQUAD_BRAVERY   ("hypesquadBravery",    "712650361814646839", false),
     HYPESQUAD_BRILLIANCE("hypesquadBrilliance", "712650362083082320", false),
     HYPESQUAD_EVENTS    ("hypesquadEvents",     "712650362057916486", false),
+    KOFI                ("kofi",                "812749810506924052", false),
     PLUS                ("plus",                "592043203629416459", false),
     MEMBERS             ("members",             "701217337692651541", false),
     MINUS               ("minus",               "592043203042213925", false),
