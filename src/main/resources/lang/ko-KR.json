@@ -271,7 +271,7 @@
         "few_args": "받은 정보가 적어!\n사용법: `{prefix}prefix <set <새 접두어>|reset>`",
         "invalid_args": "유효하지 않은 값이야!\n사용법: `{prefix}prefix <set <새 접두어>|reset>`",
         "no_prefix": "!",
-        "reset": "접두어가 `.` 로 초기화되었어.",
+        "reset": "접두어가 `{prefix}` 로 초기화되었어.",
         "set": "접두어가 `{prefix}` 로 설정되었어."
       },
       "welcome": {
@@ -318,7 +318,7 @@
         "dm_success": "네 개인 메시지를 확인해봐, {user}!",
         "dm_failure": "{user}. 너에게 메시지를 보낼 수 없어. 개인 메시지 설정을 다시 확인해줄래?",
         "embed": {
-          "description": "이 봇을 유지하는 비용은 큽니다. 크기에 상관없이 어떤 후원이든 큰 도움이 됩니다.\n정기후원을 원하신다면 Patreon을, 아니라면 Paypal을 사용해 이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{PATREON} [`Patreon`]({patreon_url}) (정기후원)",
+          "description": "이 봇을 유지하는 비용은 큽니다. 크기에 상관없이 어떤 후원이든 큰 도움이 됩니다.\n정기후원을 원하신다면 Patreon을, 아니라면 Paypal 또는 Ko-fi를 사용해 이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{KOFI} [`Ko-fi`]({kofi_url}) (일회성 후원)\n{PATREON} [`Patreon`]({patreon_url}) (정기후원)",
           "donators_more": "*...그리고 {remaining} 명의 추가 후원자들!*",
           "donators_title": "후원자",
           "donators_value": "아래에 있는 사람들은 모두 이 봇을 후원해주신 분들입니다. 감사합니다.\n이분들 덕분에 이 봇이 모두에게 무료로 서비스를 제공하고 있습니다!\n만약 이곳에 자신이 포함되고 싶으시다면, [공식 지원 서버]({guild_invite})에 들어오셔서 Andre_601에게 연락주세요!"
@@ -393,7 +393,7 @@
           },
           "nsfw_info": "연령 제한 채널에서 help 명령어를 사용하면 볼 수 있어.",
           "support_title": "봇이 마음에 든다면?",
-          "support_value": "이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) 로 평범하게 후원할 수 있습니다.\n{PATREON} [`Patreon`]({patreon_url}) 로 정기후원을 할 수 있습니다."
+          "support_value": "이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{KOFI} [`Ko-fi`]({kofi_url}) (일회성 후원)\n{PATREON} [`Patreon`]({patreon_url}) (정기후원)"
         }
       },
       "info": {
