@@ -49,7 +49,7 @@
 This bot was made to use the [nekos.life]-API but now moved to its very own API.
 
 # Commands
-**Default Prefix**: `.` (You can mention the bot to know the used prefix or change it with the prefix-command)
+**Default Prefix**: `p.` (`@mention` the bot to know what prefix is used for the Discord Server)
 
 A full list of all commands can be found on the [wiki][commands].  
 All commands require the following permissions:  
