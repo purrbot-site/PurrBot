@@ -41,6 +41,7 @@
 [discordbotlist_com]: https://discordbotlist.com/bots/purr
 [discord_bots_gg]: https://discord.bots.gg/bots/425382319449309197  
 [discordextremelist_xyz]: https://discordextremelist.xyz/bots/purr
+[discordservices.net]: https://dbot.page/purr
 
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![TranslateImg]][translations]
 
@@ -110,6 +111,9 @@ Feel free to upvote her to show your support.
 
 ### [Discordextremelist.xyz][discordextremelist_xyz]
 > Discord's unbiased list, giving small bots and small servers a big chance!
+
+### [Discordservices.net]
+> A brand new botlist that aims to deliver the best experience for its users and bot developers.
 
 # Useful Links
 - [Discord Server][Discord]
