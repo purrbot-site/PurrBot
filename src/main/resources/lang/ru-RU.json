@@ -352,6 +352,21 @@
           "channels_title": "Каналы",
           "channels_value": "{CATEGORY} Всего: {channels_total}\n{TEXTCHANNEL} Текстовых каналов: {channels_text}\n{VOICECHANNEL} Голосовых каналов: {channels_voice}",
           "created": "Создано",
+          "features": {
+            "animated_icon": "Анимированные иконки",
+            "banner": "Баннер сервера",
+            "store_channel": "Канал-страничка приложения",
+            "discoverable": "Публичный сервер",
+            "invite_screen": "Фон приглашения",
+            "more_emoji": "Больше эмодзи",
+            "news_channel": "Новостной канал",
+            "partnered": "Партнер",
+            "public": "Публичный",
+            "title": "Возможности",
+            "vanity_url": "Персональный URL",
+            "verified": "Подтверждён",
+            "vip_voice": "VIP Голосовые каналы"
+          },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Низкий",
