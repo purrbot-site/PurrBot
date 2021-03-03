@@ -355,17 +355,19 @@
           "features": {
             "animated_icon": "Animated Icon",
             "banner": "Server Banner",
-            "store_channel": "Store Channels",
+            "community": "Community Server",
             "discoverable": "Discoverable",
+            "guild_preview": "Guild Preview",
             "invite_screen": "Invite Background",
-            "more_emoji": "More Emojis",
+            "member_verification": "Member verification",
             "news_channel": "News Channel",
             "partnered": "Partnered",
-            "public": "Public",
+            "store_channel": "Store Channels",
             "title": "Features",
             "vanity_url": "Vanity URL",
             "verified": "Verified",
-            "vip_voice": "VIP Voice Regions"
+            "vip_voice": "VIP Voice Regions",
+            "welcome_screen": "Welcome Screen"
           },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
