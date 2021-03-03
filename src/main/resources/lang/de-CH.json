@@ -352,6 +352,21 @@
           "channels_title": "Kanäle",
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Textkanäle: {channels_text}\n{VOICECHANNEL} Sprachkanäle: {channels_voice}",
           "created": "Erstellt",
+          "features": {
+            "animated_icon": "Animiertes Icon",
+            "banner": "Server-Banner",
+            "store_channel": "Shop-Kanäle",
+            "discoverable": "Entdeckbar",
+            "invite_screen": "Einladungs-Hintergrund",
+            "more_emoji": "Mehr Emojis",
+            "news_channel": "Nachrichtenkanal",
+            "partnered": "Partner",
+            "public": "Öffentlich",
+            "title": "Eigenschaften",
+            "vanity_url": "Vanity-URL",
+            "verified": "Bestätigt",
+            "vip_voice": "VIP Sprachregionen"
+          },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Niedrig",
