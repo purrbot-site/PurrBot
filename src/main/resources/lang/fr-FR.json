@@ -352,6 +352,21 @@
           "channels_title": "Salons",
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Salons textuels : {channels_text}\n{VOICECHANNEL} Salons vocaux : {channels_voice}",
           "created": "Créé",
+          "features": {
+            "animated_icon": "Icône animée",
+            "banner": "Bannière du serveur",
+            "store_channel": "Salon du magasin",
+            "discoverable": "Découvrable",
+            "invite_screen": "Arrière-plan d'invitation",
+            "more_emoji": "Plus d'émojis",
+            "news_channel": "Nouveau salon",
+            "partnered": "Partenaire",
+            "public": "Publique",
+            "title": "Fonctionnalités",
+            "vanity_url": "URL personnalisée",
+            "verified": "Verifié",
+            "vip_voice": "Région vocale VIP"
+          },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Bas",
