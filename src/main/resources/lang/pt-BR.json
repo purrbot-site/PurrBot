@@ -352,6 +352,23 @@
           "channels_title": "Canais",
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Canais: {channels_text}\n{VOICECHANNEL} Canais: {channels_voice}",
           "created": "Criado",
+          "features": {
+            "animated_icon": "Ícone animado",
+            "banner": "Banner do servidor",
+            "community": "Servidor Comunitário",
+            "discoverable": "Detectável",
+            "guild_preview": "Prévia da Guilda",
+            "invite_screen": "Plano de fundo do convite",
+            "member_verification": "Verificação de membro",
+            "news_channel": "Canal de notícias",
+            "partnered": "Parceiros",
+            "store_channel": "Canais de Loja",
+            "title": "Recursos",
+            "vanity_url": "URL personalizado",
+            "verified": "Verificado",
+            "vip_voice": "Regiões de voz VIP",
+            "welcome_screen": "Tela de boas vindas"
+          },
           "levels": {
             "high": "(╯°□°)╯( ┻━┻",
             "low": "Baixo",
