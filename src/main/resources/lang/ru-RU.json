@@ -355,17 +355,19 @@
           "features": {
             "animated_icon": "Анимированные иконки",
             "banner": "Баннер сервера",
-            "store_channel": "Канал-страничка приложения",
+            "community": "Сервер сообщества",
             "discoverable": "Публичный сервер",
+            "guild_preview": "Предпросмотр сервера",
             "invite_screen": "Фон приглашения",
-            "more_emoji": "Больше эмодзи",
+            "member_verification": "Верификация участников",
             "news_channel": "Новостной канал",
             "partnered": "Партнер",
-            "public": "Публичный",
+            "store_channel": "Канал-страничка приложения",
             "title": "Возможности",
             "vanity_url": "Персональный URL",
             "verified": "Подтверждён",
-            "vip_voice": "VIP Голосовые каналы"
+            "vip_voice": "VIP Голосовые каналы",
+            "welcome_screen": "Экран приветствия"
           },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
