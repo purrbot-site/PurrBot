@@ -355,17 +355,19 @@
           "features": {
             "animated_icon": "Animiertes Icon",
             "banner": "Server-Banner",
-            "store_channel": "Shop-Kanäle",
+            "community": "Community-Server",
             "discoverable": "Entdeckbar",
+            "guild_preview": "Gildenvorschau",
             "invite_screen": "Einladungs-Hintergrund",
-            "more_emoji": "Mehr Emojis",
+            "member_verification": "Mitgliederverifikation",
             "news_channel": "Nachrichtenkanal",
             "partnered": "Partner",
-            "public": "Öffentlich",
+            "store_channel": "Shop-Kanäle",
             "title": "Eigenschaften",
             "vanity_url": "Vanity-URL",
             "verified": "Bestätigt",
-            "vip_voice": "VIP Sprachregionen"
+            "vip_voice": "VIP Sprachregionen",
+            "welcome_screen": "Willkommensbildschirm"
           },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
