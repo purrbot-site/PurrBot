@@ -355,17 +355,19 @@
           "features": {
             "animated_icon": "Icône animée",
             "banner": "Bannière du serveur",
-            "store_channel": "Salon du magasin",
+            "community": "Serveur de la communauté",
             "discoverable": "Découvrable",
+            "guild_preview": "Aperçu du serveur",
             "invite_screen": "Arrière-plan d'invitation",
-            "more_emoji": "Plus d'émojis",
+            "member_verification": "Vérification des membres",
             "news_channel": "Nouveau salon",
             "partnered": "Partenaire",
-            "public": "Publique",
+            "store_channel": "Salon du magasin",
             "title": "Fonctionnalités",
             "vanity_url": "URL personnalisée",
             "verified": "Verifié",
-            "vip_voice": "Région vocale VIP"
+            "vip_voice": "Région vocale VIP",
+            "welcome_screen": "Écran de bienvenue"
           },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
