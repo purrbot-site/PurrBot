@@ -33,3 +33,7 @@ jobs:
             New Translations were made for the bot.
             If you want to help making them, read about it on our [Documentation](https://docs.purrbot.site/contribute/translate/)
           pull_request_labels: "Type: Translation"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
