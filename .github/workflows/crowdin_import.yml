@@ -1,0 +1,35 @@
+#
+# GitHub Action to import latest translations from https://lang.purrbot.site
+# and make a PR (if not already open) with those.
+#
+name: "Crowdin Import GH Action"
+
+on:
+  schedule:
+    - cron: "0/10 * * * *" # Check every 10 minutes for updates.
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Update Code"
+        uses: actions/Checkout@v2
+      - name: "Import Crowdin Translations"
+        uses: crowdin/github-action@v1.0.20
+        with:
+          upload_sources: false # Don't upload sources
+          
+          download_translations: true # Download translations from Crowdin
+          skip_untranslated_files: true # Only download fully translated files
+          translation: "src/main/resources/lang/%locale%.%file_extension%"
+          
+          push_translations: true # Push translations to branch
+          commit_message: "Updated %language%"
+          localization_branch_name: "translations" # Git branch for translations
+          
+          create_pull_request: true
+          pull_request_title: "New Crowdin Translations"
+          pull_request_body: |-
+            New Translations were made for the bot.
+            If you want to help making them, read about it on our [Documentation](https://docs.purrbot.site/contribute/translate/)
+          pull_request_labels: "Type: Translation"
