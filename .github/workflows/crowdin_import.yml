@@ -7,6 +7,11 @@ name: "Crowdin Import GH Action"
 on:
   schedule:
     - cron: "0/10 * * * *" # Check every 10 minutes for updates.
+    
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CROWDIN_ID: ${{ secrets.CROWDIN_ID }}
+  CROWDIN_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
 
 jobs:
   import:
@@ -14,17 +19,20 @@ jobs:
     steps:
       - name: "Update Code"
         uses: actions/Checkout@v2
-      - name: "Import Crowdin Translations"
-        uses: crowdin/github-action@v1.0.20
+        
+      - name: Download French translations
+        uses: crowdin/github-action@1.0.21
         with:
+          download_language: 'fr'
+          crowdin_branch_name: 'master'
+        
           upload_sources: false # Don't upload sources
           
           download_translations: true # Download translations from Crowdin
           skip_untranslated_files: true # Only download fully translated files
-          translation: "src/main/resources/lang/%locale%.%file_extension%"
           
           push_translations: true # Push translations to branch
-          commit_message: "Updated %language%"
+          commit_message: "Updated French"
           localization_branch_name: "translations" # Git branch for translations
           
           create_pull_request: true
@@ -33,7 +41,28 @@ jobs:
             New Translations were made for the bot.
             If you want to help making them, read about it on our [Documentation](https://docs.purrbot.site/contribute/translate/)
           pull_request_labels: "Type: Translation"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_ID }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
+
+
+      - name: Download German, Switzerland translations
+        uses: crowdin/github-action@1.0.21
+        with:
+          download_language: 'de-CH'
+          crowdin_branch_name: 'master'
+        
+          upload_sources: false # Don't upload sources
+          
+          download_translations: true # Download translations from Crowdin
+          skip_untranslated_files: true # Only download fully translated files
+          
+          push_translations: true # Push translations to branch
+          commit_message: "Updated German, Switzerland"
+          localization_branch_name: "translations" # Git branch for translations
+          
+          create_pull_request: true
+          pull_request_title: "New Crowdin Translations"
+          pull_request_body: |-
+            New Translations were made for the bot.
+            If you want to help making them, read about it on our [Documentation](https://docs.purrbot.site/contribute/translate/)
+          pull_request_labels: "Type: Translation"
+
+
