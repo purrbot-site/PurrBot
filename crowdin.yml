@@ -1,5 +1,8 @@
-commit_message: "Update %language%"
-append_commit_message: false
+project_id_env: CROWDIN_ID
+api_token_env: CROWDIN_TOKEN
+
+preserve_hierarchy: true
+
 files:
   - source: src/main/resources/lang/en.json
-    translation: /src/main/resources/lang/%locale%.%file_extension%
+    translation: src/main/resources/lang/%locale%.%file_extension%
