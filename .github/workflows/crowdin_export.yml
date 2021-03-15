@@ -1,7 +1,7 @@
 #
 # GitHub Action to export latest changes to en.json to https://lang.purrbot.site
 #
-name: "Crowdin Import GH Action"
+name: "Crowdin Export GH Action"
 
 on:
   push: # Trigger on push towards the en.json file.
@@ -16,15 +16,17 @@ jobs:
     steps:
       - name: "Update Code"
         uses: actions/Checkout@v2
+        
       - name: "Export Crowdin Translations"
-        uses: crowdin/github-action@v1.0.20
+        uses: crowdin/github-action@1.0.21
         with:
-          upload_sources: true # Upload sources
+          crowdin_branch_name: 'master'
           
-          download_translations: false # Don't download translations from Crowdin
-          skip_untranslated_files: true # Only download fully translated files
-          translation: "src/main/resources/lang/%locale%.%file_extension%"
+          upload_sources: true
+          
+          upload_translations: false
+          download_translations: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_ID }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
+          CROWDIN_ID: ${{ secrets.CROWDIN_ID }}
+          CROWDIN_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
