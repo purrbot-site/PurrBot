@@ -162,8 +162,13 @@
         "description": "Get an image or gif of an adorable Neko.",
         "loading": "{LOADING} Receiving a cute neko image (or gif)...",
         "message": "Neko {NEKOWO}",
-        "purr": "Did... Did I really look like this in the past? {VANILLABLUSH}",
-        "snuggle": "That is my little sister! UwU"
+        "purr": "{PURR} Did... Did I really look like this in the past?",
+        "snuggle": "{PURR} That is my little sister! UwU"
+      },
+      "okami": {
+        "description": "Get an image of a cute looking Okami (Wolf girl).",
+        "loading": "{LOADING} Taking a picture of an Awoo...",
+        "message": "Okami {AWOO}"
       },
       "pat": {
         "description": "Pat people!",
