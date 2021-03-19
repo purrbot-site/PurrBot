@@ -162,8 +162,13 @@
         "description": "Get an image or gif of an adowabwe Neko. UwU",
         "loading": "{LOADING} Weceiving a cute neko image (ow gif)... UwU",
         "message": "Neko {NEKOWO}",
-        "purr": "Did... Did I weally look like this in the past? {VANILLABLUSH}",
-        "snuggle": "That is my wittwe sistew! UwU"
+        "purr": "{PURR} Did... Did I weally look like this in the past?",
+        "snuggle": "{PURR} That is my wittwe sistew! UwU"
+      },
+      "okami": {
+        "description": "Get an image of a cute looking Okami (Wowf giwl).",
+        "loading": "{LOADING} Taking a pictuwe of an Awoo...",
+        "message": "Okami {AWOO}"
       },
       "pat": {
         "description": "Pat peopwe!",
@@ -352,6 +357,23 @@
           "channels_title": "Channews",
           "channels_value": "{CATEGORY} Totaw: {channels_total}\n\n{TEXTCHANNEL} Text Channews: {channels_text}\n{VOICECHANNEL} Voice Channews: {channels_voice}",
           "created": "Cweated",
+          "features": {
+            "animated_icon": "Animated Icon",
+            "banner": "Sewvew Bannew",
+            "community": "Community Sewvew",
+            "discoverable": "Discovewabwe",
+            "guild_preview": "Guiwd Pweview",
+            "invite_screen": "Invite Backgwound",
+            "member_verification": "Membew vewification",
+            "news_channel": "News Channews",
+            "partnered": "Pawtnewed",
+            "store_channel": "Stowe Channews",
+            "title": "Featuwes",
+            "vanity_url": "Vanity URL",
+            "verified": "Vewified",
+            "vip_voice": "VIP Voice Wegions",
+            "welcome_screen": "Wewcome Scween"
+          },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Low",
@@ -674,8 +696,8 @@
         ]
       },
       "neko": {
-        "purr": "Nya. That is an old pictuwe of my big sistew. >w<",
-        "snuggle": "I-ish that me? OwO"
+        "purr": "{SNUGGLE} Nya. That is an owd pictuwe of my big sistew. >w<",
+        "snuggle": "{SNUGGLE} I-is that me? OwO"
       },
       "pat": {
         "mention_snuggle": [
