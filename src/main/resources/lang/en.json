@@ -696,8 +696,8 @@
         ]
       },
       "neko": {
-        "purr": "Nya. That is an old picture of my big sister. >w<",
-        "snuggle": "I-is that me? OwO"
+        "purr": "{SNUGGLE} Nya. That is an old picture of my big sister. >w<",
+        "snuggle": "{SNUGGLE} I-is that me? OwO"
       },
       "pat": {
         "mention_snuggle": [
