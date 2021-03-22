@@ -51,37 +51,6 @@ public class CmdEval implements Command{
         this.bot = bot;
     }
 
-    private void sendEvalEmbed(TextChannel tc, String input, String output, String footer, boolean success){
-        String newMsg = input;
-
-        String overflow = null;
-
-        if(newMsg.length() > 2000){
-            overflow = newMsg.substring(1999);
-            newMsg = newMsg.substring(0, 1999);
-        }
-
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed()
-                .setColor(success ? 0x00FF00 : 0xFF0000)
-                .addField("Input", String.format(
-                        "```java\n" +
-                        "%s\n" +
-                        "```",
-                        newMsg
-                ), false)
-                .addField("Output", String.format(
-                        "```java\n" +
-                        "%s\n" +
-                        "```",
-                        output
-                ), false)
-                .setFooter(footer, null);
-
-        tc.sendMessage(embed.build()).queue();
-        if(overflow != null)
-            sendEvalEmbed(tc, overflow, output, footer, success);
-    }
-
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         if(msg.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
@@ -118,5 +87,36 @@ public class CmdEval implements Command{
                     System.currentTimeMillis() - startTime
             ), false);
         }
+    }
+    
+    private void sendEvalEmbed(TextChannel tc, String input, String output, String footer, boolean success){
+        String newMsg = input;
+        
+        String overflow = null;
+        
+        if(newMsg.length() > 2000){
+            overflow = newMsg.substring(1999);
+            newMsg = newMsg.substring(0, 1999);
+        }
+        
+        EmbedBuilder embed = bot.getEmbedUtil().getEmbed()
+                .setColor(success ? 0x00FF00 : 0xFF0000)
+                .addField("Input", String.format(
+                        "```java\n" +
+                                "%s\n" +
+                                "```",
+                        newMsg
+                ), false)
+                .addField("Output", String.format(
+                        "```java\n" +
+                                "%s\n" +
+                                "```",
+                        output
+                ), false)
+                .setFooter(footer, null);
+        
+        tc.sendMessage(embed.build()).queue();
+        if(overflow != null)
+            sendEvalEmbed(tc, overflow, output, footer, success);
     }
 }

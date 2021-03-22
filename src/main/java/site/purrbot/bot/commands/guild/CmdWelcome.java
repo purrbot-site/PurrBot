@@ -63,9 +63,6 @@ public class CmdWelcome implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-
         if(args.length < 1){
             tc.sendTyping().queue(v -> {
                 InputStream image;

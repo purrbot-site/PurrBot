@@ -46,71 +46,8 @@ public class CmdQuote implements Command{
         this.bot = bot;
     }
 
-    private Message getMessage(String id, TextChannel channel){
-        Message message;
-        try{
-            message = channel.retrieveMessageById(id).complete();
-        }catch(Exception ex){
-            message = null;
-        }
-
-        return message;
-    }
-    
-    private String getMember(Guild guild, Member member){
-        if(member == null)
-            return bot.getMsg(guild.getId(), "misc.unknown_user");
-        
-        return member.getEffectiveName();
-    }
-    
-    private void sendQuoteEmbed(Message msg, String link, TextChannel channel) {
-        Guild guild = msg.getGuild();
-        String name = getMember(guild, msg.getMember());
-        
-        EmbedBuilder quoteEmbed = bot.getEmbedUtil().getEmbed()
-                .setAuthor(
-                        bot.getMsg(guild.getId(), "purr.info.quote.embed_basic.info", name), 
-                        msg.getJumpUrl(),
-                        msg.getAuthor().getEffectiveAvatarUrl()
-                )
-                .setDescription(msg.getContentRaw())
-                .setImage(link)
-                .setFooter(
-                        bot.getMsg(guild.getId(), "purr.info.quote.embed_basic.channel")
-                                .replace("{channel}", msg.getTextChannel().getName()),
-                        null
-                )
-                .setTimestamp(msg.getTimeCreated());
-
-        channel.sendMessage(quoteEmbed.build()).queue();
-    }
-    
-    private void sendImgEmbed(Member member, Message quote, byte[] bytes, TextChannel textChannel){
-        Guild guild = member.getGuild();
-        String filename = String.format("quote_%s.png", quote.getId());
-        String name = getMember(guild, quote.getMember());
-        
-        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
-                .setDescription(
-                        bot.getMsg(guild.getId(), "purr.info.quote.embed_image.info", name)
-                                .replace("{channel}", quote.getTextChannel().getAsMention())
-                                .replace("{link}", quote.getJumpUrl())
-                )
-                .setImage(String.format(
-                        "attachment://%s",
-                        filename
-                ))
-                .build();
-        
-        textChannel.sendMessage(embed).addFile(bytes, filename).queue();
-    }
-
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-
         if(args.length == 0){
             bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.few_args");
             return;
@@ -215,5 +152,65 @@ public class CmdQuote implements Command{
         }else{
             bot.getEmbedUtil().sendPermError(tc, member, channel, Permission.MESSAGE_HISTORY, true);
         }
+    }
+    
+    private Message getMessage(String id, TextChannel channel){
+        Message message;
+        try{
+            message = channel.retrieveMessageById(id).complete();
+        }catch(Exception ex){
+            message = null;
+        }
+        
+        return message;
+    }
+    
+    private String getMember(Guild guild, Member member){
+        if(member == null)
+            return bot.getMsg(guild.getId(), "misc.unknown_user");
+        
+        return member.getEffectiveName();
+    }
+    
+    private void sendQuoteEmbed(Message msg, String link, TextChannel channel) {
+        Guild guild = msg.getGuild();
+        String name = getMember(guild, msg.getMember());
+        
+        EmbedBuilder quoteEmbed = bot.getEmbedUtil().getEmbed()
+                .setAuthor(
+                        bot.getMsg(guild.getId(), "purr.info.quote.embed_basic.info", name),
+                        msg.getJumpUrl(),
+                        msg.getAuthor().getEffectiveAvatarUrl()
+                )
+                .setDescription(msg.getContentRaw())
+                .setImage(link)
+                .setFooter(
+                        bot.getMsg(guild.getId(), "purr.info.quote.embed_basic.channel")
+                                .replace("{channel}", msg.getTextChannel().getName()),
+                        null
+                )
+                .setTimestamp(msg.getTimeCreated());
+        
+        channel.sendMessage(quoteEmbed.build()).queue();
+    }
+    
+    private void sendImgEmbed(Member member, Message quote, byte[] bytes, TextChannel textChannel){
+        Guild guild = member.getGuild();
+        String filename = String.format("quote_%s.png", quote.getId());
+        String name = getMember(guild, quote.getMember());
+        
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
+                .setDescription(
+                        bot.getMsg(guild.getId(), "purr.info.quote.embed_image.info", name)
+                                .replace("{channel}", quote.getTextChannel().getAsMention())
+                                .replace("{link}", quote.getJumpUrl())
+                )
+                .setImage(String.format(
+                        "attachment://%s",
+                        filename
+                ))
+                .build();
+        
+        textChannel.sendMessage(embed).addFile(bytes, filename).queue();
     }
 }

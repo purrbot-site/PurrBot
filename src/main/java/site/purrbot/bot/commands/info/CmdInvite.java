@@ -32,8 +32,6 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
-import java.util.concurrent.TimeUnit;
-
 @CommandDescription(
         name = "Invite",
         description = "purr.info.invite.description",
@@ -54,9 +52,6 @@ public class CmdInvite implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-
         if(bot.isBeta()){
             bot.getEmbedUtil().sendError(tc, member, "snuggle.info.invite.message");
             return;
@@ -114,18 +109,6 @@ public class CmdInvite implements Command{
                                     bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getAsMention())
                             ).queue()
                     );
-            
-            
-            
-            member.getUser().openPrivateChannel().queue(
-                    pm -> pm.sendMessage(invite.build()).queue(message ->
-                            tc.sendMessage(
-                                    bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getAsMention())
-                            ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
-                    ), throwable -> tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.info.invite.dm_failure", member.getAsMention())
-                    ).queue(del -> del.delete().queueAfter(5, TimeUnit.SECONDS))
-            );
             return;
         }
 

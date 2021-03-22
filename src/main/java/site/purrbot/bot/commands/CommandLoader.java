@@ -38,7 +38,7 @@ public class CommandLoader {
     private final Set<Command> COMMANDS = new HashSet<>();
 
     public CommandLoader(PurrBot bot){
-        final Logger logger = (Logger)LoggerFactory.getLogger(CommandLoader.class); 
+        final Logger logger = (Logger)LoggerFactory.getLogger(CommandLoader.class);
         loadCommands(
                 // Fun
                 new CmdBite(bot),
@@ -55,6 +55,7 @@ public class CommandLoader {
                 new CmdKitsune(bot),
                 new CmdLick(bot),
                 new CmdNeko(bot),
+                new CmdOkami(bot),
                 new CmdPat(bot),
                 new CmdPoke(bot),
                 new CmdSenko(bot),
@@ -96,17 +97,18 @@ public class CommandLoader {
                 new CmdEval(bot),
                 new CmdLeave(bot),
                 new CmdMsg(bot),
+                new CmdNews(bot),
                 new CmdShutdown(bot)
         );
         
         logger.info("Loaded {} commands!", COMMANDS.size());
     }
+    
+    public Set<Command> getCommands(){
+        return COMMANDS;
+    }
 
     private void loadCommands(Command... commands){
         COMMANDS.addAll(Arrays.asList(commands));
-    }
-
-    public Set<Command> getCommands(){
-        return COMMANDS;
     }
 }

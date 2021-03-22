@@ -86,6 +86,7 @@ public class CmdCheck implements Command{
             String text = builder.toString();
             if(!text.endsWith("```"))
                 text += "\n```";
+            
             msg.getTextChannel().sendMessage(text).queue();
         }
     }

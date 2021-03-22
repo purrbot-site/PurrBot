@@ -110,7 +110,7 @@ public class ReadyListener extends ListenerAdapter{
                     "Loaded Bot {} vBOT_VERSION with {} shard(s) and {} guilds!",
                     jda.getSelfUser().getAsTag(),
                     shardManager.getShardCache().size(),
-                    shardManager.getGuildCache().size()
+                    bot.getMessageUtil().formatNumber(shardManager.getGuildCache().size())
             );
         }
     }

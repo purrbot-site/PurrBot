@@ -53,7 +53,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                 @CommandAttribute(key = "help", value = "{p}fuck <@user> [--anal|--normal|--yaoi|--yuri]")
         }
 )
-public class CmdFuck implements Command, HttpUtil.ImageAPI{
+public class CmdFuck implements Command{
 
     private final PurrBot bot;
 
@@ -67,7 +67,6 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-
         if(msg.getMentionedUsers().isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.fuck.no_mention");
             return;
@@ -159,9 +158,9 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
     private boolean equalsAny(String id){
         return (
                 id.equals(Emotes.SEX.getId()) ||
-                id.equals(Emotes.SEX_ANAL.getId()) ||
-                id.equals(Emotes.SEX_YURI.getId()) ||
+                id.equals(Emotes.SEX_ANAL.getId()) || 
                 id.equals(Emotes.SEX_YAOI.getId()) ||
+                id.equals(Emotes.SEX_YURI.getId()) ||
                 id.equals(Emotes.ACCEPT.getId()) ||
                 id.equals(Emotes.CANCEL.getId())
         );
@@ -225,30 +224,35 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
                         )).queue();
                         return;
                     }
-                    
+    
+                    HttpUtil.ImageAPI api;
                     if(!hasArgs(args)){
-                        if(id.equals(Emotes.SEX_ANAL.getId()))
-                            bot.getHttpUtil().handleRequest(this, "anal", author, botMsg, target.getEffectiveName(), true);
-                        else
-                        if(id.equals(Emotes.SEX_YURI.getId()))
-                            bot.getHttpUtil().handleRequest(this, "yuri", author, botMsg, target.getEffectiveName(), true);
-                        else
-                        if(id.equals(Emotes.SEX_YAOI.getId()))
-                            bot.getHttpUtil().handleRequest(this, "yaoi", author, botMsg, target.getEffectiveName(), true);
-                        else
-                            bot.getHttpUtil().handleRequest(this, "fuck", author, botMsg, target.getEffectiveName(), true);
+                        if(id.equals(Emotes.SEX_ANAL.getId())){
+                            api = HttpUtil.ImageAPI.NSFW_ANAL;
+                        }else
+                        if(id.equals(Emotes.SEX_YAOI.getId())){
+                            api = HttpUtil.ImageAPI.NSFW_YAOI;
+                        }else
+                        if(id.equals(Emotes.SEX_YURI.getId())){
+                            api = HttpUtil.ImageAPI.NSFW_YURI;
+                        }else{
+                            api = HttpUtil.ImageAPI.NSFW_FUCK;
+                        }
                     }else{
-                        if(bot.getMessageUtil().hasArg("anal", args))
-                            bot.getHttpUtil().handleRequest(this, "anal", author, botMsg, target.getEffectiveName(), true);
-                        else
-                        if(bot.getMessageUtil().hasArg("yuri", args))
-                            bot.getHttpUtil().handleRequest(this, "yuri", author, botMsg, target.getEffectiveName(), true);
-                        else
-                        if(bot.getMessageUtil().hasArg("yaoi", args))
-                            bot.getHttpUtil().handleRequest(this, "yaoi", author, botMsg, target.getEffectiveName(), true);
-                        else
-                            bot.getHttpUtil().handleRequest(this, "fuck", author, botMsg, target.getEffectiveName(), true);
+                        if(bot.getMessageUtil().hasArg("anal", args)){
+                            api = HttpUtil.ImageAPI.NSFW_ANAL;
+                        }else
+                        if(bot.getMessageUtil().hasArg("yaoi", args)){
+                            api = HttpUtil.ImageAPI.NSFW_YAOI;
+                        }else
+                        if(bot.getMessageUtil().hasArg("yuri", args)){
+                            api = HttpUtil.ImageAPI.NSFW_YURI;
+                        }else{
+                            api = HttpUtil.ImageAPI.NSFW_FUCK;
+                        }
                     }
+                    
+                    bot.getHttpUtil().handleEdit(guild, channel, botMsg, api, author, target.getEffectiveName());
                 }, 1, TimeUnit.MINUTES,
                 () -> {
                     TextChannel channel = botMsg.getTextChannel();
@@ -265,30 +269,5 @@ public class CmdFuck implements Command, HttpUtil.ImageAPI{
                     )).queue();
                 }
         );
-    }
-    
-    @Override
-    public String getCategory(){
-        return "nsfw";
-    }
-    
-    @Override
-    public String getEndpoint(){
-        return "fuck";
-    }
-    
-    @Override
-    public boolean isImgRequired(){
-        return false;
-    }
-    
-    @Override
-    public boolean isNSFW(){
-        return true;
-    }
-    
-    @Override
-    public boolean isRequest(){
-        return true;
     }
 }

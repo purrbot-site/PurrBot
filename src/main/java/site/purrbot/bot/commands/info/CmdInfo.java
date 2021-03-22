@@ -22,7 +22,6 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDAInfo;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
@@ -50,9 +49,6 @@ public class CmdInfo implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-
         MessageEmbed embed = getEmbed(member);
         if(bot.getMessageUtil().hasArg("dm", args)){
             String mention = member.getAsMention();

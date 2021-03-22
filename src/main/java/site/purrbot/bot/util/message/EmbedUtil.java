@@ -20,11 +20,10 @@ package site.purrbot.bot.util.message;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
+import site.purrbot.bot.util.HttpUtil;
 
 import java.time.ZonedDateTime;
 
@@ -76,6 +75,45 @@ public class EmbedUtil {
         
         return embed.setDescription(msg).build();
         
+    }
+    
+    public void sendResponseEmbed(Message msg, TextChannel tc, HttpUtil.Result result, Member author, String targets){
+        String id = tc.getGuild().getId();
+        
+        String text;
+        if(result.getUrl().equals("https://purrbot.site/img/sfw/neko/img/neko_136.jpg")){
+            if(bot.isBeta()){
+                text = bot.getMsg(id, "snuggle.fun.neko.purr");
+            }else{
+                text = bot.getMsg(id, "purr.fun.neko.purr");
+            }
+        }else
+        if(result.getUrl().equals("https://purrbot.site/img/sfw/neko/img/neko_076.jpg")){
+            if(bot.isBeta()){
+                text = bot.getMsg(id, "snuggle.fun.neko.snuggle");
+            }else{
+                text = bot.getMsg(id, "purr.fun.neko.snuggle");
+            }
+        }else
+        if(author == null){
+            text = bot.getMsg(id, result.getPath() + "message");
+        }else
+        if(targets == null){
+            text = bot.getMsg(id, result.getPath() + "message", author.getEffectiveName());
+        }else{
+            text = bot.getMsg(id, result.getPath() + "message", author.getEffectiveName(), targets);
+        }
+        
+        MessageEmbed embed = getEmbed()
+                .setDescription(
+                        MarkdownSanitizer.escape(text)
+                )
+                .setImage(result.getUrl())
+                .build();
+        
+        msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
+                .embed(embed)
+                .queue(null, e -> tc.sendMessage(embed).queue());
     }
     
     public void sendError(TextChannel tc, Member member, String path){

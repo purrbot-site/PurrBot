@@ -26,6 +26,7 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import io.javalin.Javalin;
 import net.discordservices.dservices4j.Commands;
 import net.discordservices.dservices4j.DServices4J;
+import net.discordservices.dservices4j.News;
 import net.discordservices.dservices4j.Stats;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -53,10 +54,7 @@ import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.listener.ConnectionListener;
 import site.purrbot.bot.listener.GuildListener;
 import site.purrbot.bot.listener.ReadyListener;
-import site.purrbot.bot.util.CheckUtil;
-import site.purrbot.bot.util.DBUtil;
-import site.purrbot.bot.util.HttpUtil;
-import site.purrbot.bot.util.ImageUtil;
+import site.purrbot.bot.util.*;
 import site.purrbot.bot.util.file.FileManager;
 import site.purrbot.bot.util.file.lang.LangUtils;
 import site.purrbot.bot.util.message.EmbedUtil;
@@ -67,6 +65,7 @@ import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BiConsumer;
 
 public class PurrBot {
 
@@ -90,30 +89,14 @@ public class PurrBot {
     private boolean beta = false;
 
     private final CommandHandler<Message> CMD_HANDLER = new CommandHandler<>();
-    private EventWaiter waiter;
+    private final EventWaiter waiter = new EventWaiter();
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     
-    private final Cache<String, String> language = Caffeine.newBuilder()
+    private final Cache<String, GuildSettings> guildSettings = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    private final Cache<String, String> prefix = Caffeine.newBuilder()
-            .expireAfterWrite(10, TimeUnit.MINUTES)
-            .build();
-    private final Cache<String, String> welcomeBg = Caffeine.newBuilder()
-            .expireAfterWrite(10, TimeUnit.MINUTES)
-            .build();
-    private final Cache<String, String> welcomeChannel = Caffeine.newBuilder()
-            .expireAfterWrite(10, TimeUnit.MINUTES)
-            .build();
-    private final Cache<String, String> welcomeColor = Caffeine.newBuilder()
-            .expireAfterWrite(10, TimeUnit.MINUTES)
-            .build();
-    private final Cache<String, String> welcomeIcon = Caffeine.newBuilder()
-            .expireAfterWrite(10, TimeUnit.MINUTES)
-            .build();
-    private final Cache<String, String> welcomeMsg = Caffeine.newBuilder()
-            .expireAfterWrite(10, TimeUnit.MINUTES)
-            .build();
+    
+    private DServices4J dServices4J;
 
     public static void main(String[] args){
         try{
@@ -142,9 +125,7 @@ public class PurrBot {
         imageUtil   = new ImageUtil(this);
         langUtils   = new LangUtils(this);
         checkUtil   = new CheckUtil(this);
-
-        waiter = new EventWaiter();
-
+        
         beta = getFileManager().getBoolean("config", "beta");
 
         CMD_HANDLER.registerCommands(new HashSet<>(commandLoader.getCommands()));
@@ -218,64 +199,51 @@ public class PurrBot {
     }
 
     public String getLanguage(String id){
-        return language.get(id, k -> getDbUtil().getLanguage(id));
+        return getGuildSettings(id).getLanguage();
     }
     public String getPrefix(String id){
-        return prefix.get(id, k -> getDbUtil().getPrefix(id));
+        return getGuildSettings(id).getPrefix();
     }
     public String getWelcomeBg(String id){
-        return welcomeBg.get(id, k -> getDbUtil().getWelcomeBg(id));
+        return getGuildSettings(id).getWelcomeBackground();
     }
     public String getWelcomeChannel(String id){ 
-        return welcomeChannel.get(id, k -> getDbUtil().getWelcomeChannel(id)); 
+        return getGuildSettings(id).getWelcomeChannel();
     }
     public String getWelcomeColor(String id){
-        return welcomeColor.get(id, k -> getDbUtil().getWelcomeColor(id));
+        return getGuildSettings(id).getWelcomeColor();
     }
     public String getWelcomeIcon(String id){
-        return welcomeIcon.get(id, k -> getDbUtil().getWelcomeIcon(id));
+        return getGuildSettings(id).getWelcomeIcon();
     }
     public String getWelcomeMsg(String id){
-        return welcomeMsg.get(id, k -> getDbUtil().getWelcomeMsg(id));
+        return getGuildSettings(id).getWelcomeMessage();
     }
 
-    public void setLanguage(String key, String value){
-        getDbUtil().setLanguage(key, value);
-        language.put(key, value);
+    public void setLanguage(String id, String value){
+        updateGuild(id, GuildSettings.LANGUAGE, value, GuildSettings::setLanguage);
     }
-    public void setPrefix(String key, String value){
-        getDbUtil().setPrefix(key, value);
-        prefix.put(key, value);
+    public void setPrefix(String id, String value){
+        updateGuild(id, GuildSettings.PREFIX, value, GuildSettings::setPrefix);
     }
-    public void setWelcomeBg(String key, String value){
-        getDbUtil().setWelcomeBg(key, value);
-        welcomeBg.put(key, value);
+    public void setWelcomeBg(String id, String value){
+        updateGuild(id, GuildSettings.WELCOME_BACKGROUND, value, GuildSettings::setWelcomeBackground);
     }
-    public void setWelcomeChannel(String key, String value){
-        getDbUtil().setWelcomeChannel(key, value);
-        welcomeChannel.put(key, value);
+    public void setWelcomeChannel(String id, String value){
+        updateGuild(id, GuildSettings.WELCOME_CHANNEL, value, GuildSettings::setWelcomeChannel);
     }
-    public void setWelcomeColor(String key, String value){
-        getDbUtil().setWelcomeColor(key, value);
-        welcomeColor.put(key, value);
+    public void setWelcomeColor(String id, String value){
+        updateGuild(id, GuildSettings.WELCOME_COLOR, value, GuildSettings::setWelcomeColor);
     }
-    public void setWelcomeIcon(String key, String value){
-        getDbUtil().setWelcomeIcon(key, value);
-        welcomeIcon.put(key, value);
+    public void setWelcomeIcon(String id, String value){
+        updateGuild(id, GuildSettings.WELCOME_ICON, value, GuildSettings::setWelcomeIcon);
     }
-    public void setWelcomeMsg(String key, String value){
-        getDbUtil().setWelcomeMsg(key, value);
-        welcomeMsg.put(key, value);
+    public void setWelcomeMsg(String id, String value){
+        updateGuild(id, GuildSettings.WELCOME_MESSAGE, value, GuildSettings::setWelcomeMessage);
     }
 
     public void invalidateCache(String id){
-        language.invalidate(id);
-        prefix.invalidate(id);
-        welcomeBg.invalidate(id);
-        welcomeChannel.invalidate(id);
-        welcomeColor.invalidate(id);
-        welcomeIcon.invalidate(id);
-        welcomeMsg.invalidate(id);
+        guildSettings.invalidate(id);
     }
 
     public List<String> getBlacklist(){
@@ -330,7 +298,7 @@ public class PurrBot {
             PostAction post = new PostAction(getShardManager());
             BotBlockAPI botBlockAPI = new BotBlockAPI.Builder()
                     .addAuthToken(
-                            Site.BOTLIST_SPACE,
+                            Site.DISCORDLIST_SPACE,
                             getFileManager().getString("config", "tokens.botlist-space")
                     )
                     .addAuthToken(
@@ -351,7 +319,7 @@ public class PurrBot {
                     )
                     .build();
     
-            DServices4J dServices4J = new DServices4J.Builder()
+            dServices4J = new DServices4J.Builder()
                     .setToken(getFileManager().getString("config", "tokens.discordservices-net"))
                     .setId(IDs.PURR)
                     .build();
@@ -391,6 +359,12 @@ public class PurrBot {
         }
     }
     
+    public void postNews(boolean error, String title, String msg){
+        News news = dServices4J.getNews();
+        
+        news.postNews(title.replace("_", " "), msg, error);
+    }
+    
     public void disable(){
         scheduler.shutdown();
         shardManager.shutdown();
@@ -426,13 +400,19 @@ public class PurrBot {
                 .replace("{PAYPAL}", Emotes.PAYPAL.getEmote())
                 .replace("{PATREON}", Emotes.PATREON.getEmote())
                 .replace("{KOFI}", Emotes.KOFI.getEmote())
+                .replace("{PURR}", Emotes.PURR.getEmote())
+                .replace("{SNUGGLE}", Emotes.SNUGGLE.getEmote())
+                .replace("{AWOO}", Emotes.AWOO.getEmote())
+                
                 // Guild link
                 .replace("{guild_invite}", Links.DISCORD)
+                
                 // Wiki pages
                 .replace("{wiki}", Links.WIKI)
                 .replace("{wiki_bg}", Links.WIKI + "/welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI + "/welcome-images#icons")
                 .replace("{wiki_welcome}", Links.WIKI + "/welcome-channel")
+                
                 // Other pages
                 .replace("{github_url}", Links.GITHUB)
                 .replace("{twitter_url}", Links.TWITTER)
@@ -470,23 +450,55 @@ public class PurrBot {
     }
     
     private String getShardInfo(){
-        
         JSONArray array = new JSONArray();
         List<JDA> shards = new ArrayList<>(shardManager.getShards());
         
         shards.sort(Comparator.comparing(jda -> jda.getShardInfo().getShardId()));
-        for(JDA shard : shards){
-            JSONObject shardInfo = new JSONObject()
-                    .put("id", shard.getShardInfo().getShardId())
-                    .put("status", shard.getStatus());
-            
-            array.put(shardInfo);
-        }
         
-        JSONObject result = new JSONObject().put("shard_count", shardManager.getShardCache().size())
+        shards.stream().map(
+                shard -> new JSONObject()
+                        .put("id", shard.getShardInfo().getShardId())
+                        .put("status", shard.getStatus())
+                        .put("guilds", shard.getGuildCache().size())
+        ).forEach(array::put);
+        
+        JSONObject result = new JSONObject()
+                .put("shard_count", shardManager.getShardCache().size())
+                .put("guilds", shardManager.getGuildCache().size())
                 .put("timestamp", System.currentTimeMillis())
                 .put("shards", array);
         
         return result.toString(2);
+    }
+    
+    private void updateGuild(String id, String key, String value, BiConsumer<GuildSettings, String> mutator){
+        GuildSettings settings = getGuildSettings(id);
+        if(settings == null)
+            settings = getGuildSettings(id);
+        
+        mutator.accept(settings, value);
+        getDbUtil().updateSettings(id, key, value);
+        
+        guildSettings.put(id, settings);
+    }
+    
+    private GuildSettings getGuildSettings(String id){
+        return guildSettings.get(id, k -> {
+            Map<String, String> guild = getDbUtil().getGuild(id);
+            if(guild == null){
+                getDbUtil().addGuild(id);
+        
+                return GuildSettings.createDefault(isBeta());
+            }
+    
+            return new GuildSettings()
+                    .setLanguage(guild.getOrDefault(GuildSettings.LANGUAGE, GuildSettings.DEF_LANGUAGE))
+                    .setPrefix(guild.getOrDefault(GuildSettings.PREFIX, isBeta() ? GuildSettings.DEF_PREFIX_BETA : GuildSettings.DEF_PREFIX))
+                    .setWelcomeBackground(guild.getOrDefault(GuildSettings.WELCOME_BACKGROUND, GuildSettings.DEF_BACKGROUND))
+                    .setWelcomeChannel(guild.getOrDefault(GuildSettings.WELCOME_CHANNEL, GuildSettings.DEF_CHANNEL))
+                    .setWelcomeColor(guild.getOrDefault(GuildSettings.WELCOME_COLOR, GuildSettings.DEF_COLOR))
+                    .setWelcomeIcon(guild.getOrDefault(GuildSettings.WELCOME_ICON, GuildSettings.DEF_ICON))
+                    .setWelcomeMessage(guild.getOrDefault(GuildSettings.WELCOME_MESSAGE, GuildSettings.DEF_MESSAGE));
+        });
     }
 }

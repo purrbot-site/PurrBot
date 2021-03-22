@@ -19,25 +19,15 @@
 package site.purrbot.bot.util;
 
 import ch.qos.logback.classic.Logger;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import okhttp3.*;
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.constants.Emotes;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
-import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
+import java.util.concurrent.CompletableFuture;
 
 public class HttpUtil {
 
@@ -75,58 +65,51 @@ public class HttpUtil {
         }
     }
     
-    public void handleRequest(ImageAPI api, Member member, Message msg, boolean isGif){
-        handleRequest(api, member, msg, "", isGif);
+    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api){
+        handleEdit(guild, tc, msg, api, null, null, false);
     }
     
-    public void handleRequest(ImageAPI api, Member member, Message msg, String targets, boolean isGif){
-        handleRequest(api, null, member, msg, targets, isGif);
+    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api, boolean required){
+        handleEdit(guild, tc, msg, api, null, null, required);
     }
     
-    public void handleRequest(ImageAPI api, String endpoint, Member member, Message msg, String targets, boolean isGif){
-        final String apiEndpoint = endpoint == null ? api.getEndpoint() : endpoint;
-        
-        String url = getUrl(api.isNSFW(), apiEndpoint, isGif);
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-        
-        client.newCall(request).enqueue(new Callback(){
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException ex){
-                logger.warn("HTTP Request failed for endpoint {}", apiEndpoint, ex);
-                editMsg(api, member, msg, targets, null);
-            }
+    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api, Member author){
+        handleEdit(guild, tc, msg, api, author, null, false);
+    }
     
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException{
-                try(ResponseBody responseBody = response.body()){
-                    if(!response.isSuccessful()){
-                        logger.warn("Received non-successful response {} ({})", response.code(), response.message());
-                        logger.warn("Endpoint: {}", endpoint);
-                        editMsg(api, member, msg, targets, null);
-                        return;
-                    }
-                    
-                    if(responseBody == null){
-                        logger.warn("Received empty response body.");
-                        logger.warn("Endpoint: {}", endpoint);
-                        editMsg(api, member, msg, targets, null);
-                        return;
-                    }
-                    
-                    String body = responseBody.string();
-                    if(body.isEmpty()){
-                        logger.warn("Received empty response body.");
-                        logger.warn("Endpoint: {}", endpoint);
-                        editMsg(api, member, msg, targets, null);
-                        return;
-                    }
-                    
-                    String link = new JSONObject(body).optString("link", null);
-                    editMsg(api, member, msg, targets, link);
+    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api, Member author, String targets){
+        handleEdit(guild, tc, msg, api, author, targets, false);
+    }
+    
+    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api, Member author, String targets, boolean required){
+        getImage(api).whenComplete((result, ex) -> {
+            if(ex != null || result.getUrl() == null){
+                if(required){
+                    bot.getEmbedUtil().sendError(tc, author, "errors.api_error");
+                    return;
                 }
+                
+                String text;
+                if(author == null){
+                    text = bot.getMsg(guild.getId(), api.getPath());
+                }else
+                if(targets == null){
+                    text = bot.getMsg(guild.getId(), api.getPath(), author.getEffectiveName());
+                }else{
+                    text = bot.getMsg(guild.getId(), api.getPath(), author.getEffectiveName(), targets);
+                }
+                
+                msg.editMessage(
+                        MarkdownSanitizer.escape(text)
+                ).queue(null, e -> tc.sendMessage(
+                        MarkdownSanitizer.escape(text)
+                ).queue());
+                return;
             }
+            
+            
+            
+            bot.getEmbedUtil().sendResponseEmbed(msg, tc, result, author, targets);
         });
     }
     
@@ -138,104 +121,141 @@ public class HttpUtil {
         }
     }
     
-    private void editMsg(ImageAPI api, Member member, Message msg, String targets, String link){
-        String path = getPath(api.getCategory(), api.getEndpoint()) + "message";
-        Guild guild = msg.getGuild();
-        boolean imgRequired = api.isImgRequired();
-        boolean isRequest = api.isRequest();
-        
-        if(link == null){
-            if(imgRequired){
-                bot.getEmbedUtil().sendError(msg.getTextChannel(), member, "errors.api_error");
-                msg.delete().queue();
-                return;
-            }
+    private CompletableFuture<Result> getImage(ImageAPI imageAPI){
+        return CompletableFuture.supplyAsync(() -> {
+            Request request = new Request.Builder()
+                    .url(imageAPI.getUrl())
+                    .build();
             
-            msg.editMessage(MarkdownSanitizer.escape(
-                    bot.getMsg(guild.getId(), path, member.getEffectiveName(), targets)
-            )).queue();
-            return;
-        }
-    
-        EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
-                .setDescription(MarkdownSanitizer.escape(
-                        bot.getMsg(guild.getId(), path, member.getEffectiveName(), targets)
-                ))
-                .setImage(link);
-        
-        if(guild.getSelfMember().hasPermission(msg.getTextChannel(), Permission.MESSAGE_MANAGE))
-            msg.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
-        
-        if(link.equalsIgnoreCase("https://purrbot.site/img/sfw/neko/img/neko_076.jpg")){
-            if(bot.isBeta()){
-                embed.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.snuggle"));
-            }else{
-                embed.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.snuggle"));
-            }
-            msg.addReaction(Emotes.SNUGGLE.getNameAndId()).queue();
-        }else
-        if(link.equalsIgnoreCase("https://purrbot.site/img/sfw/neko/img/neko_136.jpg")){
-            if(bot.isBeta()){
-                embed.setDescription(bot.getMsg(guild.getId(), "snuggle.fun.neko.purr"));
-            }else{
-                embed.setDescription(bot.getMsg(guild.getId(), "purr.fun.neko.purr"));
-            }
-            msg.addReaction(Emotes.PURR.getNameAndId()).queue();
-        }
-        
-        msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE).embed(embed.build()).queue(
-                v -> {
-                    if(isRequest){
-                        MessageEmbed success = bot.getEmbedUtil().getEmbed()
-                                .setDescription(
-                                        bot.getMsg(guild.getId(), "request.accepted", member.getEffectiveName(), targets)
-                                                .replace("{link}", msg.getJumpUrl())
-                                )
-                                .build();
-                        
-                        msg.getTextChannel().sendMessage(member.getAsMention())
-                                .embed(success)
-                                .queue(del -> del.delete().queueAfter(10, TimeUnit.SECONDS));
-                    }
-                },
-                e -> {
-                    if(isRequest){
-                        msg.getTextChannel().sendMessage(embed.build()).queue(
-                                result -> {
-                                    MessageEmbed success = bot.getEmbedUtil().getEmbed()
-                                            .setDescription(
-                                                    bot.getMsg(guild.getId(), "request.accepted", member.getEffectiveName(), targets)
-                                                            .replace("{link}", result.getJumpUrl())
-                                            )
-                                            .build();
-                                    
-                                    msg.getTextChannel().sendMessage(member.getAsMention())
-                                            .embed(success)
-                                            .queue(del -> del.delete().queueAfter(10, TimeUnit.SECONDS));
-                                }
-                        );
-                    }
+            try(Response response = client.newCall(request).execute()){
+                if(!response.isSuccessful()){
+                    logger.warn("Non-Successfull HTTP-Response for {}", imageAPI.getUrl());
+                    logger.warn("Status-Code: {}; Message: {}", response.code(), response.message());
+                    
+                    return new Result(null, imageAPI.getPath());
                 }
-        );
+                
+                ResponseBody body = response.body();
+                if(body == null){
+                    logger.warn("Received null Body for {}", imageAPI.getUrl());
+                    
+                    return new Result(null, imageAPI.getPath());
+                }
+                
+                String bodyString = body.string();
+                if(bodyString.isEmpty()){
+                    logger.warn("Received empty body!");
+                    
+                    return new Result(null, imageAPI.getPath());
+                }
+                
+                String link = new JSONObject(bodyString).optString("link", null);
+                return new Result(link, imageAPI.getPath());
+            }catch(IOException ex){
+                return new Result(null, imageAPI.getPath());
+            }
+        });
     }
     
-    private String getUrl(boolean nsfw, String endpoint, boolean gif){
-        return "https://purrbot.site/api/img/" + (nsfw ? "nsfw" : "sfw") + "/" + endpoint + "/" + (gif ? "gif" : "img");
+    public enum ImageAPI{
+        // SFW Gifs
+        BITE     ("bite",    true, false),
+        BLUSH    ("blush",   true, false),
+        CRY      ("cry",     true, false),
+        CUDDLE   ("cuddle",  true, false),
+        DANCE    ("dance",   true, false),
+        EEVEE_GIF("eevee",   true, false),
+        FEED     ("feed",    true, false),
+        FLUFF    ("fluff",   true, false),
+        HUG      ("hug",     true, false),
+        KISS     ("kiss",    true, false),
+        LICK     ("lick",    true, false),
+        NEKO_GIF ("neko",    true, false),
+        PAT      ("pat",     true, false),
+        POKE     ("poke",    true, false),
+        SLAP     ("slap",    true, false),
+        SMILE    ("smile",   true, false),
+        TAIL     ("tail",    true, false),
+        TICKLE   ("tickle",  true, false),
+        
+        // NSFW Gifs
+        NSFW_ANAL         ("anal",          "fuck",      true, true),
+        NSFW_BLOWJOB      ("blowjob",                              true, true),
+        NSFW_CUM          ("cum",                                  true, true),
+        NSFW_FUCK         ("fuck",                                 true, true),
+        NSFW_NEKO_GIF     ("neko",          "lewd",      true, true),
+        NSFW_PUSSYLICK    ("pussylick",                            true, true),
+        NSFW_SOLO         ("solo",                                 true, true),
+        NSFW_THREESOME_FFF("threesome_fff", "threesome", true, true),
+        NSFW_THREESOME_FFM("threesome_ffm", "threesome", true, true),
+        NSFW_THREESOME_MMF("threesome_mmf", "threesome", true, true),
+        NSFW_YAOI         ("yaoi",          "fuck",      true, true),
+        NSFW_YURI         ("yuri",          "fuck",      true, true),
+        
+        // SFW Images
+        EEVEE_IMG("eevee",   false, false),
+        HOLO     ("holo",    false, false),
+        KITSUNE  ("kitsune", false, false),
+        NEKO_IMG ("neko",    false, false),
+        OKAMI    ("okami",   false, false),
+        SENKO    ("senko",   false, false),
+        
+        // NSFW Images
+        NSFW_NEKO_IMG("neko", "lewd", false, true);
+        
+        private final String name;
+        private final String pathName;
+        private final boolean gif;
+        private final boolean nsfw;
+        
+        ImageAPI(String name, boolean gif, boolean nsfw){
+            this(name, name, gif, nsfw);
+        }
+        
+        ImageAPI(String name, String pathName, boolean gif, boolean nsfw){
+            this.name = name;
+            this.pathName = pathName;
+            this.gif = gif;
+            this.nsfw = nsfw;
+        }
+    
+        public String getName(){
+            return name;
+        }
+    
+        public String getUrl(){
+            return String.format(
+                    "https://purrbot.site/api/img/%s/%s/%s",
+                    nsfw ? "nsfw" : "sfw",
+                    name,
+                    gif ? "gif" : "img"
+            );
+        }
+        
+        public String getPath(){
+            return String.format(
+                    "purr.%s.%s.",
+                    nsfw ? "nsfw" : "fun",
+                    pathName
+            );
+        }
     }
     
-    private String getPath(String category, String endpoint){
-        return "purr." + category + "." + endpoint + ".";
-    }
+    public static class Result{
+        private final String url;
+        private final String path;
+        
+        public Result(String url, String path){
+            this.url = url;
+            this.path = path;
+        }
     
-    public interface ImageAPI{
-        String getCategory();
-        
-        String getEndpoint();
-        
-        boolean isImgRequired();
-        
-        boolean isNSFW();
-        
-        boolean isRequest();
+        public String getUrl(){
+            return url;
+        }
+    
+        public String getPath(){
+            return path;
+        }
     }
 }

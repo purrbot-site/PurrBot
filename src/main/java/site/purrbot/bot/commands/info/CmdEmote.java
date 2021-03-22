@@ -60,9 +60,6 @@ public class CmdEmote implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-        
         if(bot.getMessageUtil().hasArg("search", args)){
             if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_HISTORY)){
                 bot.getEmbedUtil().sendPermError(tc, member, Permission.MESSAGE_HISTORY, true);
@@ -108,6 +105,11 @@ public class CmdEmote implements Command{
     
     private void send(EmbedPaginator.Builder builder, TextChannel tc, Member member, Map<String, List<Emote>> emotes){
         int pos = 0;
+        
+        int size = emotes.values().stream()
+                .mapToInt(List::size)
+                .sum();
+        
         for(Map.Entry<String, List<Emote>> entry : emotes.entrySet()){
             for(Emote emote : entry.getValue()){
                 pos++;
@@ -117,7 +119,7 @@ public class CmdEmote implements Command{
                         member.getGuild(),
                         entry.getKey(),
                         pos,
-                        emotes.size()
+                        size
                 ));
             }
         }

@@ -228,7 +228,7 @@ public class CmdUser implements Command{
                     break;
                 
                 case VERIFIED_DEVELOPER:
-                    sb.append(Emotes.VERIFIED_DEV.getEmote());
+                    sb.append(Emotes.EARLY_VERIFIED_BOT_DEV.getEmote());
             }
         }
         

@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.nsfw;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -39,7 +38,7 @@ import site.purrbot.bot.util.HttpUtil;
                 @CommandAttribute(key = "help", value = "{p}solo")
         }
 )
-public class CmdSolo implements Command, HttpUtil.ImageAPI{
+public class CmdSolo implements Command{
 
     private final PurrBot bot;
 
@@ -49,36 +48,8 @@ public class CmdSolo implements Command, HttpUtil.ImageAPI{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-
-        tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.nsfw.solo.loading")
-        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, true));
-    }
-    
-    @Override
-    public String getCategory(){
-        return "nsfw";
-    }
-    
-    @Override
-    public String getEndpoint(){
-        return "solo";
-    }
-    
-    @Override
-    public boolean isImgRequired(){
-        return true;
-    }
-    
-    @Override
-    public boolean isNSFW(){
-        return true;
-    }
-    
-    @Override
-    public boolean isRequest(){
-        return false;
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.solo.loading")).queue(message ->
+                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.NSFW_SOLO, member)
+        );
     }
 }

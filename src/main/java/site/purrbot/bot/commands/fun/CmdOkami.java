@@ -16,7 +16,7 @@
  *  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package site.purrbot.bot.commands.info;
+package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
@@ -26,43 +26,29 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-
-import java.time.temporal.ChronoUnit;
+import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
-        name = "Ping",
-        description = "purr.info.ping.description",
-        triggers = {"ping"},
+        name = "Okami",
+        description = "purr.fun.okami.description",
+        triggers = {"okami", "wolf", "wolfgirl"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}ping"),
-                @CommandAttribute(key = "help", value = "{p}ping")
+                @CommandAttribute(key = "category", value = "fun"),
+                @CommandAttribute(key = "usage", value = "{p}okami"),
+                @CommandAttribute(key = "help", value = "{p}okami")
         }
 )
-public class CmdPing implements Command{
-
+public class CmdOkami implements Command{
     private final PurrBot bot;
-    public CmdPing(PurrBot bot){
+    
+    public CmdOkami(PurrBot bot){
         this.bot = bot;
     }
-
+    
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        tc.sendMessage(
-                bot.getRandomMsg(guild.getId(), "purr.info.ping.loading")
-        ).queue(message -> msg.getJDA().getRestPing().queue(time -> message.editMessage(
-                bot.getMsg(guild.getId(), "purr.info.ping.info_full")
-                        .replace("{edit_message}", String.valueOf(
-                                msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS)
-                        ))
-                        .replace("{discord}", String.valueOf(msg.getJDA().getGatewayPing()))
-                        .replace("{rest_action}", String.valueOf(time))
-        ).queue(), throwable -> message.editMessage(
-                bot.getMsg(guild.getId(), "purr.info.ping.info")
-                        .replace("{edit_message}", String.valueOf(
-                                msg.getTimeCreated().until(message.getTimeCreated(), ChronoUnit.MILLIS)
-                        ))
-                        .replace("{discord}", String.valueOf(msg.getJDA().getGatewayPing()))
-        ).queue()));
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.okami.loading")).queue(message -> 
+                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.OKAMI, true)
+        );
     }
 }

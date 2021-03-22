@@ -18,12 +18,14 @@
 
 package site.purrbot.bot.commands.fun;
 
+import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
@@ -41,9 +43,10 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}slap <@user> [@user ...]")
         }
 )
-public class CmdSlap implements Command, HttpUtil.ImageAPI{
+public class CmdSlap implements Command{
 
     private final PurrBot bot;
+    private final Logger logger = (Logger)LoggerFactory.getLogger("Command - Slap");
 
     public CmdSlap(PurrBot bot){
         this.bot = bot;
@@ -68,7 +71,10 @@ public class CmdSlap implements Command, HttpUtil.ImageAPI{
                         bot.getRandomMsg(guild.getId(), "purr.fun.slap.mention_purr", member.getAsMention())
                 ).queue();
             }
-            msg.addReaction("\uD83D\uDE2D").queue();
+            msg.addReaction("\uD83D\uDE2D").queue(
+                    null,
+                    e -> logger.warn("Couldn't add a Reaction to a message.")
+            );
         }
 
         if(members.contains(member)){
@@ -86,33 +92,8 @@ public class CmdSlap implements Command, HttpUtil.ImageAPI{
         if(targets.isEmpty())
             return;
 
-        tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.fun.slap.loading")
-        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, targets, true));
-    }
-    
-    @Override
-    public String getCategory(){
-        return "fun";
-    }
-    
-    @Override
-    public String getEndpoint(){
-        return "slap";
-    }
-    
-    @Override
-    public boolean isImgRequired(){
-        return false;
-    }
-    
-    @Override
-    public boolean isNSFW(){
-        return false;
-    }
-    
-    @Override
-    public boolean isRequest(){
-        return false;
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.slap.loading")).queue(message ->
+                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.SLAP, member, targets)
+        );
     }
 }

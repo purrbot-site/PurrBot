@@ -38,7 +38,7 @@ import site.purrbot.bot.util.HttpUtil;
                 @CommandAttribute(key = "help", value = "{p}fluff <@user>")
         }
 )
-public class CmdFluff implements Command, HttpUtil.ImageAPI{
+public class CmdFluff implements Command{
     
     private final PurrBot bot;
     
@@ -93,32 +93,7 @@ public class CmdFluff implements Command, HttpUtil.ImageAPI{
             ).queue();
             return;
         }
-        
-        bot.getMessageUtil().handleReactionEvent(tc, member, target, this);
-    }
     
-    @Override
-    public String getCategory(){
-        return "fun";
-    }
-    
-    @Override
-    public String getEndpoint(){
-        return "fluff";
-    }
-    
-    @Override
-    public boolean isImgRequired(){
-        return true;
-    }
-    
-    @Override
-    public boolean isNSFW(){
-        return false;
-    }
-    
-    @Override
-    public boolean isRequest(){
-        return true;
+        bot.getMessageUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.FLUFF);
     }
 }

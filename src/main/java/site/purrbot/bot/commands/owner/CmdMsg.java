@@ -45,7 +45,6 @@ public class CmdMsg implements Command{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
-        
         if(args.length <= 1){
             msg.addReaction(Emotes.CANCEL.getNameAndId()).queue();
             return;

@@ -49,18 +49,6 @@ public class DBUtil {
     /*
      *  Guild Stuff
      */
-    private void checkValue(String id, String key, String def){
-        Map<?,?> map = getGuild(id);
-
-        if(map == null){
-            addGuild(id);
-            return;
-        }
-
-        if(map.get(key) == null)
-            r.table(guildTable).get(id).update(r.hashMap(key, def)).run(connection);
-    }
-
     public void addGuild(String id){
         r.table(guildTable).insert(
                 r.array(
@@ -77,7 +65,7 @@ public class DBUtil {
     }
 
     public void delGuild(String id){
-        Map<?,?> guild = getGuild(id);
+        Map<String,String> guild = getGuild(id);
 
         if(guild == null) 
             return;
@@ -85,110 +73,22 @@ public class DBUtil {
         r.table(guildTable).get(id).delete().run(connection);
     }
 
-    private Map<String,String> getGuild(String id){
+    public Map<String,String> getGuild(String id){
         return r.table(guildTable)
                 .get(id)
                 .run(connection, Types.mapOf(String.class, String.class))
-                .single();
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
     
-    /*
-     * Language stuff
-     */
-    public String getLanguage(String id){
-        checkValue(id, "language", "en");
-        Map<String,String> guild = getGuild(id);
+    public void updateSettings(String id, String key, String value){
+        Map<String, String> guild = getGuild(id);
+        if(guild == null)
+            addGuild(id);
         
-        return guild.get("language");
-    }
-    
-    public void setLanguage(String id, String language){
-        checkValue(id, "language", "en");
-        
-        r.table(guildTable).get(id).update(r.hashMap("language", language)).run(connection);
-    }
-    
-    /*
-     *  Prefix Stuff
-     */
-    public String getPrefix(String id){
-        checkValue(id, "prefix", "p.");
-        Map<String,String> guild = getGuild(id);
-
-        return guild.get("prefix");
-    }
-
-    public void setPrefix(String id, String prefix){
-        checkValue(id, "prefix", prefix);
-
-        r.table(guildTable).get(id).update(r.hashMap("prefix", prefix)).run(connection);
-    }
-
-    /*
-     *  Welcome Stuff
-     */
-    public String getWelcomeBg(String id){
-        checkValue(id, "welcome_background", "color_white");
-        Map<String,String> guild = getGuild(id);
-
-        return guild.get("welcome_background");
-    }
-
-    public void setWelcomeBg(String id, String background){
-        checkValue(id, "welcome_background", background);
-
-        r.table(guildTable).get(id).update(r.hashMap("welcome_background", background)).run(connection);
-    }
-
-    public String getWelcomeChannel(String id){
-        checkValue(id, "welcome_channel", "none");
-        Map<String,String> guild = getGuild(id);
-
-        return guild.get("welcome_channel");
-    }
-
-    public void setWelcomeChannel(String id, String channelID){
-        checkValue(id, "welcome_channel", channelID);
-
-        r.table(guildTable).get(id).update(r.hashMap("welcome_channel", channelID)).run(connection);
-    }
-
-    public String getWelcomeColor(String id){
-        checkValue(id, "welcome_color", "hex:000000");
-        Map<String,String> guild = getGuild(id);
-
-        return guild.get("welcome_color");
-    }
-
-    public void setWelcomeColor(String id, String color){
-        checkValue(id, "welcome_color", color);
-
-        r.table(guildTable).get(id).update(r.hashMap("welcome_color", color)).run(connection);
-    }
-
-    public String getWelcomeIcon(String id){
-        checkValue(id, "welcome_icon", "purr");
-        Map<String,String> guild = getGuild(id);
-
-        return guild.get("welcome_icon");
-    }
-
-    public void setWelcomeIcon(String id, String icon){
-        checkValue(id, "welcome_icon", icon);
-
-        r.table(guildTable).get(id).update(r.hashMap("welcome_icon", icon)).run(connection);
-    }
-
-    public String getWelcomeMsg(String id){
-        checkValue(id, "welcome_message", "Welcome {mention}!");
-        Map<String,String> guild = getGuild(id);
-
-        return guild.get("welcome_message");
-    }
-
-    public void setWelcomeMsg(String id, String message){
-        checkValue(id, "welcome_message", message);
-
-        r.table(guildTable).get(id).update(r.hashMap("welcome_message", message)).run(connection);
+        r.table(guildTable).get(id)
+                .update(r.hashMap(key, value))
+                .run(connection);
     }
 }

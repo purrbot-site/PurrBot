@@ -53,7 +53,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                 @CommandAttribute(key = "help", value = "{p}threesome <@user1> <@user2> [--fff|--mmf]")
         }
 )
-public class CmdThreesome implements Command, HttpUtil.ImageAPI{
+public class CmdThreesome implements Command{
     
     private final PurrBot bot;
     
@@ -201,13 +201,18 @@ public class CmdThreesome implements Command, HttpUtil.ImageAPI{
                                 bot.getMsg(guild.getId(), "misc.and"),
                                 target2.getEffectiveName()
                         );
-                        if(bot.getMessageUtil().hasArg("mmf", args))
-                            bot.getHttpUtil().handleRequest(this, "threesome_mmf", author, botMsg, targets, true);
-                        else
-                        if(bot.getMessageUtil().hasArg("fff", args))
-                            bot.getHttpUtil().handleRequest(this, "threesome_fff", author, botMsg, targets, true);
-                        else
-                            bot.getHttpUtil().handleRequest(this, "threesome_ffm", author, botMsg, targets, true);
+    
+                        HttpUtil.ImageAPI api;
+                        if(bot.getMessageUtil().hasArg("mmf", args)){
+                            api = HttpUtil.ImageAPI.NSFW_THREESOME_MMF;
+                        }else
+                        if(bot.getMessageUtil().hasArg("fff", args)){
+                            api = HttpUtil.ImageAPI.NSFW_THREESOME_FFF;
+                        }else{
+                            api = HttpUtil.ImageAPI.NSFW_THREESOME_FFM;
+                        }
+                        
+                        bot.getHttpUtil().handleEdit(guild, channel, botMsg, api, author, targets);
                     }
                 }, 1, TimeUnit.MINUTES,
                 () -> {
@@ -235,30 +240,5 @@ public class CmdThreesome implements Command, HttpUtil.ImageAPI{
                     )).queue();
                 }
         );
-    }
-    
-    @Override
-    public String getCategory(){
-        return "nsfw";
-    }
-    
-    @Override
-    public String getEndpoint(){
-        return "threesome";
-    }
-    
-    @Override
-    public boolean isImgRequired(){
-        return false;
-    }
-    
-    @Override
-    public boolean isNSFW(){
-        return true;
-    }
-    
-    @Override
-    public boolean isRequest(){
-        return true;
     }
 }

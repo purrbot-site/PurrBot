@@ -57,27 +57,6 @@ public class CmdShards implements Command{
         this.bot = bot;
     }
     
-    private String getStatus(JDA jda, String id){
-        String status;
-        switch(jda.getStatus()){
-            case CONNECTED:
-                status = bot.getMsg(id, "purr.info.shards.status.connected");
-                break;
-            
-            case ATTEMPTING_TO_RECONNECT:
-            case RECONNECT_QUEUED:
-                status = bot.getMsg(id, "purr.info.shards.status.reconnect");
-                break;
-    
-            case DISCONNECTED:
-            default:
-                status = bot.getMsg(id, "purr.info.shards.status.disconnected");
-                break;
-        }
-        
-        return "`" + status + "`";
-    }
-    
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         EmbedPaginator.Builder builder = new EmbedPaginator.Builder()
@@ -166,5 +145,26 @@ public class CmdShards implements Command{
         
         builder.build()
                .display(tc);
+    }
+    
+    private String getStatus(JDA jda, String id){
+        String status;
+        switch(jda.getStatus()){
+            case CONNECTED:
+                status = bot.getMsg(id, "purr.info.shards.status.connected");
+                break;
+            
+            case ATTEMPTING_TO_RECONNECT:
+            case RECONNECT_QUEUED:
+                status = bot.getMsg(id, "purr.info.shards.status.reconnect");
+                break;
+            
+            case DISCONNECTED:
+            default:
+                status = bot.getMsg(id, "purr.info.shards.status.disconnected");
+                break;
+        }
+        
+        return "`" + status + "`";
     }
 }

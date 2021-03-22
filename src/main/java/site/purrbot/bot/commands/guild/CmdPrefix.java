@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.guild;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -49,9 +48,6 @@ public class CmdPrefix implements Command{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-
         if(args.length < 1){
             bot.getEmbedUtil().sendError(tc, member, "purr.guild.prefix.few_args");
             return;
@@ -85,7 +81,7 @@ public class CmdPrefix implements Command{
     }
     
     private void resetPrefix(TextChannel tc, Member member){
-        bot.setPrefix(member.getGuild().getId(), ".");
+        bot.setPrefix(member.getGuild().getId(), bot.isBeta() ? "p.." : "p.");
         
         MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                 .setColor(0x00FF00)

@@ -36,8 +36,8 @@ public class CheckUtil{
         this.bot = bot;
     }
     
-    public boolean notDeveloper(Member member){
-        return !member.getId().equals(IDs.ANDRE_601);
+    public boolean isDeveloper(Member member){
+        return member.getId().equals(IDs.ANDRE_601);
     }
     
     public boolean lacksPermission(TextChannel tc, Member member, Permission permission){

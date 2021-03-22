@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -39,7 +38,7 @@ import site.purrbot.bot.util.HttpUtil;
                 @CommandAttribute(key = "help", value = "{p}neko [--gif]")
         }
 )
-public class CmdNeko implements Command, HttpUtil.ImageAPI{
+public class CmdNeko implements Command{
 
     private final PurrBot bot;
 
@@ -49,38 +48,12 @@ public class CmdNeko implements Command, HttpUtil.ImageAPI{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-
-        boolean isGif = bot.getMessageUtil().hasArg("gif", args);
-        
-        tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.fun.neko.loading")
-        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, isGif));
-    }
-    
-    @Override
-    public String getCategory(){
-        return "fun";
-    }
-    
-    @Override
-    public String getEndpoint(){
-        return "neko";
-    }
-    
-    @Override
-    public boolean isImgRequired(){
-        return true;
-    }
-    
-    @Override
-    public boolean isNSFW(){
-        return false;
-    }
-    
-    @Override
-    public boolean isRequest(){
-        return false;
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.neko.loading")).queue(message -> {
+            if(bot.getMessageUtil().hasArg("gif", args)){
+                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.NEKO_GIF, true);
+            }else{
+                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.NEKO_IMG, true);
+            }
+        });
     }
 }

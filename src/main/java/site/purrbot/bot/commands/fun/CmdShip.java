@@ -49,7 +49,7 @@ import java.util.concurrent.TimeUnit;
 public class CmdShip implements Command{
 
     private final PurrBot bot;
-    Random random = new Random();
+    private final Random random = new Random();
     
     Cache<String, Integer> cache = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)

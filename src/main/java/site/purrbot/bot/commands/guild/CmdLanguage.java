@@ -20,7 +20,6 @@ package site.purrbot.bot.commands.guild;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -54,9 +53,6 @@ public class CmdLanguage implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-            msg.delete().queue();
-        
         if(args.length < 1){
             MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                     .setDescription(
@@ -79,7 +75,7 @@ public class CmdLanguage implements Command{
             
             tc.sendMessage(embed).queue();
         }else{
-            if(args[0].toLowerCase().equals("reset")){
+            if(args[0].equalsIgnoreCase("reset")){
                 bot.setLanguage(guild.getId(), "en");
                 
                 MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
@@ -89,7 +85,7 @@ public class CmdLanguage implements Command{
                 
                 tc.sendMessage(embed).queue();
             }else
-            if(args[0].toLowerCase().equals("set")){
+            if(args[0].equalsIgnoreCase("set")){
                 if(args.length < 2){
                     bot.getEmbedUtil().sendError(tc, member, "purr.guild.language.few_args");
                     return;

@@ -24,7 +24,6 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.sharding.ShardManager;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -55,8 +54,6 @@ public class CmdLeave implements Command{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
-        ShardManager shardManager = bot.getShardManager();
-
         String pm = null;
     
         String s = msg.getContentRaw();
@@ -66,8 +63,8 @@ public class CmdLeave implements Command{
 
         String id = args[0];
 
-        String finalPm = pm;
-        Guild targetGuild = shardManager.getGuildById(id);
+        final String finalPm = pm;
+        Guild targetGuild = bot.getShardManager().getGuildById(id);
 
         if(targetGuild == null)
             return;
@@ -79,33 +76,19 @@ public class CmdLeave implements Command{
         }
 
         owner.getUser().openPrivateChannel()
-                .flatMap(channel -> channel.sendMessage(String.format(
-                        "I left your Discord `%s` for the following reason:\n" +
-                        "```\n" +
-                        "%s\n" +
-                        "```",
-                        targetGuild.getName(),
-                        finalPm == null ? "No reason given" : finalPm
-                )))
+                .flatMap(
+                        channel -> channel.sendMessage(String.format(
+                                "I left your Discord `%s` for the following reason:\n" + 
+                                "```\n" + 
+                                "%s\n" + 
+                                "```", 
+                                targetGuild.getName(), 
+                                finalPm == null ? "No reason given" : finalPm
+                        ))
+                )
                 .queue(
                         message -> targetGuild.leave().queue(),
                         throwable -> targetGuild.leave().queue()
                 );
-        
-        targetGuild.getOwner().getUser().openPrivateChannel().queue(
-                privateChannel -> privateChannel.sendMessage(String.format(
-                        "I left your Discord `%s` for the following reason:\n" +
-                        "```\n" +
-                        "%s\n" +
-                        "```",
-                        targetGuild.getName(),
-                        finalPm == null ? "No reason given" : finalPm
-                )).queue(message -> targetGuild.leave().queue(),
-                        throwable -> targetGuild.leave().queue()),
-                throwable -> {
-                    tc.sendMessage("Couldn't send PM to user!").queue();
-                    targetGuild.leave().queue();
-                }
-        );
     }
 }

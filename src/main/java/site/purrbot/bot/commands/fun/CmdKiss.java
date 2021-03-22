@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}kiss <@user> [@user ...]")
         }
 )
-public class CmdKiss implements Command, HttpUtil.ImageAPI{
+public class CmdKiss implements Command{
     
     private final PurrBot bot;
 
@@ -98,33 +98,8 @@ public class CmdKiss implements Command, HttpUtil.ImageAPI{
         if(targets.isEmpty())
             return;
         
-        tc.sendMessage(
-                bot.getMsg(guild.getId(), "purr.fun.kiss.loading")
-        ).queue(message -> bot.getHttpUtil().handleRequest(this, member, message, targets, true));
-    }
-    
-    @Override
-    public String getCategory(){
-        return "fun";
-    }
-    
-    @Override
-    public String getEndpoint(){
-        return "kiss";
-    }
-    
-    @Override
-    public boolean isImgRequired(){
-        return false;
-    }
-    
-    @Override
-    public boolean isNSFW(){
-        return false;
-    }
-    
-    @Override
-    public boolean isRequest(){
-        return false;
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.kiss.loading")).queue(message ->
+                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.KISS, member, targets)
+        );
     }
 }

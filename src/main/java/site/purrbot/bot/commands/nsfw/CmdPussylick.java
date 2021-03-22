@@ -38,7 +38,7 @@ import site.purrbot.bot.util.HttpUtil;
                 @CommandAttribute(key = "help", value = "{p}plick <@user>")
         }
 )
-public class CmdPussylick implements Command, HttpUtil.ImageAPI{
+public class CmdPussylick implements Command{
     
     private final PurrBot bot;
     
@@ -87,31 +87,6 @@ public class CmdPussylick implements Command, HttpUtil.ImageAPI{
             return;
         }
         
-        bot.getMessageUtil().handleReactionEvent(tc, member, target, this);
-    }
-    
-    @Override
-    public String getCategory(){
-        return "nsfw";
-    }
-    
-    @Override
-    public String getEndpoint(){
-        return "pussylick";
-    }
-    
-    @Override
-    public boolean isImgRequired(){
-        return false;
-    }
-    
-    @Override
-    public boolean isNSFW(){
-        return true;
-    }
-    
-    @Override
-    public boolean isRequest(){
-        return true;
+        bot.getMessageUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.NSFW_PUSSYLICK);
     }
 }

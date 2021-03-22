@@ -85,7 +85,8 @@ public class CmdDonate implements Command{
     private String getDonators(){
         List<String> ids = bot.getDonators();
         
-        return ids.stream().map(userId -> bot.getShardManager().getUserById(userId))
+        return ids.stream()
+                .map(userId -> bot.getShardManager().getUserById(userId))
                 .filter(Objects::nonNull)
                 .map(user -> String.format("%s (%s)", user.getAsTag(), user.getAsMention()))
                 .collect(Collectors.joining("\n"));

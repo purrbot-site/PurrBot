@@ -55,110 +55,107 @@ public class CommandListener extends ListenerAdapter{
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event){
-
-        CMD_EXECUTOR.execute(
-                () -> {
-                    Message msg = event.getMessage();
-                    Guild guild = event.getGuild();
-                    User user = event.getAuthor();
-
-                    if(user.isBot())
-                        return;
-                    
-                    if(event.getChannel().getId().equals(IDs.SUGGESTIONS))
-                        return;
-                    
-                    if(event.getChannel().isNews())
-                        return;
-                    
-                    Pattern prefixPattern = Pattern.compile(
-                            Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 
-                            Pattern.DOTALL | Pattern.CASE_INSENSITIVE
-                    );
-                    Pattern mentionPattern = Pattern.compile("<@!?(\\d+)>");
-
-                    String raw = msg.getContentRaw();
-    
-                    Matcher commandMatcher = prefixPattern.matcher(raw);
-                    Matcher mentionMatcher = mentionPattern.matcher(raw);
-                    
-                    if(!commandMatcher.matches() && !mentionMatcher.matches())
-                        return;
-                    
-                    TextChannel tc = event.getChannel();
-                    Member self = guild.getSelfMember();
-
-                    Member member = msg.getMember();
-                    if(member == null)
-                        return;
-                    
-                    if(mentionMatcher.matches()){
-                        if(!self.hasPermission(tc, Permission.MESSAGE_WRITE))
-                            return;
-                        
-                        if(!mentionMatcher.group(1).equalsIgnoreCase(self.getId()))
-                            return;
-                        
-                        tc.sendMessage(
-                                bot.getMsg(guild.getId(), "misc.info", user.getAsMention())
-                        ).queue();
-                        return;
-                    }
-                    
-                    raw = commandMatcher.group("command");
-
-                    String[] args = Arrays.copyOf(raw.split("\\s+", 2), 2);
-
-                    if(args[0] == null)
-                        return;
-
-                    Command command = (Command)HANDLER.findCommand(args[0].toLowerCase());
-    
-                    if(command == null)
-                        return;
-    
-                    if(!self.hasPermission(tc, Permission.MESSAGE_WRITE)){
-                        if(self.hasPermission(tc, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI))
-                            msg.addReaction(Emotes.CANCEL.getNameAndId()).queue();
-                        
-                        return;
-                    }
-
-                    if(command.getAttribute("category").equals("owner") && bot.getCheckUtil().notDeveloper(member))
-                        return;
-                    
-                    if(bot.getCheckUtil().hasAdmin(member, tc))
-                        return;
-                    
-                    if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_EMBED_LINKS))
-                        return;
-                    
-                    if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_HISTORY))
-                        return;
-                    
-                    if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_ADD_REACTION))
-                        return;
-                    
-                    if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_EXT_EMOJI))
-                        return;
-                    
-                    if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
-                        bot.getEmbedUtil().sendError(tc, member, "errors.nsfw_random", true);
-                        return;
-                    }
-                    
-                    if(command.hasAttribute("manage_server")){
-                        if(bot.getCheckUtil().lacksPermission(tc, member, Permission.MANAGE_SERVER))
-                            return;
-                    }
-
-                    try{
-                        HANDLER.execute(command, msg, args[1] == null ? "" : args[1], args[0]);
-                    }catch(Exception ex){
-                        logger.error("Couldn't perform command {}!", args[0], ex);
-                        bot.getEmbedUtil().sendError(tc, member, "errors.unknown", ex.getMessage(), false);
-                    }
-                }
-        );
+        CMD_EXECUTOR.execute(() -> {
+            Message msg = event.getMessage();
+            Guild guild = event.getGuild();
+            User user = event.getAuthor();
+            
+            if(user.isBot())
+                return;
+            
+            if(event.getChannel().getId().equals(IDs.SUGGESTIONS))
+                return;
+            
+            if(event.getChannel().isNews())
+                return;
+            
+            Pattern prefixPattern = Pattern.compile(
+                    Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 
+                    Pattern.DOTALL | Pattern.CASE_INSENSITIVE
+            );
+            Pattern mentionPattern = Pattern.compile("<@!?(\\d+)>");
+            
+            String raw = msg.getContentRaw();
+            
+            Matcher commandMatcher = prefixPattern.matcher(raw);
+            Matcher mentionMatcher = mentionPattern.matcher(raw);
+            
+            if(!commandMatcher.matches() && !mentionMatcher.matches())
+                return;
+            
+            TextChannel tc = event.getChannel();
+            Member self = guild.getSelfMember();
+            
+            Member member = msg.getMember();
+            if(member == null)
+                return;
+            
+            if(mentionMatcher.matches()){
+                if(!self.hasPermission(tc, Permission.MESSAGE_WRITE))
+                    return;
+                
+                if(!mentionMatcher.group(1).equalsIgnoreCase(self.getId()))
+                    return;
+                
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "misc.info", user.getAsMention())
+                ).queue();
+                return;
+            }
+            
+            raw = commandMatcher.group("command");
+            
+            String[] args = Arrays.copyOf(raw.split("\\s+", 2), 2);
+            
+            if(args[0] == null)
+                return;
+            
+            Command command = (Command)HANDLER.findCommand(args[0].toLowerCase());
+            
+            if(command == null)
+                return;
+            
+            if(!self.hasPermission(tc, Permission.MESSAGE_WRITE)){
+                if(self.hasPermission(tc, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI))
+                    msg.addReaction(Emotes.CANCEL.getNameAndId()).queue();
+                
+                return;
+            }
+            
+            if(command.getAttribute("category").equals("owner") && !bot.getCheckUtil().isDeveloper(member))
+                return;
+            
+            if(bot.getCheckUtil().hasAdmin(member, tc))
+                return;
+            
+            if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_EMBED_LINKS))
+                return;
+            
+            if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_HISTORY))
+                return;
+            
+            if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_ADD_REACTION))
+                return;
+            
+            if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_EXT_EMOJI))
+                return;
+            
+            if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
+                bot.getEmbedUtil().sendError(tc, member, "errors.nsfw_random", true);
+                return;
+            }
+            
+            if(command.hasAttribute("manage_server")){
+                if(bot.getCheckUtil().lacksPermission(tc, member, Permission.MANAGE_SERVER))
+                    return;
+            }
+            
+            try{
+                HANDLER.execute(command, msg, args[1] == null ? "" : args[1], args[0]);
+            }catch(Exception ex){
+                logger.error("Couldn't perform command {}!", args[0], ex);
+                bot.getEmbedUtil().sendError(tc, member, "errors.unknown", ex.getMessage(), false);
+            }
+        });
     }
 }
