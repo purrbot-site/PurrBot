@@ -162,8 +162,13 @@
         "description": "Изображение или гифка очаровательной Неко.",
         "loading": "{LOADING} Заполучаем няшных неко в картинках и гифках...",
         "message": "Неко {NEKOWO}",
-        "purr": "Я... Я правда выглядела так в прошлом? {VANILLABLUSH}",
-        "snuggle": "Моя сестренка! UwU"
+        "purr": "{PURR} Я... Я правда выглядела так в прошлом?",
+        "snuggle": "{PURR} Моя сестренка! UwU"
+      },
+      "okami": {
+        "description": "Изображение милой Оками (девушки-волка)",
+        "loading": "{LOADING} Загружаем воющую картинку...",
+        "message": "Оками {AWOO}"
       },
       "pat": {
         "description": "Погладь всех и каждого!",
@@ -352,6 +357,23 @@
           "channels_title": "Каналы",
           "channels_value": "{CATEGORY} Всего: {channels_total}\n{TEXTCHANNEL} Текстовых каналов: {channels_text}\n{VOICECHANNEL} Голосовых каналов: {channels_voice}",
           "created": "Создано",
+          "features": {
+            "animated_icon": "Анимированные иконки",
+            "banner": "Баннер сервера",
+            "community": "Сервер сообщества",
+            "discoverable": "Публичный сервер",
+            "guild_preview": "Предпросмотр сервера",
+            "invite_screen": "Фон приглашения",
+            "member_verification": "Верификация участников",
+            "news_channel": "Новостные каналы",
+            "partnered": "Партнер",
+            "store_channel": "Канал-страничка приложения",
+            "title": "Возможности",
+            "vanity_url": "Персональный URL",
+            "verified": "Подтверждён",
+            "vip_voice": "VIP Голосовые каналы",
+            "welcome_screen": "Экран приветствия"
+          },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Низкий",
@@ -674,8 +696,8 @@
         ]
       },
       "neko": {
-        "purr": "Ня. Это старое изображение моей старшей сестренки. >w<",
-        "snuggle": "Э-это я? OwO"
+        "purr": "{SNUGGLE} Ня. Это старое изображение моей старшей сестренки. >w<",
+        "snuggle": "{SNUGGLE} Э-это я? OwO"
       },
       "pat": {
         "mention_snuggle": [

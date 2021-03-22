@@ -162,8 +162,13 @@
         "description": "Obtenez une image ou un gif d'un adorable Neko.",
         "loading": "{LOADING} Réception d'une image de neko mignon (ou gif)...",
         "message": "Neko {NEKOWO}",
-        "purr": "J'ai... j'ai vraiment ressemblé à ça dans le passé? {VANILLABLUSH}",
-        "snuggle": "C'est ma petite sœur! UwU"
+        "purr": "{PURR} J'ai... j'ai vraiment ressemblé à ça dans le passé?",
+        "snuggle": "{PURR} C'est ma petite sœur! UwU"
+      },
+      "okami": {
+        "description": "Obtenez une image d'une jolie Okami (fille-loup).",
+        "loading": "{LOADING} Prend une photo d'un Awoo...",
+        "message": "Okami {AWOO}"
       },
       "pat": {
         "description": "caresse les gens!",
@@ -352,6 +357,23 @@
           "channels_title": "Salons",
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Salons textuels : {channels_text}\n{VOICECHANNEL} Salons vocaux : {channels_voice}",
           "created": "Créé",
+          "features": {
+            "animated_icon": "Icône animée",
+            "banner": "Bannière du serveur",
+            "community": "Serveur de la communauté",
+            "discoverable": "Découvrable",
+            "guild_preview": "Aperçu du serveur",
+            "invite_screen": "Arrière-plan d'invitation",
+            "member_verification": "Vérification des membres",
+            "news_channel": "Nouveau salon",
+            "partnered": "Partenaire",
+            "store_channel": "Salon du magasin",
+            "title": "Fonctionnalités",
+            "vanity_url": "URL personnalisée",
+            "verified": "Verifié",
+            "vip_voice": "Région vocale VIP",
+            "welcome_screen": "Écran de bienvenue"
+          },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Bas",
@@ -674,8 +696,8 @@
         ]
       },
       "neko": {
-        "purr": "Nya. C'est une vieille photo de ma grande sœur. >w<",
-        "snuggle": "C-c'est moi ? OwO"
+        "purr": "{SNUGGLE} Nya. C'est une vieille photo de ma grande sœur. >w<",
+        "snuggle": "{SNUGGLE} E-est ce que c'est moi? OwO"
       },
       "pat": {
         "mention_snuggle": [

@@ -162,8 +162,13 @@
         "description": "Erhalte ein Bild oder gif einer süssen Neko.",
         "loading": "{LOADING} Erhalte ein süsses neko Bild (oder gif)...",
         "message": "Neko {NEKOWO}",
-        "purr": "Hab... Hab ich damals wirklich so ausgesehen? {VANILLABLUSH}",
-        "snuggle": "Das ist meine kleine Schwester! UwU"
+        "purr": "{PURR} Hab... Hab ich damals wirklich so ausgesehen?",
+        "snuggle": "{PURR} Das ist meine kleine Schwester! UWU"
+      },
+      "okami": {
+        "description": "Erhalte ein Bild von einem süss aussehendem Okami (Wolfmädchen).",
+        "loading": "{LOADING} Mache ein Bild von einem Awoo...",
+        "message": "Okami {AWOO}"
       },
       "pat": {
         "description": "Streichel Leute!",
@@ -352,6 +357,23 @@
           "channels_title": "Kanäle",
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Textkanäle: {channels_text}\n{VOICECHANNEL} Sprachkanäle: {channels_voice}",
           "created": "Erstellt",
+          "features": {
+            "animated_icon": "Animiertes Icon",
+            "banner": "Server-Banner",
+            "community": "Community-Server",
+            "discoverable": "Entdeckbar",
+            "guild_preview": "Gildenvorschau",
+            "invite_screen": "Einladungs-Hintergrund",
+            "member_verification": "Mitgliederverifikation",
+            "news_channel": "Nachrichtenkanal",
+            "partnered": "Partner",
+            "store_channel": "Shop-Kanäle",
+            "title": "Eigenschaften",
+            "vanity_url": "Vanity-URL",
+            "verified": "Bestätigt",
+            "vip_voice": "VIP Sprachregionen",
+            "welcome_screen": "Willkommensbildschirm"
+          },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
             "low": "Niedrig",
@@ -674,8 +696,8 @@
         ]
       },
       "neko": {
-        "purr": "Nya. Das ist ein altes Bild von meiner grossen Schwester. >w<",
-        "snuggle": "B-bin das ich? OwO"
+        "purr": "{SNUGGLE} Nya. Das ist ein altes Bild von meiner grossen Schwester. >w<",
+        "snuggle": "{SNUGGLE} B-bin das ich? OwO"
       },
       "pat": {
         "mention_snuggle": [

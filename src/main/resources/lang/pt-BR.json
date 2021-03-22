@@ -162,8 +162,13 @@
         "description": "Obtém uma imagem ou gif de um Neko adorável.",
         "loading": "{LOADING} Recebendo uma imagem de um neko fofo (ou um gif)",
         "message": "Neko {NEKOWO}",
-        "purr": "Eu... Eu realmente era assim no passado? {VANILLABLUSH}",
-        "snuggle": "Aquela é a minha irmãzinha! UwU"
+        "purr": "{PURR} Eu... Eu realmente era assim no passado?",
+        "snuggle": "{PURR} Esta é a minha irmãzinha! UwU"
+      },
+      "okami": {
+        "description": "Obtenha uma imagem de uma Okami fofa (garota Lobo).",
+        "loading": "{LOADING} Tirando uma foto de um Awoo...",
+        "message": "Okami {AWOO}"
       },
       "pat": {
         "description": "Acaricie pessoas!",
@@ -352,6 +357,23 @@
           "channels_title": "Canais",
           "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Canais: {channels_text}\n{VOICECHANNEL} Canais: {channels_voice}",
           "created": "Criado",
+          "features": {
+            "animated_icon": "Ícone animado",
+            "banner": "Banner do servidor",
+            "community": "Servidor Comunitário",
+            "discoverable": "Detectável",
+            "guild_preview": "Prévia da Guilda",
+            "invite_screen": "Plano de fundo do convite",
+            "member_verification": "Verificação de membro",
+            "news_channel": "Canal de notícias",
+            "partnered": "Parceiros",
+            "store_channel": "Canais de Loja",
+            "title": "Recursos",
+            "vanity_url": "URL personalizado",
+            "verified": "Verificado",
+            "vip_voice": "Regiões de voz VIP",
+            "welcome_screen": "Tela de boas vindas"
+          },
           "levels": {
             "high": "(╯°□°)╯( ┻━┻",
             "low": "Baixo",
@@ -674,8 +696,8 @@
         ]
       },
       "neko": {
-        "purr": "Nya. Essa é uma imagem antiga da minha irmã mais velha. >w<",
-        "snuggle": "E-esta sou eu? OwO"
+        "purr": "{SNUGGLE} Nya. Essa é uma imagem antiga da minha irmã mais velha. >w<",
+        "snuggle": "{SNUGGLE} sou eu? OwO"
       },
       "pat": {
         "mention_snuggle": [

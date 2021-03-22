@@ -162,8 +162,13 @@
         "description": "사랑스러운 고양이 소녀의 짤 또는 움짤을 가져옵니다.",
         "loading": "{LOADING} 귀여운 고양이 소녀 이미지 불러오는 중...",
         "message": "고양이소녀 {NEKOWO}",
-        "purr": "ㄴ.. 나 정말 옛날엔 저렇게 생겼던거야? {VANILLABLUSH}",
-        "snuggle": "이건 내 여동생이야! UwU"
+        "purr": "{PURR} ㄴ.. 나 정말 옛날엔 저렇게 생겼던거야?",
+        "snuggle": "{PURR} 이건 내 여동생이야! UwU"
+      },
+      "okami": {
+        "description": "귀엽게 생긴 늑대소녀의 짤을 보여줍니다.",
+        "loading": "{LOADING} 아우우~ 하며 우는 짤을 가져오는 중...",
+        "message": "늑대소녀 {AWOO}"
       },
       "pat": {
         "description": "사람들을 쓰다듬어줍니다!",
@@ -352,6 +357,23 @@
           "channels_title": "채널",
           "channels_value": "{CATEGORY} 합계: {channels_total}\n\n{TEXTCHANNEL} 텍스트 채널: {channels_text}\n{VOICECHANNEL} 음성 채널: {channels_voice}",
           "created": "생성 일자",
+          "features": {
+            "animated_icon": "움직이는 서버 아이콘",
+            "banner": "서버 배너",
+            "community": "커뮤니티 서버",
+            "discoverable": "검색 가능",
+            "guild_preview": "서버 미리보기",
+            "invite_screen": "서버 초대 배경",
+            "member_verification": "사용자 인증",
+            "news_channel": "뉴스 채널",
+            "partnered": "파트너",
+            "store_channel": "상점 채널",
+            "title": "특징",
+            "vanity_url": "서버 고유 URL",
+            "verified": "인증된 서버",
+            "vip_voice": "VIP 음성 지역",
+            "welcome_screen": "시작 화면"
+          },
           "levels": {
             "high": "(╯°□°）╯︵ ┻━┻",
             "low": "낮음",
@@ -674,8 +696,8 @@
         ]
       },
       "neko": {
-        "purr": "냥! 그건 내 언니의 옛 사진이야 >w<",
-        "snuggle": "ㄴ-내 사진이네? OwO"
+        "purr": "{SNUGGLE} 냥! 그건 내 언니의 옛 사진이야 >w<",
+        "snuggle": "{SNUGGLE} ㅇ..이거 나야? OwO"
       },
       "pat": {
         "mention_snuggle": [
