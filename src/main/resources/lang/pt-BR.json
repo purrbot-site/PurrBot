@@ -162,8 +162,13 @@
         "description": "Obtém uma imagem ou gif de um Neko adorável.",
         "loading": "{LOADING} Recebendo uma imagem de um neko fofo (ou um gif)",
         "message": "Neko {NEKOWO}",
-        "purr": "Eu... Eu realmente era assim no passado? {VANILLABLUSH}",
-        "snuggle": "Aquela é a minha irmãzinha! UwU"
+        "purr": "{PURR} Eu... Eu realmente era assim no passado?",
+        "snuggle": "{PURR} Esta é a minha irmãzinha! UwU"
+      },
+      "okami": {
+        "description": "Obtenha uma imagem de uma Okami fofa (garota Lobo).",
+        "loading": "{LOADING} Tirando uma foto de um Awoo...",
+        "message": "Okami {AWOO}"
       },
       "pat": {
         "description": "Acaricie pessoas!",
@@ -691,8 +696,8 @@
         ]
       },
       "neko": {
-        "purr": "Nya. Essa é uma imagem antiga da minha irmã mais velha. >w<",
-        "snuggle": "E-esta sou eu? OwO"
+        "purr": "{SNUGGLE} Nya. Essa é uma imagem antiga da minha irmã mais velha. >w<",
+        "snuggle": "{SNUGGLE} sou eu? OwO"
       },
       "pat": {
         "mention_snuggle": [
