@@ -18,10 +18,12 @@
 
 package site.purrbot.bot.util.message;
 
+import ch.qos.logback.classic.Logger;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
+import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.util.HttpUtil;
 
@@ -30,6 +32,7 @@ import java.time.ZonedDateTime;
 public class EmbedUtil {
     
     private final PurrBot bot;
+    private final Logger logger = (Logger)LoggerFactory.getLogger(EmbedUtil.class);
     
     public EmbedUtil(PurrBot bot){
         this.bot = bot;
@@ -113,7 +116,10 @@ public class EmbedUtil {
         
         msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
                 .embed(embed)
-                .queue(null, e -> tc.sendMessage(embed).queue());
+                .queue(message -> {
+                    if(message.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
+                        msg.clearReactions().queue(null, e -> logger.warn("Couldn't clear reactions. Message deleted?"));
+                }, e -> tc.sendMessage(embed).queue());
     }
     
     public void sendError(TextChannel tc, Member member, String path){

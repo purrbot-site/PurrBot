@@ -19,6 +19,7 @@
 package site.purrbot.bot.util;
 
 import ch.qos.logback.classic.Logger;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import okhttp3.*;
@@ -101,7 +102,10 @@ public class HttpUtil {
                 
                 msg.editMessage(
                         MarkdownSanitizer.escape(text)
-                ).queue(null, e -> tc.sendMessage(
+                ).queue(message -> {
+                    if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
+                        message.clearReactions().queue(null, e -> logger.warn("Couldn't clear reactions. Message deleted?"));
+                }, e -> tc.sendMessage(
                         MarkdownSanitizer.escape(text)
                 ).queue());
                 return;
