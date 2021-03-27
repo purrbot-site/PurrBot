@@ -28,7 +28,6 @@ import site.purrbot.bot.constants.Emotes;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @CommandDescription(
         name = "Guild",
@@ -106,61 +105,32 @@ public class CmdGuild implements Command{
     }
     
     private void getGuildFeatures(Guild guild, EmbedBuilder builder){
-        Set<String> features = guild.getFeatures();
-        
         builder.addField(
                 EmbedBuilder.ZERO_WIDTH_SPACE,
-                String.format(
-                        "**%s**\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`",
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.title"),
-                        features.contains("ANIMATED_ICON") ? Emotes.GIF_ON.getEmote() : Emotes.GIF_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.animated_icon"),
-                        features.contains("COMMERCE") ? Emotes.STORE_ON.getEmote() : Emotes.STORE_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.store_channel"),
-                        features.contains("DISCOVERABLE") ? Emotes.DISCOVER_ON.getEmote() : Emotes.DISCOVER_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.discoverable"),
-                        features.contains("MEMBER_VERIFICATION_GATE_ENABLED") ? Emotes.SCREEN_ON.getEmote() : Emotes.SCREEN_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.member_verification"),
-                        features.contains("PARTNERED") ? Emotes.PARTNER_ON.getEmote() : Emotes.PARTNER_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.partnered"),
-                        features.contains("VANITY_URL") ? Emotes.INVITE_ON.getEmote() : Emotes.INVITE_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.vanity_url"),
-                        features.contains("VIP_REGIONS") ? Emotes.VIP_VOICE_ON.getEmote() : Emotes.VIP_VOICE_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.vip_voice")
+                String.join(
+                        "\n",
+                        "**" + bot.getMsg(guild.getId(), "purr.info.guild.embed.features.title") + "**",
+                        Feature.ANIMATED_ICON.getString(bot, guild),
+                        Feature.COMMERCE.getString(bot, guild),
+                        Feature.DISCOVERABLE.getString(bot, guild),
+                        Feature.MEMBER_VERIFICATION.getString(bot, guild),
+                        Feature.PARTNERED.getString(bot, guild),
+                        Feature.VANITY_URL.getString(bot, guild),
+                        Feature.VIP_REGIONS.getString(bot, guild)
                 ),
                 true
         ).addField(
                 EmbedBuilder.ZERO_WIDTH_SPACE,
-                String.format(
-                        EmbedBuilder.ZERO_WIDTH_SPACE + "\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`\n" +
-                        "%s `%s`",
-                        features.contains("BANNER") ? Emotes.IMAGE_ON.getEmote() : Emotes.IMAGE_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.banner"),
-                        features.contains("COMMUNITY") ? Emotes.COMMUNITY_ON.getEmote() : Emotes.COMMUNITY_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.community"),
-                        features.contains("INVITE_SPLASH") ? Emotes.IMAGE_ON.getEmote() : Emotes.IMAGE_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.invite_screen"),
-                        features.contains("NEWS") ? Emotes.NEWS_ON.getEmote() : Emotes.NEWS_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.news_channel"),
-                        features.contains("PREVIEW_ENABLED") ? Emotes.PREVIEW_ON.getEmote() : Emotes.PREVIEW_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.guild_preview"),
-                        features.contains("VERIFIED") ? Emotes.VERIFIED_ON.getEmote() : Emotes.VERIFIED_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.verified"),
-                        features.contains("WELCOME_SCREEN_ENABLED") ? Emotes.SCREEN_ON.getEmote() : Emotes.SCREEN_OFF.getEmote(),
-                        bot.getMsg(guild.getId(), "purr.info.guild.embed.features.welcome_screen")
+                String.join(
+                        "\n",
+                        EmbedBuilder.ZERO_WIDTH_SPACE,
+                        Feature.BANNER.getString(bot, guild),
+                        Feature.COMMUNITY.getString(bot, guild),
+                        Feature.INVITE_SPLASH.getString(bot, guild),
+                        Feature.NEWS.getString(bot, guild),
+                        Feature.PREVIEW.getString(bot, guild),
+                        Feature.VERIFIED.getString(bot, guild),
+                        Feature.WELCOME_SCREEN.getString(bot, guild)
                 ),
                 true
         );
@@ -256,5 +226,56 @@ public class CmdGuild implements Command{
                 .replace("{channels_total}", bot.getMessageUtil().formatNumber(total))
                 .replace("{channels_text}", bot.getMessageUtil().formatNumber(text))
                 .replace("{channels_voice}", bot.getMessageUtil().formatNumber(voice));
+    }
+    
+    private enum Feature{
+        ANIMATED_ICON("ANIMATED_ICON", "animated_icon", Emotes.GIF_ON, Emotes.GIF_OFF),
+        BANNER("BANNER", "banner", Emotes.IMAGE_ON, Emotes.IMAGE_OFF),
+        COMMERCE("COMMERCE", "store_channel", Emotes.STORE_ON, Emotes.STORE_OFF),
+        COMMUNITY("COMMUNITY", "community", Emotes.COMMUNITY_ON, Emotes.COMMUNITY_OFF),
+        DISCOVERABLE("DISCOVERABLE", "discoverable", Emotes.DISCOVER_ON, Emotes.DISCOVER_OFF),
+        INVITE_SPLASH("INVITE_SPLASH", "invite_screen", Emotes.IMAGE_ON, Emotes.IMAGE_OFF),
+        MEMBER_VERIFICATION("MEMBER:VERIFICATION_GATE_ENABLED", "member_verification", Emotes.SCREEN_ON, Emotes.SCREEN_OFF),
+        NEWS("NEWS", "news_channel", Emotes.NEWS_ON, Emotes.NEWS_OFF),
+        PARTNERED("PARTNERED", "partnered", Emotes.PARTNER_ON, Emotes.PARTNER_OFF),
+        PREVIEW("PREVIEW_ENABLED", "guild_preview", Emotes.PREVIEW_ON, Emotes.PREVIEW_OFF),
+        VANITY_URL("VANITY_URL", "vanity_url", Emotes.INVITE_ON, Emotes.INVITE_OFF),
+        VERIFIED("VERIFIED", "verified", Emotes.VERIFIED_ON, Emotes.VERIFIED_OFF),
+        VIP_REGIONS("VIP_REGIONS", "vip_voice", Emotes.VIP_VOICE_ON, Emotes.VIP_VOICE_OFF),
+        WELCOME_SCREEN("WELCOME_SCREEN_ENABLED", "welcome_screen", Emotes.SCREEN_ON, Emotes.SCREEN_OFF);
+        
+        private final String feature;
+        private final String name;
+        private final Emotes active;
+        private final Emotes inactive;
+        
+        Feature(String feature, String name, Emotes active, Emotes inactive){
+            this.feature = feature;
+            this.name = name;
+            this.active = active;
+            this.inactive = inactive;
+        }
+        
+        public String getString(PurrBot bot, Guild guild){
+            String emote = guild.getFeatures().contains(this.feature) ? active.getEmote() : inactive.getEmote();
+            String msg = bot.getMsg(guild.getId(), "purr.info.guild.embed.features." + name);
+            
+            if(this == Feature.VANITY_URL){
+                if(guild.getVanityUrl() != null){
+                    return String.format(
+                            "%s [`%s`](%s)",
+                            emote,
+                            msg,
+                            guild.getVanityUrl()
+                    );
+                }
+            }
+            
+            return String.format(
+                    "%s %s",
+                    emote,
+                    guild.getFeatures().contains(feature) ? "`" + msg + "`" : "~~`" + msg + "`~~"
+            );
+        }
     }
 }

@@ -24,6 +24,7 @@ import com.rethinkdb.utils.Types;
 import site.purrbot.bot.PurrBot;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class DBUtil {
 
@@ -78,6 +79,7 @@ public class DBUtil {
                 .get(id)
                 .run(connection, Types.mapOf(String.class, String.class))
                 .stream()
+                .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null);
     }
