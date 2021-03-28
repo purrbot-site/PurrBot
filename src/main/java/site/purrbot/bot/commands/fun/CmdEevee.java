@@ -50,9 +50,9 @@ public class CmdEevee implements Command{
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.eevee.loading")).queue(message -> {
             if(bot.getMessageUtil().hasArg("gif", args)){
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.EEVEE_GIF);
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.EEVEE_GIF, member);
             }else{
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.EEVEE_IMG);
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.EEVEE_IMG, member);
             }
         });
     }

@@ -109,7 +109,7 @@ public class CmdThreesome implements Command{
             return;
         }
         
-        if(queue.getIfPresent(String.format("%s:%s", member.getId(), guild.getId())) != null){
+        if(queue.getIfPresent(bot.getRequestUtil().getQueueString("threesome", guild.getId(), member.getId())) != null){
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.nsfw.threesome.request.open", member.getAsMention())
             ).queue();
@@ -150,7 +150,7 @@ public class CmdThreesome implements Command{
         list.add(target2.getId());
         
         queue.put(
-                bot.getMessageUtil().getQueueString(author),
+                bot.getRequestUtil().getQueueString("threesome", guild.getId(), author.getId()),
                 String.format("%s:%s", target1.getId(), target2.getId())
         );
         
@@ -178,7 +178,7 @@ public class CmdThreesome implements Command{
                 },
                 event -> {
                     TextChannel channel = event.getChannel();
-                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
+                    queue.invalidate(bot.getRequestUtil().getQueueString("threesome", guild.getId(), author.getId()));
                     
                     if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
                         list.remove(target1.getId());
@@ -212,13 +212,13 @@ public class CmdThreesome implements Command{
                             api = HttpUtil.ImageAPI.NSFW_THREESOME_FFM;
                         }
                         
-                        bot.getHttpUtil().handleEdit(guild, channel, botMsg, api, author, targets);
+                        bot.getRequestUtil().handleEdit(channel, botMsg, api, author, targets);
                     }
                 }, 1, TimeUnit.MINUTES,
                 () -> {
                     TextChannel channel = botMsg.getTextChannel();
                     botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
+                    queue.invalidate(bot.getRequestUtil().getQueueString("threesome", guild.getId(), author.getId()));
                     
                     list.remove(target1.getId());
                     list.remove(target2.getId());

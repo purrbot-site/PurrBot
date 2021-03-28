@@ -97,7 +97,7 @@ public class CmdBlowjob implements Command{
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.blowjob.mention_bot");
             return;
         }
-    
-        bot.getMessageUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.NSFW_BLOWJOB);
+        
+        bot.getRequestUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.NSFW_BLOWJOB);
     }
 }

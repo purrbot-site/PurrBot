@@ -99,7 +99,7 @@ public class CmdKiss implements Command{
             return;
         
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.kiss.loading")).queue(message ->
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.KISS, member, targets)
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.KISS, member, targets)
         );
     }
 }

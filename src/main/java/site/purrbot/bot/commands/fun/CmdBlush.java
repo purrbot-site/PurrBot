@@ -49,7 +49,7 @@ public class CmdBlush implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.blush.loading")).queue(message ->
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.BLUSH, member)
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.BLUSH, member)
         );
     }
 }

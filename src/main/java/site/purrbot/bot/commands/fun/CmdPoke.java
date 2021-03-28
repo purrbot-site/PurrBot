@@ -93,7 +93,7 @@ public class CmdPoke implements Command{
             return;
 
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.poke.loading")).queue(message ->
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.POKE, member, targets)
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.POKE, member, targets)
         );
     }
 }

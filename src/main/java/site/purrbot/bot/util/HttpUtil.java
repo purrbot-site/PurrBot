@@ -19,27 +19,20 @@
 package site.purrbot.bot.util;
 
 import ch.qos.logback.classic.Logger;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
-import okhttp3.*;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
-import site.purrbot.bot.PurrBot;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
 public class HttpUtil {
-
-    private final PurrBot bot;
     
     private final Logger logger = (Logger)LoggerFactory.getLogger(HttpUtil.class);
     private final OkHttpClient client = new OkHttpClient();
-
-    public HttpUtil(PurrBot bot){
-        this.bot = bot;
-    }
     
     private String image(String url) throws IOException{
         Request request = new Request.Builder()
@@ -66,57 +59,6 @@ public class HttpUtil {
         }
     }
     
-    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api){
-        handleEdit(guild, tc, msg, api, null, null, false);
-    }
-    
-    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api, boolean required){
-        handleEdit(guild, tc, msg, api, null, null, required);
-    }
-    
-    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api, Member author){
-        handleEdit(guild, tc, msg, api, author, null, false);
-    }
-    
-    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api, Member author, String targets){
-        handleEdit(guild, tc, msg, api, author, targets, false);
-    }
-    
-    public void handleEdit(Guild guild, TextChannel tc, Message msg, ImageAPI api, Member author, String targets, boolean required){
-        getImage(api).whenComplete((result, ex) -> {
-            if(ex != null || result.getUrl() == null){
-                if(required){
-                    bot.getEmbedUtil().sendError(tc, author, "errors.api_error");
-                    return;
-                }
-                
-                String text;
-                if(author == null){
-                    text = bot.getMsg(guild.getId(), api.getPath());
-                }else
-                if(targets == null){
-                    text = bot.getMsg(guild.getId(), api.getPath(), author.getEffectiveName());
-                }else{
-                    text = bot.getMsg(guild.getId(), api.getPath(), author.getEffectiveName(), targets);
-                }
-                
-                msg.editMessage(
-                        MarkdownSanitizer.escape(text)
-                ).queue(message -> {
-                    if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-                        message.clearReactions().queue(null, e -> logger.warn("Couldn't clear reactions. Message deleted?"));
-                }, e -> tc.sendMessage(
-                        MarkdownSanitizer.escape(text)
-                ).queue());
-                return;
-            }
-            
-            
-            
-            bot.getEmbedUtil().sendResponseEmbed(msg, tc, result, author, targets);
-        });
-    }
-    
     public String getImage(String url){
         try{
             return image(url);
@@ -125,7 +67,7 @@ public class HttpUtil {
         }
     }
     
-    private CompletableFuture<Result> getImage(ImageAPI imageAPI){
+    public CompletableFuture<Result> getImage(ImageAPI imageAPI){
         return CompletableFuture.supplyAsync(() -> {
             Request request = new Request.Builder()
                     .url(imageAPI.getUrl())
@@ -136,95 +78,107 @@ public class HttpUtil {
                     logger.warn("Non-Successfull HTTP-Response for {}", imageAPI.getUrl());
                     logger.warn("Status-Code: {}; Message: {}", response.code(), response.message());
                     
-                    return new Result(null, imageAPI.getPath());
+                    return new Result(null, imageAPI.getPath(), imageAPI.isRequest(), imageAPI.isRequired());
                 }
                 
                 ResponseBody body = response.body();
                 if(body == null){
                     logger.warn("Received null Body for {}", imageAPI.getUrl());
                     
-                    return new Result(null, imageAPI.getPath());
+                    return new Result(null, imageAPI.getPath(), imageAPI.isRequest(), imageAPI.isRequired());
                 }
                 
                 String bodyString = body.string();
                 if(bodyString.isEmpty()){
                     logger.warn("Received empty body!");
                     
-                    return new Result(null, imageAPI.getPath());
+                    return new Result(null, imageAPI.getPath(), imageAPI.isRequest(), imageAPI.isRequired());
                 }
                 
                 String link = new JSONObject(bodyString).optString("link", null);
-                return new Result(link, imageAPI.getPath());
+                return new Result(link, imageAPI.getPath(), imageAPI.isRequest(), imageAPI.isRequired());
             }catch(IOException ex){
-                return new Result(null, imageAPI.getPath());
+                return new Result(null, imageAPI.getPath(), imageAPI.isRequest(), imageAPI.isRequired());
             }
         });
     }
     
     public enum ImageAPI{
         // SFW Gifs
-        BITE     ("bite",    true, false),
-        BLUSH    ("blush",   true, false),
-        CRY      ("cry",     true, false),
-        CUDDLE   ("cuddle",  true, false),
-        DANCE    ("dance",   true, false),
-        EEVEE_GIF("eevee",   true, false),
-        FEED     ("feed",    true, false),
-        FLUFF    ("fluff",   true, false),
-        HUG      ("hug",     true, false),
-        KISS     ("kiss",    true, false),
-        LICK     ("lick",    true, false),
-        NEKO_GIF ("neko",    true, false),
-        PAT      ("pat",     true, false),
-        POKE     ("poke",    true, false),
-        SLAP     ("slap",    true, false),
-        SMILE    ("smile",   true, false),
-        TAIL     ("tail",    true, false),
-        TICKLE   ("tickle",  true, false),
+        BITE     ("bite",    true, false, false, false),
+        BLUSH    ("blush",   true, false, false, false),
+        CRY      ("cry",     true, false, false, false),
+        CUDDLE   ("cuddle",  true, false, false, false),
+        DANCE    ("dance",   true, false, false, false),
+        EEVEE_GIF("eevee",   true, false, false, true),
+        FEED     ("feed",    true, false, true,  false),
+        FLUFF    ("fluff",   true, false, false, false),
+        HUG      ("hug",     true, false, false, false),
+        KISS     ("kiss",    true, false, false, false),
+        LICK     ("lick",    true, false, false, false),
+        NEKO_GIF ("neko",    true, false, false, true),
+        PAT      ("pat",     true, false, false, false),
+        POKE     ("poke",    true, false, false, false),
+        SLAP     ("slap",    true, false, false, false),
+        SMILE    ("smile",   true, false, false, false),
+        TAIL     ("tail",    true, false, true,  false),
+        TICKLE   ("tickle",  true, false, false, false),
         
         // NSFW Gifs
-        NSFW_ANAL         ("anal",          "fuck",      true, true),
-        NSFW_BLOWJOB      ("blowjob",                              true, true),
-        NSFW_CUM          ("cum",                                  true, true),
-        NSFW_FUCK         ("fuck",                                 true, true),
-        NSFW_NEKO_GIF     ("neko",          "lewd",      true, true),
-        NSFW_PUSSYLICK    ("pussylick",                            true, true),
-        NSFW_SOLO         ("solo",                                 true, true),
-        NSFW_THREESOME_FFF("threesome_fff", "threesome", true, true),
-        NSFW_THREESOME_FFM("threesome_ffm", "threesome", true, true),
-        NSFW_THREESOME_MMF("threesome_mmf", "threesome", true, true),
-        NSFW_YAOI         ("yaoi",          "fuck",      true, true),
-        NSFW_YURI         ("yuri",          "fuck",      true, true),
+        NSFW_ANAL         ("anal",          "fuck",      true, true, true,  false),
+        NSFW_BLOWJOB      ("blowjob",                              true, true, true,  false),
+        NSFW_CUM          ("cum",                                  true, true, false, false),
+        NSFW_FUCK         ("fuck",                                 true, true, true,  false),
+        NSFW_NEKO_GIF     ("neko",          "lewd",      true, true, false, true),
+        NSFW_PUSSYLICK    ("pussylick",                            true, true, true,  false),
+        NSFW_SOLO         ("solo",                                 true, true, false, false),
+        NSFW_THREESOME_FFF("threesome_fff", "threesome", true, true, true,  false),
+        NSFW_THREESOME_FFM("threesome_ffm", "threesome", true, true, true,  false),
+        NSFW_THREESOME_MMF("threesome_mmf", "threesome", true, true, true,  false),
+        NSFW_YAOI         ("yaoi",          "fuck",      true, true, true,  false),
+        NSFW_YURI         ("yuri",          "fuck",      true, true, true,  false),
         
         // SFW Images
-        EEVEE_IMG("eevee",   false, false),
-        HOLO     ("holo",    false, false),
-        KITSUNE  ("kitsune", false, false),
-        NEKO_IMG ("neko",    false, false),
-        OKAMI    ("okami",   false, false),
-        SENKO    ("senko",   false, false),
+        EEVEE_IMG("eevee",   false, false, false, true),
+        HOLO     ("holo",    false, false, false, true),
+        KITSUNE  ("kitsune", false, false, false, true),
+        NEKO_IMG ("neko",    false, false, false, true),
+        OKAMI    ("okami",   false, false, false, true),
+        SENKO    ("senko",   false, false, false, true),
         
         // NSFW Images
-        NSFW_NEKO_IMG("neko", "lewd", false, true);
+        NSFW_NEKO_IMG("neko", "lewd", false, true, false, true);
         
         private final String name;
         private final String pathName;
         private final boolean gif;
         private final boolean nsfw;
+        private final boolean request;
+        private final boolean required;
         
-        ImageAPI(String name, boolean gif, boolean nsfw){
-            this(name, name, gif, nsfw);
+        ImageAPI(String name, boolean gif, boolean nsfw, boolean request, boolean required){
+            this(name, name, gif, nsfw, request, required);
         }
         
-        ImageAPI(String name, String pathName, boolean gif, boolean nsfw){
+        ImageAPI(String name, String pathName, boolean gif, boolean nsfw, boolean request, boolean required){
             this.name = name;
             this.pathName = pathName;
             this.gif = gif;
             this.nsfw = nsfw;
+            this.request = request;
+            this.required = required;
         }
     
         public String getName(){
             return name;
+        }
+    
+        public boolean isRequest(){
+            return request;
+        }
+    
+        public boolean isRequired(){
+            return required;
         }
     
         public String getUrl(){
@@ -248,10 +202,14 @@ public class HttpUtil {
     public static class Result{
         private final String url;
         private final String path;
+        private final boolean request;
+        private final boolean required;
         
-        public Result(String url, String path){
+        public Result(String url, String path, boolean request, boolean required){
             this.url = url;
             this.path = path;
+            this.request = request;
+            this.required = required;
         }
     
         public String getUrl(){
@@ -260,6 +218,14 @@ public class HttpUtil {
     
         public String getPath(){
             return path;
+        }
+    
+        public boolean isRequest(){
+            return request;
+        }
+    
+        public boolean isRequired(){
+            return required;
         }
     }
 }

@@ -50,9 +50,9 @@ public class CmdNeko implements Command{
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.neko.loading")).queue(message -> {
             if(bot.getMessageUtil().hasArg("gif", args)){
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.NEKO_GIF, true);
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NEKO_GIF, member);
             }else{
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.NEKO_IMG, true);
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NEKO_IMG, member);
             }
         });
     }

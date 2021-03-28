@@ -49,7 +49,7 @@ public class CmdSolo implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.solo.loading")).queue(message ->
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.NSFW_SOLO, member)
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_SOLO, member)
         );
     }
 }

@@ -113,7 +113,7 @@ public class CmdFuck implements Command{
             return;
         }
 
-        if(queue.getIfPresent(String.format("%s:%s", member.getId(), guild.getId())) != null){
+        if(queue.getIfPresent(bot.getRequestUtil().getQueueString("fuck", guild.getId(), member.getId())) != null){
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.nsfw.fuck.request.open", member.getAsMention())
             ).queue();
@@ -182,7 +182,10 @@ public class CmdFuck implements Command{
     
     private void handleEvent(Message botMsg, Member author, Member target, String... args){
         Guild guild = botMsg.getGuild();
-        queue.put(bot.getMessageUtil().getQueueString(author), target.getId());
+        queue.put(
+                bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()),
+                target.getId()
+        );
         
         EventWaiter waiter = bot.getWaiter();
         waiter.waitForEvent(
@@ -210,7 +213,7 @@ public class CmdFuck implements Command{
                     String id = event.getReactionEmote().getId();
                     
                     TextChannel channel = event.getChannel();
-                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
+                    queue.invalidate(bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()));
                     
                     if(id.equals(Emotes.CANCEL.getId())){
                         botMsg.delete().queue();
@@ -252,12 +255,12 @@ public class CmdFuck implements Command{
                         }
                     }
                     
-                    bot.getHttpUtil().handleEdit(guild, channel, botMsg, api, author, target.getEffectiveName());
+                    bot.getRequestUtil().handleEdit(channel, botMsg, api, author, target.getEffectiveName());
                 }, 1, TimeUnit.MINUTES,
                 () -> {
                     TextChannel channel = botMsg.getTextChannel();
                     botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                    queue.invalidate(bot.getMessageUtil().getQueueString(author));
+                    queue.invalidate(bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()));
                     
                     channel.sendMessage(MarkdownSanitizer.escape(
                             bot.getMsg(

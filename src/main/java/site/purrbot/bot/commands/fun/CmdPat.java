@@ -93,7 +93,7 @@ public class CmdPat implements Command{
             return;
 
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.pat.loading")).queue(message ->
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.PAT, member, targets)
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.PAT, member, targets)
         );
     }
 }

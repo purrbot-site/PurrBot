@@ -94,6 +94,6 @@ public class CmdFluff implements Command{
             return;
         }
     
-        bot.getMessageUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.FLUFF);
+        bot.getRequestUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.FLUFF);
     }
 }

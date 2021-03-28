@@ -45,9 +45,9 @@ import org.botblock.javabotblockapi.jda.PostAction;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
+import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
-import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
@@ -76,7 +76,7 @@ public class PurrBot {
     private final Random random = new Random();
 
     private final FileManager fileManager = new FileManager();
-    private final HttpUtil httpUtil = new HttpUtil(this);
+    private final HttpUtil httpUtil = new HttpUtil();
     private final CommandLoader commandLoader = new CommandLoader(this);
     
     private DBUtil dbUtil;
@@ -85,6 +85,7 @@ public class PurrBot {
     private ImageUtil imageUtil;
     private LangUtils langUtils;
     private CheckUtil checkUtil;
+    private RequestUtil requestUtil;
 
     private boolean beta = false;
 
@@ -125,6 +126,7 @@ public class PurrBot {
         imageUtil   = new ImageUtil(this);
         langUtils   = new LangUtils(this);
         checkUtil   = new CheckUtil(this);
+        requestUtil = new RequestUtil(this);
         
         beta = getFileManager().getBoolean("config", "beta");
 
@@ -182,6 +184,9 @@ public class PurrBot {
     }
     public ImageUtil getImageUtil(){
         return imageUtil;
+    }
+    public RequestUtil getRequestUtil(){
+        return requestUtil;
     }
     
     public boolean isBeta(){

@@ -47,8 +47,8 @@ public class CmdOkami implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.okami.loading")).queue(message -> 
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.OKAMI, true)
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.okami.loading")).queue(message ->
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.OKAMI, member)
         );
     }
 }

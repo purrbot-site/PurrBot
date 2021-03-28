@@ -98,8 +98,8 @@ public class CmdBite implements Command{
         if(targets.isEmpty())
             return;
         
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.bite.loading")).queue(message -> 
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.BITE, member, targets)
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.bite.loading")).queue(message ->
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.BITE, member, targets)
         );
     }
 }

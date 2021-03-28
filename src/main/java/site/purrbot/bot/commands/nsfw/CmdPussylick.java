@@ -86,7 +86,7 @@ public class CmdPussylick implements Command{
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.pussylick.mention_bot");
             return;
         }
-        
-        bot.getMessageUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.NSFW_PUSSYLICK);
+    
+        bot.getRequestUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.NSFW_PUSSYLICK);
     }
 }

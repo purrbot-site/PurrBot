@@ -50,9 +50,9 @@ public class CmdLewd implements Command{
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.lewd.loading")).queue(message -> {
             if(bot.getMessageUtil().hasArg("gif", args)){
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.NSFW_NEKO_GIF);
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_NEKO_GIF, member);
             }else{
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.NSFW_NEKO_IMG);
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_NEKO_IMG, member);
             }
         });
     }

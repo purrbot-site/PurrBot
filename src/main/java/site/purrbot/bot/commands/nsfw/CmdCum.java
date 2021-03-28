@@ -51,7 +51,7 @@ public class CmdCum implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.cum.loading")).queue(message ->
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.NSFW_CUM, member)
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_CUM, member)
         );
     }
 }

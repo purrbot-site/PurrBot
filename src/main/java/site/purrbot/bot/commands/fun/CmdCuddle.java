@@ -93,7 +93,7 @@ public class CmdCuddle implements Command{
             return;
     
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.cuddle.loading")).queue(message ->
-                bot.getHttpUtil().handleEdit(guild, tc, message, HttpUtil.ImageAPI.CUDDLE, member, targets)
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.CUDDLE, member, targets)
         );
     }
 }
