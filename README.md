@@ -21,11 +21,11 @@
 [Wiki]: https://docs.purrbot.site/bot
 [translations]: https://lang.purrbot.site
 [commands]: https://docs.purrbot.site/bot/commands
+[translate]: https://docs.purrbot.site/contribute/translate
 
 <!-- GitHub links -->
 [Issues]: https://github.com/purrbot-site/PurrBot/issues
 [License]: https://github.com/purrbot-site/PurrBot/blob/master/LICENSE
-[translations.md]: https://github.com/purrbot-site/PurrBot/blob/master/translations.md
 
 <!-- Other links -->
 [nekos.life]: https://nekos.life
@@ -71,28 +71,28 @@ All commands require the following permissions:
 - Use External Emojis
 
 ## Translations
-Version 2.5 of \*Purr* added an option to have a per-guild language set.  
-We are happy about any translations made for the bot.
+Version 2.5 of \*Purr* added an option to have a per-guild language set. We welcome any new and exciting language that should be added to the bot.
 
-If you would like to get added for a new or existing language to be translated, head over to the [translations.md] file for more info on how to get added.  
-You can find the currently made translations on https://lang.purrbot.site.
+If you would like to help with the translations of the bot check out the [translation documentation][translate] for a further explanation on how to request a supportive language.
+
+You can find the translations of this bot by visiting: https://lang.purrbot.site.
 
 ## Inviting the bot
-To invite the bot with all required permissions mentioned in the [Commands Section](#commands) can you use this invite:  
+To invite the bot with all the necessary required permissions mentioned in the [Commands Section](#commands) you can use this invitation link:  
 > https://add.botl.ink/?id=425382319449309197&perms=387136
 
 If you want to add the bot without a pre-made role, use this link instead:  
 > https://add.botl.ink/?id=425382319449309197
 
-Note that when you add the bot without a pre-made role, will you need to give it one with the required permissions.
+Note that when you add the bot without a pre-made role, you will need to give it one with the necessary required permissions.
 
 ### Note about Administrator permissions
 The `Administrator` Permission is a dangerous one as it can allow bots to cause damage on your server with barely any way for you to prevent it (Except for kicking it).
 
-To prevent this to ever happen does \*Purr* deny the Administrator Permission when assigned with it, and never executes commands with it.  
+To prevent such events from happening with \*Purr* does it not execute any commands while having the Administrator permission assigned.  
 This is our way to protect your server from any possible harm.
 
-We highly recommend to you to always have a dedicated Bot-Role which has the necessary permissions and NEVER give Administrator to any bot.  
+We highly recommend to always have a dedicated Bot-Role which has the necessary permissions the bot requires and NEVER give Administrator permissions to any bot.  
 If a bot can't work without this permission, search for a different one as this is not considered a good practice in Bot Development.
 
 ## Donations
@@ -103,8 +103,8 @@ All donations help keeping this bot running.
 
 No feature of the bot is behind any paywall as we believe that everyone should have access to joy and entertainment without restrictions.
 
-If you like what the bot offers would we really appreciate a donation from you.  
-Donations can be made either through Ko-Fi, PayPal or Patreon. Last one is better for repeating donations while the other ones are more recommended, if you only want to make a single donation.
+If you like what the bot offers we really appreciate a donation from you.  
+Donations can be made either through Ko-Fi, PayPal or Patreon. Patreon is a preferred payment method for recurring donations while the other ones are more recommended, if you are only wanting to donate once.
 
 ## Botlists
 \*Purr* can be found on different Botlist sites.  
