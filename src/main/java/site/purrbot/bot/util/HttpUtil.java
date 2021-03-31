@@ -105,33 +105,33 @@ public class HttpUtil {
     
     public enum ImageAPI{
         // SFW Gifs
-        BITE     ("bite",    true, false, false, false),
-        BLUSH    ("blush",   true, false, false, false),
-        CRY      ("cry",     true, false, false, false),
-        CUDDLE   ("cuddle",  true, false, false, false),
-        DANCE    ("dance",   true, false, false, false),
-        EEVEE_GIF("eevee",   true, false, false, true),
-        FEED     ("feed",    true, false, true,  false),
-        FLUFF    ("fluff",   true, false, false, false),
-        HUG      ("hug",     true, false, false, false),
-        KISS     ("kiss",    true, false, false, false),
-        LICK     ("lick",    true, false, false, false),
-        NEKO_GIF ("neko",    true, false, false, true),
-        PAT      ("pat",     true, false, false, false),
-        POKE     ("poke",    true, false, false, false),
-        SLAP     ("slap",    true, false, false, false),
-        SMILE    ("smile",   true, false, false, false),
-        TAIL     ("tail",    true, false, true,  false),
-        TICKLE   ("tickle",  true, false, false, false),
+        BITE     ("bite",    "bite",   true, false, false, false),
+        BLUSH    ("blush",   "blush",  true, false, false, false),
+        CRY      ("cry",     "cry",    true, false, false, false),
+        CUDDLE   ("cuddle",  "cuddle", true, false, false, false),
+        DANCE    ("dance",   "dance",  true, false, false, false),
+        EEVEE_GIF("eevee",   "eevee",  true, false, false, true),
+        FEED     ("feed",    "feed",   true, false, true,  false),
+        FLUFF    ("fluff",   "fluff",  true, false, false, false),
+        HUG      ("hug",     "hug",    true, false, false, false),
+        KISS     ("kiss",    "kiss",   true, false, false, false),
+        LICK     ("lick",    "lick",   true, false, false, false),
+        NEKO_GIF ("neko",    "neko",   true, false, false, true),
+        PAT      ("pat",     "pat",    true, false, false, false),
+        POKE     ("poke",    "poke",   true, false, false, false),
+        SLAP     ("slap",    "slap",   true, false, false, false),
+        SMILE    ("smile",   "smile",  true, false, false, false),
+        TAIL     ("tail",    "tail",   true, false, true,  false),
+        TICKLE   ("tickle",  "tickle", true, false, false, false),
         
         // NSFW Gifs
         NSFW_ANAL         ("anal",          "fuck",      true, true, true,  false),
-        NSFW_BLOWJOB      ("blowjob",                              true, true, true,  false),
-        NSFW_CUM          ("cum",                                  true, true, false, false),
-        NSFW_FUCK         ("fuck",                                 true, true, true,  false),
+        NSFW_BLOWJOB      ("blowjob",       "blowjob",   true, true, true,  false),
+        NSFW_CUM          ("cum",           "cum",       true, true, false, false),
+        NSFW_FUCK         ("fuck",          "fuck",      true, true, true,  false),
         NSFW_NEKO_GIF     ("neko",          "lewd",      true, true, false, true),
-        NSFW_PUSSYLICK    ("pussylick",                            true, true, true,  false),
-        NSFW_SOLO         ("solo",                                 true, true, false, false),
+        NSFW_PUSSYLICK    ("pussylick",     "pussylick", true, true, true,  false),
+        NSFW_SOLO         ("solo",          "solo",      true, true, false, false),
         NSFW_THREESOME_FFF("threesome_fff", "threesome", true, true, true,  false),
         NSFW_THREESOME_FFM("threesome_ffm", "threesome", true, true, true,  false),
         NSFW_THREESOME_MMF("threesome_mmf", "threesome", true, true, true,  false),
@@ -139,12 +139,12 @@ public class HttpUtil {
         NSFW_YURI         ("yuri",          "fuck",      true, true, true,  false),
         
         // SFW Images
-        EEVEE_IMG("eevee",   false, false, false, true),
-        HOLO     ("holo",    false, false, false, true),
-        KITSUNE  ("kitsune", false, false, false, true),
-        NEKO_IMG ("neko",    false, false, false, true),
-        OKAMI    ("okami",   false, false, false, true),
-        SENKO    ("senko",   false, false, false, true),
+        EEVEE_IMG("eevee",   "eevee",   false, false, false, true),
+        HOLO     ("holo",    "holo",    false, false, false, true),
+        KITSUNE  ("kitsune", "kitsune", false, false, false, true),
+        NEKO_IMG ("neko",    "neko",    false, false, false, true),
+        OKAMI    ("okami",   "okami",   false, false, false, true),
+        SENKO    ("senko",   "senko",   false, false, false, true),
         
         // NSFW Images
         NSFW_NEKO_IMG("neko", "lewd", false, true, false, true);
@@ -155,10 +155,6 @@ public class HttpUtil {
         private final boolean nsfw;
         private final boolean request;
         private final boolean required;
-        
-        ImageAPI(String name, boolean gif, boolean nsfw, boolean request, boolean required){
-            this(name, name, gif, nsfw, request, required);
-        }
         
         ImageAPI(String name, String pathName, boolean gif, boolean nsfw, boolean request, boolean required){
             this.name = name;
