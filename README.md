@@ -8,6 +8,9 @@
 [patreonImg]: https://img.shields.io/badge/Support%20me%20on-Patreon-blue?logo=data:image/svg%2bxml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+UGF0cmVvbiBpY29uPC90aXRsZT48cGF0aCBkPSJNMCAuNDh2MjMuMDRoNC4yMlYuNDh6bTE1LjM4NSAwYy00Ljc2NCAwLTguNjQxIDMuODgtOC42NDEgOC42NSAwIDQuNzU1IDMuODc3IDguNjIzIDguNjQxIDguNjIzIDQuNzUgMCA4LjYxNS0zLjg2OCA4LjYxNS04LjYyM0MyNCA0LjM2IDIwLjEzNi40OCAxNS4zODUuNDh6IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==
 [paypalImg]: https://img.shields.io/badge/Donate%20with-PayPal-blue?logo=data:image/svg%2bxml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+UGF5UGFsIGljb248L3RpdGxlPjxwYXRoIGQ9Ik02LjkwOCAyNEgzLjgwNGMtLjY2NCAwLTEuMDg2LS41MjktLjkzNi0xLjE4bC4xNDktLjY3NGgyLjA3MWMuNjY2IDAgMS4zMzYtLjUzMyAxLjQ4Mi0xLjE4MmwxLjA2NC00LjU5MmMuMTUtLjY0OC44MTYtMS4xOCAxLjQ4LTEuMThoLjg4M2MzLjc4OSAwIDYuNzM0LS43NzkgOC44NC0yLjM0czMuMTYtMy42IDMuMTYtNi4xMzVjMC0xLjEyNS0uMTk1LTIuMDU1LS41ODgtMi43ODkgMC0uMDE2LS4wMTYtLjAzMS0uMDE2LS4wNDZsLjEzNS4wNzVjLjc1LjQ2NSAxLjMyIDEuMDY0IDEuNzExIDEuODE0LjQwNC43NS41OTggMS42OC41OTggMi43OTEgMCAyLjUzNS0xLjA0OSA0LjU3NC0zLjE2NCA2LjEzNS0yLjEgMS41NDUtNS4wNTUgMi4zMjQtOC44MzQgMi4zMjRoLS45Yy0uNjYgMC0xLjMzNC41MjUtMS40ODQgMS4xODZMOC4zOSAyMi44MTJjLS4xNDkuNjQ1LS44MSAxLjE3LTEuNDcgMS4xN0w2LjkwOCAyNHptLTIuNjc3LTIuNjk1SDEuMTI2Yy0uNjYzIDAtMS4wODQtLjUyOS0uOTM2LTEuMThMNC41NjMgMS4xODJDNC43MTQuNTI5IDUuMzc4IDAgNi4wNDQgMGg2LjQ2NWMxLjM5NSAwIDIuNjA5LjA5OCAzLjY0OC4yODkgMS4wMzUuMTg5IDEuOTIuNTE5IDIuNjg0Ljk5LjczNi40NjUgMS4zMjIgMS4wNzIgMS42OTcgMS44MTguMzg5Ljc0OC41ODQgMS42OC41ODQgMi43OTcgMCAyLjUzNS0xLjA1MSA0LjU3NC0zLjE2NCA2LjExOS0yLjEgMS41NjEtNS4wNTYgMi4zMjYtOC44MzYgMi4zMjZoLS44ODNjLS42NiAwLTEuMzI4LjUyNC0xLjQ3OCAxLjE2OUw1LjcgMjAuMDk3Yy0uMTQ5LjY0Ni0uODE3IDEuMTcyLTEuNDg1IDEuMTcybC4wMTYuMDM2em03LjQ0Ni0xNy4zNjloLTEuMDE0Yy0uNjY2IDAtMS4zMzIuNTI5LTEuNDggMS4xNzhsLS45MyA0LjAyYy0uMTUuNjQ4LjI3IDEuMTc5LjkzIDEuMTc5aC43NjZjMS42NjQgMCAyLjk3LS4zNDMgMy45LTEuMDIxLjkyOS0uNjg2IDEuMzk1LTEuNjU0IDEuMzk1LTIuOTEyIDAtLjgzLS4zMDEtMS40NDUtLjktMS44NC0uNi0uNDA0LTEuNS0uNjA1LTIuNjg2LS42MDVsLjAxOS4wMDF6IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==
 
+<!-- Images -->
+[mention_example]: https://purrbot.site/assets/img/demo/mention_example.webp
+
 <!-- Discord OAuth -->
 [full_invite]: https://add.botl.ink/?id=425382319449309197&perms=387136
 [basic_invite]: https://add.botl.ink/?id=425382319449309197
@@ -51,7 +54,12 @@
 This bot was made to use the [nekos.life]-API but now moved to its very own API.
 
 ## Commands
-**Default Prefix**: `p.` (`@mention` the bot to know what prefix is used for the Discord Server)
+**Default Prefix**: `p.`
+
+The bot can have a different prefix on other Discord Servers.  
+If You're not sure what prefix is used can you just mention the bot (`@*Purr*#6875`) and it will tell you what prefix is used.
+
+![mention_example]
 
 A full list of all commands can be found on the [wiki][commands].  
 All commands require the following permissions:  
