@@ -87,18 +87,21 @@ If you want to add the bot without a pre-made role, use this link instead:
 Note that when you add the bot without a pre-made role, will you need to give it one with the required permissions.
 
 ### Note about Administrator permissions
-To prevent possible damage in case of a token leak or attack on our VPS does the Bot deny the administrator permission and won't perform any actions while having it.  
-We strongly believe that a bot shouldn't have admin priviledges to perfom actions, including moderation stuff like kicks or bans.
+The bot will not execute any commands while having the `Administrator` Permission assigned.  
+This is to prevent possible security issues when f.e. the Account of the Developer gets hijacked and the bot's dev-commands abused for damage on Servers.
 
-Please take your time to setup a dedicated Bot role with all nessesary permissions and without administrator!
+Please make sure to properly setup permissions for the bot(s) you use on your Server to prevent issues such as Mass-tagging, channel-edits and/or deletions or worse.
 
 ## Donations
 [![ko-fiImg]][ko-fi] [![patreonImg]][patreon] [![paypalImg]][paypal]
 
-Donations help me (Andre_601) to keep this bot up and running. It also allows me to other its features to everyone for free.  
-If you really enjoy the features of this bot, consider supporting my work with a donation.
+All donations help keeping this bot running.  
+\*Purr* is a Bot made and maintained in the free time of the dev and paid from their own pocket.
 
-You can either do single donations with PayPal or through Ko-fi, or make continued donations on Patreon.
+No feature of the bot is behind any paywall as we believe that everyone should have access to joy and entertainment without restrictions.
+
+If you like what the bot offers would we really appreciate a donation from you.  
+Donations can be made either through Ko-Fi, PayPal or Patreon. Last one is better for repeating donations while the other ones are more recommended, if you only want to make a single donation.
 
 ## Botlists
 \*Purr* can be found on different Botlist sites.  
