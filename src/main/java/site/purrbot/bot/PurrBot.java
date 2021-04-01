@@ -274,6 +274,8 @@ public class PurrBot {
     }
     
     public String getMsg(String id, String path, String user, String targets){
+        targets = targets == null ? "null" : targets;
+        
         return getMsg(id, path, user)
                 .replace("{target}", targets)
                 .replace("{targets}", getMessageUtil().replaceLast(targets, ",", " " + getMsg(id, "misc.and")));

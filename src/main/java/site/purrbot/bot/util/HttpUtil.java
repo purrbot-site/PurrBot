@@ -112,7 +112,7 @@ public class HttpUtil {
         DANCE    ("dance",   "dance",  true, false, false, false),
         EEVEE_GIF("eevee",   "eevee",  true, false, false, true),
         FEED     ("feed",    "feed",   true, false, true,  false),
-        FLUFF    ("fluff",   "fluff",  true, false, false, false),
+        FLUFF    ("fluff",   "fluff",  true, false, true,  false),
         HUG      ("hug",     "hug",    true, false, false, false),
         KISS     ("kiss",    "kiss",   true, false, false, false),
         LICK     ("lick",    "lick",   true, false, false, false),
@@ -121,7 +121,7 @@ public class HttpUtil {
         POKE     ("poke",    "poke",   true, false, false, false),
         SLAP     ("slap",    "slap",   true, false, false, false),
         SMILE    ("smile",   "smile",  true, false, false, false),
-        TAIL     ("tail",    "tail",   true, false, true,  false),
+        TAIL     ("tail",    "tail",   true, false, false, false),
         TICKLE   ("tickle",  "tickle", true, false, false, false),
         
         // NSFW Gifs

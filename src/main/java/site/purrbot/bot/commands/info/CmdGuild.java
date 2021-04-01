@@ -229,20 +229,20 @@ public class CmdGuild implements Command{
     }
     
     private enum Feature{
-        ANIMATED_ICON("ANIMATED_ICON", "animated_icon", Emotes.GIF_ON, Emotes.GIF_OFF),
-        BANNER("BANNER", "banner", Emotes.IMAGE_ON, Emotes.IMAGE_OFF),
-        COMMERCE("COMMERCE", "store_channel", Emotes.STORE_ON, Emotes.STORE_OFF),
-        COMMUNITY("COMMUNITY", "community", Emotes.COMMUNITY_ON, Emotes.COMMUNITY_OFF),
-        DISCOVERABLE("DISCOVERABLE", "discoverable", Emotes.DISCOVER_ON, Emotes.DISCOVER_OFF),
-        INVITE_SPLASH("INVITE_SPLASH", "invite_screen", Emotes.IMAGE_ON, Emotes.IMAGE_OFF),
-        MEMBER_VERIFICATION("MEMBER:VERIFICATION_GATE_ENABLED", "member_verification", Emotes.SCREEN_ON, Emotes.SCREEN_OFF),
-        NEWS("NEWS", "news_channel", Emotes.NEWS_ON, Emotes.NEWS_OFF),
-        PARTNERED("PARTNERED", "partnered", Emotes.PARTNER_ON, Emotes.PARTNER_OFF),
-        PREVIEW("PREVIEW_ENABLED", "guild_preview", Emotes.PREVIEW_ON, Emotes.PREVIEW_OFF),
-        VANITY_URL("VANITY_URL", "vanity_url", Emotes.INVITE_ON, Emotes.INVITE_OFF),
-        VERIFIED("VERIFIED", "verified", Emotes.VERIFIED_ON, Emotes.VERIFIED_OFF),
-        VIP_REGIONS("VIP_REGIONS", "vip_voice", Emotes.VIP_VOICE_ON, Emotes.VIP_VOICE_OFF),
-        WELCOME_SCREEN("WELCOME_SCREEN_ENABLED", "welcome_screen", Emotes.SCREEN_ON, Emotes.SCREEN_OFF);
+        ANIMATED_ICON      ("ANIMATED_ICON",                    "animated_icon",       Emotes.GIF_ON,       Emotes.GIF_OFF),
+        BANNER             ("BANNER",                           "banner",              Emotes.IMAGE_ON,     Emotes.IMAGE_OFF),
+        COMMERCE           ("COMMERCE",                         "store_channel",       Emotes.STORE_ON,     Emotes.STORE_OFF),
+        COMMUNITY          ("COMMUNITY",                        "community",           Emotes.COMMUNITY_ON, Emotes.COMMUNITY_OFF),
+        DISCOVERABLE       ("DISCOVERABLE",                     "discoverable",        Emotes.DISCOVER_ON,  Emotes.DISCOVER_OFF),
+        INVITE_SPLASH      ("INVITE_SPLASH",                    "invite_screen",       Emotes.IMAGE_ON,     Emotes.IMAGE_OFF),
+        MEMBER_VERIFICATION("MEMBER_VERIFICATION_GATE_ENABLED", "member_verification", Emotes.SCREEN_ON,    Emotes.SCREEN_OFF),
+        NEWS               ("NEWS",                             "news_channel",        Emotes.NEWS_ON,      Emotes.NEWS_OFF),
+        PARTNERED          ("PARTNERED",                        "partnered",           Emotes.PARTNER_ON,   Emotes.PARTNER_OFF),
+        PREVIEW            ("PREVIEW_ENABLED",                  "guild_preview",       Emotes.PREVIEW_ON,   Emotes.PREVIEW_OFF),
+        VANITY_URL         ("VANITY_URL",                       "vanity_url",          Emotes.INVITE_ON,    Emotes.INVITE_OFF),
+        VERIFIED           ("VERIFIED",                         "verified",            Emotes.VERIFIED_ON,  Emotes.VERIFIED_OFF),
+        VIP_REGIONS        ("VIP_REGIONS",                      "vip_voice",           Emotes.VIP_VOICE_ON, Emotes.VIP_VOICE_OFF),
+        WELCOME_SCREEN     ("WELCOME_SCREEN_ENABLED",           "welcome_screen",      Emotes.SCREEN_ON,    Emotes.SCREEN_OFF);
         
         private final String feature;
         private final String name;
