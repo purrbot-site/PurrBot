@@ -49,62 +49,152 @@ public class CmdGuild implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        EmbedBuilder guildInfo = bot.getEmbedUtil().getEmbed(member)
+        guild.loadMembers().onSuccess(members -> sendGuildInfo(guild, tc, member, members))
+                .onError(e -> sendGuildInfo(guild, tc, member, null));
+    }
+    
+    private void sendGuildInfo(Guild guild, TextChannel tc, Member member, List<Member> members){
+        EmbedBuilder info = bot.getEmbedUtil().getEmbed(member)
                 .setTitle(guild.getName())
-                .setThumbnail(guild.getIconUrl())
-                .addField(
-                        EmbedBuilder.ZERO_WIDTH_SPACE,
-                        String.format(
-                                "**%s**: %s\n" +
-                                "**%s**: `%s`\n" +
-                                "\n" +
-                                "**%s**: %s %s\n" +
-                                "**%s**: %s\n" +
-                                "\n" +
-                                "**%s**: %s",
-                                bot.getMsg(guild.getId(), "purr.info.guild.embed.owner"),
-                                getOwner(guild),
-                                bot.getMsg(guild.getId(), "purr.info.guild.embed.created"),
-                                bot.getMessageUtil().formatTime(LocalDateTime.from(guild.getTimeCreated())),
-                                bot.getMsg(guild.getId(), "purr.info.guild.embed.region"),
-                                guild.getRegion().getEmoji(),
-                                guild.getRegion().getName(),
-                                bot.getMsg(guild.getId(), "purr.info.guild.embed.levels.title"),
-                                getVerifyLevel(guild),
-                                bot.getMsg(guild.getId(), "purr.info.guild.embed.boost.title"),
-                                getBoostMessage(guild)
-                        ),
-                        false
-                )
-                .addField(
-                        EmbedBuilder.ZERO_WIDTH_SPACE,
-                        String.format(
-                                "**%s**\n" +
-                                "%s\n" +
-                                "\n" +
-                                "**%s**\n" +
-                                "%s",
-                                bot.getMsg(guild.getId(), "purr.info.guild.embed.members_title"),
-                                getMembers(guild),
-                                bot.getMsg(guild.getId(), "purr.info.guild.embed.channels_title"),
-                                getChannels(guild)
-                        ),
-                        false
-                );
+                .setThumbnail(guild.getIconUrl());
         
-        getGuildFeatures(guild, guildInfo);
+        setGenericInfo(guild, info);
+        setMembersAndChannels(guild, info, members);
+        setGuildFeatures(guild, info);
         
-        if(guild.getBannerUrl() != null)
-            guildInfo.addField(
+        if(guild.getBannerUrl() != null){
+            info.addField(
                     EmbedBuilder.ZERO_WIDTH_SPACE,
                     "**" + bot.getMsg(guild.getId(), "purr.info.guild.embed.features.banner") + "**",
                     false
             ).setImage(guild.getBannerUrl() + "?size=512");
+        }
         
-        tc.sendMessage(guildInfo.build()).queue();
+        tc.sendMessage(info.build()).queue();
     }
     
-    private void getGuildFeatures(Guild guild, EmbedBuilder builder){
+    private void setGenericInfo(Guild guild, EmbedBuilder builder){
+        builder.addField(
+                EmbedBuilder.ZERO_WIDTH_SPACE,
+                String.format(
+                        "%s\n" +
+                        "%s\n" +
+                        "\n" +
+                        "%s\n" +
+                        "%s\n" +
+                        "\n" +
+                        "%s",
+                        getOwner(guild),
+                        getCreationDate(guild),
+                        getRegion(guild),
+                        getVerificationLevel(guild),
+                        getBoostLevel(guild)
+                ),
+                false
+        );
+    }
+    
+    private void setMembersAndChannels(Guild guild, EmbedBuilder builder, List<Member> members){
+        builder.addField(
+                EmbedBuilder.ZERO_WIDTH_SPACE,
+                String.format(
+                        "%s\n" +
+                        "\n" +
+                        "%s",
+                        getMembers(guild, members),
+                        getChannels(guild)
+                ),
+                false
+        );
+    }
+    
+    private String getOwner(Guild guild){
+        Member owner = guild.getOwner();
+        String unknown = bot.getMsg(guild.getId(), "misc.unknown_user");
+    
+        return String.format(
+                "**%s**: %s | %s",
+                bot.getMsg(guild.getId(), "purr.info.guild.embed.owner"),
+                owner == null ? unknown : owner.getAsMention(),
+                owner == null ? unknown : owner.getEffectiveName()
+        );
+    }
+    
+    private String getCreationDate(Guild guild){
+        return String.format(
+                "**%s**: `%s`",
+                bot.getMsg(guild.getId(), "purr.info.guild.embed.created"),
+                bot.getMessageUtil().formatTime(LocalDateTime.from(guild.getTimeCreated()))
+        );
+    }
+    
+    private String getRegion(Guild guild){
+        return String.format(
+                "**%s**: %s %s",
+                bot.getMsg(guild.getId(), "purr.info.guild.embed.region"),
+                guild.getRegion().getEmoji(),
+                guild.getRegion().getName()
+        );
+    }
+    
+    private String getVerificationLevel(Guild guild){
+        return String.format(
+                "**%s**: %s",
+                bot.getMsg(guild.getId(), "purr.info.guild.embed.levels.title"),
+                getLevelName(guild)
+        );
+    }
+    
+    private String getBoostLevel(Guild guild){
+        return String.format(
+                "**%s**: %s",
+                bot.getMsg(guild.getId(), "purr.info.guild.embed.boost.title"),
+                getBoostMessage(guild)
+        );
+    }
+    
+    private String getMembers(Guild guild, List<Member> members){
+        String title = bot.getMsg(guild.getId(), "purr.info.guild.embed.members_title");
+        if(members == null){
+            return String.format(
+                    "**%s**\n" +
+                    "`?`",
+                    title
+            );
+        }
+        
+        int total = members.size();
+        long humans = members.stream().filter(member -> !member.getUser().isBot()).count();
+        long bots = members.stream().filter(member -> member.getUser().isBot()).count();
+        
+        return String.format(
+                "**%s**\n" +
+                "%s",
+                title,
+                bot.getMsg(guild.getId(), "purr.info.guild.embed.members_value")
+                        .replace("{members_total}", bot.getMessageUtil().formatNumber(total))
+                        .replace("{members_human}", bot.getMessageUtil().formatNumber(humans))
+                        .replace("{members_bot}", bot.getMessageUtil().formatNumber(bots))
+        );
+    }
+    
+    private String getChannels(Guild guild){
+        long total = guild.getChannels().stream().filter(chan -> !chan.getType().equals(ChannelType.CATEGORY)).count();
+        long text  = guild.getChannels().stream().filter(chan -> chan.getType().equals(ChannelType.TEXT)).count();
+        long voice = guild.getChannels().stream().filter(chan -> chan.getType().equals(ChannelType.VOICE)).count();
+        
+        return String.format(
+                "**%s**\n" +
+                "%s",
+                bot.getMsg(guild.getId(), "purr.info.guild.embed.channels_title"),
+                bot.getMsg(guild.getId(), "purr.info.guild.embed.channels_value")
+                        .replace("{channels_total}", bot.getMessageUtil().formatNumber(total))
+                        .replace("{channels_text}", bot.getMessageUtil().formatNumber(text))
+                        .replace("{channels_voice}", bot.getMessageUtil().formatNumber(voice))
+        );
+    }
+    
+    private void setGuildFeatures(Guild guild, EmbedBuilder builder){
         builder.addField(
                 EmbedBuilder.ZERO_WIDTH_SPACE,
                 String.join(
@@ -136,7 +226,7 @@ public class CmdGuild implements Command{
         );
     }
     
-    private String getVerifyLevel(Guild guild){
+    private String getLevelName(Guild guild){
         Guild.VerificationLevel level = guild.getVerificationLevel();
         
         switch(level){
@@ -162,12 +252,14 @@ public class CmdGuild implements Command{
     }
     
     private String getBoostMessage(Guild guild){
+        int count = guild.getBoostCount();
         String boostMsg;
-        if(guild.getBoostCount() == 1)
+        if(count == 1){
             boostMsg = bot.getMsg(guild.getId(), "purr.info.guild.embed.boost.single");
-        else
+        }else{
             boostMsg = bot.getMsg(guild.getId(), "purr.info.guild.embed.boost.multiple")
-                    .replace("{boost}", String.valueOf(guild.getBoostCount()));
+                    .replace("{boost}", String.valueOf(count));
+        }
         
         return bot.getMsg(guild.getId(), "purr.info.guild.embed.boost.value")
                 .replace("{boosts}", boostMsg)
@@ -191,41 +283,6 @@ public class CmdGuild implements Command{
             case TIER_3:
                 return Emotes.BOOST_TIER_3.getEmote();
         }
-    }
-    
-    private String getOwner(Guild guild){
-        Member member = guild.getOwner();
-        if(member == null)
-            return bot.getMsg(guild.getId(), "misc.unknown_user");
-        
-        return String.format(
-                "%s | %s",
-                member.getAsMention(),
-                member.getEffectiveName()
-        );
-    }
-    
-    private String getMembers(Guild guild){
-        List<Member> members = guild.loadMembers().get();
-        int total = members.size();
-        long humans = members.stream().filter(member -> !member.getUser().isBot()).count();
-        long bots = members.stream().filter(member -> member.getUser().isBot()).count();
-        
-        return bot.getMsg(guild.getId(), "purr.info.guild.embed.members_value")
-                .replace("{members_total}", bot.getMessageUtil().formatNumber(total))
-                .replace("{members_human}", bot.getMessageUtil().formatNumber(humans))
-                .replace("{members_bot}", bot.getMessageUtil().formatNumber(bots));
-    }
-    
-    private String getChannels(Guild guild){
-        long total = guild.getChannels().stream().filter(chan -> !chan.getType().equals(ChannelType.CATEGORY)).count();
-        long text  = guild.getChannels().stream().filter(chan -> chan.getType().equals(ChannelType.TEXT)).count();
-        long voice = guild.getChannels().stream().filter(chan -> chan.getType().equals(ChannelType.VOICE)).count();
-        
-        return bot.getMsg(guild.getId(), "purr.info.guild.embed.channels_value")
-                .replace("{channels_total}", bot.getMessageUtil().formatNumber(total))
-                .replace("{channels_text}", bot.getMessageUtil().formatNumber(text))
-                .replace("{channels_voice}", bot.getMessageUtil().formatNumber(voice));
     }
     
     private enum Feature{
