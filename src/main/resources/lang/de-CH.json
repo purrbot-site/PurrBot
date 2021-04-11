@@ -640,7 +640,7 @@
     }
   },
   "request": {
-    "accepted": "{target} hat deine anfrage akzeptiert. ([Nachricht]({link}))",
+    "accepted": "{target} hat deine Anfrage akzeptiert {user}.",
     "timed_out": "Deine Anfrage is abgelaufen {user}. {target} hat nicht schnell genug reagiert."
   },
   "snuggle": {
