@@ -49,9 +49,9 @@
 
 <!--Start of README content -->
 
+![purr]  
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![TranslateImg]][translations]
 
-![purr]
 This bot was made to use the [nekos.life]-API but moved to its very own API.
 
 # Commands
