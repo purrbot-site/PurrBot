@@ -640,7 +640,7 @@
     }
   },
   "request": {
-    "accepted": "{target} accepted youw wequest. ([Message]({link}))",
+    "accepted": "{target} accepted youw wequest {user}.",
     "timed_out": "Youw wequest timed out {user}. {target} didn't respond fast enough."
   },
   "snuggle": {
