@@ -9,7 +9,8 @@
 [paypalImg]: https://img.shields.io/badge/Donate%20with-PayPal-blue?logo=data:image/svg%2bxml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+UGF5UGFsIGljb248L3RpdGxlPjxwYXRoIGQ9Ik02LjkwOCAyNEgzLjgwNGMtLjY2NCAwLTEuMDg2LS41MjktLjkzNi0xLjE4bC4xNDktLjY3NGgyLjA3MWMuNjY2IDAgMS4zMzYtLjUzMyAxLjQ4Mi0xLjE4MmwxLjA2NC00LjU5MmMuMTUtLjY0OC44MTYtMS4xOCAxLjQ4LTEuMThoLjg4M2MzLjc4OSAwIDYuNzM0LS43NzkgOC44NC0yLjM0czMuMTYtMy42IDMuMTYtNi4xMzVjMC0xLjEyNS0uMTk1LTIuMDU1LS41ODgtMi43ODkgMC0uMDE2LS4wMTYtLjAzMS0uMDE2LS4wNDZsLjEzNS4wNzVjLjc1LjQ2NSAxLjMyIDEuMDY0IDEuNzExIDEuODE0LjQwNC43NS41OTggMS42OC41OTggMi43OTEgMCAyLjUzNS0xLjA0OSA0LjU3NC0zLjE2NCA2LjEzNS0yLjEgMS41NDUtNS4wNTUgMi4zMjQtOC44MzQgMi4zMjRoLS45Yy0uNjYgMC0xLjMzNC41MjUtMS40ODQgMS4xODZMOC4zOSAyMi44MTJjLS4xNDkuNjQ1LS44MSAxLjE3LTEuNDcgMS4xN0w2LjkwOCAyNHptLTIuNjc3LTIuNjk1SDEuMTI2Yy0uNjYzIDAtMS4wODQtLjUyOS0uOTM2LTEuMThMNC41NjMgMS4xODJDNC43MTQuNTI5IDUuMzc4IDAgNi4wNDQgMGg2LjQ2NWMxLjM5NSAwIDIuNjA5LjA5OCAzLjY0OC4yODkgMS4wMzUuMTg5IDEuOTIuNTE5IDIuNjg0Ljk5LjczNi40NjUgMS4zMjIgMS4wNzIgMS42OTcgMS44MTguMzg5Ljc0OC41ODQgMS42OC41ODQgMi43OTcgMCAyLjUzNS0xLjA1MSA0LjU3NC0zLjE2NCA2LjExOS0yLjEgMS41NjEtNS4wNTYgMi4zMjYtOC44MzYgMi4zMjZoLS44ODNjLS42NiAwLTEuMzI4LjUyNC0xLjQ3OCAxLjE2OUw1LjcgMjAuMDk3Yy0uMTQ5LjY0Ni0uODE3IDEuMTcyLTEuNDg1IDEuMTcybC4wMTYuMDM2em03LjQ0Ni0xNy4zNjloLTEuMDE0Yy0uNjY2IDAtMS4zMzIuNTI5LTEuNDggMS4xNzhsLS45MyA0LjAyYy0uMTUuNjQ4LjI3IDEuMTc5LjkzIDEuMTc5aC43NjZjMS42NjQgMCAyLjk3LS4zNDMgMy45LTEuMDIxLjkyOS0uNjg2IDEuMzk1LTEuNjU0IDEuMzk1LTIuOTEyIDAtLjgzLS4zMDEtMS40NDUtLjktMS44NC0uNi0uNDA0LTEuNS0uNjA1LTIuNjg2LS42MDVsLjAxOS4wMDF6IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==
 
 <!-- Images -->
-[mention_example]: https://purrbot.site/assets/img/demo/mention_example.webp
+[purr]: https://purrbot.site/assets/img/github/purr.webp
+[mention]: https://purrbot.site/assets/img/github/mention.webp
 
 <!-- Discord OAuth -->
 [full_invite]: https://add.botl.ink/?id=425382319449309197&perms=387136
@@ -50,16 +51,16 @@
 
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![TranslateImg]][translations]
 
-# \*Purr*
-This bot was made to use the [nekos.life]-API but now moved to its very own API.
+![purr]
+This bot was made to use the [nekos.life]-API but moved to its very own API.
 
-## Commands
+# Commands
 **Default Prefix**: `p.`
 
 The bot can have a different prefix on other Discord Servers.  
 If You're not sure what prefix is used can you just mention the bot (`@*Purr*#6875`) and it will tell you what prefix is used.
 
-![mention_example]
+![mention]
 
 A full list of all commands can be found on the [wiki][commands].  
 All commands require the following permissions:  
@@ -70,14 +71,14 @@ All commands require the following permissions:
 - Add Reactions
 - Use External Emojis
 
-## Translations
+# Translations
 Version 2.5 of \*Purr* added an option to have a per-guild language set. We welcome any new and exciting language that should be added to the bot.
 
 If you would like to help with the translations of the bot check out the [translation documentation][translate] for a further explanation on how to request a supportive language.
 
 You can find the translations of this bot by visiting: https://lang.purrbot.site.
 
-## Inviting the bot
+# Inviting the bot
 To invite the bot with all the necessary required permissions mentioned in the [Commands Section](#commands) you can use this invitation link:  
 > https://add.botl.ink/?id=425382319449309197&perms=387136
 
@@ -86,7 +87,7 @@ If you want to add the bot without a pre-made role, use this link instead:
 
 Note that when you add the bot without a pre-made role, you will need to give it one with the necessary required permissions.
 
-### Note about Administrator permissions
+## Note about Administrator permissions
 The `Administrator` Permission is a dangerous one as it can allow bots to cause damage on your server with barely any way for you to prevent it (Except for kicking it).
 
 To prevent such events from happening with \*Purr* does it not execute any commands while having the Administrator permission assigned.  
@@ -95,7 +96,7 @@ This is our way to protect your server from any possible harm.
 We highly recommend to always have a dedicated Bot-Role which has the necessary permissions the bot requires and NEVER give Administrator permissions to any bot.  
 If a bot can't work without this permission, search for a different one as this is not considered a good practice in Bot Development.
 
-## Donations
+# Donations
 [![ko-fiImg]][ko-fi] [![patreonImg]][patreon] [![paypalImg]][paypal]
 
 All donations help keeping this bot running.  
@@ -106,34 +107,34 @@ No feature of the bot is behind any paywall as we believe that everyone should h
 If you like what the bot offers we really appreciate a donation from you.  
 Donations can be made either through Ko-Fi, PayPal or Patreon. Patreon is a preferred payment method for recurring donations while the other ones are more recommended, if you are only wanting to donate once.
 
-## Botlists
+# Botlists
 \*Purr* can be found on different Botlist sites.  
 Feel free to upvote her to show your support.
 
-#### [Botlist.space][botlist_space]
+### [Botlist.space][botlist_space]
 > Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
 
 ![widget_botlist_space]
 
-#### [Discord.boats][discord_boats]
+### [Discord.boats][discord_boats]
 > Discord Boats is a growing directory of Discord bots to enhance your server - Find the perfect bot for your needs and add it to your server easily, quickly and for free.
 
 ![widget_discord_boats]
 
-#### [Discordbotlist.com][discordbotlist_com]
+### [Discordbotlist.com][discordbotlist_com]
 > Find the best Discord bots for your server with our discord bot list.
 > Browse information on each bot and vote for your favourites.
 
-#### [Discord.bots.gg][discord_bots_gg]
+### [Discord.bots.gg][discord_bots_gg]
 > The original Discord bot list, find the right bot for your server today.
 
-#### [Discordextremelist.xyz][discordextremelist_xyz]
+### [Discordextremelist.xyz][discordextremelist_xyz]
 > Discord's unbiased list, giving small bots and small servers a big chance!
 
-#### [Discordservices.net]
+### [Discordservices.net]
 > A brand new botlist that aims to deliver the best experience for its users and bot developers.
 
-## Useful Links
+# Useful Links
 - [Discord Server][Discord]
 - [Invite with Roles][full_invite] (Recommended)
 - [Invite without Roles][basic_invite]
