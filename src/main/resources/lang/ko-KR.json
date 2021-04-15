@@ -640,7 +640,7 @@
     }
   },
   "request": {
-    "accepted": "{target}이(가) 요청을 수락했어. ([Message]({link}))",
+    "accepted": "{target}이(가) {user}의 요청을 수락했어.",
     "timed_out": "{user}, 네 요청에 대한 대기시간이 만료되었어. {target}이(가) 시간 내로 반응하지 않았거든."
   },
   "snuggle": {
