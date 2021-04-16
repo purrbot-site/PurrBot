@@ -640,7 +640,7 @@
     }
   },
   "request": {
-    "accepted": "{target} принимает ваш запрос. ([Сообщение]({link}))",
+    "accepted": "{target} принимает запрос {user}.",
     "timed_out": "Ваш запрос истек, {user}. Не поступило ответа от {target}."
   },
   "snuggle": {
