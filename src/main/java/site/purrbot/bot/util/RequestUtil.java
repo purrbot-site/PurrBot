@@ -106,10 +106,10 @@ public class RequestUtil{
                         );
                     
                     if(result.isRequest() && author != null)
-                        sendConfirmEmbed(tc, author, targets, message.getJumpUrl());
+                        sendConfirmation(tc, author, targets, message);
                 }, e -> tc.sendMessage(MarkdownSanitizer.escape(text)).queue(message -> {
                     if(result.isRequest() && author != null)
-                        sendConfirmEmbed(tc, author, targets, message.getJumpUrl());
+                        sendConfirmation(tc, author, targets, message);
                 }));
                 return;
             }
@@ -211,23 +211,16 @@ public class RequestUtil{
                         );
                     
                     if(result.isRequest() && author != null)
-                        sendConfirmEmbed(tc, author, targets, message.getJumpUrl());
+                        sendConfirmation(tc, author, targets, message);
                 }, e -> tc.sendMessage(embed.build()).queue(message -> {
                     if(result.isRequest() && author != null)
-                        sendConfirmEmbed(tc, author, targets, message.getJumpUrl());
+                        sendConfirmation(tc, author, targets, message);
                 }));
     }
     
-    private void sendConfirmEmbed(TextChannel tc, Member author, String targets, String messageUrl){
-        MessageEmbed embed = bot.getEmbedUtil().getEmbed()
-                .setDescription(
-                        bot.getMsg(tc.getGuild().getId(), "request.accepted", author.getEffectiveName(), targets)
-                                .replace("{link}", messageUrl)
-                )
-                .build();
-        
-        tc.sendMessage(author.getAsMention()).embed(embed).queue(
-                del -> del.delete().queueAfter(10, TimeUnit.SECONDS)
-        );
+    private void sendConfirmation(TextChannel tc, Member author, String targets, Message msg){
+        msg.reply(
+                bot.getMsg(tc.getGuild().getId(), "request.accepted", author.getAsMention(), targets)
+        ).queue();
     }
 }
