@@ -50,6 +50,8 @@
 <!--Start of README content -->
 
 ![purr]  
+<p align="right"><i>Image made by <code>Makay#0270</code></i></p>
+
 [![DiscordImg]][Discord] [![IssuesImg]][Issues] [![LicenseImg]][License] [![TranslateImg]][translations]
 
 This bot was made to use the [nekos.life]-API but moved to its very own API.
