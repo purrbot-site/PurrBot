@@ -411,7 +411,8 @@
           "description": {
             "command_value": "Para obter mais informações sobre um comando específico, execute `{prefix}help [command]`.\nVocê também pode executar `{prefix}ajuda cat:[category]` para mostrar os comandos de uma categoria específica.",
             "nav_title": "Navegação",
-            "nav_value": "Clique nas reações para as seguintes ações:\n\n◀ - Página Anterior\n▶ - Próxima página\n⏹ - Cancelar Menu"
+            "nav_value": "Clique nas reações para as seguintes ações:\n\n◀ - Página Anterior\n▶ - Próxima página\n⏹ - Cancelar Menu",
+            "support": "Se precisar de ajuda com o bot, não hesite em [entrar no Discord de Suporte]({guild_invite}) para o suporte, um bate-papo casual com nekos!"
           },
           "nsfw_info": "Execute o comando de ajuda em um canal NSFW para ver esta página.",
           "support_title": "Ama o bot?",
