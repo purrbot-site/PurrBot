@@ -411,7 +411,8 @@
           "description": {
             "command_value": "특정 명령어에 대한 설명을 보고싶다면, `{prefix}help [command]` 를 입력해줘.\n카테고리에 대한 설명은 `{prefix}help cat:[category]` 이야!",
             "nav_title": "조작",
-            "nav_value": "아래의 이모티콘을 클릭하세요!\n\n◀ - 앞 페이지\n▶ - 뒷 페이지\n⏹ - 취소"
+            "nav_value": "아래의 이모티콘을 클릭하세요!\n\n◀ - 앞 페이지\n▶ - 뒷 페이지\n⏹ - 취소",
+            "support": "봇 사용에 어려움이 있다면, [디스코드 서버]{guild_invite} 로 오세요! 봇 지원 외에도 귀여운 고양이 소녀들과 즐거운 대화장소가 있습니다."
           },
           "nsfw_info": "연령 제한 채널에서 help 명령어를 사용하면 볼 수 있어.",
           "support_title": "봇이 마음에 든다면?",
