@@ -411,7 +411,8 @@
           "description": {
             "command_value": "To get mowe info about a specific command wun `{prefix}help [command]`\nYou can awso wun `{prefix}help cat:[category]` to show the commands of a specific categowy!",
             "nav_title": "Navigation",
-            "nav_value": "Cwick the weactions fow the fowwowing actions:\n\n◀ - Pwevious Page\n▶ - Next Page\n⏹ - Cancew Menu"
+            "nav_value": "Cwick the weactions fow the fowwowing actions:\n\n◀ - Pwevious Page\n▶ - Next Page\n⏹ - Cancew Menu",
+            "support": "If you need hewp with the bot, don't hesitate to [join the Suppowt Discowd]({guild_invite}) fow suppowt, a casuaw chat and cute nekos!"
           },
           "nsfw_info": "Wun the hewp command in a NSFW channew to see this page! O//w//O",
           "support_title": "Do- do you love the bot O\\\\W\\\\O?",
