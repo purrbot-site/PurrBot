@@ -480,8 +480,6 @@ public class PurrBot {
     
     private void updateGuild(String id, String key, String value, BiConsumer<GuildSettings, String> mutator){
         GuildSettings settings = getGuildSettings(id);
-        if(settings == null)
-            settings = getGuildSettings(id);
         
         mutator.accept(settings, value);
         getDbUtil().updateSettings(id, key, value);

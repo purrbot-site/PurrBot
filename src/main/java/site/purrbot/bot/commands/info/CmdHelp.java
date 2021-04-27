@@ -285,6 +285,11 @@ public class CmdHelp implements Command{
                         false
                 )
                 .addField(
+                        EmbedBuilder.ZERO_WIDTH_SPACE,
+                        bot.getMsg(id, "purr.info.help.command_menu.description.support"),
+                        false
+                )
+                .addField(
                         String.format(
                                 "%s%s",
                                 title.equals("title") ? "" : categories.get(title) + " ",
