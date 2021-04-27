@@ -411,7 +411,8 @@
           "description": {
             "command_value": "Pour obtenir plus d'informations sur une commande spécifique, exécutez `{prefix}help [command]`.\nVous pouvez également exécuter `{prefix}help cat:[category]` pour afficher les commandes d'une catégorie spécifique.",
             "nav_title": "Navigation",
-            "nav_value": "Cliquez sur les réactions pour les actions suivantes :\n\n◀ - Page précédente\n▶ - Page suivante\n⏹ - Annuler le menu"
+            "nav_value": "Cliquez sur les réactions pour les actions suivantes :\n\n◀ - Page précédente\n▶ - Page suivante\n⏹ - Annuler le menu",
+            "support": "Si vous avez besoin d'aide avec le bot, n'hésitez pas à [rejoindre le Discord de Support]({guild_invite}) pour obtenir de l'aide, une zone de chat et de mignons nekos!"
           },
           "nsfw_info": "Exécutez la commande help dans un salon NSFW pour voir cette page.",
           "support_title": "Vous aimez le bot?",
