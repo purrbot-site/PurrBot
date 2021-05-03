@@ -25,7 +25,7 @@
   "misc": {
     "and": "y",
     "info": "¡Hola, {user}!\nMi prefijo en este Discord es `{prefix}`\nEjecuta `{prefix}help` para ver la lista de comandos.",
-    "language": "Español (es)",
+    "language": "Español (es-es)",
     "unknown_user": "Desconocido",
     "welcome_member": "Eres miembro #{count}"
   },

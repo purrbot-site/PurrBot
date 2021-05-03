@@ -30,7 +30,7 @@ public interface Command extends AbstractCommand<Message>{
      * We convert the default "execute(Message, String, String)" to our own "run(Guild, TextChannel, Message, Member, String...)"
      * method to have a better command system.
      * 
-     * This method isn't automatically implemented into the classes, since it's being overriden here.
+     * This method isn't automatically implemented into the classes, since it's being overridden here.
      */
     @Override
     default void execute(Message message, String s, String trigger){

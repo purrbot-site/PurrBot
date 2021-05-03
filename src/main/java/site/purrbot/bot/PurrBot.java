@@ -42,6 +42,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.botblock.javabotblockapi.core.BotBlockAPI;
 import org.botblock.javabotblockapi.core.Site;
 import org.botblock.javabotblockapi.jda.PostAction;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
@@ -93,7 +94,7 @@ public class PurrBot {
     private final EventWaiter waiter = new EventWaiter();
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     
-    private final Cache<String, GuildSettings> guildSettings = Caffeine.newBuilder()
+    private final Cache<@NotNull String, @NotNull GuildSettings> guildSettings = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
     
@@ -114,6 +115,7 @@ public class PurrBot {
                 .addLang("de-CH")
                 .addLang("en")
                 .addLang("en-OWO")
+                .addLang("es-ES")
                 .addLang("fr-FR")
                 //.addLang("it-IT") // Discontinued at the moment.
                 .addLang("ko-KR")
