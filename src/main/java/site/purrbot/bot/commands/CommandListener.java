@@ -114,7 +114,7 @@ public class CommandListener extends ListenerAdapter{
                 return;
             
             if(!self.hasPermission(tc, Permission.MESSAGE_WRITE)){
-                if(self.hasPermission(tc, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI))
+                if(self.hasPermission(tc, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI, Permission.MESSAGE_HISTORY))
                     msg.addReaction(Emotes.CANCEL.getNameAndId()).queue();
                 
                 return;

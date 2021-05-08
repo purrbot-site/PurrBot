@@ -40,12 +40,11 @@
 [widget_discord_boats]: https://discord.boats/api/widget/425382319449309197
 
 <!-- Botlists -->
-[botlist_space]: https://botlist.space/bot/425382319449309197  
+[discordlist_space]: https://discordlist.space/bot/425382319449309197  
 [discord_boats]: https://discord.boats/bot/purr  
-[discordbotlist_com]: https://discordbotlist.com/bots/purr
 [discord_bots_gg]: https://discord.bots.gg/bots/425382319449309197  
 [discordextremelist_xyz]: https://discordextremelist.xyz/bots/purr
-[discordservices.net]: https://dbot.page/purr
+[discordservices_net]: https://dbot.page/purr
 
 <!--Start of README content -->
 
@@ -113,27 +112,23 @@ Donations can be made either through Ko-Fi, PayPal or Patreon. Patreon is a pref
 \*Purr* can be found on different Botlist sites.  
 Feel free to upvote her to show your support.
 
-### [Botlist.space][botlist_space]
-> Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
-
-![widget_botlist_space]
-
-### [Discord.boats][discord_boats]
+## [Discord.boats][discord_boats]
 > Discord Boats is a growing directory of Discord bots to enhance your server - Find the perfect bot for your needs and add it to your server easily, quickly and for free.
 
 ![widget_discord_boats]
 
-### [Discordbotlist.com][discordbotlist_com]
-> Find the best Discord bots for your server with our discord bot list.
-> Browse information on each bot and vote for your favourites.
-
-### [Discord.bots.gg][discord_bots_gg]
+## [Discord.bots.gg][discord_bots_gg]
 > The original Discord bot list, find the right bot for your server today.
 
-### [Discordextremelist.xyz][discordextremelist_xyz]
+## [Discordextremelist.xyz][discordextremelist_xyz]
 > Discord's unbiased list, giving small bots and small servers a big chance!
 
-### [Discordservices.net]
+## [Discordlist.space][discordlist_space]
+> Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
+
+![widget_botlist_space]
+
+## [Discordservices.net][discordservices_net]
 > A brand new botlist that aims to deliver the best experience for its users and bot developers.
 
 # Useful Links

@@ -27,9 +27,8 @@ public class Links {
     public static final String GITHUB = "https://purrbot.site/github";
 
     // Bot lists
-    public static final String BOTLIST_SPACE          = "https://botlist.space/bot/425382319449309197";
+    public static final String DISCORDLIST_SPACE      = "https://discordlist.space/bot/425382319449309197";
     public static final String DISCORD_BOATS          = "https://discord.boats/bot/purr";
-    public static final String DISCORDBOTLIST_COM     = "https://discordbotlist.com/bots/purr";
     public static final String DISCORD_BOTS_GG        = "https://discord.bots.gg/bots/425382319449309197";
     public static final String DISCORDEXTREMELIST_XYZ = "https://discordextremelist.xyz/bots/purr";
     public static final String DISCORDSERVICES_NET    = "https://discordservices.net/bot/425382319449309197";
