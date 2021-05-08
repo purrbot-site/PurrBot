@@ -268,7 +268,7 @@
           "translators_title": "Traducido por",
           "translators_value": "¡Gracias a todas las personas que tradujeron el bot!\nPuedes encontrar el proyecto de traducción [aquí]({link})."
         },
-        "language_set": "¡Idioma establecido a `Español (es)`!",
+        "language_set": "¡Idioma establecido a `Español (es-es)`!",
         "no_language": "¡Por favor proporciona el idioma que quieres establecer!"
       },
       "prefix": {
@@ -416,7 +416,7 @@
           },
           "nsfw_info": "Ejecuta el comando de ayuda en un canal NSFW para ver esta página.",
           "support_title": "¿Te encanta el bot?",
-          "support_value": "Considera apoyar al bot a través de la donación.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Donación simple)\n{KOFI} [`Ko-fi`]({kofi_url}) (Donación simple).\n{PATREON} [`Patreon`]({patreon_url}) (Donación continua)"
+          "support_value": "Considera apoyar al bot a través de la donación.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Donación simple)\n{KOFI} [`Ko-fi`]({kofi_url}) (Donación simple)\n{PATREON} [`Patreon`]({patreon_url}) (Donación continua)"
         }
       },
       "info": {
