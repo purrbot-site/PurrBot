@@ -416,7 +416,7 @@
           },
           "nsfw_info": "Execute o comando de ajuda em um canal NSFW para ver esta página.",
           "support_title": "Ama o bot?",
-          "support_value": "Considere apoiar o bot através de doações.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Doação única)\n{KOFI} [`Ko-fi`]({kofi_url}) (Doação única).\n{PATREON} [`Patreon`]({patreon_url}) (Doação Contínua)"
+          "support_value": "Considere apoiar o bot através de doações.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Doação única)\n{KOFI} [`Ko-fi`]({kofi_url}) (Doação única)\n{PATREON} [`Patreon`]({patreon_url}) (Doação Contínua)"
         }
       },
       "info": {
