@@ -25,7 +25,7 @@
   "misc": {
     "and": "y",
     "info": "¡Hola, {user}!\nMi prefijo en este Discord es `{prefix}`\nEjecuta `{prefix}help` para ver la lista de comandos.",
-    "language": "Español (es)",
+    "language": "Español (es-es)",
     "unknown_user": "Desconocido",
     "welcome_member": "Eres miembro #{count}"
   },
@@ -268,7 +268,7 @@
           "translators_title": "Traducido por",
           "translators_value": "¡Gracias a todas las personas que tradujeron el bot!\nPuedes encontrar el proyecto de traducción [aquí]({link})."
         },
-        "language_set": "¡Idioma establecido a `Español (es)`!",
+        "language_set": "¡Idioma establecido a `Español (es-es)`!",
         "no_language": "¡Por favor proporciona el idioma que quieres establecer!"
       },
       "prefix": {
