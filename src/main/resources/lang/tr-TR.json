@@ -25,7 +25,7 @@
   "misc": {
     "and": "ve",
     "info": "Selam {user}!\nBu sunucudaki önekim `{prefix}` olarak ayarlanmış.\nTüm komutları görmek için `{prefix}help` komutunu kullan.",
-    "language": "Türkçe (tr)",
+    "language": "Türkçe (tr-tr)",
     "unknown_user": "Bilinmiyor",
     "welcome_member": "Sen #{count}. üyesin"
   },
@@ -268,7 +268,7 @@
           "translators_title": "Çevirmenler",
           "translators_value": "Botu tercüme eden herkese teşekkürler!\nÇeviri projesini [burada]({link}) bulabilirsin."
         },
-        "language_set": "Dil `English (en)` olarak ayarlandı!",
+        "language_set": "Dil `Türkçe (tr-tr)` olarak ayarlandı!",
         "no_language": "Lütfen ayarlamak istediğiniz dili belirtin!"
       },
       "prefix": {
