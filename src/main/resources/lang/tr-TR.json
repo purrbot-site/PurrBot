@@ -394,7 +394,7 @@
         "command_info": {
           "aliases": "Alternatifler",
           "command_nsfw": "Lütfen bu komutu NSFW kanalında kullanın.",
-          "no_command": "Belirtilen komut (`{command}`) mevcut değil!\nKomutu doğru yazdığından emin ol.\n\nKategori adlarının önüne `cat:` gelmelidir (ör. `{prefix}help cat:fun`)!",
+          "no_command": "Belirtilen komut (`{command}`) mevcut değil!\nKomutu doğru yazdığından emin ol.\n\nKategori adlarının önüne `cat:` gelmelidir (örn. `{prefix}help cat:eğlence`)!",
           "title": "Komut yardımı: {command}",
           "usage_title": "Kullanım şekli",
           "usage_value": "```\n{commands}\n```\n`[]` = İsteğe bağlı\n`<>` = gerekli"
@@ -412,11 +412,11 @@
             "command_value": "Belirli bir komut hakkında daha fazla bilgi almak için `{prefix}help [komut]` komutunu kullanabilirsiniz.\nAyrıca, belirli bir kategorinin komutlarını görmek için `{prefix}help cat:[kategori]` kullanabilirsiniz.",
             "nav_title": "Gezinme",
             "nav_value": "Aşağıdaki eylemler için tepkilere tıklayın:\n\n◀ - Önceki Sayfa\n▶ - Sonraki Sayfa\n⏹ - Menüyü İptal Et",
-            "support": "Botla ilgili yardıma ihtiyacınız varsa, destek için [Destek Sunucusuna]({guild_invite}) katılmaktan çekinmeyin."
+            "support": "Bot ile ilgili yardıma ihtiyacınız varsa, destek için [Destek Sunucusuna]({guild_invite}) katılmaktan çekinmeyin."
           },
           "nsfw_info": "Bu sayfayı görebilmek için, bu komutu bir NSFW kanalında kullan.",
           "support_title": "Botu sevdin mi?",
-          "support_value": "Bağış yaparak botu desteklemeyebilirsin.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Tek Seferlik Bağış)\n{KOFI} [`Ko-fi`]({kofi_url}) (Tek Seferlik Bağış)\n{PATREON} [`Patreon`]({patreon_url}) (Tekrarlanan Bağış)"
+          "support_value": "Bağış yaparak botu destekleyebilirsin.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Tek Seferlik Bağış)\n{KOFI} [`Ko-fi`]({kofi_url}) (Tek Seferlik Bağış)\n{PATREON} [`Patreon`]({patreon_url}) (Tekrarlanan Bağış)"
         }
       },
       "info": {
