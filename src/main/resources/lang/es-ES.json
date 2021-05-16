@@ -27,7 +27,7 @@
     "info": "¡Hola, {user}!\nMi prefijo en este Discord es `{prefix}`\nEjecuta `{prefix}help` para ver la lista de comandos.",
     "language": "Español (es-es)",
     "unknown_user": "Desconocido",
-    "welcome_member": "Eres miembro #{count}"
+    "welcome_member": "Eres el miembro #{count}"
   },
   "purr": {
     "fun": {
