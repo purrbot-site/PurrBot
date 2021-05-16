@@ -120,7 +120,8 @@ public class PurrBot {
                 //.addLang("it-IT") // Discontinued at the moment.
                 .addLang("ko-KR")
                 .addLang("pt-BR")
-                .addLang("ru-RU");
+                .addLang("ru-RU")
+                .addLang("tr-TR");
 
         dbUtil      = new DBUtil(this);
         messageUtil = new MessageUtil(this);
@@ -283,7 +284,17 @@ public class PurrBot {
                 .replace("{targets}", getMessageUtil().replaceLast(targets, ",", " " + getMsg(id, "misc.and")));
     }
     
+    public String getMsg(String id, String path, String user, List<String> targets){
+        String targetReplacement = targets.isEmpty() ? "null" : getMessageUtil().getFormattedMembers(id, targets.toArray(new String[0]));
+        
+        return getMsg(id, path, user)
+                .replace("{target}", targetReplacement)
+                .replace("{targets}", targetReplacement);
+    }
+    
     public String getMsg(String id, String path, String user){
+        user = getMessageUtil().getFormattedMembers(id, user);
+        
         return getMsg(id, path).replace("{user}", user);
     }
     
@@ -293,6 +304,8 @@ public class PurrBot {
     }
     
     public String getRandomMsg(String id, String path, String user){
+        user = getMessageUtil().getFormattedMembers(id, user);
+        
         return getRandomMsg(id, path).replace("{user}", user);
     }
     

@@ -89,11 +89,11 @@ public class CmdLick implements Command{
             ).queue();
         }
 
-        String targets = members.stream()
+        List<String> targets = members.stream()
                 .filter(mem -> !mem.equals(guild.getSelfMember()))
                 .filter(mem -> !mem.equals(member))
                 .map(Member::getEffectiveName)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.toList());
 
         if(targets.isEmpty())
             return;

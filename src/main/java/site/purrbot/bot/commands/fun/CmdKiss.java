@@ -88,12 +88,12 @@ public class CmdKiss implements Command{
             ).queue();
         }
         
-        String targets = members.stream()
+        List<String> targets = members.stream()
                 .filter(mem -> !mem.getId().equals(IDs.PURR))
                 .filter(mem -> !mem.getId().equals(IDs.SNUGGLE))
                 .filter(mem -> !mem.equals(member))
                 .map(Member::getEffectiveName)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.toList());
         
         if(targets.isEmpty())
             return;

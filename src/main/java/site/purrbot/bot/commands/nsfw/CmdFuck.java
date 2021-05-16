@@ -32,6 +32,7 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
@@ -255,7 +256,7 @@ public class CmdFuck implements Command{
                         }
                     }
                     
-                    bot.getRequestUtil().handleEdit(channel, botMsg, api, author, target.getEffectiveName());
+                    bot.getRequestUtil().handleEdit(channel, botMsg, api, author, Collections.singletonList(target.getEffectiveName()));
                 }, 1, TimeUnit.MINUTES,
                 () -> {
                     TextChannel channel = botMsg.getTextChannel();

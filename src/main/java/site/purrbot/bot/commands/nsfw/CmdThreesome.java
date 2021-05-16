@@ -33,6 +33,7 @@ import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.util.HttpUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -195,12 +196,7 @@ public class CmdThreesome implements Command{
                                 .replace("{target2}", target2.getEffectiveName())
                         )).queue();
                     }else{
-                        String targets = String.join(
-                                " ",
-                                target1.getEffectiveName(),
-                                bot.getMsg(guild.getId(), "misc.and"),
-                                target2.getEffectiveName()
-                        );
+                        List<String> targets = Arrays.asList(target1.getEffectiveName(), target2.getEffectiveName());
     
                         HttpUtil.ImageAPI api;
                         if(bot.getMessageUtil().hasArg("mmf", args)){

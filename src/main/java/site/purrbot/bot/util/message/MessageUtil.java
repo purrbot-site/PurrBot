@@ -33,6 +33,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -245,6 +246,21 @@ public class MessageUtil {
         
         
         return String.format(game, formatNumber(guilds));
+    }
+    
+    public String getFormattedMembers(String id, String... members){
+        if(members.length == 1)
+            return "**" + members[0].replace("*", "\\*") + "**";
+        
+        StringBuilder builder = new StringBuilder();
+        for(String member : members){
+            if(builder.length() > 0)
+                builder.append(", ");
+            
+            builder.append("**").append(member.replace("*", "\\*")).append("**");
+        }
+        
+        return replaceLast(builder.toString(), ",", " " + bot.getMsg(id, "misc.and"));
     }
     
     public String replaceLast(String input, String target, String replacement){

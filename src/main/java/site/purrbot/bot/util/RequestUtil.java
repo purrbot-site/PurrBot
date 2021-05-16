@@ -32,6 +32,8 @@ import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RequestUtil{
@@ -78,7 +80,7 @@ public class RequestUtil{
         handleEdit(tc, msg, api, author, null);
     }
     
-    public void handleEdit(TextChannel tc, Message msg, HttpUtil.ImageAPI api, Member author, String targets){
+    public void handleEdit(TextChannel tc, Message msg, HttpUtil.ImageAPI api, Member author, List<String> targets){
         bot.getHttpUtil().getImage(api).whenComplete(((result, ex) -> {
             Guild guild = tc.getGuild();
             String text;
@@ -155,7 +157,7 @@ public class RequestUtil{
                                 e -> logger.warn("Unable to delete Message for {}. Was it already deleted?", api.getName())
                         );
                     }else{
-                        handleEdit(tc, msg, api, author, target.getEffectiveName());
+                        handleEdit(tc, msg, api, author, Collections.singletonList(target.getEffectiveName()));
                     }
                 },
                 1, TimeUnit.MINUTES,
@@ -173,7 +175,7 @@ public class RequestUtil{
         );
     }
     
-    private void sendResponse(Message msg, TextChannel tc, HttpUtil.Result result, Member author, String targets, String text){
+    private void sendResponse(Message msg, TextChannel tc, HttpUtil.Result result, Member author, List<String> targets, String text){
         String id = tc.getGuild().getId();
         
         if(result.getUrl().equalsIgnoreCase("https://purrbot.site/img/sfw/neko/img/neko_136.jpg")){
@@ -218,7 +220,7 @@ public class RequestUtil{
                 }));
     }
     
-    private void sendConfirmation(TextChannel tc, Member author, String targets, Message msg){
+    private void sendConfirmation(TextChannel tc, Member author, List<String> targets, Message msg){
         msg.reply(
                 bot.getMsg(tc.getGuild().getId(), "request.accepted", author.getAsMention(), targets)
         ).queue();

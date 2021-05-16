@@ -69,11 +69,11 @@ public class CmdFluff implements Command{
             }else{
                 if(bot.isBeta()){
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.fun.fluff.special_user", member.getAsMention())
+                            bot.getMsg(guild.getId(), "snuggle.fun.fluff.mention_snuggle", member.getAsMention())
                     ).queue();
                 }else{
                     tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.fun.fluff.special_user", member.getAsMention())
+                            bot.getMsg(guild.getId(), "purr.fun.fluff.mention_purr", member.getAsMention())
                     ).queue();
                 }
             }

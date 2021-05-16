@@ -38,6 +38,7 @@ public final class LangUtils{
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
+            case "tr-tr":
                 return bot.getFileManager().getString(language.toLowerCase(), path);
     
             case "it-it":
@@ -56,6 +57,7 @@ public final class LangUtils{
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
+            case "tr-tr":
                 return bot.getFileManager().getStringlist(language.toLowerCase(), path);
     
             case "it-it":
@@ -76,6 +78,7 @@ public final class LangUtils{
         KO_KR ("\uDDF0", "\uDDF7"),
         PT_BR ("\uDDE7", "\uDDF7"),
         RU_RU ("\uDDF7", "\uDDFA"),
+        TR_TR ("\uDDF9", "\uDDF7"),
         
         UNKNOWN("\uDDFA", "\uDDF3");
         
