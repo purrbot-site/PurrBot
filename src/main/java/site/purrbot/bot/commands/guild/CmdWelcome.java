@@ -46,7 +46,7 @@ import java.io.InputStream;
                         "{p}welcome color reset\n" +
                         "{p}welcome icon set <icon>\n" +
                         "{p}welcome icon reset\n" +
-                        "{p}welcome msg <message>\n" +
+                        "{p}welcome msg set <message>\n" +
                         "{p}welcome msg reset\n" +
                         "{p}welcome test"
                 ),
