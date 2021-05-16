@@ -276,12 +276,10 @@ public class PurrBot {
         return getFileManager().getStringlist("data", "welcome.icon");
     }
     
-    public String getMsg(String id, String path, String user, String targets){
-        targets = targets == null ? "null" : targets;
+    public String getMsg(String id, String path, String user, String target){
+        target = target == null ? "null" : target;
         
-        return getMsg(id, path, user)
-                .replace("{target}", targets)
-                .replace("{targets}", getMessageUtil().replaceLast(targets, ",", " " + getMsg(id, "misc.and")));
+        return getMsg(id, path, user, Collections.singletonList(target));
     }
     
     public String getMsg(String id, String path, String user, List<String> targets){

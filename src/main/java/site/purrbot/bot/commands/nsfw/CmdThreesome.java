@@ -219,12 +219,7 @@ public class CmdThreesome implements Command{
                     list.remove(target1.getId());
                     list.remove(target2.getId());
     
-                    String targets = String.join(
-                            " ",
-                            target1.getEffectiveName(),
-                            bot.getMsg(guild.getId(), "misc.and"),
-                            target2.getEffectiveName()
-                    );
+                    List<String> targets = Arrays.asList(target1.getEffectiveName(), target2.getEffectiveName());
                     
                     channel.sendMessage(MarkdownSanitizer.escape(
                             bot.getMsg(
