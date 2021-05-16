@@ -409,7 +409,7 @@
             "title": "Kategoriler"
           },
           "description": {
-            "command_value": "Belirli bir komut hakkında daha fazla bilgi almak için `{prefix}help [komut]` komutunu kullanabilirsiniz.\nAyrıca, belirli bir kategorinin komutlarını görmek için `{prefix}help cat:[kategori]` kullanabilirsiniz.",
+            "command_value": "Belirli bir komut hakkında daha fazla bilgi almak için `{prefix}help [komut]` komutunu kullanabilirsiniz.\nAyrıca, belirli bir kategorinin komutlarını görmek için `{prefix}help cat:[kategori]` komutunu kullanabilirsiniz.",
             "nav_title": "Gezinme",
             "nav_value": "Aşağıdaki eylemler için tepkilere tıklayın:\n\n◀ - Önceki Sayfa\n▶ - Sonraki Sayfa\n⏹ - Menüyü İptal Et",
             "support": "Bot ile ilgili yardıma ihtiyacınız varsa, destek için [Destek Sunucusuna]({guild_invite}) katılmaktan çekinmeyin."
