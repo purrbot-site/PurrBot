@@ -26,7 +26,6 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.requests.RestAction;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
@@ -186,15 +185,12 @@ public class CmdThreesome implements Command{
                         list.remove(target2.getId());
     
                         botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
-                        channel.sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(
-                                        guild.getId(),
-                                        "purr.nsfw.threesome.request.denied",
-                                        author.getAsMention()
-                                )
-                                .replace("{target1}", target1.getEffectiveName())
-                                .replace("{target2}", target2.getEffectiveName())
-                        )).queue();
+                        channel.sendMessage(bot.getMsg(
+                                guild.getId(),
+                                "purr.nsfw.threesome.request.denied",
+                                author.getAsMention()
+                            ).replace("{target1}", target1.getEffectiveName()).replace("{target2}", target2.getEffectiveName())
+                        ).queue();
                     }else{
                         List<String> targets = Arrays.asList(target1.getEffectiveName(), target2.getEffectiveName());
     
@@ -221,13 +217,11 @@ public class CmdThreesome implements Command{
     
                     List<String> targets = Arrays.asList(target1.getEffectiveName(), target2.getEffectiveName());
                     
-                    channel.sendMessage(MarkdownSanitizer.escape(
-                            bot.getMsg(
-                                    guild.getId(),
-                                    "request.timed_out",
-                                    author.getAsMention(),
-                                    targets
-                            )
+                    channel.sendMessage(bot.getMsg(
+                            guild.getId(),
+                            "request.timed_out",
+                            author.getAsMention(),
+                            targets
                     )).queue();
                 }
         );

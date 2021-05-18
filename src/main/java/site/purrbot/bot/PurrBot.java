@@ -291,7 +291,12 @@ public class PurrBot {
     }
     
     public String getMsg(String id, String path, String user){
-        user = getMessageUtil().getFormattedMembers(id, user);
+        return getMsg(id, path, user, true);
+    }
+    
+    public String getMsg(String id, String path, String user, boolean format){
+        if(format)
+            user = getMessageUtil().getFormattedMembers(id, user);
         
         return getMsg(id, path).replace("{user}", user);
     }

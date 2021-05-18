@@ -45,7 +45,7 @@ public class EmbedUtil {
 
     public EmbedBuilder getEmbed(Member member){
         return getEmbed().setFooter(
-                bot.getMsg(member.getGuild().getId(), "embed.footer", member.getUser().getAsTag()), 
+                bot.getMsg(member.getGuild().getId(), "embed.footer", member.getUser().getAsTag(), false), 
                 member.getUser().getEffectiveAvatarUrl()
         );
     }

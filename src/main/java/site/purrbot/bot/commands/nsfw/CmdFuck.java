@@ -26,7 +26,6 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.requests.RestAction;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
@@ -218,14 +217,13 @@ public class CmdFuck implements Command{
                     
                     if(id.equals(Emotes.CANCEL.getId())){
                         botMsg.delete().queue();
-                        channel.sendMessage(MarkdownSanitizer.escape(
-                                bot.getMsg(
-                                        guild.getId(),
-                                        "purr.nsfw.fuck.request.denied",
-                                        author.getAsMention(),
-                                        target.getEffectiveName()
-                                )
-                        )).queue();
+                        channel.sendMessage(bot.getMsg(
+                                guild.getId(),
+                                "purr.nsfw.fuck.request.denied",
+                                author.getAsMention(),
+                                target.getEffectiveName()
+                            )
+                        ).queue();
                         return;
                     }
     
@@ -263,14 +261,13 @@ public class CmdFuck implements Command{
                     botMsg.delete().queue(null, ignore(UNKNOWN_MESSAGE));
                     queue.invalidate(bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()));
                     
-                    channel.sendMessage(MarkdownSanitizer.escape(
-                            bot.getMsg(
-                                    guild.getId(),
-                                    "request.timed_out",
-                                    author.getAsMention(),
-                                    target.getEffectiveName()
-                            )
-                    )).queue();
+                    channel.sendMessage(bot.getMsg(
+                            guild.getId(),
+                            "request.timed_out",
+                            author.getAsMention(),
+                            target.getEffectiveName()
+                        )
+                    ).queue();
                 }
         );
     }

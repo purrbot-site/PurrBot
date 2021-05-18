@@ -18,23 +18,17 @@
 
 package site.purrbot.bot.util.message;
 
-import ch.qos.logback.classic.Logger;
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
-import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,17 +36,12 @@ public class MessageUtil {
 
     private final PurrBot bot;
     private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd. MMM yyyy HH:mm:ss");
-    private final Logger logger = (Logger)LoggerFactory.getLogger("MessageUtil");
     
     private final Pattern placeholder = Pattern.compile("(\\{(.+?)})", Pattern.CASE_INSENSITIVE);
     private final Pattern rolePattern = Pattern.compile("(\\{r_(name|mention):(\\d+)})", Pattern.CASE_INSENSITIVE);
     private final Pattern channelPattern = Pattern.compile("(\\{c_(name|mention):(\\d+)})", Pattern.CASE_INSENSITIVE);
     
     private final DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
-    
-    private final Cache<String, String> queue = Caffeine.newBuilder()
-            .expireAfterWrite(2, TimeUnit.MINUTES)
-            .build();
 
     public MessageUtil(PurrBot bot){
         this.bot = bot;
@@ -250,14 +239,14 @@ public class MessageUtil {
     
     public String getFormattedMembers(String id, String... members){
         if(members.length == 1)
-            return "**" + members[0].replace("*", "\\*") + "**";
+            return "**" + escapeAll(members[0]) + "**";
         
         StringBuilder builder = new StringBuilder();
         for(String member : members){
             if(builder.length() > 0)
                 builder.append(", ");
             
-            builder.append("**").append(member.replace("*", "\\*")).append("**");
+            builder.append("**").append(escapeAll(member)).append("**");
         }
         
         return replaceLast(builder.toString(), ",", " " + bot.getMsg(id, "misc.and"));
@@ -290,5 +279,12 @@ public class MessageUtil {
         }
         
         return false;
+    }
+    
+    private String escapeAll(String name){
+        return name.replace("*", "\\*")
+                .replace("_", "\\_")
+                .replace("`", "\\`")
+                .replace("~", "\\~");
     }
 }

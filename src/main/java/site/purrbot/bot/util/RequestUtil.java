@@ -27,7 +27,6 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.requests.RestAction;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
@@ -100,7 +99,7 @@ public class RequestUtil{
                     return;
                 }
                 
-                msg.editMessage(MarkdownSanitizer.escape(text)).queue(message -> { 
+                msg.editMessage(text).queue(message -> { 
                     if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
                         message.clearReactions().queue(
                                 null,
@@ -109,7 +108,7 @@ public class RequestUtil{
                     
                     if(result.isRequest() && author != null)
                         sendConfirmation(tc, author, targets, message);
-                }, e -> tc.sendMessage(MarkdownSanitizer.escape(text)).queue(message -> {
+                }, e -> tc.sendMessage(text).queue(message -> {
                     if(result.isRequest() && author != null)
                         sendConfirmation(tc, author, targets, message);
                 }));
@@ -148,9 +147,9 @@ public class RequestUtil{
                     queue.invalidate(getQueueString(api.getName(), guild.getId(), author.getId()));
                     
                     if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
-                        channel.sendMessage(MarkdownSanitizer.escape(
+                        channel.sendMessage(
                                 bot.getMsg(guild.getId(), api.getPath() + "request.denied", author.getAsMention(), target.getEffectiveName())
-                        )).queue();
+                        ).queue();
                         
                         msg.delete().queue(
                                 null,
@@ -168,9 +167,9 @@ public class RequestUtil{
                     );
                     queue.invalidate(getQueueString(api.getName(), guild.getId(), author.getId()));
                     
-                    tc.sendMessage(MarkdownSanitizer.escape(
+                    tc.sendMessage(
                             bot.getMsg(guild.getId(), "request.timed_out", author.getAsMention(), target.getEffectiveName())
-                    )).queue();
+                    ).queue();
                 }
         );
     }
