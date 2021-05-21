@@ -309,7 +309,7 @@
         "placeholders": {
           "message_title": "Current Message",
           "note_title": "Note",
-          "note_value": "The placeholder `{c_mention:<id>}` may only work with IDs of Text Channels.",
+          "note_value": "The placeholder `{c_mention:<id>}` may only work with IDs of Text, Store and Voice Channels.",
           "placeholders_title": "Available Placeholders",
           "result_title": "Result"
         },
