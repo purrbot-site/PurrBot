@@ -309,7 +309,7 @@
         "placeholders": {
           "message_title": "Aktuelle Nachricht",
           "note_title": "Hinweis",
-          "note_value": "The Platzhalter `{c_mention:<id>}` kann nur mit IDs von Textkanälen funktionieren.",
+          "note_value": "Der Platzhalter `{c_mention:<id>}` funktioniert nur mit IDs von Text-, Store- und Sprachkanälen.",
           "placeholders_title": "Verfügbare Platzhalter",
           "result_title": "Resultat"
         },
