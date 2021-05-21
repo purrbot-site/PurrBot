@@ -309,7 +309,7 @@
         "placeholders": {
           "message_title": "Mevcut Mesaj",
           "note_title": "Not",
-          "note_value": "Yer tutucu `{c_mention:<id>}` yalnızca Metin Kanallarının ID'leri ile çalışır.",
+          "note_value": "Yer tutucu `{c_mention:<id>}` yalnızca metin, mağaza ve ses kanallarının ID'leri ile çalışır.",
           "placeholders_title": "Kullanılabilir Yer Tutucular",
           "result_title": "Sonuç"
         },
