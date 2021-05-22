@@ -309,7 +309,7 @@
         "placeholders": {
           "message_title": "Mensaje actual",
           "note_title": "Nota",
-          "note_value": "El marcador de posición `{c_mention:<id>}` sólo puede funcionar con IDs de canales de texto.",
+          "note_value": "El marcador de posición `{c_mention:<id>}` sólo puede funcionar con IDs de canales de texto, tienda y voz.",
           "placeholders_title": "Sustitutos disponibles",
           "result_title": "Resultado"
         },
