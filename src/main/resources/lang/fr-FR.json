@@ -309,7 +309,7 @@
         "placeholders": {
           "message_title": "Message actuel",
           "note_title": "Note",
-          "note_value": "La place réservée `{c_mention:<id>}` ne peut fonctionner qu'avec les identifiants de salons textuels.",
+          "note_value": "La place réservée `{c_mention:<id>}` ne peut fonctionner qu'avec des identifiants de textes, de magasins et de salons vocaux.",
           "placeholders_title": "Emplacements disponibles",
           "result_title": "résultat"
         },
