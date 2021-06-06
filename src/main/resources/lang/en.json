@@ -89,7 +89,7 @@
         "no_mention": "Please mention someone to give some food.",
         "request": {
           "denied": "{target} doesn't want food from you {user}",
-          "message": "Hey {target}!\n{user} wants to give you some food to eat. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to give you some food to eat. Do you want that too?\nClick on the green button to accept and on the red one to deny.\n\n> **This request will time out in 1 minute!**",
           "open": "You already asked someone {user}! Please wait for the request to be accepted, denied or for it to time out."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Please mention someone you want to fluff.",
         "request": {
           "denied": "{target} doesn't want to get fluffed by you {user}",
-          "message": "Hey {target}!\n{user} wants to fluff your tail. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to fluff your tail. Do you want that too?\nClick on the green button to accept and on the red one to deny.\n\n> **This request will time out in 1 minute!**",
           "open": "You already asked someone to get fluffed {user}! Please wait for the request to be accepted, denied or for it to time out."
         },
         "special_user": "B-but {user}. That is lewd to do that in public."
@@ -564,7 +564,7 @@
         "no_mention": "Please mention a user you want to suck.",
         "request": {
           "denied": "{target} doesn't want to get sucked by you {user}. :/",
-          "message": "Hey {target}!\n{user} wants to give you a blowjob. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to give you a blowjob. Do you want that too?\nClick on the green button to accept and on the red one to deny.\n\n> **This request will time out in 1 minute!**",
           "open": "Don't be that greedy {user}! Wait until your previous requests get accepted, denied or times out."
         },
         "special_user": "Okay sweetie. Let me get my \"toys\" so that we can have fun.\n\\*takes {user}'s hand and disappears in her room*"
@@ -583,8 +583,8 @@
         "no_mention": "Please mention a user you want to fuck with.",
         "request": {
           "denied": "{target} doesn't want to have sex with you {user}. >.<",
-          "message": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny the request.\n\n> **This request will time out in 1 minute!**",
-          "message_choose": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nReact with one of the below options to choose:\n{SEX} - Normal Sex\n{ANAL} - Anal Sex\n{YAOI} - Yaoi Sex\n{YURI} - Yuri Sex\n{CANCEL} - Deny Request\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nClick on the green button to accept and on the red one to deny.\n\n> **This request will time out in 1 minute!**",
+          "message_choose": "Hey {target}!\n{user} wants to have sex with you. Do you want that too?\nClick on one of the buttons to choose:\n{SEX} - Normal Sex\n{ANAL} - Anal Sex\n{YAOI} - Yaoi Sex\n{YURI} - Yuri Sex\n{CANCEL} - Deny Request\n\n> **This request will time out in 1 minute!**",
           "open": "Don't be such a horny person {user}!\nYou already have a open request. Wait for it to be accepted, denied or for it to time out."
         },
         "special_user": {
@@ -633,7 +633,7 @@
         "no_mention": "Please mention 2 users you want to fuck!",
         "request": {
           "denied": "Either {target1} or {target2} don't want to have sex with you {user}.",
-          "message": "Hey {target1} and {target2}!\n{user} wants to have sex with both of you. Do you want that too?\nReact with {ACCEPT} to accept or with {CANCEL} to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target1} and {target2}!\n{user} wants to have sex with both of you. Do you want that too?\nClick on the green button to accept and on the red one to deny.\nOnly if both of you accept this, will this happen.\n\n> **This request will time out in 1 minute!**",
           "open": "Whoa there {user}! Show some patience you horny person!\nYou already asked people to fuck with you, so either wait for the to accept it, deny it or for the request to time out."
         },
         "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much for me {user}... {VANILLABLUSH}"
@@ -641,6 +641,14 @@
     }
   },
   "request": {
+    "buttons": {
+      "accept": "Accept",
+      "deny": "Deny",
+      "fuck_anal": "Anal",
+      "fuck_normal": "Normal",
+      "fuck_yaoi": "Yaoi (Gay)",
+      "fuck_yuri": "Yuri (Lesbian)"
+    },
     "accepted": "{target} accepted your request {user}.",
     "timed_out": "Your request timed out {user}. {target} didn't respond fast enough."
   },
