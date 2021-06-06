@@ -89,7 +89,7 @@
         "no_mention": "Por favor, menciona a alguien para darle algo de comida.",
         "request": {
           "denied": "{target} no quiere comida tuya {user}",
-          "message": "¡Hola {target}!\n{user} quiere darte algo de comida para comer. ¿Aceptas la ofrenda?\nReacciona con {ACCEPT} para aceptar o con {CANCEL} para negarlo.\n\n> **¡Esta solicitud caducará en 1 minuto!**",
+          "message": "¡Hola {target}!\n{user} quiere darte algo de comida. ¿Aceptas la ofrenda?\nReacciona con el botón verde para aceptar o con el rojo para negarlo.\n\n> **¡Esta solicitud caducará en 1 minuto!**",
           "open": "¡Ya has solicitado a alguien eso {user}! Por favor, espera a que la solicitud sea aceptada, denegada o hasta que se agote el tiempo de espera."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Por favor, mencione a alguien que desee que le ahuequen la cola.",
         "request": {
           "denied": "{target} no quiere que le ahueques la cola {user}",
-          "message": "¡Hola {target}!\n{user} quiere ahuecarte la cola. ¿Te gustaría eso?\nReacciona con {ACCEPT} para aceptar o con {CANCEL} para negarlo.\n\n> **¡Esta solicitud caducará en 1 minuto!**",
+          "message": "¡Hola {target}!\n{user} quiere ahuecarte la cola. ¿Te gustaría eso?\nReacciona con el botón verde para aceptar o con el rojo para negarlo.\n\n> **¡Esta solicitud caducará en 1 minuto!**",
           "open": "¡Ya has solicitado a alguien eso {user}! Por favor, espera a que la solicitud sea aceptada, denegada o hasta que se agote el tiempo de espera."
         },
         "special_user": "P-pero {user}. Eso es obsceno para hacer en público."
@@ -564,7 +564,7 @@
         "no_mention": "Por favor, mencione a un usuario que desee hace una mamada.",
         "request": {
           "denied": "{target} no quiere que le hagas una mamada {user}. :/",
-          "message": "¡Hola {target}!\n{user} quiere hacerte una mamada. ¿Aceptas el delicioso?\nReacciona con {ACCEPT} para aceptar o con {CANCEL} para negarlo.\n\n> **¡Esta solicitud caducará en 1 minuto!**",
+          "message": "¡Hola {target}!\n{user} quiere hacerte una mamada. ¿Aceptas el delicioso?\nReacciona con el botón verde para aceptar o con el rojo para negarlo.\n\n> **¡Esta solicitud caducará en 1 minuto!**",
           "open": "¡No seas tan avaricioso {user}! Espera hasta que tus solicitudes anteriores sean aceptadas, denegadas o caduquen."
         },
         "special_user": "Vale cariño. Déjame llevar mis \"juguetitos\" para que podamos divertirnos.\n\\*toma la mano de {user} y desaparecen en su habitación*"
@@ -583,8 +583,8 @@
         "no_mention": "Por favor, mencione un usuario con el que quieras follar.",
         "request": {
           "denied": "{target} no quiere tener sexo contigo {user}. >.<",
-          "message": "¡Hola, {target}!\n{user} quiere tener sexo contigo. ¿Aceptas la propuesta indecente?\nReacciona con {ACCEPT} para aceptar o con {CANCEL} para negar la solicitud.\n\n> **¡Esta solicitud caducará en 1 minuto!**",
-          "message_choose": "¡Hola {target}!\n{user} quiere tener sexo contigo. ¿Aceptas la propuesta indecente?\nReacciona con una de las siguientes opciones para elegir:\n{SEX} - Sexo Normal\n{ANAL} - Sexo Anal\n{YAOI} - Sexo Yaoi\n{YURI} - Sexo Yuri\n{CANCEL} - Denegar Solicitud\n\n> **¡Esta solicitud caducará en 1 minuto!**",
+          "message": "¡Hola, {target}!\n{user} quiere tener sexo contigo. ¿Aceptas la propuesta indecente?\nReacciona con el botón verde para aceptar o con el rojo para negarlo.\n\n> **¡Esta solicitud caducará en 1 minuto!**",
+          "message_choose": "¡Hola, {target}!\n{user} quiere tener relaciones sexuales contigo. ¿Quieres eso también?\nHaz clic en uno de los botones de abajo para elegir.\n\n> **¡Esta solicitud se agotará en 1 minuto!**",
           "open": "¡No seas una persona tan caliente {user}!\nYa tienes una solicitud abierta. Espere a que sea aceptado, negado o a que se agote."
         },
         "special_user": {
@@ -633,7 +633,7 @@
         "no_mention": "Por favor mencione 2 usuarios con lo que quieras follar!",
         "request": {
           "denied": "O bien {target1} o {target2}, no quieren tener relaciones sexuales contigo {user}.",
-          "message": "¡Hola {target1} y {target2}!\n{user} quiere tener un trio con ustedes. ¿Qué os parece la idea?\nReaccionar con {ACCEPT} para aceptar o con {CANCEL} para negarla.\nSólo si ambos aceptan, esto sucederá.\n\n> **¡Esta solicitud se agotará en 1 minuto!**",
+          "message": "¡Hola, {target1} y {target2}!\n{user} quiere tener relaciones sexuales con ambos. ¿Quieres eso también?\nReacciona con el botón verde para aceptar o con el rojo para negarlo.\nSólo si ambos aceptan, sucederá esto.\n\n> **¡Esta solicitud se agotará en 1 minuto!**",
           "open": "¡Vaya, {user}! ¡Muestra algo de paciencia, persona cachonda!\nYa le pediste a la gente para hacer un trio, así que espera a que lo acepten, lo nieguen o la solicitud se agote."
         },
         "special_user": "P-por mucho que me guste hacer cosas obscenas contigo, eso es demasiado para mí {user}... {VANILLABLUSH}"
@@ -641,6 +641,14 @@
     }
   },
   "request": {
+    "buttons": {
+      "accept": "Aceptar",
+      "deny": "Denegar",
+      "fuck_anal": "Anal",
+      "fuck_normal": "Normal",
+      "fuck_yaoi": "Yaoi (Gay)",
+      "fuck_yuri": "Yuri (Lesbiano)"
+    },
     "accepted": "{target} ha aceptado tu solicitud {user}.",
     "timed_out": "Tu solicitud ha agotado el tiempo de espera {user}. {target} no respondió con la rapidez suficiente."
   },
