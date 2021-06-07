@@ -89,7 +89,7 @@
         "no_mention": "Lütfen yemek vermek istediğin kişiyi etiketle.",
         "request": {
           "denied": "{target} senden yemek istemiyor {user}",
-          "message": "Selam {target}!\n{user} sana yiyecek bir şeyler vermek istiyor. Aç mısın?\nKabul etmek için {ACCEPT} ile, reddetmek için {CANCEL} ile tepki ver.\n\n> ** Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "message": "Selam {target}!\n{user} sana yiyecek bir şeyler vermek istiyor. Aç mısın?\nKabul etmek için yeşil, reddetmek için kırmızı butona tıkla.\n\n> ** Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
           "open": "{user} zaten birine bu soruyu sordun! Lütfen talebin kabul edilmesini, reddedilmesini veya zaman aşımına uğramasını bekle."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Lütfen kuyruğunu kabartmak istediğin kişiyi etiketle.",
         "request": {
           "denied": "{target} senden onun kuyruğunu kabartmanı istemiyor {user}",
-          "message": "Selam {target}!\n{user} senin kuyruğunu kabartmak istiyor. Sen de ister misin?\nKabul etmek için {ACCEPT} ile, reddetmek için {CANCEL} ile tepki ver.\n\n> ** Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "message": "Selam {target}!\n{user} senin kuyruğunu kabartmak istiyor. Sen de ister misin?\nKabul etmek için yeşil, reddetmek için kırmızı butona tıkla.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
           "open": "{user} zaten birine bu soruyu sordun! Lütfen talebin kabul edilmesini, reddedilmesini veya zaman aşımına uğramasını bekle."
         },
         "special_user": "A-ama {user}, bunu herkesin içinde yapamayız."
@@ -564,7 +564,7 @@
         "no_mention": "Lütfen emmek istediğin kişiyi etiketle.",
         "request": {
           "denied": "{target} senden onun onu emmeni istemiyor {user}. :/",
-          "message": "Selam {target}!\n{user} sana oral seks yapmak istiyor. İster misin?\nKabul etmek için {ACCEPT} ile, reddetmek için {CANCEL} ile tepki ver.\n\n> ** Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "message": "Selam {target}!\n{user} sana oral seks yapmak istiyor. İster misin?\nKabul etmek için yeşil, reddetmek için kırmızı butona tıkla.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
           "open": "Bu kadar açgözlü olma {user}! Önceki isteğin kabul edilene, reddedilene veya zaman aşımına uğrayana kadar bekle."
         },
         "special_user": "Tamam tatlım. Gidip *\"oyuncaklarımı\" alayım bu sayede biraz eğlenebiliriz.\n\\*{user} adlı üyenin elini tutar ve odasına doğru koşar*"
@@ -583,8 +583,8 @@
         "no_mention": "Lütfen sevişmek istediğin kişiyi etiketle.",
         "request": {
           "denied": "{target} seninle sevmişmek istemiyor {user}. >.<",
-          "message": "Selam {target}!\n{user} seninle sevişmek istiyor. Sen de ister misin?\nKabul etmek için {ACCEPT} ile, reddetmek için {CANCEL} ile tepki ver.\n\n> ** Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
-          "message_choose": "Selam {target}!\n{user} seninle sevişmek istiyor. Sen de ister misin?\nSeçmek için aşağıdaki seçeneklerden biriyle tepki ver:\n{SEX} - Normal Seks\n{ANAL} - Anal Seks\n{YAOI} - Yaoi Seks\n{YURI} - Yuri Seks\n{CANCEL} - İsteği Reddet\n> ** Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "message": "Selam {target}!\n{user} seninle sevişmek istiyor. Sen de ister misin?\nKabul etmek için yeşil, reddetmek için kırmızı butona tıkla.\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "message_choose": "Selam {target}!\n{user} seninle sevişmek istiyor. Sen de ister misin?\nSeçmek için aşağıdaki butonlardan birine tıkla.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
           "open": "Bu kadar azgın biri olma {user}!\nZaten birine bu soruyu sordun! Lütfen talebin kabul edilmesini, reddedilmesini veya zaman aşımına uğramasını bekle."
         },
         "special_user": {
@@ -633,7 +633,7 @@
         "no_mention": "Lütfen sevişmek istediğin 2 kişiyi etiketle.",
         "request": {
           "denied": "{target1} veya {target2} sizinle seks yapmak istemiyor {user}.",
-          "message": "Selam {target1} ve {target2}!\n{user} ikinizle de sevişmek istiyor. Siz de ister misiniz?\nKabul etmek için {ACCEPT} ile, reddetmek için {CANCEL} ile tepki ver.\nSadece ikiniz de bunu kabul ederseniz, gerçekleşecek.\n\n> ** Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "message": "Selam {target1} ve {target2}!\n{user} ikinizle de sevişmek istiyor. Siz de ister misiniz?\nKabul etmek için yeşil, reddetmek için kırmızı butona tıkla.\nSadece ikiniz de bunu kabul ederseniz, gerçekleşecek.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
           "open": "Vay be {user}! Biraz sabır göster, sapık!\nBirilerinden zaten seninle sevişmelerini istedin. Bu yüzden; önceki isteğinin kabul etmesini, reddedilmesini veya zaman aşımına uğraşamasını bekle."
         },
         "special_user": "S-seninle ahlaksız şeyler yapmaktan hoşlansam da, bu benim için biraz fazla {user}...{VANILLABLUSH}"
@@ -641,6 +641,14 @@
     }
   },
   "request": {
+    "buttons": {
+      "accept": "Kabul Et",
+      "deny": "Reddet",
+      "fuck_anal": "Anal",
+      "fuck_normal": "Normal",
+      "fuck_yaoi": "Yaoi (Eşcinsel)",
+      "fuck_yuri": "Yuri (Lezbiyen)"
+    },
     "accepted": "{target}, {user} adlı üyenin isteiğini kabul etti",
     "timed_out": "İsteğin zaman aşımına uğradı {user}. {target} yeterince hızlı cevap veremedi."
   },
