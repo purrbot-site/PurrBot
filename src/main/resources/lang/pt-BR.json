@@ -89,7 +89,7 @@
         "no_mention": "Por favor, mencione alguém para dar um pouco de comida.",
         "request": {
           "denied": "{target} não quer comida de você {user}",
-          "message": "Ei {target}!\n{user} quer te dar um pouco de comida para você comer. Você concorda?\naperte no botão verde para aceitar e no vermelho para negar.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target}!\n{user} quer te dar um pouco de comida para você comer. Você aceita?\nReaja com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
           "open": "Você já pediu a alguém {user}! Por favor, aguarde a solicitação ser aceita, negada ou um tempo limite."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Por favor, mencione usuários que você quer afofar a cauda.",
         "request": {
           "denied": "{target} não quer ser afofado por você {user}",
-          "message": "Ei {target}!\n{user} quer afofar sua cauda. Você concorda?\naperte o botão verde para aceitar ou com o vermelho para para negar.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target}!\n{user} quer afofar sua cauda. Você aceita?\nReaja com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
           "open": "Você já pediu para afofar a cauda de alguém {user}! Por favor, aguarde a solicitação ser aceita, negada ou um tempo limite."
         },
         "special_user": "B-but {user}. Isso é pervertido fazer isso em público."
@@ -564,7 +564,7 @@
         "no_mention": "Por favor, mencione 2 usuários que você quer ter sexo com.",
         "request": {
           "denied": "{target} não quer ser chupado por você {user}. :/",
-          "message": "Ei {target}!\n{user} quer te dar um boquete. Você concorda?\naperte o botão verde para aceitar ou com o vermelho para para negar.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target}!\n{user} quer te dar um boquete. Você aceita?\nReaja com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
           "open": "Não seja a ganâncioso {user}! Espere até que suas solicitações sejam aceitas, negadas ou expiradas."
         },
         "special_user": "Ok, doce. Deixe-me pegar meus \"brinquedos\" para que possamos nos divertir.\n\\*pega a mão de {user}e desaparece em seu quarto*"
@@ -583,8 +583,8 @@
         "no_mention": "Por favor, mencione 2 usuários que você quer ter sexo com.",
         "request": {
           "denied": "{target} não quer ter sexo com você {user}. >.<",
-          "message": "Ei {target}!\n{user} quer ter sexo com você. Você concorda?\naperte o botão verde para aceitar ou com o vermelho para para negar.\n\n> **Este pedido vai expirar em 1 minuto!**",
-          "message_choose": "Ei {target}!\n{user} quer ter sexo com você. Você concorda?\naperte um dor botões abaixo para escolher.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target}!\n{user} quer te dar um boquete. Você aceita?\nReaja com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message_choose": "Ei {target}!\n{user} quer ter sexo com você. Você concorda?\naperte um dos botões abaixo para escolher.\n\n> **Este pedido vai expirar em 1 minuto!**",
           "open": "Não seja uma pessoa tão excitada {user}!\nVocê já tem uma solicitação aberta. Aguarde a aceitação, negação ou o tempo limite."
         },
         "special_user": {
@@ -614,7 +614,7 @@
         "no_mention": "Por favor, mencione um usuário do qual você deseja lamber a vagina de.",
         "request": {
           "denied": "{target} não quer que você lamba o sua vagina {user}... Você tem mesmo uma?",
-          "message": "Ei {target}!\n{user} quer lamber sua vagina. Você também quer isso?\nReaja com {ACCEPT} para aceitar ou com {CANCEL} para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target}!\n{user} quer lamber sua vagina. Você aceita?\nReaja com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
           "open": "Você tem sede? Você já tem um pedido aberto {user}!\nEspere que a outra aceite ou negue-a, ou que a solicitação expire."
         },
         "special_user": "Ei... Você está *\"sede\"* {user}, está?\n\\*pega a mão de {user}* e desaparece em um quarto*"
@@ -633,7 +633,7 @@
         "no_mention": "Por favor, mencione 2 usuários que você quer ter sexo com!",
         "request": {
           "denied": "{target1} ou {target2} não querem fazer sexo com você {user}.",
-          "message": "Ei {target1} e {target2}!\n{user} quer fazer sexo com vocês. Vocês comcordam?\napertem o botão verde para aceitar ou o vermelho com para negá-lo.\nSomente se vocês aceitarem isso, vai acontecer\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target1} e {target2}!\n{user} quer fazer sexo com vocês. Vocês querem isso também?\nReajam com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\nSomente se vocês aceitarem isso, vai acontecer\n\n> **Este pedido vai expirar em 1 minuto!**",
           "open": "Opa, aqui {user}! Tenha paciência!\nVocê já pediu para as pessoas irem se mexer com você então aguarde até que a aceitem, neguem ou o pedido expire."
         },
         "special_user": "Por mais que eu goste de fazer coisas safadas com você, isso é um pouco demais para mim {user}... {VANILLABLUSH}"
