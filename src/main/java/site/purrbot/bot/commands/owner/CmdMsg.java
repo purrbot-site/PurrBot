@@ -46,13 +46,13 @@ public class CmdMsg implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         if(args.length <= 1){
-            msg.addReaction(Emotes.CANCEL.getNameAndId()).queue();
+            msg.addReaction(Emotes.DENY.getNameAndId()).queue();
             return;
         }
         
         TextChannel channel = bot.getShardManager().getTextChannelById(args[0]);
         if(channel == null){
-            msg.addReaction(Emotes.CANCEL.getNameAndId()).queue();
+            msg.addReaction(Emotes.DENY.getNameAndId()).queue();
             return;
         }
         
@@ -61,7 +61,7 @@ public class CmdMsg implements Command{
             
             channel.sendMessage(content).queue(
                     message -> msg.addReaction(Emotes.ACCEPT.getNameAndId()).queue(),
-                    failure -> msg.addReaction(Emotes.CANCEL.getNameAndId()).queue()
+                    failure -> msg.addReaction(Emotes.DENY.getNameAndId()).queue()
             );
         }else
         if(args[1].equalsIgnoreCase("edit")){
@@ -70,7 +70,7 @@ public class CmdMsg implements Command{
             Message message = channel.retrieveMessageById(msgId).complete();
             if(message == null || !message.getAuthor().equals(guild.getSelfMember().getUser())){
                 tc.sendMessage("Invalid message! It was either null or I'm not the author of it.").queue(
-                        m -> msg.addReaction(Emotes.CANCEL.getNameAndId()).queue()
+                        m -> msg.addReaction(Emotes.DENY.getNameAndId()).queue()
                 );
                 return;
             }
@@ -78,7 +78,7 @@ public class CmdMsg implements Command{
             String content = args[2].substring(msgId.length() + 1).replaceAll("\\{#(\\d+)}", "<#$1>");
             message.editMessage(content).queue(
                     m -> msg.addReaction(Emotes.ACCEPT.getNameAndId()).queue(),
-                    failure -> msg.addReaction(Emotes.CANCEL.getNameAndId()).queue());
+                    failure -> msg.addReaction(Emotes.DENY.getNameAndId()).queue());
         }else
         if(args[1].equalsIgnoreCase("embed")){
             String content = args[2].replaceAll("\\{#(\\d+)}", "<#$1>");

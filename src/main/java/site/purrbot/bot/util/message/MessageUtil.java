@@ -173,14 +173,10 @@ public class MessageUtil {
                         break;
                     
                     case "mention":
-                        if(!channel.getType().equals(ChannelType.TEXT))
+                        if(channel.getType().equals(ChannelType.CATEGORY))
                             continue;
                         
-                        TextChannel tc = guild.getTextChannelById(channelMatcher.group(3));
-                        if(tc == null)
-                            continue;
-                        
-                        channelMatcher.appendReplacement(builder, tc.getAsMention());
+                        channelMatcher.appendReplacement(builder, channel.getAsMention());
                         break;
                 }
             }while(channelMatcher.find());

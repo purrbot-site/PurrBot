@@ -81,12 +81,10 @@ public class CmdGuild implements Command{
                         "%s\n" +
                         "\n" +
                         "%s\n" +
-                        "%s\n" +
                         "\n" +
                         "%s",
                         getOwner(guild),
                         getCreationDate(guild),
-                        getRegion(guild),
                         getVerificationLevel(guild),
                         getBoostLevel(guild)
                 ),
@@ -125,15 +123,6 @@ public class CmdGuild implements Command{
                 "**%s**: `%s`",
                 bot.getMsg(guild.getId(), "purr.info.guild.embed.created"),
                 bot.getMessageUtil().formatTime(LocalDateTime.from(guild.getTimeCreated()))
-        );
-    }
-    
-    private String getRegion(Guild guild){
-        return String.format(
-                "**%s**: %s %s",
-                bot.getMsg(guild.getId(), "purr.info.guild.embed.region"),
-                guild.getRegion().getEmoji(),
-                guild.getRegion().getName()
         );
     }
     

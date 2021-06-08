@@ -410,8 +410,6 @@ public class PurrBot {
                 .replace("{ANAL}", Emotes.SEX_ANAL.getEmote())
                 .replace("{YAOI}", Emotes.SEX_YAOI.getEmote())
                 .replace("{YURI}", Emotes.SEX_YURI.getEmote())
-                .replace("{ACCEPT}", Emotes.ACCEPT.getEmote())
-                .replace("{CANCEL}", Emotes.CANCEL.getEmote())
                 .replace("{BOTICON}", Emotes.BOT_ICON.getEmote())
                 .replace("{CATEGORY}", Emotes.CATEGORY.getEmote())
                 .replace("{TEXTCHANNEL}", Emotes.TEXT_CHANNEL.getEmote())

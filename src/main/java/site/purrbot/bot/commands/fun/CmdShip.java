@@ -118,6 +118,8 @@ public class CmdShip implements Command{
                         bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }
+            msg.addReaction("\uD83D\uDE33").queue();
+            
             return;
         }
 

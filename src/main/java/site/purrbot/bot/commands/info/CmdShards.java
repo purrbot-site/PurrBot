@@ -96,7 +96,7 @@ public class CmdShards implements Command{
                     )
                     .addField(
                             bot.getMsg(guild.getId(), "purr.info.shards.embed.current_title"),
-                            currId == id ? Emotes.ACCEPT.getEmote() : Emotes.CANCEL.getEmote(),
+                            currId == id ? Emotes.ACCEPT.getEmote() : Emotes.DENY.getEmote(),
                             true
                     )
                     .addField(

@@ -27,7 +27,7 @@ public enum Emotes{
     TYPING        ("typing",       "700429689851740160", true),
 
     // Static/normal emotes
-    ACCEPT                ("accept",              "700459644719464458", false),
+    ACCEPT                ("accept",              "851551333756174377", false),
     AWOO                  ("awoo",                "600421753952534567", false),
     BLOB_HOLO             ("blobHolo",            "700429689960923187", false),
     BLUSH                 ("blush",               "700429690007060671", false),
@@ -39,10 +39,10 @@ public enum Emotes{
     BOT_1                 ("bot_1",               "714834779538718781", false),
     BOT_2                 ("bot_2",               "714834779723530261", false),
     BUGHUNTER             ("bughunter",           "712650361990807603", false),
-    CANCEL                ("cancel",              "700439540875395112", false),
     CATEGORY              ("category",            "701213334657040415", false),
     COMMUNITY_OFF         ("communityOff",        "825386471950516305", false),
     COMMUNITY_ON          ("communityOn",         "817146168249024513", false),
+    DENY                  ("deny",                "851551333656166451", false),
     DISCORD               ("discord",             "700429689503744161", false),
     DISCOVER_OFF          ("discoverOff",         "825386471879606272", false),
     DISCOVER_ON           ("discoverOn",          "817146168181915699", false),

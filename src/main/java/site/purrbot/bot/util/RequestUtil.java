@@ -25,8 +25,8 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.api.requests.RestAction;
+import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.interactions.components.Button;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
@@ -62,13 +62,13 @@ public class RequestUtil{
         
         tc.sendMessage(
                 bot.getMsg(guild.getId(), api.getPath() + "request.message", author.getEffectiveName(), target.getAsMention())
-        ).queue(message -> RestAction.allOf(
-                message.addReaction(Emotes.ACCEPT.getNameAndId()),
-                message.addReaction(Emotes.CANCEL.getNameAndId())
+        ).setActionRow(
+                getButton(guild.getId(), api.getName(), true),
+                getButton(guild.getId(), api.getName(), false)
         ).queue(
-                v -> handleReaction(message, tc, author, target, api),
+                message -> handleReaction(message, tc, author, target, api),
                 e -> bot.getEmbedUtil().sendError(tc, author, "errors.request_error")
-        ));
+        );
     }
     
     public void handleEdit(TextChannel tc, Message msg, HttpUtil.ImageAPI api){
@@ -99,19 +99,21 @@ public class RequestUtil{
                     return;
                 }
                 
-                msg.editMessage(text).queue(message -> { 
-                    if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-                        message.clearReactions().queue(
-                                null,
-                                e -> logger.warn("Unable to clear reactions from Message! Was the message deleted?")
-                        );
-                    
-                    if(result.isRequest() && author != null)
-                        sendConfirmation(tc, author, targets, message);
-                }, e -> tc.sendMessage(text).queue(message -> {
-                    if(result.isRequest() && author != null)
-                        sendConfirmation(tc, author, targets, message);
-                }));
+                msg.editMessage(text)
+                   .override(true)
+                   .queue(message -> { 
+                       if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE)) 
+                           message.clearReactions().queue(
+                                   null, 
+                                   e -> logger.warn("Unable to clear reactions from Message! Was the message deleted?")
+                           );
+                       
+                       if(result.isRequest() && author != null) 
+                           sendConfirmation(tc, author, targets, message); 
+                       }, e -> tc.sendMessage(text).queue(message -> { 
+                           if(result.isRequest() && author != null) 
+                               sendConfirmation(tc, author, targets, message); 
+                       }));
                 return;
             }
             
@@ -124,29 +126,40 @@ public class RequestUtil{
         
         Guild guild = tc.getGuild();
         EventWaiter waiter = bot.getWaiter();
+        
         waiter.waitForEvent(
-                GuildMessageReactionAddEvent.class,
+                ButtonClickEvent.class,
                 event -> {
                     if(event.getUser().isBot())
                         return false;
                     
+                    if(event.getMember() == null)
+                        return false;
+    
+                    Button button = event.getButton();
+                    if(!isValidButton(button, api.getName()))
+                        return false;
+    
+                    if(!event.isAcknowledged()) 
+                        event.deferEdit().queue();
+    
                     if(!event.getMember().equals(target))
-                        return false;
-                    
-                    MessageReaction.ReactionEmote emote = event.getReactionEmote();
-                    if(!emote.isEmote())
-                        return false;
-                    
-                    if(!emote.getId().equals(Emotes.ACCEPT.getId()) && !emote.getId().equals(Emotes.CANCEL.getId()))
                         return false;
                     
                     return event.getMessageId().equals(msg.getId());
                 },
                 event -> {
-                    TextChannel channel = event.getChannel();
+                    TextChannel channel = event.getTextChannel();
                     queue.invalidate(getQueueString(api.getName(), guild.getId(), author.getId()));
                     
-                    if(event.getReactionEmote().getId().equals(Emotes.CANCEL.getId())){
+                    Button button = event.getButton();
+                    if(button == null || button.getId() == null){
+                        bot.getEmbedUtil().sendError(channel, event.getMember(), "errors.request_error");
+                        return;
+                    }
+                    
+                    String result = button.getId().split(":")[2];
+                    if(result.equals("deny")){
                         channel.sendMessage(
                                 bot.getMsg(guild.getId(), api.getPath() + "request.denied", author.getAsMention(), target.getEffectiveName())
                         ).queue();
@@ -200,28 +213,53 @@ public class RequestUtil{
         }
     
         embed.setDescription(text)
-                .setImage(result.getUrl());
+             .setImage(result.getUrl());
         
         msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-                .embed(embed.build())
-                .queue(message -> {
-                    if(message.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
-                        message.clearReactions().queue(
-                                null,
-                                e -> logger.warn("Unable to clear reactions from Message! Was the message deleted?")
-                        );
-                    
-                    if(result.isRequest() && author != null)
-                        sendConfirmation(tc, author, targets, message);
-                }, e -> tc.sendMessage(embed.build()).queue(message -> {
-                    if(result.isRequest() && author != null)
-                        sendConfirmation(tc, author, targets, message);
-                }));
+           .override(true)
+           .embed(embed.build())
+           .queue(message -> {
+               if(message.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
+                   message.clearReactions().queue(
+                           null,
+                           e -> logger.warn("Unable to clear reactions from Message! Was the message deleted?")
+                   );
+               
+               if(result.isRequest() && author != null)
+                   sendConfirmation(tc, author, targets, message);
+           }, e -> tc.sendMessage(embed.build()).queue(message -> {
+               if(result.isRequest() && author != null)
+                   sendConfirmation(tc, author, targets, message);
+           }));
     }
     
     private void sendConfirmation(TextChannel tc, Member author, List<String> targets, Message msg){
         msg.reply(
                 bot.getMsg(tc.getGuild().getId(), "request.accepted", author.getAsMention(), targets)
         ).queue();
+    }
+    
+    private Button getButton(String guildId, String apiName, boolean accept){
+        if(accept)
+            return Button.success(
+                    String.format("purr:%s:accept", apiName),
+                    bot.getMsg(guildId, "request.buttons.accept")
+            ).withEmoji(Emoji.fromMarkdown(Emotes.ACCEPT.getEmote()));
+        
+        return Button.danger(
+                String.format("purr:%s:deny", apiName),
+                bot.getMsg(guildId, "request.buttons.deny")
+        ).withEmoji(Emoji.fromMarkdown(Emotes.DENY.getEmote()));
+    }
+    
+    private boolean isValidButton(Button button, String apiName){
+        if(button == null)
+            return false;
+        
+        if(button.getId() == null)
+            return false;
+        
+        return button.getId().equals(String.format("purr:%s:accept", apiName)) ||
+               button.getId().equals(String.format("purr:%s:deny", apiName));
     }
 }

@@ -194,7 +194,7 @@ public class CmdHelp implements Command{
             }
             
             builder.append(command.getAttribute("help").replace("{p}", prefix))
-                    .append("\n");
+                   .append("\n");
         }
         
         embeds.add(commandList(
