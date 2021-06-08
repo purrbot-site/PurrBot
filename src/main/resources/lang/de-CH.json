@@ -89,7 +89,7 @@
         "no_mention": "Bitte erwähne jemandem, um etwas Essen zu geben.",
         "request": {
           "denied": "{target} will kein Essen von dir {user}",
-          "message": "Hey {target}!\n{user} möchte dir etwas Essen geben. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte dir etwas Essen geben. Willst du das auch?\nKlick auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Du hast bereits jemanden {user}gefragt! Bitte warte, bis die Anfrage angenommen oder abgelehnt wird, oder bis sie abgelaufen ist."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Bitte erwähne jemanden, welchen du fluffen willst.",
         "request": {
           "denied": "{target} möchte nicht von dir geflufft werden {user}",
-          "message": "Hey {target}!\n{user} möchte deinen Schweif fluffen. Möchtest du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte deinen Schweif fluffen. Möchtest du das auch?\nKlick auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Du hast bereits jemanden zum fluffen gefragt {user}! Bitte warte bis die Anfrage angenommen oder abgelehnt wird, oder bis sie abgelaufen ist."
         },
         "special_user": "A-aber {user}. Es ist unanständig das in der Öffentlichkeit zu tun."
@@ -309,7 +309,7 @@
         "placeholders": {
           "message_title": "Aktuelle Nachricht",
           "note_title": "Hinweis",
-          "note_value": "The Platzhalter `{c_mention:<id>}` kann nur mit IDs von Textkanälen funktionieren.",
+          "note_value": "Der Platzhalter `{c_mention:<id>}` funktioniert nur mit IDs von Text-, Store- und Sprachkanälen.",
           "placeholders_title": "Verfügbare Platzhalter",
           "result_title": "Resultat"
         },
@@ -564,7 +564,7 @@
         "no_mention": "Bitte erwähnen einen User den du lutschen willst.",
         "request": {
           "denied": "{target} möchte nicht von dir einen geblasen bekommen {user}. :/",
-          "message": "Hey {target}!\n{user} möchte dir einen Blowjob geben. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mir {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte dir einen Blowjob geben. Willst du das auch?\nKlick auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
           "open": "Sei nicht so gierig {user}! Warte bis deine vorherige Anfrage angenommen, abgelehnt oder abgelaufen ist."
         },
         "special_user": "Okay Süsse. Lass mich schnell meine \"Spielzeuge\" holen, so dass wir Spass haben können.\n\\*nimmt {user}'s Hand und verschwindet in ihrem Raum*"
@@ -583,8 +583,8 @@
         "no_mention": "Bitte erwähne einen User mit dem du Sex haben willst.",
         "request": {
           "denied": "{target} möchte keinen Sex mit dir haben {user}. >.<",
-          "message": "Hey {target}!\n{user} möchte Sex mit dir haben. Willst du das auch?\nReagiere mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen der Anfrage.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
-          "message_choose": "Hey {target}!\n{user} möchte Sex mit dir haben. Willst du das auch?\nReagiere mit einer der folgenden Optionen um zu wählen:\n{SEX} - Normaler Sex\n{ANAL} - Anal Sex\n{YAOI} - Schwuler Sex\n{YURI} - Lesbischer Sex\n{CANCEL} - Anfrage ablehnen\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
+          "message": "Hey {target}!\n{user} möchte gerne Sex mit dir haben. Willst du das auch?\nKlick auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
+          "message_choose": "Hey {target}!\n{user} möchte gerne Sex mit dir haben. Willst du das auch?\nKlicke auf einen der unteren Knöpfe zum wählen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Sei nicht so eine notgeile Person {user}!\nDu hast bereits eine offene Anfrage. Warte bis diese angenommen oder abgelehnt wird, oder abläuft."
         },
         "special_user": {
@@ -614,7 +614,7 @@
         "no_mention": "Bitte erwähne jemanden, um dessen Pussy zu lecken.",
         "request": {
           "denied": "{target} möchte nicht, dass du ihre Pussy leckst {user}... Hat Sie überhaupt eine?",
-          "message": "Hey {target}!\n{user} möchte deinen Pussy lecken. Willst du das auch?\nReagiere mit {ACCEPT} zum annehmen oder mit {CANCEL} zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte gerne deine Pussy lecken. Willst du das auch?\nKlick auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
           "open": "Bist du durstig? Du hast bereits eine offene Anfrage {user}!\nWarte, bis diese angenommen, abgelehnt oder abgelaufen ist."
         },
         "special_user": "Hehehe... Du bist *\"durstig\"* {user}, nicht wahr?\n\\*nimmt {user}'s hand und verschwindet in einem Raum*"
@@ -633,7 +633,7 @@
         "no_mention": "Bitte erwähne 2 Personen mit welchen du Sex haben willst!",
         "request": {
           "denied": "Entweder {target1} oder {target2} will keinen Sex mit dir haben {user}.",
-          "message": "Hey {target1} und {target2}!\n{user} möchte mit euch beiden Sex haben. Wollt Ihr das auch?\nReagiert mit {ACCEPT} zum akzeptieren oder mit {CANCEL} zum ablehnen.\nNur wenn Ihr beide dies akzeptiert, wird es geschehen.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
+          "message": "Hey {target1} und {target2}!\n{user} möchte mit euch beiden Sex haben. Wollt Ihr das auch?\nKlickt auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\nNur wenn Ihr beide dies akzeptiert, wird es geschehen.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
           "open": "Mal langsam {user}! Zeig etwas gedult du notgeile Person!\nDu hast bereits leute gefragt mit dir zu schlafen, also warte bis diese es entweder annehmen, ablehnen, oder die Anfrage abläuft."
         },
         "special_user": "S-so sehr ich es gern hab, unanständige Dinge mir dir zu machen, ist das etwas zu viel für mich {user}... {VANILLABLUSH}"
@@ -641,6 +641,14 @@
     }
   },
   "request": {
+    "buttons": {
+      "accept": "Akzeptieren",
+      "deny": "Ablehnen",
+      "fuck_anal": "Anal",
+      "fuck_normal": "Normal",
+      "fuck_yaoi": "Yaoi (Schwul)",
+      "fuck_yuri": "Yuri (Lesbisch)"
+    },
     "accepted": "{target} hat deine Anfrage akzeptiert {user}.",
     "timed_out": "Deine Anfrage is abgelaufen {user}. {target} hat nicht schnell genug reagiert."
   },
