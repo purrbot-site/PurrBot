@@ -385,8 +385,7 @@
           },
           "members_title": "Membres",
           "members_value": "{MEMBERS} Total : {members_total}\n\n{FACE} Humains : {members_human}\n{BOTICON} Bots : {members_bot}",
-          "owner": "Propriétaire",
-          "region": "Région"
+          "owner": "Propriétaire"
         }
       },
       "help": {

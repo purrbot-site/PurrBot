@@ -385,8 +385,7 @@
           },
           "members_title": "Membews",
           "members_value": "{MEMBERS} Totaw: {members_total}\n\n{FACE} Humans (OwO): {members_human}\n{BOTICON} Bots (beep boop): {members_bot}",
-          "owner": "Ownew",
-          "region": "Wegion"
+          "owner": "Ownew"
         }
       },
       "help": {

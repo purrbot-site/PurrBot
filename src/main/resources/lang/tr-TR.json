@@ -385,8 +385,7 @@
           },
           "members_title": "Üyeler",
           "members_value": "{MEMBERS} Toplam: {members_total}\n\n{FACE} İnsan: {members_human}\n{BOTICON} Bot: {members_bot}",
-          "owner": "Kurucu",
-          "region": "Bölge"
+          "owner": "Kurucu"
         }
       },
       "help": {
