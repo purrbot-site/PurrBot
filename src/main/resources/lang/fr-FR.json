@@ -89,7 +89,7 @@
         "no_mention": "S'il vous plaît mentionner quelqu'un pour donner de la nourriture.",
         "request": {
           "denied": "{target} ne veut pas de nourriture de votre part {user}",
-          "message": "Salut {target}!\n{user} veut vous donner de la nourriture a manger. Voulez-vous cela aussi ?\nclique sur le bouton vert pour accepter ou sur le rouge pour refuser.\n\n> **Cette demande prendra fin dans 1 minute !**",
+          "message": "Hé {target}!\n{user} veut vous donner de la nourriture a manger. Voulez-vous cela aussi ?\nclique sur \"Accepter\" pour accepter ou sur \"Refuser\" pour refuser.\n\n> **Cette demande prendra fin dans 1 minute !**",
           "open": "Vous avez déjà demandé à quelqu'un {user}! Veuillez attendre que la demande soit acceptée, refusée ou qu'elle expire."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Veuillez mentionner quelqu'un dont vous voulez toucher la queue",
         "request": {
           "denied": "{target} ne veut pas que vous touchiez sa queue {user}",
-          "message": "Salut {target}!\n{user} veut touché votre queue. Voulez-vous cela aussi ?\nclique sur le bouton vert pour accepter ou sur le rouge pour refuser.\n\n> **Cette demande prendra fin dans 1 minute !**",
+          "message": "Hé {target}!\n{user} veut touchez votre queue. Le voulez-vous aussi?\nCliquer sur \"Accepter\" pour accepter ou sur \"Refuser\" pour refuser.\n\n> **Cette demande expirera dans 1 minute !**",
           "open": "Vous avez déjà demandé à quelqu'un de touché sa queue {user}! Veuillez attendre que la demande soit acceptée, refusée ou qu'elle expire."
         },
         "special_user": "M-mais {user}. C'est pervers de faire ça en public."
@@ -564,7 +564,7 @@
         "no_mention": "Veuillez mentionner un utilisateur que vous voulez sucer.",
         "request": {
           "denied": "{target} ne veut pas se faire sucer par vous {user}. :/",
-          "message": "Salut {target}!\n{user} veut vous sucer la bite. Voulez-vous cela aussi ?\nclique sur le bouton vert pour accepter ou sur le rouge pour refuser.\n\n> **Cette demande prendra fin dans 1 minute !**",
+          "message": "Hé {target}!\n{user} veut vous sucez. Le voulez-vous ?\nCliquer sur \"Accepter\" pour accepter ou sur \"Refuser\" pour refuser..\n\n> **Cette demande expirera dans 1 minute !**",
           "open": "Ne soyez pas aussi avide {user}! Attendez que vos demandes précédentes soient acceptées, refusées ou expire."
         },
         "special_user": "Ok mon chou. laisse-moi prendre mes \"jouets\" pour que nous puissions nous amuser.\n\\*prend la main de {user} et disparaît dans sa chambre*"
@@ -583,7 +583,7 @@
         "no_mention": "Veuillez mentionner un utilisateur avec lequel vous voulez avoir une relation sexuelle.",
         "request": {
           "denied": "{target} ne veut pas avoir de relations sexuelles avec vous {user}. >.<",
-          "message": "Salut {target}!\n{user} veut avoir du sexe avec vous. Voulez-vous cela aussi ?\nclique sur le bouton vert pour accepter ou sur le rouge pour refuser.\n\n> **Cette demande prendra fin dans 1 minute !**",
+          "message": "Hé {target}!\n{user} veut avoir du sexe avec vous. Voulez-vous cela aussi ?\nCliquer sur \"Accepter\" pour accepter ou sur \"Refuser\" pour refuser..\n\n> **Cette demande prendra fin dans 1 minute !**",
           "message_choose": "Salut {target}!\n{user} veut avoir du sexe avec vous. Voulez-vous cela aussi ?\nCliquez sur l'un des boutons ci-dessous pour choisir.\n\n> **Cette requête expirera dans 1 minute !**",
           "open": "Ne soi pas une personne si pervers {user}!\nTu a déjà une demande ouverte. Attend qu'elle soit acceptée, refusée ou qu'elle expire."
         },
@@ -614,7 +614,7 @@
         "no_mention": "Veuillez mentionner un utilisateur dont vous voulez lécher la chatte.",
         "request": {
           "denied": "{target} ne veut pas que vous léchiez sa chatte {user}... En a t il seulement une?",
-          "message": "Hé {target}!\n{user} veut lécher votre chatte. Le voulez-vous ?\nRéagissez avec {ACCEPT} pour accepter ou avec {CANCEL} pour le refuser.\n\n> **Cette demande expirera dans 1 minute !**",
+          "message": "Hé {target}!\n{user} veut lécher votre chatte. Le voulez-vous ?\nCliquer sur \"Accepter\" pour accepter ou sur \"Refuser\" pour refuser.\n\n> **Cette demande expirera dans 1 minute !**",
           "open": "est tu assoiffé? Tu a déjà une demande ouverte {user}!\nAttendez que l'autre soit accepté ou refusé, ou que la requête expire."
         },
         "special_user": "Hehehe... Tu est *\"assoiffé\"* {user}, n'est ce pas ?\n\\*prend la main de {user}* et disparaît dans une pièce*"
@@ -633,7 +633,7 @@
         "no_mention": "Veuillez mentionner 2 utilisateurs que vous voulez baiser!",
         "request": {
           "denied": "{target1} ou {target2} ne veulent pas avoir de relations sexuelles avec vous {user}.",
-          "message": "Salut {target1} et {target2}!\n{user} veut avoir du sexe avec vous. Voulez-vous aussi ?\nCliquez sur le bouton vert pour accepter et sur le bouton rouge pour refuser.\nCela n'arrivera que si vous accepter tout les deux.\n\n> **Cette requête expirera dans 1 minute !**",
+          "message": "Hé {target1} et {target2}!\n{user} veut avoir du sexe avec vous. Voulez-vous cela aussi?\ncliquer sur \"Accepter\" pour accepter ou sur \"Refuser\" pour refuser.\ncela arrivera seulement si vous acceptez tout les deux.\n\n> **Cette demande prendra fin dans 1 minute !**",
           "open": "hé là {user}! Montre un peu de patience pervers!\ntu avez déjà demandé a avoir des relation , attend que ta demande soit accepter, refusée, soit qu'elle expire."
         },
         "special_user": "A-autant que j'aime faire des chose pervers avec toi, c'est un peu trop pour moi {user}... {VANILLABLUSH}"
