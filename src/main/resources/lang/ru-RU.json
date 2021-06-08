@@ -385,8 +385,7 @@
           },
           "members_title": "Участники",
           "members_value": "{MEMBERS} Всего: {members_total}\n{FACE} Людей: {members_human}\n{BOTICON} Ботов: {members_bot}",
-          "owner": "Владелец",
-          "region": "Регион"
+          "owner": "Владелец"
         }
       },
       "help": {
