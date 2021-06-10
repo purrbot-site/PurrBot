@@ -156,7 +156,7 @@ public class ImageUtil {
         }
     }
 
-    public InputStream getWelcomeImg(Member member, String icon, String bg, String color) throws IOException, NullPointerException{
+    public InputStream getWelcomeImg(Member member, String icon, String bg, String color){
         Color col = bot.getMessageUtil().getColor(color);
         
         if(col == null)
@@ -220,9 +220,11 @@ public class ImageUtil {
 
             ResponseBody responseBody = response.body();
             if(responseBody == null)
-                throw new NullPointerException("Received empty response (null).");
+                return null;
 
             return new ByteArrayInputStream(responseBody.bytes());
+        }catch(IOException ex){
+            return null;
         }
     }
 }

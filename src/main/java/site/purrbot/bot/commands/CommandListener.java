@@ -56,6 +56,11 @@ public class CommandListener extends ListenerAdapter{
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event){
         CMD_EXECUTOR.execute(() -> {
+            // Temporary Fix for Stage-channel issues
+            // TODO: Remove once fixed
+            if(!event.getChannel().getType().equals(ChannelType.TEXT))
+                return;
+            
             Message msg = event.getMessage();
             Guild guild = event.getGuild();
             User user = event.getAuthor();

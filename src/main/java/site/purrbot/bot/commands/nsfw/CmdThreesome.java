@@ -30,7 +30,6 @@ import net.dv8tion.jda.api.interactions.components.Button;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.util.HttpUtil;
 
 import java.util.ArrayList;
@@ -121,10 +120,8 @@ public class CmdThreesome implements Command{
                         .replace("{target1}", target1.getAsMention())
                         .replace("{target2}", target2.getAsMention())
         ).setActionRow(
-                Button.success("purr:threesome:accept", bot.getMsg(guild.getId(), "request.buttons.accept"))
-                        .withEmoji(Emoji.fromMarkdown(Emotes.ACCEPT.getEmote())),
-                Button.danger("purr:threesome:deny", bot.getMsg(guild.getId(), "request.buttons.deny"))
-                        .withEmoji(Emoji.fromMarkdown(Emotes.DENY.getEmote()))
+                bot.getRequestUtil().getButton(guild.getId(), "threesome", true),
+                bot.getRequestUtil().getButton(guild.getId(), "threesome", false)
         ).queue(
                 message -> handleEvent(message, member, target1, target2, args),
                 e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")

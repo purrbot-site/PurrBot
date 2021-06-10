@@ -54,6 +54,7 @@ import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.listener.ConnectionListener;
 import site.purrbot.bot.listener.GuildListener;
+import site.purrbot.bot.listener.MemberListener;
 import site.purrbot.bot.listener.ReadyListener;
 import site.purrbot.bot.util.*;
 import site.purrbot.bot.util.file.FileManager;
@@ -141,6 +142,7 @@ public class PurrBot {
         ));
         shardManager = DefaultShardManagerBuilder
                 .createDefault(getFileManager().getString("config", "bot-token"))
+                .disableIntents(GatewayIntent.GUILD_VOICE_STATES)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .disableCache(CacheFlag.VOICE_STATE)
                 .setChunkingFilter(ChunkingFilter.include(Long.parseLong(IDs.GUILD)))
@@ -149,6 +151,7 @@ public class PurrBot {
                         new ReadyListener(this),
                         new ConnectionListener(this),
                         new GuildListener(this),
+                        new MemberListener(this),
                         new CommandListener(this, CMD_HANDLER),
                         waiter
                 )

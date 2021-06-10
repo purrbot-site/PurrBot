@@ -26,7 +26,6 @@ import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 @CommandDescription(
@@ -65,17 +64,12 @@ public class CmdWelcome implements Command{
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(args.length < 1){
             tc.sendTyping().queue(v -> {
-                InputStream image;
-                try{
-                    image = bot.getImageUtil().getWelcomeImg(
-                            msg.getMember(),
-                            bot.getWelcomeIcon(guild.getId()),
-                            bot.getWelcomeBg(guild.getId()),
-                            bot.getWelcomeColor(guild.getId())
-                    );
-                }catch(IOException ex){
-                    image = null;
-                }
+                InputStream image = bot.getImageUtil().getWelcomeImg(
+                        msg.getMember(),
+                        bot.getWelcomeIcon(guild.getId()),
+                        bot.getWelcomeBg(guild.getId()),
+                        bot.getWelcomeColor(guild.getId())
+                );
                 
                 welcomeSettings(tc, member, image);
             });
@@ -267,17 +261,12 @@ public class CmdWelcome implements Command{
             
             case "test":
                 tc.sendTyping().queue(v -> {
-                    InputStream image;
-                    try{
-                        image = bot.getImageUtil().getWelcomeImg(
-                                member,
-                                bot.getWelcomeIcon(guild.getId()),
-                                bot.getWelcomeBg(guild.getId()),
-                                bot.getWelcomeColor(guild.getId())
-                        );
-                    }catch(IOException ex){
-                        image = null;
-                    }
+                    InputStream image = bot.getImageUtil().getWelcomeImg(
+                            member,
+                            bot.getWelcomeIcon(guild.getId()),
+                            bot.getWelcomeBg(guild.getId()),
+                            bot.getWelcomeColor(guild.getId())
+                    );
                     
                     bot.getMessageUtil().sendWelcomeMsg(tc, bot.getWelcomeMsg(guild.getId()), member, image);
                 });
@@ -285,17 +274,12 @@ public class CmdWelcome implements Command{
 
             default:
                 tc.sendTyping().queue(v -> {
-                    InputStream image;
-                    try{
-                        image = bot.getImageUtil().getWelcomeImg(
-                                member,
-                                bot.getWelcomeIcon(guild.getId()),
-                                bot.getWelcomeBg(guild.getId()),
-                                bot.getWelcomeColor(guild.getId())
-                        );
-                    }catch(IOException ex){
-                        image = null;
-                    }
+                    InputStream image = bot.getImageUtil().getWelcomeImg(
+                            member,
+                            bot.getWelcomeIcon(guild.getId()),
+                            bot.getWelcomeBg(guild.getId()),
+                            bot.getWelcomeColor(guild.getId())
+                    );
     
                     welcomeSettings(tc, member, image);
                 });

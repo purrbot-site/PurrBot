@@ -27,6 +27,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.interactions.components.ButtonStyle;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
@@ -50,6 +51,15 @@ public class RequestUtil{
     
     public String getQueueString(String api, String guildId, String authorId){
         return api + ":" + guildId + ":" + authorId;
+    }
+    
+    public Button getButton(String guildId, String buttonId, boolean accept){
+        return Button.of(
+                accept ? ButtonStyle.SUCCESS : ButtonStyle.DANGER,
+                "purr:" + buttonId + (accept ? ":accept" : ":deny"),
+                bot.getMsg(guildId, accept ? "request.buttons.accept" : "request.buttons.deny"),
+                Emoji.fromMarkdown((accept ? Emotes.ACCEPT : Emotes.DENY).getEmote())
+        );
     }
     
     public void handleReactionEvent(TextChannel tc, Member author, Member target, HttpUtil.ImageAPI api){
@@ -237,19 +247,6 @@ public class RequestUtil{
         msg.reply(
                 bot.getMsg(tc.getGuild().getId(), "request.accepted", author.getAsMention(), targets)
         ).queue();
-    }
-    
-    private Button getButton(String guildId, String apiName, boolean accept){
-        if(accept)
-            return Button.success(
-                    String.format("purr:%s:accept", apiName),
-                    bot.getMsg(guildId, "request.buttons.accept")
-            ).withEmoji(Emoji.fromMarkdown(Emotes.ACCEPT.getEmote()));
-        
-        return Button.danger(
-                String.format("purr:%s:deny", apiName),
-                bot.getMsg(guildId, "request.buttons.deny")
-        ).withEmoji(Emoji.fromMarkdown(Emotes.DENY.getEmote()));
     }
     
     private boolean isValidButton(Button button, String apiName){

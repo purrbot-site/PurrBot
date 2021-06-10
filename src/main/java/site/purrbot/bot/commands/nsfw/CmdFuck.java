@@ -27,6 +27,7 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.interactions.components.ButtonStyle;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
@@ -126,33 +127,36 @@ public class CmdFuck implements Command{
                 bot.getMsg(guild.getId(), path, member.getEffectiveName(), target.getAsMention())
         );
         
+        String guildId = guild.getId();
         if(hasArgs(args)){
             messageAction.setActionRow(
-                    Button.success("purr:fuck:accept", bot.getMsg(guild.getId(), "request.buttons.accept"))
-                          .withEmoji(Emoji.fromMarkdown(Emotes.ACCEPT.getEmote())),
-                    Button.danger("purr:fuck:deny", bot.getMsg(guild.getId(), "request.buttons.deny"))
-                          .withEmoji(Emoji.fromMarkdown(Emotes.DENY.getEmote()))
+                    bot.getRequestUtil().getButton(guildId, "fuck", true),
+                    bot.getRequestUtil().getButton(guildId, "fuck", false)
             ).queue(
                     message -> handleEvent(message, member, target, args),
                     e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
             );
         }else{
             messageAction.setActionRow(
-                    Button.primary("purr:fuck:anal", bot.getMsg(guild.getId(), "request.buttons.fuck_anal"))
-                          .withEmoji(Emoji.fromMarkdown(Emotes.SEX_ANAL.getEmote())),
-                    Button.primary("purr:fuck:normal", bot.getMsg(guild.getId(), "request.buttons.fuck_normal"))
-                          .withEmoji(Emoji.fromMarkdown(Emotes.SEX.getEmote())),
-                    Button.primary("purr:fuck:yaoi", bot.getMsg(guild.getId(), "request.buttons.fuck_yaoi"))
-                          .withEmoji(Emoji.fromMarkdown(Emotes.SEX_YAOI.getEmote())),
-                    Button.primary("purr:fuck:yuri", bot.getMsg(guild.getId(), "request.buttons.fuck_yuri"))
-                          .withEmoji(Emoji.fromMarkdown(Emotes.SEX_YURI.getEmote())),
-                    Button.danger("purr:fuck:deny", bot.getMsg(guild.getId(), "request.buttons.deny"))
-                          .withEmoji(Emoji.fromMarkdown(Emotes.DENY.getEmote()))
+                    getPrimaryButton(guildId, "anal", "fuck_anal", Emotes.SEX_ANAL),
+                    getPrimaryButton(guildId, "normal", "fuck_normal", Emotes.SEX),
+                    getPrimaryButton(guildId, "yaoi", "fuck_yaoi", Emotes.SEX_YAOI),
+                    getPrimaryButton(guildId, "yuri", "fuck_yuri", Emotes.SEX_YURI),
+                    bot.getRequestUtil().getButton(guildId, "fuck", false)
             ).queue(
                     message -> handleEvent(message, member, target, args),
                     e -> bot.getEmbedUtil().sendError(tc, member, "errors.request_error")
             );
         }
+    }
+    
+    private Button getPrimaryButton(String guildId, String buttonId, String buttonName, Emotes emote){
+        return Button.of(
+                ButtonStyle.PRIMARY,
+                "purr:fuck:" + buttonId,
+                bot.getMsg(guildId, "request.buttons." + buttonName),
+                Emoji.fromMarkdown(emote.getEmote())
+        );
     }
     
     private boolean equalsAny(String id){

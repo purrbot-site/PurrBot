@@ -118,43 +118,6 @@ public class GuildListener extends ListenerAdapter{
     }
 
     @Override
-    public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event){
-        Guild guild = event.getGuild();
-
-        if(event.getUser().isBot())
-            return;
-
-        if(bot.getWelcomeChannel(guild.getId()).equals("none"))
-            return;
-
-        TextChannel tc = guild.getTextChannelById(bot.getWelcomeChannel(guild.getId()));
-        if(tc == null)
-            return;
-
-        if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_WRITE))
-            return;
-
-        String msg = bot.getWelcomeMsg(guild.getId());
-        if(msg == null)
-            msg = "Hello {mention}!";
-        
-        InputStream image;
-    
-        try {
-            image = bot.getImageUtil().getWelcomeImg(
-                    event.getMember(),
-                    bot.getWelcomeIcon(guild.getId()),
-                    bot.getWelcomeBg(guild.getId()),
-                    bot.getWelcomeColor(guild.getId())
-            );
-        }catch(IOException ex){
-            image = null;
-        }
-        
-        bot.getMessageUtil().sendWelcomeMsg(tc, msg, event.getMember(), image);
-    }
-
-    @Override
     public void onTextChannelDelete(@Nonnull TextChannelDeleteEvent event){
         Guild guild = event.getGuild();
         String id = bot.getWelcomeChannel(guild.getId());
