@@ -393,6 +393,7 @@
         "command_info": {
           "aliases": "Aliase",
           "command_nsfw": "Bitte verwende diesen Befehl in einem NSFW-Kanal",
+          "docs": "Doks",
           "no_command": "Der angegebene Befehl (`{command}`) existiert nicht!\nStelle sicher, dass du Ihn richtig geschrieben hast.\n\nKategorienamen müssen mit `cat:` gestartet werden (z.B. `{prefix}help cat:fun`",
           "title": "Befehls-Hilfe: {command}",
           "usage_title": "Verwendungs Optionen",
@@ -474,13 +475,14 @@
         "info_full": "{EDIT} Nachricht editieren: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "button": "Zur Nachricht springen",
         "description": "Zitiere die Nachricht von jemandem. Du kannst optional noch einen Kanal angeben um dort nach der Nachricht zu suchen.",
         "embed_basic": {
           "channel": "Gepostet in #{channel}",
           "info": "Zitat von {user}"
         },
         "embed_image": {
-          "info": "Zitat von {user} in {channel} [`[Link]`]({link})"
+          "info": "Zitat von {user} in {channel}"
         },
         "few_args": "Zu wenige Argumente!\nVerwendung: `{prefix}quote <messageID> [#channel]`",
         "invalid_id": "Die angegebene ID war ungültig!\nStell sicher, dass du den Entwickler-Modus aktiviert, auf die **Nachricht** rechts-klick gemacht hast und \"ID kopieren\" ausgewählt hast.",
