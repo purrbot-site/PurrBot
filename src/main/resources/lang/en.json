@@ -393,6 +393,7 @@
         "command_info": {
           "aliases": "Aliases",
           "command_nsfw": "Please run this command in a NSFW channel.",
+          "docs": "Docs",
           "no_command": "The provided command (`{command}`) doesn't exist!\nMake sure you typed it correctly.\n\nCategory names need to be prefixed with `cat:` (e.g. `{prefix}help cat:fun`)!",
           "title": "Command help: {command}",
           "usage_title": "Usage options",
@@ -474,13 +475,14 @@
         "info_full": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "button": "Jump to message",
         "description": "Quote the message of someone. You can optionally provide a channel to search for the message there.",
         "embed_basic": {
           "channel": "Posted in #{channel}",
           "info": "Quote from {user}"
         },
         "embed_image": {
-          "info": "Quote from {user} in {channel} [`[Link]`]({link})"
+          "info": "Quote from {user} in {channel}"
         },
         "few_args": "Too few arguments!\nUsage: `{prefix}quote <messageID> [#channel]`",
         "invalid_id": "The provided ID was invalid!\nMake sure to have developer mode enabled and that you right-clicked the **message** and selected \"Copy id\".",
