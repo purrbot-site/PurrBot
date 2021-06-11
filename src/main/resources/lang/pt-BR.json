@@ -393,6 +393,7 @@
         "command_info": {
           "aliases": "Apelidos",
           "command_nsfw": "Por favor, execute esse comando em um canal NSFW.",
+          "docs": "Documentação",
           "no_command": "O comando fornecido (`{command}`) não existe!\nCertifique-se de digitá-lo corretamente.\n\nNomes de categoria precisam ser prefixados com `cat:` (por exemplo, `{prefix}ajuda cat:fun`)!",
           "title": "Ajuda no comando: {command}",
           "usage_title": "Opções de uso",
@@ -474,13 +475,14 @@
         "info_full": "{EDIT} Editar mensagem: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "button": "Pular para mensagem",
         "description": "Cite a mensagem de alguém. Você pode opcionalmente fornecer um canal para pesquisar a mensagem lá.",
         "embed_basic": {
           "channel": "Enviada em {channel}",
           "info": "Citação de {user}"
         },
         "embed_image": {
-          "info": "Citação de {user} em {channel} [`[Link]`]({link})"
+          "info": "Citação de {user} em {channel}"
         },
         "few_args": "Muito poucos argumentos!\nUso: `{prefix}quote <messageID> [#channel]`",
         "invalid_id": "O ID fornecido é inválido!\nCertifique-se de que o modo de desenvolvedor esteja ativado e que você tenha clicado com o botão direito na **mensagem** e selecione \"Copiar id\".",
