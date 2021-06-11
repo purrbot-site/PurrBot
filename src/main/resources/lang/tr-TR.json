@@ -393,6 +393,7 @@
         "command_info": {
           "aliases": "Alternatifler",
           "command_nsfw": "Lütfen bu komutu NSFW kanalında kullanın.",
+          "docs": "Dokümanlar",
           "no_command": "Belirtilen komut (`{command}`) mevcut değil!\nKomutu doğru yazdığından emin ol.\n\nKategori adlarının önüne `cat:` gelmelidir (örn. `{prefix}help cat:eğlence`)!",
           "title": "Komut yardımı: {command}",
           "usage_title": "Kullanım şekli",
@@ -474,13 +475,14 @@
         "info_full": "{EDIT} Mesaj Düzenleme: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "button": "Mesaja Git",
         "description": "Birinin mesajını alıntıla. İsteğe bağlı olarak mesajı aramak için bir kanal belirtebilirsin.",
         "embed_basic": {
           "channel": "#{channel} kanalında paylaşıldı",
           "info": "{user} adlı üyeden alıntı"
         },
         "embed_image": {
-          "info": "{user} adlı üyenin {channel} kanalındaki mesajından alıntı [`[Link]`]({link})"
+          "info": "{user} adlı üyenin {channel} kanalındaki mesajından alıntı"
         },
         "few_args": "Çok az argüman sağlandı!\nKullanım: `{prefix}quote <mesajID> [#kanal]`",
         "invalid_id": "Sağlanan ID geçersiz!\nGeliştirici modunun etkinleştirildiğinden ve **mesaja** sağ tıklayıp \"ID'yi kopyala\" ya tıkladığından emin ol.",
