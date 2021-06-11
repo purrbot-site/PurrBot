@@ -393,6 +393,7 @@
         "command_info": {
           "aliases": "Alias",
           "command_nsfw": "Veuillez exécuter cette commande dans un salon NSFW.",
+          "docs": "Documents",
           "no_command": "La commande donnée (`{command}`) n'existe pas!\nAssurez-vous de la saisir correctement.\n\nLes noms de catégories doivent être préfixés avec `cat:` (exemple `{prefix}help cat:fun`)!",
           "title": "Aide de commande: {command}",
           "usage_title": "Options d'utilisation",
@@ -474,13 +475,14 @@
         "info_full": "{EDIT} Modifier le message : `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "button": "Aller au message",
         "description": "Citer le message de quelqu'un. Vous pouvez éventuellement fournir un salon pour y rechercher le message.",
         "embed_basic": {
           "channel": "Posté dans #{channel}",
           "info": "Citation de {user}"
         },
         "embed_image": {
-          "info": "Citation de {user} dans {channel} [`[Link]`]({link})"
+          "info": "Citation de {user} dans {channel}"
         },
         "few_args": "Trop peu d'arguments !\nUtilisation: `{prefix}quote <messageID> [#Salon]`",
         "invalid_id": "L'ID fourni n'était pas valide !\nAssurez-vous que le mode développeur est activé et que vous avez cliqué avec le bouton droit de la souris sur le **message** et sélectionné \"Copier l'id\".",
