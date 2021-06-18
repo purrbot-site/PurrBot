@@ -3,7 +3,7 @@
     "footer": "Wequested by {user}"
   },
   "errors": {
-    "administrator": "**Administwatow Pewmission detected**\nI have the `Administwatow` Pewmission which is a huge secuwity wisk! >~<\n__I won't pewfowm any commands as long as I have this Pewmission, to pwevent possibwe abuse.__\n\nTo fix this, do one of the fowwowing things:\n- Wemove the wole which has Administwatow from me.\n- Wemove the Pewmission fwom the Wole(s) listed bewow.\n\nAdministwatow was detected in the following woles:\n{roles}",
+    "administrator": "**Administwatow Pewmission detected**\nI have the `Administwatow` Pewmission which is a huge secuwity wisk! >~<\n__I won't pewfowm any commands as long as I have this Pewmission, to pwevent possibwe abuse.__\n\nTo fix this, do one of the fowwowing things:\n- Wemove the wole which has Administwatow from me.\n- Wemove the Pewmission fwom the Wole(s) listed bewow.\n\nAdministwatow was detected in the fowwowing woles:\n{roles}",
     "api_error": "Thewe was an ewwow weaching the API! Pwease twy again water.",
     "missing_perms": {
       "self": "I lack the pewmission `{permssion}` fow this. :c",
@@ -20,7 +20,7 @@
     ],
     "request_error": "Thewe was an ewwow while handwing the wequest TwT. Make suwe that my message wasn't deweted and that I have sufficient pewmissions!",
     "title": "Ewwow",
-    "unknown": "T-that is a bit embwwrassing now, but I had an ewwow while perfowming an action. {VANILLABLUSH}\nPlease weport this on [the Discord]({guild_invite}), or on [GitHub]({github_url})!"
+    "unknown": "T-that is a bit embawwasing now, but I had an ewwow while pewfowming an action. {EMOTE_BLUSH}\nPwease wepowt this on [the Discowd]({guild_invite}), ow on [GitHub]({github_url}))!"
   },
   "misc": {
     "and": "and",
@@ -33,7 +33,7 @@
     "fun": {
       "bite": {
         "description": "Wets you bite one ow muwtipwe peopwe.",
-        "loading": "{LOADING} Going to bite someone... >:c",
+        "loading": "{EMOTE_LOADING} Going to bite someone... >:c",
         "mention_self": "Is it cannibawism, if you bite youwsewf {user}?",
         "mention_purr": [
           "W-w-wha...? I ish not tasty! >.<",
@@ -46,13 +46,13 @@
       },
       "blush": {
         "description": "Makes you bwush. o////o",
-        "loading": "{LOADING} Making you bwush...",
+        "loading": "{EMOTE_LOADING} Making you bwush...",
         "message": "{user} is bwushing"
       },
       "cuddle": {
         "description": "Lets you cuddwe one ow muwtipwe peopwe.",
-        "loading": "{LOADING} Weceiving a cuddle-gif...",
-        "mention_self": "Why do you want to cuddwe youwsewf {user}?\nYou can cuddwe me if you want. {VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} Weceiving a cuddle-gif...",
+        "mention_self": "Why do you want to cuddwe youwsewf {user}?\nYou can cuddwe me if you want. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*enjoys the cuddwe fwom {user}*",
           "\\*snuggwes tight at {user}*",
@@ -63,17 +63,17 @@
       },
       "cry": {
         "description": "Lets you cwy. ;-;",
-        "loading": "{LOADING} Cowwecting teaws... ;-;",
+        "loading": "{EMOTE_LOADING} Cowwecting teaws... ;-;",
         "message": "{user} is cwying"
       },
       "dance": {
         "description": "Allows you to dance. ~(^.^)~",
-        "loading": "{LOADING} Finding noice music to dance...",
+        "loading": "{EMOTE_LOADING} Finding noice music to dance...",
         "message": "{user} is dancing ^w^"
       },
       "eevee": {
         "description": "Gives you an image or gif of a cute Eevee. OwO",
-        "loading": "{LOADING} Captuwing a cute Eevee... UwU",
+        "loading": "{EMOTE_LOADING} Captuwing a cute Eevee... UwU",
         "message": "Eevee"
       },
       "feed": {
@@ -112,13 +112,13 @@
       },
       "holo": {
         "description": "Get an image of the appwe eating, awcohow dwinking wise wowf.",
-        "loading": "{LOADING} Weceiving an image fwom Holo...",
-        "message": "Holo {BLOBHOLO}"
+        "loading": "{EMOTE_LOADING} Weceiving an image fwom Holo...",
+        "message": "Holo {EMOTE_BLOB_HOLO}"
       },
       "hug": {
         "description": "Shawe some hugs with othew peopwe. \\(>w<)/",
-        "loading": "{LOADING} Weceiving a hug-gif...",
-        "mention_self": "Why are you hugging youwsewf {user}?\nYou can hug me if you want. {VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} Weceiving a hug-gif...",
+        "mention_self": "Why are you hugging youwsewf {user}?\nYou can hug me if you want. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*enjoys the hug fwom {user}*",
           "\\*siwentwy puwws whiwe enjoying the hug*",
@@ -129,7 +129,7 @@
       },
       "kiss": {
         "description": "Give one or muwtipwe peopwe a kiss.",
-        "loading": "{LOADING} Weceiving a kiss...",
+        "loading": "{EMOTE_LOADING} Weceiving a kiss...",
         "mention_purr": [
           "O-okay. But onwy my cheek! \\*Howds cheek out*",
           "Onwy my cheek, okay?",
@@ -142,12 +142,12 @@
       },
       "kitsune": {
         "description": "Get an image of a Kitsune (fox giwl).",
-        "loading": "{LOADING} Weceiving a kitsune-gif...",
-        "message": "Kitsune {SHIROTAILWAG}"
+        "loading": "{EMOTE_LOADING} Weceiving a kitsune-gif...",
+        "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
       "lick": {
         "description": "Lick peopwe... In a SFW way obviouswy.",
-        "loading": "{LOADING} Weceiving a lick-gif...",
+        "loading": "{EMOTE_LOADING} Weceiving a lick-gif...",
         "mention_self": "I won't ask how and *whewe* you lick youwsewf {user}...",
         "mention_purr": [
           "\\*backs away\\* I-I nevew awwowed you to lick me {user}!",
@@ -160,19 +160,19 @@
       },
       "neko": {
         "description": "Get an image or gif of an adowabwe Neko. UwU",
-        "loading": "{LOADING} Weceiving a cute neko image (ow gif)... UwU",
-        "message": "Neko {NEKOWO}",
-        "purr": "{PURR} Did... Did I weally look like this in the past?",
-        "snuggle": "{PURR} That is my wittwe sistew! UwU"
+        "loading": "{EMOTE_LOADING} Weceiving a cute neko image (ow gif)... UwU",
+        "message": "Neko {EMOTE_NEKOWO}",
+        "purr": "{EMOTE_PURR} Did... Did I weally look like this in the past?",
+        "snuggle": "{EMOTE_PURR} That is my wittwe sistew! UwU"
       },
       "okami": {
         "description": "Get an image of a cute looking Okami (Wowf giwl).",
-        "loading": "{LOADING} Taking a pictuwe of an Awoo...",
-        "message": "Okami {AWOO}"
+        "loading": "{EMOTE_LOADING} Taking a pictuwe of an Awoo...",
+        "message": "Okami {EMOTE_AWOO}"
       },
       "pat": {
         "description": "Pat peopwe!",
-        "loading": "{LOADING} Weceiving pats... UwU",
+        "loading": "{EMOTE_LOADING} Weceiving pats... UwU",
         "mention_self": "Uhm... Isn't thewe a neko that you can pat {user}? \\*points to hewsewf\\*",
         "mention_purr": [
           "\\*purr™*",
@@ -184,7 +184,7 @@
       },
       "poke": {
         "description": "Poke peopwe!",
-        "loading": "{LOADING} Weceiving a poke-gif...",
+        "loading": "{EMOTE_LOADING} Weceiving a poke-gif...",
         "mention_self": "Are you bowed ow why do you poke youwsewf {user}?",
         "mention_purr": [
           "N-nya! Nu poking me! >~<",
@@ -195,8 +195,8 @@
       },
       "senko": {
         "description": "Get an image of the divine messengew that can pampew you. UwU",
-        "loading": "{LOADING} Weceiving an image fwom Senko-san...",
-        "message": "Senko-San {SENKOTAILWAG}"
+        "loading": "{EMOTE_LOADING} Weceiving an image fwom Senko-san...",
+        "message": "Senko-San {EMOTE_SENKO_TAIL_WAG}"
       },
       "ship": {
         "description": "Ship youwsewf with someone ow two peopwe with each othew to see theiw chance of wove.",
@@ -224,7 +224,7 @@
       },
       "slap": {
         "description": "Slap da meanies! >:C",
-        "loading": "{LOADING} Slapping the usews...",
+        "loading": "{EMOTE_LOADING} Slapping the usews...",
         "mention_self": "Nononono! I won't hewp you huwting youwsewf {user}.",
         "mention_purr": [
           "Nuuuu... W-why huwting me {user}? T^T",
@@ -235,17 +235,17 @@
       },
       "smile": {
         "description": "Lets you smiwe :3",
-        "loading": "{LOADING} Making you smiwe...",
+        "loading": "{EMOTE_LOADING} Making you smiwe...",
         "message": "{user} is smiwing :3"
       },
       "tail": {
         "description": "Wag youw taiw... In excitement I hope.",
-        "loading": "{LOADING} Wagging taiw... UwU",
+        "loading": "{EMOTE_LOADING} Wagging taiw... UwU",
         "message": "{user} wags theiw tail OwO"
       },
       "tickle": {
         "description": "Tickwe peopwe to make them waugh.",
-        "loading": "{LOADING} Weceiving a tickle-gif...",
+        "loading": "{EMOTE_LOADING} Weceiving a tickle-gif...",
         "mention_self": "Okay... If you weawwy want to get tickwed... \\*tickwes {user}*",
         "mention_purr": [
           "N-not faiw! I c-can't \\*waughs from the tickwes*",
@@ -355,7 +355,7 @@
             "value": "{boosts} (Wevew {level} {BOOST_TIER})"
           },
           "channels_title": "Channews",
-          "channels_value": "{CATEGORY} Totaw: {channels_total}\n\n{TEXTCHANNEL} Text Channews: {channels_text}\n{VOICECHANNEL} Voice Channews: {channels_voice}",
+          "channels_value": "{EMOTE_CATEGORY} Totaw: {channels_total}\n\n{EMOTE_TEXT} Text Channews: {channels_text}\n{EMOTE_VOICE} Voice Channews: {channels_voice}",
           "created": "Cweated",
           "features": {
             "animated_icon": "Animated Icon",
@@ -384,7 +384,7 @@
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Membews",
-          "members_value": "{MEMBERS} Totaw: {members_total}\n\n{FACE} Humans (OwO): {members_human}\n{BOTICON} Bots (beep boop): {members_bot}",
+          "members_value": "{EMOTE_MEMBERS} Totaw: {members_total}\n\n{EMOTE_SMILEY} Humans (OwO): {members_human}\n{EMOTE_BOT} Bots (beep boop): {members_bot}",
           "owner": "Ownew"
         }
       },
@@ -393,6 +393,7 @@
         "command_info": {
           "aliases": "Awiases",
           "command_nsfw": "Pwease wun this command in a NSFW channel. ÒwÓ",
+          "docs": "Docs",
           "no_command": "The pwovided command (`{command}`) doesn't exist!\nMake suwe you typed it cowwectwy.\n\nCategowy names need to be pwefixed with `cat:` (e.g. `{prefix}help cat:fun`)!",
           "title": "Command hewp: {command}",
           "usage_title": "Usage options",
@@ -415,7 +416,7 @@
           },
           "nsfw_info": "Wun the hewp command in a NSFW channew to see this page! O//w//O",
           "support_title": "Do- do you love the bot O\\\\W\\\\O?",
-          "support_value": "Considew suppowting the bot twough donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donation OwO)\n{KOFI} [`Ko-fi`]({kofi_url}) (Single Donation OwO)\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donation UwU)"
+          "support_value": "Considew suppowting the bot twough donating.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Single Donation OwO)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Single Donation OwO)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Continuous Donation UwU)"
         }
       },
       "info": {
@@ -464,23 +465,24 @@
       "ping": {
         "description": "Check the cuwwent ping the bot has.",
         "loading": [
-          "{TYPING} Tawking with Discowd...",
-          "{TYPING} Catching a fish...",
-          "{TYPING} Giving a pong fow the ping.",
-          "{TYPING} [placeholder_loading_text]",
-          "{TYPING} Hey Discowd, awe you thewe?"
+          "{EMOTE_TYPING} Tawking with Discowd...",
+          "{EMOTE_TYPING} Catching a fish...",
+          "{EMOTE_TYPING} Giving a pong fow the ping.",
+          "{EMOTE_TYPING} [placeholder_loading_text]",
+          "{EMOTE_TYPING} Hey Discowd, awe you thewe?"
         ],
-        "info": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discowd: `{discord}`",
-        "info_full": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discowd: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
+        "info": "{EMOTE_PENCIL} Edit message: `{edit_message}`\n{EMOTE_CLYDE} Discowd: `{discord}`",
+        "info_full": "{EMOTE_PENCIL} Edit message: `{edit_message}`\n{EMOTE_CLYDE} Discowd: `{discord}`\n{EMOTE_DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "button": "Jump to message",
         "description": "Quote the message of someone. You can optionawwy pwovide a channew to seawch fow the message thewe.",
         "embed_basic": {
           "channel": "Posted in #{channel}",
           "info": "Quote fwom {user}"
         },
         "embed_image": {
-          "info": "Quote fwom {user} in {channel} [`[Link]`]({link})"
+          "info": "Quote fwom {user} in {channel}"
         },
         "few_args": "Too few awguments!\nUsage: `{prefix}quote <messageID> [#channel]`",
         "invalid_id": "The pwovided ID was invawid!\nMake suwe to have devewopew mode enabwed and that you wight-cwicked the **message** and sewected \"Copy id\".",
@@ -537,12 +539,12 @@
           "avatar": "Avataw",
           "avatar_url": "`Avataw URL`",
           "badges": "Badges",
-          "booster": "Boostew since:",
-          "created": "Account cweated:",
+          "booster": "{EMOTE_BOOST_LEVEL_3} Boostew since:",
+          "created": "{EMOTE_SLOWMODE} Account cweated:",
           "dates": "Dates",
           "id": "ID: {id}",
-          "joined": "Guiwd joined:",
-          "nickname": "Nick: {nickname}",
+          "joined": "{EMOTE_INVITE} Guiwd joined:",
+          "nickname": "Nick:",
           "no_badges": "`No badges`",
           "role_highest": "Highest Wowe",
           "role_total": "Othew Wowes"
@@ -570,11 +572,11 @@
       },
       "cum": {
         "description": "No descwiption needed.\n\nThis command can only be executed in NSFW-labeled channels!",
-        "loading": "{LOADING} Pwepawing to cum!!! OWO",
+        "loading": "{EMOTE_LOADING} Pwepawing to cum!!! OWO",
         "message": "{user} IS CUMMING!!! UwU"
       },
       "fuck": {
-        "description": "Lets you ask someone if you can have sex with them.\nIf you didn't pwe-select an option can the othew choose between nowmal, anal, yuwi and yaoi. OwO\nUse one of the following awgs to pwe-select:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nThis command can only be executed in NSFW-labeled channels!",
+        "description": "Lets you ask someone if you can have sex with them.\nIf you didn't pwe-select an option can the asked usew choose between nowmal, anal, yuwi and yaoi. OwO\nUse one of the following awgs to pwe-select:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nThis command can only be executed in NSFW-labeled channels!",
         "mention_bot": "You can't lewd with bots! >.<",
         "mention_purr": "\\*slaps {user}* NO! Not with me you pewv!",
         "mention_self": "How can you actuawwy fuck youwsewf {user}?! (No. Mastuwbation is not an answew)",
@@ -601,8 +603,8 @@
       },
       "lewd": {
         "description": "Gives an image ow gif of a naughty neko. ÒwÓ\n\nThis command can only be executed in NSFW-labeled channels!",
-        "loading": "{LOADING} Getting a lewd neko image (ow gif)...",
-        "message": "Lewd neko {NEKOWO}"
+        "loading": "{EMOTE_LOADING} Getting a lewd neko image (ow gif)...",
+        "message": "Lewd neko {EMOTE_NEKOWO}"
       },
       "pussylick": {
         "description": "Lets you ask someone, if you can lick theiw puss.\n\nThis command can only be executed in NSFW-labeled channels!",
@@ -620,7 +622,7 @@
       },
       "solo": {
         "description": "Gives you a gif of a giwl having fun with themself.\n\nThis command can only be executed in NSFW-labeled channels!",
-        "loading": "{LOADING} Getting a gif of a hot giwl...",
+        "loading": "{EMOTE_LOADING} Getting a gif of a hot giwl...",
         "message": "Solo giwl"
       },
       "threesome": {
@@ -635,7 +637,7 @@
           "message": "Hey {target1} and {target2}!\n{user} wants to have sex you both OwO. Do you want that too?\nCwick on \"Accept\" to accept ow on \"Deny\" to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This wequest will time out in 1 minute!**",
           "open": "Whoa thewe {user}! Show some patience you howny pewson!\nYou awweady asked people to fuck with you, so eithew wait fow then to accept it, deny it or for the wequest to time out."
         },
-        "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much fow me {user}... {VANILLABLUSH}"
+        "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much fow me {user}... {EMOTE_BLUSH}"
       }
     }
   },
@@ -704,8 +706,8 @@
         ]
       },
       "neko": {
-        "purr": "{SNUGGLE} Nya. That is an owd pictuwe of my big sistew. >w<",
-        "snuggle": "{SNUGGLE} I-is that me? OwO"
+        "purr": "{EMOTE_SNUGGLE} Nya. That is an owd pictuwe of my big sistew. >w<",
+        "snuggle": "{EMOTE_SNUGGLE} I-ish that me? OwO"
       },
       "pat": {
         "mention_snuggle": [
