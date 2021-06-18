@@ -20,7 +20,7 @@
     ],
     "request_error": "There was an error while handling the request. Make sure that my message wasn't deleted and that I have sufficient permissions!",
     "title": "Error",
-    "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {VANILLABLUSH}\nPlease report this on [the Discord]({guild_invite}), or on [GitHub]({github_url})!"
+    "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {EMOTE_BLUSH}\nPlease report this on [the Discord]({guild_invite}), or on [GitHub]({github_url})!"
   },
   "misc": {
     "and": "and",
@@ -33,7 +33,7 @@
     "fun": {
       "bite": {
         "description": "Lets you bite one or multiple people.",
-        "loading": "{LOADING} Going to bite someone...",
+        "loading": "{EMOTE_LOADING} Going to bite someone...",
         "mention_self": "Is it cannibalism, if you bite yourself {user}?",
         "mention_purr": [
           "W-w-wha...? I'm not tasty! >.<",
@@ -46,13 +46,13 @@
       },
       "blush": {
         "description": "Makes you blush. o////o",
-        "loading": "{LOADING} Making you blush...",
+        "loading": "{EMOTE_LOADING} Making you blush...",
         "message": "{user} is blushing"
       },
       "cuddle": {
         "description": "Lets you cuddle one or multiple people.",
-        "loading": "{LOADING} Receiving a cuddle-gif...",
-        "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} Receiving a cuddle-gif...",
+        "mention_self": "Why do you cuddle yourself {user}?\nYou can cuddle me if you want. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*enjoys the cuddle from {user}*",
           "\\*snuggles tight at {user}*",
@@ -63,17 +63,17 @@
       },
       "cry": {
         "description": "Lets you cry. ;-;",
-        "loading": "{LOADING} Collecting tears...",
+        "loading": "{EMOTE_LOADING} Collecting tears...",
         "message": "{user} is crying"
       },
       "dance": {
         "description": "Allows you to dance. ~(^.^)~",
-        "loading": "{LOADING} Finding nice music to dance...",
+        "loading": "{EMOTE_LOADING} Finding nice music to dance...",
         "message": "{user} is dancing"
       },
       "eevee": {
         "description": "Gives you an image or gif of a cute Eevee.",
-        "loading": "{LOADING} Capturing a cute Eevee...",
+        "loading": "{EMOTE_LOADING} Capturing a cute Eevee...",
         "message": "Eevee"
       },
       "feed": {
@@ -112,13 +112,13 @@
       },
       "holo": {
         "description": "Get an image of the apple eating, alcohol drinking wise wolf.",
-        "loading": "{LOADING} Receiving a image from Holo...",
-        "message": "Holo {BLOBHOLO}"
+        "loading": "{EMOTE_LOADING} Receiving a image from Holo...",
+        "message": "Holo {EMOTE_BLOB_HOLO}"
       },
       "hug": {
         "description": "Share some hugs with other people. \\(>w<)/",
-        "loading": "{LOADING} Receiving a hug-gif...",
-        "mention_self": "Why are you hugging yourself {user}?\nYou can hug me if you want. {VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} Receiving a hug-gif...",
+        "mention_self": "Why are you hugging yourself {user}?\nYou can hug me if you want. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*enjoys the hug from {user}*",
           "\\*silently purrs while enjoying the hug*",
@@ -129,7 +129,7 @@
       },
       "kiss": {
         "description": "Give one or multiple people a kiss.",
-        "loading": "{LOADING} Receiving a kiss...",
+        "loading": "{EMOTE_LOADING} Receiving a kiss...",
         "mention_purr": [
           "O-okay. But only my cheek! \\*Holds cheek out*",
           "Only my cheek, okay?",
@@ -142,12 +142,12 @@
       },
       "kitsune": {
         "description": "Get an image of a Kitsune (fox girl).",
-        "loading": "{LOADING} Receiving a kitsune-gif...",
-        "message": "Kitsune {SHIROTAILWAG}"
+        "loading": "{EMOTE_LOADING} Receiving a kitsune-gif...",
+        "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
       "lick": {
         "description": "Lick people... In a SFW way obviously.",
-        "loading": "{LOADING} Receiving a lick-gif...",
+        "loading": "{EMOTE_LOADING} Receiving a lick-gif...",
         "mention_self": "I won't ask how and *where* you lick yourself {user}...",
         "mention_purr": [
           "\\*backs away* I-I never allowed you to lick me {user}!",
@@ -160,19 +160,19 @@
       },
       "neko": {
         "description": "Get an image or gif of an adorable Neko.",
-        "loading": "{LOADING} Receiving a cute neko image (or gif)...",
-        "message": "Neko {NEKOWO}",
-        "purr": "{PURR} Did... Did I really look like this in the past?",
-        "snuggle": "{PURR} That is my little sister! UwU"
+        "loading": "{EMOTE_LOADING} Receiving a cute neko image (or gif)...",
+        "message": "Neko {EMOTE_NEKOWO}",
+        "purr": "{EMOTE_PURR} Did... Did I really look like this in the past?",
+        "snuggle": "{EMOTE_PURR} That is my little sister! UwU"
       },
       "okami": {
         "description": "Get an image of a cute looking Okami (Wolf girl).",
-        "loading": "{LOADING} Taking a picture of an Awoo...",
-        "message": "Okami {AWOO}"
+        "loading": "{EMOTE_LOADING} Taking a picture of an Awoo...",
+        "message": "Okami {EMOTE_AWOO}"
       },
       "pat": {
         "description": "Pat people!",
-        "loading": "{LOADING} Receiving pats...",
+        "loading": "{EMOTE_LOADING} Receiving pats...",
         "mention_self": "Uhm... Isn't there a neko that you can pat {user}? \\*points to herself*",
         "mention_purr": [
           "\\*purr™*",
@@ -184,7 +184,7 @@
       },
       "poke": {
         "description": "Poke people!",
-        "loading": "{LOADING} Receiving a poke-gif...",
+        "loading": "{EMOTE_LOADING} Receiving a poke-gif...",
         "mention_self": "Are you bored or why do you poke yourself {user}?",
         "mention_purr": [
           "N-nya! Nu poking me! >~<",
@@ -195,8 +195,8 @@
       },
       "senko": {
         "description": "Get an image of the divine messenger that can pamper you.",
-        "loading": "{LOADING} Receiving an image of Senko-san...",
-        "message": "Senko-San {SENKOTAILWAG}"
+        "loading": "{EMOTE_LOADING} Receiving an image of Senko-san...",
+        "message": "Senko-San {EMOTE_SENKO_TAIL_WAG}"
       },
       "ship": {
         "description": "Ship yourself with someone or two people with each other to see their chance of love.",
@@ -224,7 +224,7 @@
       },
       "slap": {
         "description": "Slap da meanies! >:C",
-        "loading": "{LOADING} Slapping the users...",
+        "loading": "{EMOTE_LOADING} Slapping the users...",
         "mention_self": "Nononono! I won't help you hurting yourself {user}.",
         "mention_purr": [
           "Nuuuu... W-why hurting me {user}? T^T",
@@ -235,17 +235,17 @@
       },
       "smile": {
         "description": "Lets you Smile. :3",
-        "loading": "{LOADING} Making you smile...",
+        "loading": "{EMOTE_LOADING} Making you smile...",
         "message": "{user} is smiling"
       },
       "tail": {
         "description": "Wag your tail... In excitement I hope.",
-        "loading": "{LOADING} Wagging tail...",
+        "loading": "{EMOTE_LOADING} Wagging tail...",
         "message": "{user} wags their tail"
       },
       "tickle": {
         "description": "Tickle people to make them laugh.",
-        "loading": "{LOADING} Receiving a tickle-gif...",
+        "loading": "{EMOTE_LOADING} Receiving a tickle-gif...",
         "mention_self": "Okay... If you really want to get tickled... \\*tickles {user}*",
         "mention_purr": [
           "N-not fair! I c-can't \\*laughs from the tickles*",
@@ -355,7 +355,7 @@
             "value": "{boosts} (Level {level} {BOOST_TIER})"
           },
           "channels_title": "Channels",
-          "channels_value": "{CATEGORY} Total: {channels_total}\n\n{TEXTCHANNEL} Text Channels: {channels_text}\n{VOICECHANNEL} Voice Channels: {channels_voice}",
+          "channels_value": "{EMOTE_CATEGORY} Total: {channels_total}\n\n{EMOTE_TEXT} Text Channels: {channels_text}\n{EMOTE_VOICE} Voice Channels: {channels_voice}",
           "created": "Created",
           "features": {
             "animated_icon": "Animated Icon",
@@ -384,7 +384,7 @@
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Members",
-          "members_value": "{MEMBERS} Total: {members_total}\n\n{FACE} Humans: {members_human}\n{BOTICON} Bots: {members_bot}",
+          "members_value": "{EMOTE_MEMBERS} Total: {members_total}\n\n{EMOTE_SMILEY} Humans: {members_human}\n{EMOTE_BOT} Bots: {members_bot}",
           "owner": "Owner"
         }
       },
@@ -416,7 +416,7 @@
           },
           "nsfw_info": "Run the help command in a NSFW channel to see this page.",
           "support_title": "Love the bot?",
-          "support_value": "Consider supporting the bot through donating.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donation)\n{KOFI} [`Ko-fi`]({kofi_url}) (Single Donation)\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donation)"
+          "support_value": "Consider supporting the bot through donating.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Single Donation)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Single Donation)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Continuous Donation)"
         }
       },
       "info": {
@@ -465,14 +465,14 @@
       "ping": {
         "description": "Check the current ping the bot has.",
         "loading": [
-          "{TYPING} Talking with Discord...",
-          "{TYPING} Catching a fish...",
-          "{TYPING} Giving a pong for the ping.",
-          "{TYPING} [placeholder_loading_text]",
-          "{TYPING} Hey Discord, are you there?"
+          "{EMOTE_TYPING} Talking with Discord...",
+          "{EMOTE_TYPING} Catching a fish...",
+          "{EMOTE_TYPING} Giving a pong for the ping.",
+          "{EMOTE_TYPING} [placeholder_loading_text]",
+          "{EMOTE_TYPING} Hey Discord, are you there?"
         ],
-        "info": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discord: `{discord}`",
-        "info_full": "{EDIT} Edit message: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
+        "info": "{EMOTE_PENCIL} Edit message: `{edit_message}`\n{EMOTE_CLYDE} Discord: `{discord}`",
+        "info_full": "{EMOTE_PENCIL} Edit message: `{edit_message}`\n{EMOTE_CLYDE} Discord: `{discord}`\n{EMOTE_DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
         "button": "Jump to message",
@@ -539,12 +539,12 @@
           "avatar": "Avatar",
           "avatar_url": "`Avatar URL`",
           "badges": "Badges",
-          "booster": "Booster since:",
-          "created": "Account created:",
+          "booster": "{EMOTE_BOOST_LEVEL_3} Booster since:",
+          "created": "{EMOTE_SLOWMODE} Account created:",
           "dates": "Dates",
           "id": "ID: {id}",
-          "joined": "Guild joined:",
-          "nickname": "Nick: {nickname}",
+          "joined": "{EMOTE_INVITE} Guild joined:",
+          "nickname": "Nick:",
           "no_badges": "`No badges`",
           "role_highest": "Highest Role",
           "role_total": "Other Roles"
@@ -572,11 +572,11 @@
       },
       "cum": {
         "description": "No description needed.\n\nThis command can only be executed in NSFW-labeled channels!",
-        "loading": "{LOADING} Preparing to cum...",
+        "loading": "{EMOTE_LOADING} Preparing to cum...",
         "message": "{user} is cumming."
       },
       "fuck": {
-        "description": "Lets you ask someone, if you can have sex with them.\nIf you didn't pre-select an option can the other choose between normal, anal, yuri and yaoi.\nUse one of the following args to pre-select:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nThis command can only be executed in NSFW-labeled channels!",
+        "description": "Lets you ask someone, if you can have sex with them.\nIf you didn't pre-select an option can the asked user choose between normal, anal, yuri and yaoi.\nUse one of the following args to pre-select:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nThis command can only be executed in NSFW-labeled channels!",
         "mention_bot": "You can't fuck with bots!",
         "mention_purr": "\\*slaps {user}* NO! Not with me you perv!",
         "mention_self": "How can you actually fuck yourself {user}?! (No. Masturbation is not an answer)",
@@ -603,8 +603,8 @@
       },
       "lewd": {
         "description": "Gives an image or gif of a naughty neko.\n\nThis command can only be executed in NSFW-labeled channels!",
-        "loading": "{LOADING} Getting a lewd neko image (or gif)...",
-        "message": "Lewd neko {NEKOWO}"
+        "loading": "{EMOTE_LOADING} Getting a lewd neko image (or gif)...",
+        "message": "Lewd neko {EMOTE_NEKOWO}"
       },
       "pussylick": {
         "description": "Lets you ask someone, if you can lick their pussy.\n\nThis command can only be executed in NSFW-labeled channels!",
@@ -622,7 +622,7 @@
       },
       "solo": {
         "description": "Gives you a gif of a girl having fun with themself.\n\nThis command can only be executed in NSFW-labeled channels!",
-        "loading": "{LOADING} Getting a gif of a hot girl...",
+        "loading": "{EMOTE_LOADING} Getting a gif of a hot girl...",
         "message": "Solo girl"
       },
       "threesome": {
@@ -637,7 +637,7 @@
           "message": "Hey {target1} and {target2}!\n{user} wants to have sex with both of you. Do you want that too?\nClick on \"Accept\" to accept or on \"Deny\" to deny it.\nOnly if both of you accept this, will this happen.\n\n> **This request will time out in 1 minute!**",
           "open": "Whoa there {user}! Show some patience you horny person!\nYou already asked people to fuck with you, so either wait for the to accept it, deny it or for the request to time out."
         },
-        "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much for me {user}... {VANILLABLUSH}"
+        "special_user": "A-as much as I like to do lewd stuff with you, is that a bit too much for me {user}... {EMOTE_BLUSH}"
       }
     }
   },
@@ -706,8 +706,8 @@
         ]
       },
       "neko": {
-        "purr": "{SNUGGLE} Nya. That is an old picture of my big sister. >w<",
-        "snuggle": "{SNUGGLE} I-is that me? OwO"
+        "purr": "{EMOTE_SNUGGLE} Nya. That is an old picture of my big sister. >w<",
+        "snuggle": "{EMOTE_SNUGGLE} I-is that me? OwO"
       },
       "pat": {
         "mention_snuggle": [
