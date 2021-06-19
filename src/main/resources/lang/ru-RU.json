@@ -20,7 +20,7 @@
     ],
     "request_error": "Произошла ошибка во время запроса. Убедитсь, что моё сообщение не удалено и у меня достаточно прав!",
     "title": "Ошибка",
-    "unknown": "П-простите, это немного глупо, но у нас тут произошла ошибка. {VANILLABLUSH}\nСообщите об этом в [нашем Discord]({guild_invite}) или на [GitHub]({github_url})!"
+    "unknown": "Как же стыдно, но у нас случилась ошибка во время этого действия. {EMOTE_BLUSH}\nПожалуйста сообщите об этом на нашем [Дискорд сервере]({guild_invite}), либо на [ГитХабе]({github_url})!"
   },
   "misc": {
     "and": "и",
@@ -33,7 +33,7 @@
     "fun": {
       "bite": {
         "description": "Укусить одного или даже несколько человек.",
-        "loading": "{LOADING} Иду делать кусь...",
+        "loading": "{EMOTE_LOADING} Идём кусаться...",
         "mention_self": "Каннибализм плохо! За что ты себя так, {user}?",
         "mention_purr": [
           "Ч-ч-что...? Я не вкутная! >.<",
@@ -46,13 +46,13 @@
       },
       "blush": {
         "description": "Заставляет вас покраснеть. o////o",
-        "loading": "{LOADING} Помогаем тебе покраснеть...",
+        "loading": "{EMOTE_LOADING} Заставляем тебя краснеть...",
         "message": "{user} краснеет"
       },
       "cuddle": {
         "description": "Крепко обнять одного или более человек.",
-        "loading": "{LOADING} Получаю обнимашечную GIF-ку...",
-        "mention_self": "Почему ты обнимаешь себя, {user}?\nТы можешь обнять меня, если хочешь. {VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} Ищем gif с обнимашками...",
+        "mention_self": "Зачем так крепко обнимать себя. {user}?\nТы можешь также крепко обнять меня, если ты хочешь. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*наслаждается обнимашками с {user}*",
           "\\*крепко обнимает {user}*",
@@ -63,17 +63,17 @@
       },
       "cry": {
         "description": "Время плакать. ;-;",
-        "loading": "{LOADING} Пускаем слезы...",
+        "loading": "{EMOTE_LOADING} Собираем слёзки...",
         "message": "{user} плачет"
       },
       "dance": {
         "description": "Заставляет вас затанцевать. ~(^.^)~",
-        "loading": "{LOADING} Ищем приятную музыку для танцев...",
+        "loading": "{EMOTE_LOADING} Ищем зажигательную музыку для танцев...",
         "message": "{user} танцует"
       },
       "eevee": {
         "description": "Показывает вам картинку или гифку с Иви.",
-        "loading": "{LOADING} Ловим милых Иви...",
+        "loading": "{EMOTE_LOADING} Ловим пушистую Иви...",
         "message": "Иви"
       },
       "feed": {
@@ -112,13 +112,13 @@
       },
       "holo": {
         "description": "Изображение мудрой волчицы, которая ест яблоки и пьет алкоголь.",
-        "loading": "{LOADING} Скачиваю картинку с Хоро...",
-        "message": "Хоро {BLOBHOLO}"
+        "loading": "{EMOTE_LOADING} Пытаемся найти картинку с Холо...",
+        "message": "Холо {EMOTE_BLOB_HOLO}"
       },
       "hug": {
         "description": "Поделитесь обнимашками со всеми. \\(>w<)/",
-        "loading": "{LOADING} Наполняюсь гифкой с объятиями...",
-        "mention_self": "Почему ты хочешь обнять себя, {user}?\nЛучше обними меня, если хочешь. {VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} Получаем gif-обнимашку...",
+        "mention_self": "Зачем обнимать себя, {user}?\nЛучше обними меня, если хочешь. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*наслаждается объятиями от {user}*",
           "\\*тихо мурлыкает во время объятий*",
@@ -129,7 +129,7 @@
       },
       "kiss": {
         "description": "Раздайте поцелуи, одному или сразу нескольким персонам.",
-        "loading": "{LOADING} Отправляем поцелуйчики...",
+        "loading": "{EMOTE_LOADING} Получаем поцелуй...",
         "mention_purr": [
           "О-окей. Но только в щечку! \\*Подставляет щечку*",
           "Только в щечку, окей?",
@@ -142,12 +142,12 @@
       },
       "kitsune": {
         "description": "Изображение китцунэ (девушки-лисы).",
-        "loading": "{LOADING} Заполучаем гифку с кицсунэ...",
-        "message": "Кицунэ {SHIROTAILWAG}"
+        "loading": "{EMOTE_LOADING} Ищем gif с Китцунэ...",
+        "message": "Китцунэ {EMOTE_SHIRO_TAIL_WAG}"
       },
       "lick": {
         "description": "Лизните кого-нибудь... Без 18+, конечно же.",
-        "loading": "{LOADING} Облизываем гифки...",
+        "loading": "{EMOTE_LOADING} Ищем лизь для gif...",
         "mention_self": "Божечки, я не хочу знать, *куда* ты пытаешься лизнуть себя, {user}...",
         "mention_purr": [
           "\\*пятится назад* Я-я не разрешала тебе облизывать меня, {user}!",
@@ -160,19 +160,19 @@
       },
       "neko": {
         "description": "Изображение или гифка очаровательной Неко.",
-        "loading": "{LOADING} Заполучаем няшных неко в картинках и гифках...",
-        "message": "Неко {NEKOWO}",
-        "purr": "{PURR} Я... Я правда выглядела так в прошлом?",
-        "snuggle": "{PURR} Моя сестренка! UwU"
+        "loading": "{EMOTE_LOADING} Ищем милую неко на картинке (или на gif)...",
+        "message": "Неко {EMOTE_NEKOWO}",
+        "purr": "{EMOTE_PURR} Неужели... Неужели я правда выглядела так раньше?",
+        "snuggle": "{EMOTE_PURR} Это моя младшая сестра! UwU"
       },
       "okami": {
         "description": "Изображение милой Оками (девушки-волка)",
-        "loading": "{LOADING} Загружаем воющую картинку...",
-        "message": "Оками {AWOO}"
+        "loading": "{EMOTE_LOADING} Снимаем картинку с оками...",
+        "message": "Оками {EMOTE_AWOO}"
       },
       "pat": {
         "description": "Погладь всех и каждого!",
-        "loading": "{LOADING} Гладим по головке...",
+        "loading": "{EMOTE_LOADING} Получаем гладь-гладь...",
         "mention_self": "Кхем... Разве нету здесь не одной неко, которую можно погладить, {user}? \\*показывает на себя*",
         "mention_purr": [
           "\\*пурр™*",
@@ -184,7 +184,7 @@
       },
       "poke": {
         "description": "Тыкни кого-нибудь!",
-        "loading": "{LOADING} Тыкаем гифку...",
+        "loading": "{EMOTE_LOADING} Тыкаем gif...",
         "mention_self": "Тебе скучно? Для чего ты тыкаешь себя, {user}?",
         "mention_purr": [
           "Н-няяя! Не тыкай меня! >~<",
@@ -195,8 +195,8 @@
       },
       "senko": {
         "description": "Изображение одной лисицы, которая может немного побаловать вас.",
-        "loading": "{LOADING} Заполучаем изображение Сенко-сан...",
-        "message": "Сенко-сан {SENKOTAILWAG}"
+        "loading": "{EMOTE_LOADING} Ищем изображение Сенко-сан...",
+        "message": "Сенко-сан {EMOTE_SENKO_TAIL_WAG}"
       },
       "ship": {
         "description": "Воспользуйтесь магией шипиринга на себе с кем-то, либо на двух случайных людей, чтобы понять насколько крепка их (или ваша) любовь.",
@@ -224,7 +224,7 @@
       },
       "slap": {
         "description": "Дай пощёчину, да посильнее! >:C",
-        "loading": "{LOADING} Шлёпаем по картинкам...",
+        "loading": "{EMOTE_LOADING} Раздаём пощёчины...",
         "mention_self": "Ненене! Я не позволю шлёпать самих себя, {user}.",
         "mention_purr": [
           "Неет... З-за что, {user}? T^T",
@@ -235,17 +235,17 @@
       },
       "smile": {
         "description": "Давайте улыбаться. :3",
-        "loading": "{LOADING} Заставляем вас улыбаться",
+        "loading": "{EMOTE_LOADING} Заставляем всех улыбнуться...",
         "message": "{user} улыбается"
       },
       "tail": {
         "description": "Виляйте хвостом... Радуясь, наверное.",
-        "loading": "{LOADING} Виляем хвостами...",
+        "loading": "{EMOTE_LOADING} Машем хвостом...",
         "message": "{user} виляет своим хвостиком"
       },
       "tickle": {
         "description": "Щекотульки, внимание, вызывает смех.",
-        "loading": "{LOADING} Щекотим гифку...",
+        "loading": "{EMOTE_LOADING} Щекотим первого встречного...",
         "mention_self": "Окей... Если ты этого так хочешь... \\*щекотит {user}*",
         "mention_purr": [
           "Н-не честно! Я н-не- \\*смеется от щекотки*",
@@ -355,7 +355,7 @@
             "value": "{boosts} (Уровень {level} {BOOST_TIER})"
           },
           "channels_title": "Каналы",
-          "channels_value": "{CATEGORY} Всего: {channels_total}\n{TEXTCHANNEL} Текстовых каналов: {channels_text}\n{VOICECHANNEL} Голосовых каналов: {channels_voice}",
+          "channels_value": "{EMOTE_CATEGORY} Всего: {channels_total}\n\n{EMOTE_TEXT}Текстовые каналы: {channels_text}\n{EMOTE_VOICE} Голосовые каналы: {channels_voice}",
           "created": "Создано",
           "features": {
             "animated_icon": "Анимированные иконки",
@@ -384,7 +384,7 @@
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Участники",
-          "members_value": "{MEMBERS} Всего: {members_total}\n{FACE} Людей: {members_human}\n{BOTICON} Ботов: {members_bot}",
+          "members_value": "{EMOTE_MEMBERS} Пользователей: {members_total}\n\n{EMOTE_SMILEY} Людей: {members_human}\n{EMOTE_BOT} Ботов: {members_bot}",
           "owner": "Владелец"
         }
       },
@@ -416,7 +416,7 @@
           },
           "nsfw_info": "Используйте эту команду в NSFW канале, чтобы увидеть эту страницу.",
           "support_title": "Нравится бот?",
-          "support_value": "Поддержите нас.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (одно пожертвование)\n{KOFI} [`Ko-fi`]({kofi_url}) (одно пожертвование)\n{PATREON} [`Patreon`]({patreon_url}) (ежемесячная подписка)"
+          "support_value": "{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Одно пожертвование)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Одно пожертвование)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Подписка)"
         }
       },
       "info": {
@@ -465,14 +465,14 @@
       "ping": {
         "description": "Проверка текущего пинга бота.",
         "loading": [
-          "{TYPING} Общаемся с Discord'ом...",
-          "{TYPING} Рыбачим...",
-          "{TYPING} Отдаем понг, за пинг.",
-          "{TYPING} [вставьте_загрузочный_текст]",
-          "{TYPING} Алло Discord, ты тута?"
+          "{EMOTE_TYPING} Болтаем с Дискордом...",
+          "{EMOTE_TYPING} Ловим рыбу...",
+          "{EMOTE_TYPING} Кидаем понг к пингу.",
+          "{EMOTE_TYPING} [крутой_держатель_для_текста]",
+          "{EMOTE_TYPING} Тук-тук, Дискорд? Ты тут?"
         ],
-        "info": "{EDIT} Отредактированных сообщений: `{edit_message}`\n{DISCORD} Discord: `{discord}`",
-        "info_full": "{EDIT} Отредактированных сообщений: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
+        "info": "{EMOTE_PENCIL} Изменённое сообщение: `{edit_message}`\n{EMOTE_CLYDE} Дискорд: `{discord}`",
+        "info_full": "{EMOTE_PENCIL} Изменённое сообщение: `{edit_message}`\n{EMOTE_CLYDE} Дискорд: `{discord}`\n{EMOTE_DOWNLOAD} RestAction: `{rest_action} `"
       },
       "quote": {
         "button": "Перейти к сообщению",
@@ -539,12 +539,12 @@
           "avatar": "Аватар",
           "avatar_url": "`Ссылка на аватар`",
           "badges": "Значки",
-          "booster": "Бустит с:",
-          "created": "Аккаунт создан:",
+          "booster": "{EMOTE_BOOST_LEVEL_3} Бустер с:",
+          "created": "{EMOTE_SLOWMODE} Аккаунт создан:",
           "dates": "Даты",
           "id": "ID: {id}",
-          "joined": "Дата присоединения:",
-          "nickname": "Никнейм: {nickname}",
+          "joined": "{EMOTE_INVITE} Дата присоединения:",
+          "nickname": "Никнейм:",
           "no_badges": "`Нет значков`",
           "role_highest": "Высшая роль",
           "role_total": "Другие роли"
@@ -572,7 +572,7 @@
       },
       "cum": {
         "description": "Без комментариев.\n\nКоманда может быть выполнена только в каналах с меткой \"NSFW\"!",
-        "loading": "{LOADING} кончаем!..",
+        "loading": "{EMOTE_LOADING} Готовимся кончать...",
         "message": "{user} кончает."
       },
       "fuck": {
@@ -603,8 +603,8 @@
       },
       "lewd": {
         "description": "Изображение или гифка с пошлой неко.\n\nКоманда может быть выполнена только в каналах с меткой \"NSFW\"!",
-        "loading": "{LOADING} Крадем фотки с пошлыми неками (или гифки)...",
-        "message": "Пошлая неко {NEKOWO}"
+        "loading": "{EMOTE_LOADING} Получаем фотки с пошлыми неками (или gif)...",
+        "message": "Пошлая неко {EMOTE_NEKOWO}"
       },
       "pussylick": {
         "description": "Спросить у кого-нибудь разрешение на куннилингус.\n\nКоманда может быть выполнена только в каналах с меткой \"NSFW\"!",
@@ -622,7 +622,7 @@
       },
       "solo": {
         "description": "Гифка девушки, которая доставляет себе удовольствие пальчиками.\n\nКоманда может быть выполнена только в каналах с меткой \"NSFW\"!",
-        "loading": "{LOADING} Собираем гифки горячих девочек...",
+        "loading": "{EMOTE_LOADING} Собираем gif горячей девушки...",
         "message": "Одна девушка"
       },
       "threesome": {
@@ -637,7 +637,7 @@
           "message": "Хэй, {target1} и {target2}!\n{user} хочет трахнуть вас. Хотите ли вы этого?\nЖмите \"Принять\", чтобы принять и \"Отклонить\", чтобы отказаться.\nВсе произойдет, только, если вдвоем примите запрос.\n\n> **Запрос истекает через оду минуту**",
           "open": "Воу-воу, {user}! Придержи коней!\nСлишком много людей ты просишь для этого, так что жди принятия, отказа или истечения по времени."
         },
-        "special_user": "К-как бы я не любила заниматься с тобой пошлостями, но это перебор для меня, {user}... {VANILLABLUSH}"
+        "special_user": "К-как бы я не любила заниматься с тобой пошлостями, но это перебор для меня, {user}... {EMOTE_BLUSH}"
       }
     }
   },
@@ -706,8 +706,8 @@
         ]
       },
       "neko": {
-        "purr": "{SNUGGLE} Ня. Это старое изображение моей старшей сестренки. >w<",
-        "snuggle": "{SNUGGLE} Э-это я? OwO"
+        "purr": "{EMOTE_SNUGGLE} Ня. Это старое изображение моей старшей сестренки. >w<",
+        "snuggle": "{EMOTE_SNUGGLE} Э-это я? OwO"
       },
       "pat": {
         "mention_snuggle": [
