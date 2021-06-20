@@ -576,7 +576,7 @@
         "message": "{user} está gozando."
       },
       "fuck": {
-        "description": "Vamos perguntar a alguém, se você pode ter sexo com ele.\nSe você não pré-selecionou uma opção pode escolher entre normal, anal, yuri e yaoi.\nUse um dos argumentos a seguir para pré-selecionar:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nEste comando só pode ser executado em canais com rótulo de NSFW!",
+        "description": "Vamos perguntar a alguém, se você pode ter sexo com ele.\nSe você não pré-selecionou uma opção pode escolher entre Hetero, anal, yuri e yaoi.\nUse um dos argumentos a seguir para pré-selecionar:\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\n\nEste comando só pode ser executado em canais com rótulo de NSFW!",
         "mention_bot": "Você não pode ter sexo com bots!",
         "mention_purr": "\\*da um tapa em {user}* NÃO! Não comigo seu pervertido!",
         "mention_self": "Como você pode realmente ter sexo consigo mesmo {user}?! (Não. A masturbação não é uma resposta)",
@@ -646,7 +646,7 @@
       "accept": "Aceitar",
       "deny": "Negar",
       "fuck_anal": "Anal",
-      "fuck_normal": "Normal",
+      "fuck_normal": "Hetero",
       "fuck_yaoi": "Yaoi (Gay)",
       "fuck_yuri": "Yuri (Lesbica)"
     },
