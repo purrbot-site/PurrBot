@@ -576,7 +576,7 @@
         "message": "{user} boşalıyor."
       },
       "fuck": {
-        "description": "Birine onunla seks yapıp yapamayacağını sorarsın.\nBir seçeneği önceden seçmediysen, diğer kişi; normal, anal, yuri ve yaoi arasında seçim yapabilir.\nÖn seçim yapmak için aşağıdaki argümanlardan birini kullan:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
+        "description": "Birine onunla seks yapıp yapamayacağını sorarsın.\nBir seçeneği önceden seçmediysen, diğer kişi; hetero, anal, yuri ve yaoi arasında seçim yapabilir.\nÖn seçim yapmak için aşağıdaki argümanlardan birini kullan:\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
         "mention_bot": "Botlarla sevişemezsin!",
         "mention_purr": "\\* {user} adlı üyeye tokat atar* OLMAZ! Benimle olmaz seni sapık!",
         "mention_self": "{user} kendini nasıl becerebilirsin ki?! (Hayır. Cevap mastürbasyon değil)",
@@ -646,7 +646,7 @@
       "accept": "Kabul Et",
       "deny": "Reddet",
       "fuck_anal": "Anal",
-      "fuck_normal": "Normal",
+      "fuck_normal": "Hetero",
       "fuck_yaoi": "Yaoi (Eşcinsel)",
       "fuck_yuri": "Yuri (Lezbiyen)"
     },
