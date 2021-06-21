@@ -20,7 +20,7 @@
     ],
     "request_error": "요청을 처리하는데 오류가 발생했어. 내 메시지가 삭제되지는 않았는지, 아니면 내 권한이 부족한건 아닌지 확인해줘!",
     "title": "에러",
-    "unknown": "부.. 부끄럽지만, 무언가 잘못된 모양이야. {VANILLABLUSH}\n이걸 [디스코드]({guild_invite}) 혹은 [GitHub]({github_url})에 문의해주지 않을래?"
+    "unknown": "부.. 부끄럽지만, 무언가 잘못된 모양이야. {EMOTE_BLUSH}\n이걸 [디스코드]({guild_invite}) 혹은 [GitHub]({github_url})에 문의해주지 않을래?"
   },
   "misc": {
     "and": "그리고",
@@ -33,7 +33,7 @@
     "fun": {
       "bite": {
         "description": "한 명 또는 여러 사람들을 깨뭅니다.",
-        "loading": "{LOADING} 누군가를 물러 가는중...",
+        "loading": "{EMOTE_LOADING} 누군가를 물러 가는중...",
         "mention_self": "혹시 스스로 무는건 식인습성이야, {user}?",
         "mention_purr": [
           "ㅁ, 뭐...? 난 맛없어! >.<",
@@ -46,13 +46,13 @@
       },
       "blush": {
         "description": "다른 사람의 얼굴이 붉어지게 만듭니다. o////o",
-        "loading": "{LOADING} 당신의 얼굴을 빨갛게 만드는 중...",
+        "loading": "{EMOTE_LOADING} 당신의 얼굴을 빨갛게 만드는 중...",
         "message": "{user}가 부끄러워하고 있어"
       },
       "cuddle": {
         "description": "한 명 또는 여러 사람들을 격하게 껴안습니다.",
-        "loading": "{LOADING} 부비부비 이미지 불러오는 중...",
-        "mention_self": "왜 혼자 부비부비 하고 있어, {user}?\n여기 날 부비부비하면 되잖아..{VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} 부비부비 이미지 불러오는 중...",
+        "mention_self": "왜 혼자 부비부비 하고 있어, {user}?\n여기 날 부비부비하면 되잖아..{EMOTE_BLUSH}",
         "mention_purr": [
           "\\*{user}와 부비부비를 즐기는 중*",
           "\\*{user}에게 달라붙어 부비부비하는 중*",
@@ -63,17 +63,17 @@
       },
       "cry": {
         "description": "당신을 울게 합니다. ;-;",
-        "loading": "{LOADING} 눈물을 모으는중...",
+        "loading": "{EMOTE_LOADING} 눈물을 모으는중...",
         "message": "{user}가 울고있어"
       },
       "dance": {
         "description": "당신을 춤추게 합니다. ;-;",
-        "loading": "{LOADING} 춤을 추기 위해 좋은 노래를 찾는중...",
+        "loading": "{EMOTE_LOADING} 춤을 추기 위해 좋은 노래를 찾는중...",
         "message": "{user}가 춤추고 있어"
       },
       "eevee": {
         "description": "이브이 짤 또는 움짤을 보여줍니다.",
-        "loading": "{LOADING} 귀여운 이브이 잡아오는 중...",
+        "loading": "{EMOTE_LOADING} 귀여운 이브이 잡아오는 중...",
         "message": "이브이"
       },
       "feed": {
@@ -112,13 +112,13 @@
       },
       "holo": {
         "description": "사과 먹으면서 술이나 퍼 마시며 노는 지혜로운 늑대의 짤을 보여줍니다.",
-        "loading": "{LOADING} 호로 이미지 불러오는 중...",
-        "message": "호로 {BLOBHOLO}"
+        "loading": "{EMOTE_LOADING} 호로 이미지 불러오는 중...",
+        "message": "호로 {EMOTE_BLOB_HOLO}"
       },
       "hug": {
         "description": "다른 사람들과 포옹을 나눕니다. \\(>w<)/",
-        "loading": "{LOADING} 포옹 이미지 불러오는 중...",
-        "mention_self": "왜 혼자 껴안으려고 해, {user}?\n여기 날 껴안으면 되잖아.. {VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} 포옹 이미지 불러오는 중...",
+        "mention_self": "왜 혼자 껴안으려고 해, {user}?\n여기 날 껴안으면 되잖아.. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*{user}에게 껴안기는 중*",
           "\\*조용히 갸르릉거리며 포옹을 즐기는 중*",
@@ -129,7 +129,7 @@
       },
       "kiss": {
         "description": "한 명 또는 여러 사람들과 키스합니다.",
-        "loading": "{LOADING} 키스 이미지 불러오는 중...",
+        "loading": "{EMOTE_LOADING} 키스 이미지 불러오는 중...",
         "mention_purr": [
           "그, 그래..! 하지만 볼에다가만 해! \\*볼을 내미는 중*",
           "내 볼에만 해. 알았지?",
@@ -142,12 +142,12 @@
       },
       "kitsune": {
         "description": "여우소녀 짤을 보여줍니다.",
-        "loading": "{LOADING} 여우 이미지 불러오는중...",
-        "message": "여우소녀 {SHIROTAILWAG}"
+        "loading": "{EMOTE_LOADING} 여우 이미지 불러오는중...",
+        "message": "여우소녀 {EMOTE_SHIRO_TAIL_WAG}"
       },
       "lick": {
         "description": "사람들을 핥습니다. 물론, 건전하게요.",
-        "loading": "{LOADING} 핥짝 이미지 불러오는중...",
+        "loading": "{EMOTE_LOADING} 핥짝 이미지 불러오는중...",
         "mention_self": "어.. 스스로 *어딜* 어떻게 핥으려는지는 묻지 않을께, {user}...",
         "mention_purr": [
           "\\*뒷걸음질 치며* 그-그만! 핥으라고 한 적 없어, {user}!",
@@ -160,19 +160,19 @@
       },
       "neko": {
         "description": "사랑스러운 고양이 소녀의 짤 또는 움짤을 가져옵니다.",
-        "loading": "{LOADING} 귀여운 고양이 소녀 이미지 불러오는 중...",
-        "message": "고양이소녀 {NEKOWO}",
-        "purr": "{PURR} ㄴ.. 나 정말 옛날엔 저렇게 생겼던거야?",
-        "snuggle": "{PURR} 이건 내 여동생이야! UwU"
+        "loading": "{EMOTE_LOADING} 귀여운 고양이 소녀 이미지 불러오는 중...",
+        "message": "고양이소녀 {EMOTE_NEKOWO}",
+        "purr": "{EMOTE_PURR} ㄴ.. 나 정말 옛날엔 저렇게 생겼던거야?",
+        "snuggle": "{EMOTE_PURR} 이건 내 여동생이야! UwU"
       },
       "okami": {
         "description": "귀엽게 생긴 늑대소녀의 짤을 보여줍니다.",
-        "loading": "{LOADING} 아우우~ 하며 우는 짤을 가져오는 중...",
-        "message": "늑대소녀 {AWOO}"
+        "loading": "{EMOTE_LOADING} 아우우~ 하며 우는 짤을 가져오는 중...",
+        "message": "늑대소녀 {EMOTE_AWOO}"
       },
       "pat": {
         "description": "사람들을 쓰다듬어줍니다!",
-        "loading": "{LOADING} 쓰담쓰담 이미지 불러오는 중...",
+        "loading": "{EMOTE_LOADING} 쓰담쓰담 이미지 불러오는 중...",
         "mention_self": "어.. 혹시 쓰다듬을 고양이가 없는거야, {user}? \\*자신을 가리키며*",
         "mention_purr": [
           "\\*갸르릉™*",
@@ -184,7 +184,7 @@
       },
       "poke": {
         "description": "사람들을 콕콕 찔러봅니다!",
-        "loading": "{LOADING} 푹푹 이미지 불러오는 중...",
+        "loading": "{EMOTE_LOADING} 푹푹 이미지 불러오는 중...",
         "mention_self": "심심한거야? 왜 스스로를 찌르려고 해, {user}?",
         "mention_purr": [
           "야-야옹-! 푹푹 찌르지 마아-! >~<",
@@ -195,8 +195,8 @@
       },
       "senko": {
         "description": "당신을 소중하게 돌봐줄 수 있는 성스러운 전달자의 짤을 보여줍니다.",
-        "loading": "{LOADING} 센코 이미지 불러오는 중...",
-        "message": "센코씨 {SENKOTAILWAG}"
+        "loading": "{EMOTE_LOADING} 센코 이미지 불러오는 중...",
+        "message": "센코씨 {EMOTE_SENKO_TAIL_WAG}"
       },
       "ship": {
         "description": "자기 자신과 다른 사람 또는 서로 다른 두 사람이 사귈 확률이 얼마나 될 지 보여줍니다.",
@@ -224,7 +224,7 @@
       },
       "slap": {
         "description": "나쁜 사람들의 뺨을 때립니다! >:C",
-        "loading": "{LOADING} 찰싹 이미지 불러오는 중...",
+        "loading": "{EMOTE_LOADING} 찰싹 이미지 불러오는 중...",
         "mention_self": "안돼! 거기까지. 너 자신을 상처입히지 마, {user}.",
         "mention_purr": [
           "으아아앙.. 왜 날 상처주는거야, {user}? T^T",
@@ -235,17 +235,17 @@
       },
       "smile": {
         "description": "당신을 미소짓게 합니다. :3",
-        "loading": "{LOADING} 당신을 미소짓게 하는 중...",
+        "loading": "{EMOTE_LOADING} 당신을 미소짓게 하는 중...",
         "message": "{user}가 웃고있어."
       },
       "tail": {
         "description": "꼬리를 흔듭니다. 기분이 좋아서겠죠..?",
-        "loading": "{LOADING} 꼬리를 흔드는 중...",
+        "loading": "{EMOTE_LOADING} 꼬리를 흔드는 중...",
         "message": "{user}이(가) 꼬리를 흔들고 있어."
       },
       "tickle": {
         "description": "사람들을 간지럽혀서 웃게 만듭니다.",
-        "loading": "{LOADING} 간질간질 이미지 불러오는 중...",
+        "loading": "{EMOTE_LOADING} 간질간질 이미지 불러오는 중...",
         "mention_self": "그래.. 정말 간지럽혀지고 싶다면 말야.. \\*{user}을(를) 간지럽힌다*",
         "mention_purr": [
           "부-불공평해! 아하하하! \\*간지러움에 폭소하며*",
@@ -355,7 +355,7 @@
             "value": "{boosts} (레벨 {level} {BOOST_TIER})"
           },
           "channels_title": "채널",
-          "channels_value": "{CATEGORY} 합계: {channels_total}\n\n{TEXTCHANNEL} 텍스트 채널: {channels_text}\n{VOICECHANNEL} 음성 채널: {channels_voice}",
+          "channels_value": "{EMOTE_CATEGORY} 합계: {channels_total}\n\n{EMOTE_TEXT} 텍스트 채널: {channels_text}\n{EMOTE_VOICE} 음성 채널: {channels_voice}",
           "created": "생성 일자",
           "features": {
             "animated_icon": "움직이는 서버 아이콘",
@@ -384,7 +384,7 @@
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "사용자",
-          "members_value": "{MEMBERS} 전체: {members_total}\n\n{FACE} 사람: {members_human}\n{BOTICON} 봇: {members_bot}",
+          "members_value": "{EMOTE_MEMBERS} 전체: {members_total}\n\n{EMOTE_SMILEY} 사람: {members_human}\n{EMOTE_BOT} 봇: {members_bot}",
           "owner": "소유자"
         }
       },
@@ -393,6 +393,7 @@
         "command_info": {
           "aliases": "같은 명령어",
           "command_nsfw": "이 명령어는 연령 제한 채널에서만 사용할 수 있어.",
+          "docs": "문서",
           "no_command": "나에게 물어본 (`{command}`) 는 존재하지 않아.\n제대로 보냈는지 다시 확인해줘.\n\n카테고리에 대한 설명은 `cat:` 를 붙여줘야해. (예시: `{prefix}help cat:fun`)",
           "title": "명령어 도움말: {command}",
           "usage_title": "사용법",
@@ -415,7 +416,7 @@
           },
           "nsfw_info": "연령 제한 채널에서 help 명령어를 사용하면 볼 수 있어.",
           "support_title": "봇이 마음에 든다면?",
-          "support_value": "이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{KOFI} [`Ko-fi`]({kofi_url}) (일회성 후원)\n{PATREON} [`Patreon`]({patreon_url}) (정기후원)"
+          "support_value": "이 봇을 후원해주세요.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (일회성 후원)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (정기후원)"
         }
       },
       "info": {
@@ -464,23 +465,24 @@
       "ping": {
         "description": "현재 봇의 처리 지연시간을 확인합니다.",
         "loading": [
-          "{TYPING} 디스코드와 떠드는 중...",
-          "{TYPING} 물고기를 잡는 중...",
-          "{TYPING} 핑퐁을 준비중...",
-          "{TYPING} [대충 로딩한다는 내용]",
-          "{TYPING} 야 디스코드! 전할게."
+          "{EMOTE_TYPING} 디스코드와 떠드는 중...",
+          "{EMOTE_TYPING} 물고기를 잡는 중...",
+          "{EMOTE_TYPING} 핑퐁을 준비중...",
+          "{EMOTE_TYPING} [placeholder_loading_text]",
+          "{EMOTE_TYPING} 야 디스코드! 전할게."
         ],
-        "info": "{EDIT} 메시지 수정: `{edit_message}`\n{DISCORD} 디스코드 도착: `{discord}`",
-        "info_full": "{EDIT} 메시지 수정: `{edit_message}`\n{DISCORD} 디스코드 도착: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
+        "info": "{EMOTE_PENCIL} 메시지 수정: `{edit_message}`\n{EMOTE_CLYDE} 디스코드 도착: `{discord}`",
+        "info_full": "{EMOTE_PENCIL} 메시지 수정: `{edit_message}`\n{EMOTE_CLYDE} 디스코드 도착: `{discord}`\n{EMOTE_DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "button": "메시지로 이동하기",
         "description": "누군가가 한 말을 인용합니다. 채널을 인자로 쓸 경우 그 곳에서 메시지를 찾습니다.",
         "embed_basic": {
           "channel": "#{channel}에 올라옴",
           "info": "{user}이(가) 작성한 메시지"
         },
         "embed_image": {
-          "info": "{user}이(가){channel}에 작성한 메시지 [`[Link]`]({link})"
+          "info": "{user}이(가){channel}에 작성한 메시지"
         },
         "few_args": "무언가 적게 받았어!\n사용법: `{prefix}quote <메시지 ID> [#채널핑]`",
         "invalid_id": "유효하지 않은 ID야. 개발자 모드를 킨 상태에서 **메시지**를 우클릭하고 \"ID복사하기\"를 제대로 눌렀는 지 확인해봐.",
@@ -537,12 +539,12 @@
           "avatar": "프로필 사진",
           "avatar_url": "`프로필 사진 주소`",
           "badges": "뱃지",
-          "booster": "부스트 시작:",
-          "created": "계정생성:",
+          "booster": "{EMOTE_BOOST_LEVEL_3} 부스터 시작일:",
+          "created": "{EMOTE_SLOWMODE} 계정 생성일:",
           "dates": "날짜",
           "id": "ID: {id}",
-          "joined": "서버입장:",
-          "nickname": "닉네임: {nickname}",
+          "joined": "{EMOTE_INVITE} 서버 입장일:",
+          "nickname": "별명:",
           "no_badges": "`뱃지 없음`",
           "role_highest": "최고 역할",
           "role_total": "그 외 역할"
@@ -570,11 +572,11 @@
       },
       "cum": {
         "description": "설명이 필요없어보이네요.\n\n연령 제한 채널에서만 사용가능합니다.",
-        "loading": "{LOADING} 싸는 모습을 준비하는 중...",
+        "loading": "{EMOTE_LOADING} 싸는 모습을 준비하는 중...",
         "message": "{user}가 결국 싸버렸어."
       },
       "fuck": {
-        "description": "대상에게 당신이 그 사람과 뜨거운 밤을 보내도 되는지 물어봅니다.\n만약 미리 지정하지 않는다면, 그 대상에게 어떤 밤이 좋은지 물어봅니다.\n미리 지정하고 싶다면 다음 중 하나의 인자를 넣어주세요.\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\n연령 제한 채널에서만 사용가능합니다.",
+        "description": "대상에게 당신이 그 사람과 뜨거운 밤을 보내도 되는지 물어봅니다.\n만약 미리 지정하지 않는다면, 그 대상에게 어떤 밤이 좋은지 물어봅니다.\n미리 지정하고 싶다면 다음 중 하나의 인자를 넣어주세요.\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\n\n연령 제한 채널에서만 사용가능합니다.",
         "mention_bot": "봇이랑 야한 걸 할 생각 마!",
         "mention_purr": "\\*{user}의 뺨을 때리며* 안돼! 이 변태자식.",
         "mention_self": "어떻게 너 자신이랑 하려고, {user}? .. 자기위로 같은 대답은 하지 마.",
@@ -601,8 +603,8 @@
       },
       "lewd": {
         "description": "야한 고양이 소녀의 짤 또는 움짤을 보여줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",
-        "loading": "{LOADING} 야한 고양이 불러오는 중...",
-        "message": "야한 고양이 소녀 {NEKOWO}"
+        "loading": "{EMOTE_LOADING} 야한 고양이 불러오는 중...",
+        "message": "야한 고양이 소녀 {EMOTE_NEKOWO}"
       },
       "pussylick": {
         "description": "대상에게 당신이 그 사람의 소중한 부위를 핥아도 되는지 물어봅니다.\n\n연령 제한 채널에서만 사용가능합니다.",
@@ -620,7 +622,7 @@
       },
       "solo": {
         "description": "혼자서 즐기고 있는 소녀의 움짤을 보여줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",
-        "loading": "{LOADING} 야한 여자아이 불러오는 중...",
+        "loading": "{EMOTE_LOADING} 야한 여자아이 불러오는 중...",
         "message": "야한 여자"
       },
       "threesome": {
@@ -635,7 +637,7 @@
           "message": "{target1}(이)랑 {target2}!\n{user}이(가) 너희 둘이랑 함께 뜨거운 밤을 보내고 싶대. 너도 하고싶어?\n수락하려면 \"수락\" 을 눌러. \"거절\" 을 누르면 거절할 수 있어.\n요청받은 두 사람이 같이 수락하면.. 말 안해도 알지?\n\n> **1분이 지나면 자동으로 거절이야!**",
           "open": "발정난 개도 어지간해야지, {user}! 이미 네가 부탁한 사람이 있잖아."
         },
-        "special_user": "내가 너랑 하는 걸 좋아하는 만큼, 이게 나한테 심한 일일까? {user}... {VANILLABLUSH}"
+        "special_user": "내가 너랑 하는 걸 좋아하는 만큼, 이게 나한테 심한 일일까? {user}... {EMOTE_BLUSH}"
       }
     }
   },
@@ -644,7 +646,7 @@
       "accept": "동의",
       "deny": "거부",
       "fuck_anal": "뒷구멍",
-      "fuck_normal": "일반",
+      "fuck_normal": "헤테로",
       "fuck_yaoi": "장미",
       "fuck_yuri": "백합"
     },
@@ -704,8 +706,8 @@
         ]
       },
       "neko": {
-        "purr": "{SNUGGLE} 냥! 그건 내 언니의 옛 사진이야 >w<",
-        "snuggle": "{SNUGGLE} ㅇ..이거 나야? OwO"
+        "purr": "{EMOTE_SNUGGLE} 냥! 그건 내 언니의 옛 사진이야 >w<",
+        "snuggle": "{EMOTE_SNUGGLE} ㅇ..이거 나야? OwO"
       },
       "pat": {
         "mention_snuggle": [
