@@ -576,7 +576,7 @@
         "message": "{user} éjacule."
       },
       "fuck": {
-        "description": "Vous permet de demander à quelqu'un, si vous pouvez avoir des relations sexuelles avec lui.\nSi vous n'avez pas présélectionné une option l'autre peut choisir entre normal, anal, yuri et yaoi.\nUtilisez l'un des arguments suivants pour présélectionner :\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nCette commande ne peut être exécutée que dans les salons NSFW!",
+        "description": "Vous permet de demander à quelqu'un, si vous pouvez avoir des relations sexuelles avec lui.\nSi vous n'avez pas présélectionné une option l'autre peut choisir entre hetero, anal, yuri et yaoi.\nUtilisez l'un des arguments suivants pour présélectionner :\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\n\nCette commande ne peut être exécutée que dans les salons NSFW!",
         "mention_bot": "tu ne peux pas faire l'amour a des robots!",
         "mention_purr": "\\*baffe {user}* NON! Pas avec moi pervers!",
         "mention_self": "Comment peut tu faire l'amour a toi même {user}?! (Non la masturbation n'est pas une réponse)",
@@ -646,7 +646,7 @@
       "accept": "Accepter",
       "deny": "Refuser",
       "fuck_anal": "Anal",
-      "fuck_normal": "Normal",
+      "fuck_normal": "Hétéro",
       "fuck_yaoi": "Yaoi (Gay)",
       "fuck_yuri": "Yuri (Lesbian)"
     },
