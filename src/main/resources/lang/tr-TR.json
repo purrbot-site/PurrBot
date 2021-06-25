@@ -20,7 +20,7 @@
     ],
     "request_error": "İstek işlenirken bir hata oluştu. Mesajımın silinmediğinden ve yeterli izinlere sahip olduğumdan emin olun!",
     "title": "Hata",
-    "unknown": "B-bu biraz utanç verici ancak, bir eylemi gerçekleştirirken hatayla karşılaştım.\n{VANILLABLUSH}\nLütfen bunu [Discord]({guild_invite}) veya [GitHub]({github_url}) üzerinden bildirin!"
+    "unknown": "B-bu biraz utanç verici ancak, bir eylemi gerçekleştirirken hatayla karşılaştım. {EMOTE_BLUSH}\nLütfen bunu [Discord]({guild_invite}) veya [GitHub]({github_url}) üzerinden bildirin!"
   },
   "misc": {
     "and": "ve",
@@ -33,7 +33,7 @@
     "fun": {
       "bite": {
         "description": "Bir veya daha fazla kişiyi ısırmanızı sağlar.",
-        "loading": "{LOADING} Biri ısırılacak...",
+        "loading": "{EMOTE_LOADING} Biri ısırılacak...",
         "mention_self": "Kendini ısırırsan bu yamyamlık olmaz mı {user}?",
         "mention_purr": [
           "N-n-ne...? Ben lezzetli değilim! >.<",
@@ -46,13 +46,13 @@
       },
       "blush": {
         "description": "Seni utandırır. o////o",
-        "loading": "{LOADING} Utandırılıyorsun...",
+        "loading": "{EMOTE_LOADING} Utandırılıyorsun...",
         "message": "{user} kızarıyor."
       },
       "cuddle": {
         "description": "Bir veya birden fazla kişiyi kucaklamanı sağlar.",
-        "loading": "{LOADING} Bir sarılma gif arıyorum...",
-        "mention_self": "Neden kendini kucaklıyorsun ki {user}?\nİstersen beni kucaklayabilirsin. {VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} Bir sarılma gifi arıyorum...",
+        "mention_self": "Neden kendini kucaklıyorsun ki {user}?\nİstersen beni kucaklayabilirsin. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*{user} ile kucaklaşmanın tadını çıkarıyor*",
           "\\*{user} adlı üyeye sıkı sıkı sarılıyor*",
@@ -63,17 +63,17 @@
       },
       "cry": {
         "description": "Ağlamanı sağlar. ;-;",
-        "loading": "{LOADING} Gözyaşları toplanıyor...",
+        "loading": "{EMOTE_LOADING} Gözyaşları toplanıyor...",
         "message": "{user} ağlıyor"
       },
       "dance": {
         "description": "Dans etmeneni sağlar. ~(^.^)~",
-        "loading": "{LOADING} Dans etmek için müzik aranıyor...",
+        "loading": "{EMOTE_LOADING} Dans etmek için müzik aranıyor...",
         "message": "{user} dans ediyor"
       },
       "eevee": {
         "description": "Sevimli bir Eevee resmi veya gifi gönderir.",
-        "loading": "{LOADING} Sevimli bir Eevee yakalanıyor...",
+        "loading": "{EMOTE_LOADING} Sevimli bir Eevee yakalanıyor...",
         "message": "Eevee"
       },
       "feed": {
@@ -112,13 +112,13 @@
       },
       "holo": {
         "description": "Elma yiyen, alkol içen bilge kurt resmi gönderir.",
-        "loading": "{LOADING} Holo'dan bir resim alınıyor...",
-        "message": "Holo {BLOBHOLO}"
+        "loading": "{EMOTE_LOADING} Holo'dan bir resim alınıyor...",
+        "message": "Holo {EMOTE_BLOB_HOLO}"
       },
       "hug": {
         "description": "Başkalarıyla biraz kucaklaş. \\(>w<)/",
-        "loading": "{LOADING} Sarılma gifi aranıyor...",
-        "mention_self": "Neden kendine sarılıyorsun {user}?\nEğer istersen bana sarılabilirsin. {VANILLABLUSH}",
+        "loading": "{EMOTE_LOADING} Sarılma gifi aranıyor...",
+        "mention_self": "Neden kendine sarılıyorsun {user}?\nEğer istersen bana sarılabilirsin. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*{user} adlı üyenin sarılmasının tadını çıkarıyor*",
           "\\*sarılmanın tadını çıkarırken sessizce mırıldanıyor*",
@@ -129,7 +129,7 @@
       },
       "kiss": {
         "description": "Bir veya daha fazla kişiye öpücük ver.",
-        "loading": "{LOADING} Öpücük atılıyor...",
+        "loading": "{EMOTE_LOADING} Öpücük atılıyor...",
         "mention_purr": [
           "T-tamam. Ama sadece yanağımdan! \\*Yanağını gösterir *",
           "Sadece yanağım, tamam mı?",
@@ -142,12 +142,12 @@
       },
       "kitsune": {
         "description": "Bir Kitsune (tilki kız) resmi gönderir.",
-        "loading": "{LOADING} kitsune gifi yükleniyor...",
-        "message": "Kitsune {SHIROTAILWAG}"
+        "loading": "{EMOTE_LOADING} kitsune gifi yükleniyor...",
+        "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
       "lick": {
         "description": "İnsanları yala... SFW yoluyla elbette.",
-        "loading": "{LOADING} Yalama gifi aranıyor...",
+        "loading": "{EMOTE_LOADING} Yalama gifi aranıyor...",
         "mention_self": "{user} kendini nasıl ve *nerede* yaladığını sormayacağım...",
         "mention_purr": [
           "\\*geri çekilir* B-ben beni asla yalamana izin vermedim {user}!",
@@ -160,19 +160,19 @@
       },
       "neko": {
         "description": "Sevimli bir Neko resmi veya gifi gönderir.",
-        "loading": "{LOADING} Sevimli bir neko resmi (veya gifi) aranıyor...",
-        "message": "Neko {NEKOWO}",
-        "purr": "{PURR} Geçm.. Geçmişte gerçekten böyle mi görünüyordum?",
-        "snuggle": "{PURR} Bu benim küçük kız kardeşim! UwU"
+        "loading": "{EMOTE_LOADING} Sevimli bir neko resmi (veya gifi) aranıyor...",
+        "message": "Neko {EMOTE_NEKOWO}",
+        "purr": "{EMOTE_PURR} Geçm.. Geçmişte gerçekten böyle mi görünüyordum?",
+        "snuggle": "{EMOTE_PURR} Bu benim küçük kız kardeşim! UwU"
       },
       "okami": {
         "description": "Sevimli görünen bir Okami (Kurt kız) resmi gönderir.",
-        "loading": "{LOADING} Awoo'nun fotoğrafı çekiliyor...",
-        "message": "Okami {AWOO}"
+        "loading": "{EMOTE_LOADING} Awoo'nun fotoğrafı çekiliyor...",
+        "message": "Okami {EMOTE_AWOO}"
       },
       "pat": {
         "description": "İnsanları okşa!",
-        "loading": "{LOADING} Okşama yükleniyor...",
+        "loading": "{EMOTE_LOADING} Okşama yükleniyor...",
         "mention_self": "Uhm... Burada okşayabileceğin bir neko yok mu {user}? \\*kendini işaret ediyor*",
         "mention_purr": [
           "\\*miyav™*",
@@ -184,7 +184,7 @@
       },
       "poke": {
         "description": "İnsanları dürt!",
-        "loading": "{LOADING} Dürtme gifi aranıyor...",
+        "loading": "{EMOTE_LOADING} Dürtme gifi aranıyor...",
         "mention_self": "{user} sanırım sıkıldın yoksa neden kendini dürtesin ki?",
         "mention_purr": [
           "N-nya! Beni dürtme! >~<",
@@ -195,8 +195,8 @@
       },
       "senko": {
         "description": "Seni şımartabilecek bir senko resmi gönderir.",
-        "loading": "{LOADING} Senko-san'ın bir resmi alınıyor...",
-        "message": "Senko-San {SENKOTAILWAG}"
+        "loading": "{EMOTE_LOADING} Senko-san'ın bir resmi alınıyor...",
+        "message": "Senko-San {EMOTE_SENKO_TAIL_WAG}"
       },
       "ship": {
         "description": "Kendinin bir başkasıyla veya iki kişinin birbiriyle ne kadar yakıştığını gösterir.",
@@ -224,7 +224,7 @@
       },
       "slap": {
         "description": "Birini tokarlarsın! >:C",
-        "loading": "{LOADING} Üyelere tokat atılıyor...",
+        "loading": "{EMOTE_LOADING} Üyelere tokat atılıyor...",
         "mention_self": "Hayır, hayır, hayır, hayır! Kendini incitmene yardım etmeyeceğim {user}.",
         "mention_purr": [
           "Hayırrrrrr... {user} n-neden canımı yakıyorsun? T^T",
@@ -235,17 +235,17 @@
       },
       "smile": {
         "description": "Seni güldürür. :3",
-        "loading": "{LOADING} Seni güldürmeye çalışıyor...",
+        "loading": "{EMOTE_LOADING} Seni güldürmeye çalışıyor...",
         "message": "{user} gülümsüyor"
       },
       "tail": {
         "description": "Kuyruğunu salla...",
-        "loading": "{LOADING} Kuyruk sallanıyor...",
+        "loading": "{EMOTE_LOADING} Kuyruk sallanıyor...",
         "message": "{user} kuyruğunu sallıyor"
       },
       "tickle": {
         "description": "İnsanları güldürmek için gıdıkla.",
-        "loading": "{LOADING} Gıdıklama gifi aranıyor...",
+        "loading": "{EMOTE_LOADING} Gıdıklama gifi aranıyor...",
         "mention_self": "Tamam... Gerçekten gıdıklanmak istiyorsan... \\*{user} adlı üyeyi gıdıklıyor*",
         "mention_purr": [
           "A-adil değil! b-ben \\*gıdıklandığı için gülüyor*",
@@ -355,7 +355,7 @@
             "value": "{boosts} ( {BOOST_TIER} {level} Seviye )"
           },
           "channels_title": "Kanallar",
-          "channels_value": "{CATEGORY} Toplam: {channels_total}\n\n{TEXTCHANNEL} Metin Kanalları: {channels_text}\n{VOICECHANNEL} Ses Kanalları: {channels_voice}",
+          "channels_value": "{EMOTE_CATEGORY} Toplam: {channels_total}\n\n{EMOTE_TEXT} Metin Kanalları: {channels_text}\n{EMOTE_VOICE} Ses Kanalları: {channels_voice}",
           "created": "Oluşturulma Tarihi",
           "features": {
             "animated_icon": "Hareketli Simge",
@@ -384,7 +384,7 @@
             "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ﾉ 彡 ┻━┻"
           },
           "members_title": "Üyeler",
-          "members_value": "{MEMBERS} Toplam: {members_total}\n\n{FACE} İnsan: {members_human}\n{BOTICON} Bot: {members_bot}",
+          "members_value": "{EMOTE_MEMBERS} Toplam: {members_total}\n\n{EMOTE_SMILEY} İnsan: {members_human}\n{EMOTE_BOT} Bot: {members_bot}",
           "owner": "Kurucu"
         }
       },
@@ -393,6 +393,7 @@
         "command_info": {
           "aliases": "Alternatifler",
           "command_nsfw": "Lütfen bu komutu NSFW kanalında kullanın.",
+          "docs": "Dokümanlar",
           "no_command": "Belirtilen komut (`{command}`) mevcut değil!\nKomutu doğru yazdığından emin ol.\n\nKategori adlarının önüne `cat:` gelmelidir (örn. `{prefix}help cat:eğlence`)!",
           "title": "Komut yardımı: {command}",
           "usage_title": "Kullanım şekli",
@@ -415,7 +416,7 @@
           },
           "nsfw_info": "Bu sayfayı görebilmek için, bu komutu bir NSFW kanalında kullan.",
           "support_title": "Botu sevdin mi?",
-          "support_value": "Bağış yaparak botu destekleyebilirsin.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Tek Seferlik Bağış)\n{KOFI} [`Ko-fi`]({kofi_url}) (Tek Seferlik Bağış)\n{PATREON} [`Patreon`]({patreon_url}) (Tekrarlanan Bağış)"
+          "support_value": "Bağış yaparak botu destekleyebilirsin.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Tek Seferlik Bağış)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Tek Seferlik Bağış)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Tekrarlanan Bağış)"
         }
       },
       "info": {
@@ -464,23 +465,24 @@
       "ping": {
         "description": "Botun gecikmesini gösterir.",
         "loading": [
-          "{TYPING} Discord ile konuşuluyor...",
-          "{TYPING} Balık tutuluyor...",
-          "{TYPING} Ping için pong veriliyor.",
-          "{TYPING} [placeholder_loading_text]",
-          "{TYPING} Selam Discord, orada mısın?"
+          "{EMOTE_TYPING} Discord ile konuşuluyor...",
+          "{EMOTE_TYPING} Balık tutuluyor...",
+          "{EMOTE_TYPING} Ping için pong veriliyor.",
+          "{EMOTE_TYPING} [placeholder_loading_text]",
+          "{EMOTE_TYPING} Selam Discord, orada mısın?"
         ],
-        "info": "{EDIT} Mesaj Düzenleme: `{edit_message}`\n{DISCORD} Discord: `{discord}`",
-        "info_full": "{EDIT} Mesaj Düzenleme: `{edit_message}`\n{DISCORD} Discord: `{discord}`\n{DOWNLOAD} RestAction: `{rest_action}`"
+        "info": "{EMOTE_PENCIL} Mesaj Düzenleme: `{edit_message}`\n{EMOTE_CLYDE} Discord: `{discord}`",
+        "info_full": "{EMOTE_PENCIL} Mesaj Düzenleme: `{edit_message}`\n{EMOTE_CLYDE} Discord: `{discord}`\n{EMOTE_DOWNLOAD} RestAction: `{rest_action}`"
       },
       "quote": {
+        "button": "Mesaja Git",
         "description": "Birinin mesajını alıntıla. İsteğe bağlı olarak mesajı aramak için bir kanal belirtebilirsin.",
         "embed_basic": {
           "channel": "#{channel} kanalında paylaşıldı",
           "info": "{user} adlı üyeden alıntı"
         },
         "embed_image": {
-          "info": "{user} adlı üyenin {channel} kanalındaki mesajından alıntı [`[Link]`]({link})"
+          "info": "{user} adlı üyenin {channel} kanalındaki mesajından alıntı"
         },
         "few_args": "Çok az argüman sağlandı!\nKullanım: `{prefix}quote <mesajID> [#kanal]`",
         "invalid_id": "Sağlanan ID geçersiz!\nGeliştirici modunun etkinleştirildiğinden ve **mesaja** sağ tıklayıp \"ID'yi kopyala\" ya tıkladığından emin ol.",
@@ -537,12 +539,12 @@
           "avatar": "Profil Resmi",
           "avatar_url": "`Profil URL'i `",
           "badges": "Rozetler",
-          "booster": "Şu tarihten beri Takviyeci:",
-          "created": "Hesap oluşturulma tarihi:",
+          "booster": "{EMOTE_BOOST_LEVEL_3} **Şu tarihten itibaren sunucuya Takviye yapıyor:**",
+          "created": "{EMOTE_SLOWMODE} **Hesap oluşturulma tarihi:**",
           "dates": "Tarihler",
           "id": "ID: {id}",
-          "joined": "Sunucuya katılma tarihi:",
-          "nickname": "Takma Ad: {nickname}",
+          "joined": "{EMOTE_INVITE} **Sunucuya katılma tarihi:**",
+          "nickname": "Kullanıcı Adı:",
           "no_badges": "`Rozet yok`",
           "role_highest": "En Yüksek Rol",
           "role_total": "Diğer Roller"
@@ -570,11 +572,11 @@
       },
       "cum": {
         "description": "Açıklamaya gerek yok.\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
-        "loading": "{LOADING} Hazırlanılıyor...",
+        "loading": "{EMOTE_LOADING} Boşalmaya hazırlanılıyor...",
         "message": "{user} boşalıyor."
       },
       "fuck": {
-        "description": "Birine onunla seks yapıp yapamayacağını sormana izin verir.\nBir seçeneği önceden seçmediysen, diğer kişi; normal, anal, yuri ve yaoi arasında seçim yapabilir.\nÖn seçim yapmak için aşağıdaki argümanlardan birini kullan:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
+        "description": "Birine onunla seks yapıp yapamayacağını sorarsın.\nBir seçeneği önceden seçmediysen, diğer kişi; hetero, anal, yuri ve yaoi arasında seçim yapabilir.\nÖn seçim yapmak için aşağıdaki argümanlardan birini kullan:\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
         "mention_bot": "Botlarla sevişemezsin!",
         "mention_purr": "\\* {user} adlı üyeye tokat atar* OLMAZ! Benimle olmaz seni sapık!",
         "mention_self": "{user} kendini nasıl becerebilirsin ki?! (Hayır. Cevap mastürbasyon değil)",
@@ -601,8 +603,8 @@
       },
       "lewd": {
         "description": "Yaramaz bir neko resmi veya gifi gönderir.\n\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
-        "loading": "{LOADING} Yaramaz bir neko resmi (veya gifi) aranıyor...",
-        "message": "Yaramaz neko {NEKOWO}"
+        "loading": "{EMOTE_LOADING} Müstehcen bir neko resmi (veya gifi) aranıyor...",
+        "message": "Müstehcen neko {EMOTE_NEKOWO}"
       },
       "pussylick": {
         "description": "Birisine onun kukusunu yalayıp yalayamayacağını sorar.\n\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
@@ -620,7 +622,7 @@
       },
       "solo": {
         "description": "Kendisiyle eğlenen bir kızın gifini gönderir.\n\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
-        "loading": "{LOADING} Ateşli bir kız gifi aranıyor...",
+        "loading": "{EMOTE_LOADING} Ateşli bir kız gifi aranıyor...",
         "message": "Yalnız kız"
       },
       "threesome": {
@@ -635,7 +637,7 @@
           "message": "Selam {target1} ve {target2}!\n{user} ikinizle de sevişmek istiyor. Siz de ister misiniz?\nKabul etmek için \"Kabul Et\", reddetmek için \"Reddet\" butonuna tıkla.\nSadece ikiniz de bunu kabul ederseniz, gerçekleşecek.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
           "open": "Vay be {user}! Biraz sabır göster, sapık!\nBirilerinden zaten seninle sevişmelerini istedin. Bu yüzden; önceki isteğinin kabul etmesini, reddedilmesini veya zaman aşımına uğraşamasını bekle."
         },
-        "special_user": "S-seninle ahlaksız şeyler yapmaktan hoşlansam da, bu benim için biraz fazla {user}...{VANILLABLUSH}"
+        "special_user": "S-seninle ahlaksız şeyler yapmaktan hoşlansam da, bu benim için biraz fazla {user}... {EMOTE_BLUSH}"
       }
     }
   },
@@ -644,7 +646,7 @@
       "accept": "Kabul Et",
       "deny": "Reddet",
       "fuck_anal": "Anal",
-      "fuck_normal": "Normal",
+      "fuck_normal": "Hetero",
       "fuck_yaoi": "Yaoi (Eşcinsel)",
       "fuck_yuri": "Yuri (Lezbiyen)"
     },
@@ -704,8 +706,8 @@
         ]
       },
       "neko": {
-        "purr": "{SNUGGLE} Nya. Bu, ablamın eski bir fotoğrafı. >w<",
-        "snuggle": "{SNUGGLE} B-bu ben miyim? OwO"
+        "purr": "{EMOTE_SNUGGLE} Nya. Bu, ablamın eski bir fotoğrafı. >w<",
+        "snuggle": "{EMOTE_SNUGGLE} B-bu ben miyim? OwO"
       },
       "pat": {
         "mention_snuggle": [
