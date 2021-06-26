@@ -6,7 +6,7 @@ on:
 
 jobs:
   label:
-    if: startsWith(github.head_ref, 'dependabot') == false
+    if: startsWith(github.head_ref, 'renovate') == false
     runs-on: ubuntu-latest
     steps:
       - name: Label Pull request
