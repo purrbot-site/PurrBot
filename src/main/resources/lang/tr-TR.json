@@ -352,7 +352,7 @@
             "multiple": "{boost} takviye",
             "single": "1 takviye",
             "title": "Takviye",
-            "value": "{boosts} ( {BOOST_TIER} {level} Seviye )"
+            "value": "{boosts} (Seviye {level}{BOOST_TIER})"
           },
           "channels_title": "Kanallar",
           "channels_value": "{EMOTE_CATEGORY} Toplam: {channels_total}\n\n{EMOTE_TEXT} Metin Kanalları: {channels_text}\n{EMOTE_VOICE} Ses Kanalları: {channels_voice}",
