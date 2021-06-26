@@ -1,0 +1,26 @@
+{
+  "packageRules": [
+    {
+      "matchFiles": ["build.gradle"],
+      "labels": [
+        "Target: Gradle",
+        "Type: Dependency update"
+      ]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "labels": [
+        "Target: GitHub Actions",
+        "Type: Dependency update"
+      ]
+    }
+  ],
+  "enabledManagers": [
+    "gradle",
+    "github-actions"
+  ],
+  "ignoreDeps": [
+    "com.github.johnrengelman.shadow",
+    "jda-command"
+  ]
+}
