@@ -100,7 +100,7 @@ public class CmdInvite implements Command{
         
         if(bot.getMessageUtil().hasArg("dm", args)){
             member.getUser().openPrivateChannel()
-                    .flatMap((channel) -> channel.sendMessage(invite.build()))
+                    .flatMap((channel) -> channel.sendMessageEmbeds(invite.build()))
                     .queue(
                             message -> tc.sendMessage(
                                     bot.getMsg(guild.getId(), "purr.info.invite.dm_success", member.getAsMention())
@@ -112,7 +112,7 @@ public class CmdInvite implements Command{
             return;
         }
 
-        tc.sendMessage(invite.build()).queue();
+        tc.sendMessageEmbeds(invite.build()).queue();
     }
     
     private String getInvite(Guild guild, Permission... permissions){

@@ -73,7 +73,7 @@ public class CmdLanguage implements Command{
                     )
                     .build();
             
-            tc.sendMessage(embed).queue();
+            tc.sendMessageEmbeds(embed).queue();
         }else{
             if(args[0].equalsIgnoreCase("reset")){
                 bot.setLanguage(guild.getId(), "en");
@@ -83,7 +83,7 @@ public class CmdLanguage implements Command{
                         .setDescription("Language reset back to `English (en)`!")
                         .build();
                 
-                tc.sendMessage(embed).queue();
+                tc.sendMessageEmbeds(embed).queue();
             }else
             if(args[0].equalsIgnoreCase("set")){
                 if(args.length < 2){
@@ -105,7 +105,7 @@ public class CmdLanguage implements Command{
                         )
                         .build();
                 
-                tc.sendMessage(embed).queue();
+                tc.sendMessageEmbeds(embed).queue();
             }else{
                 bot.getEmbedUtil().sendError(tc, member, "purr.guild.language.invalid_args");
             }

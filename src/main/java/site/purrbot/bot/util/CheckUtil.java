@@ -93,7 +93,7 @@ public class CheckUtil{
                            .replace("{roles}", roles)
                 ).build();
         
-        tc.sendMessage(embed).queue();
+        tc.sendMessageEmbeds(embed).queue();
         
         return true;
     }

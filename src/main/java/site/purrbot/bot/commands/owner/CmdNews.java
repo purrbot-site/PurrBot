@@ -57,7 +57,7 @@ public class CmdNews implements Command{
                     ))
                     .build();
             
-            tc.sendMessage(embed).queue();
+            tc.sendMessageEmbeds(embed).queue();
             return;
         }
         
@@ -77,7 +77,7 @@ public class CmdNews implements Command{
                     )
                     .build();
     
-            tc.sendMessage(embed).queue();
+            tc.sendMessageEmbeds(embed).queue();
             return;
         }
         

@@ -124,7 +124,7 @@ public class ImageUtil {
         }
     }
     
-    public byte[] getQuoteImg(Message quote) throws IOException, NullPointerException{
+    public byte[] getQuoteImg(Message quote){
         Member member = quote.getMember();
 
         JSONObject json = new JSONObject()
@@ -150,9 +150,11 @@ public class ImageUtil {
 
             ResponseBody responseBody = response.body();
             if(responseBody == null)
-                throw new NullPointerException("Received empty response (null).");
+                return null;
 
             return IOUtil.readFully(responseBody.byteStream());
+        }catch(IOException ex){
+            return null;
         }
     }
 

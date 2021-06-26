@@ -99,7 +99,7 @@ public class CmdEmote implements Command{
             return;
         }
         
-        tc.sendMessage(emoteInfo(member, msg.getEmotes().get(0), guild, null, 1, 1)).queue();
+        tc.sendMessageEmbeds(emoteInfo(member, msg.getEmotes().get(0), guild, null, 1, 1)).queue();
         
     }
     

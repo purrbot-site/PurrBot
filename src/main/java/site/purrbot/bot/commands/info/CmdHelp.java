@@ -25,6 +25,7 @@ import com.jagrosh.jdautilities.menu.EmbedPaginator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.interactions.components.Button;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -77,7 +78,12 @@ public class CmdHelp implements Command{
                 return;
             }
 
-            tc.sendMessage(commandHelp(member, command, prefix)).queue();
+            tc.sendMessageEmbeds(commandHelp(member, command, prefix))
+                    .setActionRow(Button.link(
+                            "https://docs.purrbot.site/bot/commands#" + command.getDescription().name().toLowerCase(Locale.ROOT),
+                            bot.getMsg(guild.getId(), "purr.info.help.command_info.docs")
+                    ))
+                    .queue();
         }else{
             showHelpMenu(member, tc, null);
         }
@@ -144,14 +150,14 @@ public class CmdHelp implements Command{
                         )
                         .build();
                 
-                tc.sendMessage(embed).queue();
+                tc.sendMessageEmbeds(embed).queue();
                 return;
             }
             
             List<MessageEmbed> pages = getHelpPages(cat, member, prefix, tc.isNSFW());
             
             if(pages.size() == 1){
-                tc.sendMessage(pages.get(0)).queue();
+                tc.sendMessageEmbeds(pages.get(0)).queue();
                 return;
             }
             

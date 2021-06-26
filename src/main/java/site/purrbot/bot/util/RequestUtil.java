@@ -111,13 +111,7 @@ public class RequestUtil{
                 
                 msg.editMessage(text)
                    .override(true)
-                   .queue(message -> { 
-                       if(guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE)) 
-                           message.clearReactions().queue(
-                                   null, 
-                                   e -> logger.warn("Unable to clear reactions from Message! Was the message deleted?")
-                           );
-                       
+                   .queue(message -> {
                        if(result.isRequest() && author != null) 
                            sendConfirmation(tc, author, targets, message); 
                        }, e -> tc.sendMessage(text).queue(message -> { 
@@ -146,8 +140,7 @@ public class RequestUtil{
                     if(event.getMember() == null)
                         return false;
     
-                    Button button = event.getButton();
-                    if(!isValidButton(button, api.getName()))
+                    if(!isValidButton(event.getComponentId(), api.getName()))
                         return false;
     
                     if(!event.isAcknowledged()) 
@@ -162,13 +155,7 @@ public class RequestUtil{
                     TextChannel channel = event.getTextChannel();
                     queue.invalidate(getQueueString(api.getName(), guild.getId(), author.getId()));
                     
-                    Button button = event.getButton();
-                    if(button == null || button.getId() == null){
-                        bot.getEmbedUtil().sendError(channel, event.getMember(), "errors.request_error");
-                        return;
-                    }
-                    
-                    String result = button.getId().split(":")[2];
+                    String result = event.getComponentId().split(":")[2];
                     if(result.equals("deny")){
                         channel.sendMessage(
                                 bot.getMsg(guild.getId(), api.getPath() + "request.denied", author.getAsMention(), target.getEffectiveName())
@@ -227,7 +214,7 @@ public class RequestUtil{
         
         msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
            .override(true)
-           .embed(embed.build())
+           .setEmbeds(embed.build())
            .queue(message -> {
                if(message.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
                    message.clearReactions().queue(
@@ -237,7 +224,7 @@ public class RequestUtil{
                
                if(result.isRequest() && author != null)
                    sendConfirmation(tc, author, targets, message);
-           }, e -> tc.sendMessage(embed.build()).queue(message -> {
+           }, e -> tc.sendMessageEmbeds(embed.build()).queue(message -> {
                if(result.isRequest() && author != null)
                    sendConfirmation(tc, author, targets, message);
            }));
@@ -249,14 +236,8 @@ public class RequestUtil{
         ).queue();
     }
     
-    private boolean isValidButton(Button button, String apiName){
-        if(button == null)
-            return false;
-        
-        if(button.getId() == null)
-            return false;
-        
-        return button.getId().equals(String.format("purr:%s:accept", apiName)) ||
-               button.getId().equals(String.format("purr:%s:deny", apiName));
+    private boolean isValidButton(String buttonId, String apiName){ 
+        return buttonId.equals(String.format("purr:%s:accept", apiName)) ||
+               buttonId.equals(String.format("purr:%s:deny", apiName));
     }
 }

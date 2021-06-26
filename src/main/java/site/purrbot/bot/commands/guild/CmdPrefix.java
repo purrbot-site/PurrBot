@@ -77,7 +77,7 @@ public class CmdPrefix implements Command{
                 )
                 .build();
         
-        tc.sendMessage(embed).queue();
+        tc.sendMessageEmbeds(embed).queue();
     }
     
     private void resetPrefix(TextChannel tc, Member member){
@@ -90,6 +90,6 @@ public class CmdPrefix implements Command{
                 )
                 .build();
         
-        tc.sendMessage(embed).queue();
+        tc.sendMessageEmbeds(embed).queue();
     }
 }

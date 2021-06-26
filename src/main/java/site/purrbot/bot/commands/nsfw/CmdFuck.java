@@ -165,7 +165,7 @@ public class CmdFuck implements Command{
         
         return (
                 id.equals("purr:fuck:anal") ||
-                id.equals("purr:fuck:normal") || 
+                id.equals("purr:fuck:normal") ||
                 id.equals("purr:fuck:yaoi") ||
                 id.equals("purr:fuck:yuri") ||
                 id.equals("purr:fuck:accept") ||
@@ -177,7 +177,7 @@ public class CmdFuck implements Command{
         if(bot.getMessageUtil().hasArg("anal", args)){
             return true;
         }else
-        if(bot.getMessageUtil().hasArg("normal", args)){
+        if(bot.getMessageUtil().hasArg("normal", args) || bot.getMessageUtil().hasArg("hetero", args)){
             return true;
         }else
         if(bot.getMessageUtil().hasArg("yaoi", args)){
@@ -204,12 +204,7 @@ public class CmdFuck implements Command{
                     if(event.getMember() == null)
                         return false;
                     
-                    Button button = event.getButton();
-                    if(button == null)
-                        return false;
-                    
-                    String buttonId = button.getId();
-                    if(!equalsAny(buttonId))
+                    if(!equalsAny(event.getComponentId()))
                         return false;
                     
                     if(!event.isAcknowledged())
@@ -224,13 +219,7 @@ public class CmdFuck implements Command{
                     TextChannel channel = event.getTextChannel();
                     queue.invalidate(bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()));
                     
-                    Button button = event.getButton();
-                    if(button == null || button.getId() == null){
-                        bot.getEmbedUtil().sendError(channel, event.getMember(), "errors.request_error");
-                        return;
-                    }
-                    
-                    String buttonId = button.getId().split(":")[2];
+                    String buttonId = event.getComponentId().split(":")[2];
                     if(buttonId.equals("deny")){
                         botMsg.delete().queue(
                                 null,
@@ -249,6 +238,7 @@ public class CmdFuck implements Command{
                             break;
                         
                         case "normal":
+                        case "hetero":
                             api = HttpUtil.ImageAPI.NSFW_FUCK;
                             break;
                         

@@ -244,7 +244,7 @@ public class CmdWelcome implements Command{
                             )
                             .build();
                     
-                    tc.sendMessage(embed).queue();
+                    tc.sendMessageEmbeds(embed).queue();
                     return;
                 }
                 if(args[1].equalsIgnoreCase("reset")){
@@ -330,7 +330,7 @@ public class CmdWelcome implements Command{
                 );
         
         if(file == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
-            tc.sendMessage(embed.build()).queue();
+            tc.sendMessageEmbeds(embed.build()).queue();
         }else{
             embed.addField(
                     bot.getMsg(guild.getId(), "purr.guild.welcome.embed.preview"),
@@ -339,7 +339,7 @@ public class CmdWelcome implements Command{
             )
                     .setImage("attachment://welcome_preview.jpg");
             
-            tc.sendMessage(embed.build())
+            tc.sendMessageEmbeds(embed.build())
                     .addFile(file, "welcome_preview.jpg")
                     .queue();
         }
@@ -375,7 +375,7 @@ public class CmdWelcome implements Command{
                 value = getMsg(value);
         }
         
-        tc.sendMessage(
+        tc.sendMessageEmbeds(
                 bot.getEmbedUtil().getEmbed(member)
                         .setColor(0x00FF00)
                         .setDescription(
@@ -411,7 +411,7 @@ public class CmdWelcome implements Command{
                 bot.setWelcomeMsg(id, "Welcome {mention}!");
         }
         
-        tc.sendMessage(
+        tc.sendMessageEmbeds(
                 bot.getEmbedUtil().getEmbed(member)
                         .setColor(0x00FF00)
                         .setDescription(

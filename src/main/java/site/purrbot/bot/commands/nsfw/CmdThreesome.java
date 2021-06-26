@@ -26,7 +26,6 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
-import net.dv8tion.jda.api.interactions.components.Button;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -161,34 +160,22 @@ public class CmdThreesome implements Command{
                     if(event.getMember() == null)
                         return false;
                     
-                    Button button = event.getButton();
-                    if(button == null || button.getId() == null)
-                        return false;
-                    
                     if(!event.getMember().equals(target1) && !event.getMember().equals(target2))
                         return false;
                     
                     if(!event.getMessageId().equals(botMsg.getId()))
                         return false;
                     
-                    return allUser(list, event.getUser().getId(), button.getId());
+                    if(!event.isAcknowledged())
+                        event.deferEdit().queue();
+                    
+                    return allUser(list, event.getUser().getId(), event.getComponentId());
                 },
                 event -> {
                     TextChannel channel = event.getTextChannel();
                     queue.invalidate(bot.getRequestUtil().getQueueString("threesome", guild.getId(), author.getId()));
                     
-                    event.deferEdit().queue();
-                    
-                    Button button = event.getButton();
-                    if(button == null || button.getId() == null){
-                        list.remove(target1.getId());
-                        list.remove(target2.getId());
-                        
-                        bot.getEmbedUtil().sendError(channel, event.getMember(), "errors.request_error");
-                        return;
-                    }
-                    
-                    if(button.getId().equals("purr:threesome:deny")){
+                    if(event.getComponentId().equals("purr:threesome:deny")){
                         list.remove(target1.getId());
                         list.remove(target2.getId());
                         

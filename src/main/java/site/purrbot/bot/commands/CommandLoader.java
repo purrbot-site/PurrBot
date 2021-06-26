@@ -96,6 +96,7 @@ public class CommandLoader {
                 new CmdCheck(bot),
                 new CmdEval(bot),
                 new CmdLeave(bot),
+                new CmdListEmotes(bot),
                 new CmdMsg(bot),
                 new CmdNews(bot),
                 new CmdShutdown(bot)

@@ -56,7 +56,7 @@ public class CmdShutdown implements Command{
                 .setImage(bot.getMessageUtil().getRandomShutdownImg())
                 .build();
 
-        tc.sendMessage(embed).queue(message -> {
+        tc.sendMessageEmbeds(embed).queue(message -> {
             logger.info("Disabling bot! Good bye...");
             bot.disable();
         });

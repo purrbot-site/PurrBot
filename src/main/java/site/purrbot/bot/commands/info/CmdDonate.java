@@ -66,7 +66,7 @@ public class CmdDonate implements Command{
         
         if(bot.getMessageUtil().hasArg("dm", args)){
             member.getUser().openPrivateChannel()
-                    .flatMap(channel -> channel.sendMessage(embed))
+                    .flatMap(channel -> channel.sendMessageEmbeds(embed))
                     .queue(
                             message -> tc.sendMessage(
                                     bot.getMsg(guild.getId(), "purr.info.donate.dm_success", member.getAsMention())
@@ -79,7 +79,7 @@ public class CmdDonate implements Command{
             return;
         }
         
-        tc.sendMessage(embed).queue();
+        tc.sendMessageEmbeds(embed).queue();
     }
     
     private String getDonators(){

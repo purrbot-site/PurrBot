@@ -23,10 +23,9 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.interactions.components.Button;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-
-import java.io.IOException;
 
 @CommandDescription(
         name = "Quote",
@@ -70,35 +69,11 @@ public class CmdQuote implements Command{
                         )
                         .build();
                 
-                tc.sendMessage(embed).queue();
+                tc.sendMessageEmbeds(embed).queue();
                 return;
             }
-            if(!quote.getAttachments().isEmpty()){
-                String link = quote.getAttachments().stream().filter(Message.Attachment::isImage).findFirst()
-                        .map(Message.Attachment::getUrl).orElse(null);
-
-                if(link == null && quote.getContentRaw().isEmpty()){
-                    bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.no_value");
-                    return;
-                }
-
-                sendQuoteEmbed(quote, link, tc);
-            }else{
-                byte[] bytes;
-
-                try{
-                    bytes = bot.getImageUtil().getQuoteImg(quote);
-                }catch(IOException ex){
-                    bytes = null;
-                }
-
-                if(bytes == null){
-                    sendQuoteEmbed(quote, null, tc);
-                    return;
-                }
-
-                sendImgEmbed(member, quote, bytes, tc);
-            }
+            
+            sendMsg(tc, quote, member);
             return;
         }
 
@@ -112,7 +87,7 @@ public class CmdQuote implements Command{
                     )
                     .build();
             
-            tc.sendMessage(embed).queue();
+            tc.sendMessageEmbeds(embed).queue();
             return;
         }
 
@@ -123,34 +98,36 @@ public class CmdQuote implements Command{
                 bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.invalid_id");
                 return;
             }
-
-            if(!quote.getAttachments().isEmpty()){
-                String link = quote.getAttachments().stream().filter(Message.Attachment::isImage).findFirst()
-                        .map(Message.Attachment::getUrl).orElse(null);
-
-                if(link == null && quote.getContentRaw().isEmpty()){
-                    bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.no_value");
-                    return;
-                }
-
-                sendQuoteEmbed(quote, link, tc);
-            }else{
-                byte[] bytes;
-
-                try{
-                    bytes = bot.getImageUtil().getQuoteImg(quote);
-                }catch(IOException ex){
-                    bytes = null;
-                }
-
-                if(bytes == null){
-                    sendQuoteEmbed(quote, null, tc);
-                    return;
-                }
-                sendImgEmbed(member, quote, bytes, tc);
-            }
+            
+            sendMsg(tc, quote, member);
         }else{
             bot.getEmbedUtil().sendPermError(tc, member, channel, Permission.MESSAGE_HISTORY, true);
+        }
+    }
+    
+    private void sendMsg(TextChannel tc, Message quote, Member member){
+        if(!quote.getAttachments().isEmpty()){
+            String link = quote.getAttachments().stream()
+                    .filter(Message.Attachment::isImage)
+                    .findFirst()
+                    .map(Message.Attachment::getUrl)
+                    .orElse(null);
+            
+            if(link == null && quote.getContentRaw().isEmpty()){
+                bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.no_value");
+                return;
+            }
+            
+            sendQuoteEmbed(quote, link, tc);
+        }else{
+            byte[] bytes = bot.getImageUtil().getQuoteImg(quote);
+            
+            if(bytes == null){
+                sendQuoteEmbed(quote, null, tc);
+                return;
+            }
+            
+            sendImgEmbed(member, quote, bytes, tc);
         }
     }
     
@@ -172,29 +149,31 @@ public class CmdQuote implements Command{
         return member.getEffectiveName();
     }
     
-    private void sendQuoteEmbed(Message msg, String link, TextChannel channel) {
-        Guild guild = msg.getGuild();
-        String name = getMember(guild, msg.getMember());
+    private void sendQuoteEmbed(Message quote, String link, TextChannel channel) {
+        Guild guild = quote.getGuild();
+        String name = getMember(guild, quote.getMember());
         
         EmbedBuilder quoteEmbed = bot.getEmbedUtil().getEmbed()
                 .setAuthor(
-                        bot.getMsg(guild.getId(), "purr.info.quote.embed_basic.info", name),
-                        msg.getJumpUrl(),
-                        msg.getAuthor().getEffectiveAvatarUrl()
+                        bot.getMsg(guild.getId(), "purr.info.quote.embed_basic.info", name, false),
+                        null,
+                        quote.getAuthor().getEffectiveAvatarUrl()
                 )
-                .setDescription(msg.getContentRaw())
+                .setDescription(quote.getContentRaw())
                 .setImage(link)
                 .setFooter(
                         bot.getMsg(guild.getId(), "purr.info.quote.embed_basic.channel")
-                                .replace("{channel}", msg.getTextChannel().getName()),
+                                .replace("{channel}", quote.getTextChannel().getName()),
                         null
                 )
-                .setTimestamp(msg.getTimeCreated());
+                .setTimestamp(quote.getTimeCreated());
         
-        channel.sendMessage(quoteEmbed.build()).queue();
+        channel.sendMessageEmbeds(quoteEmbed.build())
+               .setActionRow(Button.link(quote.getJumpUrl(), bot.getMsg(guild.getId(), "purr.info.quote.button")))
+               .queue();
     }
     
-    private void sendImgEmbed(Member member, Message quote, byte[] bytes, TextChannel textChannel){
+    private void sendImgEmbed(Member member, Message quote, byte[] bytes, TextChannel channel){
         Guild guild = member.getGuild();
         String filename = String.format("quote_%s.png", quote.getId());
         String name = getMember(guild, quote.getMember());
@@ -211,6 +190,9 @@ public class CmdQuote implements Command{
                 ))
                 .build();
         
-        textChannel.sendMessage(embed).addFile(bytes, filename).queue();
+        channel.sendMessageEmbeds(embed)
+               .addFile(bytes, filename)
+               .setActionRow(Button.link(quote.getJumpUrl(), bot.getMsg(guild.getId(), "purr.info.quote.button")))
+               .queue();
     }
 }

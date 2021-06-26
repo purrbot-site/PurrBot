@@ -54,7 +54,7 @@ public class CmdInfo implements Command{
             String mention = member.getAsMention();
             String prefix = bot.isBeta() ? "snuggle" : "purr";
             member.getUser().openPrivateChannel()
-                    .flatMap(channel -> channel.sendMessage(embed))
+                    .flatMap(channel -> channel.sendMessageEmbeds(embed))
                     .queue(
                             message -> tc.sendMessage(
                                     bot.getMsg(guild.getId(), prefix + ".info.info.dm_success", mention)
@@ -66,7 +66,7 @@ public class CmdInfo implements Command{
             return;
         }
 
-        tc.sendMessage(embed).queue();
+        tc.sendMessageEmbeds(embed).queue();
     }
     
     private MessageEmbed getEmbed(Member member){

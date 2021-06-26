@@ -88,7 +88,7 @@ public class CmdMsg implements Command{
                     .setDescription(content)
                     .build();
             
-            channel.sendMessage(embed).queue();
+            channel.sendMessageEmbeds(embed).queue();
         }else{
             tc.sendMessage("Invalid message type! Allowed are `msg`, `edit` and `embed`").queue();
         }

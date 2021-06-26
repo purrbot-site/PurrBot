@@ -396,45 +396,16 @@ public class PurrBot {
     }
     
     private String setPlaceholders(String msg){
-        return msg
-                // Emotes
-                .replace("{BLOBHOLO}", Emotes.BLOB_HOLO.getEmote())
-                .replace("{LOADING}", Emotes.LOADING.getEmote())
-                .replace("{NEKOWO}", Emotes.NEKOWO.getEmote())
-                .replace("{SENKOTAILWAG}", Emotes.SENKO_TAIL_WAG.getEmote())
-                .replace("{SHIROTAILWAG}", Emotes.SHIRO_TAIL_WAG.getEmote())
-                .replace("{TYPING}", Emotes.TYPING.getEmote())
-                .replace("{VANILLABLUSH}", Emotes.BLUSH.getEmote())
-                .replace("{EDIT}", Emotes.EDIT.getEmote())
-                .replace("{DOWNLOAD}", Emotes.DOWNLOAD.getEmote())
-                .replace("{DISCORD}", Emotes.DISCORD.getEmote())
-                .replace("{TAIL}", Emotes.TAIL.getEmote())
-                .replace("{SEX}", Emotes.SEX.getEmote())
-                .replace("{ANAL}", Emotes.SEX_ANAL.getEmote())
-                .replace("{YAOI}", Emotes.SEX_YAOI.getEmote())
-                .replace("{YURI}", Emotes.SEX_YURI.getEmote())
-                .replace("{BOTICON}", Emotes.BOT_ICON.getEmote())
-                .replace("{CATEGORY}", Emotes.CATEGORY.getEmote())
-                .replace("{TEXTCHANNEL}", Emotes.TEXT_CHANNEL.getEmote())
-                .replace("{VOICECHANNEL}", Emotes.VOICE_CHANNEL.getEmote())
-                .replace("{MEMBERS}", Emotes.MEMBERS.getEmote())
-                .replace("{FACE}", Emotes.FACE.getEmote())
-                .replace("{PAYPAL}", Emotes.PAYPAL.getEmote())
-                .replace("{PATREON}", Emotes.PATREON.getEmote())
-                .replace("{KOFI}", Emotes.KOFI.getEmote())
-                .replace("{PURR}", Emotes.PURR.getEmote())
-                .replace("{SNUGGLE}", Emotes.SNUGGLE.getEmote())
-                .replace("{AWOO}", Emotes.AWOO.getEmote())
-                
+        return Emotes.getWithEmotes(msg)
                 // Guild link
                 .replace("{guild_invite}", Links.DISCORD)
-                
+        
                 // Wiki pages
                 .replace("{wiki}", Links.WIKI)
                 .replace("{wiki_bg}", Links.WIKI + "/welcome-images#backgrounds")
                 .replace("{wiki_icon}", Links.WIKI + "/welcome-images#icons")
                 .replace("{wiki_welcome}", Links.WIKI + "/welcome-channel")
-                
+        
                 // Other pages
                 .replace("{github_url}", Links.GITHUB)
                 .replace("{twitter_url}", Links.TWITTER)

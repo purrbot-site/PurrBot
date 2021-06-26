@@ -115,7 +115,7 @@ public class CmdEval implements Command{
                 ), false)
                 .setFooter(footer, null);
         
-        tc.sendMessage(embed.build()).queue();
+        tc.sendMessageEmbeds(embed.build()).queue();
         if(overflow != null)
             sendEvalEmbed(tc, overflow, output, footer, success);
     }

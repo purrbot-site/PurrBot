@@ -89,7 +89,7 @@ public class CmdStats implements Command{
                         false
                 );
 
-        tc.sendMessage(stats.build()).queue();
+        tc.sendMessageEmbeds(stats.build()).queue();
 
     }
     
