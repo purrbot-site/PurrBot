@@ -20,7 +20,7 @@
     "github-actions"
   ],
   "ignoreDeps": [
-    "com.github.johnrengelman.shadow",
-    "jda-command"
+    "com.github.johnrengelman.shadow:com.github.johnrengelman.shadow.gradle.plugin",
+    "com.github.rainestormee:jda-command"
   ]
 }
