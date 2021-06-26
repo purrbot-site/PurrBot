@@ -57,7 +57,7 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.10.0'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
-    compile group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.5'
+    compile group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.13'
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '3.0.2'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
     compile group: 'org.botblock', name: 'javabotblockapi-core', version: '6.7.0_343'
