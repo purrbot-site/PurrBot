@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "15:00"
+    timezone: "Europe/Zurich"
+  open-pull-requests-limit: 10
+  labels:
+  - "Type: Dependency update"
+  - "Target: Gradle"
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "15:00"
+    timezone: "Europe/Zurich"
+  open-pull-requests-limit: 10
+  labels:
+  - "Type: Dependency update"
+  - "Target: GitHub Actions"
