@@ -352,7 +352,7 @@
             "multiple": "{boost} Boosts",
             "single": "1 Boost",
             "title": "Boosten",
-            "value": "{boosts} (Level {level} {BOOST_TIER})"
+            "value": "{boosts} (Level {level}{BOOST_TIER})"
           },
           "channels_title": "Kanäle",
           "channels_value": "{EMOTE_CATEGORY} Total: {channels_total}\n\n{EMOTE_TEXT} Textkanäle: {channels_text}\n{EMOTE_VOICE} Sprachkanäle: {channels_voice}",
