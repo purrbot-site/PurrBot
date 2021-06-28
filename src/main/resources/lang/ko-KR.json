@@ -352,7 +352,7 @@
             "multiple": "서버부스트 {boost} 개",
             "single": "서버부스트 1 개",
             "title": "서버부스트 중",
-            "value": "{boosts} (레벨 {level} {BOOST_TIER})"
+            "value": "{boosts} (레벨 {level}{BOOST_TIER})"
           },
           "channels_title": "채널",
           "channels_value": "{EMOTE_CATEGORY} 합계: {channels_total}\n\n{EMOTE_TEXT} 텍스트 채널: {channels_text}\n{EMOTE_VOICE} 음성 채널: {channels_voice}",
