@@ -352,7 +352,7 @@
             "multiple": "{boost} бустов",
             "single": "1 буcт",
             "title": "Бусты",
-            "value": "{boosts} (Уровень {level} {BOOST_TIER})"
+            "value": "{boosts} (Уровень {level}{BOOST_TIER})"
           },
           "channels_title": "Каналы",
           "channels_value": "{EMOTE_CATEGORY} Всего: {channels_total}\n\n{EMOTE_TEXT}Текстовые каналы: {channels_text}\n{EMOTE_VOICE} Голосовые каналы: {channels_voice}",
