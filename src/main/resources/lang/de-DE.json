@@ -97,7 +97,7 @@
         "description": "Schüttelt den Schwanz von jemandem... wenn diese Person das will.",
         "mention_bot": "Bots haben keinen Schwanz... leider!",
         "mention_purr": [
-          "Wha-! Das ist unanständig {user}! \\*Hält ihren Schwanz um ihn zu beschützen*",
+          "Wa-! Das ist unanständig {user}! \\*Hält ihren Schwanz um ihn zu beschützen*",
           "N-nein {user}. Ich erlaube keine fremden mich anzufassen!"
         ],
         "mention_self": "Nawww... Hast du nicht jemanden der deinen Schwanz berühren könnte? Oder bist du nur zu schüchtern?",
@@ -111,16 +111,16 @@
         "special_user": "A-aber {user}. Das ist zu unanständig um es öffentlich zu machen."
       },
       "holo": {
-        "description": "Holt ein Bild von einem Apfelessenden, Alkohol trinkenden weisen Wolf.",
+        "description": "Holt ein Bild von dem Apfel essenden, Alkohol trinkenden weisen Wolf.",
         "loading": "{EMOTE_LOADING} Bekommt ein Bild von Holo...",
         "message": "Holo {EMOTE_BLOB_HOLO}"
       },
       "hug": {
-        "description": "Teilt einige Umarmungen mit anderen Mensch. \\(>w<)/",
+        "description": "Teile einige Umarmungen mit anderen Leuten. \\(>w<)/",
         "loading": "{EMOTE_LOADING} Bekommt ein umarmungs-gif...",
         "mention_self": "Warum umarmst du dich selbst {user}?\nDu kannst mich umarmen wenn du möchtest. {EMOTE_BLUSH}",
         "mention_purr": [
-          "\\*enjoys the hug from {user}*",
+          "\\*genießt die Umarmung von {user}*",
           "\\*schnurrt leise beim Genießen der Umarmung*",
           "Ich mag immer Umarmungen {user}"
         ],
