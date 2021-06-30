@@ -3,29 +3,29 @@
     "footer": "Angefragt von {user}"
   },
   "errors": {
-    "administrator": "**Administrator-Berechtigung erkannt**\nIch habe die `Administrator`-Berechtigung, was ein enormes Sicherheitsrisiko ist!\n__Ich werde keine Befehle ausführen, solange ich diese Berechtigung habe, um möglichen Missbrauch zu verhindern. _\n\nUm dies zu beheben, führe eines der folgenden Dinge aus:\n- Entferne die Rolle, die Administrator von mir hat.\n- Entferne die Erlaubnis von der Rolle(n) unten aufgeführt.\n\nAdministrator wurde in den folgenden Rollen entdeckt:\n{roles}",
+    "administrator": "**Administrator-Berechtigung erkannt**\nIch habe die `Administrator`-Berechtigung, was ein enormes Sicherheitsrisiko ist!\n__Ich werde keine Befehle ausführen, solange ich diese Berechtigung habe, um möglichen Missbrauch zu verhindern. _\n\nUm dies zu beheben, führe eines der folgenden Dinge aus:\n- Entferne die Rolle, die Administrator von mir hat.\n- Entferne die Erlaubnis von den unten aufgeführten Rollen.\n\nAdministrator wurde in den folgenden Rollen entdeckt:\n{roles}",
     "api_error": "Es gab einen Fehler beim Erreichen der API! Bitte versuche es später erneut.",
     "missing_perms": {
       "self": "Ich benötige die Berechtigung {permission} für das.",
       "self_channel": "Ich brauche die Berechtigung `{permission}` im Channel {channel}, um dies zu tun!",
-      "other": "Dir fehlt die Berechtigung {permission} für diesen Befehl."
+      "other": "Dir fehlt die Berechtigung `{permission}` für diesen Befehl."
     },
     "nsfw_random": [
       "Dieser Kanal hat scheinbar kein NSFW-Label, nicht wahr {user}?",
       "Bitte sei in einem NSFW-Kanal unartig, {user}.",
-      "Nein! Du bist ein toller Mensch und benutzt diesen Befehl in einem NSFW-Kanal {user}!",
+      "Nein! Du bist eine gute Person und benutzt diesen Befehl in einem NSFW-Kanal {user}!",
       "ChannelNotNSFWException: Befehl darf nicht außerhalb eines NSFW-Kanals verwendet werden.",
       "Du kannst diese versauten Dinge nur in NSFW-Kanälen sehen, {user}.",
       "Alles hat seinen Platz. Und dieser Befehl gehört in einen NSFW-Kanal {user}."
     ],
     "request_error": "Bei der Bearbeitung dieses Befehls ist ein Fehler aufgetreten. Versichere dich, dass meine Nachricht nicht gelöscht wurde und ich über ausreichende Berechtigungen verfüge.",
     "title": "Fehler",
-    "unknown": "D-das ist ein bisschen peinlich, aber ich hatte einen Fehler bei der Durchführung einer Aktion. {EMOTE_BLUSH} Bitte melde dies auf dem Discord-Server ({guild_invite}), oder auf [GitHub] ({github_url})!"
+    "unknown": "D-das ist ein bisschen peinlich, aber ich hatte einen Fehler bei der Durchführung einer Aktion. {EMOTE_BLUSH}\nBitte melde dies auf dem [Discord-Server]({guild_invite}), oder auf [GitHub]({github_url})!"
   },
   "misc": {
     "and": "und",
     "info": "Hallo {user}!\nMein Präfix auf diesem Discord ist {prefix}.\nVerwende `{prefix}help` für eine Liste von Befehlen.",
-    "language": "Deutsch (de)",
+    "language": "Deutsch (de-de)",
     "unknown_user": "Unbekannt",
     "welcome_member": "Du bist Mitglied #{count}"
   },
@@ -47,11 +47,11 @@
       "blush": {
         "description": "Bringt dich zum rot werden. o////o",
         "loading": "{EMOTE_LOADING} Macht dich rot...",
-        "message": "{user} ist rot."
+        "message": "{user} ist am erröten."
       },
       "cuddle": {
         "description": "Lässt dich mit einer oder mehreren Personen kuscheln.",
-        "loading": "{EMOTE_LOADING}Erhält ein kuschel-gif...",
+        "loading": "{EMOTE_LOADING} Erhält ein kuschel-gif...",
         "mention_self": "Warum kuschelst du mit dir selbst {user}?\nDu kannst mit mir kuscheln, wenn du möchtest. {EMOTE_BLUSH}",
         "mention_purr": [
           "\\*genießt das kuscheln mit {user}*",
@@ -84,13 +84,13 @@
           "Danke für das Essen {user}.",
           "\\*Isst das Essen mit Freude*"
         ],
-        "mention_self": "Du fütterst dich selbst, Idiot. Es ist besser das Essen zu teilen! \\*schaut {user} mit großen Augen an*",
+        "mention_self": "Du fütterst dich selbst, Dummerchen. Es ist besser das Essen zu teilen! \\*schaut {user} mit großen Augen an*",
         "message": "{user} gibt {target} etwas zu essen.",
         "no_mention": "Bitte nenne eine Person um ihr Essen zu geben.",
         "request": {
           "denied": "{target} will kein Essen von dir {user}",
           "message": "Hallo {target}!\n{user} möchte dir etwas Essen zum Essen geben. Willst du das auch?\nKlicke auf \"Akzeptieren\" um es zu akzeptieren oder auf \"Ablehnen\" um es abzulehnen.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
-          "open": "Du hast bereits jemanden {user} gefragt! Bitte warte, bis die Anfrage angenommen wird, abgelehnt wird oder bis sie ausgelaufen ist."
+          "open": "Du hast bereits jemanden gefragt {user}! Bitte warte, bis die Anfrage angenommen wird, abgelehnt wird oder bis sie ausgelaufen ist."
         }
       },
       "fluff": {
