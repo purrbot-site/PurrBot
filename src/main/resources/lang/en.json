@@ -89,7 +89,7 @@
         "no_mention": "Please mention someone to give some food.",
         "request": {
           "denied": "{target} doesn't want food from you {user}",
-          "message": "Hey {target}!\n{user} wants to give you some food to eat. Do you want that too?\nClick on \"Accept\" to accept or on \"Deny\" to deny it.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to give you some food to eat. Do you want that too?",
           "open": "You already asked someone {user}! Please wait for the request to be accepted, denied or for it to time out."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Please mention someone you want to fluff.",
         "request": {
           "denied": "{target} doesn't want to get fluffed by you {user}",
-          "message": "Hey {target}!\n{user} wants to fluff your tail. Do you want that too?\nClick on \"Accept\" to accept or on \"Deny\" to deny it.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to fluff your tail. Do you want that too?",
           "open": "You already asked someone to get fluffed {user}! Please wait for the request to be accepted, denied or for it to time out."
         },
         "special_user": "B-but {user}. That is lewd to do that in public."
@@ -565,7 +565,7 @@
         "no_mention": "Please mention a user you want to suck.",
         "request": {
           "denied": "{target} doesn't want to get sucked by you {user}. :/",
-          "message": "Hey {target}!\n{user} wants to give you a blowjob. Do you want that too?\nClick on \"Accept\" to accept or on \"Deny\" to deny it.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to give you a blowjob. Do you want that too?",
           "open": "Don't be that greedy {user}! Wait until your previous requests get accepted, denied or times out."
         },
         "special_user": "Okay sweetie. Let me get my \"toys\" so that we can have fun.\n\\*takes {user}'s hand and disappears in her room*"
@@ -615,7 +615,7 @@
         "no_mention": "Please mention a user that you want to lick the pussy of.",
         "request": {
           "denied": "{target} doesn't want you to lick their pussy {user}... Do they even have one?",
-          "message": "Hey {target}!\n{user} wants to lick your pussy. Do you want that?\nClick on \"Accept\" to accept or on \"Deny\" to deny it.\n\n> **This request will time out in 1 minute!**",
+          "message": "Hey {target}!\n{user} wants to lick your pussy. Do you want that?",
           "open": "Are you thirsty? You already have a open request {user}!\nWait for the other to accept or deny it, or for the request to time out."
         },
         "special_user": "Hehehe... You're *\"thirsty\"* {user}, are you?\n\\*takes {user}'s hand* and disappears in a room*"
@@ -624,6 +624,21 @@
         "description": "Gives you a gif of a girl having fun with themself.\n\nThis command can only be executed in NSFW-labeled channels!",
         "loading": "{EMOTE_LOADING} Getting a gif of a hot girl...",
         "message": "Solo girl"
+      },
+      "spank": {
+        "description": "Spank the butt of someone naughty.\n\nThis command can only be executed in NSFW-labeled channels!",
+        "mention_bot": "Trying to slap some robo-ass {user}? This would only break your hand...",
+        "mention_purr": "Do you really think I would allow this {user}?",
+        "mention_self": "If you really want your ass slapped, find someone to do this for you {user}.",
+        "mention_snuggle": "NO {user}! You won't touch my little Sister you Pervert!",
+        "message": "{user} is spanking the ass of {target}",
+        "no_mention": "Please mention a user that you want to spank the ass of",
+        "request": {
+          "denied": "{target} doesn't want their ass spanked by you {user}.",
+          "message": "Hey {target}!\n{user} wants to spank your ass. Do you want that?",
+          "open": "Relax {user}. You already asked someone so stay patient..."
+        },
+        "special_user": "I-I promise I'll be a good girl. J-just don't punish me too hard {user}. >////<"
       },
       "threesome": {
         "description": "Lets you ask **2** people, if they want to have sex with you.\nBy default is `--ffm` (2 Female, 1 Male) used, but you can use either `--mmf` or `--fff` for 2 Male, 1 Female and Only Females respectively.\n\nThis command can only be executed in NSFW-labeled channels!",
@@ -642,6 +657,7 @@
     }
   },
   "request": {
+    "accepted": "{target} accepted your request {user}.",
     "buttons": {
       "accept": "Accept",
       "deny": "Deny",
@@ -650,7 +666,7 @@
       "fuck_yaoi": "Yaoi (Gay)",
       "fuck_yuri": "Yuri (Lesbian)"
     },
-    "accepted": "{target} accepted your request {user}.",
+    "message": "{text}\nClick on \"Accept\" to accept or on \"Deny\" to deny the request.\n\n> **This Request will time out after 1 Minute!**",
     "timed_out": "Your request timed out {user}. {target} didn't respond fast enough."
   },
   "snuggle": {
@@ -767,6 +783,11 @@
       },
       "pussylick": {
         "mention_snuggle": "H-hey. I don't want you to lick me *there* {user}!"
+      },
+      "spank": {
+        "mention_purr": "NO! You won't lay a hand on my Sister {user}!",
+        "mention_snuggle": "\\*Runs away* N-no! I don't want such stuff {user}!",
+        "special_user": "B-but {user}! Y-you should do that with my Sister! She is much more naughty than me."
       },
       "threesome": {
         "mention_snuggle": "I-I'm not into that stuff {user}!"
