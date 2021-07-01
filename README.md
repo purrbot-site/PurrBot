@@ -36,7 +36,7 @@
 [paypal]: https://purrbot.site/donate
 
 <!-- Widgets -->
-[widget_botlist_space]: https://api.botlist.space/widget/425382319449309197/6  
+[widget_discordlist_space]: https://api.discordlist.space/v2/bots/425382319449309197/widget  
 [widget_discord_boats]: https://discord.boats/api/widget/425382319449309197
 
 <!-- Botlists -->
@@ -126,7 +126,7 @@ Feel free to upvote her to show your support.
 ## [Discordlist.space][discordlist_space]
 > Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
 
-![widget_botlist_space]
+![widget_discordlist_space]
 
 ## [Discordservices.net][discordservices_net]
 > A brand new botlist that aims to deliver the best experience for its users and bot developers.
