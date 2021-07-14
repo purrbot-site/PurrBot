@@ -54,7 +54,7 @@ dependencies {
         exclude(module: 'opus-java')
     }
     compile group: 'club.minnced', name: 'discord-webhooks', version: '0.5.7'
-    compile group: 'commons-io', name: 'commons-io', version: '2.10.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.11.0'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
     compile group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.5'
