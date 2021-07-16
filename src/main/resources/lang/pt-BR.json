@@ -89,7 +89,7 @@
         "no_mention": "Por favor, mencione alguém para dar um pouco de comida.",
         "request": {
           "denied": "{target} não quer comida de você {user}",
-          "message": "Ei {target}!\n{user} quer te dar um pouco de comida para você comer. Você aceita?\nReaja com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target}!\n{user} quer te dar um pouco de comida para comer. Você concorda?",
           "open": "Você já pediu a alguém {user}! Por favor, aguarde a solicitação ser aceita, negada ou um tempo limite."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Por favor, mencione usuários que você quer afofar a cauda.",
         "request": {
           "denied": "{target} não quer ser afofado por você {user}",
-          "message": "Ei {target}!\n{user} quer afofar sua cauda. Você aceita?\nReaja com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target}!\n{user} quer afofar sua cauda. Você concorda?",
           "open": "Você já pediu para afofar a cauda de alguém {user}! Por favor, aguarde a solicitação ser aceita, negada ou um tempo limite."
         },
         "special_user": "B-but {user}. Isso é pervertido fazer isso em público."
@@ -565,7 +565,7 @@
         "no_mention": "Por favor, mencione 2 usuários que você quer ter sexo com.",
         "request": {
           "denied": "{target} não quer ser chupado por você {user}. :/",
-          "message": "Ei {target}!\n{user} quer te dar um boquete. Você aceita?\nReaja com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target}!\n{user} quer te dar um boquete. Você concorda?",
           "open": "Não seja a ganâncioso {user}! Espere até que suas solicitações sejam aceitas, negadas ou expiradas."
         },
         "special_user": "Ok, doce. Deixe-me pegar meus \"brinquedos\" para que possamos nos divertir.\n\\*pega a mão de {user}e desaparece em seu quarto*"
@@ -615,7 +615,7 @@
         "no_mention": "Por favor, mencione um usuário do qual você deseja lamber a vagina de.",
         "request": {
           "denied": "{target} não quer que você lamba o sua vagina {user}... Você tem mesmo uma?",
-          "message": "Ei {target}!\n{user} quer lamber sua vagina. Você aceita?\nReaja com \"Aceitar\" para aceitar ou com \"Negar\" para negá-lo.\n\n> **Este pedido vai expirar em 1 minuto!**",
+          "message": "Ei {target}!\n{user} quer lamber sua vagina. concorda?",
           "open": "Você tem sede? Você já tem um pedido aberto {user}!\nEspere que a outra aceite ou negue-a, ou que a solicitação expire."
         },
         "special_user": "Ei... Você está *\"sede\"* {user}, está?\n\\*pega a mão de {user}* e desaparece em um quarto*"
@@ -624,6 +624,21 @@
         "description": "Dá a você um gif de uma garota se divertindo consigo mesma.\n\nEsse comando só pode ser executado em canais com rótulo NSFW!",
         "loading": "{EMOTE_LOADING} Obtendo um gif de uma garota gostosa ...",
         "message": "Menina sozinha"
+      },
+      "spank": {
+        "description": "De um tapa na bunda de alguém pervertido(a).\n\nEste comando só pode ser usado em canais NSFW!",
+        "mention_bot": "Tentando dar um tapa em uma bunda de robô {user}? Isso quebraria sua mão...",
+        "mention_purr": "Você realmente acha que eu permitiria isso {user}?",
+        "mention_self": "Se você realmente quer que batam em sua bunda, encontre alguém para fazer isso por você {user}.",
+        "mention_snuggle": "NÃO {user}! Você não vai tocar em minha irmãzinha seu pervertido!",
+        "message": "{user} está dando tapas na bunda de {target}",
+        "no_mention": "Por favor, mencione um usuário do qual você deseja sar um tapa",
+        "request": {
+          "denied": "{target} não quer tomar tapas seus {user}.",
+          "message": "Ei {target}!\n{user} quer dar tapas em sua bunda. concorda?",
+          "open": "Relaxe {user}. Você já pediu a alguém então fique paciente..."
+        },
+        "special_user": "I-I promete que eu serei uma boa menina. J-just não me castigue demais {user}. >////<"
       },
       "threesome": {
         "description": "Permite que você pergunte a **2** pessoas, se elas querem fazer sexo com você.\nPor padrão é `--ffm` (2 Femininos, 1 Masculino) é usado, mas você pode usar `--mmf` ou `--fff` para 2 Masculinos, 1 feminino e somente femininos respectivamente.\n\nEsse comando só pode ser executado em canais com rótulo NSFW!",
@@ -642,6 +657,7 @@
     }
   },
   "request": {
+    "accepted": "{target} aceitou o seu pedido {user}.",
     "buttons": {
       "accept": "Aceitar",
       "deny": "Negar",
@@ -650,7 +666,7 @@
       "fuck_yaoi": "Yaoi (Gay)",
       "fuck_yuri": "Yuri (Lesbica)"
     },
-    "accepted": "{target} aceitou o seu pedido {user}.",
+    "message": "{text}\nClique em \"Aceitar\" para aceitar ou \"Negar\" para negar o pedido.\n\n> **Este pedido expirará depois de 1 minuto!**",
     "timed_out": "Sua solicitação expirou em {user}. {target} não respondeu rápido o suficiente."
   },
   "snuggle": {
@@ -767,6 +783,11 @@
       },
       "pussylick": {
         "mention_snuggle": "Oi. Eu não quero que você me lamba *lá* {user}!"
+      },
+      "spank": {
+        "mention_purr": "NÃO! Você não vai botar um dedo em minha Irmã {user}!",
+        "mention_snuggle": "\\*Foge* N-não! Eu não quero essas coisas {user}!",
+        "special_user": "M-mas {user}! Você deve fazer isso com minha irmã! Ela é muito mais travessa do que eu."
       },
       "threesome": {
         "mention_snuggle": "Eu não sou destas coisas {user}!"

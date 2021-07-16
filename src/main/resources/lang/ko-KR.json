@@ -67,7 +67,7 @@
         "message": "{user}가 울고있어"
       },
       "dance": {
-        "description": "당신을 춤추게 합니다. ;-;",
+        "description": "당신을 춤추게 합니다. ~(^.^)~",
         "loading": "{EMOTE_LOADING} 춤을 추기 위해 좋은 노래를 찾는중...",
         "message": "{user}가 춤추고 있어"
       },
@@ -89,7 +89,7 @@
         "no_mention": "최소한 음식을 받을 상대 한 명을 언급해줘!",
         "request": {
           "denied": "{target}이(가) {user}의 음식을 먹고싶지 않나봐.",
-          "message": "{target}!\n{user}이(가) 널 위해 음식을 준비했어. 한번 먹어볼래?\n수락하려면 \"수락\" 을 눌러. \"거절\" 을 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "message": "{target}!\n{user}가 먹을것을 좀 주려고하는데, 먹고싶어?",
           "open": "이미 누군가에게 주고 있잖아, {user}! 적어도 그 사람이 음식을 받던 말던 기다려줘."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "최소한 꼬리를 만지고 싶은 상대 한 명을 언급해줘!",
         "request": {
           "denied": "{target}은(는) {user}이(가) 꼬리를 만져주는게 싫은가봐.",
-          "message": "{target}!\n{user}이(가) 네 꼬리를 만져보고 싶대. 그래도 괜찮아?\n수락하려면 \"수락\" 을 눌러. \"거절\" 을 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "message": "{target}!\n{user}가 네 꼬리를 만지고 싶다는데, 괜찮아?",
           "open": "이미 누군가에게 꼬리를 만져달라고 했잖아, {user}! 적어도 그게 받아들여지던, 거부되던, 만료되길 기다려 줘."
         },
         "special_user": "ㅎ-하지만, {user}. 여기서 하기엔 너무 야해."
@@ -352,7 +352,7 @@
             "multiple": "서버부스트 {boost} 개",
             "single": "서버부스트 1 개",
             "title": "서버부스트 중",
-            "value": "{boosts} (레벨 {level} {BOOST_TIER})"
+            "value": "{boosts} (레벨 {level}{BOOST_TIER})"
           },
           "channels_title": "채널",
           "channels_value": "{EMOTE_CATEGORY} 합계: {channels_total}\n\n{EMOTE_TEXT} 텍스트 채널: {channels_text}\n{EMOTE_VOICE} 음성 채널: {channels_voice}",
@@ -565,7 +565,7 @@
         "no_mention": "최소한 빨아줄 상대 한 명을 언급해줘!",
         "request": {
           "denied": "{target}은(는) {user}의 입을 원하지 않는 모양이야. :/",
-          "message": "{target}!\n{user}이(가) 입으로 야한걸 해주고 싶대. 너도 하고싶어?\n수락하려면 \"수락\" 을 눌러. \"거절\" 을 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "message": "{target}!\n{user}가 입으로 네 막대를 기분좋게 해주고 싶다는데, 원해?",
           "open": "욕심부리지마, {user}! 이미 네가 부탁한 사람이 있잖아."
         },
         "special_user": "좋아 자기. 조금 시간을 줄래? \"장난감\"이 좀 필요하니까.\n\\*{user}의 손을 잡고 방에서 사라진다*"
@@ -615,7 +615,7 @@
         "no_mention": "최소한 핥아줄 상대 한 명을 언급해줘!",
         "request": {
           "denied": "{target}은(는) {user}이(가) 핥아주는 걸 원하지 않나봐... 사실 핥아줄 부위가 없는거 아냐?",
-          "message": "{target}!\n{user}이(가) 네 은밀한 부분을 핥아주고 싶대. ...핥아질 부위를 가지고 있는건 맞지?\n수락하려면 \"수락\" 을 눌러. \"거절\" 을 누르면 거절할 수 있어.\n\n> **1분이 지나면 자동으로 거절이야!**",
+          "message": "{target}!\n{user}가 입으로 네 가랑이 사이를 기분좋게 해주고 싶다는데, 원해?",
           "open": "애정에 굶주리기라도 한거야, {user}? 이미 네가 부탁한 사람이 있잖아. 만료되기를 기다리던가, 대답을 기다려."
         },
         "special_user": "헤헤... 너 지금 *\"목마른\"* 상태구나, {user}?\n\\*{user}의 손을 잡고 함께 사라진다*"
@@ -624,6 +624,21 @@
         "description": "혼자서 즐기고 있는 소녀의 움짤을 보여줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",
         "loading": "{EMOTE_LOADING} 야한 여자아이 불러오는 중...",
         "message": "야한 여자"
+      },
+      "spank": {
+        "description": "엉덩이를 찰싹 때려줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",
+        "mention_bot": "로봇을 때리려는거야? 그러다 {user}의 손만 부러질걸.",
+        "mention_purr": "{user}, 내가 그걸 허락해줄거라고 생각한거야?",
+        "mention_self": "정말 엉덩이를 맞고 싶다면, 그렇게 해줄 누군가를 찾는게 어때, {user}?",
+        "mention_snuggle": "멈춰 {user} 이 변태자식. 내 동생에게서 손 때!",
+        "message": "{user}이(가) {target}의 엉덩이를 찰싹 때려주고 있어!",
+        "no_mention": "최소한 때려줄 상대 한 명을 언급해줘!",
+        "request": {
+          "denied": "{target}은(는) {user}에게 엉덩이를 보이고 싶지 않나봐.",
+          "message": "{target}!\n{user}가 네 엉덩이를 때려주고 싶다는데, 좋아?",
+          "open": "진정해 {user}. 이미 다른 사람에게 물어봤잖아?"
+        },
+        "special_user": "약속할께.. 좋은 아이가 될게요! 너무 벌주지 말아줘, {user}! >////<"
       },
       "threesome": {
         "description": "서로 다른 두 대상에게 당신이 그들과 뜨거운 밤을 보내도 되는지 물어봅니다.\n기본적으로는 `--ffm`(여자 2, 남자 1)가 지정되지만, `--mmf` 를 통해 남자 2, 여자 1을, `--fff`를 통해 여자 셋이서 즐기도록 설정할 수 있습니다.\n\n연령 제한 채널에서만 사용가능합니다.",
@@ -642,6 +657,7 @@
     }
   },
   "request": {
+    "accepted": "{target}이(가) {user}의 요청을 수락했어.",
     "buttons": {
       "accept": "동의",
       "deny": "거부",
@@ -650,7 +666,7 @@
       "fuck_yaoi": "장미",
       "fuck_yuri": "백합"
     },
-    "accepted": "{target}이(가) {user}의 요청을 수락했어.",
+    "message": "{text}\n\"Accept\" 를 누르면 승낙, \"Deny\"를 누르면 거절이야.\n\n> **1분 안에 결정해!**",
     "timed_out": "{user}, 네 요청에 대한 대기시간이 만료되었어. {target}이(가) 시간 내로 반응하지 않았거든."
   },
   "snuggle": {
@@ -767,6 +783,11 @@
       },
       "pussylick": {
         "mention_snuggle": "ㅇ-야! 난 네가 내 *그곳*을 핥기를 원하지 않아, {user}!"
+      },
+      "spank": {
+        "mention_purr": "안돼! 내 언니에게 손 대지마, {user}!",
+        "mention_snuggle": "\\*도망가는 중* 안돼, {user}! 난 그런거 싫어!",
+        "special_user": "그-그래도 {user}! 그런건 언니랑 해! 언니가 더.. 그 쪽 취향이니까."
       },
       "threesome": {
         "mention_snuggle": "ㄴ-나는 그런거 절대로 싫어, {user}!"

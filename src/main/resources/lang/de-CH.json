@@ -89,7 +89,7 @@
         "no_mention": "Bitte erwähne jemandem, um etwas Essen zu geben.",
         "request": {
           "denied": "{target} will kein Essen von dir {user}",
-          "message": "Hey {target}!\n{user} möchte dir etwas Essen geben. Willst du das auch?\nKlick auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte dir etwas zu essen geben. Willst du das auch?",
           "open": "Du hast bereits jemanden {user}gefragt! Bitte warte, bis die Anfrage angenommen oder abgelehnt wird, oder bis sie abgelaufen ist."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Bitte erwähne jemanden, welchen du fluffen willst.",
         "request": {
           "denied": "{target} möchte nicht von dir geflufft werden {user}",
-          "message": "Hey {target}!\n{user} möchte deinen Schweif fluffen. Möchtest du das auch?\nKlick auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte deinen Schwanz verwuscheln. Willst du das auch?",
           "open": "Du hast bereits jemanden zum fluffen gefragt {user}! Bitte warte bis die Anfrage angenommen oder abgelehnt wird, oder bis sie abgelaufen ist."
         },
         "special_user": "A-aber {user}. Es ist unanständig das in der Öffentlichkeit zu tun."
@@ -352,7 +352,7 @@
             "multiple": "{boost} Boosts",
             "single": "1 Boost",
             "title": "Boosten",
-            "value": "{boosts} (Level {level} {BOOST_TIER})"
+            "value": "{boosts} (Level {level}{BOOST_TIER})"
           },
           "channels_title": "Kanäle",
           "channels_value": "{EMOTE_CATEGORY} Total: {channels_total}\n\n{EMOTE_TEXT} Textkanäle: {channels_text}\n{EMOTE_VOICE} Sprachkanäle: {channels_voice}",
@@ -565,7 +565,7 @@
         "no_mention": "Bitte erwähnen einen User den du lutschen willst.",
         "request": {
           "denied": "{target} möchte nicht von dir einen geblasen bekommen {user}. :/",
-          "message": "Hey {target}!\n{user} möchte dir einen Blowjob geben. Willst du das auch?\nKlick auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\n\n> **Diese Anfrage wird in 1 Minute ablaufen!**",
+          "message": "Hey {target}!\n{user} möchte dir einen Blowjob geben. Willst du das auch?",
           "open": "Sei nicht so gierig {user}! Warte bis deine vorherige Anfrage angenommen, abgelehnt oder abgelaufen ist."
         },
         "special_user": "Okay Süsse. Lass mich schnell meine \"Spielzeuge\" holen, so dass wir Spass haben können.\n\\*nimmt {user}'s Hand und verschwindet in ihrem Raum*"
@@ -615,7 +615,7 @@
         "no_mention": "Bitte erwähne jemanden, um dessen Pussy zu lecken.",
         "request": {
           "denied": "{target} möchte nicht, dass du ihre Pussy leckst {user}... Hat Sie überhaupt eine?",
-          "message": "Hey {target}!\n{user} möchte gerne deine Pussy lecken. Willst du das auch?\nKlick auf \"Akzeptieren\" zum akzeptieren oder auf \"Ablehnen\" zum ablehnen.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
+          "message": "Hey {target}!\n{user} möchte deine Pussy lecken. Willst du das?",
           "open": "Bist du durstig? Du hast bereits eine offene Anfrage {user}!\nWarte, bis diese angenommen, abgelehnt oder abgelaufen ist."
         },
         "special_user": "Hehehe... Du bist *\"durstig\"* {user}, nicht wahr?\n\\*nimmt {user}'s hand und verschwindet in einem Raum*"
@@ -624,6 +624,21 @@
         "description": "Gibt dir ein gif von einer Frau, welche Spass mit sich selbst hat.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwenden werden!",
         "loading": "{EMOTE_LOADING} Erhalte ein gif von einer heissen Frau...",
         "message": "Einzelne Frau"
+      },
+      "spank": {
+        "description": "Versohle den Hintern von jemand ungezogenem.\n\nDieser Befehl kann nur in NSFW-markierten Kanälen ausgeführt werden.",
+        "mention_bot": "Versuchst du einen Robo-Hintern zu hauen {user}? Das würde nur deine Hand brechen...",
+        "mention_purr": "Glaubst du wirklich dass ich sowas erlaube {user}?",
+        "mention_self": "Wenn du wirklich deinen Hintern versohlt kriegen willst, finde jemanden der das für dich tut {user}.",
+        "mention_snuggle": "NEIN {user}! Du wirst meine kleine Schwester nicht anfassen du Perversling!",
+        "message": "{user} versohlt den Hintern von {target}",
+        "no_mention": "Bitte erwähne einen Benutzer dessen Hintern du versohlen willst",
+        "request": {
+          "denied": "{target} möchte seinen/ihren Hintern nicht von dir versohlt bekommen {user}.",
+          "message": "Hey {target}!\n{user} möchte deinen Hintern versohlen. Willst du das?",
+          "open": "Entspann dich {user}. Du hast bereits jemanden gefragt also gedulde dich..."
+        },
+        "special_user": "I-ich verspreche dass ich ein gutes Mädchen sein werde. B-bestrafe mich einfach nicht zu hart {user}. >////<"
       },
       "threesome": {
         "description": "Lässt dich **2** Personen fragen, ob sie Sex mit dir haben wollen.\nStandardmässig wird `--ffm` (2 Frauen, 1 Mann) verwendet, aber du kannst entweder `--mmf` oder `--fff` für 2 Männer, 1 Frau oder nur Frauen verwenden.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwenden werden!",
@@ -642,6 +657,7 @@
     }
   },
   "request": {
+    "accepted": "{target} hat deine Anfrage akzeptiert {user}.",
     "buttons": {
       "accept": "Akzeptieren",
       "deny": "Ablehnen",
@@ -650,7 +666,7 @@
       "fuck_yaoi": "Yaoi (Schwul)",
       "fuck_yuri": "Yuri (Lesbisch)"
     },
-    "accepted": "{target} hat deine Anfrage akzeptiert {user}.",
+    "message": "{text}\nKlicke auf \"Akzeptieren\" zum akzeptieren oder \"Ablehnen\" zum ablehnen der Anfrage.\n\n> **Diese Anfrage läuft in 1 Minute ab!**",
     "timed_out": "Deine Anfrage is abgelaufen {user}. {target} hat nicht schnell genug reagiert."
   },
   "snuggle": {
@@ -767,6 +783,11 @@
       },
       "pussylick": {
         "mention_snuggle": "H-hey. Ich will nicht, dass du mich *dort* leckst {user}!"
+      },
+      "spank": {
+        "mention_purr": "NEIN! Du wirst keine Hand gegen meine Schwester erheben {user}!",
+        "mention_snuggle": "\\*Rennt weg* N-nein! Ich möchte sowas nicht {user}!",
+        "special_user": "A-aber {user}! D-du solltest sowas mit meiner Schwester machen! Sie ist viel ungezogener als ich."
       },
       "threesome": {
         "mention_snuggle": "I-ich steh nicht auf sowas {user}!"

@@ -89,7 +89,7 @@
         "no_mention": "Lütfen yemek vermek istediğin kişiyi etiketle.",
         "request": {
           "denied": "{target} senden yemek istemiyor {user}",
-          "message": "Selam {target}!\n{user} sana yiyecek bir şeyler vermek istiyor. Aç mısın?\nKabul etmek için \"Kabul Et\", reddetmek için \"Reddet\" butonuna tıkla.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "message": "Selam {target}!\n{user}, sana yemen için biraz yemek vermek istiyor. Bunu sen de ister misin?",
           "open": "{user} zaten birine bu soruyu sordun! Lütfen talebin kabul edilmesini, reddedilmesini veya zaman aşımına uğramasını bekle."
         }
       },
@@ -105,7 +105,7 @@
         "no_mention": "Lütfen kuyruğunu kabartmak istediğin kişiyi etiketle.",
         "request": {
           "denied": "{target} senden onun kuyruğunu kabartmanı istemiyor {user}",
-          "message": "Selam {target}!\n{user} senin kuyruğunu kabartmak istiyor. Sen de ister misin?\nKabul etmek için \"Kabul Et\", reddetmek için \"Reddet\" butonuna tıkla.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "message": "Selam {target}!\n{user} senin kuyruğunu kabartmak istiyor. Bunu sen de ister misin?",
           "open": "{user} zaten birine bu soruyu sordun! Lütfen talebin kabul edilmesini, reddedilmesini veya zaman aşımına uğramasını bekle."
         },
         "special_user": "A-ama {user}, bunu herkesin içinde yapamayız."
@@ -352,7 +352,7 @@
             "multiple": "{boost} takviye",
             "single": "1 takviye",
             "title": "Takviye",
-            "value": "{boosts} ( {BOOST_TIER} {level} Seviye )"
+            "value": "{boosts} (Seviye {level}{BOOST_TIER})"
           },
           "channels_title": "Kanallar",
           "channels_value": "{EMOTE_CATEGORY} Toplam: {channels_total}\n\n{EMOTE_TEXT} Metin Kanalları: {channels_text}\n{EMOTE_VOICE} Ses Kanalları: {channels_voice}",
@@ -564,8 +564,8 @@
         "message": "{user}, {target} adlı üyeye oral seks yapıyor!",
         "no_mention": "Lütfen emmek istediğin kişiyi etiketle.",
         "request": {
-          "denied": "{target} senden onun onu emmeni istemiyor {user}. :/",
-          "message": "Selam {target}!\n{user} sana oral seks yapmak istiyor. İster misin?\nKabul etmek için \"Kabul Et\", reddetmek için \"Reddet\" butonuna tıkla.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "denied": "{target} senden onu emmeni istemiyor {user}. :/",
+          "message": "Hey {target}!\n{user} sana oral seks yapmak istiyor. Bunu sen de ister misin?",
           "open": "Bu kadar açgözlü olma {user}! Önceki isteğin kabul edilene, reddedilene veya zaman aşımına uğrayana kadar bekle."
         },
         "special_user": "Tamam tatlım. Gidip *\"oyuncaklarımı\" alayım bu sayede biraz eğlenebiliriz.\n\\*{user} adlı üyenin elini tutar ve odasına doğru koşar*"
@@ -615,7 +615,7 @@
         "no_mention": "Lütfen kukusunu yalamak istediğin kişiyi etiketle.",
         "request": {
           "denied": "{target} onun kukusunu yalamanı istemiyor {user}...",
-          "message": "Selam {target}!\n{user} senin kukunu yalamak istiyor. Sen de ister misin?\nKabul etmek için \"Kabul Et\", reddetmek için \"Reddet\" butonuna tıkla.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
+          "message": "Hey {target}!\n{user} senin kukunu yalamak istiyor. Bunu sen de ister misin?",
           "open": "Susadın mı? Zaten bu soruyu birine sormuşsun {user}!\nLütfen isteğinin kabul edilmesini, reddedilmesini veya zaman aşımına uğramasını bekle."
         },
         "special_user": "Hehehe... {user} *\"susadın\"*, değil mi?\n\\*{user} adlı üyenin elini tutar* ve odaya doğru koşmaya başlar*"
@@ -624,6 +624,21 @@
         "description": "Kendisiyle eğlenen bir kızın gifini gönderir.\n\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
         "loading": "{EMOTE_LOADING} Ateşli bir kız gifi aranıyor...",
         "message": "Yalnız kız"
+      },
+      "spank": {
+        "description": "Yaramaz birinin kıçına şaplak atar.\n\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir.",
+        "mention_bot": "Bir robotun kıçını mı tokatlamaya çalışıyorsun {user}? Bu sadece elini kırmana sebep olur...",
+        "mention_purr": "Gerçekten buna izin vereceğimi mi düşündün {user}?",
+        "mention_self": "Eğer gerçekten kendi kıçını şaplaklamak istiyorsan, bunu senin için yapacak başka birini bul {user}.",
+        "mention_snuggle": "HAYIR {user}! Benim kardeşime dokunmayacaksın seni Sapık!",
+        "message": "{user}, {target} adlı üyenin kıçını şaplaklıyor",
+        "no_mention": "Lütfen kıçını şaplaklamak istediğin kişiyi etiketle",
+        "request": {
+          "denied": "{target} senden onun kıçını şaplaklamanı istemiyor {user}.",
+          "message": "Selam {target}!\n{user} senin kıçını şaplaklamak istiyor. Bunu sen de ister misin?",
+          "open": "Sakinleş {user}. Bunu zaten birisinden istedin o yüzden biraz sabırlı ol..."
+        },
+        "special_user": "B-ben iyi bir kız olacağıma söz veriyorum. Lütfen beni çok ağır cezalandırma {user}. >///<"
       },
       "threesome": {
         "description": "**2** kişiye seninle seks yapıp yapmak istemediklerini sorar.\nVarsayılan olarak `--ffm` (2 Kadın, 1 Erkek) kullanılır, ancak 2 Erkek, 1 Kadın veya Yalnızca Kadınlar için `--mmf` veya `--fff` argümanlarını kullanabilirsin.\n\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
@@ -642,6 +657,7 @@
     }
   },
   "request": {
+    "accepted": "{target}, {user} adlı üyenin isteiğini kabul etti",
     "buttons": {
       "accept": "Kabul Et",
       "deny": "Reddet",
@@ -650,7 +666,7 @@
       "fuck_yaoi": "Yaoi (Eşcinsel)",
       "fuck_yuri": "Yuri (Lezbiyen)"
     },
-    "accepted": "{target}, {user} adlı üyenin isteiğini kabul etti",
+    "message": "{text}\nİsteği kabul etmek için \"Kabul Et\", reddetmek için \"Reddet\" butonuna tıkla.\n\n> **Bu istek 1 dakika sonra zaman aşımına uğrayacak!**",
     "timed_out": "İsteğin zaman aşımına uğradı {user}. {target} yeterince hızlı cevap veremedi."
   },
   "snuggle": {
@@ -767,6 +783,11 @@
       },
       "pussylick": {
         "mention_snuggle": "H-hey. Beni *burada* yalamanı istemiyorum {user}!"
+      },
+      "spank": {
+        "mention_purr": "HAYIR! Kardeşime elini bile sürmeyeceksin {user}!",
+        "mention_snuggle": "\\*Uzağa koşar* H-hayır! Böyle şeyler istemiyorum {user}!",
+        "special_user": "A-ama {user}! B-bunu kardeşimle yapmalısın! O benden daha yaramaz."
       },
       "threesome": {
         "mention_snuggle": "B-ben böyle şeylere ilgi duymuyorum {user}!"
