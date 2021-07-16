@@ -32,6 +32,7 @@ public final class LangUtils{
     public String getString(String language, String path){
         switch(language.toLowerCase()){
             case "de-ch":
+            case "de-de":
             case "en-owo":
             case "es-es":
             case "fr-fr":
@@ -51,6 +52,7 @@ public final class LangUtils{
     public List<String> getStringList(String language, String path){
         switch(language.toLowerCase()){
             case "de-ch":
+            case "de-de":
             case "en-owo":
             case "es-es":
             case "fr-fr":
@@ -69,6 +71,7 @@ public final class LangUtils{
     
     public enum Language{
         DE_CH ("\uDDE8", "\uDDED"),
+        DE_DE ("\uDDE9", "\uDDEA"),
         EN    ("\uDDEC", "\uDDE7"),
         EN_OWO("\uDDEC", "\uDDE7"),
         ES_ES ("\uDDEA", "\uDDF8"),
@@ -90,8 +93,7 @@ public final class LangUtils{
         
         public static String getEmote(String lang){
             for(Language language : values()){
-                String name = language.name().toLowerCase().replace("_", "-");
-                if(name.equals(lang))
+                if(lang.equals(language.name().toLowerCase().replace("_", "-")))
                     return language.emote;
             }
             
@@ -100,9 +102,8 @@ public final class LangUtils{
         
         public static String getString(String lang){
             for(Language language : values()){
-                String name = language.name().toLowerCase().replace("_", "-");
-                if(name.equals(lang))
-                    return language.emote + " " + name;
+                if(lang.equals(language.name().toLowerCase().replace("_", "-")))
+                    return language.emote + " " + lang;
             }
             
             return UNKNOWN.emote + " " + UNKNOWN.name().toLowerCase();

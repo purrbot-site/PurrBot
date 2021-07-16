@@ -114,6 +114,7 @@ public class PurrBot {
                 .addFile("data", "/data.json", "./data.json")
                 .addFile("random", "/random.json", "./random.json")
                 .addLang("de-CH")
+                .addLang("de-DE")
                 .addLang("en")
                 .addLang("en-OWO")
                 .addLang("es-ES")
@@ -356,7 +357,7 @@ public class PurrBot {
             commands.postCommands();
     
             scheduler.scheduleAtFixedRate(() -> {
-        
+                
                 getShardManager().setActivity(Activity.of(
                         Activity.ActivityType.WATCHING,
                         getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
@@ -371,14 +372,14 @@ public class PurrBot {
                 stats.postStats(
                         getShardManager().getGuildCache().size(),
                         getShardManager().getShardCache().size()
-                );
+                ); 
             }, 1, 5, TimeUnit.MINUTES);
         }else{
             scheduler.scheduleAtFixedRate(() -> 
-                    getShardManager().setActivity(Activity.of(
-                            Activity.ActivityType.WATCHING,
-                            getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
-                    ))
+                getShardManager().setActivity(Activity.of(
+                    Activity.ActivityType.WATCHING,
+                    getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
+                ))
             , 1, 5, TimeUnit.MINUTES);
         }
     }

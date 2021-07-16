@@ -90,6 +90,7 @@ public class CommandLoader {
                 new CmdLewd(bot),
                 new CmdPussylick(bot),
                 new CmdSolo(bot),
+                new CmdSpank(bot),
                 new CmdThreesome(bot),
 
                 // Owner

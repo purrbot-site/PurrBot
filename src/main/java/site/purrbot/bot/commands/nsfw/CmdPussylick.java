@@ -87,6 +87,6 @@ public class CmdPussylick implements Command{
             return;
         }
     
-        bot.getRequestUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.NSFW_PUSSYLICK);
+        bot.getRequestUtil().handleButtonEvent(tc, member, target, HttpUtil.ImageAPI.NSFW_PUSSYLICK);
     }
 }

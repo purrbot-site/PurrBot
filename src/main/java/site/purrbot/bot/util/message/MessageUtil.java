@@ -20,12 +20,12 @@ package site.purrbot.bot.util.message;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.TimeFormat;
 import site.purrbot.bot.PurrBot;
 
 import java.awt.Color;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.time.Instant;
 import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -64,12 +64,10 @@ public class MessageUtil {
     }
 
     public String formatTime(TemporalAccessor time){
-        long timestamp = (Instant.from(time).toEpochMilli() / 1000);
-        
         return String.format(
-                "<t:%d:f> (<t:%d:R>)",
-                timestamp,
-                timestamp
+                "%s (%s)",
+                TimeFormat.DATE_TIME_SHORT.format(time),
+                TimeFormat.RELATIVE.format(time)
         );
     }
 

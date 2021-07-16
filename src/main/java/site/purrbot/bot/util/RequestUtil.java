@@ -62,7 +62,7 @@ public class RequestUtil{
         );
     }
     
-    public void handleReactionEvent(TextChannel tc, Member author, Member target, HttpUtil.ImageAPI api){
+    public void handleButtonEvent(TextChannel tc, Member author, Member target, HttpUtil.ImageAPI api){
         Guild guild = tc.getGuild();
         
         if(queue.getIfPresent(getQueueString(api.getName(), guild.getId(), author.getId())) != null){
@@ -70,8 +70,11 @@ public class RequestUtil{
             return;
         }
         
+        String text = bot.getMsg(guild.getId(), api.getPath() + "request.message", author.getEffectiveName(), target.getAsMention());
+        
         tc.sendMessage(
-                bot.getMsg(guild.getId(), api.getPath() + "request.message", author.getEffectiveName(), target.getAsMention())
+                bot.getMsg(guild.getId(), "request.message")
+                   .replace("{text}", text)
         ).setActionRow(
                 getButton(guild.getId(), api.getName(), true),
                 getButton(guild.getId(), api.getName(), false)
@@ -90,7 +93,7 @@ public class RequestUtil{
     }
     
     public void handleEdit(TextChannel tc, Message msg, HttpUtil.ImageAPI api, Member author, List<String> targets){
-        bot.getHttpUtil().getImage(api).whenComplete(((result, ex) -> {
+        bot.getHttpUtil().getImage(api).whenComplete((result, ex) -> {
             Guild guild = tc.getGuild();
             String text;
             
@@ -122,7 +125,7 @@ public class RequestUtil{
             }
             
             sendResponse(msg, tc, result, author, targets, text);
-        }));
+        });
     }
     
     private void handleReaction(Message msg, TextChannel tc, Member author, Member target, HttpUtil.ImageAPI api){

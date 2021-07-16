@@ -26,78 +26,95 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
-        name = "Blowjob",
-        description = "purr.nsfw.blowjob.description",
-        triggers = {"blowjob", "bj", "bjob", "succ"},
+        name = "Spank",
+        description = "purr.nsfw.spank.description",
+        triggers = {"spank", "spanking"},
         attributes = {
                 @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}blowjob <@user>"),
-                @CommandAttribute(key = "help", value = "{p}blowjob <@user>")
+                @CommandAttribute(key = "usage", value = "{p}spank <@user>"),
+                @CommandAttribute(key = "help", value = "{p}spank <@user>")
         }
 )
-public class CmdBlowjob implements Command{
-
+public class CmdSpank implements Command{
+    
     private final PurrBot bot;
-
-    public CmdBlowjob(PurrBot bot){
+    
+    public CmdSpank(PurrBot bot){
         this.bot = bot;
     }
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.blowjob.no_mention");
-            return;
-        }
-
-        Member target = msg.getMentionedMembers().get(0);
-
-        if(target.equals(guild.getSelfMember())){
-            if(bot.isBeta()){
-                if(bot.isSpecial(member.getId())){
-                    tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.special_user", member.getAsMention())
-                    ).queue();
-                    return;
-                }
-                tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_snuggle", member.getAsMention())
-                ).queue();
-            }else{
-                if(bot.isSpecial(member.getId())){
-                    tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.nsfw.blowjob.special_user", member.getAsMention())
-                    ).queue();
-                    return;
-                }
-                tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_purr", member.getAsMention())
-                ).queue();
-            }
-            return;
-        }
-
-        if(target.equals(member)){
-            if(bot.isBeta()){
-                tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.nsfw.blowjob.mention_self", member.getAsMention())
-                ).queue();
-            }else{
-                tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.nsfw.blowjob.mention_self", member.getAsMention())
-                ).queue();
-            }
-            return;
-        }
-
-        if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.blowjob.mention_bot");
+            bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.spank.no_mention");
             return;
         }
         
-        bot.getRequestUtil().handleButtonEvent(tc, member, target, HttpUtil.ImageAPI.NSFW_BLOWJOB);
+        Member target = msg.getMentionedMembers().get(0);
+        if(isPurrOrSnuggle(target.getId(), member, tc))
+            return;
+        
+        if(target.equals(member)){
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.nsfw.spank.mention_self", member.getAsMention())
+            ).queue();
+            return;
+        }
+        
+        if(target.getUser().isBot()){
+            tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.nsfw.spank.mention_bot", member.getAsMention())
+            ).queue();
+            return;
+        }
+        
+        bot.getRequestUtil().handleButtonEvent(tc, member, target, HttpUtil.ImageAPI.NSFW_SPANK);
+    }
+    
+    private boolean isPurrOrSnuggle(String memberId, Member member, TextChannel tc){
+        Guild guild = tc.getGuild();
+        if(memberId.equals(IDs.PURR)){
+            if(bot.isBeta()){
+                if(bot.isSpecial(member.getId())){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "snuggle.nsfw.spank.special_user", member.getAsMention())
+                    ).queue();
+                    return true;
+                }
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.spank.mention_purr", member.getAsMention())
+                ).queue();
+            }else{
+                if(bot.isSpecial(member.getId())){
+                    tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.nsfw.spank.special_user", member.getAsMention())
+                    ).queue();
+                    return true;
+                }
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.nsfw.spank.mention_purr", member.getAsMention())
+                ).queue();
+            }
+            return true;
+        }
+    
+        if(memberId.equals(IDs.SNUGGLE)){
+            if(bot.isBeta()){
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.nsfw.spank.mention_snuggle", member.getAsMention())
+                ).queue();
+            }else{
+                tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.nsfw.spank.mention_snuggle", member.getAsMention())
+                ).queue();
+            }
+            return true;
+        }
+        
+        return false;
     }
 }

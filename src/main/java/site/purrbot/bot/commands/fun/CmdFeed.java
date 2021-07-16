@@ -87,6 +87,6 @@ public class CmdFeed implements Command{
             return;
         }
         
-        bot.getRequestUtil().handleReactionEvent(tc, member, target, HttpUtil.ImageAPI.FEED);
+        bot.getRequestUtil().handleButtonEvent(tc, member, target, HttpUtil.ImageAPI.FEED);
     }
 }
