@@ -37,7 +37,8 @@
 
 <!-- Widgets -->
 [widget_discordlist_space]: https://api.discordlist.space/v2/bots/425382319449309197/widget  
-[widget_discord_boats]: https://discord.boats/api/widget/425382319449309197
+[widget_discord_boats]: https://discord.boats/api/widget/425382319449309197  
+[widget_discordservices_net]: https://discordservices.net/bot/425382319449309197/widget.svg
 
 <!-- Botlists -->
 [discordlist_space]: https://discordlist.space/bot/425382319449309197  
@@ -130,6 +131,8 @@ Feel free to upvote her to show your support.
 
 ## [Discordservices.net][discordservices_net]
 > A brand new botlist that aims to deliver the best experience for its users and bot developers.
+
+![widget_discordservices_net]
 
 # Useful Links
 - [Discord Server][Discord]
