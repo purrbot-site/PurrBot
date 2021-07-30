@@ -5,6 +5,12 @@
   "errors": {
     "administrator": "**Administrator Berechtigung erkannt**\nIch habe die `Administrator` Berechtigung welches ein grosses Sicherheitsrisiko ist!\n__Ich werde keine Befehle ausführen so lange ich diese Berechtigung habe, um möglichen Missbrauch zu verhindern.__\n\nUm dies zu beheben, führe eines der folgenden Dinge aus:\n- Entferne die Rolle, welche die Administrator Rechte hat von mir.\n- Entferne die Berechtigung von der Rolle/den Rollen welche unten aufgeführt ist.\n\nAdministrator wurde in folgenden Rollen gefunden:\n{roles}",
     "api_error": "Es gab einen Fehler beim erreichen der API! Bitte versuch es später erneut.",
+    "fetch": {
+      "booster_role": "Kann die Booster-Rolle vom Support-Server nicht abrufen. Bitte versuche es später noch einmal und wenn dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})",
+      "guild": "Der Support-Server konnte nicht abgerufen werden. Bitte versuche es später noch einmal und falls dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})",
+      "member": "Mitgliederinformationen konnten nicht vom Support-Server abgerufen werden. Bitte versuche es später noch einmal und wenn dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})",
+      "patreon_roles": "Patreon Rollen konnten nicht vom Support-Server abgerufen werden. Bitte versuche es später noch einmal und falls dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})"
+    },
     "missing_perms": {
       "self": "Mir fehlt die Berechtigung `{permission}` dafür.",
       "self_channel": "Mir fehlt die Berechtigung `{permission}` im Textkanal {channel} dafür!",
@@ -302,10 +308,12 @@
         "invalid_color": "Die angegebene Farbe war ungültig!\nUnterstützt werden `hex:rrggbb`, `rgb:r,g,b` oder `random`!",
         "invalid_icon": "Ungültiges Icon `{icon}`!\nÜberprüfe das [Wiki]({wiki_icon}) für verfügbare Icons.",
         "no_bg": "Bitte gib einen Hintergrund an!\nEine Liste von Hintergründen kannst du [hier]({wiki_bg}) finden.",
+        "no_booster": "Der Serverbesitzer muss ein Booster auf dem [Support-Server]({guild_invite}) sein, um dies zu nutzen!",
         "no_channel": "Kein Textkanal angegeben! Stell sicher, dass du einen erwähnst.",
         "no_color": "Keine Farbe angegeben!\nBitte verwende entweder `hex:rrggbb`, `rgb:r,g,b` oder `random`",
         "no_icon": "Bitte gib ein Icon an!\nEine Liste von Icons kannst du [hier]({wiki_icon}) finden.",
         "no_msg": "Keine Nachricht angegeben!",
+        "no_patreon": "Der Serverbesitzer muss ein Stufe 2 oder Stufe 3 [Patreon Mitglied]({patreon_url}) sein, um dies nutzen zu können.",
         "placeholders": {
           "message_title": "Aktuelle Nachricht",
           "note_title": "Hinweis",
@@ -323,10 +331,12 @@
         "dm_success": "Überprüfe deine privaten Nachrichten {user}!",
         "dm_failure": "I konnte dir keine DM senden {user}. Hast du sichergestellt, dass deine DMs offen sind?",
         "embed": {
+          "booster_title": "Server Booster",
           "description": "Der Betrieb dieses Bots ist teuer. Deshalb sind alle Spenden - ob gross oder klein - willkommen.\nDu kannst wählen, ob du nur einmal mit PayPal oder Ko-fi spenden möchtest oder ob du fortwährende Spenden bei Patreon machen möchtest.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Einzelne Spende)\n{KOFI} [`Ko-fi`]({kofi_url}) (Einzelne Spende)\n{PATREON} [`Patreon`]({patreon_url}) (Kontinuierliche Spenden)",
-          "donators_more": "*und {remaining} weitere...*",
+          "donate_title": "Server Booster und Spender",
+          "donate_value": "Unten findest du Listen von Leuten, die Spender sind oder den [Support Server]({guild_invite}) gebootet haben.\nSpenden und Server boosten entsperren bestimmte Perks wie spezielle Willkommens-Banner oder die Option, deine eigenen zu nutzen!\nWenn dies für dich attraktiv klingt, solltest du dir überlegen, den Server zu boosten oder ein Stufe 2+ Patreon Mitglied zu werden.\nEinzelne Spenden sind auch willkommen!",
           "donators_title": "Spender",
-          "donators_value": "Alle Spender - entweder einzelne oder kontinuierliche Spenden - sind unten als Dankeschön aufgelistet.\nDank ihnen kann der Bot für alle aktiv und kostenlos bleiben!\nWenn du aufgelistet werden möchtest, solltest du auf dem [~Nya Discord]({guild_invite}) sein undAndre_601 darüber kontaktieren!"
+          "more": "*Und viele weitere...*"
         }
       },
       "emote": {
