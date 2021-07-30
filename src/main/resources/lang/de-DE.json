@@ -287,6 +287,7 @@
       },
       "welcome": {
         "description": "Heiße neue Mitglieder auf deinem Discord durch eine Nachricht und ein Bild willkommen!\nWenn du Argumente weglässt wird die aktuellen Einstellungen zeigen.\nSchau dir [den Wiki-Artikel]({wiki_welcome}) für Hilfe an.",
+        "custom": "Benutzerdefiniert",
         "embed": {
           "channel": "Kanal",
           "color_title": "Farbe",
@@ -304,9 +305,11 @@
         "few_args": "Nicht genügend Argumente angegeben!\nVerwende `{prefix}welcome` um alle verfügbaren Unterbefehle anzuzeigen.",
         "invalid_args": "Invalide Argumente!\nVerwende `{prefix}welcome` um alle verfügbaren Unterbefehle anzuzeigen.",
         "invalid_bg": "Invalider Hintergrund `{background}`\nÜberprüfe das [Wiki]({wiki_bg}) für verfügbare Hintergründe.",
+        "invalid_bg_width": "Ungültiger benutzerdefinierter Hintergrund.\nNur Bilder mit den Größen `2000x350` sind erlaubt!",
         "invalid_channel": "Bitte nenne mindestens einen gültigen Textkanal!",
         "invalid_color": "Die angegebene Farbe ist nicht gültig!\nUnterstützt sind `hex:rrggbb`, `rgb:r,g,b` oder `random`!",
-        "invalid_icon": "Das angegebene Icon ist ungültig!\nÜberprüfe das [Wiki]({wiki_icon}) für verfügbare Icons.",
+        "invalid_icon": "Invalider Hintergrund `{icon}`\nÜberprüfe das [Wiki]({wiki_icon}) für verfügbare Hintergründe.",
+        "invalid_icon_width": "Invalides benutzerdefiniertes Symbol.\nNur Bilder mit den Größen `320x320` sind erlaubt!",
         "no_bg": "Bitte gib einen Hintergrundnamen an!\nEine Liste an Hintergründen kannst du hier [here]({wiki_bg}) finden.",
         "no_booster": "Der Serverbesitzer muss die Booster-Rolle auf dem [Support Server]({guild_invite}) besitzen um dies zu verwenden!",
         "no_channel": "Kein Textkanal angegeben! Stelle sicher, dass du einen nennst.",
