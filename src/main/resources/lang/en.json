@@ -5,6 +5,12 @@
   "errors": {
     "administrator": "**Administrator Permission detected**\nI have the `Administrator` Permission which is a huge security risk!\n__I won't perform any commands as long as I have this Permission, to prevent possible abuse.__\n\nTo fix this, do one of the following things:\n- Remove the role which has Administrator from me.\n- Remove the Permission from the Role(s) listed below.\n\nAdministrator was detected in the following roles:\n{roles}",
     "api_error": "There was an error reaching the API! Please try again later.",
+    "fetch": {
+      "booster_role": "Unable to retrieve the Booster role from the Support Server. Please try again later and if this issue persists, report it on [our Discord Server]({guild_invite})",
+      "guild": "Unable to retrieve the Support Server. Please try again later and if this issue persists, report it on [our Discord Server]({guild_invite})",
+      "member": "Unable to retrieve Member information from the Support Server. Please try again later and if this issue persists, report it on [our Discord Server]({guild_invite})",
+      "patreon_roles": "Unable to retrieve Patreon roles from Support Server. Please try again later and if this issue persists, report it on [our Discord Server]({guild_invite})"
+    },
     "missing_perms": {
       "self": "I lack the permission `{permission}` for this.",
       "self_channel": "I lack the permission `{permission}` in the channel {channel} to do this!",
@@ -302,10 +308,12 @@
         "invalid_color": "The provided color was invalid!\nSupported are `hex:rrggbb`, `rgb:r,g,b` or `random`!",
         "invalid_icon": "The provided icon was invalid!\nCheck the [Wiki]({wiki_icon}) for available icons.",
         "no_bg": "Please provide a background name!\nA list of backgrounds can be found [here]({wiki_bg}).",
+        "no_booster": "The Server owner needs to be a Booster on the [Support Server]({guild_invite}) in order to use this!",
         "no_channel": "No text channel provided! Make sure you mention one.",
         "no_color": "No color provided!\nPlease either use `hex:rrggbb`, `rgb:r,g,b` or `random`",
         "no_icon": "Please provide an icon name!\nA list of icons can be found [here]({wiki_icon}).",
         "no_msg": "No message provided!",
+        "no_patreon": "The Server owner needs to be a Tier 2 or Tier 3 [Patreon Member]({patreon_url}) in order to use this.",
         "placeholders": {
           "message_title": "Current Message",
           "note_title": "Note",
@@ -323,10 +331,12 @@
         "dm_success": "Check your private messages {user}!",
         "dm_failure": "I couldn't send you a DM {user}. Did you make sure to have your DMs open?",
         "embed": {
+          "booster_title": "Server Booster",
           "description": "Running this bot is expensive. That's why any donations - either big or small - are welcome.\nYou can choose if you want to only donate once using PayPal or Ko-fi, or if you want to make continuous donations on Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donations)\n{KOFI} [`Ko-fi`]({kofi_url}) (Single Donation)\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donations)",
-          "donators_more": "*and {remaining} more...*",
+          "donate_title": "Server Booster and Donator",
+          "donate_value": "Below can you find lists of people that are donators or boosted the [Support Server]({guild_invite})\nDonations and Server boosting unlock specific perks such as special Welcome banners or the option to use your own ones!\nIf this sounds appealing to you consider boosting the server or becoming a Tier 2+ Patreon member.\nSingle donations are also welcome!",
           "donators_title": "Donators",
-          "donators_value": "All donators - Either single or continuous donations - are listed below as a thank you.\nThanks to them can the bot stay active for everyone and for free!\nIf you would like to get listed, make sure to be on the [~Nya Discord]({guild_invite}) and contact Andre_601 about it!"
+          "more": "*and many more...*"
         }
       },
       "emote": {
