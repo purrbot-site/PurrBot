@@ -287,6 +287,7 @@
       },
       "welcome": {
         "description": "Accueillez les membres de votre Discord avec un message et une image !\nNe fournir aucun argument affichera les paramètres actuels.\nConsultez [l'article du wiki]({wiki_welcome}) pour obtenir de l'aide.\n\nVous avez besoin de la permission `Gérer le serveur` pour cela.",
+        "custom": "Personnalisé",
         "embed": {
           "channel": "Salon",
           "color_title": "Couleur",
@@ -304,9 +305,11 @@
         "few_args": "Pas assez d'arguments fournis!\nExécutez `{prefix}welcome` pour voir toutes les sous-commandes disponibles.",
         "invalid_args": "Arguments invalides!\nExécutez `{prefix}welcome` pour voir toutes les sous-commandes disponibles.",
         "invalid_bg": "Arrière-plan invalide `{background}`\nVérifiez le [Wiki]({wiki_bg}) pour les fonds disponibles.",
+        "invalid_bg_width": "Fond personnalisé invalide.\nSeules les images avec les dimensions `2000x350` sont autorisées!",
         "invalid_channel": "Veuillez mentionner un salon textuel valide !",
         "invalid_color": "La couleur fournie est invalide !\n`hex:rrggbb`, `rgb:r,g,b` ou `random` sont supporté!",
-        "invalid_icon": "L'icône fournie est invalide !\nVérifiez le [Wiki]({wiki_icon}) pour les icônes disponibles.",
+        "invalid_icon": "Icône invalide `{icon}`\nVérifiez le [Wiki]({wiki_icon}) pour les icônes disponibles.",
+        "invalid_icon_width": "Icône personnalisée invalide.\nSeules les images avec les dimensions `320x320` sont autorisées!",
         "no_bg": "Veuillez fournir un nom d'arrière-plans !\nUne liste d'arrière-plans peut être trouvée [ici]({wiki_bg}).",
         "no_booster": "Le propriétaire du serveur doit être un Booster sur le [serveur de support]({guild_invite}) pour pouvoir l'utiliser !",
         "no_channel": "Aucun salon textuel fourni! Assurez-vous d'en mentionner un.",
