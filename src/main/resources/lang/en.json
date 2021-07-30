@@ -287,6 +287,7 @@
       },
       "welcome": {
         "description": "Greet joining Members on your Discord with a message and image!\nNot providing any arguments will display the current settings.\nCheck out [the wiki article]({wiki_welcome}) for help.\n\nYou need the `Manage Server` permission for this.",
+        "custom": "Custom",
         "embed": {
           "channel": "Channel",
           "color_title": "Color",
@@ -304,9 +305,11 @@
         "few_args": "Not enough arguments provided!\nRun `{prefix}welcome` to see all available sub-commands.",
         "invalid_args": "Invalid arguments!\nRun `{prefix}welcome` to see all available sub-commands.",
         "invalid_bg": "Invalid background `{background}`\nCheck the [Wiki]({wiki_bg}) for available backgrounds.",
+        "invalid_bg_width": "Invalid custom background.\nOnly images with dimensions `2000x350` are allowed!",
         "invalid_channel": "Please mention a valid text channel!",
         "invalid_color": "The provided color was invalid!\nSupported are `hex:rrggbb`, `rgb:r,g,b` or `random`!",
-        "invalid_icon": "The provided icon was invalid!\nCheck the [Wiki]({wiki_icon}) for available icons.",
+        "invalid_icon": "Invalid icon `{icon}`\nCheck the [Wiki]({wiki_icon}) for available icons.",
+        "invalid_icon_width": "Invalid custom icon.\nOnly images with dimensions `320x320` are allowed!",
         "no_bg": "Please provide a background name!\nA list of backgrounds can be found [here]({wiki_bg}).",
         "no_booster": "The Server owner needs to be a Booster on the [Support Server]({guild_invite}) in order to use this!",
         "no_channel": "No text channel provided! Make sure you mention one.",
