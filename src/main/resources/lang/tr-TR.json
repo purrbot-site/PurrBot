@@ -5,6 +5,12 @@
   "errors": {
     "administrator": "**Yönetici İzni Algılandı**\nBüyük bir güvenlik riski olan `Yönetici` iznine sahibim!\n__Olası kötüye kullanımı önlemek için; bu izne sahip olduğum sürece herhangi bir komutun gerekliliklerini yerine getirmeyeceğim.__\n\nBunu düzeltmek için aşağıdakilerden birini yapabilirsin:\n- Yönetici rolüne sahip olan rolü benden kaldır.\n- Aşağıda listelenen rol(ler) den izni kaldır.\nYönetici yetkisi tespit edilen roller:\n{roles}",
     "api_error": "API'ye ulaşılamadı! Lütfen daha sonra tekrar deneyiniz.",
+    "fetch": {
+      "booster_role": "Destek sunucusundan Takviyeci rolü alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuzda gelerek]({guild_invite}) bildirin.",
+      "guild": "Destek Sunucusu alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuza gelerek]({guild_invite}) bildirin.",
+      "member": "Destek sunucusundan Üye bilgileri alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuza gelerek]({guild_invite}) bildirin.",
+      "patreon_roles": "Destek sunucusundan Patreon rolleri alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuza gelerek]({guild_invite}) bildirin."
+    },
     "missing_perms": {
       "self": "Bunun için `{permission}` iznine sahip değilim.",
       "self_channel": "Bunu yapmak için {channel} kanalında `{permission}` iznim yok!",
@@ -281,6 +287,7 @@
       },
       "welcome": {
         "description": "Discord sunucunuza yeni katılan üyeleri resim ve yazıyla karşılayın!\nHerhangi bir argüman sağlamadan komutu tekrar kullanırsanız mevcut ayarlar gözükecektir.\nYardım için [Wiki makalesine]({wiki_welcome}) göz atın.\n\nBunun için \"Sunucuyu Yönet\" iznine ihtiyacın var.",
+        "custom": "Özel",
         "embed": {
           "channel": "Kanal",
           "color_title": "Renk",
@@ -298,14 +305,18 @@
         "few_args": "Yeterli argüman sağlanmadı!\nKullanılabilir tüm alt komutları görmek için `{prefix}welcome` komutunu kullanın.",
         "invalid_args": "Geçersiz argüman!\nKullanılabilir tüm alt komutları görmek için `{prefix}welcome` komutunu kullan.",
         "invalid_bg": "Geçersiz arka plan `{background}`\nKullanılabilir arka planlar için [Wiki]({wiki_bg}) adresini kontrol edin.",
+        "invalid_bg_width": "Geçersiz özel arkaplan\nYalnızca `2000x350` çözünürlüğe sahip resimler kullanılabilir!",
         "invalid_channel": "Lütfen geçerli bir metin kanalı etiketle!",
         "invalid_color": "Sağlanan renk geçersiz!\nDesteklenenler şunlardır: `hex:rrggbb`, `rgb:r,g,b` veya `random`!",
-        "invalid_icon": "Sağlanan simge geçersiz!\nKullanılabilir simgeler için [Wiki]({wiki_icon}) adresini kontrol edin.",
+        "invalid_icon": "Geçersiz simge `{icon}`\n[Wiki]({wiki_icon}) adresine giderek kullanılabilir simgeleri görebilirsin.",
+        "invalid_icon_width": "Geçersiz özel simge.\nYalnızca `320x320` çözünürlüğe sahip simgeler kullanılabilir!",
         "no_bg": "Lütfen bir arka plan adı belirt!\nArka plan listesi [burada]({wiki_bg}) bulunabilir.",
+        "no_booster": "Sunucu sahibinin bunu kullanmak için [Destek Sunucusunda]({guild_invite}) bir takviyeci olması gerekiyor!",
         "no_channel": "Metin kanalı belirtilmedi! Bir metin kanalı etiketlediğinden emin ol.",
         "no_color": "Renk belirtilmedi!\nLütfen, `hex:rrggbb`, `rgb:r,g,b` veya `random` bunlardan birini kullan.",
         "no_icon": "Lütfen bir simge adı belirt!\nSimgelerin bir listesi [burada]({wiki_icon}) bulunabilir.",
         "no_msg": "Mesaj belirtilmedi!",
+        "no_patreon": "Bunu kullanmak için Sunucu sahibinin Tier 2 veya Tier 3 [Patreon Üyesi]({patreon_url}) olması gerekiyor.",
         "placeholders": {
           "message_title": "Mevcut Mesaj",
           "note_title": "Not",
@@ -323,10 +334,12 @@
         "dm_success": "Özel mesajlarını kontrol et {user}!",
         "dm_failure": "Sana DM gönderemedim {user}. DM'lerinin açık olduğundan emin misin?",
         "embed": {
+          "booster_title": "Sunucu Takviyecisi",
           "description": "Bu botu ayakta tutmak için para gerekiyor. Bu nedenle, küçük veya büyük farketmeksizin her türlü bağışa açığız.\nPayPal veya Ko-fi kullanarak yalnızca bir kez bağış yapmayı veya Patreon kullanarak belli aralıklarla bağışlara devam etmeyi tercih edebilirsiniz.\n{PAYPAL} [`PayPal`]({paypal_url}) (Tek Seferlik)\n{KOFI} [`Ko-fi`]({kofi_url}) (Tek Seferlik)\n{PATREON} [`Patreon`]({patreon_url}) (Yenilenen Bağış)",
-          "donators_more": "*ve {remaining} kişi daha...*",
+          "donate_title": "Sunucu Takviyecisi ve Bağışçı",
+          "donate_value": "Aşağıda bağış yapan veya [destek sunucusuna]({guild_invite}) takviye yapan kişilerin listesini bulabilirsiniz.\nBağış ve sunucuya takviye yapmak özel Hoşgeldin afişi veya kendi özel rollerinizi kullanma gibi özel özellikleri açar!\nBu size çekici geliyorsa, sunucuyu yükseltmeyi veya Tier 2+ Patreon üyesi olmayı düşünün.\nTek seferlik bağışlar da hoş karşılanıyor!",
           "donators_title": "Bağış Yapanlar",
-          "donators_value": "Tüm bağışçılar - ister tek seferlik, ister sürekli bağış yapanlar- aşağıda teşekkür amacıyla listelenmiştir.\nOnlar sayesinde bot herkes için ücretsiz ve aktif kalabiliyor!\nEğer sende listede olmak istiyorsan, [~Nya Discord]({guild_invite}) sunucusunda olduğundan emin ol ve bu durumla ilgili Andre_601 ile iletişime geç!"
+          "more": "*ve daha fazlası...*"
         }
       },
       "emote": {
