@@ -5,6 +5,12 @@
   "errors": {
     "administrator": "**Administwatow Pewmission detected**\nI have the `Administwatow` Pewmission which is a huge secuwity wisk! >~<\n__I won't pewfowm any commands as long as I have this Pewmission, to pwevent possibwe abuse.__\n\nTo fix this, do one of the fowwowing things:\n- Wemove the wole which has Administwatow from me.\n- Wemove the Pewmission fwom the Wole(s) listed bewow.\n\nAdministwatow was detected in the fowwowing woles:\n{roles}",
     "api_error": "Thewe was an ewwow weaching the API! Pwease twy again water.",
+    "fetch": {
+      "booster_role": "Unable to wetwieve Boostew wole fwom the Suppowt Sewvew. TwT Pwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
+      "guild": "Unable to wetwieve the Suppowt Sewver. TwT Pwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
+      "member": "Unable to wetwieve Membew Infowmation fwom the Suppowt Sewvew. TwT Pwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
+      "patreon_roles": "Unable to wetwieve Patweon woles fwom Suppowt Sewver. TwT Pwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})"
+    },
     "missing_perms": {
       "self": "I lack the pewmission `{permssion}` fow this. :c",
       "self_channel": "I lack the pewmission `{permission}` in the channew {channel} to do this!",
@@ -281,6 +287,7 @@
       },
       "welcome": {
         "description": "Gweet joining Membews on youw Discowd with a message and image!\nNot pwoviding any awguments wiww dispway the cuwwent settings.\nCheck out [the wiki awticwe]({wiki_welcome}) for hewp.\n\nYou need the `Manage Sewvew` pewmission for this.",
+        "custom": "Custom",
         "embed": {
           "channel": "Channew",
           "color_title": "Cowow",
@@ -298,14 +305,18 @@
         "few_args": "Not enough awguments pwovided!\nUsage: `{prefix}welcome` to see aww avaiwabwe sub-commands.",
         "invalid_args": "Invawid awguments!\nUsage: `{prefix}welcome` to see aww avaiwabwe sub-commands.",
         "invalid_bg": "Invawid backgwound `{background}`\nCheck the [Wiki]({wiki_bg}) for avaiwabwe backgwounds.",
+        "invalid_bg_width": "Invalid custom backgwound.\nOnly images with dimensions `2000x350` awe allowed!",
         "invalid_channel": "Pwease mention a vawid text channew!",
         "invalid_color": "The pwovided cowow was invawid!\nSuppowted awe `hex:rrggbb`, `rgb:r,g,b` ow `random`!",
-        "invalid_icon": "The pwovided icon was invawid!\nCheck the [Wiki]({wiki_icon}) fow avaiwabwe icons.",
+        "invalid_icon": "Invalid icon `{icon}`\nCheck the [Wiki]({wiki_icon}) fow available icons.",
+        "invalid_icon_width": "Invalid custom icon.\nOnly images with dimensions `320x320` awe allowed!",
         "no_bg": "Pwease pwovide a backgwound name!\nA list of backgwounds can be found [hewe]({wiki_bg}).",
+        "no_booster": "The Sewew ownew needs to be a Boostew on the [Suppowt Sewvew]({guild_invite}) in owdew to use this!",
         "no_channel": "No text channew pwovided! Make suwe you mention one.",
         "no_color": "No cowow pwovided!\nPwease eithew use `hex:rrggbb`, `rgb:r,g,b` ow `random`",
         "no_icon": "Pwease pwovide an icon name!\nA list of icons can be found [hewe]({wiki_icon}).",
         "no_msg": "No message pwovided!",
+        "no_patreon": "The Sewew ownew needs to be a Tiew 2 or Tiew 3 [Patweon Membew]({patreon_url}) in owdew to use this.",
         "placeholders": {
           "message_title": "Cuwwent Message",
           "note_title": "Note",
@@ -323,10 +334,12 @@
         "dm_success": "Check youw pwivate messages {user}!  {VANILLABLUSH}",
         "dm_failure": "I couwdn`t send you a DM {user}. Did you make sure to have youw DMs open?",
         "embed": {
+          "booster_title": "Sewew Boostew OwO",
           "description": "Wunning this bot is vewy vewy expensive. That's why any donations - eithew big or smaww - are wewcome.\nYou can choose if you want to onwy donate once using PayPal or Ko-fi, or if you want to make continuous donations on Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donations)\n{KOFI} [`Ko-fi`]({kofi_url}) (Single Donation)\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donations)",
-          "donators_more": "*and {remaining} mowe...*",
+          "donate_title": "Sewew Boostew and Donatow",
+          "donate_value": "Below can you find lists of people that awe donatows ow boosted the [Suppowt Sewew]({guild_invite}) ^-^\nDonations and Sewew boosting unlock specific pewks such as special Welcome banners ow the option to use youw own ones!\nIf this sounds appealing to you considew boosting the sewew ow becoming a Tiew 2+ Patweon membew.\nSingle donations awe also welcome!",
           "donators_title": "Donatows",
-          "donators_value": "Aww donatows - eithew singwe ow continuous donations - awe wisted bewow as a thank you.\nThanks to them can the bot stay active fow evewyone and fow fwee!\nIf you wouwd wike to get wisted, make suwe to be on the [~Nya Discord]({guild_invite}) and contact Andre_601 about it!"
+          "more": "*any many mowe...* UwU"
         }
       },
       "emote": {

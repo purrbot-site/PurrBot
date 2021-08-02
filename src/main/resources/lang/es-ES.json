@@ -5,6 +5,12 @@
   "errors": {
     "administrator": "**Permiso de administrador detectado**\n¡Tengo el permiso de `Administrador` esto es un riesgo para la seguridad!\n__No ejecutaré ningún comando mientras tenga este permiso. Hay que evitar posibles incidentes.__\n\nPara solucionar este problema, realice una de las siguientes pasos:\n- Quitarme el rol que tiene Administrador.\n- Eliminar el permiso de los roles que se enumeran a continuación.\n\nSe detectó administrador en las siguientes roles:\n{roles}",
     "api_error": "¡Hubo un error con la API! Por favor, inténtelo de nuevo más tarde.",
+    "fetch": {
+      "booster_role": "No se puede recuperar el rol de Booster desde el Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, repórtalo en [nuestro servidor de Discord]({guild_invite})",
+      "guild": "No se puede recuperar el Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, repórtalo en [nuestro servidor de Discord]({guild_invite})",
+      "member": "No se puede recuperar la información de los miembros del Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, repórtalo en [nuestro servidor de Discord]({guild_invite})",
+      "patreon_roles": "No se han podido recuperar los roles de Patreon del Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, infórmanos en [nuestro servidor de Discord]({guild_invite})"
+    },
     "missing_perms": {
       "self": "Me falta el permiso `{permission}` para esto.",
       "self_channel": "¡No tengo el permiso `{permission}` en el canal {channel} para hacer esto!",
@@ -281,6 +287,7 @@
       },
       "welcome": {
         "description": "¡Saluda a los Miembros de tu Discord con un mensaje e imagen!\nNo proporcionar ningún argumento, mostrará la configuración actual.\nEcha un vistazo a [el artículo de la wiki]({wiki_welcome}) para obtener ayuda.\n\nNecesitas el permiso `Gestionar servidor` para realizar esto.",
+        "custom": "Personalizar",
         "embed": {
           "channel": "Canal",
           "color_title": "Color",
@@ -298,14 +305,18 @@
         "few_args": "¡No hay suficientes argumentos proporcionados!\nEjecute `{prefix}welcome` para ver todos los subcomandos disponibles.",
         "invalid_args": "¡Argumentos inválidos!\nEjecute `{prefix}welcome` para ver todos los subcomandos disponibles.",
         "invalid_bg": "Fondo no válido `{background}`\nCompruebe la [Wiki]({wiki_bg}) para ver los fondos disponibles.",
+        "invalid_bg_width": "Fondo personalizado inválido.\n¡Solo se permiten imágenes con dimensiones `2000x350`!",
         "invalid_channel": "¡Por favor, menciona un canal de texto válido!",
         "invalid_color": "¡El color proporcionado no era válido!\n¡Su formato valido es `hex:rrggbb`, `rgb:r,g,b` or `random`!",
-        "invalid_icon": "¡El icono proporcionado no era válido!\nCompruebe el [Wiki]({wiki_icon}) para ver los iconos disponibles.",
+        "invalid_icon": "Fondo no válido `{icon}`\nCompruebe la [Wiki]({wiki_icon}) para ver los iconos disponibles.",
+        "invalid_icon_width": "Icono personalizado inválido.\n¡Solo se permiten imágenes con dimensiones `320x320`!",
         "no_bg": "¡Por favor, introduce un nombre de fondo!\nPuedes encontrar una lista de fondos [aquí]({wiki_bg}).",
+        "no_booster": "¡El dueño del servidor necesita ser Booster en el [Servidor de Soporte]({guild_invite}) para poder usar esto!",
         "no_channel": "¡No hay ningún canal de texto proporcionado! Asegúrese de mencionar alguno.",
         "no_color": "¡Ningún color proporcionado!\nPor favor usa `hex:rrggbb`, `rgb:r,g,b` o `random`",
         "no_icon": "¡Por favor proporciona un nombre de icono!\nSe puede encontrar una lista de iconos [aquí]({wiki_icon}).",
         "no_msg": "¡Ningún mensaje proporcionado!",
+        "no_patreon": "El dueño del servidor debe ser un [miembro de Patreon]({patreon_url}) de Nivel 2 o Nivel 3 para poder usar esto.",
         "placeholders": {
           "message_title": "Mensaje actual",
           "note_title": "Nota",
@@ -323,10 +334,12 @@
         "dm_success": "¡Revisa tus mensajes privados {user}!",
         "dm_failure": "No pude enviarte un DM {user}. ¿Te aseguraste de tener abiertos tus MD?",
         "embed": {
+          "booster_title": "Server Booster",
           "description": "Ejecutar este bot es caro. Por eso cualquier donación - grande o pequeña - es bienvenida.\nPuedes elegir si solo quieres donar una vez usando PayPal o Ko-fi, o si quieres hacer donaciones continuas en Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Donaciones simples)\n{KOFI} [`Ko-fi`]({kofi_url}) (Donación simple)\n{PATREON} [`Patreon`]({patreon_url}) (Donaciones continuas)",
-          "donators_more": "*y {remaining} más...*",
+          "donate_title": "Booster y donaciones del servidor",
+          "donate_value": "A continuación puedes encontrar listas de personas que son donantes o que han bosteado el [Servidor de Soporte]({guild_invite})\n¡Las donaciones y los boost desbloquean ventajas específicas, como pancartas de bienvenida especiales o la opción de usar las tuyas propias!\nSi esto te suena atractivo, considera hacer boosting el servidor o convertirse en miembro de Patreon Nivel 2+.\n¡Las donaciones individuales también son bienvenidas!",
           "donators_title": "Donantes",
-          "donators_value": "Todos los donantes, ya sean individuales o continuos, se enumeran a continuación como agradecimientos.\n¡Gracias a ellos el bot puede estar activo para todos y gratis!\nSi quieres ser listado, asegúrate de estar en el [~Nya Discord]({guild_invite}) y contacta a Andre_601 acerca de ello!"
+          "more": "*y muchos más...*"
         }
       },
       "emote": {
