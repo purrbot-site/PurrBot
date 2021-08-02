@@ -5,6 +5,12 @@
   "errors": {
     "administrator": "**관리자 권한 감지됨**\n내가 가지고 있는 `관리자` 권한은 엄청 큰 보안위험을 안고 있어.\n__내가 이 권한을 가지고 있는 한, 남용을 피하기 위해 어떠한 명령어에도 응답하지 않을거야.__\n\n고치려면, 둘 중 하나를 해줘.\n- 관리자 권한을 가진 역할을 제거.\n- 밑에 나열된 역할에서 관리자 권한을 제거.\n\n관리자 권한이 있는 역할:\n{roles}",
     "api_error": "API 요청에 실패했어! 나중에 다시 시도해줘.",
+    "fetch": {
+      "booster_role": "지원 서버에서 니트로 부스터 역할을 불러올 수 없습니다. 다음에 다시 시도해주세요. 계속 안되면, [지원서버]({guild_invite}) 에 문의해주세요.",
+      "guild": "지원 서버를 불러올 수 없습니다. 다음에 다시 시도해주세요. 계속 안되면, [지원서버]({guild_invite}) 에 문의해주세요.",
+      "member": "지원 서버에서 사용자 목록을 불러올 수 없습니다. 다음에 다시 시도해주세요. 계속 안되면, [지원서버]({guild_invite}) 에 문의해주세요.",
+      "patreon_roles": "지원 서버에서 Patreon 역할을 불러올 수 없습니다. 다음에 다시 시도해주세요. 계속 안되면, [지원서버]({guild_invite}) 에 문의해주세요."
+    },
     "missing_perms": {
       "self": "`{permission}` 권한이 없어서 할 수 없어!",
       "self_channel": "나에게는 {channel} 채널을 위한 `{permission}` 권한이 없어!",
@@ -281,6 +287,7 @@
       },
       "welcome": {
         "description": "당신의 서버에 들어온 사람들에게 인사와 이미지를 통해 환영해보세요!\n아무런 인자가 없다면 현재 설정을 보여줍니다.\n[위키 자료]({wiki_welcome})를 확인하면 더 자세히 알 수 있습니다.\n\n`서버 관리` 권한이 있는 사람만 사용할 수 있습니다.",
+        "custom": "꾸미기",
         "embed": {
           "channel": "채널",
           "color_title": "색상",
@@ -298,14 +305,18 @@
         "few_args": "받은 정보가 적어!\n`{prefix}welcome` 을 사용하면 사용 가능한 모든 세부 명령어들을 확인할 수 있어!",
         "invalid_args": "유효하지 않은 값이야!\nRun `{prefix}welcome` 을 사용하면 가능한 모든 세부 명령어들을 확인할 수 있어!",
         "invalid_bg": "`{background}`는 유효하지 않은 배경이야.\n[위키]({wiki_bg})에 가능한 배경들이 소개되어 있어.",
+        "invalid_bg_width": "유효하지 않은 배경이야.\n2000x350 해상도의 이미지만 사용할 수 있어!",
         "invalid_channel": "유효한 텍스트 채널을 알려줘!",
         "invalid_color": "색상코드가 잘못되었어.\n`hex:rrggbb` 나 `rgb:r,g,b` 를 이용해서 색상코드를 입력해줘. 아니면 `random` 이라던가!",
-        "invalid_icon": "그 아이콘은 유효하지 않아!\n[위키]({wiki_icon})에 가능한 아이콘들이 소개되어 있어.",
+        "invalid_icon": "그 아이콘`{icon}`은 유효하지 않아!\n[위키]({wiki_icon})에 가능한 아이콘들이 소개되어 있어.",
+        "invalid_icon_width": "그 커스텀 아이콘은 유효하지 않아.\n320x320 해상도의 이미지만 사용할 수 있어!",
         "no_bg": "배경의 이름을 알려줘!\n[위키]({wiki_bg})에 가능한 배경들이 소개되어 있어.",
+        "no_booster": "기능 사용을 위해 서버의 주인이 [지원서버]({guild_invite})를 부스트해야 합니다.",
         "no_channel": "아무런 텍스트 채널도 받지 못했어. 제대로 나에게 언급해줘.",
         "no_color": "아무 색도 받지 못했어!\n`hex:rrggbb` 나 `rgb:r,g,b`, 또는 `random` 를 이용해서 색상코드를 입력해줘.",
         "no_icon": "아이콘의 이름을 같이 줘!",
         "no_msg": "아무런 메시지도 받지 못했어!",
+        "no_patreon": "기능 사용을 위해 서버의 주인이 티어 2/3 [Patreon 후원자]({patreon_url})여야 합니다.",
         "placeholders": {
           "message_title": "현재 메시지",
           "note_title": "참고",
@@ -323,10 +334,12 @@
         "dm_success": "네 개인 메시지를 확인해봐, {user}!",
         "dm_failure": "{user}. 너에게 메시지를 보낼 수 없어. 개인 메시지 설정을 다시 확인해줄래?",
         "embed": {
+          "booster_title": "서버 부스터",
           "description": "이 봇을 유지하는 비용은 큽니다. 크기에 상관없이 어떤 후원이든 큰 도움이 됩니다.\n정기후원을 원하신다면 Patreon을, 아니라면 Paypal 또는 Ko-fi를 사용해 이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{KOFI} [`Ko-fi`]({kofi_url}) (일회성 후원)\n{PATREON} [`Patreon`]({patreon_url}) (정기후원)",
-          "donators_more": "*...그리고 {remaining} 명의 추가 후원자들!*",
+          "donate_title": "서버 부스터와 후원자",
+          "donate_value": "여기에 기록된 분들은 [지원 서버]({guild_invite})를 부스트하거나 후원해주신 분들입니다.\n후원과 서버 부스트는 서버 입장 배너 또는 새로운 기능 추가에 큰 도움을 줍니다!\n물론, 서버 부스트나 주기적인 후원만 도움이 되는건 아닙니다. 단순한 후원도 언제든지 환영합니다!",
           "donators_title": "후원자",
-          "donators_value": "아래에 있는 사람들은 모두 이 봇을 후원해주신 분들입니다. 감사합니다.\n이분들 덕분에 이 봇이 모두에게 무료로 서비스를 제공하고 있습니다!\n만약 이곳에 자신이 포함되고 싶으시다면, [공식 지원 서버]({guild_invite})에 들어오셔서 Andre_601에게 연락주세요!"
+          "more": "그리고 더 많은 기능들 ..."
         }
       },
       "emote": {
