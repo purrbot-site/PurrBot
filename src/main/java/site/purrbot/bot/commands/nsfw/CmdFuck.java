@@ -189,6 +189,7 @@ public class CmdFuck implements Command{
     
     private void handleEvent(Message botMsg, Member author, Member target, String... args){
         Guild guild = botMsg.getGuild();
+        String channelId = botMsg.getTextChannel().getId();
         queue.put(
                 bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()),
                 target.getId()
@@ -268,7 +269,10 @@ public class CmdFuck implements Command{
                     bot.getRequestUtil().handleEdit(channel, botMsg, api, author, Collections.singletonList(target.getEffectiveName()));
                 }, 1, TimeUnit.MINUTES,
                 () -> {
-                    TextChannel channel = botMsg.getTextChannel();
+                    TextChannel channel = guild.getTextChannelById(channelId);
+                    if(channel == null)
+                        return;
+                    
                     botMsg.delete().queue(
                             null,
                             e -> logger.warn("Unable to delete own Message for fuck! Was it already deleted?")

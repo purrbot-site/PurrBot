@@ -24,6 +24,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.constants.IDs;
 
 import java.util.List;
 import java.util.Objects;
@@ -53,13 +54,18 @@ public class CmdDonate implements Command{
         MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                 .setDescription(bot.getMsg(guild.getId(), "purr.info.donate.embed.description"))
                 .addField(
-                        bot.getMsg(guild.getId(), "purr.info.donate.embed.donators_title"),
-                        bot.getMsg(guild.getId(), "purr.info.donate.embed.donators_value"),
+                        bot.getMsg(guild.getId(), "purr.info.donate.embed.donate_title"),
+                        bot.getMsg(guild.getId(), "purr.info.donate.embed.donate_value"),
                         false
                 )
                 .addField(
-                        EmbedBuilder.ZERO_WIDTH_SPACE,
-                        getDonators(),
+                        bot.getMsg(guild.getId(), "purr.info.donate.embed.donators_title"),
+                        getDonators(guild.getId()),
+                        false
+                )
+                .addField(
+                        bot.getMsg(guild.getId(), "purr.info.donate.embed.booster_title"),
+                        getBoosters(guild.getId()),
                         false
                 )
                 .build();
@@ -82,13 +88,54 @@ public class CmdDonate implements Command{
         tc.sendMessageEmbeds(embed).queue();
     }
     
-    private String getDonators(){
-        List<String> ids = bot.getDonators();
+    private String getDonators(String id){
+        Role donator = bot.getShardManager().getRoleById(IDs.DONATOR);
+        if(donator == null)
+            return "`?`";
         
-        return ids.stream()
-                .map(userId -> bot.getShardManager().getUserById(userId))
-                .filter(Objects::nonNull)
-                .map(user -> String.format("%s (%s)", user.getAsTag(), user.getAsMention()))
-                .collect(Collectors.joining("\n"));
+        return getMembers(donator, id);
+    }
+    
+    private String getBoosters(String id){
+        Role booster = bot.getShardManager().getRoleById("603361261043974145");
+        if(booster == null)
+            return "`?`";
+        
+        return getMembers(booster, id);
+    }
+    
+    private String getMembers(Role role, String id){
+        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD);
+        if(guild == null)
+            return "`?`";
+        
+        StringBuilder builder = new StringBuilder();
+        List<Member> members = guild.getMembers();
+        if(members.isEmpty())
+            return "`?`";
+    
+        for(Member member : members){
+            if(member == null)
+                continue;
+        
+            if(!member.getRoles().contains(role))
+                continue;
+            
+            if(member.getId().equals(IDs.ANDRE_601))
+                continue;
+        
+            String name = String.format("%s (%s)", member.getUser().getAsTag(), member.getAsMention());
+            if(builder.length() + name.length() + 30 > MessageEmbed.VALUE_MAX_LENGTH){
+                builder.append("\n").append(bot.getMsg(id, "purr.info.donate.embed.more"));
+                break;
+            }
+        
+            if(builder.length() > 0)
+                builder.append("\n");
+        
+            builder.append(name);
+        }
+        
+        return builder.toString();
     }
 }

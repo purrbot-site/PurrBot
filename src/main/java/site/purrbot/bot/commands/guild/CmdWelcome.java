@@ -27,6 +27,7 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
 import java.io.InputStream;
+import java.util.Locale;
 
 @CommandDescription(
         name = "Welcome",
@@ -90,11 +91,34 @@ public class CmdWelcome implements Command{
                         bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_bg");
                         return;
                     }
-                    if(!bot.getWelcomeBg().contains(args[2].toLowerCase()) && !args[2].equalsIgnoreCase("random")){
-                        bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.invalid_bg");
+                    String bg = args[2].toLowerCase(Locale.ROOT);
+                    if((bg.startsWith("https://") || bg.startsWith("http://")) && !bot.getCheckUtil().isPatreon(tc, guild.getOwnerId())){
+                        bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_patreon");
                         return;
                     }
-                    update(tc, member, Type.BACKGROUND, args[2].toLowerCase());
+                    if(bg.equalsIgnoreCase("booster") && !bot.getCheckUtil().isBooster(tc, guild.getOwnerId())){
+                        bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_booster");
+                        return;
+                    }
+                    if(!bot.getWelcomeBg().contains(bg)){
+                        if(bg.startsWith("https://") || bg.startsWith("http://")){
+                            if(!bot.getImageUtil().isValidImage(bg, 2000, 350)){
+                                bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.invalid_bg_width");
+                                return;
+                            }
+                        }else{
+                            MessageEmbed embed = bot.getEmbedUtil().getErrorEmbed(member)
+                                    .setDescription(
+                                            bot.getMsg(guild.getId(), "purr.guild.welcome.invalid_bg")
+                                                    .replace("{background}", bg)
+                                    ).build();
+    
+                            tc.sendMessageEmbeds(embed).queue();
+                            return;
+                        }
+                    }
+                    
+                    update(tc, member, Type.BACKGROUND, bg);
                 }else{
                     bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.invalid_args");
                 }
@@ -161,11 +185,34 @@ public class CmdWelcome implements Command{
                         bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_icon");
                         return;
                     }
-                    if(!bot.getWelcomeIcon().contains(args[2].toLowerCase()) && !args[2].equalsIgnoreCase("random")){
-                        bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.invalid_icon");
+                    String icon = args[2].toLowerCase(Locale.ROOT);
+                    if((icon.startsWith("https://") || icon.startsWith("http://")) && !bot.getCheckUtil().isPatreon(tc, member.getId())){
+                        bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_patreon");
                         return;
                     }
-                    update(tc, member, Type.ICON, args[2].toLowerCase());
+                    if(icon.equalsIgnoreCase("booster") && !bot.getCheckUtil().isBooster(tc, member.getId())){
+                        bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_booster");
+                        return;
+                    }
+                    if(!bot.getWelcomeIcon().contains(icon)){
+                        if(icon.startsWith("https://") || icon.startsWith("http://")){
+                            if(!bot.getImageUtil().isValidImage(icon, 320, 320)){
+                                bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.invalid_icon_width");
+                                return;
+                            }
+                        }else{
+                            MessageEmbed embed = bot.getEmbedUtil().getErrorEmbed(member)
+                                    .setDescription(
+                                            bot.getMsg(guild.getId(), "purr.guild.welcome.invalid_icon")
+                                                    .replace("{icon}", icon)
+                                    ).build();
+            
+                            tc.sendMessageEmbeds(embed).queue();
+                            return;
+                        }
+                    }
+                    
+                    update(tc, member, Type.ICON, icon);
                 }else{
                     bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.invalid_args");
                 }
@@ -352,7 +399,15 @@ public class CmdWelcome implements Command{
         switch(type){
             case BACKGROUND:
                 bot.setWelcomeBg(id, value);
-                value = "`" + value + "`";
+                if(value.startsWith("http://") || value.startsWith("https://")){
+                    value = String.format(
+                            "[`%s`](%s)",
+                            bot.getMsg(id, "purr.guild.welcome.custom"),
+                            value
+                    );
+                }else{
+                    value = "`" + value + "`";
+                }
                 break;
             
             case CHANNEL:
@@ -367,7 +422,15 @@ public class CmdWelcome implements Command{
             
             case ICON:
                 bot.setWelcomeIcon(id, value);
-                value = "`" + value + "`";
+                if(value.startsWith("http://") || value.startsWith("https://")){
+                    value = String.format(
+                            "[`%s`](%s)",
+                            bot.getMsg(id, "purr.guild.welcome.custom"),
+                            value
+                    );
+                }else{
+                    value = "`" + value + "`";
+                }
                 break;
             
             case MESSAGE:

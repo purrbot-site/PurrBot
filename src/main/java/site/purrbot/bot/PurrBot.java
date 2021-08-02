@@ -343,7 +343,7 @@ public class PurrBot {
                             getFileManager().getString("config", "tokens.discord-boats")
                     )
                     .build();
-    
+            
             dServices4J = new DServices4J.Builder()
                     .setToken(getFileManager().getString("config", "tokens.discordservices-net"))
                     .setId(IDs.PURR)

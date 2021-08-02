@@ -165,7 +165,7 @@ public class ImageUtil {
             color = "#000000";
         else
             color = String.format("%d,%d,%d", col.getRed(), col.getGreen(), col.getBlue());
-
+        
         JSONObject json = new JSONObject()
                 .put("username", member.getUser().getName())
                 .put(
@@ -175,15 +175,11 @@ public class ImageUtil {
                 )
                 .put(
                         "icon",
-                        icon.equalsIgnoreCase("random") ? 
-                                bot.getHttpUtil().getImage("https://purrbot.site/api/img/sfw/icon/img") : 
-                                String.format("https://purrbot.site/img/sfw/icon/img/%s.png", icon)
+                        getUrl("icon", icon, member.getGuild().getOwnerId())
                 )
                 .put(
-                        "banner", 
-                        bg.equalsIgnoreCase("random") ? 
-                                bot.getHttpUtil().getImage("https://purrbot.site/api/img/sfw/background/img") : 
-                                String.format("https://purrbot.site/img/sfw/background/img/%s.png", bg)
+                        "banner",
+                        getUrl("background", bg, member.getGuild().getOwnerId())
                 )
                 .put(
                         "avatar", 
@@ -228,5 +224,49 @@ public class ImageUtil {
         }catch(IOException ex){
             return null;
         }
+    }
+    
+    public boolean isValidImage(String url, int width, int height){
+        try{
+            URL finalUrl = new URL(url);
+            URLConnection connection = finalUrl.openConnection();
+            connection.setRequestProperty("User-Agent", "PurrBot BOT_VERSION");
+            connection.connect();
+            
+            BufferedImage image = ImageIO.read(connection.getInputStream());
+            if(image == null)
+                return false;
+            
+            return image.getWidth() == width && image.getHeight() == height;
+        }catch(IOException ex){
+            return false;
+        }
+    }
+    
+    private String getUrl(String type, String name, String ownerId){
+        String baseUrl = "https://purrbot.site/img/sfw/%s/img/%s.png";
+        String defaultUrl = String.format(baseUrl, type, type.equalsIgnoreCase("background") ? "color_white" : "purr");
+        
+        int width = type.equalsIgnoreCase("background") ? 2000 : 320;
+        int height = type.equalsIgnoreCase("background") ? 350 : 320;
+    
+        String url = String.format(baseUrl, type, name);
+        if(name.equalsIgnoreCase("booster")){
+            if(bot.getCheckUtil().isBooster(ownerId))
+                url = String.format("https://purrbot.site/images/boost/booster_%s.png", type);
+            else
+                url = defaultUrl;
+        }else
+        if((name.startsWith("https://") || name.startsWith("http://"))){
+            if(bot.getCheckUtil().isPatreon(ownerId) && isValidImage(name, width, height))
+                url = name;
+            else
+                url = defaultUrl;
+        }else
+        if(name.equalsIgnoreCase("random")){
+            url = bot.getHttpUtil().getImage(String.format("https://purrbot.site/api/img/sfw/%s/img", type));
+        }
+        
+        return url;
     }
 }

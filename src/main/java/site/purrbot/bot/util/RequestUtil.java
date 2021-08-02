@@ -79,7 +79,7 @@ public class RequestUtil{
                 getButton(guild.getId(), api.getName(), true),
                 getButton(guild.getId(), api.getName(), false)
         ).queue(
-                message -> handleReaction(message, tc, author, target, api),
+                message -> handleButton(message, tc, author, target, api),
                 e -> bot.getEmbedUtil().sendError(tc, author, "errors.request_error")
         );
     }
@@ -128,10 +128,11 @@ public class RequestUtil{
         });
     }
     
-    private void handleReaction(Message msg, TextChannel tc, Member author, Member target, HttpUtil.ImageAPI api){
+    private void handleButton(Message msg, TextChannel tc, Member author, Member target, HttpUtil.ImageAPI api){
         queue.put(getQueueString(api.getName(), tc.getGuild().getId(), author.getId()), target.getId());
         
         Guild guild = tc.getGuild();
+        String channelId = tc.getId();
         EventWaiter waiter = bot.getWaiter();
         
         waiter.waitForEvent(
@@ -174,13 +175,17 @@ public class RequestUtil{
                 },
                 1, TimeUnit.MINUTES,
                 () -> {
+                    TextChannel channel = guild.getTextChannelById(channelId);
+                    if(channel == null)
+                        return;
+                    
                     msg.delete().queue(
                             null,
                             e -> logger.warn("Unable to delete Message for {}. Was it already deleted?", api.getName())
                     );
                     queue.invalidate(getQueueString(api.getName(), guild.getId(), author.getId()));
                     
-                    tc.sendMessage(
+                    channel.sendMessage(
                             bot.getMsg(guild.getId(), "request.timed_out", author.getAsMention(), target.getEffectiveName())
                     ).queue();
                 }

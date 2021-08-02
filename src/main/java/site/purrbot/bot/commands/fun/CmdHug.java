@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 @CommandDescription(
         name = "Hug",
         description = "purr.fun.hug.description",
-        triggers = {"hug", "hugging"},
+        triggers = {"hug", "hugging", "hugs"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
                 @CommandAttribute(key = "usage", value = "{p}hug <@user> [@user ...]"),

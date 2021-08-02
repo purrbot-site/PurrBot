@@ -4,6 +4,7 @@
   "special": [],
   "welcome": {
     "background": [
+      "booster",
       "color_black",
       "color_blue",
       "color_green",
@@ -16,17 +17,20 @@
       "gradient_green",
       "gradient_orange",
       "gradient_red",
+      "random",
       "rainbow"
     ],
     "icon": [
+      "booster",
+      "holo",
       "neko_hug",
       "neko_smile",
       "purr",
+      "random",
+      "senko",
       "snuggle",
       "snuggle_lurk",
-      "senko",
-      "shiro",
-      "holo"
+      "shiro"
     ]
   }
 }
