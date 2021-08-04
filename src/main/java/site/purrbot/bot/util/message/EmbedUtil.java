@@ -24,6 +24,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.PurrBot;
 
 import java.time.ZonedDateTime;
@@ -107,6 +108,14 @@ public class EmbedUtil {
             );
 
         tc.sendMessageEmbeds(embed.build()).queue();
+    }
+    
+    public void sendError(InteractionHook hook, Guild guild, Member member, String path){
+        MessageEmbed embed = getErrorEmbed(member)
+                .setDescription(bot.getMsg(guild.getId(), path, member.getEffectiveName()))
+                .build();
+        
+        hook.editOriginalEmbeds(embed).queue();
     }
     
     

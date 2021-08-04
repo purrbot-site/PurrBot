@@ -21,10 +21,16 @@ package site.purrbot.bot.commands.info;
 import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.menu.EmbedPaginator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.interactions.Interaction;
+import net.dv8tion.jda.api.interactions.InteractionHook;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.Button;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
@@ -44,7 +50,7 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}help [command]")
         }
 )
-public class CmdHelp implements Command{
+public class CmdHelp extends SlashCommand implements Command{
 
     private final PurrBot bot;
     private final HashMap<String, String> categories = new LinkedHashMap<>();
@@ -54,11 +60,33 @@ public class CmdHelp implements Command{
     public CmdHelp(PurrBot bot){
         this.bot = bot;
         
+        this.name = "purrhelp";
+        this.help = "Lists all commands or provides info about an existing command/category.";
+        this.guildOnly = true;
+        
+        List<OptionData> options = new ArrayList<>();
+        options.add(new OptionData(OptionType.STRING, "name", "The name of the command or category"));
+        options.add(new OptionData(OptionType.BOOLEAN, "category", "Should the name be treated as category?"));
+        
+        this.options = options;
+        
         categories.put("fun", "\uD83C\uDFB2");
         categories.put("guild", "\uD83C\uDFAE");
         categories.put("info", "\u2139");
         categories.put("nsfw", "\uD83D\uDC8B");
         categories.put("owner", "<:andre_601:730944556119359588>");
+    }
+    
+    @Override
+    protected void execute(SlashCommandEvent event){
+        String name = bot.getCommandUtil().getString(event, "name", null);
+        boolean category = bot.getCommandUtil().getBoolean(event, "category", false);
+        
+        event.deferReply().queue(hook -> {
+            if(name == null){
+                
+            }
+        });
     }
     
     @Override
@@ -87,6 +115,82 @@ public class CmdHelp implements Command{
         }else{
             showHelpMenu(member, tc, null);
         }
+    }
+    
+    private void showHelp(InteractionHook hook, TextChannel tc, Guild guild, Member member, String name, boolean isCategory){
+        hook.deleteOriginal().queue();
+        
+        List<SlashCommand> commands = this.getClient().getSlashCommands();
+        commands.sort(Comparator.comparing(SlashCommand::getName));
+        
+        StringBuilder builder = new StringBuilder();
+        EmbedPaginator.Builder paginator = getPaginator(member, tc);
+        
+        if(isCategory){
+            for(SlashCommand command : commands){
+                if(command.getCategory().getName().equals(name.toLowerCase(Locale.ROOT))){
+                    String commandName = getSlashCommandSyntax(command);
+                    if(builder.length() + commandName.length() + 10 > MessageEmbed.VALUE_MAX_LENGTH){
+                        paginator.addItems(slashCommandList(member, name.toLowerCase(Locale.ROOT), builder.toString()));
+                        
+                        builder.setLength(0);
+                    }
+    
+                    if(builder.length() > 0)
+                        builder.append("\n");
+    
+                    builder.append(commandName);
+                }
+            }
+            
+            paginator.build().display(tc);
+        }else{
+            for(SlashCommand command : commands){
+                if(!command.getName().equalsIgnoreCase(name))
+                    continue;
+                
+                showCommandHelp(guild, tc, member, command);
+                break;
+            }
+        }
+    }
+    
+    private void showCommandHelp(Guild guild, TextChannel tc, Member member, SlashCommand command){
+        String syntax = getSlashCommandSyntax(command);
+        
+        MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
+            .setTitle(
+                bot.getMsg(guild.getId(), "purr.info.help.command_info.title")
+                   .replace("{command}", command.getName())
+            ).setDescription(bot.getMsg(guild.getId(), String.format(
+                "purr.%s.%s.description",
+                command.getCategory().getName().toLowerCase(Locale.ROOT),
+                command.getName()
+            ))).addField(
+                bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_title"),
+                bot.getMsg(guild.getId(), "purr.info.help.command_info.usage_value")
+                    .replace("{commands}", syntax),
+                false
+            ).build();
+        
+        tc.sendMessageEmbeds(embed).queue();
+    }
+    
+    private String getSlashCommandSyntax(SlashCommand command){
+        List<OptionData> options = command.getOptions();
+        StringBuilder builder = new StringBuilder("/").append(command.getName());
+        
+        if(options.isEmpty())
+            return builder.toString();
+        
+        for(OptionData option : options){
+            if(option.isRequired())
+                builder.append(" <").append(option.getName()).append(">");
+            else
+                builder.append(" [").append(option.getName()).append("]");
+        }
+        
+        return builder.toString();
     }
     
     private void showHelpMenu(Member member, TextChannel tc, String category){
@@ -275,6 +379,42 @@ public class CmdHelp implements Command{
     
     private boolean isCommand(Command cmd){
         return cmd.getDescription() != null || cmd.hasAttribute("description");
+    }
+    
+    private MessageEmbed slashCommandList(Member member, String title, String commands){
+        String guildId = member.getGuild().getId();
+        
+        return bot.getEmbedUtil().getEmbed(member)
+            .addField(
+                bot.getMsg(guildId, "purr.info.help.command_menu.description.nav_title"),
+                bot.getMsg(guildId, "purr.info.help.command_menu.description.nav_value"),
+                false
+            ).addField(
+                EmbedBuilder.ZERO_WIDTH_SPACE,
+                bot.getMsg(guildId, "purr.info.help.command_menu.description.command_value"),
+                false
+            ).addField(
+                EmbedBuilder.ZERO_WIDTH_SPACE,
+                bot.getMsg(guildId, "purr.info.help.command_menu.description.support"),
+                false
+            ).addField(
+                String.format(
+                    "%s%s",
+                    title.equals("title") ? "" : categories.get(title) + " ",
+                    bot.getMsg(guildId, "purr.info.help.command_menu.categories." + title)
+                ),
+                String.format(
+                    "```\n" +
+                    "%s\n" +
+                    "```",
+                    commands
+                ),
+                false
+            ).addField(
+                bot.getMsg(guildId, "purr.info.help.command_menu.support_title"),
+                bot.getMsg(guildId, "purr.info.help.command_menu.support_value"),
+                false
+            ).build();
     }
     
     private MessageEmbed commandList(Member member, String title, String commands){

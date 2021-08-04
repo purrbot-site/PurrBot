@@ -26,6 +26,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.interactions.components.Button;
 import net.dv8tion.jda.api.interactions.components.ButtonStyle;
 import org.slf4j.LoggerFactory;
@@ -125,6 +126,36 @@ public class RequestUtil{
             }
             
             sendResponse(msg, tc, result, author, targets, text);
+        });
+    }
+    
+    public void handleInteraction(InteractionHook hook, HttpUtil.ImageAPI api, Guild guild, Member author){
+        handleInteraction(hook, api, guild, author, null);
+    }
+    
+    public void handleInteraction(InteractionHook hook, HttpUtil.ImageAPI api, Guild guild, Member author, List<String> targets){
+        bot.getHttpUtil().getImage(api).whenComplete((result, ex) -> {
+            String text;
+            if(author == null){
+                text = bot.getMsg(guild.getId(), result.getPath() + "message");
+            }else
+            if(targets == null){
+                text = bot.getMsg(guild.getId(), result.getPath() + "message", author.getEffectiveName());
+            }else{
+                text = bot.getMsg(guild.getId(), result.getPath() + "message", author.getEffectiveName(), targets);
+            }
+            
+            if(ex != null || result.getUrl() == null){
+                if(result.isRequired()){
+                    bot.getEmbedUtil().sendError(hook, guild, author, "errors.api_error");
+                    return;
+                }
+                
+                hook.editOriginal(text).queue();
+                return;
+            }
+            
+            
         });
     }
     

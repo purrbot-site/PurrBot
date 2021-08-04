@@ -80,6 +80,7 @@ public class PurrBot {
     private final FileManager fileManager = new FileManager();
     private final HttpUtil httpUtil = new HttpUtil();
     private final CommandLoader commandLoader = new CommandLoader(this);
+    private final CommandUtil commandUtil = new CommandUtil();
     
     private DBUtil dbUtil;
     private MessageUtil messageUtil;
@@ -194,6 +195,9 @@ public class PurrBot {
     }
     public RequestUtil getRequestUtil(){
         return requestUtil;
+    }
+    public CommandUtil getCommandUtil(){
+        return commandUtil;
     }
     
     public boolean isBeta(){
