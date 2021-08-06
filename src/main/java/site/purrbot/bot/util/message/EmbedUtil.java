@@ -24,6 +24,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.PurrBot;
 
@@ -116,6 +117,14 @@ public class EmbedUtil {
                 .build();
         
         hook.editOriginalEmbeds(embed).queue();
+    }
+    
+    public void sendGuildError(SlashCommandEvent event){
+        MessageEmbed embed = getErrorEmbed(null)
+            .setDescription("Unable to get Guild from Slash command!")
+            .build();
+        
+        event.replyEmbeds(embed).setEphemeral(true).queue();
     }
     
     

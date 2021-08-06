@@ -21,15 +21,17 @@ package site.purrbot.bot.commands.fun;
 import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import com.jagrosh.jdautilities.command.SlashCommand;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,19 +45,77 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}bite <@user> [@user ...]")
         }
 )
-public class CmdBite implements Command{
+public class CmdBite extends SlashCommand implements Command{
     
     private final PurrBot bot;
     private final Logger logger = (Logger)LoggerFactory.getLogger("Command - Bite");
     
     public CmdBite(PurrBot bot){
         this.bot = bot;
+        
+        this.name = "bite";
+        this.help = "Lets you bite up to 3 people.";
+        this.guildOnly = true;
+        
+        this.options = Arrays.asList(
+            new OptionData(OptionType.USER, "user", "First user to bite."),
+            new OptionData(OptionType.USER, "user2", "Second user to bite."),
+            new OptionData(OptionType.USER, "user3", "Third user to bite.")
+        );
+    }
+    
+    @Override
+    protected void execute(SlashCommandEvent event){
+        List<User> users = bot.getCommandUtil().getUsers(event, "user", "user2", "user3");
+        
+        Guild guild = event.getGuild();
+        if(guild == null){
+            bot.getEmbedUtil().sendGuildError(event);
+            return;
+        }
+        
+        event.deferReply().queue(hook -> {
+            if(users.isEmpty()){
+                bot.getEmbedUtil().sendError(hook, guild, event.getMember(), "purr.fun.bite.no_user");
+                return;
+            }
+    
+            TextChannel tc = event.getTextChannel();
+            if(users.contains(guild.getSelfMember().getUser())){
+                if(bot.isBeta()){
+                    tc.sendMessage(
+                        bot.getRandomMsg(guild.getId(), "snuggle.fun.bite.mention_snuggle", event.getUser().getAsMention())
+                    ).queue();
+                }else{
+                    if(bot.isSpecial(event.getUser().getId())){
+                        tc.sendMessage(
+                            bot.getMsg(guild.getId(), "purr.fun.bite.special_user", event.getUser().getAsMention())
+                        ).queue();
+                    }else{
+                        tc.sendMessage(
+                            bot.getRandomMsg(guild.getId(), "purr.fun.bite.mention_purr", event.getUser().getAsMention())
+                        ).queue();
+                    }
+                }
+            }
+            
+            if(users.contains(event.getUser())){
+                tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.bite.mention_self", event.getUser().getAsMention())
+                ).queue();
+            }
+            
+            List<String> names = bot.getCommandUtil().convertNames(users, event.getUser(), guild);
+            if(names.isEmpty())
+                return;
+            
+            bot.getRequestUtil().handleInteraction(hook, HttpUtil.ImageAPI.BITE, guild, event.getMember(), names);
+        });
     }
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         List<Member> members = msg.getMentionedMembers();
-        
         if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.bite.no_mention");
             return;

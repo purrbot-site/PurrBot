@@ -18,17 +18,22 @@
 
 package site.purrbot.bot.util;
 
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import site.purrbot.bot.constants.IDs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class CommandUtil{
     
     public boolean getBoolean(SlashCommandEvent event, String key, boolean def){
-        OptionMapping option = getOption(event, key);
+        OptionMapping option = event.getOption(key);
         if(option == null)
             return def;
         
@@ -36,7 +41,7 @@ public class CommandUtil{
     }
     
     public String getString(SlashCommandEvent event, String key, String def){
-        OptionMapping option = getOption(event, key);
+        OptionMapping option = event.getOption(key);
         if(option == null)
             return def;
         
@@ -44,7 +49,7 @@ public class CommandUtil{
     }
     
     public User getUser(SlashCommandEvent event, String key){
-        OptionMapping option = getOption(event, key);
+        OptionMapping option = event.getOption(key);
         if(option == null)
             return null;
         
@@ -64,8 +69,14 @@ public class CommandUtil{
         return users;
     }
     
-    private OptionMapping getOption(SlashCommandEvent event, String key){
-        return event.getOption(key);
+    public List<String> convertNames(List<User> users, User own, Guild guild){
+        return users.stream()
+            .filter(user -> !user.getId().equals(IDs.PURR))
+            .filter(user -> !user.getId().equals(own.getId()))
+            .map(guild::getMember)
+            .filter(Objects::nonNull)
+            .map(Member::getEffectiveName)
+            .collect(Collectors.toList());
     }
     
 }
