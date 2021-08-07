@@ -20,10 +20,12 @@ package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
+import com.jagrosh.jdautilities.command.SlashCommand;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
@@ -38,12 +40,23 @@ import site.purrbot.bot.util.HttpUtil;
                 @CommandAttribute(key = "help", value = "{p}blush")
         }
 )
-public class CmdBlush implements Command{
+public class CmdBlush extends SlashCommand implements Command{
     
     private final PurrBot bot;
     
     public CmdBlush(PurrBot bot){
         this.bot = bot;
+        
+        this.name = "blush";
+        this.help = "Lets you blush.";
+        this.guildOnly = true;
+    }
+    
+    @Override
+    protected void execute(SlashCommandEvent event){
+        event.deferReply().queue(hook ->
+            bot.getRequestUtil().handleInteraction(hook, HttpUtil.ImageAPI.BLUSH, event.getGuild(), event.getMember())
+        );
     }
     
     @Override

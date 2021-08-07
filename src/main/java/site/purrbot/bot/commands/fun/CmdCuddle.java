@@ -21,15 +21,17 @@ package site.purrbot.bot.commands.fun;
 import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import com.jagrosh.jdautilities.command.SlashCommand;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,13 +45,68 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}cuddle <@user> [@user ...]")
         }
 )
-public class CmdCuddle implements Command{
+public class CmdCuddle extends SlashCommand implements Command{
 
     private final PurrBot bot;
     private final Logger logger = (Logger)LoggerFactory.getLogger("Command - Cuddle");
 
     public CmdCuddle(PurrBot bot){
         this.bot = bot;
+        
+        this.name = "cuddle";
+        this.help = "Cuddle up to 3 people";
+        this.guildOnly = true;
+    
+        this.options = Arrays.asList(
+            new OptionData(OptionType.USER, "user", "First user to cuddle."),
+            new OptionData(OptionType.USER, "user2", "Second user to cuddle."),
+            new OptionData(OptionType.USER, "user3", "Third user to cuddle.")
+        );
+    }
+    
+    @Override
+    protected void execute(SlashCommandEvent event){
+        List<User> users = bot.getCommandUtil().getUsers(event, "user", "user2", "user3");
+        
+        Guild guild = event.getGuild();
+        if(guild == null){
+            bot.getEmbedUtil().sendGuildError(event);
+            return;
+        }
+        
+        event.deferReply().queue(hook -> {
+            if(users.isEmpty()){
+                bot.getEmbedUtil().sendError(hook, guild, event.getMember(), "errors.no_users");
+                return;
+            }
+            
+            TextChannel tc = event.getTextChannel();
+            if(users.contains(guild.getSelfMember().getUser())){
+                if(bot.isBeta()){
+                    tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.cuddle.mention_snuggle", event.getUser().getAsMention())
+                    ).queue();
+                }else{
+                    tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.cuddle.mention_purr", event.getUser().getAsMention())
+                    ).queue();
+                }
+            }
+            
+            if(users.contains(event.getUser())){
+                tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.cuddle.mention_self", event.getUser().getAsMention())
+                ).queue();
+            }
+            
+            List<String> names = bot.getCommandUtil().convertNames(users, event.getUser(), guild);
+            if(names.isEmpty()){
+                hook.deleteOriginal().queue();
+                return;
+            }
+            
+            bot.getRequestUtil().handleInteraction(hook, HttpUtil.ImageAPI.CUDDLE, guild, event.getMember(), names);
+        });
     }
 
     @Override

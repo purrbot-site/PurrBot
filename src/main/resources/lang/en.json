@@ -16,6 +16,7 @@
       "self_channel": "I lack the permission `{permission}` in the channel {channel} to do this!",
       "other": "You lack the permission `{permission}` for this command."
     },
+    "no_users": "No valid User provided.",
     "nsfw_random": [
       "This channel doesn't seem to have a NSFW-label, does it {user}?",
       "Please be naughty in a NSFW channel {user}.",

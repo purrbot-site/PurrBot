@@ -76,7 +76,7 @@ public class CmdBite extends SlashCommand implements Command{
         
         event.deferReply().queue(hook -> {
             if(users.isEmpty()){
-                bot.getEmbedUtil().sendError(hook, guild, event.getMember(), "purr.fun.bite.no_user");
+                bot.getEmbedUtil().sendError(hook, guild, event.getMember(), "errors.no_users");
                 return;
             }
     
@@ -106,8 +106,10 @@ public class CmdBite extends SlashCommand implements Command{
             }
             
             List<String> names = bot.getCommandUtil().convertNames(users, event.getUser(), guild);
-            if(names.isEmpty())
+            if(names.isEmpty()){
+                hook.deleteOriginal().queue();
                 return;
+            }
             
             bot.getRequestUtil().handleInteraction(hook, HttpUtil.ImageAPI.BITE, guild, event.getMember(), names);
         });
