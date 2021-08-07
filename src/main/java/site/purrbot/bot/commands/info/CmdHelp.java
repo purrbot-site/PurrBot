@@ -27,7 +27,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.interactions.Interaction;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -64,11 +63,10 @@ public class CmdHelp extends SlashCommand implements Command{
         this.help = "Lists all commands or provides info about an existing command/category.";
         this.guildOnly = true;
         
-        List<OptionData> options = new ArrayList<>();
-        options.add(new OptionData(OptionType.STRING, "name", "The name of the command or category"));
-        options.add(new OptionData(OptionType.BOOLEAN, "category", "Should the name be treated as category?"));
-        
-        this.options = options;
+        this.options = Arrays.asList(
+            new OptionData(OptionType.STRING, "name", "The name of the command or category."),
+            new OptionData(OptionType.BOOLEAN, "category", "If the name should be treated as category.")
+        );
         
         categories.put("fun", "\uD83C\uDFB2");
         categories.put("guild", "\uD83C\uDFAE");
@@ -82,9 +80,17 @@ public class CmdHelp extends SlashCommand implements Command{
         String name = bot.getCommandUtil().getString(event, "name", null);
         boolean category = bot.getCommandUtil().getBoolean(event, "category", false);
         
+        Guild guild = event.getGuild();
+        if(guild == null){
+            bot.getEmbedUtil().sendGuildError(event);
+            return;
+        }
+        
         event.deferReply().queue(hook -> {
             if(name == null){
-                
+                showMenu(hook, guild, event.getMember(), event.getTextChannel());
+            }else{
+                showHelp(hook, event.getTextChannel(), event.getGuild(), event.getMember(), name, category);
             }
         });
     }
@@ -120,38 +126,36 @@ public class CmdHelp extends SlashCommand implements Command{
     private void showHelp(InteractionHook hook, TextChannel tc, Guild guild, Member member, String name, boolean isCategory){
         hook.deleteOriginal().queue();
         
-        List<SlashCommand> commands = this.getClient().getSlashCommands();
-        commands.sort(Comparator.comparing(SlashCommand::getName));
-        
-        StringBuilder builder = new StringBuilder();
-        EmbedPaginator.Builder paginator = getPaginator(member, tc);
         
         if(isCategory){
-            for(SlashCommand command : commands){
-                if(command.getCategory().getName().equals(name.toLowerCase(Locale.ROOT))){
-                    String commandName = getSlashCommandSyntax(command);
-                    if(builder.length() + commandName.length() + 10 > MessageEmbed.VALUE_MAX_LENGTH){
-                        paginator.addItems(slashCommandList(member, name.toLowerCase(Locale.ROOT), builder.toString()));
-                        
-                        builder.setLength(0);
-                    }
-    
-                    if(builder.length() > 0)
-                        builder.append("\n");
-    
-                    builder.append(commandName);
+            StringBuilder builder = new StringBuilder();
+            EmbedPaginator.Builder paginator = getPaginator(member, tc);
+            
+            for(SlashCommand command : getSlashCommands(name)){
+                String commandName = getSlashCommandSyntax(command);
+                if(builder.length() + commandName.length() + 10 > MessageEmbed.VALUE_MAX_LENGTH){
+                    paginator.addItems(slashCommandList(member, name.toLowerCase(Locale.ROOT), builder.toString()));
+                    
+                    builder.setLength(0);
                 }
+                
+                if(builder.length() > 0)
+                    builder.append("\n");
+                
+                builder.append(commandName);
             }
             
             paginator.build().display(tc);
         }else{
-            for(SlashCommand command : commands){
+            for(SlashCommand command : getSlashCommands(null)){
                 if(!command.getName().equalsIgnoreCase(name))
                     continue;
                 
                 showCommandHelp(guild, tc, member, command);
-                break;
+                return;
             }
+            
+            bot.getEmbedUtil().sendError(hook, guild, member, "purr.info.help.command_not_found");
         }
     }
     
@@ -176,6 +180,18 @@ public class CmdHelp extends SlashCommand implements Command{
         tc.sendMessageEmbeds(embed).queue();
     }
     
+    private List<SlashCommand> getSlashCommands(String category){
+        return this.getClient().getSlashCommands().stream()
+            .sorted(Comparator.comparing(SlashCommand::getName))
+            .filter(command -> {
+                if(category == null)
+                    return true;
+                
+                return command.getCategory().getName().equalsIgnoreCase(category);
+            })
+            .collect(Collectors.toList());
+    }
+    
     private String getSlashCommandSyntax(SlashCommand command){
         List<OptionData> options = command.getOptions();
         StringBuilder builder = new StringBuilder("/").append(command.getName());
@@ -185,12 +201,64 @@ public class CmdHelp extends SlashCommand implements Command{
         
         for(OptionData option : options){
             if(option.isRequired())
-                builder.append(" <").append(option.getName()).append(">");
+                builder.append("\n  <").append(option.getName()).append(">");
             else
-                builder.append(" [").append(option.getName()).append("]");
+                builder.append("\n  [").append(option.getName()).append("]");
         }
         
         return builder.toString();
+    }
+    
+    private void showMenu(InteractionHook hook, Guild guild, Member member, TextChannel tc){
+        hook.deleteOriginal().queue();
+        EmbedPaginator.Builder builder = getPaginator(member, tc);
+        
+        builder.addItems(
+            commandList(
+                member,
+                "title",
+                String.join(
+                    "\n",
+                    bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.fun"),
+                    bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.guild"),
+                    bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.info"),
+                    bot.getMsg(guild.getId(), "purr.info.help.command_menu.categories.nsfw")
+                )
+            )
+        );
+        
+        builder.addItems(getHelpPages(
+            "fun",
+            guild,
+            member,
+            false
+        )).addItems(getHelpPages(
+            "guild",
+            guild,
+            member,
+            false
+        )).addItems(getHelpPages(
+            "info",
+            guild,
+            member,
+            false
+        )).addItems(getHelpPages(
+            "nsfw",
+            guild,
+            member,
+            true
+        ));
+        
+        if(bot.getCheckUtil().isDeveloper(member)){
+            builder.addItems(getHelpPages(
+                "owner",
+                guild,
+                member,
+                false
+            ));
+        }
+        
+        builder.build().display(tc);
     }
     
     private void showHelpMenu(Member member, TextChannel tc, String category){
@@ -270,6 +338,47 @@ public class CmdHelp extends SlashCommand implements Command{
             builder.addItems(pages).build().display(tc);
         }
         
+    }
+    
+    private List<MessageEmbed> getHelpPages(String category, Guild guild, Member member, boolean isNsfw){
+        List<MessageEmbed> embeds = new LinkedList<>();
+        
+        if(category.equals("nsfw") && !isNsfw){
+            embeds.add(commandList(
+                member,
+                category,
+                bot.getMsg(guild.getId(), "purr.info.help.command_menu.nsfw_info")
+            ));
+            return embeds;
+        }
+        
+        StringBuilder builder = new StringBuilder();
+        for(SlashCommand command : getSlashCommands(category)){
+            String commandSyntax = getSlashCommandSyntax(command);
+            if(builder.length() + commandSyntax.length() + 10 > MessageEmbed.VALUE_MAX_LENGTH){
+                embeds.add(slashCommandList(
+                    member,
+                    category,
+                    builder.toString()
+                ));
+                
+                builder.setLength(0);
+            }
+            
+            if(builder.length() > 0)
+                builder.append("\n");
+            
+            builder.append(commandSyntax);
+            
+        }
+        
+        embeds.add(slashCommandList(
+            member,
+            category,
+            builder.toString()
+        ));
+        
+        return embeds;
     }
     
     private List<MessageEmbed> getHelpPages(String category, Member member, String prefix){
