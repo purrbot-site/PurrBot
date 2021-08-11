@@ -119,7 +119,7 @@ Feel free to upvote her to show your support.
   <tbody>
     <tr>
       <td align="center"><a href="https://discordextremelist.xyz/bots/purr">Discordextremelist.xyz</a></td>
-      <td align="center"><img src="https://api.discordlist.space/v2/bots/425382319449309197/widget" alt="discordlist.space"></td>
+      <td align="center"><img src="https://api.discordlist.space/v2/bots/425382319449309197/widget?background=3F51B5" alt="discordlist.space"></td>
     </tr>
   </tbody>
   <thead>
