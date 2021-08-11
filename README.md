@@ -45,14 +45,10 @@
 This bot was made to use the [nekos.life]-API but moved to its very own API.
 
 # Commands
-**Default Prefix**: `p.`
+The bot uses Discords Slash Commands feature, meaning it uses `/` as its prefix.  
 
-The bot can have a different prefix on other Discord Servers.  
-If You're not sure what prefix is used can you just mention the bot (`@*Purr*#6875`) and it will tell you what prefix is used.
+You can use `/purrhelp` for a list of commands or visit the [Wiki][commands].
 
-![mention]
-
-A full list of all commands can be found on the [wiki][commands].  
 All commands require the following permissions:  
 - Read Messages
 - Send Messages
