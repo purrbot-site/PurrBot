@@ -74,7 +74,6 @@ public class CommandLoader {
                 new CmdDonate(bot),
                 new CmdEmote(bot),
                 new CmdGuild(bot),
-                new CmdHelp(bot),
                 new CmdInfo(bot),
                 new CmdInvite(bot),
                 new CmdPing(bot),

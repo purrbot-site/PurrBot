@@ -111,6 +111,10 @@ public class EmbedUtil {
         tc.sendMessageEmbeds(embed.build()).queue();
     }
     
+    public void sendError(InteractionHook hook, Guild guild, String path){
+        sendError(hook, guild, null, path);
+    }
+    
     public void sendError(InteractionHook hook, Guild guild, Member member, String path){
         MessageEmbed embed = getErrorEmbed(member)
                 .setDescription(bot.getMsg(guild.getId(), path, member.getEffectiveName()))

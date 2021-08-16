@@ -31,7 +31,7 @@ public class CmdImg extends SlashCommand{
     public CmdImg(PurrBot bot){
         this.name = "img";
         this.help = "Displays different images.";
-        this.guildOnly = true;
+        this.category = new Category("fun");
         
         this.children = new SlashCommand[]{
             new Eevee(bot),
@@ -54,7 +54,7 @@ public class CmdImg extends SlashCommand{
             this.bot = bot;
             
             this.help = "Returns an image or gif of Eevee.";
-            this.guildOnly = true;
+            this.category = new Category("fun");
             
             this.options = Collections.singletonList(
                 new OptionData(OptionType.BOOLEAN, "gif", "Should the bot return a gif?")
@@ -83,7 +83,7 @@ public class CmdImg extends SlashCommand{
             
             this.name = "kitsune";
             this.help = "Returns an image of a Kitsune (Fox girl).";
-            this.guildOnly = true;
+            this.category = new Category("fun");
         }
         
         @Override
@@ -102,7 +102,7 @@ public class CmdImg extends SlashCommand{
             
             this.name = "neko";
             this.help = "Returns an image or gif of a Neko (Cat girl).";
-            this.guildOnly = true;
+            this.category = new Category("fun");
             
             this.options = Collections.singletonList(
                 new OptionData(OptionType.BOOLEAN, "gif", "Should the bot return a gif?")
@@ -131,7 +131,7 @@ public class CmdImg extends SlashCommand{
             
             this.name = "okami";
             this.help = "Returns an image of an Okami (Wolf girl)";
-            this.guildOnly = true;
+            this.category = new Category("fun");
         }
         
         @Override
@@ -150,7 +150,7 @@ public class CmdImg extends SlashCommand{
             
             this.name = "senko";
             this.help = "Returns an image of Senko-San.";
-            this.guildOnly = true;
+            this.category = new Category("fun");
         }
     
         @Override

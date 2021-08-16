@@ -55,10 +55,10 @@ public class CmdCuddle extends SlashCommand implements Command{
         
         this.name = "cuddle";
         this.help = "Cuddle up to 3 people";
-        this.guildOnly = true;
+        this.category = new Category("fun");
     
         this.options = Arrays.asList(
-            new OptionData(OptionType.USER, "user", "First user to cuddle."),
+            new OptionData(OptionType.USER, "user", "First user to bite.").setRequired(true),
             new OptionData(OptionType.USER, "user2", "Second user to cuddle."),
             new OptionData(OptionType.USER, "user3", "Third user to cuddle.")
         );

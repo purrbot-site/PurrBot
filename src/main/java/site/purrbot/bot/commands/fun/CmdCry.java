@@ -49,7 +49,7 @@ public class CmdCry extends SlashCommand implements Command{
         
         this.name = "cry";
         this.help = "Cry about something";
-        this.guildOnly = true;
+        this.category = new Category("fun");
     }
     
     @Override

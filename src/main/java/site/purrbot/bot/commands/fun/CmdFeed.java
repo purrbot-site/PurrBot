@@ -21,14 +21,19 @@ package site.purrbot.bot.commands.fun;
 import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import com.jagrosh.jdautilities.command.SlashCommand;
+import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @CommandDescription(
         name = "Feed",
@@ -40,13 +45,48 @@ import site.purrbot.bot.util.HttpUtil;
                 @CommandAttribute(key = "help", value = "{p}feed <@user>")
         }
 )
-public class CmdFeed implements Command{
+public class CmdFeed extends SlashCommand implements Command{
     
     private final PurrBot bot;
     private final Logger logger = (Logger)LoggerFactory.getLogger("Command - Feed");
     
     public CmdFeed(PurrBot bot){
         this.bot = bot;
+        
+        this.name = "kiss";
+        this.help = "Kiss up to 3 people.";
+        this.category = new Category("fun");
+        
+        this.options = Collections.singletonList(
+            new OptionData(OptionType.USER, "user", "The user to feed").setRequired(true)
+        );
+    }
+    
+    @Override
+    protected void execute(SlashCommandEvent event){
+        User user = bot.getCommandUtil().getUser(event, "user");
+        
+        Guild guild = event.getGuild();
+        if(guild == null){
+            bot.getEmbedUtil().sendGuildError(event);
+            return;
+        }
+        
+        event.deferReply().queue(hook -> {
+            if(user == null){
+                bot.getEmbedUtil().sendError(hook, guild, "purr.fun.feed.no_user");
+                return;
+            }
+    
+            Member author = event.getMember();
+            Member member = guild.getMember(user);
+            if(author == null || member == null){
+                bot.getEmbedUtil().sendError(hook, guild, "purr.fun.feed.no_user");
+                return;
+            }
+            
+            bot.getRequestUtil().handleRequest(hook, guild, event.getTextChannel(), author, member, HttpUtil.ImageAPI.FEED);
+        });
     }
     
     @Override

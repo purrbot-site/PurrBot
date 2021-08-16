@@ -155,8 +155,76 @@ public class RequestUtil{
                 return;
             }
             
+            MessageEmbed embed = bot.getEmbedUtil().getEmbed()
+                .setDescription(text)
+                .setImage(result.getUrl())
+                .build();
             
+            hook.editOriginalEmbeds(embed).queue();
         });
+    }
+    
+    public void handleRequest(InteractionHook hook, Guild guild, TextChannel tc, Member author, Member target, HttpUtil.ImageAPI api){
+        if(queue.getIfPresent(getQueueString(api.getName(), guild.getId(), author.getId())) != null){
+            bot.getEmbedUtil().sendError(hook, guild, api.getPath() + "request.open");
+            return;
+        }
+        
+        String text = bot.getMsg(guild.getId(), api.getPath() + "request.message", author.getEffectiveName(), target.getAsMention());
+        
+        hook.deleteOriginal().queue();
+        
+        tc.sendMessage(bot.getMsg(guild.getId(), "request.message").replace("{text}", text))
+            .setActionRow(
+                getButton(guild.getId(), api.getName(), true),
+                getButton(guild.getId(), api.getName(), false)
+            ).queue(message -> {
+                queue.put(getQueueString(api.getName(), guild.getId(), author.getId()), target.getId());
+                
+                bot.getWaiter().waitForEvent(
+                    ButtonClickEvent.class,
+                    event -> {
+                        if(event.getUser().isBot())
+                            return false;
+    
+                        if(event.getMember() == null)
+                            return false;
+    
+                        if(!isValidButton(event.getComponentId(), api.getName()))
+                            return false;
+    
+                        if(!event.isAcknowledged())
+                            event.deferEdit().queue();
+    
+                        if(!event.getMember().getId().equals(target.getId()))
+                            return false;
+    
+                        return event.getMessageId().equals(message.getId());
+                    },
+                    event -> {
+                        queue.invalidate(getQueueString(api.getName(), guild.getId(), author.getId()));
+    
+                        Message msg = event.getMessage();
+                        String result = event.getComponentId().split(":")[2];
+                        
+                        if(result.equals("deny")){
+                            tc.sendMessage(
+                                bot.getMsg(guild.getId(), api.getPath() + "request.denied", author.getAsMention(), target.getEffectiveName())
+                            ).queue();
+    
+                            if(msg == null)
+                                return;
+                            msg.delete().queue();
+                        }else{
+                            handleEdit(tc, msg, api, author, Collections.singletonList(target.getEffectiveName()));
+                        }
+                        
+                    },
+                    1, TimeUnit.MINUTES,
+                    () -> {
+                    }
+                );
+            });
     }
     
     private void handleButton(Message msg, TextChannel tc, Member author, Member target, HttpUtil.ImageAPI api){
