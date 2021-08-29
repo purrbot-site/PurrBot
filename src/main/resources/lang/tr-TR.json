@@ -335,7 +335,7 @@
         "dm_failure": "Sana DM gönderemedim {user}. DM'lerinin açık olduğundan emin misin?",
         "embed": {
           "booster_title": "Sunucu Takviyecisi",
-          "description": "Bu botu ayakta tutmak için para gerekiyor. Bu nedenle, küçük veya büyük farketmeksizin her türlü bağışa açığız.\nPayPal veya Ko-fi kullanarak yalnızca bir kez bağış yapmayı veya Patreon kullanarak belli aralıklarla bağışlara devam etmeyi tercih edebilirsiniz.\n{PAYPAL} [`PayPal`]({paypal_url}) (Tek Seferlik)\n{KOFI} [`Ko-fi`]({kofi_url}) (Tek Seferlik)\n{PATREON} [`Patreon`]({patreon_url}) (Yenilenen Bağış)",
+          "description": "Botu ayakta tutmak için para gerekiyor. Bu nedenle, - küçük veya büyük farketmeksizin - her türlü bağışa açığız. PayPal veya Ko-fi kullanarak yalnızca bir kez bağış yapmayı veya Patreon kullanarak belli aralıklarla bağışlara devam etmeyi tercih edebilirsiniz.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Tek Seferlik)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Tek Seferlik)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Yenilenen Bağış)",
           "donate_title": "Sunucu Takviyecisi ve Bağışçı",
           "donate_value": "Aşağıda bağış yapan veya [destek sunucusuna]({guild_invite}) takviye yapan kişilerin listesini bulabilirsiniz.\nBağış ve sunucuya takviye yapmak özel Hoşgeldin afişi veya kendi özel rollerinizi kullanma gibi özel özellikleri açar!\nBu size çekici geliyorsa, sunucuyu yükseltmeyi veya Tier 2+ Patreon üyesi olmayı düşünün.\nTek seferlik bağışlar da hoş karşılanıyor!",
           "donators_title": "Bağış Yapanlar",
