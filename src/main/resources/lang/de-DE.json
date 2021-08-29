@@ -335,7 +335,7 @@
         "dm_failure": "Ich konnte dir keine Privatnachricht schicken, {user}. Bist du dir sicher, dass du deine DMs offen hast?",
         "embed": {
           "booster_title": "Server-Booster",
-          "description": "Diesen Bot zu betreiben ist teuer. Deshalb sind alle Spenden - ob groß oder klein - willkommen.\nDu kannst wählen ob du nur einmal durch PayPal oder Ko-fi spenden willst, oder ob du fortlaufende Spenden über Patreon machen möchtest.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Einzelne Spende)\n{KOFI} [`Ko-fi`]({kofi_url}) (Einzelne Spende)\n{PATREON} [`Patreon`]({patreon_url}) (Fortlaufende Spenden)",
+          "description": "Diesen Bot zu betreiben ist teuer. Deshalb sind alle spenden - ob groß oder klein - willkommen.\nDu kannst entscheiden ob du nur einmal über PayPal oder Ko-fi spendest, oder ob du fortlaufende Spenden über Patreon machst.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Einzelne Spende)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Einzelne Spende)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Fortlaufende Spende)",
           "donate_title": "Server-Booster und Spender",
           "donate_value": "Unten findest du eine Liste von Leuten, die Spender sind oder den [Support Server]({guild_invite}) geboostet haben\nSpenden und Server-Boosting schält Berechtigungen wie ein spezielles Willkommens-Banner oder die Option, deine eigenen zu nutzen frei!\nFalls du das attraktiv findest, denke darüber nach, den Server zu boosten oder ein Stufe-2 Patreonmitglied zu werden.\nEinzelspenden sind auch willkommen!",
           "donators_title": "Spender",
