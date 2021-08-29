@@ -335,7 +335,7 @@
         "dm_failure": "Je ne pouvais pas t'envoyer un MP {user}. êtes-tu sûr d'avoir ouvert tes MP?",
         "embed": {
           "booster_title": "Booster du serveur",
-          "description": "Faire fonctionner ce bot est coûteux. C'est pourquoi tous les dons - petits ou grands - sont les bienvenus.\nVous pouvez choisir si vous ne voulez faire qu'une seule don en utilisant PayPal ou Ko-fi, ou si vous voulez faire des dons continus sur Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (donation unique)\n{KOFI} [`Ko-fi`]({kofi_url}) (donation unique)\n{PATREON} [`Patreon`]({patreon_url}) (donation continue)",
+          "description": "Faire fonctionner ce bot est coûteux. C'est pourquoi tous les dons - petits ou grands - sont les bienvenus.\nVous pouvez choisir si vous voulez faire un don en utilisant PayPal ou Ko-fi, ou si vous voulez faire des dons continus sur Patreon.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (donation unique)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (donation unique)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (donation continue)",
           "donate_title": "Booster du serveur et donateur",
           "donate_value": "Ci-dessous vous pouvez trouver des listes de personnes qui sont des donateurs ou ont boosté le [serveur de support]({guild_invite})\nLes dons et le boost du serveur débloquent des avantages spécifiques tels que des bannières spéciales de bienvenue ou l'option d'utiliser les vôtres!\nSi cela vous plaît envisager de booster le serveur ou de devenir un membre de Tier 2+ sur Patreon.\nLes dons uniques sont également les bienvenus !",
           "donators_title": "Donateurs",
