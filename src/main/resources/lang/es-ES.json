@@ -335,7 +335,7 @@
         "dm_failure": "No pude enviarte un DM {user}. ¿Te aseguraste de tener abiertos tus MD?",
         "embed": {
           "booster_title": "Server Booster",
-          "description": "Ejecutar este bot es caro. Por eso cualquier donación - grande o pequeña - es bienvenida.\nPuedes elegir si solo quieres donar una vez usando PayPal o Ko-fi, o si quieres hacer donaciones continuas en Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Donaciones simples)\n{KOFI} [`Ko-fi`]({kofi_url}) (Donación simple)\n{PATREON} [`Patreon`]({patreon_url}) (Donaciones continuas)",
+          "description": "Ejecutar este bot es caro. Por eso cualquier donación (grande o pequeña) es bienvenida.\nPuedes elegir si solo quieres donar una vez usando PayPal o Ko-fi, o si quieres hacer donaciones continuas en Patreon.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Donaciones simples)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Donaciones simple)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Donaciones continuas)",
           "donate_title": "Booster y donaciones del servidor",
           "donate_value": "A continuación puedes encontrar listas de personas que son donantes o que han bosteado el [Servidor de Soporte]({guild_invite})\n¡Las donaciones y los boost desbloquean ventajas específicas, como pancartas de bienvenida especiales o la opción de usar las tuyas propias!\nSi esto te suena atractivo, considera hacer boosting el servidor o convertirse en miembro de Patreon Nivel 2+.\n¡Las donaciones individuales también son bienvenidas!",
           "donators_title": "Donantes",
