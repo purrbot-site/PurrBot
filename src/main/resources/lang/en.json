@@ -335,7 +335,7 @@
         "dm_failure": "I couldn't send you a DM {user}. Did you make sure to have your DMs open?",
         "embed": {
           "booster_title": "Server Booster",
-          "description": "Running this bot is expensive. That's why any donations - either big or small - are welcome.\nYou can choose if you want to only donate once using PayPal or Ko-fi, or if you want to make continuous donations on Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donations)\n{KOFI} [`Ko-fi`]({kofi_url}) (Single Donation)\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donations)",
+          "description": "Running this bot is expensive. That's why any donations - either big or small - are welcome.\nYou can choose if you want to only donate once using PayPal or Ko-fi, or if you want to make continuous donations on Patreon.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Single Donations)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Single Donation)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Continuous Donations)",
           "donate_title": "Server Booster and Donator",
           "donate_value": "Below can you find lists of people that are donators or boosted the [Support Server]({guild_invite})\nDonations and Server boosting unlock specific perks such as special Welcome banners or the option to use your own ones!\nIf this sounds appealing to you consider boosting the server or becoming a Tier 2+ Patreon member.\nSingle donations are also welcome!",
           "donators_title": "Donators",
