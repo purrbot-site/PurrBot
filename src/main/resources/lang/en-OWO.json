@@ -335,7 +335,7 @@
         "dm_failure": "I couwdn`t send you a DM {user}. Did you make sure to have youw DMs open?",
         "embed": {
           "booster_title": "Sewew Boostew OwO",
-          "description": "Wunning this bot is vewy vewy expensive. That's why any donations - eithew big or smaww - are wewcome.\nYou can choose if you want to onwy donate once using PayPal or Ko-fi, or if you want to make continuous donations on Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Single Donations)\n{KOFI} [`Ko-fi`]({kofi_url}) (Single Donation)\n{PATREON} [`Patreon`]({patreon_url}) (Continuous Donations)",
+          "description": "Wunning this bot is expensive. That's why any donations - eithew big or smaww - awe wewcome.\nYou can choose if you want to onwy donate once using PayPal or Ko-fi, or if you want to make continuous donations on Patreon.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Singwe Donations)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Singwe Donation)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Continuous Donations)",
           "donate_title": "Sewew Boostew and Donatow",
           "donate_value": "Below can you find lists of people that awe donatows ow boosted the [Suppowt Sewew]({guild_invite}) ^-^\nDonations and Sewew boosting unlock specific pewks such as special Welcome banners ow the option to use youw own ones!\nIf this sounds appealing to you considew boosting the sewew ow becoming a Tiew 2+ Patweon membew.\nSingle donations awe also welcome!",
           "donators_title": "Donatows",
