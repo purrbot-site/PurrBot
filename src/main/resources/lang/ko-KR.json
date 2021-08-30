@@ -335,7 +335,7 @@
         "dm_failure": "{user}. 너에게 메시지를 보낼 수 없어. 개인 메시지 설정을 다시 확인해줄래?",
         "embed": {
           "booster_title": "서버 부스터",
-          "description": "이 봇을 유지하는 비용은 큽니다. 크기에 상관없이 어떤 후원이든 큰 도움이 됩니다.\n정기후원을 원하신다면 Patreon을, 아니라면 Paypal 또는 Ko-fi를 사용해 이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{KOFI} [`Ko-fi`]({kofi_url}) (일회성 후원)\n{PATREON} [`Patreon`]({patreon_url}) (정기후원)",
+          "description": "이 봇을 유지하는 비용은 큽니다. 크기에 상관없이 어떤 후원이든 큰 도움이 됩니다.\n정기후원을 원하신다면 Patreon을, 아니라면 Paypal 또는 Ko-fi를 사용해 이 봇을 후원해주세요.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (일회성 후원)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (정기후원)",
           "donate_title": "서버 부스터와 후원자",
           "donate_value": "여기에 기록된 분들은 [지원 서버]({guild_invite})를 부스트하거나 후원해주신 분들입니다.\n후원과 서버 부스트는 서버 입장 배너 또는 새로운 기능 추가에 큰 도움을 줍니다!\n물론, 서버 부스트나 주기적인 후원만 도움이 되는건 아닙니다. 단순한 후원도 언제든지 환영합니다!",
           "donators_title": "후원자",
