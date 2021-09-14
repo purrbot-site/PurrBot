@@ -63,7 +63,7 @@ dependencies {
     compile group: 'org.botblock', name: 'javabotblockapi-core', version: '6.7.4_347'
     compile group: 'org.botblock', name: 'javabotblockapi-jda', version: '6.7.4_347'
     compile group: 'net.discordservices', name: 'dservices4j', version: '1.3.1_8'
-    compile group: 'io.javalin', name: 'javalin', version: '3.13.11'
+    compile group: 'io.javalin', name: 'javalin', version: '4.0.0'
     compile group: 'org.json', name: 'json', version: '20210307'
 }
 
