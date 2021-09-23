@@ -32,8 +32,6 @@ public class GuildSettings{
     
     // Default values
     public static final String DEF_LANGUAGE    = "en";
-    public static final String DEF_PREFIX      = "p.";
-    public static final String DEF_PREFIX_BETA = "p..";
     
     public static final String DEF_BACKGROUND = "color_white";
     public static final String DEF_CHANNEL    = "none";
@@ -42,7 +40,6 @@ public class GuildSettings{
     public static final String DEF_MESSAGE    = "Welcome {mention}!";
     
     private String language;
-    private String prefix;
     
     private String welcomeBackground;
     private String welcomeChannel;
@@ -50,10 +47,9 @@ public class GuildSettings{
     private String welcomeIcon;
     private String welcomeMessage;
     
-    public static GuildSettings createDefault(boolean beta){
+    public static GuildSettings createDefault(){
         return new GuildSettings()
                 .setLanguage(DEF_LANGUAGE)
-                .setPrefix(beta ? DEF_PREFIX_BETA : DEF_PREFIX)
                 .setWelcomeBackground(DEF_BACKGROUND)
                 .setWelcomeChannel(DEF_CHANNEL)
                 .setWelcomeColor(DEF_COLOR)
@@ -63,11 +59,6 @@ public class GuildSettings{
     
     public GuildSettings setLanguage(String language){
         this.language = language;
-        return this;
-    }
-    
-    public GuildSettings setPrefix(String prefix){
-        this.prefix = prefix;
         return this;
     }
     
@@ -98,10 +89,6 @@ public class GuildSettings{
     
     public String getLanguage(){
         return language;
-    }
-    
-    public String getPrefix(){
-        return prefix;
     }
     
     public String getWelcomeBackground(){

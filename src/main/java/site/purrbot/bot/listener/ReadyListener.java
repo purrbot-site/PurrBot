@@ -21,19 +21,25 @@ package site.purrbot.bot.listener;
 import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
+import com.jagrosh.jdautilities.command.CommandClient;
+import com.jagrosh.jdautilities.command.SlashCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.util.message.WebhookUtil;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReadyListener extends ListenerAdapter{
 
@@ -55,29 +61,31 @@ public class ReadyListener extends ListenerAdapter{
         JDA jda = event.getJDA();
 
         shards++;
-        logger.info("Shard {} ({} Guilds) ready!", jda.getShardInfo().getShardId(), jda.getGuildCache().size());
-
+        logger.info("{} guilds ready!", jda.getGuildCache().size());
+    
         WebhookEmbed embed = new WebhookEmbedBuilder()
-                .setColor(0x00FF00)
-                .setTitle(new WebhookEmbed.EmbedTitle(Emotes.STATUS_READY.getEmote(), null))
-                .addField(new WebhookEmbed.EmbedField(
-                        true,
-                        "Guilds:",
-                        String.valueOf(jda.getGuilds().size())
-                ))
-                .addField(new WebhookEmbed.EmbedField(
-                        true,
-                        "Shard:",
-                        String.valueOf(jda.getShardInfo().getShardId())
-                ))
-                .setFooter(new WebhookEmbed.EmbedFooter("Ready at", null))
-                .setTimestamp(ZonedDateTime.now())
-                .build();
+            .setColor(0x00FF00)
+            .addField(new WebhookEmbed.EmbedField(
+                true,
+                "Guilds:",
+                String.valueOf(jda.getGuilds().size())
+            ))
+            .addField(new WebhookEmbed.EmbedField(
+                true,
+                "Shard:",
+                String.valueOf(jda.getShardInfo().getShardId())
+            ))
+            .setFooter(new WebhookEmbed.EmbedFooter("Ready at", null))
+            .setTimestamp(ZonedDateTime.now())
+            .build();
     
         webhookUtil.sendMsg(
-                jda.getSelfUser().getEffectiveAvatarUrl(),
-                "Shard ready!",
-                embed
+            jda.getSelfUser().getEffectiveAvatarUrl(),
+            String.format(
+                "Shard %d: Loaded",
+                event.getJDA().getShardInfo().getShardId()
+            ),
+            embed
         );
         
         if(shards == jda.getShardInfo().getShardTotal()){

@@ -48,7 +48,6 @@ public class ConnectionListener extends ListenerAdapter{
 
         WebhookEmbedBuilder embed = new WebhookEmbedBuilder()
                 .setColor(0xFF0000)
-                .setTitle(new WebhookEmbed.EmbedTitle(Emotes.STATUS_DISCONNECT.getEmote(), null))
                 .addField(new WebhookEmbed.EmbedField(
                         true,
                         "Shard:",
@@ -78,7 +77,10 @@ public class ConnectionListener extends ListenerAdapter{
     
         webhookUtil.sendMsg(
                 jda.getSelfUser().getEffectiveAvatarUrl(),
-                "Disconnected",
+                String.format(
+                    "Shard %d: Session disconnected",
+                    jda.getShardInfo().getShardId()
+                ),
                 embed.build()
         );
         logger.info("Got disconnected on shard {}. Resume connection...", jda.getShardInfo().getShardId());
@@ -107,7 +109,10 @@ public class ConnectionListener extends ListenerAdapter{
     
         webhookUtil.sendMsg(
                 jda.getSelfUser().getEffectiveAvatarUrl(),
-                "Resumed session",
+                String.format(
+                    "Shard %d: Session resumed",
+                    jda.getShardInfo().getShardId()
+                ),
                 embed
         );
         logger.info("Connection successfully resumed for shard {}!", jda.getShardInfo().getShardId());

@@ -20,6 +20,7 @@ package site.purrbot.bot.util;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
@@ -32,12 +33,24 @@ import java.util.stream.Collectors;
 
 public class CommandUtil{
     
+    public TextChannel getTextChannel(SlashCommandEvent event, String key){
+        OptionMapping option = event.getOption(key);
+        if(option == null)
+            return null;
+        
+        return (TextChannel)option.getAsGuildChannel();
+    }
+    
     public boolean getBoolean(SlashCommandEvent event, String key, boolean def){
         OptionMapping option = event.getOption(key);
         if(option == null)
             return def;
         
         return option.getAsBoolean();
+    }
+    
+    public String getString(SlashCommandEvent event, String key){
+        return getString(event, key, null);
     }
     
     public String getString(SlashCommandEvent event, String key, String def){

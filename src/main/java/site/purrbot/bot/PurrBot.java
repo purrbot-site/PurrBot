@@ -21,7 +21,9 @@ package site.purrbot.bot;
 import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.rainestormee.jdacommand.CommandHandler;
+import com.jagrosh.jdautilities.command.CommandClient;
+import com.jagrosh.jdautilities.command.CommandClientBuilder;
+import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import io.javalin.Javalin;
 import net.discordservices.dservices4j.Commands;
@@ -46,9 +48,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
-import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.commands.CommandListener;
-import site.purrbot.bot.commands.CommandLoader;
+import site.purrbot.bot.commands.fun.*;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
@@ -74,12 +74,12 @@ public class PurrBot {
     private final Logger logger = (Logger)LoggerFactory.getLogger(PurrBot.class);
 
     private ShardManager shardManager = null;
+    private CommandClient commandClient;
 
     private final Random random = new Random();
 
     private final FileManager fileManager = new FileManager();
     private final HttpUtil httpUtil = new HttpUtil();
-    private final CommandLoader commandLoader = new CommandLoader(this);
     private final CommandUtil commandUtil = new CommandUtil();
     
     private DBUtil dbUtil;
@@ -92,7 +92,6 @@ public class PurrBot {
 
     private boolean beta = false;
 
-    private final CommandHandler<Message> CMD_HANDLER = new CommandHandler<>();
     private final EventWaiter waiter = new EventWaiter();
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     
@@ -135,9 +134,19 @@ public class PurrBot {
         requestUtil = new RequestUtil(this);
         
         beta = getFileManager().getBoolean("config", "beta");
-
-        CMD_HANDLER.registerCommands(new HashSet<>(commandLoader.getCommands()));
-    
+        
+        commandClient = new CommandClientBuilder()
+            .setManualUpsert(true)
+            .addSlashCommands(
+                new CmdBite(this),
+                new CmdBite(this),
+                new CmdCry(this),
+                new CmdCuddle(this),
+                new CmdDance(this),
+                new CmdFeed(this)
+            )
+            .build();
+        
         MessageAction.setDefaultMentions(EnumSet.of(
                 Message.MentionType.ROLE,
                 Message.MentionType.USER
@@ -152,9 +161,9 @@ public class PurrBot {
                 .addEventListeners(
                         new ReadyListener(this),
                         new ConnectionListener(this),
-                        new GuildListener(this),
+                        new GuildListener(this, commandClient),
                         new MemberListener(this),
-                        new CommandListener(this, CMD_HANDLER),
+                        commandClient,
                         waiter
                 )
                 .setShardsTotal(-1)
@@ -207,18 +216,12 @@ public class PurrBot {
         return getFileManager().getStringlist("data", "special").contains(id);
     }
 
-    public CommandHandler<Message> getCmdHandler(){
-        return CMD_HANDLER;
-    }
     public EventWaiter getWaiter(){
         return waiter;
     }
 
     public String getLanguage(String id){
         return getGuildSettings(id).getLanguage();
-    }
-    public String getPrefix(String id){
-        return getGuildSettings(id).getPrefix();
     }
     public String getWelcomeBg(String id){
         return getGuildSettings(id).getWelcomeBackground();
@@ -235,12 +238,9 @@ public class PurrBot {
     public String getWelcomeMsg(String id){
         return getGuildSettings(id).getWelcomeMessage();
     }
-
+    
     public void setLanguage(String id, String value){
         updateGuild(id, GuildSettings.LANGUAGE, value, GuildSettings::setLanguage);
-    }
-    public void setPrefix(String id, String value){
-        updateGuild(id, GuildSettings.PREFIX, value, GuildSettings::setPrefix);
     }
     public void setWelcomeBg(String id, String value){
         updateGuild(id, GuildSettings.WELCOME_BACKGROUND, value, GuildSettings::setWelcomeBackground);
@@ -277,10 +277,10 @@ public class PurrBot {
     public List<String> getStartupMsg(){
         return getFileManager().getStringlist("random", "startup_msg");
     }
-    public List<String> getWelcomeBg(){
+    public List<String> getWelcomeBackgrounds(){
         return getFileManager().getStringlist("data", "welcome.background");
     }
-    public List<String> getWelcomeIcon(){
+    public List<String> getWelcomeIcons(){
         return getFileManager().getStringlist("data", "welcome.icon");
     }
     
@@ -310,8 +310,7 @@ public class PurrBot {
     }
     
     public String getMsg(String id, String path){
-        return setPlaceholders(langUtils.getString(getLanguage(id), path))
-                .replace("{prefix}", getPrefix(id));
+        return setPlaceholders(langUtils.getString(getLanguage(id), path));
     }
     
     public String getRandomMsg(String id, String path, String user){
@@ -422,19 +421,19 @@ public class PurrBot {
     }
     
     private List<Commands.CommandInfo> getCommands(){
-        List<Commands.CommandInfo> commandInfoList = new ArrayList<>();
-        for(Command command : commandLoader.getCommands()){
-            if(command.getAttribute("category").equals("owner"))
+        List<Commands.CommandInfo> commands = new ArrayList<>();
+        for(SlashCommand command : commandClient.getSlashCommands()){
+            if(command.getCategory().getName().equalsIgnoreCase("owner"))
                 continue;
             
-            commandInfoList.add(new Commands.CommandInfo(
-                    command.getDescription().name(),
-                    setPlaceholders(langUtils.getString("en", command.getDescription().description())),
-                    command.getAttribute("category")
+            commands.add(new Commands.CommandInfo(
+                command.getName(),
+                command.getHelp(),
+                command.getCategory().getName()
             ));
         }
         
-        return commandInfoList;
+        return commands;
     }
     
     private void setupStatusAPI(){
@@ -484,12 +483,11 @@ public class PurrBot {
             if(guild == null){
                 getDbUtil().addGuild(id);
         
-                return GuildSettings.createDefault(isBeta());
+                return GuildSettings.createDefault();
             }
     
             return new GuildSettings()
                     .setLanguage(guild.getOrDefault(GuildSettings.LANGUAGE, GuildSettings.DEF_LANGUAGE))
-                    .setPrefix(guild.getOrDefault(GuildSettings.PREFIX, isBeta() ? GuildSettings.DEF_PREFIX_BETA : GuildSettings.DEF_PREFIX))
                     .setWelcomeBackground(guild.getOrDefault(GuildSettings.WELCOME_BACKGROUND, GuildSettings.DEF_BACKGROUND))
                     .setWelcomeChannel(guild.getOrDefault(GuildSettings.WELCOME_CHANNEL, GuildSettings.DEF_CHANNEL))
                     .setWelcomeColor(guild.getOrDefault(GuildSettings.WELCOME_COLOR, GuildSettings.DEF_COLOR))

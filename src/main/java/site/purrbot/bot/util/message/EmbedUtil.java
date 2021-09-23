@@ -49,6 +49,10 @@ public class EmbedUtil {
         );
     }
     
+    public EmbedBuilder getErrorEmbed(){
+        return getEmbed().setColor(0xFF0000);
+    }
+    
     public EmbedBuilder getErrorEmbed(Member member){
         return (member == null ? getEmbed() : getEmbed(member)).setColor(0xFF0000);
     }

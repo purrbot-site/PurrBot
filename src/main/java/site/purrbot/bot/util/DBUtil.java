@@ -28,8 +28,6 @@ import java.util.Objects;
 
 public class DBUtil {
 
-    private final PurrBot bot;
-
     private final RethinkDB r;
     private final Connection connection;
 
@@ -44,7 +42,6 @@ public class DBUtil {
                 .connect();
 
         guildTable  = bot.getFileManager().getString("config", "database.guildTable");
-        this.bot = bot;
     }
 
     /*
@@ -55,7 +52,6 @@ public class DBUtil {
                 r.array(
                         r.hashMap("id", id)
                          .with("language", "en")
-                         .with("prefix", bot.isBeta() ? "p.." : "p.")
                          .with("welcome_background", "color_white")
                          .with("welcome_channel", "none")
                          .with("welcome_color", "hex:000000")
@@ -66,9 +62,7 @@ public class DBUtil {
     }
 
     public void delGuild(String id){
-        Map<String,String> guild = getGuild(id);
-
-        if(guild == null) 
+        if(getGuild(id) == null) 
             return;
         
         r.table(guildTable).get(id).delete().run(connection);
@@ -90,7 +84,7 @@ public class DBUtil {
             addGuild(id);
         
         r.table(guildTable).get(id)
-                .update(r.hashMap(key, value))
-                .run(connection);
+            .update(r.hashMap(key, value))
+            .run(connection);
     }
 }

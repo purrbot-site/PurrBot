@@ -22,6 +22,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.update.GuildMemberUpdatePendingEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -50,7 +51,7 @@ public class MemberListener extends ListenerAdapter{
         if(event.getUser().isBot())
             return;
         
-        sendWelcomeMessage(guild, event.getMember());
+        sendWelcomeMessage(guild, event.getUser());
     }
     
     @Override
@@ -61,10 +62,10 @@ public class MemberListener extends ListenerAdapter{
         if(event.getUser().isBot())
             return;
         
-        sendWelcomeMessage(event.getGuild(), event.getMember());
+        sendWelcomeMessage(event.getGuild(), event.getUser());
     }
     
-    private void sendWelcomeMessage(Guild guild, Member member){
+    private void sendWelcomeMessage(Guild guild, User user){
         String guildId = guild.getId();
         if(bot.getWelcomeChannel(guildId).equals("none"))
             return;
@@ -80,13 +81,16 @@ public class MemberListener extends ListenerAdapter{
         if(message == null)
             message = "Welcome {mention}!";
         
-        InputStream image = bot.getImageUtil().getWelcomeImg(
-                member,
-                bot.getWelcomeIcon(guildId),
-                bot.getWelcomeBg(guildId),
-                bot.getWelcomeColor(guildId)
-        );
-        
-        bot.getMessageUtil().sendWelcomeMsg(tc, message, member, image);
+        // Because of stupid lambda will we need this waste of time...
+        String finalMsg = message;
+        bot.getImageUtil().getWelcomeImage(guild, user).whenComplete((stream, ex) -> {
+            
+            if(ex != null || stream == null){
+                bot.getMessageUtil().sendWelcomeMsg(tc, finalMsg, user, null, null);
+                return;
+            }
+            
+            bot.getMessageUtil().sendWelcomeMsg(tc, finalMsg, user, stream, null);
+        });
     }
 }

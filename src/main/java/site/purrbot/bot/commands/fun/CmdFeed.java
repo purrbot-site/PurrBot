@@ -18,43 +18,25 @@
 
 package site.purrbot.bot.commands.fun;
 
-import ch.qos.logback.classic.Logger;
-import com.github.rainestormee.jdacommand.CommandAttribute;
-import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.command.SlashCommand;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
-@CommandDescription(
-        name = "Feed",
-        description = "purr.fun.feed.description",
-        triggers = {"feed", "food", "eat"},
-        attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}feed <@user>"),
-                @CommandAttribute(key = "help", value = "{p}feed <@user>")
-        }
-)
-public class CmdFeed extends SlashCommand implements Command{
+public class CmdFeed extends SlashCommand{
     
     private final PurrBot bot;
-    private final Logger logger = (Logger)LoggerFactory.getLogger("Command - Feed");
     
     public CmdFeed(PurrBot bot){
         this.bot = bot;
         
-        this.name = "kiss";
-        this.help = "Kiss up to 3 people.";
+        this.name = "feed";
+        this.help = "Give someone some food to eat.";
         this.category = new Category("fun");
         
         this.options = Collections.singletonList(
@@ -87,46 +69,5 @@ public class CmdFeed extends SlashCommand implements Command{
             
             bot.getRequestUtil().handleRequest(hook, guild, event.getTextChannel(), author, member, HttpUtil.ImageAPI.FEED);
         });
-    }
-    
-    @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentionedMembers().isEmpty()){
-            bot.getEmbedUtil().sendError(tc, member, "purr.fun.feed.no_mention");
-            return;
-        }
-        
-        Member target = msg.getMentionedMembers().get(0);
-        
-        if(target.equals(guild.getSelfMember())){
-            if(bot.isBeta()){
-                tc.sendMessage(
-                        bot.getRandomMsg(guild.getId(), "snuggle.fun.feed.mention_snuggle", member.getAsMention())
-                ).queue();
-            }else{
-                tc.sendMessage(
-                        bot.getRandomMsg(guild.getId(), "purr.fun.feed.mention_purr", member.getAsMention())
-                ).queue();
-            }
-            msg.addReaction("\u2764").queue(
-                    null,
-                    e -> logger.warn("Couldn't add Reaction to a message.")
-            );
-            return;
-        }
-        
-        if(target.equals(member)){
-            tc.sendMessage(
-                    bot.getMsg(guild.getId(), "purr.fun.feed.mention_self", member.getAsMention())
-            ).queue();
-            return;
-        }
-        
-        if(target.getUser().isBot()){
-            bot.getEmbedUtil().sendError(tc, member, "purr.fun.feed.mention_bot");
-            return;
-        }
-        
-        bot.getRequestUtil().handleButtonEvent(tc, member, target, HttpUtil.ImageAPI.FEED);
     }
 }

@@ -20,6 +20,7 @@ package site.purrbot.bot.util.message;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.utils.TimeFormat;
 import site.purrbot.bot.PurrBot;
 
@@ -119,10 +120,10 @@ public class MessageUtil {
         return color;
     }
 
-    public void sendWelcomeMsg(TextChannel tc, String message, Member member, InputStream file){
-        Guild guild = member.getGuild();
+    public void sendWelcomeMsg(TextChannel tc, String message, User user, InputStream file, InteractionHook hook){
+        Guild guild = tc.getGuild();
     
-        message = formatPlaceholders(message, member);
+        message = formatPlaceholders(message, guild, user);
         
         if(file == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
             tc.sendMessage(message).queue();
@@ -132,14 +133,15 @@ public class MessageUtil {
         tc.sendMessage(message)
           .addFile(file, String.format(
                   "welcome_%s.jpg",
-                  member.getId()
+                  user.getId()
           ))
-          .queue();
+          .queue(m -> {
+              if(hook != null)
+                  hook.deleteOriginal().queue();
+          });
     }
     
-    public String formatPlaceholders(String msg, Member member){
-        Guild guild = member.getGuild();
-        
+    public String formatPlaceholders(String msg, Guild guild, User user){
         Matcher roleMatcher = rolePattern.matcher(msg);
         if(roleMatcher.find()){
             StringBuilder builder = new StringBuilder();
@@ -195,12 +197,12 @@ public class MessageUtil {
             do{
                 switch(matcher.group(2).toLowerCase()){
                     case "mention":
-                        matcher.appendReplacement(builder, member.getAsMention());
+                        matcher.appendReplacement(builder, user.getAsMention());
                         break;
                     
                     case "name":
                     case "username":
-                        matcher.appendReplacement(builder, member.getEffectiveName());
+                        matcher.appendReplacement(builder, user.getName());
                         break;
                     
                     case "guild":
@@ -219,7 +221,7 @@ public class MessageUtil {
                         break;
                     
                     case "tag":
-                        matcher.appendReplacement(builder, member.getUser().getAsTag());
+                        matcher.appendReplacement(builder, user.getAsTag());
                 }
             }while(matcher.find());
             

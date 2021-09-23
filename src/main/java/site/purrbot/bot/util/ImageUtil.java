@@ -18,12 +18,15 @@
 
 package site.purrbot.bot.util;
 
+import ch.qos.logback.classic.Logger;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.internal.utils.IOUtil;
 import okhttp3.*;
 import org.json.JSONObject;
+import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 
 import javax.imageio.ImageIO;
@@ -35,10 +38,13 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.concurrent.CompletableFuture;
 
 public class ImageUtil {
 
     private final PurrBot bot;
+    
+    private final Logger logger = (Logger)LoggerFactory.getLogger(ImageUtil.class);
 
     public ImageUtil(PurrBot bot){
         this.bot = bot;
@@ -157,7 +163,80 @@ public class ImageUtil {
             return null;
         }
     }
-
+    
+    public CompletableFuture<InputStream> getWelcomeImage(Guild guild, User user){
+        return CompletableFuture.supplyAsync(() -> {
+            Color color = bot.getMessageUtil().getColor(bot.getWelcomeColor(guild.getId()));
+        
+            if(color == null)
+                color = Color.BLACK;
+        
+            String colorFormat = String.format("%d,%d,%d", color.getRed(), color.getBlue(), color.getGreen());
+        
+            JSONObject json = new JSONObject()
+                .put(
+                    "username",
+                    user.getName()
+                )
+                .put(
+                    "members",
+                    bot.getMsg(guild.getId(), "misc.welcome_member")
+                        .replace("{count}", String.valueOf(guild.getMemberCount()))
+                )
+                .put(
+                    "icon",
+                    getUrl("icon", bot.getWelcomeIcon(guild.getId()), guild.getOwnerId())
+                )
+                .put(
+                    "banner",
+                    getUrl("background", bot.getWelcomeBg(guild.getId()), guild.getOwnerId())
+                )
+                .put(
+                    "avatar",
+                    user.getEffectiveAvatarUrl()
+                )
+                .put(
+                    "color_welcome",
+                    colorFormat
+                )
+                .put(
+                    "color_username",
+                    colorFormat
+                )
+                .put(
+                    "color_members",
+                    colorFormat
+                );
+        
+            RequestBody requestBody = RequestBody.create(json.toString(), null);
+        
+            Request request = new Request.Builder()
+                .addHeader("User-Agent", "PurrBot BOT_VERSION")
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", bot.getFileManager().getString("config", "tokens.fluxpoint-dev"))
+                .post(requestBody)
+                .url("https://api.fluxpoint.dev/gen/welcome")
+                .build();
+        
+            try(Response response = CLIENT.newCall(request).execute()){
+                if(!response.isSuccessful()){
+                    logger.warn("Unable to generate welcome image! API responded with {} ({})", response.code(), response.message());
+                    return null;
+                }
+            
+                ResponseBody body = response.body();
+                if(body == null){
+                    logger.warn("Unable to generate welcome image! API returned empty/null body!");
+                    return null;
+                }
+            
+                return new ByteArrayInputStream(body.bytes());
+            }catch(IOException ex){
+                return null;
+            }
+        });
+    }
+    
     public InputStream getWelcomeImg(Member member, String icon, String bg, String color){
         Color col = bot.getMessageUtil().getColor(color);
         
@@ -226,7 +305,33 @@ public class ImageUtil {
         }
     }
     
+    public boolean isValidImage(HttpUrl url, int width, int height){
+        Request request = new Request.Builder()
+            .url(url)
+            .addHeader("User-Agent", "PurrBot BOT_VERSION")
+            .build();
+        
+        try(Response response = CLIENT.newCall(request).execute()){
+            if(!response.isSuccessful())
+                return false;
+            
+            ResponseBody responseBody = response.body();
+            if(responseBody == null)
+                return false;
+            
+            BufferedImage img = ImageIO.read(responseBody.byteStream());
+            if(img == null)
+                return false;
+            
+            return img.getWidth() == width && img.getHeight() == height;
+        }catch(IOException ex){
+            return false;
+        }
+    }
+    
     public boolean isValidImage(String url, int width, int height){
+        
+        
         try{
             URL finalUrl = new URL(url);
             URLConnection connection = finalUrl.openConnection();

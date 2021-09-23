@@ -18,29 +18,12 @@
 
 package site.purrbot.bot.commands.fun;
 
-import com.github.rainestormee.jdacommand.CommandAttribute;
-import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.command.SlashCommand;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
-@CommandDescription(
-        name = "Cry",
-        description = "purr.fun.cry.description",
-        triggers = {"cry", "sob"},
-        attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}cry"),
-                @CommandAttribute(key = "help", value = "{p}cry")
-        }
-)
-public class CmdCry extends SlashCommand implements Command{
+public class CmdCry extends SlashCommand{
     
     private final PurrBot bot;
     
@@ -56,13 +39,6 @@ public class CmdCry extends SlashCommand implements Command{
     protected void execute(SlashCommandEvent event){
         event.deferReply().queue(hook -> 
             bot.getRequestUtil().handleInteraction(hook, HttpUtil.ImageAPI.CRY, event.getGuild(), event.getMember())
-        );
-    }
-    
-    @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.cry.loading")).queue(message ->
-                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.CRY, member)
         );
     }
 }

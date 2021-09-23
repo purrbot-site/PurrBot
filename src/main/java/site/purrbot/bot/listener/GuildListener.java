@@ -21,22 +21,28 @@ package site.purrbot.bot.listener;
 import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
+import com.jagrosh.jdautilities.command.CommandClient;
+import com.jagrosh.jdautilities.command.SlashCommand;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
+import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.util.message.WebhookUtil;
 
 import javax.annotation.Nonnull;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuildListener extends ListenerAdapter{
 
@@ -44,12 +50,22 @@ public class GuildListener extends ListenerAdapter{
 
     private final PurrBot bot;
     private final WebhookUtil webhookUtil;
+    private final List<CommandData> commands = new ArrayList<>();
+    private final List<Long> guildIds = new ArrayList<>();
 
-    public GuildListener(PurrBot bot){
+    public GuildListener(PurrBot bot, CommandClient client){
         this.bot = bot;
         this.webhookUtil = new WebhookUtil(bot.getFileManager().getString("config", "webhooks.guild"));
+        
+        for(SlashCommand command : client.getSlashCommands())
+            this.commands.add(command.buildCommandData());
     }
 
+    @Override
+    public void onGuildReady(@NotNull GuildReadyEvent event){
+        loadCommands(event.getGuild());
+    }
+    
     @Override
     public void onGuildJoin(@Nonnull GuildJoinEvent event){
         Guild guild = event.getGuild();
@@ -88,6 +104,8 @@ public class GuildListener extends ListenerAdapter{
         
         logger.info("[Guild Join] {} (id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
         
+        loadCommands(guild);
+        
         guild.retrieveOwner().queue(
                 owner -> sendWebhook(owner, guild, Action.JOIN),
                 e -> sendWebhook(null, guild, Action.JOIN)
@@ -97,13 +115,15 @@ public class GuildListener extends ListenerAdapter{
     @Override
     public void onGuildLeave(@Nonnull GuildLeaveEvent event){
         Guild guild = event.getGuild();
+    
+        bot.getDbUtil().delGuild(guild.getId());
+    
+        bot.invalidateCache(guild.getId());
+    
+        guildIds.remove(guild.getIdLong());
 
         if(bot.getBlacklist().contains(guild.getId()))
             return;
-
-        bot.getDbUtil().delGuild(guild.getId());
-
-        bot.invalidateCache(guild.getId());
     
         logger.info("[Guild Leave] {} (id: {}, members: {})", guild.getName(), guild.getId(), guild.getMemberCount());
     
@@ -180,21 +200,18 @@ public class GuildListener extends ListenerAdapter{
         
         switch(action){
             case JOIN:
-                title = "Join";
-                embed.setColor(0x00FF00)
-                     .setTitle(new WebhookEmbed.EmbedTitle(Emotes.PLUS.getEmote(), null));
+                title = "Joined Server";
+                embed.setColor(0x00FF00);
                 break;
             
             case LEAVE:
-                title = "Leave";
-                embed.setColor(0xFF0000)
-                     .setTitle(new WebhookEmbed.EmbedTitle(Emotes.MINUS.getEmote(), null));
+                title = "Left Server";
+                embed.setColor(0xFF0000);
                 break;
             
             case AUTO_LEAVE:
-                title = "Leave [Auto]";
-                embed.setColor(0xFF0000)
-                     .setTitle(new WebhookEmbed.EmbedTitle(Emotes.MINUS.getEmote(), null));
+                title = "Left Server [Auto]";
+                embed.setColor(0xFF0000);
                 break;
         }
         
@@ -204,6 +221,17 @@ public class GuildListener extends ListenerAdapter{
                 action == Action.JOIN ? ".leave " + guild.getId() : null,
                 embed.build()
         );
+    }
+    
+    private void loadCommands(Guild guild){
+        if(guildIds.contains(guild.getIdLong()))
+            return;
+        
+        logger.info("Loading {} commands for Guild {} ({})...", commands.size(), guild.getName(), guild.getId());
+        guild.updateCommands().addCommands(commands).queue(
+            cmds -> logger.info("Loaded {} commands for Guild {} ({}) successfully!", cmds.size(), guild.getName(), guild.getId())
+        );
+        guildIds.add(guild.getIdLong());
     }
     
     enum Action{
