@@ -335,7 +335,7 @@
         "dm_failure": "Não consegui enviar uma DM para você {user}. Você tem certeza que as suas DMs estão abertas ?",
         "embed": {
           "booster_title": "Impulsionador do Servidor",
-          "description": "hospedar esse bot é caro. É por isso que qualquer doação - grande ou pequena - é bem-vinda.\nVocê pode escolher se você deseja doar apenas uma vez usando PayPal, ou se você deseja fazer doações contínuas no Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Doações individuais)\n{KOFI} [`Ko-fi`]({kofi_url}) (doações únicas)\n{PATREON} [`Patreon`]({patreon_url}) (Doações Contínuas)",
+          "description": "hospedar esse bot é caro. É por isso que qualquer doação - grande ou pequena - é bem-vinda.\nVocê pode escolher se você deseja doar apenas uma vez usando PayPal ou Ko-fi, ou se você deseja fazer doações contínuas no Patreon.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Doação individual)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Doação individual)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Doações Contínuas)",
           "donate_title": "Impulsionador do Servidores e Doador",
           "donate_value": "Abaixo, você pode encontrar listas de pessoas que são doadoras ou impulsionaram o [Servidor de Suporte]({guild_invite})\nDoações e Impulsos desbloqueiam vantagens específicas, como banners especiais de Boas Vindas ou a opção de usar os seus próprios!\nSe isto parece atraente para você considere impulsionar o servidor ou se tornar um membro do Patreon de nível 2+.\nDoações individuais também são bem-vindas!",
           "donators_title": "Doadores",
