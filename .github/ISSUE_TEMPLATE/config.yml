@@ -6,6 +6,6 @@ contact_links:
   - name: Wiki
     url: https://docs.purrbot.site/bot
     about: Make sure to check our wiki before asking questions.
-  - name: Questions
+  - name: Questions and Suggestsions
     url: https://github.com/purrbot-site/PurrBot/discussions
-    about: Please ask questions in our Discussions.
+    about: Please ask questions or share ideas in our Discussions.
