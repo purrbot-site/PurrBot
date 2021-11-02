@@ -1,0 +1,40 @@
+name: 'Bug Report'
+description: 'Report a bug with QuickShop to us.'
+
+body:
+  - type: 'markdown'
+    attributes:
+      value: |-
+        Thenk you for filling out a bug report.  
+        With your help can the bot be improved and bugs get fixed.
+  - type: 'textarea'
+    attributes:
+      label: 'Description'
+      description: |-
+        Describe the bug as detailed as possible.
+        Feel free to upload screenshots or gifs here if they help describing the issue.
+      placeholder: 'When I used ... did ... happen'
+    validations:
+      required: true
+  - type: 'textarea'
+    attributes:
+      label: 'Steps to reproduce'
+      description: 'List your steps on how to reproduce this bug reliably here.'
+      placeholder: |-
+        1. Do something
+        2. ...
+        3. Bug!
+    validations:
+      required: true
+  - type: 'textarea'
+    attributes:
+      label: 'Expected Behaviour'
+      description: 'What did you expect QuickShop to do?'
+      placeholder: '\*Purr* should ...'
+    validations:
+      required: true
+  - type: 'textarea'
+    attributes:
+      label: 'Additional Context'
+      description: 'Feel free to include any info that may not fit any of the previous sections.'
+      placeholder: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam ...'
