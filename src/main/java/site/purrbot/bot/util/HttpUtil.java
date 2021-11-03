@@ -19,12 +19,10 @@
 package site.purrbot.bot.util;
 
 import ch.qos.logback.classic.Logger;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
+import okhttp3.*;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
+import site.purrbot.bot.constants.IDs;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
@@ -101,6 +99,100 @@ public class HttpUtil {
                 return new Result(null, imageAPI.getPath(), imageAPI.isRequest(), imageAPI.isRequired());
             }
         });
+    }
+    
+    public CompletableFuture<BotListResult> postServerStats(String name, String discrim, long guilds, long shards, BotList botList, String token){
+        return CompletableFuture.supplyAsync(() -> performPost(name, discrim, guilds, shards, botList, token));
+    }
+    
+    private BotListResult performPost(String name, String discrim, long guilds, long shards, BotList botList, String token){
+        JSONObject json = new JSONObject()
+            .put(botList.getGuildCount(), guilds);
+        
+        if(botList.getShardCount() != null)
+            json.put(botList.getShardCount(), shards);
+        
+        RequestBody requestBody = RequestBody.create(json.toString(), null);
+        Request request = new Request.Builder()
+            .url(botList.getUrl().replace("{id}", IDs.PURR))
+            .addHeader("Authorization", token)
+            .addHeader("Content-Type", "application/json")
+            .addHeader("User-Agent", String.format(
+                "%s-%s/%s (JDA) DBots/%s",
+                name,
+                discrim,
+                "BOT_VERSION",
+                IDs.PURR
+            ))
+            .post(requestBody)
+            .build();
+        
+        try(Response response = client.newCall(request).execute()){
+            return new BotListResult(botList.getName(), response.isSuccessful(), response.code(), response.message());
+        }catch(IOException ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static class BotListResult{
+        private final String botList;
+        private final boolean success;
+        private final int responseCode;
+        private final String responseMessage;
+        
+        public BotListResult(String botList, boolean success, int responseCode, String responseMessage){
+            this.botList = botList;
+            this.success = success;
+            this.responseCode = responseCode;
+            this.responseMessage = responseMessage;
+        }
+        
+        public String getBotList(){
+            return botList;
+        }
+        
+        public boolean isSuccess(){
+            return success;
+        }
+        
+        public int getResponseCode(){
+            return responseCode;
+        }
+        
+        public String getResponseMessage(){
+            return responseMessage;
+        }
+    }
+    
+    public static class Result{
+        private final String url;
+        private final String path;
+        private final boolean request;
+        private final boolean required;
+        
+        public Result(String url, String path, boolean request, boolean required){
+            this.url = url;
+            this.path = path;
+            this.request = request;
+            this.required = required;
+        }
+        
+        public String getUrl(){
+            return url;
+        }
+        
+        public String getPath(){
+            return path;
+        }
+        
+        public boolean isRequest(){
+            return request;
+        }
+        
+        public boolean isRequired(){
+            return required;
+        }
     }
     
     public enum ImageAPI{
@@ -196,33 +288,80 @@ public class HttpUtil {
         }
     }
     
-    public static class Result{
-        private final String url;
-        private final String path;
-        private final boolean request;
-        private final boolean required;
+    public enum BotList{
+        DISCORD_BOATS(
+            "tokens.discord-boats",
+            "discord.boats",
+            "https://discord.boats/api/bot/{id}",
+            "server_count"
+        ),
+        DISCORD_BOTS_GG(
+            "tokens.discord-bots-gg",
+            "discord.bots.gg",
+            "https://discord.bots.gg/api/v1/bots/{id}/stats",
+            "guildCount", "shardCount"
+        ),
+        DISCORDEXTREMELIST_XYZ(
+            "tokens.discordextremelist-xyz",
+            "discordextremelist.xyz",
+            "https://api.discordextremelist.xyz/v2/bot/{id}/stats",
+            "guildCount",
+            "shardCount"
+        ),
+        DISCORDLIST_SPACE(
+            "tokens.botlist-space",
+            "discordlist.space",
+            "https://api.discordlist.space/v2/bots/{id}",
+            "serverCount"
+        ),
+        DISCORDSERVICES_NET(
+            "tokens.discordservices-net",
+            "discordservices.net",
+            "https://api.discordservices.net/bot/{id}/stats",
+            "servers",
+            "shards"
+        );
         
-        public Result(String url, String path, boolean request, boolean required){
+        private final String tokenPath;
+        private final String name;
+        private final String url;
+        private final String guildCount;
+        private final String shardCount;
+        
+        BotList(String tokenPath, String name, String url, String guildCount){
+            this.tokenPath = tokenPath;
+            this.name = name;
             this.url = url;
-            this.path = path;
-            this.request = request;
-            this.required = required;
+            this.guildCount = guildCount;
+            this.shardCount = null;
+        }
+    
+        BotList(String tokenPath, String name, String url, String guildCount, String shardCount){
+            this.tokenPath = tokenPath;
+            this.name = name;
+            this.url = url;
+            this.guildCount = guildCount;
+            this.shardCount = shardCount;
+        }
+    
+        public String getTokenPath(){
+            return tokenPath;
+        }
+    
+        public String getName(){
+            return name;
         }
     
         public String getUrl(){
             return url;
         }
-    
-        public String getPath(){
-            return path;
+        
+        public String getGuildCount(){
+            return guildCount;
         }
-    
-        public boolean isRequest(){
-            return request;
-        }
-    
-        public boolean isRequired(){
-            return required;
+        
+        public String getShardCount(){
+            return shardCount;
         }
     }
 }

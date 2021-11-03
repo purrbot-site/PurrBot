@@ -113,7 +113,7 @@ public class RequestUtil{
                 }
                 
                 msg.editMessage(text)
-                   .override(true)
+                   .setActionRows(Collections.emptyList())
                    .queue(message -> {
                        if(result.isRequest() && author != null) 
                            sendConfirmation(tc, author, targets, message); 
@@ -144,12 +144,12 @@ public class RequestUtil{
                     if(event.getMember() == null)
                         return false;
     
+                    if(!event.isAcknowledged())
+                        event.deferEdit().queue();
+                    
                     if(!isValidButton(event.getComponentId(), api.getName()))
                         return false;
-    
-                    if(!event.isAcknowledged()) 
-                        event.deferEdit().queue();
-    
+                    
                     if(!event.getMember().equals(target))
                         return false;
                     
@@ -209,7 +209,7 @@ public class RequestUtil{
                 text = bot.getMsg(id, "purr.fun.neko.snuggle");
             }
         }
-    
+        
         EmbedBuilder embed;
         if(result.isRequired() && author != null){
             embed = bot.getEmbedUtil().getEmbed(author);
@@ -221,7 +221,7 @@ public class RequestUtil{
              .setImage(result.getUrl());
         
         msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-           .override(true)
+           .setActionRows(Collections.emptyList())
            .setEmbeds(embed.build())
            .queue(message -> {
                if(message.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))

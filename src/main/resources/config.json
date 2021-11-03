@@ -16,8 +16,7 @@
     "botlist-space": "botlist-token",
     "discordextremelist-xyz": "debl-token",
     "discord-boats": "discord-boats-token",
-    "discordservices-net": "discordservices-net-token",
-    "discordbotlist-com": "discordbotlist-com-token"
+    "discordservices-net": "discordservices-net-token"
   },
   
   "database": {

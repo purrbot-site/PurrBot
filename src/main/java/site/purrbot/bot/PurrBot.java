@@ -24,10 +24,6 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import io.javalin.Javalin;
-import net.discordservices.dservices4j.Commands;
-import net.discordservices.dservices4j.DServices4J;
-import net.discordservices.dservices4j.News;
-import net.discordservices.dservices4j.Stats;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -39,14 +35,10 @@ import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.botblock.javabotblockapi.core.BotBlockAPI;
-import org.botblock.javabotblockapi.core.Site;
-import org.botblock.javabotblockapi.jda.PostAction;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
-import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
 import site.purrbot.bot.constants.Emotes;
@@ -98,8 +90,6 @@ public class PurrBot {
     private final Cache<@NotNull String, @NotNull GuildSettings> guildSettings = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    
-    private DServices4J dServices4J;
 
     public static void main(String[] args){
         try{
@@ -323,71 +313,49 @@ public class PurrBot {
     }
     
     public void startUpdater(){
-        if(!isBeta()){
-            PostAction post = new PostAction(getShardManager());
-            BotBlockAPI botBlockAPI = new BotBlockAPI.Builder()
-                    .addAuthToken(
-                            Site.DISCORDLIST_SPACE,
-                            getFileManager().getString("config", "tokens.botlist-space")
-                    )
-                    .addAuthToken(
-                            Site.DISCORD_BOTS_GG,
-                            getFileManager().getString("config", "tokens.discord-bots-gg")
-                    )
-                    .addAuthToken(
-                            Site.DISCORDEXTREMELIST_XYZ,
-                            getFileManager().getString("config", "tokens.discordextremelist-xyz")
-                    )
-                    .addAuthToken(
-                            Site.DISCORD_BOATS,
-                            getFileManager().getString("config", "tokens.discord-boats")
-                    )
-                    .build();
+        scheduler.scheduleAtFixedRate(() -> {
+            getShardManager().setActivity(Activity.of(
+                Activity.ActivityType.WATCHING,
+                getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
+            ));
             
-            dServices4J = new DServices4J.Builder()
-                    .setToken(getFileManager().getString("config", "tokens.discordservices-net"))
-                    .setId(IDs.PURR)
-                    .build();
+            if(isBeta())
+                return;
             
-            Commands commands = dServices4J.getCommands();
-            Stats stats = dServices4J.getStats();
+            long guilds = getShardManager().getGuildCache().size();
+            long shards = getShardManager().getShardCache().size();
             
-            commands.addCommands(getCommands());
-                
-            commands.postCommands();
-    
-            scheduler.scheduleAtFixedRate(() -> {
-                
-                getShardManager().setActivity(Activity.of(
-                        Activity.ActivityType.WATCHING,
-                        getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
-                ));
-        
-                try{
-                    post.postGuilds(getShardManager(), botBlockAPI);
-                }catch(Exception ex){
-                    logger.warn("Not able to post guild counts!", ex);
-                }
-                
-                stats.postStats(
-                        getShardManager().getGuildCache().size(),
-                        getShardManager().getShardCache().size()
-                ); 
-            }, 1, 5, TimeUnit.MINUTES);
-        }else{
-            scheduler.scheduleAtFixedRate(() -> 
-                getShardManager().setActivity(Activity.of(
-                    Activity.ActivityType.WATCHING,
-                    getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
-                ))
-            , 1, 5, TimeUnit.MINUTES);
-        }
-    }
-    
-    public void postNews(boolean error, String title, String msg){
-        News news = dServices4J.getNews();
-        
-        news.postNews(title.replace("_", " "), msg, error);
+            logger.info("Posting Guild Stats to Bot lists...");
+            for(HttpUtil.BotList botList : HttpUtil.BotList.values()){
+                getHttpUtil().postServerStats(
+                    "*Purr*",
+                    "6875",
+                    guilds,
+                    shards,
+                    botList,
+                    getFileManager().getString("config", botList.getTokenPath())
+                ).whenComplete((botListResult, ex) -> {
+                    if(botListResult == null || !botListResult.isSuccess() || ex != null){
+                        logger.warn("Error while posting Guild stats to bot list {}!", botList.getName());
+                        if(botListResult == null){
+                            logger.warn("BotListResult is null!");
+                            return;
+                        }
+                        
+                        if(ex != null){
+                            ex.printStackTrace();
+                            return;
+                        }
+                        
+                        logger.info("Response Code: {}", botListResult.getResponseCode());
+                        logger.info("Response Message: {}", botListResult.getResponseMessage());
+                        return;
+                    }
+                    
+                    logger.info("Successfully posted stats to {}!", botListResult.getBotList());
+                });
+            }
+        }, 1, 5, TimeUnit.MINUTES);
     }
     
     public void disable(){
@@ -415,22 +383,6 @@ public class PurrBot {
                 .replace("{paypal_url}", Links.PAYPAL)
                 .replace("{patreon_url}", Links.PATREON)
                 .replace("{kofi_url}", Links.KOFI);
-    }
-    
-    private List<Commands.CommandInfo> getCommands(){
-        List<Commands.CommandInfo> commandInfoList = new ArrayList<>();
-        for(Command command : commandLoader.getCommands()){
-            if(command.getAttribute("category").equals("owner"))
-                continue;
-            
-            commandInfoList.add(new Commands.CommandInfo(
-                    command.getDescription().name(),
-                    setPlaceholders(langUtils.getString("en", command.getDescription().description())),
-                    command.getAttribute("category")
-            ));
-        }
-        
-        return commandInfoList;
     }
     
     private void setupStatusAPI(){
