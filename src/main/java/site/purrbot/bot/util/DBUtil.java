@@ -49,15 +49,15 @@ public class DBUtil {
      */
     public void addGuild(String id){
         r.table(guildTable).insert(
-                r.array(
-                        r.hashMap("id", id)
-                         .with("language", "en")
-                         .with("welcome_background", "color_white")
-                         .with("welcome_channel", "none")
-                         .with("welcome_color", "hex:000000")
-                         .with("welcome_icon", "purr")
-                         .with("welcome_message", "Welcome {mention}!")
-                )
+            r.array(
+                r.hashMap("id", id)
+                    .with(GuildSettings.LANGUAGE, GuildSettings.DEF_LANGUAGE)
+                    .with(GuildSettings.WELCOME_BACKGROUND, GuildSettings.DEF_BACKGROUND)
+                    .with(GuildSettings.WELCOME_CHANNEL, GuildSettings.DEF_CHANNEL)
+                    .with(GuildSettings.WELCOME_COLOR, GuildSettings.DEF_COLOR)
+                    .with(GuildSettings.WELCOME_ICON, GuildSettings.DEF_ICON)
+                    .with(GuildSettings.WELCOME_MESSAGE, GuildSettings.DEF_MESSAGE)
+            )
         ).optArg("conflict", "update").run(connection);
     }
 
@@ -86,5 +86,23 @@ public class DBUtil {
         r.table(guildTable).get(id)
             .update(r.hashMap(key, value))
             .run(connection);
+    }
+    
+    public void resetSettings(String id){
+        Map<String, String> guild = getGuild(id);
+        if(guild == null){
+            addGuild(id);
+            return;
+        }
+        
+        r.table(guildTable).get(id)
+            .update(
+                r.hashMap(GuildSettings.LANGUAGE, GuildSettings.DEF_LANGUAGE)
+                    .with(GuildSettings.WELCOME_BACKGROUND, GuildSettings.DEF_BACKGROUND)
+                    .with(GuildSettings.WELCOME_CHANNEL, GuildSettings.DEF_CHANNEL)
+                    .with(GuildSettings.WELCOME_COLOR, GuildSettings.DEF_COLOR)
+                    .with(GuildSettings.WELCOME_ICON, GuildSettings.DEF_ICON)
+                    .with(GuildSettings.WELCOME_MESSAGE, GuildSettings.DEF_MESSAGE)
+            ).optArg("conflict", "update").run(connection);
     }
 }

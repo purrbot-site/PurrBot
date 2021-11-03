@@ -257,6 +257,9 @@ public class PurrBot {
     public void setWelcomeMsg(String id, String value){
         updateGuild(id, GuildSettings.WELCOME_MESSAGE, value, GuildSettings::setWelcomeMessage);
     }
+    public void resetWelcomeSettings(String id){
+        resetGuild(id);
+    }
 
     public void invalidateCache(String id){
         guildSettings.invalidate(id);
@@ -474,6 +477,13 @@ public class PurrBot {
         mutator.accept(settings, value);
         getDbUtil().updateSettings(id, key, value);
         
+        guildSettings.put(id, settings);
+    }
+    
+    private void resetGuild(String id){
+        GuildSettings settings = GuildSettings.createDefault();
+        
+        getDbUtil().resetSettings(id);
         guildSettings.put(id, settings);
     }
     

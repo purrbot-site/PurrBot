@@ -31,7 +31,6 @@ import okhttp3.HttpUrl;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.util.GuildSettings;
 
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.Locale;
 
@@ -45,7 +44,10 @@ public class CmdWelcome extends SlashCommand{
             new Background(bot),
             new Channel(bot),
             new Color(bot),
-            new Icon(bot)
+            new Icon(bot),
+            new Message(bot),
+            new Reset(bot),
+            new Test(bot)
         };
     }
     
@@ -69,9 +71,9 @@ public class CmdWelcome extends SlashCommand{
             this.bot = bot;
             
             this.name = "background";
-            this.help = "Set the background to use. Leave empty to reset.";
+            this.help = "Set the background to use.";
             this.options = Collections.singletonList(
-                new OptionData(OptionType.STRING, "background", "The background to set.")
+                new OptionData(OptionType.STRING, "background", "The background to set.").setRequired(true)
             );
         }
         
@@ -87,8 +89,7 @@ public class CmdWelcome extends SlashCommand{
             
             event.deferReply().queue(hook -> {
                 if(background == null){
-                    bot.setWelcomeBg(guild.getId(), GuildSettings.DEF_BACKGROUND);
-                    sendSuccess(bot, hook, bot.getMsg(guild.getId(), "purr.welcome.background_reset"));
+                    bot.getEmbedUtil().sendError(hook, guild, "purr.commands.welcome.invalid_background");
                     return;
                 }
                 
@@ -111,7 +112,7 @@ public class CmdWelcome extends SlashCommand{
                     }else{
                         MessageEmbed embed = bot.getEmbedUtil().getErrorEmbed()
                             .setDescription(
-                                bot.getMsg(guild.getId(), "purr.commands.welcome.invalid_bg")
+                                bot.getMsg(guild.getId(), "purr.commands.welcome.invalid_background")
                                     .replace("{background}", background)
                             ).build();
                         
@@ -139,11 +140,12 @@ public class CmdWelcome extends SlashCommand{
             this.bot = bot;
             
             this.name = "channel";
-            this.help = "Set or remove a channel. Leave channel argument empty to reset.";
+            this.help = "Set or remove a channel.";
             
             this.options = Collections.singletonList(
-                new OptionData(OptionType.CHANNEL, "channel", "The channel to set. Leave empty for reset.")
+                new OptionData(OptionType.CHANNEL, "channel", "The channel to set.")
                     .setChannelTypes(ChannelType.TEXT)
+                    .setRequired(true)
             );
         }
     
@@ -159,8 +161,7 @@ public class CmdWelcome extends SlashCommand{
             
             event.deferReply().queue(hook -> {
                 if(channel == null){
-                    bot.setWelcomeChannel(guild.getId(), GuildSettings.DEF_CHANNEL);
-                    sendSuccess(bot, hook, bot.getMsg(guild.getId(), "purr.welcome.channel_reset"));
+                    bot.getEmbedUtil().sendError(hook, guild, "purr.commands.welcome.invalid_channel");
                     return;
                 }
     
@@ -168,7 +169,8 @@ public class CmdWelcome extends SlashCommand{
                 sendSuccess(
                     bot,
                     hook,
-                    bot.getMsg(guild.getId(), "purr.welcome.channel_set").replace("{channe}", channel.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.commands.welcome.channel_set")
+                        .replace("{channe}", channel.getAsMention())
                 );
             });
         }
@@ -182,10 +184,10 @@ public class CmdWelcome extends SlashCommand{
             this.bot = bot;
             
             this.name = "color";
-            this.help = "Set the color of the text. Leave empty for resetting.";
+            this.help = "Set the color of the text.";
             
             this.options = Collections.singletonList(
-                new OptionData(OptionType.STRING, "color", "The text color to set.")
+                new OptionData(OptionType.STRING, "color", "The text color to set.").setRequired(true)
             );
         }
         
@@ -201,8 +203,7 @@ public class CmdWelcome extends SlashCommand{
             
             event.deferReply().queue(hook -> {
                 if(color == null){
-                    bot.setWelcomeColor(guild.getId(), GuildSettings.DEF_COLOR);
-                    sendSuccess(bot, hook, "purr.commands.welcome.color_reset");
+                    bot.getEmbedUtil().sendError(hook, guild, "purr.commands.welcome.invalid_color");
                     return;
                 }
                 
@@ -215,7 +216,8 @@ public class CmdWelcome extends SlashCommand{
                 sendSuccess(
                     bot,
                     hook,
-                    bot.getMsg(guild.getId(), "purr.commands.welcome.color_set").replace("{color}", color)
+                    bot.getMsg(guild.getId(), "purr.commands.welcome.color_set")
+                        .replace("{color}", color)
                 );
             });
         }
@@ -229,10 +231,10 @@ public class CmdWelcome extends SlashCommand{
             this.bot = bot;
             
             this.name = "icon";
-            this.help = "Set the Icon of the image. Leave empty to reset.";
+            this.help = "Set the Icon of the image.";
             
             this.options = Collections.singletonList(
-                new OptionData(OptionType.STRING, "icon", "The icon to set. Leave empty to reset.")
+                new OptionData(OptionType.STRING, "icon", "The icon to set.").setRequired(true)
             );
         }
     
@@ -248,8 +250,7 @@ public class CmdWelcome extends SlashCommand{
             
             event.deferReply().queue(hook -> {
                 if(icon == null){
-                    bot.setWelcomeIcon(guild.getId(), GuildSettings.DEF_ICON);
-                    sendSuccess(bot, hook, bot.getMsg(guild.getId(), "purr.commands.welcome.icon_reset"));
+                    bot.getEmbedUtil().sendError(hook, guild, "purr.commands.welcome.invalid_icon");
                     return;
                 }
                 
@@ -303,7 +304,7 @@ public class CmdWelcome extends SlashCommand{
             this.help = "Set the message to greet members with. Leave empty to reset.";
             
             this.options = Collections.singletonList(
-                new OptionData(OptionType.STRING, "message", "The message to set. Leave empty to reset.")
+                new OptionData(OptionType.STRING, "message", "The message to set.").setRequired(true)
             );
         }
         
@@ -319,8 +320,7 @@ public class CmdWelcome extends SlashCommand{
             
             event.deferReply().queue(hook -> {
                 if(message == null){
-                    bot.setWelcomeMsg(guild.getId(), GuildSettings.DEF_MESSAGE);
-                    sendSuccess(bot, hook, bot.getMsg(guild.getId(), "purr.commands.welcome.message_reset"));
+                    bot.getEmbedUtil().sendError(hook, guild, "purr.commands.welcome.invalid_message");
                     return;
                 }
                 
@@ -332,6 +332,87 @@ public class CmdWelcome extends SlashCommand{
                         .replace("{message}", message)
                 );
             });
+        }
+    }
+    
+    private static class Reset extends SlashCommand{
+        
+        private final PurrBot bot;
+        
+        public Reset(PurrBot bot){
+            this.bot = bot;
+            
+            this.name = "reset";
+            this.help = "Reset all or one specific setting.";
+            
+            this.options = Collections.singletonList(
+                new OptionData(OptionType.STRING, "type", "What option should be reset. Defaults to all")
+                    .addChoice("All", "all")
+                    .addChoice("Background", "background")
+                    .addChoice("Channel", "channel")
+                    .addChoice("Color", "color")
+                    .addChoice("Icon", "icon")
+                    .addChoice("Message", "message")
+                    .setRequired(true)
+            );
+        }
+        
+        @Override
+        protected void execute(SlashCommandEvent event){
+            String type = bot.getCommandUtil().getString(event, "type", "all");
+            Guild guild = event.getGuild();
+            
+            if(guild == null){
+                bot.getEmbedUtil().sendGuildError(event);
+                return;
+            }
+            
+            event.deferReply().queue(hook -> {
+                String id = guild.getId();
+                switch(type.toLowerCase(Locale.ROOT)){
+                    case "all":
+                        bot.resetWelcomeSettings(id);
+                        sendSuccess(bot, hook, bot.getMsg(guild.getId(), "purr.commands.welcome.all_settings_reset"));
+                        break;
+                    
+                    case "background":
+                        bot.setWelcomeBg(id, GuildSettings.DEF_BACKGROUND);
+                        resetSuccess(hook, id, type);
+                        break;
+                    
+                    case "channel":
+                        bot.setWelcomeChannel(id, GuildSettings.DEF_CHANNEL);
+                        resetSuccess(hook, id, type);
+                        break;
+                    
+                    case "color":
+                        bot.setWelcomeColor(id, GuildSettings.DEF_COLOR);
+                        resetSuccess(hook, id, type);
+                        break;
+                    
+                    case "icon":
+                        bot.setWelcomeIcon(id, GuildSettings.WELCOME_ICON);
+                        resetSuccess(hook, id, type);
+                        break;
+                    
+                    case "message":
+                        bot.setWelcomeMsg(id, GuildSettings.DEF_MESSAGE);
+                        resetSuccess(hook, id, type);
+                        break;
+                    
+                    default:
+                        bot.getEmbedUtil().sendError(hook, guild, "purr.commands.welcome.unknown_reset_type");
+                }
+            });
+        }
+        
+        private void resetSuccess(InteractionHook hook, String id, String type){
+            sendSuccess(
+                bot,
+                hook,
+                bot.getMsg(id, "purr.commands.welcome.setting_reset")
+                    .replace("{type}", type)
+            );
         }
     }
     
