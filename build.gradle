@@ -61,7 +61,7 @@ dependencies {
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '3.0.5'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
     compile group: 'io.javalin', name: 'javalin', version: '4.1.1'
-    compile group: 'org.json', name: 'json', version: '20210307'
+    compile group: 'org.json', name: 'json', version: '20211205'
     compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
 }
 
