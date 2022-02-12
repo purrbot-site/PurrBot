@@ -1,8 +1,8 @@
 <!-- Badges -->
-[DiscordImg]: https://img.shields.io/discord/423771795523371019?color=%237289DA&label=Chat&logo=Discord&logoColor=white&style=plastic
-[IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot?label=Issues&logo=GitHub&style=plastic
-[LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg?label=License&logo=GitHub&style=plastic
-[TranslateImg]: https://img.shields.io/badge/Translations-on%20Crowdin-blue?style=plastic&logo=Crowdin
+[DiscordImg]: https://img.shields.io/discord/423771795523371019?color=%237289DA&label=Chat&logo=Discord&logoColor=white&style=for-the-badge
+[IssuesImg]: https://img.shields.io/github/issues/Andre601/PurrBot?label=Issues&logo=GitHub&style=for-the-badge
+[LicenseImg]: https://img.shields.io/github/license/Andre601/PurrBot.svg?label=License&logo=GitHub&style=for-the-badge
+[TranslateImg]: https://img.shields.io/badge/Translations-on%20Crowdin-blue?logo=Crowdin&style=for-the-badge
 
 [ko-fiImg]: https://img.shields.io/badge/Ko--fi-29abe0?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+S28tZmkgaWNvbjwvdGl0bGU+PHBhdGggZD0iTTIzLjg4MSA4Ljk0OGMtLjc3My00LjA4NS00Ljg1OS00LjU5My00Ljg1OS00LjU5M0guNzIzYy0uNjA0IDAtLjY3OS43OTgtLjY3OS43OThzLS4wODIgNy4zMjQtLjAyMiAxMS44MjJjLjE2NCAyLjQyNCAyLjU4NiAyLjY3MiAyLjU4NiAyLjY3MnM4LjI2Ny0uMDIzIDExLjk2Ni0uMDQ5YzIuNDM4LS40MjYgMi42ODMtMi41NjYgMi42NTgtMy43MzQgNC4zNTIuMjQgNy40MjItMi44MzEgNi42NDktNi45MTZ6bS0xMS4wNjIgMy41MTFjLTEuMjQ2IDEuNDUzLTQuMDExIDMuOTc2LTQuMDExIDMuOTc2cy0uMTIxLjExOS0uMzEuMDIzYy0uMDc2LS4wNTctLjEwOC0uMDktLjEwOC0uMDktLjQ0My0uNDQxLTMuMzY4LTMuMDQ5LTQuMDM0LTMuOTU0LS43MDktLjk2NS0xLjA0MS0yLjctLjA5MS0zLjcxLjk1MS0xLjAxIDMuMDA1LTEuMDg2IDQuMzYzLjQwNyAwIDAgMS41NjUtMS43ODIgMy40NjgtLjk2MyAxLjkwNC44MiAxLjgzMiAzLjAxMS43MjMgNC4zMTF6bTYuMTczLjQ3OGMtLjkyOC4xMTYtMS42ODIuMDI4LTEuNjgyLjAyOFY3LjI4NGgxLjc3czEuOTcxLjU1MSAxLjk3MSAyLjYzOGMwIDEuOTEzLS45ODUgMi42NjctMi4wNTkgMy4wMTV6IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==
 [patreonImg]: https://img.shields.io/badge/Patreon-FF424D?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+UGF0cmVvbiBpY29uPC90aXRsZT48cGF0aCBkPSJNMCAuNDh2MjMuMDRoNC4yMlYuNDh6bTE1LjM4NSAwYy00Ljc2NCAwLTguNjQxIDMuODgtOC42NDEgOC42NSAwIDQuNzU1IDMuODc3IDguNjIzIDguNjQxIDguNjIzIDQuNzUgMCA4LjYxNS0zLjg2OCA4LjYxNS04LjYyM0MyNCA0LjM2IDIwLjEzNi40OCAxNS4zODUuNDh6IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==
