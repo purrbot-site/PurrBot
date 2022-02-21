@@ -35,18 +35,14 @@ public class CommandUtil{
     
     public TextChannel getTextChannel(SlashCommandEvent event, String key){
         OptionMapping option = event.getOption(key);
-        if(option == null)
-            return null;
         
-        return (TextChannel)option.getAsGuildChannel();
+        return option == null ? null : (TextChannel)option.getAsGuildChannel();
     }
     
     public boolean getBoolean(SlashCommandEvent event, String key, boolean def){
         OptionMapping option = event.getOption(key);
-        if(option == null)
-            return def;
         
-        return option.getAsBoolean();
+        return option == null ? def : option.getAsBoolean();
     }
     
     public String getString(SlashCommandEvent event, String key){
@@ -55,18 +51,14 @@ public class CommandUtil{
     
     public String getString(SlashCommandEvent event, String key, String def){
         OptionMapping option = event.getOption(key);
-        if(option == null)
-            return def;
         
-        return option.getAsString();
+        return option == null ? def : option.getAsString();
     }
     
     public User getUser(SlashCommandEvent event, String key){
         OptionMapping option = event.getOption(key);
-        if(option == null)
-            return null;
         
-        return option.getAsUser();
+        return option == null ? null : option.getAsUser();
     }
     
     public List<User> getUsers(SlashCommandEvent event, String... keys){
