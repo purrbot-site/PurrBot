@@ -289,12 +289,6 @@ public class HttpUtil {
     }
     
     public enum BotList{
-        DISCORD_BOATS(
-            "tokens.discord-boats",
-            "discord.boats",
-            "https://discord.boats/api/bot/{id}",
-            "server_count"
-        ),
         DISCORD_BOTS_GG(
             "tokens.discord-bots-gg",
             "discord.bots.gg",
