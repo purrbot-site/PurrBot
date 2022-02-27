@@ -19,10 +19,11 @@
     "nsfw_random": [
       "Este canal parece no tener una etiqueta NSFW, ¿Lo hago {user}?",
       "Por favor, ten cuidado en un canal NSFW {user}.",
-      "¡Nonono! ¡Eres una buena persona y utilizas este comando en un canal NSFW {user}!",
-      "ChannelNotNSFWException: El comando no puede ser usado fuera de un canal NSFW.",
+      "¡Nonono! ¡Serás una buena persona pequeña y usarás este comando en un canal NSFW {user} !",
+      "ChannelNotAgeRestrictedException: El comando no puede ser usado fuera de un canal NSFW.",
       "Solo puedes ver esas cosas \"sucias\" en los canales NSFW {user}.",
-      "Todo tiene su lugar, y este comando pertenece a un canal NSFW {user}."
+      "Todo tiene su lugar, y este comando pertenece a un canal NSFW {user}.",
+      "Lo siento {user}, pero Discord solo me permite usar este comando en un canal NSFW..."
     ],
     "request_error": "Se ha producido un error al procesar la solicitud. ¡Asegúrese de que mi mensaje no ha sido borrado y de que tengo suficientes permisos!",
     "title": "Error",
@@ -30,7 +31,7 @@
   },
   "misc": {
     "and": "y",
-    "info": "¡Hola, {user}!\nMi prefijo en este Discord es `{prefix}`\nEjecuta `{prefix}help` para ver la lista de comandos.",
+    "info": "¡Hola {user}!\nMi prefijo en este Discord es `{prefix}`\nEjecuta `{prefix}help` para ver mi lista de comandos o consultar mi Documentación:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Español (es-es)",
     "unknown_user": "Desconocido",
     "welcome_member": "Eres el miembro #{count}"
@@ -88,7 +89,8 @@
         "mention_purr": [
           "¿Comida? ¿Por mi? ¡Gracias {user}! \\*come la comida y menea la cola*",
           "Gracias por la comida {user}.",
-          "\\*Come la comida con alegría*"
+          "\\*Come la comida con alegría*",
+          "\\*Ruidos felices de comer*"
         ],
         "mention_self": "Te estás alimentando a ti estúpido. Es mejor compartirlo. \\*mira {user} con ojos grandes*",
         "message": "{user} le da a {target} algo para comer.",
@@ -592,7 +594,8 @@
         "description": "Te permite preguntar a alguien, si puedes tener relaciones sexuales con ellos.\nSi no has preseleccionado una opción, el otro puede elegir entre normal, anal, yuri y yaoi.\nUsa uno de los siguientes argumentos para pre-seleccionar:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\n¡Este comando solo puede ejecutarse en canales etiquetados con NSFW!",
         "mention_bot": "¡No puedes follar con bots!",
         "mention_purr": "\\*golpea a {user}* ¡NO! ¡No conmigo pervertido!",
-        "mention_self": "¿Cómo puedes realmente follarte a ti mismo {user}?! (No. No es una respuesta la masturbación)",
+        "mention_self": "¡¿Cómo puedes realmente follarte a ti mismo {user}?! (No. No aceptaré la masturbación como respuesta)",
+        "mention_snuggle": "¡BAKAAA! ¡No permitiré que toques a mi hermanita así {user}!",
         "message": "¡{user} y {target} tienen sexo!",
         "no_mention": "Por favor, mencione un usuario con el que quieras follar.",
         "request": {
@@ -792,6 +795,7 @@
         "special_user": "¿P-por qué quieres hacer esto conmigo {user}? T-tienes a mi hermana para eso."
       },
       "fuck": {
+        "mention_purr": "¡No {user}! ¡No te ayudaré a hacer cochinadas con mi hermana!",
         "mention_snuggle": "¡N-no! No haré eso contigo {user}."
       },
       "pussylick": {
