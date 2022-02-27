@@ -17,12 +17,13 @@
       "other": "il vous manque la permission `{permission}` pour cette commande."
     },
     "nsfw_random": [
-      "Ce salon ne semble pas avoir été déclaré NSFW, n'est-ce pas {user}?",
-      "S'il-te-plaît sois pervers dans un salon NSFW {user}",
-      "Non non non! Tu est une bonne personne et utilise cette commande dans une salon NSFW {user}!",
-      "ChannelNotNSFWException: Cette commande ne peut pas être utilisée en dehors d'un salon NSFW.",
-      "Tu peux seulement voir ces choses pervers dans un salon NSFW {user}.",
-      "Tout a sa place. Et cette commande va dans un salon NSFW {user}."
+      "Ce salon ne semble pas avoir de limite d'âge, n'est-ce pas {user}?",
+      "S'il-te-plaît sois pervers dans un salon avec une limite d'âge {user}",
+      "Non-non! Vous serez une bonne personne en chaleur et utiliserez cette commande dans un salon avec une limite d'âge {user}!",
+      "ChannelNotAgeRestrictedException: La commande ne peut pas être utilisée en dehors d'un salon ayant une limite d'âges.",
+      "Tu peux seulement voir ces choses pervers dans un salon ayant une limite d'âge {user}.",
+      "Tout a sa place. Et cette commande va dans un salon ayant une limite d'âge {user}.",
+      "Je suis désolé {user} mais Discord ne me permet d'utiliser cette commande que dans un salon ayant une limite d'âge..."
     ],
     "request_error": "Il y a eu une erreur lors du traitement de la requête. Assurez-vous que mon message n'a pas été supprimé et que j'ai les permissions suffisantes!",
     "title": "Erreur",
@@ -30,7 +31,7 @@
   },
   "misc": {
     "and": "et",
-    "info": "Hé la {user}!\nMon préfix sur ce serveur est `{prefix}`\nFait `{prefix}help` pour une liste des commandes.",
+    "info": "Bonjour {user}!\nMon préfixe sur ce Discord est `{prefix}`\nExécutez `{prefix}help` pour une liste de commandes ou vérifiez ma documentation :\nhttps://docs. urrbot.site/bot/commandes",
     "language": "Français (fr)",
     "unknown_user": "Inconnu",
     "welcome_member": "tu est le membre #{count}"
@@ -88,7 +89,8 @@
         "mention_purr": [
           "De la nourriture ? Pour moi ? Merchi {user}! \\*mange la nourriture et remue la queue*",
           "Merci pour la nourriture {user}.",
-          "\\*Mange la nourriture avec joie*"
+          "\\*Mange la nourriture avec joie*",
+          "\\*Joyeux bruit d'avalement*"
         ],
         "mention_self": "Tu te nourris toi même. Il vaut mieux partager. \\*regarde {user} avec de grands yeux*",
         "message": "{user} donne à {target} quelque chose à manger.",
@@ -591,8 +593,9 @@
       "fuck": {
         "description": "Vous permet de demander à quelqu'un, si vous pouvez avoir des relations sexuelles avec lui.\nSi vous n'avez pas présélectionné une option l'autre peut choisir entre hetero, anal, yuri et yaoi.\nUtilisez l'un des arguments suivants pour présélectionner :\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\n\nCette commande ne peut être exécutée que dans les salons NSFW!",
         "mention_bot": "tu ne peux pas faire l'amour a des robots!",
-        "mention_purr": "\\*baffe {user}* NON! Pas avec moi pervers!",
-        "mention_self": "Comment peut tu faire l'amour a toi même {user}?! (Non la masturbation n'est pas une réponse)",
+        "mention_purr": "\\*baffe {user}* NON! Pas avec moi perver!",
+        "mention_self": "Comment peut tu faire l'amour a toi même {user}?! (Non. Je n'accepterais pas la masturbation comme réponse)",
+        "mention_snuggle": "NON {user}! Je ne vous laisserai pas toucher ma petite sœur comme ça, baka!",
         "message": "{user} et {target} font l'amour!",
         "no_mention": "Veuillez mentionner un utilisateur avec lequel vous voulez avoir une relation sexuelle.",
         "request": {
@@ -792,6 +795,7 @@
         "special_user": "P-pourquoi veut tu faire cela avec moi {user}? T-tu a ma sœur pour ça."
       },
       "fuck": {
+        "mention_purr": "Non {user}! Je ne vous aiderai pas à faire des choses pervers avec ma sœur!",
         "mention_snuggle": "N-non ! Je ne ferai pas cela avec toi {user}."
       },
       "pussylick": {
