@@ -17,12 +17,13 @@
       "other": "Dir fehlt die Berechtigung `{permission}` für diesen Befehl."
     },
     "nsfw_random": [
-      "Dieser Kanal scheint keinen NSFW-Label zu haben, oder {user}?",
-      "Bitte sei ungezogen in einem NSFW-Kanal {user}.",
-      "Neinneinnein! Du bist eine gute Person und verwendest diesen Befehl in einem NSFW-Kabal {user}!",
-      "ChannelNotNSFWException: Der Befehl darf nicht ausserhalb eines NSFW-Kanals verwendet werden.",
-      "Du kannst diese schmutzigen dinge nur in NSFW-Kanälen sehen {user}.",
-      "Alles hat seinen Platz. Und dieser Befehl gehört in einen NSFW-Kanal {user}."
+      "Dieser Kanal scheint keine Altersbeschränkung zu haben, oder {user}?",
+      "Bitte sei ungezogen in einem Altersbeschränkten Kanal {user}.",
+      "Neinneinnein! Du wirst eine gute kleine geile Person sein und diesen Befehl in einem altersbeschränkten Kanal verwenden {user}!",
+      "KanalNichtAltersbeschränktFehler: Der Befehl kann nicht ausserhalb von altersbeschränkten Kanälen verwendet werden.",
+      "Du kannst diese ungezogenen Dinge nur in altersbeschränkten Kanälen sehen {user}.",
+      "Alles hat seinen Platz. Und dieser Befehl gehört in einen altersbeschränkten Kanal {user}.",
+      "Es tut mir leid {user} aber Discord erlaubt mir nur, diesen Befehl in einem altersbeschränkten Kanal zu verwenden..."
     ],
     "request_error": "Bei der Bearbeitung der Anfrage ist ein Fehler aufgetreten. Vergewissere dich, dass meine Nachricht nicht gelöscht wurde und dass ich über ausreichende Berechtigungen verfüge!",
     "title": "Fehler",
@@ -30,7 +31,7 @@
   },
   "misc": {
     "and": "und",
-    "info": "Hey da {user}!\nMein Prefix auf diesem Discord ist `{prefix}`\nVerwende `{prefix}help` für eine Liste von Befehlen.",
+    "info": "Hallo {user}!\nMein Präfix auf diesem Discord ist `{prefix}`\nVerwende `{prefix}help` für eine Liste von Befehlen oder schau die meine Dokumentation an:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Deutsch (de-ch)",
     "unknown_user": "Unbekannt",
     "welcome_member": "Du bist Mitglied #{count}"
@@ -88,7 +89,8 @@
         "mention_purr": [
           "Essen? Für mich? Dankeschön {user}! \\*Isst das Essen und wedelt mit dem Schwanz*",
           "Danke für das Essen {user}.",
-          "\\*Isst das Essen mit Freude*"
+          "\\*Isst das Essen mit Freude*",
+          "\\*Fröhliche Essensgeräusche*"
         ],
         "mention_self": "Du fütterst dich selbst Dummerchen. Es ist besser, es zu teilen. \\*schaut {user} mit grossen Augen an*",
         "message": "{user} gibt {target} etwas zu essen.",
@@ -591,8 +593,9 @@
       "fuck": {
         "description": "Lässt dich jemanden fragen, ob sie mit dir Sex haben wollen.\nWenn du keine Option vorher ausgewählt hast, kann die gefragte Person zwischen hetero, anal, lesbisch (yuri) und schwul (yaoi) wählen.\nVerwende einen dieser Argumente zum auswählen:\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwenden werden!",
         "mention_bot": "Du kannst nicht mit Bots schlafen!",
-        "mention_purr": "\\*schlägt {user}* NEIN! Nicht mit mir du Perverser!",
-        "mention_self": "Wie kannst du dich selbst ficken {user}?! (Nein. Masturbation ist keine Antwort)",
+        "mention_purr": "\\*schlägt {user}* NEIN! Nicht mit mir du Perversling!",
+        "mention_self": "Wie kannst du dich selbst ficken {user}? (Nein. Ich werde masturbieren nicht als Antwort akzeptieren)",
+        "mention_snuggle": "NEIN {user}! Ich werde dir nicht erlauben meine kleine Schwester auf diese Weise anzufassen du Baka!",
         "message": "{user} und {target} haben Sex!",
         "no_mention": "Bitte erwähne einen User mit dem du Sex haben willst.",
         "request": {
@@ -792,6 +795,7 @@
         "special_user": "W-warum willst du dass mit mir machen {user}? D-du hast meine Schwester für das."
       },
       "fuck": {
+        "mention_purr": "Nein {user}! Ich werde dir nicht helfen schmutzige dinge mit meiner Schwester zu machen!",
         "mention_snuggle": "N-nein! Ich werde dass nicht mir dir machen {user}."
       },
       "pussylick": {
