@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
+import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.util.HttpUtil;
 
 import java.util.Collections;
@@ -76,29 +77,41 @@ public class CmdFuck implements Command{
         }
 
         Member target = msg.getMentionedMembers().get(0);
-
-        if(target.equals(guild.getSelfMember())){
+        
+        if(target.getId().equals(IDs.PURR)){
             if(bot.isBeta()){
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "snuggle.nsfw.fuck.mention_snuggle", member.getAsMention())
+                    bot.getMsg(guild.getId(), "snuggle.nsfw.fuck.mention_purr", member.getAsMention())
                 ).queue();
-                return;
-            }
-            if(bot.isSpecial(member.getId())){
-                int random = bot.getRandom().nextInt(10);
-
-                if(random >= 1 && random <= 3) {
-                    tc.sendMessage(
+            }else{
+                if(bot.isSpecial(member.getId())){
+                    int random = bot.getRandom().nextInt(10);
+                    
+                    if(random >= 1 && random <= 3){
+                        tc.sendMessage(
                             bot.getRandomMsg(guild.getId(), "purr.nsfw.fuck.special_user.accept", member.getAsMention())
-                    ).queue();
+                        ).queue();
+                    }else{
+                        tc.sendMessage(
+                            bot.getRandomMsg(guild.getId(), "purr.nsfw.fuck.special_user.deny", member.getAsMention())
+                        ).queue();
+                    }
                 }else{
                     tc.sendMessage(
-                            bot.getRandomMsg(guild.getId(), "purr.nsfw.fuck.special_user.deny", member.getAsMention())
+                        bot.getMsg(guild.getId(), "purr.nsfw.fuck.mention_purr", member.getAsMention())
                     ).queue();
                 }
+            }
+            return;
+        }else
+        if(target.getId().equals(IDs.SNUGGLE)){
+            if(bot.isBeta()){
+                tc.sendMessage(
+                    bot.getMsg(guild.getId(), "snuggle.nsfw.fuck.mention_snuggle", member.getAsMention())
+                ).queue();
             }else{
                 tc.sendMessage(
-                        bot.getMsg(guild.getId(), "purr.nsfw.fuck.mention_purr", member.getAsMention())
+                    bot.getMsg(guild.getId(), "purr.nsfw.fuck.mention_snuggle", member.getAsMention())
                 ).queue();
             }
             return;

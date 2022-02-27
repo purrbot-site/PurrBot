@@ -17,12 +17,13 @@
       "other": "You lack the permission `{permission}` for this command."
     },
     "nsfw_random": [
-      "This channel doesn't seem to have a NSFW-label, does it {user}?",
-      "Please be naughty in a NSFW channel {user}.",
-      "Nonono! You're a nice person and use this command in a NSFW-channel {user}!",
-      "ChannelNotNSFWException: Command may not be used outside a NSFW channel.",
-      "You can only see those naughty things in NSFW channels {user}.",
-      "Everything has its place. And this command belongs in a NSFW-channel {user}."
+      "This channel doesn't seem to be Age-restricted, does it {user}?",
+      "Please be naughty in a Age-restricted channel {user}.",
+      "Nonono! You will be a good little horny person and use this command in a Age-restricted channel {user}!",
+      "ChannelNotAgeRestrictedException: The command may not be used outside a Age-restricted channel.",
+      "You can only see those naughty things in Age-restricted channels {user}.",
+      "Everything has its place. And this command belongs in a Age-restricted channel {user}.",
+      "I'm sorry {user} but Discord only allows me to use this command in a Age-restricted channel..."
     ],
     "request_error": "There was an error while handling the request. Make sure that my message wasn't deleted and that I have sufficient permissions!",
     "title": "Error",
@@ -30,7 +31,7 @@
   },
   "misc": {
     "and": "and",
-    "info": "Hey there {user}!\nMy prefix on this Discord is `{prefix}`\nRun `{prefix}help` for a list of commands.",
+    "info": "Hey there {user}!\nMy prefix on this Discord is `{prefix}`\nRun `{prefix}help` for a list of commands or check my Documentation:\nhttps://docs.purrbot.site/bot/commands",
     "language": "English (en)",
     "unknown_user": "Unknown",
     "welcome_member": "You're member #{count}"
@@ -88,7 +89,8 @@
         "mention_purr": [
           "Food? For me? Thank chu {user}! \\*noms food and wags tail*",
           "Thank you for the food {user}.",
-          "\\*Eats the food with joy*"
+          "\\*Eats the food with joy*",
+          "\\*Happy food-eating noises*"
         ],
         "mention_self": "You're feeding yourself silly. It's better to share it. \\*looks at {user} with big eyes*",
         "message": "{user} gives {target} something to eat.",
@@ -591,8 +593,9 @@
       "fuck": {
         "description": "Lets you ask someone, if you can have sex with them.\nIf you didn't pre-select an option can the asked user choose between hetero, anal, yuri and yaoi.\nUse one of the following args to pre-select:\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\n\nThis command can only be executed in NSFW-labeled channels!",
         "mention_bot": "You can't fuck with bots!",
-        "mention_purr": "\\*slaps {user}* NO! Not with me you perv!",
-        "mention_self": "How can you actually fuck yourself {user}?! (No. Masturbation is not an answer)",
+        "mention_purr": "\\*slaps {user}* NO! Not with me you pervert!",
+        "mention_self": "How can you actually fuck yourself {user}?! (No. I won't accept masturbation as an answer)",
+        "mention_snuggle": "NO {user}! I won't allow you to touch my little sister like this you baka!",
         "message": "{user} and {target} have sex!",
         "no_mention": "Please mention a user you want to fuck with.",
         "request": {
@@ -792,6 +795,7 @@
         "special_user": "W-why do you want to do this with me {user}? Y-you have my sister for that."
       },
       "fuck": {
+        "mention_purr": "No {user}! I won't help you being dirty with my sister!",
         "mention_snuggle": "N-no! I won't do this with you {user}."
       },
       "pussylick": {
