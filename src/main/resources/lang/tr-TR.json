@@ -17,12 +17,13 @@
       "other": "Bu komut için `{permission}` iznine sahip değilsiniz."
     },
     "nsfw_random": [
-      "Bu kanalın NSFW etiketi yok gibi görünüyor, değil mi {user}?",
-      "Lütfen yalnızca NSFW kanallarında yaramaz ol {user}.",
-      "Hayır hayır hayır! Sen iyi bir insansın, bu komutu bir NSFW kanalında kullan {user}!",
-      "ChannelNotNSFWException: Komut, NSFW kanalı dışında kullanılamaz.",
-      "Bu ayıp şeyleri yalnızca NSFW kanallarında görebilirsin {user}.",
-      "Her şeyin bir yeri var. Ve bu komut bir NSFW kanalına ait {user}."
+      "Bu kanal yaş kısıtlanmalı gibi görünmüyor, değil mi {user}?",
+      "Lütfen yaş kısıtlaması olan bir kanalda yaramaz ol {user}.",
+      "Hayır hayır hayır! Tatlı ve ateşli bir insan olacaksın ve bu komutu yaş kısıtlaması olan bir kanalda kullanacaksın {user}!",
+      "ChannelNotAgeRestrictedException: Komut, Yaş kısıtlamalı bir kanalın dışında kullanılamaz.",
+      "Bu yaramaz şeyleri yalnızca yaş kısıtlamalı kanallarda görebilirsin {user}.",
+      "Her şeyin bir yeri vardır. Ve bu komut yaş kısıtlamalı bir kanala ait {user}.",
+      "Üzgünüm {user} ama Discord bu komutu sadece yaş kısıtlamalı kanallarda kullanmama izin veriyor..."
     ],
     "request_error": "İstek işlenirken bir hata oluştu. Mesajımın silinmediğinden ve yeterli izinlere sahip olduğumdan emin olun!",
     "title": "Hata",
@@ -30,7 +31,7 @@
   },
   "misc": {
     "and": "ve",
-    "info": "Selam {user}!\nBu sunucudaki önekim `{prefix}` olarak ayarlanmış.\nTüm komutları görmek için `{prefix}help` komutunu kullan.",
+    "info": "Selam {user}!\nBu sunucudaki önekim `{prefix}`\nTüm komutlarımı görmek için `{prefix}help` komutunu kullan veya bu bağlantıyı ziyaret et:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Türkçe (tr-tr)",
     "unknown_user": "Bilinmiyor",
     "welcome_member": "Sen #{count}. üyesin"
@@ -88,7 +89,8 @@
         "mention_purr": [
           "Yemek mi? Benim için mi? Teşekkürler {user}! \\ *yemeğini yiyip kuyruğunu sallıyor*",
           "Yemek için teşekkürler {user}.",
-          "\\*tadını çıkararak yemeğini yiyor*"
+          "\\*tadını çıkararak yemeğini yiyor*",
+          "\\*Mutlu yemek yeme sesleri*"
         ],
         "mention_self": "Kendini besliyorsun şapşal. Yemeğini başkasıyla paylaşmaya ne dersin? \\*gözlerini açarak {user} adlı üyeye bakıyor*",
         "message": "{user}, {target} adlı üyeye yiyecek bir şeyler veriyor.",
@@ -591,8 +593,9 @@
       "fuck": {
         "description": "Birine onunla seks yapıp yapamayacağını sorarsın.\nBir seçeneği önceden seçmediysen, diğer kişi; hetero, anal, yuri ve yaoi arasında seçim yapabilir.\nÖn seçim yapmak için aşağıdaki argümanlardan birini kullan:\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
         "mention_bot": "Botlarla sevişemezsin!",
-        "mention_purr": "\\* {user} adlı üyeye tokat atar* OLMAZ! Benimle olmaz seni sapık!",
-        "mention_self": "{user} kendini nasıl becerebilirsin ki?! (Hayır. Cevap mastürbasyon değil)",
+        "mention_purr": "\\*{user} tokat yedi* HAYIR! Benimle değil sapık!",
+        "mention_self": "Ciddi misin, Kendini nasıl becerebilirsin ki {user}?! (Hayır. Mastürbasyonu cevap olarak kabul etmiyorum)",
+        "mention_snuggle": "HAYIR {user}! Kardeşime böyle dokunmana izin vermeyeceğim seni aptal!",
         "message": "{user} ve {target} sevişiyor!",
         "no_mention": "Lütfen sevişmek istediğin kişiyi etiketle.",
         "request": {
@@ -792,6 +795,7 @@
         "special_user": "N-neden bunu benimle yapmak istiyorsun {user}? B-bunun için bir kardeşim var."
       },
       "fuck": {
+        "mention_purr": "Hayır {user}! Kardeşimle böyle şeyler yapmana izin vermeyeceğim!",
         "mention_snuggle": "H-hayır! Bunu seninle yapmak istemiyorum {user}."
       },
       "pussylick": {
