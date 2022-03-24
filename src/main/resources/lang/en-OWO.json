@@ -6,10 +6,10 @@
     "administrator": "**Administwatow Pewmission detected**\nI have the `Administwatow` Pewmission which is a huge secuwity wisk! >~<\n__I won't pewfowm any commands as long as I have this Pewmission, to pwevent possibwe abuse.__\n\nTo fix this, do one of the fowwowing things:\n- Wemove the wole which has Administwatow from me.\n- Wemove the Pewmission fwom the Wole(s) listed bewow.\n\nAdministwatow was detected in the fowwowing woles:\n{roles}",
     "api_error": "Thewe was an ewwow weaching the API! Pwease twy again water.",
     "fetch": {
-      "booster_role": "Unable to wetwieve Boostew wole fwom the Suppowt Sewvew. TwT Pwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
-      "guild": "Unable to wetwieve the Suppowt Sewver. TwT Pwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
-      "member": "Unable to wetwieve Membew Infowmation fwom the Suppowt Sewvew. TwT Pwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
-      "patreon_roles": "Unable to wetwieve Patweon woles fwom Suppowt Sewver. TwT Pwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})"
+      "booster_role": "Unable to wetwieve Boostew wole fwom the Suppowt Sewvew. TwT\nPwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
+      "guild": "Unable to wetwieve the Suppowt Sewver. TwT\nPwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
+      "member": "Unable to wetwieve Membew Infowmation fwom the Suppowt Sewvew. TwT\nPwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
+      "patreon_roles": "Unable to wetwieve Patweon woles fwom Suppowt Sewver. TwT\nPwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})"
     },
     "missing_perms": {
       "self": "I lack the pewmission `{permssion}` fow this. :c",
@@ -17,12 +17,13 @@
       "other": "You lack the pewmission `{permission}` fow this command."
     },
     "nsfw_random": [
-      "This channew doesn't seem to have a NSFW-label, does it, {user}? òwó",
-      "Pwease be naughty in a NSFW channew {user}! (。U⁄ ⁄ω⁄ ⁄ U。)",
-      "Nonono! You'we a nice pewson and use this command in a NSFW-channel {user}! (。U⁄ ⁄ω⁄ ⁄ U。)",
-      "ChannelNotNSFWException: Command may not be used outside a NSFW channew.",
-      "You can onwy see those naughty things in NSFW channews {user}.",
-      "Evewything has its pwace. And this command bewongs in a NSFW-channel {user]! OwO"
+      "This channew doesn't seem to be age-westwicted, does it {user}? òwó",
+      "Pwease be naughty in a Age-westwicted channew {user}! (。U⁄ ⁄ω⁄ ⁄ U。)",
+      "Nuuuuu! You wiww be a good wittwe howny and use this command in a Age westwicted channew {user}!",
+      "ChannewNotAgeWestwictedException: The command may not be used outside a Age-Westwicted channew. >.<",
+      "You can onwy see those naughty things in Age-westwicted channews {user}.",
+      "Evewything has its pwace. And this command bewongs in a Age-westwicted channew {user}! OwO",
+      "I'm sowwy {user} but Discowd onwy awwows me to use this command in a Age-westwicted channew... TwT"
     ],
     "request_error": "Thewe was an ewwow while handwing the wequest TwT. Make suwe that my message wasn't deweted and that I have sufficient pewmissions!",
     "title": "Ewwow",
@@ -30,7 +31,7 @@
   },
   "misc": {
     "and": "and",
-    "info": "Hey thewe {user}!\nMy pwefix on this Discord is `{prefix}`\nRun `{prefix}help` fow a wist of commands.",
+    "info": "Hey thewe {user}!\nMy pwefix on this Discowd is `{prefix}`\nWun `{prefix}help` fow a wist of commands ow check ma Docies:\nhttps://docs.purrbot.site/bot/commands",
     "language": "English (OwO) (en-owo)",
     "unknown_user": "Unknown UwU",
     "welcome_member": "You'we membew #{count}"
@@ -88,7 +89,8 @@
         "mention_purr": [
           "Food? Fow me OwO? Thank chu {user}! \\*noms food and wags tail* UwU",
           "Thank you fow the food {user}! OwO",
-          "\\*Eats the food with joy\\*"
+          "\\*Eats the food with joy\\*",
+          "\\*Happy food-munchie noises*"
         ],
         "mention_self": "You'we feeding youwsewf siwwy. It's bettew to shawe it. \\*wooks at {user} with big eyes OwO*",
         "message": "{user} gives {target} something to eat. UwU",
@@ -591,8 +593,9 @@
       "fuck": {
         "description": "Lets you ask someone if you can have sex with them.\nIf you didn't pwe-select an option can the asked usew choose between nowmal, anal, yuwi and yaoi. OwO\nUse one of the following awgs to pwe-select:\n`--normal`\n`--anal`\n`--yaoi`\n`--yuri`\n\nThis command can only be executed in NSFW-labeled channels!",
         "mention_bot": "You can't lewd with bots! >.<",
-        "mention_purr": "\\*slaps {user}* NO! Not with me you pewv!",
-        "mention_self": "How can you actuawwy fuck youwsewf {user}?! (No. Mastuwbation is not an answew)",
+        "mention_purr": "\\*swaps {user}* NU! Not with me you pewvewt!",
+        "mention_self": "How can you actuawwy fuck youwsewf {user}?! (No. I won't accept \"pwaying\" with youwsewf)",
+        "mention_snuggle": "NU {user}! I won't awwow you to touch my wittwe sistew wike this you baka! Ò-Ó",
         "message": "{user} and {target} have sex!",
         "no_mention": "Pwease mention a usew you want to fuck with.",
         "request": {
@@ -792,6 +795,7 @@
         "special_user": "W-why do you want to do this with me {user}? Y-you have my sistew for that."
       },
       "fuck": {
+        "mention_purr": "Nu {user}! I won't hewp you being diwty with ma sistew!",
         "mention_snuggle": "N-no! I won't do this with you {user}. \\*pouts*"
       },
       "pussylick": {
