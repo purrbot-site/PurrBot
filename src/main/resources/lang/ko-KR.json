@@ -19,10 +19,11 @@
     "nsfw_random": [
       "이 채널은 연령 제한 채널이 아닌 것 같은데.. 그렇지, {user}?",
       "응큼한건 연령 제한 채널에서 하지 않을래, {user}?",
-      "그만! 거기까지. 넌 좋은 사람이니까 제발 그 명령어는 연령 제한 채널해서 써, {user}!",
-      "ChannelNotNSFWException: 명령어는 연령 제한 채널이 아닌 경우 사용할 수 없습니다.",
+      "안돼! 네 응큼함은 연령 제한 채널에서 풀도록 하라구, {user}!",
+      "ChannelNotAgeRestrictedException: 연령 제한 채널이 아닌 곳에서 사용할 수 없는 명령어입니다.",
       "그런 부끄러운 것들은 연령 제한 채널에서만 볼 수 있어, {user}.",
-      "모든 것은 속한 자리가 있지. 그리고 그 명령어의 자리는 연령 제한 채널이야, {user}."
+      "모든 것은 속한 자리가 있지. 그리고 그 명령어의 자리는 연령 제한 채널이야, {user}.",
+      "미안하지만 디스코드가 연령 제한 채널에서만 그 부탁을 들어주라고 하네, {user}."
     ],
     "request_error": "요청을 처리하는데 오류가 발생했어. 내 메시지가 삭제되지는 않았는지, 아니면 내 권한이 부족한건 아닌지 확인해줘!",
     "title": "에러",
@@ -30,7 +31,7 @@
   },
   "misc": {
     "and": "그리고",
-    "info": "{user}, 반가워!\n이 디스코드 서버에서의 접두어는 `{prefix}` 이야.\n`{prefix}help` 에서 더 많은 명령어들을 확인할 수 있어.",
+    "info": "안녕 {user}!\n이 서버에서의 접두사는 `{prefix}` 이야\n`{prefix}help` 를 통해 내 명령어들을 볼 수 있어.\n아니면 내 사용 설명서를 읽어봐!\nhttps://docs.purrbot.site/bot/commands",
     "language": "한국어 (ko-KR)",
     "unknown_user": "(알 수 없음)",
     "welcome_member": "넌 {count}번 째로 들어온 사람이야!"
@@ -88,7 +89,8 @@
         "mention_purr": [
           "응? 이 음식, 날 위한거야? 고마워, {user}! \\*음식을 먹으며 꼬리를 흔드는 중*",
           "음식 고마워, {user}.",
-          "\\*즐겁게 음식을 먹는 중*"
+          "\\*즐겁게 음식을 먹는 중*",
+          "\\*기분좋게 음식을 먹는 중*"
         ],
         "mention_self": "바보. 혼자 다 먹는거야? 그걸 나눈다면 더 좋을건데. \\*{user}를 눈 크게뜨고 바라보며*",
         "message": "{user}이(가) {target}에게 먹을 것을 주고있어.",
@@ -335,7 +337,7 @@
         "dm_failure": "{user}. 너에게 메시지를 보낼 수 없어. 개인 메시지 설정을 다시 확인해줄래?",
         "embed": {
           "booster_title": "서버 부스터",
-          "description": "이 봇을 유지하는 비용은 큽니다. 크기에 상관없이 어떤 후원이든 큰 도움이 됩니다.\n정기후원을 원하신다면 Patreon을, 아니라면 Paypal 또는 Ko-fi를 사용해 이 봇을 후원해주세요.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{KOFI} [`Ko-fi`]({kofi_url}) (일회성 후원)\n{PATREON} [`Patreon`]({patreon_url}) (정기후원)",
+          "description": "이 봇을 유지하는 비용은 큽니다. 크기에 상관없이 어떤 후원이든 큰 도움이 됩니다.\n정기후원을 원하신다면 Patreon을, 아니라면 Paypal 또는 Ko-fi를 사용해 이 봇을 후원해주세요.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (일회성 후원)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (일회성 후원)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (정기후원)",
           "donate_title": "서버 부스터와 후원자",
           "donate_value": "여기에 기록된 분들은 [지원 서버]({guild_invite})를 부스트하거나 후원해주신 분들입니다.\n후원과 서버 부스트는 서버 입장 배너 또는 새로운 기능 추가에 큰 도움을 줍니다!\n물론, 서버 부스트나 주기적인 후원만 도움이 되는건 아닙니다. 단순한 후원도 언제든지 환영합니다!",
           "donators_title": "후원자",
@@ -593,6 +595,7 @@
         "mention_bot": "봇이랑 야한 걸 할 생각 마!",
         "mention_purr": "\\*{user}의 뺨을 때리며* 안돼! 이 변태자식.",
         "mention_self": "어떻게 너 자신이랑 하려고, {user}? .. 자기위로 같은 대답은 하지 마.",
+        "mention_snuggle": "안돼, {user}! 내 동생을 그런 식으로 건들게 둘 것 같아? 이 바보!",
         "message": "{user}이(가) {target} 랑 사랑을 나누고 있어!",
         "no_mention": "최소한 사랑을 나눌 상대 한 명을 언급해줘!",
         "request": {
@@ -792,6 +795,7 @@
         "special_user": "ㅇ-왜 나랑 하려는거야, {user}? 내 언니랑만 하는거 아니야..?"
       },
       "fuck": {
+        "mention_purr": "안돼, {user}! 내 언니랑 그런 걸 하도록 놔두지 않을거야!",
         "mention_snuggle": "싫어! 절대로 싫어, {user}."
       },
       "pussylick": {

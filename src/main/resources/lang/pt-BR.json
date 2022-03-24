@@ -17,12 +17,13 @@
       "other": "Você precisa da permissão `{permission}` para este comando."
     },
     "nsfw_random": [
-      "Este canal não parece ter um rótulo NSFW, não é {user}?",
-      "por favor seja atrevido somente em um canal NSFW {user}.",
-      "Nãonãonão! Seja uma boa pessoa e use esse comando em um canal NSFW {user}!",
-      "ExceçãoDeCanalNãoNSFW: Comando não deve ser usado fora de um canal NSFW.",
-      "Você só pode ver essas coisas atrevidas nos canais NSFW {user}.",
-      "Tudo tem seu lugar. E esse comando pertence em um canal NSFW {user}."
+      "Este canal não parece ter um restrição de idade, não é {user}?",
+      "por favor seja atrevido somente em um canal com restrição de idade {user}.",
+      "Não não não! Você será uma boa pessoa exitada e usará este comando em um canal com restrição de idade {user}!",
+      "ExceçãoDeCanalSemRestriçãoDeIdade: O comando não pode ser usado fora de um canal restrito.",
+      "Você só pode ver essas coisas atrevidas nos canais restritos {user}.",
+      "Tudo tem seu lugar. E esse comando pertence em um canal Restrito {user}.",
+      "Me desculpe {user} mas o Discord só me permite usar este comando em um canal restrito..."
     ],
     "request_error": "Houve um erro ao lidar com a solicitação. Certifique-se de que a minha mensagem não foi excluída e de que eu tenho permissões suficientes!",
     "title": "Erro",
@@ -30,7 +31,7 @@
   },
   "misc": {
     "and": "e",
-    "info": "Olá {user}!\nMeu prefixo nesse discord é `{prefix}`\nexecute `{prefix}help` para uma lista de comandos",
+    "info": "Olá, {user}!\nMeu prefixo neste Discord é `{prefix}`\nExecute `{prefix}help` para obter uma lista de comandos ou consulte minha Documentação:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Português (pt)",
     "unknown_user": "Desconhecido",
     "welcome_member": "você é o membro #{count}"
@@ -88,7 +89,8 @@
         "mention_purr": [
           "Comida? Para mim? Obrigado {user}! \\*come a comida e balança sua cauda*",
           "Obrigado pela comida {user}.",
-          "\\*Coma a comida com alegria*"
+          "\\*Coma a comida com alegria*",
+          "\\*Barulhos felizes de lanche*"
         ],
         "mention_self": "Você está se alimentando bobo. É melhor compartilhar. \\*olha para {user} com olhos grandes*",
         "message": "{user} dá {target} algo para comer",
@@ -335,7 +337,7 @@
         "dm_failure": "Não consegui enviar uma DM para você {user}. Você tem certeza que as suas DMs estão abertas ?",
         "embed": {
           "booster_title": "Impulsionador do Servidor",
-          "description": "hospedar esse bot é caro. É por isso que qualquer doação - grande ou pequena - é bem-vinda.\nVocê pode escolher se você deseja doar apenas uma vez usando PayPal, ou se você deseja fazer doações contínuas no Patreon.\n\n{PAYPAL} [`PayPal`]({paypal_url}) (Doações individuais)\n{KOFI} [`Ko-fi`]({kofi_url}) (doações únicas)\n{PATREON} [`Patreon`]({patreon_url}) (Doações Contínuas)",
+          "description": "hospedar esse bot é caro. É por isso que qualquer doação - grande ou pequena - é bem-vinda.\nVocê pode escolher se você deseja doar apenas uma vez usando PayPal ou Ko-fi, ou se você deseja fazer doações contínuas no Patreon.\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Doação individual)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Doação individual)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Doações Contínuas)",
           "donate_title": "Impulsionador do Servidores e Doador",
           "donate_value": "Abaixo, você pode encontrar listas de pessoas que são doadoras ou impulsionaram o [Servidor de Suporte]({guild_invite})\nDoações e Impulsos desbloqueiam vantagens específicas, como banners especiais de Boas Vindas ou a opção de usar os seus próprios!\nSe isto parece atraente para você considere impulsionar o servidor ou se tornar um membro do Patreon de nível 2+.\nDoações individuais também são bem-vindas!",
           "donators_title": "Doadores",
@@ -593,6 +595,7 @@
         "mention_bot": "Você não pode ter sexo com bots!",
         "mention_purr": "\\*da um tapa em {user}* NÃO! Não comigo seu pervertido!",
         "mention_self": "Como você pode realmente ter sexo consigo mesmo {user}?! (Não. A masturbação não é uma resposta)",
+        "mention_snuggle": "NÃO {user}! Eu não vou permitir que você toque em minha irmãzinha assim!",
         "message": "{user} e {target} têm sexo!",
         "no_mention": "Por favor, mencione 2 usuários que você quer ter sexo com.",
         "request": {
@@ -792,6 +795,7 @@
         "special_user": "W-Por que você quer fazer isso comigo {user}? Você tem minha irmã pra isso."
       },
       "fuck": {
+        "mention_purr": "Não, {user}! Eu não vou ajudar você ser pervertido com a minha irmã!",
         "mention_snuggle": "Não! Eu não vou fazer isso com você {user}."
       },
       "pussylick": {
