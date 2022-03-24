@@ -39,7 +39,7 @@
   "purr": {
     "fun": {
       "bite": {
-        "description": "Wets you bite one ow muwtipwe peopwe.",
+        "description": "Wets you nom one ow muwtipwe peopwe.",
         "loading": "{EMOTE_LOADING} Going to bite someone... >:c",
         "mention_self": "Is it cannibawism, if you bite youwsewf {user}?",
         "mention_purr": [
