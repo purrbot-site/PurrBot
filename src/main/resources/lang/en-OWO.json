@@ -56,6 +56,16 @@
         "loading": "{EMOTE_LOADING} Making you bwush...",
         "message": "{user} is bwushing"
       },
+      "comfy": {
+        "description": "Awwows you to show that you feew comfy. ^w^",
+        "loading": "{EMOTE_LOADING} Pwepawing comfy pwace...",
+        "message": "{user} is feewing comfy."
+      },
+      "cry": {
+        "description": "Lets you cwy. ;-;",
+        "loading": "{EMOTE_LOADING} Cowwecting teaws... ;-;",
+        "message": "{user} is cwying"
+      },
       "cuddle": {
         "description": "Lets you cuddwe one ow muwtipwe peopwe.",
         "loading": "{EMOTE_LOADING} Weceiving a cuddle-gif...",
@@ -67,11 +77,6 @@
         ],
         "message": "{user} cuddwes with you {targets}",
         "no_mention": "Pwease mention at weast one user to cuddwe!"
-      },
-      "cry": {
-        "description": "Lets you cwy. ;-;",
-        "loading": "{EMOTE_LOADING} Cowwecting teaws... ;-;",
-        "message": "{user} is cwying"
       },
       "dance": {
         "description": "Allows you to dance. ~(^.^)~",
