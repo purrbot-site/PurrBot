@@ -56,6 +56,16 @@
         "loading": "{EMOTE_LOADING} Utandırılıyorsun...",
         "message": "{user} kızarıyor."
       },
+      "comfy": {
+        "description": "Rahat hissettiğinizi göstermenizi sağlar. ^w^",
+        "loading": "{EMOTE_LOADING} Rahat bir yer hazırlanıyor...",
+        "message": "{user} rahat hissediyor."
+      },
+      "cry": {
+        "description": "Ağlamanı sağlar. ;-;",
+        "loading": "{EMOTE_LOADING} Gözyaşları toplanıyor...",
+        "message": "{user} ağlıyor"
+      },
       "cuddle": {
         "description": "Bir veya birden fazla kişiyi kucaklamanı sağlar.",
         "loading": "{EMOTE_LOADING} Bir sarılma gifi arıyorum...",
@@ -67,11 +77,6 @@
         ],
         "message": "{user} ile {targets} birbirine sarıldı.",
         "no_mention": "Lütfen sarılmak için en az bir üye etiketle!"
-      },
-      "cry": {
-        "description": "Ağlamanı sağlar. ;-;",
-        "loading": "{EMOTE_LOADING} Gözyaşları toplanıyor...",
-        "message": "{user} ağlıyor"
       },
       "dance": {
         "description": "Dans etmeneni sağlar. ~(^.^)~",
