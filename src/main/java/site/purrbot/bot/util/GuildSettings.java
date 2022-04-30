@@ -22,7 +22,6 @@ public class GuildSettings{
     
     // Name keys for the settings
     public static final String LANGUAGE = "language";
-    public static final String PREFIX   = "prefix";
     
     public static final String WELCOME_BACKGROUND = "welcome_background";
     public static final String WELCOME_CHANNEL    = "welcome_channel";

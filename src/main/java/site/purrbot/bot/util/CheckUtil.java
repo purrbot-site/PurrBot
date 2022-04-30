@@ -24,6 +24,8 @@ import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
 
+import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 public class CheckUtil{
@@ -76,19 +78,36 @@ public class CheckUtil{
         Member self = guild.getSelfMember();
         if(!self.hasPermission(Permission.ADMINISTRATOR))
             return false;
-        
-        String roles = self.getRoles().stream()
-                .filter(role -> role.getPermissions().contains(Permission.ADMINISTRATOR))
-                .map(role -> "- " + role.getAsMention())
-                .collect(Collectors.joining("\n"));
+    
+        List<String> roles = self.getRoles().stream()
+            .filter(role -> role.hasPermission(Permission.ADMINISTRATOR))
+            .map(role -> "- " + role.getAsMention())
+            .collect(Collectors.toList());
         
         if(guild.getPublicRole().getPermissions().contains(Permission.ADMINISTRATOR))
-            roles += (roles.isEmpty() ? "" : "\n") + "- @everyone";
+            roles.add("- @everyone");
     
+        StringJoiner joiner = new StringJoiner("\n");
+        
+        for(int i = 0; i < roles.size(); i++){
+            if(joiner.length() + roles.get(i).length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
+                int remainingRoles = roles.size() - i;
+                
+                joiner.add(
+                    bot.getMsg(guild.getId(), "purr.info.user.more_mores")
+                        .replace("{remaining}", String.valueOf(remainingRoles))
+                );
+                break;
+            }
+            
+            joiner.add(roles.get(i));
+        }
+        
+        
         MessageEmbed embed = bot.getEmbedUtil().getErrorEmbed(executor)
                 .setDescription(
                         bot.getMsg(guild.getId(), "errors.administrator")
-                           .replace("{roles}", roles)
+                           .replace("{roles}", joiner.toString())
                 ).build();
         
         tc.sendMessageEmbeds(embed).queue();

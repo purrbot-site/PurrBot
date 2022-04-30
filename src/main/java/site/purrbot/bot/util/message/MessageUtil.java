@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
+import java.util.StringJoiner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -242,16 +243,13 @@ public class MessageUtil {
     public String getFormattedMembers(String id, String... members){
         if(members.length == 1)
             return "**" + escapeAll(members[0]) + "**";
-        
-        StringBuilder builder = new StringBuilder();
+    
+        StringJoiner joiner = new StringJoiner(", ");
         for(String member : members){
-            if(builder.length() > 0)
-                builder.append(", ");
-            
-            builder.append("**").append(escapeAll(member)).append("**");
+            joiner.add("**" + escapeAll(member) + "**");
         }
         
-        return replaceLast(builder.toString(), ",", " " + bot.getMsg(id, "misc.and"));
+        return replaceLast(joiner.toString(), ",", " " + bot.getMsg(id, "misc.and"));
     }
     
     public String replaceLast(String input, String target, String replacement){
