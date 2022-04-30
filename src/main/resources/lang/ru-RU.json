@@ -56,6 +56,16 @@
         "loading": "{EMOTE_LOADING} Заставляем тебя краснеть...",
         "message": "{user} краснеет"
       },
+      "comfy": {
+        "description": "Помогает показать, что вам комфортно. ^w^",
+        "loading": "{EMOTE_LOADING} Подготавливаем удобное место....",
+        "message": "{user} ощущает себя уютно."
+      },
+      "cry": {
+        "description": "Время плакать. ;-;",
+        "loading": "{EMOTE_LOADING} Собираем слёзки...",
+        "message": "{user} плачет"
+      },
       "cuddle": {
         "description": "Крепко обнять одного или более человек.",
         "loading": "{EMOTE_LOADING} Ищем gif с обнимашками...",
@@ -67,11 +77,6 @@
         ],
         "message": "{user} обнимается с {targets}",
         "no_mention": "Вы забыли упомянуть пользователя для обнимашек!"
-      },
-      "cry": {
-        "description": "Время плакать. ;-;",
-        "loading": "{EMOTE_LOADING} Собираем слёзки...",
-        "message": "{user} плачет"
       },
       "dance": {
         "description": "Заставляет вас затанцевать. ~(^.^)~",
