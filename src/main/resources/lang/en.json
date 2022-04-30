@@ -56,6 +56,16 @@
         "loading": "{EMOTE_LOADING} Making you blush...",
         "message": "{user} is blushing"
       },
+      "comfy": {
+        "description": "Allows you to show that you feel comfy. ^w^",
+        "loading": "{EMOTE_LOADING} Preparing comfy place...",
+        "message": "{user} is feeling comfy."
+      },
+      "cry": {
+        "description": "Lets you cry. ;-;",
+        "loading": "{EMOTE_LOADING} Collecting tears...",
+        "message": "{user} is crying"
+      },
       "cuddle": {
         "description": "Lets you cuddle one or multiple people.",
         "loading": "{EMOTE_LOADING} Receiving a cuddle-gif...",
@@ -67,11 +77,6 @@
         ],
         "message": "{user} cuddles with you {targets}",
         "no_mention": "Please mention at least one user to cuddle!"
-      },
-      "cry": {
-        "description": "Lets you cry. ;-;",
-        "loading": "{EMOTE_LOADING} Collecting tears...",
-        "message": "{user} is crying"
       },
       "dance": {
         "description": "Allows you to dance. ~(^.^)~",
