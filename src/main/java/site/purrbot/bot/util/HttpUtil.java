@@ -199,6 +199,7 @@ public class HttpUtil {
         // SFW Gifs
         BITE     ("bite",    "bite",   true, false, false, false),
         BLUSH    ("blush",   "blush",  true, false, false, false),
+        COMFY    ("comfy",   "comfy",  true, false, false, false),
         CRY      ("cry",     "cry",    true, false, false, false),
         CUDDLE   ("cuddle",  "cuddle", true, false, false, false),
         DANCE    ("dance",   "dance",  true, false, false, false),
