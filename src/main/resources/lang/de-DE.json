@@ -56,6 +56,16 @@
         "loading": "{EMOTE_LOADING} Macht dich rot...",
         "message": "{user} ist am erröten."
       },
+      "comfy": {
+        "description": "Erlaubt dir zu zeigen, dass du es gemütlich hast. ^w^",
+        "loading": "{EMOTE_LOADING} Bereite gemütlichen Platz vor...",
+        "message": "{user} hat es sehr gemütlich."
+      },
+      "cry": {
+        "description": "Lässt dich weinen. ;-;",
+        "loading": "{EMOTE_LOADING} Sammelt Tränen...",
+        "message": "{user} weint"
+      },
       "cuddle": {
         "description": "Lässt dich mit einer oder mehreren Personen kuscheln.",
         "loading": "{EMOTE_LOADING} Erhält ein kuschel-gif...",
@@ -67,11 +77,6 @@
         ],
         "message": "{user} kuschelt mit dir {targets}",
         "no_mention": "Bitte nenne eine Person um mit ihr zu kuscheln!"
-      },
-      "cry": {
-        "description": "Lässt dich weinen. ;-;",
-        "loading": "{EMOTE_LOADING} Sammelt Tränen...",
-        "message": "{user} weint"
       },
       "dance": {
         "description": "Erlaubt es dir zu tanzen. ~(^.^)~",
