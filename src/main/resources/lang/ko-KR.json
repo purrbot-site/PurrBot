@@ -56,6 +56,16 @@
         "loading": "{EMOTE_LOADING} 당신의 얼굴을 빨갛게 만드는 중...",
         "message": "{user}가 부끄러워하고 있어"
       },
+      "comfy": {
+        "description": "편하게 쉴 수 있도록 해줍니다 ^w^.",
+        "loading": "{EMOTE_LOADING} 편안하게 쉴 공간을 찾는 중...",
+        "message": "{user}가 편히 쉬고있어."
+      },
+      "cry": {
+        "description": "당신을 울게 합니다. ;-;",
+        "loading": "{EMOTE_LOADING} 눈물을 모으는중...",
+        "message": "{user}가 울고있어"
+      },
       "cuddle": {
         "description": "한 명 또는 여러 사람들을 격하게 껴안습니다.",
         "loading": "{EMOTE_LOADING} 부비부비 이미지 불러오는 중...",
@@ -67,11 +77,6 @@
         ],
         "message": "{user}이(가) {targets}(이)랑 부비부비하고 있어!",
         "no_mention": "최소한 부비부비할 상대 한 명을 언급해줘!"
-      },
-      "cry": {
-        "description": "당신을 울게 합니다. ;-;",
-        "loading": "{EMOTE_LOADING} 눈물을 모으는중...",
-        "message": "{user}가 울고있어"
       },
       "dance": {
         "description": "당신을 춤추게 합니다. ~(^.^)~",
