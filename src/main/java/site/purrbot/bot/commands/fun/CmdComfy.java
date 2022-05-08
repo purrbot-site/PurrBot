@@ -18,6 +18,8 @@
 
 package site.purrbot.bot.commands.fun;
 
+import com.github.rainestormee.jdacommand.CommandAttribute;
+import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -26,6 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+@CommandDescription(
+    name = "Comfy",
+    description = "purr.fun.comfy.description",
+    triggers = {"comfy"},
+    attributes = {
+        @CommandAttribute(key = "category", value = "fun"),
+        @CommandAttribute(key = "usage", value = "{p}comfy"),
+        @CommandAttribute(key = "help", value = "{p}comfy")
+    }
+)
 public class CmdComfy implements Command{
     
     private final PurrBot bot;

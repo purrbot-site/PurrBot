@@ -215,7 +215,7 @@ public class CmdHelp implements Command{
     private List<Command> getCommands(String category){
         return bot.getCmdHandler().getCommands().stream()
                 .map(cmd -> (Command)cmd)
-                .sorted(Comparator.comparing(cmd -> cmd.getDescription().name()))
+                .sorted(Comparator.comparing(cmd -> cmd.getDescription().name().toLowerCase(Locale.ROOT)))
                 .filter(cmd -> cmd.getAttribute("category").equals(category))
                 .collect(Collectors.toList());
     }
