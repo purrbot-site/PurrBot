@@ -28,7 +28,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
@@ -42,7 +42,7 @@ import site.purrbot.bot.constants.Links;
                 @CommandAttribute(key = "help", value = "{p}invite [--dm]")
         }
 )
-public class CmdInvite implements Command{
+public class CmdInvite implements OldCommand{
 
     private final PurrBot bot;
 

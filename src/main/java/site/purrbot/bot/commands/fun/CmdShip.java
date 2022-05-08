@@ -29,7 +29,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.IDs;
 
 import java.util.List;
@@ -46,7 +46,7 @@ import java.util.concurrent.TimeUnit;
                 @CommandAttribute(key = "help", value = "{p}ship <@user> [@user]")
         }
 )
-public class CmdShip implements Command{
+public class CmdShip implements OldCommand{
 
     private final PurrBot bot;
     private final Random random = new Random();

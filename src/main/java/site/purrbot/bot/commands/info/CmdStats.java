@@ -28,7 +28,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 
 import java.lang.management.ManagementFactory;
 import java.text.DecimalFormat;
@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
                 @CommandAttribute(key = "help", value = "{p}stats")
         }
 )
-public class CmdStats implements Command{
+public class CmdStats implements OldCommand{
 
     private final PurrBot bot;
 

@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 
 import java.time.temporal.ChronoUnit;
 
@@ -39,7 +39,7 @@ import java.time.temporal.ChronoUnit;
                 @CommandAttribute(key = "help", value = "{p}ping")
         }
 )
-public class CmdPing implements Command{
+public class CmdPing implements OldCommand{
 
     private final PurrBot bot;
     public CmdPing(PurrBot bot){

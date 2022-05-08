@@ -23,7 +23,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
@@ -38,7 +38,7 @@ import java.util.List;
                 @CommandAttribute(key = "help", value = "{p}guild")
         }
 )
-public class CmdGuild implements Command{
+public class CmdGuild implements OldCommand{
 
     private final PurrBot bot;
 

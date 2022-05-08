@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.interactions.components.Button;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 
 @CommandDescription(
         name = "Quote",
@@ -37,7 +37,7 @@ import site.purrbot.bot.commands.Command;
                 @CommandAttribute(key = "help", value = "{p}quote <messageId> [#channel]")
         }
 )
-public class CmdQuote implements Command{
+public class CmdQuote implements OldCommand{
 
     private final PurrBot bot;
 

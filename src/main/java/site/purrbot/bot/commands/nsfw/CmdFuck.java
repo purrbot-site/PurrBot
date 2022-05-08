@@ -22,12 +22,10 @@ import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.jagrosh.jdautilities.command.SlashCommand;
-import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import com.jagrosh.jdautilities.command.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.Button;
@@ -35,7 +33,7 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.util.HttpUtil;
 
@@ -44,7 +42,7 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class CmdFuck extends SlashCommand implements Command{
+public class CmdFuck extends SlashCommand implements OldCommand{
 
     private final Logger logger = (Logger)LoggerFactory.getLogger(CmdFuck.class);
     private final PurrBot bot;

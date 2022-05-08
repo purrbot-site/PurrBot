@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.Emotes;
 
 import java.util.List;
@@ -40,7 +40,7 @@ import java.util.List;
                 @CommandAttribute(key = "help", value = "{p}user [@user]")
         }
 )
-public class CmdUser implements Command{
+public class CmdUser implements OldCommand{
 
     private final PurrBot bot;
 

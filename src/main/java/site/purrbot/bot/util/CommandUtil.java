@@ -20,11 +20,12 @@ package site.purrbot.bot.util;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import com.jagrosh.jdautilities.command.SlashCommandEvent;
+import net.dv8tion.jda.api.interactions.InteractionHook;
+import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.IDs;
+import site.purrbot.bot.util.message.EmbedUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,39 +33,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CommandUtil{
-    
-    public TextChannel getTextChannel(SlashCommandEvent event, String key){
-        OptionMapping option = event.getOption(key);
-        
-        return option == null ? null : (TextChannel)option.getAsGuildChannel();
-    }
-    
-    public boolean getBoolean(SlashCommandEvent event, String key, boolean def){
-        OptionMapping option = event.getOption(key);
-        
-        return option == null ? def : option.getAsBoolean();
-    }
-    
-    public String getString(SlashCommandEvent event, String key){
-        return getString(event, key, null);
-    }
-    
-    public String getString(SlashCommandEvent event, String key, String def){
-        OptionMapping option = event.getOption(key);
-        
-        return option == null ? def : option.getAsString();
-    }
-    
-    public User getUser(SlashCommandEvent event, String key){
-        OptionMapping option = event.getOption(key);
-        
-        return option == null ? null : option.getAsUser();
-    }
-    
-    public List<User> getUsers(SlashCommandEvent event, String... keys){
+    public static List<User> getUsers(SlashCommandEvent event, String... keys){
         List<User> users = new ArrayList<>();
         for(String key : keys){
-            User user = getUser(event, key);
+            User user = event.optUser(key);
             if(user == null)
                 continue;
             
@@ -74,7 +46,7 @@ public class CommandUtil{
         return users;
     }
     
-    public List<String> convertNames(List<User> users, User own, Guild guild){
+    public static List<String> convertNames(List<User> users, User own, Guild guild){
         return users.stream()
             .filter(user -> !user.getId().equals(IDs.PURR))
             .filter(user -> !user.getId().equals(own.getId()))
@@ -84,4 +56,29 @@ public class CommandUtil{
             .collect(Collectors.toList());
     }
     
+    public static void sendError(SlashCommandEvent event, String msg, Object... args){
+        event.replyEmbeds(EmbedUtil.getErrorEmbed().setDescription(String.format(msg, args)).build())
+            .setEphemeral(true)
+            .queue();
+    }
+    
+    public static void sendError(InteractionHook hook, String msg){
+        hook.editOriginalEmbeds(EmbedUtil.getErrorEmbed().setDescription(msg).build()).queue();
+    }
+    
+    public static void sendTranslatedError(SlashCommandEvent event, PurrBot bot, Guild guild, String path){
+        sendError(event, bot.getMsg(guild.getId(), path));
+    }
+    
+    public static void sendTranslatedError(InteractionHook hook, PurrBot bot, Guild guild, String path){
+        sendError(hook, bot.getMsg(guild.getId(), path));
+    }
+    
+    public static void sendTranslatedError(InteractionHook hook, PurrBot bot, Guild guild, String path, Member member){
+        sendError(hook, bot.getMsg(guild.getId(), path, member.getEffectiveName()));
+    }
+    
+    public static void sendTranslatedRandomError(SlashCommandEvent event, PurrBot bot, Guild guild, String path, Member member){
+        sendError(event, bot.getRandomMsg(guild.getId(), path, member.getEffectiveName()));
+    }
 }

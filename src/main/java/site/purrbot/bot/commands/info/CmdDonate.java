@@ -20,16 +20,13 @@ package site.purrbot.bot.commands.info;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.IDs;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @CommandDescription(
         name = "Donate",
@@ -41,7 +38,7 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}donate [--dm]")
         }
 )
-public class CmdDonate implements Command{
+public class CmdDonate implements OldCommand{
     
     private final PurrBot bot;
     

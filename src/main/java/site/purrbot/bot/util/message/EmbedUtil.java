@@ -24,7 +24,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import com.jagrosh.jdautilities.command.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.PurrBot;
 
@@ -38,27 +38,20 @@ public class EmbedUtil {
         this.bot = bot;
     }
     
-    public EmbedBuilder getEmbed(){
+    public static EmbedBuilder getEmbed(){
         return new EmbedBuilder().setColor(0x802F3136).setTimestamp(ZonedDateTime.now());
     }
-
-    public EmbedBuilder getEmbed(Member member){
-        return getEmbed().setFooter(
-                bot.getMsg(member.getGuild().getId(), "embed.footer", member.getUser().getAsTag(), false), 
-                member.getUser().getEffectiveAvatarUrl()
-        );
+    
+    public static EmbedBuilder getTranslatedEmbed(Guild guild, PurrBot bot, String path){
+        return getEmbed().setDescription(bot.getMsg(guild.getId(), path));
     }
     
-    public EmbedBuilder getErrorEmbed(){
+    public static EmbedBuilder getErrorEmbed(){
         return getEmbed().setColor(0xFF0000);
     }
     
-    public EmbedBuilder getErrorEmbed(Member member){
-        return (member == null ? getEmbed() : getEmbed(member)).setColor(0xFF0000);
-    }
-    
     public MessageEmbed getPermErrorEmbed(Member member, Guild guild, TextChannel channel, Permission perm, boolean self){
-        EmbedBuilder embed = getErrorEmbed(member);
+        EmbedBuilder embed = getErrorEmbed();
         String msg;
         if(self){
             if(channel == null){

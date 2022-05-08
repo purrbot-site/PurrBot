@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.util.HttpUtil;
 
@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}kiss <@user> [@user ...]")
         }
 )
-public class CmdKiss implements Command{
+public class CmdKiss implements OldCommand{
     
     private final PurrBot bot;
 

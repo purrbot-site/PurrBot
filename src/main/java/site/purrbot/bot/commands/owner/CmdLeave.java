@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,7 +42,7 @@ import java.util.regex.Pattern;
                 @CommandAttribute(key = "help", value = "{p}leave <guildId> [--pm <message>]")
         }
 )
-public class CmdLeave implements Command{
+public class CmdLeave implements OldCommand{
 
     Pattern pattern = Pattern.compile("--pm (?<message>.+)", Pattern.DOTALL);
     

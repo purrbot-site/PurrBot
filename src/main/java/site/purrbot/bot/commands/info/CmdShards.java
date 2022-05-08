@@ -27,7 +27,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.requests.ErrorResponse;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.Emotes;
 
 import java.text.DecimalFormat;
@@ -49,7 +49,7 @@ import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
                 @CommandAttribute(key = "help", value = "{p}shards")
         }
 )
-public class CmdShards implements Command{
+public class CmdShards implements OldCommand{
     
     private final PurrBot bot;
     

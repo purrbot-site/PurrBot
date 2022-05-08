@@ -16,29 +16,17 @@
  *  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package site.purrbot.bot.commands.fun;
+package site.purrbot.bot.commands;
 
-import com.jagrosh.jdautilities.command.SlashCommand;
-import com.jagrosh.jdautilities.command.SlashCommandEvent;
-import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.util.HttpUtil;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 
-public class CmdBlush extends SlashCommand{
+public interface OldCommand{
     
-    private final PurrBot bot;
-    
-    public CmdBlush(PurrBot bot){
-        this.bot = bot;
-        
-        this.name = "blush";
-        this.help = "Lets you blush.";
-        this.category = new Category("fun");
-    }
-    
-    @Override
-    protected void execute(SlashCommandEvent event){
-        event.deferReply().queue(hook ->
-            bot.getRequestUtil().handleInteraction(hook, HttpUtil.ImageAPI.BLUSH, event.getGuild(), event.getMember())
-        );
-    }
+    /*
+     * This is the method we use in the commands to provide the information for easier handling.
+     */
+    void run(Guild guild, TextChannel tc, Message msg, Member member, String... args);
 }

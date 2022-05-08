@@ -26,10 +26,6 @@ import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import io.javalin.Javalin;
-import net.discordservices.dservices4j.Commands;
-import net.discordservices.dservices4j.DServices4J;
-import net.discordservices.dservices4j.News;
-import net.discordservices.dservices4j.Stats;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -41,9 +37,6 @@ import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.botblock.javabotblockapi.core.BotBlockAPI;
-import org.botblock.javabotblockapi.core.Site;
-import org.botblock.javabotblockapi.jda.PostAction;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -98,8 +91,6 @@ public class PurrBot {
     private final Cache<@NotNull String, @NotNull GuildSettings> guildSettings = Caffeine.newBuilder()
             .expireAfterWrite(10, TimeUnit.MINUTES)
             .build();
-    
-    private DServices4J dServices4J;
 
     public static void main(String[] args){
         try{
@@ -136,6 +127,7 @@ public class PurrBot {
         beta = getFileManager().getBoolean("config", "beta");
         
         commandClient = new CommandClientBuilder()
+            .setOwnerId(IDs.ANDRE_601)
             .setManualUpsert(true)
             .addSlashCommands(
                 new CmdBite(this),
@@ -167,7 +159,7 @@ public class PurrBot {
                         waiter
                 )
                 .setShardsTotal(-1)
-                .setActivity(Activity.of(Activity.ActivityType.DEFAULT, getMessageUtil().getRandomStartupMsg()))
+                .setActivity(Activity.of(Activity.ActivityType.PLAYING, getMessageUtil().getRandomStartupMsg()))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .build();
         
@@ -306,6 +298,9 @@ public class PurrBot {
     }
     
     public String getMsg(String id, String path, String user, boolean format){
+        if(user == null)
+            return getMsg(id, path);
+        
         if(format)
             user = getMessageUtil().getFormattedMembers(id, user);
         
@@ -326,74 +321,6 @@ public class PurrBot {
         List<String> list = langUtils.getStringList(getLanguage(id), path);
         
         return list.isEmpty() ? "" : setPlaceholders(list.get(getRandom().nextInt(list.size())));
-    }
-    
-    public void startUpdater(){
-        if(!isBeta()){
-            PostAction post = new PostAction(getShardManager());
-            BotBlockAPI botBlockAPI = new BotBlockAPI.Builder()
-                    .addAuthToken(
-                            Site.DISCORDLIST_SPACE,
-                            getFileManager().getString("config", "tokens.botlist-space")
-                    )
-                    .addAuthToken(
-                            Site.DISCORD_BOTS_GG,
-                            getFileManager().getString("config", "tokens.discord-bots-gg")
-                    )
-                    .addAuthToken(
-                            Site.DISCORDEXTREMELIST_XYZ,
-                            getFileManager().getString("config", "tokens.discordextremelist-xyz")
-                    )
-                    .addAuthToken(
-                            Site.DISCORD_BOATS,
-                            getFileManager().getString("config", "tokens.discord-boats")
-                    )
-                    .build();
-            
-            dServices4J = new DServices4J.Builder()
-                    .setToken(getFileManager().getString("config", "tokens.discordservices-net"))
-                    .setId(IDs.PURR)
-                    .build();
-            
-            Commands commands = dServices4J.getCommands();
-            Stats stats = dServices4J.getStats();
-            
-            commands.addCommands(getCommands());
-                
-            commands.postCommands();
-    
-            scheduler.scheduleAtFixedRate(() -> {
-                
-                getShardManager().setActivity(Activity.of(
-                        Activity.ActivityType.WATCHING,
-                        getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
-                ));
-        
-                try{
-                    post.postGuilds(getShardManager(), botBlockAPI);
-                }catch(Exception ex){
-                    logger.warn("Not able to post guild counts!", ex);
-                }
-                
-                stats.postStats(
-                        getShardManager().getGuildCache().size(),
-                        getShardManager().getShardCache().size()
-                ); 
-            }, 1, 5, TimeUnit.MINUTES);
-        }else{
-            scheduler.scheduleAtFixedRate(() -> 
-                getShardManager().setActivity(Activity.of(
-                    Activity.ActivityType.WATCHING,
-                    getMessageUtil().getBotGame(getShardManager().getGuildCache().size())
-                ))
-            , 1, 5, TimeUnit.MINUTES);
-        }
-    }
-    
-    public void postNews(boolean error, String title, String msg){
-        News news = dServices4J.getNews();
-        
-        news.postNews(title.replace("_", " "), msg, error);
     }
     
     public void disable(){
@@ -421,22 +348,6 @@ public class PurrBot {
                 .replace("{paypal_url}", Links.PAYPAL)
                 .replace("{patreon_url}", Links.PATREON)
                 .replace("{kofi_url}", Links.KOFI);
-    }
-    
-    private List<Commands.CommandInfo> getCommands(){
-        List<Commands.CommandInfo> commands = new ArrayList<>();
-        for(SlashCommand command : commandClient.getSlashCommands()){
-            if(command.getCategory().getName().equalsIgnoreCase("owner"))
-                continue;
-            
-            commands.add(new Commands.CommandInfo(
-                command.getName(),
-                command.getHelp(),
-                command.getCategory().getName()
-            ));
-        }
-        
-        return commands;
     }
     
     private void setupStatusAPI(){

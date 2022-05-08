@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
@@ -50,7 +50,7 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
                 @CommandAttribute(key = "help", value = "{p}emote <:emote:|--search>")
         }
 )
-public class CmdEmote implements Command{
+public class CmdEmote implements OldCommand{
     
     private final PurrBot bot;
     

@@ -26,7 +26,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.Emotes;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ import java.util.List;
                 @CommandAttribute(key = "help", value = "{p}check")
         }
 )
-public class CmdCheck implements Command{
+public class CmdCheck implements OldCommand{
     
     private final PurrBot bot;
     

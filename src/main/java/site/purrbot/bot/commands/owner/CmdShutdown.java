@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 
 @CommandDescription(
         name = "Shutdown",
@@ -37,7 +37,7 @@ import site.purrbot.bot.commands.Command;
                 @CommandAttribute(key = "help", value = "{p}shutdown")
         }
 )
-public class CmdShutdown implements Command{
+public class CmdShutdown implements OldCommand{
 
     private final PurrBot bot;
     private final Logger logger = (Logger)LoggerFactory.getLogger(CmdShutdown.class);

@@ -22,7 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.util.file.lang.LangUtils;
 
@@ -44,7 +44,7 @@ import java.util.List;
                 @CommandAttribute(key = "help", value = "{p}language [set <language>|reset]")
         }
 )
-public class CmdLanguage implements Command{
+public class CmdLanguage implements OldCommand{
     private final PurrBot bot;
     
     public CmdLanguage(PurrBot bot){

@@ -18,27 +18,15 @@
 
 package site.purrbot.bot.commands.fun;
 
-import com.github.rainestormee.jdacommand.CommandAttribute;
-import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.util.HttpUtil;
 
-@CommandDescription(
-        name = "Fluff",
-        description = "purr.fun.fluff.description",
-        triggers = {"fluff", "fluffing"},
-        attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}fluff <@user>"),
-                @CommandAttribute(key = "help", value = "{p}fluff <@user>")
-        }
-)
-public class CmdFluff implements Command{
+public class CmdFluff implements OldCommand{
     
     private final PurrBot bot;
     

@@ -28,7 +28,7 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.util.HttpUtil;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ import java.util.concurrent.TimeUnit;
                 @CommandAttribute(key = "help", value = "{p}threesome <@user1> <@user2> [--fff|--mmf]")
         }
 )
-public class CmdThreesome implements Command{
+public class CmdThreesome implements OldCommand{
     
     private final Logger logger = (Logger)LoggerFactory.getLogger(CmdThreesome.class);
     private final PurrBot bot;

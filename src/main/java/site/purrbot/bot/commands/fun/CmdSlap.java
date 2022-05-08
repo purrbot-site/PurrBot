@@ -27,7 +27,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.util.HttpUtil;
 
 import java.util.List;
@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
                 @CommandAttribute(key = "help", value = "{p}slap <@user> [@user ...]")
         }
 )
-public class CmdSlap implements Command{
+public class CmdSlap implements OldCommand{
 
     private final PurrBot bot;
     private final Logger logger = (Logger)LoggerFactory.getLogger("Command - Slap");

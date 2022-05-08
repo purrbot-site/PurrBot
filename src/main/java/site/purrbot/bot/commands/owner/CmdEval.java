@@ -27,7 +27,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -43,7 +43,7 @@ import javax.script.ScriptException;
                 @CommandAttribute(key = "help", value = "{p}eval <code>")
         }
 )
-public class CmdEval implements Command{
+public class CmdEval implements OldCommand{
 
     private final PurrBot bot;
 

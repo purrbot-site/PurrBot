@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.JDAInfo;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
@@ -39,7 +39,7 @@ import site.purrbot.bot.constants.Links;
                 @CommandAttribute(key = "help", value = "{p}info [--dm]")
         }
 )
-public class CmdInfo implements Command{
+public class CmdInfo implements OldCommand{
     
     private final PurrBot bot;
 

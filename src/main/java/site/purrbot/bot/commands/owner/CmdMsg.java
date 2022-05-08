@@ -22,7 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.constants.Emotes;
 
 @CommandDescription(
@@ -35,7 +35,7 @@ import site.purrbot.bot.constants.Emotes;
                 @CommandAttribute(key = "help", value = "{p}msg <channelId> <message>")
         }
 )
-public class CmdMsg implements Command{
+public class CmdMsg implements OldCommand{
     
     private final PurrBot bot;
 

@@ -22,7 +22,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.*;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 
 @CommandDescription(
         name = "News",
@@ -34,7 +34,7 @@ import site.purrbot.bot.commands.Command;
                 @CommandAttribute(key = "help", value = "{p}news <normal|error> <title> <message>")
         }
 )
-public class CmdNews implements Command{
+public class CmdNews implements OldCommand{
     
     private final PurrBot bot;
     

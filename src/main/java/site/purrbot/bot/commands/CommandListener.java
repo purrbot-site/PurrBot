@@ -113,7 +113,7 @@ public class CommandListener extends ListenerAdapter{
             if(args[0] == null)
                 return;
             
-            Command command = (Command)HANDLER.findCommand(args[0].toLowerCase());
+            OldCommand command = (OldCommand)HANDLER.findCommand(args[0].toLowerCase());
             
             if(command == null)
                 return;

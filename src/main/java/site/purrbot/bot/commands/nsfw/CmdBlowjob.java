@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.commands.OldCommand;
 import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
@@ -38,7 +38,7 @@ import site.purrbot.bot.util.HttpUtil;
                 @CommandAttribute(key = "help", value = "{p}blowjob <@user>")
         }
 )
-public class CmdBlowjob implements Command{
+public class CmdBlowjob implements OldCommand{
 
     private final PurrBot bot;
 

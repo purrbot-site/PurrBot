@@ -20,7 +20,7 @@ package site.purrbot.bot.commands.fun;
 
 import com.jagrosh.jdautilities.command.SlashCommand;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import com.jagrosh.jdautilities.command.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import site.purrbot.bot.PurrBot;
