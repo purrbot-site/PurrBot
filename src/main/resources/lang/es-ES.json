@@ -56,6 +56,16 @@
         "loading": "{EMOTE_LOADING} Haciéndote sonrojar...",
         "message": "¡{user} se ha sonrojado!"
       },
+      "comfy": {
+        "description": "Te permite mostrar como de comodo te sientes. ^w^",
+        "loading": "{EMOTE_LOADING} Preparando lugar confortable...",
+        "message": "{user} se siente cómodo."
+      },
+      "cry": {
+        "description": "Te permite llorar. ;-;",
+        "loading": "{EMOTE_LOADING} Recolectando lágrimas...",
+        "message": "{user} está llorando"
+      },
       "cuddle": {
         "description": "Te permite mimar a una o varias personas.",
         "loading": "{EMOTE_LOADING} Recibiendo un gif mimoso...",
@@ -67,11 +77,6 @@
         ],
         "message": "{user} le da mimos a {targets}",
         "no_mention": "¡Por favor, mencione al menos un usuario para mimar!"
-      },
-      "cry": {
-        "description": "Te permite llorar. ;-;",
-        "loading": "{EMOTE_LOADING} Recolectando lágrimas...",
-        "message": "{user} está llorando"
       },
       "dance": {
         "description": "Te permite bailar. ~(^.^)~",

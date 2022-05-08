@@ -56,6 +56,16 @@
         "loading": "{EMOTE_LOADING} Vous fait rougir...",
         "message": "{user} rougit"
       },
+      "comfy": {
+        "description": "Vous permet de montrer que vous vous sentez à l'aise. ^w^",
+        "loading": "{EMOTE_LOADING} Préparation d'un lieu confortable...",
+        "message": "{user} se sent à l'aise."
+      },
+      "cry": {
+        "description": "Vous laisse pleurer. ;-;",
+        "loading": "{EMOTE_LOADING} Collecte des larmes...",
+        "message": "{user} pleure"
+      },
       "cuddle": {
         "description": "Vous permet de câliner une ou plusieurs personnes.",
         "loading": "{EMOTE_LOADING} Réception d'un gif-câlinage...",
@@ -67,11 +77,6 @@
         ],
         "message": "{user} vous câlines {targets}",
         "no_mention": "Veuillez mentionner au moins un utilisateur a câliner!"
-      },
-      "cry": {
-        "description": "Vous laisse pleurer. ;-;",
-        "loading": "{EMOTE_LOADING} Collecte des larmes...",
-        "message": "{user} pleure"
       },
       "dance": {
         "description": "Vous permet de danser. ~(^.^)~",

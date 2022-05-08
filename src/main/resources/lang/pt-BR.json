@@ -56,6 +56,16 @@
         "loading": "{EMOTE_LOADING} Te fazendo corar...",
         "message": "{user} está corando"
       },
+      "comfy": {
+        "description": "te permite comstrar que está confortável. ^w^",
+        "loading": "{EMOTE_LOADING} Preparando um lugar confortável...",
+        "message": "{user} Está se sentindo confortável."
+      },
+      "cry": {
+        "description": "Deixa você chorar. ;-;",
+        "loading": "{EMOTE_LOADING} Coletando Lágrimas...",
+        "message": "{user} está chorando"
+      },
       "cuddle": {
         "description": "Permite que você abraçe uma ou várias pessoas.",
         "loading": "{EMOTE_LOADING} Recebendo um gif de abraço...",
@@ -67,11 +77,6 @@
         ],
         "message": "{user} te abraça você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para dar um abraço!"
-      },
-      "cry": {
-        "description": "Deixa você chorar. ;-;",
-        "loading": "{EMOTE_LOADING} Coletando Lágrimas...",
-        "message": "{user} está chorando"
       },
       "dance": {
         "description": "Deixa você dançar. ~(^.^)~",
