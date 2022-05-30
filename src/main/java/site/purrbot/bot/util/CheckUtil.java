@@ -1,14 +1,14 @@
 /*
- *  Copyright 2018 - 2021 Andre601
- *  
+ *  Copyright 2018 - 2022 Andre601
+ *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *  documentation files (the "Software"), to deal in the Software without restriction, including without limitation
  *  the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
  *  and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  
+ *
  *  The above copyright notice and this permission notice shall be included in all copies or substantial
  *  portions of the Software.
- *  
+ *
  *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  *  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
  *  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
@@ -18,190 +18,67 @@
 
 package site.purrbot.bot.util;
 
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.constants.IDs;
-
-import java.util.List;
-import java.util.StringJoiner;
-import java.util.stream.Collectors;
+import site.purrbot.bot.util.commands.CommandErrorReply;
 
 public class CheckUtil{
-
-    private final PurrBot bot;
     
-    public CheckUtil(PurrBot bot){
-        this.bot = bot;
-    }
-    
-    public boolean isDeveloper(Member member){
-        return member.getId().equals(IDs.ANDRE_601);
-    }
-    
-    public boolean lacksPermission(TextChannel tc, Member member, Permission permission){
-        return lacksPermission(tc, member, false, null, permission);
-    }
-    
-    public boolean lacksPermission(TextChannel tc, Member member, boolean isSelf, TextChannel channel, Permission permission){
-        Guild guild = tc.getGuild();
-        if(isSelf){
-            Member self = guild.getSelfMember();
-            if(channel == null){
-                if(self.hasPermission(permission)){
-                    return false;
-                }else{
-                    bot.getEmbedUtil().sendPermError(tc, member, permission, true);
-                    return true;
-                }
-            }else{
-                if(self.hasPermission(channel, permission)){
-                    return false;
-                }else{
-                    bot.getEmbedUtil().sendPermError(tc, member, channel, permission, true);
-                    return true;
-                }
-            }
-        }else{
-            if(member.hasPermission(permission)){
-                return false;
-            }else{
-                bot.getEmbedUtil().sendPermError(tc, member, permission, false);
-                return true;
-            }
-        }
-    }
-    
-    public boolean hasAdmin(Member executor, TextChannel tc){
-        Guild guild = tc.getGuild();
-        Member self = guild.getSelfMember();
-        if(!self.hasPermission(Permission.ADMINISTRATOR))
+    public static boolean isDonator(InteractionHook hook, String guildId, String userId){
+        Guild guild = PurrBot.getBot().getShardManager().getGuildById("");
+        if(guild == null){
+            CommandErrorReply.messageFromPath("errors.no_main_server", guildId).send(hook);
             return false;
+        }
     
-        List<String> roles = self.getRoles().stream()
-            .filter(role -> role.hasPermission(Permission.ADMINISTRATOR))
-            .map(role -> "- " + role.getAsMention())
-            .collect(Collectors.toList());
-        
-        if(guild.getPublicRole().getPermissions().contains(Permission.ADMINISTRATOR))
-            roles.add("- @everyone");
-    
-        StringJoiner joiner = new StringJoiner("\n");
-        
-        for(int i = 0; i < roles.size(); i++){
-            if(joiner.length() + roles.get(i).length() + 20 > MessageEmbed.VALUE_MAX_LENGTH){
-                int remainingRoles = roles.size() - i;
-                
-                joiner.add(
-                    bot.getMsg(guild.getId(), "purr.info.user.more_mores")
-                        .replace("{remaining}", String.valueOf(remainingRoles))
-                );
-                break;
-            }
-            
-            joiner.add(roles.get(i));
+        Member member = guild.getMemberById(userId);
+        if(member == null){
+            CommandErrorReply.messageFromPath("errors.no_donator", guildId)
+                .withPlaceholders(
+                    "{server_invite}", ""
+                ).send(hook);
+            return false;
         }
         
-        
-        MessageEmbed embed = bot.getEmbedUtil().getErrorEmbed(executor)
-                .setDescription(
-                        bot.getMsg(guild.getId(), "errors.administrator")
-                           .replace("{roles}", joiner.toString())
-                ).build();
-        
-        tc.sendMessageEmbeds(embed).queue();
+        if(member.getRoles().stream().noneMatch(role -> role.getId().equals(""))){
+            CommandErrorReply.messageFromPath("errors.no_donator", guildId)
+                .withPlaceholders(
+                    "{server_invite}", ""
+                ).send(hook);
+            return false;
+        }
         
         return true;
     }
     
-    public boolean isPatreon(String id){
-        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD);
-        if(guild == null)
-            return false;
-        
-        Member member = guild.getMemberById(id);
-        if(member == null)
-            return false;
-    
-        Role tier2 = guild.getRoleById(IDs.PATREON_TIER_2);
-        Role tier3 = guild.getRoleById(IDs.PATREON_TIER_3);
-        if(tier2 == null || tier3 == null)
-            return false;
-        
-        return member.getRoles().contains(tier2) || member.getRoles().contains(tier3);
-    }
-    
-    public boolean isPatreon(TextChannel tc, String id){
-        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD);
+    public static boolean isBooster(InteractionHook hook, String guildId, String userId){
+        Guild guild = PurrBot.getBot().getShardManager().getGuildById("");
         if(guild == null){
-            EmbedBuilder builder = bot.getEmbedUtil().getErrorEmbed(null)
-                    .setDescription(bot.getMsg(tc.getGuild().getId(), "errors.fetch.guild"));
-            tc.sendMessageEmbeds(builder.build()).queue();
+            CommandErrorReply.messageFromPath("errors.no_main_server", guildId).send(hook);
             return false;
         }
-        
-        Member member = guild.getMemberById(id);
+    
+        Member member = guild.getMemberById(userId);
         if(member == null){
-            EmbedBuilder builder = bot.getEmbedUtil().getErrorEmbed(null)
-                    .setDescription(bot.getMsg(tc.getGuild().getId(), "errors.fetch.member"));
-            tc.sendMessageEmbeds(builder.build()).queue();
+            CommandErrorReply.messageFromPath("errors.no_booster", guildId)
+                .withPlaceholders(
+                    "{server_invite}", ""
+                ).send(hook);
             return false;
         }
     
-        Role tier2 = guild.getRoleById(IDs.PATREON_TIER_2);
-        Role tier3 = guild.getRoleById(IDs.PATREON_TIER_3);
-        if(tier2 == null || tier3 == null){
-            EmbedBuilder builder = bot.getEmbedUtil().getErrorEmbed(null)
-                    .setDescription(bot.getMsg(tc.getGuild().getId(), "errors.fetch.patreon_roles"));
-            tc.sendMessageEmbeds(builder.build()).queue();
+        String boostId = guild.getBoostRole() == null ? null : guild.getBoostRole().getId();
+        if(boostId == null || member.getRoles().stream().noneMatch(role -> role.getId().equals(boostId))){
+            CommandErrorReply.messageFromPath("errors.no_donator", guildId)
+                .withPlaceholders(
+                    "{server_invite}", ""
+                ).send(hook);
             return false;
         }
         
-        return member.getRoles().contains(tier2) || member.getRoles().contains(tier3);
+        return true;
     }
     
-    public boolean isBooster(String id){
-        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD);
-        if(guild == null)
-            return false;
-    
-        Member member = guild.getMemberById(id);
-        if(member == null)
-            return false;
-    
-        Role booster = guild.getBoostRole();
-        if(booster == null)
-            return false;
-    
-        return member.getRoles().contains(booster);
-    }
-    
-    public boolean isBooster(TextChannel tc, String id){
-        Guild guild = bot.getShardManager().getGuildById(IDs.GUILD);
-        if(guild == null){
-            EmbedBuilder builder = bot.getEmbedUtil().getErrorEmbed(null)
-                            .setDescription(bot.getMsg(tc.getGuild().getId(), "errors.fetch.guild"));
-            tc.sendMessageEmbeds(builder.build()).queue();
-            return false;
-        }
-        
-        Member member = guild.getMemberById(id);
-        if(member == null){
-            EmbedBuilder builder = bot.getEmbedUtil().getErrorEmbed(null)
-                    .setDescription(bot.getMsg(tc.getGuild().getId(), "errors.fetch.member"));
-            tc.sendMessageEmbeds(builder.build()).queue();
-            return false;
-        }
-        
-        Role booster = guild.getBoostRole();
-        if(booster == null){
-            EmbedBuilder builder = bot.getEmbedUtil().getErrorEmbed(null)
-                    .setDescription(bot.getMsg(tc.getGuild().getId(), "errors.fetch.booster_role"));
-            tc.sendMessageEmbeds(builder.build()).queue();
-            return false;
-        }
-        
-        return member.getRoles().contains(booster);
-    }
 }

@@ -1,14 +1,14 @@
 /*
- *  Copyright 2018 - 2021 Andre601
- *  
+ *  Copyright 2018 - 2022 Andre601
+ *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *  documentation files (the "Software"), to deal in the Software without restriction, including without limitation
  *  the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
  *  and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  
+ *
  *  The above copyright notice and this permission notice shall be included in all copies or substantial
  *  portions of the Software.
- *  
+ *
  *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  *  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
  *  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
@@ -27,7 +27,7 @@ public enum Emotes{
     SENKO_TAIL_WAG("senkoTailWag", "858053594081918996", true),
     SHIRO_TAIL_WAG("shiroTailWag", "858053594162135070", true),
     TYPING        ("typing",       "858052735063818260", true),
-
+    
     // Static/normal emotes
     ACCEPT                ("accept",              "858052657204559872", false),
     AWOO                  ("awoo",                "858074817822195727", false),
@@ -88,47 +88,29 @@ public enum Emotes{
     VERIFIED              ("verified",            "855418151587807232", false),
     VOICE                 ("voice",               "855418149054578688", false);
     
-    private static final Pattern emote_pattern = Pattern.compile("\\{EMOTE_(?<name>[A-Z0-9_]+)}");
+    private static final Pattern EMOTE_PATTERN = Pattern.compile("\\{EMOTE_(?<name>[A-Z0-9_]+)}");
     private static final Emotes[] ALL = values();
     
-    private final String emoteName;
-    private final String id;
+    private final String name, id;
     private final boolean animated;
-
-    Emotes(String emoteName, String id, boolean animated){
-        this.emoteName = emoteName;
+    
+    Emotes(String name, String id, boolean animated){
+        this.name = name;
         this.id = id;
         this.animated = animated;
     }
     
-    public String getEmote() {
-        return String.format(
-                "<%s:%s:%s>",
-                this.animated ? "a" : "",
-                this.emoteName,
-                this.id
-        );
-    }
-
-    public String getNameAndId(){
-        return String.format(
-                "%s:%s",
-                this.emoteName,
-                this.id
-        );
-    }
-
-    public String getId(){
-        return this.id;
+    public String getAsMention(){
+        return String.format("<%s:%s:%s>", animated ? "a" : "", name, id);
     }
     
-    public static String getWithEmotes(String input){
-        Matcher matcher = emote_pattern.matcher(input);
+    public static String parseEmotes(String message){
+        Matcher matcher = EMOTE_PATTERN.matcher(message);
         if(matcher.find()){
             StringBuilder builder = new StringBuilder();
             
             do{
-                String name = getEmote(matcher.group("name"));
+                String name = getAsMention(matcher.group("name"));
                 if(name == null)
                     continue;
                 
@@ -136,16 +118,16 @@ public enum Emotes{
             }while(matcher.find());
             
             matcher.appendTail(builder);
-            input = builder.toString();
+            message = builder.toString();
         }
         
-        return input;
+        return message;
     }
     
-    private static String getEmote(String name){
+    private static String getAsMention(String name){
         for(Emotes emote : ALL){
             if(emote.name().equalsIgnoreCase(name))
-                return emote.getEmote();
+                return emote.getAsMention();
         }
         
         return null;
