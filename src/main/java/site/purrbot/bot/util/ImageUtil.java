@@ -19,9 +19,7 @@
 package site.purrbot.bot.util;
 
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.internal.utils.IOUtil;
 import okhttp3.*;
 import org.json.JSONObject;
 import site.purrbot.bot.PurrBot;
@@ -119,40 +117,6 @@ public class ImageUtil {
             ImageIO.write(background, "png", baos);
 
             return baos.toByteArray();
-        }catch(IOException ex){
-            return null;
-        }
-    }
-    
-    public byte[] getQuoteImg(Message quote){
-        Member member = quote.getMember();
-
-        JSONObject json = new JSONObject()
-                .put("avatar", quote.getAuthor().getEffectiveAvatarUrl())
-                .put("nameColor", member == null ? String.valueOf(0x1FFFFFFF) : String.valueOf(member.getColorRaw()))
-                .put("dateFormat", "dd. MMM yyyy")
-                .put("username", member == null ? "Anonymous" : member.getEffectiveName())
-                .put("message", quote.getContentDisplay())
-                .put("timestamp", quote.getTimeCreated().toInstant().toEpochMilli());
-
-        RequestBody body = RequestBody.create(json.toString(), null);
-        
-        Request request = new Request.Builder()
-                .addHeader("User-Agent", "PurrBot BOT_VERSION")
-                .addHeader("content-type", "application/json")
-                .post(body)
-                .url("https://purrbot.site/api/quote")
-                .build();
-
-        try(Response response = CLIENT.newCall(request).execute()){
-            if(!response.isSuccessful())
-                throw new IOException("Couldn't get quote image.");
-
-            ResponseBody responseBody = response.body();
-            if(responseBody == null)
-                return null;
-
-            return IOUtil.readFully(responseBody.byteStream());
         }catch(IOException ex){
             return null;
         }
