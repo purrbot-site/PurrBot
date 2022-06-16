@@ -60,7 +60,7 @@ dependencies {
     compile group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.5'
     compile group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '3.1.1'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
-    compile group: 'io.javalin', name: 'javalin', version: '4.6.1'
+    compile group: 'io.javalin', name: 'javalin', version: '4.6.3'
     compile group: 'org.json', name: 'json', version: '20220320'
     compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.10.0'
 }
