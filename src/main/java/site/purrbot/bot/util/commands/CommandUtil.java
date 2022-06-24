@@ -19,13 +19,16 @@
 package site.purrbot.bot.util.commands;
 
 import com.jagrosh.jdautilities.command.SlashCommandEvent;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import site.purrbot.bot.util.constants.IDs;
+import site.purrbot.bot.util.message.MessageHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CommandUtil{
     
@@ -42,12 +45,59 @@ public class CommandUtil{
         return users;
     }
     
-    public static List<String> convertUsersToStringList(List<User> users, User commandExecutor){
-        return users.stream()
-            .filter(user -> !user.getId().equals(IDs.PURR))
-            .filter(user -> !user.getId().equals(IDs.SNUGGLE))
-            .filter(user -> !user.getId().equals(commandExecutor.getId()))
-            .map(User::getName)
-            .collect(Collectors.toList());
+    public static String convertUserList(String guildId, List<User> users, User commandExecutor){
+        List<String> names = new ArrayList<>();
+        for(User user : users){
+            if(user.getId().equals(IDs.PURR) || user.getId().equals(IDs.SNUGGLE) || user.getId().equals(commandExecutor.getId()))
+                continue;
+            
+            names.add(user.getName());
+        }
+        
+        if(names.isEmpty())
+            return null;
+        
+        if(names.size() == 1)
+            return "**" + escapeAll(names.get(0)) + "**";
+        
+        StringBuilder builder = new StringBuilder();
+        for(String name : names){
+            if(builder.length() > 0)
+                builder.append(", ");
+            
+            builder.append("**").append(escapeAll(name)).append("**");
+        }
+        
+        int index = builder.lastIndexOf(",");
+        if(index == -1)
+            return builder.toString();
+        
+        String and = MessageHandler.getMessage(guildId, "misc.and", false).toString();
+        builder.replace(index, index + 1, " " + and);
+        
+        return builder.toString();
+    }
+    
+    public static String getMissingPermissions(Member member, TextChannel tc, Permission... permissions){
+        StringBuilder builder = new StringBuilder();
+        for(Permission permission : permissions){
+            if(member.hasPermission(tc, permission))
+                continue;
+            
+            if(builder.length() > 0)
+                builder.append("\n");
+            
+            builder.append("- ").append(permission.getName());
+        }
+        
+        return builder.toString();
+    }
+    
+    private static String escapeAll(String input){
+        return input.replace("*", "\\*")
+            .replace("_", "\\_")
+            .replace("`", "\\`")
+            .replace("|", "\\|")
+            .replace("~", "\\~");
     }
 }

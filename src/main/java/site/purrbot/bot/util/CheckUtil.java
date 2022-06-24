@@ -23,11 +23,12 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.util.commands.CommandErrorReply;
+import site.purrbot.bot.util.constants.IDs;
 
 public class CheckUtil{
     
     public static boolean isDonator(InteractionHook hook, String guildId, String userId){
-        Guild guild = PurrBot.getBot().getShardManager().getGuildById("");
+        Guild guild = PurrBot.getBot().getShardManager().getGuildById(IDs.SERVER);
         if(guild == null){
             CommandErrorReply.messageFromPath("errors.no_main_server", guildId).send(hook);
             return false;
@@ -36,17 +37,15 @@ public class CheckUtil{
         Member member = guild.getMemberById(userId);
         if(member == null){
             CommandErrorReply.messageFromPath("errors.no_donator", guildId)
-                .withPlaceholders(
-                    "{server_invite}", ""
-                ).send(hook);
+                .withReplacement("{server_invite}", "https://purrbot.site/discord")
+                .send(hook);
             return false;
         }
         
         if(member.getRoles().stream().noneMatch(role -> role.getId().equals(""))){
             CommandErrorReply.messageFromPath("errors.no_donator", guildId)
-                .withPlaceholders(
-                    "{server_invite}", ""
-                ).send(hook);
+                .withReplacement("{server_invite}", "https://purrbot.site/discord")
+                .send(hook);
             return false;
         }
         
@@ -54,7 +53,7 @@ public class CheckUtil{
     }
     
     public static boolean isBooster(InteractionHook hook, String guildId, String userId){
-        Guild guild = PurrBot.getBot().getShardManager().getGuildById("");
+        Guild guild = PurrBot.getBot().getShardManager().getGuildById(IDs.SERVER);
         if(guild == null){
             CommandErrorReply.messageFromPath("errors.no_main_server", guildId).send(hook);
             return false;
@@ -63,18 +62,16 @@ public class CheckUtil{
         Member member = guild.getMemberById(userId);
         if(member == null){
             CommandErrorReply.messageFromPath("errors.no_booster", guildId)
-                .withPlaceholders(
-                    "{server_invite}", ""
-                ).send(hook);
+                .withReplacement("{server_invite}", "https://purrbot.site/discord")
+                .send(hook);
             return false;
         }
     
         String boostId = guild.getBoostRole() == null ? null : guild.getBoostRole().getId();
         if(boostId == null || member.getRoles().stream().noneMatch(role -> role.getId().equals(boostId))){
-            CommandErrorReply.messageFromPath("errors.no_donator", guildId)
-                .withPlaceholders(
-                    "{server_invite}", ""
-                ).send(hook);
+            CommandErrorReply.messageFromPath("errors.no_booster", guildId)
+                .withReplacement("{server_invite}", "https://purrbot.site/discord")
+                .send(hook);
             return false;
         }
         

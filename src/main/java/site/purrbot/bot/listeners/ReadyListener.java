@@ -75,7 +75,7 @@ public class ReadyListener extends ListenerAdapter{
         if(shards == jda.getShardInfo().getShardTotal()){
             PurrBot.getBot().getShardManager().setPresence(OnlineStatus.ONLINE, Activity.of(
                 Activity.ActivityType.WATCHING,
-                ""
+                PurrBot.getBot().getFileManager().getString("random", "startup_msg", "Starting bot...")
             ));
     
             PurrBot.getBot().initUpdater();

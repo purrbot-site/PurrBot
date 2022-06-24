@@ -16,21 +16,32 @@
  *  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package site.purrbot.bot.util.message;
+package site.purrbot.bot.commands.fun;
 
-import net.dv8tion.jda.api.EmbedBuilder;
+import com.jagrosh.jdautilities.command.SlashCommandEvent;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.interactions.InteractionHook;
+import site.purrbot.bot.commands.BotCommand;
+import site.purrbot.bot.util.enums.ImageAPIEndpoints;
+import site.purrbot.bot.util.http.ImageAPI;
 
-import java.time.Instant;
-import java.util.Map;
-
-public class EmbedManager{
+public class CmdComfy extends BotCommand{
     
-    public static EmbedBuilder getDefaultEmbed(){
-        return new EmbedBuilder().setColor(0x802F3136).setTimestamp(Instant.now());
+    public CmdComfy(){
+        this.name = "comfy";
+        this.help = "Makes you feel comfy.";
+        
+        this.reply = "purr.fun.comfy.loading";
+        
+        this.guildOnly = true;
     }
     
-    public static EmbedBuilder getTranslatedDefaultEmbed(String guildId, String path, Map<String, String> replacements){
-        String msg = MessageHandler.getMessage(guildId, path, false).withReplacements(replacements).getString();
-        return getDefaultEmbed().setDescription(msg);
+    @Override
+    protected void handle(SlashCommandEvent event, InteractionHook hook, Guild guild, TextChannel tc, Member member){
+        ImageAPI.createRequest(ImageAPIEndpoints.COMFY, hook, guild.getId())
+            .withReplacement("{user}", member.getEffectiveName())
+            .returnImage();
     }
 }

@@ -25,13 +25,15 @@ import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.util.message.MessageHandler;
 
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CommandErrorReply{
     
     private final String message;
     private final String guildId;
     private final boolean random;
-    private Object[] placeholders = new Object[0];
+    private final Map<String, String> replacements = new HashMap<>();
     
     private CommandErrorReply(String message, String guildId, boolean random){
         this.message = message;
@@ -51,8 +53,8 @@ public class CommandErrorReply{
         return new CommandErrorReply(path, guildId, true);
     }
     
-    public CommandErrorReply withPlaceholders(Object... placeholders){
-        this.placeholders = placeholders;
+    public CommandErrorReply withReplacement(String placeholder, String replacement){
+        replacements.put(placeholder, replacement);
         return this;
     }
     
@@ -62,7 +64,7 @@ public class CommandErrorReply{
             return;
         }
         
-        String msg = MessageHandler.getMessage(guildId, message, random).withPlaceholders(placeholders).getString();
+        String msg = MessageHandler.getMessage(guildId, message, random).withReplacements(replacements).getString();
         event.replyEmbeds(getErrorEmbed(msg)).queue();
     }
     
@@ -72,7 +74,7 @@ public class CommandErrorReply{
             return;
         }
         
-        String msg = MessageHandler.getMessage(guildId, message, random).withPlaceholders(placeholders).getString();
+        String msg = MessageHandler.getMessage(guildId, message, random).withReplacements(replacements).getString();
         hook.editOriginalEmbeds(getErrorEmbed(msg)).queue();
     }
     

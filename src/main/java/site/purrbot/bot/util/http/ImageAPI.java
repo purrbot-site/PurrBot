@@ -33,6 +33,8 @@ import site.purrbot.bot.util.http.response.SuccessImageAPIResponse;
 import site.purrbot.bot.util.message.EmbedManager;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class ImageAPI{
@@ -40,22 +42,42 @@ public class ImageAPI{
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final Gson GSON = new Gson();
     
-    public static void returnImage(ImageAPIEndpoints endpoint, InteractionHook hook, Guild guild, Object... placeholders){
+    private final Map<String, String> replacements = new HashMap<>();
+    private final ImageAPIEndpoints endpoint;
+    private final InteractionHook hook;
+    private final String guildId;
+    
+    public ImageAPI(ImageAPIEndpoints endpoint, InteractionHook hook, String guildId){
+        this.endpoint = endpoint;
+        this.hook = hook;
+        this.guildId = guildId;
+    }
+    
+    public static ImageAPI createRequest(ImageAPIEndpoints endpoint, InteractionHook hook, String guildId){
+        return new ImageAPI(endpoint, hook, guildId);
+    }
+    
+    public ImageAPI withReplacement(String placeholder, String replacement){
+        replacements.put(placeholder, replacement);
+        return this;
+    }
+    
+    public void returnImage(){
         getImage(endpoint).whenComplete((response, throwable) -> {
             if(throwable != null){
-                CommandErrorReply.messageFromPath("errors.image_api.unknown_error", guild.getId())
-                    .withPlaceholders("{error}", throwable.getMessage())
+                CommandErrorReply.messageFromPath("errors.image_api.unknown_error", guildId)
+                    .withReplacement("{error}", throwable.getMessage())
                     .send(hook);
                 return;
             }
             
             if((response instanceof FailedImageAPIResponse) && endpoint.isRequired()){
-                CommandErrorReply.messageFromPath("errors.image_api.not_successful", guild.getId())
-                    .withPlaceholders("{error}", ((FailedImageAPIResponse)response).getMessage())
+                CommandErrorReply.messageFromPath("errors.image_api.not_successful", guildId)
+                    .withReplacement("{error}", ((FailedImageAPIResponse)response).getMessage())
                     .send(hook);
             }
             
-            EmbedBuilder embed = EmbedManager.getTranslatedDefaultEmbed(guild.getId(), endpoint.getPath() + ".message", placeholders);
+            EmbedBuilder embed = EmbedManager.getTranslatedDefaultEmbed(guildId, endpoint.getPath() + ".message", replacements);
             if(response instanceof SuccessImageAPIResponse)
                 embed.setImage(((SuccessImageAPIResponse)response).getLink());
             

@@ -20,6 +20,8 @@ package site.purrbot.bot.commands.guild;
 
 import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.command.SlashCommandEvent;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -43,6 +45,10 @@ public class CmdWelcome extends BotCommand{
         this.help = "Set different welcome settings";
         
         this.guildOnly = true;
+    
+        this.perms = new Permission[]{
+            Permission.MANAGE_SERVER
+        };
         
         this.children = new SlashCommand[]{
             new Background(),
@@ -64,8 +70,15 @@ public class CmdWelcome extends BotCommand{
             this.name = "background";
             this.help = "Sets the background for the welcome image";
             
+            this.guildOnly = true;
+            
+            this.perms = new Permission[]{
+                Permission.MANAGE_SERVER
+            };
+            
             this.options = Collections.singletonList(
-                new OptionData(OptionType.STRING, "name", "Name of the welcome background").setRequired(true)
+                new OptionData(OptionType.STRING, "name", "Name of the welcome background")
+                    .setRequired(true)
             );
         }
         
@@ -85,16 +98,14 @@ public class CmdWelcome extends BotCommand{
                 if(CheckUtil.isDonator(hook, guild.getId(), member.getId())){
                     if(!background.startsWith("http://") && !background.startsWith("https://")){
                         CommandErrorReply.messageFromPath("purr.guild.welcome.invalid_background", guild.getId())
-                            .withPlaceholders(
-                                "{background}", background
-                            ).send(hook);
+                            .withReplacement("{background}", background)
+                            .send(hook);
                         return;
                     }
                 }else{
                     CommandErrorReply.messageFromPath("purr.guild.welcome.invalid_background", guild.getId())
-                        .withPlaceholders(
-                            "{background}", background
-                        ).send(hook);
+                        .withReplacement("{background}", background)
+                        .send(hook);
                     return;
                 }
             }
@@ -109,10 +120,38 @@ public class CmdWelcome extends BotCommand{
     }
     
     private static class Channel extends BotCommand{
+        
+        public Channel(){
+            this.name = "channel";
+            this.help = "Set a Text Channel for the welcome messages";
+            
+            this.guildOnly = true;
     
+            this.perms = new Permission[]{
+                Permission.MANAGE_SERVER
+            };
+            
+            this.options = Collections.singletonList(
+                new OptionData(OptionType.CHANNEL, "channel", "The Text Channel to set.")
+                    .setRequired(true)
+                    .setChannelTypes(ChannelType.TEXT)
+            );
+        }
+        
         @Override
         protected void handle(SlashCommandEvent event, InteractionHook hook, Guild guild, TextChannel tc, Member member){
-        
+            TextChannel channel = event.getOption("channel", chan -> chan == null ? null : chan.getAsTextChannel());
+            if(channel == null){
+                CommandErrorReply.messageFromPath("purr.guild.welcome.invalid_channel", guild.getId()).send(hook);
+                return;
+            }
+            
+            PurrBot.getBot().getGuildSettingsManager().updateSettings(
+                guild.getId(),
+                GuildSettingsManager.WELCOME_CHANNEL_KEY,
+                channel.getId(),
+                GuildSettingsManager.GuildSettings::setWelcomeChannel
+            );
         }
     }
     

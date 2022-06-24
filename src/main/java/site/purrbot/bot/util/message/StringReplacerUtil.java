@@ -30,12 +30,15 @@ public class StringReplacerUtil{
     
     private final EntryList<String, String> entries = new EntryList<>();
     
-    public StringReplacerUtil add(String from, String to){
+    public void add(String from, String to){
         if(from == null || to == null)
-            return this;
+            return;
         
         entries.add(from, to);
-        return this;
+    }
+    
+    public void addAll(Map<String, String> replacements){
+        entries.addAll(replacements.entrySet());
     }
     
     public String get(String from){

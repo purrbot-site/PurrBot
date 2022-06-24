@@ -21,11 +21,9 @@ package site.purrbot.bot.util.message;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class MessageHandler{
     
@@ -44,21 +42,13 @@ public class MessageHandler{
         return new MessageHandler(guildId, path, random);
     }
     
-    public MessageHandler withPlaceholders(Object... placeholders){
-        if(placeholders.length % 2 != 0)
-            return this;
-        
-        for(int i = 0; i < placeholders.length; i++){
-            if((i + 1) % 2 == 0){
-                String placeholder = (String)placeholders[i - 1]; // Get entry before current.
-                String replacement = getCasted(placeholders[i]);
-                if(replacement == null)
-                    continue;
-                
-                replacer.add(placeholder, replacement);
-            }
-        }
-        
+    public MessageHandler withReplacement(String placeholder, String replacement){
+        replacer.add(placeholder, replacement);
+        return this;
+    }
+    
+    public MessageHandler withReplacements(Map<String, String> replacements){
+        replacer.addAll(replacements);
         return this;
     }
     
@@ -77,27 +67,6 @@ public class MessageHandler{
         return msg;
     }
     
-    private String getCasted(Object obj){
-        if(obj instanceof List<?>){
-            Iterator<?> values = ((List<?>)obj).iterator();
-            List<String> results = new ArrayList<>();
-            while(values.hasNext()){
-                Object value = values.next();
-                if(!(value instanceof String))
-                    continue;
-                
-                results.add((String)value);
-            }
-            
-            return convertList(results);
-        }else
-        if(obj instanceof String){
-            return (String)obj;
-        }
-        
-        return null;
-    }
-    
     // TODO: Add those replacements where used.
     private String parsePlaceholders(String message){
         return Emotes.parseEmotes(message)
@@ -112,39 +81,7 @@ public class MessageHandler{
             .replace("{kofi_url}", "");
     }
     
-    private String convertList(List<String> entries){
-        if(entries == null || entries.isEmpty())
-            return null;
-        
-        if(entries.size() == 1)
-            return "**" + escapeAll(entries.get(0)) + "**";
-    
-        StringBuilder builder = new StringBuilder();
-        for(String entry : entries){
-            if(builder.length() > 0)
-                builder.append(", ");
-            
-            builder.append("**").append(escapeAll(entry)).append("**");
-        }
-        
-        if(!builder.toString().contains(","))
-            return builder.toString();
-        
-        int index = builder.lastIndexOf(",");
-        builder.replace(index, index + 1, " " + getTranslation("misc.and"));
-        
-        return builder.toString();
-    }
-    
-    private static String escapeAll(String input){
-        return input.replace("*", "\\*")
-            .replace("_", "\\_")
-            .replace("`", "\\`")
-            .replace("|", "\\|")
-            .replace("~", "\\~");
-    }
-    
-    private String getTranslation(String pathOverride){
+    public String getTranslation(String pathOverride){
         String language = PurrBot.getBot().getGuildSettingsManager().getLanguage(guildId);
         String finalPath = pathOverride != null ? pathOverride : path;
         for(String lang : PurrBot.getBot().getFileManager().getLanguages()){

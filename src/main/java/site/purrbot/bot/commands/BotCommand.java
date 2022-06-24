@@ -20,12 +20,14 @@ package site.purrbot.bot.commands;
 
 import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.command.SlashCommandEvent;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.util.commands.CommandErrorReply;
+import site.purrbot.bot.util.commands.CommandUtil;
 import site.purrbot.bot.util.message.MessageHandler;
 
 import java.util.Arrays;
@@ -34,6 +36,7 @@ public abstract class BotCommand extends SlashCommand{
     
     protected String reply = "misc.default_loading";
     protected boolean nsfw = false;
+    protected Permission[] perms = new Permission[0];
     
     @Override
     protected void execute(SlashCommandEvent event){
@@ -59,16 +62,26 @@ public abstract class BotCommand extends SlashCommand{
             return;
         }
         
-        if(command.isNsfw() && !event.getTextChannel().isNSFW()){
+        TextChannel tc = event.getTextChannel();
+        
+        if(command.isNsfw() && !tc.isNSFW()){
             CommandErrorReply.randomMessageFromPath("errors.no_nsfw_channel", guild.getId())
-                    .withPlaceholders(
-                        "{user}", event.getUser().getName()
-                    ).send(event);
+                .withReplacement("{user}", event.getUser().getName())
+                .send(event);
+            return;
+        }
+        
+        if(perms.length > 0 && !member.hasPermission(tc, perms)){
+            String missingPerms = CommandUtil.getMissingPermissions(member, tc, perms);
+            
+            CommandErrorReply.messageFromPath("errors.user.insufficient_permissions", guild.getId())
+                .withReplacement("{permissions}", missingPerms)
+                .send(event);
             return;
         }
         
         event.reply(MessageHandler.getMessage(guild.getId(), reply, false).getString()).queue(
-            hook -> handle(event, hook, guild, event.getTextChannel(), member)
+            hook -> handle(event, hook, guild, tc, member)
         );
     }
     

@@ -35,6 +35,8 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.BotCommand;
 import site.purrbot.bot.commands.fun.CmdBite;
+import site.purrbot.bot.listeners.MemberListener;
+import site.purrbot.bot.listeners.ReadyListener;
 import site.purrbot.bot.util.DBManager;
 import site.purrbot.bot.util.FileManager;
 import site.purrbot.bot.util.GuildSettingsManager;
@@ -149,6 +151,10 @@ public class PurrBot{
             .setShardsTotal(-1)
             .setActivity(Activity.of(Activity.ActivityType.PLAYING, "Game"))
             .setStatus(OnlineStatus.DO_NOT_DISTURB)
+            .addEventListeners(
+                new MemberListener(),
+                new ReadyListener()
+            )
             .build();
     }
     
