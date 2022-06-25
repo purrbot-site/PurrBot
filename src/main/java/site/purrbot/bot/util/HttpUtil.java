@@ -303,12 +303,6 @@ public class HttpUtil {
             "guildCount",
             "shardCount"
         ),
-        DISCORDLIST_SPACE(
-            "tokens.botlist-space",
-            "discordlist.space",
-            "https://api.discordlist.space/v2/bots/{id}",
-            "serverCount"
-        ),
         DISCORDSERVICES_NET(
             "tokens.discordservices-net",
             "discordservices.net",

@@ -36,11 +36,9 @@
 [paypal]: https://purrbot.site/donate
 
 <!-- Widgets -->
-[widget_discordlist_space]: https://api.discordlist.space/v2/bots/425382319449309197/widget  
 [widget_discordservices_net]: https://discordservices.net/bot/425382319449309197/widget.svg
 
-<!-- Botlists -->
-[discordlist_space]: https://discordlist.space/bot/425382319449309197  
+<!-- Botlists -->  
 [discord_bots_gg]: https://discord.bots.gg/bots/425382319449309197  
 [discordextremelist_xyz]: https://discordextremelist.xyz/bots/purr
 [discordservices_net]: https://dbot.page/purr
@@ -116,11 +114,6 @@ Feel free to upvote her to show your support.
 
 ## [Discordextremelist.xyz][discordextremelist_xyz]
 > Discord's unbiased list, giving small bots and small servers a big chance!
-
-## [Discordlist.space][discordlist_space]
-> Explore hundreds of Discord bots in our bot list for your next big server using our large selection of popular bots.
-
-![widget_discordlist_space]
 
 ## [Discordservices.net][discordservices_net]
 > A brand new botlist that aims to deliver the best experience for its users and bot developers.
