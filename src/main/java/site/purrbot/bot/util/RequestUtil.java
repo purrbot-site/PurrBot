@@ -25,9 +25,10 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
-import net.dv8tion.jda.api.interactions.components.Button;
-import net.dv8tion.jda.api.interactions.components.ButtonStyle;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
@@ -55,10 +56,10 @@ public class RequestUtil{
     
     public Button getButton(String guildId, String buttonId, boolean accept){
         return Button.of(
-                accept ? ButtonStyle.SUCCESS : ButtonStyle.DANGER,
-                "purr:" + buttonId + (accept ? ":accept" : ":deny"),
-                bot.getMsg(guildId, accept ? "request.buttons.accept" : "request.buttons.deny"),
-                Emoji.fromMarkdown((accept ? Emotes.ACCEPT : Emotes.DENY).getEmote())
+            accept ? ButtonStyle.SUCCESS : ButtonStyle.DANGER,
+            "purr:" + buttonId + (accept ? ":accept" : ":deny"),
+            bot.getMsg(guildId, accept ? "request.buttons.accept" : "request.buttons.deny"),
+            Emoji.fromFormatted((accept ? Emotes.ACCEPT : Emotes.DENY).getEmote())
         );
     }
     
@@ -136,7 +137,7 @@ public class RequestUtil{
         EventWaiter waiter = bot.getWaiter();
         
         waiter.waitForEvent(
-                ButtonClickEvent.class,
+                ButtonInteractionEvent.class,
                 event -> {
                     if(event.getUser().isBot())
                         return false;
@@ -156,7 +157,7 @@ public class RequestUtil{
                     return event.getMessageId().equals(msg.getId());
                 },
                 event -> {
-                    TextChannel channel = event.getTextChannel();
+                    TextChannel channel = event.getGuildChannel().asTextChannel();
                     queue.invalidate(getQueueString(api.getName(), guild.getId(), author.getId()));
                     
                     String result = event.getComponentId().split(":")[2];

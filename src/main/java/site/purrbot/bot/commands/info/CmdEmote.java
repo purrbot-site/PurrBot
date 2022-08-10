@@ -24,6 +24,8 @@ import com.jagrosh.jdautilities.menu.EmbedPaginator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.emoji.CustomEmoji;
+import net.dv8tion.jda.api.entities.emoji.RichCustomEmoji;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -72,7 +74,7 @@ public class CmdEmote implements Command{
                     .waitOnSinglePage(true)
                     .addUsers(member.getUser())
                     .setFinalAction(message -> {
-                        if(guild.getSelfMember().hasPermission(message.getTextChannel(), Permission.MESSAGE_MANAGE))
+                        if(guild.getSelfMember().hasPermission(message.getGuildChannel(), Permission.MESSAGE_MANAGE))
                             message.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
                     });
             
@@ -83,10 +85,10 @@ public class CmdEmote implements Command{
                     .cache(false)
                     .takeAsync(100)
                     .thenApply(List::stream)
-                    .thenApply(stream -> stream.filter(message -> !message.getEmotes().isEmpty()))
+                    .thenApply(stream -> stream.filter(message -> !message.getMentions().getCustomEmojis().isEmpty()))
                     .thenApply(stream -> stream.collect(Collectors.toMap(
                             Message::getJumpUrl,
-                            Message::getEmotes,
+                            m -> m.getMentions().getCustomEmojis(),
                             (existing, replacement) -> existing,
                             LinkedHashMap::new
                     )))
@@ -94,24 +96,24 @@ public class CmdEmote implements Command{
             return;
         }
         
-        if(msg.getEmotes().isEmpty()){
+        if(msg.getMentions().getCustomEmojis().isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.info.emote.no_args");
             return;
         }
         
-        tc.sendMessageEmbeds(emoteInfo(member, msg.getEmotes().get(0), guild, null, 1, 1)).queue();
+        tc.sendMessageEmbeds(emoteInfo(member, msg.getMentions().getCustomEmojis().get(0), guild, null, 1, 1)).queue();
         
     }
     
-    private void send(EmbedPaginator.Builder builder, TextChannel tc, Member member, Map<String, List<Emote>> emotes){
+    private void send(EmbedPaginator.Builder builder, TextChannel tc, Member member, Map<String, List<CustomEmoji>> emotes){
         int pos = 0;
         
         int size = emotes.values().stream()
                 .mapToInt(List::size)
                 .sum();
         
-        for(Map.Entry<String, List<Emote>> entry : emotes.entrySet()){
-            for(Emote emote : entry.getValue()){
+        for(Map.Entry<String, List<CustomEmoji>> entry : emotes.entrySet()){
+            for(CustomEmoji emote : entry.getValue()){
                 pos++;
                 builder.addItems(emoteInfo(
                         member,
@@ -127,8 +129,8 @@ public class CmdEmote implements Command{
         builder.build().display(tc);
     }
     
-    private MessageEmbed emoteInfo(Member member, Emote emote, Guild guild, @Nullable String link, int pos, int size){
-        Emote e = bot.getShardManager().getEmoteById(emote.getId());
+    private MessageEmbed emoteInfo(Member member, CustomEmoji emote, Guild guild, @Nullable String link, int pos, int size){
+        RichCustomEmoji e = bot.getShardManager().getEmojiById(emote.getId());
         Guild emoteGuild = null;
         if(e != null)
             emoteGuild = e.getGuild();
@@ -137,48 +139,47 @@ public class CmdEmote implements Command{
         
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
                 .setTitle(
-                        bot.getMsg(guild.getId(), path)
-                                .replace("{current}", String.valueOf(pos))
-                                .replace("{total}", String.valueOf(size))
+                    bot.getMsg(guild.getId(), path)
+                        .replace("{current}", String.valueOf(pos))
+                        .replace("{total}", String.valueOf(size))
                 )
                 .addField(
-                        bot.getMsg(guild.getId(), "purr.info.emote.embed.name"),
-                        String.format(
-                                "`:%s:`",
-                                emote.getName()
-                        ),
-                        true
+                    bot.getMsg(guild.getId(), "purr.info.emote.embed.name"),
+                    String.format(
+                        "`:%s:`",
+                        emote.getName()
+                    ),
+                    true
                 )
                 .addField(
-                        bot.getMsg(guild.getId(), "purr.info.emote.embed.id"),
-                        String.format(
-                                "`%s`",
-                                emote.getId()
-                        ),
-                        true
+                    bot.getMsg(guild.getId(), "purr.info.emote.embed.id"),
+                    String.format(
+                        "`%s`",
+                        emote.getId()
+                    ),
+                    true
                 )
                 .addField(
-                        bot.getMsg(guild.getId(), "purr.info.emote.embed.guild"),
-                        String.format(
-                                "`%s`",
-                                emoteGuild != null ? emoteGuild.getName() : bot.getMsg(guild.getId(), "purr.info.emote.unknown_guild")
-                        ),
-                        true
+                    bot.getMsg(guild.getId(), "purr.info.emote.embed.guild"),
+                    String.format(
+                        "`%s`", 
+                        emoteGuild != null ? emoteGuild.getName() : bot.getMsg(guild.getId(), "purr.info.emote.unknown_guild")
+                    ),
+                    true
                 )
                 .addField(
-                        bot.getMsg(guild.getId(), "purr.info.emote.embed.image"),
-                        bot.getMsg(guild.getId(), "purr.info.emote.embed.link")
-                                .replace("{link}", emote.getImageUrl()),
-                        true
+                    bot.getMsg(guild.getId(), "purr.info.emote.embed.image"),
+                    bot.getMsg(guild.getId(), "purr.info.emote.embed.link").replace("{link}", emote.getImageUrl()),
+                    true
                 )
                 .setThumbnail(emote.getImageUrl());
         
         if(link != null)
             embed.addField(
-                    bot.getMsg(guild.getId(), "purr.info.emote.embed.message"),
-                    bot.getMsg(guild.getId(), "purr.info.emote.embed.link")
-                            .replace("{link}", link),
-                    true
+                bot.getMsg(guild.getId(), "purr.info.emote.embed.message"),
+                bot.getMsg(guild.getId(), "purr.info.emote.embed.link")
+                    .replace("{link}", link),
+                true
             );
         
         return embed.build();

@@ -40,7 +40,7 @@ public interface Command extends AbstractCommand<Message>{
             return;
         
         // We trigger the below method to run the commands.
-        run(message.getGuild(), message.getTextChannel(), message, message.getMember(), args);
+        run(message.getGuild(), message.getChannel().asTextChannel(), message, message.getMember(), args);
     }
     
     /*

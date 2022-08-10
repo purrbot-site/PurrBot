@@ -48,12 +48,12 @@ public class CmdBlowjob implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentionedMembers().isEmpty()){
+        if(msg.getMentions().getMembers().isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.blowjob.no_mention");
             return;
         }
 
-        Member target = msg.getMentionedMembers().get(0);
+        Member target = msg.getMentions().getMembers().get(0);
 
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){

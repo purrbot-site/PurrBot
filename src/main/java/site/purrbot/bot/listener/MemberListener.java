@@ -73,7 +73,7 @@ public class MemberListener extends ListenerAdapter{
         if(tc == null)
             return;
         
-        if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_WRITE))
+        if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_SEND))
             return;
         
         String message = bot.getWelcomeMsg(guildId);

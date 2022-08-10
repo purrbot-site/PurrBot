@@ -25,9 +25,10 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
-import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
-import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
+import net.dv8tion.jda.api.interactions.components.selections.SelectMenu;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
@@ -71,12 +72,12 @@ public class CmdFuck implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentionedUsers().isEmpty()){
+        if(msg.getMentions().getUsers().isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.fuck.no_mention");
             return;
         }
 
-        Member target = msg.getMentionedMembers().get(0);
+        Member target = msg.getMentions().getMembers().get(0);
         
         if(target.getId().equals(IDs.PURR)){
             if(bot.isBeta()){
@@ -160,13 +161,13 @@ public class CmdFuck implements Command{
         }
     }
     
-    private SelectionMenu getSelectionMenu(String guildId){
-        return SelectionMenu.create("purr:fuck")
-            .addOption(bot.getMsg(guildId, "request.buttons.fuck_anal"), "anal", Emoji.fromMarkdown(Emotes.SEX_ANAL.getEmote()))
-            .addOption(bot.getMsg(guildId, "request.buttons.fuck_normal"), "normal", Emoji.fromMarkdown(Emotes.SEX.getEmote()))
-            .addOption(bot.getMsg(guildId, "request.buttons.fuck_yaoi"), "yaoi", Emoji.fromMarkdown(Emotes.SEX_YAOI.getEmote()))
-            .addOption(bot.getMsg(guildId, "request.buttons.fuck_yuri"), "yuri", Emoji.fromMarkdown(Emotes.SEX_YURI.getEmote()))
-            .addOption(bot.getMsg(guildId, "request.buttons.deny"), "deny", Emoji.fromMarkdown(Emotes.DENY.getEmote()))
+    private SelectMenu getSelectionMenu(String guildId){
+        return SelectMenu.create("purr:fuck")
+            .addOption(bot.getMsg(guildId, "request.buttons.fuck_anal"), "anal", Emoji.fromFormatted(Emotes.SEX_ANAL.getEmote()))
+            .addOption(bot.getMsg(guildId, "request.buttons.fuck_normal"), "normal", Emoji.fromFormatted(Emotes.SEX.getEmote()))
+            .addOption(bot.getMsg(guildId, "request.buttons.fuck_yaoi"), "yaoi", Emoji.fromFormatted(Emotes.SEX_YAOI.getEmote()))
+            .addOption(bot.getMsg(guildId, "request.buttons.fuck_yuri"), "yuri", Emoji.fromFormatted(Emotes.SEX_YURI.getEmote()))
+            .addOption(bot.getMsg(guildId, "request.buttons.deny"), "deny", Emoji.fromFormatted(Emotes.DENY.getEmote()))
             .build();
     }
     
@@ -186,14 +187,14 @@ public class CmdFuck implements Command{
     
     private void handleSelection(Message botMsg, Member author, Member target){
         Guild guild = botMsg.getGuild();
-        String channelId = botMsg.getTextChannel().getId();
+        String channelId = botMsg.getChannel().getId();
         queue.put(
             bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()),
             target.getId()
         );
         
         bot.getWaiter().waitForEvent(
-            SelectionMenuEvent.class,
+            SelectMenuInteractionEvent.class,
             event -> {
                 if(event.getUser().isBot())
                     return false;
@@ -216,7 +217,7 @@ public class CmdFuck implements Command{
                 return event.getMessageId().equals(botMsg.getId());
             },
             event -> {
-                TextChannel channel = event.getTextChannel();
+                TextChannel channel = event.getChannel().asTextChannel();
                 queue.invalidate(bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()));
                 
                 String value = event.getValues().get(0);
@@ -275,7 +276,7 @@ public class CmdFuck implements Command{
     
     private void handleButton(Message botMsg, Member author, Member target, String... args){
         Guild guild = botMsg.getGuild();
-        String channelId = botMsg.getTextChannel().getId();
+        String channelId = botMsg.getChannel().getId();
         queue.put(
                 bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()),
                 target.getId()
@@ -283,7 +284,7 @@ public class CmdFuck implements Command{
         
         EventWaiter waiter = bot.getWaiter();
         waiter.waitForEvent(
-            ButtonClickEvent.class,
+            ButtonInteractionEvent.class,
             event -> {
                 if(event.getUser().isBot())
                     return false;
@@ -303,7 +304,7 @@ public class CmdFuck implements Command{
                 return event.getMessageId().equals(botMsg.getId());
             },
             event -> {
-                TextChannel channel = event.getTextChannel();
+                TextChannel channel = event.getChannel().asTextChannel();
                 queue.invalidate(bot.getRequestUtil().getQueueString("fuck", guild.getId(), author.getId()));
                 
                 String buttonId = event.getComponentId().split(":")[2];

@@ -25,6 +25,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -54,7 +55,7 @@ public class CmdHug implements Command{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        List<Member> members = msg.getMentionedMembers();
+        List<Member> members = msg.getMentions().getMembers();
     
         if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.hug.no_mention");
@@ -71,7 +72,7 @@ public class CmdHug implements Command{
                         bot.getRandomMsg(guild.getId(), "purr.fun.hug.mention_purr", member.getAsMention())
                 ).queue();
             }
-            msg.addReaction("\u2764").queue(
+            msg.addReaction(Emoji.fromUnicode("\u2764")).queue(
                     null,
                     e -> logger.warn("Couldn't add a Reaction to a message.")
             );

@@ -22,7 +22,8 @@ import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandHandler;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
@@ -54,11 +55,9 @@ public class CommandListener extends ListenerAdapter{
     }
 
     @Override
-    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event){
+    public void onMessageReceived(@NotNull MessageReceivedEvent event){
         CMD_EXECUTOR.execute(() -> {
-            // Temporary Fix for Stage-channel issues
-            // TODO: Remove once fixed
-            if(!event.getChannel().getType().equals(ChannelType.TEXT))
+            if(!event.isFromGuild() || event.getChannel().getType() != ChannelType.TEXT)
                 return;
             
             Message msg = event.getMessage();
@@ -71,24 +70,23 @@ public class CommandListener extends ListenerAdapter{
             if(event.getChannel().getId().equals(IDs.SUGGESTIONS))
                 return;
             
-            if(event.getChannel().isNews())
+            if(event.getChannel().getType() == ChannelType.NEWS)
                 return;
             
             Pattern prefixPattern = Pattern.compile(
                     Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 
                     Pattern.DOTALL | Pattern.CASE_INSENSITIVE
             );
-            Pattern mentionPattern = Pattern.compile("<@!?(\\d+)>");
             
             String raw = msg.getContentRaw();
             
             Matcher commandMatcher = prefixPattern.matcher(raw);
-            Matcher mentionMatcher = mentionPattern.matcher(raw);
+            Matcher mentionMatcher = Message.MentionType.USER.getPattern().matcher(raw);
             
             if(!commandMatcher.matches() && !mentionMatcher.matches())
                 return;
             
-            TextChannel tc = event.getChannel();
+            TextChannel tc = event.getChannel().asTextChannel();
             Member self = guild.getSelfMember();
             
             Member member = msg.getMember();
@@ -96,7 +94,7 @@ public class CommandListener extends ListenerAdapter{
                 return;
             
             if(mentionMatcher.matches()){
-                if(!self.hasPermission(tc, Permission.MESSAGE_WRITE))
+                if(!self.hasPermission(tc, Permission.MESSAGE_SEND))
                     return;
                 
                 if(!mentionMatcher.group(1).equalsIgnoreCase(self.getId()))
@@ -118,9 +116,9 @@ public class CommandListener extends ListenerAdapter{
             if(command == null)
                 return;
             
-            if(!self.hasPermission(tc, Permission.MESSAGE_WRITE)){
+            if(!self.hasPermission(tc, Permission.MESSAGE_SEND)){
                 if(self.hasPermission(tc, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI, Permission.MESSAGE_HISTORY))
-                    msg.addReaction(Emotes.DENY.getNameAndId()).queue();
+                    msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue();
                 
                 return;
             }

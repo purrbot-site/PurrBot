@@ -86,7 +86,7 @@ public class CmdInvite implements Command{
                                 ),
                                 getInvite(
                                         guild,
-                                        Permission.MESSAGE_WRITE,
+                                        Permission.MESSAGE_SEND,
                                         Permission.MESSAGE_EMBED_LINKS,
                                         Permission.MESSAGE_HISTORY,
                                         Permission.MESSAGE_ADD_REACTION,

@@ -50,7 +50,7 @@ public class CmdUser implements Command{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
-        Member target = msg.getMentionedMembers().isEmpty() ? member : msg.getMentionedMembers().get(0);
+        Member target = msg.getMentions().getMembers().isEmpty() ? member : msg.getMentions().getMembers().get(0);
         
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
                 .setThumbnail(target.getUser().getEffectiveAvatarUrl())

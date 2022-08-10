@@ -134,7 +134,7 @@ public class PurrBot {
         shardManager = DefaultShardManagerBuilder
                 .createDefault(getFileManager().getString("config", "bot-token"))
                 .disableIntents(GatewayIntent.GUILD_VOICE_STATES)
-                .enableIntents(GatewayIntent.GUILD_MEMBERS)
+                .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
                 .disableCache(CacheFlag.VOICE_STATE)
                 .setChunkingFilter(ChunkingFilter.include(Long.parseLong(IDs.GUILD)))
                 .setMemberCachePolicy(beta ? MemberCachePolicy.ALL : MemberCachePolicy.OWNER)
@@ -147,7 +147,7 @@ public class PurrBot {
                         waiter
                 )
                 .setShardsTotal(-1)
-                .setActivity(Activity.of(Activity.ActivityType.DEFAULT, getMessageUtil().getRandomStartupMsg()))
+                .setActivity(Activity.of(Activity.ActivityType.PLAYING, getMessageUtil().getRandomStartupMsg()))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .build();
         

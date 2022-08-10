@@ -21,6 +21,7 @@ package site.purrbot.bot.commands.owner;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
@@ -46,13 +47,13 @@ public class CmdMsg implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         if(args.length <= 1){
-            msg.addReaction(Emotes.DENY.getNameAndId()).queue();
+            msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue();
             return;
         }
         
         TextChannel channel = bot.getShardManager().getTextChannelById(args[0]);
         if(channel == null){
-            msg.addReaction(Emotes.DENY.getNameAndId()).queue();
+            msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue();
             return;
         }
         
@@ -60,8 +61,8 @@ public class CmdMsg implements Command{
             String content = args[2].replaceAll("\\{#(\\d+)}", "<#$1>");
             
             channel.sendMessage(content).queue(
-                    message -> msg.addReaction(Emotes.ACCEPT.getNameAndId()).queue(),
-                    failure -> msg.addReaction(Emotes.DENY.getNameAndId()).queue()
+                    message -> msg.addReaction(Emoji.fromFormatted(Emotes.ACCEPT.getEmote())).queue(),
+                    failure -> msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue()
             );
         }else
         if(args[1].equalsIgnoreCase("edit")){
@@ -70,15 +71,15 @@ public class CmdMsg implements Command{
             Message message = channel.retrieveMessageById(msgId).complete();
             if(message == null || !message.getAuthor().equals(guild.getSelfMember().getUser())){
                 tc.sendMessage("Invalid message! It was either null or I'm not the author of it.").queue(
-                        m -> msg.addReaction(Emotes.DENY.getNameAndId()).queue()
+                        m -> msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue()
                 );
                 return;
             }
             
             String content = args[2].substring(msgId.length() + 1).replaceAll("\\{#(\\d+)}", "<#$1>");
             message.editMessage(content).queue(
-                    m -> msg.addReaction(Emotes.ACCEPT.getNameAndId()).queue(),
-                    failure -> msg.addReaction(Emotes.DENY.getNameAndId()).queue());
+                    m -> msg.addReaction(Emoji.fromFormatted(Emotes.ACCEPT.getEmote())).queue(),
+                    failure -> msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue());
         }else
         if(args[1].equalsIgnoreCase("embed")){
             String content = args[2].replaceAll("\\{#(\\d+)}", "<#$1>");

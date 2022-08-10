@@ -23,7 +23,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -52,7 +52,7 @@ public class CmdQuote implements Command{
             return;
         }
         
-        TextChannel targetChannel = msg.getMentionedChannels().isEmpty() ? tc : msg.getMentionedChannels().get(0);
+        TextChannel targetChannel = msg.getMentions().getChannels(TextChannel.class).isEmpty() ? tc : msg.getMentions().getChannels(TextChannel.class).get(0);
         
         if(targetChannel.isNSFW() && !tc.isNSFW()){
             MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
@@ -66,7 +66,7 @@ public class CmdQuote implements Command{
             return;
         }
         
-        if(!guild.getSelfMember().hasPermission(targetChannel, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY)){
+        if(!guild.getSelfMember().hasPermission(targetChannel, Permission.VIEW_CHANNEL, Permission.MESSAGE_HISTORY)){
             bot.getEmbedUtil().sendPermError(tc, member, targetChannel, Permission.MESSAGE_HISTORY, true);
             return;
         }
