@@ -21,6 +21,9 @@ package site.purrbot.bot.commands.owner;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.emoji.CustomEmoji;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
+import net.dv8tion.jda.api.entities.emoji.RichCustomEmoji;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
@@ -50,18 +53,18 @@ public class CmdListEmotes implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
         if(args.length == 0){
-            msg.addReaction(Emotes.DENY.getEmote()).queue();
+            msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue();
             return;
         }
         
         Guild targetGuild = bot.getShardManager().getGuildById(args[0]);
         if(targetGuild == null){
-            msg.addReaction(Emotes.DENY.getEmote()).queue();
+            msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue();
             return;
         }
     
-        List<Emote> emotes = new ArrayList<>(targetGuild.getEmotes());
-        emotes.sort(Comparator.comparing(Emote::getName));
+        List<RichCustomEmoji> emotes = new ArrayList<>(targetGuild.getEmojis());
+        emotes.sort(Comparator.comparing(RichCustomEmoji::getName));
         
         StringBuilder builder = new StringBuilder(String.format(
                 "Emotes for Guild %s (%d emotes)\n" +
@@ -70,7 +73,7 @@ public class CmdListEmotes implements Command{
                 emotes.size()
         ));
         int i = 0;
-        for(Emote emote : emotes){
+        for(RichCustomEmoji emote : emotes){
             if(emote.isAnimated())
                 continue;
             
@@ -103,7 +106,7 @@ public class CmdListEmotes implements Command{
         ).queue();
     }
     
-    private String getEmoteString(Emote emote){
+    private String getEmoteString(RichCustomEmoji emote){
         return String.format(
                 "%s `:%s: - %s`",
                 emote.getAsMention(),

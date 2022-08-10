@@ -21,10 +21,11 @@ package site.purrbot.bot.listener;
 import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
+import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
+import net.dv8tion.jda.api.events.channel.ChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -114,7 +115,10 @@ public class GuildListener extends ListenerAdapter{
     }
 
     @Override
-    public void onTextChannelDelete(@Nonnull TextChannelDeleteEvent event){
+    public void onChannelDelete(@Nonnull ChannelDeleteEvent event){
+        if(!event.isFromGuild() || (event.getChannel().getType() != ChannelType.TEXT))
+            return;
+        
         Guild guild = event.getGuild();
         String id = bot.getWelcomeChannel(guild.getId());
 

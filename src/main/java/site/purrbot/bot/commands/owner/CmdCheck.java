@@ -70,7 +70,7 @@ public class CmdCheck implements Command{
         for(JDA shard : shards){
             if(builder.length() + getShardStatus(shard).length() > Message.MAX_CONTENT_LENGTH){
                 builder.append("\n```");
-                msg.getTextChannel().sendMessage(builder.toString()).queue();
+                msg.getChannel().asTextChannel().sendMessage(builder.toString()).queue();
                 builder = new StringBuilder("```");
             }
             
@@ -87,7 +87,7 @@ public class CmdCheck implements Command{
             if(!text.endsWith("```"))
                 text += "\n```";
             
-            msg.getTextChannel().sendMessage(text).queue();
+            msg.getChannel().asTextChannel().sendMessage(text).queue();
         }
     }
     

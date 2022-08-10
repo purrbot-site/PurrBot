@@ -28,6 +28,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.emoji.Emoji;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
@@ -64,7 +65,7 @@ public class CmdShip implements Command{
         Member member1;
         Member member2;
 
-        List<Member> members = msg.getMentionedMembers();
+        List<Member> members = msg.getMentions().getMembers();
 
         if (members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.ship.no_mention");
@@ -118,7 +119,7 @@ public class CmdShip implements Command{
                         bot.getMsg(guild.getId(), "purr.fun.ship.mention_purr", member.getAsMention())
                 ).queue();
             }
-            msg.addReaction("\uD83D\uDE33").queue();
+            msg.addReaction(Emoji.fromUnicode("\uD83D\uDE33")).queue();
             
             return;
         }

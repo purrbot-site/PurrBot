@@ -147,7 +147,7 @@ public class PurrBot {
                         waiter
                 )
                 .setShardsTotal(-1)
-                .setActivity(Activity.of(Activity.ActivityType.DEFAULT, getMessageUtil().getRandomStartupMsg()))
+                .setActivity(Activity.of(Activity.ActivityType.PLAYING, getMessageUtil().getRandomStartupMsg()))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .build();
         

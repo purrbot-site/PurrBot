@@ -133,15 +133,15 @@ public class CmdWelcome implements Command{
                     reset(tc, member, Type.CHANNEL);
                 }else
                 if(args[1].equalsIgnoreCase("set")){
-                    if(msg.getMentionedChannels().isEmpty()){
+                    if(msg.getMentions().getChannels().isEmpty()){
                         bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_channel");
                         return;
                     }
-                    if(msg.getMentionedChannels().get(0) == null){
+                    if(msg.getMentions().getChannels().get(0) == null){
                         bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.invalid_channel");
                         return;
                     }
-                    update(tc, member, Type.CHANNEL, msg.getMentionedChannels().get(0).getId());
+                    update(tc, member, Type.CHANNEL, msg.getMentions().getChannels().get(0).getId());
                 }else{
                     bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.invalid_args");
                 }

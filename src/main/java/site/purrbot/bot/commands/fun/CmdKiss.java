@@ -52,7 +52,7 @@ public class CmdKiss implements Command{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        List<Member> members = msg.getMentionedMembers();
+        List<Member> members = msg.getMentions().getMembers();
         if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.kiss.no_mention");
             return;

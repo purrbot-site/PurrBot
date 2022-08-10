@@ -25,7 +25,7 @@ import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -65,13 +65,13 @@ public class CmdThreesome implements Command{
     
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentionedMembers().isEmpty() || msg.getMentionedMembers().size() < 2){
+        if(msg.getMentions().getMembers().isEmpty() || msg.getMentions().getMembers().size() < 2){
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.threesome.no_mention");
             return;
         }
         
-        Member target1 = msg.getMentionedMembers().get(0);
-        Member target2 = msg.getMentionedMembers().get(1);
+        Member target1 = msg.getMentions().getMembers().get(0);
+        Member target2 = msg.getMentions().getMembers().get(1);
         
         if(target1.equals(guild.getSelfMember()) || target2.equals(guild.getSelfMember())){
             if(bot.isBeta()){
@@ -152,7 +152,7 @@ public class CmdThreesome implements Command{
         
         EventWaiter waiter = bot.getWaiter();
         waiter.waitForEvent(
-                ButtonClickEvent.class,
+            ButtonInteractionEvent.class,
                 event -> {
                     if(event.getUser().isBot())
                         return false;
@@ -172,7 +172,7 @@ public class CmdThreesome implements Command{
                     return allUser(list, event.getUser().getId(), event.getComponentId());
                 },
                 event -> {
-                    TextChannel channel = event.getTextChannel();
+                    TextChannel channel = event.getGuildChannel().asTextChannel();
                     queue.invalidate(bot.getRequestUtil().getQueueString("threesome", guild.getId(), author.getId()));
                     
                     if(event.getComponentId().equals("purr:threesome:deny")){
@@ -206,7 +206,7 @@ public class CmdThreesome implements Command{
                     }
                 }, 1, TimeUnit.MINUTES,
                 () -> {
-                    TextChannel channel = botMsg.getTextChannel();
+                    TextChannel channel = botMsg.getChannel().asTextChannel();
                     botMsg.delete().queue(
                             null,
                             e -> logger.warn("Unable to delete own Message for Threesome! Was it already deleted?")
