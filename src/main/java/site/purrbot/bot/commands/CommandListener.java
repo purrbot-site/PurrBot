@@ -57,7 +57,7 @@ public class CommandListener extends ListenerAdapter{
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event){
         CMD_EXECUTOR.execute(() -> {
-            if(!event.isFromGuild())
+            if(!event.isFromGuild() || event.getChannel().getType() != ChannelType.TEXT)
                 return;
             
             Message msg = event.getMessage();
