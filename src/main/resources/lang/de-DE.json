@@ -410,15 +410,7 @@
       },
       "help": {
         "description": "Eine Liste mit allen Befehlen, welche der Bot hat.\nDu kannst den Namen eines Befehls hinzufügen, damit du weitere Informationen über diesen Befehl bekommst.",
-        "command_info": {
-          "aliases": "Aliase",
-          "command_nsfw": "Bitte verwende diesen Befehl in einem NSFW-Kanal.",
-          "docs": "Dokumente",
-          "no_command": "Der angegebene Befehl (`{command}`) existiert nicht!\nStelle sicher, dass du ihn korrekt eingegeben hast.\n\nKategorienamen müssen mit `cat;` geschrieben werden (z.B. `{prefix}help cat:fun`)!",
-          "title": "Befehlshilfe: {command}",
-          "usage_title": "Nutzungsoptionen",
-          "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Erforderlich"
-        },
+        "commands": "Eine komplette Liste aller verfügbaren Befehle kann auf [`docs.purrbot.site`]({wiki}/commands/) gefunden werden!",
         "command_menu": {
           "categories": {
             "fun": "Spaß",
