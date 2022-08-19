@@ -410,15 +410,7 @@
       },
       "help": {
         "description": "List aww avaiwabwe commands the bot has.\nYou can add the name of a command aftew it, to weceive some additionaw info about that specified command.",
-        "command_info": {
-          "aliases": "Awiases",
-          "command_nsfw": "Pwease wun this command in a NSFW channel. ÒwÓ",
-          "docs": "Docs",
-          "no_command": "The pwovided command (`{command}`) doesn't exist!\nMake suwe you typed it cowwectwy.\n\nCategowy names need to be pwefixed with `cat:` (e.g. `{prefix}help cat:fun`)!",
-          "title": "Command hewp: {command}",
-          "usage_title": "Usage options",
-          "usage_value": "```\n{commands}\n```\n`[]` = Optionaw\n`<>` = Requiwed"
-        },
+        "commands": "A compwete wist of avaiwabwe commands can be found on [`docs.purrbot.site`]({wiki}/commands/)! :3",
         "command_menu": {
           "categories": {
             "fun": "Fun",
