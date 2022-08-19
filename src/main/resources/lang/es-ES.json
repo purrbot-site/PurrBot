@@ -410,15 +410,7 @@
       },
       "help": {
         "description": "Listar todos los comandos disponibles que tiene el bot.\nPuedes añadir el nombre de un comando después de él, para recibir información adicional sobre ese comando especificado.",
-        "command_info": {
-          "aliases": "Alias",
-          "command_nsfw": "Por favor, ejecuta este comando en un canal NSFW.",
-          "docs": "Documentación",
-          "no_command": "¡El comando proporcionado (`{command}`) no existe!\nAsegúrese de que lo escribió correctamente.\n\nLos nombres de las categorías deben tener prefijo `cat:` (ej.: `{prefix}help cat:fun`)!",
-          "title": "Ayuda del comando: {command}",
-          "usage_title": "Opciones de uso",
-          "usage_value": "```\n{commands}\n```\n`[]` = Opcional\n`<>` = Requerido"
-        },
+        "commands": "¡Puedes encontrar una lista completa de los comandos disponibles en [`docs.purrbot.site`]({wiki}/commands/)!",
         "command_menu": {
           "categories": {
             "fun": "Diversión",
