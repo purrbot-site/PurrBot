@@ -21,10 +21,24 @@ package site.purrbot.bot;
 import ch.qos.logback.classic.Logger;
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.requests.restaction.MessageAction;
+import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.LoggerFactory;
+import site.purrbot.bot.manager.DBManager;
+import site.purrbot.bot.manager.command.CommandLoader;
+import site.purrbot.bot.manager.file.FileManager;
+import site.purrbot.bot.manager.guild.GuildSettingsManager;
 
 import javax.security.auth.login.LoginException;
+import java.util.EnumSet;
 import java.util.Random;
 
 public class PurrBot{
@@ -33,7 +47,10 @@ public class PurrBot{
     private static PurrBot bot;
     
     // Bot classes
-    
+    FileManager fileManager;
+    DBManager dbManager;
+    GuildSettingsManager guildSettingsManager;
+    CommandLoader commandLoader;
     
     // JDA
     private ShardManager shardManager = null;
@@ -56,7 +73,71 @@ public class PurrBot{
         }
     }
     
+    // Getter methods
+    public static PurrBot getBot(){
+        return bot;
+    }
+    
+    public FileManager getFileManager(){
+        return fileManager;
+    }
+    
+    public DBManager getDbManager(){
+        return dbManager;
+    }
+    
+    public GuildSettingsManager getGuildSettingsManager(){
+        return guildSettingsManager;
+    }
+    
+    public CommandLoader getCommandLoader(){
+        return commandLoader;
+    }
+    
+    public ShardManager getShardManager(){
+        return shardManager;
+    }
+    
+    public EventWaiter getEventWaiter(){
+        return eventWaiter;
+    }
+    
+    public Random getRandom(){
+        return random;
+    }
+    
+    
+    
     private void startBot() throws LoginException{
+        fileManager = new FileManager();
+        dbManager = new DBManager();
+        guildSettingsManager = new GuildSettingsManager();
+        commandLoader = new CommandLoader();
         
+        fileManager.addFile("config")
+            .addFile("random");
+        
+        MessageAction.setDefaultMentions(EnumSet.of(
+            Message.MentionType.USER,
+            Message.MentionType.ROLE
+        ));
+        
+        shardManager = DefaultShardManagerBuilder.createDefault(fileManager.getString("config", "", "token"))
+            .disableIntents(GatewayIntent.GUILD_VOICE_STATES)
+            .disableCache(CacheFlag.VOICE_STATE)
+            .enableIntents(
+                GatewayIntent.GUILD_MEMBERS,
+                GatewayIntent.GUILD_MESSAGES,
+                GatewayIntent.MESSAGE_CONTENT
+            )
+            .setChunkingFilter(ChunkingFilter.include(0L))
+            .setMemberCachePolicy(MemberCachePolicy.OWNER)
+            .addEventListeners(
+                commandClient
+            )
+            .setActivity(Activity.of(Activity.ActivityType.PLAYING, "TODO"))
+            .setStatus(OnlineStatus.DO_NOT_DISTURB)
+            .addEventListeners()
+            .build();
     }
 }
