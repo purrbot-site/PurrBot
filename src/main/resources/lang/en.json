@@ -410,15 +410,7 @@
       },
       "help": {
         "description": "List all available commands the bot has.\nYou can add the name of a command after it, to receive some additional info about that specified command.",
-        "command_info": {
-          "aliases": "Aliases",
-          "command_nsfw": "Please run this command in a NSFW channel.",
-          "docs": "Docs",
-          "no_command": "The provided command (`{command}`) doesn't exist!\nMake sure you typed it correctly.\n\nCategory names need to be prefixed with `cat:` (e.g. `{prefix}help cat:fun`)!",
-          "title": "Command help: {command}",
-          "usage_title": "Usage options",
-          "usage_value": "```\n{commands}\n```\n`[]` = Optional\n`<>` = Required"
-        },
+        "commands": "A complete list of available commands can be found on [`docs.purrbot.site`]({wiki}/commands/)!",
         "command_menu": {
           "categories": {
             "fun": "Fun",
