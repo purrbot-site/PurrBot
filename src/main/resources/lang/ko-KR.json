@@ -410,15 +410,7 @@
       },
       "help": {
         "description": "이 봇이 사용가능한 모든 명령어를 보여줍니다.\n원하는 명령어의 이름을 뒤에 붙여 쓸 경우 그 명령어에 대한 설명을 보여줍니다.",
-        "command_info": {
-          "aliases": "같은 명령어",
-          "command_nsfw": "이 명령어는 연령 제한 채널에서만 사용할 수 있어.",
-          "docs": "문서",
-          "no_command": "나에게 물어본 (`{command}`) 는 존재하지 않아.\n제대로 보냈는지 다시 확인해줘.\n\n카테고리에 대한 설명은 `cat:` 를 붙여줘야해. (예시: `{prefix}help cat:fun`)",
-          "title": "명령어 도움말: {command}",
-          "usage_title": "사용법",
-          "usage_value": "```\n{commands}\n```\n`[]` = 선택가능\n`<>` = 필수"
-        },
+        "commands": "사용 가능한 명령의 전체 목록은 [`docs.purrbot.site`]({wiki}/commands/)에서 찾을 수 있습니다!",
         "command_menu": {
           "categories": {
             "fun": "재미",

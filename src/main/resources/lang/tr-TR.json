@@ -410,15 +410,7 @@
       },
       "help": {
         "description": "Botun sahip olduğu tüm mevcut komutları gösterir.\nBelirli bir komut hakkında ek bilgi almak için, bilgi almak istediğiniz komutu bu komutun sonuna ekleyerek gönderebilirsiniz.",
-        "command_info": {
-          "aliases": "Alternatifler",
-          "command_nsfw": "Lütfen bu komutu NSFW kanalında kullanın.",
-          "docs": "Dokümanlar",
-          "no_command": "Belirtilen komut (`{command}`) mevcut değil!\nKomutu doğru yazdığından emin ol.\n\nKategori adlarının önüne `cat:` gelmelidir (örn. `{prefix}help cat:eğlence`)!",
-          "title": "Komut yardımı: {command}",
-          "usage_title": "Kullanım şekli",
-          "usage_value": "```\n{commands}\n```\n`[]` = İsteğe bağlı\n`<>` = gerekli"
-        },
+        "commands": "Kullanılabilir komutların tam listesi [`docs.purrbot.site`]({wiki}/commands/) adresinde bulunabilir!",
         "command_menu": {
           "categories": {
             "fun": "Eğlence",
