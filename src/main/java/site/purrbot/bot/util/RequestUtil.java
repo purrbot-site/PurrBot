@@ -114,7 +114,7 @@ public class RequestUtil{
                 }
                 
                 msg.editMessage(text)
-                   .setActionRows(Collections.emptyList())
+                   .setComponents(Collections.emptyList())
                    .queue(message -> {
                        if(result.isRequest() && author != null) 
                            sendConfirmation(tc, author, targets, message); 
@@ -222,7 +222,7 @@ public class RequestUtil{
              .setImage(result.getUrl());
         
         msg.editMessage(EmbedBuilder.ZERO_WIDTH_SPACE)
-           .setActionRows(Collections.emptyList())
+           .setComponents(Collections.emptyList())
            .setEmbeds(embed.build())
            .queue(message -> {
                if(message.getGuild().getSelfMember().hasPermission(tc, Permission.MESSAGE_MANAGE))
@@ -233,10 +233,13 @@ public class RequestUtil{
                
                if(result.isRequest() && author != null)
                    sendConfirmation(tc, author, targets, message);
-           }, e -> tc.sendMessageEmbeds(embed.build()).queue(message -> {
-               if(result.isRequest() && author != null)
-                   sendConfirmation(tc, author, targets, message);
-           }));
+           }, e -> {
+               logger.warn("Unable to edit original message for {}. Sending fallback. Cause: {}", result.getPath(), e.getMessage());
+               tc.sendMessageEmbeds(embed.build()).queue(message -> {
+                   if(result.isRequest() && author != null)
+                       sendConfirmation(tc, author, targets, message);
+               });
+           });
     }
     
     private void sendConfirmation(TextChannel tc, Member author, List<String> targets, Message msg){

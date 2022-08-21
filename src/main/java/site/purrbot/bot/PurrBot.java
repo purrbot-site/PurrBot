@@ -29,12 +29,13 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.requests.restaction.MessageAction;
+import net.dv8tion.jda.api.requests.restaction.MessageCreateAction;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import net.dv8tion.jda.api.utils.messages.MessageRequest;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -126,8 +127,8 @@ public class PurrBot {
         beta = getFileManager().getBoolean("config", "beta");
 
         CMD_HANDLER.registerCommands(new HashSet<>(commandLoader.getCommands()));
-    
-        MessageAction.setDefaultMentions(EnumSet.of(
+        
+        MessageRequest.setDefaultMentions(EnumSet.of(
                 Message.MentionType.ROLE,
                 Message.MentionType.USER
         ));

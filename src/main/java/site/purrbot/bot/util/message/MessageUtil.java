@@ -20,6 +20,7 @@ package site.purrbot.bot.util.message;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.FileUpload;
 import net.dv8tion.jda.api.utils.TimeFormat;
 import site.purrbot.bot.PurrBot;
 
@@ -130,10 +131,7 @@ public class MessageUtil {
         }
         
         tc.sendMessage(message)
-          .addFile(file, String.format(
-                  "welcome_%s.jpg",
-                  member.getId()
-          ))
+            .addFiles(FileUpload.fromData(file, String.format("welcome_%s.jpg", member.getId())))
           .queue();
     }
     

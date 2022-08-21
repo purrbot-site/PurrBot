@@ -44,13 +44,15 @@ repositories {
 
 dependencies {
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
-    compile group: 'pw.chew', name: 'jda-chewtils-commons', version: '2.0-SNAPSHOT'
-    compile group: 'pw.chew', name: 'jda-chewtils-menu', version: '2.0-SNAPSHOT'
+    //compile group: 'pw.chew', name: 'jda-chewtils-commons', version: '2.0-SNAPSHOT'
+    //compile group: 'pw.chew', name: 'jda-chewtils-menu', version: '2.0-SNAPSHOT'
+    compile group: 'com.github.Andre601', name: 'JDA-Chewtils', version: '9513237948'
     compile group: 'com.rethinkdb', name: 'rethinkdb-driver', version:'2.4.4'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.9.1'
-    compile(group: 'net.dv8tion', name: 'JDA', version:'5.0.0-alpha.17'){
-        exclude(module: 'opus-java')
-    }
+    compile group: 'com.github.DV8FromTheWorld', name: 'JDA', version: 'e111d55'
+    //compile(group: 'net.dv8tion', name: 'JDA', version:'5.0.0-alpha.17'){
+    //    exclude(module: 'opus-java')
+    //}
     compile group: 'club.minnced', name: 'discord-webhooks', version: '0.8.2'
     compile group: 'commons-io', name: 'commons-io', version: '2.11.0'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'

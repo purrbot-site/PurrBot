@@ -23,6 +23,7 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.utils.FileUpload;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
@@ -383,11 +384,11 @@ public class CmdWelcome implements Command{
                     bot.getMsg(guild.getId(), "purr.guild.welcome.embed.preview"),
                     EmbedBuilder.ZERO_WIDTH_SPACE,
                     false
-            )
-                    .setImage("attachment://welcome_preview.jpg");
+                )
+                .setImage("attachment://welcome_preview.jpg");
             
             tc.sendMessageEmbeds(embed.build())
-                    .addFile(file, "welcome_preview.jpg")
+                    .addFiles(FileUpload.fromData(file, "welcome_preview.jpg"))
                     .queue();
         }
         

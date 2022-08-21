@@ -29,7 +29,7 @@ import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.selections.SelectMenu;
-import net.dv8tion.jda.api.requests.restaction.MessageAction;
+import net.dv8tion.jda.api.requests.restaction.MessageCreateAction;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -138,7 +138,7 @@ public class CmdFuck implements Command{
         }
         
         String path = hasArgs(args) ? "purr.nsfw.fuck.request.message" : "purr.nsfw.fuck.request.message_choose";
-        MessageAction messageAction = tc.sendMessage(
+        MessageCreateAction messageAction = tc.sendMessage(
                 bot.getMsg(guild.getId(), path, member.getEffectiveName(), target.getAsMention())
         );
         

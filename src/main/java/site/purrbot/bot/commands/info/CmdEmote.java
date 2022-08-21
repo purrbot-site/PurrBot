@@ -44,12 +44,12 @@ import static net.dv8tion.jda.api.requests.ErrorResponse.UNKNOWN_MESSAGE;
         description = "purr.info.emote.description",
         triggers = {"emote", "e"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}emote <:emote:>\n" +
-                        "{p}emote <--search>"
-                ),
-                @CommandAttribute(key = "help", value = "{p}emote <:emote:|--search>")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = 
+                "{p}emote <:emote:>\n" +
+                "{p}emote <--search>"
+            ),
+            @CommandAttribute(key = "help", value = "{p}emote <:emote:|--search>")
         }
 )
 public class CmdEmote implements Command{
@@ -68,31 +68,32 @@ public class CmdEmote implements Command{
                 return;
             }
             
-            EmbedPaginator.Builder builder = new EmbedPaginator.Builder().setEventWaiter(bot.getWaiter())
-                    .setTimeout(1, TimeUnit.MINUTES)
-                    .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
-                    .waitOnSinglePage(true)
-                    .addUsers(member.getUser())
-                    .setFinalAction(message -> {
-                        if(guild.getSelfMember().hasPermission(message.getGuildChannel(), Permission.MESSAGE_MANAGE))
-                            message.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
-                    });
+            EmbedPaginator.Builder builder = new EmbedPaginator.Builder()
+                .setEventWaiter(bot.getWaiter())
+                .setTimeout(1, TimeUnit.MINUTES)
+                .setText(EmbedBuilder.ZERO_WIDTH_SPACE)
+                .waitOnSinglePage(true)
+                .addUsers(member.getUser())
+                .setFinalAction(message -> {
+                    if(guild.getSelfMember().hasPermission(message.getGuildChannel(), Permission.MESSAGE_MANAGE))
+                        message.clearReactions().queue(null, ignore(UNKNOWN_MESSAGE));
+                });
             
             if(guild.getOwner() != null)
                 builder.addUsers(guild.getOwner().getUser());
             
             tc.getIterableHistory()
-                    .cache(false)
-                    .takeAsync(100)
-                    .thenApply(List::stream)
-                    .thenApply(stream -> stream.filter(message -> !message.getMentions().getCustomEmojis().isEmpty()))
-                    .thenApply(stream -> stream.collect(Collectors.toMap(
-                            Message::getJumpUrl,
-                            m -> m.getMentions().getCustomEmojis(),
-                            (existing, replacement) -> existing,
-                            LinkedHashMap::new
-                    )))
-                    .thenAccept(emotes -> send(builder, tc, member, emotes));
+                .cache(false)
+                .takeAsync(100)
+                .thenApply(List::stream)
+                .thenApply(stream -> stream.filter(message -> !message.getMentions().getCustomEmojis().isEmpty()))
+                .thenApply(stream -> stream.collect(Collectors.toMap(
+                    Message::getJumpUrl,
+                    m -> m.getMentions().getCustomEmojis(),
+                    (existing, replacement) -> existing,
+                    LinkedHashMap::new
+                )))
+                .thenAccept(emotes -> send(builder, tc, member, emotes));
             return;
         }
         
@@ -106,22 +107,26 @@ public class CmdEmote implements Command{
     }
     
     private void send(EmbedPaginator.Builder builder, TextChannel tc, Member member, Map<String, List<CustomEmoji>> emotes){
+        if(emotes.isEmpty()){
+            bot.getEmbedUtil().sendError(tc, member, "purr.info.emote.not_found");
+        }
+        
         int pos = 0;
         
         int size = emotes.values().stream()
-                .mapToInt(List::size)
-                .sum();
+            .mapToInt(List::size)
+            .sum();
         
         for(Map.Entry<String, List<CustomEmoji>> entry : emotes.entrySet()){
             for(CustomEmoji emote : entry.getValue()){
                 pos++;
                 builder.addItems(emoteInfo(
-                        member,
-                        emote,
-                        member.getGuild(),
-                        entry.getKey(),
-                        pos,
-                        size
+                    member,
+                    emote,
+                    member.getGuild(),
+                    entry.getKey(),
+                    pos,
+                    size
                 ));
             }
         }
@@ -138,47 +143,47 @@ public class CmdEmote implements Command{
         String path = size > 1 ? "purr.info.emote.embed.emote_multiple" : "purr.info.emote.embed.emote_single";
         
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
-                .setTitle(
-                    bot.getMsg(guild.getId(), path)
-                        .replace("{current}", String.valueOf(pos))
-                        .replace("{total}", String.valueOf(size))
-                )
-                .addField(
-                    bot.getMsg(guild.getId(), "purr.info.emote.embed.name"),
-                    String.format(
-                        "`:%s:`",
-                        emote.getName()
-                    ),
-                    true
-                )
-                .addField(
-                    bot.getMsg(guild.getId(), "purr.info.emote.embed.id"),
-                    String.format(
-                        "`%s`",
-                        emote.getId()
-                    ),
-                    true
-                )
-                .addField(
-                    bot.getMsg(guild.getId(), "purr.info.emote.embed.guild"),
-                    String.format(
-                        "`%s`", 
-                        emoteGuild != null ? emoteGuild.getName() : bot.getMsg(guild.getId(), "purr.info.emote.unknown_guild")
-                    ),
-                    true
-                )
-                .addField(
-                    bot.getMsg(guild.getId(), "purr.info.emote.embed.image"),
-                    bot.getMsg(guild.getId(), "purr.info.emote.embed.link").replace("{link}", emote.getImageUrl()),
-                    true
-                )
-                .setThumbnail(emote.getImageUrl());
+            .setTitle(
+                bot.getMsg(guild.getId(), path)
+                    .replace("{current}", String.valueOf(pos))
+                    .replace("{total}", String.valueOf(size))
+            )
+            .addField(
+                bot.getMsg(guild.getId(), "purr.info.emote.embed.name"),
+                String.format(
+                    "`:%s:`",
+                    emote.getName()
+                ),
+                true
+            )
+            .addField(
+                bot.getMsg(guild.getId(), "purr.info.emote.embed.id"),
+                String.format(
+                    "`%s`",
+                    emote.getId()
+                ),
+                true
+            )
+            .addField(
+                bot.getMsg(guild.getId(), "purr.info.emote.embed.guild"),
+                String.format(
+                    "`%s`", 
+                    emoteGuild != null ? emoteGuild.getName() : bot.getMsg(guild.getId(), "purr.info.emote.unknown_guild")
+                ),
+                true
+            )
+            .addField(
+                bot.getMsg(guild.getId(), "purr.info.emote.embed.image"),
+                bot.getMsg(guild.getId(), "purr.info.emote.embed.link").replace("{link}", emote.getImageUrl()),
+                true
+            )
+            .setThumbnail(emote.getImageUrl());
         
         if(link != null)
             embed.addField(
                 bot.getMsg(guild.getId(), "purr.info.emote.embed.message"),
                 bot.getMsg(guild.getId(), "purr.info.emote.embed.link")
-                    .replace("{link}", link),
+                    .replace("{link}", link), 
                 true
             );
         

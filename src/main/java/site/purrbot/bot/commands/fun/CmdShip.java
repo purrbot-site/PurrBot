@@ -22,13 +22,15 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
-import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
+import net.dv8tion.jda.api.utils.FileUpload;
+import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
+import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
@@ -102,11 +104,9 @@ public class CmdShip implements Command{
                     if(img != null && guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
                         tc.sendMessage(
                                 bot.getMsg(guild.getId(), "purr.fun.ship.special_user", member.getAsMention())
-                        ).addFile(img, String.format(
-                                "love_%s_%s.png",
-                                member1.getId(),
-                                member2.getId()
-                        )).queue();
+                            )
+                            .addFiles(FileUpload.fromData(img, String.format("love_%s_%s.png", member1.getId(), member2.getId())))
+                            .queue();
                         return;
                     }
                     
@@ -160,21 +160,17 @@ public class CmdShip implements Command{
         image = bot.getImageUtil().getShipImg(member1, member2, result);
 
         if(image == null || !guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_ATTACH_FILES)){
-            Message message = new MessageBuilder(String.format(
-                    "`%d%%` | %s",
-                    result,
-                    getMessage(result, guild.getId())
-            )).build();
+            MessageCreateData message = new MessageCreateBuilder()
+                .addContent(String.format("`%d%%` | %s", result, getMessage(result, guild.getId())))
+                .build();
 
             tc.sendMessage(message).queue();
             return;
         }
 
-        tc.sendMessage(getMessage(result, guild.getId())).addFile(image, String.format(
-                "love_%s_%s.png",
-                member1.getId(),
-                member2.getId()
-        )).queue();
+        tc.sendMessage(getMessage(result, guild.getId()))
+            .addFiles(FileUpload.fromData(image, String.format("love_%s_%s.png", member1.getId(), member2.getId())))
+            .queue();
 
     }
     
