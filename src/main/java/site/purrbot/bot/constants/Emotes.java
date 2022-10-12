@@ -20,9 +20,6 @@ package site.purrbot.bot.constants;
 
 import site.purrbot.bot.manager.string.StringReplacer;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public enum Emotes{
     // Animated emotes,
     LOADING       ("loading",      "858052734859345930", true),
