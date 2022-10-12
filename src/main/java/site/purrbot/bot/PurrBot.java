@@ -25,12 +25,12 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import net.dv8tion.jda.api.utils.messages.MessageRequest;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.manager.DBManager;
 import site.purrbot.bot.manager.command.CommandLoader;
@@ -106,8 +106,6 @@ public class PurrBot{
         return random;
     }
     
-    
-    
     private void startBot() throws LoginException{
         fileManager = new FileManager();
         dbManager = new DBManager();
@@ -117,7 +115,7 @@ public class PurrBot{
         fileManager.addFile("config")
             .addFile("random");
         
-        MessageAction.setDefaultMentions(EnumSet.of(
+        MessageRequest.setDefaultMentions(EnumSet.of(
             Message.MentionType.USER,
             Message.MentionType.ROLE
         ));

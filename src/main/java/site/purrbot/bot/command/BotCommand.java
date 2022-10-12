@@ -22,7 +22,7 @@ import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.command.SlashCommandEvent;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.manager.command.CommandError;
@@ -59,9 +59,9 @@ public abstract class BotCommand extends SlashCommand{
                 .send(event);
             return;
         }
-    
+
         TextChannel tc = event.getTextChannel();
-        
+
         if(command.nsfwOnly && !tc.isNSFW()){
             CommandError.fromPath(guild.getId(), "errors", "no_nsfw")
                 .replace("{user}", member.getEffectiveName())

@@ -48,7 +48,7 @@ dependencies {
     implementation group: 'pw.chew', name: 'jda-chewtils-menu', version: '2.0-SNAPSHOT'
     implementation group: 'pw.chew', name: 'jda-chewtils-command', version: '2.0-SNAPSHOT'
     implementation group: 'com.rethinkdb', name: 'rethinkdb-driver', version:'2.4.4'
-    implementation (group: 'net.dv8tion', name: 'JDA', version:'5.0.0-alpha.17'){
+    implementation (group: 'net.dv8tion', name: 'JDA', version:'5.0.0-alpha.21'){
         exclude(module: 'opus-java')
     }
     implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.8.2'
