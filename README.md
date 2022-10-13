@@ -13,8 +13,8 @@
 [mention]: https://purrbot.site/assets/img/github/mention.webp
 
 <!-- Discord OAuth -->
-[full_invite]: https://add.botl.ink/?id=425382319449309197&perms=387136
-[basic_invite]: https://add.botl.ink/?id=425382319449309197
+[full_invite]: https://discord.com/oauth2/authorize?client_id=425382319449309197&permissions=379968&scope=bot%20applications.commands
+[basic_invite]: https://discord.com/oauth2/authorize?client_id=425382319449309197&scope=bot%20applications.commands
 
 <!-- Website links -->
 [Website]: https://purrbot.site
