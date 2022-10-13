@@ -78,10 +78,10 @@ You can find the translations of this bot by visiting: https://lang.purrbot.site
 
 # Inviting the bot
 To invite the bot with all the necessary required permissions mentioned in the [Commands Section](#commands) you can use this invitation link:  
-> https://add.botl.ink/?id=425382319449309197&perms=387136
+> https://discord.com/oauth2/authorize?client_id=425382319449309197&permissions=379968&scope=bot%20applications.commands
 
 If you want to add the bot without a pre-made role, use this link instead:  
-> https://add.botl.ink/?id=425382319449309197
+> https://discord.com/oauth2/authorize?client_id=425382319449309197&scope=bot%20applications.commands
 
 Note that when you add the bot without a pre-made role, you will need to give it one with the necessary required permissions.
 
