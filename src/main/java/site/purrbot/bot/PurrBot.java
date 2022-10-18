@@ -29,7 +29,6 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.requests.restaction.MessageCreateAction;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
@@ -138,7 +137,9 @@ public class PurrBot {
                 .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
                 .disableCache(CacheFlag.VOICE_STATE)
                 .setChunkingFilter(ChunkingFilter.include(Long.parseLong(IDs.GUILD)))
-                .setMemberCachePolicy(beta ? MemberCachePolicy.ALL : MemberCachePolicy.OWNER)
+                .setMemberCachePolicy(
+                    MemberCachePolicy.PENDING.or(member -> member.getGuild().getId().equals(IDs.GUILD))
+                )
                 .addEventListeners(
                         new ReadyListener(this),
                         new ConnectionListener(this),
@@ -194,9 +195,6 @@ public class PurrBot {
         return getFileManager().getStringlist("data", "special").contains(id);
     }
 
-    public CommandHandler<Message> getCmdHandler(){
-        return CMD_HANDLER;
-    }
     public EventWaiter getWaiter(){
         return waiter;
     }
@@ -390,7 +388,7 @@ public class PurrBot {
         if(this.isBeta())
             return;
         
-        Javalin app = Javalin.create(config -> config.defaultContentType = "application/json")
+        Javalin app = Javalin.create(config -> config.http.defaultContentType = "application/json")
                 .start(7000);
         
         app.get("shards", response -> response.status(200).result(getShardInfo()));

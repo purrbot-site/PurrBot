@@ -21,22 +21,22 @@ package site.purrbot.bot.listener;
 import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
-import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.channel.ChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.utils.MarkdownSanitizer;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.Links;
 import site.purrbot.bot.util.message.WebhookUtil;
 
-import javax.annotation.Nonnull;
 import java.time.ZonedDateTime;
 
 public class GuildListener extends ListenerAdapter{
@@ -52,7 +52,7 @@ public class GuildListener extends ListenerAdapter{
     }
 
     @Override
-    public void onGuildJoin(@Nonnull GuildJoinEvent event){
+    public void onGuildJoin(@NotNull GuildJoinEvent event){
         Guild guild = event.getGuild();
 
         if(bot.getBlacklist().contains(guild.getId())){
@@ -96,7 +96,7 @@ public class GuildListener extends ListenerAdapter{
     }
 
     @Override
-    public void onGuildLeave(@Nonnull GuildLeaveEvent event){
+    public void onGuildLeave(@NotNull GuildLeaveEvent event){
         Guild guild = event.getGuild();
 
         if(bot.getBlacklist().contains(guild.getId()))
@@ -115,7 +115,7 @@ public class GuildListener extends ListenerAdapter{
     }
 
     @Override
-    public void onChannelDelete(@Nonnull ChannelDeleteEvent event){
+    public void onChannelDelete(@NotNull ChannelDeleteEvent event){
         if(!event.isFromGuild() || (event.getChannel().getType() != ChannelType.TEXT))
             return;
         

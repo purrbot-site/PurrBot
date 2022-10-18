@@ -19,12 +19,17 @@
 package site.purrbot.bot.util.message;
 
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
 import net.dv8tion.jda.api.utils.FileUpload;
 import net.dv8tion.jda.api.utils.TimeFormat;
 import site.purrbot.bot.PurrBot;
 
-import java.awt.Color;
+import java.awt.*;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.time.temporal.TemporalAccessor;

@@ -21,14 +21,13 @@ package site.purrbot.bot.listener;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.update.GuildMemberUpdatePendingEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import site.purrbot.bot.PurrBot;
 
-import javax.annotation.Nonnull;
 import java.io.InputStream;
 
 public class MemberListener extends ListenerAdapter{
@@ -40,7 +39,7 @@ public class MemberListener extends ListenerAdapter{
     }
     
     @Override
-    public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event){
+    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event){
         Guild guild = event.getGuild();
     
         // Don't handle joins when the Guild has the Member screening active

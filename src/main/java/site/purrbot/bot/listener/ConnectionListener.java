@@ -22,8 +22,8 @@ import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.events.DisconnectEvent;
-import net.dv8tion.jda.api.events.ResumedEvent;
+import net.dv8tion.jda.api.events.session.SessionDisconnectEvent;
+import net.dv8tion.jda.api.events.session.SessionResumeEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class ConnectionListener extends ListenerAdapter{
     }
 
     @Override
-    public void onDisconnect(@NotNull DisconnectEvent event){
+    public void onSessionDisconnect(@NotNull SessionDisconnectEvent event){
         JDA jda = event.getJDA();
 
         WebhookEmbedBuilder embed = new WebhookEmbedBuilder()
@@ -85,7 +85,7 @@ public class ConnectionListener extends ListenerAdapter{
     }
     
     @Override
-    public void onResumed(@NotNull ResumedEvent event){
+    public void onSessionResume(@NotNull SessionResumeEvent event){
         JDA jda = event.getJDA();
 
         WebhookEmbed embed = new WebhookEmbedBuilder()
