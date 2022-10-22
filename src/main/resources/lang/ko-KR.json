@@ -172,8 +172,8 @@
         "special_user": "하, 하지만 자기... 여긴 모두가 보고 있다구. \\*부끄부끄*"
       },
       "neko": {
-        "description": "사랑스러운 고양이 소녀의 짤 또는 움짤을 가져옵니다.",
-        "loading": "{EMOTE_LOADING} 귀여운 고양이 소녀 이미지 불러오는 중...",
+        "description": "사랑스러운 (혹은 야릇한) 고양이 소녀의 짤 또는 움짤을 가져옵니다.",
+        "loading": "{EMOTE_LOADING} 고양이를 낚아오는 중",
         "message": "고양이소녀 {EMOTE_NEKOWO}",
         "purr": "{EMOTE_PURR} ㄴ.. 나 정말 옛날엔 저렇게 생겼던거야?",
         "snuggle": "{EMOTE_PURR} 이건 내 여동생이야! UwU"
@@ -234,6 +234,11 @@
         },
         "special_user": "헤에. {user}, 우린 완벽히 100인거 알잖아, 자기~",
         "target_bot": "봇이랑 사랑에 빠지지 말라구, 이 바보야!"
+      },
+      "shiro": {
+        "description": "으스스한 귀신들을 쫓아낼 수 있는 성스러운 전달자의 짤을 보여줍니다.",
+        "loading": "{EMOTE_LOADING} 시로 이미지 불러오는 중...",
+        "message": "시로 {EMOTE_SHIRO_TAIL_WAG}"
       },
       "slap": {
         "description": "나쁜 사람들의 뺨을 때립니다! >:C",
@@ -614,10 +619,8 @@
           ]
         }
       },
-      "lewd": {
-        "description": "야한 고양이 소녀의 짤 또는 움짤을 보여줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",
-        "loading": "{EMOTE_LOADING} 야한 고양이 불러오는 중...",
-        "message": "야한 고양이 소녀 {EMOTE_NEKOWO}"
+      "neko": {
+        "message": "야한 고양이소녀 {EMOTE_NEKOWO}"
       },
       "pussylick": {
         "description": "대상에게 당신이 그 사람의 소중한 부위를 핥아도 되는지 물어봅니다.\n\n연령 제한 채널에서만 사용가능합니다.",
