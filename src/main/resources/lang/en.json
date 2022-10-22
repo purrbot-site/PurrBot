@@ -172,8 +172,8 @@
         "special_user": "B-but sweetie... Not in public. \\*blushes*"
       },
       "neko": {
-        "description": "Get an image or gif of an adorable Neko.",
-        "loading": "{EMOTE_LOADING} Receiving a cute neko image (or gif)...",
+        "description": "Get an image or gif of an adorable (or lewd) Neko.",
+        "loading": "{EMOTE_LOADING} Luring out a neko...",
         "message": "Neko {EMOTE_NEKOWO}",
         "purr": "{EMOTE_PURR} Did... Did I really look like this in the past?",
         "snuggle": "{EMOTE_PURR} That is my little sister! UwU"
@@ -234,6 +234,11 @@
         },
         "special_user": "Awww {user} sweetie. You know we both are always a perfect 100.",
         "target_bot": "You can't really ship with bots you weirdo!"
+      },
+      "shiro": {
+        "description": "Get an image of the divine messenger that can keep away spoopy ghosts.",
+        "loading": "{EMOTE_LOADING} Receiving an image of Shiro...",
+        "message": "Shiro {EMOTE_SHIRO_TAIL_WAG}"
       },
       "slap": {
         "description": "Slap da meanies! >:C",
@@ -614,9 +619,7 @@
           ]
         }
       },
-      "lewd": {
-        "description": "Gives an image or gif of a naughty neko.\n\nThis command can only be executed in NSFW-labeled channels!",
-        "loading": "{EMOTE_LOADING} Getting a lewd neko image (or gif)...",
+      "neko": {
         "message": "Lewd neko {EMOTE_NEKOWO}"
       },
       "pussylick": {
