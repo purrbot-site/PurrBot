@@ -222,7 +222,7 @@ public class HttpUtil {
         NSFW_BLOWJOB      ("blowjob",       "blowjob",   true, true, true,  false),
         NSFW_CUM          ("cum",           "cum",       true, true, false, false),
         NSFW_FUCK         ("fuck",          "fuck",      true, true, true,  false),
-        NSFW_NEKO_GIF     ("neko",          "lewd",      true, true, false, true),
+        NSFW_NEKO_GIF     ("neko",          "neko",      true, true, false, true),
         NSFW_PUSSYLICK    ("pussylick",     "pussylick", true, true, true,  false),
         NSFW_SOLO         ("solo",          "solo",      true, true, false, false),
         NSFW_SPANK        ("spank",         "spank",     true, true, true,  false),
@@ -239,9 +239,10 @@ public class HttpUtil {
         NEKO_IMG ("neko",    "neko",    false, false, false, true),
         OKAMI    ("okami",   "okami",   false, false, false, true),
         SENKO    ("senko",   "senko",   false, false, false, true),
+        SHIRO    ("shiro",   "shiro"  , false, false, false, true),
         
         // NSFW Images
-        NSFW_NEKO_IMG("neko", "lewd", false, true, false, true);
+        NSFW_NEKO_IMG("neko", "neko", false, true, false, true);
         
         private final String name;
         private final String pathName;
