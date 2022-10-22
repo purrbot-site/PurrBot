@@ -104,7 +104,7 @@ public class PurrBot {
                 .addFile("data", "/data.json", "./data.json")
                 .addFile("random", "/random.json", "./random.json")
                 .addLang("de-CH")
-                .addLang("de-DE")
+                //.addLang("de-DE")
                 .addLang("en")
                 .addLang("en-OWO")
                 .addLang("es-ES")
