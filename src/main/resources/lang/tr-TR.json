@@ -172,8 +172,8 @@
         "special_user": "A-ama tatlım... Herkesin içinde olmaz. \\*utanma*"
       },
       "neko": {
-        "description": "Sevimli bir Neko resmi veya gifi gönderir.",
-        "loading": "{EMOTE_LOADING} Sevimli bir neko resmi (veya gifi) aranıyor...",
+        "description": "Sevimli (veya müstehcen) bir Neko resmi veya gif'i alın.",
+        "loading": "{EMOTE_LOADING} Bir neko ayartılıyor...",
         "message": "Neko {EMOTE_NEKOWO}",
         "purr": "{EMOTE_PURR} Geçm.. Geçmişte gerçekten böyle mi görünüyordum?",
         "snuggle": "{EMOTE_PURR} Bu benim küçük kız kardeşim! UwU"
@@ -234,6 +234,11 @@
         },
         "special_user": "Awww {user} tatlım. Biliyorsun ikimiz de daima 100'lük bir çiftiz.",
         "target_bot": "Botları kendine yakıştıramazsın tuhaf şey!"
+      },
+      "shiro": {
+        "description": "Korkunç hayaletleri uzak tutabilecek ilahi habercinin bir görüntüsünü alın.",
+        "loading": "{EMOTE_LOADING} Shiro'nun bir görüntüsü alınıyor...",
+        "message": "Shiro {EMOTE_SHIRO_TAIL_WAG}"
       },
       "slap": {
         "description": "Birini tokarlarsın! >:C",
@@ -614,9 +619,7 @@
           ]
         }
       },
-      "lewd": {
-        "description": "Yaramaz bir neko resmi veya gifi gönderir.\n\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
-        "loading": "{EMOTE_LOADING} Müstehcen bir neko resmi (veya gifi) aranıyor...",
+      "neko": {
         "message": "Müstehcen neko {EMOTE_NEKOWO}"
       },
       "pussylick": {

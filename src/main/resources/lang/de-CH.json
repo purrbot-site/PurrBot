@@ -172,8 +172,8 @@
         "special_user": "A-aber Schatz... Doch nicht in aller öffentlichkeit. \\*Errötet*"
       },
       "neko": {
-        "description": "Erhalte ein Bild oder gif einer süssen Neko.",
-        "loading": "{EMOTE_LOADING} Erhalte ein süsses Neko Bild (oder gif)...",
+        "description": "Erhalte ein Bild oder von einer süssen (oder unartigen) Neko.",
+        "loading": "{EMOTE_LOADING} Locke eine Neko an...",
         "message": "Neko {EMOTE_NEKOWO}",
         "purr": "{EMOTE_PURR} Hab... Hab ich damals wirklich so ausgesehen?",
         "snuggle": "{EMOTE_PURR} Das ist meine kleine Schwester! UWU"
@@ -234,6 +234,11 @@
         },
         "special_user": "Awww {user} Süsse. Du weisst doch dass wir beide immer eine perfekte 100 sind.",
         "target_bot": "Du kannst dich nicht wirklich mit Bots verkuppeln du Verrückter!"
+      },
+      "shiro": {
+        "description": "Erhalte ein bild der göttlichen Botin, welche gruuuuselige Geister fernhalten kann.",
+        "loading": "{EMOTE_LOADING} Erhalte ein Bild von Shiro...",
+        "message": "Shiro {EMOTE_SHIRO_TAIL_WAG}"
       },
       "slap": {
         "description": "Schlage die bösen! >:C",
@@ -614,10 +619,8 @@
           ]
         }
       },
-      "lewd": {
-        "description": "Gibt ein Bild oder gif einer unanständigen Neko.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwenden werden!",
-        "loading": "{EMOTE_LOADING} Erhalte ein ungezogenes Neko Bild (oder gif)...",
-        "message": "Ungezogenes Neko {EMOTE_NEKOWO}"
+      "neko": {
+        "message": "Unartige Neko {EMOTE_NEKOWO}"
       },
       "pussylick": {
         "description": "Lässt dich jemand fragen, ob du Ihre Pussy lecken kannst.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwenden werden!",

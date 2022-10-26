@@ -172,8 +172,8 @@
         "special_user": "M-mais mon chou... Pas en public. \\*rougie*"
       },
       "neko": {
-        "description": "Obtenez une image ou un gif d'un adorable Neko.",
-        "loading": "{EMOTE_LOADING} Réception d'une image de neko mignon (ou gif)...",
+        "description": "Obtenez une image ou un gif d'un adorable(ou cochon) Neko.",
+        "loading": "{EMOTE_LOADING} Attraction d'un neko...",
         "message": "Neko {EMOTE_NEKOWO}",
         "purr": "{EMOTE_PURR} J'ai... j'ai vraiment ressemblé à ça dans le passé?",
         "snuggle": "{EMOTE_PURR} C'est ma petite sœur! UwU"
@@ -234,6 +234,11 @@
         },
         "special_user": "Awww {user} mon chou. tu sais que nous sommes tous les deux toujours un parfaits 100.",
         "target_bot": "Tu ne peut pas avoir de relation avec des bots, tes bizarre!"
+      },
+      "shiro": {
+        "description": "Obtenez une image de la messagère divine qui peut garder éloigner les fantômes effrayants.",
+        "loading": "{EMOTE_LOADING} Réception d'une image de Shiro...",
+        "message": "Shiro {EMOTE_SHIRO_TAIL_WAG}"
       },
       "slap": {
         "description": "Baffe ce méchant! >:C",
@@ -614,10 +619,8 @@
           ]
         }
       },
-      "lewd": {
-        "description": "Donne une image ou un gif d'une neko vilaine.\n\nCette commande ne peut être exécutée que dans les salon NSFW!",
-        "loading": "{EMOTE_LOADING} Réception d'une image de neko chaude (ou gif)...",
-        "message": "Neko lubrique {EMOTE_NEKOWO}"
+      "neko": {
+        "message": "Neko cochon{EMOTE_NEKOWO}"
       },
       "pussylick": {
         "description": "Vous permet de demander à quelqu'un, si vous pouvez lécher leur chatte.\n\nCette commande ne peut être exécutée que dans les salon listée NSFW !",
