@@ -121,7 +121,7 @@
           "message": "Ei {target}!\n{user} quer afofar sua cauda. Você concorda?",
           "open": "Você já pediu para afofar a cauda de alguém {user}! Por favor, aguarde a solicitação ser aceita, negada ou um tempo limite."
         },
-        "special_user": "B-but {user}. Isso é pervertido fazer isso em público."
+        "special_user": "M-mas {user}. Isso é pervertido fazer isso em público."
       },
       "holo": {
         "description": "receba uma imagem de uma loba comedora de maçãs e sábia tomadora de álcool",
@@ -146,7 +146,7 @@
         "mention_purr": [
           "O-okay. Mas apenas em minha bochecha! \\*deixa a bochecha a mostra*",
           "Só minha bochecha, ok?",
-          "T-It é um pouco sensual, mas ok. \\*cora*"
+          "I-isso é um pouco sensual, mas ok. \\*cora*"
         ],
         "mention_self": "Como você pode se beijar{user}? Com um espelho?",
         "message": "{user} beija {target}",
@@ -172,8 +172,8 @@
         "special_user": "M-mas querida... Não em público. \\*cora*"
       },
       "neko": {
-        "description": "Obtém uma imagem ou gif de um Neko adorável.",
-        "loading": "{EMOTE_LOADING} Recebendo uma imagem de um neko fofo (ou um gif)",
+        "description": "Obtém uma imagem ou gif de um Neko adorável (ou sensual)",
+        "loading": "{EMOTE_LOADING} Atraindo uma neko...",
         "message": "Neko {EMOTE_NEKOWO}",
         "purr": "{EMOTE_PURR} Eu... Eu realmente era assim no passado?",
         "snuggle": "{EMOTE_PURR} Esta é a minha irmãzinha! UwU"
@@ -234,6 +234,11 @@
         },
         "special_user": "Owww {user} amor. Você sabe que ambos somos sempre um perfeito 100.",
         "target_bot": "Você não pode shippar com bots seu estranho!"
+      },
+      "shiro": {
+        "description": "Obtenha uma imagem de um mensageiro divino que pode afastar fantasmas assustadores",
+        "loading": "{EMOTE_LOADING} Recebendo uma imagem da Shiro...",
+        "message": "Shiro {EMOTE_SHIRO_TAIL_WAG}"
       },
       "slap": {
         "description": "De tapas nos malvados! >:C",
@@ -614,9 +619,7 @@
           ]
         }
       },
-      "lewd": {
-        "description": "Dá uma imagem ou gif de um Neko pervertido.\n\nEste comando só pode ser executado em canais denominados NSFW!",
-        "loading": "{EMOTE_LOADING} Recebendo uma imagem de um neko Pervertido (ou um gif)",
+      "neko": {
         "message": "Neko Pervertido {EMOTE_NEKOWO}"
       },
       "pussylick": {

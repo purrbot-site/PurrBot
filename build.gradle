@@ -47,9 +47,9 @@ dependencies {
     compile group: 'pw.chew', name: 'jda-chewtils-commons', version: '2.0-SNAPSHOT'
     compile group: 'pw.chew', name: 'jda-chewtils-menu', version: '2.0-SNAPSHOT'
     implementation group: 'com.rethinkdb', name: 'rethinkdb-driver', version:'2.4.4'
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.1'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10'
     // implementation group: 'com.github.DV8FromTheWorld', name: 'JDA', version: 'e111d55'
-    implementation('net.dv8tion:JDA:5.0.0-alpha.21')
+    implementation('net.dv8tion:JDA:5.0.0-alpha.22')
     {
         exclude(module: 'opus-java')
     }
@@ -60,7 +60,7 @@ dependencies {
     implementation group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.5'
     implementation group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '3.1.1'
     implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
-    implementation group: 'io.javalin', name: 'javalin', version: '5.1.1'
+    implementation group: 'io.javalin', name: 'javalin', version: '5.1.2'
     implementation group: 'org.json', name: 'json', version: '20220924'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.10.0'
 }
