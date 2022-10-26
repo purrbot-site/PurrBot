@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 - 2021 Andre601
+ *  Copyright 2018 - 2022 Andre601
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *  documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -32,7 +32,6 @@ public final class LangUtils{
     public String getString(String language, String path){
         switch(language.toLowerCase()){
             case "de-ch":
-            case "de-de":
             case "en-owo":
             case "es-es":
             case "fr-fr":
@@ -41,7 +40,8 @@ public final class LangUtils{
             case "ru-ru":
             case "tr-tr":
                 return bot.getFileManager().getString(language.toLowerCase(), path);
-    
+            
+            case "de-de":
             case "it-it":
             case "et-ee":
             default:
@@ -52,7 +52,6 @@ public final class LangUtils{
     public List<String> getStringList(String language, String path){
         switch(language.toLowerCase()){
             case "de-ch":
-            case "de-de":
             case "en-owo":
             case "es-es":
             case "fr-fr":
@@ -61,7 +60,8 @@ public final class LangUtils{
             case "ru-ru":
             case "tr-tr":
                 return bot.getFileManager().getStringlist(language.toLowerCase(), path);
-    
+            
+            case "de-de":
             case "it-it":
             case "et-ee":
             default:
@@ -71,7 +71,7 @@ public final class LangUtils{
     
     public enum Language{
         DE_CH ("\uDDE8", "\uDDED"),
-        DE_DE ("\uDDE9", "\uDDEA"),
+        //DE_DE ("\uDDE9", "\uDDEA"),
         EN    ("\uDDEC", "\uDDE7"),
         EN_OWO("\uDDEC", "\uDDE7"),
         ES_ES ("\uDDEA", "\uDDF8"),

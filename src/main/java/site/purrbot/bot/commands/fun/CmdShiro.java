@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 - 2021 Andre601
+ *  Copyright 2018 - 2022 Andre601
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *  documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,7 +16,7 @@
  *  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package site.purrbot.bot.commands.nsfw;
+package site.purrbot.bot.commands.fun;
 
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
@@ -29,31 +29,27 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
 @CommandDescription(
-        name = "Lewd",
-        description = "purr.nsfw.lewd.description",
-        triggers = {"lewd", "lneko"},
-        attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}lewd [--gif]"),
-                @CommandAttribute(key = "help", value = "{p}lewd [--gif]")
-        }
+    name = "shiro",
+    description = "purr.fun.shiro.description",
+    triggers = {"shiro"},
+    attributes = {
+        @CommandAttribute(key = "category", value = "fun"),
+        @CommandAttribute(key = "usage", value = "{p}shiro"),
+        @CommandAttribute(key = "help", value = "{p}shiro")
+    }
 )
-public class CmdLewd implements Command{
-
+public class CmdShiro implements Command{
+    
     private final PurrBot bot;
-
-    public CmdLewd(PurrBot bot){
+    
+    public CmdShiro(PurrBot bot){
         this.bot = bot;
     }
-
+    
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.lewd.loading")).queue(message -> {
-            if(bot.getMessageUtil().hasArg("gif", args)){
-                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_NEKO_GIF, member);
-            }else{
-                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_NEKO_IMG, member);
-            }
-        });
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.shiro.loading")).queue(message -> 
+            bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.SHIRO, member)
+        );
     }
 }

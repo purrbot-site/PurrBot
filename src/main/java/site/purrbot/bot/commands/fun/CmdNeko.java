@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 - 2021 Andre601
+ *  Copyright 2018 - 2022 Andre601
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *  documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -34,8 +34,8 @@ import site.purrbot.bot.util.HttpUtil;
         triggers = {"neko", "catgirl"},
         attributes = {
                 @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}neko [--gif]"),
-                @CommandAttribute(key = "help", value = "{p}neko [--gif]")
+                @CommandAttribute(key = "usage", value = "{p}neko [--gif] [--nsfw]"),
+                @CommandAttribute(key = "help", value = "{p}neko [--gif] [--nsfw]")
         }
 )
 public class CmdNeko implements Command{
@@ -49,11 +49,31 @@ public class CmdNeko implements Command{
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.neko.loading")).queue(message -> {
-            if(bot.getMessageUtil().hasArg("gif", args)){
-                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NEKO_GIF, member);
+            boolean isNsfw = bot.getMessageUtil().hasArg("nsfw", args);
+            boolean isGif = bot.getMessageUtil().hasArg("gif", args);
+    
+            HttpUtil.ImageAPI image;
+            if(isNsfw){
+                if(!tc.isNSFW()){
+                    bot.getEmbedUtil().sendError(tc, member, "errors.nsfw_random", true);
+                    message.delete().queue();
+                    return;
+                }
+                
+                if(isGif){
+                    image = HttpUtil.ImageAPI.NSFW_NEKO_GIF;
+                }else{
+                    image = HttpUtil.ImageAPI.NSFW_NEKO_IMG;
+                }
             }else{
-                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NEKO_IMG, member);
+                if(isGif){
+                    image = HttpUtil.ImageAPI.NEKO_GIF;
+                }else{
+                    image = HttpUtil.ImageAPI.NEKO_IMG;
+                }
             }
+            
+            bot.getRequestUtil().handleEdit(tc, message, image, member);
         });
     }
 }

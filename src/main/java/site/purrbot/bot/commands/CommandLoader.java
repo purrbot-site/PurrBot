@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 - 2021 Andre601
+ *  Copyright 2018 - 2022 Andre601
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *  documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -61,6 +61,7 @@ public class CommandLoader {
             new CmdPoke(bot),
             new CmdSenko(bot),
             new CmdShip(bot),
+            new CmdShiro(bot),
             new CmdSlap(bot),
             new CmdSmile(bot),
             new CmdTail(bot),
@@ -88,7 +89,6 @@ public class CommandLoader {
             new CmdBlowjob(bot),
             new CmdCum(bot),
             new CmdFuck(bot),
-            new CmdLewd(bot),
             new CmdPussylick(bot),
             new CmdSolo(bot),
             new CmdSpank(bot),
