@@ -54,6 +54,12 @@ public class CmdNeko implements Command{
     
             HttpUtil.ImageAPI image;
             if(isNsfw){
+                if(!tc.isNSFW()){
+                    bot.getEmbedUtil().sendError(tc, member, "errors.nsfw_random", true);
+                    message.delete().queue();
+                    return;
+                }
+                
                 if(isGif){
                     image = HttpUtil.ImageAPI.NSFW_NEKO_GIF;
                 }else{

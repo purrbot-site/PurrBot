@@ -30,8 +30,8 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
-import net.dv8tion.jda.api.interactions.components.selections.SelectMenu;
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
+import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 import net.dv8tion.jda.api.requests.restaction.MessageCreateAction;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
@@ -164,8 +164,8 @@ public class CmdFuck implements Command{
         }
     }
     
-    private SelectMenu getSelectionMenu(String guildId){
-        return SelectMenu.create("purr:fuck")
+    private StringSelectMenu getSelectionMenu(String guildId){
+        return StringSelectMenu.create("purr:fuck")
             .addOption(bot.getMsg(guildId, "request.buttons.fuck_anal"), "anal", Emoji.fromFormatted(Emotes.SEX_ANAL.getEmote()))
             .addOption(bot.getMsg(guildId, "request.buttons.fuck_normal"), "normal", Emoji.fromFormatted(Emotes.SEX.getEmote()))
             .addOption(bot.getMsg(guildId, "request.buttons.fuck_yaoi"), "yaoi", Emoji.fromFormatted(Emotes.SEX_YAOI.getEmote()))
@@ -197,7 +197,7 @@ public class CmdFuck implements Command{
         );
         
         bot.getWaiter().waitForEvent(
-            SelectMenuInteractionEvent.class,
+            StringSelectInteractionEvent.class,
             event -> {
                 if(event.getUser().isBot())
                     return false;
