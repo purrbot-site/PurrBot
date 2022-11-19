@@ -149,6 +149,7 @@
           "T-that's a bit lewd, but okay. \\*blushes*"
         ],
         "mention_self": "How can you kiss yourself {user}? With a mirror?",
+        "mention_snuggle": "No {user}! You have to ask her yourself for this.",
         "message": "{user} kisses {target}",
         "no_mention": "Please mention at least one user to kiss!",
         "special_user": "\\*Enjoys the kiss from {user}*"
@@ -723,6 +724,7 @@
         ]
       },
       "kiss": {
+        "mention_purr": "You can't kiss my sister through my help {user}!",
         "mention_snuggle": [
           "Wha-? O-okay. B-but you can only kiss my cheek {user}! \\*Lets you kiss her cheek*",
           "B-but {user}... That is embarrassing here in public. \\*looks shy* O-okay fine, but only a single kiss. Q////Q",
