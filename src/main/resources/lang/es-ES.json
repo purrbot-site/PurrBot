@@ -149,6 +149,7 @@
           "E-eso es un poco obsceno, pero está bien. \\*se sonroja*"
         ],
         "mention_self": "¿Cómo puedes besarte a ti mismo {user}? ¿Con un espejo?",
+        "mention_snuggle": "¡No {user}! Tienes que preguntárselo tú mismo.",
         "message": "{user} besa a {target}",
         "no_mention": "¡Por favor, mencione al menos un usuario para besar!",
         "special_user": "\\*Disfruta del beso de {user}*"
@@ -723,6 +724,7 @@
         ]
       },
       "kiss": {
+        "mention_purr": "¡No puedes besar a mi hermana con mi ayuda {user}!",
         "mention_snuggle": [
           "Qu-? O-okay. P-pero solo puedes un beso en mi mejilla {user}! \\*Deja que beses su mejilla*",
           "P-Pero {user}... Eso es vergonzoso aquí en público. \\*parece tímida* O-okay, pero sólo un solo beso. Q////Q",
