@@ -149,6 +149,7 @@
           "D-das ist ein wenig lewd, aber okay. \\*errötet*"
         ],
         "mention_self": "Wie kannst du dich selber küssen {user}? Mit einem Spiegel?",
+        "mention_snuggle": "Nein {user}! Du musst sie selber darum bitten.",
         "message": "{user} küsst {target}",
         "no_mention": "Bitte erwähne mindestens eine Person zum küssen!",
         "special_user": "\\*Geniesst den kuss von {user}*"
@@ -723,6 +724,7 @@
         ]
       },
       "kiss": {
+        "mention_purr": "Du kannst meine Schwester nicht durch meine Hilfe küssen {user}!",
         "mention_snuggle": [
           "Wa-? O-okay. A-aber du kannst nur meine Wange küssen {user}! \\*Lässt dich ihre Wange küssen*",
           "A-aber {user}... Das ist peinlich hier in der Öffentlichkeit. \\*schaut schüchtern* O-okay gut, aber nur ein einziger Kuss. Q////Q",

@@ -149,6 +149,7 @@
           "I-isso é um pouco sensual, mas ok. \\*cora*"
         ],
         "mention_self": "Como você pode se beijar{user}? Com um espelho?",
+        "mention_snuggle": "Não {user}! Você mesmo tem que pedir isso a ela.",
         "message": "{user} beija {target}",
         "no_mention": "Por favor, mencione pelo menos um usuário para beijar!",
         "special_user": "\\*Aprecia o beijo de {user}*"
@@ -723,6 +724,7 @@
         ]
       },
       "kiss": {
+        "mention_purr": "Você não pode beijar minha irmã com minha ajuda {user}!",
         "mention_snuggle": [
           "Wha-? O-OK. M-mas você só pode beijar a minha bochecha {user}! \\*Deixe você beijar a bochecha dela*",
           "M-mas {user}... Isso é embaraçoso aqui em público. \\*parece tímido* O-okay bem, mas apenas um único beijo. Q////Q",

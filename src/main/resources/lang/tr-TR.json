@@ -149,6 +149,7 @@
           "B-bu biraz ayıp, ama tamam. \\*yüzü kızarır*"
         ],
         "mention_self": "{user} kendini nasıl öpebilirsin ki? Aynayla mı?",
+        "mention_snuggle": "Hayır {user}! Bunu ona kendin sormalısın.",
         "message": "{user}, {target} adlı üyeyi öpüyor.",
         "no_mention": "Lütfen öpmek için en az bir üye etiketle!",
         "special_user": "\\*{user} tarafından gelen öpücüğün tadını çıkarıyor*"
@@ -723,6 +724,7 @@
         ]
       },
       "kiss": {
+        "mention_purr": "Benim yardımımla kız kardeşimi öpemezsin {user}!",
         "mention_snuggle": [
           "nE? T-tamam. A-ama sadece yanağımı öpebilirsin {user}! \\*yanağını öpmene izir verir*",
           "{user} b-bu... Bunu herkesin içinde yapmak biraz utanç verici. \\*utanarak bakar* T-tamam ama sadece bir öpücük. Q////Q",

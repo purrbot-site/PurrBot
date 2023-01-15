@@ -149,6 +149,7 @@
           "T-that's a bit wewd, but okay. \\*bwushes* OwO"
         ],
         "mention_self": "How can you kiss youwselwf {user}? With a miwwow?",
+        "mention_snuggle": "No {user}! You have to ask hew youwself fow this! >:C",
         "message": "{user} kisses {target}",
         "no_mention": "Pwease mention at weast one user to kiss!",
         "special_user": "\\*Enjoys the kiss fwom {user}*"
@@ -723,6 +724,7 @@
         ]
       },
       "kiss": {
+        "mention_purr": "You can't kiss my sistew thwough my help {user}! >.<",
         "mention_snuggle": [
           "Wha-? O-okay. B-but you can onwy kissu my cheek {user}! \\*Lets you kiss hew cheek*",
           "B-but {user}... That is so embawwassing here in pubwic. \\*wooks shy* O-okay fine, but onwy a singwe kiss. Q////Q",

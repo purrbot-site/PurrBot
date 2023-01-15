@@ -149,6 +149,7 @@
           "C-c'est un peu pervers, mais d'accord. \\*blushes*"
         ],
         "mention_self": "Comment peut t'embrasser toi-même {user}? Avec un miroir?",
+        "mention_snuggle": "Non, {user}! Vous devez lui demander vous-même.",
         "message": "{user} embrasse {target}",
         "no_mention": "Veuillez mentionner au moins un utilisateur a embrasser!",
         "special_user": "\\*Apprécie le baiser de {user}*"
@@ -723,6 +724,7 @@
         ]
       },
       "kiss": {
+        "mention_purr": "Vous ne pouvez pas embrasser ma sœur avec mon aide {user}!",
         "mention_snuggle": [
           "Qu-? D-d'accord. M-mais tu ne peut embrasser que ma joue {user}! \\*te laisse embrasser sa joue*",
           "M-mais {user}... C'est embarrassant ici en public. \\*semble timide* O-okay très bien, mais seulement un baiser. Q////Q",
