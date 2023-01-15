@@ -32,7 +32,7 @@
   "misc": {
     "and": "и",
     "info": "Здравей {user}!\nМоят prefix за този Discord е `{prefix}`\nНапиши `{prefix}help`, за да видиш част от командите или виж документацията:\nhttps://docs.purrbot.site/bot/commands",
-    "language": "английски (EN)",
+    "language": "български (bg-bg)",
     "unknown_user": "Неизвестен",
     "welcome_member": "Ти си потребител №{count}"
   },
@@ -287,7 +287,7 @@
           "translators_title": "Преводачи",
           "translators_value": "Благодаря на всички хора които преведоха бота!\nМоже да намерите проекта за превод [here]({link})."
         },
-        "language_set": "Сложете езика на `Английски (en)`!",
+        "language_set": "Задайте български `език (bg-bg)`!",
         "no_language": "Моля предоставете езикът който искате да сложите!"
       },
       "prefix": {

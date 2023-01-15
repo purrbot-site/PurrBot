@@ -31,6 +31,7 @@ public final class LangUtils{
 
     public String getString(String language, String path){
         switch(language.toLowerCase()){
+            case "bg-bg":
             case "de-ch":
             case "en-owo":
             case "es-es":
@@ -51,6 +52,7 @@ public final class LangUtils{
     
     public List<String> getStringList(String language, String path){
         switch(language.toLowerCase()){
+            case "bg-bg":
             case "de-ch":
             case "en-owo":
             case "es-es":
@@ -70,6 +72,7 @@ public final class LangUtils{
     }
     
     public enum Language{
+        BG_BG ("\uDDE7", "\uDDEC"),
         DE_CH ("\uDDE8", "\uDDED"),
         //DE_DE ("\uDDE9", "\uDDEA"),
         EN    ("\uDDEC", "\uDDE7"),

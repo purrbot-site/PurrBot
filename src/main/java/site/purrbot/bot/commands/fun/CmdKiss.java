@@ -58,6 +58,47 @@ public class CmdKiss implements Command{
             return;
         }
         
+        if(bot.isBeta()){
+            if(containsAny(members, IDs.PURR)){
+                if(bot.isSpecial(member.getId())){
+                    tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.kiss.special_user", member.getAsMention())
+                    ).queue();
+                }else{
+                    tc.sendMessage(
+                        bot.getMsg(guild.getId(), "snuggle.fun.kiss.mention_purr", member.getAsMention())
+                    ).queue();
+                }
+            }else
+            if(containsAny(members, IDs.SNUGGLE)){
+                tc.sendMessage(
+                    bot.getRandomMsg(guild.getId(), "snuggle.fun.kiss.mention_snuggle", member.getAsMention())
+                ).queue();
+            }
+        }else{
+            if(containsAny(members, IDs.PURR)){
+                if(bot.isSpecial(member.getId())){
+                    tc.sendMessage(
+                        bot.getMsg(guild.getId(), "purr.fun.kiss.special_user", member.getAsMention())
+                    ).queue();
+                }else{
+                    tc.sendMessage(
+                        bot.getRandomMsg(guild.getId(), "purr.fun.kiss.mention_purr", member.getAsMention())
+                    ).queue();
+                }
+            }else
+            if(containsAny(members, IDs.SNUGGLE)){
+                tc.sendMessage(
+                    bot.getMsg(guild.getId(), "purr.fun.kiss.mention_snuggle", member.getAsMention())
+                ).queue();
+            }
+        }
+        
+        
+        
+        
+        
+        
         if(members.contains(guild.getSelfMember())){
             if(bot.isBeta()){
                 if(bot.isSpecial(member.getId())){
@@ -82,6 +123,8 @@ public class CmdKiss implements Command{
             }
         }
         
+        
+        
         if(members.contains(member)){
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.fun.kiss.mention_self", member.getAsMention())
@@ -101,5 +144,14 @@ public class CmdKiss implements Command{
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.kiss.loading")).queue(message ->
                 bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.KISS, member, targets)
         );
+    }
+    
+    private boolean containsAny(List<Member> members, String id){
+        for(Member member : members){
+            if(member.getId().equals(id))
+                return true;
+        }
+        
+        return false;
     }
 }
