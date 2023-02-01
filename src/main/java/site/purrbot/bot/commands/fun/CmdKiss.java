@@ -94,37 +94,6 @@ public class CmdKiss implements Command{
             }
         }
         
-        
-        
-        
-        
-        
-        if(members.contains(guild.getSelfMember())){
-            if(bot.isBeta()){
-                if(bot.isSpecial(member.getId())){
-                    tc.sendMessage(
-                            bot.getMsg(guild.getId(), "snuggle.fun.kiss.special_user", member.getAsMention())
-                    ).queue();
-                }else{
-                    tc.sendMessage(
-                            bot.getRandomMsg(guild.getId(), "snuggle.fun.kiss.mention_snuggle", member.getAsMention())
-                    ).queue();
-                }
-            }else{
-                if(bot.isSpecial(member.getId())){
-                    tc.sendMessage(
-                            bot.getMsg(guild.getId(), "purr.fun.kiss.special_user", member.getAsMention())
-                    ).queue();
-                }else{
-                    tc.sendMessage(
-                            bot.getRandomMsg(guild.getId(), "purr.fun.kiss.mention_purr", member.getAsMention())
-                    ).queue();
-                }
-            }
-        }
-        
-        
-        
         if(members.contains(member)){
             tc.sendMessage(
                     bot.getMsg(guild.getId(), "purr.fun.kiss.mention_self", member.getAsMention())
