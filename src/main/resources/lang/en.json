@@ -16,15 +16,25 @@
       "self_channel": "I lack the permission `{permission}` in the channel {channel} to do this!",
       "other": "You lack the permission `{permission}` for this command."
     },
-    "nsfw_random": [
-      "This channel doesn't seem to be Age-restricted, does it {user}?",
-      "Please be naughty in a Age-restricted channel {user}.",
-      "Nonono! You will be a good little horny person and use this command in a Age-restricted channel {user}!",
-      "ChannelNotAgeRestrictedException: The command may not be used outside a Age-restricted channel.",
-      "You can only see those naughty things in Age-restricted channels {user}.",
-      "Everything has its place. And this command belongs in a Age-restricted channel {user}.",
-      "I'm sorry {user} but Discord only allows me to use this command in a Age-restricted channel..."
-    ],
+    "nsfw": {
+      "no_channel_random": [
+        "This channel doesn't seem to be Age-restricted, does it {user}?",
+        "Please be naughty in a Age-restricted channel {user}.",
+        "Nonono! You will be a good little horny person and use this command in a Age-restricted channel {user}!",
+        "ChannelNotAgeRestrictedException: The command may not be used outside a Age-restricted channel.",
+        "You can only see those naughty things in Age-restricted channels {user}.",
+        "Everything has its place. And this command belongs in a Age-restricted channel {user}.",
+        "I'm sorry {user} but Discord only allows me to use this command in a Age-restricted channel..."
+      ],
+      "no_donator": {
+        "description": "This command is only accessible on Servers owned by **Patreon Supporters**!\n\nTo unlock it for your server, follow these steps:\n1. Join the [~Nya Discord Server]({guild_invite})\n2. Become a [Tier 2/3 Patreon Supporter]({patreon_url}).",
+        "note_description": "- You need to have your Discord account linked with your Patreon account.\n- It can take a few hours for the Donation to propagate.\n- Leaving the Server or cancelling your donation may get your command access revoked.",
+        "note_title": "Important notes",
+        "support_description": "If you have questions or need help with unlocking these commands, join the [~Nya Discord]({guild_invite}) and ask in the `#support` channel.",
+        "support_title": "Need Help?",
+        "title": "Donator-exclusive command"
+      }
+    },
     "request_error": "There was an error while handling the request. Make sure that my message wasn't deleted and that I have sufficient permissions!",
     "title": "Error",
     "unknown": "T-that is a bit embarrassing now, but I had an error while performing an action. {EMOTE_BLUSH}\nPlease report this on [the Discord]({guild_invite}), or on [GitHub]({github_url})!"
