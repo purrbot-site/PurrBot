@@ -16,15 +16,25 @@
       "self_channel": "Il me manque la permission `{permission}` dans le salon {channel} pour faire cela!",
       "other": "il vous manque la permission `{permission}` pour cette commande."
     },
-    "nsfw_random": [
-      "Ce salon ne semble pas avoir de limite d'âge, n'est-ce pas {user}?",
-      "S'il-te-plaît sois pervers dans un salon avec une limite d'âge {user}",
-      "Non-non! Vous serez une bonne personne en chaleur et utiliserez cette commande dans un salon avec une limite d'âge {user}!",
-      "ChannelNotAgeRestrictedException: La commande ne peut pas être utilisée en dehors d'un salon ayant une limite d'âges.",
-      "Tu peux seulement voir ces choses pervers dans un salon ayant une limite d'âge {user}.",
-      "Tout a sa place. Et cette commande va dans un salon ayant une limite d'âge {user}.",
-      "Je suis désolé {user} mais Discord ne me permet d'utiliser cette commande que dans un salon ayant une limite d'âge..."
-    ],
+    "nsfw": {
+      "no_channel_random": [
+        "Ce salon ne semble pas avoir de limite d'âge, n'est-ce pas {user}?",
+        "S'il te plaît sois en chaleur dans un salon ayant une limite d'âge {user}",
+        "Non-non! Vous serez une bonne personne en chaleur et utiliserez cette commande dans un salon avec une limite d'âge {user}!",
+        "ChannelNotAgeRestrictedException: La commande ne peut pas être utilisée en dehors d'un salon ayant une limite d'âges.",
+        "Tu peux seulement voir ces choses pervers dans un salon ayant une limite d'âge {user}.",
+        "Tout a sa place. Et cette commande va dans un salon ayant une limite d'âge {user}.",
+        "Je suis désolé {user} mais Discord ne me permet d'utiliser cette commande que dans un salon ayant une limite d'âge..."
+      ],
+      "no_donator": {
+        "description": "Cette commande n'est accessible que sur les serveurs appartenant aux **Supporteurs Patreon**!\n\nPour la débloquer pour votre serveur, suivez ces étapes :\n1. Rejoignez le [serveur Discord ~Nya]({guild_invite})\n2. Devenez un [Supporteur Patreon de Tier 2/3 ({patreon_url}).",
+        "note_description": "- Tu dois avoir ton compte Discord lié à ton compte Patreon.\n- Il peut prendre quelques heures pour que le don se propage.\n- Si vous quittez le serveur ou annulez votre don, votre accès aux commandes peut être révoqué.",
+        "note_title": "Note importante :",
+        "support_description": "Si vous avez des questions ou avez besoin d'aide pour déverrouiller ces commandes, rejoignez [~Nya Discord]({guild_invite}) et demandez dans le salon `#support`.",
+        "support_title": "Besoin d'aide ?",
+        "title": "Commande exclusive aux donateurs"
+      }
+    },
     "request_error": "Il y a eu une erreur lors du traitement de la requête. Assurez-vous que mon message n'a pas été supprimé et que j'ai les permissions suffisantes!",
     "title": "Erreur",
     "unknown": "C-c'est un peu embarrassant, mais j'ai eu une erreur en effectuant une action. {EMOTE_BLUSH}\ns'il vous plait signaler ceci sur [le Discord]({guild_invite}), ou sur [GitHub]({github_url} )!"
