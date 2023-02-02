@@ -16,15 +16,25 @@
       "self_channel": "Bunu yapmak için {channel} kanalında `{permission}` iznim yok!",
       "other": "Bu komut için `{permission}` iznine sahip değilsiniz."
     },
-    "nsfw_random": [
-      "Bu kanal yaş kısıtlanmalı gibi görünmüyor, değil mi {user}?",
-      "Lütfen yaş kısıtlaması olan bir kanalda yaramaz ol {user}.",
-      "Hayır hayır hayır! Tatlı ve ateşli bir insan olacaksın ve bu komutu yaş kısıtlaması olan bir kanalda kullanacaksın {user}!",
-      "ChannelNotAgeRestrictedException: Komut, Yaş kısıtlamalı bir kanalın dışında kullanılamaz.",
-      "Bu yaramaz şeyleri yalnızca yaş kısıtlamalı kanallarda görebilirsin {user}.",
-      "Her şeyin bir yeri vardır. Ve bu komut yaş kısıtlamalı bir kanala ait {user}.",
-      "Üzgünüm {user} ama Discord bu komutu sadece yaş kısıtlamalı kanallarda kullanmama izin veriyor..."
-    ],
+    "nsfw": {
+      "no_channel_random": [
+        "Bu kanalda yaş sınırlaması yok gibi görünüyor, değil mi {user}?",
+        "Lütfen yaş sınırlaması olan bir kanalda yaramazlık yap {user}.",
+        "Hayır hayır hayır! Tatlı ve ateşli bir insan olacaksın ve bu komutu yaş kısıtlaması olan bir kanalda kullanacaksın {user}!",
+        "ChannelNotAgeRestrictedException: Komut, Yaş kısıtlamalı bir kanalın dışında kullanılamaz.",
+        "Bu yaramaz şeyleri yalnızca yaş kısıtlamalı kanallarda görebilirsin {user}.",
+        "Her şeyin bir yeri vardır. Ve bu komut yaş kısıtlamalı bir kanala ait {user}.",
+        "Üzgünüm {user} ama Discord bu komutu sadece yaş kısıtlamalı kanallarda kullanmama izin veriyor..."
+      ],
+      "no_donator": {
+        "description": "Bu komuta yalnızca **Patreon Destekçilerine** sahip Sunuculardan erişilebilir!\n\nSunucunuz için kilidi açmak için aşağıdaki adımları izleyin:\n1. [~Nya Discord Sunucusu]'na katılın ({guild_invite})\n2. [Kademe 2/3 Patreon Destekçisi]({patreon_url}) olun.",
+        "note_description": "- Discord hesabınızın Patreon hesabınızla bağlantılı olması gerekiyor.\n- Bağışın gözükmesi birkaç saat sürebilir.\n- Sunucudan ayrılmak veya bağışınızı iptal etmek komut erişiminizin iptal edilmesine neden olabilir.",
+        "note_title": "Önemli notlar",
+        "support_description": "Sorularınız varsa veya bu komutların kilidini açmak için yardıma ihtiyacınız varsa, [~Nya Discord]({guild_invite}) sunucusuna katılın ve `#support` kanalına sorunuzu sorun.",
+        "support_title": "Yardım mı gerekiyor?",
+        "title": "Bağışçılara özel komut"
+      }
+    },
     "request_error": "İstek işlenirken bir hata oluştu. Mesajımın silinmediğinden ve yeterli izinlere sahip olduğumdan emin olun!",
     "title": "Hata",
     "unknown": "B-bu biraz utanç verici ancak, bir eylemi gerçekleştirirken hatayla karşılaştım. {EMOTE_BLUSH}\nLütfen bunu [Discord]({guild_invite}) veya [GitHub]({github_url}) üzerinden bildirin!"
