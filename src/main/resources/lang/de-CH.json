@@ -12,9 +12,8 @@
       "patreon_roles": "Patreon Rollen konnten nicht vom Support-Server abgerufen werden. Bitte versuche es später noch einmal und falls dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})"
     },
     "missing_perms": {
-      "self": "Mir fehlt die Berechtigung `{permission}` dafür.",
-      "self_channel": "Mir fehlt die Berechtigung `{permission}` im Textkanal {channel} dafür!",
-      "other": "Dir fehlt die Berechtigung `{permission}` für diesen Befehl."
+      "self": "Mir fehlen die folgenden Berechtigungen im Kanal {channel}:\n{permissions}",
+      "user": "Dir fehlt die folgende Berechtigung um diesen Befehl auszuführen:\n{permission}"
     },
     "nsfw": {
       "no_channel_random": [
