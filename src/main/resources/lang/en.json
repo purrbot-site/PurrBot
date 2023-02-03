@@ -12,9 +12,8 @@
       "patreon_roles": "Unable to retrieve Patreon roles from Support Server. Please try again later and if this issue persists, report it on [our Discord Server]({guild_invite})"
     },
     "missing_perms": {
-      "self": "I lack the permission `{permission}` for this.",
-      "self_channel": "I lack the permission `{permission}` in the channel {channel} to do this!",
-      "other": "You lack the permission `{permission}` for this command."
+      "self": "I lack the following permission(s) in the channel {channel}:\n{permissions}",
+      "user": "You lack the following permission to execute this command:\n{permission}"
     },
     "nsfw": {
       "no_channel_random": [
