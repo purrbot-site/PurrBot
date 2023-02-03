@@ -16,15 +16,25 @@
       "self_channel": "¡No tengo el permiso `{permission}` en el canal {channel} para hacer esto!",
       "other": "No tienes el permiso `{permission}` para este comando."
     },
-    "nsfw_random": [
-      "Este canal parece no tener una etiqueta NSFW, ¿Lo hago {user}?",
-      "Por favor, ten cuidado en un canal NSFW {user}.",
-      "¡Nonono! ¡Serás una buena persona pequeña y usarás este comando en un canal NSFW {user} !",
-      "ChannelNotAgeRestrictedException: El comando no puede ser usado fuera de un canal NSFW.",
-      "Solo puedes ver esas cosas \"sucias\" en los canales NSFW {user}.",
-      "Todo tiene su lugar, y este comando pertenece a un canal NSFW {user}.",
-      "Lo siento {user}, pero Discord solo me permite usar este comando en un canal NSFW..."
-    ],
+    "nsfw": {
+      "no_channel_random": [
+        "Este canal no parece tener restricción por edad, ¿Lo hago {user}?",
+        "Por favor, sea traviesa en un canal NSFW {user}.",
+        "¡¡Nonono!! ¡¡{user}!! ¡Serás una cachondo decente y usarás este comando en un de canal NSFW!",
+        "ChannelNotAgeRestrictedException: El comando no se puede usar fuera de un canal NSFW.",
+        "Solo puedes ver cosas guarras en un canal NSFW {user}.",
+        "Todo tiene su lugar... Y este comando pertenece a un canal NSFW {user}.",
+        "Lo siento {user}, pero Discord solo me permite usar este comando en un canal NSFW..."
+      ],
+      "no_donator": {
+        "description": "¡Este comando solo es accesible en nuestros Servers para los **Patreon Supporters**!\n\nPara desbloquearlo para su servidor, siga estos pasos:\n1. Únete al [~Nya Discord Server]({guild_invite})\n2. Conviértase en un [Seguidor de Patreon de nivel 2/3]({patreon_url}).",
+        "note_description": "- Necesitas tener tu cuenta de Discord vinculada con tu cuenta de Patreon.\n- La donación puede tardar algunas horas en propagarse.\n- Si abandona el servidor o cancela su donación, es posible que se le revoque el acceso a los comandos.",
+        "note_title": "Notas importantes",
+        "support_description": "Si tienes preguntas o necesitas ayuda para desbloquear estos comandos, entre en [~Nya Discord]({guild_invite}) y pregunta en el canal `#support`.",
+        "support_title": "¿Necesita ayuda?",
+        "title": "Comando exclusivo para donantes"
+      }
+    },
     "request_error": "Se ha producido un error al procesar la solicitud. ¡Asegúrese de que mi mensaje no ha sido borrado y de que tengo suficientes permisos!",
     "title": "Error",
     "unknown": "E-esto es un poco embarazoso, pero tuve un error mientras realizaba una acción. {EMOTE_BLUSH}\n¡Por favor, reporta esto en el [Discord]({guild_invite}), o en [GitHub]({github_url})!"
