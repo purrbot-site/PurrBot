@@ -12,9 +12,8 @@
       "patreon_roles": "Destek sunucusundan Patreon rolleri alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuza gelerek]({guild_invite}) bildirin."
     },
     "missing_perms": {
-      "self": "Bunun için `{permission}` iznine sahip değilim.",
-      "self_channel": "Bunu yapmak için {channel} kanalında `{permission}` iznim yok!",
-      "other": "Bu komut için `{permission}` iznine sahip değilsiniz."
+      "self": "{channel} kanalında aşağıdaki izin(ler)e sahip değilim:\n{permissions}",
+      "user": "Bu komutu çalıştırmak için aşağıdaki izinlere sahip değilsiniz:\n{permission}"
     },
     "nsfw": {
       "no_channel_random": [
