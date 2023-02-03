@@ -12,9 +12,8 @@
       "patreon_roles": "Não foi possível obter cargo do Patreon no Servidor de Suporte. Por favor, tente novamente mais tarde e, se este problema persistir, reporte-o em [nosso servidor Discord]({guild_invite})"
     },
     "missing_perms": {
-      "self": "Eu preciso da permissão `{permission}` para isso.",
-      "self_channel": "Eu preciso da permissão `{permission}` no canal {channel} para fazer isso!",
-      "other": "Você precisa da permissão `{permission}` para este comando."
+      "self": "Não tenho a(s) seguinte(s) permissões no canal {channel}:\n{permissions}",
+      "user": "Você não tem a seguinte permissão para executar este comando:\n{permission}"
     },
     "nsfw": {
       "no_channel_random": [
