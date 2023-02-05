@@ -12,9 +12,8 @@
       "patreon_roles": "No se han podido recuperar los roles de Patreon del Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, infórmanos en [nuestro servidor de Discord]({guild_invite})"
     },
     "missing_perms": {
-      "self": "Me falta el permiso `{permission}` para esto.",
-      "self_channel": "¡No tengo el permiso `{permission}` en el canal {channel} para hacer esto!",
-      "other": "No tienes el permiso `{permission}` para este comando."
+      "self": "No tengo los siguientes permisos en el canal {channel}:\n{permissions}",
+      "user": "Te falta el siguiente permiso para ejecutar este comando:\n{permission}"
     },
     "nsfw": {
       "no_channel_random": [
