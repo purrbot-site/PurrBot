@@ -15,6 +15,12 @@
       "self": "Mir fehlen die folgenden Berechtigungen im Kanal {channel}:\n{permissions}",
       "user": "Dir fehlt die folgende Berechtigung um diesen Befehl auszuführen:\n{permission}"
     },
+    "no_patreon": {
+      "title": "Patreon Feature!",
+      "description": "Diese Funktion ist nur für Server von [Stufe 2/3 Patreon Unterstützer]({patreon_url}) verfügbar!\n\nSolltest du der Besitzer dieses Servers sein und möchtest diese Funktion entsperren, mache folgende Schritte:\n1. Tritt dem [~Nya Discord Server]({guild_invite}) bei.\n2. Verlinke deinen Discord mit deinem Patreon Konto.\n3. Abonniere Stufe 2 oder 3 auf Patreon.",
+      "note_title": "Wichtig!",
+      "note_description": "Solltest du den Discord Server verlassen oder dein Patreon Abonnement beenden, wird diese Funktion wieder deaktiviert."
+    },
     "nsfw": {
       "no_channel_random": [
         "Diese Kanal scheint keine Altersbeschränkung zu haben, oder {user}?",
@@ -24,15 +30,7 @@
         "Du kannst diese ungezogenen Dinge nur in altersbeschränkten Kanälen sehen {user}.",
         "Alles hat seinen Platz. Und dieser Befehl gehört in einen altersbeschränkten Kanal {user}.",
         "Es tut mir leid {user} aber Discord erlaubt es mir nur, solche Befehle in altersbeschränkten Kanäler auszuführen..."
-      ],
-      "no_donator": {
-        "description": "Dieser Befehl ist nur für Server von **Patreon Unterstützer** verfügbar!\n\nUm es für deinen Server zu entsperren, folge diesen Schritten:\n1. Tritt dem [~Nya Discord Server]({guild_invite}) bei\n2. Werde ein [Stufe 2/3 Patreon Unterstützer]({patreon_url}).",
-        "note_description": "- Du musst deinen Discord Account mit deinem Patreon Account verknüpft haben.\n- Es kann einige Stunden dauern, bis die Spende verarbeitet wurde.\n- Das verlassen des Servers oder auflösen deiner Mitgliedschaft entfernt den Zugriff auf den Befehl.",
-        "note_title": "Wichtige Hinweise",
-        "support_description": "Falls du Fragen hast oder Hilfe beim entsperren dieser Befehle brauchts, kannst du dem [~Nya Discord]({guild_invite}) beitreten und im `#support` Kanal fragen.",
-        "support_title": "Brauchst du Hilfe?",
-        "title": "Spender-Exklusiver Befehl"
-      }
+      ]
     },
     "request_error": "Bei der Bearbeitung der Anfrage ist ein Fehler aufgetreten. Vergewissere dich, dass meine Nachricht nicht gelöscht wurde und dass ich über ausreichende Berechtigungen verfüge!",
     "title": "Fehler",
