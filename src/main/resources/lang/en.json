@@ -15,6 +15,12 @@
       "self": "I lack the following permission(s) in the channel {channel}:\n{permissions}",
       "user": "You lack the following permission to execute this command:\n{permission}"
     },
+    "no_patreon": {
+      "title": "Patreon Feature!",
+      "description": "This feature is only available for Servers owned by [Tier 2/3 Patreon Supporters]({patreon_url})!\n\nShould you be the Owner of this server and want to unlock this feature, do the following steps:\n1. Join the [~Nya Discord Server]({guild_invite})\n2. Link your Discord with your Patreon account.\n3. Subscribe to Tier 2 or 3 on Patreon.",
+      "note_title": "Important!",
+      "note_description": "Should you leave the Discord Server or stop your Patreon subscription will this feature be disabled again."
+    },
     "nsfw": {
       "no_channel_random": [
         "This channel doesn't seem to be Age-restricted, does it {user}?",
@@ -24,15 +30,7 @@
         "You can only see those naughty things in Age-restricted channels {user}.",
         "Everything has its place. And this command belongs in a Age-restricted channel {user}.",
         "I'm sorry {user} but Discord only allows me to use this command in a Age-restricted channel..."
-      ],
-      "no_donator": {
-        "description": "This command is only accessible on Servers owned by **Patreon Supporters**!\n\nTo unlock it for your server, follow these steps:\n1. Join the [~Nya Discord Server]({guild_invite})\n2. Become a [Tier 2/3 Patreon Supporter]({patreon_url}).",
-        "note_description": "- You need to have your Discord account linked with your Patreon account.\n- It can take a few hours for the Donation to propagate.\n- Leaving the Server or cancelling your donation may get your command access revoked.",
-        "note_title": "Important notes",
-        "support_description": "If you have questions or need help with unlocking these commands, join the [~Nya Discord]({guild_invite}) and ask in the `#support` channel.",
-        "support_title": "Need Help?",
-        "title": "Donator-exclusive command"
-      }
+      ]
     },
     "request_error": "There was an error while handling the request. Make sure that my message wasn't deleted and that I have sufficient permissions!",
     "title": "Error",
