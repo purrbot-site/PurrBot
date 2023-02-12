@@ -15,6 +15,12 @@
       "self": "No tengo los siguientes permisos en el canal {channel}:\n{permissions}",
       "user": "Te falta el siguiente permiso para ejecutar este comando:\n{permission}"
     },
+    "no_patreon": {
+      "title": "¡Característica de Patreon!",
+      "description": "¡Esta función solo está disponible para los Servers del propietario que sean [Patreon Supporter de Nivel 2/3]({patreon_url})!\n\nSi eres el propietario de este servidor y desea desbloquear esta función, realice los siguientes pasos:\n1. Únete al [~Nya Discord Server]({guild_invite})\n2. Vincula tu Discord con tu cuenta de Patreon.\n3. Suscríbete al Nivel 2 o 3 en Patreon.",
+      "note_title": "¡Importante!",
+      "note_description": "Si abandonas el servidor Discord o cancela su suscripción a Patreon, esta función se desactivará de nuevo."
+    },
     "nsfw": {
       "no_channel_random": [
         "Este canal no parece tener restricción por edad, ¿Lo hago {user}?",
@@ -24,15 +30,7 @@
         "Solo puedes ver cosas guarras en un canal NSFW {user}.",
         "Todo tiene su lugar... Y este comando pertenece a un canal NSFW {user}.",
         "Lo siento {user}, pero Discord solo me permite usar este comando en un canal NSFW..."
-      ],
-      "no_donator": {
-        "description": "¡Este comando solo es accesible en nuestros Servers para los **Patreon Supporters**!\n\nPara desbloquearlo para su servidor, siga estos pasos:\n1. Únete al [~Nya Discord Server]({guild_invite})\n2. Conviértase en un [Seguidor de Patreon de nivel 2/3]({patreon_url}).",
-        "note_description": "- Necesitas tener tu cuenta de Discord vinculada con tu cuenta de Patreon.\n- La donación puede tardar algunas horas en propagarse.\n- Si abandona el servidor o cancela su donación, es posible que se le revoque el acceso a los comandos.",
-        "note_title": "Notas importantes",
-        "support_description": "Si tienes preguntas o necesitas ayuda para desbloquear estos comandos, entre en [~Nya Discord]({guild_invite}) y pregunta en el canal `#support`.",
-        "support_title": "¿Necesita ayuda?",
-        "title": "Comando exclusivo para donantes"
-      }
+      ]
     },
     "request_error": "Se ha producido un error al procesar la solicitud. ¡Asegúrese de que mi mensaje no ha sido borrado y de que tengo suficientes permisos!",
     "title": "Error",
