@@ -15,6 +15,12 @@
       "self": "Não tenho a(s) seguinte(s) permissões no canal {channel}:\n{permissions}",
       "user": "Você não tem a seguinte permissão para executar este comando:\n{permission}"
     },
+    "no_patreon": {
+      "title": "Recurso do Patreon!",
+      "description": "Este recurso só está disponível para Servidores pertencentes a [Apoiadores Patreon Nível 2/3]({patreon_url})!\n\nCaso seja o proprietário deste servidor e deseje desbloquear este recurso, execute as seguintes etapas:\n1. Junte-se ao [Servidor Discord ~Nya]({guild_invite})\n2. Vincule seu Discord com sua conta no Patreon.\n3. Inscreva-se no Nível 2 ou 3 do Patreon.",
+      "note_title": "Importante!",
+      "note_description": "Caso saia do servidor Discord ou cancele sua assinatura no Patreon, este recurso será desativado novamente."
+    },
     "nsfw": {
       "no_channel_random": [
         "Este canal não parece ter uma restrição de idade, não é {user}?",
@@ -24,15 +30,7 @@
         "Você só pode ver essas coisas atrevidas nos canais restritos {user}.",
         "Tudo tem seu lugar. E esse comando pertence em um canal Restrito {user}.",
         "Me desculpe {user} mas o Discord só me permite usar este comando em um canal restrito..."
-      ],
-      "no_donator": {
-        "description": "Este comando só é acessível em Servidores possuídos por **Apoiadores Patron**!\n\nPara desbloqueá-lo para seu servidor, siga estes passos:\n1. Junte-se ao [Servidor do Discord ~Nya]({guild_invite})\n2. Torne-se um [Apoiador Tier 2/3]({patreon_url}).",
-        "note_description": "- Você precisa ter sua conta do Discord vinculada à sua conta no Patreon.\n- Pode levar algumas horas para a doação se propagar.\n- Sair do Servidor ou cancelar sua doação poderá causar a revogação de seu acesso ao comando.",
-        "note_title": "Notas importantes",
-        "support_description": "Se você tem perguntas ou precisa de ajuda para desbloquear esses comandos, junte-se ao [~Nya Discord]({guild_invite}) e pergunte no canal `#support`.",
-        "support_title": "Você precisa de ajuda?",
-        "title": "Comando exclusivo de doadores"
-      }
+      ]
     },
     "request_error": "Houve um erro ao lidar com a solicitação. Certifique-se de que a minha mensagem não foi excluída e de que eu tenho permissões suficientes!",
     "title": "Erro",
