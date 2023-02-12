@@ -15,6 +15,12 @@
       "self": "{channel} kanalında aşağıdaki izin(ler)e sahip değilim:\n{permissions}",
       "user": "Bu komutu çalıştırmak için aşağıdaki izinlere sahip değilsiniz:\n{permission}"
     },
+    "no_patreon": {
+      "title": "Patreon Özelliği!",
+      "description": "Bu özellik yalnızca [Kademe 2/3 Patreon Destekçileri]({patreon_url}) tarafından sahip olunan Sunucular için kullanılabilir!\n\nBu sunucunun Sahibi olmanız ve bu özelliğin kilidini açmak istemeniz durumunda, aşağıdaki adımları uygulayın:\n1. [~Nya Discord Sunucusu]'na katılın ({guild_invite})\n2. Discord'unuzu Patreon hesabınıza bağlayın.\n3. Patreon'da Kademe 2 veya 3'e abone olun.",
+      "note_title": "Önemli!",
+      "note_description": "Discord Sunucusundan ayrılmanız veya Patreon aboneliğinizi durdurmanız durumunda bu özellik tekrar devre dışı bırakılacaktır."
+    },
     "nsfw": {
       "no_channel_random": [
         "Bu kanalda yaş sınırlaması yok gibi görünüyor, değil mi {user}?",
@@ -24,15 +30,7 @@
         "Bu yaramaz şeyleri yalnızca yaş kısıtlamalı kanallarda görebilirsin {user}.",
         "Her şeyin bir yeri vardır. Ve bu komut yaş kısıtlamalı bir kanala ait {user}.",
         "Üzgünüm {user} ama Discord bu komutu sadece yaş kısıtlamalı kanallarda kullanmama izin veriyor..."
-      ],
-      "no_donator": {
-        "description": "Bu komuta yalnızca **Patreon Destekçilerine** sahip Sunuculardan erişilebilir!\n\nSunucunuz için kilidi açmak için aşağıdaki adımları izleyin:\n1. [~Nya Discord Sunucusu]'na katılın ({guild_invite})\n2. [Kademe 2/3 Patreon Destekçisi]({patreon_url}) olun.",
-        "note_description": "- Discord hesabınızın Patreon hesabınızla bağlantılı olması gerekiyor.\n- Bağışın gözükmesi birkaç saat sürebilir.\n- Sunucudan ayrılmak veya bağışınızı iptal etmek komut erişiminizin iptal edilmesine neden olabilir.",
-        "note_title": "Önemli notlar",
-        "support_description": "Sorularınız varsa veya bu komutların kilidini açmak için yardıma ihtiyacınız varsa, [~Nya Discord]({guild_invite}) sunucusuna katılın ve `#support` kanalına sorunuzu sorun.",
-        "support_title": "Yardım mı gerekiyor?",
-        "title": "Bağışçılara özel komut"
-      }
+      ]
     },
     "request_error": "İstek işlenirken bir hata oluştu. Mesajımın silinmediğinden ve yeterli izinlere sahip olduğumdan emin olun!",
     "title": "Hata",
