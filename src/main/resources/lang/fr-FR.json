@@ -15,6 +15,12 @@
       "self": "Il me manque la(les) permission(s) suivante(s) dans le salon {channel}:\n{permissions}",
       "user": "Vous n'avez pas la permission suivante pour exécuter cette commande :\n{permission}"
     },
+    "no_patreon": {
+      "title": "Fonctionnalité des Patreon !",
+      "description": "Cette fonctionnalité n'est disponible que pour les serveurs appartenant aux [Supporteurs Patreon de Tier 2/3]({patreon_url})!\n\nSi vous êtes le Propriétaire de ce serveur et souhaitez débloquer cette fonctionnalité, Suiver les étapes suivantes :\n1. Rejoignez le [~serveur Discord Nya]({guild_invite})\n2. Associez votre Discord à votre compte Patreon.\n3. Abonnez-vous aux niveaux Patreon 2 ou 3.",
+      "note_title": "Important!",
+      "note_description": "Si vous quittez le serveur Discord ou si vous arrêtez votre abonnement Patreon cette fonctionnalité sera de nouveau désactivé."
+    },
     "nsfw": {
       "no_channel_random": [
         "Ce salon ne semble pas avoir de limite d'âge, n'est-ce pas {user}?",
@@ -24,15 +30,7 @@
         "Tu peux seulement voir ces choses pervers dans un salon ayant une limite d'âge {user}.",
         "Tout a sa place. Et cette commande va dans un salon ayant une limite d'âge {user}.",
         "Je suis désolé {user} mais Discord ne me permet d'utiliser cette commande que dans un salon ayant une limite d'âge..."
-      ],
-      "no_donator": {
-        "description": "Cette commande n'est accessible que sur les serveurs appartenant aux **Supporteurs Patreon**!\n\nPour la débloquer pour votre serveur, suivez ces étapes :\n1. Rejoignez le [serveur Discord ~Nya]({guild_invite})\n2. Devenez un [Supporteur Patreon de Tier 2/3 ({patreon_url}).",
-        "note_description": "- Tu dois avoir ton compte Discord lié à ton compte Patreon.\n- Il peut prendre quelques heures pour que le don se propage.\n- Si vous quittez le serveur ou annulez votre don, votre accès aux commandes peut être révoqué.",
-        "note_title": "Note importante :",
-        "support_description": "Si vous avez des questions ou avez besoin d'aide pour déverrouiller ces commandes, rejoignez [~Nya Discord]({guild_invite}) et demandez dans le salon `#support`.",
-        "support_title": "Besoin d'aide ?",
-        "title": "Commande exclusive aux donateurs"
-      }
+      ]
     },
     "request_error": "Il y a eu une erreur lors du traitement de la requête. Assurez-vous que mon message n'a pas été supprimé et que j'ai les permissions suffisantes!",
     "title": "Erreur",
