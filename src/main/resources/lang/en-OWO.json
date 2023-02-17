@@ -15,6 +15,12 @@
       "self": "I lack the fowwowing pewmission(s) in the channew {channel}:\n`{permissions}`",
       "user": "You lack the fowwoing pewmission to execute this command:\n{permission}"
     },
+    "no_patreon": {
+      "title": "Patweon Featuwe! OWO",
+      "description": "This fatuwe is only available fow Sewvews owned by [Tiew 2/3 Patweon Suppowtews]({patreon_url})! -w-\n\nShould you be the Ownew of this sewew and want to unlock this featuwe, do the following steps:\n1. Join the [~Nya Discowd Sewew]({guild_invite})\n2. Link youw Discowd with youw Patweon account.\n3. Subscwibe to Tiew 2 ow 3 on Patweon.",
+      "note_title": "Important! OwO",
+      "note_description": "Should you leave the Discowd Sewew ow stop youw Patweon subscwiption will this featuwe be disabled again. TwT"
+    },
     "nsfw": {
       "no_channel_random": [
         "This channew doesn't seem to be age-westwicted, does it {user}? òwó",
@@ -24,15 +30,7 @@
         "You can onwy see those naughty things in Age-westwicted channews {user}.",
         "Evewything has its pwace. And this command bewongs in a Age-westwicted channew {user}! OwO",
         "I'm sowwy {user} but Discowd onwy awwows me to use this command in a Age-westwicted channew... TwT"
-      ],
-      "no_donator": {
-        "description": "This command is onwy accessibwe on Sewvews owned by **Patweon Supportews**!\n\nTo unwock it for your sewvew, fowwow these steps:\n1. Join the [~Nya Discowd Sewvew]({guild_invite})\n2. Become a [Tiew 2/3 Patweon Suppowtew]({patreon_url}).",
-        "note_description": "- You need to have your Discowd account linked with your Patweon account.\n- It can take a few houws for the Donation to pwopagate.\n- Weaving the Server or cancewwing youw donation may get youw command access wevoked.",
-        "note_title": "Impowtant notes",
-        "support_description": "If you have questions ow need hewp with unwocking these commands , join the [~Nya Discowd]({guild_invite}) and ask in the `#support` channew.",
-        "support_title": "Need Hewp?",
-        "title": "Donatow-excwusive command"
-      }
+      ]
     },
     "request_error": "Thewe was an ewwow while handwing the wequest TwT. Make suwe that my message wasn't deweted and that I have sufficient pewmissions!",
     "title": "Ewwow",
