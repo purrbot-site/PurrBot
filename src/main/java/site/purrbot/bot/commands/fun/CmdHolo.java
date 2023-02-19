@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Holo",
         description = "purr.fun.holo.description",
         triggers = {"holo", "spiceandwolf"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}holo"),
-                @CommandAttribute(key = "help", value = "{p}holo")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}holo"),
+            @CommandAttribute(key = "help", value = "{p}holo")
         }
 )
 public class CmdHolo implements Command{
@@ -47,7 +49,7 @@ public class CmdHolo implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.holo.loading")).queue(message ->
                 bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.HOLO, member)
         );

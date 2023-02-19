@@ -28,16 +28,18 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Cum",
         description = "purr.nsfw.cum.description",
         triggers = {"cum", "cumming"},
         attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}cum"
-                ),
-                @CommandAttribute(key = "help", value = "{p}cum")
+            @CommandAttribute(key = "category", value = "nsfw"),
+            @CommandAttribute(key = "usage", value =
+                "{p}cum"
+            ),
+            @CommandAttribute(key = "help", value = "{p}cum")
         }
 )
 public class CmdCum implements Command{
@@ -49,7 +51,7 @@ public class CmdCum implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.cum.loading")).queue(message ->
                 bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_CUM, member)
         );

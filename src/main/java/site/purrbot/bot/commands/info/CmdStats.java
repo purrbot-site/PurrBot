@@ -32,6 +32,7 @@ import site.purrbot.bot.commands.Command;
 
 import java.lang.management.ManagementFactory;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @CommandDescription(
@@ -39,9 +40,9 @@ import java.util.concurrent.TimeUnit;
         description = "purr.info.stats.description",
         triggers = {"stats", "stat", "statistic", "statistics"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}stats"),
-                @CommandAttribute(key = "help", value = "{p}stats")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = "{p}stats"),
+            @CommandAttribute(key = "help", value = "{p}stats")
         }
 )
 public class CmdStats implements Command{
@@ -54,7 +55,7 @@ public class CmdStats implements Command{
     
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         JDA jda = msg.getJDA();
         ShardManager shardManager = bot.getShardManager();
         

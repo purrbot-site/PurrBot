@@ -270,9 +270,6 @@ public class MessageUtil {
     }
     
     public boolean hasArg(String value, String... args){
-        if(args.length == 0)
-            return false;
-        
         for(String arg : args){
             if(arg.equalsIgnoreCase("--" + value))
                 return true;

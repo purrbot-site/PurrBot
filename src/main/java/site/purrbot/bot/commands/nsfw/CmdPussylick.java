@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "PussyLick",
         description = "purr.nsfw.pussylick.description",
         triggers = {"pussylick", "plick", "cunni"},
         attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}plick <@user>"),
-                @CommandAttribute(key = "help", value = "{p}plick <@user>")
+            @CommandAttribute(key = "category", value = "nsfw"),
+            @CommandAttribute(key = "usage", value = "{p}plick <@user>"),
+            @CommandAttribute(key = "help", value = "{p}plick <@user>")
         }
 )
 public class CmdPussylick implements Command{
@@ -47,13 +49,13 @@ public class CmdPussylick implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentions().getUsers().isEmpty()){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.pussylick.no_mention");
             return;
         }
         
-        Member target = msg.getMentions().getMembers().get(0);
+        Member target = members.get(0);
         
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){

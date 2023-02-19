@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.commands.fun;
 
-import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
@@ -26,6 +25,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -39,24 +39,22 @@ import java.util.stream.Collectors;
         description = "purr.fun.pat.description",
         triggers = {"pat", "patting", "pet", "patto"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}pat <@user> [@user ...]"),
-                @CommandAttribute(key = "help", value = "{p}pat <@user> [@user ...]")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}pat <@user> [@user ...]"),
+            @CommandAttribute(key = "help", value = "{p}pat <@user> [@user ...]")
         }
 )
 public class CmdPat implements Command{
 
     private final PurrBot bot;
-    private final Logger logger = (Logger)LoggerFactory.getLogger("Command - Pat");
+    private final Logger logger = LoggerFactory.getLogger("Command - Pat");
 
     public CmdPat(PurrBot bot){
         this.bot = bot;
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
-        List<Member> members = msg.getMentions().getMembers();
-    
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args) {
         if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.pat.no_mention");
             return;

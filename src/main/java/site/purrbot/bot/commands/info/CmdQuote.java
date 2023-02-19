@@ -31,14 +31,17 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
+import java.util.EnumSet;
+import java.util.List;
+
 @CommandDescription(
         name = "Quote",
         description = "purr.info.quote.description",
         triggers = {"quote"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}quote <messageId> [#channel]"),
-                @CommandAttribute(key = "help", value = "{p}quote <messageId> [#channel]")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = "{p}quote <messageId> [#channel]"),
+            @CommandAttribute(key = "help", value = "{p}quote <messageId> [#channel]")
         }
 )
 public class CmdQuote implements Command{
@@ -50,7 +53,7 @@ public class CmdQuote implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         if(args.length == 0){
             bot.getEmbedUtil().sendError(tc, member, "purr.info.quote.few_args");
             return;
@@ -119,6 +122,16 @@ public class CmdQuote implements Command{
                 
                 tc.sendMessageEmbeds(embed).queue();
             }
+        );
+    }
+    
+    @Override
+    public EnumSet<Permission> getPermissions(){
+        return EnumSet.of(
+            Permission.MESSAGE_EMBED_LINKS,
+            Permission.MESSAGE_ADD_REACTION,
+            Permission.MESSAGE_EXT_EMOJI,
+            Permission.MESSAGE_HISTORY
         );
     }
     

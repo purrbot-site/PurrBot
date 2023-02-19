@@ -36,9 +36,9 @@ import java.util.List;
         description = "purr.info.user.description",
         triggers = {"user", "member", "userinfo", "memberinfo"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}user [@user]"),
-                @CommandAttribute(key = "help", value = "{p}user [@user]")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = "{p}user [@user]"),
+            @CommandAttribute(key = "help", value = "{p}user [@user]")
         }
 )
 public class CmdUser implements Command{
@@ -50,8 +50,8 @@ public class CmdUser implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
-        Member target = msg.getMentions().getMembers().isEmpty() ? member : msg.getMentions().getMembers().get(0);
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args) {
+        Member target = members.isEmpty() ? member : members.get(0);
         
         EmbedBuilder embed = bot.getEmbedUtil().getEmbed(member)
                 .setThumbnail(target.getUser().getEffectiveAvatarUrl())

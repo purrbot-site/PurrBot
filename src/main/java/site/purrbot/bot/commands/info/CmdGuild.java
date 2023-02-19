@@ -37,9 +37,9 @@ import java.util.List;
         description = "purr.info.guild.description",
         triggers = {"guild", "server", "guildinfo", "serverinfo"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}guild"),
-                @CommandAttribute(key = "help", value = "{p}guild")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = "{p}guild"),
+            @CommandAttribute(key = "help", value = "{p}guild")
         }
 )
 public class CmdGuild implements Command{
@@ -51,8 +51,8 @@ public class CmdGuild implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        guild.loadMembers().onSuccess(members -> sendGuildInfo(guild, tc, member, members))
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
+        guild.loadMembers().onSuccess(guildMembers -> sendGuildInfo(guild, tc, member, guildMembers))
                 .onError(e -> sendGuildInfo(guild, tc, member, null));
     }
     

@@ -23,19 +23,23 @@ import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.util.CheckUtil;
 import site.purrbot.bot.util.HttpUtil;
+
+import java.util.List;
 
 @CommandDescription(
         name = "Neko",
         description = "purr.fun.neko.description",
         triggers = {"neko", "catgirl"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}neko [--gif] [--nsfw]"),
-                @CommandAttribute(key = "help", value = "{p}neko [--gif] [--nsfw]")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}neko [--gif] [--nsfw]"),
+            @CommandAttribute(key = "help", value = "{p}neko [--gif] [--nsfw]")
         }
 )
 public class CmdNeko implements Command{
@@ -47,7 +51,7 @@ public class CmdNeko implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args) {
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.neko.loading")).queue(message -> {
             boolean isNsfw = bot.getMessageUtil().hasArg("nsfw", args);
             boolean isGif = bot.getMessageUtil().hasArg("gif", args);
@@ -55,7 +59,12 @@ public class CmdNeko implements Command{
             HttpUtil.ImageAPI image;
             if(isNsfw){
                 if(!tc.isNSFW()){
-                    bot.getEmbedUtil().sendError(tc, member, "errors.nsfw_random", true);
+                    bot.getEmbedUtil().sendError(tc, member, "errors.nsfw.no_channel_random", true);
+                    message.delete().queue();
+                    return;
+                }
+                
+                if(CheckUtil.notPatreon(bot, tc, guild.getOwnerId())){
                     message.delete().queue();
                     return;
                 }

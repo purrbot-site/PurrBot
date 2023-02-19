@@ -27,6 +27,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,9 +38,9 @@ import java.util.regex.Pattern;
                 "Use `--pm` to send an optional PM to Guild Owner",
         triggers = {"leave", "bye"},
         attributes = {
-                @CommandAttribute(key = "category", value = "owner"),
-                @CommandAttribute(key = "usage", value = "{p}leave <guildId> [--pm <message>]"),
-                @CommandAttribute(key = "help", value = "{p}leave <guildId> [--pm <message>]")
+            @CommandAttribute(key = "category", value = "owner"),
+            @CommandAttribute(key = "usage", value = "{p}leave <guildId> [--pm <message>]"),
+            @CommandAttribute(key = "help", value = "{p}leave <guildId> [--pm <message>]")
         }
 )
 public class CmdLeave implements Command{
@@ -53,7 +54,7 @@ public class CmdLeave implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args) {
         String pm = null;
     
         String s = msg.getContentRaw();

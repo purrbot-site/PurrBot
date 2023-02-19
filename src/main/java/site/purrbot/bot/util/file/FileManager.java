@@ -18,12 +18,12 @@
 
 package site.purrbot.bot.util.file;
 
-import ch.qos.logback.classic.Logger;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 
@@ -39,7 +39,7 @@ import java.util.Map;
 
 public class FileManager{
 
-    private final Logger logger = (Logger)LoggerFactory.getLogger(FileManager.class);
+    private final Logger logger = LoggerFactory.getLogger(FileManager.class);
     private Map<String, File> files;
     private List<String> languages;
 

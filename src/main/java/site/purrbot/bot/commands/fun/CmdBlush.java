@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Blush",
         description = "purr.fun.blush.description",
         triggers = {"blush", "blushing"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}blush"),
-                @CommandAttribute(key = "help", value = "{p}blush")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}blush"),
+            @CommandAttribute(key = "help", value = "{p}blush")
         }
 )
 public class CmdBlush implements Command{
@@ -47,7 +49,7 @@ public class CmdBlush implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.blush.loading")).queue(message ->
                 bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.BLUSH, member)
         );

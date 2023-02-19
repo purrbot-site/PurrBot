@@ -19,10 +19,16 @@
 package site.purrbot.bot.commands;
 
 import com.github.rainestormee.jdacommand.AbstractCommand;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import org.apache.commons.collections4.Bag;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
 
 public interface Command extends AbstractCommand<Message>{
     
@@ -39,12 +45,37 @@ public interface Command extends AbstractCommand<Message>{
         if(message.getMember() == null)
             return;
         
+        // Get all members mentioned through the args
+        List<Member> members = resolveMembers(message.getGuild(), message);
+        
         // We trigger the below method to run the commands.
-        run(message.getGuild(), message.getChannel().asTextChannel(), message, message.getMember(), args);
+        run(message.getGuild(), message.getChannel().asTextChannel(), message, message.getMember(), members, args);
+    }
+    
+    /*
+     * Allows to define a collection of Permissions required for the command to work properly.
+     * Defaults to the Default set of permissions (Embed links, add reactions, use ext. emojis)
+     */
+    default EnumSet<Permission> getPermissions(){
+        return EnumSet.of(
+            Permission.MESSAGE_EMBED_LINKS,
+            Permission.MESSAGE_ADD_REACTION,
+            Permission.MESSAGE_EXT_EMOJI
+        );
+    }
+    
+    default List<Member> resolveMembers(Guild guild, Message msg){
+        Bag<Member> memberBag = msg.getMentions().getMembersBag();
+        
+        // If the message starts with the bots mention, remove first appearance from the bag.
+        if(msg.getContentRaw().startsWith(guild.getSelfMember().getAsMention()))
+            memberBag.remove(guild.getSelfMember(), 1);
+        
+        return new ArrayList<>(memberBag.uniqueSet());
     }
     
     /*
      * This is the method we use in the commands to provide the information for easier handling.
      */
-    void run(Guild guild, TextChannel tc, Message msg, Member member, String... args);
+    void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args);
 }

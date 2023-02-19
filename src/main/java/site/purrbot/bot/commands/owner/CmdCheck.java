@@ -39,9 +39,9 @@ import java.util.List;
                 "Checks the Shards and prints their status.",
         triggers = {"check"},
         attributes = {
-                @CommandAttribute(key = "category", value = "owner"),
-                @CommandAttribute(key = "usage", value = "{p}check"),
-                @CommandAttribute(key = "help", value = "{p}check")
+            @CommandAttribute(key = "category", value = "owner"),
+            @CommandAttribute(key = "usage", value = "{p}check"),
+            @CommandAttribute(key = "help", value = "{p}check")
         }
 )
 public class CmdCheck implements Command{
@@ -53,7 +53,7 @@ public class CmdCheck implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(String.format(
                 "%s Performing Status checks on Shards. Please wait...",
                 Emotes.TYPING.getEmote()

@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.commands.nsfw;
 
-import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
@@ -29,6 +28,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -44,18 +44,18 @@ import java.util.concurrent.TimeUnit;
         description = "purr.nsfw.threesome.description",
         triggers = {"threesome", "3some"},
         attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = 
-                        "{p}threesome <@user1> <@user2>\n" +
-                        "{p}threesome <@user1> <@user2> --fff\n" +
-                        "{p}threesome <@user1> <@user2> --mmf"
-                ),
-                @CommandAttribute(key = "help", value = "{p}threesome <@user1> <@user2> [--fff|--mmf]")
+            @CommandAttribute(key = "category", value = "nsfw"),
+            @CommandAttribute(key = "usage", value =
+                "{p}threesome <@user1> <@user2>\n" +
+                "{p}threesome <@user1> <@user2> --fff\n" +
+                "{p}threesome <@user1> <@user2> --mmf"
+            ),
+            @CommandAttribute(key = "help", value = "{p}threesome <@user1> <@user2> [--fff|--mmf]")
         }
 )
 public class CmdThreesome implements Command{
     
-    private final Logger logger = (Logger)LoggerFactory.getLogger(CmdThreesome.class);
+    private final Logger logger = LoggerFactory.getLogger(CmdThreesome.class);
     private final PurrBot bot;
     
     public CmdThreesome(PurrBot bot){
@@ -67,14 +67,14 @@ public class CmdThreesome implements Command{
             .build();
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentions().getMembers().isEmpty() || msg.getMentions().getMembers().size() < 2){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
+        if(members.isEmpty() || members.size() < 2){
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.threesome.no_mention");
             return;
         }
         
-        Member target1 = msg.getMentions().getMembers().get(0);
-        Member target2 = msg.getMentions().getMembers().get(1);
+        Member target1 = members.get(0);
+        Member target2 = members.get(1);
         
         if(target1.equals(guild.getSelfMember()) || target2.equals(guild.getSelfMember())){
             if(bot.isBeta()){

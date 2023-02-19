@@ -18,9 +18,9 @@
 
 package site.purrbot.bot.util;
 
-import ch.qos.logback.classic.Logger;
 import okhttp3.*;
 import org.json.JSONObject;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.constants.IDs;
 
@@ -29,7 +29,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class HttpUtil {
     
-    private final Logger logger = (Logger)LoggerFactory.getLogger(HttpUtil.class);
+    private final Logger logger = LoggerFactory.getLogger(HttpUtil.class);
     private final OkHttpClient client = new OkHttpClient();
     
     private String image(String url) throws IOException{

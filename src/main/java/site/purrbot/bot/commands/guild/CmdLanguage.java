@@ -38,14 +38,14 @@ import java.util.List;
         description = "purr.guild.language.description",
         triggers = {"language", "lang"},
         attributes = {
-                @CommandAttribute(key = "manage_server"),
-                @CommandAttribute(key = "category", value = "guild"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}language\n" +
-                        "{p}language set <language>\n" +
-                        "{p}language reset"
-                ),
-                @CommandAttribute(key = "help", value = "{p}language [set <language>|reset]")
+            @CommandAttribute(key = "manage_server"),
+            @CommandAttribute(key = "category", value = "guild"),
+            @CommandAttribute(key = "usage", value =
+                "{p}language\n" +
+                "{p}language set <language>\n" + 
+                "{p}language reset"
+            ),
+            @CommandAttribute(key = "help", value = "{p}language [set <language>|reset]")
         }
 )
 public class CmdLanguage implements Command{
@@ -56,7 +56,7 @@ public class CmdLanguage implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         if(args.length < 1){
             MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                     .setDescription(

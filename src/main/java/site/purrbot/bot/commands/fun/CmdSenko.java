@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Senko",
         description = "purr.fun.senko.description",
         triggers = {"senko", "senko-san"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}senko"),
-                @CommandAttribute(key = "help", value = "{p}senko")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}senko"),
+            @CommandAttribute(key = "help", value = "{p}senko")
         }
 )
 public class CmdSenko implements Command{
@@ -47,7 +49,7 @@ public class CmdSenko implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.senko.loading")).queue(message ->
                 bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.SENKO, member)
         );

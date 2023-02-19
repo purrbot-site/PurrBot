@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Smile",
         description = "purr.fun.smile.description",
         triggers = {"smile", "grinning", "grin"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}smile"),
-                @CommandAttribute(key = "help", value = "{p}smile")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}smile"),
+            @CommandAttribute(key = "help", value = "{p}smile")
         }
 )
 public class CmdSmile implements Command{
@@ -47,7 +49,7 @@ public class CmdSmile implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.smile.loading")).queue(message ->
                 bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.SMILE, member)
         );

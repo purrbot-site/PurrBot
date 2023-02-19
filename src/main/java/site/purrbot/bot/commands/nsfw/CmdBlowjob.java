@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Blowjob",
         description = "purr.nsfw.blowjob.description",
         triggers = {"blowjob", "bj", "bjob", "succ"},
         attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}blowjob <@user>"),
-                @CommandAttribute(key = "help", value = "{p}blowjob <@user>")
+            @CommandAttribute(key = "category", value = "nsfw"),
+            @CommandAttribute(key = "usage", value = "{p}blowjob <@user>"),
+            @CommandAttribute(key = "help", value = "{p}blowjob <@user>")
         }
 )
 public class CmdBlowjob implements Command{
@@ -47,13 +49,13 @@ public class CmdBlowjob implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentions().getMembers().isEmpty()){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.blowjob.no_mention");
             return;
         }
 
-        Member target = msg.getMentions().getMembers().get(0);
+        Member target = members.get(0);
 
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){

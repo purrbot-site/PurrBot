@@ -35,6 +35,7 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -44,9 +45,9 @@ import java.util.concurrent.TimeUnit;
         description = "purr.fun.ship.description",
         triggers = {"ship", "shipping"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}ship <@user> [@user]"),
-                @CommandAttribute(key = "help", value = "{p}ship <@user> [@user]")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}ship <@user> [@user]"),
+            @CommandAttribute(key = "help", value = "{p}ship <@user> [@user]")
         }
 )
 public class CmdShip implements Command{
@@ -63,12 +64,9 @@ public class CmdShip implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         Member member1;
         Member member2;
-
-        List<Member> members = msg.getMentions().getMembers();
-
         if (members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.ship.no_mention");
             return;
@@ -172,6 +170,16 @@ public class CmdShip implements Command{
             .addFiles(FileUpload.fromData(image, String.format("love_%s_%s.png", member1.getId(), member2.getId())))
             .queue();
 
+    }
+    
+    @Override
+    public EnumSet<Permission> getPermissions(){
+        return EnumSet.of(
+            Permission.MESSAGE_ATTACH_FILES,
+            Permission.MESSAGE_EMBED_LINKS,
+            Permission.MESSAGE_ADD_REACTION,
+            Permission.MESSAGE_EXT_EMOJI
+        );
     }
     
     private String getMessage(int chance, String id){

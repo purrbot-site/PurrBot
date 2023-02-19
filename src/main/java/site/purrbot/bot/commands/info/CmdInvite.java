@@ -32,14 +32,16 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Invite",
         description = "purr.info.invite.description",
         triggers = {"invite", "links"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}invite [--dm]"),
-                @CommandAttribute(key = "help", value = "{p}invite [--dm]")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = "{p}invite [--dm]"),
+            @CommandAttribute(key = "help", value = "{p}invite [--dm]")
         }
 )
 public class CmdInvite implements Command{
@@ -51,7 +53,7 @@ public class CmdInvite implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         if(bot.isBeta()){
             bot.getEmbedUtil().sendError(tc, member, "snuggle.info.invite.message");
             return;
@@ -116,9 +118,9 @@ public class CmdInvite implements Command{
     }
     
     private String getInvite(Guild guild, Permission... permissions){
-        String invite = "https://add.botl.ink?id=" + IDs.PURR + "&perms=" + Permission.getRaw(permissions);
+        String link = guild.getJDA().setRequiredScopes("applications.commands").getInviteUrl(permissions);
         
-        return getLink(guild.getId(), "invite", invite);
+        return getLink(guild.getId(), "invite", link);
     }
     
     private String getLink(String id, String path, String link){

@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.util;
 
-import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
@@ -32,6 +31,7 @@ import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 public class RequestUtil{
     
     private final PurrBot bot;
-    private final Logger logger = (Logger)LoggerFactory.getLogger(RequestUtil.class);
+    private final Logger logger = LoggerFactory.getLogger(RequestUtil.class);
     
     private final Cache<String, String> queue = Caffeine.newBuilder()
             .expireAfterWrite(2, TimeUnit.MINUTES)

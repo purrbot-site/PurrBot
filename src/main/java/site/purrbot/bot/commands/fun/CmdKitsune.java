@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Kitsune",
         description = "purr.fun.kitsune.description",
         triggers = {"kitsune", "foxgirl"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}kitsune"),
-                @CommandAttribute(key = "help", value = "{p}kitsune")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}kitsune"),
+            @CommandAttribute(key = "help", value = "{p}kitsune")
         }
 )
 public class CmdKitsune implements Command{
@@ -47,7 +49,7 @@ public class CmdKitsune implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(bot.getMsg(tc.getGuild().getId(), "purr.fun.kitsune.loading")).queue(message ->
                 bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.KITSUNE, member)
         );

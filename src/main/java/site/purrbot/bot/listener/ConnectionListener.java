@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.listener;
 
-import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import net.dv8tion.jda.api.JDA;
@@ -26,6 +25,7 @@ import net.dv8tion.jda.api.events.session.SessionDisconnectEvent;
 import net.dv8tion.jda.api.events.session.SessionResumeEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
@@ -35,7 +35,7 @@ import java.time.ZonedDateTime;
 
 public class ConnectionListener extends ListenerAdapter{
 
-    private final Logger logger = (Logger)LoggerFactory.getLogger(ConnectionListener.class);
+    private final Logger logger = LoggerFactory.getLogger(ConnectionListener.class);
     private final WebhookUtil webhookUtil;
 
     public ConnectionListener(PurrBot bot){

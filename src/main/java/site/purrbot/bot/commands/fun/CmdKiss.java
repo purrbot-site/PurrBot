@@ -37,9 +37,9 @@ import java.util.stream.Collectors;
         description = "purr.fun.kiss.description",
         triggers = {"kiss", "love", "kissu"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}kiss <@user> [@user ...]"),
-                @CommandAttribute(key = "help", value = "{p}kiss <@user> [@user ...]")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}kiss <@user> [@user ...]"),
+            @CommandAttribute(key = "help", value = "{p}kiss <@user> [@user ...]")
         }
 )
 public class CmdKiss implements Command{
@@ -51,8 +51,7 @@ public class CmdKiss implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        List<Member> members = msg.getMentions().getMembers();
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.kiss.no_mention");
             return;

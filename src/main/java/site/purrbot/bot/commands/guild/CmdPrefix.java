@@ -28,6 +28,9 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
+import java.util.List;
+import java.util.Locale;
+
 @CommandDescription(
         name = "Prefix",
         description = "purr.guild.prefix.description",
@@ -51,7 +54,7 @@ public class CmdPrefix implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         if(args.length < 1){
             bot.getEmbedUtil().sendError(tc, member, "purr.guild.prefix.few_args");
             return;
@@ -64,7 +67,7 @@ public class CmdPrefix implements Command{
             if(args.length == 1){
                 bot.getEmbedUtil().sendError(tc, member, "purr.guild.prefix.no_prefix");
             }else{
-                setPrefix(tc, member, args[1].toLowerCase());
+                setPrefix(tc, member, args[1].toLowerCase(Locale.ROOT));
             }
         }else{
             bot.getEmbedUtil().sendError(tc, member, "purr.guild.prefix.invalid_args");

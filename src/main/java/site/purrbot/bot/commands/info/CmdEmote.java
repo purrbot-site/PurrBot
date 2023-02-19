@@ -34,6 +34,7 @@ import net.dv8tion.jda.api.entities.emoji.RichCustomEmoji;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
+import java.util.EnumSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,13 +66,8 @@ public class CmdEmote implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         if(bot.getMessageUtil().hasArg("search", args)){
-            if(!guild.getSelfMember().hasPermission(tc, Permission.MESSAGE_HISTORY)){
-                bot.getEmbedUtil().sendPermError(tc, member, Permission.MESSAGE_HISTORY, true);
-                return;
-            }
-            
             EmbedPaginator.Builder builder = new EmbedPaginator.Builder()
                 .setEventWaiter(bot.getWaiter())
                 .setTimeout(1, TimeUnit.MINUTES)
@@ -108,6 +104,16 @@ public class CmdEmote implements Command{
         
         tc.sendMessageEmbeds(emoteInfo(member, msg.getMentions().getCustomEmojis().get(0), guild, null, 1, 1)).queue();
         
+    }
+    
+    @Override
+    public EnumSet<Permission> getPermissions(){
+        return EnumSet.of(
+            Permission.MESSAGE_EMBED_LINKS,
+            Permission.MESSAGE_ADD_REACTION,
+            Permission.MESSAGE_EXT_EMOJI,
+            Permission.MESSAGE_HISTORY
+        );
     }
     
     private void send(EmbedPaginator.Builder builder, TextChannel tc, Member member, Map<String, List<CustomEmoji>> emotes){

@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.listener;
 
-import ch.qos.logback.classic.Logger;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import net.dv8tion.jda.api.JDA;
@@ -28,6 +27,7 @@ import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
@@ -37,7 +37,7 @@ import java.time.ZonedDateTime;
 
 public class ReadyListener extends ListenerAdapter{
 
-    private final Logger logger = (Logger)LoggerFactory.getLogger(ReadyListener.class);
+    private final Logger logger = LoggerFactory.getLogger(ReadyListener.class);
 
     private final PurrBot bot;
     private final WebhookUtil webhookUtil;

@@ -28,15 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @CommandDescription(
         name = "Ping",
         description = "purr.info.ping.description",
         triggers = {"ping"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}ping"),
-                @CommandAttribute(key = "help", value = "{p}ping")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = "{p}ping"),
+            @CommandAttribute(key = "help", value = "{p}ping")
         }
 )
 public class CmdPing implements Command{
@@ -47,7 +48,7 @@ public class CmdPing implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(
                 bot.getRandomMsg(guild.getId(), "purr.info.ping.loading")
         ).queue(message -> msg.getJDA().getRestPing().queue(time -> message.editMessage(

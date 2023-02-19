@@ -222,7 +222,7 @@ public class ImageUtil {
                 url = defaultUrl;
         }else
         if((name.startsWith("https://") || name.startsWith("http://"))){
-            if(bot.getCheckUtil().isPatreon(ownerId) && isValidImage(name, width, height))
+            if(!CheckUtil.notPatreon(bot, null, ownerId) && isValidImage(name, width, height))
                 url = name;
             else
                 url = defaultUrl;

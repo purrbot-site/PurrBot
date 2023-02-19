@@ -18,33 +18,28 @@
 
 package site.purrbot.bot.commands;
 
-import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandHandler;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
-import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.constants.IDs;
+import site.purrbot.bot.util.CheckUtil;
 
-import java.util.Arrays;
+import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CommandListener extends ListenerAdapter{
     
-    private final Logger logger = (Logger)LoggerFactory.getLogger(CommandListener.class);
+    private final Logger logger = LoggerFactory.getLogger(CommandListener.class);
 
     private final ThreadGroup CMD_THREAD = new ThreadGroup("CommandThread");
     private final Executor CMD_EXECUTOR = Executors.newCachedThreadPool(
@@ -53,6 +48,8 @@ public class CommandListener extends ListenerAdapter{
 
     private final PurrBot bot;
     private final CommandHandler<Message> HANDLER;
+    
+    private String mention = null;
 
     public CommandListener(PurrBot bot, CommandHandler<Message> handler){
         this.bot = bot;
@@ -62,107 +59,111 @@ public class CommandListener extends ListenerAdapter{
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event){
         CMD_EXECUTOR.execute(() -> {
+            // Ignore non-guild messages and non-text channels
             if(!event.isFromGuild() || event.getChannel().getType() != ChannelType.TEXT)
                 return;
             
+            // Ignore other bots (includes self)
+            if(event.getAuthor().isBot())
+                return;
+    
+            Member self = event.getGuild().getSelfMember();
+            if(mention == null)
+                mention = self.getAsMention();
+            
+            // Don't bother with channels Bot can't write in.
+            if(!self.hasPermission(event.getChannel().asTextChannel(), Permission.MESSAGE_SEND))
+                return;
+    
             Message msg = event.getMessage();
-            Guild guild = event.getGuild();
-            User user = event.getAuthor();
-            
-            if(user.isBot())
-                return;
-            
-            if(event.getChannel().getId().equals(IDs.SUGGESTIONS))
-                return;
-            
-            if(event.getChannel().getType() == ChannelType.NEWS)
-                return;
-            
-            Pattern prefixPattern = Pattern.compile(
-                    Pattern.quote(bot.getPrefix(guild.getId())) + "(?<command>[^\\s].*)", 
-                    Pattern.DOTALL | Pattern.CASE_INSENSITIVE
-            );
-            
-            String raw = msg.getContentRaw();
-            
-            Matcher commandMatcher = prefixPattern.matcher(raw);
-            Matcher mentionMatcher = Message.MentionType.USER.getPattern().matcher(raw);
-            
-            if(!commandMatcher.matches() && !mentionMatcher.matches())
-                return;
-            
-            TextChannel tc = event.getChannel().asTextChannel();
-            Member self = guild.getSelfMember();
-            
             Member member = msg.getMember();
             if(member == null)
                 return;
             
-            if(mentionMatcher.matches()){
-                if(!self.hasPermission(tc, Permission.MESSAGE_SEND))
-                    return;
-                
-                if(!mentionMatcher.group(1).equalsIgnoreCase(self.getId()))
-                    return;
-                
-                msg.reply(bot.getMsg(guild.getId(), "misc.info", member.getEffectiveName())).queue();
+            // Ignore specific channels on the support server.
+            if(event.getChannel().getId().equals(IDs.SUGGESTIONS))
+                return;
+            
+            // Ignore news/Announcement channels.
+            if(event.getChannel().getType() == ChannelType.NEWS)
+                return;
+            
+            String raw = msg.getContentRaw();
+            String guildId = event.getGuild().getId();
+            
+            // Check if the message is only the mention itself to send some info for the user.
+            if(raw.equalsIgnoreCase(mention)){
+                msg.reply(bot.getMsg(guildId, "misc.info", member.getEffectiveName())).queue();
                 return;
             }
             
-            raw = commandMatcher.group("command");
-            
-            String[] args = Arrays.copyOf(raw.split("\\s+", 2), 2);
-            
-            if(args[0] == null)
-                return;
-            
-            Command command = (Command)HANDLER.findCommand(args[0].toLowerCase());
-            
-            if(command == null)
-                return;
-            
-            if(!self.hasPermission(tc, Permission.MESSAGE_SEND)){
-                if(self.hasPermission(tc, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI, Permission.MESSAGE_HISTORY))
-                    msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue();
-                
+            String cmd;
+            if(raw.startsWith(mention)){
+                // Remove mention and any leading spaces.
+                cmd = raw.substring(mention.length()).stripLeading();
+            }else
+            if(raw.toLowerCase(Locale.ROOT).startsWith(bot.getPrefix(guildId))){
+                // Remove prefix
+                cmd = raw.substring(bot.getPrefix(guildId).length());
+            }else{
+                // Text didn't start with mention nor prefix, so it's not a command to handle.
                 return;
             }
             
-            if(command.getAttribute("category").equals("owner") && !bot.getCheckUtil().isDeveloper(member))
+            // The command starts with at least one whitespace which is not good.
+            // Mention has leading spaces striped, so this only applies to text prefixes.
+            if(Character.isWhitespace(cmd.charAt(0)))
                 return;
             
-            if(bot.getCheckUtil().hasAdmin(member, tc))
-                return;
-            
-            if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_EMBED_LINKS))
-                return;
-            
-            if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_HISTORY))
-                return;
-            
-            if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_ADD_REACTION))
-                return;
-            
-            if(bot.getCheckUtil().lacksPermission(tc, member, true, tc, Permission.MESSAGE_EXT_EMOJI))
-                return;
-            
-            if(command.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
-                bot.getEmbedUtil().sendError(tc, member, "errors.nsfw_random", true);
-                return;
-            }
-            
-            if(command.hasAttribute("manage_server")){
-                if(bot.getCheckUtil().lacksPermission(tc, member, Permission.MANAGE_SERVER))
-                    return;
-            }
-            
-            try{
-                String arguments = args[1] == null ? "" : args[1];
-                HANDLER.execute(command, msg, arguments, args[0]);
-            }catch(Exception ex){
-                logger.error("Couldn't perform command {}!", args[0], ex);
-                bot.getEmbedUtil().sendError(tc, member, "errors.unknown", ex.getMessage(), false);
-            }
+            // Give the new command String to handle further.
+            handle(cmd, event.getChannel().asTextChannel(), msg, member);
         });
+    }
+    
+    private void handle(String message, TextChannel tc, Message msg, Member member){
+        // split at spaces with a max size of 2 (Command + arguments)
+        String[] split = message.split("\\s+", 2);
+        
+        // Veeeeeery unlikely, but better safe than sorry.
+        if(split.length == 0)
+            return;
+        
+        Command cmd = (Command)HANDLER.findCommand(split[0].toLowerCase(Locale.ROOT));
+        // No command was found -> No reply ("Unknown command" replies are bad)
+        if(cmd == null)
+            return;
+        
+        // Only bot-dev should run these commands.
+        if(cmd.getAttribute("category").equals("owner") && !bot.getCheckUtil().isDeveloper(member))
+            return;
+        
+        // Bot doesn't allow administrator for itself.
+        if(bot.getCheckUtil().selfHasAdmin(member, tc))
+            return;
+        
+        // Check required permissions for this command.
+        if(CheckUtil.selfLacksPermissions(bot, tc, cmd.getPermissions()))
+            return;
+        
+        // Don't allow age-restricted commands in normal channels.
+        if(cmd.getAttribute("category").equals("nsfw")){
+            if(!tc.isNSFW()){
+                bot.getEmbedUtil().sendError(tc, member, "errors.nsfw.no_channel_random", true);
+                return;
+            }
+            
+            if(CheckUtil.notPatreon(bot, tc, tc.getGuild().getOwnerId()))
+                return;
+        }
+        
+        if(cmd.hasAttribute("manage_server") && CheckUtil.lacksPermission(bot, tc, member, Permission.MANAGE_SERVER))
+            return;
+        
+        try{
+            HANDLER.execute(cmd, msg, split.length == 1 ? "" : split[1], split[0]);
+        }catch(Exception ex){
+            logger.error("Unable to perform command {}!", split[0], ex);
+            bot.getEmbedUtil().sendError(tc, member, "errors.unknown", ex.getMessage(), false);
+        }
     }
 }

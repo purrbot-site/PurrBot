@@ -33,14 +33,16 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.constants.Links;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Info",
         description = "purr.info.info.description",
         triggers = {"info", "infos", "information"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}info [--dm]"),
-                @CommandAttribute(key = "help", value = "{p}info [--dm]")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = "{p}info [--dm]"),
+            @CommandAttribute(key = "help", value = "{p}info [--dm]")
         }
 )
 public class CmdInfo implements Command{
@@ -52,7 +54,7 @@ public class CmdInfo implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         MessageEmbed embed = getEmbed(member);
         if(bot.getMessageUtil().hasArg("dm", args)){
             String mention = member.getAsMention();

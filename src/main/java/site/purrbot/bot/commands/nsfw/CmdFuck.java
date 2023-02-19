@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.commands.nsfw;
 
-import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandAttribute;
@@ -33,6 +32,7 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 import net.dv8tion.jda.api.requests.restaction.MessageCreateAction;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
@@ -41,6 +41,7 @@ import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.util.HttpUtil;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -49,20 +50,20 @@ import java.util.concurrent.TimeUnit;
         description = "purr.nsfw.fuck.description",
         triggers = {"fuck", "sex"},
         attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value =
-                        "{p}fuck <@user>\n" +
-                        "{p}fuck <@user> --anal\n" +
-                        "{p}fuck <@user> --normal\n" +
-                        "{p}fuck <@user> --yaoi\n" +
-                        "{p}fuck <@user> --yuri"
-                ),
-                @CommandAttribute(key = "help", value = "{p}fuck <@user> [--anal|--normal|--yaoi|--yuri]")
+            @CommandAttribute(key = "category", value = "nsfw"),
+            @CommandAttribute(key = "usage", value =
+                "{p}fuck <@user>\n" +
+                "{p}fuck <@user> --anal\n" +
+                "{p}fuck <@user> --normal\n" +
+                "{p}fuck <@user> --yaoi\n" +
+                "{p}fuck <@user> --yuri"
+            ),
+            @CommandAttribute(key = "help", value = "{p}fuck <@user> [--anal|--normal|--yaoi|--yuri]")
         }
 )
 public class CmdFuck implements Command{
 
-    private final Logger logger = (Logger)LoggerFactory.getLogger(CmdFuck.class);
+    private final Logger logger = LoggerFactory.getLogger(CmdFuck.class);
     private final PurrBot bot;
 
     public CmdFuck(PurrBot bot){
@@ -74,13 +75,13 @@ public class CmdFuck implements Command{
             .build();
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentions().getUsers().isEmpty()){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.fuck.no_mention");
             return;
         }
 
-        Member target = msg.getMentions().getMembers().get(0);
+        Member target = members.get(0);
         
         if(target.getId().equals(IDs.PURR)){
             if(bot.isBeta()){

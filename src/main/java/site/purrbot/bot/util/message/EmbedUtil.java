@@ -27,6 +27,8 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import site.purrbot.bot.PurrBot;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmbedUtil {
     

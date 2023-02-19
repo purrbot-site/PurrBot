@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Solo",
         description = "purr.nsfw.solo.description",
         triggers = {"solo", "girl"},
         attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}solo"),
-                @CommandAttribute(key = "help", value = "{p}solo")
+            @CommandAttribute(key = "category", value = "nsfw"),
+            @CommandAttribute(key = "usage", value = "{p}solo"),
+            @CommandAttribute(key = "help", value = "{p}solo")
         }
 )
 public class CmdSolo implements Command{
@@ -47,7 +49,7 @@ public class CmdSolo implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.solo.loading")).queue(message ->
                 bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_SOLO, member)
         );

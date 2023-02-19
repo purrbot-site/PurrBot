@@ -18,7 +18,6 @@
 
 package site.purrbot.bot.commands.fun;
 
-import ch.qos.logback.classic.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
@@ -26,38 +25,41 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
+
+import java.util.List;
 
 @CommandDescription(
         name = "Feed",
         description = "purr.fun.feed.description",
         triggers = {"feed", "food", "eat"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}feed <@user>"),
-                @CommandAttribute(key = "help", value = "{p}feed <@user>")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}feed <@user>"),
+            @CommandAttribute(key = "help", value = "{p}feed <@user>")
         }
 )
 public class CmdFeed implements Command{
     
     private final PurrBot bot;
-    private final Logger logger = (Logger)LoggerFactory.getLogger("Command - Feed");
+    private final Logger logger = LoggerFactory.getLogger("Command - Feed");
     
     public CmdFeed(PurrBot bot){
         this.bot = bot;
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentions().getMembers().isEmpty()){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.feed.no_mention");
             return;
         }
         
-        Member target = msg.getMentions().getMembers().get(0);
+        Member target = members.get(0);
         
         if(target.equals(guild.getSelfMember())){
             if(bot.isBeta()){

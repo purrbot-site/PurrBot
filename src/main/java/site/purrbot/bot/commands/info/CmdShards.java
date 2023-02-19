@@ -48,9 +48,9 @@ import static net.dv8tion.jda.api.exceptions.ErrorResponseException.ignore;
         description = "purr.info.shards.description",
         triggers = {"shard", "shards", "shardinfo"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}shards"),
-                @CommandAttribute(key = "help", value = "{p}shards")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = "{p}shards"),
+            @CommandAttribute(key = "help", value = "{p}shards")
         }
 )
 public class CmdShards implements Command{
@@ -62,7 +62,7 @@ public class CmdShards implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         EmbedPaginator.Builder builder = new EmbedPaginator.Builder()
                 .setEventWaiter(bot.getWaiter())
                 .addUsers(member.getUser())

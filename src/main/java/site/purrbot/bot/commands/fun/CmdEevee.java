@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Eevee",
         description = "purr.fun.eevee.description",
         triggers = {"eevee"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}eevee [--gif]"),
-                @CommandAttribute(key = "help", value = "{p}eevee [--gif]")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}eevee [--gif]"),
+            @CommandAttribute(key = "help", value = "{p}eevee [--gif]")
         }
 )
 public class CmdEevee implements Command{
@@ -47,7 +49,7 @@ public class CmdEevee implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         tc.sendMessage(bot.getMsg(guild.getId(), "purr.fun.eevee.loading")).queue(message -> {
             if(bot.getMessageUtil().hasArg("gif", args)){
                 bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.EEVEE_GIF, member);

@@ -29,14 +29,16 @@ import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.IDs;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Spank",
         description = "purr.nsfw.spank.description",
         triggers = {"spank", "spanking"},
         attributes = {
-                @CommandAttribute(key = "category", value = "nsfw"),
-                @CommandAttribute(key = "usage", value = "{p}spank <@user>"),
-                @CommandAttribute(key = "help", value = "{p}spank <@user>")
+            @CommandAttribute(key = "category", value = "nsfw"),
+            @CommandAttribute(key = "usage", value = "{p}spank <@user>"),
+            @CommandAttribute(key = "help", value = "{p}spank <@user>")
         }
 )
 public class CmdSpank implements Command{
@@ -48,13 +50,13 @@ public class CmdSpank implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentions().getMembers().isEmpty()){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.nsfw.spank.no_mention");
             return;
         }
         
-        Member target = msg.getMentions().getMembers().get(0);
+        Member target = members.get(0);
         if(isPurrOrSnuggle(target.getId(), member, tc))
             return;
         

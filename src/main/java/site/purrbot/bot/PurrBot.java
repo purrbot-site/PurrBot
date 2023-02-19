@@ -18,7 +18,6 @@
 
 package site.purrbot.bot;
 
-import ch.qos.logback.classic.Logger;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.rainestormee.jdacommand.CommandHandler;
@@ -38,6 +37,7 @@ import net.dv8tion.jda.api.utils.messages.MessageRequest;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import site.purrbot.bot.commands.CommandListener;
 import site.purrbot.bot.commands.CommandLoader;
@@ -63,7 +63,7 @@ import java.util.function.BiConsumer;
 
 public class PurrBot {
 
-    private final Logger logger = (Logger)LoggerFactory.getLogger(PurrBot.class);
+    private final Logger logger = LoggerFactory.getLogger(PurrBot.class);
 
     private ShardManager shardManager = null;
 
@@ -103,7 +103,7 @@ public class PurrBot {
         getFileManager().addFile("config", "/config.json", "./config.json")
             .addFile("data", "/data.json", "./data.json")
             .addFile("random", "/random.json", "./random.json")
-            .addLang("bg-BG")
+            //.addLang("bg-BG") Discontinued
             .addLang("de-CH")
             //.addLang("de-DE")
             .addLang("en")
@@ -247,12 +247,9 @@ public class PurrBot {
     public void invalidateCache(String id){
         guildSettings.invalidate(id);
     }
-
+    
     public List<String> getBlacklist(){
         return getFileManager().getStringlist("data", "blacklist");
-    }
-    public List<String> getDonators(){
-        return getFileManager().getStringlist("data", "donators");
     }
     public List<String> getShutdownImg(){
         return getFileManager().getStringlist("random", "shutdown_img");

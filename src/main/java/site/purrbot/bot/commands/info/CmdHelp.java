@@ -28,6 +28,8 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Help",
         description = "purr.info.help.description",
@@ -47,7 +49,7 @@ public class CmdHelp implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args) {
         MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
             .setDescription(bot.getMsg(guild.getId(), "purr.info.help.commands"))
             .build();

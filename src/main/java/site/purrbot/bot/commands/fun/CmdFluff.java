@@ -28,14 +28,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.util.HttpUtil;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Fluff",
         description = "purr.fun.fluff.description",
         triggers = {"fluff", "fluffing"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}fluff <@user>"),
-                @CommandAttribute(key = "help", value = "{p}fluff <@user>")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}fluff <@user>"),
+            @CommandAttribute(key = "help", value = "{p}fluff <@user>")
         }
 )
 public class CmdFluff implements Command{
@@ -47,13 +49,13 @@ public class CmdFluff implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        if(msg.getMentions().getMembers().isEmpty()){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
+        if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.fluff.no_mention");
             return;
         }
         
-        Member target = msg.getMentions().getMembers().get(0);
+        Member target = members.get(0);
         
         if(target.equals(guild.getSelfMember())){
             if(bot.isSpecial(member.getId())){

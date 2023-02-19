@@ -30,8 +30,11 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.utils.FileUpload;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
+import site.purrbot.bot.util.CheckUtil;
 
 import java.io.InputStream;
+import java.util.EnumSet;
+import java.util.List;
 import java.util.Locale;
 
 @CommandDescription(
@@ -67,7 +70,7 @@ public class CmdWelcome implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         if(args.length < 1){
             tc.sendTyping().queue(v -> {
                 InputStream image = bot.getImageUtil().getWelcomeImg(
@@ -97,10 +100,9 @@ public class CmdWelcome implements Command{
                         return;
                     }
                     String bg = args[2].toLowerCase(Locale.ROOT);
-                    if((bg.startsWith("https://") || bg.startsWith("http://")) && !bot.getCheckUtil().isPatreon(tc, guild.getOwnerId())){
-                        bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_patreon");
+                    if((bg.startsWith("https://") || bg.startsWith("http://")) && CheckUtil.notPatreon(bot, tc, guild.getOwnerId()))
                         return;
-                    }
+                    
                     if(bg.equalsIgnoreCase("booster") && !bot.getCheckUtil().isBooster(tc, guild.getOwnerId())){
                         bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_booster");
                         return;
@@ -191,10 +193,9 @@ public class CmdWelcome implements Command{
                         return;
                     }
                     String icon = args[2].toLowerCase(Locale.ROOT);
-                    if((icon.startsWith("https://") || icon.startsWith("http://")) && !bot.getCheckUtil().isPatreon(tc, member.getId())){
-                        bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_patreon");
+                    if((icon.startsWith("https://") || icon.startsWith("http://")) && CheckUtil.notPatreon(bot, tc, guild.getOwnerId()))
                         return;
-                    }
+                    
                     if(icon.equalsIgnoreCase("booster") && !bot.getCheckUtil().isBooster(tc, member.getId())){
                         bot.getEmbedUtil().sendError(tc, member, "purr.guild.welcome.no_booster");
                         return;
@@ -336,6 +337,16 @@ public class CmdWelcome implements Command{
                     welcomeSettings(tc, member, image);
                 });
         }
+    }
+    
+    @Override
+    public EnumSet<Permission> getPermissions(){
+        return EnumSet.of(
+            Permission.MESSAGE_ATTACH_FILES,
+            Permission.MESSAGE_EMBED_LINKS,
+            Permission.MESSAGE_ADD_REACTION,
+            Permission.MESSAGE_EXT_EMOJI
+        );
     }
     
     private String getMsg(String msg){

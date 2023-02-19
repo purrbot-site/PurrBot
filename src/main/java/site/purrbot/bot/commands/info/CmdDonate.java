@@ -34,9 +34,9 @@ import java.util.concurrent.TimeUnit;
         description = "purr.info.donate.description",
         triggers = {"donate", "donation", "donations", "donator"},
         attributes = {
-                @CommandAttribute(key = "category", value = "info"),
-                @CommandAttribute(key = "usage", value = "{p}donate [--dm]"),
-                @CommandAttribute(key = "help", value = "{p}donate [--dm]")
+            @CommandAttribute(key = "category", value = "info"),
+            @CommandAttribute(key = "usage", value = "{p}donate [--dm]"),
+            @CommandAttribute(key = "help", value = "{p}donate [--dm]")
         }
 )
 public class CmdDonate implements Command{
@@ -48,7 +48,7 @@ public class CmdDonate implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
                 .setDescription(bot.getMsg(guild.getId(), "purr.info.donate.embed.description"))
                 .addField(

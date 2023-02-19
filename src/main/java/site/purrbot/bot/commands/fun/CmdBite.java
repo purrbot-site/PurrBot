@@ -18,7 +18,7 @@
 
 package site.purrbot.bot.commands.fun;
 
-import ch.qos.logback.classic.Logger;
+import org.slf4j.Logger;
 import com.github.rainestormee.jdacommand.CommandAttribute;
 import com.github.rainestormee.jdacommand.CommandDescription;
 import net.dv8tion.jda.api.entities.Guild;
@@ -39,24 +39,22 @@ import java.util.stream.Collectors;
         description = "purr.fun.bite.description",
         triggers = {"bite", "nibble", "nom"},
         attributes = {
-                @CommandAttribute(key = "category", value = "fun"),
-                @CommandAttribute(key = "usage", value = "{p}bite <@user> [@user ...]"),
-                @CommandAttribute(key = "help", value = "{p}bite <@user> [@user ...]")
+            @CommandAttribute(key = "category", value = "fun"),
+            @CommandAttribute(key = "usage", value = "{p}bite <@user> [@user ...]"),
+            @CommandAttribute(key = "help", value = "{p}bite <@user> [@user ...]")
         }
 )
 public class CmdBite implements Command{
     
     private final PurrBot bot;
-    private final Logger logger = (Logger)LoggerFactory.getLogger("Command - Bite");
+    private final Logger logger = LoggerFactory.getLogger("Command - Bite");
     
     public CmdBite(PurrBot bot){
         this.bot = bot;
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
-        List<Member> members = msg.getMentions().getMembers();
-        
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         if(members.isEmpty()){
             bot.getEmbedUtil().sendError(tc, member, "purr.fun.bite.no_mention");
             return;

@@ -31,7 +31,6 @@ public final class LangUtils{
 
     public String getString(String language, String path){
         switch(language.toLowerCase()){
-            case "bg-bg":
             case "de-ch":
             case "en-owo":
             case "es-es":
@@ -42,6 +41,7 @@ public final class LangUtils{
             case "tr-tr":
                 return bot.getFileManager().getString(language.toLowerCase(), path);
             
+            case "bg-bg":
             case "de-de":
             case "it-it":
             case "et-ee":
@@ -52,7 +52,6 @@ public final class LangUtils{
     
     public List<String> getStringList(String language, String path){
         switch(language.toLowerCase()){
-            case "bg-bg":
             case "de-ch":
             case "en-owo":
             case "es-es":
@@ -63,6 +62,7 @@ public final class LangUtils{
             case "tr-tr":
                 return bot.getFileManager().getStringlist(language.toLowerCase(), path);
             
+            case "bg-bg":
             case "de-de":
             case "it-it":
             case "et-ee":
@@ -72,7 +72,7 @@ public final class LangUtils{
     }
     
     public enum Language{
-        BG_BG ("\uDDE7", "\uDDEC"),
+        //BG_BG ("\uDDE7", "\uDDEC"),
         DE_CH ("\uDDE8", "\uDDED"),
         //DE_DE ("\uDDE9", "\uDDEA"),
         EN    ("\uDDEC", "\uDDE7"),

@@ -39,9 +39,9 @@ import java.util.List;
         description = "Lists all emotes the bot uses",
         triggers = {"listemotes", "le"},
         attributes = {
-                @CommandAttribute(key = "category", value = "owner"),
-                @CommandAttribute(key = "usage", value = "{p}listemotes"),
-                @CommandAttribute(key = "help", value = "{p}listemotes")
+            @CommandAttribute(key = "category", value = "owner"),
+            @CommandAttribute(key = "usage", value = "{p}listemotes"),
+            @CommandAttribute(key = "help", value = "{p}listemotes")
         }
 )
 public class CmdListEmotes implements Command{
@@ -53,7 +53,7 @@ public class CmdListEmotes implements Command{
     }
     
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args){
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
         if(args.length == 0){
             msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue();
             return;

@@ -30,14 +30,16 @@ import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
 import site.purrbot.bot.constants.Emotes;
 
+import java.util.List;
+
 @CommandDescription(
         name = "Message",
         description = "Sends a message as the bot to the specified channel",
         triggers = {"msg", "message", "send"},
         attributes = {
-                @CommandAttribute(key = "category", value = "owner"),
-                @CommandAttribute(key = "usage", value = "{p}msg <channelId> <message>"),
-                @CommandAttribute(key = "help", value = "{p}msg <channelId> <message>")
+            @CommandAttribute(key = "category", value = "owner"),
+            @CommandAttribute(key = "usage", value = "{p}msg <channelId> <message>"),
+            @CommandAttribute(key = "help", value = "{p}msg <channelId> <message>")
         }
 )
 public class CmdMsg implements Command{
@@ -49,7 +51,7 @@ public class CmdMsg implements Command{
     }
 
     @Override
-    public void run(Guild guild, TextChannel tc, Message msg, Member member, String... args) {
+    public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args) {
         if(args.length <= 1){
             msg.addReaction(Emoji.fromFormatted(Emotes.DENY.getEmote())).queue();
             return;
