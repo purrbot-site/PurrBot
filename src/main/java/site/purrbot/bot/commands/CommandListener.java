@@ -112,7 +112,7 @@ public class CommandListener extends ListenerAdapter{
             
             // The command starts with at least one whitespace which is not good.
             // Mention has leading spaces striped, so this only applies to text prefixes.
-            if(Character.isWhitespace(cmd.charAt(0)))
+            if(cmd.isEmpty() || Character.isWhitespace(cmd.charAt(0)))
                 return;
             
             // Give the new command String to handle further.

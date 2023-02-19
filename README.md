@@ -36,7 +36,7 @@ This bot was made to use the [nekos.life]-API but moved to its very own API.
 **Default Prefix**: `p.`
 
 The bot can have a different prefix on other Discord Servers.  
-If You're not sure what prefix is used can you just mention the bot (`@*Purr*#6875`) and it will tell you what prefix is used.
+If You're not sure what prefix is used can you just mention the bot (`@*Purr*#6875`) and it will tell you what prefix is used. Alternatively can you also start the command with the mention instead of the prefix.
 
 ![mention]
 
@@ -55,7 +55,7 @@ All commands require the following permissions:
   <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@2/assets/cozy/translate/crowdin_64h.png" height="64" alt="crowdin-badge" title="Translate the bot on Crowdin">
 </a>
 
-Thanks to the community is \*Purr\* available in various languages and we're always open for adding more!  
+Thanks to the community is \*Purr\* available in various languages, and we're always open for adding more!  
 Want to help? Great! Just make sure to read the information provided in [our documentation][translate] to find out how you can help.
 
 All currently worked on translations can be found at [lang.purrbot.site][translations].
@@ -95,7 +95,7 @@ If a bot can't work without this permission, search for a different one as this 
 Running the bot isn't free, which is why we appreciate any donations given to us.  
 Single donations can be done through [Ko-fi] or [PayPal]. Continous donations (Subscriptions) can be done through [Patreon].
 
-As a thank you for donation will you get a Donator role on our [Discord Server][discord]. As a Tier 2 or 3 Patreon will you also unlock the option of defining your own custom Welcome background and icon (Requires you to be in our Discord Server).
+As a thank you for donation will you get a Donator role on our [Discord Server][discord]. As a Tier 2 or 3 Patreon will you also unlock the NSFW commands as-well as the option of defining your own custom Welcome background and icon (Requires you to be in our Discord Server).
 
 # Botlists
 
