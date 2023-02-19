@@ -12,19 +12,26 @@
       "patreon_roles": "Destek sunucusundan Patreon rolleri alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuza gelerek]({guild_invite}) bildirin."
     },
     "missing_perms": {
-      "self": "Bunun için `{permission}` iznine sahip değilim.",
-      "self_channel": "Bunu yapmak için {channel} kanalında `{permission}` iznim yok!",
-      "other": "Bu komut için `{permission}` iznine sahip değilsiniz."
+      "self": "{channel} kanalında aşağıdaki izin(ler)e sahip değilim:\n{permissions}",
+      "user": "Bu komutu çalıştırmak için aşağıdaki izinlere sahip değilsiniz:\n{permission}"
     },
-    "nsfw_random": [
-      "Bu kanal yaş kısıtlanmalı gibi görünmüyor, değil mi {user}?",
-      "Lütfen yaş kısıtlaması olan bir kanalda yaramaz ol {user}.",
-      "Hayır hayır hayır! Tatlı ve ateşli bir insan olacaksın ve bu komutu yaş kısıtlaması olan bir kanalda kullanacaksın {user}!",
-      "ChannelNotAgeRestrictedException: Komut, Yaş kısıtlamalı bir kanalın dışında kullanılamaz.",
-      "Bu yaramaz şeyleri yalnızca yaş kısıtlamalı kanallarda görebilirsin {user}.",
-      "Her şeyin bir yeri vardır. Ve bu komut yaş kısıtlamalı bir kanala ait {user}.",
-      "Üzgünüm {user} ama Discord bu komutu sadece yaş kısıtlamalı kanallarda kullanmama izin veriyor..."
-    ],
+    "no_patreon": {
+      "title": "Patreon Özelliği!",
+      "description": "Bu özellik yalnızca [Kademe 2/3 Patreon Destekçileri]({patreon_url}) tarafından sahip olunan Sunucular için kullanılabilir!\n\nBu sunucunun Sahibi olmanız ve bu özelliğin kilidini açmak istemeniz durumunda, aşağıdaki adımları uygulayın:\n1. [~Nya Discord Sunucusu]'na katılın ({guild_invite})\n2. Discord'unuzu Patreon hesabınıza bağlayın.\n3. Patreon'da Kademe 2 veya 3'e abone olun.",
+      "note_title": "Önemli!",
+      "note_description": "Discord Sunucusundan ayrılmanız veya Patreon aboneliğinizi durdurmanız durumunda bu özellik tekrar devre dışı bırakılacaktır."
+    },
+    "nsfw": {
+      "no_channel_random": [
+        "Bu kanalda yaş sınırlaması yok gibi görünüyor, değil mi {user}?",
+        "Lütfen yaş sınırlaması olan bir kanalda yaramazlık yap {user}.",
+        "Hayır hayır hayır! Tatlı ve ateşli bir insan olacaksın ve bu komutu yaş kısıtlaması olan bir kanalda kullanacaksın {user}!",
+        "ChannelNotAgeRestrictedException: Komut, Yaş kısıtlamalı bir kanalın dışında kullanılamaz.",
+        "Bu yaramaz şeyleri yalnızca yaş kısıtlamalı kanallarda görebilirsin {user}.",
+        "Her şeyin bir yeri vardır. Ve bu komut yaş kısıtlamalı bir kanala ait {user}.",
+        "Üzgünüm {user} ama Discord bu komutu sadece yaş kısıtlamalı kanallarda kullanmama izin veriyor..."
+      ]
+    },
     "request_error": "İstek işlenirken bir hata oluştu. Mesajımın silinmediğinden ve yeterli izinlere sahip olduğumdan emin olun!",
     "title": "Hata",
     "unknown": "B-bu biraz utanç verici ancak, bir eylemi gerçekleştirirken hatayla karşılaştım. {EMOTE_BLUSH}\nLütfen bunu [Discord]({guild_invite}) veya [GitHub]({github_url}) üzerinden bildirin!"

@@ -12,19 +12,26 @@
       "patreon_roles": "Impossible de récupérer les rôles Patreon depuis le serveur de support. Veuillez réessayer plus tard si ce problème persiste, signalez-le sur [notre serveur Discord]({guild_invite})"
     },
     "missing_perms": {
-      "self": "Il me manque la permission `{permission}` pour cela.",
-      "self_channel": "Il me manque la permission `{permission}` dans le salon {channel} pour faire cela!",
-      "other": "il vous manque la permission `{permission}` pour cette commande."
+      "self": "Il me manque la(les) permission(s) suivante(s) dans le salon {channel}:\n{permissions}",
+      "user": "Vous n'avez pas la permission suivante pour exécuter cette commande :\n{permission}"
     },
-    "nsfw_random": [
-      "Ce salon ne semble pas avoir de limite d'âge, n'est-ce pas {user}?",
-      "S'il-te-plaît sois pervers dans un salon avec une limite d'âge {user}",
-      "Non-non! Vous serez une bonne personne en chaleur et utiliserez cette commande dans un salon avec une limite d'âge {user}!",
-      "ChannelNotAgeRestrictedException: La commande ne peut pas être utilisée en dehors d'un salon ayant une limite d'âges.",
-      "Tu peux seulement voir ces choses pervers dans un salon ayant une limite d'âge {user}.",
-      "Tout a sa place. Et cette commande va dans un salon ayant une limite d'âge {user}.",
-      "Je suis désolé {user} mais Discord ne me permet d'utiliser cette commande que dans un salon ayant une limite d'âge..."
-    ],
+    "no_patreon": {
+      "title": "Fonctionnalité des Patreon !",
+      "description": "Cette fonctionnalité n'est disponible que pour les serveurs appartenant aux [Supporteurs Patreon de Tier 2/3]({patreon_url})!\n\nSi vous êtes le Propriétaire de ce serveur et souhaitez débloquer cette fonctionnalité, Suiver les étapes suivantes :\n1. Rejoignez le [~serveur Discord Nya]({guild_invite})\n2. Associez votre Discord à votre compte Patreon.\n3. Abonnez-vous aux niveaux Patreon 2 ou 3.",
+      "note_title": "Important!",
+      "note_description": "Si vous quittez le serveur Discord ou si vous arrêtez votre abonnement Patreon cette fonctionnalité sera de nouveau désactivé."
+    },
+    "nsfw": {
+      "no_channel_random": [
+        "Ce salon ne semble pas avoir de limite d'âge, n'est-ce pas {user}?",
+        "S'il te plaît sois en chaleur dans un salon ayant une limite d'âge {user}",
+        "Non-non! Vous serez une bonne personne en chaleur et utiliserez cette commande dans un salon avec une limite d'âge {user}!",
+        "ChannelNotAgeRestrictedException: La commande ne peut pas être utilisée en dehors d'un salon ayant une limite d'âges.",
+        "Tu peux seulement voir ces choses pervers dans un salon ayant une limite d'âge {user}.",
+        "Tout a sa place. Et cette commande va dans un salon ayant une limite d'âge {user}.",
+        "Je suis désolé {user} mais Discord ne me permet d'utiliser cette commande que dans un salon ayant une limite d'âge..."
+      ]
+    },
     "request_error": "Il y a eu une erreur lors du traitement de la requête. Assurez-vous que mon message n'a pas été supprimé et que j'ai les permissions suffisantes!",
     "title": "Erreur",
     "unknown": "C-c'est un peu embarrassant, mais j'ai eu une erreur en effectuant une action. {EMOTE_BLUSH}\ns'il vous plait signaler ceci sur [le Discord]({guild_invite}), ou sur [GitHub]({github_url} )!"

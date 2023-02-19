@@ -12,19 +12,26 @@
       "patreon_roles": "Unable to wetwieve Patweon woles fwom Suppowt Sewver. TwT\nPwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})"
     },
     "missing_perms": {
-      "self": "I lack the pewmission `{permssion}` fow this. :c",
-      "self_channel": "I lack the pewmission `{permission}` in the channew {channel} to do this!",
-      "other": "You lack the pewmission `{permission}` fow this command."
+      "self": "I lack the fowwowing pewmission(s) in the channew {channel}:\n`{permissions}`",
+      "user": "You lack the fowwoing pewmission to execute this command:\n{permission}"
     },
-    "nsfw_random": [
-      "This channew doesn't seem to be age-westwicted, does it {user}? òwó",
-      "Pwease be naughty in a Age-westwicted channew {user}! (。U⁄ ⁄ω⁄ ⁄ U。)",
-      "Nuuuuu! You wiww be a good wittwe howny and use this command in a Age westwicted channew {user}!",
-      "ChannewNotAgeWestwictedException: The command may not be used outside a Age-Westwicted channew. >.<",
-      "You can onwy see those naughty things in Age-westwicted channews {user}.",
-      "Evewything has its pwace. And this command bewongs in a Age-westwicted channew {user}! OwO",
-      "I'm sowwy {user} but Discowd onwy awwows me to use this command in a Age-westwicted channew... TwT"
-    ],
+    "no_patreon": {
+      "title": "Patweon Featuwe! OWO",
+      "description": "This fatuwe is only available fow Sewvews owned by [Tiew 2/3 Patweon Suppowtews]({patreon_url})! -w-\n\nShould you be the Ownew of this sewew and want to unlock this featuwe, do the following steps:\n1. Join the [~Nya Discowd Sewew]({guild_invite})\n2. Link youw Discowd with youw Patweon account.\n3. Subscwibe to Tiew 2 ow 3 on Patweon.",
+      "note_title": "Important! OwO",
+      "note_description": "Should you leave the Discowd Sewew ow stop youw Patweon subscwiption will this featuwe be disabled again. TwT"
+    },
+    "nsfw": {
+      "no_channel_random": [
+        "This channew doesn't seem to be age-westwicted, does it {user}? òwó",
+        "Pwease be naughty in a Age-westwicted channew {user}! (。U⁄ ⁄ω⁄ ⁄ U。)",
+        "Nuuuuu! You wiww be a good wittwe howny pewson and use this command in a Age westwicted channew {user}!",
+        "ChannewNotAgeWestwictedException: The command may not be used outside a Age-Westwicted channew. >.<",
+        "You can onwy see those naughty things in Age-westwicted channews {user}.",
+        "Evewything has its pwace. And this command bewongs in a Age-westwicted channew {user}! OwO",
+        "I'm sowwy {user} but Discowd onwy awwows me to use this command in a Age-westwicted channew... TwT"
+      ]
+    },
     "request_error": "Thewe was an ewwow while handwing the wequest TwT. Make suwe that my message wasn't deweted and that I have sufficient pewmissions!",
     "title": "Ewwow",
     "unknown": "T-that is a bit embawwasing now, but I had an ewwow while pewfowming an action. {EMOTE_BLUSH}\nPwease wepowt this on [the Discowd]({guild_invite}), ow on [GitHub]({github_url}))!"

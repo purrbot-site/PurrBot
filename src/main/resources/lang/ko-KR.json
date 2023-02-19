@@ -12,19 +12,26 @@
       "patreon_roles": "지원 서버에서 Patreon 역할을 불러올 수 없습니다. 다음에 다시 시도해주세요. 계속 안되면, [지원서버]({guild_invite}) 에 문의해주세요."
     },
     "missing_perms": {
-      "self": "`{permission}` 권한이 없어서 할 수 없어!",
-      "self_channel": "나에게는 {channel} 채널을 위한 `{permission}` 권한이 없어!",
-      "other": "이 명령어를 사용하려면 너에게 `{permission}` 권한이 있어야 해."
+      "self": "채널 {channel} 에서 {permissions} 권한이 없어!",
+      "user": "그 명령어를 수행하려면 네가 {permission} 권한을 가지고 있어야 해."
     },
-    "nsfw_random": [
-      "이 채널은 연령 제한 채널이 아닌 것 같은데.. 그렇지, {user}?",
-      "응큼한건 연령 제한 채널에서 하지 않을래, {user}?",
-      "안돼! 네 응큼함은 연령 제한 채널에서 풀도록 하라구, {user}!",
-      "ChannelNotAgeRestrictedException: 연령 제한 채널이 아닌 곳에서 사용할 수 없는 명령어입니다.",
-      "그런 부끄러운 것들은 연령 제한 채널에서만 볼 수 있어, {user}.",
-      "모든 것은 속한 자리가 있지. 그리고 그 명령어의 자리는 연령 제한 채널이야, {user}.",
-      "미안하지만 디스코드가 연령 제한 채널에서만 그 부탁을 들어주라고 하네, {user}."
-    ],
+    "no_patreon": {
+      "title": "Patreon 후원자 혜택!",
+      "description": "이 기능은 [티어 2/3 Patreon 후원자]({patreon_url})만 사용가능합니다!\n\n이 기능을 사용하기 위해서는\n1. 서버의 주인이 [지원 디스코드 서버]({guild_invite})에 입장한 후\n2. 디스코드 계정을 Patreon 계정과 연결하고\n3. 티어2/3 Patreon 후원자가 되어야 합니다.",
+      "note_title": "중요사항!",
+      "note_description": "디스코드 서버에서 나가거나, Patreon 후원을 그만둘 경우, 해당 기능이 다시 잠깁니다."
+    },
+    "nsfw": {
+      "no_channel_random": [
+        "이 채널은 연령 제한 채널이 아닌 것 같은데.. 그렇지, {user}?",
+        "응큼한건 연령 제한 채널에서 하지 않을래, {user}?",
+        "안돼! 네 응큼함은 연령 제한 채널에서 풀도록 하라구, {user}!",
+        "ChannelNotAgeRestrictedException: 연령 제한 채널이 아닌 곳에서 사용할 수 없는 명령어입니다.",
+        "그런 부끄러운 것들은 연령 제한 채널에서만 볼 수 있어, {user}.",
+        "모든 것은 속한 자리가 있지. 그리고 그 명령어의 자리는 연령 제한 채널이야, {user}.",
+        "미안하지만 디스코드가 연령 제한 채널에서만 그 부탁을 들어주라고 하네, {user}."
+      ]
+    },
     "request_error": "요청을 처리하는데 오류가 발생했어. 내 메시지가 삭제되지는 않았는지, 아니면 내 권한이 부족한건 아닌지 확인해줘!",
     "title": "에러",
     "unknown": "부.. 부끄럽지만, 무언가 잘못된 모양이야. {EMOTE_BLUSH}\n이걸 [디스코드]({guild_invite}) 혹은 [GitHub]({github_url})에 문의해주지 않을래?"

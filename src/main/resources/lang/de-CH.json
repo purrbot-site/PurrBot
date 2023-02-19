@@ -12,19 +12,26 @@
       "patreon_roles": "Patreon Rollen konnten nicht vom Support-Server abgerufen werden. Bitte versuche es später noch einmal und falls dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})"
     },
     "missing_perms": {
-      "self": "Mir fehlt die Berechtigung `{permission}` dafür.",
-      "self_channel": "Mir fehlt die Berechtigung `{permission}` im Textkanal {channel} dafür!",
-      "other": "Dir fehlt die Berechtigung `{permission}` für diesen Befehl."
+      "self": "Mir fehlen die folgenden Berechtigungen im Kanal {channel}:\n{permissions}",
+      "user": "Dir fehlt die folgende Berechtigung um diesen Befehl auszuführen:\n{permission}"
     },
-    "nsfw_random": [
-      "Dieser Kanal scheint keine Altersbeschränkung zu haben, oder {user}?",
-      "Bitte sei ungezogen in einem Altersbeschränkten Kanal {user}.",
-      "Neinneinnein! Du wirst eine gute kleine geile Person sein und diesen Befehl in einem altersbeschränkten Kanal verwenden {user}!",
-      "KanalNichtAltersbeschränktFehler: Der Befehl kann nicht ausserhalb von altersbeschränkten Kanälen verwendet werden.",
-      "Du kannst diese ungezogenen Dinge nur in altersbeschränkten Kanälen sehen {user}.",
-      "Alles hat seinen Platz. Und dieser Befehl gehört in einen altersbeschränkten Kanal {user}.",
-      "Es tut mir leid {user} aber Discord erlaubt mir nur, diesen Befehl in einem altersbeschränkten Kanal zu verwenden..."
-    ],
+    "no_patreon": {
+      "title": "Patreon Feature!",
+      "description": "Diese Funktion ist nur für Server von [Stufe 2/3 Patreon Unterstützer]({patreon_url}) verfügbar!\n\nSolltest du der Besitzer dieses Servers sein und möchtest diese Funktion entsperren, mache folgende Schritte:\n1. Tritt dem [~Nya Discord Server]({guild_invite}) bei.\n2. Verlinke deinen Discord mit deinem Patreon Konto.\n3. Abonniere Stufe 2 oder 3 auf Patreon.",
+      "note_title": "Wichtig!",
+      "note_description": "Solltest du den Discord Server verlassen oder dein Patreon Abonnement beenden, wird diese Funktion wieder deaktiviert."
+    },
+    "nsfw": {
+      "no_channel_random": [
+        "Diese Kanal scheint keine Altersbeschränkung zu haben, oder {user}?",
+        "Bitte sei in einem Altersbeschränkten Kanal ungezogen {user}.",
+        "Nein nein nein! Du wirst eine artige geile Person sein und diesen Befehl in einem altersbeschränkten Kanal verwenden {user}!",
+        "ChannelNotAgeRestrictedException: Der Befehl kann nur in altersbeschränkten Kanälen verwendet werden.",
+        "Du kannst diese ungezogenen Dinge nur in altersbeschränkten Kanälen sehen {user}.",
+        "Alles hat seinen Platz. Und dieser Befehl gehört in einen altersbeschränkten Kanal {user}.",
+        "Es tut mir leid {user} aber Discord erlaubt es mir nur, solche Befehle in altersbeschränkten Kanäler auszuführen..."
+      ]
+    },
     "request_error": "Bei der Bearbeitung der Anfrage ist ein Fehler aufgetreten. Vergewissere dich, dass meine Nachricht nicht gelöscht wurde und dass ich über ausreichende Berechtigungen verfüge!",
     "title": "Fehler",
     "unknown": "D-das ist jetzt etwas peinlich, aber ich hatte einen Fehler beim ausführen einer Aktion. {EMOTE_BLUSH}\nBitte melde dies [im Discord]({guild_invite}), oder auf [GitHub]({github_url})!"
