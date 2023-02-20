@@ -8,7 +8,7 @@
     "fetch": {
       "booster_role": "Destek sunucusundan Takviyeci rolü alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuzda gelerek]({guild_invite}) bildirin.",
       "guild": "Destek Sunucusu alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuza gelerek]({guild_invite}) bildirin.",
-      "member": "Destek sunucusundan Üye bilgileri alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuza gelerek]({guild_invite}) bildirin.",
+      "member": "[Destek Sunucusu]({guild_invite})'ndan Üye bilgileri alınamıyor. Bunun çalışması için sunucu sahibinin Destek sunucumuzda olması gerekiyor.\nSunucu sahibiyseniz ve sunucumuzda olduğunuz halde bu sorun devam ediyorsa, `#support` kanalından bize bunu bildirin.",
       "patreon_roles": "Destek sunucusundan Patreon rolleri alınamıyor. Lütfen daha sonra tekrar deneyin ve bu sorun devam ederse, [Discord sunucumuza gelerek]({guild_invite}) bildirin."
     },
     "missing_perms": {
