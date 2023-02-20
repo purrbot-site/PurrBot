@@ -8,7 +8,7 @@
     "fetch": {
       "booster_role": "No se puede recuperar el rol de Booster desde el Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, repórtalo en [nuestro servidor de Discord]({guild_invite})",
       "guild": "No se puede recuperar el Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, repórtalo en [nuestro servidor de Discord]({guild_invite})",
-      "member": "No se puede recuperar la información de los miembros del Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, repórtalo en [nuestro servidor de Discord]({guild_invite})",
+      "member": "No se puede obtener la información del miembro del [Support Server] ({guild_invite}). El propietario del servidor debe estar en nuestro servidor de soporte para que esto funcione.\nSi eres el propietario del servidor, y este problema persisten aun estando en nuestro servidor, infórmanos en el canal `#support`.",
       "patreon_roles": "No se han podido recuperar los roles de Patreon del Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, infórmanos en [nuestro servidor de Discord]({guild_invite})"
     },
     "missing_perms": {
