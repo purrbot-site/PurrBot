@@ -8,7 +8,7 @@
     "fetch": {
       "booster_role": "Kann die Booster-Rolle vom Support-Server nicht abrufen. Bitte versuche es später noch einmal und wenn dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})",
       "guild": "Der Support-Server konnte nicht abgerufen werden. Bitte versuche es später noch einmal und falls dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})",
-      "member": "Mitgliederinformationen konnten nicht vom Support-Server abgerufen werden. Bitte versuche es später noch einmal und wenn dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})",
+      "member": "Mitgliederinformationen können nicht vom [Support-Server]({guild_invite}) abgerufen werden. Der Serverinhaber muss auf unserem Support-Server sein, damit dies funktionier.\nSolltest du der Serverinhaber sein, dich auf unserme Server befinden und dieses Problem weiterhin auftreten, melde es uns im `#support` Kanal.",
       "patreon_roles": "Patreon Rollen konnten nicht vom Support-Server abgerufen werden. Bitte versuche es später noch einmal und falls dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})"
     },
     "missing_perms": {
