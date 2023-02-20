@@ -8,7 +8,7 @@
     "fetch": {
       "booster_role": "Unable to retrieve the Booster role from the Support Server. Please try again later and if this issue persists, report it on [our Discord Server]({guild_invite})",
       "guild": "Unable to retrieve the Support Server. Please try again later and if this issue persists, report it on [our Discord Server]({guild_invite})",
-      "member": "Unable to retrieve Member information from the Support Server. Please try again later and if this issue persists, report it on [our Discord Server]({guild_invite})",
+      "member": "Unable to fetch Member information from the [Support Server]({guild_invite}). The server owner needs to be on our Support server for this to work.\nIf you're the server owner, you're on our server and this issue persists, report it to us in the `#support` channel.",
       "patreon_roles": "Unable to retrieve Patreon roles from Support Server. Please try again later and if this issue persists, report it on [our Discord Server]({guild_invite})"
     },
     "missing_perms": {
