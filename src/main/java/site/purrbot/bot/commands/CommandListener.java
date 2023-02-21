@@ -146,14 +146,9 @@ public class CommandListener extends ListenerAdapter{
             return;
         
         // Don't allow age-restricted commands in normal channels.
-        if(cmd.getAttribute("category").equals("nsfw")){
-            if(!tc.isNSFW()){
-                bot.getEmbedUtil().sendError(tc, member, "errors.nsfw.no_channel_random", true);
-                return;
-            }
-            
-            if(CheckUtil.notPatreon(bot, tc, tc.getGuild().getOwnerId()))
-                return;
+        if(cmd.getAttribute("category").equals("nsfw") && !tc.isNSFW()){
+            bot.getEmbedUtil().sendError(tc, member, "errors.nsfw.no_channel_random", true);
+            return;
         }
         
         if(cmd.hasAttribute("manage_server") && CheckUtil.lacksPermission(bot, tc, member, Permission.MANAGE_SERVER))

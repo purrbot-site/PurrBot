@@ -64,11 +64,6 @@ public class CmdNeko implements Command{
                     return;
                 }
                 
-                if(CheckUtil.notPatreon(bot, tc, guild.getOwnerId())){
-                    message.delete().queue();
-                    return;
-                }
-                
                 if(isGif){
                     image = HttpUtil.ImageAPI.NSFW_NEKO_GIF;
                 }else{
