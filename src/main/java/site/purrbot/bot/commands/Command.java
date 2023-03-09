@@ -66,6 +66,14 @@ public interface Command extends AbstractCommand<Message>{
     
     default List<Member> resolveMembers(Guild guild, Message msg){
         Bag<Member> memberBag = msg.getMentions().getMembersBag();
+        List<Member> memberList = msg.getMentions().getMembers();
+        
+        // Check if bag actually has all mentions, including replies. If not: Add it.
+        // Workaround for https://github.com/DV8FromTheWorld/JDA/issues/2408
+        for(Member member : memberList){
+            if(!memberBag.contains(member))
+                memberBag.add(member);
+        }
         
         // If the message starts with the bots mention, remove first appearance from the bag.
         if(msg.getContentRaw().startsWith(guild.getSelfMember().getAsMention()))
