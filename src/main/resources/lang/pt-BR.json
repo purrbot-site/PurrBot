@@ -8,7 +8,7 @@
     "fetch": {
       "booster_role": "Não foi possível encontrar o cargo de impulsionador do Servidor de Suporte. Por favor, tente novamente mais tarde e, se este problema persistir, reporte-o em [nosso servidor Discord]({guild_invite})",
       "guild": "Não foi possível encontrar o Servidor de Suporte. Por favor, tente novamente mais tarde e, se este problema persistir, reporte-o em [nosso servidor Discord]({guild_invite})",
-      "member": "Não foi possível obter as informações do membro do Servidor de Suporte. Por favor, tente novamente mais tarde e, se este problema persistir, reporte-o em [nosso servidor Discord]({guild_invite})",
+      "member": "Não é possível obter informações de membro do [Servidor de Suporte]({guild_invite}). O dono do servidor precisa estar em nosso servidor de suporte para que isso funcione.\nSe você for o proprietário do servidor, está em nosso servidor e este problema persistir, peça ajuda para nós no canal `#support`.",
       "patreon_roles": "Não foi possível obter cargo do Patreon no Servidor de Suporte. Por favor, tente novamente mais tarde e, se este problema persistir, reporte-o em [nosso servidor Discord]({guild_invite})"
     },
     "missing_perms": {
