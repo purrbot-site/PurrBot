@@ -15,6 +15,7 @@
       "self": "Mir fehlen die folgenden Berechtigungen im Kanal {channel}:\n{permissions}",
       "user": "Dir fehlt die folgende Berechtigung um diesen Befehl auszuführen:\n{permission}"
     },
+    "no_help_info": "Dieser Befehl hat keine Benutzungsinformationen, welche angezeigt werden könnten.",
     "no_patreon": {
       "title": "Patreon Feature!",
       "description": "Diese Funktion ist nur für Server von [Stufe 2/3 Patreon Unterstützer]({patreon_url}) verfügbar!\n\nSolltest du der Besitzer dieses Servers sein und möchtest diese Funktion entsperren, mache folgende Schritte:\n1. Tritt dem [~Nya Discord Server]({guild_invite}) bei.\n2. Verlinke deinen Discord mit deinem Patreon Konto.\n3. Abonniere Stufe 2 oder 3 auf Patreon.",
@@ -38,6 +39,12 @@
   },
   "misc": {
     "and": "und",
+    "command_help": {
+      "command_usage": "Befehlsverwendung:",
+      "more_info": "Weitere Infos",
+      "required_permissions": "Benötigte Berechtigungen:",
+      "title": "Befehls-Hilfe: {command}"
+    },
     "info": "Hallo {user}!\nMein Präfix auf diesem Discord ist `{prefix}`\nVerwende `{prefix}help` für eine Liste von Befehlen oder schau die meine Dokumentation an:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Deutsch (de-ch)",
     "unknown_user": "Unbekannt",
