@@ -15,7 +15,7 @@
       "self": "I lack the following permission(s) in the channel {channel}:\n{permissions}",
       "user": "You lack the following permission to execute this command:\n{permission}"
     },
-    "no_help_info": "This command does not havy any usage info to show.",
+    "no_help_info": "This command does not have any usage info to show.",
     "no_patreon": {
       "title": "Patreon Feature!",
       "description": "This feature is only available for Servers owned by [Tier 2/3 Patreon Supporters]({patreon_url})!\n\nShould you be the Owner of this server and want to unlock this feature, do the following steps:\n1. Join the [~Nya Discord Server]({guild_invite})\n2. Link your Discord with your Patreon account.\n3. Subscribe to Tier 2 or 3 on Patreon.",
