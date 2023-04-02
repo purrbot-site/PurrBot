@@ -15,6 +15,7 @@
       "self": "Não tenho a(s) seguinte(s) permissões no canal {channel}:\n{permissions}",
       "user": "Você não tem a seguinte permissão para executar este comando:\n{permission}"
     },
+    "no_help_info": "Esse comando não tem nenhuma informação de uso para ser exibida.",
     "no_patreon": {
       "title": "Recurso do Patreon!",
       "description": "Este recurso só está disponível para Servidores pertencentes a [Apoiadores Patreon Nível 2/3]({patreon_url})!\n\nCaso seja o proprietário deste servidor e deseje desbloquear este recurso, execute as seguintes etapas:\n1. Junte-se ao [Servidor Discord ~Nya]({guild_invite})\n2. Vincule seu Discord com sua conta no Patreon.\n3. Inscreva-se no Nível 2 ou 3 do Patreon.",
@@ -38,6 +39,12 @@
   },
   "misc": {
     "and": "e",
+    "command_help": {
+      "command_usage": "Utilização do Comando:",
+      "more_info": "Mais informações",
+      "required_permissions": "Permissões necessárias",
+      "title": "Informações sobre o comando: {command}"
+    },
     "info": "Olá, {user}!\nMeu prefixo neste Discord é `{prefix}`\nExecute `{prefix}help` para obter uma lista de comandos ou consulte minha Documentação:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Português (pt)",
     "unknown_user": "Desconhecido",
