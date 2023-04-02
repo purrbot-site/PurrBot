@@ -15,6 +15,7 @@
       "self": "{channel} kanalında aşağıdaki izin(ler)e sahip değilim:\n{permissions}",
       "user": "Bu komutu çalıştırmak için aşağıdaki izinlere sahip değilsiniz:\n{permission}"
     },
+    "no_help_info": "Bu komutun gösterilecek bir kullanım bilgisi bulunmuyor.",
     "no_patreon": {
       "title": "Patreon Özelliği!",
       "description": "Bu özellik yalnızca [Kademe 2/3 Patreon Destekçileri]({patreon_url}) tarafından sahip olunan Sunucular için kullanılabilir!\n\nBu sunucunun Sahibi olmanız ve bu özelliğin kilidini açmak istemeniz durumunda, aşağıdaki adımları uygulayın:\n1. [~Nya Discord Sunucusu]'na katılın ({guild_invite})\n2. Discord'unuzu Patreon hesabınıza bağlayın.\n3. Patreon'da Kademe 2 veya 3'e abone olun.",
@@ -38,6 +39,12 @@
   },
   "misc": {
     "and": "ve",
+    "command_help": {
+      "command_usage": "Komut Kullanımı:",
+      "more_info": "Daha Fazla Bilgi",
+      "required_permissions": "Gerekli İzinler:",
+      "title": "Komut Bilgisi: {command}"
+    },
     "info": "Selam {user}!\nBu sunucudaki önekim `{prefix}`\nTüm komutlarımı görmek için `{prefix}help` komutunu kullan veya bu bağlantıyı ziyaret et:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Türkçe (tr-tr)",
     "unknown_user": "Bilinmiyor",
