@@ -31,6 +31,7 @@ import site.purrbot.bot.manager.api.response.GenericAPIResponse;
 import site.purrbot.bot.manager.api.response.ImageAPIErrorResponse;
 import site.purrbot.bot.manager.api.response.ImageAPISuccessResponse;
 import site.purrbot.bot.manager.command.CommandError;
+import site.purrbot.bot.manager.string.StringReplacer;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
@@ -40,33 +41,37 @@ public class ImageAPI{
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final Gson GSON = new Gson();
     
+    public static void returnImage(InteractionHook hook, String guildId, ImageAPICommand command, Member member){
+        returnImage(hook, guildId, command, member, null);
+    }
+    
     public static void returnImage(InteractionHook hook, String guildId, ImageAPICommand command, Member member, String targets){
         getImage(command).whenComplete((response, throwable) -> {
             if(throwable != null){
                 CommandError.fromPath(guildId, "errors", "image_api", "unknown_error")
-                    .replace("{error}", throwable.getMessage())
+                    .modify(text -> StringReplacer.replace(text, "{error}", throwable.getMessage()))
                     .send(hook);
                 return;
             }
             
-            if((response instanceof ImageAPIErrorResponse) && command.isRequired()){
+            if((response instanceof ImageAPIErrorResponse error) && command.isRequired()){
                 CommandError.fromPath(guildId, "errors", "image_api", "not_successful")
-                    .replace("{error}", ((ImageAPIErrorResponse)response).getMessage())
+                    .modify(text -> StringReplacer.replace(text, "{error}", error.getMessage()))
                     .send(hook);
                 return;
             }
             
             EmbedManager manager = EmbedManager.get(guildId, command.getMessagePath());
             if(member != null)
-                manager.replace("{user}", member.getEffectiveName());
+                manager.modify(text -> StringReplacer.replace(text, "{user}", member.getEffectiveName()));
             
             if(targets != null && !targets.isEmpty())
-                manager.replace("{targets}", targets);
+                manager.modify(text -> StringReplacer.replace(text, "{targets}", targets));
             
             EmbedBuilder embed = manager.getEmbed();
             
-            if(response instanceof ImageAPISuccessResponse)
-                embed.setImage(((ImageAPISuccessResponse)response).getLink());
+            if(response instanceof ImageAPISuccessResponse imgResponse)
+                embed.setImage(imgResponse.getLink());
             
             hook.editOriginalEmbeds(embed.build()).queue();
         });

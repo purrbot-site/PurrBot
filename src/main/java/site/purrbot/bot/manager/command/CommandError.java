@@ -23,16 +23,16 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.manager.string.MessageHandler;
-import site.purrbot.bot.manager.string.StringReplacer;
 
 import java.time.Instant;
+import java.util.function.Function;
 
 public class CommandError{
     
     private String message;
     
     private CommandError(String guildId, String... path){
-        this.message = guildId == null ? String.valueOf(path[0]) : MessageHandler.getTranslation(guildId, path).getMessage();
+        this.message = guildId == null ? path[0] : MessageHandler.getTranslation(guildId, path).getMessage();
     }
     
     public static CommandError fromStatic(String message){
@@ -43,11 +43,8 @@ public class CommandError{
         return new CommandError(guildId, path);
     }
     
-    public CommandError replace(String input, Object output){
-        if(input == null || input.isEmpty() || output == null)
-            return this;
-        
-        this.message = StringReplacer.replace(message, input, output);
+    public CommandError modify(Function<String, String> function){
+        this.message = function.apply(message);
         return this;
     }
     

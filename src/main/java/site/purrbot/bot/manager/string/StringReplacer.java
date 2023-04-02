@@ -23,6 +23,9 @@ import java.util.Map;
 public class StringReplacer{
     
     public static String replace(String input, String target, Object replacement){
+        if(input == null || input.isEmpty() || target == null || target.isEmpty() || replacement == null)
+            return input;
+        
         StringBuilder output = new StringBuilder(input);
         int index = 0;
         while((index = output.indexOf(target, index)) != -1){

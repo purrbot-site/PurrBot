@@ -27,12 +27,13 @@ import net.dv8tion.jda.api.interactions.InteractionHook;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.manager.command.CommandError;
 import site.purrbot.bot.manager.string.MessageHandler;
+import site.purrbot.bot.manager.string.StringReplacer;
 
 import java.util.Arrays;
 
 public abstract class BotCommand extends SlashCommand{
     
-    protected String[] replyMsgPath = new String[]{"misc", "default_loading"};
+    protected String[] loadingMsgPath = new String[]{"misc", "default_loading"};
     
     @Override
     protected void execute(SlashCommandEvent event){
@@ -55,7 +56,7 @@ public abstract class BotCommand extends SlashCommand{
         
         if(command == null){
             CommandError.fromPath(guild.getId(), "errors", "no_command_found")
-                .replace("{command}", event.getName())
+                .modify(text -> StringReplacer.replace(text, "{command}", event.getName()))
                 .send(event);
             return;
         }
@@ -64,12 +65,12 @@ public abstract class BotCommand extends SlashCommand{
 
         if(command.nsfwOnly && !tc.isNSFW()){
             CommandError.fromPath(guild.getId(), "errors", "no_nsfw")
-                .replace("{user}", member.getEffectiveName())
+                .modify(text -> StringReplacer.replace(text, "{user}", member.getEffectiveName()))
                 .send(event);
             return;
         }
         
-        event.reply(MessageHandler.getTranslation(guild.getId(), replyMsgPath).getMessage()).queue(
+        event.reply(MessageHandler.getTranslation(guild.getId(), loadingMsgPath).getMessage()).queue(
             hook -> handle(event, hook, guild, tc, member)
         );
     }

@@ -18,7 +18,7 @@
 
 package site.purrbot.bot.manager.file;
 
-import ch.qos.logback.classic.Logger;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.gson.GsonConfigurationLoader;
@@ -34,26 +34,29 @@ import java.util.*;
 
 public class FileManager{
     
-    private final Logger logger = (Logger)LoggerFactory.getLogger(FileManager.class);
+    private static FileManager instance = null;
     
+    private final Logger logger = LoggerFactory.getLogger(FileManager.class);
+    
+    private final Random random = new Random();
     private final Map<String, ConfigurationNode> files = new HashMap<>();
-    private final List<String> languages = new ArrayList<>();
     
     public FileManager(){}
+    
+    public static FileManager get(){
+        if(instance != null)
+            return instance;
+        
+        return (instance = new FileManager());
+    }
     
     public FileManager addLanguage(String language){
         String filePath = "/lang/" + language + ".json";
         if(!createOrLoad(language.toLowerCase(Locale.ROOT), filePath, "." + filePath)){
             logger.warn("Cannot create lang file {}. Skipping...", language);
-            return this;
         }
         
-        languages.add(language.toLowerCase(Locale.ROOT));
         return this;
-    }
-    
-    public List<String> getLanguages(){
-        return languages;
     }
     
     public FileManager addFile(String name){
@@ -62,14 +65,33 @@ public class FileManager{
         return this;
     }
     
-    public String getString(String name, String def, String... path){
+    public String getString(String name, String... path){
         ConfigurationNode node = files.get(name);
         if(node == null)
-            return def;
+            return "ERROR: Unknown file `" + name + "` provided!";
         
-        Object[] objPath = convertStringPath(path);
+        return fromPath(node, path).getString("ERROR: Invalid path `" + String.join(" -> ", path) + "` provided!");
+    }
+    
+    public String getRandomString(String name, String... path){
+        ConfigurationNode node = files.get(name);
+        if(node == null)
+            return "ERROR: Unknown file `" + name + "` provided!";
         
-        return node.node(objPath).getString(def);
+        ConfigurationNode listNode = fromPath(node, path);
+        if(!listNode.isList())
+            return "ERROR: Path `" + String.join(" -> ", path) + "` is not a list!";
+        
+        List<String> list = getStringList(name, path);
+        if(list.isEmpty())
+            return "ERROR: Provided path `" + String.join(" -> ", path) + "` had no entries.";
+        
+        if(list.size() == 1)
+            return list.get(0); // No need to use random on a list with 1 entry.
+        
+        synchronized(random){
+            return list.get(random.nextInt(list.size()));
+        }
     }
     
     public List<String> getStringList(String name, String... path){
@@ -78,8 +100,7 @@ public class FileManager{
             return Collections.emptyList();
         
         try{
-            Object[] objPath = convertStringPath(path);
-            return node.node(objPath).getList(String.class);
+            return fromPath(node, path).getList(String.class);
         }catch(SerializationException ex){
             return Collections.emptyList();
         }
@@ -94,13 +115,22 @@ public class FileManager{
         return node.node(objPath).getBoolean(def);
     }
     
-    public int isList(String name, String... path){
+    public boolean hasLanguage(String language){
+        return files.containsKey(language.toLowerCase(Locale.ROOT));
+    }
+    
+    public int resolveType(String name, String... path){
         ConfigurationNode node = files.get(name);
         if(node == null)
             return -1;
     
-        Object[] objPath = convertStringPath(path);
-        return node.node(objPath).isList() ? 1 : 0;
+        return fromPath(node, path).isList() ? 1 : 0;
+    }
+    
+    private ConfigurationNode fromPath(ConfigurationNode node, String... path){
+        Object[] finalPath = convertStringPath(path);
+        
+        return node.node(finalPath);
     }
     
     private boolean createOrLoad(String name, String internalPath, String externalPath){

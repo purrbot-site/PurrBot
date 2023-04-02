@@ -22,6 +22,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import site.purrbot.bot.manager.string.MessageHandler;
 
 import java.time.Instant;
+import java.util.function.Function;
 
 public class EmbedManager{
     
@@ -37,6 +38,11 @@ public class EmbedManager{
     
     public static EmbedBuilder getDefaultEmbed(){
         return new EmbedBuilder().setTimestamp(Instant.now()).setColor(0x802F3136);
+    }
+    
+    public EmbedManager modify(Function<String, String> function){
+        messageHandler.modify(function);
+        return this;
     }
     
     public EmbedManager replace(String target, Object replacement){

@@ -25,6 +25,7 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
@@ -47,7 +48,6 @@ public class PurrBot{
     private static PurrBot bot;
     
     // Bot classes
-    FileManager fileManager;
     DBManager dbManager;
     GuildSettingsManager guildSettingsManager;
     CommandLoader commandLoader;
@@ -78,16 +78,8 @@ public class PurrBot{
         return bot;
     }
     
-    public FileManager getFileManager(){
-        return fileManager;
-    }
-    
     public DBManager getDbManager(){
         return dbManager;
-    }
-    
-    public GuildSettingsManager getGuildSettingsManager(){
-        return guildSettingsManager;
     }
     
     public CommandLoader getCommandLoader(){
@@ -106,21 +98,25 @@ public class PurrBot{
         return random;
     }
     
+    
+    
     private void startBot() throws LoginException{
-        fileManager = new FileManager();
         dbManager = new DBManager();
-        guildSettingsManager = new GuildSettingsManager();
         commandLoader = new CommandLoader();
         
-        fileManager.addFile("config")
-            .addFile("random");
-        
+        FileManager.get()
+            .addFile("config")
+            .addFile("random")
+            .addFile("data")
+            .addLanguage("en")
+            .addLanguage("de_CH");
+    
         MessageRequest.setDefaultMentions(EnumSet.of(
             Message.MentionType.USER,
             Message.MentionType.ROLE
         ));
         
-        shardManager = DefaultShardManagerBuilder.createDefault(fileManager.getString("config", "", "token"))
+        shardManager = DefaultShardManagerBuilder.createDefault(FileManager.get().getString("config", "token"))
             .disableIntents(GatewayIntent.GUILD_VOICE_STATES)
             .disableCache(CacheFlag.VOICE_STATE)
             .enableIntents(

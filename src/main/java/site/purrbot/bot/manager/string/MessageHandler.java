@@ -19,11 +19,11 @@
 package site.purrbot.bot.manager.string;
 
 import org.jetbrains.annotations.NotNull;
-import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.constants.Emotes;
 import site.purrbot.bot.manager.file.FileManager;
+import site.purrbot.bot.manager.guild.GuildSettingsManager;
 
-import java.util.*;
+import java.util.function.Function;
 
 public class MessageHandler{
     
@@ -35,41 +35,34 @@ public class MessageHandler{
     
     @NotNull
     public static MessageHandler getTranslation(String guildId, String... path){
-        String language = PurrBot.getBot().getGuildSettingsManager().getLanguage(guildId);
-        FileManager fileManager = PurrBot.getBot().getFileManager();
-        String textPath = String.join(".", path);
+        String language = GuildSettingsManager.get().settings(guildId).getLanguage();
+        String textPath = String.join(" -> ", path);
     
-        String msg = null;
-        for(String lang : fileManager.getLanguages()){
-            if(lang.equalsIgnoreCase(language)){
-                int isListResult = fileManager.isList(language, path);
-                if(isListResult == -1){
-                    msg = "ERROR: Invalid path `" + textPath + "` for guild id `" + guildId + "`! String was empty/null.";
-                    break;
-                }else
-                if(isListResult == 1){
-                    List<String> lines = fileManager.getStringList(language, path);
-                    if(lines.isEmpty()){
-                        msg = "ERROR: Invalid path `" + textPath + "` for guild id `" + guildId + "`! List was empty.";
-                    }else{
-                        msg = lines.get(PurrBot.getBot().getRandom().nextInt(lines.size()));
-                    }
-                    break;
-                }else{
-                    msg = fileManager.getString(
-                        language, 
-                        "ERROR: Could not get message from path `" + textPath + "`!", 
-                        path
-                    );
-                    break;
-                }
-            }
+        String msg;
+        if(!FileManager.get().hasLanguage(language))
+            language = "en";
+        
+        int type = FileManager.get().resolveType(language, path);
+        if(type == -1){
+            // Unknown/Invalid type
+            msg = "ERROR: Invalid path `" + textPath + "`! `" + language + "` had no matching language file.";
+        }else
+        if(type == 1){
+            // Type is a list, so get a random String from it.
+            msg = FileManager.get().getRandomString(language, path);
+        }else{
+            msg = FileManager.get().getString(language, path);
         }
         
         if(msg == null || msg.isEmpty())
-            msg = "ERROR: Invalid path `" + textPath + "` for guild id `" + guildId + "`! String was empty/null.";
+            msg = "ERROR: Invalid path `" + textPath + "`! Retrieved text was empty/null.";
         
         return new MessageHandler(msg);
+    }
+    
+    public MessageHandler modify(Function<String, String> function){
+        this.message = function.apply(message);
+        return this;
     }
     
     public MessageHandler replace(String target, Object replacement){

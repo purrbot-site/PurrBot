@@ -43,11 +43,24 @@ public class GuildSettingsManager{
         DEF_WELCOME_ICON = "purr",
         DEF_WELCOME_MESSAGE = "Welcome {mention]!";
     
+    private static GuildSettingsManager instance = null;
+    
     private final Cache<String, GuildSettings> guildSettingsCache = Caffeine.newBuilder()
         .expireAfterWrite(10, TimeUnit.MINUTES)
         .build();
     
     public GuildSettingsManager(){}
+    
+    public static GuildSettingsManager get(){
+        if(instance != null)
+            return instance;
+        
+        return (instance = new GuildSettingsManager());
+    }
+    
+    public GuildSettings settings(String id){
+        return getSettings(id);
+    }
     
     public String getLanguage(String id){
         return getSettings(id).getLanguage();

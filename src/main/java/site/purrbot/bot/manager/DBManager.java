@@ -23,6 +23,7 @@ import com.rethinkdb.gen.ast.Table;
 import com.rethinkdb.net.Connection;
 import com.rethinkdb.utils.Types;
 import site.purrbot.bot.PurrBot;
+import site.purrbot.bot.manager.file.FileManager;
 import site.purrbot.bot.manager.guild.GuildSettingsManager;
 
 import java.util.Map;
@@ -38,11 +39,11 @@ public class DBManager{
     public DBManager(){
         r = RethinkDB.r;
         connection = r.connection()
-            .hostname(PurrBot.getBot().getFileManager().getString("config", "localhost", "database", "ip"))
+            .hostname(FileManager.get().getString("config", "database", "ip"))
             .port(28015)
-            .db(PurrBot.getBot().getFileManager().getString("config", "main", "database", "name"))
+            .db(FileManager.get().getString("config", "database", "name"))
             .connect();
-        guildTable = PurrBot.getBot().getFileManager().getString("config", "guilds", "database", "guildTable");
+        guildTable = FileManager.get().getString("config", "database", "guildTable");
     }
     
     public void addGuild(String id){

@@ -21,8 +21,9 @@ package site.purrbot.bot.command.fun;
 import com.jagrosh.jdautilities.command.SlashCommandEvent;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -31,6 +32,7 @@ import site.purrbot.bot.manager.api.ImageAPI;
 import site.purrbot.bot.manager.command.CommandError;
 import site.purrbot.bot.manager.command.CommandUtil;
 import site.purrbot.bot.manager.string.MessageHandler;
+import site.purrbot.bot.manager.string.StringReplacer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,9 +42,8 @@ public class CmdBite extends ImageAPICommand{
     public CmdBite(){
         this.name = "bite";
         this.help = "Bite some people.";
-        this.guildOnly = true;
         
-        this.replyMsgPath = new String[]{"purr", "fun", "bite", "loading"};
+        this.loadingMsgPath = new String[]{"purr", "fun", "bite", "loading"};
     
         this.apiName = "bite";
         this.apiMessagePath = new String[]{"purr", "fun", "bite", "message"};
@@ -51,7 +52,7 @@ public class CmdBite extends ImageAPICommand{
         this.options = Arrays.asList(
             new OptionData(OptionType.USER, "user", "The first user to bite. Required.").setRequired(true),
             new OptionData(OptionType.USER, "user2", "The second user to bite."),
-            new OptionData(OptionType.USER, "user3", "The second user to bite.")
+            new OptionData(OptionType.USER, "user3", "The third user to bite.")
         );
     }
     
@@ -65,7 +66,7 @@ public class CmdBite extends ImageAPICommand{
         
         if(users.contains(hook.getJDA().getSelfUser())){
             String msg = MessageHandler.getTranslation(guild.getId(), "purr", "fun", "bite", "mention_purr")
-                .replace("{user}", member.getAsMention())
+                .modify(text -> StringReplacer.replace(text, "{user}", member.getAsMention()))
                 .getMessage();
             
             tc.sendMessage(msg).queue();
@@ -73,7 +74,7 @@ public class CmdBite extends ImageAPICommand{
         
         if(users.contains(member.getUser())){
             String msg = MessageHandler.getTranslation(guild.getId(), "purr", "fun", "bite", "mention_self")
-                .replace("{user}", member.getAsMention())
+                .modify(text -> StringReplacer.replace(text, "{user}", member.getAsMention()))
                 .getMessage();
             
             tc.sendMessage(msg).queue();
