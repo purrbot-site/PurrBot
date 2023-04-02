@@ -15,6 +15,7 @@
       "self": "У меня нет следующих прав в канале {channel}:\n{permissions}",
       "user": "У вас не хватает следующего права, чтоб исполнить эту команду:\n{permission}"
     },
+    "no_help_info": "У этой команды нет никакой информации о том как её использовать.",
     "no_patreon": {
       "title": "Только для Patreon!",
       "description": "Эта функция доступна только для серверов, которыми обладают [Tier 2/3 донатеры на Patreon]({patreon_url})!\n\nЕсли вы владелец сервера и хотите разблокировать эту функцию, выполните следующее:\n1. Вступите в [~Nya Discord сервер]({guild_invite})\n2. Привяжите ваш Discord аккаунт к Patreon.\n3. Подпишитесь на Tier 2 или Tier 3 на Patreon.",
@@ -38,6 +39,12 @@
   },
   "misc": {
     "and": "и",
+    "command_help": {
+      "command_usage": "Использование команды:",
+      "more_info": "Подробнее",
+      "required_permissions": "Требуемые права:",
+      "title": "Помощь по команде: {command}"
+    },
     "info": "Привет, {user}!\nМой префикс на этом сервере `{prefix}`\nИспользуй `{prefix}help`, чтобы взглянуть на все команды или документацию:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Русский (ru-RU)",
     "unknown_user": "Неизвестный",
