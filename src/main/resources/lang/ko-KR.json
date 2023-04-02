@@ -15,6 +15,7 @@
       "self": "채널 {channel} 에서 {permissions} 권한이 없어!",
       "user": "그 명령어를 수행하려면 네가 {permission} 권한을 가지고 있어야 해."
     },
+    "no_help_info": "이 명령어에는 별도의 사용설명이 없습니다.",
     "no_patreon": {
       "title": "Patreon 후원자 혜택!",
       "description": "이 기능은 [티어 2/3 Patreon 후원자]({patreon_url})만 사용가능합니다!\n\n이 기능을 사용하기 위해서는\n1. 서버의 주인이 [지원 디스코드 서버]({guild_invite})에 입장한 후\n2. 디스코드 계정을 Patreon 계정과 연결하고\n3. 티어2/3 Patreon 후원자가 되어야 합니다.",
@@ -38,6 +39,12 @@
   },
   "misc": {
     "and": "그리고",
+    "command_help": {
+      "command_usage": "명령어 사용법:",
+      "more_info": "추가 정보",
+      "required_permissions": "필요한 권한:",
+      "title": "명령어 정보: {command}"
+    },
     "info": "안녕 {user}!\n이 서버에서의 접두사는 `{prefix}` 이야\n`{prefix}help` 를 통해 내 명령어들을 볼 수 있어.\n아니면 내 사용 설명서를 읽어봐!\nhttps://docs.purrbot.site/bot/commands",
     "language": "한국어 (ko-KR)",
     "unknown_user": "(알 수 없음)",
