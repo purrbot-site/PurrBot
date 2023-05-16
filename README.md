@@ -95,7 +95,7 @@ If a bot can't work without this permission, search for a different one as this 
 Running the bot isn't free, which is why we appreciate any donations given to us.  
 Single donations can be done through [Ko-fi] or [PayPal]. Continous donations (Subscriptions) can be done through [Patreon].
 
-As a thank you for donation will you get a Donator role on our [Discord Server][discord]. As a Tier 2 or 3 Patreon will you also unlock the NSFW commands as-well as the option of defining your own custom Welcome background and icon (Requires you to be in our Discord Server).
+As a thank you for donation will you get a Donator role on our [Discord Server][discord]. As a Tier 2 or 3 Patreon will you also unlock the option of defining your own custom Welcome background and icon (Requires you to be in our Discord Server).
 
 # Botlists
 
