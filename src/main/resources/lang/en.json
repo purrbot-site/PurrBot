@@ -654,7 +654,7 @@
       "solo": {
         "description": "Gives you a gif of a girl having fun with themself.\n\nThis command can only be executed in NSFW-labeled channels!",
         "loading": "{EMOTE_LOADING} Getting a gif of a hot girl...",
-        "message": "Solo girl"
+        "message": "{user} is having fun with themself. \uD83E\uDD2D"
       },
       "spank": {
         "description": "Spank the butt of someone naughty.\n\nThis command can only be executed in NSFW-labeled channels!",
