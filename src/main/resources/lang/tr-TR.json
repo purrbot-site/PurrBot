@@ -652,9 +652,9 @@
         "special_user": "Hehehe... {user} *\"susadın\"*, değil mi?\n\\*{user} adlı üyenin elini tutar* ve odaya doğru koşmaya başlar*"
       },
       "solo": {
-        "description": "Kendisiyle eğlenen bir kızın gifini gönderir.\n\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir!",
+        "description": "Mastürbasyon yapan bir erkek veya kadın gif'i gönderir.\n\nBu komut sadece NSFW etiketli kanallarda kullanılabilir!",
         "loading": "{EMOTE_LOADING} Ateşli bir kız gifi aranıyor...",
-        "message": "Yalnız kız"
+        "message": "{user} kendiyle eğleniyor. 🤭"
       },
       "spank": {
         "description": "Yaramaz birinin kıçına şaplak atar.\n\nBu komut yalnızca NSFW etiketli kanallarda kullanılabilir.",
