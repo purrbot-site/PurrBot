@@ -652,9 +652,9 @@
         "special_user": "Hehehe... Du bist *\"durstig\"* {user}, nicht wahr?\n\\*nimmt {user}'s hand und verschwindet in einem Raum*"
       },
       "solo": {
-        "description": "Gibt dir ein gif von einer Frau, welche Spass mit sich selbst hat.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwenden werden!",
+        "description": "Gibt dir ein Gif von einem Mann oder einer Frau, welche masturbieren.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwendet werden.",
         "loading": "{EMOTE_LOADING} Erhalte ein gif von einer heissen Frau...",
-        "message": "Einzelne Frau"
+        "message": "{user} hat mit sich selber spass. 🤭"
       },
       "spank": {
         "description": "Versohle den Hintern von jemand ungezogenem.\n\nDieser Befehl kann nur in NSFW-markierten Kanälen ausgeführt werden.",
