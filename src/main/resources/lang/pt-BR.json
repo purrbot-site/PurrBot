@@ -652,9 +652,9 @@
         "special_user": "Ei... Você está *\"sede\"* {user}, está?\n\\*pega a mão de {user}* e desaparece em um quarto*"
       },
       "solo": {
-        "description": "Dá a você um gif de uma garota se divertindo consigo mesma.\n\nEsse comando só pode ser executado em canais com rótulo NSFW!",
+        "description": "Dá a você um gif de um homem ou mulher se masturbando.\n\nEste comando só pode ser executado em canais com rótulo NSFW!",
         "loading": "{EMOTE_LOADING} Obtendo um gif de uma garota gostosa ...",
-        "message": "Menina sozinha"
+        "message": "{user} está se divertindo sozinho. 🤭"
       },
       "spank": {
         "description": "De um tapa na bunda de alguém pervertido(a).\n\nEste comando só pode ser usado em canais NSFW!",
