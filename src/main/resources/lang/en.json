@@ -652,7 +652,7 @@
         "special_user": "Hehehe... You're *\"thirsty\"* {user}, are you?\n\\*takes {user}'s hand* and disappears in a room*"
       },
       "solo": {
-        "description": "Gives you a gif or a male or female masturbating.\n\nThis command can only be executed in NSFW-labeled channels!",
+        "description": "Gives you a gif of a male or female masturbating.\n\nThis command can only be executed in NSFW-labeled channels!",
         "loading": "{EMOTE_LOADING} Getting a gif of a hot girl...",
         "message": "{user} is having fun with themself. \uD83E\uDD2D"
       },
