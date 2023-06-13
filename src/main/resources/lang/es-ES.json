@@ -652,9 +652,9 @@
         "special_user": "Hehehe... Tienes *\"sed\"* {user}, ¿verdad?\n\\*toma la mano de {user} y desaparecen en una habitación*"
       },
       "solo": {
-        "description": "Te da un gif de una chica divirtiéndose consigo misma.\n\n¡Este comando solo puede ejecutarse en canales etiquetados con NSFW!",
+        "description": "Envía un GIF de un hombre o una mujer masturbándose.\n\n¡Este comando solo se puede ejecutar en canales etiquetados como NSFW!",
         "loading": "{EMOTE_LOADING} Obteniendo un gif de una chica caliente...",
-        "message": "Chica solita"
+        "message": "{user} se divierte con si mismo. 🤭"
       },
       "spank": {
         "description": "Azotar el trasero de alguien travieso.\n\n¡Este comando solo puede ejecutarse en canales etiquetados con NSFW!",
