@@ -30,11 +30,10 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.requests.ErrorResponse;
+import net.dv8tion.jda.api.utils.MarkdownUtil;
 import site.purrbot.bot.PurrBot;
 import site.purrbot.bot.commands.Command;
-import site.purrbot.bot.constants.Emotes;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -77,78 +76,91 @@ public class CmdShards implements Command{
         
         if(guild.getOwner() != null)
             builder.addUsers(guild.getOwner().getUser());
-    
+        
+        String statusTitle = bot.getMsg(guild.getId(), "purr.info.shards.embed.status_title");
+        String pingTitle = bot.getMsg(guild.getId(), "purr.info.shards.embed.ping_title");
+        String guildTitle = bot.getMsg(guild.getId(), "purr.info.shards.embed.guilds_title");
+        
+        int pingWidth = pingTitle.length();
+        int guildWidth = guildTitle.length();
+        int statusWidth = statusTitle.length();
+        
         int id = msg.getJDA().getShardInfo().getShardId();
+        
         final List<JDA> shards = bot.getShardManager().getShardCache().stream()
                 .sorted(Comparator.comparing(jda -> jda.getShardInfo().getShardId()))
                 .collect(Collectors.toList());
         List<MessageEmbed> embeds = new ArrayList<>();
         
-        double ping = 0;
-        double guilds = 0;
-        
+        // We do a for loop to get the initial widths of different texts
         for(final JDA jda : shards){
-            int currId = jda.getShardInfo().getShardId();
+            // We need ping and guilds as String to now the text width.
+            String ping = String.valueOf(jda.getGatewayPing());
+            String guilds = String.valueOf(jda.getGuildCache().size());
+            String status = getStatus(jda, guild.getId());
             
-            ping += jda.getGatewayPing();
-            guilds += jda.getGuildCache().size();
-            MessageEmbed embed = bot.getEmbedUtil().getEmbed(member)
-                    .setTitle(
-                            bot.getMsg(guild.getId(), "purr.info.shards.embed.title")
-                                    .replace("{shard_id}", String.valueOf(currId))
-                                    .replace("{shard_total}", String.valueOf(shards.size()))
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.shards.embed.current_title"),
-                            currId == id ? Emotes.ACCEPT.getEmote() : Emotes.DENY.getEmote(),
-                            true
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.shards.embed.guilds_title"),
-                            String.format("`%d`", jda.getGuildCache().size()),
-                            true
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.shards.embed.status_title"),
-                            getStatus(jda, guild.getId()),
-                            true
-                    )
-                    .addField(
-                            bot.getMsg(guild.getId(), "purr.info.shards.embed.ping_title"),
-                            String.format("`%d`", jda.getGatewayPing()),
-                            true
-                    )
+            if(ping.length() > pingWidth)
+                pingWidth = ping.length();
+            
+            if(guilds.length() > guildWidth)
+                guildWidth = guilds.length();
+            
+            if(status.length() > statusWidth)
+                statusWidth = status.length();
+        }
+        
+        StringBuilder sBuilder = new StringBuilder(getHeader(statusTitle, pingTitle, guildTitle, statusWidth, pingWidth, guildWidth));
+        
+        for(final JDA shard : shards){
+            String statusLine = getShardLine(shard, guild.getId(), id, statusWidth, pingWidth, guildWidth);
+            
+            if((sBuilder.length() + 100) > MessageEmbed.DESCRIPTION_MAX_LENGTH){
+                MessageEmbed embed = new EmbedBuilder()
+                    .setDescription(MarkdownUtil.codeblock(sBuilder.toString()))
                     .build();
+                
+                embeds.add(embed);
+                
+                sBuilder.setLength(0);
+                sBuilder.append(getHeader(statusTitle, pingTitle, guildTitle, statusWidth, pingWidth, guildWidth));
+            }
+            
+            sBuilder.append("\n").append(statusLine);
+        }
+        
+        if(sBuilder.length() > 0){
+            MessageEmbed embed = new EmbedBuilder()
+                .setDescription(MarkdownUtil.codeblock(sBuilder.toString()))
+                .build();
             
             embeds.add(embed);
         }
         
-        double avgPing = (ping / bot.getShardManager().getShardCache().size());
-        double avgGuilds = (guilds / bot.getShardManager().getShardCache().size());
-    
-        DecimalFormat format = new DecimalFormat("#,###.##");
-        
-        MessageEmbed average = bot.getEmbedUtil().getEmbed(member)
-                .setTitle(bot.getMsg(guild.getId(), "purr.info.shards.average.title"))
-                .setDescription(bot.getMsg(guild.getId(), "purr.info.shards.average.description"))
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.info.shards.average.guilds"),
-                        String.format("`%s`", format.format(avgGuilds)),
-                        false
-                )
-                .addField(
-                        bot.getMsg(guild.getId(), "purr.info.shards.average.ping"),
-                        String.format("`%s`", format.format(avgPing)),
-                        false
-                )
-                .build();
-        
-        builder.addItems(average);
-        for(MessageEmbed embed : embeds)
-            builder.addItems(embed);
+        builder.addItems(embeds);
         
         builder.build()
                .display(tc);
+    }
+    
+    private String getHeader(String statusTitle, String pingTitle, String guildsTitle, int statusWidth, int pingWidth, int guildsWidth){
+        return String.format(
+            "     | %-" + statusWidth + "s | %-" + pingWidth + "s | %-" + guildsWidth + "s",
+            statusTitle,
+            pingTitle,
+            guildsTitle
+        );
+    }
+    
+    private String getShardLine(JDA shard, String guildId, int ownShard, int statusWidth, int pingWidth, int guildsWidth){
+        String status = getStatus(shard, guildId);
+        
+        return String.format(
+            "%4s | %-"+ statusWidth + "s | %" + pingWidth + "d | %" + guildsWidth + "d",
+            (shard.getShardInfo().getShardId() == ownShard ? "*" : "") + shard.getShardInfo().getShardId(),
+            status,
+            shard.getGatewayPing(),
+            shard.getGuildCache().size()
+        );
     }
     
     private String getStatus(JDA jda, String id){
@@ -169,6 +181,6 @@ public class CmdShards implements Command{
                 break;
         }
         
-        return "`" + status + "`";
+        return status;
     }
 }

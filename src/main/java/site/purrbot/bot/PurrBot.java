@@ -62,7 +62,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 
 public class PurrBot {
-
+    
+    private static PurrBot instance;
+    
     private final Logger logger = LoggerFactory.getLogger(PurrBot.class);
 
     private ShardManager shardManager = null;
@@ -93,7 +95,7 @@ public class PurrBot {
 
     public static void main(String[] args){
         try{
-            new PurrBot().setup();
+            (instance = new PurrBot()).setup();
         }catch(LoginException ex){
             new PurrBot().logger.error("Couldn't login to Discord!", ex);
         }
@@ -109,7 +111,7 @@ public class PurrBot {
             .addLang("en")
             .addLang("en-OWO")
             .addLang("es-ES")
-            .addLang("fr-FR")
+            //.addLang("fr-FR") // Translator left the server.
             //.addLang("it-IT") // Discontinued at the moment.
             .addLang("ko-KR")
             .addLang("pt-BR")
@@ -155,6 +157,14 @@ public class PurrBot {
                 .build();
         
         setupStatusAPI();
+    }
+    
+    public static PurrBot get(){
+        return instance;
+    }
+    
+    public CommandHandler<Message> getCommandHandler(){
+        return CMD_HANDLER;
     }
 
     public Random getRandom(){

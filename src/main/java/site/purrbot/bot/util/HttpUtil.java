@@ -225,6 +225,7 @@ public class HttpUtil {
         NSFW_NEKO_GIF     ("neko",          "neko",      true, true, false, true),
         NSFW_PUSSYLICK    ("pussylick",     "pussylick", true, true, true,  false),
         NSFW_SOLO         ("solo",          "solo",      true, true, false, false),
+        NSFW_SOLO_MALE    ("solo_male",     "solo",      true, true, false, false),
         NSFW_SPANK        ("spank",         "spank",     true, true, true,  false),
         NSFW_THREESOME_FFF("threesome_fff", "threesome", true, true, true,  false),
         NSFW_THREESOME_FFM("threesome_ffm", "threesome", true, true, true,  false),

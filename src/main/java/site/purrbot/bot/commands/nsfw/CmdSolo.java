@@ -33,11 +33,11 @@ import java.util.List;
 @CommandDescription(
         name = "Solo",
         description = "purr.nsfw.solo.description",
-        triggers = {"solo", "girl"},
+        triggers = {"solo", "masturbation"},
         attributes = {
             @CommandAttribute(key = "category", value = "nsfw"),
-            @CommandAttribute(key = "usage", value = "{p}solo"),
-            @CommandAttribute(key = "help", value = "{p}solo")
+            @CommandAttribute(key = "usage", value = "{p}solo [--male]"),
+            @CommandAttribute(key = "help", value = "{p}solo [--male]")
         }
 )
 public class CmdSolo implements Command{
@@ -50,8 +50,12 @@ public class CmdSolo implements Command{
 
     @Override
     public void run(Guild guild, TextChannel tc, Message msg, Member member, List<Member> members, String... args){
-        tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.solo.loading")).queue(message ->
-                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_SOLO, member)
-        );
+        tc.sendMessage(bot.getMsg(guild.getId(), "purr.nsfw.solo.loading")).queue(message ->{
+            if(bot.getMessageUtil().hasArg("male", args)){
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_SOLO_MALE, member);
+            }else{
+                bot.getRequestUtil().handleEdit(tc, message, HttpUtil.ImageAPI.NSFW_SOLO, member);
+            }
+        });
     }
 }

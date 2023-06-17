@@ -34,7 +34,6 @@ public final class LangUtils{
             case "de-ch":
             case "en-owo":
             case "es-es":
-            case "fr-fr":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
@@ -43,8 +42,9 @@ public final class LangUtils{
             
             case "bg-bg":
             case "de-de":
-            case "it-it":
             case "et-ee":
+            case "fr-fr":
+            case "it-it":
             default:
                 return bot.getFileManager().getString("en", path);
         }
@@ -55,7 +55,6 @@ public final class LangUtils{
             case "de-ch":
             case "en-owo":
             case "es-es":
-            case "fr-fr":
             case "ko-kr":
             case "pt-br":
             case "ru-ru":
@@ -64,8 +63,9 @@ public final class LangUtils{
             
             case "bg-bg":
             case "de-de":
-            case "it-it":
+            case "fr-fr":
             case "et-ee":
+            case "it-it":
             default:
                 return bot.getFileManager().getStringlist("en", path);
         }
@@ -79,7 +79,7 @@ public final class LangUtils{
         EN_OWO("\uDDEC", "\uDDE7"),
         ES_ES ("\uDDEA", "\uDDF8"),
         //ET_EE ("\uDDEA", "\uDDEA"),
-        FR_FR ("\uDDEB", "\uDDF7"),
+        //FR_FR ("\uDDEB", "\uDDF7"),
         //IT_IT ("\uDDEE", "\uDDF9"),
         KO_KR ("\uDDF0", "\uDDF7"),
         PT_BR ("\uDDE7", "\uDDF7"),

@@ -60,7 +60,7 @@ public class CommandListener extends ListenerAdapter{
     public void onMessageReceived(@NotNull MessageReceivedEvent event){
         CMD_EXECUTOR.execute(() -> {
             // Ignore non-guild messages and non-text channels
-            if(!event.isFromGuild() || event.getChannel().getType() != ChannelType.TEXT)
+            if(!event.isFromGuild() || event.getChannel().getType() == ChannelType.NEWS)
                 return;
             
             // Ignore other bots (includes self)
@@ -72,7 +72,7 @@ public class CommandListener extends ListenerAdapter{
                 mention = self.getAsMention();
             
             // Don't bother with channels Bot can't write in.
-            if(!self.hasPermission(event.getChannel().asTextChannel(), Permission.MESSAGE_SEND))
+            if(!event.getChannel().canTalk())
                 return;
     
             Message msg = event.getMessage();
@@ -82,10 +82,6 @@ public class CommandListener extends ListenerAdapter{
             
             // Ignore specific channels on the support server.
             if(event.getChannel().getId().equals(IDs.SUGGESTIONS))
-                return;
-            
-            // Ignore news/Announcement channels.
-            if(event.getChannel().getType() == ChannelType.NEWS)
                 return;
             
             String raw = msg.getContentRaw();
