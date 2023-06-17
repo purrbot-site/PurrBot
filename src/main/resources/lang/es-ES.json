@@ -8,13 +8,14 @@
     "fetch": {
       "booster_role": "No se puede recuperar el rol de Booster desde el Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, repórtalo en [nuestro servidor de Discord]({guild_invite})",
       "guild": "No se puede recuperar el Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, repórtalo en [nuestro servidor de Discord]({guild_invite})",
-      "member": "No se puede recuperar la información de los miembros del Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, repórtalo en [nuestro servidor de Discord]({guild_invite})",
+      "member": "No se puede obtener la información del miembro del [Support Server] ({guild_invite}). El propietario del servidor debe estar en nuestro servidor de soporte para que esto funcione.\nSi eres el propietario del servidor, y este problema persisten aun estando en nuestro servidor, infórmanos en el canal `#support`.",
       "patreon_roles": "No se han podido recuperar los roles de Patreon del Servidor de Soporte. Por favor, inténtalo de nuevo más tarde y si este problema persiste, infórmanos en [nuestro servidor de Discord]({guild_invite})"
     },
     "missing_perms": {
       "self": "No tengo los siguientes permisos en el canal {channel}:\n{permissions}",
       "user": "Te falta el siguiente permiso para ejecutar este comando:\n{permission}"
     },
+    "no_help_info": "Este comando no tiene ninguna información para mostrar.",
     "no_patreon": {
       "title": "¡Característica de Patreon!",
       "description": "¡Esta función solo está disponible para los Servers del propietario que sean [Patreon Supporter de Nivel 2/3]({patreon_url})!\n\nSi eres el propietario de este servidor y desea desbloquear esta función, realice los siguientes pasos:\n1. Únete al [~Nya Discord Server]({guild_invite})\n2. Vincula tu Discord con tu cuenta de Patreon.\n3. Suscríbete al Nivel 2 o 3 en Patreon.",
@@ -38,6 +39,12 @@
   },
   "misc": {
     "and": "y",
+    "command_help": {
+      "command_usage": "Comando usado:",
+      "more_info": "Más info",
+      "required_permissions": "Permisos requeridos:",
+      "title": "Información del comando: {command}"
+    },
     "info": "¡Hola {user}!\nMi prefijo en este Discord es `{prefix}`\nEjecuta `{prefix}help` para ver mi lista de comandos o consultar mi Documentación:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Español (es-es)",
     "unknown_user": "Desconocido",
@@ -645,9 +652,9 @@
         "special_user": "Hehehe... Tienes *\"sed\"* {user}, ¿verdad?\n\\*toma la mano de {user} y desaparecen en una habitación*"
       },
       "solo": {
-        "description": "Te da un gif de una chica divirtiéndose consigo misma.\n\n¡Este comando solo puede ejecutarse en canales etiquetados con NSFW!",
+        "description": "Envía un GIF de un hombre o una mujer masturbándose.\n\n¡Este comando solo se puede ejecutar en canales etiquetados como NSFW!",
         "loading": "{EMOTE_LOADING} Obteniendo un gif de una chica caliente...",
-        "message": "Chica solita"
+        "message": "{user} se divierte con si mismo. 🤭"
       },
       "spank": {
         "description": "Azotar el trasero de alguien travieso.\n\n¡Este comando solo puede ejecutarse en canales etiquetados con NSFW!",

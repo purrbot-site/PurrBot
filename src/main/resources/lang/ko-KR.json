@@ -8,13 +8,14 @@
     "fetch": {
       "booster_role": "지원 서버에서 니트로 부스터 역할을 불러올 수 없습니다. 다음에 다시 시도해주세요. 계속 안되면, [지원서버]({guild_invite}) 에 문의해주세요.",
       "guild": "지원 서버를 불러올 수 없습니다. 다음에 다시 시도해주세요. 계속 안되면, [지원서버]({guild_invite}) 에 문의해주세요.",
-      "member": "지원 서버에서 사용자 목록을 불러올 수 없습니다. 다음에 다시 시도해주세요. 계속 안되면, [지원서버]({guild_invite}) 에 문의해주세요.",
+      "member": "[지원 서버]({guild_invite}) 에서 정보를 찾을 수 없습니다. 서버의 소유주는 지원 서버에 있어야 합니다.\n서버의 소유주이며, 지원 서버에 있음에도 이 문제가 발생한다면, 지원 서버의 `#support` 채널에 제보해주세요.",
       "patreon_roles": "지원 서버에서 Patreon 역할을 불러올 수 없습니다. 다음에 다시 시도해주세요. 계속 안되면, [지원서버]({guild_invite}) 에 문의해주세요."
     },
     "missing_perms": {
       "self": "채널 {channel} 에서 {permissions} 권한이 없어!",
       "user": "그 명령어를 수행하려면 네가 {permission} 권한을 가지고 있어야 해."
     },
+    "no_help_info": "이 명령어에는 별도의 사용설명이 없습니다.",
     "no_patreon": {
       "title": "Patreon 후원자 혜택!",
       "description": "이 기능은 [티어 2/3 Patreon 후원자]({patreon_url})만 사용가능합니다!\n\n이 기능을 사용하기 위해서는\n1. 서버의 주인이 [지원 디스코드 서버]({guild_invite})에 입장한 후\n2. 디스코드 계정을 Patreon 계정과 연결하고\n3. 티어2/3 Patreon 후원자가 되어야 합니다.",
@@ -38,6 +39,12 @@
   },
   "misc": {
     "and": "그리고",
+    "command_help": {
+      "command_usage": "명령어 사용법:",
+      "more_info": "추가 정보",
+      "required_permissions": "필요한 권한:",
+      "title": "명령어 정보: {command}"
+    },
     "info": "안녕 {user}!\n이 서버에서의 접두사는 `{prefix}` 이야\n`{prefix}help` 를 통해 내 명령어들을 볼 수 있어.\n아니면 내 사용 설명서를 읽어봐!\nhttps://docs.purrbot.site/bot/commands",
     "language": "한국어 (ko-KR)",
     "unknown_user": "(알 수 없음)",
@@ -645,9 +652,9 @@
         "special_user": "헤헤... 너 지금 *\"목마른\"* 상태구나, {user}?\n\\*{user}의 손을 잡고 함께 사라진다*"
       },
       "solo": {
-        "description": "혼자서 즐기고 있는 소녀의 움짤을 보여줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",
+        "description": "혼자서 즐기고 있는 소녀의 짤 또는 움짤을 보여줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",
         "loading": "{EMOTE_LOADING} 야한 여자아이 불러오는 중...",
-        "message": "야한 여자"
+        "message": "{user}가 혼자 즐기고있는 모양이야. 🤭"
       },
       "spank": {
         "description": "엉덩이를 찰싹 때려줍니다.\n\n연령 제한 채널에서만 사용가능합니다.",

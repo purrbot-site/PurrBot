@@ -8,13 +8,14 @@
     "fetch": {
       "booster_role": "Kann die Booster-Rolle vom Support-Server nicht abrufen. Bitte versuche es später noch einmal und wenn dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})",
       "guild": "Der Support-Server konnte nicht abgerufen werden. Bitte versuche es später noch einmal und falls dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})",
-      "member": "Mitgliederinformationen konnten nicht vom Support-Server abgerufen werden. Bitte versuche es später noch einmal und wenn dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})",
+      "member": "Mitgliederinformationen können nicht vom [Support-Server]({guild_invite}) abgerufen werden. Der Serverinhaber muss auf unserem Support-Server sein, damit dies funktionier.\nSolltest du der Serverinhaber sein, dich auf unserme Server befinden und dieses Problem weiterhin auftreten, melde es uns im `#support` Kanal.",
       "patreon_roles": "Patreon Rollen konnten nicht vom Support-Server abgerufen werden. Bitte versuche es später noch einmal und falls dieses Problem weiterhin besteht, melde es auf [unserem Discord Server]({guild_invite})"
     },
     "missing_perms": {
       "self": "Mir fehlen die folgenden Berechtigungen im Kanal {channel}:\n{permissions}",
       "user": "Dir fehlt die folgende Berechtigung um diesen Befehl auszuführen:\n{permission}"
     },
+    "no_help_info": "Dieser Befehl hat keine Benutzungsinformationen, welche angezeigt werden könnten.",
     "no_patreon": {
       "title": "Patreon Feature!",
       "description": "Diese Funktion ist nur für Server von [Stufe 2/3 Patreon Unterstützer]({patreon_url}) verfügbar!\n\nSolltest du der Besitzer dieses Servers sein und möchtest diese Funktion entsperren, mache folgende Schritte:\n1. Tritt dem [~Nya Discord Server]({guild_invite}) bei.\n2. Verlinke deinen Discord mit deinem Patreon Konto.\n3. Abonniere Stufe 2 oder 3 auf Patreon.",
@@ -38,6 +39,12 @@
   },
   "misc": {
     "and": "und",
+    "command_help": {
+      "command_usage": "Befehlsverwendung:",
+      "more_info": "Weitere Infos",
+      "required_permissions": "Benötigte Berechtigungen:",
+      "title": "Befehls-Hilfe: {command}"
+    },
     "info": "Hallo {user}!\nMein Präfix auf diesem Discord ist `{prefix}`\nVerwende `{prefix}help` für eine Liste von Befehlen oder schau die meine Dokumentation an:\nhttps://docs.purrbot.site/bot/commands",
     "language": "Deutsch (de-ch)",
     "unknown_user": "Unbekannt",
@@ -645,9 +652,9 @@
         "special_user": "Hehehe... Du bist *\"durstig\"* {user}, nicht wahr?\n\\*nimmt {user}'s hand und verschwindet in einem Raum*"
       },
       "solo": {
-        "description": "Gibt dir ein gif von einer Frau, welche Spass mit sich selbst hat.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwenden werden!",
+        "description": "Gibt dir ein Gif von einem Mann oder einer Frau, welche masturbieren.\n\nDieser Befehl kann nur in als NSFW markierten Kanälen verwendet werden.",
         "loading": "{EMOTE_LOADING} Erhalte ein gif von einer heissen Frau...",
-        "message": "Einzelne Frau"
+        "message": "{user} hat mit sich selber spass. 🤭"
       },
       "spank": {
         "description": "Versohle den Hintern von jemand ungezogenem.\n\nDieser Befehl kann nur in NSFW-markierten Kanälen ausgeführt werden.",
