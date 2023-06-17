@@ -8,13 +8,14 @@
     "fetch": {
       "booster_role": "Unable to wetwieve Boostew wole fwom the Suppowt Sewvew. TwT\nPwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
       "guild": "Unable to wetwieve the Suppowt Sewver. TwT\nPwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
-      "member": "Unable to wetwieve Membew Infowmation fwom the Suppowt Sewvew. TwT\nPwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})",
+      "member": "Unable to fetch Membew Infowmation fwom the [Suppowt Sewvew]({guild_invite}). The sewvew ownew needs to be on ouw Suppowt sewvew fow this to wowk. QwQ\nIf you'we the sewew ownew, you'we on ouw sewvew and this issue persists, wepowt it to us in the `#support` channel.",
       "patreon_roles": "Unable to wetwieve Patweon woles fwom Suppowt Sewver. TwT\nPwease twy again later and if this issue persists, wepowt it on [ouw Discowd Server]({guild_invite})"
     },
     "missing_perms": {
       "self": "I lack the fowwowing pewmission(s) in the channew {channel}:\n`{permissions}`",
       "user": "You lack the fowwoing pewmission to execute this command:\n{permission}"
     },
+    "no_help_info": "This command does not have any usagw info to show. QwQ",
     "no_patreon": {
       "title": "Patweon Featuwe! OWO",
       "description": "This fatuwe is only available fow Sewvews owned by [Tiew 2/3 Patweon Suppowtews]({patreon_url})! -w-\n\nShould you be the Ownew of this sewew and want to unlock this featuwe, do the following steps:\n1. Join the [~Nya Discowd Sewew]({guild_invite})\n2. Link youw Discowd with youw Patweon account.\n3. Subscwibe to Tiew 2 ow 3 on Patweon.",
@@ -38,6 +39,12 @@
   },
   "misc": {
     "and": "and",
+    "command_help": {
+      "command_usage": "Command Usage:",
+      "more_info": "Mowe Info UwU",
+      "required_permissions": "Wequiwed Pewmissions:",
+      "title": "Command Info: {command}"
+    },
     "info": "Hey thewe {user}!\nMy pwefix on this Discowd is `{prefix}`\nWun `{prefix}help` fow a wist of commands ow check ma Docies:\nhttps://docs.purrbot.site/bot/commands",
     "language": "English (OwO) (en-owo)",
     "unknown_user": "Unknown UwU",
@@ -645,9 +652,9 @@
         "special_user": "Hehehe... You'we *\"thiwsty\"* {user}, awe you?\n\\*takes {user}'s hand* and disappears in a room*"
       },
       "solo": {
-        "description": "Gives you a gif of a giwl having fun with themself.\n\nThis command can only be executed in NSFW-labeled channels!",
+        "description": "Gives you a gif of a male ow female mastuwbating. oWo\n\nThis command can only be executed in NSFW-labeled channels!",
         "loading": "{EMOTE_LOADING} Getting a gif of a hot giwl...",
-        "message": "Solo giwl"
+        "message": "{user} is having fun with themself. 🤭"
       },
       "spank": {
         "description": "Spank the butt of someone naughty. O//w//O\n\nThis command can only be executed in NSFW-labeled channels!",
