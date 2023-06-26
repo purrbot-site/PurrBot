@@ -173,6 +173,11 @@
         "loading": "{EMOTE_LOADING} kitsune gifi yükleniyor...",
         "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
+      "lay": {
+        "description": "Uzanmana izin verir.",
+        "loading": "Uzanacak rahat bir yer bulunuyor...",
+        "message": "{user} uzanıyor"
+      },
       "lick": {
         "description": "İnsanları yala... SFW yoluyla elbette.",
         "loading": "{EMOTE_LOADING} Yalama gifi aranıyor...",
