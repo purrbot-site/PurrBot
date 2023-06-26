@@ -173,6 +173,11 @@
         "loading": "{EMOTE_LOADING} Recebendo um gif de kitsune",
         "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
+      "lay": {
+        "description": "Permite que você se deite.",
+        "loading": "Encontrando local confortável para se deitar...",
+        "message": "{user} está deitando"
+      },
       "lick": {
         "description": "lamba pessoas... Em um jeito SFW obviamente.",
         "loading": "{EMOTE_LOADING} Recebendo um gif de lambida",
