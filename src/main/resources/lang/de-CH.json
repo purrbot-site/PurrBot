@@ -173,6 +173,11 @@
         "loading": "{EMOTE_LOADING} Erhalte ein Kitsune-gif...",
         "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
+      "lay": {
+        "description": "Erlaubt es dir, dich hinzulegen.",
+        "loading": "Finde einen bequemen Platz zum hinlegen...",
+        "message": "{user} legt sich hin"
+      },
       "lick": {
         "description": "Lecke Leute... In eine SFW Art natürlich.",
         "loading": "{EMOTE_LOADING} Erhalte ein Leck-gif...",
