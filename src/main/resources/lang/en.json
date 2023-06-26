@@ -173,6 +173,11 @@
         "loading": "{EMOTE_LOADING} Receiving a kitsune-gif...",
         "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
+      "lay": {
+        "description": "Allows you to lay down.",
+        "loading": "Finding comfy spot to lay down...",
+        "message": "{user} is laying down"
+      },
       "lick": {
         "description": "Lick people... In a SFW way obviously.",
         "loading": "{EMOTE_LOADING} Receiving a lick-gif...",
