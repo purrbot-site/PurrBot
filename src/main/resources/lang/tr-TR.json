@@ -52,6 +52,11 @@
   },
   "purr": {
     "fun": {
+      "angry": {
+        "description": "\\*sinirli neko sesleri*",
+        "loading": "Biri sinirlendiriliyor...",
+        "message": "{user} sinirli"
+      },
       "bite": {
         "description": "Bir veya daha fazla kişiyi ısırmanızı sağlar.",
         "loading": "{EMOTE_LOADING} Biri ısırılacak...",
@@ -225,6 +230,11 @@
         ],
         "message": "{user} parmak ucuyla {targets} adlı üyeyi dürttü",
         "no_mention": "Lütfen dürtmek için en az bir üye etiketle!"
+      },
+      "pout": {
+        "description": "Somurtmanı sağlar.",
+        "loading": "Birine \"hımm\" çektiriliyor...",
+        "message": "{user} somurtuyor"
       },
       "senko": {
         "description": "Seni şımartabilecek bir senko resmi gönderir.",
