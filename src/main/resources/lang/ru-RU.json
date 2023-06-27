@@ -173,6 +173,11 @@
         "loading": "{EMOTE_LOADING} Ищем gif с Китцунэ...",
         "message": "Китцунэ {EMOTE_SHIRO_TAIL_WAG}"
       },
+      "lay": {
+        "description": "Команда, чтобы прилечь.",
+        "loading": "Ищем удобное место, чтоб полежать...",
+        "message": "{user} прилёг"
+      },
       "lick": {
         "description": "Лизните кого-нибудь... Без 18+, конечно же.",
         "loading": "{EMOTE_LOADING} Ищем лизь для gif...",
