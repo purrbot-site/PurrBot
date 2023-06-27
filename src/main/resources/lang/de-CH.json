@@ -52,6 +52,11 @@
   },
   "purr": {
     "fun": {
+      "angry": {
+        "description": "\\*wütende Neko geräusche*",
+        "loading": "Mache jemanden wütent...",
+        "message": "{user} ist wütend"
+      },
       "bite": {
         "description": "Lässt dich eine oder mehrere Personen beissen.",
         "loading": "{EMOTE_LOADING} Werde jemanden beissen...",
@@ -225,6 +230,11 @@
         ],
         "message": "{user} stupst dich {targets}",
         "no_mention": "Bitte erwähne mindestens eine Person zum stupsen!"
+      },
+      "pout": {
+        "description": "Erlaubt dir zu schmollen.",
+        "loading": "Lasse jemanden schmollen...",
+        "message": "{user} schmollt"
       },
       "senko": {
         "description": "Erhalte ein Bild vom Göttlichen Boten, welche dich verwöhnen kann.",
