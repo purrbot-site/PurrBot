@@ -52,6 +52,11 @@
   },
   "purr": {
     "fun": {
+      "angry": {
+        "description": "\\*barulho de neko irritada*",
+        "loading": "Deixando alguém bravo...",
+        "message": "{user} está com raiva"
+      },
       "bite": {
         "description": "Permite que você morda uma ou várias pessoas.",
         "loading": "{EMOTE_LOADING} Indo morder alguém...",
@@ -225,6 +230,11 @@
         ],
         "message": "{user} cutuca você {targets}",
         "no_mention": "Por favor, mencione pelo menos um usuário para cutucar!"
+      },
+      "pout": {
+        "description": "Deixa você fazer cara feia.",
+        "loading": "Alguém está fazendo \"hmph\"...",
+        "message": "{user} está de cara feia"
       },
       "senko": {
         "description": "Obtenha uma imagem de um mensageiro divino que pode dar atenção á você.",
