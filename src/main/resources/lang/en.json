@@ -52,6 +52,11 @@
   },
   "purr": {
     "fun": {
+      "angry": {
+        "description": "\\*angry neko noises*",
+        "loading": "Making someone angry...",
+        "message": "{user} is angry"
+      },
       "bite": {
         "description": "Lets you bite one or multiple people.",
         "loading": "{EMOTE_LOADING} Going to bite someone...",
@@ -225,6 +230,11 @@
         ],
         "message": "{user} pokes you {targets}",
         "no_mention": "Please mention at least one user to poke!"
+      },
+      "pout": {
+        "description": "Allows you to pout.",
+        "loading": "Making someone \"hmph\"...",
+        "message": "{user} is pouting"
       },
       "senko": {
         "description": "Get an image of the divine messenger that can pamper you.",
