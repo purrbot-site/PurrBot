@@ -52,6 +52,11 @@
   },
   "purr": {
     "fun": {
+      "angry": {
+        "description": "\\*angwy nyeko noises*",
+        "loading": "Making someone angwy...",
+        "message": "{user} is angwy \\\\(#`Д´)/"
+      },
       "bite": {
         "description": "Wets you nom one ow muwtipwe peopwe.",
         "loading": "{EMOTE_LOADING} Going to bite someone... >:c",
@@ -173,6 +178,11 @@
         "loading": "{EMOTE_LOADING} Weceiving a kitsune-gif...",
         "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
+      "lay": {
+        "description": "Allows you to west. ( - ω - )",
+        "loading": "Finding comfy spot to west...",
+        "message": "{user} is westing ( - ω - )"
+      },
       "lick": {
         "description": "Lick peopwe... In a SFW way obviouswy.",
         "loading": "{EMOTE_LOADING} Weceiving a lick-gif...",
@@ -220,6 +230,11 @@
         ],
         "message": "{user} pokes you {targets} OwO",
         "no_mention": "Pwease mention at weast one user to poke!"
+      },
+      "pout": {
+        "description": "Allows you to pout ( > ⤙ < )",
+        "loading": "Making someone \"hmpf\" ( > - < )...",
+        "message": "{user} is pouting ( > ⤙ < )"
       },
       "senko": {
         "description": "Get an image of the divine messengew that can pampew you. UwU",
