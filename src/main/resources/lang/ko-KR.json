@@ -52,6 +52,11 @@
   },
   "purr": {
     "fun": {
+      "angry": {
+        "description": "*화난 고양이 소리*",
+        "loading": "누군가를 화나게 만드는 중...",
+        "message": "{user}가 화났어"
+      },
       "bite": {
         "description": "한 명 또는 여러 사람들을 깨뭅니다.",
         "loading": "{EMOTE_LOADING} 누군가를 물러 가는중...",
@@ -173,6 +178,11 @@
         "loading": "{EMOTE_LOADING} 여우 이미지 불러오는중...",
         "message": "여우소녀 {EMOTE_SHIRO_TAIL_WAG}"
       },
+      "lay": {
+        "description": "당신을 눕게 합니다.",
+        "loading": "눕기 위해 편안한 장소를 찾는 중...",
+        "message": "{user}가 누웠어."
+      },
       "lick": {
         "description": "사람들을 핥습니다. 물론, 건전하게요.",
         "loading": "{EMOTE_LOADING} 핥짝 이미지 불러오는중...",
@@ -220,6 +230,11 @@
         ],
         "message": "{user}이(가) {targets}을(를) 손가락으로 찌르고 있어!",
         "no_mention": "최소한 손가락으로 찌를 상대 한 명을 언급해줘!"
+      },
+      "pout": {
+        "description": "당신이 삐졌다는것을 표현합니다.",
+        "loading": "누군가를 삐지게 만드는 중...",
+        "message": "{user}가 삐졌어"
       },
       "senko": {
         "description": "당신을 소중하게 돌봐줄 수 있는 성스러운 전달자의 짤을 보여줍니다.",

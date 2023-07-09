@@ -52,6 +52,11 @@
   },
   "purr": {
     "fun": {
+      "angry": {
+        "description": "\\*ruidos de neko enojado*",
+        "loading": "Hacer enojar a alguien...",
+        "message": "{user} está enojado"
+      },
       "bite": {
         "description": "Te permite morder una o varias personas.",
         "loading": "{EMOTE_LOADING} Yendo a morder a alguien...",
@@ -173,6 +178,11 @@
         "loading": "{EMOTE_LOADING} Recibiendo un gif de kitsune...",
         "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
+      "lay": {
+        "description": "Te permite acostarte.",
+        "loading": "Buscando un lugar cómodo para acostarse...",
+        "message": "{user} está acostado"
+      },
       "lick": {
         "description": "Lamer a la gente... Obviamente, de una manera SFW.",
         "loading": "{EMOTE_LOADING} Recibiendo un gif lamiendo...",
@@ -220,6 +230,11 @@
         ],
         "message": "{user} chincha a {targets}",
         "no_mention": "¡Por favor, mencione al menos un usuario para chinchar!"
+      },
+      "pout": {
+        "description": "Te permite hacer pucheros.",
+        "loading": "Hacer \"hmph\" a alguien...",
+        "message": "{user} está haciendo pucheros"
       },
       "senko": {
         "description": "Obtén una imagen del mensajero divino que te pueda mimar.",

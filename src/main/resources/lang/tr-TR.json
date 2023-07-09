@@ -52,6 +52,11 @@
   },
   "purr": {
     "fun": {
+      "angry": {
+        "description": "\\*sinirli neko sesleri*",
+        "loading": "Biri sinirlendiriliyor...",
+        "message": "{user} sinirli"
+      },
       "bite": {
         "description": "Bir veya daha fazla kişiyi ısırmanızı sağlar.",
         "loading": "{EMOTE_LOADING} Biri ısırılacak...",
@@ -173,6 +178,11 @@
         "loading": "{EMOTE_LOADING} kitsune gifi yükleniyor...",
         "message": "Kitsune {EMOTE_SHIRO_TAIL_WAG}"
       },
+      "lay": {
+        "description": "Uzanmana izin verir.",
+        "loading": "Uzanacak rahat bir yer bulunuyor...",
+        "message": "{user} uzanıyor"
+      },
       "lick": {
         "description": "İnsanları yala... SFW yoluyla elbette.",
         "loading": "{EMOTE_LOADING} Yalama gifi aranıyor...",
@@ -220,6 +230,11 @@
         ],
         "message": "{user} parmak ucuyla {targets} adlı üyeyi dürttü",
         "no_mention": "Lütfen dürtmek için en az bir üye etiketle!"
+      },
+      "pout": {
+        "description": "Somurtmanı sağlar.",
+        "loading": "Birine \"hımm\" çektiriliyor...",
+        "message": "{user} somurtuyor"
       },
       "senko": {
         "description": "Seni şımartabilecek bir senko resmi gönderir.",
