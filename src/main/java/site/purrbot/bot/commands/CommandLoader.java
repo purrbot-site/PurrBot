@@ -41,6 +41,7 @@ public class CommandLoader {
         final Logger logger = LoggerFactory.getLogger(CommandLoader.class);
         loadCommands(
             // Fun
+            new CmdAngry(),
             new CmdBite(bot),
             new CmdBlush(bot),
             new CmdComfy(bot),
@@ -54,11 +55,13 @@ public class CommandLoader {
             new CmdHug(bot),
             new CmdKiss(bot),
             new CmdKitsune(bot),
+            new CmdLay(),
             new CmdLick(bot),
             new CmdNeko(bot),
             new CmdOkami(bot),
             new CmdPat(bot),
             new CmdPoke(bot),
+            new CmdPout(),
             new CmdSenko(bot),
             new CmdShip(bot),
             new CmdShiro(bot),

@@ -197,6 +197,7 @@ public class HttpUtil {
     
     public enum ImageAPI{
         // SFW Gifs
+        ANGRY    ("angry",   "angry",  true, false, false, false),
         BITE     ("bite",    "bite",   true, false, false, false),
         BLUSH    ("blush",   "blush",  true, false, false, false),
         COMFY    ("comfy",   "comfy",  true, false, false, false),
@@ -208,10 +209,12 @@ public class HttpUtil {
         FLUFF    ("fluff",   "fluff",  true, false, true,  false),
         HUG      ("hug",     "hug",    true, false, false, false),
         KISS     ("kiss",    "kiss",   true, false, false, false),
+        LAY      ("lay",     "lay",    true, false, false, false),
         LICK     ("lick",    "lick",   true, false, false, false),
         NEKO_GIF ("neko",    "neko",   true, false, false, true),
         PAT      ("pat",     "pat",    true, false, false, false),
         POKE     ("poke",    "poke",   true, false, false, false),
+        POUT     ("pout",    "pout",   true, false, false, false),
         SLAP     ("slap",    "slap",   true, false, false, false),
         SMILE    ("smile",   "smile",  true, false, false, false),
         TAIL     ("tail",    "tail",   true, false, false, false),
@@ -296,7 +299,8 @@ public class HttpUtil {
             "tokens.discord-bots-gg",
             "discord.bots.gg",
             "https://discord.bots.gg/api/v1/bots/{id}/stats",
-            "guildCount", "shardCount"
+            "guildCount",
+            "shardCount"
         ),
         DISCORDEXTREMELIST_XYZ(
             "tokens.discordextremelist-xyz",
