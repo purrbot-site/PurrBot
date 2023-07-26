@@ -37,6 +37,7 @@ import site.purrbot.bot.commands.Command;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -94,7 +95,7 @@ public class CmdShards implements Command{
         
         // We do a for loop to get the initial widths of different texts
         for(final JDA jda : shards){
-            // We need ping and guilds as String to now the text width.
+            // We need ping and guilds as String to know the text width.
             String ping = String.valueOf(jda.getGatewayPing());
             String guilds = String.valueOf(jda.getGuildCache().size());
             String status = getStatus(jda, guild.getId());
@@ -109,28 +110,29 @@ public class CmdShards implements Command{
                 statusWidth = status.length();
         }
         
-        StringBuilder sBuilder = new StringBuilder(getHeader(statusTitle, pingTitle, guildTitle, statusWidth, pingWidth, guildWidth));
+        List<List<JDA>> splits = splitList(shards);
+        int page = 0;
         
-        for(final JDA shard : shards){
-            String statusLine = getShardLine(shard, guild.getId(), id, statusWidth, pingWidth, guildWidth);
+        for(List<JDA> shardList : splits){
+            page++;
+            StringJoiner joiner = new StringJoiner("\n");
             
-            if((sBuilder.length() + 100) > MessageEmbed.DESCRIPTION_MAX_LENGTH){
-                MessageEmbed embed = new EmbedBuilder()
-                    .setDescription(MarkdownUtil.codeblock(sBuilder.toString()))
-                    .build();
-                
-                embeds.add(embed);
-                
-                sBuilder.setLength(0);
-                sBuilder.append(getHeader(statusTitle, pingTitle, guildTitle, statusWidth, pingWidth, guildWidth));
-            }
+            joiner.add(getHeader(statusTitle, pingTitle, guildTitle, statusWidth, pingWidth, guildWidth));
             
-            sBuilder.append("\n").append(statusLine);
-        }
-        
-        if(sBuilder.length() > 0){
+            final int fStatusWidth = statusWidth;
+            final int fPingWidth = pingWidth;
+            final int fGuildWidth = guildWidth;
+            
+            shardList.forEach(jda -> joiner.add(getShardLine(jda, guild.getId(), id, fStatusWidth, fPingWidth, fGuildWidth)));
+            
+            joiner.add("").add(
+                bot.getMsg(guild.getId(), "purr.info.shards.page")
+                    .replace("{page}", String.valueOf(page))
+                    .replace("{pages}", String.valueOf(splits.size()))
+            );
+            
             MessageEmbed embed = new EmbedBuilder()
-                .setDescription(MarkdownUtil.codeblock(sBuilder.toString()))
+                .setDescription(MarkdownUtil.codeblock(joiner.toString()))
                 .build();
             
             embeds.add(embed);
@@ -182,5 +184,23 @@ public class CmdShards implements Command{
         }
         
         return status;
+    }
+    
+    private List<List<JDA>> splitList(List<JDA> shards){
+        List<List<JDA>> partitions = new ArrayList<>();
+        List<JDA> part = new ArrayList<>(10);
+        
+        for(JDA jda : shards){
+            part.add(jda);
+            if(part.size() == 10){
+                partitions.add(part);
+                part = new ArrayList<>(10);
+            }
+        }
+        
+        if(!part.isEmpty())
+            partitions.add(part);
+        
+        return partitions;
     }
 }

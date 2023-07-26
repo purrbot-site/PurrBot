@@ -539,19 +539,12 @@
       },
       "shards": {
         "description": "List basic info about all shards the bot currently has.",
-        "average": {
-          "title": "Average",
-          "description": "Those are the average Ping and Guild count.",
-          "guilds": "Average Guilds per Shard",
-          "ping": "Average Ping per Shard"
-        },
         "embed": {
-          "current_title": "Your Shard?",
           "guilds_title": "Guilds",
           "ping_title": "Ping (ms)",
-          "status_title": "Status",
-          "title": "Shard Info [{shard_id}/{shard_total}]"
+          "status_title": "Status"
         },
+        "page": "Page {page} / {pages}",
         "status": {
           "connected": "Connected",
           "disconnected": "Disconnected",
