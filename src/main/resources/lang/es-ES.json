@@ -539,19 +539,12 @@
       },
       "shards": {
         "description": "Listar información básica sobre todos los fragmentos que tiene el bot.",
-        "average": {
-          "title": "Promedio",
-          "description": "Estos son el número promedio de ping y servidores.",
-          "guilds": "Promedio de Servidores por Fragmento",
-          "ping": "Ping promedio por Shard"
-        },
         "embed": {
-          "current_title": "¿Tu Shard?",
           "guilds_title": "Servidores",
           "ping_title": "Ping (ms)",
-          "status_title": "Estado",
-          "title": "Información de Shard [{shard_id}/{shard_total}]"
+          "status_title": "Estado"
         },
+        "page": "Página {page} / {pages}",
         "status": {
           "connected": "Conectado",
           "disconnected": "Desconectado",
