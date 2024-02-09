@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Label Pull request
-        uses: TimonVS/pr-labeler-action@v4.1.1
+        uses: TimonVS/pr-labeler-action@v5.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
