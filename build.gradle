@@ -43,7 +43,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.14'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.0'
     compile group: 'pw.chew', name: 'jda-chewtils-commons', version: '2.0-SNAPSHOT'
     compile group: 'pw.chew', name: 'jda-chewtils-menu', version: '2.0-SNAPSHOT'
     implementation group: 'com.rethinkdb', name: 'rethinkdb-driver', version:'2.4.4'
