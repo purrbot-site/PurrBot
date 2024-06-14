@@ -539,19 +539,12 @@
       },
       "shards": {
         "description": "현재 봇이 갖고 있는 모든 샤드들의 간단한 정보를 보여줍니다.",
-        "average": {
-          "title": "평균",
-          "description": "여기 평균 지연시간 및 서버갯수야.",
-          "guilds": "샤드 당 평균 서버수",
-          "ping": "샤드 당 평균 지연시간"
-        },
         "embed": {
-          "current_title": "현재 서버에 배당된 샤드 여부",
           "guilds_title": "서버",
           "ping_title": "지연시간 (ms)",
-          "status_title": "상태",
-          "title": "샤드 정보 [{shard_id}/{shard_total}]"
+          "status_title": "상태"
         },
+        "page": "페이지 {page} / {pages}",
         "status": {
           "connected": "연결됨",
           "disconnected": "연결 끊김",
