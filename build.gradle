@@ -61,7 +61,7 @@ dependencies {
     implementation group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '3.1.8'
     implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.34'
     implementation group: 'io.javalin', name: 'javalin', version: '6.4.0'
-    implementation group: 'org.json', name: 'json', version: '20241224'
+    implementation group: 'org.json', name: 'json', version: '20250107'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.12.0'
 }
 
