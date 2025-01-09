@@ -43,13 +43,13 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.12'
-    compile group: 'pw.chew', name: 'jda-chewtils-commons', version: '2.0-SNAPSHOT'
-    compile group: 'pw.chew', name: 'jda-chewtils-menu', version: '2.0-SNAPSHOT'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.16'
+    compile group: 'pw.chew', name: 'jda-chewtils-commons', version: '2.1-SNAPSHOT'
+    compile group: 'pw.chew', name: 'jda-chewtils-menu', version: '2.1-SNAPSHOT'
     implementation group: 'com.rethinkdb', name: 'rethinkdb-driver', version:'2.4.4'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.11.0'
     // implementation group: 'com.github.DV8FromTheWorld', name: 'JDA', version: 'e111d55'
-    implementation('net.dv8tion:JDA:5.2.1')
+    implementation('net.dv8tion:JDA:5.2.2')
     {
         exclude(module: 'opus-java')
     }
@@ -60,8 +60,8 @@ dependencies {
     implementation group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.5'
     implementation group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '3.1.8'
     implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.36'
-    implementation group: 'io.javalin', name: 'javalin', version: '6.3.0'
-    implementation group: 'org.json', name: 'json', version: '20240303'
+    implementation group: 'io.javalin', name: 'javalin', version: '6.4.0'
+    implementation group: 'org.json', name: 'json', version: '20250107'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.12.0'
 }
 
