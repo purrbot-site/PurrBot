@@ -62,7 +62,7 @@ dependencies {
     implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.42'
     implementation group: 'io.javalin', name: 'javalin', version: '6.7.0'
     implementation group: 'org.json', name: 'json', version: '20250517'
-    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '5.3.0'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '5.3.1'
 }
 
 compileJava {
