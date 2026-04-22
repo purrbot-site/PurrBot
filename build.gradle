@@ -59,7 +59,7 @@ dependencies {
     implementation group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
     implementation group: 'com.github.rainestormee', name: 'jda-command', version: '1.1.5'
     implementation group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: 'v3.2.3'
-    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.44'
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.46'
     implementation group: 'io.javalin', name: 'javalin', version: '7.2.0'
     implementation group: 'org.json', name: 'json', version: '20251224'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '5.3.2'
