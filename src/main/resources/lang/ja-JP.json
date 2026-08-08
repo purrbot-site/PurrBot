@@ -1,0 +1,838 @@
+{
+  "embed": {
+    "footer": "{user} からのリクエスト"
+  },
+  "errors": {
+    "administrator": "**管理者権限が検出されました**\n`管理者` を持っており、セキュリティ上の大きなリスクになります!\n__悪用されることを防ぐため、この権限がある限り、どんなコマンドも実行しません。__\n\nこれを解決するには、以下のいずれかを行なってください:\n- このボットから管理者権限を持つロールを取り除く。\n- 以下のロールから管理者権限を取り除く。\n\n次のロールから管理者が検出されました:\n{roles}",
+    "api_error": "APIに到達する際にエラーが発生しました! あとでもう一度やり直してください。",
+    "fetch": {
+      "booster_role": "サポートサーバーからブースターロールを取得できません。 あとでやり直してもこの問題が解決しない場合、 [our Discord Server]({guild_invite}) に報告してください。",
+      "guild": "サポートサーバーを取得することができません。あとでもう一度やり直してもこの問題が解決しない場合、 [our Discord Server]({guild_invite}) に報告してください。",
+      "member": "[サポートサーバー]({guild_invite})からメンバー情報を取得できません。この操作を行うには、サーバー所有者がサポートサーバーにいる必要があります。あなたがサーバー所有者で、既にサポートサーバーに参加している状態でこの問題が発生する場合は、`#support` チャンネルに報告してください。",
+      "patreon_roles": "サポートサーバーからPatreonのロールを取得できません。あとでもう一度やり直してもこの問題が解決しない場合、 [Discordサーバー]({guild_invite}) に報告してください。"
+    },
+    "missing_perms": {
+      "self": "以下の権限がチャンネル {channel} で不足しています:\n{permissions}",
+      "user": "そのコマンドを実行する権限がありません。次の権限が不足しています:\n{permission}"
+    },
+    "no_help_info": "このコマンドには、表示可能な使い方の説明がありません。",
+    "no_patreon": {
+      "title": "Patreonの機能！",
+      "description": "この機能は、サーバー所有者が [ティア2か3のPatreonサポーター]({patreon_url}) である場合のみ利用可能です。\n\nあなたがサーバーの所有者で、この機能を使いたいのであれば、以下の指示に従ってください。\n1. [~Nya ディスコードサーバー]({guild_invite})に参加する。\n2. Patreonアカウントとディスコードアカウントを紐付ける。\n3. Patreonでティア2または3を登録する。",
+      "note_title": "重要事項",
+      "note_description": "~Nyaディスコードサーバーから抜けるか、Patreonの登録をキャンセルすると、この機能はまた利用できなくなります。"
+    },
+    "nsfw": {
+      "no_channel_random": [
+        "このチャンネルは年齢制限されてないようだけど、 {user} ？",
+        "エッチなことするんだったら年齢制限チャンネルでしてください。",
+        "おいおいおい！このコマンドは年齢制限チャンネルで使うんだよ {user} ！",
+        "ChannelNotAgeRestrictedException: このコマンドは年齢制限チャンネル外では使用することができません。",
+        "そういうエッチなやつは年齢制限チャンネルでしか見られませんよ、 {user} さん。",
+        "すべてのものにはその場所があります。そして、このコマンドは年齢制限のあるチャンネルに属しています。 {user} さん。",
+        "申し訳ありませんが {user} 様、Discordでは年齢制限のあるチャンネルでしかこのコマンドを使うことができません..."
+      ]
+    },
+    "request_error": "リクエストの処理中にエラーが発生しました。私のメッセージが削除されていないか、十分な権限があるか確認してください。",
+    "title": "エラー",
+    "unknown": "今更ですが、あるアクションを実行中にエラーが発生しました。{EMOTE_BLUSH} です。\n [the Discord]({guild_invite}) か [GitHub]({github_url}) で報告してください!"
+  },
+  "misc": {
+    "and": "と",
+    "command_help": {
+      "command_usage": "コマンドの使用方法:",
+      "more_info": "詳細",
+      "required_permissions": "必要な権限:",
+      "title": "コマンド情報: {command}"
+    },
+    "info": "やあ {user}!\n私のコマンドのプレフィックスは `{prefix}` です `{prefix}help` を実行してコマンドリストを表示するかドキュメンテーションをご覧ください:\nhttps://docs.purrbot.site/bot/commands",
+    "language": "英語 (en)",
+    "unknown_user": "不明",
+    "welcome_member": "あなたはメンバー#{count}です"
+  },
+  "purr": {
+    "fun": {
+      "angry": {
+        "description": "\\*怒った猫の鳴き声*",
+        "loading": "誰かを怒らせています...",
+        "message": "{user} は怒っている。"
+      },
+      "bite": {
+        "description": "1人または複数人を噛ませることができます。",
+        "loading": "{EMOTE_LOADING} 誰かを噛みに行っています...",
+        "mention_self": "自分{user}を噛んだらカニバリズムなのか?",
+        "mention_purr": [
+          "な、なに? 私は美味しくないよ! >.<",
+          "きゃあ！私は食いものじゃないわよ！",
+          "わ、わたしをかじらないで。"
+        ],
+        "message": "{user} はあなた {targets} を噛む",
+        "no_mention": "一人以上の噛むユーザーをメンションしてください!",
+        "special_user": "だ、だけど {user}! 恥ずかしいよ。"
+      },
+      "blush": {
+        "description": "赤面させるよ。 o////o",
+        "loading": "{EMOTE_LOADING} あなたの頬を赤らめています...",
+        "message": "{user} は赤くなっている"
+      },
+      "comfy": {
+        "description": "快適さを実感できるようになるよ。^w^",
+        "loading": "{EMOTE_LOADING} 心地のいい場所を準備しています...",
+        "message": "{user} は心地よさを感じている。"
+      },
+      "cry": {
+        "description": "あなたを泣かせる。 ;-;",
+        "loading": "{EMOTE_LOADING} 涙をあつめています...",
+        "message": "{user} は泣いている"
+      },
+      "cuddle": {
+        "description": "一人でも複数人でも抱きしめることができます。",
+        "loading": "{EMOTE_LOADING} 抱きしめるgifを取得しています...",
+        "mention_self": "なんで {user} を抱きしめるの?\nあなたはわたしを抱きしめられるのよ。 {EMOTE_BLUSH}",
+        "mention_purr": [
+          "\\* {user} の抱きしめを楽しんでいます *",
+          "\\*{user} に強く抱きつく*",
+          "心地よい寄り添いをありがとう {user}。 UwU"
+        ],
+        "message": "{user} が寄り添う {targets}",
+        "no_mention": "寄り添う人を一人以上メンションしてください!"
+      },
+      "dance": {
+        "description": "踊れる。 ~(^.^)~",
+        "loading": "{EMOTE_LOADING} ダンスをするのにいい音楽を探しています...",
+        "message": "{user} は踊っている"
+      },
+      "eevee": {
+        "description": "かわいいイーブイの画像やgifを与えます。",
+        "loading": "{EMOTE_LOADING} かわいいイーブイを捕まえています...",
+        "message": "イーブイ"
+      },
+      "feed": {
+        "description": "おいしい食べ物を人に与えましょう。",
+        "mention_bot": "ボットはそんな愚かな食べ物なんか食べれません! ぼっとはあなたのデータしか食べれないよ。 O_O",
+        "mention_purr": [
+          "食べ物? わたしに? ありがと(チュ {user}! \\*食べ物を食べるのとワグのしっぽ*",
+          "食べ物をありがとう。 {user}。",
+          "\\*食べ物を喜んで食べる*",
+          "\\*美味しそうに食べる音*"
+        ],
+        "mention_self": "あなたはあなたを愚かに餌食しています。 \\*大きな目で {user} を見る*",
+        "message": "{user} が {target} に何か食べ物を与える。",
+        "no_mention": "誰かをメンションして食べ物を与えてください。",
+        "request": {
+          "denied": "{target} は {user} からの食べ物を欲しがらない",
+          "message": "やあ {target}!\n{user} が君に何か食べ物を与えたいようだよ。 いる?",
+          "open": "誰かにもう聞いてるよ {user}! リクエストが承認されるか、拒否されるか、時間切れになるかを待っててください。"
+        }
+      },
+      "fluff": {
+        "description": "誰かの尻尾をふわふわさせる...彼らがそれを望むならね。",
+        "mention_bot": "ボットにはしっぽがない... 悲しいなぁ!",
+        "mention_purr": [
+          "な! いやらしい {user} だ! \\*尻尾を持って守る*",
+          "や、やめて {user}。 知らない人にもふもふされたくない!"
+        ],
+        "mention_self": "なーんだ... 尻尾をふってくれる人はいないの? それとも人見知り?",
+        "message": "{user} は {target} のしっぽをモフモフする。",
+        "no_mention": "もふらせたい人をメンションしてください。",
+        "request": {
+          "denied": "{target} は {user} からもふられたくない",
+          "message": "やあ {target}!\n{user} は君のしっぽをモフモフさせたいよ。 いい?",
+          "open": "誰かにもう聞いてるよ {user}! リクエストが承認されるか、拒否されるか、時間切れになるかを待っててください。"
+        },
+        "special_user": "で、でも {user}。 公共の場でいやらしいことをすることになるよ。"
+      },
+      "holo": {
+        "description": "リンゴを食べる、飲む賢明な狼の画像を取得します。",
+        "loading": "{EMOTE_LOADING} Holoから画像を取得しています...",
+        "message": "Holo {EMOTE_BLOB_HOLO}"
+      },
+      "hug": {
+        "description": "他の人とハグを共有しよう。\\(>w<)/",
+        "loading": "{EMOTE_LOADING} ハグのGIFを取得しています...",
+        "mention_self": "なんであなたがあなた自身をハグしてるの? {user}。\nやりたいなら、わたしをハグできるんだよ。 {EMOTE_BLUSH}",
+        "mention_purr": [
+          "\\*{user} からのハグを楽しむ*",
+          "\\*もっこり*",
+          "ずっとハグが好きだよ、{user}"
+        ],
+        "message": "{user} が {targets} をハグする",
+        "no_mention": "ハグするユーザーを一人以上メンションしてください!"
+      },
+      "kiss": {
+        "description": "一人または複数の人にキスをする。",
+        "loading": "{EMOTE_LOADING} キスを取得しています...",
+        "mention_purr": [
+          "わかったよ。でもほっぺただけ! \\*ほっぺたを膨らます*",
+          "ほっぺただけ、わかった?",
+          "ちょっとふしだらだけど、いいかな。 \\*♪*"
+        ],
+        "mention_self": "どうやって自分自身をキスするの? {user}。 鏡で?",
+        "mention_snuggle": "ダメだよ {user}！あなたがその子に聞かなきゃ。",
+        "message": "{user} が {target} をキス",
+        "no_mention": "キスをするユーザーを一人以上メンションしてください!",
+        "special_user": "\\*{user} からのキスを楽しむ*"
+      },
+      "kitsune": {
+        "description": "キツネ (キツネ女) の画像を取得する。",
+        "loading": "{EMOTE_LOADING} キツネのGIFを取得中...",
+        "message": "キツネ {EMOTE_SHIRO_TAIL_WAG}"
+      },
+      "lay": {
+        "description": "倒れます。",
+        "loading": "ぶっ倒れるための快適なスポットを見つけています...",
+        "message": "{user} は倒れている。"
+      },
+      "lick": {
+        "description": "人を舐める... 明らかにSF的な方法で。",
+        "loading": "{EMOTE_LOADING} 舐めGIFを取得中...",
+        "mention_self": "あなたはどのように、そして*どこで*自分自身を舐めるかを聞きません... {user}。",
+        "mention_purr": [
+          "\\*退く* わたしは絶対わたしを舐めさせないわ! {user}!",
+          "ねぇ! 舐めないで! >.<",
+          "にゃ! そんなことしていいのか!"
+        ],
+        "message": "{user} が {targets} を舐める",
+        "no_mention": "舐めるユーザーを一人以上メンションしてください!",
+        "special_user": "でもあなた... 人前ではやめて〜 \\*♪~*"
+      },
+      "neko": {
+        "description": "かわいい（または淫らな）ネコの画像やGIFを入手する。",
+        "loading": "{EMOTE_LOADING} ネコを誘い出しています...",
+        "message": "猫耳 {EMOTE_NEKOWO}",
+        "purr": "{EMOTE_PURR} そう... 昔の私は本当にこんな風だったのだろう?",
+        "snuggle": "{EMOTE_PURR} わたしの妹だ! UwU"
+      },
+      "okami": {
+        "description": "かわいらしいオオカミ(狼女)の画像を取得。",
+        "loading": "{EMOTE_LOADING} アウーな写真を撮っています...",
+        "message": "オオカミ {EMOTE_AWOO}"
+      },
+      "pat": {
+        "description": "人を撫でる!",
+        "loading": "{EMOTE_LOADING} パットを取得中...",
+        "mention_self": "ええと... 撫でれるネコがいないなぁ? {user}。 \\*自分自身に指を指す*",
+        "mention_purr": [
+          "\\*グルル™*",
+          "\\*{user} の手に頭を押しつけた*",
+          "にゃあ... 撫でてくれてありがとう。"
+        ],
+        "message": "{user} が {targets} を撫でる",
+        "no_mention": "一人以上の撫でるユーザーをメンションしてください!"
+      },
+      "poke": {
+        "description": "人をつつく!",
+        "loading": "{EMOTE_LOADING} つつくGIFを取得中...",
+        "mention_self": "暇なのか? なんで自分自身をつつくのだ {user}?",
+        "mention_purr": [
+          "にゃ! ぬぅ、つついてる! >~<",
+          "なんでつついてるの?"
+        ],
+        "message": "{user} が {targets} をつつく",
+        "no_mention": "一人以上のつつくユーザーをメンションしてください!"
+      },
+      "pout": {
+        "description": "あなたが口を尖らせます。",
+        "loading": "誰かを「むんっ」とさせます。",
+        "message": "{user} は口を尖らせている"
+      },
+      "senko": {
+        "description": "ちやほやしてくれる神使のイメージを取得。",
+        "loading": "{EMOTE_LOADING} センコーさんの画像を取得中...",
+        "message": "センコーさん {EMOTE_SENKO_TAIL_WAG}"
+      },
+      "ship": {
+        "description": "誰かと自分を出荷させたり、二人の恋のチャンスを見たり。",
+        "mention_self": "自分で出荷するの? {user}。実際に他の人を手に入れましょう",
+        "mention_purr": "ぬぅ! わたしは出荷できないぞ! {user}!",
+        "mention_snuggle": "妹は出荷させないよ! {user}。",
+        "no_mention": "出荷するユーザーを一人以上メンションしてください!",
+        "results": {
+          "100": "パーフェクトラブ! ❤️",
+          "91_99": "あなたの結婚式に招待してください。 ^-^",
+          "81_90": "お二人の結婚が本当に想像できますね。",
+          "71_80": "\\*互いに近くなる*",
+          "61_70": "それは何か深刻そうに思えます。",
+          "69": "ああ・・・*そういう*愛なんだ・・・？😏",
+          "51_60": "もう、キスして！",
+          "41_50": "もうカップルなのかな？",
+          "31_40": "カップルになれるかも。",
+          "21_30": "フレンドゾーン+（※*特典*付き）",
+          "11_20": "フレンドゾーン",
+          "1_10": "友達でもなさそう...",
+          "0": "愛が熱だとしたら、これは氷の塊でしょう。"
+        },
+        "special_user": "{user} ちゃん可愛いwww 私たち二人はいつも100点満点なんだよ！",
+        "target_bot": "ボットで本当に出荷できるのかこの変人!"
+      },
+      "shiro": {
+        "description": "怪しげな幽霊を遠ざけられる神の使いの画像を手に入れる。",
+        "loading": "{EMOTE_LOADING} シロの画像を受信中...",
+        "message": "シロ {EMOTE_SHIRO_TAIL_WAG}"
+      },
+      "slap": {
+        "description": "ミーハーどもを叩け！>:C",
+        "loading": "{EMOTE_LOADING} ユーザーを叩いています...",
+        "mention_self": "ダメダメダメ！自傷行為はだめだよ {user} 。",
+        "mention_purr": [
+          "ぬぅぅぅ... な、なんでわたしを傷つけるの？ {user} 。 T^T",
+          "\\*はたき返す* わたしをたたいてもなにもいいことはないよ！ {user} ！"
+        ],
+        "message": "{user} が {targets} をたたく",
+        "no_mention": "たたくユーザーを一人以上メンションしてください！"
+      },
+      "smile": {
+        "description": "スマイル :3",
+        "loading": "{EMOTE_LOADING} あなたをスマイルにしています...",
+        "message": "{user} は笑顔"
+      },
+      "tail": {
+        "description": "尻尾を振って... 興奮しながら......だといいんだけど。",
+        "loading": "{EMOTE_LOADING} 尻尾を振っています...",
+        "message": "{user} がしっぽを振る"
+      },
+      "tickle": {
+        "description": "くすぐって笑わせる。",
+        "loading": "{EMOTE_LOADING} くすぐりGIFを取得中...",
+        "mention_self": "わかった... 本当にくすぐられたいなら... \\*{user} をくすぐる*",
+        "mention_purr": [
+          "ずるいよ！ わたしがくすぐれない！ \\*くすぐったいから笑う*",
+          "\\*笑いを我慢しようとしたけど無理だった*",
+          "なんでわたしがくすぐられないといけないの～？ >~<"
+        ],
+        "message": "{user} が {targets} をくすぐる",
+        "no_mention": "くすぐるユーザーを一人以上メンションしてください！"
+      }
+    },
+    "guild": {
+      "language": {
+        "description": "現在のGuildでBotに使用されている言語を変更します。\n引数なしで実行すると、現在の設定が表示されます。\n\nこれには `Manage Server` という権利が必要です。",
+        "few_args": "引数が足りません！\n使用法: `{prefix}language set <language>`",
+        "invalid_args": "引数が無効です！\n使用法: `{prefix}language <set <言語>|reset>`",
+        "invalid_lang": "入力された言語が無効です!\n利用可能な言語を見るには `p.language` を使ってください。",
+        "embed": {
+          "available_lang_title": "利用可能な言語",
+          "description": "`{prefix}language set <language>` を使って、下記の対応する言語に変更することができます。\n\n**現在の言語**: {flag} {language}",
+          "translators_title": "翻訳者",
+          "translators_value": "このボットを翻訳してくれた方々に感謝します。\n翻訳プロジェクトは [here]({link}) をご覧ください。"
+        },
+        "language_set": "言語を `日本語 (ja)` に設定しました！",
+        "no_language": "設定する言語を入力してください！"
+      },
+      "prefix": {
+        "description": "ボットがコマンドに使用するプレフィックスを変更します。\nGuildのプレフィックスが何であるかは、いつでもボットに `@mention` して確認することができます。\n\nこのためには `Manage Server` 権限が必要です。",
+        "few_args": "引数が足りません！\n使用法: `{prefix}prefix <set <新しいプレフィックス>|reset>`",
+        "invalid_args": "引数が無効です！\n使用法: `{prefix}prefix <set <新しいプレフィックス>|reset>`",
+        "no_prefix": "プレフィックスを指定する必要があります！",
+        "reset": "プレフィックスを`{prefix}`に戻します",
+        "set": "プレフィックスを`{prefix}`に設定しました"
+      },
+      "welcome": {
+        "description": "あなたのDiscordに参加するメンバーをメッセージと画像でお出迎え!\n引数を指定しない場合は、現在の設定が表示されます。\nwikiの記事]({wiki_welcome})を参照してください。\n\nこのためには `Manage Server` 権限が必要です。",
+        "custom": "カスタム",
+        "embed": {
+          "channel": "チャンネル",
+          "color_title": "色",
+          "color_value": "```\n種類:  {type}\n値: {value}\n```",
+          "current_settings": "これらはこのDiscordの現在のWelcome設定です。\n設定を変更するには `{prefix}welcome [subcommand]` を使ってください。\n\n設定を変更するためのチュートリアルは [wiki]({wiki_welcome}) にあります。",
+          "image_title": "画像",
+          "image_value": "```\n拝啓: {background}\n色:      {color}\nアイコン:       {icon}\n```",
+          "message_title": "メッセージ",
+          "no_channel": "`チャンネルが設定されていません`",
+          "preview": "プレビュー",
+          "subcommands_title": "サブコマンド",
+          "subcommands_value": "```\nbg      set <背景>\n        reset\nchannel set <#チャンネル>\n        reset\ncolor   set <hex:rrggbb|rgb:r,g,b|ランダム>\n        reset\nicon    set <アイコン>\n        reset\nmsg     set <メッセージ>\n        reset\ntest\n```",
+          "title": "現在のお迎え設定"
+        },
+        "few_args": "引数が足りません！\n`{prefix}welcome` を実行してすべての利用可能なサブコマンドが表示されます。",
+        "invalid_args": "引数が足りません！\n`{prefix}welcome` を実行してすべての利用可能なサブコマンドが表示されます。",
+        "invalid_bg": "無効な背景 `{background}`\n[Wiki]({wiki_bg}) から利用可能な背景を確認してください。",
+        "invalid_bg_width": "カスタム背景が無効です。\n`2000x350`のサイズの画像のみ使用可能です。",
+        "invalid_channel": "有効なテキストチャンネルをメンションしてください！",
+        "invalid_color": "入力された色は無効です！\n`hex:rrggbb` または `rgb:r,g,b`, `random` は対応しています。",
+        "invalid_icon": "無効なアイコン `{icon}`\n利用可能なアイコンは[ウィキ]({wiki_icon})をご覧ください。",
+        "invalid_icon_width": "カスタムアイコンが無効です。\n`320x320`サイズの画像のみ使用可能です。",
+        "no_bg": "背景の名称を入力してください\n背景の一覧は[こちら]({wiki_bg})にございます。",
+        "no_booster": "これを使用するにはサーバーのオーナーが [サポートサーバー]({guild_invite}) のブースターになる必要があります。",
+        "no_channel": "テキストチャンネルが指定されていません！必ず1つメンションしてください。",
+        "no_color": "色が指定されていません！\n`hex:rrggbb` または `rgb:r,g,b`, `random` を使ってください。",
+        "no_icon": "アイコンの名称を入力してください！\nアイコンの一覧は [こちら]({wiki_icon}) にございます。",
+        "no_msg": "メッセージが指定されていません！",
+        "no_patreon": "これを利用するには、サーバーのオーナーが Tier 2 または Tier 3 の [Patreon メンバー]({patreon_url}) になる必要があります。",
+        "placeholders": {
+          "message_title": "現在のメッセージ",
+          "note_title": "メモ",
+          "note_value": "プレースホルダー `{c_mention:<id>}` は、テキスト、ストア、ボイスチャンネルのIDに対してのみ機能します。",
+          "placeholders_title": "利用可能なプレースホルダー",
+          "result_title": "結果"
+        },
+        "reset": "{type} がリセットされました。",
+        "set": "{type} を {value} に設定しました"
+      }
+    },
+    "info": {
+      "donate": {
+        "description": "このロボットを存続させるために、何か寄付をしてください！",
+        "dm_success": "{user} 、あなたのプライベートメッセージをご確認ください！",
+        "dm_failure": "{user} にDMを送信できませんでした。DMを許可していますか？",
+        "embed": {
+          "booster_title": "サーバーブースター",
+          "description": "このボットを動かすにはとてもお金がかかります。そのため、大小問わず、どんな寄付でも歓迎します。\nPayPalやKo-fiを使って一度だけ寄付するか、Patreonで継続的に寄付するか、選択できます。\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (一括寄付)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (一括寄付)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (継続寄付)",
+          "donate_title": "サーバーブースターとドナー",
+          "donate_value": "以下は、[サポートサーバー]({guild_invite})に寄付をしたり、ブーストをした人のリストです。\n寄付やサーバーブーストをすると、特別な歓迎バナーや自分のバナーを使うことができるなど、特定の特典がアンロックされます。\nもしこれが魅力的に思えるなら、サーバーをブーストするか、Tier 2+ Patreon メンバーになることを検討してみてください。\n単発の寄付も大歓迎です!",
+          "donators_title": "ドナー",
+          "more": "*他のもっと多くの人たち...*"
+        }
+      },
+      "emote": {
+        "description": "1つまたは複数のエモート (カスタム Discord スタンプ) の基本情報を取得します。\n引数 `--search` を使用すると、過去 100 通のメッセージで使用されたすべてのエモートをリストアップすることができます。",
+        "embed": {
+          "emote_multiple": "エモート [{current} / {total}]",
+          "emote_single": "エモート",
+          "guild": "ギルド",
+          "id": "ID",
+          "image": "画像",
+          "link": "[`リンク`]({link})",
+          "message": "メッセージ",
+          "name": "名前"
+        },
+        "no_args": "コマンドの後に `:emote:` または `--search` のいずれかを指定してください。",
+        "not_found": "過去100件のメッセージの中にエモートが見つかりませんでした。",
+        "unknown_guild": "不明なギルド"
+      },
+      "guild": {
+        "description": "ギルドの基本情報を取得します。",
+        "embed": {
+          "boost": {
+            "multiple": "{boost} ブースト",
+            "single": "1ブースト",
+            "title": "ブースト中",
+            "value": "{boosts} (レベル {level}{BOOST_TIER})"
+          },
+          "channels_title": "チャンネル",
+          "channels_value": "{EMOTE_CATEGORY} 合計: {channels_total}\n\n{EMOTE_TEXT} テキストチャンネル: {channels_text}\n{EMOTE_VOICE} ボイスチャンネル: {channels_voice}",
+          "created": "作成済",
+          "features": {
+            "animated_icon": "アニメーションアイコン",
+            "banner": "サーバーバナー",
+            "community": "コミュニティサーバー",
+            "discoverable": "探索",
+            "guild_preview": "Guild プレビュー",
+            "invite_screen": "招待の背景",
+            "member_verification": "メンバー認証",
+            "news_channel": "ニュースチャンネル",
+            "partnered": "提携",
+            "store_channel": "ストアチャンネル",
+            "title": "機能",
+            "vanity_url": "バニティーURL",
+            "verified": "認証済",
+            "vip_voice": "VIPボイスエリア",
+            "welcome_screen": "ウェルカムスクリーン"
+          },
+          "levels": {
+            "high": "(╯°□°）╯︵ ┻━┻",
+            "low": "低",
+            "medium": "中",
+            "none": "レベルなし",
+            "title": "認証レベル",
+            "unknown": "不明なレベル",
+            "very_high": "┻━┻ ミ ヽ(ಠ益ಠ)ノ 彡 ┻━┻"
+          },
+          "members_title": "メンバー",
+          "members_value": "{EMOTE_MEMBERS} 合計: {members_total}\n\n{EMOTE_SMILEY} 人間: {members_human}\n{EMOTE_BOT} ボット: {members_bot}",
+          "owner": "オーナー"
+        }
+      },
+      "help": {
+        "description": "ボットの利用可能なコマンドをすべてリストアップします。\nコマンドの後ろにコマンド名を追加すると、そのコマンドに関する追加情報を受け取ることができます。",
+        "commands": "利用可能なコマンドの完全なリストは [`docs.purrbot.site`]({wiki}/commands/) で見ることができます！",
+        "command_menu": {
+          "categories": {
+            "fun": "娯楽",
+            "guild": "Guild",
+            "info": "情報",
+            "nsfw": "18禁",
+            "owner": "オーナー",
+            "title": "カテゴリ"
+          },
+          "description": {
+            "command_value": "特定のコマンドに関する詳細な情報を得るには `{prefix}help [command]` を実行してください。\nまた、`{prefix}help cat:[category]` を実行すると、特定のカテゴリのコマンドを表示することができます。",
+            "nav_title": "ナビゲーション",
+            "nav_value": "以下のアクションのリアクションをクリックします。\n\n◀ - 前のページ\n▶ - 次のページ\n⏩ - メニューをキャンセル",
+            "support": "ボットで困ったことがあったら、遠慮なく[サポートDiscordに参加]({guild_invite})して、サポートやカジュアルチャット、かわいいネコを楽しんでください。"
+          },
+          "nsfw_info": "NSFWチャンネルでhelpコマンドを実行すると、このページが表示されます。",
+          "support_title": "ボットを気に入っていただけましたか？",
+          "support_value": "寄付によるボットの支援をご検討ください。\n\n{EMOTE_PAYPAL} [`PayPal`]({paypal_url}) (Single Donation)\n{EMOTE_KOFI} [`Ko-fi`]({kofi_url}) (Single Donation)\n{EMOTE_PATREON} [`Patreon`]({patreon_url}) (Continuous Donation)"
+        }
+      },
+      "info": {
+        "description": "ボットの基本情報を取得します。",
+        "dm_failure": "DM を {user} に送れません！",
+        "dm_success": "DM をご確認ください！ {user}",
+        "embed": {
+          "about_title": "私について",
+          "about_value": "やあ！\n私は {name} です。にゃあDiscordのボットです。\nAndre_601 (<@{id}>) がJDAの助けを借りて、たくさんの自由な時間を使って作りました ;)",
+          "bot_info": {
+            "library": "ライブラリ: `JDA {jda_version}`",
+            "title": "ボット情報",
+            "version": "ボットバージョン: `PurrBot {bot_version}`"
+          },
+          "bot_lists_title": "ボットリスト:",
+          "commands_title": "コマンド",
+          "commands_value": "コマンドの一覧はDiscordの `{prefix}help` を使ってください。",
+          "links": {
+            "discord": "[`Discord (サポート)`]({guild_invite})",
+            "github": "[`GitHub`]({github_url})",
+            "policy": "[`プライバシーポリシーと利用規約`]({policy_url})",
+            "title": "その他のリンク",
+            "twitter": "[`Twitter`]({twitter_url})",
+            "website": "[`ウェブサイト`]({website_url})",
+            "wiki": "[`Wiki`]({wiki})"
+          },
+          "support_title": "このボットを応援しましょう！",
+          "support_value": "このボットをサポートするには、寄付をする必要があります。\n詳しくは `{prefix}donate` を実行してください。"
+        }
+      },
+      "invite": {
+        "description": "ボットを招待したり、公式サポートサーバーに参加するためのリンクを取得します。",
+        "dm_failure": "DMを送らせてください！ {user} さん！",
+        "dm_success": "{user} に DM を送信します！",
+        "embed": {
+          "about_title": "リンクについて",
+          "about_value": "それぞれのリンクは異なる目的を持っています。\n`Bot Invite` は私をあなたのサーバに招待するためのものです。\n`Discord` は、私のサポート用Discordへの招待です。",
+          "info_title": "招待してください",
+          "info_value": "ヘイヨォ！あなたのDiscordに私を招待してくれてありがとう (=^･ω･^=)\n下の`Bot Invite`オプションを選択すれば、あなたのDiscordに私を招待して、あなたに楽しさとネコたちをもたらすことができます。",
+          "links": {
+            "discord": "`Discord (Support)`",
+            "invite": "`Bot Invite`"
+          }
+        }
+      },
+      "ping": {
+        "description": "ボットの現在の Ping を確認します。",
+        "loading": [
+          "{EMOTE_TYPING} Discord と話しています...",
+          "{EMOTE_TYPING} 魚を捕まえています...",
+          "{EMOTE_TYPING} ピン (Ping) にポン (Pong) しています。",
+          "{EMOTE_TYPING} [placeholder_loading_text]",
+          "{EMOTE_TYPING} おい、Discord、そこにいるのか？"
+        ],
+        "info": "{EMOTE_PENCIL} メッセージを編集: `{edit_message}`\n{EMOTE_CLYDE} Discord: `{discord}`",
+        "info_full": "{EMOTE_PENCIL} メッセージを編集: `{edit_message}`\n{EMOTE_CLYDE} Discord: `{discord}`\n{EMOTE_DOWNLOAD} RestAction: `{rest_action}`"
+      },
+      "quote": {
+        "button": "メッセージへ移動",
+        "description": "誰かのメッセージを引用します。オプションでチャンネルを指定し、そこでメッセージを検索することも可能です。",
+        "embed_basic": {
+          "channel": "#{channel} に投稿されました",
+          "info": "{user} からの引用"
+        },
+        "embed_image": {
+          "info": "{user} からの {channel} での引用"
+        },
+        "few_args": "引数が少なすぎます！\n使用法: `{prefix}quote <messageID> [#channel]`",
+        "invalid_id": "提供されたIDは無効です！\n開発者モードを有効にし、**メッセージ**を右クリックし、「IDをコピー」を選択したことを確認してください。",
+        "no_msg": "{channel}にメッセージが見つかりません！\nIDが正しいか、メッセージが正しいチャンネルにあるか確認してください！",
+        "no_value": "このメッセージには、画像も引用するテキストもありません。",
+        "nsfw_channel": "あなたが挙げたチャンネル({channel})は年齢制限付きとマークされていますが、このチャンネルはそうではありません!\n安全のため、NSFWチャンネルからのメッセージを年齢制限付きでないチャンネルで引用することはしません。"
+      },
+      "shards": {
+        "description": "ボットが現在持っているすべてのシャードの基本情報を一覧表示します。",
+        "embed": {
+          "guilds_title": "ギルド",
+          "ping_title": "Ping (ms)",
+          "status_title": "状態"
+        },
+        "page": "{page} / {pages} ページ",
+        "status": {
+          "connected": "接続されました",
+          "disconnected": "切断されました",
+          "reconnect": "再接続しています..."
+        }
+      },
+      "stats": {
+        "description": "退屈な統計... もういいや。",
+        "uptime": {
+          "day": "日",
+          "days": "日",
+          "hour": "時",
+          "hours": "時間",
+          "minute": "分",
+          "minutes": "分",
+          "second": "秒",
+          "seconds": "秒"
+        },
+        "embed": {
+          "other_title": "その他の統計",
+          "other_value": "```yaml\nRAM: {ram}\nアップタイム: {days}日, {hours}時間, {minutes}分 {seconds}秒\n```",
+          "shard_this_title": "このShard",
+          "shard_this_value": "```yaml\nID: {id} # ID は 0 から始まります\n\nGuilds: {guilds}\n```",
+          "shard_total_title": "合計",
+          "shard_total_value": "```yaml\nShards: {shards}\n\nGuilds: {guilds}\n```",
+          "title": "統計"
+        }
+      },
+      "user": {
+        "description": "自分や他人の基本情報を得る",
+        "embed": {
+          "avatar": "アバター",
+          "avatar_url": "`アバターURL`",
+          "badges": "バッジ",
+          "booster": "{EMOTE_BOOST_LEVEL_3} **ブースター開始:**",
+          "created": "{EMOTE_SLOWMODE} **アカウント作成:**",
+          "dates": "日付",
+          "id": "ID: {id}",
+          "joined": "{EMOTE_INVITE} **Guild が参加しました:**",
+          "nickname": "あだ名:",
+          "no_badges": "`バッジがありません`",
+          "role_highest": "最高のロール",
+          "role_total": "他のロール"
+        },
+        "more_roles": "+{remaining} 以上",
+        "no_member": "メンションされたメンバーはこのDiscordにいません！",
+        "no_roles": "`割り当てられたロールがありません`",
+        "no_roles_others": "`その他のロールが割り当てられていません`"
+      }
+    },
+    "nsfw": {
+      "blowjob": {
+        "description": "お前がしゃぶりたいなら、誰かに聞いてみよう。\n\nこのコマンドはNSFWの付いたチャンネルでのみ実行可能です。",
+        "mention_bot": "それは、ソケットに舌を突っ込むようなものです。",
+        "mention_purr": "この変態！ 他の奴にしろ！ \\*{user} を叩く*",
+        "mention_self": "わかったよ。自分をしゃぶりたいんなら、止めないよ。 {user}",
+        "message": "{user} は {target} をフェラしています！",
+        "no_mention": "しゃぶりたい人をメンションしてください。",
+        "request": {
+          "denied": "{target} はあなた ( {user} ) にしゃぶられたくないそうです。 :/",
+          "message": "おい、{ターゲット}!\n{ユーザー}はあなたにフェラをしたいそうだ。あなたもそうしたいか？",
+          "open": "そんな欲張りな {user} にならないでください！ 前のリクエストが受理されるか、拒否されるか、タイムアウトになるまで待ってください。"
+        },
+        "special_user": "わかったよ、かわいこちゃん。「オモチャ」を取ってくるから待っててね。\n\\* {user} の手を取り 部屋に消える*"
+      },
+      "cum": {
+        "description": "説明不要です。\n\nこのコマンドは、年齢制限ラベルの付いたチャンネルでのみ実行可能です",
+        "loading": "{EMOTE_LOADING} イク準備中...",
+        "message": "{user} がイッちゃう"
+      },
+      "fuck": {
+        "description": "このアプリは、誰かにセックスしていいかどうかを聞くことができます。\nオプションを事前に選択しなかった場合、ヘテロ、アナル、百合、ヤオイから選択することができます。\n事前に選択するには、以下のいずれかの引数を使用します。\n`--hetero`\n`--anal`\n`--yaoi`\n`--yuri`\n\nこのコマンドは年齢制限ラベルの付いたチャンネルでのみ実行できます！",
+        "mention_bot": "ボットなんかと一緒にするな！",
+        "mention_purr": "\\* {user} を叩く* やめろ！私と一緒にするな！この変態！",
+        "mention_self": "どうやって自分自身とできるんだ {user} ？！ (いや、オナニーという答えは認めない)",
+        "mention_snuggle": "やめろ {user} ！妹に手を出すなんて許せないわこのバカ！",
+        "message": "{user} と {target} がセックス！",
+        "no_mention": "ヤリたいユーザーを挙げてください。",
+        "request": {
+          "denied": "{target} はあなた {user} とのセックスを望んでいません。>.<",
+          "message": "ヘイ、 {target} ！\n{user} はあなたとセックスしたいと思っているのですが、あなたもそうしたいですか？\n受け入れる場合は「Accept」、拒否する場合は「Deny」をクリックしてください。\n\n> **このリクエストは1分後にタイムアウトします！**。",
+          "message_choose": "ヘイ、 {target} ！\n{user} はあなたとセックスしたいと思っているのですが、あなたもそうしたいですか？\n以下のボタンから選んでください。\n\n> **このリクエストは1分後にタイムアウトします！**。",
+          "open": "そんなムラムラするなよ {user} ！\nあなたはすでにオープンなリクエストを持っています。受け入れられるか、拒否されるか、タイムアウトになるのを待ってください。"
+        },
+        "special_user": {
+          "accept": [
+            "ベッドルームはどれが良いですか {user} ？",
+            "\\*彼女の手で{user}の体を移動する* 少しプライベートなことをしましょう、かわいこちゃん。😘",
+            "早く*おもちゃ*を取って、一緒に時間を過ごさせてよ {user}。"
+          ],
+          "deny": [
+            "ごめんだけど {user} 、今はできないよ...",
+            "もう少し待ってくれないか {user}？今、時間がないんですよ。",
+            "\\*キス* ごめんよ {user} 。"
+          ]
+        }
+      },
+      "neko": {
+        "message": "やらしいネコ {EMOTE_NEKOWO}"
+      },
+      "pussylick": {
+        "description": "貴様がま◯こをペロペロしたいなら、誰かに言え。\n\nこのコマンドは年齢制限のあるチャンネルでのみ実行可能です。",
+        "mention_bot": "ボットはま◯こなんて持ってないぞ。",
+        "mention_purr": "ダメ！させない...",
+        "mention_self": "どうしてそんなことが？... 聞かないけど。",
+        "message": "{user} は {target} のおま◯こをペロペロしてます。",
+        "no_mention": "ま◯こをペロペロしたい人をメンションしてください。",
+        "request": {
+          "denied": "{target} は自分のマ◯コをペロペロしたくないようだぞ、 {user} 。そいつはふた◯りか？",
+          "message": "{target} ！\n{user} はあなたのおま◯こを舐めたがっています。舐めさせますか？",
+          "open": "舌が渇いちまったか？ あなたは既に {user} にお願いしているんだぞ！\nその人が同意、拒否もしくはリクエストがタイムアウトするまで待ってください。"
+        },
+        "special_user": "ヘヘヘ... {user} は*\"乾いている\"*。そうだよな？\n\\*{user}の手をとって部屋から去る*"
+      },
+      "solo": {
+        "description": "男性か女性のオナニーのGIF画像を取得します。\n\nこのコマンドは、年齢制限のあるチャンネルでのみ実行可能です。",
+        "loading": "{EMOTE_LOADING} イイ女のGIFを入手しています...",
+        "message": "(　ﾟдﾟ) {user} は{user}だけで楽しくヤってる。"
+      },
+      "spank": {
+        "description": "誰かのケツをペチンと叩く。\n\nこのコマンドは、年齢制限のあるチャンネルでのみ実行可能です。",
+        "mention_bot": "クソ硬いロボットのケツを叩こうとしているのか {user}？君の手が壊れると思うのだが...",
+        "mention_purr": "この {user} を許可してもよろしいですか？",
+        "mention_self": "あなたがケツを叩かれたいのであれば、誰かにしてもらってください。 {user}",
+        "mention_snuggle": "ダメ！ {user}、私の小さい妹に触るな！この変態！",
+        "message": "{user}は{target}のケツを叩いている。",
+        "no_mention": "ケツを叩きたい人をメンションしてください。",
+        "request": {
+          "denied": "{target}は{user}からお尻を叩かれたくないようです。",
+          "message": "{target}さん！\n{user}はあなたのケツを叩きたいそうですよ！されたいですか？",
+          "open": "{user}よ、落ち着きなさい。あなたはもう誰かにお願いしたのだよ。おとなしく待っておきなさい。"
+        },
+        "special_user": "わ、わたしはイイ女になるの。お、お願いだからやさしくして。(///´ฅωฅ///)"
+      },
+      "threesome": {
+        "description": "**2**人に行為をしたいか、きくことができます。\nデフォルトでは、`--ffm` (女が2人、男が1人) が適用されます。また、`--mmf` や `--fff` で、男2、女1、そして女のみを適用できます。\n\nこのコマンドは、年齢制限のあるチャンネルでのみ実行可能です！",
+        "mention_bot": "{user}、ボットよりも人間との方が楽しめるはずだよ。",
+        "mention_purr": "ちょっと変態に聞こえるのはわかってるんだ、でも*そういう*趣味はないから！ {user}。",
+        "mention_self": "間違ってたら訂正してほしいんだけど、3Pには普通、**3**人必要なんじゃないの？ {user}。",
+        "message": "{user} は {targets} と...///",
+        "no_mention": "セクロスしたい人を2人メンションしてください。",
+        "request": {
+          "denied": "{target1} か {target2} のどちらか両方かが {user} とはヤりたくないと言っています。",
+          "message": "{target1} と {target2} ！\n{user} があなたたち2人とセックスをしたいんだけど、あなたたちもしたい？\nしたいなら「同意」、嫌なら「拒否」をクリックしてください。\nどちらも同意すると、始まります。\n\n> **このリクエストは、1分後に失効します！ご注意ください！**",
+          "open": "{user} さん！ムラついてないで焦らされてなさい。\n既に誰かに性交を申し出ているではないか。相手の反応を待つか、時間切れになるまで待ってください。"
+        },
+        "special_user": "すっごくあなたとシたい気分、でもちょっと多すぎない？ {user} {EMOTE_BLUSH}"
+      }
+    }
+  },
+  "request": {
+    "accepted": "{target} が {user} のリクエストを承認しました。",
+    "buttons": {
+      "accept": "同意",
+      "deny": "拒否",
+      "fuck_anal": "ケツアナ",
+      "fuck_normal": "異性愛",
+      "fuck_yaoi": "ヤオイ(ゲイ)",
+      "fuck_yuri": "百合(レズ)"
+    },
+    "message": "{text}\n「承認」を押して承認するか、「拒否」を押して拒否してください。\n\n> **このリクエストは1分後に時間切れになります！**",
+    "timed_out": "{user} のリクエストは時間切れになりました。{target} は応答しませんでした。"
+  },
+  "snuggle": {
+    "fun": {
+      "bite": {
+        "mention_snuggle": [
+          "ニャ？！？！ぼくは食べ物じゃないにゃ！ {user}",
+          "{user} /// やめて/// 恥ずかしいの/////",
+          "ど、どうしてわたしのことを？"
+        ]
+      },
+      "cuddle": {
+        "mention_snuggle": [
+          "{user} にすり寄ってきた",
+          "{user} を強く抱きしめた",
+          "とっても気持ちいい UwU"
+        ]
+      },
+      "feed": {
+        "mention_snuggle": [
+          "{user}, くれるの？あ、ありがとう///",
+          "よっしゃ！タダ飯だ！ありがとう、{user}",
+          "静かに餌にかじりついた"
+        ]
+      },
+      "fluff": {
+        "mention_snuggle": [
+          "にゃあ！？！しっぽをもふもふしないで！{user}",
+          "\\*尻尾をつかむ* だめ！"
+        ],
+        "special_user": "ど、どうしてそんなにしっぽをもふもふしたがるの？おねえちゃんのがあるでしょ！{user}"
+      },
+      "hug": {
+        "mention_snuggle": [
+          "{user} からのハグが好きになった",
+          "{user} のハグは気持ちいよ。",
+          "{user}に抱かれているとき、静かに「にゃん」と鳴いた"
+        ]
+      },
+      "kiss": {
+        "mention_purr": "{user} 私の私をキスさせるなんて許さないんだから！",
+        "mention_snuggle": [
+          "は？っっ...わかったよ。で、でも、{user}は口でキスはさせないんだからね！\\*頬にキスをする*",
+          "{user}... 公共の場でシちゃうなんて/// 一回だけよ/////♡",
+          "にゃ！？！{user}、えっちすぎます///！！！"
+        ],
+        "special_user": "私で彼女にキスさせるなんて... じ、自分でできるでしょ！！！ {user}"
+      },
+      "lick": {
+        "mention_snuggle": [
+          "きゃあ/// えっちすぎますう/// {user}",
+          "私は飴でもなんでもないからぁ♡ {user}",
+          "ぐぬぅ... えっちすぎるってばぁ///// {user}"
+        ]
+      },
+      "neko": {
+        "purr": "{EMOTE_SNUGGLE} ニャ、昔の姉貴の写真だにゃ。",
+        "snuggle": "{EMOTE_SNUGGLE} それ、私...? OwO"
+      },
+      "pat": {
+        "mention_snuggle": [
+          "\\*こころよく撫でられる*",
+          "やったぁ！撫でてくれた！ありがとう、{user}",
+          "\\*撫でられ、笑みをこぼす*"
+        ]
+      },
+      "poke": {
+        "mention_snuggle": [
+          "んにゃぅぅ... つつかにゃいでぇ！",
+          "きゃんっ！(怖がった様子で)ど、どうしてつついてくるの？",
+          "つついてこないでぇ！なにかしちゃった？/////"
+        ]
+      },
+      "ship": {
+        "mention_purr": "ダメ！わたしのことはダメ！{user}",
+        "mention_snuggle": "いや！私はプレゼントされたくないの！{user}",
+        "special_user": "どうして自分を自分に呼び出そうとするの？{user}\n自分でしなさいよ/////"
+      },
+      "slap": {
+        "mention_snuggle": [
+          "({user}から逃げる)",
+          "(逃げて棚の下に隠れた) {user}の意地悪ぅ！",
+          "にゃぅぅ... (泣き出した)"
+        ]
+      },
+      "tickle": {
+        "mention_snuggle": [
+          "たすけてぇ！笑えないよぉッッ (笑い出す)",
+          "そんなの不公平よ。仕返しできないじゃないッ (笑い出す)",
+          "(普通の状態を演じるが失敗する)"
+        ]
+      }
+    },
+    "info": {
+      "info": {
+        "dm_failure": "{user} にDMできない。DMが閉じられちゃってる。",
+        "dm_success": "📬 メールを受信した！ {user}",
+        "embed": {
+          "about_title": "情報",
+          "about_value": "こんにちは！\n私の名前は {name}。\\*Purr*の妹です！"
+        }
+      },
+      "invite": {
+        "message": "にゃ！わたしのパパさんである「Andre_601」の[Patreon]({patreon_url})を支援しないとあなたのDiscordには招待できないよ！ (15$ ティア)\n\nお姉ちゃんなら招待できるけどね！"
+      }
+    },
+    "nsfw": {
+      "blowjob": {
+        "mention_snuggle": "(その場から逃げて隠れる) えっちいのは嫌！{user}",
+        "mention_self": "ふっ、自分のをシちゃうなんて... 恥ずかしがり屋さんなのね、{user}は。",
+        "special_user": "なんで私としたいわけ？{user}。おねえちゃんとやってなよ！"
+      },
+      "fuck": {
+        "mention_purr": "いや！{user}。汚れたくなんてなりたくない！",
+        "mention_snuggle": "い、いや！あなたとなんてやりたくないんだから！{user}"
+      },
+      "pussylick": {
+        "mention_snuggle": "い、いやぁ！*そこ*、舐めないでぇ！{user}"
+      },
+      "spank": {
+        "mention_purr": "だめ！おねえちゃんには触れさせないよ！{user}",
+        "mention_snuggle": "(にげる) だめ！そんなこと... {user}",
+        "special_user": "でも {user}！そんな破廉恥なことは私のおねえちゃんとやるべきだわよ！"
+      },
+      "threesome": {
+        "mention_snuggle": "わ、わたしはそんなのに興味ない！{user}"
+      }
+    }
+  }
+}
