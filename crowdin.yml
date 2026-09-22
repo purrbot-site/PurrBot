@@ -1,5 +1,11 @@
-commit_message: "Update %language%"
+project_id_env: CROWDIN_ID
+api_token_env: CROWDIN_TOKEN
+
+skip_untranslated_files: true
+
 append_commit_message: false
+commit_message: "Update latest translations"
+
 files:
   - source: src/main/resources/lang/en.json
-    translation: /src/main/resources/lang/%locale%.%file_extension%
+    translation: /src/main/resources/lang/%locale%.json
