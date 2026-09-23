@@ -539,19 +539,12 @@
       },
       "shards": {
         "description": "Lista de informações básicas sobre todos os fragmentos do bot atualmente.",
-        "average": {
-          "title": "média",
-          "description": "Estes são os valores médios do Ping e da Guilda.",
-          "guilds": "Média de Guildas por Fragmento",
-          "ping": "Média de Ping por Fragmento"
-        },
         "embed": {
-          "current_title": "Seu Fragmento?",
           "guilds_title": "Guildas",
           "ping_title": "Ping (ms)",
-          "status_title": "Estado",
-          "title": "Informações de fragmento [{shard_id}/{shard_total}]"
+          "status_title": "Estado"
         },
+        "page": "Página {page} / {pages}",
         "status": {
           "connected": "Conectado",
           "disconnected": "Desconectado",

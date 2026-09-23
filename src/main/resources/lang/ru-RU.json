@@ -539,19 +539,12 @@
       },
       "shards": {
         "description": "Список всех шардов у бота.",
-        "average": {
-          "title": "В среднем",
-          "description": "Это примерный пинг и количество серверов.",
-          "guilds": "Среднее количество серверов на шард",
-          "ping": "Среднее число пинга на шард"
-        },
         "embed": {
-          "current_title": "Ваш шард?",
           "guilds_title": "Сервера",
           "ping_title": "Пинг (мс)",
-          "status_title": "Статус",
-          "title": "Информация о shard [{shard_id}/{shard_total}]"
+          "status_title": "Статус"
         },
+        "page": "Страница {page} / {pages}",
         "status": {
           "connected": "Подключено",
           "disconnected": "Отсоединено",
