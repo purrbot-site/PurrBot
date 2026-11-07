@@ -29,6 +29,9 @@
 [![purr]][website]  
 <p align="right"><i>Image made by <code>Makay#0270</code></i></p>
 
+> [!IMPORTANT]
+> This repository has been moved to [Codeberg](https://codeberg.org/purrbot-site/PurrBot).
+
 This bot was made to use the [nekos.life]-API but moved to its very own API.
 
 # Commands
